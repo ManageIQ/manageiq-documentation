@@ -1,10 +1,9 @@
-= OpenShift Documentation
+= ManageIQ Documentation
 
 This repo contains the documentation for
 
-* http://origin.openshift.com/[OpenShift Origin]
-* http://openshift.com/[OpenShift Online]
-* http://www.redhat.com/products/cloud-computing/openshift-enterprise/[OpenShift Enterprise]
+* http://manageiq.org/[ManageIQ]
+* http://www.redhat.com/en/technologies/cloud-computing/cloudforms/[Red Hat CloudForms Management Engine]
 
 The documentation is sourced in http://www.methods.co.nz/asciidoc/[AsciiDoc] and transformed into HTML/CSS and other formats through http://asciidoctor.org/[AsciiDoctor]-based automation.
 
@@ -25,18 +24,17 @@ Each directory of the repo represents a different collection of topics (you can 
 ----
 
 == Version Management
-The overlap of documentation across OpenShifts Origin, Online and Enterprise is no less than 80%. In many cases, this means that individual topics may need to include or exclude individual paragraphs with respect to a specific OpenShift distribution. While it is _possible_ to accomplish this solely by using git branches to maintain slightly different versions of a given topic, doing so would make the task of maintaining internal consistency extrememely difficult for content contributors.
+The overlap of documentation across ManageIQ and CFME is no less than 80%. In many cases, this means that individual topics may need to include or exclude individual paragraphs with respect to a specific ManageIQ distribution. While it is _possible_ to accomplish this solely by using git branches to maintain slightly different versions of a given topic, doing so would make the task of maintaining internal consistency extrememely difficult for content contributors.
 
-Git branching is still extremely valuable, and serves the important role of tracking the release versions of documentation for the various OpenShift distributions.
+Git branching is still extremely valuable, and serves the important role of tracking the release versions of documentation for the various ManageIQ distributions.
 
 === Distribution-Specific Conditionals
-OpenShift documentation uses AsciiDoc's `ifdef/endif` macro to conditionalize document segments for specific OpenShift distributions down to the single-line level.
+ManageIQ documentation uses AsciiDoc's `ifdef/endif` macro to conditionalize document segments for specific ManageIQ distributions down to the single-line level.
 
-The supported distribution attributes used in the OpenShift document generator are:
+The supported distribution attributes used in the ManageIQ document generator are:
 
-* `openshift-origin`
-* `openshift-online`
-* `openshift-enterprise`
+* `manageiq`
+* `cfme`
 
 These attributes can be used alone or together to conditionalize text within a topic document.
 
@@ -45,34 +43,33 @@ Here is an example of this concept in use:
 ----
 This first line is unconditionalized, and will appear for all versions.
 
-\ifdef::openshift-online[]
-This line will only appear for OpenShift Online.
+\ifdef::manageiq[]
+This line will only appear for ManageIQ.
 \endif::[]
 
-\ifdef::openshift-enterprise[]
-This line will only appear for OpenShift Enterprise.
+\ifdef::cfme[]
+This line will only appear for CloudForms Management Engine.
 \endif::[]
 
-\ifdef::openshift-origin,openshift-enterprise[]
-This line will appear for OpenShift Origin and Enterprise, but not for OpenShift Online.
+\ifdef::manageiq,other_distro[]
+This line will appear for ManageIQ, and another possible future distro, but not for CloudForms Management Engine.
 \endif::[]
 ----
 
 Two important points to keep in mind:
 
-* The `ifdef/endif` blocks have no size limit, however they should _not_ be used to conditionalize an entire topic. If an entire topic file is specific to a given OpenShift distribution, refer to the link:#document-set-metadata[Document Set Metadata] section for information on how to conditionalize at the whole-topic level.
+* The `ifdef/endif` blocks have no size limit, however they should _not_ be used to conditionalize an entire topic. If an entire topic file is specific to a given ManageIQ distribution, refer to the link:#document-set-metadata[Document Set Metadata] section for information on how to conditionalize at the whole-topic level.
 
 * The `ifdef/endif` blocks _cannot be nested_. In other words, one conditional block cannot contain other conditional blocks.
 
 === Release Branches
-Through the use of link:#distribution-specific-conditionals[Distribution-Specific Conditionals] and link:#document-set-metadata[Document Set Metadata], the master branch of this repository always contains a complete set of documentation that includes all of the OpenShift distributions. However, when and as new versions of the OpenShift distros are released, the master branch is merged down to new or existing release branches. Here is the general naming scheme used in the branches:
+Through the use of link:#distribution-specific-conditionals[Distribution-Specific Conditionals] and link:#document-set-metadata[Document Set Metadata], the master branch of this repository always contains a complete set of documentation that includes all of the ManageIQ distributions. However, when and as new versions of the ManageIQ distros are released, the master branch is merged down to new or existing release branches. Here is the general naming scheme used in the branches:
 
-* `master` - OpenShift Origin latest code
-* `origin-N.N` - OpenShift Origin most recent stable release
-* `online` - OpenShift Online most recent release
-* `enterprise-N.N` - OpenShift Enterprise support releases
+* `master` - ManageIQ latest code
+* `anand` - ManageIQ most recent stable release
+* `cfme-N.N` - CloudForms Management Engine support releases
 
-On a nightly basis, the documentation is rebuilt for each of these branches. In this manner, documentation for released versions of OpenShift will remain the same even as development continues on master. Additionally, any corrections or additions that are "cherry-picked" into the release branches will show up in the release documentation the next day.
+On a nightly basis, the documentation is rebuilt for each of these branches. In this manner, documentation for released versions of ManageIQ will remain the same even as development continues on master. Additionally, any corrections or additions that are "cherry-picked" into the release branches will show up in the release documentation the next day.
 
 == Document Set Metadata
 In order to construct the documentation site from these sources, the build system looks at the `_build_cfg.yml` metdata file. The build system _only_ looks in this file for information on which files to include, so any new file submissions must be accompanied by an update to this metadata file.
@@ -91,21 +88,21 @@ Topics:
     Distros: all
   - Name: The Curious Crocodile
     File: the_curious_crocodile
-    Distros: openshift-online,openshift-enterprise <7>
+    Distros: manageiq,cfme <7>
 ----
 <1> Record separator at the top of each topic group
 <2> Display name of topic group
 <3> Directory name of topic group
-<4> Which OpenShift versions this topic group is part of
+<4> Which ManageIQ versions this topic group is part of
 <5> Topic name
 <6> Topic file under the topic group dir without '.adoc'
-<7> Which OpenShift versions this topic is part of
+<7> Which ManageIQ versions this topic is part of
 
 === Notes on "Distros"
 
 * The "Distros" setting is optional for topic groups and topic items. When the "Distros" setting is absent, the system treats the topic group or topic as though the user had set "Distros: all".
-* The "all" value for "Distros" is a synonym for "openshift-origin,openshift-enterprise,openshift-online".
-* The "all" value trumps other values, so "openshift-online,all" is treated as "all"
+* The "all" value for "Distros" is a synonym for "manageiq,cfme".
+* The "all" value trumps other values, so "manageiq,all" is treated as "all"
 
 == Understanding the Complete Distribution Condition Chain
 It is important to understand the ordering of distribution conditionals in determining whether or not a specific piece of content appears in the documentation set. The hierarchy is fairly straightforward:
@@ -116,7 +113,7 @@ It is important to understand the ordering of distribution conditionals in deter
 
 In this manner:
 
-* If a topic group is configured with "Distros: openshift-online", the entire group will be skipped for OpenShift Enterprise and OpenShift Origin, regardless of the Topic-level and document-level content rules within that group.
+* If a topic group is configured with "Distros: manageiq", the entire group will be skipped for CloudForms Management Engine, regardless of the Topic-level and document-level content rules within that group.
 
 * When a topic group is available to all Distros, but a specific topic item is limited, the topic group will appear for all distros and the specific topic item will only appear for the indicated distros.
 
@@ -133,15 +130,15 @@ You will need the following tools in your editing environment:
 
 With these tools available, first perform a one-time setup:
 
-1. Clone the https://github.com/openshift/openshift-docs[openshift-docs] repo from GitHub:
+1. Clone the https://github.com/manageiq/manageiq_docs[manageiq_docs] repo from GitHub:
 + 
 ----
-$ git clone https://github.com/openshift/openshift-docs.git
+$ git clone https://github.com/manageiq/manageiq_docs.git
 ----
 2. From the cloned directory, run a bundle install:
 + 
 ----
-$ cd openshift-docs
+$ cd manageiq_docs
 $ bundle install
 ----
 +
@@ -152,13 +149,13 @@ That's it for setup, the next section explains how to run the LiveReload system.
 === Running with LiveReload
 Once you've installed the link:#prerequisites[prerequisites] you can fire up the LiveReload setup as follows:
 
-1. From the `openshift-docs` directory, run a preliminary build:
+1. From the `manageiq_docs` directory, run a preliminary build:
 + 
 ----
-$ cd openshift-docs
+$ cd manageiq_docs
 $ bundle exec rake build
 ----
-2. Now open the generated HTML file in your browser. It will be under `openshift-docs/_preview` with the same path and filename as the original file. The only difference will be the name ending in '.html' instead of '.adoc'.
+2. Now open the generated HTML file in your browser. It will be under `manageiq_docs/_preview` with the same path and filename as the original file. The only difference will be the name ending in '.html' instead of '.adoc'.
 3. Now start up the `guard` utility:
 + 
 ----
@@ -208,5 +205,5 @@ NOTE: Any section headers within the article must be level 2 (==) or lower. Try 
 
 For questions or comments about the documentation system:
 
-* OpenShift team members can be found on the http://webchat.freenode.net/?randomnick=1&channels=openshift&uio=d4[#openshift] and http://webchat.freenode.net/?randomnick=1&channels=openshift-dev&uio=d4[#openshift-dev channels] on http://www.freenode.net/[FreeNode].
-* You can also join the http://lists.openshift.redhat.com/openshiftmm/listinfo/users[Users] or http://lists.openshift.redhat.com/openshiftmm/listinfo/dev[Developers] mailing list.
+* ManageIQ team members can be found on the http://manageiq.org/community/irc/[#manageiq channel] on http://www.freenode.net/[FreeNode].
+* You can also join the http://talk.manageiq.org[talk.manageiq.org] forum.

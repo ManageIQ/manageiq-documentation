@@ -14,8 +14,8 @@ module DocSiteBuilder
     PREVIEW_DIRNAME     = '_preview'
     PACKAGE_DIRNAME     = '_package'
     BLANK_STRING_RE     = Regexp.new('^\s*$')
-    PRODUCT_AUTHOR      = "OpenShift Documentation Project <dev@lists.openshift.redhat.com>"
-    ANALYTICS_SHIM      = '<script type="text/javascript" src="https://assets.openshift.net/app/assets/site/tracking.js"></script>'
+    PRODUCT_AUTHOR      = "ManageIQ Documentation Project <contact@manageiq.org>"
+    ANALYTICS_SHIM      = "" # '<script type="text/javascript" src="https://assets.openshift.net/app/assets/site/tracking.js"></script>'
 
     def source_dir
       @source_dir ||= File.expand_path '../../../', __FILE__
@@ -125,7 +125,7 @@ module DocSiteBuilder
 <link href="https://assets.openshift.net/content/subdomain/favicon32x32.png" rel="shortcut icon" type="text/css">
 <!--[if IE]><link rel="shortcut icon" href="https://assets.openshift.net/content/subdomain/favicon.ico"><![endif]-->
 <!-- or, set /favicon.ico for IE10 win -->
-<meta content="OpenShift" name="application-name">
+<meta content="ManageIQ" name="application-name">
 <meta content="#000000" name="msapplication-TileColor">
 <meta content="https://assets.openshift.net/content/subdomain/touch-icon-precomposed.png" name="msapplication-TileImage">
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -210,7 +210,7 @@ module DocSiteBuilder
   </p>
   <ol class="breadcrumb">
         <li class="sitename">
-          <a href="/">OpenShift Documentation</a>
+          <a href="/">ManageIQ Documentation</a>
         </li>
         <li class="hidden-xs active">
           #{args[:distro]} #{args[:version]}

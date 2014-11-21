@@ -6,7 +6,7 @@
 :toc:
 :toc-placement!:
 :toc-title: Topics Covered
-:description: These are basic guidelines for creating technical documentation for OpenShift.
+:description: These are basic guidelines for creating technical documentation for ManageIQ.
 
 toc::[]
 
@@ -130,13 +130,12 @@ image:<name_of_image>[image]
 You only need to specify `<name_of_image>`. The build mechanism automatically specifies the file path. 
 
 == Conditional text between products
-OpenShift documentation uses the AsciiDoc `ifdef/endif` macro to conditionalize document segments for specific OpenShift distributions down to the single-line level.
+ManageIQ documentation uses the AsciiDoc `ifdef/endif` macro to conditionalize document segments for specific ManageIQ distributions down to the single-line level.
 
-The supported distribution attributes used with the OpenShift build mechanism are: 
+The supported distribution attributes used with the ManageIQ build mechanism are: 
 
-* _openshift-origin_
-* _openshift-online_
-* _openshift-enterprise_
+* _manageiq_
+* _cfme_
 
 These attributes can be used by themselves, or in conjunction to conditionalize text within a topic document.
 
@@ -145,23 +144,23 @@ Here is an example of this concept in use:
 ....
 This first line is unconditionalized, and will appear for all versions.
 
-ifdef::openshift-online[]
-This line will only appear for OpenShift Online.
+ifdef::manageiq[]
+This line will only appear for ManageIQ.
 endif::[]
 
-ifdef::openshift-enterprise[]
-This line will only appear for OpenShift Enterprise.
+ifdef::cfme[]
+This line will only appear for CloudForms Management Engine.
 endif::[]
 
-ifdef::openshift-origin,openshift-enterprise[]
-This line will appear for OpenShift Origin and Enterprise, but not for OpenShift Online.
+ifdef::manageiq,other_distro[]
+This line will appear for ManageIQ, and another possible future distro, but not for CloudForms Management Engine.
 endif::[]
 ....
 
 
 Note that the following limitations exist when conditionalizing text:
 
-1. The `ifdef/endif` blocks have no size limit, however they should not be used to conditionalize an entire topic. If an entire topic file is specific to a given OpenShift distribution, refer to the Document Set Metadata section for information on how to conditionalize at the whole-topic level.
+1. The `ifdef/endif` blocks have no size limit, however they should not be used to conditionalize an entire topic. If an entire topic file is specific to a given ManageIQ distribution, refer to the Document Set Metadata section for information on how to conditionalize at the whole-topic level.
 
 2. The `ifdef/endif` blocks cannot be nested. In other words, one conditional block cannot contain other conditional blocks.
 

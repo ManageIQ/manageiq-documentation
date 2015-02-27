@@ -41,14 +41,14 @@ Management and Orchestration.
 Configuration Management Database (CMDB), Role-based Administration
 (RBA), and Web Services.
 
-⁠Architecture
+Architecture
 ~~~~~~~~~~~~
 The diagram below describes the capabilities of CloudForms Management
 Engine. Its features are designed to work together to provide robust
 management and maintenance of your virtual infrastructure.
 
 .Features
-⁠image:images/1845.png[Features]
+image:images/1845.png[Features]
 
 The architecture comprises the following components:
 
@@ -73,14 +73,14 @@ Appliance. Each storage location must have a SmartProxy with visibility
 to it. The SmartProxy acts on behalf of the Appliance communicating with
 it over HTTPS on standard port 443.
 
-⁠Requirements
+Requirements
 ~~~~~~~~~~~~
 To use CloudForms Management Engine, the following requirements must be
 met:
 
 * One of the following web browsers:
 ** Mozilla Firefox for versions supported under Mozilla's Extended
-Support Release (ESR) ⁠<<1>>
+Support Release (ESR) <<1>>
 ** Internet Explorer 8 or higher
 ** Google Chrome for Business
 * A monitor with minimum resolution of 1280x1024.
@@ -262,7 +262,7 @@ Management Engine Infrastructure. This document describes the methods
 available for use in CloudForms Management Engine. This document is
 organized by the object hierarchy in the Automate Model.
 
-⁠$evm.root
+$evm.root
 ~~~~~~~~~
 When an Automate method is launched, it has one global variable: `$evm`.
 The `$evm` variable allows the method to communicate back to CloudForms
@@ -280,49 +280,49 @@ obtained from the `$evm.root` object.
 
 [source,ruby]
 ----
-  ​#########################
-​  #
-​  # Method: dumpRoot
-​  # Description: Dump Root information
-​  #
-​  ##########################
-​  def dumpRoot
-​    $evm.log("info", "#{@log_prefix} - Root:<$evm.root> Begin Attributes")
-​    $evm.root.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Root:<$evm.root> Attributes - #{k}: #{v}")}
-​    $evm.log("info", "#{@log_prefix} - Root:<$evm.root> End Attributes")
-​    $evm.log("info", "")
-​  end
-​
-​  #########################
-​  #
-​  # Method: dumpServer
-​  # Inputs: $evm.root['miq_server']
-​  # Description: Dump MIQ Server information
-​  #
-​  ##########################
-​  def dumpServer
-​    $evm.log("info","#{@log_prefix} - Server:<#{$evm.root['miq_server'].name}> Begin Attributes")
-​    $evm.root['miq_server'].attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Server:<#{$evm.root['miq_server'].name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - Server:<#{$evm.root['miq_server'].name}> End Attributes")
-​    $evm.log("info", "")
-​  end
+   #########################
+   #
+   # Method: dumpRoot
+   # Description: Dump Root information
+   #
+   ##########################
+   def dumpRoot
+     $evm.log("info", "#{@log_prefix} - Root:<$evm.root> Begin Attributes")
+     $evm.root.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Root:<$evm.root> Attributes - #{k}: #{v}")}
+     $evm.log("info", "#{@log_prefix} - Root:<$evm.root> End Attributes")
+     $evm.log("info", "")
+   end
+
+   #########################
+   #
+   # Method: dumpServer
+   # Inputs: $evm.root['miq_server']
+   # Description: Dump MIQ Server information
+   #
+   ##########################
+   def dumpServer
+     $evm.log("info","#{@log_prefix} - Server:<#{$evm.root['miq_server'].name}> Begin Attributes")
+     $evm.root['miq_server'].attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Server:<#{$evm.root['miq_server'].name}> Attributes - #{k}: #{v.inspect}")}
+     $evm.log("info","#{@log_prefix} - Server:<#{$evm.root['miq_server'].name}> End Attributes")
+     $evm.log("info", "")
+   end
 ----
 
 The result of dumpRoot is below. The value of miq_server is what gets
 passed into the dumpServer method.
 
 ----
-​​[----] I, [2012-10-23T13:53:54.517279 #5320:f329024]  INFO -- : <User-Defined Method> [InspectMe] - EVM Automate Method Started
-​[----] I, [2012-10-23T13:53:54.523637 #5320:f329024]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Begin Attributes
-​[----] I, [2012-10-23T13:53:54.527552 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - miq_server: #<MiqAeMethodService::MiqAeServiceMiqServer:0x0000001e76d900>
-​[----] I, [2012-10-23T13:53:54.528801 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - miq_server_id: 1
-​[----] I, [2012-10-23T13:53:54.529961 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - object_name: Request
-​[----] I, [2012-10-23T13:53:54.531067 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - request: inspectme
-​[----] I, [2012-10-23T13:53:54.534054 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - vm: DEV-JaneM
-​[----] I, [2012-10-23T13:53:54.535156 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - vm_id: 85
-​[----] I, [2012-10-23T13:53:54.536238 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - vmdb_object_type: vm
-​[----] I, [2012-10-23T13:53:54.537159 #5320:f329024]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> End Attributes
-​[----] I, [2012-10-23T13:53:54.537772 #5320:f329024]  INFO -- : <User-Defined Method>
+[----] I, [2012-10-23T13:53:54.517279 #5320:f329024]  INFO -- : <User-Defined Method> [InspectMe] - EVM Automate Method Started
+[----] I, [2012-10-23T13:53:54.523637 #5320:f329024]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Begin Attributes
+[----] I, [2012-10-23T13:53:54.527552 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - miq_server: #<MiqAeMethodService::MiqAeServiceMiqServer:0x0000001e76d900>
+[----] I, [2012-10-23T13:53:54.528801 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - miq_server_id: 1
+[----] I, [2012-10-23T13:53:54.529961 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - object_name: Request
+[----] I, [2012-10-23T13:53:54.531067 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - request: inspectme
+[----] I, [2012-10-23T13:53:54.534054 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - vm: DEV-JaneM
+[----] I, [2012-10-23T13:53:54.535156 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - vm_id: 85
+[----] I, [2012-10-23T13:53:54.536238 #5320:ef8c538]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> Attributes - vmdb_object_type: vm
+[----] I, [2012-10-23T13:53:54.537159 #5320:f329024]  INFO -- : <User-Defined Method> [InspectMe] - Root:<$evm.root> End Attributes
+[----] I, [2012-10-23T13:53:54.537772 #5320:f329024]  INFO -- : <User-Defined Method>
 ----
 
 Method Hierarchy
@@ -478,59 +478,59 @@ is linked to a button.
 
 [source,ruby]
 ----
-​​###################################
-​# EVM Automate Method: InspectMe
-​#
-​# Notes: Dump the objects in storage to the automation.log
-​###################################
-​
+###################################
+# EVM Automate Method: InspectMe
+#
+# Notes: Dump the objects in storage to the automation.log
+###################################
+
 begin
-​  @method = 'InspectMe'
-​  @log_prefix = "[#{@method}]"
-​  $evm.log("info", "#{@log_prefix} - EVM Automate Method Started")
-​
-​  # Turn on verbose logging
-​  @debug = true
-​
-​​  # List the types of object we will try to detect
-​  obj_types = %w{ vm host storage ems_cluster ext_management_system }
-​  obj_type = $evm.root.attributes.detect { |k,v| obj_types.include?(k)}
-​
-​  # uncomment below to dump root object attributes
-​  dumpRoot
-​
-​  # uncomment below to dump miq_server object attributes
-​  dumpServer
-​​
-​  # If obj_type is NOT nil
-​  unless obj_type.nil?
-​    rootobj = obj_type.first
-​    obj = obj_type.second
-​    $evm.log("info", "#{@log_prefix} - Detected Object:<#{rootobj}>")
-​    $evm.log("info","")
-​
-​    case rootobj
-​    when 'host' then dumpHost(obj)
-​    when 'vm' then dumpVM(obj)
-​    when 'ems_cluster' then dumpCluster(obj)
-​    when 'ext_management_system' then dumpEMS(obj)
-​    when 'storage' then dumpStorage(obj)
-​    end
-​  end
-​
-​  #
-​  # Exit method
-​  #
-​  $evm.log("info", "#{@log_prefix} - EVM Automate Method Ended")
-​  exit MIQ_OK
-​
-​  #
-​  # Set Ruby rescue behavior
-​  #
-​rescue => err
-​  $evm.log("error", "#{@log_prefix} - [#{err}]\n#{err.backtrace.join("\n")}")
-​  exit MIQ_ABORT
-​end
+  @method = 'InspectMe'
+  @log_prefix = "[#{@method}]"
+  $evm.log("info", "#{@log_prefix} - EVM Automate Method Started")
+
+  # Turn on verbose logging
+  @debug = true
+
+  # List the types of object we will try to detect
+  obj_types = %w{ vm host storage ems_cluster ext_management_system }
+  obj_type = $evm.root.attributes.detect { |k,v| obj_types.include?(k)}
+
+  # uncomment below to dump root object attributes
+  dumpRoot
+
+  # uncomment below to dump miq_server object attributes
+  dumpServer
+
+  # If obj_type is NOT nil
+  unless obj_type.nil?
+    rootobj = obj_type.first
+    obj = obj_type.second
+    $evm.log("info", "#{@log_prefix} - Detected Object:<#{rootobj}>")
+    $evm.log("info","")
+
+    case rootobj
+    when 'host' then dumpHost(obj)
+    when 'vm' then dumpVM(obj)
+    when 'ems_cluster' then dumpCluster(obj)
+    when 'ext_management_system' then dumpEMS(obj)
+    when 'storage' then dumpStorage(obj)
+    end
+  end
+
+  #
+  # Exit method
+  #
+  $evm.log("info", "#{@log_prefix} - EVM Automate Method Ended")
+  exit MIQ_OK
+
+  #
+  # Set Ruby rescue behavior
+  #
+rescue => err
+  $evm.log("error", "#{@log_prefix} - [#{err}]\n#{err.backtrace.join("\n")}")
+  exit MIQ_ABORT
+end
 ----
 
 [[Availability Zones (availability_zone)]] Availability Zones (availability_zone)
@@ -602,7 +602,7 @@ begin
 |cloud_resource_quotas      |Returns object's quotas
 |====================================================================
 
-[[Customization Template (customization_template)]] ⁠Customization Template (customization_template)
+[[Customization Template (customization_template)]] Customization Template (customization_template)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -630,29 +630,29 @@ begin
 
 [source,ruby]
 ----
-​​  #########################
-​  #
-​  # Method: dumpCluster
-​  # Inputs: $evm.root['ems_cluster']
-​  # Description: Dump Cluster information
-​  #
-​  ##########################
-​  def dumpCluster(cluster)
-​    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> Begin Attributes")
-​    cluster.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Cluster:<#{cluster.name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> End Attributes")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> Begin Associations")
-​    cluster.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - Cluster:<#{cluster.name}> Associations - #{assc}")}
-​    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> End Associations")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> Begin Virtual Columns")
-​    cluster.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - Cluster:<#{cluster.name}> Virtual Columns - #{vcn}: #{cluster.send(vcn)}")}
-​    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> End Virtual Columns")
-​    $evm.log("info","")
-​  end
+  #########################
+  #
+  # Method: dumpCluster
+  # Inputs: $evm.root['ems_cluster']
+  # Description: Dump Cluster information
+  #
+  ##########################
+  def dumpCluster(cluster)
+    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> Begin Attributes")
+    cluster.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Cluster:<#{cluster.name}> Attributes - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> End Attributes")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> Begin Associations")
+    cluster.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - Cluster:<#{cluster.name}> Associations - #{assc}")}
+    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> End Associations")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> Begin Virtual Columns")
+    cluster.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - Cluster:<#{cluster.name}> Virtual Columns - #{vcn}: #{cluster.send(vcn)}")}
+    $evm.log("info","#{@log_prefix} - Cluster:<#{cluster.name}> End Virtual Columns")
+    $evm.log("info","")
+  end
 ----
 
 [[Management System Events (ems_event)]] Management System Events (ems_event)
@@ -684,7 +684,7 @@ begin
 |folder_path(*options)      |Returns folders path
 |====================================================================
 
-[[Providers (ext_management_system)]] ⁠Providers (ext_management_system)
+[[Providers (ext_management_system)]] Providers (ext_management_system)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -705,34 +705,34 @@ begin
 
 [source,ruby]
 ----
-​​  #########################
-​  #
-​  # Method: dumpEMS
-​  # Inputs: $evm.root['ext_management_system']
-​  # Description: Dump EMS information
-​  #
-​  ##########################
-​  def dumpEMS(ems)
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin Attributes")
-​    ems.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End Attributes")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin Associations")
-​    ems.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> Associations - #{assc}")}
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End Associations")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin EMS Folders")
-​    ems.ems_folders.each { |ef| ef.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> EMS Folder:<#{ef.name}> #{k}: #{v.inspect}")}}
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End EMS Folders")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin Virtual Columns")
-​    ems.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> Virtual Columns - #{vcn}: #{ems.send(vcn)}")}
-​    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End Virtual Columns")
-​    $evm.log("info","")
-​  end
+  #########################
+  #
+  # Method: dumpEMS
+  # Inputs: $evm.root['ext_management_system']
+  # Description: Dump EMS information
+  #
+  ##########################
+  def dumpEMS(ems)
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin Attributes")
+    ems.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> Attributes - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End Attributes")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin Associations")
+    ems.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> Associations - #{assc}")}
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End Associations")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin EMS Folders")
+    ems.ems_folders.each { |ef| ef.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> EMS Folder:<#{ef.name}> #{k}: #{v.inspect}")}}
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End EMS Folders")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> Begin Virtual Columns")
+    ems.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - EMS:<#{ems.name}> Virtual Columns - #{vcn}: #{ems.send(vcn)}")}
+    $evm.log("info","#{@log_prefix} - EMS:<#{ems.name}> End Virtual Columns")
+    $evm.log("info","")
+  end
 ----
 
 [[Cloud Providers (ems_cloud)]] Cloud Providers (ems_cloud)
@@ -751,7 +751,7 @@ begin
 |====================================================================
 
 
-[[Firewall Rules (firewall_rule)]] ⁠Firewall Rules (firewall_rule)
+[[Firewall Rules (firewall_rule)]] Firewall Rules (firewall_rule)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -913,62 +913,62 @@ The following Ruby snippet demonstrates using the
 
 [source,ruby]
 ----
-​​host = $evm.root['host']
-​cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.ago.utc,5.minutes.ago.utc], :avg)
+host = $evm.root['host']
+cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.ago.utc,5.minutes.ago.utc], :avg)
 ----
 
 [source,ruby]
 ----
-​​  #########################
-​  #
-​  # Method: dumpHost
-​  # Inputs: $evm.root['host']
-​  # Description: Dump Host information
-​  #
-​  ##########################
-​
+  #########################
+  #
+  # Method: dumpHost
+  # Inputs: $evm.root['host']
+  # Description: Dump Host information
+  #
+  ##########################
+
   def dumpHost(host)
-​    host = $evm.object['host'] || $evm.root['host']
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Attributes")
-​    host.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Attributes")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Associations")
-​    host.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Associations - #{assc}")}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Associations")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Hardware")
-​    host.hardware.attributes.each { |k,v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Hardware - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Hardware")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Lans")
-​    host.lans.each { |lan| lan.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Lan:<#{lan.name}> - #{k}: #{v.inspect}")}}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Lans")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Switches")
-​    host.switches.each { |switch| switch.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Swtiche:<#{switch.name}> - #{k}: #{v.inspect}")}}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Switches")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Operating System")
-​    host.operating_system.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Operating System - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Operating System")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Guest Applications")
-​    host.guest_applications.each { |guest_app| guest_app.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Guest Application:<#{guest_app.name}> - #{k}: #{v.inspect}")}}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Guest Applications")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Virtual Columns")
-​    host.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Virtual Columns - #{vcn}: #{host.send(vcn).inspect}")}
-​    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Virtual Columns")
-​    $evm.log("info", "")
-​  end
+    host = $evm.object['host'] || $evm.root['host']
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Attributes")
+    host.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Attributes - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Attributes")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Associations")
+    host.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Associations - #{assc}")}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Associations")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Hardware")
+    host.hardware.attributes.each { |k,v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Hardware - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Hardware")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Lans")
+    host.lans.each { |lan| lan.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Lan:<#{lan.name}> - #{k}: #{v.inspect}")}}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Lans")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Switches")
+    host.switches.each { |switch| switch.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Swtiche:<#{switch.name}> - #{k}: #{v.inspect}")}}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Switches")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Operating System")
+    host.operating_system.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Operating System - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Operating System")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Guest Applications")
+    host.guest_applications.each { |guest_app| guest_app.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Guest Application:<#{guest_app.name}> - #{k}: #{v.inspect}")}}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Guest Applications")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> Begin Virtual Columns")
+    host.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - Host:<#{host.name}> Virtual Columns - #{vcn}: #{host.send(vcn).inspect}")}
+    $evm.log("info","#{@log_prefix} - Host:<#{host.name}> End Virtual Columns")
+    $evm.log("info", "")
+  end
 ----
 
 [[Hosts: Vmware ESX (host_vmware_esx)]] Hosts: Vmware ESX (host_vmware_esx)
@@ -1014,36 +1014,36 @@ The following Ruby snippet demonstrates using the
 
 [source,ruby]
 ----
-​  #########################
+  #########################
   #
-​  # Method: dumpGroup
-​  # Inputs: $evm.root['user'].miq_group
-​  # Description: Dump User's Group information
-​  #
+  # Method: dumpGroup
+  # Inputs: $evm.root['user'].miq_group
+  # Description: Dump User's Group information
+  #
   ##########################
 
-​  def dumpGroup
-​    user = $evm.root['user']
-​    unless user.nil?
-​      miq_group = user.miq_group
-​      unless miq_group.nil?
-​        $evm.log("info","#{@method} - Group:<#{miq_group.description}> Begin Attributes [miq_group.attributes]")
-​        miq_group.attributes.sort.each { |k, v| $evm.log("info", "#{@method} - Group:<#{miq_group.description}> Attributes - #{k}: #{v.inspect}")} unless $evm.root['user'].miq_group.nil?
-​        $evm.log("info","#{@method} - Group:<#{miq_group.description}> End Attributes [miq_group.attributes]")
-​        $evm.log("info", "")
-​
-​        $evm.log("info","#{@method} - Group:<#{miq_group.description}> Begin Associations [miq_group.associations]")
-​        miq_group.associations.sort.each { |assc| $evm.log("info", "#{@method} - Group:<#{miq_group.description}> Associations - #{assc}")}
-​        $evm.log("info","#{@method} - Group:<#{miq_group.description}> End Associations [miq_group.associations]")
-​        $evm.log("info","")
-​
-​        $evm.log("info","#{@method} - Group:<#{miq_group.description}> Begin Virtual Columns [miq_group.virtual_column_names]")
-​        miq_group.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@method} - Group:<#{miq_group.description}> Virtual Columns - #{vcn}: #{miq_group.send(vcn).inspect}")}
-​        $evm.log("info","#{@method} - Group:<#{miq_group.description}> End Virtual Columns [miq_group.virtual_column_names]")
-​        $evm.log("info","")
-​      end
-​    end
-​  end
+  def dumpGroup
+    user = $evm.root['user']
+    unless user.nil?
+      miq_group = user.miq_group
+      unless miq_group.nil?
+        $evm.log("info","#{@method} - Group:<#{miq_group.description}> Begin Attributes [miq_group.attributes]")
+        miq_group.attributes.sort.each { |k, v| $evm.log("info", "#{@method} - Group:<#{miq_group.description}> Attributes - #{k}: #{v.inspect}")} unless $evm.root['user'].miq_group.nil?
+        $evm.log("info","#{@method} - Group:<#{miq_group.description}> End Attributes [miq_group.attributes]")
+        $evm.log("info", "")
+
+        $evm.log("info","#{@method} - Group:<#{miq_group.description}> Begin Associations [miq_group.associations]")
+        miq_group.associations.sort.each { |assc| $evm.log("info", "#{@method} - Group:<#{miq_group.description}> Associations - #{assc}")}
+        $evm.log("info","#{@method} - Group:<#{miq_group.description}> End Associations [miq_group.associations]")
+        $evm.log("info","")
+
+        $evm.log("info","#{@method} - Group:<#{miq_group.description}> Begin Virtual Columns [miq_group.virtual_column_names]")
+        miq_group.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@method} - Group:<#{miq_group.description}> Virtual Columns - #{vcn}: #{miq_group.send(vcn).inspect}")}
+        $evm.log("info","#{@method} - Group:<#{miq_group.description}> End Virtual Columns [miq_group.virtual_column_names]")
+        $evm.log("info","")
+      end
+    end
+  end
 ----
 
 [[Request (miq_request)]] Request (miq_request)
@@ -1372,7 +1372,7 @@ _Returns:_
 |status                 |Returns status of the task
 |====================================================================
 
-[[Host Provision Task (miq_host_provision)]] ⁠Host Provision Task (miq_host_provision)
+[[Host Provision Task (miq_host_provision)]] Host Provision Task (miq_host_provision)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 [options="header"]
 |====================================================================
@@ -1504,83 +1504,83 @@ _Example:_
 
 [source,ruby]
 ----
-​​begin
-​  miq_provision = $evm.root["miq_provision"] || $evm.root['miq_provision']
-​  prov = $evm.root["miq_provision"]
-​  user = prov.miq_request.requester
-​  raise "User not specified" if user.nil?
-​
-​  ###################################
-​  # Process Change Request Number and set VM Annotation
-​  ###################################
-​  intake = prov.get_option(:vm_description)
-​  intake = "Change Request#: #{intake}"
-​  prov.set_option(:vm_description,intake)
-​
-​  ###################################
-​  # Set the customization spec based on the environment tag chosen in the dialog
-​  ###################################
-​  tags = prov.get_tags
-​  $evm.log("info","Tags: #{tags.inspect}")
-​  env = tags[:environment]
-​  $evm.log("info", "Mapping custom spec based on Category Environment <#{env}> chosen in the dialog")
-​  if env.eql? "dev"
-​    customization_spec = "Dev-Specification"
-​    miq_provision.set_customization_spec(customization_spec)
-​  end
-​  if env.eql? "stg"
-​    customization_spec = "Stg-Specification"
-​    miq_provision.set_customization_spec(customization_spec)
-​  end
-​
-​  ###################################
-​  # Set the VM Notes as follows:
-​  ###################################
-​  vm_notes = "#{intake}"
-​  vm_notes +=  "\nOwner: #{miq_provision.get_option(:owner_first_name)} #{miq_provision.get_option(:owner_last_name)}"
-​  vm_notes += "\nEmail: #{miq_provision.get_option(:owner_email)}"
-​  vm_notes += "\nSource Template: #{miq_provision.vm_template.name}"
-​  miq_provision.set_vm_notes(vm_notes)
-​
-​  ###################################
-​  # Drop the VM in the targeted folder
-​  # In VC a folder must exist that matches the LDAP Group
-​  # VM will be placed in the Folder
-​  ###################################
-​  if prov.get_option(:placement_folder_name).nil?
-​    ###################################
-​    # If you want to use a Default folder, set folder = below to the default
-​    ###################################
-​    #    folder = "22F DC/LAB FARM/GSE/Intel/Infrastructure/ManageIQ/SelfServiceVMs"
-​    folder = "DC1/Infrastructure/ManageIQ/SelfService"
-​    $evm.log("info", "Placing VM in VC folder: <#{folder}")
-​    $evm.log("info", "Set_folder called with [#{folder.inspect}]")
-​
-​    miq_provision.set_folder(folder)
-​  end
-​
-​  ####################################################
-​  # Set the IP Address based on the :mac_address entered in the dialog
-​  #
-​  ####################################################
-​  ipaddr = prov.get_option(:mac_address)
-​
-​  if ! ipaddr.nil?
-​    # Set provisioning options to override options
-​    prov.set_option(:sysprep_spec_override, [true, 1])
-​    prov.set_option(:addr_mode, ["static", "Static"])
-​    prov.set_option(:ip_addr, ipaddr)
-​    # Reset :mac_address to nil
-​    prov.set_option(:mac_address, nil)
-​  end
-​
-​  $evm.log("info", "Provision Options: #{prov.options.inspect}")
-​
-​  exit MIQ_OK
-​
-​rescue => err
-​  $evm.log("info", "Set_folder err [#{err}]\n#{err.backtrace.join("\n")}")
-​end
+begin
+  miq_provision = $evm.root["miq_provision"] || $evm.root['miq_provision']
+  prov = $evm.root["miq_provision"]
+  user = prov.miq_request.requester
+  raise "User not specified" if user.nil?
+
+  ###################################
+  # Process Change Request Number and set VM Annotation
+  ###################################
+  intake = prov.get_option(:vm_description)
+  intake = "Change Request#: #{intake}"
+  prov.set_option(:vm_description,intake)
+
+  ###################################
+  # Set the customization spec based on the environment tag chosen in the dialog
+  ###################################
+  tags = prov.get_tags
+  $evm.log("info","Tags: #{tags.inspect}")
+  env = tags[:environment]
+  $evm.log("info", "Mapping custom spec based on Category Environment <#{env}> chosen in the dialog")
+  if env.eql? "dev"
+    customization_spec = "Dev-Specification"
+    miq_provision.set_customization_spec(customization_spec)
+  end
+  if env.eql? "stg"
+    customization_spec = "Stg-Specification"
+    miq_provision.set_customization_spec(customization_spec)
+  end
+
+  ###################################
+  # Set the VM Notes as follows:
+  ###################################
+  vm_notes = "#{intake}"
+  vm_notes +=  "\nOwner: #{miq_provision.get_option(:owner_first_name)} #{miq_provision.get_option(:owner_last_name)}"
+  vm_notes += "\nEmail: #{miq_provision.get_option(:owner_email)}"
+  vm_notes += "\nSource Template: #{miq_provision.vm_template.name}"
+  miq_provision.set_vm_notes(vm_notes)
+
+  ###################################
+  # Drop the VM in the targeted folder
+  # In VC a folder must exist that matches the LDAP Group
+  # VM will be placed in the Folder
+  ###################################
+  if prov.get_option(:placement_folder_name).nil?
+    ###################################
+    # If you want to use a Default folder, set folder = below to the default
+    ###################################
+    #    folder = "22F DC/LAB FARM/GSE/Intel/Infrastructure/ManageIQ/SelfServiceVMs"
+    folder = "DC1/Infrastructure/ManageIQ/SelfService"
+    $evm.log("info", "Placing VM in VC folder: <#{folder}")
+    $evm.log("info", "Set_folder called with [#{folder.inspect}]")
+
+    miq_provision.set_folder(folder)
+  end
+
+  ####################################################
+  # Set the IP Address based on the :mac_address entered in the dialog
+  #
+  ####################################################
+  ipaddr = prov.get_option(:mac_address)
+
+  if ! ipaddr.nil?
+    # Set provisioning options to override options
+    prov.set_option(:sysprep_spec_override, [true, 1])
+    prov.set_option(:addr_mode, ["static", "Static"])
+    prov.set_option(:ip_addr, ipaddr)
+    # Reset :mac_address to nil
+    prov.set_option(:mac_address, nil)
+  end
+
+  $evm.log("info", "Provision Options: #{prov.options.inspect}")
+
+  exit MIQ_OK
+
+rescue => err
+  $evm.log("info", "Set_folder err [#{err}]\n#{err.backtrace.join("\n")}")
+end
 ----
 
 [[VM Provisioning for Clouds Task (miq_provision_cloud)]] VM Provisioning for Clouds Task (miq_provision_cloud)
@@ -1635,7 +1635,7 @@ _Example:_
 |status             |Returns status of the migration task
 |====================================================================
 
-[[Proxies (miq_proxy)]] ⁠Proxies (miq_proxy)
+[[Proxies (miq_proxy)]] Proxies (miq_proxy)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -1657,19 +1657,19 @@ These methods are available to the CloudForms Management Engine Server.
 
 [source,ruby]
 ----
-​  #########################
-​  #
-​  # Method: dumpServer
-​  # Inputs: $evm.root['miq_server']
-​  # Description: Dump MIQ Server information
-​  #
-​  ##########################
-​  def dumpServer
-​    $evm.log("info","#{@method} - Server:<#{$evm.root['miq_server'].name}> Begin Attributes")
-​    $evm.root['miq_server'].attributes.sort.each { |k, v| $evm.log("info", "#{@method} - Server:<#{$evm.root['miq_server'].name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@method} - Server:<#{$evm.root['miq_server'].name}> End Attributes")
-​    $evm.log("info", "")
-​  end
+  #########################
+  #
+  # Method: dumpServer
+  # Inputs: $evm.root['miq_server']
+  # Description: Dump MIQ Server information
+  #
+  ##########################
+  def dumpServer
+    $evm.log("info","#{@method} - Server:<#{$evm.root['miq_server'].name}> Begin Attributes")
+    $evm.root['miq_server'].attributes.sort.each { |k, v| $evm.log("info", "#{@method} - Server:<#{$evm.root['miq_server'].name}> Attributes - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@method} - Server:<#{$evm.root['miq_server'].name}> End Attributes")
+    $evm.log("info", "")
+  end
 ----
 
 [[Network (network)]] Network (network)
@@ -1690,7 +1690,7 @@ These methods are available to the CloudForms Management Engine Server.
 |pxe_server                 |Returns objects pxe server
 |====================================================================
 
-[[PXE Server (pxe_server)]] ⁠PXE Server (pxe_server)
+[[PXE Server (pxe_server)]] PXE Server (pxe_server)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -1717,7 +1717,7 @@ These methods are available to the CloudForms Management Engine Server.
 |vms                        |Returns object's VMs
 |====================================================================
 
-[[Service (service)]] ⁠Service (service)
+[[Service (service)]] Service (service)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -1751,7 +1751,7 @@ These methods are available to the CloudForms Management Engine Server.
 |set_dialog_option(key, value)  |Sets `value` of a dialog option specified by `key`
 |====================================================================
 
-[[Service Resource (service_resource)]] ⁠Service Resource (service_resource)
+[[Service Resource (service_resource)]] Service Resource (service_resource)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [options="header"]
 |====================================================================
@@ -1797,34 +1797,34 @@ These methods can be used on Snapshots
 |unregistered_vms           |Returns objects unregistered Virtual Machines
 |to_s                       |Converts object to string
 |scan                       |Performs SmartState Analysis on the object
-|============================================⁠========================
+|====================================================================
 
 [source,ruby]
 ----
- ​ #########################
-​  #
-​  # Method: dumpStorage
-​  # Inputs: $evm.root['storage']
-​  # Description: Dump Storage information
-​  #
-​  ##########################
-​
+  #########################
+  #
+  # Method: dumpStorage
+  # Inputs: $evm.root['storage']
+  # Description: Dump Storage information
+  #
+  ##########################
+
   def dumpStorage(storage)
-​    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> Begin Attributes")
-​    storage.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Storage:<#{storage.name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> End Attributes")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> Begin Associations")
-​    storage.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - Storage:<#{storage.name}> Associations - #{assc}")}
-​    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> End Associations")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> Begin Virtual Columns")
-​    storage.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - Storage:<#{storage.name}> Virtual Columns - #{vcn}: #{storage.send(vcn)}")}
-​    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> End Virtual Columns")
-​    $evm.log("info","")
-​  end
+    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> Begin Attributes")
+    storage.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - Storage:<#{storage.name}> Attributes - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> End Attributes")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> Begin Associations")
+    storage.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - Storage:<#{storage.name}> Associations - #{assc}")}
+    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> End Associations")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> Begin Virtual Columns")
+    storage.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - Storage:<#{storage.name}> Virtual Columns - #{vcn}: #{storage.send(vcn)}")}
+    $evm.log("info","#{@log_prefix} - Storage:<#{storage.name}> End Virtual Columns")
+    $evm.log("info","")
+  end
 ----
 
 [[Switch (switch)]] Switch (switch)
@@ -1839,7 +1839,7 @@ These methods can be used on Switches.
 |lans           |Returns switch's lans
 |====================================================================
 
-[[User (user)]] ⁠User (user)
+[[User (user)]] User (user)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 These methods can be used on the currently logged on user.
 
@@ -1862,36 +1862,36 @@ These methods can be used on the currently logged on user.
 
 [source,ruby]
 ----
-​  #########################
-​  #
-​  # Method: dumpUser
-​  # Inputs: $evm.root['user']
-​  # Description: Dump User information
-​  #
-​  ##########################
+  #########################
+  #
+  # Method: dumpUser
+  # Inputs: $evm.root['user']
+  # Description: Dump User information
+  #
+  ##########################
 
-​  def dumpUser
-​    user = $evm.root['user']
-​    unless user.nil?
-​      $evm.log("info","#{@method} - User:<#{user.name}> Begin Attributes [user.attributes]")
-​      user.attributes.sort.each { |k, v| $evm.log("info", "#{@method} - User:<#{user.name}> Attributes - #{k}: #{v.inspect}")}
-​      $evm.log("info","#{@method} - User:<#{user.name}> End Attributes [user.attributes]")
-​      $evm.log("info", "")
-​
-​      $evm.log("info","#{@method} - User:<#{user.name}> Begin Associations [user.associations]")
-​      user.associations.sort.each { |assc| $evm.log("info", "#{@method} - User:<#{user.name}> Associations - #{assc}")}
-​      $evm.log("info","#{@method} - User:<#{user.name}> End Associations [user.associations]")
-​      $evm.log("info","")
-​
-​      $evm.log("info","#{@method} - User:<#{user.name}> Begin Virtual Columns [user.virtual_column_names]")
-​      user.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@method} - User:<#{user.name}> Virtual Columns - #{vcn}: #{user.send(vcn).inspect}")}
-​      $evm.log("info","#{@method} - User:<#{user.name}> End Virtual Columns [user.virtual_column_names]")
-​      $evm.log("info","")
-​    end
-​  end
+  def dumpUser
+    user = $evm.root['user']
+    unless user.nil?
+      $evm.log("info","#{@method} - User:<#{user.name}> Begin Attributes [user.attributes]")
+      user.attributes.sort.each { |k, v| $evm.log("info", "#{@method} - User:<#{user.name}> Attributes - #{k}: #{v.inspect}")}
+      $evm.log("info","#{@method} - User:<#{user.name}> End Attributes [user.attributes]")
+      $evm.log("info", "")
+
+      $evm.log("info","#{@method} - User:<#{user.name}> Begin Associations [user.associations]")
+      user.associations.sort.each { |assc| $evm.log("info", "#{@method} - User:<#{user.name}> Associations - #{assc}")}
+      $evm.log("info","#{@method} - User:<#{user.name}> End Associations [user.associations]")
+      $evm.log("info","")
+
+      $evm.log("info","#{@method} - User:<#{user.name}> Begin Virtual Columns [user.virtual_column_names]")
+      user.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@method} - User:<#{user.name}> Virtual Columns - #{vcn}: #{user.send(vcn).inspect}")}
+      $evm.log("info","#{@method} - User:<#{user.name}> End Virtual Columns [user.virtual_column_names]")
+      $evm.log("info","")
+    end
+  end
 ----
 
-[[Virtual Machines and Templates (vm_or_template)]] ⁠Virtual Machines and Templates (vm_or_template)
+[[Virtual Machines and Templates (vm_or_template)]] Virtual Machines and Templates (vm_or_template)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The following methods can be used on a virtual machine or template
 object.
@@ -1982,101 +1982,101 @@ _Example:_
 
 [source,ruby]
 ----
-​  #########################
-​  #
-​  # Method: dumpVM
-​  # Inputs: $evm.root['vm']
-​  # Description: Dump VM information
-​  #
-​  ##########################
+  #########################
+  #
+  # Method: dumpVM
+  # Inputs: $evm.root['vm']
+  # Description: Dump VM information
+  #
+  ##########################
 
-​  def dumpVM(vm)
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Attributes [vm.attributes]")
-​    vm.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Attributes - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Attributes [vm.attributes]")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Associations [vm.associations]")
-​    vm.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Associations - #{assc}")}
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Associations [vm.associations]")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Hardware Attributes [vm.hardware]")
-​    vm.hardware.attributes.each { |k,v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Hardware - #{k}: #{v.inspect}")}
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Hardware Attributes [vm.hardware]")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Hardware Associations [vm.hardware.associations]")
-​    vm.hardware.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> hardware Associations - #{assc}")}
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End hardware Associations [vm.hardware.associations]")
-​    $evm.log("info","")
-​
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Neworks [vm.hardware.nics]")
-​    vm.hardware.nics.each { |nic| nic.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> VLAN:<#{nic.device_name}> - #{k}: #{v.inspect}")}}
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Networks [vm.hardware.nics]")
-​    $evm.log("info","")
-​
-​    unless vm.ext_management_system.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin EMS [vm.ext_management_system]")
-​      vm.ext_management_system.attributes.sort.each { |ems_k, ems_v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> EMS:<#{vm.ext_management_system.name}> #{ems_k} - #{ems_v.inspect}")}
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End EMS [vm.ext_management_system]")
-​      $evm.log("info","")
-​    end
-​
-​    unless vm.owner.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Owner [vm.owner]")
-​      vm.owner.attributes.each { |k,v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Owner - #{k}: #{v.inspect}")}
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Owner [vm.owner]")
-​      $evm.log("info","")
-​    end
-​
-​    unless vm.operating_system.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Operating System [vm.operating_system]")
-​      vm.operating_system.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Operating System - #{k}: #{v.inspect}")}
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Operating System [vm.operating_system]")
-​      $evm.log("info","")
-​    end
-​
-​    unless vm.guest_applications.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Guest Applications")
-​      vm.guest_applications.each { |guest_app| guest_app.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Guest Application:<#{guest_app.name}> - #{k}: #{v.inspect}")}} unless vm.guest_applications.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Guest Applications")
-​      $evm.log("info","")
-​    end
-​
-​    unless vm.snapshots.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Snapshots")
-​      vm.snapshots.each { |ss| ss.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Snapshot:<#{ss.name}> - #{k}: #{v.inspect}")}} unless vm.snapshots.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Snapshots")
-​      $evm.log("info","")
-​    end
-​
-​    unless vm.storage.nil?
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin VM Storage [vm.storage]")
-​      vm.storage.attributes.sort.each { |stor_k, stor_v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Storage:<#{vm.storage.name}> #{stor_k} - #{stor_v.inspect}")}
-​      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End VM Storage [vm.storage]")
-​      $evm.log("info","")
-​    end
-​
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Virtual Columns -----")
-​    vm.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Virtual Columns - #{vcn}: #{vm.send(vcn).inspect}")}
-​    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Virtual Columns -----")
-​    $evm.log("info","")
-​  end
+  def dumpVM(vm)
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Attributes [vm.attributes]")
+    vm.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Attributes - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Attributes [vm.attributes]")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Associations [vm.associations]")
+    vm.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Associations - #{assc}")}
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Associations [vm.associations]")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Hardware Attributes [vm.hardware]")
+    vm.hardware.attributes.each { |k,v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Hardware - #{k}: #{v.inspect}")}
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Hardware Attributes [vm.hardware]")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Hardware Associations [vm.hardware.associations]")
+    vm.hardware.associations.sort.each { |assc| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> hardware Associations - #{assc}")}
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End hardware Associations [vm.hardware.associations]")
+    $evm.log("info","")
+
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Neworks [vm.hardware.nics]")
+    vm.hardware.nics.each { |nic| nic.attributes.sort.each { |k,v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> VLAN:<#{nic.device_name}> - #{k}: #{v.inspect}")}}
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Networks [vm.hardware.nics]")
+    $evm.log("info","")
+
+    unless vm.ext_management_system.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin EMS [vm.ext_management_system]")
+      vm.ext_management_system.attributes.sort.each { |ems_k, ems_v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> EMS:<#{vm.ext_management_system.name}> #{ems_k} - #{ems_v.inspect}")}
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End EMS [vm.ext_management_system]")
+      $evm.log("info","")
+    end
+
+    unless vm.owner.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Owner [vm.owner]")
+      vm.owner.attributes.each { |k,v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Owner - #{k}: #{v.inspect}")}
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Owner [vm.owner]")
+      $evm.log("info","")
+    end
+
+    unless vm.operating_system.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Operating System [vm.operating_system]")
+      vm.operating_system.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Operating System - #{k}: #{v.inspect}")}
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Operating System [vm.operating_system]")
+      $evm.log("info","")
+    end
+
+    unless vm.guest_applications.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Guest Applications")
+      vm.guest_applications.each { |guest_app| guest_app.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Guest Application:<#{guest_app.name}> - #{k}: #{v.inspect}")}} unless vm.guest_applications.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Guest Applications")
+      $evm.log("info","")
+    end
+
+    unless vm.snapshots.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Snapshots")
+      vm.snapshots.each { |ss| ss.attributes.sort.each { |k, v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Snapshot:<#{ss.name}> - #{k}: #{v.inspect}")}} unless vm.snapshots.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Snapshots")
+      $evm.log("info","")
+    end
+
+    unless vm.storage.nil?
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin VM Storage [vm.storage]")
+      vm.storage.attributes.sort.each { |stor_k, stor_v| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Storage:<#{vm.storage.name}> #{stor_k} - #{stor_v.inspect}")}
+      $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End VM Storage [vm.storage]")
+      $evm.log("info","")
+    end
+
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> Begin Virtual Columns -----")
+    vm.virtual_column_names.sort.each { |vcn| $evm.log("info", "#{@log_prefix} - VM:<#{vm.name}> Virtual Columns - #{vcn}: #{vm.send(vcn).inspect}")}
+    $evm.log("info","#{@log_prefix} - VM:<#{vm.name}> End Virtual Columns -----")
+    $evm.log("info","")
+  end
 ----
 
 [source,ruby]
 ----
-  ​​####################
+  ####################
   #
-  ​# Method: createSnapshot
-  ​#
-  ​####################
-  ​
+  # Method: createSnapshot
+  #
+  ####################
+
   def createSnapshot(vm, snap_name, snap_desc=snap_name)
-​    $evm.log("info","#{@method} - VM:<#{vm.name}> Creating Snapshot:<#{snap_name}> Description:<#{snap_desc}>")
-    ​vm.create_snapshot(snap_name, snap_desc)
-  ​end
+    $evm.log("info","#{@method} - VM:<#{vm.name}> Creating Snapshot:<#{snap_name}> Description:<#{snap_desc}>")
+    vm.create_snapshot(snap_name, snap_desc)
+  end
 ----
 
 [[VMs (vm)]] VMs (vm)
@@ -2110,8 +2110,8 @@ The following Ruby snippet demonstrates using the
 
 [source,ruby]
 ----
-​host = $evm.root['vm']
-​cpu_rdy = vm.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.ago.utc,5.minutes.ago.utc], :avg)
+host = $evm.root['vm']
+cpu_rdy = vm.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.ago.utc,5.minutes.ago.utc], :avg)
 ----
 
 [[VMs for Clouds (vm_cloud)]] VMs for Clouds (vm_cloud)
@@ -2178,13 +2178,13 @@ created and a message is logged. Values are then added to the category.
 
 [source,ruby]
 ----
-​if $evm.execute('category_exists?', "department")
-​  $evm.log("info", "Classification department exists")
-​else
-​  $evm.log("info", "Classification department doesn't exist, creating category")
-​  $evm.execute('category_create', :name => "department", :single_value => false, :description => "Department")
-​  $evm.log("info", "Adding new tag in Department Category")
-​  $evm.execute(tag_create', "department", :name => "finance", :description => "Finance")
+if $evm.execute('category_exists?', "department")
+  $evm.log("info", "Classification department exists")
+else
+  $evm.log("info", "Classification department doesn't exist, creating category")
+  $evm.execute('category_create', :name => "department", :single_value => false, :description => "Department")
+  $evm.log("info", "Adding new tag in Department Category")
+  $evm.execute(tag_create', "department", :name => "finance", :description => "Finance")
 ----
 
 [[Quota]] Quota

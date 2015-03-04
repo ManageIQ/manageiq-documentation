@@ -1,113 +1,23 @@
-Methods Available for Automation
-================================
-:author: CloudForms Docs Team
-:revdate: Thu Feb 26 2015
-:revnumber: 1.0-0
+= Methods Available for Automation
+//{product-author}
+//{product-version}
+:data-uri:
 :numbered:
-:toc:
+:toc: macro
+:toc-title:
 :toclevels: 3
-
-// only numbered seems to work when placed in Header. Build using command:
-// asciidoc -a toc -n -a toclevels=3 Methods_Available_for_Automation.ad
 
 .Abstract
 This guide provides advanced methods for CloudForms Management Engine's
-automation functions. Methods can be used from within CloudForms
-Management Engine to create custom actions and workflows for the objects
+automation functions. Methods can be used from within CloudForms Management Engine to create custom actions and workflows for the objects
 managed by CloudForms Management Engine. Information and procedures in
 this book are relevant to CloudForms Management Engine administrators.
 This document is organized by the object hierarchy in the Automate
 Model.
 
-Introduction to Red Hat CloudForms
-----------------------------------
-CloudForms Management Engine delivers the insight, control, and
-automation enterprises need to address the challenges of managing
-virtual environments. This technology enables enterprises with existing
-virtual infrastructures to improve visibility and control, and those
-starting virtualization deployments to build and operate a well-managed
-virtual infrastructure.
+toc::[]
 
-Red Hat CloudForms 3.1 is comprised of a single component, the
-CloudForms Management Engine. It has the following feature sets:
-
-* Insight: Discovery, Monitoring, Utilization, Performance, Reporting,
-Analytics, Chargeback, and Trending.
-* Control: Security, Compliance, Alerting, and Policy-Based Resource,
-and Configuration Enforcement.
-* Automate: IT Process, Task and Event, Provisioning, and Workload
-Management and Orchestration.
-* Integrate: Systems Management, Tools and Processes, Event Consoles,
-Configuration Management Database (CMDB), Role-based Administration
-(RBA), and Web Services.
-
-Architecture
-~~~~~~~~~~~~
-The diagram below describes the capabilities of CloudForms Management
-Engine. Its features are designed to work together to provide robust
-management and maintenance of your virtual infrastructure.
-
-.Features
-image:images/1845.png[Features]
-
-The architecture comprises the following components:
-
-* The CloudForms Management Engine Appliance (Appliance) which is
-supplied as a secure, high-performance, preconfigured virtual machine.
-It provides support for HTTPS communications.
-* The CloudForms Management Engine Server (Server) resides on the
-Appliance. It is the software layer that communicates between the
-SmartProxy and the Virtual Management Database. It includes support for
-HTTPS communications.
-* The Virtual Management Database (VMDB) resides either on the Appliance
-or another computer accessible to the Appliance. It is the definitive
-source of intelligence collected about your Virtual Infrastructure. It
-also holds status information regarding Appliance tasks.
-* The CloudForms Management Engine Console (Console) is the Web
-interface used to view and control the Server and Appliance. It is
-consumed through Web 2.0 mash-ups and web services (WS Management)
-interfaces.
-* The SmartProxy can reside on the Appliance or on an ESX Server. If not
-embedded in the Server, the SmartProxy can be deployed from the
-Appliance. Each storage location must have a SmartProxy with visibility
-to it. The SmartProxy acts on behalf of the Appliance communicating with
-it over HTTPS on standard port 443.
-
-Requirements
-~~~~~~~~~~~~
-To use CloudForms Management Engine, the following requirements must be
-met:
-
-* One of the following web browsers:
-** Mozilla Firefox for versions supported under Mozilla's Extended
-Support Release (ESR) <<1>>
-** Internet Explorer 8 or higher
-** Google Chrome for Business
-* A monitor with minimum resolution of 1280x1024.
-* Adobe Flash Player 9 or above. At the time of publication, you can
-access it at
-http://www.adobe.com/products/flashplayer/[http://www.adobe.com/products/flashplayer/].
-* The CloudForms Management Engine Appliance must already be installed
-and activated in your enterprise environment.
-* The SmartProxy must have visibility to the virtual machines and cloud
-instances that you want to control.
-* The resources that you want to control must have a SmartProxy
-associated with them.
-
-Important: Due to browser limitations, Red Hat supports logging in to only one tab
-for each multi-tabbed browser. Console settings are saved for the active
-tab only. For the same reason, CloudForms Management Engine does not
-guarantee that the browser's *Back* button will produce the desired
-results. Red Hat recommends using the breadcrumbs provided in the
-Console.
-
-[[1]]
-[1] http://www.mozilla.org/en-US/firefox/organizations/faq/[http://www.mozilla.org/en-US/firefox/organizations/faq/
-
-Terminology
-~~~~~~~~~~~
-*The following terms are used throughout this document. Review them
-before proceeding.*
+== Terminology
 
 Account Role::
   A designation assigned to a user allowing or restricting a user to
@@ -153,8 +63,7 @@ Event::
   A trigger to check a condition.
 Event Monitor::
   Software on the CloudForms Management Engine Appliance which monitors
-  external providers for events and sends them to the CloudForms
-  Management Engine server.
+  external providers for events and sends them to the CloudForms Management Engine server.
 Host::
   A computer on which virtual machine monitor software is loaded.
 Instance/Cloud Instance::
@@ -200,8 +109,7 @@ SmartProxy::
   CloudForms Management Engine Appliance to perform actions on hosts,
   providers, storage and virtual machines.
   +
-  The SmartProxy can be configured to reside on the CloudForms
-  Management Engine Appliance or on an ESX server version. The
+  The SmartProxy can be configured to reside on the CloudForms Management Engine Appliance or on an ESX server version. The
   SmartProxy can be deployed from the CloudForms Management Engine
   Appliance, and provides visibility to the VMFS storage. Each storage
   location must have a SmartProxy with visibility to it. The SmartProxy
@@ -254,25 +162,20 @@ Zones::
   location, network location, or function. When first started, new
   servers are put into the default zone.
 
-Methods Available for Use with CloudForms Management Engine
------------------------------------------------------------
+== Methods Available for Use with CloudForms Management Engine
 Methods can be used from within CloudForms Management Engine to create
-custom actions and workflows for the objects managed for your CloudForms
-Management Engine Infrastructure. This document describes the methods
+custom actions and workflows for the objects managed for your CloudForms Management Engine Infrastructure. This document describes the methods
 available for use in CloudForms Management Engine. This document is
 organized by the object hierarchy in the Automate Model.
 
-$evm.root
-~~~~~~~~~
+=== $evm.root
 When an Automate method is launched, it has one global variable: `$evm`.
-The `$evm` variable allows the method to communicate back to CloudForms
-Management Engine. The `$evm.root` is the root object in the workspace,
-it provides access to the data currently loaded in the CloudForms
-Management Engine model. It use the objects data to solve more complex
+The `$evm` variable allows the method to communicate back to CloudForms Management Engine. The `$evm.root` is the root object in the workspace,
+it provides access to the data currently loaded in the CloudForms Management Engine model. It use the objects data to solve more complex
 problems by integrating with CloudForms Management Engine methods.
 
 The following is an excerpt from the *InspectMe* method that can be
-found in the *ManageIQ\System\Request* namespace. The dumpRoot method
+found in the *CloudForms Management Engine\System\Request* namespace. The dumpRoot method
 accesses the `$evm.root` object, and sends all of its attributes to the
 CloudForms Management Engine Automate log for review. In the dumpServer
 Method, the inspect method is run based on the value of the miq_server
@@ -325,8 +228,7 @@ passed into the dumpServer method.
 [----] I, [2012-10-23T13:53:54.537772 #5320:f329024]  INFO -- : <User-Defined Method>
 ----
 
-Method Hierarchy
-~~~~~~~~~~~~~~~~
+=== Method Hierarchy
 The Automate Model inline methods have a hierarchy. The sublevels in the
 hierarchy have access to the methods for itself and the levels above it.
 For example, Red Hat Hosts have access to the Red Hat Host methods, Host
@@ -450,8 +352,7 @@ Methods without links do not have any additional methods.
 ***** Vmware (vm_vmware)
 ** Windows Images (windows_images) - <<Windows Image (windows_image),Windows Image (windows_image)>>
 
-[[Base Methods]] Base Methods
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Base Methods
 These methods may be used with all objects available in the Automate
 Model.
 
@@ -471,8 +372,7 @@ Model.
 |====================================================================
 
 The *InspectMe* *Sample Method* uses many of the Methods shown in this
-document. The method returns attributes of the CloudForms Management
-Engine Server and then returns attributes for the host, cluster, and
+document. The method returns attributes of the CloudForms Management Engine Server and then returns attributes for the host, cluster, and
 virtual machine from the provider of invocation. In many environments it
 is linked to a button.
 
@@ -533,8 +433,7 @@ rescue => err
 end
 ----
 
-[[Availability Zones (availability_zone)]] Availability Zones (availability_zone)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Availability Zones (availability_zone)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -544,8 +443,7 @@ end
 |cloud_subnets              |Returns object's cloud subnets
 |====================================================================
 
-[[Classifications (classification)]] Classifications (classification)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Classifications (classification)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -556,8 +454,7 @@ end
 |to_tag                     |Returns object's tag mapping
 |====================================================================
 
-[[Cloud Networks (cloud_network)]] Cloud Networks (cloud_network)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Cloud Networks (cloud_network)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -568,8 +465,7 @@ end
 |vms                        |Returns object's VMs
 |====================================================================
 
-[[Cloud Resource Quotas (cloud_resource_quota)]] Cloud Resource Quotas (cloud_resource_quota)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Cloud Resource Quotas (cloud_resource_quota)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -577,8 +473,7 @@ end
 |cloud_tenant               |Returns object's cloud tenant
 |====================================================================
 
-[[Cloud Subnets (cloud_subnet)]] Cloud Subnets (cloud_subnet)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Cloud Subnets (cloud_subnet)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -587,8 +482,7 @@ end
 |vms                        |Returns object's VMs
 |====================================================================
 
-[[Cloud Tenants (cloud_tenant)]] Cloud Tenants (cloud_tenant)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Cloud Tenants (cloud_tenant)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -602,16 +496,14 @@ end
 |cloud_resource_quotas      |Returns object's quotas
 |====================================================================
 
-[[Customization Template (customization_template)]] Customization Template (customization_template)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Customization Template (customization_template)
 [options="header"]
 |====================================================================
 |Method                     |Use
 |Pxe_images                 |Returns customization templates pxe images
 |====================================================================
 
-[[Clusters (ems_cluster)]] Clusters (ems_cluster)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Clusters (ems_cluster)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -655,8 +547,7 @@ end
   end
 ----
 
-[[Management System Events (ems_event)]] Management System Events (ems_event)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Management System Events (ems_event)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -673,8 +564,7 @@ end
 |====================================================================
 
 
-[[Management System Folders (ems_folder)]] Management System Folders (ems_folder)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Management System Folders (ems_folder)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -684,8 +574,7 @@ end
 |folder_path(*options)      |Returns folders path
 |====================================================================
 
-[[Providers (ext_management_system)]] Providers (ext_management_system)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Providers (ext_management_system)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -735,8 +624,7 @@ end
   end
 ----
 
-[[Cloud Providers (ems_cloud)]] Cloud Providers (ems_cloud)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Cloud Providers (ems_cloud)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -751,8 +639,7 @@ end
 |====================================================================
 
 
-[[Firewall Rules (firewall_rule)]] Firewall Rules (firewall_rule)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Firewall Rules (firewall_rule)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -760,8 +647,7 @@ end
 |source_security_group      |Return object's source security group
 |====================================================================
 
-[[Flavors (flavor)]] Flavors (flavor)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Flavors (flavor)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -769,8 +655,7 @@ end
 |vms                        |Returns object's VMs
 |====================================================================
 
-[[Floating IPs (floating_ip)]] Floating IPs (floating_ip)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Floating IPs (floating_ip)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -779,8 +664,7 @@ end
 |cloud_tenant               |Returns object's cloud tenant
 |====================================================================
 
-[[Guest Applications (guest_application)]] Guest Applications (guest_application)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Guest Applications (guest_application)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -788,8 +672,7 @@ end
 |host                       |Returns objects Host
 |====================================================================
 
-[[Guest Device (guest_device)]] Guest Device (guest_device)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Guest Device (guest_device)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -799,8 +682,7 @@ end
 |network                    |Returns objects network
 |====================================================================
 
-[[Hardware (hardware)]] Hardware (hardware)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Hardware (hardware)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -814,8 +696,7 @@ end
 |mac_addresses              |Returns objects MAC addresses
 |====================================================================
 
-[[Hosts (host)]] Hosts (host)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Hosts (host)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -971,8 +852,7 @@ cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes
   end
 ----
 
-[[Hosts: Vmware ESX (host_vmware_esx)]] Hosts: Vmware ESX (host_vmware_esx)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Hosts: Vmware ESX (host_vmware_esx)
 [options="header"]
 |====================================================================
 |Method                                 |Use
@@ -988,8 +868,7 @@ cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes
 |vmotion_enabled?(device = nil)         |Check to see if vMotion is enabled
 |====================================================================
 
-[[LAN (lan)]] LAN (lan)
-~~~~~~~~~~~~~~~~~~~~~~~
+=== LAN (lan)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1000,8 +879,7 @@ cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes
 |hosts                      |Returns objects Hosts
 |====================================================================
 
-[[Groups (miq_group)]] Groups (miq_group)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Groups (miq_group)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1046,9 +924,7 @@ cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes
   end
 ----
 
-[[Request (miq_request)]] Request (miq_request)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+=== Request (miq_request)
 Request objects are submitted to CloudForms Management Engine Server for
 processing. After the request phase, the request becomes a task object.
 The table below shows the relationship between a request object and a
@@ -1168,16 +1044,14 @@ $evm.root["miq_request"].pending`
 |set_option(key, value)             |Sets the specified key/value pair for the object
 |====================================================================
 
-[[Automation Request (automation_request)]] Automation Request (automation_request)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Automation Request (automation_request)
 [options="header"]
 |====================================================================
 |Method                     |Use
 |automation_tasks           |Returns objects automate tasks
 |====================================================================
 
-[[Host Provision Request (miq_host_provision_request)]] Host Provision Request (miq_host_provision_request)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Host Provision Request (miq_host_provision_request)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1185,8 +1059,7 @@ $evm.root["miq_request"].pending`
 |ci_type                    |Returns the cloud infrastructure type: `host`
 |====================================================================
 
-[[VM Provision Request (miq_provision_request)]] VM Provision Request (miq_provision_request)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== VM Provision Request (miq_provision_request)
 [options="header"]
 |====================================================================
 |Method                                 |Use
@@ -1286,8 +1159,7 @@ _Example:_
 |vm_template                            |Returns the requests template
 |====================================================================
 
-[[Request Task (miq_request_task)]] Request Task (miq_request_task)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Request Task (miq_request_task)
 [options="header"]
 |====================================================================
 |Method                                 |Use
@@ -1362,9 +1234,7 @@ _Returns:_
 |source                                 |Returns the source object. (The source, or input, object that the task runs against. In the case of provisioning, this would be the VM or template selected to be provisioned.)
 |====================================================================
 
-
-[[Automation Task (automation_task)]] Automation Task (automation_task)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Automation Task (automation_task)
 [options="header"]
 |====================================================================
 |Method                 |Use
@@ -1372,8 +1242,7 @@ _Returns:_
 |status                 |Returns status of the task
 |====================================================================
 
-[[Host Provision Task (miq_host_provision)]] Host Provision Task (miq_host_provision)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Host Provision Task (miq_host_provision)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1382,9 +1251,7 @@ _Returns:_
 |status                     |Returns status of host provision
 |====================================================================
 
-
-[[VM Provision Task (miq_provision)]] VM Provision Task (miq_provision)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== VM Provision Task (miq_provision)
 [options="header"]
 |====================================================================
 |Method                                 |Use
@@ -1583,8 +1450,7 @@ rescue => err
 end
 ----
 
-[[VM Provisioning for Clouds Task (miq_provision_cloud)]] VM Provisioning for Clouds Task (miq_provision_cloud)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== VM Provisioning for Clouds Task (miq_provision_cloud)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1598,8 +1464,7 @@ end
 |cloud_tenants              |Returns object's cloud tenant
 |====================================================================
 
-[[Service Template Provision Task (service_template_provision_task)]] Service Template Provision Task (service_template_provision_task)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Service Template Provision Task (service_template_provision_task)
 [options="header"]
 |====================================================================
 |Method                         |Use
@@ -1615,8 +1480,7 @@ _Example:_
 |status                         |Returns the tasks status
 |====================================================================
 
-[[Service Reconfiguration Task (service_reconfigure_task)]] Service Reconfiguration Task (service_reconfigure_task)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Service Reconfiguration Task (service_reconfigure_task)
 [options="header"]
 |====================================================================
 |Method                         |Use
@@ -1627,16 +1491,14 @@ _Example:_
 |finished(msg)                  |Sets the task to finished with the supplied message
 |====================================================================
 
-[[VM Migrate Task (vm_migrate_task)]] VM Migrate Task (vm_migrate_task)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== VM Migrate Task (vm_migrate_task)
 [options="header"]
 |====================================================================
 |Method             |Use
 |status             |Returns status of the migration task
 |====================================================================
 
-[[Proxies (miq_proxy)]] Proxies (miq_proxy)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Proxies (miq_proxy)
 [options="header"]
 |====================================================================
 |Method             |Use
@@ -1644,8 +1506,7 @@ _Example:_
 |powershell(script, returns = 'string') |Submits a powershell script
 |====================================================================
 
-[[Servers (miq_server)]] Servers (miq_server)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Servers (miq_server)
 These methods are available to the CloudForms Management Engine Server.
 [options="header"]
 |====================================================================
@@ -1672,8 +1533,7 @@ These methods are available to the CloudForms Management Engine Server.
   end
 ----
 
-[[Network (network)]] Network (network)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Network (network)
 [options="header"]
 |====================================================================
 |Method             |Use
@@ -1681,8 +1541,7 @@ These methods are available to the CloudForms Management Engine Server.
 |guest_device       |Returns objects guest devices
 |====================================================================
 
-[[PXE Image (pxe_image)]] PXE Image (pxe_image)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== PXE Image (pxe_image)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1690,8 +1549,7 @@ These methods are available to the CloudForms Management Engine Server.
 |pxe_server                 |Returns objects pxe server
 |====================================================================
 
-[[PXE Server (pxe_server)]] PXE Server (pxe_server)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== PXE Server (pxe_server)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1705,8 +1563,7 @@ These methods are available to the CloudForms Management Engine Server.
 |windows_images             |Returns objects windows images
 |====================================================================
 
-[[Security Groups (security_group)]] Security Groups (security_group)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Security Groups (security_group)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1717,8 +1574,7 @@ These methods are available to the CloudForms Management Engine Server.
 |vms                        |Returns object's VMs
 |====================================================================
 
-[[Service (service)]] Service (service)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Service (service)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1751,8 +1607,7 @@ These methods are available to the CloudForms Management Engine Server.
 |set_dialog_option(key, value)  |Sets `value` of a dialog option specified by `key`
 |====================================================================
 
-[[Service Resource (service_resource)]] Service Resource (service_resource)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Service Resource (service_resource)
 [options="header"]
 |====================================================================
 |Method             |Use
@@ -1762,8 +1617,7 @@ These methods are available to the CloudForms Management Engine Server.
 |source             |Returns the source object
 |====================================================================
 
-[[Service Template (service_template)]] Service Template (service_template)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Service Template (service_template)
 [options="header"]
 |====================================================================
 |Method         |Use
@@ -1771,8 +1625,7 @@ These methods are available to the CloudForms Management Engine Server.
 |owner=(owner)  |Sets owner for the service template
 |====================================================================
 
-[[Snapshot (snapshot)]] Snapshot (snapshot)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Snapshot (snapshot)
 These methods can be used on Snapshots
 
 [options="header"]
@@ -1785,9 +1638,7 @@ These methods can be used on Snapshots
 |remove                 |Removes specified snapshot
 |====================================================================
 
-
-[[Datastores (storage)]] Datastores (storage)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Datastores (storage)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -1827,8 +1678,7 @@ These methods can be used on Snapshots
   end
 ----
 
-[[Switch (switch)]] Switch (switch)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Switch (switch)
 These methods can be used on Switches.
 
 [options="header"]
@@ -1839,8 +1689,7 @@ These methods can be used on Switches.
 |lans           |Returns switch's lans
 |====================================================================
 
-[[User (user)]] User (user)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== User (user)
 These methods can be used on the currently logged on user.
 
 [options="header"]
@@ -1891,8 +1740,7 @@ These methods can be used on the currently logged on user.
   end
 ----
 
-[[Virtual Machines and Templates (vm_or_template)]] Virtual Machines and Templates (vm_or_template)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Virtual Machines and Templates (vm_or_template)
 The following methods can be used on a virtual machine or template
 object.
 
@@ -2079,8 +1927,7 @@ _Example:_
   end
 ----
 
-[[VMs (vm)]] VMs (vm)
-^^^^^^^^^^^^^^^^^^^^^
+==== VMs (vm)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -2114,8 +1961,7 @@ host = $evm.root['vm']
 cpu_rdy = vm.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.ago.utc,5.minutes.ago.utc], :avg)
 ----
 
-[[VMs for Clouds (vm_cloud)]] VMs for Clouds (vm_cloud)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== VMs for Clouds (vm_cloud)
 [options="header"]
 |====================================================================
 |Method                 |Use
@@ -2128,8 +1974,7 @@ cpu_rdy = vm.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.a
 |key_pairs              |Returns object's key pairs
 |====================================================================
 
-[[Windows Image (windows_image)]] Windows Image (windows_image)
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Windows Image (windows_image)
 [options="header"]
 |====================================================================
 |Method                     |Use
@@ -2137,8 +1982,7 @@ cpu_rdy = vm.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes.a
 |pxe_server                 |Returns the images pxe server.
 |====================================================================
 
-[[Creating Categories and Tags]] Creating Categories and Tags
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+=== Creating Categories and Tags
 These methods are invoked using $evm.execute. See after the table for
 usage examples.
 
@@ -2170,8 +2014,7 @@ _Example:_
 `$evm.execute(tag_create', "department", :name => "finance", :description => "Finance")`
 |====================================================================
 
-[[Category and Tags Methods Example]] Category and Tags Methods Example
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+==== Category and Tags Methods Example
 In this example, the VMDB is checked to see if the *Department* category
 exists. If it does, then a message is logged. If not, the category is
 created and a message is logged. Values are then added to the category.
@@ -2187,8 +2030,7 @@ else
   $evm.execute(tag_create', "department", :name => "finance", :description => "Finance")
 ----
 
-[[Quota]] Quota
-~~~~~~~~~~~~~~~
+=== Quota
 [options="header"]
 |====================================================================
 |Method(_parameter_)                                    |Use

@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Security_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Red_Hat_CloudForms-Security_Guide-Setting_SSL_for_the_Appliance_Database" lang="en-US">
+  <title>Configuring the Database to use SSL</title>
+    <para>
+      CloudForms initially connects to the database through an unencrypted communication. However, you can set up your database connection to use SSL. An SSL connection encrypts the communication between the CloudForms and the database, which is advantageous if using a multi-region environment over a wide area network.
+    </para>
+    <para>
+      The process for setting up SSL database communication requires two main pieces of configuration. First, the database server requires configuration to receive SSL connections. Second, the CloudForms appliance clients requires configuration to send database requests over SSL.
+    </para>
+    <para>
+      For this procedure you need the following SSL certificate files:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <filename>server.crt</filename> - Signed certificate
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <filename>server.key</filename> - Private key for certificate
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <filename>root-ca.cert</filename> - Certificate of root-ca that signed the certificate
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      It is also recommended to stop all Red Hat CloudForms services before configuring the database to use SSL.
+    </para>
+    <procedure id="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_database_server">
+      <title>Configuring SSL on the database server</title>
+      <step>
+        <para>
+          Login to the main appliance as <literal>root</literal>.
+        </para>
+      </step>
+      <step>
+        <para>
+          Copy your signed certificate and private key to the required locations on the database server:
+        </para>
+        <screen>
+[root@database~]# cp server.{key,crt} /opt/rh/postgresql92/root/var/lib/pgsql/data/.
+[root@database~]# chown postgres:postgres /opt/rh/postgresql92/root/var/lib/pgsql/data/server.{key,crt}
+[root@database~]# chmod 0400 /opt/rh/postgresql92/root/var/lib/pgsql/data/server.key
+        </screen>
+      </step>
+      <step>
+        <para>
+          Edit the <filename>postgresql.conf</filename> file and add the following option:
+        </para>
+        <screen>
+ssl=on
+        </screen>
+      </step>
+      <step>
+        <para>
+          Edit the <filename>pg_hba.conf</filename> file. It should looks similar to this:
+        </para>
+        <screen>
+# TYPE    DATABASE USER  ADDRESS       METHOD
+local     all      all                 peer map=usermap
+host      all      all   all           md5
+#hostssl  all      all   all           md5
+        </screen>
+        <para>
+          Modify the file content to comment the <literal>host</literal> entry and uncomment the <literal>hostssl</literal> entry:
+        </para>
+        <screen>
+# TYPE    DATABASE USER  ADDRESS       METHOD
+local     all      all                 peer map=usermap
+#host     all      all   all           md5
+hostssl   all      all   all           md5
+        </screen>
+        <para>
+This changes the incoming communication protocol to use SSL and refuse any unencrypted PostgreSQL connections.
+        </para>
+      </step>
+      <step>
+        <para>
+          Restart the <literal>postgresql</literal> service so the changes take effect:
+        </para>
+        <screen>
+[root@database~]# service postgresql92-postgresql restart
+        </screen>
+      </step>
+    </procedure>
+    <para>
+      The database server now only accepts connections from clients using SSL. The next procedure sets up the Satellite server to communicate to the database using SSL.
+    </para>
+    <procedure id="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_Satellite_server">
+      <title>Configuring SSL on the Satellite server</title>
+      <step>
+        <para>
+          Login as <literal>root</literal> to the external appliance.
+        </para>
+      </step>
+      <step>
+        <para>
+          Copy your <filename>root-ca.cert</filename> certificate to the following location:
+        </para>
+        <screen>
+[root@satellite ~]# cp root-ca.cert /etc/rhn/postgresql-db-root-ca.cert
+        </screen>
+      </step>
+
+    </procedure>
+    <para>
+      The Satellite server now communicates with the database server using SSL.
+    </para>
+
+
+
+</chapter>

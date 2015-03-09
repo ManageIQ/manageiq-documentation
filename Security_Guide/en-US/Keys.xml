@@ -4,33 +4,121 @@
 %BOOK_ENTITIES;
 ]>
 <chapter id="chap-Red_Hat_CloudForms-Security_Guide-Creating_Keys" lang="en-US">
-	<title>Creating Keys</title>
-	 <para>
-		This is a test paragraph
-	</para>
-	 <section id="sect-Red_Hat_CloudForms-Security_Guide-Creating_Keys-Test_Section_1">
-		<title>Test Section 1</title>
-		 <para>
-			This is a test paragraph in a section
-		</para>
-
-	</section>
-	 <section id="sect-Red_Hat_CloudForms-Security_Guide-Creating_Keys-Test_Section_2">
-		<title>Test Section 2</title>
-		 <para>
-			This is a test paragraph in Section 2 
-			<orderedlist>
-				<listitem>
-					<para>
-						This is a test listitem.
-					</para>
-
-				</listitem>
-
-			</orderedlist>
-
-		</para>
-
-	</section>
+	<title>Creating Customer Encryption Keys</title>
+	<para>
+    To avoid storing passwords in plain text, CloudForms appliances use an encryption key to encode and decode passwords. Each appliance stores the key in the <filename>/var/www/miq/vmdb/certs/v2_key</filename> and can be regenerated at any time.
+  </para>
+  <para>
+    The following procedure shows how to generate a new encryption key.
+  </para>
+  <procedure>
+		<title>Generating a New Encryption Key</title>
+    <step>
+      <para>
+        Login to the console of your master appliance as the <literal>admin</literal> user.
+      </para>
+    </step>
+    <step>
+      <para>
+        The CloudForms appliance information screen appears. Press any key to view the appliance menu.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter <userinput>11</userinput> for <guilabel>11) Generate Custom Encryption Key</guilabel>.
+      </para>
+    </step>
+    <step>
+      <para>
+        A prompt asks if for confirmation to overwrite the existing key. Enter <userinput>Y</userinput>.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter <userinput>1</userinput> for <guilabel>1) Create key</guilabel>.
+      </para>
+    </step>
+    <step>
+      <para>
+        The appliance generates the new key. Press any key to complete this procedure.
+      </para>
+    </step>
+  </procedure>
+  <para>
+    This completes the procedure for generating the new key. If you have external CloudForms appliances, you must share this key to ensure your whole CloudForms infrastructure is using consistent encryption. Failure to use the same key results in encryption and decryption problems.
+  </para>
+  <procedure>
+    <title>Copying an Encryption Key</title>
+    <step>
+      <para>
+        Login to the console of an external appliance as the <literal>admin</literal> user.
+      </para>
+    </step>
+    <step>
+      <para>
+        The CloudForms appliance information screen appears. Press any key to view the appliance menu.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter <userinput>11</userinput> for <guilabel>11) Generate Custom Encryption Key</guilabel>.
+      </para>
+    </step>
+    <step>
+      <para>
+        A prompt asks if for confirmation to overwrite the existing key. Enter <userinput>Y</userinput>.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter <userinput>2</userinput> for <guilabel>1) Fetch key from remote machine</guilabel>.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter the hostname or IP address of the master appliance.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter the username for SSH access to the master appliance. Use the default <literal>root</literal> user.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter the password for SSH access to the master appliance.
+      </para>
+    </step>
+    <step>
+      <para>
+        Enter the location of the remote key. Accept the default as <filename>/var/www/miq/vmdb/certs/v2_key</filename>.
+      </para>
+    </step>
+    <step>
+      <para>
+        The appliance copies the new key from the remote server. Press any key to complete this procedure.
+      </para>
+    </step>
+  </procedure>
+  <para>
+    After distributing the new key, all appliances require an update to the database configuration. For all appliance, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:
+  </para>
+  <screen>
+[root@cloudforms ~]# cd /var/www/miq/vmdb
+[root@cloudforms ~]# PASSWORD=`./bin/rails runner 'puts MiqPassword.encrypt("dbpassword")'`
+[root@cloudforms ~]# sed -i.`date +%m-%d-%Y` "s;password:.*;password: ${PASSWORD};g" config/database.yml
+[root@cloudforms ~]# service evmserverd restart
+  </screen>
+  <para>
+    In addition, on each database appliance only, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:
+  </para>
+  <screen>
+[root@cloudforms ~]# cd /var/www/miq/vmdb
+[root@cloudforms ~]# bundle exec ruby ./tools/fix_auth.rb --hostname localhost --password dbpassword
+[root@cloudforms ~]# service evmserverd restart
+  </screen>
+  <para>
+    This completes the new encryption key generation for your Red Hat CloudForms infrastructure.
+  </para>
 </chapter>
 

@@ -6,28 +6,38 @@
 <chapter id="chap-Red_Hat_CloudForms-Security_Guide-Setting_SSL_for_the_Appliance_Database" lang="en-US">
   <title>Configuring the Database to use SSL</title>
     <para>
-      CloudForms initially connects to the database through an unencrypted communication. However, you can set up your database connection to use SSL. An SSL connection encrypts the communication between the CloudForms and the database, which is advantageous if using a multi-region environment over a wide area network.
+      CloudForms initially connects to the database through an unencrypted communication. This is not an issue if you aim to use an internal-only database CloudForms appliance. If using multiple appliances connecting to a single appliance database, you can set up the database connection to use SSL. An SSL connection encrypts the communication between the CloudForms and the database.
     </para>
+<!--    <para>
+      The process for setting up SSL database communication only requires database server configuration to use SSL certificates and SSL communication. Clients automatically attempt to communicate through SSL before trying a non-secure connection.
+    </para> -->
     <para>
-      The process for setting up SSL database communication requires two main pieces of configuration. First, the database server requires configuration to receive SSL connections. Second, the CloudForms appliance clients requires configuration to send database requests over SSL.
-    </para>
-    <para>
-      For this procedure you need the following SSL certificate files:
+      For this procedure uses the following SSL certificate files on your main CloudForms database appliance:
     </para>
     <itemizedlist>
       <listitem>
         <para>
-          <filename>server.crt</filename> - Signed certificate
+          <filename>/var/www/miq/vmdb/certs/server.cer</filename> - Signed certificate for CloudForms database server appliance
         </para>
       </listitem>
       <listitem>
         <para>
-          <filename>server.key</filename> - Private key for certificate
+          <filename>/var/www/miq/vmdb/certs/server.cer.key</filename> - Private key for server certificate
         </para>
       </listitem>
       <listitem>
         <para>
-          <filename>root-ca.cert</filename> - Certificate of root-ca that signed the certificate
+          <filename>/var/www/miq/vmdb/certs/client.cer</filename> - Signed certificate for CloudForms client appliances
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <filename>/var/www/miq/vmdb/certs/client.cer.key</filename> - Private key for client certificate
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <filename>/var/www/miq/vmdb/certs/ca.cer</filename> - The certificate authority that signed the server and client certificates.
         </para>
       </listitem>
     </itemizedlist>
@@ -43,25 +53,40 @@
       </step>
       <step>
         <para>
-          Copy your signed certificate and private key to the required locations on the database server:
+          Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf</filename> file:
         </para>
         <screen>
-[root@database~]# cp server.{key,crt} /opt/rh/postgresql92/root/var/lib/pgsql/data/.
-[root@database~]# chown postgres:postgres /opt/rh/postgresql92/root/var/lib/pgsql/data/server.{key,crt}
-[root@database~]# chmod 0400 /opt/rh/postgresql92/root/var/lib/pgsql/data/server.key
+[root@cloudforms1 ~]# vi /opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf
         </screen>
-      </step>
-      <step>
         <para>
-          Edit the <filename>postgresql.conf</filename> file and add the following option:
+          Uncomment and edit the <option>ssl</option> option:
         </para>
         <screen>
 ssl=on
         </screen>
+        <para>
+          Uncomment and edit the SSL certificate location options to match the following:
+        </para>
+        <screen>
+ssl_cert_file = '/var/www/miq/vmdb/certs/server.cer'          # (change requires restart)
+ssl_key_file  = '/var/www/miq/vmdb/certs/server.cer.key'      # (change requires restart)
+ssl_ca_file   = '/var/www/miq/vmdb/certs/ca.cer'              # (change requires restart)
+        </screen>
+        <para>
+          Save your changes to this file.
+        </para>
       </step>
       <step>
         <para>
-          Edit the <filename>pg_hba.conf</filename> file. It should looks similar to this:
+          Secure the key file:
+        </para>
+        <screen>
+[root@cloudforms2 ~]# chmod 600 /var/www/miq/vmdb/certs/server.cer.key
+        </screen>
+      </step>
+      <step>
+        <para>
+          Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/pg_hba.conf</filename> file. It should looks similar to this:
         </para>
         <screen>
 # TYPE    DATABASE USER  ADDRESS       METHOD
@@ -87,32 +112,69 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
           Restart the <literal>postgresql</literal> service so the changes take effect:
         </para>
         <screen>
-[root@database~]# service postgresql92-postgresql restart
+[root@cloudforms1 ~]# service postgresql92-postgresql restart
         </screen>
       </step>
     </procedure>
     <para>
-      The database server now only accepts connections from clients using SSL. The next procedure sets up the Satellite server to communicate to the database using SSL.
+      The database server now only accepts connections from clients using SSL. The next procedure sets up client appliances to communicate to the database using SSL. Use this procedure for each client appliance.
     </para>
     <procedure id="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_Satellite_server">
       <title>Configuring SSL on the Satellite server</title>
       <step>
         <para>
-          Login as <literal>root</literal> to the external appliance.
+          Login as <literal>root</literal> to the client appliance.
         </para>
       </step>
       <step>
         <para>
-          Copy your <filename>root-ca.cert</filename> certificate to the following location:
+          Create the <filename>.postgresql</filename> directory in your <literal>root</literal> users home directory.
         </para>
         <screen>
-[root@satellite ~]# cp root-ca.cert /etc/rhn/postgresql-db-root-ca.cert
+[root@cloudforms2 ~]# mkdir ~/.postgresql
+        </screen>
+        <para>
+          The PostgreSQL client library, which CloudForms Management Engine also uses, looks to this directory for custom configuration files.
+        </para>
+      </step>
+      <step>
+        <para>
+          Copy the required CloudForms appliance client certificate files to the <filename>.postgresql</filename> directory defaults:
+        </para>
+        <screen>
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer ~/.postgresql/postgresql.crt
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer.key ~/.postgresql/postgresql.key
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer ~/.postgresql/root.crt
         </screen>
       </step>
+      <step>
+        <para>
+          Secure the key file:
+        </para>
+        <screen>
+[root@cloudforms2 ~]# chmod 600 ~/.postgresql/postgresql.key
+        </screen>
+      </step>
+      <step>
+        <para>
+          Test the connection between the appliance client and the appliance database server using the <command>psql</command>:
+        </para>
+        <screen>
+[root@localhost ~]# psql -h [cloudforms1 host] -d vmdb_production
+Password: ********
+psql (9.2.8)
+<emphasis role="bold">SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)</emphasis>
+Type "help" for help.
 
+vmdb_production=#
+        </screen>
+        <para>
+          The <command>psql</command> displays information about the SSL connection, which indicates that the configuration suceeded. Enter <command>\q</command> to leave <command>psql</command>.
+        </para>
+      </step>
     </procedure>
     <para>
-      The Satellite server now communicates with the database server using SSL.
+      Complete this procedure for each external appliance. This secures all database transactions in your CloudForms infrastructure.
     </para>
 
 

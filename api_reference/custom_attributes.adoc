@@ -1,0 +1,189 @@
+[[custom-attributes]]
+== Custom Attributes
+
+Custom Attributes can be managed for Virtual Machines. This is done via the
+custom_attributes sub-collection as follows:
+
+[source,data]
+----
+/api/vms/:id/custom_attributes
+----
+
+* link:#querying-custom-attributes[Querying Custom Attributes]
+* link:#specifying-custom-attributes[Specifying Custom Attributes]
+* link:#custom-attribute-actions[Custom Attribute Actions]
+* link:#add-custom-attributes[Adding Custom Attributes]
+* link:#edit-custom-attributes[Editing Custom Attributes]
+* link:#delete-custom-attributes[Deleting Custom Attributes]
+
+[[querying-custom-attributes]]
+=== Querying Custom Attributes
+
+Custom attributes of a VM can be asked for by expanding the subcollection as follows:
+
+----
+GET /api/vms/:id?expand=custom_attributes
+----
+
+Optionally, just the custom attributes of a VMs can be queried:
+
+----
+GET /api/vms/:id/custom_attributes
+----
+
+[[specifying-attribute-actions]]
+=== Specifying Attribute Actions
+
+Custom attributes are specified as follows:
+
+[source,json]
+----
+{
+  "name" : "...",
+  "value" : "...",
+  "source" : "...",
+  "section" : "...",
+}
+----
+
+For adding custom attributes, *name* field is required.
+
+If omitted, *source* will be set to *EVM*.  If *source* is set to *VC*,
+the custom attribute field will be updated on the provider.
+
+For editing a custom attribute, specify the custom attribute either by *name*:
+
+[source,json]
+----
+{
+  "name" : "...",
+  "value" : "..."
+}
+----
+
+Or by *href*:
+
+[source,json]
+----
+{
+  "href" : "http://localhost:3000/api/vms/:id/custom_attributes/:id",
+  "value" : "..."
+}
+----
+
+[[custom-attribute-actions]]
+=== Custom Attribute Actions
+
+[cols="<,<",options="header",]
+|=====================
+| Action | Description
+| add | Adding Custom Attributes to a VM
+| edit | Editing Custom Attributes of a VM
+| delete | Deleting Custom Attributes from a VM
+|=====================
+
+[[add-custom-attributes]]
+=== Adding Custom Attributes
+
+Adding custom attributes to a VM:
+
+----
+POST /api/vms/:id/custom_attributes
+----
+
+[source,json]
+----
+{
+  "action" : "add",
+  "resources" : [
+    { ... },
+    { ... },
+    ...
+  ]
+}
+----
+
+For example, adding two custom attributes:
+
+[source,json]
+----
+{
+  "action" : "add",
+  "resources" : [
+    { "name" : "ca1", "value" : "value 1" },
+    { "name" : "ca2", "value" : "value 2" }
+  ]
+}
+----
+
+
+[[edit-custom-attributes]]
+=== Editing Custom Attributes
+
+Editing custom attributes of a VM:
+
+----
+POST /api/vms/:id/custom_attributes
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    { ... },
+    { ... },
+    ...
+  ]
+}
+----
+
+For example:
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    { "name" : "ca_name1", "value" : "updated custom attribute value 1" },
+    { "name" : "ca_name2", "value" : "updated custom attribute value 2" }
+  ]
+}
+----
+
+[[delete-custom-attributes]]
+=== Deleting Custom Attributes
+
+Deleting custom attributes of a VM:
+
+----
+POST /api/vms/:id/custom_attributes
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { ... },
+    { ... },
+    ...
+  ]
+}
+----
+
+
+In the following example, a request to delete custom attributes of a VM by name and by href:
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    { "name" : "ca_name1" },
+    { "href" : "http://localhost:3000/api/vms/:id/custom_attributes/:id" }
+  ]
+}
+----
+
+

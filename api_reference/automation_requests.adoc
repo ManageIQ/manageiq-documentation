@@ -1,0 +1,94 @@
+[[automation-requests]]
+== Automation Requests
+
+Automation requests are made available via the following entrypoint.
+
+[source,data]
+----
+/api/automation_requests
+----
+
+Either by specifying a _create_ action or by posting the automation request directly
+to */api/automation_requests*.
+
+As an example:
+
+[source,json]
+----
+{
+  "uri_parts" : {
+    "namespace" : "System",
+    "class"     : "Request",
+    "instance"  : "InspectME",
+    "message"   : "create"
+  },
+  "parameters" : {
+    "var1" : "value 1",
+    "var2" : "value 2",
+    "minimum_memory" : 2048
+  },
+  "requester" : {
+    "auto_approve" : true
+  }
+}
+----
+
+[[monitoring-request]]
+=== Monitoring Request
+
+Once an automation request is created, the response will be the queryable 
+automation request itself, i.e. */api/automation_request/:id*
+
+==== Response:
+
+[source,json]
+----
+{
+  "results": [
+    {
+      "id": 10,
+      "description": "Automation Task",
+      "approval_state": "approved",
+      "type": "AutomationRequest",
+      "created_on": "2015-04-14T18:12:12Z",
+      "updated_on": "2015-04-14T18:12:12Z",
+      "requester_id": 1,
+      "requester_name": "Administrator",
+      "request_type": "automation",
+      "request_state": "pending",
+      "status": "Ok",
+      "options": {
+        "message": "create",
+        "namespace": "System",
+        "class_name": "Request",
+        "instance_name": "InspectME",
+        "user_id": 1,
+        "attrs": {
+          "var1": "value 1",
+          "var2": "value 2",
+          "minimum_memory": 2048,
+          "userid": "admin"
+        }
+      },
+      "userid": "admin"
+    }
+  ]
+}
+----
+
+In the above example, the request could be queried periodically 
+until the *request_state* reaches the *finished* state.
+
+NOTE: The request tasks of an automation request can also be queried by
+expanding the request_tasks subcollection as follows:
+
+----
+GET /api/automation_requests/:id?expand=request_tasks
+----
+
+An alias *tasks* is also defined for the above subcollection:
+
+----
+GET /api/automation_requests/:id?expand=tasks
+----
+

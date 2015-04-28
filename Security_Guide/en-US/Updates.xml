@@ -1,0 +1,265 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Security_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Red_Hat_CloudForms-Security_Guide-Updates" lang="en-US">
+  <title>Registering and Updating CloudForms Management Engine</title>
+  <para>
+    An important part of securing Red Hat CloudForms Management Engine is to ensure your appliances use the latest packages. Package updates to the appliance contain patches for any software bugs, including possible security bugs.
+  </para>
+  <para>
+    The <guibutton>Red Hat Updates</guibutton> page enables you to edit register and update appliances. This includes either registering the appliance to Red Hat's Content Delivery Network (CDN) or to a Red Hat Satellite server.
+  </para>
+  <para>
+    The following tools are used during the update process:
+  </para>
+  <itemizedlist>
+    <listitem>
+      <para>
+        <literal>Yum</literal> provides package installation, updates, and dependency checking.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <literal>Red Hat Subscription Manager</literal> manages subscriptions and entitlements.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        <literal>Red Hat Satellite Server</literal> runs at customer locations providing local system registration and updates from inside the customer's firewall.
+      </para>
+    </listitem>
+  </itemizedlist>
+  <important>
+    <para>
+      The update worker synchronizes the VMDB with the status of available <productname>CloudForms Management Engine</productname> content every 12 hours.
+    </para>
+  </important>
+  <note>
+    <para>
+      Servers with the <guilabel>RHN Mirror</guilabel> role also act as a repository for other Appliances to pull <productname>CloudForms Management Engine</productname> packages updates.
+    </para>
+  </note>
+  <para>
+    The <guibutton>Red Hat Updates</guibutton> page enables you to register appliances. You need the following to register:
+  </para>
+  <itemizedlist>
+    <listitem>
+      <para>
+        Your Red Hat Account login or Red Hat Network Satellite login
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        A Red Hat subscription that covers your product
+      </para>
+    </listitem>
+  </itemizedlist>
+  <procedure>
+    <title>Registering a CloudForms Management Engine Appliance</title>
+    <step>
+      <para>
+        Login to the Appliance as the <literal>admin</literal> user.
+      </para>
+    </step>
+    <step>
+      <para>
+        Navigate to <menuchoice><guimenu>Configure</guimenu><guisubmenu>Configuration</guisubmenu></menuchoice>. Select <guimenu>Region</guimenu> in the accordion menu and click the <guimenu>Red Hat Updates</guimenu> tab.
+      </para>
+    </step>
+    <step>
+      <para>
+        In <guilabel>Red Hat Software Updates</guilabel>, click <guibutton>Edit Registration</guibutton>.
+      </para>
+    </step>
+    <step>
+      <para>
+        You can register the CloudForms Management Engine Appliance using one of three available options:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Red Hat Subscription Management
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Red Hat Satellite 5
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Red Hat Satellite 6
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        The Subscription Management Service you register with will provide your systems with updates and allow additional management.
+      </para>
+      <stepalternatives>
+        <step>
+          <para>
+            To register with Red Hat Subscription Management:
+          </para>
+          <substeps>
+            <step>
+              <para>
+                In <guimenu>Register to</guimenu>, select <guimenuitem>Red Hat Subscription Management</guimenuitem>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter <guimenu>Red Hat Subscription Management Address</guimenu>. The default is <literal>subscription.rhn.redhat.com</literal>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter <guimenu>Repository Name</guimenu>. The default is <literal>cf-me-5.4-for-rhel-6-rpms rhel-server-rhscl-6-rpms</literal>, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+              </para>
+            </step>
+            <step>
+              <para>
+                To use a HTTP proxy, select <guibutton>Use HTTP Proxy</guibutton> and enter your proxy details.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter your Red Hat account information; click <guibutton>Validate</guibutton>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Click <guibutton>Save</guibutton>.
+              </para>
+            </step>
+          </substeps>
+        </step>
+        <step>
+          <para>
+            To register with Red Hat Satellite 5:
+          </para>
+          <substeps>
+            <step>
+              <para>
+                In <guimenu>Register to</guimenu>, select <guimenuitem>Red Hat Satellite 5</guimenuitem>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter <guimenu>Red Hat Satellite 5 Address</guimenu>. The default is <literal>subscription.rhn.redhat.com</literal>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter <guimenu>Repository Name</guimenu>. The default is <literal>rhel-x86_64-server-6-cf-me-3.2 rhel-x86_64-server-6-rhscl-1</literal>, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+              </para>
+            </step>
+            <step>
+              <para>
+                To use a HTTP proxy, select <guibutton>Use HTTP Proxy</guibutton> and enter your proxy details.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter your Red Hat network Satellite account information.
+              </para>
+            </step>
+            <step>
+              <para>
+                Click <guibutton>Save</guibutton>.
+              </para>
+            </step>
+          </substeps>
+        </step>
+        <step>
+          <para>
+            To register with Red Hat Satellite 6:
+          </para>
+          <substeps>
+            <step>
+              <para>
+                In <guimenu>Register to</guimenu>, select <guimenuitem>Red Hat Satellite 6</guimenuitem>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter <guimenu>Red Hat Satellite 6 Address</guimenu>. The default is <literal>subscription.rhn.redhat.com</literal>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter <guimenu>Repository Name</guimenu>. The default is <literal>cf-me-5.4-for-rhel-6-rpms rhel-server-rhscl-6-rpms</literal>, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+              </para>
+            </step>
+            <step>
+              <para>
+                To use a HTTP proxy, select <guibutton>Use HTTP Proxy</guibutton> and enter your proxy details.
+              </para>
+            </step>
+            <step>
+              <para>
+                Enter your Red Hat network Satellite account information; click <guibutton>Validate</guibutton>.
+              </para>
+            </step>
+            <step>
+              <para>
+                Click <guibutton>Save</guibutton>.
+              </para>
+            </step>
+          </substeps>
+        </step>
+      </stepalternatives>
+    </step>
+  </procedure>
+  <para>
+    After registering, the following options are available in the <guimenu>Appliance Updates</guimenu> section of the <guimenu>Red Hat Updates</guimenu> tab:
+  </para>
+  <informaltable frame="all">
+    <tgroup cols="2">
+      <colspec colwidth="1*" />
+      <colspec colwidth="2*" />
+      <thead>
+        <row>
+          <entry>
+            <para>
+              Option
+            </para>
+          </entry>
+          <entry>
+            <para>
+              Use
+            </para>
+          </entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>
+            Check for Updates
+          </entry>
+          <entry>
+            Checks for available updates using <command>yum</command>.
+          </entry>
+        </row>
+        <row>
+          <entry>
+            Register
+          </entry>
+          <entry>
+            Attempts to register the appliance if it is not already registered. CloudForms Management Engine subscribes to the <filename>rhel-x86_64-server-6-cf-me-3</filename> RHN channel for RHN registered appliances, and to the products designated by Red Hat product certification for <command>subscription-manager</command> registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, CloudForms Management Engine checks for updates after registering.
+          </entry>
+        </row>
+        <row>
+          <entry>
+            Apply CFME Update
+          </entry>
+          <entry>
+            Applies updates to CloudForms Management Engine packages only. Specifically, this option runs the <command>yum -y update cfme-appliance</command> command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated.
+          </entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+</chapter>
+

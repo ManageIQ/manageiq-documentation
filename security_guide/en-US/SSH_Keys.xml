@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Security_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="chap-Red_Hat_CloudForms-Security_Guide-Setting_SSH_Keys" lang="en-US">
+  <title>Setting SSH Keys on the Appliance</title>
+  <para>
+    Another recommended practice is to secure access to the appliance from a single machine using SSH keys. An SSH key provides secure access from one machine to another. The following procedure shows how to create an SSH key on your local machine and add it to the appliance.
+  </para>
+  <procedure>
+    <title>Setting SSH Keys on the Appliance</title>
+    <step>
+      <para>
+        Check the <filename>.ssh/</filename> directory in your home directory for any existing key pairs:
+      </para>
+      <screen>
+[user@localhost ~]$ ls ~/.ssh/
+      </screen>
+      <para>
+        A key pair usually consists of two files. One file is the private key, which stays on your local machine, and the other is the public key, which you copy to another machine. But files are named the same except the public key ends with a <filename>.pub</filename> extension.
+      </para>
+      <para>
+        If a key pair already exists, you can use this key pair. Otherwise, use the next few steps to create your own.
+      </para>
+    </step>
+    <step>
+      <para>
+        On your local machine, start the key pair generation process using the <command>ssh-keygen</command> command:
+      </para>
+      <screen>
+[user@localhost ~]$ ssh-keygen -t rsa
+      </screen>
+    </step>
+    <step>
+      <para>
+        A prompt asks for the file and location to store these keys.
+      </para>
+      <screen>
+Enter file in which to save the key (/home/user/.ssh/id_rsa):
+      </screen>
+      <para>
+        Accept the default path if you do not have a <filename>id_rsa</filename> key pair.
+      </para>
+    </step>
+    <step>
+      <para>
+        Another prompt asks for a passphrase:
+      </para>
+      <screen>
+Enter passphrase (empty for no passphrase):
+      </screen>
+      <para>
+        This secures the key pair with password encryption. This protects the key pair if it ever falls into the wrong hands. Alternatively, you can leave the passphrase empty, which provides an automatic login between your local machine and the remote machine.
+      </para>
+    </step>
+    <step>
+      <para>
+        The <command>ssh-keygen</command> command generates two files:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The private key - the default is <filename>/home/user/.ssh/id_rsa</filename>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The public key - the default is <filename>/home/user/.ssh/id_rsa.pub</filename>
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Copy the public key to the appliance using the <command>ssh-copy-id</command> command:
+      </para>
+      <screen>
+[user@localhost ~]$ ssh-copy-id ~/.ssh/id_rsa.pub root@10.1.1.205
+      </screen>
+      <para>
+        The command copies the public key to the appliance. You might recieve a prompt for the password of the root user on the appliance.
+      </para>
+    </step>
+    <step>
+      <para>
+        Test the SSH key authentication:
+      </para>
+      <screen>
+[user@localhost ~]$ ssh root@10.1.1.205
+      </screen>
+      <para>
+        This authenticates using the SSH key pair. If you entered a passphrase for the key, the command prompts you for the passphrase.
+      </para>
+    </step>
+    <step>
+      <para>
+        As an additional security measure, edit the <filename>/etc/ssh/sshd_config</filename> on the appliance and modify the following parameter:
+      </para>
+      <screen>
+PermitRootLogin without-password
+      </screen>
+      <para>
+        This forces the <literal>root</literal> user account to use certificates instead of passwords for SSH logins. This means only your local system can access the appliance.
+      </para>
+    </step>
+  </procedure>
+  <para>
+    The appliance is now secured with your SSH key.
+  </para>
+</section>
+

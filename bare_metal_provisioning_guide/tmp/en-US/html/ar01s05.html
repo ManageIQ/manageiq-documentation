@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" xmlns:ext="http://exslt.org/common" class="chrometwo"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /><title>5. Enabling the Foreman Discovery Plugin on a Satellite 6 Provider</title><link rel="stylesheet" type="text/css" href="Common_Content/css/default.css" /><link rel="stylesheet" media="print" href="Common_Content/css/print.css" type="text/css" /><meta name="generator" content="publican v4.2.6" /><meta name="package" content="Red_Hat_CloudForms-Bare_Metal_Provisioning_Guide-3.2-en-US-0.0-0" /><link rel="home" href="index.html" title="Bare Metal Provisioning Guide" /><link rel="up" href="index.html" title="Bare Metal Provisioning Guide" /><link rel="prev" href="ar01s04.html" title="4. Triggering a Refresh of a Satellite 6 Provider" /><link rel="next" href="ar01s06.html" title="6. Discovering a Bare Metal Host in a Foreman provider" /><link rel="copyright" href="ln-idm262862372432.html" title="Legal Notice" /></head><body><div id="chrometwo"><div id="main"><p id="title"><a class="left" href="https://access.redhat.com"><img alt="Product Site" src="Common_Content/images//image_left.png" /></a><a class="right" href="https://access.redhat.com"><img alt="Documentation Site" src="Common_Content/images//image_right.png" /></a></p><ul class="docnav top"><li class="previous"><a accesskey="p" href="ar01s04.html"><strong>Prev</strong></a></li><li class="home">Bare Metal Provisioning Guide</li><li class="next"><a accesskey="n" href="ar01s06.html"><strong>Next</strong></a></li></ul><div class="section"><div class="titlepage"><div><div><h2 class="title"><a id="idm262863827552">
+      ⁠</a>5. Enabling the Foreman Discovery Plugin on a Satellite 6 Provider</h2></div></div></div><div class="para">
+			The Foreman Discovery plug-in in Red Hat Satellite Server adds Metal-as-a-Service (MaaS) features. Bare-metal hosts on Satellite Server-managed networks can be booted over the network through PXE into stripped-down Red Hat Enterprise Linux systems running from memory to collect and send hardware facts to the Satellite Server.
+		</div><div class="para">
+			After they have booted, these systems appear as discovered hosts on the Satellite Server. Administrators can use these collected hardware facts to provision systems, removing the need to manually collect MAC addresses and other hardware information and reducing the time required to provision hosts.
+		</div><div class="para">
+			After the provisioning configuration is complete, the Foreman discovery plug-in sends a reboot command to the discovered host and the installation begins. The host then moves from the <span class="guimenu"><strong>Discovered Hosts</strong></span> list in the Satellite Server to the <span class="guimenu"><strong>All Hosts</strong></span> list.
+		</div><div class="para">
+			This section provides a brief set of instructions for configuring Satellite 6 to use to Discovery plugin. For full instructions, see <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.0/html/User_Guide/chap-Configuring_the_Foreman_Discovery_Plugin.html#sect-Installing_the_Foreman_Discovery_Plugin">Chapter 11. Using the Foreman Discovery Plugin</a> in the <em class="citetitle">Red Hat Satellite 6 User Guide</em>.
+		</div><div xmlns:d="http://docbook.org/ns/docbook" class="procedure"><a id="idm262863821616">
+      ⁠</a><p class="title"><strong>Procedure 3. Enabling the Foreman Discovery Plugin on a Satellite 6 Provider</strong></p><ol class="1"><li class="step"><div class="para">
+					Run the following command as the <code class="systemitem">root</code> user on the Satellite 6 server to install the Foreman Discovery plug-in:
+				</div><pre class="screen">
+[root@satellite6 ~]# yum install foreman-discovery-image
+</pre><div class="para">
+					This installs an image containing Foreman Discovery to the TFTP service on you Satellite 6 server.
+				</div></li><li class="step"><div class="para">
+					Red Hat Satellite 6 contains a Global PXE template that requires modification. In Red Hat Satellite 6.0, this template is locked from editing. To unlock this template, run the <span class="application"><strong>rake</strong></span> console on the Satellite 6.0 server.
+				</div><pre class="screen">
+[root@satellite6 ~]# foreman-rake console
+</pre><div class="para">
+					Enter the following commands in the console:
+				</div><pre class="screen">
+&gt; ct = ConfigTemplate.find_by_name("PXELinux global default"); ct.locked = false; ct.save!
+&gt; exit
+</pre><div class="para">
+					This unlocks the template.
+				</div></li><li class="step"><div class="para">
+					Log into your Red Hat Satellite 6 UI and navigate to <span class="guimenu"><strong>Hosts</strong></span> → <span class="guimenuitem"><strong>Provisioning templates</strong></span>. Edit the <code class="literal">PXELinux global default template</code> and add the following lines:
+				</div><pre class="screen">
+LABEL discovery
+MENU LABEL Foreman Discovery
+MENU DEFAULT
+KERNEL boot/foreman-discovery-image-latest.el6.iso-vmlinuz
+APPEND rootflags=loop initrd=boot/foreman-discovery-image-latest.el6.iso-img root=live:/foreman.iso rootfstype=auto ro rd.live.image rd.live.check rd.lvm=0 rootflags=ro crashkernel=128M elevator=deadline max_loop=256 rd.luks=0 rd.md=0 rd.dm=0 rd.bootif=0 rd.neednet=0 nomodeset selinux=0 stateless foreman.url=<em class="replaceable">FOREMAN_URL</em>
+IPAPPEND 2
+</pre><div class="para">
+					This adds an entry for Foreman Discovery when using the default PXE boot service for Satellite 6.
+				</div><div class="para">
+					The highlighted <code class="option">FOREMAN_URL</code> option on the APPEND line identifies the location of the Satellite 6 server. Ensure that this is set correctly in global settings or the discovered hosts will not register to Satellite 6.
+				</div><div class="para">
+					Also set the <em class="parameter"><code>ONTIMEOUT</code></em> parameter to <code class="literal">discovery</code> to make the <code class="option">Foreman Discovery</code> option the default:
+				</div><pre class="screen">ONTIMEOUT discovery</pre><div class="para">
+					When completed, save this template.
+				</div></li><li class="step"><div class="para">
+					Click <span class="guibutton"><strong>Build PXE Default</strong></span> to deploy the global default template file to the TFTP server.
+				</div></li></ol></div><div class="para">
+			This Foreman Discovery plugin is not enabled and configured. The next section tests the service by adding a new bare metal host.
+		</div></div><ul class="docnav bottom"><li class="previous"><a accesskey="p" href="ar01s04.html"><strong>Prev</strong>4. Triggering a Refresh of a Satellite 6 Provider</a></li><li class="up"><a accesskey="u" href="#"><strong>Up</strong></a></li><li class="home"><a accesskey="h" href="index.html"><strong>Home</strong></a></li><li class="next"><a accesskey="n" href="ar01s06.html"><strong>Next</strong>6. Discovering a Bare Metal Host in a Foreman pro...</a></li></ul></div></div></body></html>

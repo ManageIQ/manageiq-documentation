@@ -8,6 +8,11 @@
 	<para>
     To avoid storing passwords in plain text, CloudForms appliances use an encryption key to encode and decode passwords. Each appliance stores the key in the <filename>/var/www/miq/vmdb/certs/v2_key</filename> and can be regenerated at any time.
   </para>
+  <important>
+    <para>
+      All appliances in your environment must use the same encryption key. The ideal scenario is the create a new key on your master appliance and copy this key to all other appliances in your environment.
+    </para>
+  </important>
   <para>
     The following procedure shows how to generate a new encryption key.
   </para>
@@ -101,7 +106,7 @@
     </step>
   </procedure>
   <para>
-    After distributing the new key, all appliances require an update to the database configuration. For all appliance, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:
+    After distributing the new key, all appliances require an update to the database configuration. For all appliances, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:
   </para>
   <screen>
 [root@cloudforms ~]# cd /var/www/miq/vmdb
@@ -113,8 +118,7 @@
     In addition, on each database appliance only, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:
   </para>
   <screen>
-[root@cloudforms ~]# cd /var/www/miq/vmdb
-[root@cloudforms ~]# bundle exec ruby ./tools/fix_auth.rb --hostname localhost --password dbpassword
+[root@cloudforms ~]# fix_auth --databaseyml --password <replaceable>dbpassword</replaceable>
 [root@cloudforms ~]# service evmserverd restart
   </screen>
   <para>

@@ -1,0 +1,488 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Bare_Metal_Provisioning_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<article>
+	<xi:include href="Article_Info.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<para>
+		Satellite 6 is a subscription and system management tool that provides a way to provision hosts (both virtual and bare metal) and configure them using a set of Puppet modules. Red Hat CloudForms 3.2 provides functionality to integrate with a Red Hat Satellite 6 server and take advantage of its features. This includes:
+  </para>
+  <itemizedlist>
+    <listitem>
+      <para>
+        Monitoring the inventory of your Red Hat Satellite 6 server, including independent hosts and hosts provisioned using hostgroups.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Reprovisioning existing bare mental systems hosts to new host groups.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        Applying Red Hat CloudForms Management Engine policy tags to hosts.
+      </para>
+    </listitem>
+  </itemizedlist>
+  <para>
+    This guide provides a step-by-step workflow on how to integrate Red Hat CloudForms 3.2 and Red Hat Satellite 6 together.
+	</para>
+  <important>
+    <para>
+      Red Hat CloudForms only reprovisions existing systems in a Red Hat Satellite 6 environment. Provisioning systems from Red Hat Satellite 6's bare metal discovery service is planned for a future release.
+    </para>
+  </important>
+  <section>
+    <title>Defining the Workflow</title>
+    <para>
+      This guide uses the following workflow:
+    </para>
+    <orderedlist>
+      <listitem>
+        <para>
+          Add a Red Hat Satellite 6 server details to Red Hat CloudForms Management Engine.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Refresh the state of your Red Hat Satellite 6 provider in Red Hat CloudForms Management Engine.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Select an existing bare metal host from Red Hat Satellite 6 for reprovisioning.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Apply policy tags to Red Hat Satellite 6 hosts.
+        </para>
+      </listitem>
+    </orderedlist>
+  </section>
+  <section>
+    <title>Defining the Hostgroup Hierarchy</title>
+    <para>
+      Red Hat CloudForms Management Engine displays the Red Hat Satellite 6 infrastructure in a host group and host relationship. A host group defines a set of default values that hosts inherit when placed in that group. Hosts can belong to only one host group, but host groups can be nested in hierarchies. You can create a "base" or "parent" host group that represents all hosts in your organization, and then create nested or "child" host groups under that parent to provide specific settings.
+    </para>
+  </section>
+  <section>
+    <title>Adding a Satellite 6 Provider to CloudForms</title>
+    <para>
+      To start provisioning bare metal machines, you need at least one Red Hat Satelllite 6 provider added to Red Hat CloudForms Management Engine. The following procedure show how to do this.
+    </para>
+    <procedure>
+      <title>Adding a Red Hat Satellite 6 Provider</title>
+      <step>
+        <para>
+          Log in to your Red Hat CloudForms Management Engine UI as the administration user.
+        </para>
+      </step>
+      <step>
+        <para>
+          Navigate to <menuchoice><guimenu>Infrastructure</guimenu><guisubmenu>Configuration Management</guisubmenu></menuchoice>. The providers list appears and should be empty.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <menuchoice><guimenu>Configuration</guimenu><guisubmenu>Add a new Foreman Provider</guisubmenu></menuchoice>. A empty form for your new Satellite 6 provider appears.
+        </para>
+      </step>
+      <step>
+        <para>
+          Enter a <guilabel>Name</guilabel> for the provider. This is just a plain text name to help identify your provider in the Red Hat CloudForms Management Engine UI. For example, <literal>Satellite 6</literal>.
+        </para>
+      </step>
+      <step>
+        <para>
+          Enter a <guilabel>URL</guilabel> for the provider. This is the root URL for the Satellite 6 server and can be either an IP address or a hostname. For example, <literal>http://satellite6.example.com</literal>.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <guilabel>Verify SSL</guilabel> to use encrypted communication with the provider. This requires the SSL certificates from your Red Hat Satellite 6 provider. <remark>Need to add SSL cert configuration as an Appendix</remark>
+        </para>
+      </step>
+      <step>
+        <para>
+          Enter a <guilabel>User ID</guilabel> for a user on the provider. Ideally, this would be a user in Satellite 6 with administrative access.
+        </para>
+      </step>
+      <step>
+        <para>
+          Enter a <guilabel>Password</guilabel> and enter it again to <guilabel>Verify Password</guilabel>. Click the <guilabel>Validate</guilabel> button to test your connection with the Red Hat Satellite 6 server.
+        </para>
+      </step>
+      <step>
+        <para>
+          Click <guilabel>Save</guilabel> to confirm your settings and save the provider.
+        </para>
+      </step>
+    </procedure>
+    <para>
+      Red Hat CloudForms Management Engine saves the Satellite 6 provider in its database and triggers a refresh of resources detected in the provider.
+    </para>
+  </section>
+  <section>
+    <title>Triggering a Refresh of a Satellite 6 Provider</title>
+    <para>
+      Your Satellite 6 provider can still create new hosts independently of Red Hat CloudForms. Your Red Hat CloudForms appliance detects these changes after an automatic refresh period. However, you can trigger a manual refresh to avoid waiting for the automatic refresh.
+    </para>
+    <procedure>
+      <title>Triggering a Refresh of a Satellite 6 Provider</title>
+      <step>
+        <para>
+          If you have not navigated elsewhere, the <menuchoice><guimenu>Infrastructure</guimenu><guisubmenu>Configuration Management</guisubmenu></menuchoice> screen displays your Red Hat Satellite 6 server.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select your Red hat Satellite 6 provider using the checkbox and click <menuchoice><guimenu>Configuration</guimenu><guisubmenu>Refresh Relationships and Power States</guisubmenu></menuchoice>. This triggers the refresh.
+        </para>
+      </step>
+      <step>
+        <para>
+          When the refresh complete, click on the Red Hat Satellite 6 provider to check the updated contents.
+        </para>
+      </step>
+    </procedure>
+    <para>
+      The page now displays an updated list of host groups in the provider.
+    </para>
+  </section>
+  <section>
+    <title>Displaying Red Hat Satellite 6 Contents</title>
+    <para>
+      Red Hat CloudForms provides to methods for viewing the contents of a Red Hat Satellite 6 provider. These methods are:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          <guilabel>Providers</guilabel> - This presents the Red Hat Satellite 6 contents as a hierarchy of host groups belonging to a provider and then individual hosts belonging to each provider.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          <guilabel>Configured Systems</guilabel> - This presents a list of all hosts on your Red Hat Satellite 6 server. This also provides a method to apply pre-defined filters to organized specific machines.
+        </para>
+      </listitem>
+    </itemizedlist>
+    <para>
+      Change between these two views using the accordian menu on the left of the user interface.
+    </para>
+  </section>
+<!--  <section>
+    <title>Enabling the Foreman Discovery Plugin on a Satellite 6 Provider</title>
+    <para>
+      The Foreman Discovery plug-in in Red&nbsp;Hat Satellite Server adds Metal-as-a-Service (MaaS) features. Bare-metal hosts on Satellite Server-managed networks can be booted over the network through PXE into stripped-down Red&nbsp;Hat Enterprise&nbsp;Linux systems running from memory to collect and send hardware facts to the Satellite Server.
+    </para>
+    <para>
+      After they have booted, these systems appear as discovered hosts on the Satellite Server. Administrators can use these collected hardware facts to provision systems, removing the need to manually collect MAC addresses and other hardware information and reducing the time required to provision hosts.
+    </para>
+    <para>
+      After the provisioning configuration is complete, the Foreman discovery plug-in sends a reboot command to the discovered host and the installation begins. The host then moves from the <guimenu>Discovered Hosts</guimenu> list in the Satellite Server to the <guimenu>All Hosts</guimenu> list.
+    </para>
+    <para>
+      This section provides a brief set of instructions for configuring Satellite 6 to use to Discovery plugin. For full instructions, see <ulink url="https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.0/html/User_Guide/chap-Configuring_the_Foreman_Discovery_Plugin.html#sect-Installing_the_Foreman_Discovery_Plugin">Chapter 11. Using the Foreman Discovery Plugin</ulink> in the <citetitle>Red Hat Satellite 6 User Guide</citetitle>.
+    </para>
+    <procedure>
+      <title>Enabling the Foreman Discovery Plugin on a Satellite 6 Provider</title>
+      <step>
+        <para>
+          Run the following command as the <systemitem class="username">root</systemitem> user on the Satellite 6 server to install the Foreman Discovery plug-in:
+        </para>
+        <screen>
+[root@satellite6 ~]# yum install foreman-discovery-image
+        </screen>
+        <para>
+          This installs an image containing Foreman Discovery to the TFTP service on you Satellite 6 server.
+        </para>
+      </step>
+      <step>
+        <para>
+          Red Hat Satellite 6 contains a Global PXE template that requires modification. In Red Hat Satellite 6.0, this template is locked from editing. To unlock this template, run the <application>rake</application> console on the Satellite 6.0 server.
+        </para>
+        <screen>
+[root@satellite6 ~]# foreman-rake console
+        </screen>
+        <para>
+          Enter the following commands in the console:
+        </para>
+        <screen>
+&gt; ct = ConfigTemplate.find_by_name("PXELinux global default"); ct.locked = false; ct.save!
+&gt; exit
+        </screen>
+        <para>
+          This unlocks the template.
+        </para>
+      </step>
+      <step>
+        <para>
+          Log into your Red Hat Satellite 6 UI and navigate to <menuchoice><guimenu>Hosts</guimenu><guimenuitem>Provisioning templates</guimenuitem></menuchoice>. Edit the <literal>PXELinux global default template</literal> and add the following lines:
+        </para>
+        <screen>
+LABEL discovery
+MENU LABEL Foreman Discovery
+MENU DEFAULT
+KERNEL boot/foreman-discovery-image-latest.el6.iso-vmlinuz
+APPEND rootflags=loop initrd=boot/foreman-discovery-image-latest.el6.iso-img root=live:/foreman.iso rootfstype=auto ro rd.live.image rd.live.check rd.lvm=0 rootflags=ro crashkernel=128M elevator=deadline max_loop=256 rd.luks=0 rd.md=0 rd.dm=0 rd.bootif=0 rd.neednet=0 nomodeset selinux=0 stateless foreman.url=<replaceable>FOREMAN_URL</replaceable>
+IPAPPEND 2
+        </screen>
+        <para>
+          This adds an entry for Foreman Discovery when using the default PXE boot service for Satellite 6.
+        </para>
+        <para>
+          The highlighted <option>FOREMAN_URL</option> option on the APPEND line identifies the location of the Satellite 6 server. Ensure that this is set correctly in global settings or the discovered hosts will not register to Satellite 6.
+        </para>
+        <para>
+          Also set the <parameter>ONTIMEOUT</parameter> parameter to <literal>discovery</literal> to make the <option>Foreman Discovery</option> option the default:
+        </para>
+        <screen>ONTIMEOUT discovery</screen>
+        <para>
+          When completed, save this template.
+        </para>
+      </step>
+      <step>
+        <para>
+          Click <guibutton>Build PXE Default</guibutton> to deploy the global default template file to the TFTP server.
+        </para>
+      </step>
+    </procedure>
+    <para>
+      This Foreman Discovery plugin is not enabled and configured. The next section tests the service by adding a new bare metal host.
+    </para>
+  </section>
+  <section>
+    <title>Discovering a Bare Metal Host in a Foreman provider</title>
+    <para>
+      Before provisioning a bare metal host, Satellite 6 needs to discover them. Satellite 6 achieves this through its Foreman Discovery service, which we configured in the previous section.
+    </para>
+    <procedure>
+      <step>
+        <para>
+          Start a new bare metal host and elect to start over the network from the boot options menu. This starts the host using the <acronym>PXE</acronym> service.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <literal>Foreman Discovery</literal> from the <guilabel>PXE boot</guilabel> options menu. The host starts into the <guilabel>Foreman Discovery</guilabel> screen and is automatically registered in the installer.
+        </para>
+      </step>
+      <step>
+        <para>
+          Log into the Foreman provider and confirm that the host has been registered:
+        </para>
+        <substeps>
+          <step>
+            <para>
+              Click <menuchoice><guimenu>Hosts</guimenu><guimenuitem>Discovered hosts</guimenuitem></menuchoice>.
+            </para>
+          </step>
+          <step>
+            <para>
+              Click the name of the newly registered host to open the details page for the host, and review the details.
+            </para>
+          </step>
+        </substeps>
+      </step>
+    </procedure>
+    <para>
+      The host is now included in the list of discovered hosts. Red Hat CloudForms Management Enginer can now provision them.
+    </para>
+  </section>
+  <section>
+    <title>Provisioning a Bare Metal Host in Red Hat CloudForms</title>
+    <para></para>
+  </section> -->
+  <section>
+    <title>Reprovisioning a Bare Metal Host in Red Hat CloudForms</title>
+    <para>
+      The current inventory of your Red Hat Satellite 6 server is now visable in Red Hat CloudForms Management Engine. The next procedure is an example of reprovisioning an existing bare metal system into a new hostgroup. For this example, your Red Hat Satellite 6 environment requires the following:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          An existing bare metal system stored as a host object in your Red Hat Satellite 6 server. This system can either:
+        </para>
+        <itemizedlist>
+          <listitem>
+            <para>
+               A standalone system previously provisioned without a host group.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+               A system previously provisioned using a host group.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+      <listitem>
+        <para>
+          A target host group. This host group contains the system configuration to apply to the host when reprovisioning it. This includes:
+        </para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              A new operating system installation, including a new partition table.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              A new networking configuration that the Red Hat Satellite 6 server defines and manages.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Registration to any Red Hat subscriptions and repositories assigned to the hostgroup.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Application of any Puppet modules assigned to the hostgroup.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+    <procedure>
+      <title>Reprovisioning a Bare Metal Host in Red Hat CloudForms</title>
+      <step>
+        <para>
+          If you have not navigated elsewhere, the <menuchoice><guimenu>Infrastructure</guimenu><guisubmenu>Configuration Management</guisubmenu></menuchoice> screen displays your Red Hat Satellite 6 server.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <guilabel>Configured Systems</guilabel> from the accordian menu on the left. This displays our system list.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select one or more hosts to reprovision. Use the checkboxes to select these systems.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <menuchoice><guimenu>Lifecycle</guimenu><guisubmenu>Provision Configured Systems</guisubmenu></menuchoice>. This displays the form we use for provisioning details.
+        </para>
+      </step>
+      <step>
+        <para>
+          Under the <guilabel>Request</guilabel> tab, enter the following details:
+        </para>
+        <substeps>
+          <step>
+            <para>
+              <guilabel>E-Mail</guilabel> address
+            </para>
+          </step>
+          <step>
+            <para>
+              <guilabel>First Name</guilabel>
+            </para>
+          </step>
+          <step>
+            <para>
+              <guilabel>Last Name</guilabel>
+            </para>
+          </step>
+          <step>
+            <para>
+              This form also contains optional fields for users to enter a plain text <guilabel>Note</guilabel> to inform Red Hat CloudForms administrators of any special details and a field  their manager's <guilabel>Name</guilabel> in case administrators require approval from a user's manager.
+            </para>
+          </step>
+        </substeps>
+      </step>
+      <step>
+        <para>
+          Select the <guilabel>Purpose</guilabel> tab and select any Red Hat CloudForms policy tags that apply to the system.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select the <guilabel>Catalog</guilabel> tab. This screen displays the list of chosen machines to reprovision and their current details. Select a target host group from the <guilabel>Configuration Profile</guilabel> list. Red Hat CloudForms communicates to Red Hat Satellite to apply the configuration from this host group to the selected host and reprovision the system.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select the <guilabel>Customise</guilabel> tab. This screen displays some customizable fields for the selected system. You can change the <guilabel>Root Password</guilabel> or change the <guilabel>Host name</guilabel> and <guilabel>IP Address</guilabel>. Note that these fields are optional as the host group in Red Hat Satellite 6 contains this information. The fields here will override the settings from the hostgroup.
+        </para>
+        <important>
+          <para>
+            Provisioning bare metal systems still requires access to the network that Red Hat Satellite 6 manages. This is because Red Hat Satellite controls PXE booting, kickstarts, and Puppet configuration for bare metal systems. Ensure the <guilabel>IP address</guilabel> you enter in Red Hat CloudForms Management Engine can access a DHCP service that Red Hat Satellite 6 provides either through the main server or through a Red Hat Satellite 6 Capsule server.
+          </para>
+        </important>
+      </step>
+      <step>
+        <para>
+          Select the <guilabel>Customise</guilabel> tab. This screen allows you to either launch the provisioning process <guilabel>Immediately on Approval</guilabel> or using a schedule. Click <guilabel>Schedule</guilabel> to show the date and time fields you use to schedule the provisioning.
+        </para>
+      </step>
+      <step>
+        <para>
+          When you have completed all sections of the provisioning form, click <guilabel>Submit</guilabel>.
+        </para>
+      </step>
+    </procedure>
+    <para>
+      This submits the provisioning request. Depending on the request settings on your Red Hat CloudForms appliance, this provisioning request might require approval from an administrator. If not, the provisioning request launches depending on your choce for the <guilabel>Schedule</guilabel>.
+    </para>
+    <note>
+      <para>
+        Previously provisioned hosts might require manual selection of PXE boot from the boot menu or else they might boot to hard disk and not reprovision.
+      </para>
+    </note>
+  </section>
+  <section>
+    <title>Tagging a Bare Metal Host in Red Hat CloudForms</title>
+    <para>
+      Red Hat CloudForms can also control policy settings of bare metal systems from Red Hat Satellite 6 through tagging. Tagging attaches levels of metadata to help define the policy rules required for a set of systems.
+    </para>
+    <procedure>
+      <title>Tagging a Bare Metal Host in Red Hat CloudForms</title>
+      <step>
+        <para>
+          If you have not navigated elsewhere, the <menuchoice><guimenu>Infrastructure</guimenu><guisubmenu>Configuration Management</guisubmenu></menuchoice> screen displays your Red Hat Satellite 6 server.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <guilabel>Configured Systems</guilabel> from the accordian menu on the left. This displays our system list.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select one or more hosts to tag. Use the checkboxes to select these systems.
+        </para>
+      </step>
+      <step>
+        <para>
+          Select <menuchoice><guimenu>Policy</guimenu><guisubmenu>Edit Tags</guisubmenu></menuchoice>. This displays the form we use for tagging systems.
+        </para>
+      </step>
+      <step>
+        <para>
+          Under <guilabel>Tag Assignment</guilabel>, select a tag from <guilabel>Select a customer tag to assign</guilabel> and then choose a value from <guilabel>Select a value to assign</guilabel>. For example, you can tag this system as located in Chicago by selecting <guilabel>Location</guilabel> as the tag and <guilabel>Chicago</guilabel> as the value. Once selected, the user interface automatically adds this tag and value to the table below.
+        </para>
+      </step>
+      <step>
+        <para>
+          After adding your chosen tags and values, click <guilabel>Save</guilabel>.
+        </para>
+      </step>
+    </procedure>
+    <para>
+      The bare metal system is now configured with a set of policy tags.
+    </para>
+    <note>
+      <para>
+        For more information on tags and system policy, see LINK TBA.
+      </para>
+    </note>
+  </section>
+	<xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<index />
+</article>
+

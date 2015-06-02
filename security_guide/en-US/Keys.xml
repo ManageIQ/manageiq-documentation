@@ -110,15 +110,7 @@
   </para>
   <screen>
 [root@cloudforms ~]# cd /var/www/miq/vmdb
-[root@cloudforms ~]# PASSWORD=`./bin/rails runner 'puts MiqPassword.encrypt("dbpassword")'`
-[root@cloudforms ~]# sed -i.`date +%m-%d-%Y` "s;password:.*;password: ${PASSWORD};g" config/database.yml
-[root@cloudforms ~]# service evmserverd restart
-  </screen>
-  <para>
-    In addition, on each database appliance only, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:
-  </para>
-  <screen>
-[root@cloudforms ~]# fix_auth --databaseyml --password <replaceable>dbpassword</replaceable>
+[root@cloudforms ~]# bundle exec ruby ./tools/fix_auth.rb --databaseyml --hostname localhost --password <replaceable>dbpassword</replaceable>
 [root@cloudforms ~]# service evmserverd restart
   </screen>
   <para>

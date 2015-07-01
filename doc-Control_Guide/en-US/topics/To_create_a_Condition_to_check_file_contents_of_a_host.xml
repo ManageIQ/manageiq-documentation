@@ -1,0 +1,104 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Control_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="To_create_a_Condition_to_check_file_contents_of_a_host" remap="TID_14774">
+	<title>Creating a Compliance Condition to Check Host File Contents</title>
+	<para> 
+		<productname>CloudForms Management Engine</productname> Control provides the ability to create a compliance condition that checks file contents. Use this to be sure that internal operating system settings meet your security criteria. Regular expressions are used to create the search pattern. Test your regular expressions thoroughly before using them in a production environment.
+	</para>
+	<para>
+		Note that to search file contents you will need to have collected the file using a host analysis profile. See <ulink url="https://access.redhat.com/documentation/en-US/CloudForms/3.1/html/Management_Engine_5.3_Insight_Guide/index.html"><citetitle><productname>CloudForms Management Engine</productname> Insight Guide</citetitle></ulink> for instructions.
+	</para>
+	<procedure>
+		<title>To Create a Condition to Check Host File Contents</title>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Control</guimenu><guisubmenu>Explorer</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click the <guimenuitem>Conditions</guimenuitem> accordion, and select <guilabel>Host Conditions</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Configuration</guilabel>), 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1848.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Add a New Host Condition</guilabel>).
+			</para>
+		</step>
+		<step>
+			<para>
+				In <guilabel>Basic Information</guilabel>, type in a <guilabel>Description</guilabel> for the condition.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/1937.png" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Editing the <guilabel>Scope</guilabel> area is not necessary for this procedure. Skip editing any <guilabel>Scope</guilabel> conditions.
+			</para>
+		</step>
+		<step>
+			<para>
+				If the <guilabel>Expression</guilabel> area is not automatically opened, click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1851.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Edit this Expression</guilabel>), then edit the condition area to create a general condition based on a simple attribute. Based on what you choose, different options appear.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Click <guilabel>Find</guilabel>, then <guimenuitem>Host.Files : Name</guimenuitem>, and the parameters to select the file that you want to check.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click <guimenuitem>Check Any</guimenuitem>, <guimenuitem>Contents</guimenuitem>, <guimenuitem>Regular Expression Matches</guimenuitem>, and type the expression. For example, if you want to make sure that permit root login is set to no, type <literal>^\s*PermitRootLogin\s+no</literal>.
+					</para>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/1936.png" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1863.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Commit expression element changes</guilabel>) to add the expression.
+			</para>
+		</step>
+		<step>
+			<para>
+				In <guilabel>Notes</guilabel> area, type in a detailed explanation of the condition.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Add</guibutton>.
+			</para>
+		</step>
+	</procedure>
+</section>

@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Methods_Available_for_Automation.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Quota2" remap="TID_15721">
+	<title>Quota</title>
+	<para />
+	<informaltable frame="all">
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Method(<emphasis>parameter</emphasis>)
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Use
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						<para>
+							vms_by_owner, vms_by_group, vms_by_owner_and_group
+						</para>
+						<para />
+					</entry>
+					<entry>
+						<para>
+							Collect stats about existing VMs by owner or in the same LDAP group as the owner in the current request.
+						</para>
+						<para>
+							Sample return object:
+						</para>
+						<para>
+							{:class_name=&gt;"Vm", :count=&gt;5, :ids=&gt;[22, 120, 121, 122, 117], :cpu=&gt;6, :memory=&gt;5120, :allocated_storage=&gt;29032972288, :used_storage=&gt;29032972288}
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							retired_vms_by_owner, retired_vms_by_group, retired_vms_by_owner_and_group
+						</para>
+						<para />
+					</entry>
+					<entry>
+						<para>
+							Collect stats about retired VMs, that have not been deleted from the host, by owner or in the same LDAP group as the owner in the current request.
+						</para>
+						<para>
+							Sample return object:
+						</para>
+						<para>
+							{:class_name=&gt;"Vm", :count=&gt;5, :ids=&gt;[22, 120, 121, 122, 117], :cpu=&gt;6, :memory=&gt;5120, :allocated_storage=&gt;29032972288, :used_storage=&gt;29032972288}
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							provisions_by_owner, provisions_by_group
+						</para>
+						<para />
+					</entry>
+					<entry>
+						<para>
+							Collect stats based on provisions running on the same day as the current request (based on scheduled date or immediate) by owner or in the same LDAP group as the owner. (Results do not include Provision Requests that have not been approved.)
+						</para>
+						<para>
+							Sample return object:
+						</para>
+						<para>
+							{:class_name=&gt;"MiqProvisionRequest", :count=&gt;6, :ids=&gt;[115, 116, 104, 102, 105, 112], :cpu=&gt;6, :memory=&gt;1536, , :storage=&gt;62914560}
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							requests_by_owner, requests_by_group
+						</para>
+						<para />
+					</entry>
+					<entry>
+						<para>
+							Collect stats based on provision requests made the same day as the request by the same owner or LDAP group as the owner in the current request, regardless of when the provision request is scheduled to run. (Results do not include Provision Requests that have been denied.)
+						</para>
+						<para>
+							Sample return object:
+						</para>
+						<para>
+							{:class_name=&gt;"MiqProvisionRequest", :count=&gt;6, :ids=&gt;[115, 116, 104, 102, 105, 112], :cpu=&gt;6, :memory=&gt;1536, , :storage=&gt;62914560}
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							active_provisions_by_owner, active_provisions_by_group, active_provisions
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Collect stats based on currently active provision requests by the same owner or LDAP group as the owner in the current request.
+						</para>
+						<para />
+						<para>
+							Sample return object:
+						</para>
+						<para>
+							{:class_name=&gt;"MiqProvisionRequest", :count=&gt;6, :ids=&gt;[115, 116, 104, 102, 105, 112], :cpu=&gt;6, :memory=&gt;1536, , :storage=&gt;62914560}
+						</para>
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</informaltable>
+	<para />
+</section>

@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Methods_Available_for_Automation.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Booting_OpenStack_Instances_from_Volume" remap="TID_43178">
+	<title>Booting OpenStack Instances from Volume</title>
+	<para>
+		You can boot instances created in Red Hat Enterprise Linux OpenStack Platform from a specified volume from an existing selection of block volumes. You can enable automate to pass the required parameters to OpenStack to use volumes as booting devices on an instance.
+	</para>
+	<example>
+		<title>Usage in Automate Model:</title>
+		<para>
+			Include the following settings in the prov.set_option for provisioning instances created in OpenStack. 
+			<screen>
+prov.set_option(
+  :clone_options, {
+    :image_ref =&gt; nil,
+    :block_device_mapping_v2 =&gt; [{
+      :boot_index =&gt; 0,
+      :uuid =&gt; "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxx",
+      :device_name =&gt; "vda",
+      :source_type =&gt; "volume",
+      :destination_type =&gt; "volume",
+      :delete_on_termination =&gt; false
+    }]
+  }
+)
+</screen> You can allow passing "block_device_mapping_v2" in the clone options and remove keys from clone_options by setting value to nil.
+		</para>
+	</example>
+</section>

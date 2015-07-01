@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Insight_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Adding_OpenStack_Providers" remap="TID_41544">
+	<title>Adding OpenStack Providers</title>
+	<para> 
+		<productname>CloudForms Management Engine</productname> supports operating with the <productname>OpenStack</productname> "admin" tenant. When creating an OpenStack provider in <productname>CloudForms Management Engine</productname>, select the <productname>OpenStack</productname> provider's admin user because it is the default administrator of the <productname>OpenStack</productname> admin tenant. When using the admin credentials, a user in <productname>CloudForms Management Engine</productname> provisions into the admin tenant, and sees images, networks, and instances that are associated with the admin tenant.
+	</para>
+	<procedure>
+		<title>To Add an OpenStack Provider</title>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Clouds</guimenu> <guisubmenu>Providers</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject> <guibutton>(Configuration)</guibutton>, then click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1848.png" />
+					</imageobject>
+				</inlinemediaobject> <guibutton>(Add a New Cloud Provider)</guibutton>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Enter a <guilabel>Name</guilabel> for the provider.
+			</para>
+		</step>
+		<step>
+			<para>
+				From the <guilabel>Type</guilabel> drop down menu select <guilabel>OpenStack</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Enter the <guilabel>Host Name (or IPv4 or IPv6 address)</guilabel> of the provider.
+			</para>
+			<important>
+				<para>
+					The <guilabel>Host Name</guilabel> must use a unique fully qualified domain name.
+				</para>
+			</important>
+		</step>
+		<step>
+			<para>
+				Enter the <guilabel>API Port</guilabel> of your Keystone service. The default port is <literal>5000</literal>.
+			</para>
+			<important>
+				<para>
+					If the Keystone service is configured to use SSL, you must enter the SSL port for Keystone.
+				</para>
+			</important>
+		</step>
+		<step>
+			<para>
+				Select the appropriate <guilabel>Zone</guilabel> for the provider. By default, the zone is set to <guilabel>default</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				In the <guilabel>Credentials</guilabel> area, under <guilabel>Default</guilabel>, provide the login credentials required for the Keystone user:
+			</para>
+			<important>
+				<para>
+					To enable discovery of <productname>OpenStack</productname> cloud providers, ensure that the <filename>iptables</filename> for the <productname>OpenStack</productname> host providing Keystone services allows port 5000 access to all hosts on the same network.
+				</para>
+			</important>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Enter the user name in the <guilabel>User ID</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Enter the user password in the <guilabel>Password</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Confirm the user password in the <guilabel>Verify Password</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click <guilabel>Validate</guilabel> to confirm that the CloudForms Management Engine can connect to the OpenStack Infrastructure instance using the user name and password.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				If AMQP credentials were changed during the OpenStack provider install, use the <guilabel>AMQP</guilabel> tab of the <guilabel>Credentials</guilabel> area to provide the login credentials required for the Advanced Message Queuing Protocol messaging service on your <productname>OpenStack</productname> Nova component:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Enter the administrative user name in the <guilabel>User ID</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Enter the user password in the <guilabel>Password</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Confirm the user password in the <guilabel>Verify Password</guilabel> field.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click <guilabel>Validate</guilabel> to confirm that the CloudForms Management Engine can connect to the messaging service using the user name and password.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Click <guilabel>Add</guilabel>.
+			</para>
+		</step>
+	</procedure>
+</section>

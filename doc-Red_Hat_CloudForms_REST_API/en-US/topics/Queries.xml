@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Queries" remap="TID_44453">
+	<title>Queries</title>
+	<para>
+		Query all virtual machines:
+	</para>
+	<screen>GET /api/vms</screen>
+	<para>
+		Query a specific virtual machine:
+	</para>
+	<screen>GET /api/vms/1386</screen>
+	<para>
+		Query all virtual machines, but return only the name and vendor:
+	</para>
+	<screen>GET /api/vms?expand=resources&amp;attributes=name,vendor</screen>
+	<para>
+		Query all virtual machines named sample*, and return the name and vendor:
+	</para>
+	<screen>GET /api/vms?expand=resources&amp;attributes=name,vendor&amp;filter[]="name='sample%'"</screen>
+	<para>
+		Query all virtual machines, but only return the first 500 results:
+	</para>
+	<screen>GET /api/vms?offset=0&amp;limit=500</screen>
+	<para>
+		Query all virtual machines, but return the second 500 results:
+	</para>
+	<screen>GET /api/vms?offset=500&amp;limit=500</screen>
+	<para>
+		Query the first 1000 virtual machines named test*, get the name, vendor, and guid, and sort by name in ascending order:
+	</para>
+	<screen>GET /api/vms?offset=0&amp;limit=1000&amp;filter[]="name='test%'"&amp;expand=resources&amp;attributes=name,vendor,guid&amp;sort_by=name&amp;sort_order=asc</screen>
+	<para>
+		Query services tagged for the finance department:
+	</para>
+	<screen>GET /api/services?by_tag=/department/finance</screen>
+	<para>
+		Get the details of tags for the first service:
+	</para>
+	<screen>GET /api/services/1/tags?expand=resources</screen>
+	<para>
+		Get the details of the first service catalog and related details on the assigned service templates:
+	</para>
+	<screen>GET /api/service_catalogs/1?expand=service_templates</screen>
+	<screen>GET /api/service_templates/25/service_requests?expand=resources,request_tasks</screen>
+	<para>
+		Get a specific provision request with expanded details on the associated provision request tasks:
+	</para>
+	<screen>GET /api/provision_requests/120?expand=tasks</screen>
+</section>

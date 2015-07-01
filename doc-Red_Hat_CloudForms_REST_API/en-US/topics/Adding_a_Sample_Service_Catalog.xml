@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Adding_a_Sample_Service_Catalog" remap="TID_44422">
+	<title>Adding a Sample Service Catalog</title>
+	<para>
+		Request:
+	</para>
+	<screen>POST /api/service_catalogs</screen>
+	<programlisting>{
+   "action" : "create",
+   "resource" : {
+        "name" : "Sample Service Catalog",
+        "description" : "Description of Sample Service Catalog",
+        "service_templates" : [
+          { "href" : "http://localhost:3000/api/service_templates/3" },
+          { "href" : "http://localhost:3000/api/service_templates/4" }
+        ]
+   }
+}</programlisting>
+	<para>
+		Response:
+	</para>
+	<programlisting>{
+  "results": [
+    {
+      "id": 7,
+      "name": "Sample Service Catalog",
+      "description": "Description of Sample Service Catalog"
+    }
+  ]
+}</programlisting>
+</section>

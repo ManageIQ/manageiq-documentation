@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="CRUD_Examples" remap="TID_30352">
+	<title>CRUD Examples</title>
+	<para>
+		The following examples show the basic CRUD operations (Create, Read, Update, Delete) using the REST API.
+	</para>
+	<para>
+		The commands below use basic authentication via the <emphasis>--user admin:smartvm</emphasis> credentials argument. For multiple API calls, it is recommended to access the CFME REST API via token-based authentication. See <xref linkend="sect-Authentication" /> for details.
+	</para>
+	<formalpara>
+		<title>Show a Collection of Resources</title>
+		<para>
+			Get a collection of services: <emphasis role="strong">GET /api/services</emphasis>
+		</para>
+	</formalpara>
+	<programlisting>
+curl --user admin:smartvm
+	-i -X GET -H &quot;Accept: application/json&quot;
+	http://localhost:3000/api/services
+</programlisting>
+	<formalpara>
+		<title>Return a Single Resource</title>
+		<para>
+			Return a single service: <emphasis role="strong">GET /api/services/:id</emphasis>
+		</para>
+	</formalpara>
+	<programlisting>
+curl --user admin:smartvm
+	-i -X GET -H &quot;Accept: application/json&quot;
+	http://localhost:3000/api/services/1
+</programlisting>
+	<formalpara>
+		<title>Create a Resource</title>
+		<para>
+			Create a new provider: <emphasis role="strong">POST /api/providers</emphasis>
+		</para>
+	</formalpara>
+	<programlisting>
+curl --user admin:smartvm
+      -i -X POST -H &quot;Accept: application/json&quot;
+      -d '{
+            &quot;type&quot;      : &quot;EmsRedhat&quot;,
+            &quot;name&quot;      : &quot;RHEVM Provider&quot;,
+            &quot;hostname&quot;  : &quot;rhevm.local.com&quot;,
+            &quot;ipaddress&quot; : &quot;192.168.5.1&quot;,
+            &quot;credentials&quot; : {
+              &quot;userid&quot;   : &quot;admin&quot;,
+              &quot;password&quot; : &quot;12345&quot;
+            }
+      }'
+      http://localhost:3000/api/providers
+</programlisting>
+	<formalpara>
+		<title>Update a Resource</title>
+		<para>
+			Update the name of a service: <emphasis role="strong">PUT /api/services/:id</emphasis>
+		</para>
+	</formalpara>
+	<programlisting>
+curl --user admin:smartvm
+      -i -X PUT -H &quot;Accept: application/json&quot;
+      -d '{ &quot;name&quot; : &quot;updated service name&quot; }'
+      http://localhost:3000/api/services/1
+</programlisting>
+	<formalpara>
+		<title>Delete a Resource</title>
+		<para>
+			Delete a service: <emphasis role="strong">DELETE /api/services/:id</emphasis>
+		</para>
+	</formalpara>
+	<programlisting>
+curl --user admin:smartvm
+	-i -X DELETE -H &quot;Accept: application/json&quot;
+	http://localhost:3000/api/services/1
+</programlisting>
+</section>

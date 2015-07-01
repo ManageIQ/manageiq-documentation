@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Specification">
+	<title>Specification</title>
+	<section id="sect-HTTP_Basics">
+		<title>HTTP Basics</title>
+		<xi:include href="topics/REST_API_Entry_Point.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Supported_Content_Types.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/URL_Paths.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Methods_and_related_URLs.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Updating_Resources.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Modifying_Resource_Attributes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Return_Codes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<xi:include href="topics/CRUD_Examples.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<section id="sect-Authentication">
+		<title>Authentication</title> 
+		<para>
+			There are two methods of authentication for the CFME REST API:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					Basic Authentication: the user and password credentials are passed in with each HTTP request.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Token based Authentication: the client requests a token for the username/password credentials specified. Then the token is used in lieu of the username/password for each subsequent API call.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<xi:include href="topics/Using_Basic_Authentication.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Using_Authentication_Tokens.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-JSON_Specification">
+		<title>JSON Specification</title> 
+		<para>
+			The API uses JSON throughout; the Content-Type for all requests and responses is <literal>application/json</literal>.
+		</para>
+		<para>
+			As is general practice with REST, clients should not make assumptions about the server's URL space. Clients are expected to discover all URL's by navigating the API. To keep this document readable, we still mention specific URL's, generally in the form of an absolute path. Clients should not use these, or assume that the actual URL structure follows these examples, and instead use discovered URL's. Any client should start its discovery with the API entry point, here denoted with <literal>/api</literal>.
+		</para>
+		<xi:include href="topics/Basic_types.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Common_Attributes_and_Actions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Collections4.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Actions4.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Forms1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Query_Specification">
+		<title>Query Specification</title> 
+		<para>
+			This specification identifies the controls available when querying collections.
+		</para>
+		<xi:include href="topics/Control_Attributes.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Filtering.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Expanding_Collections1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+</chapter>

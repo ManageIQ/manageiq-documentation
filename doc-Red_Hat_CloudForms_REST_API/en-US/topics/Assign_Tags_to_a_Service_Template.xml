@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Assign_Tags_to_a_Service_Template" remap="TID_44428">
+	<title>Assign Tags to a Service Template</title>
+	<para>
+		Request:
+	</para>
+	<screen>POST /api/service_templates/1/tags</screen>
+	<programlisting>{
+  "action" : "assign",
+  "resources" : [
+    { "category" : "location", "name" : "ny" },
+    { "category" : "department", "name" : "finance" }
+  ]
+}</programlisting>
+	<para>
+		Response:
+	</para>
+	<programlisting>{
+  "results": [
+    {
+      "success": true,
+      "message": "Assigning Tag: category:'location' name:'ny'",
+      "href": "http://localhost:3000/api/service_templates/1",
+      "tag_category": "location",
+      "tag_name": "ny"
+    },
+    {
+      "success": true,
+      "message": "Assigning Tag: category:'department' name:'finance'",
+      "href": "http://localhost:3000/api/service_templates/1",
+      "tag_category": "department",
+      "tag_name": "finance"
+    }
+  ]
+}</programlisting>
+</section>

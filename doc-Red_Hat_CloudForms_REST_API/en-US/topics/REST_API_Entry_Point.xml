@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="REST_API_Entry_Point" remap="TID_30346">
+	<title>REST API Entry Point</title>
+	<para>
+		The REST API is available via the /api URL prefix. It can be accessed on the CloudForms Management Engine server directly via HTTP using the default port as follows:
+	</para>
+	<programlisting>
+http://localhost:3000/api
+</programlisting>
+	<para>
+		Or external to the CFME Appliance as follows:
+	</para>
+	<programlisting>
+https://&lt;cfmeHost_fqdn&gt;/api
+</programlisting>
+	<para> 
+		<literal>Response</literal>
+	</para>
+	<programlisting>
+{
+  &quot;name&quot; : &quot;API&quot;,
+  &quot;description&quot; : &quot;REST API&quot;,
+  &quot;version&quot; : &quot;2.0.0&quot;,
+  &quot;versions&quot; : [
+    {
+      &quot;name&quot; : &quot;2.0.0&quot;,
+      &quot;href&quot; : &quot;http://localhost:3000/api/v2.0.0&quot;
+    },
+  ]
+  &quot;collections&quot; : [
+    {
+      &quot;name&quot; : &quot;automation_requests&quot;,
+      &quot;href&quot; : &quot;http://localhost:3000/api/automation_requests&quot;,
+      &quot;description&quot; : &quot;Automation Requests&quot;
+    },
+    {
+      &quot;name&quot; : &quot;availability_zones&quot;,
+      &quot;href&quot; : &quot;http://localhost:3000/api/availability_zones&quot;,
+      &quot;description&quot; : &quot;Availability Zones&quot;
+    },
+    ...
+  ]
+}
+</programlisting>
+	<itemizedlist>
+		<listitem>
+			<para> 
+				<literal>version</literal> is the current API version, accessible via either of the following:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						/api/
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						/api/v2.0.0/
+					</para>
+				</listitem>
+			</itemizedlist>
+		</listitem>
+		<listitem>
+			<para> 
+				<literal>versions</literal> lists all the earlier API versions that are still exposed via their respective entry points:
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						/api/v<literal>Version</literal>/
+					</para>
+				</listitem>
+			</itemizedlist>
+		</listitem>
+	</itemizedlist>
+</section>

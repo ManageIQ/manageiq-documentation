@@ -1,0 +1,154 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Actions4" remap="TID_30360">
+	<title>Action Specification</title>
+	<para>
+		The representation of each resource will only contain an action and its URL if the current user is presently allowed to perform that action against that resource. Actions will be contained in the <emphasis>actions</emphasis> attribute of a resource; that attribute contains an array of action definition, where each action definition has a rel, method and a href attribute.
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para> 
+				<emphasis>name</emphasis> attribute contains the action name
+			</para>
+		</listitem>
+		<listitem>
+			<para> 
+				<emphasis>method</emphasis> attribute states the HTTP method that must be used in a client HTTP request in order to perform the given action (eg. GET, POST, PUT, DELETE)
+			</para>
+		</listitem>
+		<listitem>
+			<para> 
+				<emphasis>href</emphasis> attribute contains the absolute URL that the HTTP request should be performed against
+			</para>
+		</listitem>
+		<listitem>
+			<para> 
+				<emphasis>form</emphasis> is an optional attribute that references a JSON document which describes the resource attributes that can be provided in the message body when performing this action. This description indicates which of those attributes are mandatory and which are optional.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<formalpara>
+		<title>Collection actions</title>
+		<para>
+			The actions performed against a collection of resources, are in most cases batch operations against multiple resources. The action request must include an HTTP body with the action name and the list of resource representations that the action will be performed against.
+		</para>
+	</formalpara>
+	<para>
+		The resource representation might include the resource attributes as they can change the way how the action is actually performed. In the example below, the first resource is started with <emphasis>enable_ipmi</emphasis> attribute, but the second resource omits this attribute which means the default value will be used.
+	</para>
+	<para>
+		Sample JSON request body for collection action:
+	</para>
+	<para> 
+		<literal>POST /api/vms</literal>
+	</para>
+	<programlisting>
+{
+  &quot;action&quot;: &quot;start&quot;,
+  &quot;resources&quot; : [
+    { &quot;href&quot; : &quot;http://localhost:3000/api/vms/1&quot;, &quot;enable_ipmi&quot; : &quot;enabled&quot;, &quot;initial_state&quot; : &quot;started&quot; },
+    { &quot;href&quot; : &quot;http://localhost:3000/api/vms/2&quot; }
+  ]
+}
+</programlisting>
+	<para>
+		Actions in collection:
+	</para>
+	<programlisting>
+{
+  &quot;name&quot; : &quot;String&quot;,
+  &quot;count&quot;: String,
+  &quot;subcount&quot;: String,
+  &quot;resources&quot;: [ ... ],
+  &quot;actions&quot;: [
+    {
+	&quot;name&quot;   : &quot;shutdown&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;href&quot;   : &quot;URL&quot;
+    },
+    {
+	&quot;name&quot;   : &quot;restart&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;href&quot;   : &quot;URL&quot;
+    },
+    {
+	&quot;name&quot;   : &quot;poweron&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;href&quot;   : &quot;URL&quot;
+    },
+    {
+	&quot;name&quot;   : &quot;poweroff&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;href&quot;   : &quot;URL&quot;
+    },
+    {
+	&quot;name&quot;   : &quot;suspend&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;href&quot;   : &quot;URL&quot;
+    },
+    {
+	&quot;name&quot;    : &quot;edit&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;form&quot;   : { &quot;href&quot; : &quot;http://localhost:3000/api/vms?form_for=add&quot; },
+	&quot;href&quot;   : &quot;URL&quot;
+    },
+    {
+	&quot;name&quot;   : &quot;destroy&quot;,
+	&quot;method&quot; : &quot;delete&quot;,
+	&quot;href&quot;   : &quot;URL&quot;
+    }
+  ]
+}
+</programlisting>
+	<formalpara>
+		<title>Resource actions</title>
+		<para>
+			An action performed against a given resource is always described in the body of the HTTP request. The HTTP body could contain a list of resource attributes that dictate how the state of the receiving resource is to be changed once the action is performed. At minimum the JSON document in the message body must contain the name of the action to be performed.
+		</para>
+	</formalpara>
+	<para>
+		In cases where no attributes are required to perform an action the HTTP body will contain an empty JSON document, in which case default values will be assigned to the corresponding attributes.
+	</para>
+	<para>
+		Sample JSON request body for resource action:
+	</para>
+	<para> 
+		<literal>POST /api/vms/123</literal>
+	</para>
+	<programlisting>
+{
+  &quot;action&quot;   : &quot;start&quot;,
+  &quot;resource&quot; : { &quot;enable_ipmi&quot; : &quot;enabled&quot; }
+}
+</programlisting>
+	<para> 
+		<literal>POST /api/vms/321</literal>
+	</para>
+	<programlisting>
+{
+  &quot;action&quot;   : &quot;start&quot;,
+  &quot;resource&quot; : {}
+}
+</programlisting>
+	<para>
+		Actions in a resource:
+	</para>
+	<programlisting>
+{
+  &quot;href&quot;  : "Ref(self)",
+  &quot;id&quot;    : Integer,
+  &quot;name&quot;  : &quot;resource human name&quot;,
+  &quot;actions&quot; : [
+    {
+	&quot;name&quot;   : &quot;edit&quot;,
+	&quot;method&quot; : &quot;post&quot;,
+	&quot;form&quot;   : { &quot;href&quot; : &quot;http://localhost:3000/api/vms?form_for=edit&quot; },
+	&quot;href&quot;   : &quot;URL&quot;
+    }
+  ]
+}
+</programlisting>
+</section>

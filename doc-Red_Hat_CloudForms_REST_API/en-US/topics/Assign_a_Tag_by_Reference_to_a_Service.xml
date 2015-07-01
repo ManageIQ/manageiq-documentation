@@ -1,0 +1,33 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Assign_a_Tag_by_Reference_to_a_Service" remap="TID_44426">
+	<title>Assign a Tag by Reference to a Service</title>
+	<para>
+		Request:
+	</para>
+	<screen>POST /api/services/101/tags</screen>
+	<programlisting>{
+  "action" : "assign",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/services/1/tags/49" }
+  ]
+}</programlisting>
+	<para>
+		Response:
+	</para>
+	<programlisting>{
+  "results": [
+    {
+      "success": true,
+      "message": "Assigning Tag: category:'department' name:'finance'",
+      "href": "http://localhost:3000/api/services/101",
+      "tag_category": "department",
+      "tag_name": "finance",
+      "tag_href": "http://localhost:3000/api/tags/49"
+    }
+  ]
+}</programlisting>
+</section>

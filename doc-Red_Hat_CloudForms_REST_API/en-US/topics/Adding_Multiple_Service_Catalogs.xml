@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_REST_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Adding_Multiple_Service_Catalogs" remap="TID_44423">
+	<title>Adding Multiple Service Catalogs</title>
+	<para>
+		Request:
+	</para>
+	<screen>POST /api/service_catalogs</screen>
+	<programlisting>{
+   "action" : "create",
+   "resources" : [
+      {
+        "name" : "First Sample Service Catalog",
+        "description" : "Description of First Sample Service Catalog",
+        "service_templates" : [
+          { "href" : "http://localhost:3000/api/service_templates/1" },
+          { "href" : "http://localhost:3000/api/service_templates/2" }
+        ]
+      },
+      {
+        "name" : "Second Sample Service Catalog",
+        "description" : "Description of Second Sample Service Catalog",
+        "service_templates" : [
+          { "href" : "http://localhost:3000/api/service_templates/3" },
+          { "href" : "http://localhost:3000/api/service_templates/4" }
+        ]
+      },
+      {
+        "name" : "Third Sample Service Catalog",
+        "description" : "Description of Third Sample Service Catalog",
+        "service_templates" : [
+          { "href" : "http://localhost:3000/api/service_templates/5" },
+          { "href" : "http://localhost:3000/api/service_templates/6" }
+        ]
+      }
+  ]
+}</programlisting>
+	<para>
+		Response:
+	</para>
+	<programlisting>{
+  "results": [
+    {
+      "id": 8,
+      "name": "First Sample Service Catalog",
+      "description": "Description of First Sample Service Catalog"
+    },
+    {
+      "id": 9,
+      "name": "Second Sample Service Catalog",
+      "description": "Description of Second Sample Service Catalog"
+    },
+    {
+      "id": 10,
+      "name": "Third Sample Service Catalog",
+      "description": "Description of Third Sample Service Catalog"
+    }
+  ]
+}</programlisting>
+</section>

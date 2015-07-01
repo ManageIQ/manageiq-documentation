@@ -1,0 +1,17 @@
+pressgang_website_callback([
+	{"topicId":44352,"target":"Adding_a_New_Catalog","title":"Adding a New Catalog","newSince":""},
+	{"topicId":44362,"target":"Ordering_Service","title":"Ordering Service","newSince":""},
+	{"topicId":44363,"target":"sect-Cloud_Orchestration","title":"Cloud Orchestration","newSince":""},
+	{"topicId":44364,"target":"sect-CloudFormation_Provisioning_via_Services","title":"CloudFormation Provisioning via Services","newSince":""},
+	{"topicId":44365,"target":"Orchestration_Stacks","title":"Orchestration Stacks","newSince":""},
+	{"topicId":44340,"target":"Abstract","title":"Abstract","newSince":""},
+	{"topicId":44341,"target":"appe-Revision_History","title":"Revision History","newSince":""},
+	{"topicId":44374,"target":"Adding_a_New_Service_Dialog","title":"Adding a New Service Dialog","newSince":""},
+	{"topicId":44343,"target":"Integration_with_AWS_CloudFormation_and_OpenStack_Heat","title":"Integration with AWS CloudFormation and OpenStack Heat","newSince":""},
+	{"topicId":44345,"target":"Adding_a_New_Orchestration_Template","title":"Adding a New Orchestration Template","newSince":""},
+	{"topicId":42938,"target":"Author_Group","title":"Author Group","newSince":""},
+	{"topicId":44347,"target":"Editing_Orchestration_Templates","title":"Editing Orchestration Templates","newSince":""},
+	{"topicId":44348,"target":"Copying_Orchestration_Templates","title":"Copying Orchestration Templates","newSince":""},
+	{"topicId":44349,"target":"Deleting_Orchestration_Templates","title":"Deleting Orchestration Templates","newSince":""},
+	{"topicId":44350,"target":"Adding_a_New_Catalog_Item","title":"Adding a New Catalog Item","newSince":""},
+	{"topicId":44351,"target":"Introduction","title":"Introduction","newSince":""}], 23092, "Red Hat CloudForms", "Integration with AWS CloudFormation and OpenStack Heat", "3.2");

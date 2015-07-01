@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Installing_CloudForms_on_Red_Hat_Enterprise_Linux_OpenStack_Platform.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Adding_a_Floating_IP_Address" remap="TID_34200">
+	<title>Adding a Floating IP Address</title>
+	<para>
+		When you create an instance, Red Hat Enterprise Linux OpenStack Platform automatically assigns it a fixed IP address in the network to which the instance belongs. This IP address is permanently associated with the instance until the instance is terminated.
+	</para>
+	<para>
+		In addition to the fixed address, you can also assign a floating IP address to an instance. Unlike fixed IP addresses, you can modify floating IP addresses associations at any time, regardless of the state of the instances involved.
+	</para>
+	<procedure>
+		<title>Adding Floating IP Addresses Using the Dashboard</title>
+		<step>
+			<para>
+				At the command-line on your RHEL OpenStack Platform host, create a pool of floating IP addresses using the <command>nova-manage floating create</command> command. Replace <replaceable>IP_BLOCK</replaceable> with the desired block of IP addresses expressed in CIDR notation.
+			</para>
+			<screen><prompt>$</prompt> <userinput>nova-manage floating create <replaceable>IP_BLOCK</replaceable></userinput></screen>
+		</step>
+		<step>
+			<para>
+				In the <guilabel>Project</guilabel> tab, navigate to <menuchoice><guimenu>Compute</guimenu><guisubmenu>Access &amp; Security</guisubmenu></menuchoice>.
+			</para>
+		</step> 
+		<!--	<step>
+			<para>
+				Click <guibutton>Allocate IP To Project</guibutton>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select a pool of addresses from the <guilabel>Pool</guilabel> list.
+			</para>
+		</step> -->
+		<step>
+			<para>
+				In the <guilabel>Floating IPs</guilabel> tab, click <guibutton>Allocate IP To Project</guibutton>. The <guilabel>Allocate Floating IP</guilabel> window is displayed.
+			</para>
+			<figure>
+				<title>Allocate Floating IP</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/7218.png" format="PNG" />
+					</imageobject>
+					<textobject> 
+						<phrase>Allocate Floating IP</phrase>
+					</textobject>
+				</mediaobject>
+			</figure>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Allocate IP</guibutton> to allocate a floating IP from the <guilabel>Pool</guilabel>. The allocated IP address appears in the <guilabel>Floating IPs</guilabel> table.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select the newly allocated IP address from the <guilabel>Floating IPs</guilabel> table. Click <guibutton>Associate</guibutton> to assign the IP address to a specific instance.
+			</para>
+			<para>
+				<figure>
+					<title>Manage Floating IP Associations</title>
+					<mediaobject>
+						<imageobject>
+							<imagedata fileref="images/7217.png" format="PNG" />
+						</imageobject>
+						<textobject> 
+							<phrase>Manage Floating IP Associations</phrase>
+						</textobject>
+					</mediaobject>
+				</figure>
+			</para>
+		</step>
+		<step>
+			<para>
+				Select an instance with which to associate the floating <guilabel>IP Address</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Associate</guibutton> to associate the IP address with the selected instance.
+			</para>
+			<note>
+				<para>
+					To disassociate a floating IP address from an instance when it is no longer required, click <guibutton>Release Floating IPs</guibutton>.
+				</para>
+			</note>
+		</step>
+	</procedure>
+</section>

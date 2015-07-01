@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="HostGetTags" remap="TID_14648">
+	<title>HostGetTags</title>
+	<para> 
+		<literal>HostGetTags</literal> retrieves the list of tags associated with a host. The returned tag objects include properties for <literal>category</literal>, <literal>tag_name</literal>, <literal>tag_display_name</literal>, and <literal>tag_path</literal>. See the WSDL definition for the <literal>Tag</literal> object for the full property listing.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1809.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> <literal>[{:hostGuid =&gt; :string}]</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>[[Tag]]</literal>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>HostGetTags</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>HostGetTags WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="HostGetTags">
+  <part name="hostGuid" type="xsd:string" />
+</message>
+<message name="HostGetTagsResponse">
+  <part name="return" type="typens:VmdbwsSupport..TagArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..Tag">
+      <xsd:all>
+        <xsd:element name="tag_display_name" type="xsd:string"/>
+        <xsd:element name="display_name" type="xsd:string"/>
+        <xsd:element name="tag_name" type="xsd:string"/>
+        <xsd:element name="tag_path" type="xsd:string"/>
+        <xsd:element name="category" type="xsd:string"/>
+        <xsd:element name="category_display_name" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>HostGetTags Output (Windows PowerShell)</title>
+		<screen>Calling HostGetTags...
+display_name          : Location: Chicago
+category              : location
+category_display_name : Location
+tag_display_name      : Chicago
+tag_name              : chicago
+tag_path              : /managed/location/chicago
+
+display_name          : Environment: Production
+category              : environment
+category_display_name : Environment
+tag_display_name      : Production
+tag_name              : prod
+tag_path              : /managed/environment/prod</screen>
+	</example>
+</section>

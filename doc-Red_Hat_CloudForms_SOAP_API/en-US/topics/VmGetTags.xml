@@ -1,0 +1,79 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="VmGetTags" remap="TID_14650">
+	<title>VmGetTags</title>
+	<para> 
+		<literal>VmGetTags</literal> retrieves the list of tags associated with a virtual machine. The returned tag objects include properties for <literal>category</literal>, <literal>tag_name</literal>, <literal>tag_display_name</literal>, and <literal>tag_path</literal>. See the WSDL definition for the <literal>Tag</literal> object for the full property listing.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1811.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> <literal>[{:vmGuid =&gt; :string}]</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>[[Tag]]</literal>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>VmGetTags</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>VmGetTags WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="VmGetTags">
+  <part name="vmGuid" type="xsd:string" />
+</message>
+<message name="VmGetTagsResponse">
+  <part name="return" type="typens:VmdbwsSupport..TagArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..Tag">
+      <xsd:all>
+        <xsd:element name="tag_display_name" type="xsd:string"/>
+        <xsd:element name="display_name" type="xsd:string"/>
+        <xsd:element name="tag_name" type="xsd:string"/>
+        <xsd:element name="tag_path" type="xsd:string"/>
+        <xsd:element name="category" type="xsd:string"/>
+        <xsd:element name="category_display_name" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>VmGetTags Output (Windows PowerShell)</title>
+		<screen><![CDATA[Calling VmGetTags...
+display_name          : Cost Center: Cost Center 002
+category              : cc
+category_display_name : Cost Center
+tag_display_name      : Cost Center 002
+tag_name              : 002
+tag_path              : /managed/cc/002
+
+display_name          : Parent Folder Path (VMs & Templates): Datacenters/VI4/vm
+category              : folder_path_blue
+category_display_name : Parent Folder Path (VMs & Templates)
+tag_display_name      : Datacenters/VI4/vm
+tag_name              : datacenters:vi4:vm
+tag_path              : /managed/folder_path_blue/datacenters:vi4:vm]]></screen>
+	</example>
+</section>

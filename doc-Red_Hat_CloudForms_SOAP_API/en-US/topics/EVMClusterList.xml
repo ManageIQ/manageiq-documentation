@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMClusterList" remap="TID_14612">
+	<title>EVMClusterList</title>
+	<para> 
+		<literal>EVMClusterList</literal> retrieves all of the <literal>id</literal> and <literal>name</literal> values of the <literal>Cluster</literal> instances stored in the VMDB.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1772.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> none
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VMdbWs..ClusterListArray</literal>. Each <literal>VmdbwsSupport..ClusterList</literal> object contains the guid and name of a host.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMClusterList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMClusterList WSDL</title>
+		<programlisting language="XML">
+<![CDATA[<message name="EVMClusterList">
+</message>
+<message name="EVMClusterListResponse">
+  <part name="return" type="typens:VmdbwsSupport..ClusterListArray"/>
+</message>
+
+    <xsd:complexType name="VmdbwsSupport..ClusterList">
+      <xsd:all>
+        <xsd:element name="id" type="xsd:string"/>
+        <xsd:element name="name" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]>
+</programlisting>
+	</example>
+	<example>
+		<title>EVMClusterList Output (PowerShell)</title>
+		<screen>Clusters:
+
+
+id   : 1
+name : Testing-Production Cluster
+
+id   : 2
+name : Development-Production Cluster
+
+
+Resource Pools:
+
+id                                     name
+--                                     ----
+10                                     Citrix
+9                                      MiqCloud
+8                                      Production Test environment
+7                                      Testing
+6                                      Training
+5                                      VMware View VMs
+1                                      Default 
+</screen>
+	</example>
+</section>

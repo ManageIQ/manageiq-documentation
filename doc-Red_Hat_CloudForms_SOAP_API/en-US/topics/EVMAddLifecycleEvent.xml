@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMAddLifecycleEvent" remap="TID_14657">
+	<title>EVMAddLifecycleEvent</title>
+	<para> 
+		<literal>EVMAddLifecycleEvent</literal> (<literal>event</literal>, <literal>status</literal>, <literal>message</literal>, <literal>guid</literal>, <literal>location</literal>, <literal>created_by</literal>) adds a lifecycle event record for a virtual machine and records the <literal>event</literal>, <literal>status</literal>, <literal>message</literal>, and <literal>created_by</literal> values in the <literal>lifecycle_events</literal> table in the VMDB. The method looks up a virtual machine either by GUID or fully-qualified path to the configuration file. (For VMware, a fully-qualified path would be similar to <literal>[datastore-1] test3/test3.vmx</literal>)
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1816.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis>
+						<screen>
+[{:event =&gt; :string},
+ {:status =&gt; :string},
+ {:message =&gt; :string},
+ {:vmGuid =&gt; :string},
+ {:vmLocation =&gt; :string},
+ {:createdBy =&gt; :string}]</screen>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis>
+						<screen>true</screen>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMAddLifecycleEvent</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMAddLifecycleEvent WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMAddLifecycleEvent">
+  <part name="event" type="xsd:string"/>
+  <part name="status" type="xsd:string"/>
+  <part name="message" type="xsd:string"/>
+  <part name="vmGuid" type="xsd:string"/>
+  <part name="vmLocation" type="xsd:string"/>
+  <part name="createdBy" type="xsd:string"/>
+</message>
+<message name="EVMAddLifecycleEventResponse">
+  <part name="return" type="xsd:boolean"/>
+</message>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMAddLifecycleEventResponse (Java)</title>
+		<screen><![CDATA[Calling EVMAddLifecycleEventResponse...
+...Result:true]]></screen>
+	</example>
+</section>

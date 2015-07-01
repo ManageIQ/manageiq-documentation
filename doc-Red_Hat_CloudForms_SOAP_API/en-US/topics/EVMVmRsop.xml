@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMVmRsop" remap="TID_14669">
+	<title>EVMVmRsop</title>
+	<para> 
+		<literal>EVMVmRsop</literal> performs a resultant set of policy resolution based on a virtual machines ID and an array of policies provided as inputs. Each policy provided in the array is resolved in the context of the virtual machine representing the ID provided. A value of <literal>true</literal> is returned if all policies pass. Otherwise, a value of <literal>false</literal> is returned.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1828.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> The GUID of a virtual machine existing and the name of a policy in the VMDB.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VmdbwsSupport..VmRsop</literal>. Each <literal>VmdbwsSupport..VmRsop</literal> object contains the result and the reason for a policy result.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMVmRsop</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMVmRsop WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMVmRsop">
+  <part name="vmGuid" type="xsd:string" />
+  <part name="policyName" type="xsd:string" />
+</message>
+<message name="EVMVmRsopResponse">
+  <part name="return" type="typens:VmdbwsSupport..VmRsop" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..VmRsop">
+      <xsd:all>
+        <xsd:element name="result" type="xsd:string"/>
+        <xsd:element name="reason" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMVmRsop Output (Java)</title>
+		<screen>Calling EVMVmRsop for VM: spam-chicago, Policy: service_level_gold...
+Result: false
+Reason: Service Level [Gold] Hardware Policy: VM must not start if CPUs setting is more than 1 and memory is more than 1024</screen>
+	</example>
+</section>

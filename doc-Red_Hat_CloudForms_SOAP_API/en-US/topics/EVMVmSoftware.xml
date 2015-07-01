@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMVmSoftware" remap="TID_14619">
+	<title>EVMVmSoftware</title>
+	<para> 
+		<literal>EVMVmSoftware</literal> retrieves the list of <literal>name</literal>, <literal>vendor</literal>, <literal>description</literal>, and <literal>version</literal> values of all software applications installed on a VM instance in the VMDB.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1779.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> The <literal>guid</literal> of a virtual machine existing in the VMDB.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VmdbwsSupport..VmSoftwareArray</literal>. Each <literal>VmdbWs..VmSoftware</literal> object contains the <literal>name</literal>, <literal>vendor</literal>, <literal>description</literal>, and <literal>version</literal> of a software instance.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMVmSoftware</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMVmSoftware WSDL</title>
+		<programlisting language="XML"><![CDATA[<message name="EVMVmSoftware">
+  <part name="vmGuid" type="xsd:string" />
+</message>
+<message name="EVMVmSoftwareResponse">
+  <part name="return" type="typens: VmdbwsSupport..VmSoftwareArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..VmSoftware">
+      <xsd:all>
+        <xsd:element name="vendor" type="xsd:string"/>
+        <xsd:element name="name" type="xsd:string"/>
+        <xsd:element name="version" type="xsd:string"/>
+        <xsd:element name="description" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMVmSoftwareOutput (Java)</title>
+		<screen><![CDATA[Calling EVMVmSoftware for VM: spam-chicago...
+Name:        VMware Tools
+Description: null
+Vendor:      null
+Version:     50397184
+
+Name:        Acronis Universal Restore for Acronis True Image Enterprise Server
+Description: null
+Vendor:      null
+Version:     151064146
+
+Name:        Acronis True Image Enterprise Server
+Description: null
+Vendor:      null
+Version:     151064146
+
+Name:        Symantec Backup Exec Remote Agent for Windows Servers
+Description: null
+Vendor:      null
+Version:     167843325
+
+Name:        GFI MailEssentials
+Description: null
+Vendor:      null
+Version:     201328598
+
+Name:        MSXML 4.0 SP2 (KB927978)
+Description: null
+Vendor:      null
+Version:     68429425
+
+Name:        Adobe Reader 7.0.8
+Description: null
+Vendor:      null
+Version:     117440520
+
+Name:        GFI MailSecurity for Exchange/SMTP
+Description: null
+Vendor:      null
+Version:     154278041
+
+Name:        Adobe Reader 7.0
+Description: Adobe Reader 7.0
+Vendor:      Adobe Systems Incorporated
+Version:     7.0.8.2006051600
+
+Name:        Cluster Administrator
+Description: Cluster Administrator
+Vendor:      Microsoft Corporation
+Version:     5.2.3790.1830
+]]></screen>
+	</example>
+</section>

@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Limit_template_selection" remap="TID_14700">
+	<title>Limit template selection</title>
+	<para>
+		This parameters value limits template selection to the Datacenters contained in the specified cluster.
+	</para>
+	<para>
+		Usable in these Methods: EVMProvisionRequestEx, VmProvisionRequest.
+	</para>
+	<para>
+		Property Name: cluster
+	</para>
+	<para>
+		Parameter: 6 additionalValues
+	</para>
+	<formalpara>
+		<title>Example:</title>
+		<para>
+			<programlisting><![CDATA[request_id=874d58|cluster=sales_prod]]></programlisting>
+		</para>
+	</formalpara>
+	<para>
+		This example limits the templates available by tag.
+	</para>
+	<programlisting><![CDATA[Clear-Host
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+$ip = "https://192.168.253.42"
+Â 
+$userid = "admin"
+$password = "smartvm"
+$cred = New-Object System.Management.Automation.PsCredential $userid, (convertto-securestring $password -asplaintext -force)
+Â 
+trap {Write-Host $Error[0]; break}
+Â 
+$Error.Clear()
+Write-Host "Connecting to EVM integrate web-services at $($ip)/vmdbws/wsdl"
+$miqvmdb = New-WebServiceProxy -uri "$($ip)/vmdbws/wsdl" -Credential $cred -ErrorAction Stop -Namespace VmdbWs
+Write-Host "Successfully connected to EVM integrate web-services"
+Â 
+$vms = $miqvmdb.GetTemplatesByTag("prov_scope/all")
+Â 
+foreach ($vm in $vms) {
+Â $idx = $idx + 1
+Â Write-Host "$($idx). VM: $($vm.name) - GUID: $($vm.guid)"
+}
+Â 
+Write-Host "done"]]></programlisting>
+	<formalpara>
+		<title>Output example:</title>
+		<para>
+			<screen>Connecting to EVM integrate web-services at https://192.168.253.42/vmdbws/wsdl
+Successfully connected to EVM integrate web-services
+1. VM: TinyVM - GUID: 2e1b5a54-4480-11e2-a836-005056910000
+2. VM: rhel63server - GUID: 95d1550a-449d-11e2-9ae3-005056910000
+done</screen>
+		</para>
+	</formalpara>
+</section>

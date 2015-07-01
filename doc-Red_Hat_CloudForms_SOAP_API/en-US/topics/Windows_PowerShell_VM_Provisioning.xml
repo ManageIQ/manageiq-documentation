@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Windows_PowerShell_VM_Provisioning" remap="TID_14689">
+	<title>Windows PowerShell: VM Provisioning</title>
+	<programlisting language="XML">
+<![CDATA[
+[System.Net.ServicePointManager]::ServerCertificateValidationCallback = { $true }
+
+$ip, $userid, $password = "https://127.0.0.1", <username>, <password>
+$cred = New-Object System.Management.Automation.PsCredential $userid, (convertto-securestring $password -asplaintext -force)
+
+$miqvmdb = New-WebServiceProxy -uri "$($ip)/vmdbws/wsdl" -Credential $cred -ErrorAction Stop -Namespace VmdbWs
+Write-Host "Successfully connected to EVM integrate web-services version: $([string]::join(".", $miqvmdb.Version()))"
+
+$version = "1.1"
+$templateFields = "name=Standard Template|ems_guid=423a73ad-97b4-43d1-462e-6f5b7bbdf38b"
+$vmFields = "number_of_sockets=1|cores_per_socket=1|vm_name=test_ws_vm|vm_memory=1024"
+$requester = "owner_email=tester1@redhat.com|user_name=tester1"
+$tags = "network_location=Internal|cc=001"
+$additionalValues = "request_id=874d58c94a36231c000251b8408fae5b|item_id=874d58cc4a36231c0013b21934aa12b4"
+$emsCustomAttributes = $null
+$miqCustomAttributes = "CreatedBy=web-service|WS Version=1.1"
+ 
+$result = $miqvmdb.EVMProvisionRequestEx($version, $templateFields, $vmFields, $requester, $tags, $additionalValues, $emsCustomAttributes, $miqCustomAttributes)
+]]>
+</programlisting>
+</section>

@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="GetVmList" remap="TID_14645">
+	<title>GetVmList</title>
+	<para> 
+		<literal>GetVmList</literal> returns the virtual machine list object for the given host GUID. Use an asterisk ("<literal>*</literal>") as the <literal>hostGuid</literal> to return all virtual machines.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1806.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> <literal>[{:hostGuid =&gt; :string}]</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VmdbwsSupport..VmList</literal>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>GetVmList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>GetVmList WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="GetVmList">
+  <part name="hostGuid" type="xsd:string" />
+</message>
+<message name="GetVmListResponse">
+  <part name="return" type="typens:VmdbwsSupport..VmListArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..VmList">-
+      <xsd:all>
+        <xsd:element name="guid" type="xsd:string" />
+        <xsd:element name="name" type="xsd:string" />
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>GetVmList Output (Windows PowerShell)</title>
+		<screen>Calling GetVmList...
+guid                                        name
+----                                        ----
+cfe05fb2-016e-11e0-8bd5-000c29fb2535        Ubuntu Desktop 10.04 RC
+d2fdc6a8-016e-11e0-8bd5-000c29fb2535        Windows Server 2003 Enterprise x64
+f693ba30-fc07-11df-ab2c-000c29fb2535        Win2008TemplateX64</screen>
+	</example>
+</section>

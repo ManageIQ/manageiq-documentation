@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMUnassignPolicy" remap="TID_14668">
+	<title>EVMUnassignPolicy</title>
+	<para> 
+		<literal>EVMUnassignPolicy</literal> removes a policy (identified by <literal>policyId</literal>) from a host (identified by <literal>hostId</literal>).
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1827.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> The GUID of a host existing in the VMDB and the GUID of a policy instance assigned to that host.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> Boolean in the form of <literal>true</literal> or <literal>false</literal>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMUnassignPolicy</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMUnassignPolicy WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMUnassignPolicy">
+  <part name="policyGuid" type="xsd:string" />
+  <part name="hostGuid" type="xsd:string" />
+</message>
+<message name="EVMUnassignPolicyResponse">
+  <part name="return" type="xsd:boolean" />
+</message>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMUnassignPolicy Output</title>
+		<screen>Calling EVMUnassignPolicy Policy: env_prod, Host: AcmeVista
+Result: true
+Calling EVMUnassignPolicy Policy: env_prod_vm_host, Host: AcmeVista
+Result: true
+Calling EVMUnassignPolicy Policy: hardware_cpus, Host: AcmeVista
+Result: true</screen>
+	</example>
+</section>

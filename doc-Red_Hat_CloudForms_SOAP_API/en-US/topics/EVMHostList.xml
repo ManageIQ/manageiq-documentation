@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMHostList" remap="TID_14614">
+	<title>EVMHostList</title>
+	<para> 
+		<literal>EVMHostList</literal> retrieves all of the <literal>id</literal> and <literal>name</literal> values of the <literal>Host</literal> instances stored in the VMDB.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1774.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> none
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VMdbWs..HostListArray</literal>. Each <literal>VmdbWs..HostList</literal> object contains the <literal>guid</literal> and <literal>name</literal> of a host.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMHostList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMHostList WSDL</title>
+		<programlisting language="XML">
+<![CDATA[<message name="EVMHostList">
+</message>
+<message name="EVMHostListResponse">
+  <part name="return" type="typens:VmdbwsSupport..HostListArray"/>
+</message> 
+ 
+    <xsd:complexType name="VmdbwsSupport..HostList">
+      <xsd:all>
+        <xsd:element name="guid" type="xsd:string"/>
+        <xsd:element name="name" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]>
+</programlisting>
+	</example>
+	<example>
+		<title>EVMHostList Output (Java)</title>
+		<screen>Calling EVMHostList...
+988be7ca-6c66-11dc-9322-005056b30b86, ESX21.Chicago.MIQ
+98957452-6c66-11dc-9322-005056b30b86, ESX7.Mahwah.MIQ
+9898d76e-6c66-11dc-9322-005056b30b86, ESX43.Seattle.MIQ
+989a5580-6c66-11dc-9322-005056b30b86, ESX54.Dallas.MIQ
+749b33e0-3a2d-11dc-8a0d-001641a27095, bhm65@redhat.com
+024ba2a6-5d51-11dc-b10b-0017f2d3eb46, luke.redhat.com
+02982fb8-5d51-11dc-b10b-0017f2d3eb46, esx1dev.redhat.com
+02bb853a-5d51-11dc-b10b-0017f2d3eb46, yoda.redhat.com</screen>
+	</example>
+</section>

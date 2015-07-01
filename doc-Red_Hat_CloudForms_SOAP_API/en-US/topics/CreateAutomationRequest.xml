@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="CreateAutomationRequest" remap="TID_14680">
+	<title>CreateAutomationRequest</title>
+	<para>
+		This method initiates an automation request. Use it to drive an automation workflow and provide feedback to the requester.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1837.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis>
+						<screen>
+[{:version =&gt; :string},
+ {:uri_parts =&gt; :string},
+ {:parameters =&gt; :string},
+ {:requester =&gt; :string}]</screen>
+					</para>
+					<para> 
+						<literal>uri_parts</literal> example: <literal>namespace=NNN|class=CCC|instance=IIII|message=MMMM</literal>
+					</para>
+					<para> 
+						<literal>paramaters</literal> example: <literal>var1=vvvvv|var2=wwww|var3=xxxxx</literal>
+					</para>
+					<para> 
+						<literal>requester</literal> example: <literal>user_name=fred|auto_approve=true</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis>
+						<screen>[string]</screen>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>CreateAutomationRequest</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>CreateAutomationRequest WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="CreateAutomationRequest">
+  <part name="version" type="xsd:string"/>
+  <part name="uri_parts" type="xsd:string"/>
+  <part name="parameters" type="xsd:string"/>
+  <part name="requester" type="xsd:string"/>
+</message>
+<message name="CreateAutomationRequestResponse">
+  <part name="return" type="xsd:string"/>
+</message>]]></programlisting>
+	</example>
+	<example>
+		<title>CreateAutomationRequest Output (Windows PowerShell)</title>
+		<screen>CreateAutomationRequest ID:17
+done</screen>
+	</example>
+</section>

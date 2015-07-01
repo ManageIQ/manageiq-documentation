@@ -1,0 +1,78 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="ResourcePoolGetTags" remap="TID_14649">
+	<title>ResourcePoolGetTags</title>
+	<para> 
+		<literal>ResourcePoolGetTags</literal> retrieves the list of tags associated with a resource pool. The returned tag objects include properties for <literal>category</literal>, <literal>tag_name</literal>, <literal>tag_display_name</literal>, and <literal>tag_path</literal>. See the WSDL definition for the <literal>Tag</literal> object for the full property listing.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1810.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> <literal>[{:resourcepoolID =&gt; :string}]</literal>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>[[VmdbwsSupport..TagArray]]</literal>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>ResourcePoolGetTags</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>ResourcePoolGetTags WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="ResourcePoolGetTags">
+  <part name="resourcepoolId" type="xsd:string"/>
+</message>
+<message name="ResourcePoolGetTagsResponse">
+  <part name="return" type="typens:VmdbwsSupport..TagArray"/>
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..Tag">
+      <xsd:all>
+        <xsd:element name="tag_display_name" type="xsd:string"/>
+        <xsd:element name="display_name" type="xsd:string"/>
+        <xsd:element name="tag_name" type="xsd:string"/>
+        <xsd:element name="tag_path" type="xsd:string"/>
+        <xsd:element name="category" type="xsd:string"/>
+        <xsd:element name="category_display_name" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>ResourcePoolGetTags Output (Windows PowerShell)</title>
+		<screen>display_name          : Location: Chicago
+category              : location
+category_display_name : Location
+tag_display_name      : Chicago
+tag_name              : chicago
+tag_path              : /managed/location/chicago
+
+display_name          : Environment: Production
+category              : environment
+category_display_name : Environment
+tag_display_name      : Production
+tag_name              : prod
+tag_path              : /managed/environment/prod</screen>
+	</example>
+</section>

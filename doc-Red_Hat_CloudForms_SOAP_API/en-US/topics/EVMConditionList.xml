@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMConditionList" remap="TID_14659">
+	<title>EVMConditionList</title>
+	<para> 
+		<literal>EVMConditionList</literal> returns the list of policy condition IDs and names defined for a given policy. If <literal>policyId</literal> is an asterisk ("<literal>*</literal>"), <literal>all</literal> or <literal>none</literal>, the method returns all conditions.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1818.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> The ID of a policy. If <literal>policyId</literal> is an asterisk ("<literal>*</literal>"), <literal>all</literal> or <literal>none</literal>, the output includes all conditions.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VmdbwsSupport..ConditionListArray</literal>. Each <literal>VmdbwsSupport..ConditionList</literal> contains the <literal>name</literal> and <literal>guid</literal> of the condition for the specified <literal>policyId</literal>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMConditionList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMConditionList WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMConditionList">
+  <part name="policyGuid" type="xsd:string" />
+</message>
+<message name="EVMConditionListResponse">
+  <part name="return" type="typens:VmdbwsSupport..ConditionListArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..ConditionList">
+      <xsd:all>
+        <xsd:element name="name" type="xsd:string"/>
+        <xsd:element name="guid" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMConditionList Output (Java)</title>
+		<screen><![CDATA[Calling EVMConditionList...
+fe92d7c4-83ca-11dc-8bac-0017f2d3eb46, env_prod
+fe936f9a-83ca-11dc-8bac-0017f2d3eb46, env_prod_vm_host
+fe94145e-83ca-11dc-8bac-0017f2d3eb46, hardware_cpus
+fe94aa18-83ca-11dc-8bac-0017f2d3eb46, os_winxp_sp2
+fe953622-83ca-11dc-8bac-0017f2d3eb46, security_accounts
+fe95bc00-83ca-11dc-8bac-0017f2d3eb46, security_administrators
+fe965b56-83ca-11dc-8bac-0017f2d3eb46, security_av_service
+fe96eed6-83ca-11dc-8bac-0017f2d3eb46, security_services
+fe978cec-83ca-11dc-8bac-0017f2d3eb46, service_level_gold
+fe981478-83ca-11dc-8bac-0017f2d3eb46, service_level_platinum
+fe989664-83ca-11dc-8bac-0017f2d3eb46, service_level_silver
+fe991bca-83ca-11dc-8bac-0017f2d3eb46, software_KB911567
+fe99a004-83ca-11dc-8bac-0017f2d3eb46, test_syntax_1
+fe9a2966-83ca-11dc-8bac-0017f2d3eb46, enforce
+fe9ab8f4-83ca-11dc-8bac-0017f2d3eb46, linux_only
+fe9b37de-83ca-11dc-8bac-0017f2d3eb46, win_only
+fe9bbef2-83ca-11dc-8bac-0017f2d3eb46, account_limit
+a23c1ed2-83ec-11dc-b8d0-0017f2d3eb46, test_xml_syntax
+
+Calling EVMConditionList for policy: env_prod, [189df1e8-83cc-11dc-912b-0017f2d3eb46]
+fe92d7c4-83ca-11dc-8bac-0017f2d3eb46, env_prod]]></screen>
+	</example>
+</section>

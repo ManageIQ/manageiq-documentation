@@ -1,0 +1,1733 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMProvisionRequestEx" remap="TID_14681">
+	<title>EVMProvisionRequestEx</title>
+	<para> 
+		<literal>EVMProvisionRequestEx</literal> initiates a virtual machine provision request. Except for <literal>version</literal>, all fields are strings that allow for multiple values passed using the format <literal>name=value</literal> and separating name-value pairs with the pipe symbol ("<literal>|</literal>"). For example:
+	</para>
+	<para> 
+		<literal>number_of_sockets=1|cores_per_socket=1|vm_name=test_ws_vm|vm_memory=1024</literal>
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1838.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<informaltable frame="all">
+		<tgroup cols="3">
+			<colspec colwidth="1*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Name
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						<para> 
+							<literal>version</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Interface version. Should be set to 1.1
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>templateFields</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Fields used to find template virtual machine. Provide any or all fields. Supply a <literal>guid</literal> or <literal>ems_guid</literal> to protect against matching same-named templates on different Providers within CloudForms Management Engine.
+						</para>
+						<para>
+							Supported fields are:
+						</para>
+						<para> 
+							<userinput> <literal>name=</literal><replaceable>[VM Template Name]</replaceable> </userinput> Example: <literal>template_1</literal>
+						</para>
+						<para> 
+							<userinput> <literal>guid</literal>=<replaceable>[guid value from vms table]</replaceable> </userinput>
+						</para>
+						<para> 
+							<userinput> <literal>ems_guid</literal>=<replaceable>[uid_ems value from vms table]</replaceable> </userinput>
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>vmFields</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Allows for the setting of properties on the Catalog, Hardware, Network, Customize, and Schedule tabs in the Provisioning dialog.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>requester</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Allows for the setting of properties on the Requester tab in the Provisioning dialog.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>tags</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Tags to apply to newly created VM.
+						</para>
+						<para>
+							Example: <literal>network_location=Internal|cc=001</literal>
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>additionalValues</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Additional values are name-value pairs stored with a provision request, but not used by the core provisioning code. These values are usually referenced from automate methods for custom processing.
+						</para>
+						<para>
+							Example: Store a <literal>request_id</literal> from an external system so the system can be notified during the provisioning process.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>emsCustomAttributes</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Custom attributes applied to the virtual machine through the Provider as part of provisioning.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para> 
+							<literal>miqCustomAttributes</literal>
+						</para>
+					</entry>
+					<entry>
+						<para>
+							string
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Custom attributes applied to the virtual machine and stored in the CloudForms Management Engine database as part of provisioning.
+						</para>
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</informaltable>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis>
+						<screen>[{:version =&gt; :string},
+ {:templateFields =&gt; :string},
+ {:vmFields =&gt; :string},
+ {:requester =&gt; :string},
+ {:tags =&gt; :string},
+ {:additionalValues =&gt; :string},
+ {:emsCustomAttributes =&gt; :string},
+ {:miqCustomAttributes =&gt; :string}]</screen>
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis>
+						<screen>[:boolean]</screen>
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMProvisionRequestEx</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMProvisionRequestEx WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMProvisionRequestEx">
+  <part name="version" type="xsd:string" />
+  <part name="templateFields" type="xsd:string" />
+  <part name="vmFields" type="xsd:string" />
+  <part name="requester" type="xsd:string" />
+  <part name="tags" type="xsd:string" />
+  <part name="additionalValues" type="xsd:string" />
+  <part name="emsCustomAttributes" type="xsd:string" />
+  <part name="miqCustomAttributes" type="xsd:string" />
+</message>
+<message name="EVMProvisionRequestExResponse">
+  <part name="return" type="xsd:boolean" />
+</message>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMProvisionRequestEx Output (Windows PowerShell)</title>
+		<screen>id             : 110
+description    : Provision from [WinXP Template] to [test_ws_vm]
+state          : pending_approval
+resource_type  : MiqProvisionRequest
+resource_id    : 112
+created_on     : 12/16/2010 3:40:48 PM
+updated_on     : 12/16/2010 3:40:48 PM
+fulfilled_on   : 1/1/0001 12:00:00 AM
+requester_id   : 1
+requester_name : Administrator</screen>
+	</example>
+	<formalpara>
+		<title>Supported Fields</title>
+		<para />
+	</formalpara>
+	<table frame="all">
+		<title> Requester </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						owner_phone
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Phone
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_country
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Country/Region
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_phone_mobile
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Mobile phone
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_title
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Title
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_first_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						First name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_manager
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Manager name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_address
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Address
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_company
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Company
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_last_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Last name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_manager_email
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Manager e-mail address
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_city
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						City
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_department
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Department
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_load_ldap
+					</entry>
+					<entry>
+						button
+					</entry>
+					<entry>
+						Look up LDAP e-mail address
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_manager_phone
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Manager phone
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_state
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						State
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_office
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Office
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_zip
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Zip code
+					</entry>
+				</row>
+				<row>
+					<entry>
+						owner_email
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						E-Mail
+					</entry>
+				</row>
+				<row>
+					<entry>
+						request_notes
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Notes
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Customize </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						dns_servers
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						DNS server list
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_organization
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Organization
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_password
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						New Administrator Password
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_custom_spec
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_server_license_mode
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Identification. Values: perServer: Per server, perSeat: Per seat
+					</entry>
+				</row>
+				<row>
+					<entry>
+						ldap_ous
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						LDAP Group
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_timezone
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Timezone
+					</entry>
+				</row>
+				<row>
+					<entry>
+						dns_suffixes
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						DNS Suffix list
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_product_id
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						ProductID
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_identification
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Identification. Values: domain: Domain, workgroup: Workgroup
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_per_server_max_connections
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Maximum Connections. Default: '5'
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_computer_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Computer Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_workgroup_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Workgroup Name. Default: WORKGROUP
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_spec_override
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Override Specification Values. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						addr_mode
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Address Mode. Values: static: Static, dhcp: DHCP, Default: dhcp
+					</entry>
+				</row>
+				<row>
+					<entry>
+						linux_host_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Computer Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_domain_admin
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Domain Admin
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_change_sid
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Change SID. Values: false: 0, true: 1; Default: true
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_domain_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Domain Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_upload_file
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Upload
+					</entry>
+				</row>
+				<row>
+					<entry>
+						gateway
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Gateway
+					</entry>
+				</row>
+				<row>
+					<entry>
+						ip_addr
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						IP Address
+					</entry>
+				</row>
+				<row>
+					<entry>
+						linux_domain_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Domain Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_domain_password
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Domain Password
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_auto_logon
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Auto Logon. Values: false: 0, true: 1; Default: true
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_enabled
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Customize. Default: disabled
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_delete_accounts
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Delete Accounts. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_upload_text
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Sysprep Text
+					</entry>
+				</row>
+				<row>
+					<entry>
+						wins_servers
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						WINS Server list
+					</entry>
+				</row>
+				<row>
+					<entry>
+						subnet_mask
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Subnet Mask
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_full_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Full Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						sysprep_auto_logon_count
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Auto Logon Count. Values: 1: '1', 2: '2', 3: '3'; Default: 1
+					</entry>
+				</row>
+				<row>
+					<entry>
+						customization_template_id
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Script Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						root_password
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Root Password
+					</entry>
+				</row>
+				<row>
+					<entry>
+						hostname
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Host Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						customization_template_script
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Script Text
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Environment </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						new_datastore_grow_increment
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Grow Increment (GB)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_create
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Create Datastore. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_cluster_name
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_aggregate
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Aggregate
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_max_size
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Max Size (GB)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_storage_controller
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Controller
+					</entry>
+				</row>
+				<row>
+					<entry>
+						cluster_filter
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Filter
+					</entry>
+				</row>
+				<row>
+					<entry>
+						host_filter
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Filter
+					</entry>
+				</row>
+				<row>
+					<entry>
+						ds_filter
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Filter
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_volume
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Volume
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_host_name
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_ds_name
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_fs_type
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						FS Type. Values: NFS: NFS, VMFS: VMFS; Default: NFS
+					</entry>
+				</row>
+				<row>
+					<entry>
+						rp_filter
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Filter
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_thin_provision
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Thin Provision
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_auto
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Choose Automatically. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_size
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Size (GB)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_autogrow
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Autogrow. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_folder_name
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						new_datastore_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_rp_name
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						placement_dc_name
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Service Catalog </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						number_of_vms
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Count. Max: 50; Default: 1
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vm_VM Description
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						VM Description. Max length: 100
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vm_prefix
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						VM Name Prefix/Suffix
+					</entry>
+				</row>
+				<row>
+					<entry>
+						src_vm_id
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vm_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						VM Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						pxe_image_id
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Image
+					</entry>
+				</row>
+				<row>
+					<entry>
+						pxe_server_id
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Server
+					</entry>
+				</row>
+				<row>
+					<entry>
+						host_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Host Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						provision_type
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Provision Type. Default: vmware
+					</entry>
+				</row>
+				<row>
+					<entry>
+						linked_clone
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Linked Clone. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						snapshot
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Snapshot
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vm_filter
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Filter
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Schedule </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						schedule_type
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						When to Provision. Values: schedule: Schedule, immediately: Immediately on Approval; Default: immediately
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vm_auto_start
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Power on virtual machines after creation. Values: false: 0, true: 1; Default: true
+					</entry>
+				</row>
+				<row>
+					<entry>
+						schedule_time
+					</entry>
+					<entry>
+						time
+					</entry>
+					<entry>
+						Provision on
+					</entry>
+				</row>
+				<row>
+					<entry>
+						retirement
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Time until Retirement. Values: 0: Indefinite, 1.month: 1 Month, 3.months: 3 Months, 6.months: 6 Months; Default: 0
+					</entry>
+				</row>
+				<row>
+					<entry>
+						retirement_warn
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Retirement Warning. Values: 1.week: 1 Week, 2.weeks: 2 Weeks, 30.days: 30 Days; Default: 1.week
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Desktop </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						vdi_new_desktop_pool_name
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Name
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vdi_farm
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Farm
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vdi_new_desktop_pool_assignment
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Desktop Pools Assignment
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vdi_desktop_pool_create
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Create Desktop Pool Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vdi_desktop_pool
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Desktop Pools
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vdi_enabled
+					</entry>
+					<entry>
+						boolean
+					</entry>
+					<entry>
+						Enabled. Values: false: 0, true: 1; Default: false
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vdi_desktop_pool_user_list
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						User List
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Network </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						vlan
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						vLan. Values: dvs: true, vlans: true
+					</entry>
+				</row>
+				<row>
+					<entry>
+						mac_address
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						MAC Address
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<table frame="all">
+		<title> Hardware </title>
+		<tgroup cols="3">
+			<colspec colwidth="2*" />
+			<colspec colwidth="1*" />
+			<colspec colwidth="2*" />
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Field
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Type
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						disk_format
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Disk Format. Values: thick: Thick, thin: Thin, unchanged: Default; Default: unchanged
+					</entry>
+				</row>
+				<row>
+					<entry>
+						cpu_limit
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						CPU (MHz)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						memory_limit
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Memory (MB)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						number_of_sockets
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Number of Sockets. Values: 1: '1', 2: '2', 4: '4', 8: '8'; Default: 1
+					</entry>
+				</row>
+				<row>
+					<entry>
+						cores_per_socket
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Cores per Socket. Values: 1: '1', 2: '2', 4: '4', 8: '8'; Default: 1
+					</entry>
+				</row>
+				<row>
+					<entry>
+						cpu_reserve
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						CPU (MHz)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						vm_memory
+					</entry>
+					<entry>
+						string
+					</entry>
+					<entry>
+						Memory (MB). Values: '2048': '2048', '4096': '4096', '1024': '1024'; Default: '1024'
+					</entry>
+				</row>
+				<row>
+					<entry>
+						memory_reserve
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Memory (MB)
+					</entry>
+				</row>
+				<row>
+					<entry>
+						network_adapters
+					</entry>
+					<entry>
+						integer
+					</entry>
+					<entry>
+						Network Adapters. Values: 1: '1', 2: '2', 3: '3', 4: '4'; Default: 1
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+</section>

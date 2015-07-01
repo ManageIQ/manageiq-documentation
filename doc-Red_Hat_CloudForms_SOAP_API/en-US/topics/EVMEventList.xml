@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMEventList" remap="TID_14660">
+	<title>EVMEventList</title>
+	<para> 
+		<literal>EVMEventList</literal> returns the list of policy event IDs and names defined for a given policy. If <literal>policyId</literal> is an asterisk ("<literal>*</literal>"), <literal>all</literal>, or <literal>none</literal>, the method returns all events.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1819.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> The ID of a policy. If <literal>policyId</literal> is an asterisk ("<literal>*</literal>"), <literal>all</literal>, or <literal>none</literal>, the output includes all conditions.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VmdbwsSupport..EventListArray</literal>. Each <literal>VmdbwsSupport..EventList</literal> contains the list of conditions for the <literal>policyid</literal>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMEventList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>EVMEventList WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMEventList">
+  <part name="policyGuid" type="xsd:string" />
+</message>
+<message name="EVMEventListResponse">
+  <part name="return" type="typens:VmdbwsSupport..EventListArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..EventList">
+      <xsd:all>
+        <xsd:element name="name" type="xsd:string"/>
+        <xsd:element name="guid" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMEventList Output (Java)</title>
+		<screen><![CDATA[Calling EVMEventList...
+fe8aadec-83ca-11dc-8bac-0017f2d3eb46, vm_start
+fe8b2b64-83ca-11dc-8bac-0017f2d3eb46, vm_shutdown
+fe8b9932-83ca-11dc-8bac-0017f2d3eb46, vm_pause
+fe8c1470-83ca-11dc-8bac-0017f2d3eb46, vm_resume
+fe8c873e-83ca-11dc-8bac-0017f2d3eb46, vm_migrate
+fe8cedbe-83ca-11dc-8bac-0017f2d3eb46, vm_relocate
+fe8d53f8-83ca-11dc-8bac-0017f2d3eb46, vm_reset
+fe8dbd02-83ca-11dc-8bac-0017f2d3eb46, vm_suspend
+fe8e29fe-83ca-11dc-8bac-0017f2d3eb46, vm_poweroff
+fe8ea6a4-83ca-11dc-8bac-0017f2d3eb46, vm_create
+fe8f23cc-83ca-11dc-8bac-0017f2d3eb46, vm_delete
+fe8f9b72-83ca-11dc-8bac-0017f2d3eb46, vm_clone
+fe900f62-83ca-11dc-8bac-0017f2d3eb46, vm_deploy
+fe90844c-83ca-11dc-8bac-0017f2d3eb46, vm_template
+fe90f9e0-83ca-11dc-8bac-0017f2d3eb46, vm_snapshot
+fe9172b2-83ca-11dc-8bac-0017f2d3eb46, vm_discover
+
+Calling EVMEventList for policy: env_prod, [189df1e8-83cc-11dc-912b-0017f2d3eb46]
+fe8aadec-83ca-11dc-8bac-0017f2d3eb46, vm_start]]></screen>
+	</example>
+</section>

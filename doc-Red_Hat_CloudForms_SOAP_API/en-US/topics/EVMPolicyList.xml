@@ -1,0 +1,130 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="EVMPolicyList" remap="TID_14662">
+	<title>EVMPolicyList</title>
+	<para> 
+		<literal>EVMPolicyList</literal> retrieves the list of policy names and descriptions for either a specific host or all hosts.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1821.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> The GUID of the host. If the <literal>hostGuid</literal> is asterisk ("*"), <literal>all</literal>, or <literal>none</literal>, the output includes all conditions.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>VmdbwsSupport..PolicyListArray</literal>. Each <literal>VmdbwsSupport..PolicyList</literal> object contains the name and description of a policy.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>EVMPolicyList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>VMPolicyList WSDL</title>
+		<programlisting language="XML"><![CDATA[
+<message name="EVMPolicyList">
+  <part name="hostGuid" type="xsd:string" />
+</message>
+<message name="EVMPolicyListResponse">
+  <part name="return" type="typens:VmdbwsSupport..PolicyListArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..PolicyList">
+      <xsd:all>
+        <xsd:element name="name" type="xsd:string"/>
+        <xsd:element name="guid" type="xsd:string"/>
+        <xsd:element name="description" type="xsd:string"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>EVMPolicyList Output (Java)</title>
+		<screen><![CDATA[Calling EVMPolicyList...
+Guid:        189df1e8-83cc-11dc-912b-0017f2d3eb46
+Name:        env_prod
+Description: VM Tagged as Production
+
+Guid:        18a0132e-83cc-11dc-912b-0017f2d3eb46
+Name:        env_prod_vm_host
+Description: VM Tagged as Production running on Host Tagged as Production
+
+Guid:        18a1d2d6-83cc-11dc-912b-0017f2d3eb46
+Name:        hardware_cpus
+Description: CPUs setting is more than 1
+
+Guid:        18a3af34-83cc-11dc-912b-0017f2d3eb46
+Name:        os_winxp_sp2
+Description: Microsoft Windows Server 2003 SP1 or better
+
+Guid:        18a5c440-83cc-11dc-912b-0017f2d3eb46
+Name:        security_accounts
+Description: Administrators and Guest accounts only
+
+Guid:        18a7bdf4-83cc-11dc-912b-0017f2d3eb46
+Name:        security_administrators
+Description: 'Administrator' account does not exist
+
+Guid:        18a9e93a-83cc-11dc-912b-0017f2d3eb46
+Name:        security_av_service
+Description: Anti-virus service is running
+
+Guid:        18abea96-83cc-11dc-912b-0017f2d3eb46
+Name:        security_services
+Description: Fast User Switching Compatibility service exists
+
+Guid:        18adbe66-83cc-11dc-912b-0017f2d3eb46
+Name:        service_level_gold
+Description: CPUs setting is 1 and memory is 1024 or less
+
+Guid:        18afd066-83cc-11dc-912b-0017f2d3eb46
+Name:        service_level_platinum
+Description: CPUs setting is more than 2 and memory is 2048 or less
+
+Guid:        18b20908-83cc-11dc-912b-0017f2d3eb46
+Name:        service_level_silver
+Description: CPUs setting is more than 1 or memory 1024 or less
+
+Guid:        18b41194-83cc-11dc-912b-0017f2d3eb46
+Name:        software_KB911567
+Description: Patch KB911567 is installed
+
+Guid:        18b630be-83cc-11dc-912b-0017f2d3eb46
+Name:        test_syntax_1
+Description: Test syntax
+
+Guid:        18b823a6-83cc-11dc-912b-0017f2d3eb46
+Name:        enforce
+Description: Environment Policy : VM can only start if it's in production running on a host in production
+
+Guid:        18ba291c-83cc-11dc-912b-0017f2d3eb46
+Name:        linux_only
+Description: Linux VM
+
+Guid:        18bc1830-83cc-11dc-912b-0017f2d3eb46
+Name:        win_only
+Description: Windows VM
+
+Guid:        18c7ada8-83cc-11dc-912b-0017f2d3eb46
+Name:        account_limit
+Description: VM Limited to 5 users]]></screen>
+	</example>
+</section>

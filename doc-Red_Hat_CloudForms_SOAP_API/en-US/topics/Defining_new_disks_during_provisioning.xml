@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Defining_new_disks_during_provisioning" remap="TID_14697">
+	<title>Defining new disks during provisioning</title>
+	<para>
+		This parameter value and its options allow you to add disks as part of the provisioning web service.
+	</para>
+	<para>
+		Usable in these Methods: EVMProvisionRequestEx, VmProvisionRequest.
+	</para>
+	<programlisting><![CDATA[diskscsi##=<controller_#>:<controller_position_#>:<size_in_mb>
+Optional:
+diskscsi##.datastore=<datastore name>
+diskscsi##.filename	=<filename>
+
+diskscsi##.connectable.allowGuestControl	= <true/false> Â Default: false
+diskscsi##.connectable.startConnected	= <true/false> Â Default: true
+diskscsi##.connectable.connected		= <true/false> Â Default: true
+
+diskscsi##.backing.diskmode		= <> Â Default: persistent
+(diskMode types: persistent, independent_persistent, independent_nonpersistent, nonpersistent)
+diskscsi##.backing.split		= <true/false> Â Default: false
+diskscsi##.backing.thinProvisioned	= <true/false> Â Default: false
+diskscsi##.backing.writeThrough	= <true/false> Â Default: false]]></programlisting>
+	<formalpara>
+		<title>Example:</title>
+		<para>
+			<programlisting><![CDATA[diskscsi0=0:0:10
+diskscsi1=0:0:8
+diskscsi1.datastore=storage1
+diskscsi1.backing.diskmode=independent_persistent]]></programlisting>
+		</para>
+	</formalpara>
+</section>

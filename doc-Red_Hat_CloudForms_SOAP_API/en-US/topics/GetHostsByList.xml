@@ -1,0 +1,143 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Red_Hat_CloudForms_SOAP_API.ent">
+%BOOK_ENTITIES;
+]>
+<section id="GetHostsByList" remap="TID_14639">
+	<title>GetHostsByList</title>
+	<para> 
+		<literal>GetHostsByList</literal> returns an array of host objects. The <literal>hostList</literal> input is usually the object returned from the <literal>GetHostList</literal> method or from the <literal>hosts</literal> property of a <literal>ProxyExtManagementSystem</literal> object.
+	</para>
+	<para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/1800.png" />
+			</imageobject>
+		</mediaobject>
+	</para>
+	<formalpara>
+		<title>Syntax</title>
+		<para>
+			<itemizedlist>
+				<listitem>
+					<para> 
+						<emphasis>Input:</emphasis> <literal>[{:hostList =&gt; [HostList]}]</literal>. The object returned by the <literal>GetHostList</literal> method or from the <literal>hosts</literal> property of a <literal>ProxyExtManagementSystem</literal> object.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<emphasis>Output:</emphasis> <literal>ProxyHost</literal> as an array.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</para>
+	</formalpara>
+	<formalpara>
+		<title>Examples</title>
+		<para>
+			The following examples demonstrate <literal>GetHostsByList</literal> usage:
+		</para>
+	</formalpara>
+	<example>
+		<title>GetHostsByList WSDL</title>
+		<programlisting language="XML"><![CDATA[<message name="GetHostsByList">
+  <part name="hostList" type="typens:VmdbwsSupport..HostListArray" />
+</message>
+<message name="GetHostsByListResponse">
+  <part name="return" type="typens:VmdbwsSupport..ProxyHostArray" />
+</message>
+...
+    <xsd:complexType name="VmdbwsSupport..ProxyHost">
+      <xsd:all>
+        <xsd:element name="id" type="xsd:string"/>
+        <xsd:element name="name" type="xsd:string"/>
+        <xsd:element name="hostname" type="xsd:string"/>
+        <xsd:element name="ipaddress" type="xsd:string"/>
+        <xsd:element name="vmm_vendor" type="xsd:string"/>
+        <xsd:element name="vmm_version" type="xsd:string"/>
+        <xsd:element name="vmm_product" type="xsd:string"/>
+        <xsd:element name="vmm_buildnumber" type="xsd:string"/>
+        <xsd:element name="created_on" type="xsd:dateTime"/>
+        <xsd:element name="updated_on" type="xsd:dateTime"/>
+        <xsd:element name="guid" type="xsd:string"/>
+        <xsd:element name="ems_id" type="xsd:string"/>
+        <xsd:element name="user_assigned_os" type="xsd:string"/>
+        <xsd:element name="power_state" type="xsd:string"/>
+        <xsd:element name="smart" type="xsd:double"/>
+        <xsd:element name="last_perf_capture_on" type="xsd:dateTime"/>
+        <xsd:element name="uid_ems" type="xsd:string"/>
+        <xsd:element name="connection_state" type="xsd:string"/>
+        <xsd:element name="ssh_permit_root_login" type="xsd:string"/>
+        <xsd:element name="ems_ref_obj" type="xsd:string"/>
+        <xsd:element name="admin_disabled" type="xsd:boolean"/>
+        <xsd:element name="service_tag" type="xsd:string"/>
+        <xsd:element name="asset_tag" type="xsd:string"/>
+        <xsd:element name="ipmi_address" type="xsd:string"/>
+        <xsd:element name="mac_address" type="xsd:string"/>
+        <xsd:element name="type" type="xsd:string"/>
+        <xsd:element name="failover" type="xsd:boolean"/>
+        <xsd:element name="ems_ref" type="xsd:string"/>
+        <xsd:element name="vms" type="typens:VmdbwsSupport..VmListArray"/>
+        <xsd:element name="ext_management_system" type="typens:VmdbwsSupport..EmsList"/>
+        <xsd:element name="ws_attributes" type="typens:VmdbwsSupport..WSAttributesArray"/>
+      </xsd:all>
+    </xsd:complexType>]]></programlisting>
+	</example>
+	<example>
+		<title>GetHostsByList Output (Windows PowerShell)</title>
+		<screen>Calling GetHostsbyList...
+Name                                              Value
+----                                              -----
+last_scan_on                                      2012-07-24 21:00:39 -0700
+max_cpu_usage_rate_average_high_over_time_period  8.13731902166194
+last_drift_state_timestamp                        2012-07-24 21:00:39 -0700
+v_total_vms                                       2
+enabled_tcp_outbound_ports
+max_cpu_usage_rate_average_low_over_time_period   3.2237920894491707
+derived_memory_used_high_over_time_period         13172.316302780524
+platform                                          linux
+max_mem_usage_absolute_average_low_over_time_p... 24.998298320564096
+max_cpu_usage_rate_average_low_over_time_perio... 3.073792089449171
+enabled_run_level_3_services                      abrt-ccpp|abrt-oops|abrtd|acp...
+max_cpu_usage_rate_average_high_over_time_peri... 7.987319021661939
+ipmi_enabled                                      false
+v_annotation
+enabled_udp_outbound_ports
+max_mem_usage_absolute_average_high_over_time_... 28.00003501276926
+last_compliance_timestamp
+v_owning_datacenter                               Default
+region_number                                     0
+enabled_run_level_0_services
+enabled_tcp_inbound_ports
+all_enabled_ports
+enabled_run_level_5_services                      abrt-ccpp|abrt-oops|abrtd|acp...
+service_names                                     abrt-ccpp|abrt-oops|abrtd|acp...
+os_image_name                                     linux_generic
+cpu_usagemhz_rate_average_low_over_time_period    1256.3802808541543
+enabled_run_level_1_services                      acpid|auditd|cgconfig|crond|c...
+region_description                                Region 0
+enabled_udp_inbound_ports
+v_total_miq_templates                             0
+v_owning_cluster                                  Pod1
+v_owning_folder                                   Datacenters
+first_drift_state_timestamp                       2012-07-23 13:07:45 -0700
+max_cpu_usage_rate_average_avg_over_time_perio... 5.530555555555555
+enabled_inbound_ports
+max_mem_usage_absolute_average_avg_over_time_p... 25.49416666666668
+derived_memory_used_low_over_time_period          13009.324111571328
+enabled_outbound_ports
+max_mem_usage_absolute_average_low_over_time_p... 27.008298320564094
+max_cpu_usage_rate_average_avg_over_time_period   5.680555555555555
+v_total_storages                                  3
+cpu_usagemhz_rate_average_avg_over_time_period    1557.939422387685
+enabled_run_level_4_services                      acpid|atd|auditd|autofs|cgcon...
+max_mem_usage_absolute_average_avg_over_time_p... 27.504166666666677
+max_mem_usage_absolute_average_high_over_time_... 25.990035012769262
+derived_memory_used_avg_over_time_period          13090.820207175926
+enabled_run_level_6_services
+cpu_usagemhz_rate_average_high_over_time_period   1859.4985639212157
+authentication_status                             Valid
+enabled_run_level_2_services                      acpid|auditd|cgconfig|crond|c...
+last_compliance_status       </screen>
+	</example>
+</section>

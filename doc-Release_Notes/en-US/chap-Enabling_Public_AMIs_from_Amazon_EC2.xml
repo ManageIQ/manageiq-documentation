@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Enabling_Public_AMIs_from_Amazon_EC2">
+	<title>Enabling Public AMIs from Amazon EC2</title> 
+	<para>
+		Alter the Main Configuration File to enable public AMIs from Amazon EC2. The following procedure makes public images viewable in CloudForms Management Engine.
+	</para>
+	<procedure>
+		<title>To Enable Public AMIs</title>
+		<step>
+			<para>
+				Log in to the appliance.
+			</para>
+		</step>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Configure</guimenu> <guimenuitem>Configuration</guimenuitem> <guimenuitem>Advanced</guimenuitem></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select the configuration file to edit from the <guilabel>File</guilabel> list. If not already automatically selected, select <guilabel>EVM Server Main Configuration</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Search for the <literal>get_public_images</literal> parameter:
+			</para>
+			<screen>
+ems_refresh:
+  capture_vm_created_on_date: false
+  ec2:
+    get_private_images: true
+    get_shared_images: true
+    <emphasis role="bold">get_public_images: false</emphasis>
+    ignore_terminated_instances: true
+      </screen>
+		</step>
+		<step>
+			<para>
+				Configure the visibility of public images:
+			</para>
+			<stepalternatives>
+				<step>
+					<para>
+						To show public images, set the parameter to <literal>get_public_images: true</literal>.
+					</para>
+				</step>
+				<step>
+					<para>
+						To remove public images from view again, set the parameter to <literal>get_public_images: false</literal>.
+					</para>
+				</step>
+			</stepalternatives>
+		</step>
+	</procedure>
+	<note>
+		<para>
+			For information on other parameters, see "Configuration Parameters" in the <citetitle>Settings and Operations Guide</citetitle>.
+		</para>
+	</note>
+</chapter>

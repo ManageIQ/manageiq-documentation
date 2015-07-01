@@ -1,0 +1,1080 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Release_Notes.ent">
+%BOOK_ENTITIES;
+]>
+<section id="RHBA-20151100_-_Red_Hat_CloudForms_5.4.0_Bug_Fixes_and_Enhancement_Update" remap="TID_44489">
+	<title>RHBA-2015:1100 - Red Hat CloudForms 5.4.0 Bug Fixes and Enhancement Update</title>
+	<variablelist>
+		<title>Appliance</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1167110">1167110</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when a user tried to delete a cluster with many policy_events, the process timed out after being in an idle state for a long time. This issue was being caused because the purger for the policy events table did not exist. This issue was fixed by adding scheduler methods for purging policy_events. It is now possible to delete clusters with many policy_events in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1052223">1052223</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the older version of CloudForms Management Engine, deleting the selected tab while customizing an Automate service dialog resulted in an undefined method error. This was fixed by correctly defining the class for the affected object. The Automate service dialog can now be customized correctly.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1180746">1180746</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine removes all symbolic links in the HTTPD document root that were pointing to files outside the HTTPD document root. This feature enhances the security standards.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1079489">1079489</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, EventEx event storms could cripple the CloudForms Management Engine environment. This was because a filter implemented to disable EventEx events was removed. This bug was fixed by re-implementing the EventEx event filter. EventEx events can no longer cause outages in the default installation of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1182329">1182329</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine stops and disables the Apache HTTPD service when the web user interface service is disabled. This feature enhances the safety of the services enabled by default.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1044597">1044597</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+The new version of CloudForms Management Engine now allows Red Hat Enterprise Linux OpenStack Platform events use in policies. Previously Red Hat Enterprise Linux OpenStack Platform events could only be captured in either the policy log or by alerts.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1182330">1182330</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of the CloudForms Management Engine appliance reconfigures all services that do not need to listen to all available network interfaces (0.0.0.0), to accept incoming connections on the loop back interface (127.0.0.1) only.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1173216">1173216</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine keeps the IP tables firewall rules persistent when the appliance is being upgraded. This feature allows uninterrupted service of the permitted incoming network connections to the CloudForms Management Engine appliance after the upgrade.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1182654">1182654</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of the CloudForms Management Engine appliance changes the default INPUT and FORWARD firewall rule chains to DROP. This enhancement complies with government security requirements.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1126020">1126020</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, accessing the web user interface appliance connected to the same regional database randomly through a load balancer, resulted in an uninitialized constant error. This error was being caused due to the load path being based on the current file instead of Rails.root. This bug was fixed by building the load path based on Rails.root. The web user interface now works correctly in a load balanced environment.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1169937">1169937</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This enhancement adds support for using the Subscription Asset Manager (SAM) Account Name as an alternative to the user principal name when authenticating against Active Directory. This enables users to use their SAM account name in environments, using the SAM account name in place of the user's principal name for authentication.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1191279">1191279</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the WMIC module required for collection of running processes from Windows VMs was not available on the appliance. As a result of this users were unable to make wmi calls to Windows systems from the appliance. This bug was resolved by building wmi-1.3.14-1.el6cf into the appliance. Users are now able to make wmi calls to Windows systems from the CloudForms Management Engine appliance.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1190799">1190799</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds support for the Amazon Web Services EC2 Configuration facility, which allows the CloudForms Management Engine to discover and respond to any configuration changes or events related to instances on Amazon EC2.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1155806">1155806</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to seed service dialogs into the database. This enhancement provides a mechanism to deliver service dialogs along with the appliance.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1134978">1134978</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, configuring the database administrator password in the administrative console did not ask the user to verify the database administrator password. This could lead to the administrator typing in the wrong password inadvertently. This bug was fixed by changing the configuration utility to ask the administrator to verify the password. It is unlikely for an administrator to inadvertently configure an incorrect password in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1184250">1184250</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the SMTP Server Hostname configuration input text box was limited to a maximum of 31 characters. As a result of this, the administrator was not able to configure a SMTP server with a Hostname longer then 31 characters. This bug was fixed by increasing the maximum field size limit of the SMTP Server Hostname configuration input text box of 255 characters. The administrator is now able to configure a Hostname larger then 31 characters.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1183167">1183167</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, Automate initiated removal of a virtual machine required that the Automate role and VIM broker be run on the same server. If the VIM broker was running on another server, the Automate task would loop indefinitely until it consumed all available CPU cycles and all available memory on the appliance. This bug was fixed by routing the request to remove the virtual machine from the disk to an appropriate worker with the ems_operations role. Virtual machine removal in distributed environments works correctly in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1089625">1089625</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the Utilization tool under the Optimize main menu item reported  incorrect data trends for datastores. This was because of a bug that resulted in the methods for fetching datastore data trends not being called. This bug was fixed by correcting the code logic to call the methods for fetching datastore data trends. The Utilization tool now reports datastore data trends correctly in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1070848">1070848</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, users were able to select the 'none' option on the customize tab while provisioning virtual machines. This was because the option 'none' was available even when there were no custom specifications available. This bug was fixed by removing the 'none' option from the list of custom specifications when it was not required. The customize tab no longer presents the 'none' option when provisioning virtual machines.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1139763">1139763</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, provisioning and cloning of virtual machines by Active Directory users was authorized using principal names. Authorization failed incorrectly if the user used the distinguished name instead of principal name for authentication. This bug was fixed by enabling support for authorizing provisioning and cloning of virtual machines when using distinguished names. Users are now able to provision virtual machines as authorized by their roles in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1099531">1099531</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, server specific TLS certificate and key files would be overwritten when the cfme package was updated. This was because the server certificate and key files were considered as binary files owned by the cfme package. This bug was fixed by marking the server certificate and key files as configuration files, which do not get updated during a package update. In the new version of CloudForms Management Engine, server certificate and key files are no longer overwritten when the cfme package is updated.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1134540">1134540</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to specify the IPA server realm. The realm information is also passed to the SSL certificates. This is an enhancement of the latest CloudForms Management Engine appliance from the previous version that used to default the IPA realm to the host's domain name.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1060207">1060207</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+The new version of CloudForms Management Engine adds the ability to authenticate users against their LDAP account, without requiring groups to be defined for the users on the LDAP server. This is done by having a default group to which users with no group information are automatically assigned to. This allows users to log into the new version of CloudForms Management Engine with their LDAP credentials without requiring the administrative overhead of defining LDAP groups for them.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1138477">1138477</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Logrotate failed to work on vmdb/log/*.log files. As logrotate was running in "httpd_sys_content_t" context, logs continued to grow using disk space.
+
+With this release, the security context of the script was changed so logrotate can read it. This has fixed the issue and logrotate now functions as expected.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Automate</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1219098">1219098</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Previously, when ordering from a service, the VMs provisioned by that service were not being enumerated. If a second user provisioned, that user's provision failed with a duplicate VM name conflict. This was due to create_request_task did not yield task before saving.
+
+With this update, create_request_task was changes to yield task before saving. This has resolved the issue and VMs are now enumerated for each service request.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1192039">1192039</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to add additional disks to an instance while provisioning. This has been implemented by adding a clone_options key into the hash of task options, that gets merged into the parameters passed to the provider. This will allow the user to construct the keys and values required to define new disks as well as override or set other keys if needed.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1192518">1192518</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, AWS Rest API request failed with undefined method 'name' error. This was because instance_type was expecting the id of the instance_type from the db.
+
+With this patch, Rest API now supports returning the instance_types (flavors) which, if available, can be used to pass the required value. This has now resolved the issue and the AWS Rest API request is successful.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1201383">1201383</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, VmReconfigureRequest/VmMigrateRequest were sent to the zone where the CFME Appliance resides. Thereby, when VMware VM reconfigure requests to increase RAM were submitted on the UI or DB server, they were put into queue with the zone of that CFME Server and therefore never ran because the worker zone is the only one with Automation Engine and Provider Operations enabled. 
+
+With this patch, VmReconfigureRequest/VmMigrateRequest are now sent to the zone where the VM is located and the request completes successfully.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1202816">1202816</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Machine state was stale in VMDB. As a result, the VM PXE provision failed with RhevmApi error.
+Code was updated to verify destination is off in the provider before queuing a refresh. VM PXE provisioning is now successful.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1152737">1152737</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to add additional disks to an instance while provisioning. This has been implemented by adding clone_options key to the provisioning task's options hash that gets merged into the parameters passed to the provider. This will allow the user to construct the keys and values required to define new disks as well as override or set other keys if needed.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1196369">1196369</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+The previous change for the miq_request.user_message method set the "Last Message" only for state machine error conditions and/or the finished state. Long running state machines would not report correct "Last Message" until the end of the state machine.
+
+With the current release, changed the user_message= method to set the miq_request.message to report an accurate "Last Message" status during state machine processing.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1173336">1173336</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, during VM provisioning, if the VM name was defined to use enumeration as part of the naming, the get_vm_full_name method was called in /app/models/miq_provision/naming.rb. This method can be called from multiple processes (across multiple appliance) at the same time and in a race condition resulted in the same enumeration value being returned. As a result, duplicate VM names were issued with multiple soap requests during provisioning.
+
+This bug has been fixed by implementing store next naming sequence in custom_attributes. Thus, naming sequences are global through current region.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1117570">1117570</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the reconfigure VM option had a 16GB Memory and 8 processor limitation. However, the configuration limit for VMware 5.1 is 1TB and 64 vCPU, respectively (hardware version 10). As a result, entering higher numbers, CFME threw an error. 
+
+This bug has been fixed by adjusting memory limit to VMware 4.1 hardware version limit. Thus, memory now accepts up to 255 GB.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1148541">1148541</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the display name of an automate instance could not be unset by deleting the value in the interface. Since the display name field was not necessary, you should be able to do this.
+This bug has been fixed by changing the code to allow to save empty display name for an instance. Display Name can now be removed from the instance.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1200601">1200601</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine exposes PxeImageType to automate. This enables customers to organize their customization templates they use for each tenant.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1138345">1138345</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when attempting to import 4-5,000 IPs, the method's memory consumption grew over time until the kernel's out-of-memory process killed the ruby pid that the method is linked to. This is due to garbage collection being disabled before a method is executed and then enabled after a method is executed. During the time the method was executing, there was no garbage collection running and the memory kept growing.
+
+Disable/enable of garbage collection was added around automate methods because Ruby would garbage collect the objects that are returned to the method. This was changed in the past to add a drb_return which would cache the object before passing it to the method. Having a drb_return for cached objects, disable/enable of garbage collection was not required anymore. Thus, this bug is now fixed by removing the logic to disable/enable garbage collection before methods.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1135627">1135627</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to limit automation tasks to be run on appliances within a specified zone. This feature enables the CloudForms Management Engine appliances to comply with network policy.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1169930">1169930</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, due to broken VM reference in snapshot service model, automate method to revert a VM’s snapshot failed with an error. Code has been updated to fix the reference and revert snapshot now completes successfully.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1161253">1161253</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, status values did not set correctly when set from an automation method on a service_request or task. This version of CloudForms now adds the ability to override service request message successfully.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1174881">1174881</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, VM migration failed due to parse_provider_category not knowing how to parse the vm_migrate_request object information. This bug has been fixed by correcting the VM migrate state machine path issues. VM migration is now successful.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1125005">1125005</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, reconfigure task was not being processed by automate. This was due to reconfigure VM action created a request which was not auto-approved with the default automate model. A user or admin must go to Services -&gt; Request and approve the corresponding VM Reconfigure request. 
+
+This bug has been fixed by redirecting to the Requests list page after a VM reconfigure, so that it can be approved. Reconfigure is now processed as expected.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1211392">1211392</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when the EXPORT_AS domain was a substring of the source domain, it resulted in a broken export. This was due to EXPORT_AS was unable to handle names which start with the same string as the original name. 
+
+With this release, EXPORT_AS has been fixed and the export now completes successfully.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1214081">1214081</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine provides a read-only text box to all dialog fields to enable marking a field read-only that the user cannot modify. The read-only flag can be set through the automate method.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1149003">1149003</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when using a custom button to invoke a method within an instance/VM object, the automate job could be executed outside of the instance/VM's zone. This was because custom buttons were not tied to the resource to which they are related.
+
+With this release, a code has been added that if the resource has a zone, submit the task into the target zone's queue. As a result, method is run in the same zone as the resource and the bug is now fixed.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Build</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1217574">1217574</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This enhancement adds SHA-256 checksum and GPG signature validation for each CloudForms Management Engine appliance.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Code - Server</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=943865">943865</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This enhancement adds the ability for Red Hat CloudForms to identify if a retirement was called by a user or by the system, allowing you to use a different automate model based on the requester.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Control</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1164386">1164386</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, there was inability to inherit resource pool's parent tags using a control policy due to reference to an invalid method name.
+
+This bug has been fixed by making a reference to a valid method name parent_resource_pool, and tags are now inherited.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1155284">1155284</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, attempting to apply compliance policy threw an error. This occurred as there was no rescue syntax for non-existent registry key.
+
+This bug has been fixed by rescue SyntaxError when evaluating expression of a condition. Compliance policy is now evaluated without any error.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>SmartState Analysis</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1151465">1151465</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, users were unable to perform SmartState analysis on VMware VMs using vddk 5.1.3. This was due to VMware's numbering scheme for the shared VixDiskLib libraries has changed. 
+
+This bug was fixed by removing the code in ffi-vix_disk_lib/api.rb that checked for a problem with their release 5.1.0 library.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Insight</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1186502">1186502</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when validating login through proxy, uninitialized constant EmsAmazon::AWS error was reported. This was because usernames or passwords used in the http_proxy setting use non-url-friendly characters.
+With this release, by escaping the username and password the bug is now fixed.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1148971">1148971</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, a race condition occurred while doing a SmartState Analysis of all VMs. This was due to a race condition in SmartProxy.
+	
+The race condition in SmartProxy has been fixed by ignoring the EEXIST error if the directory is created by another thread after existence check.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1184990">1184990</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+The VMware workflow was trying to set the cores and sockets based on the templates values.  However, the data refreshed from vSphere was incorrectly saving the core and socket counts.  As a result, VMware VM &amp; template refresh did not properly set the cores and sockets. 
+
+This bug was fixed by updating the refresh logic to add numCoresPerSocket when available and calculating and storing the cores per socket if available. Cores and socket values are now set correctly.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1081600">1081600</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+CFME is unaware of a new instance types (flavors) in Amazon EC2. As a result, inventory collection did not work properly for the new flavor.
+As a workaround, adding an "unknown" EC2 flavor has fixed the issue and, inventory collection is now successful.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1127688">1127688</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the cloud instance summary screen did not contain a relationship pointing back to the service that it was provisioned from, similar to what was in place for infrastructure virtual machines. This bug was fixed by adding a link to the service from the instance summary screen. The service information can now be viewed from the instance summary screen.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1181340">1181340</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, CloudForms Management Engine was unable to handle the Bottleneck events for hosts correctly since they were not being populated into the bottleneck_events table. As a result, bottleneck report data for hosts were not getting generated. This issue was fixed by filtering events on the base class, which is how they are defined in the bottleneck_events table. Bottleneck reports for hosts are now available in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1160007">1160007</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to gather information about start up services from Red Hat Enterprise Linux 7 virtual machines. A majority of the initial boot up processes of Linux are now controlled by 'systemd' daemon. This enhancement detects systemd based systems and acquire information about the start up services correctly.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1160855">1160855</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, encountering a single empty file during SmartState analysis resulted in an exception, and no information was stored for any file matching that file name pattern. This was caused by the "read" method returning nil instead of an empty string when reading from the empty file. This error was fixed by making the read call to return an empty string in place of null. In the new version of CloudForms Management Engine, no errors are logged upon encountering empty files when SmartState analysis information from virtual machines.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Providers</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1212123">1212123</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the current version of CloudForms Management Engine, the operating system part of the QuadIcon for virtual machines hosted on an OpenStack provider is unknown and shown as a question mark. The operating system icon is displayed correctly after SmartState analysis has been performed on the instance or virtual machine image.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1212164">1212164</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the CPU Total Field under Chargeback reports used to display incorrect values due to gaps in rolling up "realtime" data collected from systems. This issue was fixed by avoiding gaps in metrics_rollups through not deriving currently "available" values if there was no record of data collection for usage and storage value for the past 60 minutes. In the latest version of CloudForms Management Engine, CPU Total Field under Chargeback reports display correct values.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1209711">1209711</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+The previous version of CloudForms Management Engine collected inventory on all snapshots on Red Hat OpenStack Platform providers, causing significant EmsRefresh slowdown. This issue was caused by scalability issues in the refresh process, which could not handle large volumes of OpenStack Platform cinder snapshots. A temporary workaround has been provided to fix this issue until the underlying scalability problem can be fixed. The fix will allow users that have a large number of snapshots to disable the collection of inventory information for snapshots, which avoids the EmsRefresh slowdown.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1038869">1038869</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the CPU count labelling in the web user interface (UI) displayed incorrect CPU count for the RHEV CloudForms Management Engine appliances and templates. This bug was a result of the web UI incorrectly displaying the number of CPU sockets in place of logical CPUs. This issue was fixed by adding appropriate logic in the VMDB code to correctly process the CPU count request. The correct CPU count for RHEV CloudForms Management Engine appliances and templates is displayed in the web UI in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1044608">1044608</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, after providing capacity &amp; utilization credentials for a Red Hat Enterprise Virtualization (RHEV) EMS, the RHEV EMS tile displayed an error status and the '!' sign. After the credentials were verified in Configuration -&gt; Edit, a successful state was displayed. This issue was being caused by a validation issue within the RHEV metrics database resulting in EMS values not being refreshed as expected. This issue was fixed by changing the logic for validating authentication in the code. Status validation for RHEV EMS is seen correctly in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1201932">1201932</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, attempting to purge metrics data manually with the purge_metrics.rb script would result in an undefined local variable error. This was because a local variable 'count' was not defined in the context of the script. This bug was fixed by ensuring that count was defined in the context of the script. Manual purges of the metrics data work correctly in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Provisioning</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1209407">1209407</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when port groups in multiple datacenters had the same name, only one port group name was displayed in the network selection when provisioning VMs via Lifecycle or creating catalog items. This issue was being caused because user interface did not take into account the fact that the same port group name could be present under different switch names. This issue was fixed by appending the switch name to the port group name in the user interface. Multiple portgroups are displayed in the network selection as expected, in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Security</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1157859">1157859</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of Cloudforms Management Engine, it was not possible to access the web user interface after SSL 3.0 was disabled due to the POODLE vulnerability. This was fixed by disabling POODLE access to the Cloudforms Management Engine web server. Access to the Cloudforms Management Engine web user interface now works as expected.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Storage</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1166303">1166303</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+The latest version of CloudForms Management Engine adds the ability for SmartState analysis of VMs that reside on VSAN based datastores. Previously, when a user tried to run a smart state scan on VSAN datastores, he got an error. Users are now able to fleece VMs on VSAN based datastores.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+	<variablelist>
+		<title>Web UI</title>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1179503">1179503</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, catalog item did not load in Microsoft Internet Explorer due to redundant setSortImgState call against DhtmlxGrid object. This bug has been fixed by removing the redundant setSortImgState call against DhtmlxGrid object. Catalog item now loads correctly in Internet Explorer.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1122765">1122765</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of Cloudforms Management Engine, the group UID was not displayed in the Service Summary page. Knowing the group UID made it easier to make web services calls. This was fixed by adding code to display the service group UID on the service summary page. Knowing the group UID enables the user to make web services calls easily.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1169351">1169351</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the "Vendor and Guest OS" graph report showed different values than expected.This issue was being caused because every time the second sort field changed in a report, its nonblank counterpart did not change. This resulted in updating incorrect value in the 'counts' hash which led to incorrect charting numbers being returned. This issue was fixed by fixing counts in multi-dimensional charts. Counts are accurate in the chart, as expected, in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1127325">1127325</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+A typo in the admin role features list code resulted in the evmgroup-administrator role not having access to the Automate Customization page. The typo has been corrected, and the role now has appropriate access.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1154054">1154054</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, clicking on upload for file customization resulted in several provisioning dialog rendering issues. This was because the miq_request_methods.rb was not setting @temp[:vcs] as it used to.
+
+With this release, the rendering issues after the upload of Sysprep Answer File and routing issues have been fixed. As a result, the content is now properly rendered.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1194479">1194479</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, UI displayed an undefined method error when clicking on request. Incorrect logic in "if" condition caused the rendering issue. With this release, the if condition has been fixed and there in no longer an error.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1196384">1196384</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, request approvals were tied to a role name. As a result, when creating a new role by copying "EvmRole-approver" without changes, the new role was unable to see the provisioning request to approve it. This issue was fixed when the code was updated to allow MiQ request approval by feature rather than the role name. Service Request with a cloned "approver" role can view and approve the provisioning requests as expected, in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1131694">1131694</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, chargeback assignments for selected infrastructure or cloud providers were being reset upon clicking the save button. This bug was fixed by changing the code used to display the cloud or infrastructure provider rates after clicking save. Chargeback assignment rates are now shown in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1203301">1203301</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Feature: There was a need for the UI to have access to new retirement_state attribute in the lifecycle section of VM, Instance and Service in addition to the retirement_date.
+
+With this release, code was updated to add retirement_state to service and VM summary information.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1205213">1205213</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Feature: There was a need for a UI plugin for external links in CFME menu to be able to access sites outside of CFME.
+
+With this release, there is an ability to access external sites from CFME.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1129228">1129228</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, it was not possible to include virtual machine tags in performance reports on virtual machines because while creating a report, the 'Tag' fields under 'Performance' were not getting displayed. This issue was being caused due to an error in the model used for the Tag field. This bug was fixed by fixing the error in the model. It is now possible to include virtual machine tags in virtual machine performance reports in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1127779">1127779</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, it was not possible to query the tags assigned to the service when creating a service report. This was because the service model was not added to the list of Tag classes. This bug was fixed by adding the service model to the Tag class. It is now possible to include service tags in service reports in the latest version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1198735">1198735</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, after importing a csv file with tags to apply to VMs in configuration &gt; configure &gt; region[1] &gt; import tags, clicking on "apply" leads to a page "The page you were looking for doesn't exist." This was because there were no GET routes for settings_import or settings_import_tags.
+
+With this release, apply button POSTs when importing csv file for tagging, not GET. As a result, the import is now successful without an error.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1192198">1192198</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Under Cloud Intelligence -&gt; Reports in the Schedules Accordion, selecting the check box next to a schedule and executing the "Queue up selected Schedules to run now" resulted in an error that the "Schedule no longer exists". This was due to the code was not checking for correct functioning of checked schedules.
+
+With this release, code was changed to check for correct functioning of checked schedules. This has fixed the issue and there is no longer an error.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1190054">1190054</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, attempting to change the three values under LDAP Host Names and pressing Save, CloudForms dropped the last change. This was because code was deleting from an array for LDAP Settings while iterating through it.
+
+With this release, code was updated to fix LDAP authentication settings and the issue is now resolved. Changes to LDAP settings are now correctly saved.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1092157">1092157</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when a user created a new button after creating a new button group and tried to input information in first (button text) input box, the button image drop down got expanded and the cursor showed up in a different field. This issue was being caused because the dynamic HTML combo drop down box was not correctly rendering the focus. This issue is fixed in the latest version of CloudForms Management Engine. Users can now choose the correct field to input information after creating a new button.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1135659">1135659</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Previously, Capacity and Utilization tables included an incorrect fieldset that presented a non-interactive element with all the visual appearances of an interactive element. Now, the erroneous fieldset has been removed from these tables and the elements are no longer misrepresented to users.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1095457">1095457</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Previously, when creating a Catalog Item, after entering Name/Description, Catalog, Dialog, Provisioning Entry Point and clicking Save, the user interface returned an unexpected error. This happened in cases where no virtual machine template was found. Now, a check has been added for the existence of the request object, and a more meaningful error message is displayed when a template is missing.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1146719">1146719</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, when CloudForms was setup with multiple regions, there were duplicate item entries in the Show at Login list on the Start Page.
+
+With this release, adding the miq_shortcuts table to the replication excludes list has now fixed the issue.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1179908">1179908</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, attempting to order a service when using Internet Explorer 11, the order service form did not show up, while it worked in other browsers such as Firefox.
+
+With this release, the HAML syntax was fixed to make it work in IE &amp; other browsers and the issue is now resolved.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1160486">1160486</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, an undefined method error was reported when the "Show Full Screen Report" option under Chargeback -- Reports was selected, if there were no records available that matched the report criteria. This error was fixed by disabling the report download button in this condition. This error is no longer reported in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1141099">1141099</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+This version of CloudForms Management Engine adds the ability to view Service and Stack tenant relationship information when an instance from the Instances option under the Clouds main menu item is selected. This information allows the administrator to find the tenant on which the instance has been provisioned.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1145799">1145799</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version, the UI was not accepting the changes for C&amp;U. The entire selection tree was being redrawn when a check box was checked/unchecked.
+
+With this release, code was updated to only render the node that was checked/unchecked and it's children to show differences in blue colour. This has resolved the issue and the UI now accepts the changes for C&amp;U.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1161744">1161744</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the array that stored the reports (the children) for a particular Report tree node stored nil values in the absence of the corresponding report records. Attempts to view Performance by Asset Type report as user 'Admin', resulted in error. This issue was fixed to populate the children for a Report tree node only if the reports exist. No error appears when attempting to view Performance by Asset Type reports.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1100031">1100031</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+Previously, navigating to service catalog, the UI displayed only a partial catalog, with the remaining services’ list cut off.
+
+With this release, the code was updated and the issue has now been fixed. All services in the catalogs page are now completely displayed.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1163952">1163952</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, Trending reports could not be used as dashboard widgets. This caused the users not being able to create dashboard widget based on either a trending report or selecting Trending-&gt;clusters-&gt;Cluster IO trends. This issue was fixed by excluding the Trending reports from dashboard widgets. Now trending reports are not available to create widgets.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1163978">1163978</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, if a user's start page was set to 'Clouds/Availability Zones', on logging in the user was presented with 'a page does not exist' error. This was because there was no link to the 'Cloud/Availability Zones' page in the start page code. This bug was fixed by adding the missing link to 'Clouds/Availability Zones' in the start page. There are no errors in presenting the start page in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1184575">1184575</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, typing an incorrect URL for a Red Hat Satellite service would result in an inability to update the CloudForms Management Engine appliance. This was because there was no validation of the URL entered for the Satellite service. This issue was fixed by validating the Satellite service URL against a regular expression. The user is now presented with an error message if this URL is in the wrong format.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1097914">1097914</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the earlier version of CloudForms Management Engine, the administrator was not able to edit the default appliance zone. This was because editing the default appliance zone description was disabled. This was fixed by changing the code to allow the default appliance zone description to be changed. In the latest version of CloudForms Management Engine, the administrator user is able to change and delete the default appliance zone description.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1142917">1142917</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, when a user received reports from the appliance via email,  the emails were not formatted correctly and showed mark up tag in the message body. This bug was fixed by removing the mark up tag from the email template. The mark up tag is no longer seen in reports sent through emails by the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1191585">1191585</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, the user interface showed all button groups in alphabetical order and it did not honour the button group order as specified on the Automate Customization screen. This bug was fixed by correcting the button sort order to take into account the custom ordering when specified. The button groups are now displayed in the expected order in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>BZ#<ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=1166328">1166328</ulink></term>
+			<listitem>
+				<para>
+					<screen>
+In the previous version of CloudForms Management Engine, users linked to restricted access roles that limited their access to virtual machines or templates owned by them, were incorrectly presented with an unrestricted view on the virtual machine explorer. The reason for this issue was that the virtual machine explorer was using an unrestricted view on restricted users. The bug was fixed by changing the virtual machine explorer view, from unrestricted to restricted, for restricted users. Restricted users are now only able to browse virtual machines or templates that they own in the new version of CloudForms Management Engine.
+</screen>
+				</para>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

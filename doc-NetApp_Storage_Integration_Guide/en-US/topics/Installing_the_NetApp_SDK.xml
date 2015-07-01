@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../NetApp_Storage_Integration_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Installing_the_NetApp_SDK" remap="TID_41252">
+	<title>Installing the NetApp SDK</title>
+	<para>
+		The procedure describes the steps to install the NetApp SDK.
+	</para>
+	<procedure>
+		<title>To Install the NetApp SDK</title>
+		<step>
+			<para>
+				From the NetApp site, download the SDK to /var/www/miq/vmdb/lib. The file name is in the format <filename>netapp-manageability-sdk-abc.0Pxyz.zip</filename>. You need to be a NetApp customer to obtain this file.
+			</para>
+		</step>
+		<step>
+			<para>
+				Unzip the file by logging into an SSH session on the appliance, and type:
+			</para>
+			<screen>
+unzip -d /var/www/miq/vmdb/lib/netapp-manageability-sdk-4.0P1.zip 
+</screen>
+		</step>
+		<step>
+			<para>
+				Enter:
+			</para>
+			<screen>
+echo "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/var/www/miq/vmdb/lib/netapp-manageability-sdk-4.0P1/lib/linux-64" /etc/default/evm
+</screen>
+		</step>
+		<step>
+			<para>
+				Restart the CFME service by entering the command:
+			</para>
+			<screen>
+service evmserverd restart
+</screen>
+		</step>
+	</procedure>
+</section>

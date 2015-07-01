@@ -1,0 +1,72 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Deploying_OpenShift_Enterprise_with_Red_Hat_CloudForms.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Preparing_a_Virtual_Machine_for_OpenShift_Enterprise" remap="TID_41905">
+	<title>Preparing a Virtual Machine for OpenShift Enterprise</title>
+	<para>
+		To host OpenShift Enterprise, virtual machines require the following:
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				Red Hat Enterprise Linux 6.4 or higher
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Network access, with valid IP addresses and access to the OpenShift Enterprise sources, for example through Red Hat Subscription Manager or Red Hat Satellite
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				SSH key access from all appliances running the Automation Role to the virtual machines
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Ruby 1.9.3 or higher
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+		Red Hat recommends creating a virtual machine template meeting these requirements to enable efficient deployment of multiple instances. You can use your preferred source, for example PXE, ISO, or Clone, when creating the virtual machine so long as the requirements are met for OpenShift Enterprise installation.
+	</para>
+	<procedure>
+		<title>Preparing a Template Virtual Machine</title>
+		<step>
+			<para>
+				Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
+			</para>
+		</step>
+		<step>
+			<para>
+				Register the virtual machine with Red Hat Subscription Manager and update the system using <command>yum update</command>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Install Ruby 1.9.3 using <command>yum install</command>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Copy the SSH key from your appliance to the virtual machine. Confirm you can open an SSH session from the appliance to the virtual machine.
+			</para>
+		</step>
+		<step>
+			<para>
+				Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the <filename>ifcfg-eth0</filename> file.
+			</para>
+		</step>
+		<step>
+			<para>
+				Power off the virtual machine and use the Red Hat Virtualization console to create a template from the virtual machine.
+			</para>
+		</step>
+	</procedure>
+	<para>
+		DNS is an important element of the environment, as machines must be able to connect bi-directionally to any resource in the network using the hostname. That means that new virtual machines instantiated from the template need to register to your DNS system automatically.
+	</para>
+</section>

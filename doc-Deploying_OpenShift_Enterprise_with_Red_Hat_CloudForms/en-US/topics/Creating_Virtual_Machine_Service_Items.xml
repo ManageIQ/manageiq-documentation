@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Deploying_OpenShift_Enterprise_with_Red_Hat_CloudForms.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Creating_Virtual_Machine_Service_Items" remap="TID_41906">
+	<title>Creating Virtual Machine Service Items</title>
+	<para>
+		The number of virtual machine service items required corresponds to the number of servers you want to deploy in your OpenShift Enterprise service bundle. For example:
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				A single OpenShift Enterprise All-In-One bundle requires ONE virtual machine service item.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				A broker and node located on separate servers requires TWO virtual machine service items.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				A four node and one broker bundle requires FIVE virtual machine service items.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+		Virtual machine service items are represented individually but can be configured identically. If desired, you can separate brokers from nodes on different hosts by adjusting those settings when creating the service items.
+	</para>
+	<procedure>
+		<title>To Create Service Items</title>
+		<step>
+			<para>
+				Log in to the CloudForms Management Engine appliance and navigate to <menuchoice><guimenu>Services</guimenu><guisubmenu>Catalogs</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select the <guilabel>Catalog Items</guilabel> accordion.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <menuchoice><guimenu>Configuration</guimenu><guisubmenu>Add a New Catalog Item</guisubmenu></menuchoice> to create a new service item.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" contentdepth="30%" fileref="images/6227.png" width="30%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Select a destination platform from the <guilabel>Catalog Item Type</guilabel> list.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" contentdepth="30%" fileref="images/6228.png" width="30%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Enter a name and description for the service item. Red Hat recommends using the OpenShift Enterprise role as the name. For example, if the service item is a broker, then call it <literal>OpenShift Enterprise Broker</literal>.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" contentdepth="40%" fileref="images/6229.png" width="40%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Select the <guilabel>Request Info</guilabel> tab and set the virtual machine options.
+			</para>
+			<substeps>
+				<step>
+					<para>
+						Select a virtual machine as a base template that conforms to the minimum requirements for OpenShift Enterprise.
+					</para>
+				</step>
+				<step>
+					<para>
+						Enter a name for the virtual machine. CloudForms Management Engine assigns numbers automatically to ensure no conflicts. Red Hat recommends using a name similar to the service item name, for example <literal>OSE-BROKER</literal>.
+					</para>
+				</step>
+				<step>
+					<para>
+						Set the virtual machine to <guilabel>start/power on</guilabel>.
+					</para>
+				</step>
+			</substeps>
+		</step>
+		<step>
+			<para>
+				After creating the service items, tag them with their role. This enables CloudForms Management Engine to install the correct role on the service item at the time of deployment. Click <menuchoice><guimenu>Policy</guimenu><guisubmenu>Edit Tags</guisubmenu></menuchoice>.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" contentdepth="80%" fileref="images/6230.png" width="80%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Within the policy settings for the service item, assign the required <literal>OpenShift Enterprise Policy</literal> tags.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						For a broker, assign the <literal>Broker</literal> <literal>OSE Policy</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						For a node, assign the <literal>Node</literal> <literal>OSE Policy</literal>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						For an All-In-One OpenShift Enterprise server, assign all the <literal>OSE Policy</literal> tags to the service item: <literal>Broker</literal>, <literal>Node</literal>, <literal>msgServer</literal>, and <literal>dbServer</literal>.
+					</para>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" contentdepth="80%" fileref="images/6231.png" width="80%" />
+						</imageobject>
+					</mediaobject>
+				</listitem>
+			</itemizedlist>
+		</step>
+	</procedure>
+</section>

@@ -1,0 +1,237 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Deploying_OpenShift_Enterprise_with_Red_Hat_CloudForms.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Deploying_an_OpenShift_Enterprise_Service" remap="TID_41908">
+	<title>Deploying an OpenShift Enterprise Service</title>
+	<para>
+		Deploy an OpenShift Enterprise service by requesting the catalog item.
+	</para>
+	<procedure>
+		<step>
+			<para>
+				Log in to the CloudForms Management Engine appliance and navigate to <menuchoice><guimenu>Services</guimenu><guisubmenu>Catalogs</guisubmenu></menuchoice>.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/6239.png" width="70%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Select the catalog item. This example uses <literal>OpenShift Enterprise Multi Node</literal>. Click <guibutton>Order</guibutton>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Enter the basic details for the service as required.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/6240.png" width="70%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Select the <guilabel>Depot</guilabel> tab to configure the depot type.
+			</para>
+			<variablelist>
+				<varlistentry>
+					<term>None</term>
+					<listitem>
+						<para>
+							A local repository as configured in the destination virtual machine’s <filename>.repo</filename> files.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>RHSM/RHN</term>
+					<listitem>
+						<para>
+							Use either Red Hat Subscription Manager or Red Hat Network. Requires an internet connection.
+						</para>
+						<itemizedlist>
+							<listitem>
+								<para>
+									Username: Enter your RHSM or RHN Username.
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									Password: Enter your RHSM or RHN Password.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term>YUM</term>
+					<listitem>
+						<para>
+							Manually provide a URL to the YUM repository.
+						</para>
+						<itemizedlist>
+							<listitem>
+								<para>
+									YUM URL: A URL for a YUM repository containing all the required packages for an OpenShift Enterprise install.
+								</para>
+							</listitem>
+						</itemizedlist>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/6241.png" width="70%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Submit</guibutton> to order the service and add it to the queue.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/6242.png" width="70%" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Services</guimenu><guisubmenu>My Services</guisubmenu></menuchoice> to view the ordered service.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/6243.png" width="70%" />
+				</imageobject>
+			</mediaobject>
+			<para>
+				Note that the <guilabel>VMs</guilabel> field initially displays <literal>No Records Found</literal> as the service is currently being instantiated.
+			</para>
+		</step>
+	</procedure>
+	<variablelist>
+		<title>Notes</title>
+		<varlistentry>
+			<term>Service Names</term>
+			<listitem>
+				<para>
+					Initially, the service name is the same as the bundle. During the installation of OpenShift Enterprise the service is renamed to include the date and time to ensure it is unique in the <guilabel>My Services</guilabel> screen.
+				</para>
+			</listitem>
+		</varlistentry>
+		<varlistentry>
+			<term>Smart Management</term>
+			<listitem>
+				<para>
+					The <guilabel>Smart Management</guilabel> area displays important information about the deployment of OpenShift Enterprise services.
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							The install process creates tags dynamically and assigns them to various items. The tags serve two purposes: 
+							<itemizedlist>
+								<listitem>
+									<para>
+										provide debugging information if a failure occurs in the OpenShift Enterprise installation process.
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										enable the installer to track the progress of various items during the installation process.
+									</para>
+								</listitem>
+							</itemizedlist>
+						</para>
+						<para>
+							In the following example, there are three virtual machines present and the <guilabel>Smart Management</guilabel> area displays the <literal>In Progress</literal> and <literal>Temp OpenShift Enterprise State</literal> tags. 
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/6244.png" width="70%" />
+								</imageobject>
+							</mediaobject>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							The <literal>Temp OpenShift Enterprise State</literal> tag displays the name of the <literal>oo-install-ose</literal> log file for this run. As each service deployment generates a new log file, this tag enables you to associate each deployment to its log file. To view the log file for a deployment:
+						</para>
+						<procedure>
+							<step>
+								<para>
+									Record the unique ID for the deployment's log file found in the <literal>Temp OpenShift Entperprise State</literal> tag. For example: 
+									<screen>Temp OpenShift Enterprise State : <literal>161_20140817_1509</literal> – OpenShift Enterprise Log File for this run</screen>
+								</para>
+							</step>
+							<step>
+								<para>
+									Access the automation appliance performing the deployment and change to the <filename>/tmp/</filename> directory.
+								</para>
+							</step>
+							<step>
+								<para>
+									Deployment log filenames consist of the unique ID suffixed by <filename>_ose.log</filename>. For example: 
+									<itemizedlist>
+										<listitem>
+											<para> 
+												<filename>161_20140817_1509_ose.log</filename>
+											</para>
+										</listitem>
+									</itemizedlist>
+								</para>
+							</step>
+						</procedure>
+						<para>
+							By default, log files record all the actions the <literal>oo-install-ose</literal> installer performs. They also contain information on retrieving logs from remote installations. All other CloudForms Management Engine activities are logged to the automation log as normal.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							CloudForms Management Engine also tags individual virtual machines in the service. The following example displays a virtual machine in a service during its deployment of OpenShift Enterprise. The <literal>Smart Management</literal> area includes two important pieces of information: 
+							<itemizedlist>
+								<listitem>
+									<para>
+										OpenShift Enterprise Policy: the roles designated for this virtual machine
+									</para>
+								</listitem>
+								<listitem>
+									<para>
+										OpenShift Enterprise Status: the roles that the virtual machine is currently installing
+									</para>
+								</listitem>
+							</itemizedlist>
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/6245.png" width="70%" />
+								</imageobject>
+							</mediaobject>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							After the virtual machine completes role installation, the <literal>OpenShift Enterprise Status</literal> tag updates to <literal>Completed</literal> for the roles assigned in the <literal>OpenShift Enterprise Policy</literal> section. 
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/6246.png" width="70%" />
+								</imageobject>
+							</mediaobject>
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							When the OpenShift Enterprise install finishes, the service is tagged <literal>Completed</literal>. 
+							<mediaobject>
+								<imageobject>
+									<imagedata align="center" fileref="images/6247.png" width="70%" />
+								</imageobject>
+							</mediaobject>
+						</para>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+		</varlistentry>
+	</variablelist>
+</section>

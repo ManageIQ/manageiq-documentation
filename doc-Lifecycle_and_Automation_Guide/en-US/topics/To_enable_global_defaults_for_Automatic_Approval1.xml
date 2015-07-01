@@ -1,0 +1,115 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Lifecycle_and_Automation_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="To_enable_global_defaults_for_Automatic_Approval1" remap="TID_15554">
+	<title>Enabling Global Defaults for Automatic Approval</title>
+	<para>
+		To enable a global set of default approval values, edit the defaults instance by navigating to <menuchoice><guimenu>Automate</guimenu><guisubmenu>Explorer</guisubmenu></menuchoice>, then <menuchoice><guimenu>DOMAIN</guimenu><guisubmenu>Cloud|Infrastructure</guisubmenu><guimenuitem>VM</guimenuitem><guimenuitem>Provisioning</guimenuitem><guimenuitem>StateMachines</guimenuitem><guimenuitem>ProvisionRequestApproval </guimenuitem></menuchoice> in the accordion menu. The parameters in this instance are used by the methods in that same class. By default, the maximum number of virtual machines or instances that can be automatically approved for provisioning is 1. To skip the check for the maximum number of virtual machines, set this field to 0. Set this field to -1 to force manual approval. At a minimum, you must change this parameter for all others to be validated.
+	</para>
+	<procedure>
+		<title>To Enable Global Defaults for Automatic Approval</title> 
+		<!--step>
+			<para>
+				Log in as a user with administrator or super administrator rights to the <productname>CloudForms Management Engine</productname> console.
+			</para>
+		</step-->
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Automate</guimenu><guisubmenu>Explorer</guisubmenu></menuchoice>.
+			</para>
+		</step> 
+		<!--<step>
+			<para>
+				From the tree in the accordion menu, select <menuchoice><guimenu>Datastore</guimenu><guisubmenu>Factory</guisubmenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>VM Provision Approval State Machine (ProvisionRequestApproval)</guimenuitem><guimenuitem>Default</guimenuitem></menuchoice>.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/2350.png" />
+				</imageobject>
+			</mediaobject>
+		</step> -->
+		<step>
+			<para>
+				From the tree in the accordion menu, select <menuchoice><guimenu>DOMAIN</guimenu><guisubmenu>Cloud</guisubmenu><guimenuitem>VM</guimenuitem><guimenuitem>Provisioning</guimenuitem><guimenuitem>StateMachines</guimenuitem><guimenuitem>ProvisionRequestApproval Class</guimenuitem></menuchoice>.
+			</para>
+			<note>
+				<para>
+					DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+				</para>
+				<para>
+					This example uses the <guilabel>Cloud</guilabel> Namespace but can also use the <guilabel>Infrastructure</guilabel> namespace.
+				</para>
+			</note>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject><guilabel>(Configuration)</guilabel>, then 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1851.png" />
+					</imageobject>
+				</inlinemediaobject> <guilabel>(Edit this instance)</guilabel>.
+			</para> 
+			<!--<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/2351.png" />
+				</imageobject>
+			</mediaobject>-->
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/6280.png" />
+				</imageobject>
+			</mediaobject>
+			<note>
+				<para>
+					Do not change any values other than those listed below. Doing so may prevent the automatic approval process from running.
+				</para>
+			</note>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Use <guilabel>max_cpus</guilabel> to set the number of CPUs allowed to approve automatically the provisioning request.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Use <guilabel>max_vms</guilabel> to set the maximum number of virtual machines or instances that are allowed to be provisioned automatically approve the request. If this is set to blank, no requests will be automatically approved.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Use <guilabel>max_memory</guilabel> to set the maximum memory allowed to approve automatically the provisioning request.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Use <guilabel>max_retirement_days</guilabel> to set the maximum number of days until the virtual machine or instance is retired to automatically approve this request.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If a value is blank or <parameter>0</parameter>, the parameter is ignored.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Save</guibutton>.
+			</para>
+		</step>
+	</procedure>
+	<formalpara>
+		<title>Result:</title>
+		<para>
+			The thresholds for automatic approval are set. The next time a provision request is created these thresholds will be checked. If the requirements are met, the provisioning request will be approved with no user intervention.
+		</para>
+	</formalpara>
+</section>

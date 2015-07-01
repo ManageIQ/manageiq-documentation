@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Lifecycle_and_Automation_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Provisioning_a_Host1" remap="TID_15534">
+	<title>Provisioning a Host</title>
+	<para>
+		After setting up the IPMI and PXE environments, you are ready to provision a host. Currently, you can only provision in the cluster where the template is located or you can create a template in each cluster and let a <productname>CloudForms Management Engine</productname> Automate method automatically switch the selected template in the provision object.
+	</para>
+	<important>
+		<para>
+			A customization template with host-specific script additions is required. Ensure especially that the customization template contains the post-installation callback to enable discovery in CloudForms Management Engine.
+		</para>
+	</important>
+	<procedure>
+		<title>To Provision a Host</title>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Infrastructure</guimenu><guisubmenu>Hosts</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select a host with IPMI enabled.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/2007.png" />
+					</imageobject>
+				</inlinemediaobject><guilabel>(Lifecycle)</guilabel>, then 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1848.png" />
+					</imageobject>
+				</inlinemediaobject> <guilabel>(Provision Hosts)</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				In <guilabel>Request Information</guilabel>, type in at least a <guilabel>First Name</guilabel> and <guilabel>Last Name</guilabel> and an email address. This email is used to send the requester status emails during the provisioning. The other information is optional. If the <productname>CloudForms Management Engine</productname> server is configured to use LDAP, you can use the <guilabel>Look Up</guilabel> button to populate the other fields based on the email address.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/2341.png" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				On the <guilabel>Purpose</guilabel> tab, select the desired tags for the provisioned host.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/2342.png" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				On the <guilabel>Catalog</guilabel> tab, select the hosts to provision.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						In the <guilabel>Host</guilabel> area, select the hosts to provision.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In the <guilabel>PXE</guilabel> area, select the PXE server and image.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				On the <guilabel>Customize</guilabel> tab, you can select customizations for the operating system of the new host. These options vary based on the operating system to be provisioned.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Use <guilabel>Credentials</guilabel> to type in a root password
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						In the <guilabel>IP Address</guilabel> area, select either <guilabel>Static</guilabel> or <guilabel>DHCP</guilabel> and enter any other address information you need. If needed, type in DNS specifications.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Under <guilabel>Customize Template</guilabel>, select a script.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				On the <guilabel>Schedule</guilabel> tab, select when to start the provisioning process.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/2343.png" />
+				</imageobject>
+			</mediaobject>
+			<itemizedlist>
+				<listitem>
+					<para>
+						In <guilabel>Schedule Info</guilabel>, select when to start the provisioning process. If you select <guilabel>Schedule</guilabel>, enter a date and time.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Select <guilabel>Stateless</guilabel> to retain files after the provision completes. A stateless provision does not write to the disk so it requires the PXE files on the next boot.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Submit</guibutton>.
+			</para>
+		</step>
+	</procedure>
+	<formalpara>
+		<title>Result:</title>
+		<para>
+			The provisioning request is sent for approval. For the provisioning to begin, a user with the admin, approver, or super admin account role must approve the request. The admin and super admin roles can also edit, delete, and deny the requests. You will be able to see all provisioning requests where you are either the requester or the approver.
+		</para>
+	</formalpara>
+	<para>
+		After submission, the appliance assigns each provision request a <guilabel>Request ID</guilabel>. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The Request ID consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
+	</para>
+	<example>
+		<title>Request ID Format</title>
+		<para>
+			Request 99 in region 123 results in Request ID 123000000000099.
+		</para>
+	</example>
+</section>

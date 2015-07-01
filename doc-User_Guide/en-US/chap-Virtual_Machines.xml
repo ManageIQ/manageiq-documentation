@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "User_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Virtual_Machines">
+	<title>Virtual Machines</title> 
+	<para>
+		When a virtual machine or cloud instance is provisioned, it goes through multiple phases. First, the request must be made. The request includes ownership information, tags, virtual hardware requirements, the operating system, and any customization of the request. Second, the request must go through an approval phase, either automatic or manual. Finally, the request is executed. This part of provisioning consists of pre-processing and post-processing. Pre-processing acquires IP addresses for the user, creates CMDB instances, and creates the virtual machine or instance based on information in the request. Post-processing activates the CMDB instance and emails the user. The steps for provisioning may be modified at any time using <productname>CloudForms Management Engine</productname>.
+	</para>
+	<mediaobject>
+		<imageobject>
+			<imagedata align="center" fileref="images/2314.png" />
+		</imageobject>
+	</mediaobject>
+	<xi:include href="topics/To_provision_from_a_template_using_the_provided_dialogs1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="topics/Customizing_Provisioning_Dialogs1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="topics/To_add_a_provision_dialog_file_for_all_users1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<section id="sect-Controlling_Virtual_Machines">
+		<title>Controlling Virtual Machines</title> 
+		<para>
+			You can start, stop, and suspend a virtual machine through the <productname>CloudForms Management Engine</productname> console. To do this, the following requirements must be met:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					The virtual machine must be discovered.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					The virtual machine must be registered to a host and have a SmartProxy associated with it.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					The virtual machine cannot be in <menuchoice><guisubmenu>Infrastructure</guisubmenu><guisubmenu>Repositories</guisubmenu></menuchoice>.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<xi:include href="topics/To_control_the_power_state_of_one_Virtual_Machine.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<section id="sect-Accessing_the_Console_for_a_Virtual_Machine">
+			<title>Accessing the Console for a Virtual Machine</title> 
+			<para>
+				A console is a graphical window that allows you to view the start up screen, shut down screen, and desktop of a virtual machine, and to interact with that virtual machine in a similar way to a physical machine. In Red Hat CloudForms, the default application for opening a console to a virtual machine is VNC, which must be installed on the machine on which you access the CloudForms Management Engine Console.
+			</para>
+			<para>
+				To configure console access, you must complete the following:
+			</para>
+			<orderedlist>
+				<listitem>
+					<para> 
+						<xref linkend="sect-Configuring_VMware_ESXi_Hosts_to_Enable_Console_Access" /> (for VMware vCenter only).
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<xref linkend="Configuring_the_Browser_Plug-in_for_a_Virtual_Machine_Console" />.
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<xref linkend="Configuring_the_Certificate_for_a_Virtual_Machine_Console" />.
+					</para>
+				</listitem>
+			</orderedlist>
+			<important>
+				<para>
+					HTML5 console access is currently a Technology Preview feature. Technology Preview features are not fully supported under Red Hat Subscription Service Level Agreements (SLAs), may not be functionally complete, and are not intended for production use. However, these features provide early access to upcoming product innovations, enabling customers to test functionality and provide feedback during the development process.
+				</para>
+			</important>
+			<section id="sect-Configuring_VMware_ESXi_Hosts_to_Enable_Console_Access">
+				<title>Configuring VMware ESXi Hosts to Enable Console Access</title> 
+				<para>
+					You must configure the firewall on ESXi hosts in VMware vCenter to enable access to virtual machine consoles. The <literal>gdbserver</literal> ruleset must be enabled on each ESXi host running virtual machines that will be accessed through HTML5 console or VNC console on the CloudForms Management Engine. The ruleset can be configured on the host itself, or using the vCenter web user interface. The following procedures apply to VMware vCenter 5.0 and later.
+				</para>
+				<xi:include href="topics/Using_SSH_to_Configure_VMware_ESXi_Hosts_to_Enable_Console_Access.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Using_the_VMware_vCenter_Web_Interface_to_Configure_ESXi_Hosts_to_Enable_Console_Access.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<xi:include href="topics/Configuring_the_Browser_Plug-in_for_a_Virtual_Machine_Console.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Configuring_the_Certificate_for_a_Virtual_Machine_Console.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Opening_a_Console_for_a_Virtual_Machine.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+	</section>
+</chapter>

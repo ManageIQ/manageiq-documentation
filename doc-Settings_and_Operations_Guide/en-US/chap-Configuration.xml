@@ -1,0 +1,610 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Settings_and_Operations_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Configuration">
+	<title>Configuration</title> 
+	<para>
+		From the <guilabel>Configuration</guilabel> area, you can specify operating parameters for the <productname>CloudForms Management Engine</productname> infrastructure, view diagnostic information, and analytics on the servers. The accordion menu shows your <productname>CloudForms Management Engine</productname> infrastructure at the enterprise, zone, and server levels. There are three main areas.
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para> 
+				<guilabel>Settings</guilabel> enable you to modify the configuration of your <productname>CloudForms Management Engine</productname> infrastructure. You can also create analysis profiles and schedules for these profiles.
+			</para>
+		</listitem>
+		<listitem>
+			<para> 
+				<guilabel>Diagnostics</guilabel> displays the status of your servers and their roles and provides access to logs.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<section id="sect-Settings">
+		<title>Settings</title> 
+		<para>
+			Under <menuchoice><guimenu>Configure</guimenu><guisubmenu>Configuration</guisubmenu></menuchoice>, then in the <guilabel>Settings</guilabel> accordion, you have a hierarchy of the configurable items in your <productname>CloudForms Management Engine</productname> architecture. At the top level, you have <guilabel>Settings</guilabel> including users, LDAP Groups, account roles, capacity and utilization collection, tag categories, values, and imports, custom variable imports, and license uploads. When you click on <guilabel>Settings</guilabel> and expand it, you can configure <guimenuitem>Analysis Profiles</guimenuitem>, <guimenuitem>Zones</guimenuitem>, and <guimenuitem>Schedules</guimenuitem>.
+		</para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/2041.png" />
+			</imageobject>
+		</mediaobject>
+		<para>
+			When you go the <guilabel>Settings</guilabel> area, you are automatically taken to the server list under <guimenuitem>Zones</guimenuitem>.
+		</para>
+		<section id="sect-Regions">
+			<title>Regions</title> 
+			<para>
+				Use <literal>regions</literal> for centralizing data which is collected from public and private virtualization environments. A region is ultimately represented as a single database for the VMDB. Regions are particularly useful when multiple geographical locations need to be managed as they enable all the data collection to happen at each particular location and avoids data collection traffic across slow links between networks.
+			</para>
+			<para>
+				When multiple regions are being used, each with their own unique ID, a master region can be created to centralize the data of all the children regions into a single master database. To do this, configure each child region to replicate its data to the master region database (Red Hat recommends use of region 99). This parent and child region is a one-to-many relationship.
+			</para>
+			<para>
+				Regions can contain multiple zones, which in turn contain appliances. Zones are used for further segregating network traffic along with enabling failover configurations. Each appliance has the capability to be configured for a number of specialized server roles. These roles are limited to the zone containing the appliance they run on.
+			</para>
+			<para>
+				Only one failover type of each server role can run in a zone. If multiple appliances have the same failover role, the extras are used as backups that activate only if the primary appliance fails. Non-failover server roles can run on multiple appliances simultaneously in a zone, so resources can be adjusted according to the workload those roles are responsible for.
+			</para>
+			<para>
+				The following diagram demonstrates an example of the multiple regions working together in a CloudForms environment.
+			</para>
+			<figure id="fig-CloudForms-multi-region">
+				<title>Multi-Region Red Hat CloudForms Example</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/7151.png" />
+					</imageobject>
+					<textobject> 
+						<phrase>Multi-Region Red Hat CloudForms Example</phrase>
+					</textobject>
+				</mediaobject>
+			</figure>
+			<para>
+				The Master appliance is located in Chicago and contains a master region and a subregion that manages the worker appliances. The Mahwah technology center contains a single subregion that manages two zones. Likewise the San Diego technology center contains a single subregion managing a single zone.
+			</para>
+			<note>
+				<itemizedlist>
+					<listitem>
+						<para>
+							Replicating a parent region to a higher-level parent is not supported.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Parent regions can be configured after the child regions are online.
+						</para>
+					</listitem>
+				</itemizedlist>
+			</note>
+			<para>
+				The following diagram provides a closer look at a region:
+			</para>
+			<figure>
+				<title>A Red Hat CloudForms region</title>
+				<mediaobject>
+					<imageobject>
+						<imagedata fileref="images/7150.png" />
+					</imageobject>
+					<textobject> 
+						<phrase>A Red Hat CloudForms region</phrase>
+					</textobject>
+				</mediaobject>
+			</figure>
+			<para>
+				In this region, we have several Red Hat CloudForms appliances acting as UI nodes and worker nodes. These worker nodes execute tasks on the providers in your environment. The Region also uses a region database that reports to a master database on the main Red Hat CloudForms appliance. All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
+			</para>
+			<xi:include href="topics/About_Regions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Region_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<section id="sect-Capacity_and_Utilization_Collections">
+				<title>Capacity and Utilization Collections</title>
+				<xi:include href="topics/Capacity_Utilization_Collection_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_enable_a_Cluster_Host_or_Datastore_for_Capacity_Utilization_Collection.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Tags">
+				<title>Tags</title>
+				<xi:include href="topics/Company_Tag_Categories_and_Tags.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_create_a_tag_category.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_delete_a_tag_category.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_create_a_company_tag.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_delete_a_Company_Tag.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Importing_Tags_for_Virtual_Machines.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_import_tags_for_a_Virtual_Machine_from_a_csv_file.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Importing_Custom_Values_for_Virtual_Machines_and_Hosts.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_import_asset_tags_for_a_Virtual_Machine_from_a_csv_file.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Registering_and_Updating_CloudForms_Management_Engine">
+				<title>Registering and Updating CloudForms Management Engine</title> 
+				<para>
+					The <guibutton>Red Hat Updates</guibutton> page enables you to edit customer information, register appliances, and update appliances. Editing customer information enables you to determine the registration point, User ID, and password. Red Hat CloudForms prompts you to update the Server URL when updating the registration point to a local Red Hat Satellite. The <guilabel>Status of Available Servers</guilabel> area provides options to refresh, register, check for updates, and to update. The Red Hat Updates page enables the Content Delivery Network (CDN) to assign the necessary update packages to the CloudForms Management Engine Server.
+				</para>
+				<para>
+					Using the <guibutton>Check For Updates</guibutton> task button, the CDN assigns any necessary update packages to your server and notifies you. Click <guibutton>Update</guibutton> and the <productname>CloudForms Management Engine</productname> packages install and update.
+				</para>
+				<para>
+					Three steps are required for updating the CloudForms Management Engine Appliance: 
+					<orderedlist>
+						<listitem>
+							<para>
+								Register the CloudForms Management Engine for updates if it is not already registered.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Update the CloudForms Management Engine Appliance.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Update other system packages.
+							</para>
+						</listitem>
+					</orderedlist>
+				</para>
+				<para>
+					The following tools are used during the update process: 
+					<itemizedlist>
+						<listitem>
+							<para> 
+								<literal>Yum</literal> provides package installation, updates, and dependency checking.
+							</para>
+						</listitem>
+						<listitem>
+							<para> 
+								<literal>Red Hat Subscription Manager</literal> manages subscriptions and entitlements.
+							</para>
+						</listitem>
+						<listitem>
+							<para> 
+								<literal>Red Hat Satellite Server</literal> runs at customer locations providing local system registration and updates from inside the customer's firewall.
+							</para>
+						</listitem>
+					</itemizedlist>
+				</para>
+				<important>
+					<para>
+						The update worker synchronizes the VMDB with the status of available <productname>CloudForms Management Engine</productname> content every 12 hours.
+					</para>
+				</important>
+				<note>
+					<para>
+						Servers with the <guilabel>RHN Mirror</guilabel> role also act as a repository for other Appliances to pull <productname>CloudForms Management Engine</productname> packages updates.
+					</para>
+				</note>
+				<xi:include href="topics/Editing_Customer_Information.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Registering_Appliances.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Updating_Appliances.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+		</section>
+		<section id="sect-Profiles">
+			<title>Profiles</title>
+			<xi:include href="topics/Creating_an_Analysis_Profile.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_create_a_Host_Analysis_Profile.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_create_a_Virtual_Machine_Analysis_Profile.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Editing_an_Analysis_Profile.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Copying_an_Analysis_Profile.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Creating_a_Default_Analysis_Profile.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-Zones">
+			<title>Zones</title> 
+			<para>
+				You can organize your <productname>CloudForms Management Engine</productname> Infrastructure into zones to configure failover and isolate traffic. A provider that is discovered by a server in a specific zone gets monitored and managed in that zone. All jobs, such as a SmartState Analysis or VM power operation, dispatched by a server in a specific zone can get processed by any <productname>CloudForms Management Engine</productname> Appliance assigned to that same zone.
+			</para>
+			<para>
+				Zones can be created based on your own environment. You can make zones based on geographic location, network location, or function. When first started, a new server is put into the <emphasis>default</emphasis> zone.
+			</para>
+			<para>
+				Suppose you have four <productname>CloudForms Management Engine</productname> Appliances with two in the East zone, Appliances A and B, and two in the West zone, Appliances C and D. VC East is discovered by one of the <productname>CloudForms Management Engine</productname> Appliances in the <productname>CloudForms Management Engine</productname> Eastern zone. If Appliance A dispatches a job of analyzing twenty virtual machines, this job can be processed by either Appliance A or B, but not C or D.
+			</para>
+			<note>
+				<para>
+					Only users assigned the super administrator role can create zones. There must always be at least one zone. Default zone is provided. This can be removed only after you have created your own zones.
+				</para>
+			</note>
+			<xi:include href="topics/To_create_a_Zone.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_delete_a_Zone.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_edit_a_Zone.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-Servers">
+			<title>Servers</title> 
+			<para>
+				Server settings enables you to control how each <productname>CloudForms Management Engine</productname> server operates including authentication, logging, and email. If you have multiple servers in your environment that are reporting to one central VMDB, then you can edit some of these settings from the console by specifying which server you want to change.
+			</para>
+			<note>
+				<para>
+					The server selection options are only available if you have multiple servers sharing one VMDB.
+				</para>
+			</note>
+			<section id="sect-Changing_Server_Settings">
+				<title>Changing Server Settings</title> 
+				<procedure>
+					<title>To Change Server Settings</title>
+					<step>
+						<para>
+							Navigate to <menuchoice><guisubmenu>Configure</guisubmenu><guisubmenu>Configuration</guisubmenu></menuchoice>.
+						</para>
+					</step>
+					<step>
+						<para>
+							Click on the <guilabel>Settings</guilabel> accordion, then click <guilabel>Zones</guilabel>.
+						</para>
+					</step>
+					<step>
+						<para>
+							Click the zone where the <productname>CloudForms Management Engine</productname> server is located.
+						</para>
+					</step>
+					<step>
+						<para>
+							In the <guimenu>Servers</guimenu> area, click on the <productname>CloudForms Management Engine server</productname>.
+						</para>
+					</step>
+					<step>
+						<para>
+							Click <guilabel>Server</guilabel>.
+						</para>
+					</step>
+					<step>
+						<para>
+							Make any required changes.
+						</para>
+					</step>
+					<step>
+						<para>
+							Click <guibutton>Save</guibutton>.
+						</para>
+					</step>
+				</procedure>
+				<xi:include href="topics/Basic_Information_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Server_Control_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Server_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/VMware_Console_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Configuring_SNMP.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<section id="sect-Outgoing_SMTP_Email_Settings">
+					<title>Outgoing SMTP Email Settings</title> 
+					<para>
+						To use the email action in <productname>CloudForms Management Engine</productname>, set an email address to send emails from.
+					</para>
+					<note>
+						<para>
+							To be able to send any emails from the server, you must have the <guilabel>Notifier</guilabel> server role enabled. You can test the settings without the role enabled. <!--See Server Control Settings.-->
+						</para>
+					</note>
+					<mediaobject>
+						<imageobject>
+							<imagedata align="center" fileref="images/2063.png" />
+						</imageobject>
+					</mediaobject>
+					<itemizedlist>
+						<listitem>
+							<para>
+								Use <guilabel>Host</guilabel> to specify the host name of the mail server.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use <guilabel>Port</guilabel> to specify the port for the mail server.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use <guilabel>Domain</guilabel> to specify domain name for the mail server.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Check <guilabel>Start TLS Automatically</guilabel> if the mail server requires TLS.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Select the appropriate verify mode.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use the <guilabel>Authentication</guilabel> drop down to specify if you want to use login or plain authentication.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use <guilabel>User Name</guilabel> to specify the user name required for login authentication.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use <guilabel>Password</guilabel> to specify the password for login authentication.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use <guilabel>From Email Address</guilabel> to set the address you want to send the email from.
+							</para>
+						</listitem>
+						<listitem>
+							<para>
+								Use <guilabel>To Email Address</guilabel> if you want to test your email settings.
+							</para>
+						</listitem>
+					</itemizedlist>
+					<xi:include href="topics/To_test_Outgoing_SMTP_E-mail_Server_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				</section>
+				<xi:include href="topics/Web_Services_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Logging_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Custom_Support_URL_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Authentication">
+				<title>Authentication</title> 
+				<para>
+					Use the <guilabel>Authentication</guilabel> tab to specify how you want users authenticated on the console. You can use the VMDB or integrate with LDAP, LDAPS, Amazon, or an external IPA server.
+				</para>
+				<xi:include href="topics/To_change_an_Authentication_Setting.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Authentication_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/LDAP_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Amazon_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Role_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<section id="sect-Trusted_Forests">
+					<title>Trusted Forests</title>
+					<xi:include href="topics/Trusted_Forest_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+					<xi:include href="topics/To_add_settings_for_a_Trusted_Forest.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				</section>
+				<xi:include href="topics/External_Authentication_httpd.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Workers">
+				<title>Workers</title> 
+				<para>
+					Use the Workers page to specify the number of workers and amount of memory allowed to be used for each type.
+				</para>
+				<note>
+					<para>
+						Only make these changes when directed to by Red Hat Support.
+					</para>
+				</note>
+				<xi:include href="topics/To_change_the_settings_for_a_worker_except_Replication.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_change_settings_for_the_Replication_Worker.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Database">
+				<title>Database</title> 
+				<para>
+					Use the Database page to specify the location of your Virtual Machine Database (VMDB) and its login credentials. By default, the type is PostgreSQL on the Server.
+				</para>
+				<note>
+					<para>
+						The server may not start if the database settings are changed. Be sure to validate your new settings before restarting the server.
+					</para>
+				</note>
+				<xi:include href="topics/To_change_a_Database_Setting.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Customization_and_Logos">
+				<title>Customization and Logos</title>
+				<xi:include href="topics/Custom_Logos.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_upload_a_custom_logo_to_the_Console.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_customize_the_Login_Panel.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_customize_the_Login_Panel_Text.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Advanced_Settings">
+				<title>Advanced Settings</title>
+				<xi:include href="topics/Advanced1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_edit_configuration_files_manually.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Configuration_Parameters.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+		</section>
+		<section id="sect-Schedules">
+			<title>Schedules</title>
+			<xi:include href="topics/Scheduling_SmartState_Analyses_and_Backups.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_schedule_a_SmartState_Analysis_or_Compliance_Check.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_schedule_a_Database_Backup1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_modify_a_schedule.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+	</section>
+	<section id="sect-Access_Control">
+		<title>Access Control</title> 
+		<para>
+			From navigating to <menuchoice><guimenu>Configure</guimenu><guisubmenu>Configuration</guisubmenu></menuchoice>, then clicking on the <guimenu>Access Control</guimenu> accordion, you have a hierarchy of the configurable items for users, groups, and roles. You can add and modify users, groups, and account roles.
+		</para>
+		<xi:include href="topics/To_create_a_user.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Deleting_a_User1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Groups.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_create_a_user_group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/LDAP_Groups.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_use_CloudForms_Management_Engines_named_groups_to_assign_Account_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Account_Role_and_Directory_Service_Group_Names.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_use_pre-existing_LDAP_Groups_to_assign_Account_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Roles1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Account_Roles_and_Descriptions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_create_a_Role.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Diagnostics">
+		<title>Diagnostics</title> 
+		<para>
+			From navigating to <menuchoice><guimenu>Configure</guimenu><guisubmenu>Configuration</guisubmenu></menuchoice>, then clicking on the <guilabel>Diagnostics</guilabel> tab, you can also see the status of the different <productname>CloudForms Management Engine</productname> roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information. The <guilabel>Diagnostics</guilabel> area is designed in a hierarchy.
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					At the <emphasis>region</emphasis> level, you can see replication status, backup the VMDB, and run garbage collection on the VMDB.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					At the <emphasis>zone</emphasis> level, you can see <productname>CloudForms Management Engine</productname> roles by servers and servers by roles. In addition, you can set log collection values for a specific zone, and collect gap data for capacity and utilization.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					At the <emphasis>server</emphasis> level, you can see the workers for each server, set log collection values for a specific server, and view current logs.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<xi:include href="topics/Region_Diagnostics.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Region_Aware_Server_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_set_the_priority_of_a_failover_role1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<section id="sect-Replication">
+			<title>Replication</title> 
+			<para>
+				You must be on the server where replication has been set up to monitor status. To run backups, the database operations server role must be enabled. Databases can then be restored using the black console on the <productname>CloudForms Management Engine</productname> Appliance. These features are available only when using the internal <application>PostgreSQL</application> VMDB.
+			</para>
+			<xi:include href="topics/To_check_status_of_Replication.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_reset_Replication.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_run_a_single_backup1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_restore_a_database_from_backup1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-Zone_Diagnostics">
+			<title>Zone Diagnostics</title> 
+			<para>
+				The console provides a way to see all the server roles that a server has been assigned and if these roles are running. This is especially helpful when you have multiple servers with different server roles. For each zone you can also set a central place for all logs to be collected, and collect capacity and utilization data that may be missing.
+			</para>
+			<xi:include href="topics/To_view_the_status_of_Server_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Setting_Server_Role_Priorities.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Zone_Aware_Server_Roles.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_set_the_priority_of_a_failover_role.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Removing_an_Inactive_Server.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<section id="sect-Zone_Log_Collections">
+				<title>Zone Log Collections</title>
+				<xi:include href="topics/Zone_Log_Collection_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_set_the_location_of_the_Log_Depot.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_collect_and_download_logs_from_all_Servers_in_a_Zone.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Capacity_and_Utilization_Repair">
+				<title>Capacity and Utilization Repair</title> 
+				<para>
+					Under certain circumstances, it is possible that <productname>CloudForms Management Engine</productname> is not able to collect capacity and utilization data. This could be due to password expiration, a change in rights to the cloud provider <!--provider--> and this change didn't provide enough granularity to the <productname>CloudForms Management Engine</productname> service account, or network connectivity. The gap data is collected directly by extracting the monthly performance data. Gap collection need to be completed for each zone individually. Therefore, the procedure below need to be repeated for each zone.
+				</para>
+				<xi:include href="topics/To_repair_capacity_and_utilization_data.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+		</section>
+		<section id="sect-Server_Diagnostics">
+			<title>Server Diagnostics</title> 
+			<para>
+				Under Diagnostics for a server, you can view the status of <productname>CloudForms Management Engine</productname> workers running on the server, set log collection setting for only that server, and view the server's current <productname>CloudForms Management Engine</productname> and audit logs.
+			</para>
+			<section id="sect-Workers1">
+				<title>Workers</title> 
+				<para>
+					The <guilabel>Workers</guilabel> tab enables you to see the status of and restart <productname>CloudForms Management Engine</productname> Workers.
+				</para>
+				<para>
+					You can see additional information on and restart the following items.
+				</para>
+				<itemizedlist>
+					<listitem>
+						<para>
+							C &amp; U Metrics Collectors that collects capacity and utilization data.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							C &amp; U Metrics Processors, which processes the collected capacity and utilization data.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Database Replication Worker that is responsible for maintaining replication activities.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Event Handlers put events from the Event Monitor into the VMDB and starts <productname>CloudForms Management Engine</productname> processes if needed base on that information.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Event Monitors that communicate with the external cloud provider <!--provider--> to deliver up to date event information.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Generic Workers that perform long running and priority processes.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Priority Workers that perform high priority, short processes.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Schedule Workers that maintains any items that run on a schedule.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Session Broker that maintains a single connection to the cloud providers <!--providers-->.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Refresh Workers that runs the refresh processes.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Reporting Workers that generate reports.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							SmartProxy Workers that run SmartState Analyses on virtual machine.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							User Interface Worker that allows users access to the console.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							Web Services Worker that maintains <productname>CloudForms Management Engine</productname> Web services.
+						</para>
+					</listitem>
+					<listitem>
+						<para>
+							VM Analysis Collectors that run and process SmartState Analyses on virtual machines.
+						</para>
+					</listitem>
+				</itemizedlist>
+				<xi:include href="topics/To_reload_Worker_display.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_restart_a_CloudForms_Management_Engine_Worker.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+			<section id="sect-Server_and_Audit_Logs">
+				<title>Server and Audit Logs</title>
+				<xi:include href="topics/Collecting_Server_Logs_and_Configuration_Files.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_set_the_location_of_the_Log_Depot_for_a_specific_Server.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_collect_the_current_log_set_of_a_Server.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_collect_all_log_sets_from_a_Server.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/Viewing_the_Server_Audit_and_Production_Logs.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_view_the_Server_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_reload_the_Server_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_download_the_Server_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_view_the_Audit_log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_reload_the_Audit_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_download_the_Audit_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_view_the_Production_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_reload_the_Production_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+				<xi:include href="topics/To_download_the_Production_Log.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			</section>
+		</section>
+	</section>
+	<section id="sect-Database_Operations">
+		<title>Database Operations</title>
+		<xi:include href="topics/To_view_information_on_the_VMDB.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<section id="sect-Database_Regions_and_Replication">
+			<title>Database Regions and Replication</title>
+			<xi:include href="topics/Database_Regions_and_Replication.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_create_a_Region.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_replicate_a_database.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_enable_the_Database_Synchronization_Role.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_schedule_a_Database_Backup.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_run_a_single_backup.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_restore_a_database_from_backup.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_run_database_garbage_collection.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-Changing_Database_Password">
+			<title>Changing Database Password</title>
+			<xi:include href="topics/Changing_the_Password_on_the_Database_Appliance.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Changing_the_Password_on_the_Worker_Appliances.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Adding_a_New_Appliance_to_an_Existing_Region_with_Non-default_Password.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+	</section>
+</chapter>

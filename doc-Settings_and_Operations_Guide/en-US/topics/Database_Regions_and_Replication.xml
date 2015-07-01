@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Settings_and_Operations_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Database_Regions_and_Replication" remap="TID_15062">
+	<title>Database Regions and Replication</title>
+	<para>
+		Regions are used to create a central database for reporting and charting. Do not use the database at the top level for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. Assign each server participating in the region a unique number during the regionalization process, then set your subordinate regions to replicate to the top region.
+	</para>
+	<para>
+		Note that the subordinate regions are not aware of each other from a database perspective. You cannot see information from one subordinate region in another. The only VMDB with visibility to all subordinate regions is the top level.
+	</para>
+	<para>
+		For diagnostic information on replication, see <xref linkend="To_check_status_of_Replication" />.
+	</para>
+	<para>
+		The following is an example of regionalized database scenario:
+	</para>
+	<procedure>
+		<step>
+			<para>
+				Create Region Number 99 to which all other VMDBs replicate.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Treat this as a read only database for reporting and charting.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Enable only the Reporting, Scheduler, and User Interface Server Roles. To perform database maintenance items, such as scheduled backups, on the top-level region (master), also enable the Database Operations role.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						No additional settings aside from assigning the region ID. No need to configure any replication.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Create Region Number 1
+			</para>
+			<substeps>
+				<step>
+					<para>
+						Add replication worker settings pointing to the VMDB for Region 99.
+					</para>
+				</step>
+				<step>
+					<para>
+						Enable Database Synchronization Server role on one Server in the Region. If you have a second Server in the same region, do not enable the DB Synchronization role. Do not enable more than one Database Synchronization Role per Region.
+					</para>
+				</step>
+			</substeps>
+		</step>
+		<step>
+			<para>
+				Create Region Number 2
+			</para>
+			<substeps>
+				<step>
+					<para>
+						Add replication worker settings pointing to the VMDB for Region 99.
+					</para>
+				</step>
+				<step>
+					<para>
+						Enable Database Synchronization Server role on one Server in the Region. If you have a second Server in the same region, do not enable the DB Synchronization role. Do not enable more than one Database Synchronization Role per Region.
+					</para>
+				</step>
+			</substeps>
+		</step>
+	</procedure>
+	<important>
+		<para>
+			All CFME databases in a multi-region deployment must use the same security key.
+		</para>
+	</important>
+</section>

@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Settings_and_Operations_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Role_Settings" remap="TID_14981">
+	<title>Role Settings</title>
+	<para>
+		If you choose LDAP, you can use groups from your directory service to set the role for the authenticated LDAP User. The LDAP user must be in one of the Account Role Groups. See <xref linkend="LDAP_Groups" />.
+	</para>
+	<para>
+		If you do not check <guilabel>Get User Groups from LDAP</guilabel>, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase. For example, <literal>dbright@acme.com</literal> when using User Principal Name, <literal>cn=dan bright,ou=users,dc=acme,dc=com</literal> when using Distinguished Name (<literal>CN=&lt;user&gt;</literal>), or <literal>uid=dan bright,ou=users,dc=acme,dc=com</literal> when using Distinguished Name (<literal>UID=&lt;user&gt;</literal>). Then, when logging in, the user would type either <literal>dbright</literal> (User Principal Name) or <literal>dan bright</literal> (Distinguished Name). If the user is not defined in the VMDB, they will be denied access to <productname>CloudForms Management Engine</productname>.
+	</para>
+	<mediaobject>
+		<imageobject>
+			<imagedata align="center" fileref="images/2069.png" />
+		</imageobject>
+	</mediaobject>
+	<itemizedlist>
+		<listitem>
+			<para>
+				Check <guilabel>Get Roles from Home Forest</guilabel> to use the LDAP roles from the LDAP users home forest.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Check <guilabel>Follow Referrals</guilabel> to lookup and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Base DN</guilabel> to set the place in the directory tree from which you want to start searching for users.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Specify the user name to bind to the LDAP server in <guilabel>Bind DN</guilabel>. This user must have read access to all users and groups that will be used for <productname>CloudForms Management Engine</productname> authentication and role assignment.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Specify the password for the Bind DN user in <guilabel>Bind Password</guilabel>.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<para>
+		Click <guibutton>Validate</guibutton> to verify your settings.
+	</para>
+</section>

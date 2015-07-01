@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Settings_and_Operations_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Configuring_SNMP" remap="TID_42032">
+	<title>Configuring SNMP</title>
+	<para>
+		You can use Simple Network Management Protocol (SNMP) traps to send alerts for various aspects of a <productname>Red Hat CloudForms</productname> environment.
+	</para>
+	<itemizedlist>
+		<title>Requirements</title>
+		<listitem>
+			<para>
+				Configure your SNMP management station to accept traps from CFME appliances. Consult your management station's documentation.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Each appliance that could process SNMP traps must have the <application>snmpd</application> and <application>snmptrapd</application> daemons running.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				The region where the appliances are located must have the <literal>Notifier</literal> role enabled and the failover role priority set.
+			</para>
+		</listitem>
+	</itemizedlist>
+	<procedure>
+		<title>Enable the snmpd and snmptrapd Daemons</title>
+		<step>
+			<para>
+				Access each SNMP processing appliance using SSH.
+			</para>
+		</step>
+		<step>
+			<para>
+				Set the SNMP daemons to run on start up: 
+				<screen># chkconfig --level 2345 snmpd on
+# chkconfig --level 2345 snmptrapd on
+</screen>
+			</para>
+		</step>
+		<step>
+			<para>
+				The daemons run automatically when the appliance is restarted, but must be started manually now. 
+				<screen># service snmpd start
+# service snmptrapd start</screen>
+			</para>
+		</step>
+	</procedure>
+	<procedure>
+		<title>Enable the Notifier Role</title>
+		<step>
+			<para>
+				Access each SNMP processing appliance using their web interaces.
+			</para>
+		</step>
+		<step>
+			<para>
+				Navigate to <menuchoice><guisubmenu>Configure</guisubmenu><guisubmenu>Configuration</guisubmenu><guisubmenu>Settings</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select the zone where the EVM server is located, and select the EVM server.
+			</para>
+		</step>
+		<step>
+			<para>
+				In the <guilabel>Server Control</guilabel> area, select the <guilabel>Notifier</guilabel> server role.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Save</guibutton>
+			</para>
+		</step>
+	</procedure>
+	<procedure>
+		<title>Set the Failover Priority Role</title>
+		<step>
+			<para>
+				Navigate to <menuchoice><guisubmenu>Configure</guisubmenu><guisubmenu>Configuration</guisubmenu><guisubmenu>Diagnostics</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select the zone where the EVM server is located.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guilabel>Roles by Servers</guilabel> or <guilabel>Servers by Roles</guilabel> to view your servers.
+			</para>
+		</step>
+		<step>
+			<para>
+				In the <guilabel>Status of Roles for Servers in Zone Default Zone</guilabel> area, click the role that you want to set the priority for.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Configuration</guilabel>), and 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/2097.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Promote Server</guilabel>) to make this the primary server for this role.
+			</para>
+		</step>
+	</procedure>
+</section>

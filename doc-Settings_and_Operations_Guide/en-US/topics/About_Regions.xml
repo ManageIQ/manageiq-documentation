@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Settings_and_Operations_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="About_Regions" remap="TID_14934">
+	<title>Region Scope</title>
+	<para>
+		Regions are used to consolidate data from multiple VMDBs to a central database. The database at the top level, the master VMDB, cannot be used for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. It is intended for use as a reporting database that includes all information across multiple subordinate regions. The subordinate regions replicate their information to the master.
+	</para>
+	<para>
+		Note that the subordinate regions are not aware of each other from a database perspective. You cannot see information from one subordinate region in another. The only VMDB with data visibility to all subordinate regions is the top level.
+	</para>
+	<itemizedlist>
+		<title>Masters Regions Scope</title>
+		<listitem>
+			<para>
+				Reports all information from all subordinate VMDBs reporting up to it
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Can perform power operations on virtual machines from subordinate regions
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Controls its own access control list
+			</para>
+		</listitem>
+	</itemizedlist>
+	<itemizedlist>
+		<title>Subordinate Regions Scope</title>
+		<listitem>
+			<para>
+				Each subordinate controls its own access control independent of the other regions
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Can only do work (such as SmartState Analysis and Capacity and Utilization collection) in its own region
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Has no knowledge of the other regions
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Replicates its data up to the master region
+			</para>
+		</listitem>
+	</itemizedlist>
+</section>

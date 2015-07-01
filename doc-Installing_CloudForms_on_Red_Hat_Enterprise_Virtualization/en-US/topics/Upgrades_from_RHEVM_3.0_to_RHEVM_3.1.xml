@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Installing_CloudForms_on_Red_Hat_Enterprise_Virtualization.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Upgrades_from_RHEVM_3.0_to_RHEVM_3.1" remap="TID_21467">
+	<title>Upgrades from Red Hat Enterprise Virtualization Manager 3.0 to 3.1</title>
+	<para>
+		Environments upgrading from Red Hat Enterprise Virtualization Manager 3.0 to 3.1 might encounter issues regarding SSL communications with <productname>CloudForms Management Engine</productname>. This issue occurs from version 3.1 due to Apache being used as a front end to handle the SSL requests. The upgrade to 3.1 does not reconfigure the Management System for this. 
+		<footnote>
+			<para>
+				This is documented in the following link on Red Hat Bugzilla: <ulink url="https://bugzilla.redhat.com/show_bug.cgi?id=893979">https://bugzilla.redhat.com/show_bug.cgi?id=893979</ulink>
+			</para>
+		</footnote>
+	</para>
+	<para>
+		A change to the Red Hat Enterprise Virtualization Manager configuration allows CloudForms Management Engine to use SSL to connect rather than the current TLS.
+	</para>
+	<procedure>
+		<step>
+			<para>
+				Log into the Red Hat Enterprise Virtualization Manager server's terminal as the <literal>root</literal> user.
+			</para>
+		</step>
+		<step>
+			<para>
+				Modify the <filename>/usr/share/ovirt-engine/service/engine-service.xml.in</filename> file.
+			</para>
+		</step>
+		<step>
+			<para>
+				Scroll to <literal>protocols</literal> inside the <literal>ssl</literal> tag. The current value of the protocols attribute is <literal>TLSv1</literal>.
+			</para>
+			<screen>
+&lt;ssl&gt;
+  &lt;protocols&gt;TLSv1&lt;/protocols&gt;
+&lt;/ssl&gt;
+			</screen>
+		</step>
+		<step>
+			<para>
+				Replace the value of the <literal>protocols</literal> attribute with <literal>SSLv3,TLSv1</literal>.
+			</para>
+			<screen>
+&lt;ssl&gt;
+  &lt;protocols&gt;SSLv3,TLSv1&lt;/protocols&gt;
+&lt;/ssl&gt;
+			</screen>
+		</step>
+		<step>
+			<para>
+				Save the file.
+			</para>
+		</step>
+		<step>
+			<para>
+				Restart the Red Hat Enterprise Virtualization Manager server.
+			</para>
+		</step>
+	</procedure>
+	<para>
+		In addition, set the <guilabel>Server Relationship</guilabel> for CloudForms Management Engine.
+	</para>
+	<procedure>
+		<step>
+			<para>
+				Select the CloudForms Management Server's virtual machine from <menuchoice><guimenu>Services</guimenu> <guisubmenu>Virtual Machines</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Go to <menuchoice><guimenu>Configuration</guimenu> <guisubmenu>Edit Server Relationship</guisubmenu></menuchoice> and select the appropriate CloudForms Management Engine Server.
+			</para>
+		</step>
+	</procedure>
+</section>

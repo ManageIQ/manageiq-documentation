@@ -1,0 +1,1069 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Installing_CloudForms_on_Red_Hat_Enterprise_Virtualization.ent">
+%BOOK_ENTITIES;
+]>
+<article>
+	<xi:include href="Article_Info.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<section id="sect-Installing_CloudForms">
+		<title>Installing CloudForms</title> 
+		<para>
+			CloudForms Management Engine is able to be installed and ready to configure in a few quick steps. After downloading CloudForms Management Engine as a virtual machine image template from the Red Hat Customer Portal, the installation process takes you through the steps of uploading the appliance to a supported virtualization or cloud provider.
+		</para>
+		<important>
+			<title>Important</title>
+			<para>
+				After installing the CloudForms Management Engine Appliance, you must configure the database for Red Hat CloudForms. See <xref linkend="Configuring_a_Database_for_CloudForms_Management_Engine" />.
+			</para>
+		</important>
+		<xi:include href="topics/Obtaining_the_CloudForms_Management_Engine_Appliance.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Uploading_the_CloudForms_Management_Engine_Appliance_with_the_Image_Uploader_Tool.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<section id="sect-Using_the_Image_Uploader_Tool">
+			<title>Using the Image Uploader Tool</title> 
+			<para>
+				The <command>engine-image-uploader</command> command allows you to list export storage domains and upload virtual machine images in OVF format to an export storage domain and have them automatically recognized in the Red Hat Enterprise Virtualization Manager.
+			</para>
+			<note>
+				<para>
+					The image uploader only supports gzip-compressed OVF files created by Red Hat Enterprise Virtualization.
+				</para>
+			</note>
+			<para>
+				The archive contains images and master directories in the following format: 
+				<screen>
+|-- images
+|   |-- [Image Group UUID]
+|        |--- [Image UUID (this is the disk image)]
+|        |--- [Image UUID (this is the disk image)].meta
+|-- master
+|   |---vms
+|       |--- [UUID]
+|             |--- [UUID].ovf
+</screen>
+			</para>  
+			<para>
+				The basic syntax for the image uploader command is:
+			</para>
+			<screen><command>engine-image-uploader <parameter><replaceable>[options]</replaceable></parameter> <parameter>list</parameter></command>
+<command>engine-image-uploader <parameter><replaceable>[options]</replaceable></parameter> <parameter>upload</parameter> <parameter><replaceable>[file].[file]...[file]</replaceable></parameter></command>
+</screen>
+			<para>
+				The image uploader command supports two actions - <parameter>list</parameter>, and <parameter>upload</parameter>.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						The <parameter>list</parameter> action lists the export storage domains to which images can be uploaded.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						The <parameter>upload</parameter> action uploads images to the specified export storage domain.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<para>
+				You must specify one of the above actions when you use the image uploader command. Moreover, you must specify at least one local file to use the <parameter>upload</parameter> action.
+			</para>
+			<para>
+				There are several parameters to further refine the <command>engine-image-uploader</command> command. You can set defaults for any of these parameters in the <filename>/etc/ovirt-engine/imageuploader.conf</filename> file.
+			</para>
+			<variablelist>
+				<title>General Options</title>
+				<varlistentry>
+					<term><parameter>-h</parameter>, <parameter>--help</parameter></term>
+					<listitem>
+						<para>
+							Displays information on how to use the image uploader command.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>--conf-file=<replaceable>[PATH]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Sets <replaceable>[PATH]</replaceable> as the configuration file the command will use. The default is <filename>etc/ovirt-engine/imageuploader.conf</filename>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>--log-file=<replaceable>[PATH]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Sets <replaceable>[PATH]</replaceable> as the specific file name the command will use to write log output. The default is <filename>/var/log/ovirt-engine/ovirt-image-uploader/ovirt-image-uploader-<replaceable>[date]</replaceable>.log</filename>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>--cert-file=<replaceable>[PATH]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Sets <replaceable>[PATH]</replaceable> as the certificate for validating the engine. The default is <filename>/etc/pki/ovirt-engine/ca.pem</filename>.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>--insecure</parameter></term>
+					<listitem>
+						<para>
+							Specifies that no attempt will be made to verify the engine.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>--quiet</parameter></term>
+					<listitem>
+						<para>
+							Sets quiet mode, reducing console output to a minimum.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-v</parameter>, <parameter>--verbose</parameter></term>
+					<listitem>
+						<para>
+							Sets verbose mode, providing more console output.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-f</parameter>, <parameter>--force</parameter></term>
+					<listitem>
+						<para>
+							Force mode is necessary when the source file being uploaded has the same file name as an existing file in the destination export domain. This option forces the existing file to be overwritten.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<variablelist>
+				<title>Red Hat Enterprise Virtualization Manager Options</title>
+				<varlistentry>
+					<term><parameter>-u <replaceable>[USER]</replaceable></parameter>, <parameter>--user=<replaceable>[USER]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Specifies the user whose credentials will be used to execute the command. The <replaceable>[USER]</replaceable> is specified in the format <replaceable>[username]</replaceable>@<replaceable>[domain]</replaceable>. The user must exist in the specified domain and be known to the Red Hat Enterprise Virtualization Manager.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-r <replaceable>[FQDN]</replaceable></parameter>, <parameter>--engine=<replaceable>[FQDN]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Specifies the <acronym>IP</acronym> address or fully qualified domain name of the Red Hat Enterprise Virtualization Manager from which the images will be uploaded. It is assumed that the image uploader is being run from the same machine on which the Red Hat Enterprise Virtualization Manager is installed. The default value is <literal>localhost:443</literal>.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<variablelist>
+				<title>Export Storage Domain Options</title>
+				<para>
+					The following options specify the export domain to which the images will be uploaded. These options cannot be used together; you must used either the <parameter>-e</parameter> option or the <parameter>-n</parameter> option.
+				</para>
+				<varlistentry>
+					<term><parameter>-e</parameter> <replaceable>[EXPORT_DOMAIN]</replaceable>, <parameter>--export-domain=<replaceable>[EXPORT_DOMAIN]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Sets the storage domain <replaceable>EXPORT_DOMAIN</replaceable> as the destination for uploads.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-n</parameter> <replaceable>[NFSSERVER]</replaceable>, <parameter>--nfs-server=<replaceable>[NFSSERVER]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Sets the <acronym>NFS</acronym> path <replaceable>[NFSSERVER]</replaceable> as the destination for uploads.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<variablelist>
+				<title>Import Options</title>
+				<para>
+					The following options allow you to customize which attributes of the images being uploaded are included when the image is uploaded to the export domain.
+				</para>
+				<varlistentry>
+					<term><parameter>-i</parameter>, <parameter>--ovf-id</parameter></term>
+					<listitem>
+						<para>
+							Specifies that the <acronym>UUID</acronym> of the image will not be updated. By default, the command generates a new <acronym>UUID</acronym> for images that are uploaded. This ensures there is no conflict between the id of the image being uploaded and the images already in the environment.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-d</parameter>, <parameter>--disk-instance-id</parameter></term>
+					<listitem>
+						<para>
+							Specifies that the instance <acronym>ID</acronym> for each disk in the image will not be renamed. By default, the command generates new <acronym>UUID</acronym>s for disks in images that are uploaded. This ensures there are no conflicts between the disks on the image being uploaded and the disks already in the environment.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-m</parameter>, <parameter>--mac-address</parameter></term>
+					<listitem>
+						<para>
+							Specifies that network components in the image will not be removed from the image. By default, the command removes network interface cards from image being uploaded to prevent conflicts with network cards on other virtual machines already in the environment. If you do not use this option, you can use the Administration Portal to add network interface cards to newly imported images and the Manager will ensure there are no <acronym>MAC</acronym> address conflicts.
+						</para>
+					</listitem>
+				</varlistentry>
+				<varlistentry>
+					<term><parameter>-N <replaceable>[NEW_IMAGE_NAME]</replaceable></parameter>, <parameter>--name=<replaceable>[NEW_IMAGE_NAME]</replaceable></parameter></term>
+					<listitem>
+						<para>
+							Specifies a new name for the image being uploaded.
+						</para>
+					</listitem>
+				</varlistentry>
+			</variablelist>
+			<xi:include href="topics/Uploading_the_CloudForms_Management_Engine_Appliance_with_the_Image_Uploader.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<xi:include href="topics/Uploading_the_CloudForms_Management_Engine_Appliance_without_the_Image_Uploader.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Running_CloudForms_Management_Engine.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Configuring_CloudForms">
+		<title>Configuring CloudForms</title> 
+		<para>
+			Although the <productname>CloudForms Management Engine Appliance</productname> comes configured to be integrated immediately into your environment, you can make some changes to its configuration.
+		</para>
+		<note>
+			<para>
+				The <productname>CloudForms Management Engine</productname> Appliance is intended to have minimal configuration options.
+			</para>
+		</note>
+		<para /> 
+		<!--<para>
+		After startup, a summary screen appears showing some basic information about the <productname>CloudForms Management Engine</productname> Appliance. It is password protected and configured as a DHCP client with bridged networking.
+	</para>
+	<para>
+		Change the appliance configuration using Advanced Settings. You have the following menu items.
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				Use <guilabel>Set DHCP Network Configuration</guilabel> to use DHCP to obtain the IP address and network configuration for your <productname>CloudForms Management Engine Appliance</productname>.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Set Static Network Configuration</guilabel> if you have a specific IP address and network settings you need to use for the <productname>CloudForms Management Engine Appliance</productname>.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Test Network Configuration</guilabel> to check that name resolution is working correctly.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Set Hostname</guilabel> to specify a hostname for the <productname>CloudForms Management Engine</productname> Appliance.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Set Timezone, Date, and Time</guilabel> to configure the time zone, date, and time for the <productname>CloudForms Management Engine</productname> Appliance.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Disable PostgreSQL Database Server</guilabel> if you know that you will be using another database server and do not want these additional services loaded. This option will disable <application>PostgreSQL</application> and unmount the disk associated with the database. The <productname>CloudForms Management Engine Appliance</productname> will need a restart.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Restore Factory Configuration</guilabel> to overwrite any changes you have made to the <productname>CloudForms Management Engine</productname> Appliance, restore the factory configuration, add the <application>PostgreSQL</application> service, and restart the <productname>CloudForms Management Engine</productname> Appliance. Note that this does not set the Appliance to use the internal PostgreSQL database.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Restore Database from Backup</guilabel> to restore the VMDB database from a previous backup.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Setup Database Region</guilabel> to create regions for VMDB replication.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Configure Database</guilabel> to configure the VMDB database. Use this option to configure the database for the appliance after installing and running it for the first time.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Stop Server Processes</guilabel> to stop all server processes. You may need to do this to perform maintenance.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Start Server Processes</guilabel> to start the server. You may need to do this after performing maintenance.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Restart Appliance</guilabel> to restart the <productname>CloudForms Management Engine</productname> Appliance. You can either restart the appliance and clear the logs or just restart the appliance.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Shut Down Appliance</guilabel> to power down the appliance and exit all processes.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Summary Information</guilabel> to go back to the network summary screen for the <productname>CloudForms Management Engine Appliance</productname>.
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Use <guilabel>Log Off</guilabel> to log out of the <productname>CloudForms Management Engine</productname> Appliance console.
+			</para>
+		</listitem>
+	</itemizedlist> -->
+		<xi:include href="topics/To_change_settings_on_the_CloudForms_Management_Engine_Appliance.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Advanced_Configuration_Settings.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Configuring_a_Database_for_CloudForms_Management_Engine.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Configuring_an_Internal_Database.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Configuring_an_External_Database.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Configuring_a_Worker_Appliance_for_CloudForms_Management_Engine.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Additional_Requirements">
+		<title>Additional Requirements</title>
+		<xi:include href="topics/Storage_Support_Notes_about_Analyzing_from_RHEVM_3.1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Storage_Support_Notes_about_Analyzing_from_RHEVM_3.0.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Planning">
+		<title>Planning</title>
+		<xi:include href="topics/Regions.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/CPU_Sizing_Assistant.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Database_Sizing_Assistant.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Example_PostgreSQL_Configuration_File.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Security">
+		<title>Security</title> 
+		<table frame="all">
+			<title>Ports Used by CloudForms Management Engine</title>
+			<tgroup cols="6">
+				<colspec colwidth="4*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="4*" />
+				<thead>
+					<row>
+						<entry>
+							<para>
+								Initiator (CFME Role if applicable)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Receiver (CFME Role if applicable)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Application
+							</para>
+						</entry>
+						<entry>
+							<para>
+								TCP Port
+							</para>
+						</entry>
+						<entry>
+							<para>
+								UDP Port
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Purpose/Reason
+							</para>
+						</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<para>
+								Administrator (Internet Browser)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance (User Interface)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								HTTPS
+							</para>
+						</entry>
+						<entry>
+							<para>
+								443
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								Access to CFME Appliance User Interface
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								Administrator (Internet Browser)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance (User Interface)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								HTTP
+							</para>
+						</entry>
+						<entry>
+							<para>
+								80
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								Redirect Web Browser to HTTPS service (443)
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								Service Catalog or other integration through Web Service
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance (Web Service)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								HTTPS
+							</para>
+						</entry>
+						<entry>
+							<para>
+								443
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								Access to CFME Appliance Web Service
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								NFS Server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								NFS
+							</para>
+						</entry>
+						<entry>
+							<para>
+								2049
+							</para>
+						</entry>
+						<entry>
+							<para>
+								2049
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Embedded NFS VM scanning
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (User Interface)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Any Virtual Machine
+							</para>
+						</entry>
+						<entry>
+							<para>
+								TCP
+							</para>
+						</entry>
+						<entry>
+							<para>
+								903
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								VM Remote Console (if using MKS plugin)
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (User Interface)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Any Hypervisor Host
+							</para>
+						</entry>
+						<entry>
+							<para>
+								TCP
+							</para>
+						</entry>
+						<entry>
+							<para>
+								5900-5999
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								VM Remote Console (if using VNC)
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (any role)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance running the VMDB (or MS SQL)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								PostgreSQL Named Pipes
+							</para>
+						</entry>
+						<entry>
+							<para>
+								5432 (1433 MS SQL)
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance connectivity to the CFME Database (PostgreSQL or MS SQL)
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Subordinate Region VMDB Appliance(Database Synchronization)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Master Region VMDB Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								PostgreSQL Named Pipes
+							</para>
+						</entry>
+						<entry>
+							<para>
+								5432 (1433 MS SQL)
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								Regional VMDB node replication up to Master VMDB node (PostgreSQL only)
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance(Authentication through LDAP)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								LDAP Server (AD or other)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								LDAP
+							</para>
+						</entry>
+						<entry>
+							<para>
+								389
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								LDAP integration
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (Authentication through LDAPs)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								LDAP Server (AD or other)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								LDAPs
+							</para>
+						</entry>
+						<entry>
+							<para>
+								636
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								LDAPS integration
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								SNMP Agent
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance (Notifier)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								SNMP (UDP)
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								161
+							</para>
+						</entry>
+						<entry>
+							<para>
+								SNMP Polling
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (Notifier)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								SNMP Server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								SNMP (TCP)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								162
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								SNMP Trap Send
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (Notifier)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Mail server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								SMTP
+							</para>
+						</entry>
+						<entry>
+							<para>
+								25
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								SNMP Trap Send
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (any role)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								NTP Server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								NTP
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								123
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Time Source
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME SmartProxy installed on Windows or Linux
+							</para>
+						</entry>
+						<entry>
+							<para>
+								HTTPS
+							</para>
+						</entry>
+						<entry>
+							<para>
+								1139
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								Communication with SmartProxy
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME SmartProxy installed on Windows or Linux
+							</para>
+						</entry>
+						<entry>
+							<para>
+								CFME Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								HTTPS
+							</para>
+						</entry>
+						<entry>
+							<para>
+								443
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								SmartProxy Heartbeat
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								DNS Server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								UDP
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								53
+							</para>
+						</entry>
+						<entry>
+							<para>
+								DNS Lookups
+							</para>
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>  
+		<table frame="all">
+			<title>Red Hat Enterprise Virtualization Ports Used by CloudForms Management Engine</title>
+			<tgroup cols="6">
+				<colspec colwidth="4*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="2*" />
+				<colspec colwidth="4*" />
+				<thead>
+					<row>
+						<entry>
+							<para>
+								Initiator (CFME Role if applicable)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Receiver (CFME Role if applicable)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Application
+							</para>
+						</entry>
+						<entry>
+							<para>
+								TCP Port
+							</para>
+						</entry>
+						<entry>
+							<para>
+								UDP Port
+							</para>
+						</entry>
+						<entry>
+							<para>
+								Purpose/Reason
+							</para>
+						</entry>
+					</row>
+				</thead>
+				<tbody>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (SmartProxy)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								RHEV-M Server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								HTTPS
+							</para>
+						</entry>
+						<entry>
+							<para>
+								8443
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								API communications to RHEV-M environment (Inventory, Operations, SmartProxy)
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance (C&amp;U)
+							</para>
+						</entry>
+						<entry>
+							<para>
+								RHEV-M Server
+							</para>
+						</entry>
+						<entry>
+							<para>
+								PostgreSQL
+							</para>
+						</entry>
+						<entry>
+							<para>
+								5432
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								RHEV-M History Database (Database connectivity not enabled by default). See <ulink url="https://access.redhat.com/site/solutions/63277">How to access RHEV-M Postgres DB from remote machine</ulink>.
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								RHEVH Hosts or RHEL Hypervisors
+							</para>
+						</entry>
+						<entry>
+							<para>
+								SSH
+							</para>
+						</entry>
+						<entry>
+							<para>
+								22
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								SSH connections.
+							</para>
+						</entry>
+					</row>
+					<row>
+						<entry>
+							<para>
+								CFME Appliance
+							</para>
+						</entry>
+						<entry>
+							<para>
+								RHEVH Hosts or RHEL Hypervisors
+							</para>
+						</entry>
+						<entry>
+							<para>
+								DirectLUN
+							</para>
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para />
+						</entry>
+						<entry>
+							<para>
+								Direct LUN hook must be installed and enabled for embedded VM scanning on FC or iSCSI storage devices. Not a tcp/udp connection.
+							</para>
+						</entry>
+					</row>
+				</tbody>
+			</tgroup>
+		</table>
+	</section>
+	<xi:include href="topics/Upgrades_from_RHEVM_3.0_to_RHEVM_3.1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<xi:include href="Revision_History.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+</article>

@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Integration_with_ServiceNow.ent">
+%BOOK_ENTITIES;
+]>
+<section id="VM_Retirement" remap="TID_43200">
+	<title>VM Retirement</title>
+	<para>
+		The Cloud and Infrastructure <literal>Default</literal> retirement statemachines contain <literal>DeactivateCMDB</literal> and <literal>RemoveFromCMDB</literal> states.
+	</para>
+	<para>
+		To update a VM ServiceNow record during VM retirement, amend the <literal>DeactivateCMDB</literal> state to call the update_patch method, for example: 
+		<screen>Integration/ServiceNow/CMDB/update_patch?description=VM%20${/#vm.guid}%20retired%20from%20CloudForms</screen>
+		<figure>
+			<title>State ActiveCMDB</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/6668.png" />
+				</imageobject>
+				<textobject> 
+					<phrase>Deactive CMDB state</phrase>
+				</textobject>
+			</mediaobject>
+		</figure>
+	</para>
+	<para>
+		To delete a VM ServiceNow record during VM retirement, amend the <literal>RemoveFromCMDB</literal> state to call the <literal>delete</literal> method, for example: 
+		<screen>/Integration/ServiceNow/CMDB/delete</screen>
+		<figure>
+			<title>State RemoveFromCMDB</title>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="images/6669.png" />
+				</imageobject>
+				<textobject> 
+					<phrase>Remove from CMDB state</phrase>
+				</textobject>
+			</mediaobject>
+		</figure>
+	</para>
+</section>

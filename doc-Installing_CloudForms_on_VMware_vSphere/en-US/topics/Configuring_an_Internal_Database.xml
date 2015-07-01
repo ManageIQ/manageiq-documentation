@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Installing_CloudForms_on_VMware_vSphere.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Configuring_an_Internal_Database" remap="TID_26331">
+	<title>Configuring an Internal Database</title>
+	<important>
+		<para>
+			Before installing an internal database, add a disk to the infrastructure hosting your appliance. See the documentation specific to your infrastructure for instructions on how to add a disk. As a storage disk usually cannot be added while a virtual machine is running, Red Hat recommends adding the disk before starting the appliance.
+		</para>
+	</important>
+	<procedure>
+		<title>To Configure a CloudForms Management Engine Internal Database</title>
+		<step>
+			<para>
+				Start the appliance and open a terminal from your virtualization or cloud provider.
+			</para>
+		</step>
+		<step>
+			<para>
+				The login screen appears:
+			</para>
+			<screen>To administer this appliance, browse to https://192.168.0.40/
+
+Username:</screen>
+			<para>
+				Enter the administration username and password.
+			</para>
+		</step>
+		<step>
+			<para>
+				The status screen appears and displays details about the CloudForms Management Engine Appliance. Press <userinput>Enter</userinput> to change to the configuration menu.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select <userinput>8) Configure Database</userinput> from the menu.
+			</para>
+		</step>
+		<step>
+			<para>
+				You are prompted to create or fetch an encryption key.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						If this is the first CFME appliance, choose <userinput>1) Create key</userinput>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If this is not the first CFME appliance, choose <userinput>2) Fetch key from remote machine</userinput> to fetch the key from the first CFME appliance. All CFME appliances in a multi-region deployment must use the same key.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Choose <userinput>1) Internal</userinput> for the database location.
+			</para>
+		</step>
+		<step>
+			<para>
+				Choose a disk for the database. For example:
+			</para>
+			<screen>1) /dev/vdb: 20480
+
+Choose disk:</screen>
+			<para>
+				Enter <userinput>1</userinput> to choose <literal>/dev/vdb</literal> for the database location.
+			</para>
+		</step>
+		<step>
+			<para>
+				When prompted, enter a unique three digit region ID to create a new region.
+			</para>
+			<important>
+				<para>
+					Creating a new region destroys any existing data on the chosen database.
+				</para>
+			</important>
+		</step>
+		<step>
+			<para>
+				Confirm the configuration when prompted.
+			</para>
+		</step>
+	</procedure>
+	<formalpara>
+		<title>Result:</title>
+		<para>
+			CloudForms Management Engine configures the internal database.
+		</para>
+	</formalpara>
+</section>

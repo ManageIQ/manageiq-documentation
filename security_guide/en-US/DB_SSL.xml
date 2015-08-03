@@ -82,6 +82,12 @@ ssl_ca_file   = '/var/www/miq/vmdb/certs/ca.cer'              # (change requires
         </screen>
       </step>
       <step>
+        <para>Make sure that the key file is owned by <systemitem>root</systemitem>:</para>
+        <screen>
+[root@cloudforms2 ~]# chown root /var/www/miq/vmdb/certs/server.cer.key
+        </screen>
+      </step>
+      <step>
         <para>
           Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/pg_hba.conf</filename> file. It should looks similar to this:
         </para>
@@ -150,6 +156,12 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
         </para>
         <screen>
 [root@cloudforms2 ~]# chmod 600 ~/.postgresql/postgresql.key
+        </screen>
+      </step>
+      <step>
+        <para>Change the owner of the key file to <systemitem>postgres</systemitem>:</para>
+        <screen>
+[root@cloudforms2 ~]# chown postgres ~/.postgresql/postgresql.key
         </screen>
       </step>
       <step>

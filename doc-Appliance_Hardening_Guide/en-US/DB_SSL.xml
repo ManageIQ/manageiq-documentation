@@ -50,19 +50,13 @@
       </step>
       <step>
         <para>
-          Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf</filename> file:
-        </para>
-        <screen>
-[root@cloudforms1 ~]# vi /opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf
-        </screen>
-        <para>
-          Uncomment and edit the <option>ssl</option> option:
+          Open the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf</filename> file and uncomment and edit the <option>ssl</option> option:
         </para>
         <screen>
 ssl=on
         </screen>
-        <para>
-          Uncomment the following lines to specify the SSL certificate location options. The defaults are as follows:
+        <!--para>
+          Locate the following lines that specify SSL certificate location options and make sure that they are uncommented:
         </para>
         <screen>
 ssl_cert_file = '/var/www/miq/vmdb/certs/server.cer'          # (change requires restart)
@@ -70,33 +64,68 @@ ssl_key_file  = '/var/www/miq/vmdb/certs/server.cer.key'      # (change requires
 ssl_ca_file   = '/var/www/miq/vmdb/certs/ca.cer'              # (change requires restart)
         </screen>
         <para>
-          Save your changes to this file.
+           Replace the defaults with the paths to the copies of the SSL certificate files:
         </para>
+        <screen>
+ssl_cert_file = '/var/www/miq/vmdb/certs/postgres.crt'        # (change requires restart)
+ssl_key_file  = '/var/www/miq/vmdb/certs/postgres.key'        # (change requires restart)
+ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'              # (change requires restart)
+        </screen-->
+      </step>
+      <step>
+        <para>Install the server key file in the correct location and set the ownership and permissions for it:</para>
+        <screen>
+[root@cloudforms2 ~]# install -m 600 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
+        </screen>
+      </step>
+      <!--step>
+        <para>Copy the server key file:</para>
+        <screen>
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
+        </screen>
       </step>
       <step>
         <para>
-          Secure the key file:
+          Secure the server key file:
         </para>
         <screen>
-[root@cloudforms2 ~]# chmod 600 /var/www/miq/vmdb/certs/server.cer.key
+[root@cloudforms2 ~]# chmod 600 /var/www/miq/vmdb/certs/postgres.key
         </screen>
       </step>
       <step>
-        <para>Make sure that the key file is owned by <systemitem>postgres</systemitem>:</para>
+        <para>Make sure that the server key file is owned by <systemitem>postgres</systemitem>:</para>
         <screen>
-[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/server.cer.key
+[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/postgres.key
+        </screen>
+      </step-->
+      <step>
+        <para>Install the server certificate file in the correct location and set the ownership and permissions for it:</para>
+        <screen>
+[root@cloudforms2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
+        </screen>
+      </step>
+      <!--step>
+        <para>Copy the server certificate file:</para>
+        <screen>
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
         </screen>
       </step>
       <step>
-        <para>Set the correct permissions for the server certificate file:</para>
+        <para>Set the correct permissions for the server certificate:</para>
         <screen>
-[root@cloudforms2 ~]# chmod 644 /var/www/miq/vmdb/certs/server.cer
+[root@cloudforms2 ~]# chmod 644 /var/www/miq/vmdb/certs/postgres.crt
         </screen>
       </step>
       <step>
-        <para>Make sure that the server certificate file is owned by <systemitem>postgres</systemitem>:</para>
+        <para>Make sure that the server certificate is owned by <systemitem>postgres</systemitem>:</para>
         <screen>
-[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/server.cer
+[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/postgres.crt
+        </screen>
+      </step-->
+      <step>
+        <para>Copy the root certificate file:</para>
+        <screen>
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer /var/www/miq/vmdb/certs/root.crt
         </screen>
       </step>
       <step>
@@ -160,15 +189,14 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
       </step>
       <step>
         <para>
-          Copy the required CloudForms appliance client certificate files to the <filename>.postgresql</filename> directory defaults:
+          <!--Copy the required CloudForms appliance client certificate files to the <filename>.postgresql</filename> directory defaults:-->
+          Copy the root certificate file to the <filename>~/.postgresql</filename> directory:
         </para>
-        <screen>
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer ~/.postgresql/postgresql.crt
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer.key ~/.postgresql/postgresql.key
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer ~/.postgresql/root.crt
-        </screen>
+        <screen><!--[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer ~/.postgresql/postgresql.crt
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer.key ~/.postgresql/postgresql.key-->
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer ~/.postgresql/root.crt</screen>
       </step>
-      <step>
+      <!--step>
         <para>
           Secure the key file:
         </para>
@@ -187,7 +215,7 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
         <screen>
 [root@cloudforms2 ~]# restorecon -R -v ~/.postgresql
         </screen>
-      </step>
+      </step-->
       <step>
         <para>
           Test the connection between the appliance client and the appliance database server using the <command>psql</command>:

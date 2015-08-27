@@ -62,7 +62,7 @@
 ssl=on
         </screen>
         <para>
-          Uncomment and edit the SSL certificate location options to match the following:
+          Uncomment the following lines to specify the SSL certificate location options. The defaults are as follows:
         </para>
         <screen>
 ssl_cert_file = '/var/www/miq/vmdb/certs/server.cer'          # (change requires restart)
@@ -82,9 +82,27 @@ ssl_ca_file   = '/var/www/miq/vmdb/certs/ca.cer'              # (change requires
         </screen>
       </step>
       <step>
-        <para>Make sure that the key file is owned by <systemitem>root</systemitem>:</para>
+        <para>Make sure that the key file is owned by <systemitem>postgres</systemitem>:</para>
         <screen>
-[root@cloudforms2 ~]# chown root /var/www/miq/vmdb/certs/server.cer.key
+[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/server.cer.key
+        </screen>
+      </step>
+      <step>
+        <para>Set the correct permissions for the server certificate file:</para>
+        <screen>
+[root@cloudforms2 ~]# chmod 644 /var/www/miq/vmdb/certs/server.cer
+        </screen>
+      </step>
+      <step>
+        <para>Make sure that the server certificate file is owned by <systemitem>postgres</systemitem>:</para>
+        <screen>
+[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/server.cer
+        </screen>
+      </step>
+      <step>
+        <para>Make sure that the security context is set correctly for the files in <filename>/var/www/miq/certs</filename>:</para>
+        <screen>
+[root@cloudforms2 ~]# restorecon -R -v /var/www/miq/certs
         </screen>
       </step>
       <step>
@@ -159,9 +177,15 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
         </screen>
       </step>
       <step>
-        <para>Change the owner of the key file to <systemitem>postgres</systemitem>:</para>
+        <para>Make sure that the key file is owned by <systemitem>postgres</systemitem>:</para>
         <screen>
-[root@cloudforms2 ~]# chown postgres ~/.postgresql/postgresql.key
+[root@cloudforms2 ~]# chown postgres:postgres ~/.postgresql/postgresql.key
+        </screen>
+      </step>
+      <step>
+        <para>Make sure that the security context is set correctly for the files in <filename>~/.postgresql</filename>:</para>
+        <screen>
+[root@cloudforms2 ~]# restorecon -R -v ~/.postgresql
         </screen>
       </step>
       <step>

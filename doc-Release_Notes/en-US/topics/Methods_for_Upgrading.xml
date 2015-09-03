@@ -8,10 +8,10 @@
 			  <section id="Upgrade_Method_for_New_Users">
 			    <title>Upgrade Method for New Users</title>
 			      <para>
-				To avoid any collisions between the retirement functionality of the customer's domain(s) and that of the CloudForms Management Engine's domain, rename the customers domain(s) <guilabel>Retirement</guilabel> <guilabel>StateMachine</guilabel> <guilabel>Namespace</guilabel> and thoroughly test the new CloudForms Management Engine domain enhanced Retirement functionality, prior to use in production.
+				To avoid any collisions between the retirement functionality of any custom domains and that of the CloudForms Management Engine's domain, rename the custom domains <guilabel>Retirement</guilabel> <guilabel>StateMachine</guilabel> <guilabel>Namespace</guilabel>, and thoroughly test the new CloudForms Management Engine domain enhanced retirement functionality prior to use in production.
 			      </para>
 			      <para>
-				Rename selected namespaces in the customers domain by using the <guilabel>Automate</guilabel> Explorer.
+				Rename selected namespaces in custom domains using the <guilabel>Automate</guilabel> Explorer.
 			      </para>
 			      <procedure>
 				<title>Changing the Namespace for Cloud</title>
@@ -144,8 +144,8 @@
 		</section>
 		<section id="Upgrade_Method_for_Existing_Users">
 		  <title>Upgrade Method for Existing Users Using Custom Code</title>
-			    <para>This enhancement significantly changes the Retirement StateMachine and Automate methods. Users should evaluate each existing Retirement StateMachine and Automate methods to see where they fit in the new Automate model. All modifications should be thoroughly tested prior to use in production. 
-Please review the retirement state changes here: <ulink url="https://access.redhat.com/documentation/en-US/Red_Hat_CloudForms/3.2/html/Lifecycle_and_Automation_Guide/Phase_5_Retirement1.html"> B.5. Phase 5: Retirement</ulink>.
+			    <para>This enhancement significantly changes the Retirement StateMachine and Automate methods. Users should evaluate each existing Retirement StateMachine and Automate method to see where they fit in the new Automate model. All modifications should be thoroughly tested prior to use in production. 
+Review the retirement state changes here: <ulink url="https://access.redhat.com/documentation/en-US/Red_Hat_CloudForms/3.2/html/Lifecycle_and_Automation_Guide/Phase_5_Retirement1.html"> B.5. Phase 5: Retirement</ulink>.
 			    </para>
 		 </section>
 		 <section id="Backward_Compatibility_for_Existing_Users">
@@ -155,7 +155,7 @@ Please review the retirement state changes here: <ulink url="https://access.redh
 			    </para>
 			  </important>
 			  <para>
-			    A major feature of the new retirement is that it exposes the functionality to Automate. Modifications to the Automate Model by adding an Automate Method to the customer's existing StateMachine enables existing users to achieve backward compatibility and makes it possible to use the old style Retirement StateMachine, with the exception of policy.
+			    A major feature of the new retirement is that it exposes the functionality to Automate. Modifications to the Automate Model by adding an Automate Method to your existing StateMachine enables existing users to achieve backward compatibility and makes it possible to use the old style Retirement StateMachine, with the exception of policy.
 			  </para>
 			  <para>
 			    The previous VM retirement functionality:
@@ -187,14 +187,14 @@ Please review the retirement state changes here: <ulink url="https://access.redh
 			  </para>
 			      <note>
 				<para>
-				  For the following directions, the domain references of <replaceable>CUSTOMER</replaceable> means the customer domain containing the old Automate Model which has a higher priority than the ManageIQ shipped domain.
+				  For the following directions, the domain references of <replaceable>DOMAIN_NAME</replaceable> means the custom domain containing the old Automate Model, which has a higher priority than the domain shipped with Red Hat CloudForms.
 				</para>
 			      </note>
 			      <procedure>
 				<title>Modifying the StateMachine</title>
 				<step>
 				<para>
-				  Add new event instance, <emphasis>request_vm_retire</emphasis> event to <menuchoice><guimenu>System</guimenu><guimenuitem>Event</guimenuitem></menuchoice> class in the <replaceable>CUSTOMER</replaceable> domain.
+				  Add new event instance, <emphasis>request_vm_retire</emphasis> event to <menuchoice><guimenu>System</guimenu><guimenuitem>Event</guimenuitem></menuchoice> class in the <replaceable>DOMAIN_NAME</replaceable> domain.
 				    <orderedlist numeration="loweralpha">
 				      <listitem>
 					<para>
@@ -203,20 +203,20 @@ Please review the retirement state changes here: <ulink url="https://access.redh
 				      </listitem>
 				       <listitem>
 					<para>
-					 Set rel5 value to point to the same value that is set in the <menuchoice><guimenu>System</guimenu><guimenuitem>Event</guimenuitem><guimenuitem>vm_retired</guimenuitem></menuchoice> rel5 relationship in the <replaceable>CUSTOMER</replaceable> domain.  
+					 Set rel5 value to point to the same value that is set in the <menuchoice><guimenu>System</guimenu><guimenuitem>Event</guimenuitem><guimenuitem>vm_retired</guimenuitem></menuchoice> rel5 relationship in the <replaceable>DOMAIN_NAME</replaceable> domain.  
 					</para>
 				      </listitem>
 				    </orderedlist>
 				    <note>
 				      <para>
-					Value is most likely to be: <menuchoice><guimenu>Automation</guimenu><guimenuitem>VMLifecycle</guimenuitem><guimenuitem>Retirement?vm_id=${process#vm_id}</guimenuitem></menuchoice>.
+					The value is most likely to be: <menuchoice><guimenu>Automation</guimenu><guimenuitem>VMLifecycle</guimenuitem><guimenuitem>Retirement?vm_id=${process#vm_id}</guimenuitem></menuchoice>.
 				      </para>
 				    </note>
 				</para>
 			      </step>
 			      <step>
 				<para>
-				  Change schema for <replaceable>CUSTOMER</replaceable> domain:<menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>VMRetirement</guimenuitem></menuchoice> class to add a new entry.
+				  Change schema for the <replaceable>DOMAIN_NAME</replaceable> domain: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>VMRetirement</guimenuitem></menuchoice> class to add a new entry.
 				    <itemizedlist>
 					<listitem>
 					  <para>
@@ -268,18 +268,17 @@ Please review the retirement state changes here: <ulink url="https://access.redh
 			      </step>
 			      <step>
 				<para>
-				  Change <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>VMRetirement</guimenuitem><guimenuitem>Defualt</guimenuitem></menuchoice> instance:  add preretirement value of: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>Preretirement</guimenuitem></menuchoice>.
+				  Change the <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>VMRetirement</guimenuitem><guimenuitem>Defualt</guimenuitem></menuchoice> instance: add preretirement value of: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>Preretirement</guimenuitem></menuchoice>.
 				</para>
 			      </step>
 			      <step>
 				<para>
-				  Add instance: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>Preretirement</guimenuitem></menuchoice>
-				  set execute attribute value to: <guimenuitem>Preretirement</guimenuitem>. 
+				  Add the following instance: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>Preretirement</guimenuitem></menuchoice>, and set the execute attribute value to: <guimenuitem>Preretirement</guimenuitem>. 
 				</para>
 			      </step>
 			      <step>
 				<para>
-				  Add method: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>Preretirement</guimenuitem></menuchoice> with the following content:
+				  Add the following method: <menuchoice><guimenu>Factory</guimenu><guimenuitem>StateMachines</guimenuitem><guimenuitem>Preretirement</guimenuitem></menuchoice> with the following content:
 				  <itemizedlist>
 				    <listitem>
 				      <para>
@@ -294,7 +293,7 @@ Please review the retirement state changes here: <ulink url="https://access.redh
 				  </itemizedlist>
 				  <note>
 				    <para>
-				      The reason for calling the <emphasis>finish_retirement</emphasis> method in the preretirement state is that the previous retirement process immediately set the retired flag and <emphasis>retired_on</emphasis> date.  The enhanced retirement process waits until the retirement is finished before it sets the retired and <emphasis>retires_on attributes</emphasis>.  By using the <emphasis>finish_retirement</emphasis> method, CloudForms Management Engine is reverting back to the old behavior so that the customers using existing retirement state machine can proceed as before.
+				      The reason for calling the <emphasis>finish_retirement</emphasis> method in the preretirement state is that the previous retirement process immediately set the retired flag and <emphasis>retired_on</emphasis> date. The enhanced retirement process waits until the retirement is finished before it sets the retired and <emphasis>retires_on attributes</emphasis>. By using the <emphasis>finish_retirement</emphasis> method, CloudForms Management Engine reverts back to the old behavior so that the existing retirement state machine can proceed as before.
 				    </para>
 				  </note>
 				</para>

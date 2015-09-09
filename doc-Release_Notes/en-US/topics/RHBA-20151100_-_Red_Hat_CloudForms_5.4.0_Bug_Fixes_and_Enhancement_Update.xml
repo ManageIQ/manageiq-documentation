@@ -83,7 +83,11 @@ This version of the CloudForms Management Engine appliance reconfigures all serv
 			<listitem>
 				<para>
 					<screen>
-This version of CloudForms Management Engine keeps the IP tables firewall rules persistent when the appliance is being upgraded. This feature allows uninterrupted service of the permitted incoming network connections to the CloudForms Management Engine appliance after the upgrade.
+In the previous version of CloudForms Management Engine, during an upgrade, unmodified iptables configuration in the rpm were removed, leaving possibly no /etc/sysconfig/iptables. This issue was resolved by no longer modifying the /etc/sysconfig/iptables within the rpms. Now, the iptables configuration are build as part of the kickstart so iptables are set for only the NEW appliances. This enables users to create their own /etc/sysconfig/iptables that are not overwritten during upgrades. In the new version of CloudForms Management Engine, to keep the existing iptables configuration rules enabled after restart/reboot, users peforms the upgrade by using iptables-save/restore like this:
+Before upgrade:
+iptables-save &gt; /etc/sysconfig/iptables.cfme
+After upgrade:
+iptables-restore &lt; /etc/sysconfig/iptables.cfme
 </screen>
 				</para>
 			</listitem>

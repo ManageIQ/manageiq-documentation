@@ -290,6 +290,55 @@
 				    </itemizedlist>  
 				</para>
 			</listitem>			
+		</varlistentry>
+		<varlistentry>
+			<term>Service Dialog</term>
+			<listitem>
+				<para>
+				CatalogItemInitialization and CatalogBundleInitialization are Service Provisioning State Machines created to simplify the process of creating full-featured Service Catalog Items and Bundles. These Services provide CFME the ability to create rich service dialogs, without the need for any Ruby scripting. 
+				</para>
+				<para>
+				These two State Machine Instances, and their supporting Methods, have been completely re-written for Red Hat CloudForms Management Engine 5.4. 
+				</para>
+				<para>
+				  Previously in CFME, the catalogbundleinitialization and catalogiteminitialization Automate Methods had duplicated parsing code and had issues where tagging and options setting was not working correctly. To fix this issue, a new Automate Method 'dialog_parser' has been added. This new Method is executed prior to catalogbundleinitialization and catalogiteminitialization Methods to provide consolidated and configurable dialog parsing.
+				</para>
+				<para>
+				  Benefits of this Enhancement:
+				    <itemizedlist>
+				      <listitem>
+					<para>
+					  Single copy of parsing code in separate Automate Method. 
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					  Normalized Dialog information provided to Service Provision State Machine Methods.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					  Enhanced clarity by the separation of dialog options and tags.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					 Added tag_control support.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					 Ability to override the service_name, service_description and vm_name. 
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					 Service cleanup for failed service provision.
+					</para>
+				      </listitem>
+				    </itemizedlist>				    
+				</para>
+			</listitem>
 		</varlistentry>		
 		<varlistentry>
 			<term><application>ServiceNOW CMDB Support</application></term>

@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Lifecycle_and_Automation_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Connect_to_the_PXE_Server1" remap="TID_15508">
+	<title>Connecting to a PXE Server</title>
+	<para>
+		The following procedure connects to a PXE server and adds its details to <productname>CloudForms Management Engine</productname>.
+	</para>
+	<procedure>
+		<title>To Connect to a PXE Server</title>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Infrastructure</guimenu><guisubmenu>PXE</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject>(<guilabel>Configuration</guilabel>), then 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1848.png" />
+					</imageobject>
+				</inlinemediaobject> (<guilabel>Add a New PXE Server</guilabel>).
+			</para>
+		</step>
+		<step>
+			<para>
+				In <guilabel>Basic Information</guilabel>, type a <guilabel>Name</guilabel> that will be meaningful in your environment.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata align="center" fileref="images/2316.png" />
+				</imageobject>
+			</mediaobject>
+		</step>
+		<step>
+			<para>
+				For <guilabel>Depot Type</guilabel>, select either <guimenuitem>Network File System</guimenuitem> (NFS) or <guilabel>Samba</guilabel>. The fields to enter in the dialog depend on the <guilabel>Depot Type</guilabel>.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						For NFS, type in the <guilabel>URI</guilabel>, <guilabel>Access URL</guilabel>, <guilabel>PXE Directory</guilabel>, <guilabel>Windows Images Directory</guilabel> and <guilabel>Customization Directory</guilabel>. When you provision, <productname>CloudForms Management Engine</productname> writes a text file to the <guilabel>PXE Directory</guilabel>. The file is named after the MAC address of the NIC that is assigned to the virtual machine. It contains where to get the kernel and initrd image. This file is removed after a successful provision. The <guilabel>Windows Images Directory</guilabel> is where the files are located on your NFS for the provisioning of Windows operating systems. The <guilabel>Customization Directory</guilabel> is where your Kickstart and Sysprep files are located.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						If using a <guilabel>Depot Type</guilabel> of <guimenuitem>Samba</guimenuitem>, you will not need <guilabel>Access URL</guilabel>, but you will need a <guilabel>User ID</guilabel>, and <guilabel>Password</guilabel>, in addition to the items required for NFS.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				For <guilabel>PXE Image Menus</guilabel>, type the <guilabel>filename</guilabel> for the PXE Boot menu.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guibutton>Add</guibutton>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select the new PXE server from the tree on the left, and click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject>(<guibutton>Configuration</guibutton>), then 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/2003.png" />
+					</imageobject>
+				</inlinemediaobject>(<guibutton>Refresh</guibutton>) to see your existing images.
+			</para>
+		</step>
+	</procedure>
+	<note>
+		<para>
+			Next, create PXE Image types to associate with the customization templates and to specify if the image type is for a virtual machine, a host, or both.
+		</para>
+	</note>
+</section>

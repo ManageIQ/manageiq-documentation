@@ -1,0 +1,175 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Lifecycle_and_Automation_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="State_Machines1" remap="TID_15564">
+	<title>State Machines</title>
+	<para>
+		A <guilabel>State Machine</guilabel> stores the status of something at a given time, and can operate on input to change the status. It can also cause an action or output to take place for any given change. State machines are also designed so that State-B cannot begin until State-A completes successfully.
+	</para>
+	<para>
+		The following components make up a <productname>CloudForms Management Engine</productname> automate state machine:
+	</para>
+	<table frame="all">
+		<title>State Machine Components</title>
+		<tgroup cols="2">
+			<thead>
+				<row>
+					<entry>
+						<para>
+							Component
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Description
+						</para>
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						<para>
+							On_Entry
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Method to run when entering the state. It enables you to execute an automate method to do some pre-processing before the state of the state machine is processed.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							On_Exit
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Method to run when exiting the state.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							On_Error
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Method to run if an error is encountered when running the state. It enables you to execute an automate method to do some final processing before the state machine finally exits (MIQ_ABORT) due to the error.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							Default Value
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Runs after the On_Entry method completes (The actual state being processed).
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							Max Retries
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Maximum number of times to retry the state before exiting.
+						</para>
+					</entry>
+				</row>
+				<row>
+					<entry>
+						<para>
+							Max Time
+						</para>
+					</entry>
+					<entry>
+						<para>
+							Maximum time in seconds to retry the state before exiting.
+						</para>
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</table>
+	<para />
+	<para>
+		In the diagram below, you can see how these components combine to create a state machine workflow.
+	</para>
+	<para>
+		Note that the retry logic, On_Entry and On_Error are distinct cases in the program flow.
+	</para>
+	<mediaobject>
+		<imageobject>
+			<imagedata align="center" fileref="images/2353.png" />
+		</imageobject>
+	</mediaobject>
+	<example>
+		<title>Code snippet demonstrating the state machine retry logic:</title>
+		<programlisting>
+# Get current provisioning status
+task = $evm.root['service_template_provision_task']
+task_status = task['status']
+result = task.status
+
+Then check the result to see how it should proceed:
+
+case result
+when 'error'
+  $evm.root['ae_result'] = 'error'
+.....
+when 'retry'
+  $evm.root['ae_result'] = 'retry'
+  $evm.root['ae_retry_interval'] = '1.minute'
+when 'ok'
+  $evm.root['ae_result'] = 'ok'
+end
+
+When the result is "retry", it sets: 
+  $evm.root['ae_result'] = 'retry'
+  $evm.root['ae_retry_interval'] = '1.minute'
+</programlisting>
+	</example>
+	<para>
+		The following image shows a simple state machine pertaining to approving a provision request. This instance can be found in <menuchoice><guimenu>Datastore</guimenu><guisubmenu>ManageIQ</guisubmenu><guimenuitem>Infrastructure</guimenuitem><guimenuitem>VM</guimenuitem><guimenuitem>Provisioning</guimenuitem><guimenuitem>StateMachines</guimenuitem><guimenuitem>ProvisioningRequestApproval</guimenuitem><guimenuitem>Default</guimenuitem></menuchoice>.
+	</para>
+	<mediaobject>
+		<imageobject>
+			<imagedata align="center" fileref="images/2354.png" />
+		</imageobject>
+	</mediaobject>
+	<procedure>
+		<step>
+			<para>
+				The attribute <code>max_vms</code> has a value of 1. State machine processing can use the attributes of the state machine instance to make logic decisions. In this case, the <methodname>validate_request</methodname> method, which is processed during the <methodname>On_Entry</methodname> portion of the <code>ValidateRequest</code> state, evaluates the <code>max_vms</code> attribute. If the number of virtual machines requested is less than the <code>max_vms</code> value, the request can be auto-approved. See the <methodname>validate_request</methodname> method for more details.
+			</para>
+		</step>
+		<step>
+			<para> 
+				<emphasis>ValidateRequest</emphasis> is the first state to be executed.
+			</para>
+		</step>
+		<step>
+			<para> 
+				<emphasis>ApproveRequest</emphasis> is the next state to be executed.
+			</para>
+		</step>
+	</procedure>
+	<note>
+		<para>
+			Grayed out items reflect values that are set in the class schema. These values can be overwritten on a per instance basis.
+		</para>
+	</note>
+</section>

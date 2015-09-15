@@ -1,0 +1,422 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE chapter PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "Provisioning_Virtual_Machines_and_Hosts_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<chapter id="chap-Provisioning_Requests">
+	<title>Provisioning Requests</title> 
+	<para>
+		The following options are available when making provisioning requests:
+	</para>
+	<itemizedlist>
+		<listitem>
+			<para>
+				Set an owner (User can do this using LDAP lookup)
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Assign a purpose (tag)
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Select a template or image from which to create a new virtual machine or instance respectively
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Choose placement
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Set hardware requirements
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Specify the vLan
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Customize the guest operating system
+			</para>
+		</listitem>
+		<listitem>
+			<para>
+				Schedule the provisioning
+			</para>
+		</listitem>
+	</itemizedlist>
+	<mediaobject>
+		<imageobject>
+			<imagedata align="center" fileref="images/2315.png" />
+		</imageobject>
+	</mediaobject>
+	<section id="sect-Requirements_for_Provisioning_Virtual_Machines_and_Instances">
+		<title>Requirements for Provisioning Virtual Machines and Instances</title>
+		<xi:include href="topics/Requirements_for_Provisioning_Virtual_Machines_from_VMware_Management_Systems1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Requirements_for_Provisioning_Virtual_Machines_from_Red_Hat_Enterprise_Virtualization_Managers1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<section id="sect-PXE_Provisioning">
+			<title>PXE Provisioning</title> 
+			<para>
+				PXE is a boot method that allows you to load files from across a network link. <productname>CloudForms Management Engine</productname> uses it for files required for provisioning virtual machines. PXE can be used for provisioning for either <productname>Red Hat Enterprise Virtualization Manager</productname> or <productname>VMware</productname>.
+			</para>
+			<orderedlist>
+				<title>Procedure Overview</title>
+				<listitem>
+					<para>
+						Connect to the <guilabel>PXE Server</guilabel>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Create a <guilabel>System Image Type</guilabel>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Associate each <guilabel>PXE</guilabel> image with an image type.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Create a customization template.
+					</para>
+				</listitem>
+			</orderedlist>
+			<itemizedlist>
+				<title>Requirements for PXE Provisioning</title>
+				<listitem>
+					<para>
+						DHCP server configured with required PXE implementation
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						PXE implementation for Linux virtual machine provisioning
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						NFS or SAMBA read and write access to create and modify files on the PXE server
+					</para>
+				</listitem>
+				<listitem>
+					<para> 
+						<productname>CloudForms Management Engine</productname> Server uses NFS mount to read and write the response files
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						HTTP read access to the NFS share location as virtual machines use this URL to access PXE images and Kickstart or Cloud-Init configuration files
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Operating system installation media available to be streamed from PXE server
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Images configured for desired operating systems
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Kickstart or Cloud-Init templates to configure operating systems with desired packages
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<title>Additional Requirements for Provisioning Linux Virtual Machines</title>
+				<listitem>
+					<para>
+						Linux distribution kernel and ramdisk available over HTTP
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Linux sources available over HTTP
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Sample PXE menu item that boots this kernel
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<title>Additional Requirements for Provisioning <productname>Windows</productname> Virtual Machines</title>
+				<listitem>
+					<para>
+						WinPE ISO built with <productname>rhev-agent-tools</productname> (for RHEV-M environments) and configured to mount shares for Windows source files and Sysprep files and configured to run customization script
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Windows based WIM file with operating system installed and configured with Sysprep
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Sample Sysprep unattend file to be used with the operating system
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Sample PXE menu item that downloads WinPE ISO, mount in memdisk and boot into WinPE environment
+					</para>
+				</listitem>
+			</itemizedlist>
+			<xi:include href="topics/Connect_to_the_PXE_Server1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_create_System_Image_Types2.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_set_the_PXE_Image_Type_for_a_PXE_Image1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-ISO_Provisioning">
+			<title>ISO Provisioning</title>
+			<xi:include href="topics/About_ISO_Provisioning1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_add_the_ISO_Datastore1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_refresh_the_ISO_Datastore1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_create_System_Image_Types3.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_set_the_Image_Type_for_an_ISO_Image1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-Customization_Templates_for_Virtual_Machine_and_Instance_Provisioning">
+			<title>Customization Templates for Virtual Machine and Instance Provisioning</title> 
+			<para>
+				Add a customization template to provide <guilabel>Kickstart</guilabel>, <guilabel>Cloud-Init</guilabel>, or <guilabel>Sysprep</guilabel> files for the initial loading of the operating system.
+			</para>
+			<itemizedlist>
+				<title>Cloud-Init Requirements</title>
+				<listitem>
+					<para>
+						When creating a template using Red Hat Virtualization, install the <package>cloud-init</package> package on the source virtual machine. This enables Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						See the <ulink url="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.4/html/Administration_Guide/index.html">Red Hat Enterprise Virtualization Administration Guide</ulink> for more information on using Cloud-Init in a Red Hat Enterprise Virtualization environment.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						See the <ulink url="http://cloudinit.readthedocs.org/en/latest/">Cloud-Init Documentation</ulink> web site for example scripts.
+					</para>
+				</listitem>
+			</itemizedlist>
+			<itemizedlist>
+				<title>Kickstart Requirements for ISO Provisioning</title>
+				<listitem>
+					<para>
+						Name the <guilabel>Kickstart</guilabel> file <filename>ks.cfg</filename>
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Set the new virtual machine to power down after provisioning is complete
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						CFME must use the VM payload feature of RHEV to create a floppy disk containing the data from the selected customization template
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Customize the installer to include the data written to the floppy disk payload
+					</para>
+					<example>
+						<title> Example: RHEL ISO with the following modifications: </title>
+						<itemizedlist>
+							<listitem>
+								<para>
+									isolinux.cfg: modify default menu item "append" line to include "ks=cdrom"
+								</para>
+							</listitem>
+							<listitem>
+								<para>
+									ks.cfg: which must minimally include:
+								</para>
+								<para>
+									<programlisting><![CDATA[### Pre Install Scripts
+%pre
+
+# Mount the floppy drive
+modprobe floppy
+mkdir /tmp/floppy
+mount /dev/floppy /tmp/floppy
+%end
+
+# Include ks.cfg file from the floppy (written by CFME based on selected customization template)
+%include /tmp/floppy/ks.cfg
+]]></programlisting>
+								</para>
+							</listitem>
+						</itemizedlist>
+					</example>
+				</listitem>
+			</itemizedlist>
+			<xi:include href="topics/Customization_Script_Additions_for_Virtual_Machine_Provisioning1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_add_a_Customization_Template3.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+	</section>
+	<section id="sect-Provisioning_Virtual_Machines">
+		<title>Provisioning Virtual Machines</title> 
+		<para>
+			There are three types of provisioning requests available in <productname>CloudForms Management Engine</productname>:
+		</para>
+		<orderedlist>
+			<listitem>
+				<para>
+					Provision a new virtual machine from a template
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Clone a virtual machine
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Publish a virtual machine to a template
+				</para>
+			</listitem>
+		</orderedlist>
+		<xi:include href="topics/To_provision_from_a_template_using_the_provided_dialogs1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_clone_a_Virtual_Machine_VMware_Virtual_Machines_only1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_publish_a_Virtual_Machine_to_a_template_VMware_Virtual_Machines_only1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Provisioning_Instances">
+		<title>Provisioning Instances</title> 
+		<para>
+			Cloud instances follow the same process (Request, Approval, Deployment) as a standard virtual machine from virtualization infrastructure. First, a user makes a request for instances and specifies the image, tags, availability zone and hardware profile flavor. Second, the request goes through the approval phase. Finally, CloudForms Management Engine executes the request.
+		</para>
+		<xi:include href="topics/Provisioning_an_Instance_from_an_Image.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Provisioning_an_OpenStack_Instance_from_an_Image.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Requirements_for_Provisioning_a_Host">
+		<title>Requirements for Provisioning a Host</title> 
+		<para> 
+			<productname>CloudForms Management Engine</productname> can provision hosts using PXE and Intelligent Platform Management Interface (IPMI) technologies. Before you provision your first host, configure the following prerequisites:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					Provisioning requires the <guilabel>Automation Engine</guilabel> server role be enabled. Confirm your server role settings in <menuchoice><guimenu>Configure</guimenu><guimenuitem>Configuration</guimenuitem><guimenuitem>Server</guimenuitem><guimenuitem>Server Control</guimenuitem></menuchoice>.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Make a PXE server accessible to the <productname>CloudForms Management Engine</productname> server.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Create a customization template for hosts. This customization template must contain host-specific additions, documented in the <citetitle>Customization Templates for Host Provisioning</citetitle> section.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Create system image types for the host.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Associate images with the image types.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Enable IPMI on provisioning hosts and add them to the <productname>CloudForms Management Engine</productname> Infrastructure.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<section id="sect-IPMI_Hosts">
+			<title>IPMI Hosts</title>
+			<xi:include href="topics/Connect_to_the_IPMI_Host1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Discover_the_Management_Interface_for_the_IPMI_Host.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_add_IPMI_credentials1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/Add_the_Management_Interface_for_the_IPMI_Host1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+		<section id="sect-Customization_Templates_for_Host_Provisioning">
+			<title>Customization Templates for Host Provisioning</title> 
+			<para>
+				Add a customization template to provide Kickstart files for the initial loading of the operating system. There are certain sections to use to allow for interactions with the provisioning dialogs provided by <productname>CloudForms Management Engine</productname>.
+			</para>
+			<xi:include href="topics/Customization_Script_Additions1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+			<xi:include href="topics/To_add_a_Customization_Template2.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		</section>
+	</section>
+	<xi:include href="topics/Provisioning_a_Host1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	<section id="sect-Customizing_Provisioning_Dialogs">
+		<title>Customizing Provisioning Dialogs</title> 
+		<para>
+			The default set of provisioning dialogs shows all possible options. However, <productname>CloudForms Management Engine</productname> also provides the ability to customize which tabs and fields are shown. You can decide what fields are required to submit the provisioning request or set default values.
+		</para>
+		<para>
+			For each type of provisioning, there is a dialog that can be created to adjust what options are presented. While samples are provided containing all possible fields for provisioning, you can remove what fields are shown. However, you cannot add fields or tabs.
+		</para>
+		<para>
+			Edit the dialogs to:
+		</para>
+		<orderedlist>
+			<listitem>
+				<para>
+					Hide or show provisioning tabs.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Hide or show fields. If you hide an attribute, the default will be used, unless you specify otherwise.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Set default values for a field.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Specify if a field is required to submit the request.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					Create custom dialogs for specific users.
+				</para>
+			</listitem>
+		</orderedlist>
+		<xi:include href="topics/To_add_a_provision_dialog_file_for_all_users1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/To_create_a_custom_miq_provision_dialogs.rb_file1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+	<section id="sect-Provisioning_Profiles">
+		<title>Provisioning Profiles</title> 
+		<para>
+			Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or <productname>CloudForms Management Engine</productname> groups. To use provisioning profiles:
+		</para>
+		<itemizedlist>
+			<listitem>
+				<para>
+					Create a <guilabel>Provisioning Profile</guilabel> instance for the LDAP or <productname>CloudForms Management Engine</productname> group. If no instance exists, then default settings will be used.
+				</para>
+			</listitem>
+			<listitem>
+				<para>
+					If customizing dialogs, create a custom dialog file, and specify the name of that file in the provisioning profile instance. If customizing the states for provisioning, create a state instance and set the name of the state instance in the provisioning profile instance.
+				</para>
+			</listitem>
+		</itemizedlist>
+		<para>
+			The diagram below shows where provisioning profiles are called during the entire provisioning process.
+		</para>
+		<mediaobject>
+			<imageobject>
+				<imagedata align="center" fileref="images/2344.png" />
+			</imageobject>
+		</mediaobject>
+		<xi:include href="topics/To_create_a_provisioning_profile_instance1.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<xi:include href="topics/Setting_Provisioning_Scope_Tags.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+	</section>
+</chapter>

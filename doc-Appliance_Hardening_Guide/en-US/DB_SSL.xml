@@ -14,29 +14,29 @@
     <itemizedlist>
       <listitem>
         <para>
-          <filename>/var/www/miq/vmdb/certs/server.cer</filename> - Signed certificate for CloudForms database server appliance
+          <filename>/var/www/miq/vmdb/certs/server.cer</filename> - Self-signed certificate for CloudForms database server appliance. You can also use certificates signed by a trusted CA.
         </para>
       </listitem>
       <listitem>
         <para>
-          <filename>/var/www/miq/vmdb/certs/server.cer.key</filename> - Private key for server certificate
+          <filename>/var/www/miq/vmdb/certs/server.cer.key</filename> - Private key for server certificate.
         </para>
       </listitem>
       <!--listitem>
         <para>
-          <filename>/var/www/miq/vmdb/certs/client.cer</filename> - Signed certificate for CloudForms client appliances
+          <filename>/var/www/miq/vmdb/certs/client.cer</filename> - Signed certificate for CloudForms client appliances.
         </para>
       </listitem>
       <listitem>
         <para>
-          <filename>/var/www/miq/vmdb/certs/client.cer.key</filename> - Private key for client certificate
+          <filename>/var/www/miq/vmdb/certs/client.cer.key</filename> - Private key for client certificate.
         </para>
-      </listitem-->
+      </listitem
       <listitem>
         <para>
           <filename>/var/www/miq/vmdb/certs/ca.cer</filename> - The certificate authority that signed the server and client certificates.
         </para>
-      </listitem>
+      </listitem>-->
     </itemizedlist>
     <para>
       It is also recommended to stop all Red Hat CloudForms services before configuring the database to use SSL.
@@ -125,10 +125,12 @@ ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'              # (change requir
         </screen>
       </step-->
       <step>
-        <para>Copy the root certificate file:</para>
+        <para>If you are using SSL certificates signed by a trusted CA, place a copy of your root CA certificate at <filename>/var/www/miq/vmdb/certs/root.crt</filename>.</para>
+        <para>Alternatively, if you have generated a self-signed certificate for your appliance and placed it at <filename>/var/www/miq/vmdb/certs/server.cer</filename>, copy the self-signed certificate file:</para>
         <screen>
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer /var/www/miq/vmdb/certs/root.crt
+[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt
         </screen>
+        <para>See <xref linkend="chap-Red_Hat_CloudForms-Security_Guide-Test_Chapter" /> for more information on generating SSL certificates.</para>
       </step>
       <step>
         <para>Make sure that the security context is set correctly for the files in <filename>/var/www/miq/certs</filename>:</para>
@@ -192,11 +194,11 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
       <step>
         <para>
           <!--Copy the required CloudForms appliance client certificate files to the <filename>.postgresql</filename> directory defaults:-->
-          Copy the root certificate file to the <filename>~/.postgresql</filename> directory:
+          Take the root certificate file that you have placed at <filename>/var/www/miq/vmdb/certs/root.crt</filename> by following <xref linkend="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_database_server" /> and copy it from the appliance database server to the <filename>~/.postgresql</filename> directory:
         </para>
         <screen><!--[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer ~/.postgresql/postgresql.crt
 [root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer.key ~/.postgresql/postgresql.key-->
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer ~/.postgresql/root.crt</screen>
+[root@cloudforms2 ~]# scp [cloudforms1 host]:/var/www/miq/vmdb/certs/root.crt ~/.postgresql/root.crt</screen>
       </step>
       <!--step>
         <para>

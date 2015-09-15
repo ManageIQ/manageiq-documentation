@@ -6,11 +6,11 @@
 <chapter id="chap-Enhancements">
 	<title>Enhancements</title> 
 	<para>
-		The following enhancements are available with Red Hat CloudForms 3.2 (CFME 5.4).
+		The following enhancements are available with Red Hat CloudForms 4.0 (CFME 5.4).
 	</para>
 	<variablelist>
 		<varlistentry>
-			<term>AWS CloudFormation Integration</term>
+		  <term><application>AWS CloudFormation Integration</application></term>
 			<listitem>
 				<para>
 					Users of Amazon Web Services have access to a service called CloudFormation. This service enables users to orchestrate the instantiation of multi-instance services such as LAMP. These are known as stacks when instantiated. A user can control the stacks to obtain key data about their states, such as the entry URL to the software service within the stack. A user can author the stack templates, or can upload them from other sources.
@@ -74,7 +74,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>AWS Config Support</term>
+			<term><application>AWS Config Support</application></term>
 			<listitem>
 				<para>
 					Amazon's AWS Config notifies subscribers of changes in a region through its Simple Notification Service (SNS). Red Hat CloudForms now subscribes to the SNS service for AWS Config deltas and converts the deltas into Red Hat CloudForms events. Users can configure the frequency of delta creation through the AWS Management Console, and can assign Red Hat CloudForms policies to supported AWS events listed below. Note that the AWS Config service must be enabled in the AWS Console.
@@ -104,7 +104,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>IPv6</term>
+			<term><application>IPv6</application></term>
 			<listitem>
 				<para>
 					Red Hat CloudForms has implemented Internet Protocol version 6 (IPv6) for supporting providers on VMWare and RHEVM/oVirt networks. Hosts and Providers now use the hostname for communication instead of IP address. This feature provides the following enhancements: 
@@ -134,7 +134,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>Microsoft System Center Virtual Machine Manager Infrastructure Providers</term>
+			<term><application>Microsoft System Center Virtual Machine Manager Infrastructure Providers</application></term>
 			<listitem>
 				<para>
 					Users can now provision virtual machines from templates using Microsoft System Center VMM infrastructure providers. The provisioning capabilities support the following:
@@ -172,7 +172,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>OpenStack Infrastructure Providers</term>
+			<term><application>OpenStack Infrastructure Providers</application></term>
 			<listitem>
 				<para>
 					Users can now add OpenStack environments to the CloudForms Management Engine as infrastructure providers. This enhancement allows users to monitor and provision the infrastructure components in an OpenStack environment. This enhancement provides the following key features:
@@ -205,7 +205,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>OpenStack Instances to Boot from Volume</term>
+			<term><application>OpenStack Instances to Boot from Volume</application></term>
 			<listitem>
 				<para>
 					This enhancement allows instances created in Red Hat Enterprise Linux OpenStack Platform to boot from a specified volume from an existing selection of block volumes, and not from an Image, which was the only supported option by default.
@@ -229,7 +229,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>Remote Control Consoles</term>
+			<term><application>Remote Control Consoles</application></term>
 			<listitem>
 				<para>
 					Red Hat CloudForms now offers remote control consoles for Red Hat Enterprise Virtualization and VMware vSphere. In order for this to work with VMware, individual virtual machines or the entire infrastructure must be configured to allow VNC access.
@@ -240,7 +240,7 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>REST API Enhancements</term>
+			<term><application>REST API Enhancements</application></term>
 			<listitem>
 				<para>
 					The CloudForms REST API v2 now provides parity with the SOAP API. Red Hat recommends using the REST API for all integration projects, as the SOAP API will be deprecated in the next major Red Hat CloudForms release.
@@ -248,7 +248,100 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>ServiceNOW CMDB Support</term>
+			<term><application>Retirement</application></term>
+			<listitem>
+				<para>
+					Red Hat CloudForms Management Engine now provides a new feature to the virtual machine retirement and service retirement functionality, by adding a retirement state machine. The retirement state machine provides flexibility to easily modify and customize actions taken during retirement. The retirement module in old versions of CloudForms Management Engine relied heavily on hidden workflow processing and policy definitions, which significantly limited its usefulness.
+				</para>
+				<para>
+				  The new retirement state machine improves upon the old code in the following ways:
+				    <itemizedlist>
+				      <listitem>
+					<para>
+					  The new retirement state machine exposes many stages of the retirement process by adding two new events:
+					    <variablelist>
+					      <varlistentry>
+						<term></term>
+						<listitem>
+						  <para>
+						    request_vm_retire event
+						  </para>
+						  <para>
+						    request_service_retire
+						  </para>
+						</listitem>
+					      </varlistentry>
+					    </variablelist>  
+					</para>
+					<para>
+					  See <ulink url="https://access.redhat.com/documentation/en-US/Red_Hat_CloudForms/3.2/html/Lifecycle_and_Automation_Guide/Phase_5_Retirement1.html">B.5. Phase 5: Retirement</ulink> to view the new retirement workflow.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					  Adding a retirement_state attribute that allows for better tracking and error detection. This attribute can be in 3 states: retiring, retired, or error. This helps address the long standing issue of multiple conflicting retirement states.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					  There is no requirement to define a retirement policy any more.
+					</para>
+				      </listitem>
+				    </itemizedlist>  
+				</para>
+			</listitem>			
+		</varlistentry>
+		<varlistentry>
+			<term>Service Dialog</term>
+			<listitem>
+				<para>
+				CatalogItemInitialization and CatalogBundleInitialization are Service Provisioning State Machines created to simplify the process of creating full-featured Service Catalog Items and Bundles. These Services provide CFME the ability to create rich service dialogs, without the need for any Ruby scripting. 
+				</para>
+				<para>
+				These two State Machine Instances, and their supporting Methods, have been completely re-written for Red Hat CloudForms Management Engine 5.4. 
+				</para>
+				<para>
+				  Previously in CFME, the catalogbundleinitialization and catalogiteminitialization Automate Methods had duplicated parsing code and had issues where tagging and options setting was not working correctly. To fix this issue, a new Automate Method 'dialog_parser' has been added. This new Method is executed prior to catalogbundleinitialization and catalogiteminitialization Methods to provide consolidated and configurable dialog parsing.
+				</para>
+				<para>
+				  Benefits of this Enhancement:
+				    <itemizedlist>
+				      <listitem>
+					<para>
+					  Single copy of parsing code in separate Automate Method. 
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					  Normalized Dialog information provided to Service Provision State Machine Methods.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					  Enhanced clarity by the separation of dialog options and tags.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					 Added tag_control support.
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					 Ability to override the service_name, service_description and vm_name. 
+					</para>
+				      </listitem>
+				      <listitem>
+					<para>
+					 Service cleanup for failed service provision.
+					</para>
+				      </listitem>
+				    </itemizedlist>				    
+				</para>
+			</listitem>
+		</varlistentry>		
+		<varlistentry>
+			<term><application>ServiceNOW CMDB Support</application></term>
 			<listitem>
 				<para>
 					Red Hat CloudForms now provides the ability to interact with ServiceNOW CMDB servers. Insight data can now be sent to ServiceNOW CMDB servers as part of provisioning, retirement, and reconfiguration. Automation work flows can now be integrated with ServiceNOW for insight data.
@@ -259,12 +352,14 @@
 			</listitem>
 		</varlistentry>
 		<varlistentry>
-			<term>User Interface Locale</term>
+			<term><application>User Interface Locale</application></term>
 			<listitem>
 				<para>
 					Users can now change the Red Hat CloudForms' user interface locale to specify either English or Japanese. See <xref linkend="chap-Changing_the_UI_Locale" /> for the procedure on how to change the user interface locale.
 				</para>
 			</listitem>
-		</varlistentry>
+		</varlistentry>		
 	</variablelist>
+	<xi:include href="topics/Methods_for_Upgrading.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
 </chapter>
+

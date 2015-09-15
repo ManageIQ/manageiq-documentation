@@ -1,0 +1,127 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Lifecycle_and_Automation_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="To_create_a_Policy_for_Automate1" remap="TID_15630">
+	<title>Creating a Policy for Automate</title>
+	<para>
+		This procedure shows you how to create a policy for automate.
+	</para>
+	<procedure>
+		<title>To Create a Policy for Automate</title>
+		<step>
+			<para>
+				Navigate to <menuchoice><guimenu>Control</guimenu><guisubmenu>Explorer</guisubmenu></menuchoice>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click the <guilabel>Policies</guilabel> accordion, and select <guilabel>Control Policies</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Select <guilabel>VM Control Policies</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject><guilabel>(Configuration)</guilabel>, then 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1848.png" />
+					</imageobject>
+				</inlinemediaobject> <guilabel>(Add a New Control Vm Policy)</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Type in a <guilabel>Description</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Uncheck <guilabel>Active</guilabel> if you do not want this policy processed even when assigned to a resource.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guilabel>Add</guilabel>. You are brought to the page where you add conditions and events to your new policy.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1847.png" />
+					</imageobject>
+				</inlinemediaobject><guilabel>(Configuration)</guilabel>, then 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1880.png" />
+					</imageobject>
+				</inlinemediaobject> <guilabel>(Edit this Policy's Event assignments)</guilabel>.
+			</para>
+			<itemizedlist>
+				<listitem>
+					<para>
+						Check the events you want to use to send to an <guilabel>Automate Model</guilabel>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click <guilabel>Save</guilabel>.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						From the <guilabel>Events</guilabel> area, click on the <guilabel>Description of the Event</guilabel> you want to assign an action to.
+					</para>
+				</listitem>
+				<listitem>
+					<para>
+						Click 
+						<inlinemediaobject>
+							<imageobject>
+								<imagedata fileref="images/1881.png" />
+							</imageobject>
+						</inlinemediaobject> <guilabel>(Edit Actions for this Policy Event)</guilabel>.
+					</para>
+				</listitem>
+			</itemizedlist>
+		</step>
+		<step>
+			<para>
+				Select <guilabel>Raise Automation Event</guilabel>, and click 
+				<inlinemediaobject>
+					<imageobject>
+						<imagedata fileref="images/1876.png" />
+					</imageobject>
+				</inlinemediaobject> <guilabel>(Move selected Actions into this Event)</guilabel>.
+			</para>
+		</step>
+		<step>
+			<para>
+				Click <guilabel>Save</guilabel>.
+			</para>
+		</step>
+	</procedure>
+	<formalpara>
+		<title>Result:</title>
+		<para>
+			You can now assign this policy to a <guilabel>Policy Profile</guilabel>. Then, assign the policy profile to the virtual machines. Every time this event happens on the virtual machine the appropriate Automate Model will be initiated.
+		</para>
+	</formalpara>
+	<note>
+		<para>
+			If you want the policy to initiate an Automate Model from the <filename class="directory">/System/Process/Request</filename> class, then you can create your own custom action. Be sure to have an instance in the <filename class="directory">/System/Process/Request</filename> class for it to map to.
+		</para>
+	</note>
+</section>

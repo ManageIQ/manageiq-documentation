@@ -26,16 +26,6 @@
           <filename>/var/www/miq/vmdb/certs/server.cer.key</filename> - Private key for server certificate.
         </para>
       </listitem>
-      <!--listitem>
-        <para>
-          <filename>/var/www/miq/vmdb/certs/client.cer</filename> - Signed certificate for CloudForms client appliances.
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          <filename>/var/www/miq/vmdb/certs/client.cer.key</filename> - Private key for client certificate.
-        </para>
-      </listitem>-->
       <listitem>
         <para><filename>/var/www/miq/vmdb/certs/root.crt</filename> - The root certificate for CloudForms database server appliance. You can either use a self-signed certificate or a certificate signed by a trusted CA to generate your root certificate.</para>
       </listitem>
@@ -62,26 +52,6 @@
 /var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
         </screen>
       </step>
-      <!--step>
-        <para>Copy the server key file:</para>
-        <screen>
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
-        </screen>
-      </step>
-      <step>
-        <para>
-          Secure the server key file:
-        </para>
-        <screen>
-[root@cloudforms2 ~]# chmod 600 /var/www/miq/vmdb/certs/postgres.key
-        </screen>
-      </step>
-      <step>
-        <para>Make sure that the server key file is owned by <systemitem>postgres</systemitem>:</para>
-        <screen>
-[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/postgres.key
-        </screen>
-      </step-->
       <step>
         <para>Install the server certificate file in the correct location and set the ownership and permissions for it:</para>
         <screen>
@@ -89,27 +59,9 @@
 /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
         </screen>
       </step>
-      <!--step>
-        <para>Copy the server certificate file:</para>
-        <screen>
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
-        </screen>
-      </step>
-      <step>
-        <para>Set the correct permissions for the server certificate:</para>
-        <screen>
-[root@cloudforms2 ~]# chmod 644 /var/www/miq/vmdb/certs/postgres.crt
-        </screen>
-      </step>
-      <step>
-        <para>Make sure that the server certificate is owned by <systemitem>postgres</systemitem>:</para>
-        <screen>
-[root@cloudforms2 ~]# chown postgres:postgres /var/www/miq/vmdb/certs/postgres.crt
-        </screen>
-      </step-->
       <step>
         <para>Use the database server certificate to create your root certificate:</para>
-        <screen>[root@cloudforms2 ~]# openssl req -new -key /var/www/miq/vmdb/certs/server.cer.key -days 3650 -out /tmp/server.crt -x509 -subj '/C=US/ST=North Carolina/L=Raleigh/O=CloudForms/CN=root'</screen>
+        <screen>[root@cloudforms2 ~]# openssl req -new -key /var/www/miq/vmdb/certs/server.cer.key -days 3650 -out /tmp/root.crt -x509 -subj '/C=US/ST=North Carolina/L=Raleigh/O=CloudForms/CN=root'</screen>
       </step>
       <step>
         <para>Install the root certificate file in the correct location and set the ownership and permissions for it:</para>
@@ -191,34 +143,12 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
       </step>
       <step>
         <para>
-          <!--Copy the required CloudForms appliance client certificate files to the <filename>.postgresql</filename> directory defaults:-->
-          Take the root certificate file that you have previously created at <filename>/tmp/root.crt</filename> by following <xref linkend="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_database_server" /> and copy it from the appliance database server to the <filename>/root/.postgresql</filename> directory on the client side:
+          Take the root certificate file that you have previously created at <filename>/tmp/root.crt</filename> by following <xref linkend="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_database_server" /> and copy it from the database appliance server to the <filename>/root/.postgresql</filename> directory on the client side:
         </para>
-        <screen><!--[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer ~/.postgresql/postgresql.crt
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer.key ~/.postgresql/postgresql.key-->
+        <screen>
 [root@cloudforms2 ~]# scp [database_appliance_fqdn]:/tmp/root.crt /root/.postgresql/root.crt</screen>
         <para>Where <replaceable>database_appliance_fqdn</replaceable> is the fully qualified domain name of the database server appliance.</para>
       </step>
-      <!--step>
-        <para>
-          Secure the key file:
-        </para>
-        <screen>
-[root@cloudforms2 ~]# chmod 600 ~/.postgresql/postgresql.key
-        </screen>
-      </step>
-      <step>
-        <para>Make sure that the key file is owned by <systemitem>postgres</systemitem>:</para>
-        <screen>
-[root@cloudforms2 ~]# chown postgres:postgres ~/.postgresql/postgresql.key
-        </screen>
-      </step>
-      <step>
-        <para>Make sure that the security context is set correctly for the files in <filename>~/.postgresql</filename>:</para>
-        <screen>
-[root@cloudforms2 ~]# restorecon -R -v ~/.postgresql
-        </screen>
-      </step-->
       <step>
         <para>
           Test the connection between the appliance client and the appliance database server using the <command>psql</command>:

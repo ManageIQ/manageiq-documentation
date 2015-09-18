@@ -41,9 +41,9 @@
         </para>
       </step>
       <step>
-        <para>Stop the <systemitem>evmserverd</systemitem> and <systemitem>postgresql92-postgresl</systemitem> services:</para>
+        <para>Stop the <systemitem>evmserverd</systemitem> and <systemitem>rh-postgresql94-postgresql</systemitem> services:</para>
         <screen>[root@cloudforms2 ~]# service evmserverd stop</screen>
-        <screen>[root@cloudforms2 ~]# service postgresql92-postgresql stop</screen>
+        <screen>[root@cloudforms2 ~]# service rh-postgresql94-postgresql stop</screen>
       </step>
       <step>
         <para>Install the server key file in the correct location and set the ownership and permissions for it:</para>
@@ -75,7 +75,7 @@
       </step>
       <step>
         <para>
-          Open the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf</filename> file and uncomment and edit the <option>ssl</option> option:
+          Open the <filename>/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf</filename> file and uncomment and edit the <option>ssl</option> option:
         </para>
         <screen>
 ssl=on
@@ -91,7 +91,7 @@ ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'      # (change requires resta
       </step>
       <step>
         <para>
-          Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/pg_hba.conf</filename> file. It should look similar to this:
+          Edit the <filename>/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf</filename> file. It should look similar to this:
         </para>
         <programlisting>
 # TYPE    DATABASE USER  ADDRESS       METHOD
@@ -114,9 +114,9 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
       </step>
       <step>
         <para>
-          Start the <systemitem>postgresql92-postgresql</systemitem> and <systemitem>evmserverd</systemitem> services so that the changes take effect:
+          Start the <systemitem>rh-postgresql94-postgresql</systemitem> and <systemitem>evmserverd</systemitem> services so that the changes take effect:
         </para>
-        <screen>[root@cloudforms1 ~]# service postgresql92-postgresql start</screen>
+        <screen>[root@cloudforms1 ~]# service rh-postgresql94-postgresql start</screen>
         <screen>[root@cloudforms1 ~]# service evmserverd start</screen>
       </step>
     </procedure>

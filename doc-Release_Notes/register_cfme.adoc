@@ -1,0 +1,122 @@
+[[registering_and_updating_cloudforms_management_engine]]
+== Registering and Updating CloudForms Management Engine
+
+The +Red Hat Updates+ page enables you to edit customer information,
+register appliances, and update appliances. Editing customer information
+enables you to determine the registration point, User ID, and password.
+Red Hat CloudForms prompts you to update the Server URL when updating the
+registration point to a local Red Hat Satellite. The +Status of Available
+Servers+ area provides options to refresh, register, check for updates,
+and to update. The +Red Hat Updates+ page enables the Content Delivery
+Network (CDN) to assign the necessary update packages to the CloudForms
+Management Engine Server.
+
+Using the +Check For Updates+ task button, the CDN assigns any necessary
+update packages to your server and notifies you. Click +Update+, and the
+CloudForms Management Engine packages install and update.
+
+Three steps are required to update the CloudForms Management Engine Appliance:
+
+. Register the CloudForms Management Engine for updates if it is not already registered.
+. Update the CloudForms Management Engine Appliance.
+. Update other system packages.
+
+The following tools are used during the update process:
+
+* +yum+ provides package installation, updates, and dependency checking.
+* Red Hat Subscription Manager manages subscriptions and entitlements.
+* Red Hat Satellite Server runs at customer locations providing local system registration and updates from inside the customer's firewall.
+
+[IMPORTANT]
+=======
+The update worker synchronizes the VMDB with the status of available
+CloudForms Management Engine content every 12 hours.
+=======
+
+[NOTE]
+=======
+Servers with the +RHN Mirror+ role also act as a repository for other
+Appliances to pull CloudForms Management Engine packages updates.
+=======
+
+=== Registering Appliances
+
+The +Red Hat Updates+ page enables you to register appliances. You will need the following to register:
+
+* Your Red Hat Account login or Red Hat Network Satellite login
+* A Red Hat subscription that covers your product
+
+image:6637.png[]
+
+. Navigate to +Configure → Configuration+. Select +Region+ in the accordion menu, and click the +Red Hat Updates+ tab.
+. In +Red Hat Software Updates+, click +Edit Registration+.
+. You can register the CloudForms Management Engine Appliance using one of three available options:
+* Red Hat Subscription Management
+* Red Hat Satellite 5
+* Red Hat Satellite 6
+The Subscription Management Service you register with will provide your systems with updates and allow additional management.
+** To register with Red Hat Subscription Management:
+.. In Register to, select +Red Hat Subscription Management+.
+.. Enter +Red Hat Subscription Management Address+. The default is +subscription.rhn.redhat.com+.
+.. Enter +Repository Name+. The default is +cf-me-5.5-for-rhel-7-rpms rhel-server-rhscl-7-rpms+.
+.. To use an HTTP proxy, select +Use HTTP Proxy+.
+.. Enter your Red Hat account information, and click +Validate+.
+.. Click +Save+.
+** To register with Red Hat Satellite 5:
+.. In Register to, select +Red Hat Satellite 5+.
+.. Enter +Red Hat Satellite 5 Address+. The default is +subscription.rhn.redhat.com+.
+.. Enter +Repository Name+. The default is +cf-me-5.5-for-rhel-7-rpms rhel-server-rhscl-7-rpms+.
+.. To use an HTTP proxy, select +Use HTTP Proxy+.
+.. Enter your Red Hat account information, and click +Validate+.
+.. Click +Save+.
+** To register with Red Hat Satellite 6:
+.. In +Register to+, select +Red Hat Satellite 6+.
+.. Enter Red Hat Satellite 6 Address. The default is +subscription.rhn.redhat.com+.
+.. Enter +Repository Name+. The default is +cf-me-5.5-for-rhel-7-rpms rhel-server-rhscl-7-rpms+.
+.. To use an HTTP proxy, select +Use HTTP Proxy+.
+.. Enter your Red Hat account information, and click +Validate+.
+.. Click +Save+.
+
+=== Updating Appliances
+
+The +Red Hat Updates+ page enables you to check for updates and update rgistered appliances.
+
+. Navigate to +Configure → Configuration+. Select +Region+ in the accordion menu and click the +Red Hat Updates+ tab.
+. After registering, the following options are available in the +Appliance Updates+ section of the +Red Hat Updates+ tab:
+
+[width="100%",cols="30%,70%",options="header",]
+|=======================================================================
+|Option|Use
+|Check for Updates| Checks for available updates using yum.
+|Register|Attempts to register the appliance if it is not already registered. CloudForms Management Engine subscribes to the rhel-x86_64-server-6-cf-me-3 RHN channel for RHN registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, CloudForms Management Engine checks for updates after registering.
+|Apply CFME Update|Applies updates to CloudForms Management Engine packages only. Specifically, this option runs the yum -y update cfme-appliance command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated.
+|=======================================================================
+
+=== Updating the Appliance Operating System
+
+Users update CloudForms Management Engine packages through the web console under Configure → Configuration → Settings → Region → Red Hat Updates. However, updating the Appliance's operating system requires a manual update using the +yum+ command.
+
+. Log in to the Appliance as the root user.
+. Run the yum update command and confirm any updates.
++
+----
+# yum update
+  ...
+  Transaction Summary
+  =================================================
+  Upgrade  52 Packages
+  
+  Total download size: 34 M
+  Is this ok [y/N]: Y  
+----
++
+
+[IMPORTANT]
+=======
+Scheduled downtime is required while updating system packages for the following reasons:
+
+* Some updates may interrupt CloudForms Management Engine operations.
+* Updates for the PostgreSQL database server suspend CloudForms Management Engine operations.
+* System updates may require a reboot of the CloudForms Management Engine Appliance.
+=======
+

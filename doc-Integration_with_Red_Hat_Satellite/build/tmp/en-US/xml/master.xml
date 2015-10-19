@@ -1,0 +1,401 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!DOCTYPE book [
+<!ENTITY % BOOK_ENTITIES SYSTEM "master.ent">
+%BOOK_ENTITIES;
+<!ENTITY % sgml.features "IGNORE">
+<!ENTITY % xml.features "INCLUDE">
+<!ENTITY % DOCBOOK_ENTS PUBLIC "-//OASIS//ENTITIES DocBook Character Entities V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/dbcentx.mod">
+%DOCBOOK_ENTS;
+]>
+<book version="5.0" xml:lang="en-US" xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<?asciidoc-toc maxdepth="3"?>
+	<info>
+		<title>Integration with Red Hat Satellite 6</title>
+		<subtitle>A short guide to integrating Red Hat Satellite 6 features into Red Hat CloudForms</subtitle>
+		 <date>2015-10-16</date>
+		<xi:include href="Author_Group.xml" xmlns:xi="http://www.w3.org/2001/XInclude" />
+		<authorinitials>CDT</authorinitials><productname>Red Hat CloudForms</productname>
+		<productnumber>4.0</productnumber>
+		<abstract>
+			<para>
+				A new feature in Red Hat CloudForms 3.2 is integration with Red Hat Satellite 6 servers. This allows Red hat CloudForms users to leverage features from Red Hat Satellite 6, such as bare metal provisioning and configuration management. This guide shows how to add Red Hat Satellite 6 as a provider in Red Hat CloudForms Management Engine and use Red Hat Satellite 6's features within Red Hat CloudForms.
+			</para>
+		</abstract>
+	</info>
+	<chapter xml:id="Introduction">
+		<title>Introduction</title>
+		<simpara>
+			Satellite 6 is a subscription and system management tool that provides a way to provision hosts (both virtual and bare metal) and configure them using a set of Puppet modules. Red Hat CloudForms 3.2 provides functionality to integrate with a Red Hat Satellite 6 server and take advantage of its features. This includes:
+		</simpara>
+		<itemizedlist>
+			<listitem>
+				<simpara>
+					Monitoring the inventory of your Red Hat Satellite 6 server, including independent hosts and hosts provisioned using hostgroups.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Reprovisioning existing bare mental systems hosts to new host groups.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Applying Red Hat CloudForms Management Engine policy tags to hosts.
+				</simpara>
+			</listitem>
+		</itemizedlist>
+		<simpara>
+			This guide provides a step-by-step workflow on how to integrate Red Hat CloudForms 4.0 and Red Hat Satellite 6 together.
+		</simpara>
+		<formalpara>
+			<title>Important</title>
+			<para>
+				
+<screen>Red Hat CloudForms only reprovisions existing systems in a Red Hat Satellite 6 environment. Provisioning systems from Red Hat Satellite 6's bare metal discovery service is planned for a future release.</screen>
+			</para>
+		</formalpara>
+	</chapter>
+	<chapter xml:id="Defining_the_Workflow">
+		<title>Defining the Workflow</title>
+		<simpara>
+			This guide uses the following workflow:
+		</simpara>
+		<orderedlist numeration="arabic">
+			<listitem>
+				<simpara>
+					Add a Red Hat Satellite 6 server details to Red Hat CloudForms Management Engine.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Refresh the state of your Red Hat Satellite 6 provider in Red Hat CloudForms Management Engine.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Select an existing bare metal host from Red Hat Satellite 6 for reprovisioning.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Apply policy tags to Red Hat Satellite 6 hosts.
+				</simpara>
+			</listitem>
+		</orderedlist>
+	</chapter>
+	<chapter xml:id="Defining_the_Hostgroup_Hierarchy">
+		<title>Defining the Hostgroup Hierarchy</title>
+		<simpara>
+			Red Hat CloudForms Management Engine displays the Red Hat Satellite 6 infrastructure in a host group and host relationship. A host group defines a set of default values that hosts inherit when placed in that group. Hosts can belong to only one host group, but host groups can be nested in hierarchies. You can create a "base" or "parent" host group that represents all hosts in your organization, and then create nested or "child" host groups under that parent to provide specific settings.
+		</simpara>
+	</chapter>
+	<chapter xml:id="Adding_a_Satellite_6_Provider_to_CloudForms">
+		<title>Adding a Satellite 6 Provider to CloudForms</title>
+		<simpara>
+			To start provisioning bare metal machines, you need at least one Red Hat Satelllite 6 provider added to Red Hat CloudForms Management Engine. The following procedure show how to do this.
+		</simpara>
+		<section xml:id="adding_a_red_hat_satellite_6_provider">
+			<title>Adding a Red Hat Satellite 6 Provider</title>
+			<orderedlist numeration="arabic">
+				<listitem>
+					<simpara>
+						Log in to your Red Hat CloudForms Management Engine UI as the administration user.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Navigate to Infrastructure → Configuration Management. The providers list appears and should be empty.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select Configuration → Add a new Provider. A empty form for your new Satellite 6 provider appears.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Enter a Name for the provider. This is just a plain text name to help identify your provider in the Red Hat CloudForms Management Engine UI. For example, Satellite 6.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Enter a URL for the provider. This is the root URL for the Satellite 6 server and can be either an IP address or a hostname. For example, <link xlink:href="http://satellite6.example.com">http://satellite6.example.com</link>.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select Verify Peer Certificate to use encrypted communication with the provider. This requires the SSL certificates from your Red Hat Satellite 6 provider.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Enter a Username for a user on the provider. Ideally, this would be a user in Satellite 6 with administrative access.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Enter a Password and enter it again to Verify Password. Click the Validate button to test your connection with the Red Hat Satellite 6 server.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Click Add to confirm your settings and save the provider.
+					</simpara>
+				</listitem>
+			</orderedlist>
+			<simpara>
+				Red Hat CloudForms Management Engine saves the Satellite 6 provider in its database and triggers a refresh of resources detected in the provider.
+			</simpara>
+		</section>
+	</chapter>
+	<chapter xml:id="Triggering_a_Refresh_of_a_Satellite_6_Provider">
+		<title>Triggering a Refresh of a Satellite 6 Provider</title>
+		<simpara>
+			Your Satellite 6 provider can still create new hosts independently of Red Hat CloudForms. Your Red Hat CloudForms appliance detects these changes after an automatic refresh period. However, you can trigger a manual refresh to avoid waiting for the automatic refresh.
+		</simpara>
+		<section xml:id="triggering_a_refresh_of_a_satellite_6_provider">
+			<title>Triggering a Refresh of a Satellite 6 Provider</title>
+			<orderedlist numeration="arabic">
+				<listitem>
+					<simpara>
+						If you have not navigated elsewhere, the Infrastructure → Configuration Management screen displays your Red Hat Satellite 6 server.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select your Red hat Satellite 6 provider using the checkbox and click Configuration → Refresh Relationships and Power States. This triggers the refresh.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						When the refresh complete, click on the Red Hat Satellite 6 provider to check the updated contents.
+					</simpara>
+				</listitem>
+			</orderedlist>
+			<simpara>
+				The page now displays an updated list of host groups in the provider.
+			</simpara>
+		</section>
+	</chapter>
+	<chapter xml:id="Displaying_Red_Hat_Satellite_6_Contents">
+		<title>Displaying Red Hat Satellite 6 Contents</title>
+		<simpara>
+			Red Hat CloudForms provides to methods for viewing the contents of a Red Hat Satellite 6 provider. These methods are:
+		</simpara>
+		<itemizedlist>
+			<listitem>
+				<simpara>
+					Providers - This presents the Red Hat Satellite 6 contents as a hierarchy of host groups belonging to a provider and then individual hosts belonging to each provider.
+				</simpara>
+			</listitem>
+			<listitem>
+				<simpara>
+					Configured Systems - This presents a list of all hosts on your Red Hat Satellite 6 server. This also provides a method to apply pre-defined filters to organized specific machines.
+				</simpara>
+			</listitem>
+		</itemizedlist>
+		<simpara>
+			Change between these two views using the accordion menu on the left of the user interface.
+		</simpara>
+	</chapter>
+	<chapter xml:id="Reprovisioning_a_Bare_Metal_Host_in_Red_Hat_CloudForms">
+		<title>Reprovisioning a Bare Metal Host in Red Hat CloudForms</title>
+		<simpara>
+			The current inventory of your Red Hat Satellite 6 server is now visable in Red Hat CloudForms Management Engine. The next procedure is an example of reprovisioning an existing bare metal system into a new hostgroup. For this example, your Red Hat Satellite 6 environment requires the following:
+		</simpara>
+		<itemizedlist>
+			<listitem>
+				<simpara>
+					An existing bare metal system stored as a host object in your Red Hat Satellite 6 server. This system can either:
+				</simpara>
+				<itemizedlist>
+					<listitem>
+						<simpara>
+							A standalone system previously provisioned without a host group.
+						</simpara>
+					</listitem>
+					<listitem>
+						<simpara>
+							A system previously provisioned using a host group.
+						</simpara>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+			<listitem>
+				<simpara>
+					A target host group. This host group contains the system configuration to apply to the host when reprovisioning it. This includes:
+				</simpara>
+				<itemizedlist>
+					<listitem>
+						<simpara>
+							A new operating system installation, including a new partition table.
+						</simpara>
+					</listitem>
+					<listitem>
+						<simpara>
+							A new networking configuration that the Red Hat Satellite 6 server defines and manages.
+						</simpara>
+					</listitem>
+					<listitem>
+						<simpara>
+							Registration to any Red Hat subscriptions and repositories assigned to the hostgroup.
+						</simpara>
+					</listitem>
+					<listitem>
+						<simpara>
+							Application of any Puppet modules assigned to the hostgroup.
+						</simpara>
+					</listitem>
+				</itemizedlist>
+			</listitem>
+		</itemizedlist>
+		<section xml:id="reprovisioning_a_bare_metal_host_in_red_hat_cloudforms">
+			<title>Reprovisioning a Bare Metal Host in Red Hat CloudForms</title>
+			<orderedlist numeration="arabic">
+				<listitem>
+					<simpara>
+						If you have not navigated elsewhere, the Infrastructure → Configuration Management screen displays your Red Hat Satellite 6 server.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select Configured Systems from the accordion menu on the left. This displays our system list.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select one or more hosts to reprovision. Use the checkboxes to select these systems.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select Lifecycle → Provision Configured Systems. This displays the form we use for provisioning details.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Under the Request tab, enter the following details:
+					</simpara>
+					<orderedlist numeration="loweralpha">
+						<listitem>
+							<simpara>
+								E-Mail address
+							</simpara>
+						</listitem>
+						<listitem>
+							<simpara>
+								First Name
+							</simpara>
+						</listitem>
+						<listitem>
+							<simpara>
+								Last Name
+							</simpara>
+						</listitem>
+						<listitem>
+							<simpara>
+								This form also contains optional fields for users to enter a plain text Note to inform Red Hat CloudForms administrators of any special details and a field their manager’s Name in case administrators require approval from a user’s manager.
+							</simpara>
+						</listitem>
+					</orderedlist>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select the Purpose tab and select any Red Hat CloudForms policy tags that apply to the system.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select the Catalog tab. This screen displays the list of chosen machines to reprovision and their current details. Select a target host group from the Configuration Profile list. Red Hat CloudForms communicates to Red Hat Satellite to apply the configuration from this host group to the selected host and reprovision the system.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select the Customise tab. This screen displays some customizable fields for the selected system. You can change the Root Password or change the Host name and IP Address. Note that these fields are optional as the host group in Red Hat Satellite 6 contains this information. The fields here will override the settings from the hostgroup.
+					</simpara>
+				</listitem>
+			</orderedlist>
+			<formalpara>
+				<title>Important</title>
+				<para>
+					
+<screen>Provisioning bare metal systems still requires access to the network that Red Hat Satellite 6 manages. This is because Red Hat Satellite controls PXE booting, kickstarts, and Puppet configuration for bare metal systems. Ensure the IP address you enter in Red Hat CloudForms Management Engine can access a DHCP service that Red Hat Satellite 6 provides either through the main server or through a Red Hat Satellite 6 Capsule server.</screen>
+				</para>
+			</formalpara>
+			<orderedlist numeration="arabic">
+				<listitem>
+					<simpara>
+						Select the Customise tab. This screen allows you to either launch the provisioning process Immediately on Approval or using a schedule. Click Schedule to show the date and time fields you use to schedule the provisioning.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						When you have completed all sections of the provisioning form, click Submit.
+					</simpara>
+				</listitem>
+			</orderedlist>
+			<simpara>
+				This submits the provisioning request. Depending on the request settings on your Red Hat CloudForms appliance, this provisioning request might require approval from an administrator. If not, the provisioning request launches depending on your choce for the Schedule.
+			</simpara>
+			<formalpara>
+				<title>Note</title>
+				<para>
+					
+<screen>Previously provisioned hosts might require manual selection of PXE boot from the boot menu or else they might boot to hard disk and not reprovision.</screen>
+				</para>
+			</formalpara>
+		</section>
+	</chapter>
+	<chapter xml:id="Tagging_a_Bare_Metal_Host_in_Red_Hat_CloudForms">
+		<title>Tagging a Bare Metal Host in Red Hat CloudForms</title>
+		<simpara>
+			Red Hat CloudForms can also control policy settings of bare metal systems from Red Hat Satellite 6 through tagging. Tagging attaches levels of metadata to help define the policy rules required for a set of systems.
+		</simpara>
+		<section xml:id="tagging_a_bare_metal_host_in_red_hat_cloudforms">
+			<title>Tagging a Bare Metal Host in Red Hat CloudForms</title>
+			<orderedlist numeration="arabic">
+				<listitem>
+					<simpara>
+						If you have not navigated elsewhere, the Infrastructure → Configuration Management screen displays your Red Hat Satellite 6 server.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select Configured Systems from the accordion menu on the left. This displays your system list.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select one or more hosts to tag. Use the checkboxes to select these systems.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Select Policy → Edit Tags. This displays the form we use for tagging systems.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						Under Tag Assignment, select a tag from Select a customer tag to assign and then choose a value from Select a value to assign. For example, you can tag this system as located in Chicago by selecting Location as the tag and Chicago as the value. Once selected, the user interface automatically adds this tag and value to the table below.
+					</simpara>
+				</listitem>
+				<listitem>
+					<simpara>
+						After adding your chosen tags and values, click Save.
+					</simpara>
+				</listitem>
+			</orderedlist>
+			<simpara>
+				The bare metal system is now configured with a set of policy tags.
+			</simpara>
+			<formalpara>
+				<title>Note</title>
+				<para>
+					
+<screen>For more information on tags and system policy, see the Red Hat CloudForms 4.0 Insight Guide.</screen>
+				</para>
+			</formalpara>
+		</section>
+	</chapter>
+</book>
+

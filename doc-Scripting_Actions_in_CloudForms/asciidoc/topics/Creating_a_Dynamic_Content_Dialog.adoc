@@ -2,46 +2,40 @@
 
 The procedure describes the steps to create a dynamic content dialog.
 
-Navigate to Automate Explorer.
+. Navigate to `Automate` -> `Explorer`.
 
-From the accordion menu, click DOMAINCloudVMOperationsMethods.
+. From the accordion menu, click `DOMAIN` -> `Cloud` -> `VM` -> `Operations` -> `Methods`.
 
-____________________________________________________________________________________________________________________________________________________________
-*Note*
-
++
+.NOTE
 DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain.
 If necessary, you can copy the class from the ManageIQ domain into a
 custom domain.
++
+This example uses the `Cloud` Namespace but can also use the
+`Infrastructure` namespace.
 
-This example uses the Cloud Namespace but can also use the
-Infrastructure namespace.
-____________________________________________________________________________________________________________________________________________________________
+. Click image:../images/1847.png[image] (`Configuration`), then
+image:../images/2361.png[image] (`Add a new Instance`).
 
-Click image:../images/1847.png[image] (Configuration), then
-image:../images/2361.png[image] (Add a new Instance).
+. In the `Main Info` area, enter `Name` = _++dynamic_list++_, replacing _++dynamic_list++_ with an appropriate name for the method.
 
-In the Main Info area, enter Name = dynamic_list, replacing dynamic_list
-with an appropriate name for the method.
+. Enter a `Display Name` and `Description`.
 
-Enter a Display Name and Description.
+. In the `Fields` area, enter `Value` = _++dynamic_list++_. Leave the other fields blank or use the default values.
 
-In the Fields area, enter Value = dynamic_list. Leave the other fields
-blank or use the default values.
+. Click `Add`.
 
-Click Add.
+. Navigate to `Methods` tab.
 
-Navigate to Methods tab.
+. In the `Main Info` area, enter `Name` = \\dynamic_list and populate the `Data` section with the example automate method below.
 
-In the Main Info area, enter Name = dynamic_list and populate the Data
-section with the example automate method below.
+. Click `Add`.
 
-Click Add.
+. Set the automate entry point for the dialog control; use the new
+instance created in step four. You can create a new domain and copy the method to that domain.
 
-Set the automate entry point for the dialog control; use the new
-instance created in step four. You can create a new domain and copy the
-method to that domain.
-
------------------------------------------------------------------------------
+---------------------
 #  Automate Method
 
 dialog_field = $evm.object
@@ -60,4 +54,4 @@ dialog_field["data_type"] = "integer"
 
 dialog_field["values"] = {1 => "one", 2 => "two", 10 => "ten", 50 => "fifty"}
 dialog_field["default_value"] = 2
------------------------------------------------------------------------------
+---------------------

@@ -1,0 +1,38 @@
+[[_to_create_a_hostd_log_threshold_alert]]
+= Creating a hostd Log Threshold Alert
+
+Use hostd log threshold when you want to send a notification when certain items are found in the event logs for a host.
+A default analysis profile with event log items is required for this feature.
+See https://access.redhat.com/documentation/en-US/CloudForms/3.2/html/Insight_Guide/index.html[CloudForms Management Engine Insight Guide] for details.
+In this example, we will check the Hosts log for a failure to validate a virtual machine's IP address. 
+
+.Procedure: To Create a Hostd Log Threshold Alert
+. Navigate to menu:Control[Explorer]. 
+. Click the [label]#Alert# accordion. 
+. Click  image:images/1847.png[] ([label]#Configuration#),  image:images/1848.png[] ([label]#Add a new Alert#). 
+. In the [label]#Info# area: 
++
+
+image::images/1981.png[]
++
+* Type in a [label]#Description# for the alert. 
+* From [label]#Based On#, select [label]#Host#. 
+* For [label]#What to Evaluate#, select [label]#Hostd Log Threshold#. 
+* In [label]#Notification Frequency#, select how often you want to be notified if the log item is detected. 
+
+. In the [label]#Hostd Log Threshold Parameters# area, select the parameters for the event log message.
+  You can set a threshold for a filter, level, or message source. 
++
+
+image::images/1982.png[]
++
+* Use [label]#Message Filter# to look for specific text in a message.
+  Use [label]#Message Level# to filter based on message level.
+  CloudForms Management Engine reports on the specified level and above.
+  Use [label]#Message Source# to filter log messages based on its source. 
+* Set [label]#How Far Back to Check# in days you want to look for this message. 
+* If you only want an alert triggered when the log message has occurred a certain number of times, type the number in [label]#Event Count Threshold#. 
+
+. After setting the parameters, select what you want the alert to do.
+  You can send an email, create an SNMP Trap, let the alert show on the timeline, or send a management event to start an automation process. 
+. Click btn:[Add]. 

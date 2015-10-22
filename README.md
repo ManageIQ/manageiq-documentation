@@ -2,8 +2,8 @@
 
 This repo contains the documentation for
 
-* http://manageiq.org/[ManageIQ]
-* http://www.redhat.com/en/technologies/cloud-computing/cloudforms/[Red Hat CloudForms Management Engine]
+* [ManageIQ](http://manageiq.org/)
+* [Red Hat CloudForms Management Engine](http://www.redhat.com/en/technologies/cloud-computing/cloudforms/)
 
 ## Contributing
 
@@ -13,5 +13,5 @@ The documentation in this repository is built and deployed using [AsciiBinder](h
 
 For questions or comments about the documentation system:
 
-* ManageIQ team members can be found on the http://manageiq.org/community/irc/[#manageiq channel] on http://www.freenode.net/[FreeNode].
-* You can also join the http://talk.manageiq.org[talk.manageiq.org] forum.
+* ManageIQ team members can be found on the [#manageiq channel](http://manageiq.org/community/irc/) on [FreeNode](http://www.freenode.net/).
+* You can also join the [talk.manageiq.org](http://talk.manageiq.org) forum.

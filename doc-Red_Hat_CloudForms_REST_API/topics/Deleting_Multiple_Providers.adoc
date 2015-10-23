@@ -1,0 +1,42 @@
+= Deleting Multiple Providers
+
+Request: 
+
+----
+POST /api/providers
+----
+
+[source]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "https://hostname/api/providers/107" },
+    { "href" : "https://hostname/api/providers/108" }
+  ]
+}
+----
+
+Response: 
+
+[source]
+----
+{
+  "results": [
+    {
+      "success": true,
+      "message": "Provider id:107 name:'rhevm102' deleting",
+      "task_id": 626,
+      "task_href": "https://hostname/api/tasks/626",
+      "href": "https://hostname/api/providers/107"
+    },
+    {
+      "success": true,
+      "message": "Provider id:108 name:'rhevm103' deleting",
+      "task_id": 627,
+      "task_href": "https://hostname/api/tasks/627",
+      "href": "https://hostname/api/providers/108"
+    }
+  ]
+}
+----

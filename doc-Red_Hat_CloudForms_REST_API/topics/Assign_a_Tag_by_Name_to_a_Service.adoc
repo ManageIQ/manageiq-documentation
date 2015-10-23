@@ -1,0 +1,42 @@
+= Assign a Tag by Name to a Service
+
+Request: 
+
+----
+POST /api/services/101/tags
+----
+
+[source]
+----
+{
+  "action" : "assign",
+  "resources" : [
+    { "name" : "/department/finance" },
+    { "name" : "/location/ny" }
+  ]
+}
+----
+
+Response: 
+
+[source]
+----
+{
+  "results": [
+    {
+      "success": true,
+      "message": "Assigning Tag: category:'department' name:'finance'",
+      "href": "https://hostname/api/services/101",
+      "tag_category": "department",
+      "tag_name": "finance"
+    },
+    {
+      "success": true,
+      "message": "Assigning Tag: category:'location' name:'ny'",
+      "href": "https://hostname/api/services/101",
+      "tag_category": "location",
+      "tag_name": "ny"
+    }
+  ]
+}
+----

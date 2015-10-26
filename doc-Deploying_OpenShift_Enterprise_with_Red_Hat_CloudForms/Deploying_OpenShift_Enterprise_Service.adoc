@@ -1,0 +1,88 @@
+[[deploying_openshift_enterprise_service]]
+
+== Deploying an OpenShift Enterprise Service
+
+Deploy an OpenShift Enterprise service by requesting the catalog item.
+
+. Log in to the CloudForms Management Engine appliance and navigate to +Services → Catalogs+.
+image:6239.png[]
+. Select the catalog item. This example uses +OpenShift Enterprise Multi Node+. Click +Order+.
+. Enter the basic details for the service as required.
+image:6240.png[]
+. Select the +Depot+ tab to configure the depot type.
++
+--
+*None*
+
+A local repository as configured in the destination virtual machine’s +.repo+ files.
+
+*RHSM/RHN*
+
+Use either Red Hat Subscription Manager or Red Hat Network. Requires an internet connection.
+
+* +Username+: Enter your RHSM or RHN Username.
+
+* +Password+: Enter your RHSM or RHN Password.
+
+*YUM*
+
+Manually provide a URL to the YUM repository.
+
+* +YUM URL+: A URL for a YUM repository containing all the required packages for an OpenShift Enterprise install.
+--
++
+image:6241.png[]
+. Click +Submit+ to order the service and add it to the queue.
+image:6242.png[]
+. Navigate to +Services → My Services+ to view the ordered service.
+image:6243.png[]
+
+Note that the +VMs+ field initially displays +No Records Found+ as the service is currently being instantiated.
+
+*Notes*
+		
+*Service Names*
+
+* Initially, the service name is the same as the bundle. During the installation of OpenShift Enterprise the service is renamed to include the date and time to ensure it is unique in the +My Services+ screen.
+
+*Smart Management*
+
+* The +Smart Management+ area displays important information about the deployment of OpenShift Enterprise services.
+
+* The install process creates tags dynamically and assigns them to various items. The tags serve two purposes:
+** provide debugging information if a failure occurs in the OpenShift Enterprise installation process.
+** enable the installer to track the progress of various items during the installation process.
+
+In the following example, there are three virtual machines present and the +Smart Management+ area displays the +In Progress+ and +Temp OpenShift Enterprise State+ tags. 
+image:6244.png[]
+
+* The +Temp OpenShift Enterprise State+ tag displays the name of the +oo-install-ose+ log file for this run.
+As each service deployment generates a new log file, this tag enables you to associate each deployment to its log file.
+To view the log file for a deployment:
+** Record the unique ID for the deployment's log file found in the +Temp OpenShift Enterprise State+ tag. For example:
++
+----
+Temp OpenShift Enterprise State : +161_20140817_1509+ – OpenShift Enterprise Log File for this run
+----
++
+** Access the automation appliance performing the deployment and change to the +/tmp/+ directory.
+** Deployment log filenames consist of the unique ID suffixed by +_ose.log+. For example: 
+.. +161_20140817_1509_ose.log+
+
+By default, log files record all the actions the +oo-install-ose+ installer performs. They also contain information on retrieving logs from remote installations.
+All other CloudForms Management Engine activities are logged to the automation log as normal.
+
+* CloudForms Management Engine also tags individual virtual machines in the service. The following example displays a virtual machine in a service during its deployment of OpenShift Enterprise.
+The +Smart Management+ area includes two important pieces of information:
+
+** OpenShift Enterprise Policy: the roles designated for this virtual machine
+
+** OpenShift Enterprise Status: the roles that the virtual machine is currently installing
+image:6245.png[]
+
+* After the virtual machine completes role installation, the +OpenShift Enterprise Status+ tag updates to +Completed+ for the roles assigned in the +OpenShift Enterprise Policy+ section. 
+image:6246.png[]
+
+* When the OpenShift Enterprise install finishes, the service is tagged +Completed+. 
+image:6247.png[]
+

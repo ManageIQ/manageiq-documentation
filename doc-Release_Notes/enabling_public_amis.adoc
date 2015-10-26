@@ -1,0 +1,23 @@
+[[enabling_public_amis_from_amazon_ecs2]]
+== Enabling Public AMIs from Amazon EC2
+
+Alter the Main Configuration File to enable public AMIs from Amazon EC2. The following procedure makes public images viewable in CloudForms Management Engine.
+
+. Log in to the appliance.
+. Navigate to +Configure → Configuration → Advanced+.
+. Select the configuration file to edit from the +File+ list. If not already automatically selected, select +EVM Server Main Configuration+.
+. Search for the +get_public_images+ parameter:
++
+----
+  ems_refresh:
+      capture_vm_created_on_date: false
+      ec2:
+        get_private_images: true
+        get_shared_images: true
+            get_public_images: false        ignore_terminated_instances: true  
+----
++
+. Configure the visibility of public images:
+* To show public images, set the parameter to +get_public_images: true+.
+* To remove public images from view again, set the parameter to +get_public_images: false+.
+

@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE section PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+<!ENTITY % BOOK_ENTITIES SYSTEM "../Insight_Guide.ent">
+%BOOK_ENTITIES;
+]>
+<section id="Enabling_AWS_Config_Notifications" remap="TID_44158">
+	<title>Enabling AWS Config Notifications</title>
+	<para>
+		Amazon's AWS Config notifies subscribers of changes in a region through its Simple Notification Service (SNS). Red Hat CloudForms subscribes to the SNS service for AWS Config deltas and converts the deltas into Red Hat CloudForms events.
+	</para>
+	<procedure>
+		<step>
+			<para>
+				Enable the AWS Config service in the AWS Management Console. See the <ulink url="http://aws.amazon.com/documentation/config/">AWS Config Developer Guide</ulink> for more information.
+			</para>
+		</step>
+		<step>
+			<para>
+				Create a new Amazon SNS topic named <literal>AWSConfig_topic</literal>. CloudForms automatically connects to this topic.
+			</para>
+		</step>
+		<step>
+			<para>
+				(Optional) Configure the frequency of delta creation in the AWS Management Console.
+			</para>
+		</step>
+	</procedure>
+	<para>
+		You can assign Red Hat CloudForms policies to the AWS events listed below. The appliance performs a provider refresh on all these events except for <code>AWS_EC2_Instance_UPDATE</code>. See the <ulink url="https://access.redhat.com/documentation/en-US/Red_Hat_CloudForms/">Control Guide</ulink> for more information on working with CloudForms policies.
+	</para>
+	<informaltable>
+		<tgroup cols="3">
+			<thead>
+				<row>
+					<entry>
+						Event
+					</entry>
+					<entry>
+						Policies
+					</entry>
+					<entry>
+						Refresh
+					</entry>
+				</row>
+			</thead>
+			<tbody>
+				<row>
+					<entry>
+						AWS_EC2_Instance_CREATE
+					</entry>
+					<entry>
+						<para>
+							src_vm
+						</para>
+						<para>
+							vm_create
+						</para>
+					</entry>
+					<entry>
+						ems
+					</entry>
+				</row>
+				<row>
+					<entry>
+						AWS_EC2_Instance_UPDATE
+					</entry>
+					<entry>
+						N/A
+					</entry>
+					<entry>
+						ems
+					</entry>
+				</row>
+				<row>
+					<entry>
+						AWS_EC2_Instance_running
+					</entry>
+					<entry>
+						<para>
+							src_vm
+						</para>
+						<para>
+							vm_start
+						</para>
+					</entry>
+					<entry>
+						ems
+					</entry>
+				</row>
+				<row>
+					<entry>
+						AWS_EC2_Instance_stopped
+					</entry>
+					<entry>
+						<para>
+							src_vm
+						</para>
+						<para>
+							vm_power_off
+						</para>
+					</entry>
+					<entry>
+						ems
+					</entry>
+				</row>
+				<row>
+					<entry>
+						AWS_EC2_Instance_shutting-down
+					</entry>
+					<entry>
+						<para>
+							src_vm
+						</para>
+						<para>
+							vm_power_off
+						</para>
+					</entry>
+					<entry>
+						ems
+					</entry>
+				</row>
+			</tbody>
+		</tgroup>
+	</informaltable>
+</section>

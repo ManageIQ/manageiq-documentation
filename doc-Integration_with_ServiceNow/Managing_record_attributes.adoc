@@ -1,0 +1,44 @@
+[[managing_record_attributes]]
+== Managing Record Attributes
+
+You can specify any attribute via the +URI+ or +CMDB+ class instance. If neither exists, the value is determined from the CloudForms +VM+ or +miq_provision+ objects.
+
+The attributes can be reduced or extended as required by amending the Ruby methods.
+
+[NOTE]
+=======
+Some attributes are not free-text (variable) fields, that is, they must be specific values. For example, Vendor value must already exist in the ServiceNow Vendor table beforehand.
+=======
+
+=== Create and Update (_patch) Record
+You can use the following attributes when creating and/or updating a record.
+
+==== Attribute
+
+[width="40%"]
+|=========================================================
+|Attribute |Value
+|virtual |Boolean true or false, set to true.
+|name VM’s |Virtual Infrastructure name.
+|short_description |CloudForms VM GUID.
+|host_name |VM’s Operating System hostname.
+|cpu_count |VM’s CPU count.
+|ram |VM’s memory.
+|vendor |VM’s hardware vendor (provider).
+|sys_id footnoteref:[a, sys_id attribute is not required during create. Its value is returned from create request and the CloudForms object custom attribute servicenow_sys_id is created and updated.] |ServiceNow record unique system ID.
+|=========================================================
+
+=== Get and Delete Record
+
+You can use the following attribute for getting or deleting a record.
+
+[width=100%]
+|=========================================================
+| Attribute | Value
+| sys_id    | ServiceNow record unique system ID.
+|=========================================================
+
+=== Get All Records
+
+There are no attributes required to get all records. Method gets all records in the specified +ServiceNow table+ and writes their attributes to +automation.log+.
+

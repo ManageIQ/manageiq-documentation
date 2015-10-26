@@ -882,37 +882,37 @@ Appliance console CLI command and relevant options include:
                            --uninstall-ipa
 --------------------
 
---host:
+ --host:
 
 updates the hostname of the appliance. If you performed this step using the console and made the necessary updates made to /etc/hosts if DNS is not properly configured, you can omit the --host option.
 
---iparealm:
+ --iparealm:
 
 if omitted, the iparealm is based on the domain name of the ipaserver.
 
---ipaprincipal:
+ --ipaprincipal:
 
 if omitted, defaults to admin.
 
-[EXAMPLE]
-=============
-Configuring External Authentication
-
+.Configuring External Authentication
+====
+----
 $ ssh root@appliance.test.company.com
 [appliance]# /bin/appliance_console_cli --host appliance.test.company.com \
                                       --ipaserver ipaserver.test.company.com \
                                       --iparealm TEST.COMPANY.COM \
                                       --ipaprincipal admin \
                                       --ipapassword smartvm1
-=============
+----
+====
 
-[EXAMPLE]
-===========
-Reverting to Internal Database Authentication
-
+.Reverting to Internal Database Authentication
+====
+----
 $ ssh root@appliance.test.company.com
 [appliance]# /bin/appliance_console_cli --uninstall-ipa
-===========
+----
+====
 
 ===== Workers
 
@@ -1177,7 +1177,36 @@ Table 3.8. collection
 |Parameters|Description
 |ping_depot|Whether to use TCP port ping to the log depot before performing log collection. Default: true
 |ping_depot_timeout|Specify how long in seconds to wait for response from log depot before deciding that the TCP port ping failed. Default: 20
-|current|When collecting logs, specifies what is considered current logging as opposed to archived logging. Default: :pattern: * log/*.log * log/apache/*.log * log/*.txt * config/* * /opt/rh/postgresql92/root/var/lib/pgsql/data/*.conf * /opt/rh/postgresql92/root/var/lib/pgsql/data/pg_log/* * /var/log/syslog* * /var/log/daemon.log* * /etc/default/ntp* * /var/log/messages* * /var/log/cron* * BUILD * GUID * VERSION
+|current|When collecting logs, specifies what is considered current logging as opposed to archived logging. Default: :pattern: 
+
+log/\*.log 
+
+log/apache/*.log 
+
+log/\*.txt 
+
+config/* 
+
+/var/opt/rh/rh-postgresql94/lib/pgsql/data/\*.conf 
+
+/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_log/* 
+
+/var/log/syslog* 
+
+/var/log/daemon.log* 
+
+/etc/default/ntp* 
+
+/var/log/messages* 
+
+/var/log/cron* 
+
+BUILD 
+
+GUID 
+
+VERSION
+
 |archive|Specifies what is considered archived logging. The default pattern is blank which means *.gz files in the log directory.
 |=======================================================================
 

@@ -27,11 +27,13 @@ Catalogs are used to create groups of virtual machines or instances for provisio
 . Create +Catalog Items+ for each virtual machine or instance that will be part of the service.
 . Create a +Service+ dialog. For example, create a dropdown with three options small, medium, and large.
 . Create a method for the Service Dialog. This method defines what each of the options means to each of the individual virtual machines or cloud instances for the service. This method is called from a service provisioning instance in the Automate model.
-. Create an instance in the DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template class that calls the method.
+. Create an instance in the +DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template+ class that calls the method.
++
 [NOTE]
 ======
 DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 ======
++
 . Associate method with Automate instance.
 . Create a +Catalog Bundle+, adding each of the catalog items to it. Select the +Service Dialog+ you created. Use the instance created in the DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template class as the +Entry Point+. Check +Display in Catalog+ box.
 . Provision a service.
@@ -42,7 +44,7 @@ Create a catalog item for each virtual machine or cloud instance that will be pa
 
 . Navigate to +Services → Catalogs+.
 . Click the +Catalog Items+ accordion.
-. Click image:1847.png+(Configuration)+, and then image:2055.png[]+(Add a New Catalog Item)+.
+. Click image:1847.png[](+Configuration+), and then image:2055.png[](+Add a New Catalog Item+).
 . Select the +Catalog Item Type+ you are adding. The dialogs that appear will be filtered based on the selected type of provider. For example, you will only see templates residing on Red Hat Providers, if the +Catalog Item Type+ is +Redhat+.
 image:2357.png[]
 . In the +Basic Info+ subtab:
@@ -50,20 +52,23 @@ image:2357.png[]
 .. Check +Display in Catalog+ to edit +Catalog+, +Dialog+, and +Entry Point(NS/Cls/Inst)+ options.
 ... +Provisioning Entry Point (Domain/NS/Cls/Inst)+ requires you to select an Automate instance to run upon provisioning.
 ... +Retirement Entry Point (Domain/NS/Cls/Inst)+ requires you to select an Automate instance to run upon retirement.
-... image:Catalogitem-statemachine.png[]
-
+image:Catalogitem-statemachine.png[]
++
 [NOTE]
 ======
 The entry point must be a State Machine since the +Provisioning Entry Point+ list is filtered to only show State Machine class instances. No other entry points will be available from the +Provisioning Entry Point+ field.									
 ======
++
 [NOTE]
 ======
 You can only choose from the catalogs and dialogs you have already created. If you haven't done so, leave the values blank and edit later.
 ======
++
 . In the +Details+ subtab, write a +Long Description+ for the catalog item.
 . In the +Request Info+ subtab, select provisioning options that apply to the provider chosen. For more information, refer to the sections on Provisioning Virtual Machines and Provisioning Instances.
 . Click +Add+.
-		
+
+
 ==== Service Dialogs
 
 When provisioning a service, input will be needed from the requester. +Service Dialogs+ are used to take input from the user. This input is connected to a method in the +Automate+ model that defines how the users input is translated into the provision request. Before creating a +Service Dialog+, be sure to plan what items you need the user to input.
@@ -72,26 +77,28 @@ When provisioning a service, input will be needed from the requester. +Service D
 
 . Navigate to +Automate → Customization+.
 . Click the +Service Dialogs+ accordion.
-. Click image:1847.png[]+(Configuration)+, and then image:1848.png[]+(Add a new Dialog)+.
+. Click image:1847.png[](+Configuration+), and then image:1848.png[](+Add a new Dialog+).
 . In +Dialog Information+, type in a +Label+ and +Description+. Check the boxes for the buttons you want available at the bottom of the dialog form. The description will appear as hover text.
 . Click +Add+.
 . Select the dialog you just created.
-. Click image:1847.png[]+(Configuration)+, and then image:1851.png[]+(Edit this Dialog)+.
+. Click image:1847.png[](+Configuration+), and then image:1851.png[](+Edit this Dialog+).
 . Add a tab to the dialog.
-.. Click image:1848.png[]+(Add)+, then image:1848.png[]+(Add a New Tab to this Dialog)+.
+.. Click image:1848.png[](+Add+), then image:1848.png[](+Add a New Tab to this Dialog+).
 .. Type in a +Label+ and +Description+ for this tab.
 . Add a box to this tab.
-.. Click image:1848.png[]+(Add)+, then image:1848.png[]+(Add a New Box to this Tab)+.
+.. Click image:1848.png[](+Add+), then image:1848.png[](+Add a New Box to this Tab+).
 .. Type in a +Label+ and +Description+ for this box.
 . Add an element to this box. Elements are controls that accept input.
-.. Click image:1848.png[]+(Add)+, then image:1848.png[]+(Add a New Element to this Box)+.
+.. Click image:1848.png[](+Add+), then image:1848.png[](+Add a New Element to this Box+).
 .. Type in a +Label+, +Name+, and +Description+ for this element. 
++
 [IMPORTANT]
 ======
 +Name+ must use only alphanumeric characters and underscores without spaces. It is also used to retrieve the value of this element in the method used with the dialog and must start with +dialog_service_type+
 ======
++
 .. Select a +Type+ for an element type. All +Type+ options have a +Required+ and +Default Value+ field. Check +Required+ or set +Required+ to +true+ if the element is required to proceed. You can also specify a default value. The rest of the options presented are based on which type of element you select.
-
++
 [width="100%",cols="40%,60%",options="header",]
 |=======================================================================
 |Element Types|Additional Info
@@ -104,6 +111,7 @@ When provisioning a service, input will be needed from the requester. +Service D
 |Text Area Box|Provides text area for users to type in some text. You can also leave a message to users by typing in the +Default Value+ field or leave it as blank.
 |Text Box|This element type serves the same purpose as +Text Area Box+ with the option to check +Protected+ so the text is shown as asterisks (*), instead of plain text.
 |=======================================================================
++
 . Click +Save+.
 
 ===== Importing Service Dialogs
@@ -129,15 +137,18 @@ You can share service dialogs between appliances using the export and import fea
 ===== Creating a Method to Associate with the Dialog
 
 You will need to create a method that connects the values in the dialog with the provisioning request. The method should be created in the DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template class of the +Automate+ model.
+
 [NOTE]
 ======
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
++DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 ====== 
+
 A method is provided below that was created for the following scenario:
-* You want to provision a 3-tiered Service that contains catalog items of web, app and DB. Each of these virtual machines (or cloud instances) has been tagged under the +Service+ category with the appropriate value. Then, added as a catalog item and combined into a catalog bundle.
+
+* You want to provision a three-tiered Service that contains catalog items of web, app and DB. Each of these virtual machines (or cloud instances) has been tagged under the +Service+ category with the appropriate value. Then, added as a catalog item and combined into a catalog bundle.
 * The +Service Dialog+ captures the selection of small, medium or large application in a dropdown called +service_type+. When referring to a value captured in an element in a dialog, the name of the element should be prefixed with +dialog_+. For example, +service_type+ becomes +dialog_service_type+ when used in the method.
 * The method will set the memory sizes for each of the catalog items based on the +service_type+ selection.
-+
+
 ------
 #            CloudForms Management Engine Automate Method
 #
@@ -235,7 +246,7 @@ end
 $evm.log("info", "CloudForms Management Engine Automate Method ConfigureChildDialog Ended")
 exit MIQ_OK
 ------
-+
+
 
 ===== Creating a Method in the Service Class
 
@@ -243,12 +254,14 @@ Service methods have been split based on purpose.
 
 . Navigate to +Automate → Explorer+.
 . Service Class is located at +DOMAIN → Service → Provisioning → StateMachines → Methods+ and +Domain → Service → Retirement → StateMachines → Methods+.
++
 [NOTE]
 ======
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
++DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 ======
++
 . Click the +Methods+ tab.
-. Click image:1847.png[]+(Configuration)+, then image:2360.png[]+(Add a New Method)+.
+. Click image:1847.png[](+Configuration+), then image:2360.png[](+Add a New Method+).
 . Type in a +Name+ and +Display Name+.
 . In the +Data+ field, type in the method contents.
 . Click +Validate+ and wait for your data entry to be successfully validated.
@@ -259,20 +272,22 @@ image:6297.png[]
 
 . Navigate to +Automate → Explorer+.
 . Service Class is located at +DOMAIN → Service → Provisioning → StateMachines → Methods+ and +Domain → Service → Retirement → StateMachines → Methods+.
++
 [NOTE]
 ======
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
++DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 ======
++
 . Click the +Instances+ tab.
-. Click image:1847.png[]+(Configuration)+, then image:2360.png[]+(Add a new Instance)+.
+. Click image:1847.png[](+Configuration+), then image:2360.png[](+Add a new Instance+).
 . Type in a +Name+ and +Display Name+.
 . In the +Fields+ area, type in the method's name in +Value+.
 . Click +Add+.
 
-Result::
 The instance is created so that it can be called from the +ServiceProvision+ class.
 
 image:6298.png[]
+
 [NOTE]
 ======
 After the method has been created, it must be mapped to an instance in the DOMAIN/Service/Service/Provisioning/StateMachines class. The name of the instance must be specified as the +Entry Point+. This method must be called before the provision job begins.
@@ -284,23 +299,24 @@ Service methods have been split based on purpose.
 
 . Navigate to +Automate → Explorer+.
 . From the accordion menu, click the required service method. Service Class is located at +DOMAIN → Service → Provisioning → StateMachines → Methods+ and +Domain → Service → Retirement → StateMachines → Methods+.
++
 [NOTE]
 ======
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
++DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 ======
++
 . Either create a new instance or select the +clone_to_service+ instance.
-. Click image:1847.png[]+(Configuration)+, then image:1851.png[]+(Edit Selected Instance)+.
+. Click image:1847.png[](+Configuration+), then image:1851.png[](+Edit Selected Instance+).
 . In the +configurechilddialog+ value, put the path to the method.
 . Click +Save+ or +Add+ if you are adding this to a new instance.
 
-Result::
 Now that the catalog items, service dialog, dialog methods, and service provision instance have been created, you can create the catalog bundle.
 
 ==== Creating a Catalog Bundle
 
 . Navigate to +Services → Catalogs+.
 . Click the +Catalog Items+ accordion.
-. Click image:1847.png[]+(Configuration)+, and then image:1848.png[]+(Add a New Catalog Bundle)+.
+. Click image:1847.png[](+Configuration+), and then image:1848.png[](+Add a New Catalog Bundle+).
 . In +Basic Info+, type in a name and description
 images:2362.png[]
 . Click +Display in Catalog+.
@@ -309,7 +325,6 @@ images:2362.png[]
 . Click on the +Resources+ tab, then select the catalog items you want added to the bundle from the +Add a Resource+ dropdown.
 . Click +Add+.
 
-Result::
 A catalog bundle is created and visible in the +Service Catalog+ accordion.
 
 [NOTE]
@@ -324,6 +339,4 @@ You should also create and specify an Entry Point in the DOMAIN/Service/Provisio
 . Click +Order+. The dialog appears.
 . Select the options in the +Service+ dialog.
 
-Result::
 The parameters are passed to the children based on the method tied to the choices made in the dialog.
-

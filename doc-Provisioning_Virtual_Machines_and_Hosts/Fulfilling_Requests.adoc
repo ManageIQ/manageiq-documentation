@@ -3,7 +3,7 @@
 
 === Fulfilling a Request
 
-After a request has been approved, CloudForms Management Engine then goes through the steps required to complete the request. The steps followed for a regular provision from a virtual machine to a virtual machine (not to a template) are found by navigating to +Automate → Explorer+, then listed under +DOMAIN → Cloud|Infrastructure → VM → Provisioning → VMProvision_VM → Provision VM from Template (template) instance+. The value for each state shows where the instance resides in the +Datastore</guimenu> accordion. The default set of execution steps is shown below. For more information on state machines, see section State Machines.
+After a request has been approved, CloudForms Management Engine then goes through the steps required to complete the request. The steps followed for a regular provision from a virtual machine to a virtual machine (not to a template) are found by navigating to +Automate → Explorer+, then listed under +DOMAIN → Cloud|Infrastructure → VM → Provisioning → VMProvision_VM → Provision VM from Template (template) instance+. The value for each state shows where the instance resides in the +Datastore+ accordion. The default set of execution steps is shown below. For more information on state machines, see section State Machines.
            
 === Default Execution Steps in States Instance
 	
@@ -34,16 +34,20 @@ Quotas allow you to establish maximum usage thresholds for an owner or group for
 . Log in as a user with administrator or super administrator rights to the CloudForms Management Engine console.
 . Navigate to +Automate → Explorer+.
 . From the accordion menu, click +DOMAIN → Cloud → VM → Provisioning → StateMachines → ProvisionRequestQuotaVerification+.
++
 [NOTE]
 ======
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
++DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
-This example uses the +Cloud+ Namespace but can also use the +Infrastructure+ namespace.
+This example uses the +Cloud+ Namespace, but can also use the +Infrastructure+ namespace.
 ====== 
++
 . Click image:1847.png[]+(Configuration)+, image:1851.png[]+(Edit this instance)+.
 image:6279.png[]
++
 * Set the values for +Owner Max CPUs Allowed+, +Owner -- Max Memory Allowed+, or +Owner -- Max Storage Allowed+ to be the maximums for a specific owner.
 * Set the values for +Group Max CPUs Allowed+, +Group -- Max Memory Allowed+, or +Group -- Max Storage Allowed+ to be the maximums for a specific user group.
++
 . Click +Save+.
                 
 ===== Using Tags for Owner and Group Quotas
@@ -89,10 +93,9 @@ In the diagram below, you can see how these components combine to create a state
 
 Note that the retry logic, On_Entry and On_Error are distinct cases in the program flow.
 image:2353.png[]
-[EXAMPLE]
-======
+
 *Code snippet demonstrating the state machine retry logic:*
-+
+
 ------
 # Get current provisioning status
 task = $evm.root['service_template_provision_task']
@@ -116,14 +119,15 @@ When the result is "retry", it sets:
   $evm.root['ae_result'] = 'retry'
   $evm.root['ae_retry_interval'] = '1.minute'
 ------
-+
-======
 
 The following image shows a simple state machine pertaining to approving a provision request. This instance can be found in +Datastore → ManageIQ → Infrastructure → VM → Provisioning → StateMachines → ProvisioningRequestApproval → Default+.
 image:2354.png[]
+
+
 . The attribute +max_vms+ has a value of 1. State machine processing can use the attributes of the state machine instance to make logic decisions. In this case, the +validate_request+ method, which is processed during the +On_Entry+ portion of the +ValidateRequest+ state, evaluates the +max_vms+ attribute. If the number of virtual machines requested is less than the +max_vms+ value, the request can be auto-approved. See the +validate_request+ method for more details.
 . +ValidateRequest+ is the first state to be executed.
 . +ApproveRequest+ is the next state to be executed.
+
 [NOTE]
 ======
 Grayed out items reflect values that are set in the class schema. These values can be overwritten on a per instance basis.
@@ -138,13 +142,15 @@ image:6281.png[]
 
 . Navigate to +Automate → Explorer+.
 . From the accordion menu, click +DOMAIN → Cloud → VM → Provisioning → StateMachines → VMProvision_VM+.
++
 [NOTE]
 ======
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
++DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
-This example uses the +Cloud+ Namespace but can also use the +Infrastructure+ namespace.
+This example uses the +Cloud+ Namespace, but can also use the +Infrastructure+ namespace.
 ======
-. Click image:1847.png[]+(Configuration)+, then image:1851.png[]+(Edit this instance)+.
++
+. Click image:1847.png[](+Configuration+), then image:1851.png[](+Edit this instance+).
 image:6281.png[]
 . For each step that you want to remove, clear the entries in the +Value+, +On Entry+, +On Exit+, and +On Error+ columns.
 . Click +Save+.                
@@ -167,4 +173,4 @@ image:2356.png[]
 
 From +Services → Workloads+, click the virtual machine or instance that you want to view.
 
-      
+ 

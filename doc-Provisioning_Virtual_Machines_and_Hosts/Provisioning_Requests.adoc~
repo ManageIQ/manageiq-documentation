@@ -348,7 +348,7 @@ image:2328.png[]
 . For templates on Red Hat providers:
 .. Select the +Name+ of a template to use.
 .. For +Provision Type+, select either +ISO+, +PXE+, or +Native Clone+. You must select +Native Clone+ in order to use a Cloud-Init template.
-... If +Native Clone+ is selected, select +Linked Clone+ to create a linked clone to the virtual machine instead of a full clone. This is equivalent to *Thin Template Provisioning</firstterm> in Red Hat Enterprise Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
+... If +Native Clone+ is selected, select +Linked Clone+ to create a linked clone to the virtual machine instead of a full clone. This is equivalent to thin template provisioning in Red Hat Enterprise Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
 ... If +ISO+ is selected, select an ISO +Image+ to use for provisioning
 ... If +PXE+ is selected, select a PXE +Server+ and +Image+ to use for provisioning
 .. Under +Count+, select the number of virtual machines you want to create in this request.
@@ -497,13 +497,13 @@ After submission, the appliance assigns each provision request a +Request ID+. I
 
 Request 99 in region 123 results in Request ID 123000000000099.
 		
-==== Requirements for Provisioning a Host</title> 
+==== Requirements for Provisioning a Host
 
 CloudForms Management Engine can provision hosts using PXE and Intelligent Platform Management Interface (IPMI) technologies. Before you provision your first host, configure the following prerequisites:
 
 * Provisioning requires the +Automation Engine+ server role be enabled. Confirm your server role settings in +Configure → Configuration → Server → Server Control+.
 * Make a PXE server accessible to the CloudForms Management Engine server.
-* Create a customization template for hosts. This customization template must contain host-specific additions, documented in the <citetitle>Customization Templates for Host Provisioning</citetitle> section.
+* Create a customization template for hosts. This customization template must contain host-specific additions, documented in the Customization Templates for Host Provisioning section.
 * Create system image types for the host.
 * Associate images with the image types.
 * Enable IPMI on provisioning hosts and add them to the CloudForms Management Engine Infrastructure.
@@ -561,220 +561,3 @@ The IPMI host is added to the CloudForms Management Engine environment; an opera
 ===== Customization Templates for Host Provisioning
 
 Add a customization template to provide Kickstart files for the initial loading of the operating system. There are certain sections to use to allow for interactions with the provisioning dialogs provided by CloudForms Management Engine.
-	
-===== Customization Script Additions
-
-This is a new test paragraph that I am adding.
-
-[width="100%",cols="1,1,3a",options="header",]
-|=======================================================================
-|Customization Type|Reason to Include|Script entries
-|Kickstart|Takes the values from the +Customize+ tab in +Provisioning Dialog+ and substitutes them into the script.|
-
-------
-#Configure Networking based on values from provisioning dialog
-<% if evm[:addr_mode].first == 'static' %>
-  <% network_string = "network --onboot yes --device=eth0 --bootproto=static --noipv6" %>
-  <% ["ip", :ip_addr, "netmask", :subnet_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns_servers].each_slice(2) do test &#124;ks_key, evm_key&#124; %>
-    <% network_string << " --#{ks_key} #{evm[evm_key]}" unless evm[evm_key].blank? %>
-  <% end %>
-<%= network_string %>
-<% else %>
-network --device=eth0 --bootproto=dhcp
-<% end %>
-------
-
-
-|Kickstart|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+.|
-+
-------
-rootpw --iscrypted <%= MiqPassword.md5crypt(evm[:root_password]) %>
-------
-+
-
-|Kickstart|Sends status of the provision back to CloudForms Management Engine Server for display in the CloudForms Management Engine Console.|
-+
-------
-# Callback to CFME during post-install
-wget --no-check-certificate <%= evm[:post_install_callback_url] %>
-------
-+
-
-|Sysprep|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+. The value for the +AdministratorPassword+ line must be inserted to use the password from the +Provision Dialog+ and encrypt it.|
-+
-------
-<UserAccounts>
-  <AdministratorPassword>
-    <Value><%= MiqPassword.sysprep_crypt(evm[:root_password]) %></Value>
-    <PlainText>false</PlainText>
-  </AdministratorPassword>
-</UserAccounts>
-------
-+
-|=======================================================================	
-
-
-====== Adding a Customization Template
-
-. Navigate to +Infrastructure → PXE+.
-. Click the +Customization Templates+ accordion.
-. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a New Customization Template+).
-. In +Basic Information+, type in a +Name+ and +Description+.
-image:2325.png
-. Select the +Image Type+ list. This list includes the PXE image types you created.
-. In +Type+, select +Kickstart+ or +CloudInit+ for Linux based systems, and +Sysprep+ for Windows based system.
-. In the +Script+ area, either paste the script from another source or type the script directly into the CloudForms Management Engine interface.
-. Click +Add+.
-[NOTE]
-======
-The default dialogs show all possible parameters for provisioning. To limit the options shown, Customizing Provisioning Dialogs.
-======	
-
-==== Provisioning a Host
-
-After setting up the IPMI and PXE environments, you are ready to provision a host. Currently, you can only provision in the cluster where the template is located or you can create a template in each cluster and let a CloudForms Management Engine Automate method automatically switch the selected template in the provision object.
-
-[IMPORTANT]
-======
-A customization template with host-specific script additions is required. Ensure especially that the customization template contains the post-installation callback to enable discovery in CloudForms Management Engine.
-======
-
-. Navigate to +Infrastructure → Hosts+.
-. Select a host with IPMI enabled.
-. Click image:2007.png[](+Lifecycle+), then image:1848.png[](+Provision Hosts+).
-. In +Request Information+, type in at least a +First Name+ and +Last Name+ and an email address. This email is used to send the requester status emails during the provisioning. The other information is optional. If the CloudForms Management Engine server is configured to use LDAP, you can use the +Look Up+ button to populate the other fields based on the email address.
-image:2341.png[]
-. On the +Purpose+ tab, select the desired tags for the provisioned host.
-image:2342.png[]
-. On the +Catalog+ tab, select the hosts to provision.
-* In the +Host+ area, select the hosts to provision.
-* In the +PXE+ area, select the PXE server and image.
-. On the +Customize+ tab, you can select customizations for the operating system of the new host. These options vary based on the operating system to be provisioned.
-* Use +Credentials+ to type in a root password
-* In the +IP Address+ area, select either +Static+ or +DHCP+ and enter any other address information you need. If needed, type in DNS specifications.
-* Under +Customize Template+, select a script.
-. On the +Schedule+ tab, select when to start the provisioning process.
-image:2343.png[]
-. In +Schedule Info+, select when to start the provisioning process. If you select +Schedule+, enter a date and time.
-. Select +Stateless+ to retain files after the provision completes. A stateless provision does not write to the disk so it requires the PXE files on the next boot.
-. Click +Submit+.
-
-The provisioning request is sent for approval. For the provisioning to begin, a user with the admin, approver, or super admin account role must approve the request. The admin and super admin roles can also edit, delete, and deny the requests. You will be able to see all provisioning requests where you are either the requester or the approver.
-
-After submission, the appliance assigns each provision request a +Request ID+. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The Request ID consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
-
-*Request ID Format*
-
-Request 99 in region 123 results in Request ID 123000000000099.
-
-==== Customizing Provisioning Dialogs
-
-The default set of provisioning dialogs shows all possible options. However, CloudForms Management Engine also provides the ability to customize which tabs and fields are shown. You can decide what fields are required to submit the provisioning request or set default values.
-
-For each type of provisioning, there is a dialog that can be created to adjust what options are presented. While samples are provided containing all possible fields for provisioning, you can remove what fields are shown. However, you cannot add fields or tabs.
-
-Edit the dialogs to:
-
-. Hide or show provisioning tabs.
-. Hide or show fields. If you hide an attribute, the default will be used, unless you specify otherwise.
-. Set default values for a field.
-. Specify if a field is required to submit the request.
-. Create custom dialogs for specific users.
-
-
-===== Adding a Provision Dialog for All Users
-
-. Login to the CloudForms Management Engine console for the CloudForms Management Engine server where you want to change the dialog.
-. Navigate to +Automate → Customization+.
-. Click the +Provisioning Dialogs+ accordion.
-. Click the type of dialog you want to create: +Host Provision+, +VM Provision+ or +VM Migrate+.
-. Select one of the default dialogs.
-. Click image:1847.png[]+(Configuration)+, and then image:1859.png[]+(Copy this Dialog)+.
-. Type a new +Name+ and +Description+ for the dialog.
-. In the +Content+ field,
-* To remove a tab from display, change its display value to ignore. By choosing ignore, you not only hide the tab, but also skip any fields on that tab that were required. To show the tab, change the display value to show.
-* To hide a field, change its display value from +edit+ to +hide+. To display fields of most data types, use +edit+. To display a button, use +show+. To set a default value for a field, use +:default =&gt; defaultvalue+ to the list of parameters for the field. Set the required parameter to either +true+ or +false+ based on your needs. Note that if you set required parameter to +true+, the field must have a value for the provision request to be submitted.
-. Click +Add+.
-
-If you are using +Provisioning Profiles+, you can specify a specific file that holds the customizations. To do this, you must create an instance mapping to this file in the CloudForms Management Engine Applications/provisioning/profile/VM provisioning by group class. By default, if you are using provisioning profiles and the group does not have a defined instance, the appropriate default dialog file will be used based on the type of provisioning selected.
-	
-===== Creating a Custom Provision Dialog
-
-. Navigate to +Automate → Customization+.
-. Click on the +Provisioning Dialogs+ accordion.
-. Click on the type of dialog you want to create, +Host Provision+, +VM Provision+ or +VM Migrate+.
-. Select one of the default dialogs.
-. Click image:1847.png[]+(Configuration)+, and then image:1859.png[]+(Copy this Dialog)+.
-. Rename the dialog as shown in the examples below.
-[width="100%",cols="50%,50%",options="header",]
-|=======================================================================
-|Type of Provision|Dialog Name
-|Provision Virtual Machine from a template|miq_provision_dialogs_+groupname+_template For example, miq_provision_dialogs_ EvmGroup-user_self_service _template
-|Clone a Virtual Machine|miq_provision_dialogs_+groupname+_clone_to_vm For example, miq_provision_dialogs_ EvmGroup-user_self_service _clone_to_vm
-|Publish a Virtual Machine to a template|miq_provision_dialogs_+groupname+_clone_to_template For example, miq_provision_dialogs_ EvmGroup-user_self_service _clone_to_template
-|=======================================================================
-. Make any changes you need.
-. In the +Content+ field,
-* To remove a tab from display, change its display value to ignore. By choosing ignore, you not only hide the tab, but also skip any fields on that tab that were required. To show the tab, change the display value to show.
-* To hide a field, change its display value from +edit+ to +hide+. To ensure the field does not get turned back on by a workflow model, use +:display_override =&gt; :hide+. To display fields of most data types, use +edit+. To display a button, use +show+. To set a default value for a field, use +:default =&gt; defaultvalue+ to the list of parameters for the field. Set the required parameter to either +true+ or +false+ based on your needs. Note that if you set required to true, the field must have a value for the provision request to be submitted.
-. Click +Add+.
-
-Enter the name of the new dialog into the dialog name field in the appropriate CloudForms Management Engine Applications/provisioning/profile instance. This dialog can now be referred to in an instance in the Provisioning Profiles class so that it can be used for groups of users.
-
-==== Provisioning Profiles
-
-Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or CloudForms Management Engine groups. To use provisioning profiles:
-
-* Create a +Provisioning Profile+ instance for the LDAP or CloudForms Management Engine group. If no instance exists, then default settings will be used.
-* If customizing dialogs, create a custom dialog file, and specify the name of that file in the provisioning profile instance. If customizing the states for provisioning, create a state instance and set the name of the state instance in the provisioning profile instance.
-
-The diagram below shows where provisioning profiles are called during the entire provisioning process.
-image:2344.png[]
-
-===== Creating a Provisioning Profile Instance
-
-. Navigate to +Automate → Explorer+.
-. Using the tree located in the accordion, click +DOMAIN → Cloud → VM → Provisioning → Profile+.
-+
-[NOTE]
-======
-+DOMAIN+ must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-
-This example uses the +Cloud+ Namespace, but can also use the +Infrastructure+ namespace.
-======
-+
-. Click image:1847.png[]+(Configuration)+, image:2345.png[]+(Add a New Instance)+.
-. Make the name of the tag identical to the name of the LDAP or CloudForms Management Engine group you are creating the instance for, replacing spaces in the group name with underscores. For example, change +Red Hat CloudForms-test group+ to +Red Hat CloudForms-test_group+.
-image:6278.png[]
-. In the dialog name field, enter the name of the customized dialog file. This file must reside on the CloudForms Management Engine Appliance in the +/var/www/miq/vmdb/db/fixtures+ directory. Red Hat recommends naming the file in the format +miq_provision_dialogs-groupname.rb+ and copying this file to all CloudForms Management Engine appliances. For example, in the image above the filename is +miq_provision_dialogs-Red Hat CloudForms-test.rb+. For instructions on creating a custom dialog file, see Customizing Provisioning Dialogs.
-+
-[NOTE]
-======
-Be sure that the custom dialog file exists. If it does not, an error will appear when the user clicks on the +Provisioning+ button in the CloudForms Management Engine console.
-======
-+
-. Click +Add+.
-
-
-===== Setting Provisioning Scope Tags
-
-Some non-default placement methods, for example the +redhat_best_placement_with_scope+ or +vmware_best_fit_with_scope+ methods, may require you to set +Provisioning Scope+ tags for a host and a datastore.
-
-To enable these resources for all groups, set the scope to +All+. To limit access to a select group, create a tag in the +Provisioning Scope+ category with the exact name of the user group and set this tag on the desired resources. See Tags in General Configuration for information on creating tags.
-
-To set the scope for a host:
-
-. Navigate to +Infrastructure → Hosts+.
-. Select the host to set the provisioning scope for.
-. Click image:1941.png[](+Policy+), and then image:2158.png[](+Edit Tags+).
-. From the +Select a customer tag to assign+ drop down, select +Provisioning Scope+ and then a value for the tag from the next drop down menu.
-. Click +Save+.
-
-To set the scope for a datastore:
-
-. Navigate to +Infrastructure → Datastores+.
-. Select the datastore to set the provisioning scope for.
-. Click image:1941.png[](+Policy+), and then image:2158.png[](+Edit Tags+).
-. From the +Select a customer tag to assign+ drop down, select +Provisioning Scope+ and then a value for the tag from the next drop down menu.
-. Click +Save+.
-

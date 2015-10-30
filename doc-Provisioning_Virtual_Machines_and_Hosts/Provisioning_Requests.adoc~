@@ -1,0 +1,563 @@
+[[provisioning-requests]]
+== Provisioning Requests
+
+The following options are available when making provisioning requests:
+
+* Set an owner (User can do this using LDAP lookup)
+* Assign a purpose (tag)
+* Select a template or image from which to create a new virtual machine or instance respectively
+* Choose placement
+* Set hardware requirements
+* Specify the vLan
+* Customize the guest operating system
+* Schedule the provisioning
+image:2315.png[]
+		
+=== Requirements for Provisioning Virtual Machines and Instances
+		
+CloudForms Management Engine supports the provisioning of VMware ESX hosts/hypervisors. To provision a virtual machine from VMware providers, you must have an appliance with the Automation Engine role enabled.
+
+If you are using a Windows template, the following configuration is required:
+
+* To customize settings that are inside the operating system, Sysprep must be copied to the appropriate directory on your vCenter computer. Usually this location is: +class="directory">C:\Documents and Settings\All Users\Application Data\VMware\VMware VirtualCenter\sysprep+. Copy the Sysprep tools to the relevant operating system subdirectory. If you are running a standard Win2008 operating system, this step is unnecessary as Sysprep is included as standard.
+* The Windows template must have the latest version of VMware tools for its ESX Server. Check the VMware Site for more information. If you are creating a new password for the Administrator account, the Administrators password must be blank on the template. This is a limitation of Microsoft Sysprep.
+
+See the VMware documentation for a complete list of customization requirements.
+
+=== Requirements for Provisioning Virtual Machines from Red Hat Enterprise Virtualization Manager
+	
+[width="100%",cols="50%,50%a",options="header",]
+|=======================================================================
+|Item|Requirements
+|Red Hat Enterprise Virtualization Manager version 3.0 or higher|Red Hat Enterprise Virtualization Manager properly installed with API in default location https://server:8443/api
+|Red Hat Enterprise Virtualization Manager History Database|
+Red Hat Enterprise Virtualization Manager Data Warehouse (DWH) properly installed with access to the PostgreSQL database on the Red Hat Enterprise Virtualization Manager server. Port 5432 open in iptables.
+
+md5 authentication allowed to CloudForms Management Engine Appliances in +pg_hba.conf+.
+
+PostgreSQL set to listen for connections on +*:5432+ in +postgresql.conf+.
+
+Credentials provided during database setup to be used in CloudForms Management Engine UI.
+
+|Storage Supported for CloudForms Management Engine Virtual Machine Analysis|
+NFS - CloudForms Management Engine server must be able to mount NFS storage domain.
+
+iSCSI / FCP - Cluster must use full Red Hat Enterprise Linux (not Red Hat Enterprise Virtualization Hypervisor) Hosts.
+
+DirectLUN Hook installed on each host and registered to Red Hat Enterprise Virtualization Managers.
+
+Must have CloudForms Management Engine Appliance in each Cluster with this storage type.
+
+CloudForms Management Engine appliance virtual machine container must have DirectLUN attribute set.
+
+Local storage - Not yet supported (Red Hat does not recommend due to single point of failure).
+|=======================================================================					
+					
+=== PXE Provisioning
+
+PXE is a boot method that allows you to load files from across a network link. CloudForms Management Engine uses it for files required for provisioning virtual machines. PXE can be used for provisioning for either Red Hat Enterprise Virtualization Manager or VMware.
+
+*Procedure Overview*
+
+. Connect to the +PXE Server+.
+. Create a +System Image Type+.
+. Associate each +PXE+ image with an image type.
+. Create a customization template.
+
+*Requirements for PXE Provisioning*
+
+* DHCP server configured with required PXE implementation
+* PXE implementation for Linux virtual machine provisioning
+* NFS or SAMBA read and write access to create and modify files on the PXE server
+* CloudForms Management Engine Server uses NFS mount to read and write the response files
+* HTTP read access to the NFS share location as virtual machines use this URL to access PXE images and Kickstart or Cloud-Init configuration files
+* Operating system installation media available to be streamed from PXE server
+* Images configured for desired operating systems
+* Kickstart or Cloud-Init templates to configure operating systems with desired packages
+
+*Additional Requirements for Provisioning Linux Virtual Machines*
+
+* Linux distribution kernel and ramdisk available over HTTP
+* Linux sources available over HTTP
+* Sample PXE menu item that boots this kernel
+
+*Additional Requirements for Provisioning Windows Virtual Machines*
+
+* WinPE ISO built with rhev-agent-tools (for RHEV-M environments) and configured to mount shares for Windows source files and Sysprep files and configured to run customization script
+* Windows based WIM file with operating system installed and configured with Sysprep
+* Sample Sysprep unattend file to be used with the operating system
+* Sample PXE menu item that downloads WinPE ISO, mount in memdisk and boot into WinPE environment
+
+
+=== Connecting to a PXE Server
+
+The following procedure connects to a PXE server and adds its details to CloudForms Management Engine.
+
+. Navigate to +Infrastructure → PXE+.
+. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a New PXE Server+).
+. In +Basic Information+, type a +Name+ that will be meaningful in your environment.
+image:2316.png[]
+. For +Depot Type+, select either +Network File System+ (NFS) or +Samba+. The fields to enter in the dialog depend on the +Depot Type+.
+* For NFS, type in the +URI+, +Access URL+, +PXE Directory+, +Windows Images Directory+ and +Customization Directory+. When you provision, CloudForms Management Engine writes a text file to the +PXE Directory+. The file is named after the MAC address of the NIC that is assigned to the virtual machine. It contains where to get the kernel and initrd image. This file is removed after a successful provision. The +Windows Images Directory+ is where the files are located on your NFS for the provisioning of Windows operating systems. The +Customization Directory+ is where your Kickstart and Sysprep files are located.
+* If using a +Depot Type+ of +Samba+, you will not need +Access URL+, but you will need a +User ID+, and +Password+, in addition to the items required for NFS.
+. For +PXE Image Menus+, type the +filename+ for the PXE Boot menu.
+. Click +Add+.
+. Select the new PXE server from the tree on the left, and click image:1847.png[](+Configuration+), then image:2003.png[](+Refresh+) to see your existing images.
+[NOTE]
+============
+Next, create PXE Image types to associate with the customization templates and to specify if the image type is for a virtual machine, a host, or both.
+============
+			
+=== Creating System Image Types for PXE
+
+The following procedure creates a system image type for PXE servers.
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +System Image Types+ accordion.
+image:2318.png[]
+. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a new System Image Type+).
+. In +Basic Information+, type in a +Name+ and select a +Type+.
+image:2317.png[]
+* Use +Host+ if you want this image type to only apply to hosts.
+* Use +Vm+ if you want this image type to only apply to virtual machines.
+* Use +Any+ if this image type can be used for either hosts or virtual machines.
+. Click +Add+.
+[NOTE]
+=========
+After creating the System Image Types, assign the types to each image on your PXE servers. To do this, you will select each image on the PXE server and identify its type.
+=========
+
+=== Setting the PXE Image Type for a PXE Image
+
+The following procedure sets the image type for a chosen PXE image.
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +PXE Servers+ accordion and select the image that you want to set a type for.
+. Click image:1847.png[](+Configuration+), then image:1851.png[](+Edit this PXE Image+).
+. From the +Basic Information+ area, select the correct type. If this PXE image will be used as the +Windows Boot Environment+, check +Windows Boot Environment+. At the time of this writing, only one PXE Image can be identified as the +Windows Boot Environment+. Therefore, checking one as the +Windows Boot Environment+, will remove that from any other PXE image with that check.
+image:2319.png[]
+Click +Save+.
+image:2320.png[]
+
+=== ISO Provisioning
+
+CloudForms Management Engine also allows ISO provisioning from Red Hat Enterprise Virtualization Manager datastores. To use this feature, you will need to do the following before creating a provision request.
+
+. Add the +ISO Datastore+. The Red Hat Enterprise Virtualization Manager system must have already been discovered or added into the VMDB. For more information, see Managing Providers.
+. Refresh the +ISO Datastore+.
+. Create a +System Image Type+.
+. Set the +ISO Image Type+.
+. +Create+ a customization template.
+
+=== Adding an ISO Datastore
+
+The following procedure adds an ISO Datastore from your Red Hat Enterprise Virtualization environment.
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +ISO Datastores+ accordion.
+. Click image:1847.png[](+Configuration+), image:1848.png[](+Add a new ISO Datastore+).
+. Select the Red Hat Enterprise Virtualization Manager Provider hosting the ISO Datastore.
+. Click +Add+.
+
+The ISO datastore is added to CloudForms Management Engine.
+
+=== Refreshing an ISO Datastore
+
+The following procedure refreshes the chosen ISO datastore and updates CloudForms Management Engine with available ISOs.
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +ISO Datastores+ accordion, and select an ISO datastore.
+. Click image:1847.png[](+Configuration+), then click image:2003.png[](+Refresh+).
+	
+=== Creating System Image Types for ISO
+
+The following procedure creates a system image type for ISO Servers.
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +System Image Types+ accordion.
+. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a new System Image Type+).
+. In +Basic Information+, type in a +Name+ and select a +Type+.
+image:2317.png[]
+* Use +Host+ if you want this image type to only apply to hosts.
+* Use +Vm+ if you want this image type to only apply to virtual machines.
+* Use +Any+ if this image type can be used for either hosts or virtual machines.
+. Click +Add+.
+image:2322.png[]
+[NOTE]
+========
+After creating the system image types, assign the types to each image on your ISO servers. To do this, you will select each image on the ISO server and identify its type.
+========
+			
+=== Setting the Image Type for an ISO Image
+
+The following procedure sets the image type for an ISO image.
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +ISO Datastores+ accordion, and select the image that you want to set a type for.
+. Click image:1847.png[]+(Configuration), then image:1851.png[]+(Edit this ISO Image).
+. From the +Basic Information+ area, select the correct +Type+.
+image:2323.png[]
+. Click +Save+.
+
+=== Customization Templates for Virtual Machine and Instance Provisioning
+
+Add a customization template to provide +Kickstart+, +Cloud-Init+, or +Sysprep+ files for the initial loading of the operating system.
+
+*Cloud-Init Requirements*
+
+* When creating a template using Red Hat Virtualization, install the +cloud-init+ package on the source virtual machine. This enables Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
+* See the https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.4/html/Administration_Guide/index.html[Red Hat Enterprise Virtualization Administration Guide] for more information on using Cloud-Init in a Red Hat Enterprise Virtualization environment.
+* See the http://cloudinit.readthedocs.org/en/latest/[Cloud-Init Documentation] web site for example scripts.
+
+*Kickstart Requirements for ISO Provisioning*
+
+* Name the +Kickstart+ file +ks.cfg+.
+* Set the new virtual machine to power down after provisioning is complete.
+* CFME must use the virtual machine payload feature of RHEV to create a floppy disk containing the data from the selected customization template.
+* Customize the installer to include the data written to the floppy disk payload.
+
+RHEL ISO with the following modifications:
+
+* isolinux.cfg: modify default menu item "append" line to include "ks=cdrom"
+* ks.cfg: which must minimally include:
++
+------
+Pre Install Scripts
+%pre
+
+# Mount the floppy drive
+modprobe floppy
+mkdir /tmp/floppy
+mount /dev/floppy /tmp/floppy
+%end
+
+# Include ks.cfg file from the floppy (written by CFME based on selected customization template)
+%include /tmp/floppy/ks.cfg
+------
++
+
+
+
+=== Customization Script Additions for Virtual Machine and Instance Provisioning
+	
+[width="100%",cols="30%,30%,40%a",options="header",]
+|=======================================================================
+|Customization Type|Reason to Include|Script entries
+|Kickstart|Takes the values from the +Customize+ tab in +Provisioning Dialog+ and substitutes them into the script.|
++
+------
+#Configure Networking based on values from provisioning dialog
+<% if evm[:addr_mode].first == 'static' %>
+  <% network_string = "network --onboot yes --device=eth0 --bootproto=static --noipv6" %>
+  <% ["ip", :ip_addr, "netmask", :subnet_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns_servers].each_slice(2) do /|ks_key, evm_key/| %>
+    <% network_string << " --#{ks_key} #{evm[evm_key]}" unless evm[evm_key].blank? %>
+  <% end %>
+<%= network_string %>
+<% else %>
+network --device=eth0 --bootproto=dhcp
+<% end %>
+------
++
+
+|Kickstart|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+.|
++
+------
+rootpw --iscrypted <%= MiqPassword.md5crypt(evm[:root_password]) %>
+------
++
+
+|Kickstart|Sends status of the provision back to CloudForms Management Engine Server for display in the CloudForms Management Engine Console.|
++
+------
+# Callback to CFME during post-install
+wget --no-check-certificate <%= evm[:post_install_callback_url] %>
+------
++
+
+|Sysprep|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+. The value for the +AdministratorPassword+ line must be inserted to use the password from the +Provision Dialog+ and encrypt it.|
++
+------
+<UserAccounts>
+  <AdministratorPassword>
+    <Value><%= MiqPassword.sysprep_crypt(evm[:root_password]) %></Value>
+    <PlainText>false</PlainText>
+  </AdministratorPassword>
+</UserAccounts>
+------
++
+|=======================================================================	
+	
+=== Adding a Customization Template
+
+. Navigate to +Infrastructure → PXE+.
+. Click the +Customization Templates+ accordion.
+. Click image:1847.png[]+(Configuration), image:1848.png[]+(Add a new Customization Template).
+. In +Basic Information+, type in a +Name+ and +Description+.
+image:2324.png[]
+. Select the +Image Type+. This list should include the PXE image types you created.
+. In +Type+, select +Kickstart+ or +CloudInit+ for Linux based systems, and +Sysprep+ for Windows based system.
+. In the +Script+ area, either paste the script from another source or type the script directly into the CloudForms Management Engine interface.
+. Click +Add+.
+[NOTE]
+=========
+The default dialogs show all possible parameters for provisioning. To limit the options shown, see Customizing Provisioning Dialogs.
+=========			
+
+=== Provisioning Virtual Machines
+
+There are three types of provisioning requests available in CloudForms Management Engine:
+
+. Provision a new virtual machine from a template
+. Clone a virtual machine
+. Publish a virtual machine to a template
+
+=== Provisioning a Virtual Machine from a Template
+
+You can provision virtual machines through various methods. One method is to provision a virtual machine directly from a template stored on a provider.
+
+[IMPORTANT]
+=================
+To provision a virtual machine, you must have the "Automation Engine" role enabled.
+=================
+
+To Provision a Virtual Machine from a Template:
+
+. Navigate to +Infrastructure → Virtual Machines+.
+. Click image:2007.png[]+(Lifecycle), and then image:1848.png[]+(Provision VMs).
+. Select a template from the list presented.
+. Click +Continue+.
+. On the +Request+ tab, enter information about this provisioning request. 
++
+image:2326.png[]
++
+In +Request Information+, type in at least a +First Name+ and +Last Name+ and an email address. This email is used to send the requester status emails during the provisioning process for items such as auto-approval, quota, provision complete, retirement, request pending approval, and request denied. The other information is optional. If the CloudForms Management Engine server is configured to use LDAP, you can use the +Look Up+ button to populate the other fields based on the email address.
++
+[NOTE]
+==========
+Parameters with a * next to the label are required to submit the provisioning request. To change the required parameters, see Customizing Provisioning Dialogs.
+==========
+. Click the +Purpose+ tab to select the appropriate tags for the provisioned virtual machines.
+. Click the +Catalog+ tab to select the template to provision from. This tab is context sensitive based on provider.
+. For templates on VMware providers:
+image:2328.png[]
+.. For +Provision Type+, select +VMware+ or +PXE+.
+... If +VMware+ is selected, select +Linked Clone+ to create a linked clone to the virtual machine instead of a full clone. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot you want to use for the linked clone.
+... If +PXE+ is selected, select a PXE +Server+ and +Image+ to use for provisioning
+.. Under +Count+, select the number of virtual machines to create in this request.
+.. Use +Naming+ to specify a virtual machine name and virtual machine description. When provisioning multiple virtual machines, a number will be appended to the virtual machine name.
+. For templates on Red Hat providers:
+.. Select the +Name+ of a template to use.
+.. For +Provision Type+, select either +ISO+, +PXE+, or +Native Clone+. You must select +Native Clone+ in order to use a Cloud-Init template.
+... If +Native Clone+ is selected, select +Linked Clone+ to create a linked clone to the virtual machine instead of a full clone. This is equivalent to thin template provisioning in Red Hat Enterprise Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
+... If +ISO+ is selected, select an ISO +Image+ to use for provisioning
+... If +PXE+ is selected, select a PXE +Server+ and +Image+ to use for provisioning
+.. Under +Count+, select the number of virtual machines you want to create in this request.
+.. Use +Naming+ to specify a +VM Name+ and +VM Description+. When provisioning multiple virtual machines, a number will be appended to the +VM Name+.
+. Click the +Environment+ tab to decide where you want the new virtual machines to reside.
+.. If provisioning from a template on VMware, you can either let CloudForms Management Engine decide for you by checking +Choose Automatically+, or select a specific cluster, resource pool, folder, host, and datastore.
+.. If provisioning from a template on Red Hat, you can either let CloudForms Management Engine decide for you by checking +Choose Automatically+, or select a datacenter, cluster, host and datastore.
+. Click the +Hardware+ tab to set hardware options.
+image:2330.png[]
+.. In +VM Hardware+, set the number of CPUs, amount of memory, and disk format: thin, pre-allocated/thick or same as the provisioning template (default).
+.. For VMware provisioning, set the +VM Limits+ of CPU and memory the virtual machine can use.
+.. For VMware provisioning, set the +VM Reservation+ amount of CPU and memory.
+. Click +Network+ to set the vLan adapter. Additional networking settings that are internal to the operating system appear on the +Customize+ tab.
+image:2335.png[]
+.. In +Network Adapter Information+, select the +vLan+.
+. Click +Customize+ to customize the operating system of the new virtual machine. These options vary based on the operating system of the template.
+image:2336.png[]
+. For Windows provisioning:
+.. To use a customer specification from the Provider, click +Specification+. To select an appropriate template, choose from the list in the custom specification area. The values that are honored by CloudForms Management Engine display.
++
+[NOTE]
+======
+Any values in the specification that do not show in the CloudForms Management Engine console's request dialogs are not used by CloudForms Management Engine. For example, for Windows operating systems, if you have any run once values in the specification, they are not used in creating the new virtual machines. Currently, for a Windows operating system, CloudForms Management Engine honors the unattended GUI, identification, workgroup information, user data, windows options, and server license. If more than one network card is specified, only the first is used.
+======	
++
+image:2337.png[]
++
+To modify the specification, select +Override Specification Values+.
+.. Select +Sysprep Answer File+, to upload a Sysprep file or use one that exists for a custom specification on the Provider where the template resides. To upload a file, click +Browse+ to find the file, and then upload. To use an answer file in +Customization Specification+, click on the item. The answer file will automatically upload for viewing. You cannot make modifications to it.
+. For Linux provisioning:
+.. Under +Credentials+, enter a +Root Password+ for the +root+ user to access the instance.
+.. Enter a +IP Address Information+ for the instance. Leave as +DHCP+ for automatic IP assignment from the provider.
+.. Enter any +DNS+ information for the instance if necessary.
+.. Select +Customize Template+ for additional instance configuration. Select from the Kickstart or Cloud-Init customization templates stored on your appliance.
+. Click the +Schedule+ tab to select when provisioning begins.
+.. In +Schedule Info+, select when to start provisioning. If you select +Schedule+, you will be prompted to enter a date and time. Select +Stateless+ if you do not want the files deleted after the provision completes. A stateless provision does not write to the disk so it requires the PXE files on the next boot.
+.. In +Lifespan+, select to power on the virtual machines after they are created, and to set a retirement date. If you select a retirement period, you will be prompted for when you want a retirement warning.
+image:2338.png[]
+. Click +Submit+.
+
+The provisioning request is sent for approval. For the provisioning to begin, a user with the administrator, approver, or super administrator account role must approve the request. The administrator and super administrator roles can also edit, delete, and deny the requests. You will be able to see all provisioning requests where you are either the requester or the approver.
+
+After submission, the appliance assigns each provision request a +Request ID+. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The Request ID consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
+
+*Request ID Format*
+
+Request 99 in region 123 results in Request ID 123000000000099.
+
+	
+=== Cloning a Virtual Machine (VMware Virtual Machines Only)
+
+. Navigate to +Infrastructure → Virtual Machines+, and check the virtual machine you want to clone.
+. Click image:2007.png[](+Lifecycle+), and then image:2339.png[](+Clone selected item+).
+. Fill in the options as shown in +To Provision+ from a template using the provided dialogs. Be sure to check the +Catalog Tab+.
+. Schedule the request on the +Schedule+ tab.
+. Click +Submit+.
+	
+=== Publishing a Virtual Machine to a Template (VMware Virtual Machines Only)
+
+. Navigate to +Infrastructure → Virtual Machines+, and check the virtual machine you want to publish as a template.
+. Click image:2007.png[](+Lifecycle+), and then image:2340.png[](+Publish selected VM to a Template+).
+. Fill in the options as shown in +To Provision+ from a template using the provided dialogs. Be sure to check the +Catalog+ tab.
+. Schedule the request on the +Schedule+ tab.
+. Click +Submit+.
+
+		
+=== Provisioning Instances
+
+Cloud instances follow the same process (Request, Approval, Deployment) as a standard virtual machine from virtualization infrastructure. First, a user makes a request for instances and specifies the image, tags, availability zone and hardware profile flavor. Second, the request goes through the approval phase. Finally, CloudForms Management Engine executes the request.
+		
+==== Provisioning an EC2 Instance from an Image
+
+. Navigate to +Clouds → Instances+.
+. Click image:2007.png[](+Lifecycle+), then click image:1848.png[](+Provision Instances+).
+. Select an image from the list presented.
+. Click +Continue+.
+. On the +Request+ tab, enter information about this provisioning request. In +Request Information+, type in at least a first and last name and an email address. This email is used to send the requester status emails during the provisioning process for items such as auto-approval, quota, provision complete, retirement, request pending approval, and request denied. The other information is optional. If the CloudForms Management Engine Server is configured to use LDAP, you can use the +Look Up+ button to populate the other fields based on the email address.
+[NOTE]
+======
+Parameters with a * next to the label are required to submit the provisioning request. To change the required parameters, see Customizing Provisioning Dialogs.
+======
+. Click the +Purpose+ tab to select the appropriate tags for the provisioned instance.
+. Click the +Catalog+ tab for basic instance options.
+.. To change the image to use as a basis for the instance, select it from the list of images.
+.. Select the +Number of VMs+ to provision.
+.. Type a +VM Name+ and +VM Description+.
+. Click the +Environment+ tab to select the instance's +Availability Zone+, +Availability Zone+, +Virtual Private Cloud+, +Cloud Subnet+, +Security Groups+, and +Elastic IP Address+. If no specific availability zone is required, select the +Choose Automatically+ checkbox.
+. Click the +Properties+ tab to set provider options such as hardware flavor and security settings.
+.. Select a flavor from the +Instance Type+ list.
+.. Select a +Guest Access Key Pair+ for access to the instance.
+.. Select the +CloudWatch+ monitoring level. Leave as +Basic+ for the default EC2 monitoring.
+. Click the +Customize+ tab to set additional instance options.
+.. Under +Credentials+, enter a +Root Password+ for the +root+ user access to the instance.
+.. Enter a +IP Address Information+ for the instance. Leave as +DHCP+ for automatic IP assignment from the provider.
+.. Enter any +DNS+ information for the instance if necessary.
+.. Select a +Customize Template+ for additional instance configuration. Select from the Cloud-Init scripts stored on your appliance.
+. Click the +Schedule+ tab to set the provisioning and retirement date and time.
+.. In +Schedule Info+, choose whether the provisioning begins upon approval, or at a specific time. If you select +Schedule+, you will be prompted to enter a date and time.
+.. In +Lifespan+, select whether to power on the instances after they are created, and whether to set a retirement date. If you select a retirement period, you will be prompted for when to receive a retirement warning.
+. Click +Submit+.
+
+The provisioning request is sent for approval. For the provisioning to begin, a user with the admin, approver, or super admin account role must approve the request. The admin and super admin roles can also edit, delete, and deny the requests. You will be able to see all provisioning requests where you are either the requester or the approver.
+
+After submission, the appliance assigns each provision request a +Request ID+. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The Request ID consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
+
+*Request ID Format*
+
+Request 99 in region 123 results in Request ID 123000000000099.
+
+
+==== Provisioning an OpenStack Instance from an Image
+
+. Navigate to +Clouds → Instances+.
+. Click image:2007.png[](+Lifecycle+), then click image:1848.png[](+Provision Instances+).
+. Select an OpenStack image from the list presented. These images must be available on your OpenStack provider.
+. Click +Continue+.
+. On the +Request+ tab, enter information about this provisioning request. In +Request Information+, type in at least a first and last name and an email address. This email is used to send the requester status emails during the provisioning process for items such as auto-approval, quota, provision complete, retirement, request pending approval, and request denied. The other information is optional. If the CloudForms Management Engine Server is configured to use LDAP, you can use the +Look Up+ button to populate the other fields based on the email address.
+[NOTE]
+======
+Parameters with a * next to the label are required to submit the provisioning request. To change the required parameters, see section Customizing_Provisioning_Dialogs.
+======
+. Click the +Purpose+ tab to select the appropriate tags for the provisioned instance.
+. Click the +Catalog+ tab for basic instance options.
+.. To change the image to use as a basis for the instance, select it from the list of images.
+.. Select the +Number of Instances+ to provision.
+.. Type a +Instance Name+ and +Instance Description+.
+. Click the +Environment+ tab to select the instance's +Tenant+, +Availabilty Zones+, +Cloud Network+, +Security Groups+, and +Public IP Address+. If no specific Tenant is required, select the +Choose Automatically+ checkbox.
+. Click the +Properties+ tab to set provider options such as flavors and security settings.
+.. Select a flavor from the +Instance Type+ list.
+.. Select a +Guest Access Key Pair+ for access to the instance.
+. Click the +Customize+ tab to set additional instance options.
+.. Under +Credentials+, enter a +Root Password+ for the +root+ user access to the instance.
+.. Enter a +IP Address Information+ for the instance. Leave as +DHCP+ for automatic IP assignment from the provider.
+.. Enter any +DNS+ information for the instance if necessary.
+.. Select a +Customize Template+ for additional instance configuration. Select from the Cloud-Init scripts stored on your appliance.
+. Click the +Schedule+ tab to set the provisioning and retirement date and time.
+.. In +Schedule Info+, choose whether the provisioning begins upon approval, or at a specific time. If you select +Schedule+, you will be prompted to enter a date and time.
+.. In +Lifespan+, select whether to power on the instances after they are created, and whether to set a retirement date. If you select a retirement period, you will be prompted for when to receive a retirement warning.
+. Click +Submit+.
+
+The provisioning request is sent for approval. For the provisioning to begin, a user with the admin, approver, or super admin account role must approve the request. The admin and super admin roles can also edit, delete, and deny the requests. You will be able to see all provisioning requests where you are either the requester or the approver.
+
+After submission, the appliance assigns each provision request a +Request ID+. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The Request ID consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
+
+*Request ID Format*
+
+Request 99 in region 123 results in Request ID 123000000000099.
+		
+==== Requirements for Provisioning a Host
+
+CloudForms Management Engine can provision hosts using PXE and Intelligent Platform Management Interface (IPMI) technologies. Before you provision your first host, configure the following prerequisites:
+
+* Provisioning requires the +Automation Engine+ server role be enabled. Confirm your server role settings in +Configure → Configuration → Server → Server Control+.
+* Make a PXE server accessible to the CloudForms Management Engine server.
+* Create a customization template for hosts. This customization template must contain host-specific additions, documented in the Customization Templates for Host Provisioning section.
+* Create system image types for the host.
+* Associate images with the image types.
+* Enable IPMI on provisioning hosts and add them to the CloudForms Management Engine Infrastructure.
+
+
+===== IPMI Hosts
+
+There are two ways to get the Intelligent Platform Management Interface (IPMI) Host into the VMDB. You can either use the CloudForms Management Engine's discovery process or add the host using its IP address and credentials.
+			
+====== Discovering the Management Interface for an IPMI Host
+
+. Navigate to +Infrastructure → Hosts+.
+. Click image:1847.png[]+(Configuration)+, then image:2119.png[]+(Discover Hosts)+.
+. In +Discover+, check +IPMI+.
+. Optionally, in +IPMI Credentials+, type in a +User ID+ and +Password+.
+[NOTE]
+======
+You can also add IPMI credentials after the host has been discovered. See section To Add IPMI Credentials
+======
+. In +Subnet Range+, type in a range of IP addresses. For quickest results, use the actual IP address in both fields.
+. Click +Discover+.
+[NOTE]
+======
+After the host is discovered, you can add credentials for IPMI.
+======	
+			
+====== Adding IPMI Credentials to a Discovered Host
+
+After discovering an IPMI host, add the credentials using the following procedure.
+	
+. Navigate to +Infrastructure → Hosts+.
+. Click on the host you want to edit.
+. Click image:1847.png[](+Configuration+), and then image:1851.png[](+Edit this Host+).
+. In the +Credentials+ area, +IPMI+ tab, type in the IPMI credentials
+.. Use +User ID+ to specify a login ID.
+.. Use +Password+ to specify the password for the user ID.
+.. Use +Verify Password+ to confirm the password.
+. Click +Validate+ to test the credentials.
+. Click +Save+.
+	
+====== Adding the Management Interface for an IPMI Host
+
+. Navigate to +Infrastructure → Hosts+.
+. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a New Host+).
+. In +Basic Information+, type in a +Name+ and the +IPMI IP address+.
+. In the +Credentials+ area, under +IPMI+ tab, type in the IPMI credentials
+.. Use +User ID+ to specify a login ID.
+.. Use +Password+ to specify the password for the User ID.
+.. Use +Verify Password+ to confirm the password.
+. Click +Validate+ to test the credentials.
+. Click +Add+.
+
+The IPMI host is added to the CloudForms Management Engine environment; an operating system can now be provisioned onto it.
+
+===== Customization Templates for Host Provisioning
+
+Add a customization template to provide Kickstart files for the initial loading of the operating system. There are certain sections to use to allow for interactions with the provisioning dialogs provided by CloudForms Management Engine.

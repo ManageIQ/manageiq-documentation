@@ -3,13 +3,19 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Security_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="chap-Red_Hat_CloudForms-Security_Guide-Test_Chapter" lang="en-US">
-	<title>Generating SSL Certificates</title>
+<section id="chap-Red_Hat_CloudForms-Security_Guide-SSL_Certs" lang="en-US">
+	<title>Generating SSL Certificates for Your Appliance and Database</title>
   <para>
-    It is important to enhance the security of SSL communication of your appliances. The appliance image ships with a default SSL certificate and it is recommended to change this certificate.
+    It is important to enhance the security of SSL communication of your appliances, which, depending on your setup, may include your database appliance. The appliance image ships with a default SSL certificate. It is recommended to replace this certificate with your own certificate, either signed by a trusted Certificate Authority (CA) or self-signed.
   </para>
+  <section id="Creating_a_Certificate_Signing_Request">
+  <title>Creating a Certificate Signing Request</title>
+  <para>The first step is to determine the host name of your appliance or database appliance by running the following command:</para>
+  <screen>
+$ hostname
+  </screen>
   <para>
-    The first step is to create a Certificate Signing Request using the <command>openssl</command> command:
+    The next step is to create a Certificate Signing Request (CSR) using the <command>openssl</command> command:
   </para>
   <screen>
 [root@ ~]# openssl req -new -newkey rsa:2048 -out appliance.csr -keyout appliance.key
@@ -26,16 +32,17 @@ Enter PEM pass phrase: **********
 Verifying - Enter PEM pass phrase: **********
   </screen>
   <para>
-    The command then provides a questionaire requesting certain details for the key. Fill out this questionaire. For example:
+    The command then provides a questionnaire requesting certain details for the key. Fill out this questionnaire. Use the output of the <command>hostname</command> command to specify the <literal>Common Name</literal>.
   </para>
+  <para>For example:</para>
   <screen>
-Country Name (2 letter code) [XX]:AU
-State or Province Name (full name) []:Queensland
-Locality Name (eg, city) [Default City]:Brisbane
-Organization Name (eg, company) [Default Company Ltd]:Red Hat
-Organizational Unit Name (eg, section) []:Customer Content Services
-Common Name (eg, your name or your server's hostname) []:appliance.example.com
-Email Address []:example@redhat.com
+Country Name (2 letter code) [XX]:<replaceable>US</replaceable>
+State or Province Name (full name) []:<replaceable>North Carolina</replaceable>
+Locality Name (eg, city) [Default City]:<replaceable>Raleigh</replaceable>
+Organization Name (eg, company) [Default Company Ltd]:<replaceable>CloudForms</replaceable>
+Organizational Unit Name (eg, section) []:<replaceable>Customer Content Services</replaceable>
+Common Name (eg, your name or your server's hostname) []:<replaceable>$(hostname)</replaceable>
+Email Address []:<replaceable>example@example.com</replaceable>
 
 Please enter the following 'extra' attributes
 to be sent with your certificate request
@@ -43,7 +50,7 @@ A challenge password []:
 An optional company name []:
   </screen>
   <para>
-    This produces two files:
+    Running the command produces two files:
   </para>
   <itemizedlist>
     <listitem>
@@ -58,10 +65,13 @@ An optional company name []:
     </listitem>
   </itemizedlist>
   <para>
-    At this stage, you would send the CSR to a trusted Certificate Authority (CA) and in return they would send you a signed SSL certificate.
+    At this stage, you would send the CSR to a trusted Certificate Authority (CA) and in return they would send you a signed certificate.
   </para>
+  </section>
+  <section id="Creating_a_Self-signed_Certificate">
+    <title>Creating a Self-signed Certificate</title>
   <para>
-    As an alternative, you can create a self-signed certificate using the following <command>openssl</command> commands:
+    As an alternative to obtaining a signed certificate, you can use the <filename>appliance.key</filename> and <filename>appliance.csr</filename> files to create a self-signed certificate by running the following <command>openssl</command> commands:
   </para>
   <screen>
 [root@ ~]# openssl rsa -in appliance.key -out server.cer.key
@@ -82,34 +92,39 @@ An optional company name []:
       </para>
     </listitem>
   </itemizedlist>
+  </section>
+  <section id="Enabling_the_Appliance_to_Use_Your_Certificate">
+    <title>Enabling Your Certificate</title>
   <para>
-    Despite whether you used a trusted CA or self-signed the certificate, you should now have your SSL certificates for your appliance.
+    Despite whether you used a trusted CA or self-signed the certificate, you should now have your own certificate for your appliance.
   </para>
   <para>
-    Copy the SSL certificate files to the certificate directory on the appliance:
+    Copy the certificate and key files to the certificate directory on the appliance:
   </para>
   <screen>
 [root@ ~]# cp ~/server.cer.key /var/www/miq/vmdb/certs/server.cer.key
 [root@ ~]# cp ~/server.cer /var/www/miq/vmdb/certs/server.cer
   </screen>
   <para>
-    After the SSL certificate files have copied, restart the appliance:
+    After the certificate and key files have been copied, restart the appliance:
   </para>
   <screen>
 [root@ ~]# service evmserverd restart
   </screen>
   <para>
-    The appliance now uses the new SSL certificate.
+    The appliance now uses your own certificate.
   </para>
+  <para>If your environment consists of multiple appliances connecting to a single database appliance, you can use your certificate and key files to set up SSL for the database connection. For more information, see <xref linkend="chap-Red_Hat_CloudForms-Security_Guide-Setting_SSL_for_the_Database_Appliance" />.</para>
   <important>
     <para>
-      Updates from the Red Hat Content Delivery Network might overwrite these certificate files. Make sure to copy the new SSL certificate files to the certificate directory after performing an update to your appliance.
+      Updates from the Red Hat Content Delivery Network might overwrite these certificate and key files. Make sure to copy your own certificate and key files to the certificate directory after performing an update to your appliance.
     </para>
   </important>
   <note>
     <para>
-      See also the following article: <ulink url="https://access.redhat.com/articles/449033">https://access.redhat.com/articles/449033</ulink>
+      See also the following article for information on replacing SSL certificates in CloudForms Management Engine: <ulink url="https://access.redhat.com/articles/449033">https://access.redhat.com/articles/449033</ulink>.
     </para>
   </note>
+  </section>
 </section>
 

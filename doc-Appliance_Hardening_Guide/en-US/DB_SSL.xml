@@ -3,138 +3,131 @@
 <!ENTITY % BOOK_ENTITIES SYSTEM "Security_Guide.ent">
 %BOOK_ENTITIES;
 ]>
-<section id="chap-Red_Hat_CloudForms-Security_Guide-Setting_SSL_for_the_Appliance_Database" lang="en-US">
+<section id="chap-Red_Hat_CloudForms-Security_Guide-Setting_SSL_for_the_Database_Appliance" lang="en-US">
   <title>Configuring the Database to use SSL</title>
     <para>
-      CloudForms initially connects to the database through an unencrypted communication. This is not an issue if you aim to use an internal-only database CloudForms appliance. If using multiple appliances connecting to a single appliance database, you can set up the database connection to use SSL. An SSL connection encrypts the communication between the CloudForms and the database.
+      CloudForms initially connects to the database through an unencrypted communication. If using multiple appliances connecting to a single database appliance, you can set up the database connection to use SSL. An SSL connection encrypts the communication between the CloudForms and the database.
     </para>
     <para>
-      This procedure uses the following SSL certificate files on your main CloudForms database appliance:
+      The procedures in this section use the SSL certificate and key files listed below. These files can be found on your main CloudForms database appliance.
     </para>
+        <note>
+          <para>The appliance image ships with a default SSL certificate and it is recommended to change this certificate. You can use a certificate signed by a trusted CA or, alternatively, generate a self-signed certificate.</para>
+          <para>See <xref linkend="chap-Red_Hat_CloudForms-Security_Guide-SSL_Certs" /> for more information on generating an SSL certificate.</para>
+        </note>
     <itemizedlist>
       <listitem>
         <para>
-          <filename>/var/www/miq/vmdb/certs/server.cer</filename> - Signed certificate for CloudForms database server appliance
+          <filename>/var/www/miq/vmdb/certs/server.cer</filename> - Signed or self-signed certificate for the database appliance.
         </para>
       </listitem>
       <listitem>
         <para>
-          <filename>/var/www/miq/vmdb/certs/server.cer.key</filename> - Private key for server certificate
+          <filename>/var/www/miq/vmdb/certs/server.cer.key</filename> - Private key for server certificate.
         </para>
       </listitem>
       <listitem>
-        <para>
-          <filename>/var/www/miq/vmdb/certs/client.cer</filename> - Signed certificate for CloudForms client appliances
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          <filename>/var/www/miq/vmdb/certs/client.cer.key</filename> - Private key for client certificate
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          <filename>/var/www/miq/vmdb/certs/ca.cer</filename> - The certificate authority that signed the server and client certificates.
-        </para>
+        <para><filename>/var/www/miq/vmdb/certs/root.crt</filename> - The root certificate for CloudForms database server appliance. You can either use a self-signed certificate or a certificate signed by a trusted CA to generate your root certificate.</para>
       </listitem>
     </itemizedlist>
     <para>
       It is also recommended to stop all Red Hat CloudForms services before configuring the database to use SSL.
     </para>
-    <procedure id="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_database_server">
-      <title>Configuring SSL on the database server</title>
+    <procedure id="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_database_appliance">
+      <title>Configuring SSL on the database appliance</title>
       <step>
         <para>
-          Log in to the main appliance as <literal>root</literal>.
+          Log in as <literal>root</literal> to the appliance where the database resides.
         </para>
       </step>
       <step>
-        <para>
-          Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf</filename> file:
-        </para>
+        <para>Stop the <systemitem>evmserverd</systemitem> and <systemitem>rh-postgresql94-postgresql</systemitem> services:</para>
+        <screen>[root@cloudforms2 ~]# service evmserverd stop</screen>
+        <screen>[root@cloudforms2 ~]# service rh-postgresql94-postgresql stop</screen>
+      </step>
+      <step>
+        <para>Install the server key file in the correct location and set the ownership and permissions for it:</para>
         <screen>
-[root@cloudforms1 ~]# vi /opt/rh/postgresql92/root/var/lib/pgsql/data/postgresql.conf
+[root@cloudforms2 ~]# install -m 600 -o postgres -g postgres \
+/var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
         </screen>
+      </step>
+      <step>
+        <para>Install the server certificate file in the correct location and set the ownership and permissions for it:</para>
+        <screen>
+[root@cloudforms2 ~]# install -m 644 -o postgres -g postgres \
+/var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
+        </screen>
+      </step>
+      <step>
+        <para>Install the database appliance certificate file as the root certificate in the correct location and set the ownership and permissions for it:</para>
+        <screen>[root@cloudforms2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt</screen>
+      </step>
+      <step>
+        <para>Make sure that the security context is set correctly for the files in <filename>/var/www/miq/certs</filename>:</para>
+        <screen>
+[root@cloudforms2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
+        </screen>
+      </step>
+      <step>
         <para>
-          Uncomment and edit the <option>ssl</option> option:
+          Open the <filename>/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf</filename> file and uncomment and edit the <option>ssl</option> option:
         </para>
         <screen>
 ssl=on
         </screen>
         <para>
-          Uncomment and edit the SSL certificate location options to match the following:
+          In the same file, locate the options <option>ssl_cert_file</option>, <option>ssl_key_file</option>, and <option>ssl_ca_file</option> that specify the location of SSL certificates and edit them so that they are uncommented and point to the correct certificate files:
         </para>
-        <screen>
-ssl_cert_file = '/var/www/miq/vmdb/certs/server.cer'          # (change requires restart)
-ssl_key_file  = '/var/www/miq/vmdb/certs/server.cer.key'      # (change requires restart)
-ssl_ca_file   = '/var/www/miq/vmdb/certs/ca.cer'              # (change requires restart)
-        </screen>
-        <para>
-          Save your changes to this file.
-        </para>
+        <programlisting>
+ssl_cert_file = '/var/www/miq/vmdb/certs/postgres.crt'  # (change requires restart)
+ssl_key_file  = '/var/www/miq/vmdb/certs/postgres.key'  # (change requires restart)
+ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'      # (change requires restart)
+        </programlisting>
       </step>
       <step>
         <para>
-          Secure the key file:
+          Open the <filename>/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf</filename> file and locate the two lines that contain the following:
         </para>
-        <screen>
-[root@cloudforms2 ~]# chmod 600 /var/www/miq/vmdb/certs/server.cer.key
-        </screen>
-      </step>
-      <step>
-        <para>Make sure that the key file is owned by <systemitem>root</systemitem>:</para>
-        <screen>
-[root@cloudforms2 ~]# chown root /var/www/miq/vmdb/certs/server.cer.key
-        </screen>
-      </step>
-      <step>
-        <para>
-          Edit the <filename>/opt/rh/postgresql92/root/var/lib/pgsql/data/pg_hba.conf</filename> file. It should look similar to this:
-        </para>
-        <screen>
-# TYPE    DATABASE USER  ADDRESS       METHOD
-local     all      all                 peer map=usermap
+        <programlisting>
 host      all      all   all           md5
 #hostssl  all      all   all           md5
-        </screen>
+        </programlisting>
         <para>
-          Modify the file content to comment the <literal>host</literal> entry and uncomment the <literal>hostssl</literal> entry:
+          Modify the two lines to comment the <literal>host</literal> entry and uncomment the <literal>hostssl</literal> entry:
         </para>
-        <screen>
-# TYPE    DATABASE USER  ADDRESS       METHOD
-local     all      all                 peer map=usermap
+        <programlisting>
 #host     all      all   all           md5
 hostssl   all      all   all           md5
-        </screen>
+        </programlisting>
         <para>
 This changes the incoming communication protocol to use SSL and refuse any unencrypted PostgreSQL connections.
         </para>
       </step>
       <step>
         <para>
-          Restart the <literal>postgresql</literal> service so the changes take effect:
+          Start the <systemitem>rh-postgresql94-postgresql</systemitem> and <systemitem>evmserverd</systemitem> services so that the changes take effect:
         </para>
-        <screen>
-[root@cloudforms1 ~]# service postgresql92-postgresql restart
-        </screen>
+        <screen>[root@cloudforms1 ~]# service rh-postgresql94-postgresql start</screen>
+        <screen>[root@cloudforms1 ~]# service evmserverd start</screen>
       </step>
     </procedure>
     <para>
-      The database server now only accepts connections from clients using SSL. The next procedure sets up client appliances to communicate to the database using SSL. Use this procedure for each client appliance.
+      The database appliance now only accepts connections from connecting appliances using SSL. The next procedure sets up connecting appliances to communicate to the database using SSL. Use this procedure for each connecting appliance.
     </para>
     <procedure id="proc-Red_Hat_Satellite-Installation_Guide-Configuring_the_Database_to_use_SSL-Configuring_SSL_on_the_Satellite_server">
-      <title>Configuring SSL on the Satellite server</title>
+      <title>Configuring SSL on the connecting appliance</title>
       <step>
         <para>
-          Log in as <literal>root</literal> to the client appliance.
+          Log in as <literal>root</literal> to the connecting appliance.
         </para>
       </step>
       <step>
         <para>
-          Create the <filename>.postgresql</filename> directory in your <literal>root</literal> users home directory.
+          Create the <filename>.postgresql</filename> directory in your <literal>root</literal> user home directory.
         </para>
         <screen>
-[root@cloudforms2 ~]# mkdir ~/.postgresql
+[root@cloudforms2 ~]# mkdir /root/.postgresql
         </screen>
         <para>
           The PostgreSQL client library, which CloudForms Management Engine also uses, looks to this directory for custom configuration files.
@@ -142,34 +135,18 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
       </step>
       <step>
         <para>
-          Copy the required CloudForms appliance client certificate files to the <filename>.postgresql</filename> directory defaults:
+          Copy the root certificate file from the database appliance to the <filename>/root/.postgresql</filename> directory on the connecting appliance:
         </para>
         <screen>
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer ~/.postgresql/postgresql.crt
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/client.cer.key ~/.postgresql/postgresql.key
-[root@cloudforms2 ~]# cp /var/www/miq/vmdb/certs/ca.cer ~/.postgresql/root.crt
-        </screen>
+[root@cloudforms2 ~]# scp root@[database_appliance_fqdn]:/var/www/miq/vmdb/certs/root.crt /root/.postgresql/root.crt</screen>
+        <para>Where <replaceable>[database_appliance_fqdn]</replaceable> is the fully qualified domain name of the database appliance.</para>
       </step>
       <step>
         <para>
-          Secure the key file:
+          Test the connection between the connecting appliance and the database appliance using the <command>psql</command>:
         </para>
         <screen>
-[root@cloudforms2 ~]# chmod 600 ~/.postgresql/postgresql.key
-        </screen>
-      </step>
-      <step>
-        <para>Change the owner of the key file to <systemitem>postgres</systemitem>:</para>
-        <screen>
-[root@cloudforms2 ~]# chown postgres ~/.postgresql/postgresql.key
-        </screen>
-      </step>
-      <step>
-        <para>
-          Test the connection between the appliance client and the appliance database server using the <command>psql</command>:
-        </para>
-        <screen>
-[root@localhost ~]# psql -h [cloudforms1 host] -d vmdb_production
+[root@localhost ~]# psql -h [database_appliance_fqdn] -d vmdb_production
 Password: ********
 psql (9.2.8)
 <emphasis role="bold">SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)</emphasis>

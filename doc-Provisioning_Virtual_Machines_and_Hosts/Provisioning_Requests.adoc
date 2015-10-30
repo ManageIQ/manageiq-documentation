@@ -194,7 +194,7 @@ The following procedure sets the image type for an ISO image.
 
 . Navigate to +Infrastructure → PXE+.
 . Click the +ISO Datastores+ accordion, and select the image that you want to set a type for.
-. Click image:1847.png[]+(Configuration), then image:1851.png[]+(Edit this ISO Image).
+. Click image:1847.png[](+Configuration+), then image:1851.png[](+Edit this ISO Image+).
 . From the +Basic Information+ area, select the correct +Type+.
 image:2323.png[]
 . Click +Save+.
@@ -244,12 +244,12 @@ mount /dev/floppy /tmp/floppy
 |=======================================================================
 |Customization Type|Reason to Include|Script entries
 |Kickstart|Takes the values from the +Customize+ tab in +Provisioning Dialog+ and substitutes them into the script.|
-+
+
 ------
 #Configure Networking based on values from provisioning dialog
 <% if evm[:addr_mode].first == 'static' %>
   <% network_string = "network --onboot yes --device=eth0 --bootproto=static --noipv6" %>
-  <% ["ip", :ip_addr, "netmask", :subnet_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns_servers].each_slice(2) do /|ks_key, evm_key/| %>
+  <% ["ip", :ip_addr, "netmask", :subnet_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns_servers].each_slice(2) do \|ks_key, evm_key\| %>
     <% network_string << " --#{ks_key} #{evm[evm_key]}" unless evm[evm_key].blank? %>
   <% end %>
 <%= network_string %>
@@ -257,25 +257,20 @@ mount /dev/floppy /tmp/floppy
 network --device=eth0 --bootproto=dhcp
 <% end %>
 ------
-+
+
 
 |Kickstart|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+.|
-+
 ------
 rootpw --iscrypted <%= MiqPassword.md5crypt(evm[:root_password]) %>
 ------
-+
 
 |Kickstart|Sends status of the provision back to CloudForms Management Engine Server for display in the CloudForms Management Engine Console.|
-+
 ------
 # Callback to CFME during post-install
 wget --no-check-certificate <%= evm[:post_install_callback_url] %>
 ------
-+
 
 |Sysprep|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+. The value for the +AdministratorPassword+ line must be inserted to use the password from the +Provision Dialog+ and encrypt it.|
-+
 ------
 <UserAccounts>
   <AdministratorPassword>
@@ -284,7 +279,7 @@ wget --no-check-certificate <%= evm[:post_install_callback_url] %>
   </AdministratorPassword>
 </UserAccounts>
 ------
-+
+
 |=======================================================================	
 	
 === Adding a Customization Template
@@ -323,7 +318,7 @@ To provision a virtual machine, you must have the "Automation Engine" role enabl
 To Provision a Virtual Machine from a Template:
 
 . Navigate to +Infrastructure → Virtual Machines+.
-. Click image:2007.png[]+(Lifecycle), and then image:1848.png[]+(Provision VMs).
+. Click image:2007.png[](+Lifecycle+), and then image:1848.png[](+Provision VMs+).
 . Select a template from the list presented.
 . Click +Continue+.
 . On the +Request+ tab, enter information about this provisioning request. 
@@ -348,7 +343,7 @@ image:2328.png[]
 . For templates on Red Hat providers:
 .. Select the +Name+ of a template to use.
 .. For +Provision Type+, select either +ISO+, +PXE+, or +Native Clone+. You must select +Native Clone+ in order to use a Cloud-Init template.
-... If +Native Clone+ is selected, select +Linked Clone+ to create a linked clone to the virtual machine instead of a full clone. This is equivalent to *Thin Template Provisioning</firstterm> in Red Hat Enterprise Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
+... If +Native Clone+ is selected, select +Linked Clone+ to create a linked clone to the virtual machine instead of a full clone. This is equivalent to *Thin Template Provisioning in Red Hat Enterprise Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
 ... If +ISO+ is selected, select an ISO +Image+ to use for provisioning
 ... If +PXE+ is selected, select a PXE +Server+ and +Image+ to use for provisioning
 .. Under +Count+, select the number of virtual machines you want to create in this request.
@@ -426,10 +421,12 @@ Cloud instances follow the same process (Request, Approval, Deployment) as a sta
 . Select an image from the list presented.
 . Click +Continue+.
 . On the +Request+ tab, enter information about this provisioning request. In +Request Information+, type in at least a first and last name and an email address. This email is used to send the requester status emails during the provisioning process for items such as auto-approval, quota, provision complete, retirement, request pending approval, and request denied. The other information is optional. If the CloudForms Management Engine Server is configured to use LDAP, you can use the +Look Up+ button to populate the other fields based on the email address.
++
 [NOTE]
 ======
 Parameters with a * next to the label are required to submit the provisioning request. To change the required parameters, see Customizing Provisioning Dialogs.
 ======
++
 . Click the +Purpose+ tab to select the appropriate tags for the provisioned instance.
 . Click the +Catalog+ tab for basic instance options.
 .. To change the image to use as a basis for the instance, select it from the list of images.
@@ -466,10 +463,12 @@ Request 99 in region 123 results in Request ID 123000000000099.
 . Select an OpenStack image from the list presented. These images must be available on your OpenStack provider.
 . Click +Continue+.
 . On the +Request+ tab, enter information about this provisioning request. In +Request Information+, type in at least a first and last name and an email address. This email is used to send the requester status emails during the provisioning process for items such as auto-approval, quota, provision complete, retirement, request pending approval, and request denied. The other information is optional. If the CloudForms Management Engine Server is configured to use LDAP, you can use the +Look Up+ button to populate the other fields based on the email address.
++
 [NOTE]
 ======
 Parameters with a * next to the label are required to submit the provisioning request. To change the required parameters, see section Customizing_Provisioning_Dialogs.
 ======
++
 . Click the +Purpose+ tab to select the appropriate tags for the provisioned instance.
 . Click the +Catalog+ tab for basic instance options.
 .. To change the image to use as a basis for the instance, select it from the list of images.
@@ -497,13 +496,13 @@ After submission, the appliance assigns each provision request a +Request ID+. I
 
 Request 99 in region 123 results in Request ID 123000000000099.
 		
-==== Requirements for Provisioning a Host</title> 
+==== Requirements for Provisioning a Host
 
 CloudForms Management Engine can provision hosts using PXE and Intelligent Platform Management Interface (IPMI) technologies. Before you provision your first host, configure the following prerequisites:
 
 * Provisioning requires the +Automation Engine+ server role be enabled. Confirm your server role settings in +Configure → Configuration → Server → Server Control+.
 * Make a PXE server accessible to the CloudForms Management Engine server.
-* Create a customization template for hosts. This customization template must contain host-specific additions, documented in the <citetitle>Customization Templates for Host Provisioning</citetitle> section.
+* Create a customization template for hosts. This customization template must contain host-specific additions, documented in the Customization Templates for Host Provisioning section.
 * Create system image types for the host.
 * Associate images with the image types.
 * Enable IPMI on provisioning hosts and add them to the CloudForms Management Engine Infrastructure.
@@ -519,12 +518,16 @@ There are two ways to get the Intelligent Platform Management Interface (IPMI) H
 . Click image:1847.png[]+(Configuration)+, then image:2119.png[]+(Discover Hosts)+.
 . In +Discover+, check +IPMI+.
 . Optionally, in +IPMI Credentials+, type in a +User ID+ and +Password+.
++
 [NOTE]
 ======
 You can also add IPMI credentials after the host has been discovered. See section To Add IPMI Credentials
 ======
++
 . In +Subnet Range+, type in a range of IP addresses. For quickest results, use the actual IP address in both fields.
 . Click +Discover+.
++
+
 [NOTE]
 ======
 After the host is discovered, you can add credentials for IPMI.
@@ -564,8 +567,6 @@ Add a customization template to provide Kickstart files for the initial loading 
 	
 ===== Customization Script Additions
 
-This is a new test paragraph that I am adding.
-
 [width="100%",cols="1,1,3a",options="header",]
 |=======================================================================
 |Customization Type|Reason to Include|Script entries
@@ -575,7 +576,7 @@ This is a new test paragraph that I am adding.
 #Configure Networking based on values from provisioning dialog
 <% if evm[:addr_mode].first == 'static' %>
   <% network_string = "network --onboot yes --device=eth0 --bootproto=static --noipv6" %>
-  <% ["ip", :ip_addr, "netmask", :subnet_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns_servers].each_slice(2) do test &#124;ks_key, evm_key&#124; %>
+  <% ["ip", :ip_addr, "netmask", :subnet_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns_servers].each_slice(2) do \|ks_key, evm_key\| %>
     <% network_string << " --#{ks_key} #{evm[evm_key]}" unless evm[evm_key].blank? %>
   <% end %>
 <%= network_string %>
@@ -586,22 +587,17 @@ network --device=eth0 --bootproto=dhcp
 
 
 |Kickstart|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+.|
-+
 ------
 rootpw --iscrypted <%= MiqPassword.md5crypt(evm[:root_password]) %>
 ------
-+
 
 |Kickstart|Sends status of the provision back to CloudForms Management Engine Server for display in the CloudForms Management Engine Console.|
-+
 ------
 # Callback to CFME during post-install
 wget --no-check-certificate <%= evm[:post_install_callback_url] %>
 ------
-+
 
 |Sysprep|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+. The value for the +AdministratorPassword+ line must be inserted to use the password from the +Provision Dialog+ and encrypt it.|
-+
 ------
 <UserAccounts>
   <AdministratorPassword>
@@ -610,7 +606,7 @@ wget --no-check-certificate <%= evm[:post_install_callback_url] %>
   </AdministratorPassword>
 </UserAccounts>
 ------
-+
+
 |=======================================================================	
 
 
@@ -704,14 +700,14 @@ If you are using +Provisioning Profiles+, you can specify a specific file that h
 . Click on the +Provisioning Dialogs+ accordion.
 . Click on the type of dialog you want to create, +Host Provision+, +VM Provision+ or +VM Migrate+.
 . Select one of the default dialogs.
-. Click image:1847.png[]+(Configuration)+, and then image:1859.png[]+(Copy this Dialog)+.
+. Click image:1847.png[](+Configuration+), and then image:1859.png[](+Copy this Dialog+).
 . Rename the dialog as shown in the examples below.
-[width="100%",cols="50%,50%",options="header",]
+[width="100%",cols="50%,50%a",options="header",]
 |=======================================================================
 |Type of Provision|Dialog Name
-|Provision Virtual Machine from a template|miq_provision_dialogs_+groupname+_template For example, miq_provision_dialogs_ EvmGroup-user_self_service _template
-|Clone a Virtual Machine|miq_provision_dialogs_+groupname+_clone_to_vm For example, miq_provision_dialogs_ EvmGroup-user_self_service _clone_to_vm
-|Publish a Virtual Machine to a template|miq_provision_dialogs_+groupname+_clone_to_template For example, miq_provision_dialogs_ EvmGroup-user_self_service _clone_to_template
+|Provision Virtual Machine from a template|miq\_provision_dialogs_groupname_template Example: miq_provision_dialogs_ EvmGroup-user_self_service _template
+|Clone a Virtual Machine|miq\_provision_dialogs_groupname_clone_to_vm Example: miq_provision_dialogs_ EvmGroup-user_self_service _clone_to_vm
+|Publish a Virtual Machine to a template|miq\_provision_dialogs_groupname_clone_to_template Example: miq_provision_dialogs_ EvmGroup-user_self_service _clone_to_template
 |=======================================================================
 . Make any changes you need.
 . In the +Content+ field,
@@ -743,7 +739,7 @@ image:2344.png[]
 This example uses the +Cloud+ Namespace, but can also use the +Infrastructure+ namespace.
 ======
 +
-. Click image:1847.png[]+(Configuration)+, image:2345.png[]+(Add a New Instance)+.
+. Click image:1847.png[](+Configuration+), image:2345.png[](+Add a New Instance+).
 . Make the name of the tag identical to the name of the LDAP or CloudForms Management Engine group you are creating the instance for, replacing spaces in the group name with underscores. For example, change +Red Hat CloudForms-test group+ to +Red Hat CloudForms-test_group+.
 image:6278.png[]
 . In the dialog name field, enter the name of the customized dialog file. This file must reside on the CloudForms Management Engine Appliance in the +/var/www/miq/vmdb/db/fixtures+ directory. Red Hat recommends naming the file in the format +miq_provision_dialogs-groupname.rb+ and copying this file to all CloudForms Management Engine appliances. For example, in the image above the filename is +miq_provision_dialogs-Red Hat CloudForms-test.rb+. For instructions on creating a custom dialog file, see Customizing Provisioning Dialogs.

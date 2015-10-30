@@ -12,11 +12,12 @@ The CloudForms Management Engine Appliance is intended to have minimal configura
 
 The procedure describes how to make changes to the configuration settings on the CloudForms Management Engine appliance.
 
-1.  After starting the appliance, log in with a user name of admin and the default password of smartvm. The CloudForms Management Engine Appliance summary screen displays.
-2.  Press +Enter+ to manually configure settings.
-3.  Press the number for the item you want to change, and press +Enter+. The options for your selection are displayed.
-4.  Follow the prompts to make the changes.
-5.  Press +Enter+ to accept a setting where applicable.
+1.  After starting the appliance, log in with a user name of **root** and the default password of **smartvm**. This display the Bash prompt for the **root** user.
+2.  Enter the **appliance_console** command. The CloudForms Management Engine Appliance summary screen displays.
+3.  Press +Enter+ to manually configure settings.
+4.  Press the number for the item you want to change, and press +Enter+. The options for your selection are displayed.
+5.  Follow the prompts to make the changes.
+6.  Press +Enter+ to accept a setting where applicable.
 
 [NOTE]
 =======
@@ -32,17 +33,19 @@ After logging in, you can use the following menu items for advanced configuratio
 * Use +Test Network Configuration+ to check that name resolution is working correctly.
 * Use +Set Hostname+ to specify a hostname for the CloudForms Management Engine Appliance.
 * Use +Set Timezone, Date, and Time+ to configure the time zone, date, and time for the CloudForms Management Engine Appliance.
-* Use +Disable PostgreSQL Database Server+ if you know that you will be using another database server and do not want these additional services loaded. This option will disable PostgreSQL and unmount the disk associated with the database. The CloudForms Management Engine Appliance will need a restart.
-* Use +Restore Factory Configuration+ to overwrite any changes you have made to the CloudForms Management Engine Appliance, restore the factory configuration, add the PostgreSQL service, and restart the CloudForms Management Engine Appliance. Note that this does not set the Appliance to use the internal PostgreSQL database.
 * Use +Restore Database from Backup+ to restore the VMDB database from a previous backup.
 * Use +Setup Database Region+ to create regions for VMDB replication.
 * Use +Configure Database+ to configure the VMDB database. Use this option to configure the database for the appliance after installing and running it for the first time.
+* Use +Extend Temporary Storage+ to add temporary storage to the appliance. The appliance formats an unpartitioned disk attached to the appliance host and mounts it at **/var/www/miq_tmp**. The appliance uses this temporary storage directory to perform certain image download functions.
+* Use +Configure External Authentication (httpd)+ to configure authentication through an IPA server.
+* Use +Generate Custom Encryption Key+ to regenerate the encryption key used to encode plain text password.
+* Use +Harden Appliance Using SCAP Configuration+ to apply Security Content Automation Protocol (SCAP) standards to the appliance. You can view these SCAP rules in the **/var/www/miq/lib/appliance_console/config/scap_rules.yml** file.
 * Use +Stop Server Processes+ to stop all server processes. You may need to do this to perform maintenance.
 * Use +Start Server Processes+ to start the server. You may need to do this after performing maintenance.
 * Use +Restart Appliance+ to restart the CloudForms Management Engine Appliance. You can either restart the appliance and clear the logs or just restart the appliance.
 * Use +Shut Down Appliance+ to power down the appliance and exit all processes.
 * Use +Summary Information+ to go back to the network summary screen for the CloudForms Management Engine Appliance.
-* Use +Log Off+ to log out of the CloudForms Management Engine Appliance console.
+* Use +Quit+ to leave the CloudForms Management Engine Appliance console.
 
 [[configuring_a_database]]
 === Configuring a Database for CloudForms Management Engine

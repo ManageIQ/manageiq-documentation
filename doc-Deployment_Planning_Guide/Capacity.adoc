@@ -1,0 +1,539 @@
+[[Capacity_Planning]]
+== Capacity Planning
+
+=== Capacity and Utilization Collection
+
+CloudForms Management Engine server can collect and analyze capacity and
+utilization data from your virtual infrastructure. Use this data to
+understand the limitations of your current environment and plan for
+growth.
+
+For some capacity and utilization data, CloudForms Management Engine
+calculates and shows trend lines in the charts. Trend lines are created
+using linear regression. The calculation uses the capacity and
+utilization data collected by CloudForms Management Engine during the
+interval you specify for the chart. The more data you have the better the
+predictive value of the trend line.
+
+There are three server roles associated with the collection and metric
+creation of capacity and utilization.
+
+* The Capacity & Utilization Coordinator role checks to see if it is
+  time to collect data, somewhat like a scheduler. If it is time, a job
+  is queued for the capacity and utilization data collector. The
+  coordinator role is required to complete capacity and utilization
+  data collection. If more than one Server in a specific zone has this
+  role, only one will be active at a time.
+
+* The Capacity & Utilization Data Collector performs the actual
+  collection of capacity and utilization data. This role has a
+  dedicated worker, and there can be more than one server with this
+  role in a zone.
+
+* The Capacity & Utilization Data Processor processes all of the data
+  collected, allowing CloudForms Management Engine to create charts.
+  This role has a dedicated worker, and there can be more than one
+  server with this role in a zone.
+
+=== Assigning the Capacity and Utilization Server Roles
+
+. Navigate to +Configure → Configuration+.
+. Navigate to the +Server → Server Control+ area, and select the appropriate
+  capacity & utilization roles based on your configuration.
+. Click +Save+.
+
+Data collection begins immediately. However, the first collection begins
+5 minutes after the server is started, and every 10 minutes after that.
+Therefore, the longest the collection takes after enabling the capacity &
+utilization collector server role is 10 minutes. The first collection
+from a particular provider may take a few minutes since CloudForms
+Management Engine is gathering data points going one month back in time.
+
+
+[NOTE]
+======
+In addition to setting the server role, you must also select which
+clusters and datastores to collect data for. For more information, see
+*General Configuration*. You must have super administrator rights to edit
+these settings
+======
+
+=== Data Collection for Red Hat Enterprise Virtualization 3.3 and 3.4
+
+To collect capacity and utilization data for Red Hat Enterprise
+Virtualization 3.3 and 3.4, you must add CloudForms Management Engine as
+a user to the RHEV-M database.
+
+Perform this procedure on the PostgreSQL server where the history
+database is located. Usually, this is the RHEV-M server.
+
+. Using SSH, access the RHEV-M database server as the root user:
++
+------
+$ ssh root@example.postgres.server  
+------
++
+. Switch to the postgres user:
++
+------
+# su - postgres  
+------
++
+. Access the database prompt:
++
+------
+-bash-4.1$ psql  
+------
++
+. Create a new user for the CloudForms Management Engine:
++
+------
+postgres=# CREATE ROLE cfme LOGIN UNENCRYPTED PASSWORD 'smartvm' SUPERUSER VALID UNTIL 'infinity';  
+------
++
+. Exit to the RHEV-M database server prompt:
++
+------
+postgres=# \q
+-bash-4.1$ exit  
+------
++
+. Update the server's firewall to accept TCP communication on port
+  5432:
++
+------
+# iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
+# service iptables save  
+------
++
+. Enable external md5 authentication by appending the following line to
+  +/var/lib/pgsql/data/pg_hba.conf+:
++
+------
+host    all      all    0.0.0.0/0     md5  
+------
++
+. Enable PostgreSQL to listen for remote connections by updating the
+  listen_address line in +/var/lib/pgsql/data/postgresql.conf+:
++
+------
+listen_addresses  =  '*'  
+------
++
+. Reload the PostgreSQL configuration:
++
+------
+service postgresql reload  
+------
++
+
+
+=== Adding Database Credentials for Data Collection
+
+After creating the new user, add its credentials to the settings for the
+provider.
+
+. From +Infrastructure → Providers+, click a provider to update its
+  settings.
+. Click image:1847.png[](+Configuration+), and then image:1851.png[](+Edit this Provider+).
+. In the Credentials area, click +C & U Database+.
+. Type in the credentials for the new database user you created.
+. Click +Save+.
+. Finally, restart the capacity and utilization data collector. For
+  more information, see *General Configuration*.
+
+=== Data Collection for Red Hat Enterprise Linux OpenStack Platform
+
+Before you can collect data from a Red Hat Enterprise Linux OpenStack
+Platform (RHEL-OSP) provider, you must install Ceilometer and configure it
+to accept queries from external systems.
+
+These instructions require a Red Hat Enterprise Linux 6.4 @base
+installation of RHEL-OSP and registration to a satellite that has access
+to both the RHEL-OSP and RHEL Server Optional channels. Perform all steps on your RHEL-OSP system.
+
+. Add the required channels and update your system:
++
+------
+# rhn-channel --add -c rhel-x86_64-server-6-ost-3 -c rhel-x86_64-server-optional-6
+# yum update -y
+# reboot  
+------
++
+. Install Ceilometer:
++
+------
+# yum install *ceilometer*  
+------
++
+. Install and start the MongoDB store:
++
+------
+# yum install mongodb-server
+# sed -i '/--smallfiles/!s/OPTIONS=\"/OPTIONS=\"--smallfiles /' /etc/sysconfig/mongod
+# service mongod start  
+------
++
+. Create the following users and roles:
++
+------
+# SERVICE_TENANT=$(keystone tenant-list | grep services | awk '{print $2}')
+# ADMIN_ROLE=$(keystone role-list | grep ' admin ' | awk '{print $2}')
+# SERVICE_PASSWORD=servicepass
+# CEILOMETER_USER=$(keystone user-create --name=ceilometer \
+--pass="$SERVICE_PASSWORD" \
+--tenant_id $SERVICE_TENANT \
+--email=ceilometer@example.com | awk '/ id / {print $4}')
+# RESELLER_ROLE=$(keystone role-create --name=ResellerAdmin | awk '/ id / {print $4}')
+# ADMIN_ROLE=$(keystone role-list | awk '/ admin / {print $2}')
+# for role in $RESELLER_ROLE $ADMIN_ROLE ; do
+keystone user-role-add --tenant_id $SERVICE_TENANT \
+--user_id $CEILOMETER_USER --role_id $role
+done  
+------
++
+. Configure the authtoken in ceilometer.conf:
++
+------
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_host 127.0.0.1
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_port 35357
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_protocol http
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_tenant_name services
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_user ceilometer
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_password $SERVICE_PASSWORD  
+------
++
+. Configure the user credentials in ceilometer.conf:
++
+------
+# openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_auth_url http://127.0.0.1:35357/v2.0
+# openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_tenant_name services
+# openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_password $SERVICE_PASSWORD
+# openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_username ceilometer  
+------
++
+. Start the Ceilometer services:
++
+------
+# for svc in compute central collector api ; do
+  service openstack-ceilometer-$svc start
+  done  
+------
++
+. Register an endpoint with the service catalog. Replace +$EXTERNALIFACE+
+  with the IP address of your external interface:
++
+------
+# keystone service-create --name=ceilometer \
+--type=metering --description="Ceilometer Service"
+# CEILOMETER_SERVICE=$(keystone service-list | awk '/ceilometer/ {print $2}')
+# keystone endpoint-create \
+--region RegionOne \
+--service_id $CEILOMETER_SERVICE \
+--publicurl "http://$EXTERNALIFACE:8777/" \
+--adminurl "http://$EXTERNALIFACE:8777/" \
+--internalurl "http://localhost:8777/"  
+------
++
+. Enable access to Ceilometer from external systems:
++
+------
+# iptables -I INPUT -p tcp -m multiport --dports 8777 -m comment --comment "001 ceilometer incoming" -j ACCEPT
+# iptables save  
+------
++
+. Confirm the status of OpenStack and the Ceilometer services:
++
+------
+# openstack-status
+# for svc in compute central collector api ; do
+  service openstack-ceilometer-$svc status
+  done  
+------
++
+. Verify Ceilometer is working correctly by authenticating as a user
+  with instances running, for example admin. Pipe the sample for the
+  cpu meter to count lines and confirm that the value changes according
+  to the interval specified in +/etc/ceilometer/pipeline.yaml+. The
+  default interval is 600 seconds.
++
+------
+# . ~/keystonerc_admin
+# ceilometer sample-list -m cpu |wc -l  
+------
++
+. Add the configured OpenStack provider to CloudForms Management
+  Engine. See section "Adding OpenStack Providers" in *Managing Proviers*.
+  After adding the provider, capacity and utilization data for your instances
+  populate in a few minutes.
+
+=== Data Collected
+
+CloudForms Management Engine generates charts from the collected data
+which can be used to plan your hardware and virtual machine needs.
+Depending on the type of data, these charts may include lines for
+averages, maximums, minimums, and trends.
+
+
+[NOTE]
+======
+For reporting of daily capacity and utilization data, incomplete days
+(days with less than 24 hourly data points from midnight to midnight)
+that are at the beginning or end of the requested interval are excluded.
+Days with less than 24 hourly data points would be inaccurate and
+including them would skew trend lines. Therefore, at least one full day
+of hourly data from midnight to midnight is necessary for displaying the
+capacity and utilization charts under the infrastructure tab
+======
+
+==== Capacity and Utilization Charts for Host, Clusters, and Virtual Machines
+
+[width="100%",cols="3,1,1,1,1,1,1,1",options="header",]
+|=======================================================================
+| Resource Type | CPU Usage | CPU States | Disk I/O | Memory Usage | Network I/O | Running VMS | Running Hosts
+| Host          | Y         | Y          | Y        | Y            | Y           | Y           | NA
+| Cluster       | Y         | Y          | Y        | Y            | Y           | Y           | Y
+| Virtual Machine | Y       | Y          | Y        | Y            | Y           | NA          | NA
+|=======================================================================
+
+For the procedure to view Capacity and Utilization Charts for a Host, see
+section Viewing Capacity and Utilization Charts for a Host in the Red Hat
+CloudForms 4.0 Managing Inventory and Infrastructure guide.
+
+For the procedure to view Capacity and Utilization Charts for a Cluster,
+see section Viewing Capacity and Utilization Charts for a Cluster in the
+Red Hat CloudForms 4.0 Managing Inventory and Infrastructure guide.
+
+For the procedure to view Capacity and Utilization Charts for a Virtual
+Machine, see section Viewing Capacity and Utilization Charts for a
+Virtual Machine in the Red Hat CloudForms 4.0 Managing Inventory and
+Infrastructure guide.
+
+==== Capacity and Utilization Charts for Datastores
+
+Charts created include:
+
+[width="100%",cols="50%,50%",options="header",]
+|=======================================================================
+| Space by VM Type                      | Virtual Machines and Hosts
+| Used Space                            | Number of VMs by Type
+| Disk files Space                      | Hosts
+| Snapshot Files Space                  | Virtual Machines
+| Memory Files Space |
+| Non-VM Files       |
+| Used Disk Space    |
+|=======================================================================
+
+For the procedure to view Capacity and Utilization Charts for a
+Datastore, see section Viewing Capacity and Utilization Charts for a
+Datastore in the Red Hat CloudForms 4.0 Managing Inventory and
+Infrastructure guide.
+
+=== Chart Features
+
+Each chart provides its own set of special features including zooming in
+on a chart and shortcut menus.
+
+==== Zooming into a Chart
+
+. Navigate to the chart you want to zoom. If you hover anywhere on the
+  chart, two dashed lines will appear to target a coordinate of the
+  chart.
+. Click image:2251.png[](+Click to zoom in+) in the lower left corner of the
+  chart to zoom into it.
+. To go back to the regular view click image:2252.png[](+Click to zoom out+) on
+  the enlarged chart.
+
+==== Drilling into Chart Data
+
+. Navigate to the chart you want to get more detail from.
+. Hover over a data point to see the coordinates.
+. Click on a data point to open a shortcut menu for the chart. In this
+  example, we can use the shortcut menu to go to the hourly chart or
+  display the virtual machines that were running at the time the data
+  was captured.
++
+* If you are viewing the +CPU+, +Disk+, +Memory+, or +Network+ charts,
+  selecting from the +Chart+ option will change all of the charts on
+  the page to the new interval selected.
+* If you are viewing the +CPU+, +Disk+, +Memory+, or +Network+ charts,
+  selecting from the +Display+ option will allow you to drill into
+  the virtual machines or +Hosts+ that were running at the time.
+* If you are viewing the +VM+ or +Hosts+ chart, the +Display+ menu will
+  allow you to view running or stopped virtual machines. The time
+  of the data point will be displayed in addition to the virtual
+  machines that apply. From here, click on a virtual machine to go
+  its details.
+
+=== Optimization
+
+CloudForms Management Engines optimization functions allow you to view
+utilization trends, and identify and project bottlenecks in your
+environment. In addition, you can predict where you have capacity for
+additional virtual machines.
+
+[NOTE]
+======
+For reporting of daily optimization data, incomplete days (days with less
+than 24 hourly data points from midnight to midnight) that are at the
+beginning or end of the requested interval are excluded. Days with less
+than 24 hourly data points would be inaccurate and including them would
+skew trend lines. Therefore, the optimize page requires at least two full
+days of daily data because all the charted values are derived from trend
+calculations and that requires at least two data points
+======
+
+=== Utilization Trends
+
+CloudForms Management Engine allows you to view the resource utilization
+of your clusters, providers, and datastores. You can choose from summary,
+details, or report view.
+
+==== Viewing Utilization Trend Summary
+
+This procedure shows you how to view utilization trend summary.
+
+. Navigate to +Optimize → Utilization+.
+. Click +Summary+ if it is not already selected.
+. Expand the tree on the left side, until you can see the desired
+  providers, clusters, or datastores.
+. Click on the item.
+. Use the +Options+ section in the +Summary+ tab to change the
+  characteristics of the data.
++
+* Use +Trends+ for past to select how far back you want to calculate
+  the trend.
+* Use +Selected Day+ for the date you want to see percent utilization
+  for in the chart on the Summary tab.
+* Use +Classification+ to only see trends for a specific applied tag.
+* Use +Time Profile+ to select an existing time profile. If the
+  logged on user does not have any time profiles available, this
+  option will not show.
+* Select a +Time Zone+.
+
+==== Viewing Detail Lines of a Utilization Trend
+
+This procedure shows you how to view detail lines of a utilization trend.
+
+. Navigate to +Optimize → Utilization+.
+. Expand the tree on the left side, until you can see the desired
+  providers, clusters, or datastores.
+. Click on the item.
+. Click +Details+ if it is not already selected.
+. From the +Options+ area, select how far back you want to view the
+  trends for and any classifications you want to use.
+
+==== Viewing a Report of a Utilization Trend
+
+To find out more about resource utilization, view utilization trend
+reports.
+
+. Navigate to +Optimize → Utilization+.
+. Expand the tree on the left side, until you can see the desired
+  providers, clusters, or datastores.
+. Click on the item.
+. Click +Report+ if it is not already selected.
+. From the +Options+ area, select how far back you want to view the
+  trends for and any classifications you want to use.
+
+=== Planning
+
+You can use the data collected in the VMDB to plan where you can put
+additional virtual machines. CloudForms Management Engine allows you to
+use a reference virtual machine as an example to plan on which hosts and
+clusters you can place a new virtual machine.
+
+==== Planning Where to Put a New Virtual Machine
+
+Use the CloudForms Management Engine planning feature to help you plan
+for a virtual machine placement.
+
+. Navigate to +Optimize → Planning+.
+. From Reference VM Selection, use the dropdowns to select the virtual
+  machine that is most like the one that you want to add.
++
+image:2254.png[]
++
+. Select the required VM Options, for what you want to base the
+  calculations on.
++
+image:2255.png[]
++
+From the +Source+ list, select the type of data to use as the
+source for your projections. For example, select +Allocation+ to
+calculate based on the current allocation values of each resource
+(CPU, memory, or disk space) for the reference virtual machine. Use
++Reservation+ to project based on the current guaranteed
+value of the specific resource (CPU Speed, CPU count, memory, or disk
+space) although that amount may not be allocated to the virtual
+machine at a specific moment in time. Select +Usage+ if you want to
+calculate based on usage history of the reference virtual machine.
+Use +Manual Input+ to enter your own set of parameters for each
+resource.
++
+. From +Target Options+, select if you want to use clusters or hosts as
+  your targets.
++
+image:2256.png[]
++
+Also, select the limit of how high the projection can go for CPU,
+memory, and datastore space. If you are targeting hosts, you will be
+able to select a filter for which hosts can be targets.
++
+. From +Trend Options+, select how far back you want to use the trend
+  data for, a +Time Profile+ and +Time Zone+ if applicable. Note that +Time
+  Profile+ will only show if the logged on user has a +Time Profile+
+  available.
+. Click +Submit+.
+
+The +Summary+ tab shows the best clusters or hosts on which to
+place the virtual machines. The +Report+ tab shows the best fit and
+statistics on the reference virtual machine in a tabular format. From the
++Report+ tab, you can also create a PDF of the report or download the data
+in txt or csv format.
+
+
+=== Bottlenecks
+
+CloudForms Management Engine can show where bottlenecks occur in your
+virtual infrastructure. You can view them either on a timeline or as a
+report which can be downloaded for further analysis.
+
+==== Viewing the Bottleneck Summary
+
+To find out more about bottleneck capacity or utilization, view a
+bottleneck summary.
+
+. Navigate to +Optimize → Bottlenecks+.
+. Click +Summary+ if it is not already selected.
+. Expand the tree on the left side, until you can see the desired
+  providers, clusters, or datastores.
+. Click on the item.
+. Use the +Options+ section to change the characteristics of the data.
+  image:2257.png[]
++
+* Use +Event Groups+ to select if you want to see bottlenecks based
+  on capacity, utilization or both.
+* Select a +Time Zone+.
++
+
+Data is processed, and a timeline appears. Click on an icon in
+the timeline to see specific information on the bottleneck.
+
+==== Viewing a Report of the Bottlenecks Trend
+
+. Navigate to +Optimize → Bottlenecks+.
+. Click +Report+.
+. Expand the tree on the left side, until you can see the desired
+  providers, clusters, or datastores.
+. Click on the item.
+. Use the +Options+ section to change the characteristics of the data.
+  image:2258.png[]
++
+* Use +Event Groups+ to select if you want to see bottlenecks based
+  on capacity, utilization or both.
+* Select a +Time Zone+.
++
+. Expand the tree on the left side, until you can see the enterprise,
+  provider, or datastore that you want to see the trend for.
+

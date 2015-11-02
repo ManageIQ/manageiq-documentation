@@ -41,7 +41,7 @@
         </para>
       </step>
       <step>
-        <para>Stop the <systemitem>evmserverd</systemitem> and <systemitem>rh-postgresql94-postgresql</systemitem> services:</para>
+        <para>Stop the `evmserverd` and `rh-postgresql94-postgresql` services:</para>
         <screen>[root@cloudforms2 ~]# service evmserverd stop</screen>
         <screen>[root@cloudforms2 ~]# service rh-postgresql94-postgresql stop</screen>
       </step>
@@ -71,13 +71,13 @@
       </step>
       <step>
         <para>
-          Open the <filename>/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf</filename> file and uncomment and edit the <option>ssl</option> option:
+          Open the <filename>/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf</filename> file and uncomment and edit the `ssl` option:
         </para>
         <screen>
 ssl=on
         </screen>
         <para>
-          In the same file, locate the options <option>ssl_cert_file</option>, <option>ssl_key_file</option>, and <option>ssl_ca_file</option> that specify the location of SSL certificates and edit them so that they are uncommented and point to the correct certificate files:
+          In the same file, locate the options `ssl_cert_file`, `ssl_key_file`, and `ssl_ca_file` that specify the location of SSL certificates and edit them so that they are uncommented and point to the correct certificate files:
         </para>
         <programlisting>
 ssl_cert_file = '/var/www/miq/vmdb/certs/postgres.crt'  # (change requires restart)
@@ -106,7 +106,7 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
       </step>
       <step>
         <para>
-          Start the <systemitem>rh-postgresql94-postgresql</systemitem> and <systemitem>evmserverd</systemitem> services so that the changes take effect:
+          Start the `rh-postgresql94-postgresql` and `evmserverd` services so that the changes take effect:
         </para>
         <screen>[root@cloudforms1 ~]# service rh-postgresql94-postgresql start</screen>
         <screen>[root@cloudforms1 ~]# service evmserverd start</screen>

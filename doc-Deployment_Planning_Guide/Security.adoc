@@ -1,0 +1,27 @@
+[[security]]
+== Security
+
+=== Ports Used by CloudForms Management Engine
+
+[width="100%",cols="3,3,2,1,1,2",options="header",]
+|============================================================================================================
+|Initiator (CFME Role if applicable) |Receiver (CFME Role if applicable) |Application |TCP Port |UDP Port |Purpose/Reason 
+|Administrator (Internet Browser) |CFME Appliance (User Interface) |HTTPS |443 |  |Access to CFME Appliance User Interface
+|Administrator (Internet Browser) |CFME Appliance (User Interface)  |HTTP |80 |  |Redirect Web Browser to HTTPS service (443)
+|Service Catalog or other integration through Web Service |CFME Appliance (Web Service) |HTTPS |443 |  |Access to CFME Appliance Web Service
+|CFME Appliance |NFS Server |NFS |2049 |2049 |Embedded NFS VM scanning
+|CFME Appliance (User Interface) |Any Virtual Machine |TCP |903 |  |VM Remote Console (if using MKS plugin)
+|CFME Appliance (User Interface) |Any Hypervisor Host |TCP |5900-5999 |  |VM Remote Console (if using VNC)
+|CFME Appliance (any role) |CFME Appliance running the VMDB (or MS SQL) |PostgreSQL Named Pipes |5432 (1433 MS SQL) |  |CFME Appliance connectivity to the CFME Database (PostgreSQL or MS SQL)
+|CFME Subordinate Region VMDB Appliance(Database Synchronization) |CFME Master Region VMDB Appliance |PostgreSQL Named Pipes |5432 (1433 MS SQL) |  |Regional VMDB node replication up to Master VMDB node (PostgreSQL only)
+|CFME Appliance (Authentication through LDAP) |LDAP Server (AD or other)|LDAP |389 |  |LDAP integration
+|CFME Appliance (Authentication through LDAPS) |LDAP Server (AD or other) |LDAPS |636 |  |LDAPS integration
+|SNMP Agent |CFME Appliance (Notifier) |SNMP (UDP) |  |161 |SNMP Polling
+|CFME Appliance (Notifier) |SNMP Server |SNMP (TCP) |162 |  |SNMP Trap Send
+|CFME Appliance (Notifier) |Mail server |SMTP |25 |  |SNMP Trap Send
+|CFME Appliance (any role) |NTP Server |NTP |  |123 |Time Source
+|CFME Appliance |CFME SmartProxy installed on Windows or Linux |HTTPS |1139 |  |Communication with SmartProxy
+|CFME SmartProxy installed on Windows or Linux |CFME Appliance |HTTPS |443 |  |SmartProxy Heartbeat
+|CFME Appliance |DNS Server |UDP |  |53 |DNS Lookups
+|============================================================================================================
+

@@ -1,3 +1,4 @@
+
 [[active-directory]]
 == Active Directory
 
@@ -18,10 +19,12 @@ In these examples, the AD Domain shown will be EXAMPLE.COM
 [[enabling-nm]]
 == Enabling Network Manager
 
-This is optional for allowing realm to discover the Active Directory domain. If not enabled, one
+This is an *optional* step for allowing realm to discover the Active Directory domain. If not enabled, one
 can still join an AD domain if known by the domain name.
 
 ----
+# systemctl enable NetworkManager
+# systemctl start NetworkManager
 # sed -i 's/^NM_CONTROLLED=no$/NM_CONTROLLED=yes/' /etc/sysconfig/network-scripts/ifcfg-eth0
 # systemctl restart network
 ----

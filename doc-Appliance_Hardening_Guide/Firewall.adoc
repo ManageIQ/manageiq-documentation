@@ -1,1063 +1,1050 @@
 [[_chap_red_hat_cloudforms_security_guide_firewall]]
 = Configuring the Firewall
 
-A new appliance starts with a few standard ports open: 
+A new appliance starts with a few standard ports open:
 
-* 22 for SSH communication 
-* 80 for HTTP access to the appliance 
-* 443 for HTTPS access to the appliance 
-* 5432 for the appliance database 
+* 22 for SSH communication
+* 80 for HTTP access to the appliance
+* 443 for HTTPS access to the appliance
+* 5432 for the appliance database
 
 You might need to restrict or open access to certain services on your appliance in the future.
-In such situations, use either one of the following methods: 
+In such situations, use the following method:
 
-* Use +lokkit+ to enable a service or port.
-  For example, to open the LDAP port: 
+* Use +firewalld+ to enable a service or port.
+  For example, to open the LDAP port:
 +
 ----
-
-[root@ ~]# lokkit -p 389:tcp
+[root@ ~]# firewall-cmd --zone=public --permanent --add-port=389/tcp
 ----
 
-* Use +iptables+ to define a specific firewall rules: 
-+
-----
-
-[root@ ~]# iptables -I INPUT -m state --state NEW -p tcp --dport 389 -j ACCEPT
-[root@ ~]# iptables-save > /etc/sysconfig/iptables
-[root@ ~]# service iptables restart
-----
-
-* Edit +/etc/sysconfig/iptables+ to view and define all firewall rules.
-  Restart the +iptables+ service after editing and saving the file. 
-
-The following table lists the appliance's main services and their respective ports. 
+The following table lists the appliance's main services and their respective ports.
 
 .Ports Used by Red Hat CloudForms Management Engine
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
-| 
-                        
+|
+
                             Initiator (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Receiver (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Application
-                        
-                    
-| 
-                        
+
+
+|
+
                             TCP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             UDP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             Purpose/Reason
-                        
-                    
-| 
-                        
-                            Administrator (Internet Browser)
-                        
-                    
-| 
-                        
-                            CFME Appliance (User Interface)
-                        
-                    
-| 
-                        
-                            HTTPS
-                        
-                    
-| 
-                        
-                            443
-                        
-                    
+
+
 |
-| 
-                        
+
+                            Administrator (Internet Browser)
+
+
+|
+
+                            CFME Appliance (User Interface)
+
+
+|
+
+                            HTTPS
+
+
+|
+
+                            443
+
+
+|
+|
+
                             Access to CFME Appliance User Interface
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             Administrator (Internet Browser)
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance (User Interface)
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTP
-                        
-                    
-| 
-                        
+
+
+|
+
                             80
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Redirect Web Browser to HTTPS service (443)
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             Service Catalog or other integration through Web Service
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance (Web Service)
-                        
-                    
-| 
-                        
-                            HTTPS
-                        
-                    
-| 
-                        
-                            443
-                        
-                    
+
+
 |
-| 
-                        
+
+                            HTTPS
+
+
+|
+
+                            443
+
+
+|
+|
+
                             Access to CFME Appliance Web Service
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             NFS Server
-                        
-                    
-| 
-                        
+
+
+|
+
                             NFS
-                        
-                    
-| 
-                        
+
+
+|
+
                             2049
-                        
-                    
-| 
-                        
+
+
+|
+
                             2049
-                        
-                    
-| 
-                        
+
+
+|
+
                             Embedded NFS VM scanning
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (User Interface)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Any Virtual Machine
-                        
-                    
-| 
-                        
+
+
+|
+
                             TCP
-                        
-                    
-| 
-                        
+
+
+|
+
                             903
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             VM Remote Console (if using MKS plugin)
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (User Interface)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Any Virtual Machine
-                        
-                    
-| 
-                        
+
+
+|
+
                             TCP
-                        
-                    
-| 
-                        
+
+
+|
+
                             5900-5999
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             VM Remote Console (if using VNC)
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (any role)
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance running the VMDB (or MS SQL)
-                        
-                    
-| 
-                        
-                            PostgreSQL Named Pipes
-                        
-                    
-| 
-                        
-                            5432 (1433 MS SQL)
-                        
-                    
+
+
 |
-| 
-                        
+
+                            PostgreSQL Named Pipes
+
+
+|
+
+                            5432 (1433 MS SQL)
+
+
+|
+|
+
                             CFME Appliance connectivity to the CFME Database (PostgreSQL or MS SQL)
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Subordinate Region VMDB Appliance(Database Synchronization)
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Master Region VMDB Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             PostgreSQL Named Pipes
-                        
-                    
-| 
-                        
+
+
+|
+
                             5432 (1433 MS SQL)
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Regional VMDB node replication up to Master VMDB node (PostgreSQL only)
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance(Authentication through LDAP)
-                        
-                    
-| 
-                        
+
+
+|
+
                             LDAP Server (AD or other)
-                        
-                    
-| 
-                        
+
+
+|
+
                             LDAP
-                        
-                    
-| 
-                        
+
+
+|
+
                             389
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             LDAP integration
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (Authentication through LDAPs)
-                        
-                    
-| 
-                        
+
+
+|
+
                             LDAP Server (AD or other)
-                        
-                    
-| 
-                        
+
+
+|
+
                             LDAPs
-                        
-                    
-| 
-                        
+
+
+|
+
                             636
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             LDAPS integration
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             SNMP Agent
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance (Notifier)
-                        
-                    
-| 
-                        
+
+
+|
+
                             SNMP (UDP)
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             161
-                        
-                    
-| 
-                        
+
+
+|
+
                             SNMP Polling
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (Notifier)
-                        
-                    
-| 
-                        
+
+
+|
+
                             SNMP Server
-                        
-                    
-| 
-                        
+
+
+|
+
                             SNMP (TCP)
-                        
-                    
-| 
-                        
+
+
+|
+
                             162
-                        
-                    
-|
-| 
-                        
-                            SNMP Trap Send
-                        
-                    
 
-| 
-                        
+
+|
+|
+
+                            SNMP Trap Send
+
+
+
+|
+
                             CFME Appliance (Notifier)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Mail server
-                        
-                    
-| 
-                        
+
+
+|
+
                             SMTP
-                        
-                    
-| 
-                        
+
+
+|
+
                             25
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             SNMP Trap Send
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (any role)
-                        
-                    
-| 
-                        
+
+
+|
+
                             NTP Server
-                        
-                    
-| 
-                        
+
+
+|
+
                             NTP
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             123
-                        
-                    
-| 
-                        
+
+
+|
+
                             Time Source
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME SmartProxy installed on Windows or Linux
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTPS
-                        
-                    
-| 
-                        
+
+
+|
+
                             1139
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Communication with SmartProxy
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME SmartProxy installed on Windows or Linux
-                        
-                    
-| 
-                        
-                            CFME Appliance
-                        
-                    
-| 
-                        
-                            HTTPS
-                        
-                    
-| 
-                        
-                            443
-                        
-                    
-|
-| 
-                        
-                            SmartProxy Heartbeat
-                        
-                    
 
-| 
-                        
-                            CFME Appliance
-                        
-                    
-| 
-                        
-                            DNS Server
-                        
-                    
-| 
-                        
-                            UDP
-                        
-                    
+
 |
-| 
-                        
+
+                            CFME Appliance
+
+
+|
+
+                            HTTPS
+
+
+|
+
+                            443
+
+
+|
+|
+
+                            SmartProxy Heartbeat
+
+
+
+|
+
+                            CFME Appliance
+
+
+|
+
+                            DNS Server
+
+
+|
+
+                            UDP
+
+
+|
+|
+
                             53
-                        
-                    
-| 
-                        
+
+
+|
+
                             DNS Lookups
-                        
-                    
+
+
 |===
 
 .Red Hat Enterprise Virtualization Ports Used by CloudForms Management Engine
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
-| 
-                        
+|
+
                             Initiator (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Receiver (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Application
-                        
-                    
-| 
-                        
+
+
+|
+
                             TCP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             UDP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             Purpose/Reason
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance (SmartProxy)
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHEV-M Server
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTPS
-                        
-                    
-| 
-                        
+
+
+|
+
                             8443
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             API communications to RHEV-M environment (Inventory, Operations, SmartProxy)
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (C&U)
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHEV-M Server
-                        
-                    
-| 
-                        
+
+
+|
+
                             PostgreSQL
-                        
-                    
-| 
-                        
+
+
+|
+
                             5432
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             RHEV-M History Database (Database connectivity not enabled by default). See https://access.redhat.com/site/solutions/63277[How to access RHEV-M Postgres DB from remote machine].
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHEVH Hosts or RHEL Hypervisors
-                        
-                    
-| 
-                        
+
+
+|
+
                             SSH
-                        
-                    
-| 
-                        
-                            22
-                        
-                    
-|
-| 
-                        
-                            SSH connections.
-                        
-                    
 
-| 
-                        
+
+|
+
+                            22
+
+
+|
+|
+
+                            SSH connections.
+
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHEVH Hosts or RHEL Hypervisors
-                        
-                    
-| 
-                        
+
+
+|
+
                             DirectLUN
-                        
-                    
+
+
 |
 |
-| 
-                        
+|
+
                             Direct LUN hook must be installed and enabled for embedded VM scanning on FC or iSCSI storage devices. Not a tcp/udp connection.
-                        
-                    
+
+
 |===
 
 .Red Hat OpenStack Platform Ports Used by CloudForms Management Engine
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
-| 
-                        
+|
+
                             Initiator (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Receiver (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Application
-                        
-                    
-| 
-                        
+
+
+|
+
                             TCP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             UDP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             Purpose/Reason
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHOS (Keystone)
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTP REST API
-                        
-                    
-| 
-                        
+
+
+|
+
                             5000
-                        
-                    
-|
-| 
-                        
-                            Authentication and Service Entry Point
-                        
-                    
 
-| 
-                        
+
+|
+|
+
+                            Authentication and Service Entry Point
+
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHOS (Nova)
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTP REST API
-                        
-                    
-| 
-                        
+
+
+|
+
                             8774
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Compute Resources
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (C&U)
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHOS (Ceilometer)
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTP REST API
-                        
-                    
-| 
-                        
+
+
+|
+
                             8777
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Metrics for Capacity and Utilization
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHOS (Glance)
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTP REST API
-                        
-                    
-| 
-                        
+
+
+|
+
                             9292
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Authentication and Service Entry Point
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHOS (AMQP)
-                        
-                    
-| 
-                        
+
+
+|
+
                             AMQP
-                        
-                    
-| 
-                        
+
+
+|
+
                             5672
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             Events Integration
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance
-                        
-                    
-| 
-                        
+
+
+|
+
                             RHOS (Neutron)
-                        
-                    
-| 
-                        
-                            HTTP REST API
-                        
-                    
-| 
-                        
-                            9696
-                        
-                    
-|
-| 
-                        
-                            Networking
-                        
-                    
 
-| 
-                        
-                            CFME Appliance
-                        
-                    
-| 
-                        
-                            RHOS (Cinder)
-                        
-                    
-| 
-                        
-                            HTTP REST API
-                        
-                    
-| 
-                        
-                            8776
-                        
-                    
+
 |
-| 
-                        
+
+                            HTTP REST API
+
+
+|
+
+                            9696
+
+
+|
+|
+
+                            Networking
+
+
+
+|
+
+                            CFME Appliance
+
+
+|
+
+                            RHOS (Cinder)
+
+
+|
+
+                            HTTP REST API
+
+
+|
+
+                            8776
+
+
+|
+|
+
                             Block Storage
-                        
-                    
+
+
 |===
 
 .VMware vSphere Ports Used by CloudForms Management Engine
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
-| 
-                        
+|
+
                             Initiator (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Receiver (CFME Role if applicable)
-                        
-                    
-| 
-                        
+
+
+|
+
                             Application
-                        
-                    
-| 
-                        
+
+
+|
+
                             TCP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             UDP Port
-                        
-                    
-| 
-                        
+
+
+|
+
                             Purpose/Reason
-                        
-                    
-| 
-                        
+
+
+|
+
                             CFME Appliance(Management System Inventory, Management System Operations, C & U Data Collection, SmartProxy)
-                        
-                    
-| 
-                        
+
+
+|
+
                             vCenter
-                        
-                    
-| 
-                        
-                            HTTPS
-                        
-                    
-| 
-                        
-                            443
-                        
-                    
+
+
 |
-| 
-                        
+
+                            HTTPS
+
+
+|
+
+                            443
+
+
+|
+|
+
                             CFME Appliance running any of these roles will initiate communication with vCenter on this port.
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (SmartProxy)
-                        
-                    
-| 
-                        
+
+
+|
+
                             ESX, ESXi Host
-                        
-                    
-| 
-                        
+
+
+|
+
                             HTTPS
-                        
-                    
-| 
-                        
+
+
+|
+
                             443
-                        
-                    
+
+
 |
-| 
-                        
+|
+
                             CFME Appliance
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (SmartProxy)
-                        
-                    
-| 
-                        
+
+
+|
+
                             ESX Hosts(if analyzing VMs through Host)
-                        
-                    
-| 
-                        
-                            SOAP over HTTPS
-                        
-                    
-| 
-                        
-                            902
-                        
-                    
+
+
 |
-| 
-                        
+
+                            SOAP over HTTPS
+
+
+|
+
+                            902
+
+
+|
+|
+
                             Communication from CFME Appliance to Hosts.
-                        
-                    
 
-| 
-                        
+
+
+|
+
                             CFME Appliance (SmartProxy)
-                        
-                    
-| 
-                        
-                            vCenter (if analyzing VMs through VC)
-                        
-                    
-| 
-                        
-                            SOAP over HTTPS
-                        
-                    
-| 
-                        
-                            902
-                        
-                    
-|
-| 
-                        
-                            Communication from CFME Appliance to vCenters.
-                        
-                    
 
-| 
-                        
-                            CFME Appliance(SmartProxy)
-                        
-                    
-| 
-                        
-                            ESX Hosts (not needed for ESXi)
-                        
-                    
-| 
-                        
-                            SSH
-                        
-                    
-| 
-                        
-                            22
-                        
-                    
+
 |
-| 
-                        
+
+                            vCenter (if analyzing VMs through VC)
+
+
+|
+
+                            SOAP over HTTPS
+
+
+|
+
+                            902
+
+
+|
+|
+
+                            Communication from CFME Appliance to vCenters.
+
+
+
+|
+
+                            CFME Appliance(SmartProxy)
+
+
+|
+
+                            ESX Hosts (not needed for ESXi)
+
+
+|
+
+                            SSH
+
+
+|
+
+                            22
+
+
+|
+|
+
                             CFME Appliance console access (ssh) to ESX hosts
-                        
-                    
+
+
 |===
 
-IMPORTANT: To provide your Red Hat CloudForms infrastructure with an extra layer of security, use a network layer firewall to restrict port access. 
+IMPORTANT: To provide your Red Hat CloudForms infrastructure with an extra layer of security, use a network layer firewall to restrict port access.

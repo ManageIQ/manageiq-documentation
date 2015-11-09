@@ -1,55 +1,25 @@
 = Listing and Querying Collections and Sub-Collections
 
-[cols="1,1", options="header"]
-|===
-| 
-						Feature
-					
-| 
-						Path
-					
+[cols="<,<",options="header",]
+|================================================================
+|Feature |Path
+|Listing Available Collections |/api
+|Listing Collections |/api/<collection>
+|Listing Sub-Collections |/api/<collection>/<id>/<sub-collection>
+|================================================================
 
+[cols="<,<",options="header",]
+|=======================================================================
+|Querying Capability |Query Parameters
+|Paging |offset, limit
+|Sorting |sort_by=attr, sort_order=asc\|desc
+|Filtering |filter[]="..."
+|Querying by Tag |i.e. by_tag=/department/finance
+|Expanding Results |expand=<what>, i.e.  expand=resources,tags,service_templates,...
+|Selecting Attributes |attributes=<attr1>,<attr2>,... i.e.  attributes=id,name,type,...
+| |Attributes can be:
+| |Database columns
+| |Virtual attributes
+| |Relationships
+|=======================================================================
 
-| 
-						/api/collection
-					
-
-| 
-						/api/collection/id/sub-collection
-					
-|===
-
-
-
-[cols="1,1", options="header"]
-|===
-| 
-						Querying Capability
-					
-| 
-						Query Parameters
-					
-
-
-
-| 
-						
-							filter[]=... The following operators are supported: =, !=, <, <=, >=, >. String values must be quoted in single or double quotes. Special characters within the quotes must be URL encoded. Example: filter[]=name='sample%25'
-						
-						
-							By default, filters are logically ANDed together; to use a logical OR, prefix the attribute with or. Example: filter[]=name='sample%25'&filter[]=or name='test%25'
-						
-						
-							In the examples above, the database wildcard character, %, is encoded as %25.
-						
-					
-
-
-| 
-						expand=what. Example: expand=resources,tags,service_templates
-					
-
-| 
-						attributes=atr1, atr2. Example: attributes=id,name,type
-					
-|===

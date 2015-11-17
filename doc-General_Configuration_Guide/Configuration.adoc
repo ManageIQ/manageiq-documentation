@@ -16,7 +16,7 @@ When you go the +Settings+ area, you are automatically taken to the server list 
 
 ==== Regions
 
-Use +regions+ for centralizing data which is collected from public and private virtualization environments. A region is ultimately represented as a single database for the VMDB. Regions are particularly useful when multiple geographical locations need to be managed as they enable all the data collection to happen at each particular location and avoids data collection traffic across slow links between networks.
+Use +Regions+ for centralizing data which is collected from public and private virtualization environments. A region is ultimately represented as a single database for the VMDB. Regions are particularly useful when multiple geographical locations need to be managed as they enable all the data collection to happen at each particular location and avoids data collection traffic across slow links between networks.
 
 When multiple regions are being used, each with their own unique ID, a master region can be created to centralize the data of all the children regions into a single master database. To do this, configure each child region to replicate its data to the master region database (Red Hat recommends use of region 99). This parent and child region is a one-to-many relationship.
 
@@ -43,104 +43,90 @@ In this region, we have several Red Hat CloudForms appliances acting as UI nodes
 
 ===== Region Scope
 
-Regions are used to consolidate data from multiple VMDBs to a central
-database. The database at the top level, the master VMDB, cannot be used
-for operational tasks such as SmartState Analysis or Capacity and
-Utilization data collection. It is intended for use as a reporting
-database that includes all information across multiple subordinate
-regions. The subordinate regions replicate their information to the
-master.
+Regions are used to consolidate data from multiple VMDBs to a central database. The database at the top level, the master VMDB, cannot be used for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. It is intended for use as a reporting database that includes all information across multiple subordinate regions. The subordinate regions replicate their information to the master.
 
-Note that the subordinate regions are not aware of each other from a
-database perspective. You cannot see information from one subordinate
-region in another. The only VMDB with data visibility to all subordinate
-regions is the top level.
+[NOTE]
+====================
+The subordinate regions are not aware of each other from a database perspective. You cannot see information from one subordinate region in another. The only +VMDB+ with data visibility to all subordinate regions is the top level.
+====================
 
 *Master Regions Scope*
 
-* Reports all information from all subordinate VMDBs reporting up to it
-* Can perform power operations on virtual machines from subordinate regions
-* Controls its own access control list
+* Reports all information from all subordinate VMDBs reporting up to it.
+* Can perform power operations on virtual machines from subordinate regions.
+* Controls its own access control list.
 
 *Subordinate Regions Scope*
 
-* Each subordinate controls its own access control independent of the other regions
-* Can only do work (such as SmartState Analysis and Capacity and Utilization collection) in its own region
-* Has no knowledge of the other regions
-* Replicates its data up to the master region
+* Each subordinate controls its own access control independent of the other regions.
+* Can only do work (such as SmartState Analysis and Capacity and Utilization collection) in its own region.
+* Has no knowledge of the other regions.
+* Replicates its data up to the master region.
 
 ===== Region Settings
 
-In the Region area, set items that apply to your entire CloudForms Management Engine infrastructure such as users, LDAP Groups, capacity and utilization collection, company tags and tag categories, and licensing.
+In the +Region+ area, set items that apply to your entire CloudForms Management Engine infrastructure such as users, LDAP Groups, capacity and utilization collection, company tags and tag categories, and licensing.
 Regions are also used for database replication.
 
 ===== Capacity and Utilization Collections
 
 ====== Capacity and Utilization Collection Settings
 
-Use C & U Collection Settings to select specifically which clusters and datastores you want to collect usage data for.
-By selecting a cluster, you are choosing to collect data for all hosts and virtual machines that are part of that cluster.
-You must also have a server with the Capacity & Utilization Coordinator, Data Collector, and Data Processor roles enabled as well.
-See Section +Server Control Settings+.
+Use +C & U Collection Settings+ to select specifically which clusters and datastores you want to collect usage data for. By selecting a cluster, you are choosing to collect data for all hosts and virtual machines that are part of that cluster. You must also have a server with the Capacity & Utilization +Coordinator+, +Data Collector+, and +Data Processor+ roles enabled as well. See Section +Server Control Settings+.
 
-After a provider has been discovered and its relationships refreshed, the clusters, hosts, and datastores show under Configure → Configuration, then by clicking on the Settings accordion, then Region, then by clicking
-on the C & U Collection tab.
+After a provider has been discovered and its relationships refreshed, the clusters, hosts, and datastores show under +Configure → Configuration+, then by clicking on the +Settings → Region → C & U Collection tab+.
 
 ====== Enabling a Cluster, Host, or Datastore for Capacity and Utilization Collection
 
 To Enable a Cluster, Host, or Datastore for Capacity and Utilization Collection:
 
-. Navigate to +Configure → Configuration+, then click on the Settings accordion.
-. Select +Region+, then click on the C & U Collection tab.
-. In the Clusters area, check all clusters and hosts that you want to collect data for.
-. In the Datastores area, check all datastores that you want to collect data for.
-. Click Save.
+. Navigate to +Configure → Configuration+, then click on the +Settings+ accordion.
+. Select +Region+, then click on the +C & U Collection+ tab.
+. In the +Clusters+ area, check all clusters and hosts that you want to collect data for.
+. In the +Datastores+ area, check all datastores that you want to collect data for.
+. Click +Save+.
 
 
 [NOTE]
 =========================
-As new clusters, hosts, and datastores are discovered, you will need to
-come back to this configuration to enable collection of capacity and
-utilization data unless you have used the Collect for All check boxes
+As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the +Collect for All+ check boxes.
 =========================
 
 ===== Tags
 
 ====== Company Tag Categories and Tags
 
-CloudForms Management Engine allows you to create your own set of tags and tag categories. Use tags to create a customized, searchable index for your resources. Depending on your database type, your tags may be case
-sensitive. After creating these values, you can apply them to your resources. There are two kinds of tags.
+CloudForms Management Engine allows you to create your own set of tags and tag categories. Use tags to create a customized, searchable index for your resources. Depending on your database type, your tags may be case sensitive. After creating these values, you can apply them to your resources. There are two kinds of tags.
 
-* Company tags which you will see under My Company Tags for a resource. Create company tags by navigating to Configure → Configuration, then clicking on the Settings, then selecting Region, then the My Company Tags tab.
-A selection of company tags is provided to you by default as samples. These can be deleted if you do not need them, but are not recreated by CloudForms Management Engine.
+* +Company tags+ which you will see under +My Company Tags+ for a resource. Create company tags by navigating to +Configure → Configuration+, then clicking on the +Settings+, then selecting +Region+, then the +My Company Tags+ tab. A selection of company tags is provided to you by default as samples. These can be deleted if you do not need them, but are not recreated by CloudForms Management Engine.
 
-* System tags are assigned automatically by CloudForms Management Engine.
+* +System tags+ are assigned automatically by CloudForms Management Engine.
 
 [NOTE]
 ======
-If you entered a Company Name under Configure → Configuration, then clicking on the Settings tab, then the Server your desired server, that name will appear on the tab instead of My Company.
+If you entered a Company Name under +Configure → Configuration+, then clicking on the +Settings+ tab, then the +Server+ your desired server, that name will appear on the tab instead of +My Company+.
 ======
 
 ====== Creating a Tag Category
 
 To Create a Tag Category:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then Region, then click on the My Company Categories tab.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then +Region+, then click on the +My Company Categories+ tab.
 . Click image:1848.png[](Click to add a new category).
-. In the Category Information area,
+. In the +Category Information+ area,
 image:2042.png[]
-* Use Name to create a short name that refers to category in the VMDB.
+* Use +Name+ to create a short name that refers to category in the +VMDB+.
 [NOTE]
 ======
-The Name and Single Value fields cannot be changed after the category has been added.
+The +Name+ and +Single Value+ fields cannot be changed after the category has been added.
 ======
-* Use Display Name to specify how you want to see the name of the category in the Console.
-* Use Description to type a brief explanation of how the category should be used. This shows when you try to add a value to the category.
-* Check Show in Console when you feel that the category is ready for use in the console. For example, you want to populate values for the category before exposing it to users.
-* Check Single Value for categories that can only have a single value assigned to a resource. For example, a virtual machine can only be assigned to one location, but could belong to more than one department.
-* Check Capture C & U Data by tag to be able to group capacity and utilization data by this tag category. To use this, be sure to assign this tag to all the resources that you want to group by.
-. Click Add.
+* Use +Display Name+ to specify how you want to see the name of the category in the Console.
+* Use +Description+ to type a brief explanation of how the category should be used. This shows when you try to add a value to the category.
+* Check +Show+ in Console when you feel that the category is ready for use in the console. For example, you want to populate values for the category before exposing it to users.
+* Check +Single Value+ for categories that can only have a single value assigned to a resource. For example, a virtual machine can only be assigned to one location, but could belong to more than one department.
+* Check +Capture C & U Data+ by tag to be able to group capacity and utilization data by this tag category. To use this, be sure to assign this tag to all the resources that you want to group by.
+. Click +Add+.
 
 Result:: Repeat these steps for each category you need. After you have created the category, you can add values to it.
 
@@ -154,9 +140,10 @@ If no values are created for a category, you are unable to assign a value from t
 
 To Delete a Tag Category:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then Region, then click on the My Company Categories tab.
-. Click image:1861.png[] (Click to delete this category) next to the category to delete it.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then +Region+, then click on the +My Company Categories+ tab.
+. Click image:1861.png[] (+Click to delete this category+) next to the category to delete it.
+
 [NOTE]
 ========
 When you delete a tag category, the category values are removed, and any tags from the category are unassigned from all resources.
@@ -166,24 +153,26 @@ When you delete a tag category, the category values are removed, and any tags fr
 
 To Create a Company Tag:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then Region, then click on the My Company Tags tab.
-. In the Choose a Category area, select a category from the Category list. Note that some categories only allow one value to be assigned to a resource.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then +Region+, then click on the +My Company Tags+ tab.
+. In the +Choose+ a Category area, select a category from the +Category+ list.
 [NOTE]
 =======
-For some databases such as PostgreSQL, tags are case sensitive. For example, filtering by Linux in title case give you different results from filtering by linux in lower case.
+* Some categories only allow one value to be assigned to a resource.
+* For some databases such as +PostgreSQL+, tags are case sensitive. For example, filtering by 'Linux' in title case give you different results from filtering by 'linux' in lower case.
 =======
-. Click image:1848.png[](New Entry), and type a Name and Display Name for your new value.
-. Click image:2043.png[](Click to add a new entry) to confirm the entry.
++
+. Click image:1848.png[](+New Entry+), and type a Name and Display Name for your new value.
+. Click image:2043.png[](+Click to add a new entry+) to confirm the entry.
 . Repeat these steps for each value you need.
 
 ===== Deleting a Company Tag
 
 To Delete a Company Tag:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then Region, then click on the My Company Tags tab.
-. Click image:1861.png[] (Click to delete this entry) next to the tag to delete it.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then +Region+, then click on the +My Company Tags+ tab.
+. Click image:1861.png[] (+Click to delete this entry+) next to the tag to delete it.
 [NOTE]
 ========
 When you delete a tag, the tag is also deleted from any resource to which it was assigned.
@@ -191,7 +180,7 @@ When you delete a tag, the tag is also deleted from any resource to which it was
 
 ====== Importing Tags for Virtual Machines
 
-You can import a CSV file with tag assignments into the VMDB. For the import to be successful, be aware of the following:
+You can import a +CSV file+ with tag assignments into the +VMDB+. For the import to be successful, be aware of the following:
 
 * The file must be in the following format, with one line for each virtual machine. One virtual machine per tag must be on a separate line even if you are assigning multiple tags of the same category.
 * You must use the display names of the category and the display name for the tag for the import to work.
@@ -211,29 +200,29 @@ rhel6,Department,Support
 
 To Import Tags for a Virtual Machine from a CSV File:
 
-. Make sure the CSV file is in the required format.
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then Region, then click on the Import Tags tab.
-. Click Browse to go to the location where the file is located.
+. Make sure the +CSV file+ is in the required format.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then +Region+, then click on the +Import Tags+ tab.
+. Click +Browse+ to go to the location where the file is located.
 image:2044.png[]
-. Click Upload.
+. Click +Upload+.
 +
 [NOTE]
 ===========
 If there are any problems with the file, such as an incorrect column name, unknown virtual machine, unknown tag, or multiple values for a tag that should have only one, an error message will appear in the console for those records.
 ===========
 +
-. Click Apply.
+. Click +Apply+.
 
 ====== Importing Custom Values for Virtual Machines and Hosts
 
-You can import a CSV file with asset tag information into the VMDB for a virtual machine or import custom values for hosts.
+You can import a +CSV file+ with asset tag information into the +VMDB+ for a virtual machine or import custom values for hosts.
 For the import to be successful, the file must be in the following format, with one line for each virtual machine or host.
 
-* There are two columns
-* The first line of the file must have the column names as shown below
-* The column names are case sensitive
-* Each value must be separated by a comma
+* There are two columns.
+* The first line of the file must have the column names as shown below.
+* The column names are case sensitive.
+* Each value must be separated by a comma.
 
 *Virtual Machine Import Example*
 
@@ -245,7 +234,7 @@ SQLSrvr,1090430
 Firewall,8230500
 ---------------
 
-For virtual machines, the value for custom_1 will show in the VM Summary page as the Custom Identifier in the Properties area. All of the custom values will show in the Custom Fields area.
+For virtual machines, the value for custom_1 will show in the +VM Summary+ page as the +Custom Identifier+ page as the +Custom Identifier+ in the +Properties+ area. All of the custom values will show in the +Custom Fields+ area.
 
 *Host Import Example*
 
@@ -256,34 +245,33 @@ esxd1.galaxy.local,10885574,16416993
 esxd2.galaxy.local,16199125,16569419
 ----------------------
 
-For hosts, the value for custom_1 will show in the Host Summary page as the Custom Identifier in the Properties area. All of the custom values will show in the Custom Fields area.
+For hosts, the value for custom_1 will show in the +Host Summary+ page as the +Custom Identifier+ in the +Properties+ area. All of the custom values will show in the +Custom Fields+ area.
 
 ====== Importing Asset Tags for a Virtual Machine from a CSV File
 
 To Import Asset Tags for a Virtual Machine from a CSV File
 
-. Make sure the CSV file is in the required format.
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then Region, then click on the Import tab.
-. Select the type of custom variable you want to import, either Host or VM.
+. Make sure the +CSV file+ is in the required format.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then +Region+, then click on the +Import+ tab.
+. Select the type of custom variable you want to import, either +Host+ or +VM+.
 image:2045.png[]
-. Click Browse to go to the location where the custom variable file is located.
-. Click Upload.
+. Click +Browse+ to go to the location where the custom variable file is located.
+. Click +Upload+.
 +
 [NOTE]
 ===========
 If there are any problems with the file, such as an incorrect column name, unknown virtual machine or host, a message appears.
 ===========
 +
-. Click Apply.
+. Click +Apply+.
 
 ===== Registering and Updating CloudForms Management Engine
 
 The Red Hat Updates page enables you to edit customer information, register appliances, and update appliances. Editing customer information enables you to determine the registration point, User ID, and password.
-Red Hat CloudForms prompts you to update the Server URL when updating the registration point to a local Red Hat Satellite. The Status of Available Servers area provides options to refresh, register, check for updates,
-and to update. The Red Hat Updates page enables the Content Delivery Network (CDN) to assign the necessary update packages to the CloudForms Management Engine Server.
+Red Hat CloudForms prompts you to update the +Server URL+ when updating the registration point to a local Red Hat Satellite. The +Status of Available Servers+ area provides options to refresh, register, check for updates, and to update. The +Red Hat Updates+ page enables the +Content Delivery Network (CDN)+ to assign the necessary update packages to the CloudForms Management Engine Server.
 
-Using the Check For Updates task button, the CDN assigns any necessary update packages to your server and notifies you. Click Update and the CloudForms Management Engine packages install and update.
+Using the +Check For Updates+ task button, the +CDN+ assigns any necessary update packages to your server and notifies you. Click +Update+ and the CloudForms Management Engine packages install and update.
 
 Three steps are required for updating the CloudForms Management Engine Appliance:
 
@@ -293,19 +281,19 @@ Three steps are required for updating the CloudForms Management Engine Appliance
 
 The following tools are used during the update process:
 
-* Yum provides package installation, updates, and dependency checking.
-* Red Hat Subscription Manager manages subscriptions and entitlements.
-* Red Hat Satellite Server runs at customer locations providing local system registration and updates from inside the customer's firewall.
+* +Yum+ provides package installation, updates, and dependency checking.
+* +Red Hat Subscription Manager+ manages subscriptions and entitlements.
+* +Red Hat Satellite Server+ runs at customer locations providing local system registration and updates from inside the customer's firewall.
 
 
 [IMPORTANT]
 ==============
-The update worker synchronizes the VMDB with the status of available CloudForms Management Engine content every 12 hours.
+The update worker synchronizes the +VMDB+ with the status of available CloudForms Management Engine content every 12 hours.
 ==============
 
 [NOTE]
 ==============
-Servers with the RHN Mirror role also act as a repository for other Appliances to pull CloudForms Management Engine packages updates.
+Servers with the +RHN Mirror+ role also act as a repository for other Appliances to pull CloudForms Management Engine packages updates.
 ==============
 
 ====== Editing Customer Information
@@ -314,14 +302,14 @@ The Red Hat Updates page enables you to edit customer information.
 
 To Edit Customer Information
 
-. Navigate to Configure → Configuration. Select Settings → Region in the accordion menu and click the Red Hat Updates tab.
-. Click Edit Registration.
-. The Customer Information area displays options to edit registration, User ID, and Password.
-* Register to field provides options for the Customer Portal, RHN Satellite v5 for Red Hat Satellite 5.x servers, and RHN Satellite v6 for Red Hat Satellite 6.x servers. If switching to RHN Satellite v5 or v6, the page will refresh and a prompt for a Server URL will be included in the Customer Information area.
-* When the HTTP Proxy is selected, options to enable usage of the HTTP Proxy are displayed. Provide information of your HTTP Proxy in the HTTP Proxy Address, Login, and Change Password / Confirm Password boxes. For more information on how to use HTTP Proxy, Using HTTP Proxy in the Red Hat Subscription Management Guide.
+. Navigate to +Configure → Configuration+. Select +Settings → Region+ in the accordion menu and click the +Red Hat Updates+ tab.
+. Click +Edit+ Registration.
+. The +Customer Information+ area displays options to edit registration, User ID, and Password.
+* +Register+ to field provides options for the Customer Portal, RHN Satellite v5 for Red Hat Satellite 5.x servers, and RHN Satellite v6 for Red Hat Satellite 6.x servers. If switching to RHN Satellite v5 or v6, the page will refresh and a prompt for a Server URL will be included in the Customer Information area.
+* When the +HTTP Proxy+ is selected, options to enable usage of the HTTP Proxy are displayed. Provide information of your HTTP Proxy in the +HTTP Proxy Address+, +Login+, and +Change Password / Confirm Password+ boxes. For more information on how to use HTTP Proxy, see +Using HTTP Proxy+ in the +Red Hat Subscription Management Guide+.
 image:6322.png[]
-* In the Enter your Red Hat account information area, fill out the Login and Password of your customer account details for the Customer Portal or Satellite. Click Validate.
-* Click Save.
+* In the +Enter your Red Hat+ account information area, fill out the +Login+ and +Password+ of your customer account details for the Customer Portal or Satellite. Click +Validate+.
+* Click +Save+.
 
 ====== Registering Appliances
 
@@ -340,7 +328,7 @@ image:6637.png[]
 * Red Hat Satellite 6
 The Subscription Management Service you register with will provide your systems with updates and allow additional management.
 ** To register with Red Hat Subscription Management:
-.. In Register to, select +Red Hat Subscription Management+.
+.. In +Register to+, select +Red Hat Subscription Management+.
 .. Enter +Red Hat Subscription Management Address+. The default is +subscription.rhn.redhat.com+.
 .. Enter +Repository Name+. The default is +cf-me-5.5-for-rhel-7-rpms rhel-server-rhscl-7-rpms+.
 .. To use an HTTP proxy, select +Use HTTP Proxy+.
@@ -363,7 +351,7 @@ The Subscription Management Service you register with will provide your systems 
 
 ====== Updating Appliances
 
-The +Red Hat Updates+ page enables you to check for updates and update rgistered appliances.
+The +Red Hat Updates+ page enables you to check for updates and update registered appliances.
 
 . Navigate to +Configure → Configuration+. Select +Region+ in the accordion menu and click the +Red Hat Updates+ tab.
 . After registering, the following options are available in the +Appliance Updates+ section of the +Red Hat Updates+ tab:
@@ -386,56 +374,56 @@ You can create an analysis profile by referring to the sample profiles provided 
 
 To Create a Host Analysis Profile:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Analysis Profiles.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add Host Analysis Profile).
-. In the Basic Information area, type in a Name and Description for the analysis profile.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Analysis Profiles+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add Host Analysis Profile+).
+. In the +Basic Information+ area, type in a +Name+ and +Description+ for the analysis profile.
 image:2048.png[]
-. Click File to collect information about a file or group of files.
-. From the File Entry area, click image:plus_green.png[] (Click to add a new entry) to add a file or group of files.
+. Click +File+ to collect information about a file or group of files.
+. From the +File Entry+ area, click image:plus_green.png[] (+Click to add a new entry+) to add a file or group of files.
 image:2047.png[]
-* Check Collect Contents to not only check for existence, but also gather the contents of the file. If you do this, then you can use the contents to create policies in CloudForms Management Engine Control. See CloudForms Management Engine Control Guide.
-. Click Event Log to specify event log entries to collect.
-. From the Event Log Entry area, click image:plus_green.png[] (Click to add a new entry) to add a type of event log entry. Type in a Name. You can type in a specific message to find in Filter Message. In Level, set the value for the level of the entry and above. Specify the Source for the entry.
+* Check +Collect Contents+ to not only check for existence, but also gather the contents of the file. If you do this, then you can use the contents to create policies in CloudForms Management Engine Control. See +CloudForms Management Engine Control Guide+.
+. Click +Event Log+ to specify event log entries to collect.
+. From the +Event Log Entry+ area, click image:plus_green.png[] (+Click to add a new entry+) to add a type of event log entry. Type in a +Name+. You can type in a specific message to find in +Filter Message+. In +Level+, set the value for the level of the entry and above. Specify the +Source+ for the entry.
 Finally, set the # number of days that you want to collect event log entries for. If you set this to 0, it will go as far back as there is data available.
 image:2046.png[]
-. Click Add.
+. Click +Add+.
 
 ===== Creating a Virtual Machine Analysis Profile
 
 To Create a Virtual Machine Analysis Profile:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Analysis Profiles.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add VM Analysis Profile).
-. In the Basic Information area, type in a Name and Description for the analysis profile.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Analysis Profiles+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add VM Analysis Profile+).
+. In the +Basic Information+ area, type in a +Name+ and +Description+ for the analysis profile.
 image:2050.png[]
-. You begin in the Category area. From the Category Selection area, check the categories you want to collect information for. This is available for virtual machine profiles only.
+. You begin in the +Category+ area. From the +Category Selection+ area, check the categories you want to collect information for. This is available for virtual machine profiles only.
 image:2051.png[]
-. Click File to collect information about a file or group of files.
-. From the File Entry area, type a name, then click image:plus_green.png[] (Click to add a new entry) to add a file or group of files. For virtual machines, specify the file to check for. Check the box under Collect Contents if you want to collect the file contents as well.
+. Click +File+ to collect information about a file or group of files.
+. From the +File Entry+ area, type a name, then click image:plus_green.png[] (+Click to add a new entry+) to add a file or group of files. For virtual machines, specify the file to check for. Check the box under +Collect Contents+ if you want to collect the file contents as well.
 The files can be no larger than 1 MB.
 image:2052.png[]
-. Click Registry to collect information on a registry key.
-. From the Registry Entry area, click image:plus_green.png[] (Click to add a new entry) to add a file or group of files. To evaluate whether a registry key exists or does not exist on a virtual machine, without providing a value, type * in the Registry Value field.
+. Click +Registry+ to collect information on a registry key.
+. From the +Registry Entry+ area, click image:plus_green.png[] (+Click to add a new entry+) to add a file or group of files. To evaluate whether a registry key exists or does not exist on a virtual machine, without providing a value, type * in the +Registry Value+ field.
 Then, you do not need to know the registry value to collect the keys. This is available for virtual machine profiles only.
-. Click Event Log to specify event log entries to collect.
-. From the Event Log Entry area, click image:plus_green.png[] (Click to add a new entry) to add a type of event log entry. You can type in a specific message to find in Filter Message.
-In Level, set the value for the level of the entry and above. Specify the Source for the entry. Finally, set the # (number) of days that you want to collect event log entries for.
+. Click +Event Log+ to specify event log entries to collect.
+. From the +Event Log Entry+ area, click image:plus_green.png[] (+Click to add a new entry+) to add a type of event log entry. You can type in a specific message to find in +Filter Message+.
+In +Level+, set the value for the level of the entry and above. Specify the +Source for the entry+. Finally, set the # (number) of days that you want to collect event log entries for.
 If you set this to 0, it will go as far back as there is data available.
 image:2054.png[]
-. Click Add.
+. Click +Add+.
 
 ===== Editing an Analysis Profile
 
 To Edit an Analysis Profile:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Analysis Profiles.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Analysis Profiles+.
 . Check the analysis profile you want to edit.
-. Click image:1851.png[] (Edit this Analysis Profile).
+. Click image:1851.png[] (+Edit this Analysis Profile+).
 . Make any changes.
-. Click Save.
+. Click +Save+.
 
 Result:: The changes are added to the analysis profile. The virtual machines or hosts must be re-analyzed to collect the new or modified information.
 
@@ -443,13 +431,13 @@ Result:: The changes are added to the analysis profile. The virtual machines or 
 
 To Copy an Analysis Profile:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Analysis Profiles.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Analysis Profiles+.
 . Check the analysis profile you want to copy.
-. Click image:1859.png[] (Copy this Analysis Profile).
-. Type a new Name and Description.
+. Click image:1859.png[] (+Copy this Analysis Profile+).
+. Type a new +Name+ and +Description+.
 . Make required changes.
-. Click Add.
+. Click +Add+.
 
 ===== Setting a Default Analysis Profile
 
@@ -457,13 +445,13 @@ If you want to set an analysis profile to be used for all virtual machines, you 
 
 To Create a Default Analysis Profile:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Analysis Profiles.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Analysis Profiles+.
 . Click on the analysis profile you want to set as the default.
-. Click image:1851.png[] (Edit this Analysis Profile).
+. Click image:1851.png[] (+Edit this Analysis Profile+).
 . For a virtual machine profile, enter default in lower case in Name. For a host profile, enter host default.
 image:2056.png[]
-. Click Save.
+. Click +Save+.
 
 
 ==== Zones
@@ -485,42 +473,44 @@ Only users assigned the super administrator role can create zones. There must al
 
 To Create a Zone:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new zone) to create a zone.
-. In the Zone Information area, type in a Name and Description for the new zone.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add a new zone+) to create a zone.
+. In the +Zone Information+ area, type in a +Name+ and +Description+ for the new zone.
 image:2057.png[]
-. Use SmartProxy Server IP to specify the IP address of the server that you want SmartProxies installed in this zone to report to. If this is not set, then the IP address of the server that deployed the SmartProxy is used. This does not apply to embedded SmartProxies.
-. In the Credentials - Windows Domain area, type in Windows domain credentials to be able to collect running processes from Windows virtual machines that are on a domain.
+. Use +SmartProxy Server IP+ to specify the IP address of the server that you want SmartProxies installed in this zone to report to. If this is not set, then the IP address of the server that deployed the SmartProxy is used. This does not apply to embedded SmartProxies.
+. In the +Credentials → Windows Domain+ area, type in Windows domain credentials to be able to collect running processes from Windows virtual machines that are on a domain.
 image:2058.png[]
-. Optionally, you can configure NTP servers for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the Operations-Server page.
-. In the Settings area, set the number for Max Active VM Scans. The default is Unlimited.
-. Click Save.
+. Optionally, you can configure +NTP servers= for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the +Operations → Server+ page.
+. In the +Settings+ area, set the number for +Max Active VM Scans+. The default is Unlimited.
+. Click +Save+.
 
 ===== Deleting a Zone
 
 To Delete a Zone:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone you want to remove.
++
 [NOTE]
 =========
 You cannot delete a zone if there are servers assigned to it.
 =========
-. Click image:1847.png[] (Configuration), then click image:gui_delete.png[] (Delete this Zone).
-. Click OK to confirm.
++
+. Click image:1847.png[] (+Configuration+), then click image:gui_delete.png[] (+Delete this Zone+).
+. Click +OK+ to confirm.
 
 ===== Editing a Zone
 
 To Edit a Zone:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone you want to edit.
-. Click image:1847.png[] (Configuration), then click image:1851.png[] (Edit this Zone).
+. Click image:1847.png[] (+Configuration+), then click image:1851.png[] (+Edit this Zone+).
 . Make the required changes.
-. Click Save.
+. Click +Save+.
 
 ==== Servers
 
@@ -536,33 +526,33 @@ The server selection options are only available if you have multiple servers sha
 
 To Change Server Settings:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the CloudForms Management Engine server is located.
-. In the Servers area, click on the CloudForms Management Engine server.
-. Click Server.
+. In the +Servers+ area, click on the CloudForms Management Engine server.
+. Click +Server+.
 . Make any required changes.
-. Click Save.
+. Click +Save+.
 
 ====== Basic Information Settings
 image:2059.png[]
 
-* Use Company Name (maximum 20 characters) to customize the interface with your company's name. You will see the company name when you are viewing or modifying the tags of an infrastructure object or virtual machine.
-* Specify the Appliance Name (maximum 20 characters) you want displayed as the appliance that you are logged into. You will see this in the upper right corner of the interface with the name of the consoles logged on user.
-* Use Zone to isolate traffic and provide load balancing capabilities. Specify the zone that you want this CloudForms Management Engine Appliance to be a member of. At startup, the zone is set to default.
-* Use Appliance Time Zone to set the time zone for this server.
+* Use +Company Name+ (maximum 20 characters) to customize the interface with your company's name. You will see the company name when you are viewing or modifying the tags of an infrastructure object or virtual machine.
+* Specify the +Appliance Name+ (maximum 20 characters) you want displayed as the appliance that you are logged into. You will see this in the upper right corner of the interface with the name of the consoles logged on user.
+* Use +Zone+ to isolate traffic and provide load balancing capabilities. Specify the zone that you want this CloudForms Management Engine Appliance to be a member of. At startup, the zone is set to default.
+* Use +Appliance Time Zone+ to set the time zone for this server.
 [NOTE]
 ==============
 This is the time zone used when created scheduled analyses. This is not the same as the Time Zone parameter, which is found by navigating to Configure → My Settings, then exploring the Display Settings area, and is the time zone displayed in the console.
 ==============
-* Use Default Locale to specify the default language for this server.
+* Use +Default Locale+ to specify the default language for this server.
 
 ====== Server Control Settings
 
 Server role defines what a server can do. Red Hat recommends that Database Operations, Event Monitor, Reporting, Scheduler, SmartState Analysis, User Interface, Provider Inventory, Provider Operations, and Web Services be enabled on at least one server in each zone.
 These roles are enabled by default on all servers.
 
-* Use Default Repository SmartProxy to set the SmartProxy from which you refresh your virtual machine repositories. This host must have access to your repositories to analyze its virtual machines.
+* Use +Default Repository SmartProxy+ to set the SmartProxy from which you refresh your virtual machine repositories. This host must have access to your repositories to analyze its virtual machines.
 
 [NOTE]
 ==================
@@ -596,18 +586,18 @@ These roles are enabled by default on all servers.
 ====== VMware Console Settings
 
 If you are using the CloudForms Management Engine Control feature set, then you have the ability to connect to a Web console for virtual machines that are registered to a host. To use this feature, you must have VNC installed, the appropriate version of the VMware MKS plug-in or the appropriate VMRC viewer installed in your Web browser.
-Note that you are responsible for installing the correct version for your virtual infrastructure. See vendors documentation for information. After installing the appropriate software or version, you must specify which version you are using in the CloudForms Management Engine configuration settings.
 
 [NOTE]
-=================
-To edit the VMware MKS plug-in settings, you must have the super administrator role.
-=================
+==============
+* You are responsible for installing the correct version for your virtual infrastructure. See vendors documentation for information. After installing the appropriate software or version, you must specify which version you are using in the CloudForms Management Engine configuration settings.
+* To edit the VMware MKS plug-in settings, you must have the super administrator role.
+==============
 
 image:2061.png[]
 
-* If you select VNC, type in the port number used. This port must be open on the target virtual machine and the VNC software must be installed there. On the computer that you are running the console from, you must install the appropriate version of Java Runtime if it is not already installed.
-* If you select VMware MKS plug-in, select the appropriate version.
-* If using VMware VMRC plug-in, be sure that you have fulfilled the requirements. The correct version of the VMRC plug-in from VMware must be installed on the client computer.
+* If you select +VNC+, type in the port number used. This port must be open on the target virtual machine and the VNC software must be installed there. On the computer that you are running the console from, you must install the appropriate version of Java Runtime if it is not already installed.
+* If you select +VMware MKS+ plug-in, select the appropriate version.
+* If using +VMware VMRC+ plug-in, be sure that you have fulfilled the requirements. The correct version of the VMRC plug-in from VMware must be installed on the client computer.
 To do this, log into the Virtual Center Web Service and attempt to open a virtual machine console. This should prompt you to install the required plug-in.
 The VSphere Web Client must be installed on VC version 5, and the provider must be registered to it. For Virtual Center version 4, the VMware VirtualCenter Management Webservice must be running.
 
@@ -667,16 +657,16 @@ To be able to send any emails from the server, you must have the Notifier server
 
 [IMAGE]
 
-* Use Host to specify the host name of the mail server.
-* Use Port to specify the port for the mail server.
-* Use Domain to specify domain name for the mail server.
-* Check Start TLS Automatically if the mail server requires TLS.
+* Use +Host+ to specify the host name of the mail server.
+* Use +Port+ to specify the port for the mail server.
+* Use +Domain+ to specify domain name for the mail server.
+* Check +Start TLS Automatically+ if the mail server requires TLS.
 * Select the appropriate verify mode.
-* Use the Authentication drop down to specify if you want to use login or plain authentication.
-* Use User Name to specify the user name required for login authentication.
-* Use Password to specify the password for login authentication.
-* Use From Email Address to set the address you want to send the email from.
-* Use To Email Address if you want to test your email settings.
+* Use the +Authentication+ drop down to specify if you want to use login or plain authentication.
+* Use +User Name+ to specify the user name required for login authentication.
+* Use +Password+ to specify the password for login authentication.
+* Use +From Email Address+ to set the address you want to send the email from.
+* Use +To Email Address+ if you want to test your email settings.
 
 To Test Outgoing SMTP Email Server Settings:
 
@@ -714,13 +704,13 @@ Use the Authentication tab to specify how you want users authenticated on the co
 
 To Change an Authentication Setting:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
-. Click on the Authentication tab.
+. Click on the +Authentication+ tab.
 . Make any required changes. If you select LDAP, LDAPS, or Amazon as the authentication mode, click Validate to confirm your settings in the Role Settings area.
-. Click Save.
+. Click +Save+.
 
 ====== Authentication Settings
 
@@ -736,18 +726,18 @@ If you choose LDAP or LDAPS as your authentication mode, required parameters are
 
 image:2068.png[]
 
-* Use LDAP Host Name to specify the fully qualified domain names of your LDAP servers. CloudForms Management Engine will search each host name in order until it finds one that authenticates the user.
-* Use LDAP Port to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
-* From the User Type list, select User Principal Name to type the user name in the format of user@domainname. Select Email Address to login with the users email address.
-Select Distinguished Name (CN=<user>) or Distinguished Name (UID=<user>) to use just the user name, but be sure to enter the proper User Suffix for either one. Choose the correct Distinguished Name option for your directory service implementation.
-* Specify the User Suffix, such as acme.com for User Principal Name or cn=users,dc=acme,dc=comfor Distinguished Name, in Base DN.
+* Use +LDAP Host Name+ to specify the fully qualified domain names of your LDAP servers. CloudForms Management Engine will search each host name in order until it finds one that authenticates the user.
+* Use +LDAP Port+ to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
+* From the +User Type+ list, select +User Principal Name+ to type the user name in the format of user@domainname. Select +Email Address+ to login with the users email address.
+Select +Distinguished Name+ (CN=<user>) or +Distinguished Name+ (UID=<user>) to use just the user name, but be sure to enter the proper +User Suffix+ for either one. Choose the correct +Distinguished Name+ option for your directory service implementation.
+* Specify the +User Suffix+, such as acme.com for +User Principal Name+ or cn=users,dc=acme,dc=com for +Distinguished Name+, in +Base DN+.
 
 ====== Amazon Settings
 
 If you choose Amazon as your authentication mode, required parameters are exposed under Amazon Primary AWS Account Settings for IAM. Be sure to validate your setting before saving them.
 
-* Type in an Access Key provided by your Amazon account.
-* Type in a Secret Key provided by your Amazon account.
+* Type in an +Access Key+ provided by your Amazon account.
+* Type in a +Secret Key+ provided by your Amazon account.
 
 Users logging into CloudForms Management Engine with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
 Amazon users must be added as a CloudForms Management Engine user or belong to an IAM user group added to the list of CloudForms Management Engine groups.
@@ -778,15 +768,15 @@ If a user has group memberships in another LDAP Forest, then specify the setting
 
 To Add Settings for a Trusted Forest:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
-. Click the Zone where the Server is located.
-. Click on the Server.
-. Click Authentication.
-. Check Get Role from LDAP, and enter all items in the Role Settings Area.
-. In the Trusted Forest Settings area, click image:1848.png[](Click to add a new forest).
-. Enter the LDAP Host Name, select a Mode, and enter an LDAP Port, Base DN, Bind DN, and Bind Password.
-. Click Save.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
+. Click the +Zone+ where the Server is located.
+. Click on the +Server+.
+. Click +Authentication+.
+. Check +Get Role+ from +LDAP+, and enter all items in the +Role Settings Area+.
+. In the +Trusted Forest Settings+ area, click image:1848.png[](+Click to add a new forest+).
+. Enter the +LDAP Host Name+, select a +Mode+, and enter an +LDAP Port+, +Base DN+, +Bind DN+, and +Bind Password+.
+. Click +Save+.
 
 ====== External Authentication (httpd)
 
@@ -808,13 +798,13 @@ To configure the appliance for external authentication, first set up authenticat
 Using the Web Interface:
 
 . Log in to the web interface as an administrative user.
-. Navigate to Configure → Configuration → Zone → Server → NTP Servers or use the hosting provider of the virtual machine to synchronize the appliance's time with an NTP server.
-. Navigate to Configure → Configuration → Authentication.
-. Select a Session Timeout if required.
-. Select External (httpd) in the Mode list.
-. Select Enable Single Sign-On to allow single sign-on using Kerberos tickets from client machines that authenticate to the same IPA server as the appliance.
-. In the Role Settings area, select Get User Groups from External Authentication (https).
-. Click Save.
+. Navigate to +Configure → Configuration → Zone → Server → NTP Servers+ or use the hosting provider of the virtual machine to synchronize the appliance's time with an NTP server.
+. Navigate to +Configure → Configuration → Authentication+.
+. Select a +Session Timeout+ if required.
+. Select +External (httpd)+ in the +Mode list+.
+. Select +Enable Single Sign-On+ to allow single sign-on using Kerberos tickets from client machines that authenticate to the same IPA server as the appliance.
+. In the +Role Settings+ area, select +Get User Groups+ from +External Authentication (https)+.
+. Click +Save+.
 
 Using the Console:
 
@@ -850,9 +840,9 @@ To revert to internal database authentication, first configure authentication us
 Using the Web Interface:
 
 . Log in to the web interface as an administrative user.
-. Navigate to Configure → Configuration → Authentication.
-. Select Database in the Mode list.
-. Click Save.
+. Navigate to +Configure → Configuration → Authentication+.
+. Select +Database+ in the Mode list.
+. Click +Save+.
 
 Using the Console:
 
@@ -927,14 +917,14 @@ Only make these changes when directed to by Red Hat Support.
 
 To Change the Settings for a Worker (except replication worker)
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
-. Click Workers.
+. Click +Workers+.
 . Go to the type of worker you have been directed to change.
 . If applicable, change Count or Memory Threshold using the dropdown boxes.
-. Click Save.
+. Click +Save+.
 
 ====== Changing Settings for the Replication Worker
 
@@ -945,23 +935,21 @@ This should only be entered on subordinate servers that will have the Database S
 
 To Change Settings for the Replication Worker:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
-. Click Workers.
-. Go to the Replication Worker area.
+. Click +Workers+.
+. Go to the +Replication Worker+ area.
 image:2070.png[]
-* Use Database to specify the name of your VMDB.
-* Specify the User Name to connect to the VMDB.
-* Use Password and Verify Password to specify the password for the user name.
-* Use Host to specify the IP address or hostname of the top level VMDB.
-. Click Validate to confirm that the VMDB is accessible.
-. Click Save.
+* Use +Database+ to specify the name of your VMDB.
+* Specify the +User Name+ to connect to the VMDB.
+* Use +Password+ and +Verify Password+ to specify the password for the user name.
+* Use +Host+ to specify the IP address or hostname of the top level VMDB.
+. Click +Validate+ to confirm that the VMDB is accessible.
+. Click +Save+.
 
-Result:: The new settings take one to two minutes to take effect. Next,
-you need to enable the replication worker on the subordinate regions VMDB
-server.
+Result:: The new settings take one to two minutes to take effect. Next, you need to enable the replication worker on the subordinate regions VMDB server.
 
 ===== Database
 
@@ -976,19 +964,19 @@ The server may not start if the database settings are changed. Be sure to valida
 
 To Change a Database Setting:
 
-. Navigate to Configure → Configuration.
+. Navigate to +Configure → Configuration+.
 . Click on the Settings accordion, then click Zones.
 . Click the zone where the server is located.
 . Click on the server.
-. Click the Database tab.
-. In the Database area, select the Type of database. You can select from External Database on another Server, External PostgreSQL Database, and Internal Database on this Appliance (default). The rest of the possible settings will vary depending on which type of database you chose.
-* Use Hostname to specify the IP address or hostname of the external database server.
-* Use Database Name to specify the name of your VMDB.
-* Specify the User Name to connect to the VMDB.
-* Use Password and Verify Password to specify the password for the user name.
-. Click Validate to check the settings.
-. Click Save.
-. Click OK to the warning that the server will restart immediately after you save the changes.
+. Click the +Database+ tab.
+. In the +Database+ area, select the +Type+ of database. You can select from +External Database on another Server+, +External PostgreSQL Database+, and +Internal Database on this Appliance+ (default). The rest of the possible settings will vary depending on which type of database you chose.
+* Use +Hostname+ to specify the IP address or hostname of the external database server.
+* Use +Database Name+ to specify the name of your VMDB.
+* Specify the +User Name+ to connect to the VMDB.
+* Use +Password+ and +Verify Password+ to specify the password for the user name.
+. Click +Validate+ to check the settings.
+. Click +Save+.
+. Click +OK+ to the warning that the server will restart immediately after you save the changes.
 
 Result:: During the restart, you are unable to access the server. When the restart is complete, the new database settings are in effect.
 
@@ -1003,46 +991,46 @@ Use Custom Logos to display your own logo in the corner of the console or on the
 To Upload a Custom Logo to the Console:
 
 . Make sure the desired logo is accessible from the computer where you are running the console. The file must be in portable network graphics (png) format with dimensions of 350 x 70.
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the CloudForms Management Engine server is located.
 . Click on the server.
-. Click the Custom Logos tab.
+. Click the +Custom Logos+ tab.
 image:2071.png[]
-. Click Browse in the Custom Logo Image (Shown on top right of all screens) area to go to the location where the logo file is located.
-. Click Upload. The icon is displayed above the file name box, and an option is shown to use the logo.
-. Check Use Custom Logo Image to add the logo to your console.
-. Click Save.
+. Click +Browse+ in the +Custom Logo Image+ (Shown on top right of all screens) area to go to the location where the logo file is located.
+. Click +Upload+. The icon is displayed above the file name box, and an option is shown to use the logo.
+. Check +Use Custom Logo+ Image to add the logo to your console.
+. Click +Save+.
 
 ====== Customizing the Login Background
 
 To Customize the Login Background:
 
 . Make sure the logo that you want to use is accessible from the computer where you are running the console. The file must be in PNG format with dimensions of 1280 x 1000.
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
-. Click the Custom Logos tab.
-. Click Browse in the Custom Login Background Image area to go to the location where the logo file is located.
+. Click the +Custom Logos+ tab.
+. Click +Browse+ in the +Custom Login Background Image+ area to go to the location where the logo file is located.
 image:2073.png[]
-. Click Upload. The icon is displayed above the file name box, and an option is shown to use the logo.
-. Check Use Custom Login Image to add the logo to your console.
-. Click Save.
+. Click +Upload+. The icon is displayed above the file name box, and an option is shown to use the logo.
+. Check +Use Custom Login Image+ to add the logo to your console.
+. Click +Save+.
 
 ====== Customizing the Login Panel Text
 
 To Customize the Login Panel Text:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
-. Click the Custom Logos tab.
-. In Custom Login Panel Text, type in text that you want to show on the consoles login screen.
+. Click the +Custom Logos+ tab.
+. In +Custom Login Panel Text+, type in text that you want to show on the consoles login screen.
 image:2075.png[]
-. Check Use Custom Login Text box to add the text to the screen.
-. Click Save.
+. Check +Use Custom Login Text+ box to add the text to the screen.
+. Click +Save+.
 
 ===== Advanced Settings
 
@@ -1058,14 +1046,14 @@ Only make manual changes to your configuration files if directed to do so by Red
 
 To Edit Configuration Files Manually:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Zones.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
-. Click the Advanced tab.
-. Select the configuration file to edit from the Configuration File to Edit area.
+. Click the +Advanced+ tab.
+. Select the configuration file to edit from the +Configuration File to Edit+ area.
 . Make the required changes.
-. Click Save.
+. Click +Save+.
 
 
 ====== Configuration Parameters
@@ -1498,75 +1486,85 @@ From the Schedules area in Settings you can schedule the analyses of virtual mac
 
 To Schedule a SmartState Analysis or Compliance Check:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Schedules.
-. Click image:1847.png[](Configuration), and image:plus_green.png[](Add a new Schedule).
-. In the Basic Information area, type in a Name and Description for the schedule.
-. Select Active to enable this scan.
-. From the Action list, select the type of analysis to schedule. Based on the type of analysis you choose, you are presented with one of the following group boxes.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Schedules+.
+. Click image:1847.png[](+Configuration+), and image:plus_green.png[](+Add a new Schedule+).
+. In the +Basic Information+ area, type in a +Name+ and +Description+ for the schedule.
+. Select +Active+ to enable this scan.
+. From the +Action+ list, select the type of analysis to schedule. Based on the type of analysis you choose, you are presented with one of the following group boxes.
 image:2079.png[]
-* VM Analysis:: Displays VM Selection where you can choose to analyze All VMs, All VMs for Provider, All VMs for Cluster, All VMs for Host, A single VM, or Global Filters.
-* Template Analysis:: Displays Template Selection where you can choose to analyze All Templates, All Templates for Provider, All Templates for Cluster, All Templates for Host, A single Template, or Global Filters.
-* Host Analysis: Displays Host Selection where you can choose to analyze All Hosts, All Hosts for Provider, A single Host, or Global Filters.
-+
+* +VM Analysis+:: Displays +VM Selection+ where you can choose to analyze +All VMs+, +All VMs for Provider+, +All VMs for Cluster+, +All VMs for Host+, +A single VM+, or +Global Filters+.
+* +Template Analysis+:: Displays +Template Selection+ where you can choose to analyze +All Templates+, +All Templates for Provider+, +All Templates for Cluster+, +All Templates for Host+, +A single Template+, or +Global Filters+.
+* +Host Analysis+: Displays +Host Selection+ where you can choose to analyze +All Hosts+, +All Hosts for Provider+, +A single Host+, or +Global Filters+.
 [NOTE]
 ==============
 You can only schedule host analyses for connected virtual machines, not repository virtual machines that were discovered through that host.
 Since repository virtual machines do not retain a relationship with the host that discovered them, there is no current way to scan them through the scheduling feature.
 The host is shown because it may have connected virtual machines in the future when the schedule is set to run.
 ==============
-+
-* Cluster / Deployment Role Analysis:: Displays Cluster Selection where you can choose to analyze All Clusters, All Clusters for Provider, or A single Cluster.
-* Datastore Analysis:: Displays Datastore Selection where you can choose to analyze All Datastores, All Datastores for Host, All Datastores for Provider, A single Datastore, or Global Filters.
-* VM Compliance Check:: Displays VM Selection where you can choose to analyze All VMs, All VMs for Provider, All VMs for Cluster, All VMs for Host, A single VM, or Global Filters.
-* Host Compliance Check: Displays Host Selection where you can choose to analyze All Hosts, All Hosts for Provider, All Hosts for Cluster, A single Host, or Global Filters.
-. By applying Global Filters within any of the above items, you can designate which virtual machines or hosts to analyze.
-. In the Timer area, click the Run list to set the frequency of the analysis to run. There are further options based on which Run option you choose.
+* +Cluster / Deployment Role Analysis+:: Displays +Cluster Selection+ where you can choose to analyze +All Clusters+, +All Clusters for Provider+, or +A single Cluster+.
+* +Datastore Analysis+:: Displays +Datastore Selection+ where you can choose to analyze +All Datastores+, +All Datastores for Host+, +All Datastores for Provider+, +A single Datastore+, or +Global Filters+.
+* +VM Compliance Check+:: Displays +VM Selection+ where you can choose to analyze +All VMs+, +All VMs for Provider+, +All VMs for Cluster+, +All VMs for Host+, +A single VM+, or +Global Filters+.
+* Host Compliance Check: Displays +Host Selection+ where you can choose to analyze +All Hosts+, +All Hosts for Provider+, +All Hosts for Cluster+, +A single Host+, or +Global Filters+.
+. By applying +Global Filters+ within any of the above items, you can designate which virtual machines or hosts to analyze.
+. In the +Timer area+, click the +Run list+ to set the frequency of the analysis to run. There are further options based on which Run option you choose.
 image:2080.png[]
-* Click Once to have the analysis run only one time.
-* Click Daily to run the analysis on a daily basis. You will be prompted to select the number of days between each analysis.
-* Click Hourly to run the analysis hourly. You will be prompted to select the number of hours between each analysis.
-. Select a Time Zone. Note that if you change the Time Zone, you will need to reset the stating date and time.
-. Type or select a date to begin the schedule in Starting Date.
-. Select a Starting Time based on a 24 hour clock in the selected Time Zone.
-. Click Add.
+* Click +Once+ to have the analysis run only one time.
+* Click +Daily+ to run the analysis on a daily basis. You will be prompted to select the number of days between each analysis.
+* Click +Hourly+ to run the analysis hourly. You will be prompted to select the number of hours between each analysis.
+. Select a +Time Zone+. 
++
+[NOTE]
+==============
+If you change the Time Zone, you will need to reset the stating date and time.
+==============
++
+. Type or select a date to begin the schedule in +Starting Date+.
+. Select a +Starting Time+ based on a 24 hour clock in the selected Time Zone.
+. Click +Add+.
 
 
 ===== Scheduling a Database Backup
 
 To Schedule a Database Backup:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Schedules.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[](Add a new Schedule).
-. In the Basic Information area, type in a Name and Description for the schedule.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Schedules+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[](+Add a new Schedule+).
+. In the +Basic Information+ area, type in a +Name+ and +Description+ for the schedule.
 image:2082.png[]
-. Select Active to enable this backup schedule.
-. From the Action list, select Database backup.
-. In the Database Backup Settings area, select a type of server to put the backups. You can either use Network File System or Samba.
+. Select +Active+ to enable this backup schedule.
+. From the +Action+ list, select +Database backup+.
+. In the +Database Backup Settings+ area, select a type of server to put the backups. You can either use +Network File System+ or +Samba+.
 image:2108.png[]
-* If selecting Samba, enter the URI, User ID, and a valid Password. Then, click Validate to check the settings.
-* If you choose Network File System, enter the URI.
-. In the Timer area, click the Run list to specify how often to run the analysis. Your options after that depend on the Run option you choose.
+* If selecting +Samba+, enter the +URI+, +User ID+, and a valid +Password+. Then, click +Validate+ to check the settings.
+* If you choose +Network File System+, enter the +URI+.
+. In the +Timer+ area, click the +Run+ list to specify how often to run the analysis. Your options after that depend on the +Run+ option you choose.
 image:2110.png[]
-* Click Once to have the backup run only one time.
-* Click Daily to run the backup on a daily basis. You will be prompted to select the number of days between each analysis.
-* Click Hourly to run the backup hourly. You will be prompted to select the number of hours between each analysis.
-. Select a Time Zone. Note that if you change the Time Zone, you will need to reset the stating date and time.
-. Type or select a date to begin the schedule in Starting Date.
-. Select a Starting Time (UTC) based on a 24 hour clock in the selected time zone.
-. Click Add.
+* Click +Once+ to have the backup run only one time.
+* Click +Daily+ to run the backup on a daily basis. You will be prompted to select the number of days between each analysis.
+* Click +Hourly+ to run the backup hourly. You will be prompted to select the number of hours between each analysis.
+. Select a +Time Zone+. 
++
+[NOTE]
+==============
+If you change the Time Zone, you will need to reset the stating date and time.
+==============
++
+. Type or select a date to begin the schedule in +Starting Date+.
+. Select a +Starting Time+ (UTC) based on a 24 hour clock in the selected time zone.
+. Click +Add+.
 
 ====== Modifying a Schedule
 
 To Modify a Schedule:
 
-. Navigate to Configure → Configuration.
-. Click on the Settings accordion, then click Schedules.
+. Navigate to +Configure → Configuration+.
+. Click on the +Settings+ accordion, then click +Schedules+.
 . Click the schedule that you want to edit.
-. Click image:1847.png[] (Configuration), and then click image:1851.png[] (Edit this Schedule).
+. Click image:1847.png[] (+Configuration+), and then click image:1851.png[] (+Edit this Schedule+).
 . Make the required changes.
-. Click Save.
+. Click +Save+.
 
 === Access Control
 
@@ -1576,62 +1574,62 @@ From navigating to Configure → Configuration, then clicking on the Access Cont
 
 To Create a Tenant:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Tenants.
-. Click on the top-level Tenant, click image:1847.png[] (Configuration), and image:plus_green.png[] (Add child Tenant to this Tenant) to create a Tenant.
-. Enter a name for the Tenant in the Name field.
-. Enter a description for the Tenant in the Description field.
-. Click Add.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Tenants+.
+. Click on the top-level +Tenant+, click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add child Tenant to this Tenant+) to create a Tenant.
+. Enter a name for the Tenant in the +Name+ field.
+. Enter a description for the Tenant in the +Description+ field.
+. Click +Add+.
 
 ==== Creating a Project
 
 To Create a Project:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Tenants.
-. Click on the Tenant where you want to add a Project, click image:1847.png[] (Configuration), and image:plus_green.png[] (Add Project to this Tenant) to create a Project.
-. Enter a name for the Project in the Name field.
-. Enter a description for the Project in the Description field.
-. Click Add.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Tenants+.
+. Click on the +Tenant+ where you want to add a +Project+, click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add Project to this Tenant+) to create a Project.
+. Enter a name for the Project in the +Name+ field.
+. Enter a description for the Project in the +Description+ field.
+. Click +Add+.
 
 ==== Creating a Project Quota
 
 To Create a Project Quota:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Tenants.
-. Click on the Project where you want to add a Quota, click image:1847.png[] (Configuration), and image:plus_green.png[] (Manage Quotas) to create a Quota.
-. In the list of pre-built Quotas, mark the _Enforced_ checkbox next to the Quota item you want to enable.
-. In the Value field, enter the contstraints you want to apply to the Quota.
-. Click Save.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Tenants+.
+. Click on the +Project+ where you want to add a Quota, click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Manage Quotas+) to create a Quota.
+. In the list of pre-built Quotas, mark +the _Enforced_ checkbox+ next to the Quota item you want to enable.
+. In the +Value+ field, enter the contstraints you want to apply to the Quota.
+. Click +Save+.
 
 
 ==== Tagging Tenants and Projects
 To tag Tenants and Projects:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Tenants.
-. In the Tenant or Project entry, click the _Policy_ drop-down menu, and select _Edit 'My Company' Tags for this Tenant_.
-. In the _Tag Assignment_ table, click _Select a customer tag to assign_, and select a tag from the list. In the next column, set a corresponding value.
-. Click Save.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Tenants+.
+. In the +Tenant or Project entry+, click +the _Policy_+ drop-down menu, and select +_Edit 'My Company' Tags for this Tenant_+.
+. In the +_Tag Assignment_+ table, click +_Select a customer tag to assign_+, and select a tag from the list. In the next column, set a corresponding value.
+. Click +Save+.
 
 
 ==== Creating a User
 
 To Create a User:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Users.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Users+.
 image:1847.png[]
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new User) to create a user.
-. Type in a Full Name, Username, Password with confirmation, Email Address, and choose a Group for the user.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add a new User+) to create a user.
+. Type in a +Full Name+, +Username+, +Password+ with confirmation, +Email Address+, and choose a +Group+ for the user.
 image:2086.png[]
 [NOTE]
 ===============
-If you are using LDAP, but did not enable Get User Groups from LDAP in your server's Authentication tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service.
-Use all lowercase to be sure that the user can be found in the VMDB. For example, jdunn@acme.com when using User Principal Name, cn=Jack Dunn,ou=users,dc=acme,dc=com when using Distinguished Name (CN=<user>), or uid=JackDunn,ou=users,dc=acme,dc=com when using Distinguished Name (UID=<user>).
-Then, when logging in, the user would type either jdunn for User Principal Name or Jack Dunn for Distinguished Name. If the user is not defined in the VMDB, they will be denied access to CloudForms Management Engine. The password field will not be used.
-When the user logs in they should use their LDAP password.
+* If you are using LDAP, but did not enable Get User Groups from LDAP in your server's Authentication tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service.
+* Use all lowercase to be sure that the user can be found in the VMDB. For example, jdunn@acme.com when using User Principal Name, cn=Jack Dunn,ou=users,dc=acme,dc=com when using Distinguished Name (CN=<user>), or uid=JackDunn,ou=users,dc=acme,dc=com when using Distinguished Name (UID=<user>).
+* Then, when logging in, the user would type either jdunn for User Principal Name or Jack Dunn for Distinguished Name. If the user is not defined in the VMDB, they will be denied access to CloudForms Management Engine. The password field will not be used.
+* When the user logs in they should use their LDAP password.
 ===============
 . Select a Group.
 . Click Add.
@@ -1642,10 +1640,10 @@ For security reasons, delete any user that no longer needs access to the informa
 
 To Delete a User:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Users.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Users+.
 . Select the user you want to delete.
-. Click image:1847.png[] (Configuration), and image:gui_delete.png[] (Delete selected Users) to delete a user.
+. Click image:1847.png[] (+Configuration+), and image:gui_delete.png[] (+Delete selected Users+) to delete a user.
 
 ==== Groups
 
@@ -1656,21 +1654,21 @@ For a list of what each pre-defined account role can do, see Section "Roles”.
 
 To Create a User Group:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Groups.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Group) to create a group.
-. Enter a name for the group in the Description field. To ensure compatibility with tags, use underscores in place of spaces. For example, Red Hat CloudForms-test_group.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Groups+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add a new Group+) to create a group.
+. Enter a name for the group in the +Description+ field. To ensure compatibility with tags, use underscores in place of spaces. For example, Red Hat CloudForms-test_group.
 . Select a role to map to this group.
-. Select the Tenant/Project this group must belong to.
-. Select any filters that you want applied to what this group can view in the Assign Filters area.
+. Select the +Tenant+/+Project+ this group must belong to.
+. Select any filters that you want applied to what this group can view in the +Assign Filters+ area.
 . Check the boxes for the filters you want applied to this user. The items that have changed will show in a bold, blue font.
-. Click the Host & Clusters tab.
+. Click the +Host & Clusters+ tab.
 . Check the boxes for the host and clusters that you want to limit this user to. The items that have changed will show in a bold, blue font.
 image:2088.png[]
-. Click the VMs & Templates tab. This shows folders that you have created in your virtual infrastructure.
+. Click the +VMs & Templates+ tab. This shows folders that you have created in your virtual infrastructure.
 . Check the boxes for the folders that you want to limit this user to. The items that have changed will show in a bold, blue font.
 image:2089.png[]
-. Click Add.
+. Click +Add+.
 
 ==== LDAP Groups
 
@@ -1709,30 +1707,30 @@ This group must be in the LDAP directory source you specified for the Server. Se
 |=======================================================================
 
 . Make each user of your directory service that you want to have access to CloudForms Management Engine a member of one of these groups.
-. Navigate to Configure → Configuration, then click on the Settings accordion, then Zones, then the Authentication tab, you can enable Get User Groups from LDAP after typing in all of the required settings. See Section “LDAP Settings”.
+. Navigate to +Configure → Configuration+, then click on the +Settings+ accordion, then +Zones+, then the +Authentication+ tab, you can enable +Get User Groups from LDAP+ after typing in all of the required settings. See Section +LDAP Settings+.
 
 ==== Using Pre-existing LDAP Groups to Assign Account Roles
 
 To Use Pre-existing LDAP Groups to Assign Account Roles:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Groups.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Group) to create a group.
-. Enter a description for the group in the Description field.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Groups+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add a new Group+) to create a group.
+. Enter a description for the group in the +Description+ field.
 . There are two ways to specify the group to use:
-* Type in the cn for the group in LDAP Group. This group must be in the LDAP directory source you specified under Operations-Server.
+* Type in the +cn+ for the group in +LDAP Group+. This group must be in the LDAP directory source you specified under Operations-Server.
 image:2090.png[]
-* Select Look Up LDAP Groups to find a list of groups, then use the drop down list that appears in the LDAP Group Information area to choose a group.
+* Select +Look Up LDAP Groups+ to find a list of groups, then use the drop down list that appears in the +LDAP Group Information+ area to choose a group.
 image:2091.png[]
-. Select a Role to map to the group.
-. Select any filters to apply to what this group can view in the Assign Filters area:
+. Select a +Role+ to map to the group.
+. Select any +filters+ to apply to what this group can view in the +Assign Filters+ area:
 .. Select the filters to apply to the user. The items that have changed show in a bold, blue font.
-.. Click the Host & Clusters tab.
+.. Click the +Host & Clusters+ tab.
 .. Select the host and clusters to limit the user to. The items that have changed show in a bold, blue font.
 image:2093.png[]
-.. Click the VMs & Templates tab. This shows folders that you have created in your virtual infrastructure.
+.. Click the +VMs & Templates+ tab. This shows folders that you have created in your virtual infrastructure.
 .. Select the folders to limit the user to. The items that have changed show in a bold, blue font.
-. Click Add.
+. Click +Add+.
 
 ==== Roles
 
@@ -1769,55 +1767,48 @@ If you have enabled Get Role from LDAP under LDAP Settings, then the role is det
 
 To Create a Role:
 
-. Navigate to Configure → Configuration.
-. Click on the Access Control accordion, then click Roles.
+. Navigate to +Configure → Configuration+.
+. Click on the +Access Control+ accordion, then click +Roles+.
 . Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Role).
-. In the Role Information area, type a name for the new role. For VM & Template Access Restriction, select if you want to limit users with this role to only see virtual machines specifically used by the user, by the user or its group, or all virtual machines.
+. In the +Role Information+ area, type a name for the new role. For +VM & Template Access Restriction+, select if you want to limit users with this role to only see virtual machines specifically used by the user, by the user or its group, or all virtual machines.
 image:2095.png[]
-. Under Product Features (Editing), navigate to the appropriate feature and enable or disable it.
+. Under +Product Features+ (Editing), navigate to the appropriate feature and enable or disable it.
 image:2096.png[]
-. Click Add.
+. Click +Add+.
 
 === Diagnostics
 
-From navigating to Configure → Configuration, then clicking on the Diagnostics tab, you can also see the status of the different CloudForms Management Engine roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information.
+From navigating to +Configure → Configuration+, then clicking on the +Diagnostics+ tab, you can also see the status of the different CloudForms Management Engine roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information.
 The Diagnostics area is designed in a hierarchy.
 
-* At the region level, you can see replication status, backup the VMDB, and run garbage collection on the VMDB.
-* At the zone level, you can see CloudForms Management Engine roles by servers and servers by roles. In addition, you can set log collection values for a specific zone, and collect gap data for capacity and utilization.
-* At the server level, you can see the workers for each server, set log collection values for a specific server, and view current logs.
+* At the +region+ level, you can see replication status, backup the VMDB, and run garbage collection on the VMDB.
+* At the +zone+ level, you can see CloudForms Management Engine roles by servers and servers by roles. In addition, you can set log collection values for a specific zone, and collect gap data for capacity and utilization.
+* At the +server+ level, you can see the workers for each server, set log collection values for a specific server, and view current logs.
 
 ==== Region Diagnostics
 
-Using the console, you can set the priority of server regional roles,
-review and reset replication, and create backups of your database either
-on demand or on a schedule.
+Using the console, you can set the priority of server regional roles, review and reset replication, and create backups of your database either on demand or on a schedule.
 
-Regions are used primarily to consolidate multiple VMDBs into one master
-VMDB for reporting while zones are used to define functional groups of
-servers. There can be only one region per VMDB, but multiple zones per
-region (or VMDB). Some server roles are aware of each other across
-CloudForms Management Engine Appliances at the region level. This means
-that redundancy and failover rules apply at the region level. You can
+Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across CloudForms Management Engine Appliances at the region level. This means that redundancy and failover rules apply at the region level. You can
 also set priorities for the server roles that provide failover.
 
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
 * Only server roles that support failover can be marked as primary. These roles only allow one server to be active at a time.
-These are Notifier, Capacity & Utilization Coordinator, Database Synchronization, Event Monitor, Scheduler, Storage Inventory, and Provider Inventory.
+These are +Notifier+, +Capacity & Utilization Coordinator+, +Database Synchronization+, +Event Monitor+, +Scheduler+, +Storage Inventory+, and +Provider Inventory+.
 
 * All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
 
 There are three role priorities.
 
-* Primary: There can only be one primary per zone or region per role. When an appliance is started, the system looks to see if any role is set to primary.
+* +Primary+: There can only be one primary per zone or region per role. When an appliance is started, the system looks to see if any role is set to primary.
 If that is the case, the role is activated on that appliance and deactivated from the secondary. In the console, primary roles are shown in bold letters.
 The text turns red if the server goes down. You must actively set the primary priority.
 
-* Secondary: This is the default priority. There can be multiple secondaries. When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role.
+* +Secondary+: This is the default priority. There can be multiple secondaries. When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role.
 In the console, secondary roles are displayed normally with the word "secondary".
 
-* Tertiary: If all appliances with primary roles or secondary roles were down, one of the tertiary would be activated.
+* +Tertiary+: If all appliances with primary roles or secondary roles were down, one of the tertiary would be activated.
 The reason for tertiary is to ensure that if a server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities.
 Tertiary roles simply show as active in the console.
 
@@ -1842,62 +1833,52 @@ Tertiary roles simply show as active in the console.
 
 To Set the Priority of a Failover Role:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
-. Depending on how you want to view your servers, click either the Roles by Servers tab or the Servers by Roles tab.
-. In the Status of Roles for Servers in Zone Default Zone area, click on the role that you want to set the priority for.
-. Click image:1847.png[] (Configuration), and image:2097.png[] (Promote Server) to make this the primary server for this role.
-. Click image:1847.png[] (Configuration), and image:2098.png[] (Demote Server) to demote the priority of this server for this role.
-
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
+. Depending on how you want to view your servers, click either the +Roles by Servers+ tab or the +Servers by Roles+ tab.
+. In the +Status+ of +Roles for Servers+ in +Zone Default Zone+ area, click on the role that you want to set the priority for.
+. Click image:1847.png[] (+Configuration+), and image:2097.png[] (+Promote Server+) to make this the primary server for this role.
+. Click image:1847.png[] (+Configuration+), and image:2098.png[] (+Demote Server+) to demote the priority of this server for this role.
 
 ==== Replication
 
-You must be on the server where replication has been set up to monitor
-status. To run backups, the database operations server role must be
-enabled. Databases can then be restored using the black console on the
-CloudForms Management Engine Appliance. These features are available only
-when using the internal PostgreSQL VMDB.
+You must be on the server where replication has been set up to monitor status. To run backups, the database operations server role must be enabled. Databases can then be restored using the black console on the CloudForms Management Engine Appliance. These features are available only when using the internal PostgreSQL VMDB.
 
 ===== Monitoring Database Replication
 
 To Monitor Database Replication:
 
-. Navigate to Configure → Configuration.
-. Click the Diagnostics accordion and click the Region being replicated.
-. Click the Replication tab to view the status of the replication process and the backlog of database records queued for replication.
+. Navigate to +Configure → Configuration+.
+. Click the +Diagnostics+ accordion and click the +Region+ being replicated.
+. Click the +Replication+ tab to view the status of the replication process and the backlog of database records queued for replication.
 
-If directed to by Red Hat, you may need to reset replication. Do this
-from the server that is replicating up to a higher level VMDB. When you
-do this, the subordinate regions data is removed from the top level, and
-then the replication is restarted.
+If directed to by Red Hat, you may need to reset replication. Do this from the server that is replicating up to a higher level VMDB. When you do this, the subordinate regions data is removed from the top level, and then the replication is restarted.
 
 ===== Resetting Replication
 
 To Reset Replication:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click Region name.
-. Click the Replication tab.
-. Click Reset.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click Region name.
+. Click the +Replication+ tab.
+. Click +Reset+.
 
 ===== Running a Single Backup
 
 To Run a Single Backup:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click Region name.
-. Click the Database tab.
-. If you have created a backup schedule, and want to use the same depot settings, select it under Backup Schedules.
-. If you do not want to use the settings from a backup schedule, or need to create settings, go into the Database Backup Settings area.
-. Select a type of server to put the backups. You can either use Network File System or Samba.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click Region name.
+. Click the +Database+ tab.
+. If you have created a backup schedule, and want to use the same depot settings, select it under +Backup Schedules+.
+. If you do not want to use the settings from a backup schedule, or need to create settings, go into the +Database Backup Settings+ area.
+. Select a type of server to put the backups. You can either use +Network File System+ or +Samba+.
 image:2099.png[]
-* If selecting Samba, enter the URI, User ID, a Password, and a Verify Password. Click Validate to check the settings.
-* If you choose Network File System, enter the URI.
-. Click Submit.
+* If selecting +Samba+, enter the +URI+, +User ID+, a +Password+, and a +Verify Password+. Click +Validate+ to check the settings.
+* If you choose +Network File System+, enter the +URI+.
+. Click +Submit+.
 
-Result: The database backup is run immediately. You can see the task by
-navigating to Configure → Tasks, then clicking on the All Other Tasks
-tab.
+Result: The database backup is run immediately. You can see the task by navigating to +Configure → Tasks+, then clicking on the +All Other Tasks+ tab.
 
 ===== Restoring a Database from Backup
 
@@ -1909,49 +1890,35 @@ To Restore a Database from Backup:
 . Press the number 6 to select Restore Database From Backup.
 . Press Y to confirm.
 
-Result: If directed by Red Hat, you can run database garbage collection
-to reclaim unused space in your VMDB. Generally, the database server does
-this automatically.
+Result: If directed by Red Hat, you can run database garbage collection to reclaim unused space in your VMDB. Generally, the database server does this automatically.
 
 
 ==== Zone Diagnostics
 
-The console provides a way to see all the server roles that a server has
-been assigned and if these roles are running. This is especially helpful
-when you have multiple servers with different server roles. For each zone
-you can also set a central place for all logs to be collected, and
-collect capacity and utilization data that may be missing.
+The console provides a way to see all the server roles that a server has been assigned and if these roles are running. This is especially helpful when you have multiple servers with different server roles. For each zone you can also set a central place for all logs to be collected, and collect capacity and utilization data that may be missing.
 
 ===== Viewing the Status of Server Roles
 
 To View the Status of Server Roles:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
-. Depending on how you want to view your servers, click either Roles by Servers or the Servers by Roles.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
+. Depending on how you want to view your servers, click either +Roles by Servers+ or the +Servers by Roles+.
 
 ===== Setting Server Role Priorities
 
-If you have multiple servers in your environment with duplicate failover
-roles, then you can set the priority of the server role.
+If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
-* Only server roles that support failover can be marked as primary. These are Notifier, Capacity & Utilization Coordinator, Database Synchronization, Event Monitor, Scheduler, Storage Inventory, and Provider Inventory.
+* Only server roles that support failover can be marked as primary. These are +Notifier+, +Capacity & Utilization Coordinator+, +Database Synchronization+, +Event Monitor+, +Scheduler+, +Storage Inventory+, and +Provider Inventory+.
 * All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
 
 There are three role priorities.
 
-* Primary: There can only be one primary per zone per role. When an
-appliance is started, the system looks to see if any role is set to primary.
-If that is the case, the role is activated on that appliance and deactivated from the secondary.
-In the console, primary roles are shown in bold letters. The text turns red if the server goes down.
+* +Primary+: There can only be one primary per zone per role. When an appliance is started, the system looks to see if any role is set to primary. If that is the case, the role is activated on that appliance and deactivated from the secondary. In the console, primary roles are shown in bold letters. The text turns red if the server goes down.
 
-* Secondary: This is the default priority. There can be multiple secondaries.
-When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role.
-In the console, secondary roles are displayed normally with the word "secondary".
+* +Secondary+: This is the default priority. There can be multiple secondaries. When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role. In the console, secondary roles are displayed normally with the word "secondary".
 
-* Tertiary: If all appliances with primary roles or secondary roles are down, one of the tertiary would be activated.
-The reason for tertiary is to ensure that if a Server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities.
-Tertiary roles simply show as active in the console.
+* +Tertiary+: If all appliances with primary roles or secondary roles are down, one of the tertiary would be activated. The reason for tertiary is to ensure that if a Server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities. Tertiary roles simply show as active in the console.
 
 ===== Zone Aware Server Roles
 
@@ -1981,29 +1948,27 @@ Tertiary roles simply show as active in the console.
 
 To Set the Priority of a Failover Role:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
-. Depending on how you want to view your servers, click either the Roles by Servers tab or the Servers by Roles tab.
-. From the Status of Roles for Servers in Zone Default Zone area, click on the role that you want to set the priority for.
-. Click image:2097.png[] (Promote Server to primary for this role) to make this the primary Server for this role.
-. Click image:2098.png[] (Demote Server to normal for this role) to demote the priority of this Server for this role.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
+. Depending on how you want to view your servers, click either the +Roles by Servers+ tab or the +Servers by Roles+ tab.
+. From the +Status of Roles+ for +Servers+ in +Zone Default Zone+ area, click on the role that you want to set the priority for.
+. Click image:2097.png[] (+Promote Server to primary for this role+) to make this the primary Server for this role.
+. Click image:2098.png[] (+Demote Server to normal for this role+) to demote the priority of this Server for this role.
 
 ====== Removing an Inactive Server
 
 To Remove an Inactive Server:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Click on the name of the server in the tree view.
-. Click image:gui_delete.png[] (Delete Server). This button is available only if the server is inactive.
+. Click image:gui_delete.png[] (+Delete Server+). This button is available only if the server is inactive.
 
 ===== Zone Log Collections
 
 Zone Log Collection Settings
 
-If you have multiple servers reporting to one central VMDB, then you can
-collect the configuration files and logs from the console of any of the
-servers. While you can set this either at the zone or server level,
+If you have multiple servers reporting to one central VMDB, then you can collect the configuration files and logs from the console of any of the servers. While you can set this either at the zone or server level,
 settings at the server level supersede the ones at the zone level.
 
 Log Depot Options
@@ -2025,110 +1990,100 @@ will also need a user that has write access to that location.
 
 To Set the Location of the Log Depot:
 
-. Navigate to Configure → Configuration.
-. Click the Diagnostics accordion, then click the Zone that you want to view.
-. Click Collect Logs.
-. Click image:1851.png[](Edit the Log Depot Settings for the selected Zone).
-. Select the Type of share.
+. Navigate to +Configure → Configuration+.
+. Click the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
+. Click +Collect Logs+.
+. Click image:1851.png[](+Edit the Log Depot Settings for the selected Zone+).
+. Select the +Type+ of share.
 image:1851.png[]
-. Using the fully qualified domain name (FQDN) of the depot server, type in the appropriate settings for the URI.
+. Using the fully qualified domain name (+FQDN+) of the depot server, type in the appropriate settings for the +URI+.
 image:6254.png[]
-. If required, enter your user ID and password then click Validate to confirm the settings.
-. Click Save.
+. If required, enter your user +ID+ and +password+ then click +Validate+ to confirm the settings.
+. Click +Save+.
 
 ====== Collecting and Downloading Logs from All Servers in a Zone
 
 To Collect and Download Logs from all Servers in a Zone:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
-. Click the Collect Logs tab.
-. Click image:2104.png[](Collect logs). All files in the logs directory as well as configuration files are collected.
-. Click OK. The status of the log retrieval shows in the CloudForms Management Engine console.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
+. Click the +Collect Logs+ tab.
+. Click image:2104.png[](+Collect logs+). All files in the logs directory as well as configuration files are collected.
+. Click +OK+. The status of the log retrieval shows in the CloudForms Management Engine console.
 
 ===== Capacity and Utilization Repair
 
-Under certain circumstances, it is possible that CloudForms Management
-Engine is not able to collect capacity and utilization data. This could
-be due to password expiration, a change in rights to the cloud provider
-and this change didn't provide enough granularity to the CloudForms
-Management Engine service account, or network connectivity. The gap data
-is collected directly by extracting the monthly performance data. Gap
-collection need to be completed for each zone individually. Therefore,
-the procedure below need to be repeated for each zone.
+Under certain circumstances, it is possible that CloudForms Management Engine is not able to collect capacity and utilization data. This could be due to password expiration, a change in rights to the cloud provider and this change didn't provide enough granularity to the CloudForms Management Engine service account, or network connectivity. The gap data is collected directly by extracting the monthly performance data. Gap collection need to be completed for each zone individually. Therefore, the procedure below need to be repeated for each zone.
 
 ====== Repairing Capacity and Utilization Data
 
 To Repair Capacity and Utilization Data
 
 . Login to a CloudForms Management Engine Appliance located in the zone for which you want to gather the data.
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
-. Click C & U Gap Collection.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
+. Click +C & U Gap Collection+.
 image:2101.png[]
-* Select the appropriate Timezone.
-* Do not select more than one week unless instructed to do so by Red Hat Support.
-* Select a Start Date.
-* Select an End Date.
-. Click Submit.
+* Select the appropriate +Timezone+.
+[NOTE]
+=========
+Do not select more than one week unless instructed to do so by Red Hat Support.
+=========
+* Select a +Start Date+.
+* Select an +End Date+.
+. Click +Submit+.
 
-Result:: After the gap collection has completed for this zone, repeat
-these same steps for the next zone. You can check for completion by going
-to the clusters page and checking for the capacity and utilization data
-for the time period specified.
+Result:: After the gap collection has completed for this zone, repeat these same steps for the next zone. You can check for completion by going to the clusters page and checking for the capacity and utilization data for the time period specified.
 
 
 ==== Server Diagnostics
 
-Under Diagnostics for a server, you can view the status of CloudForms
-Management Engine workers running on the server, set log collection
-setting for only that server, and view the server's current CloudForms
+Under Diagnostics for a server, you can view the status of CloudForms Management Engine workers running on the server, set log collection setting for only that server, and view the server's current CloudForms
 Management Engine and audit logs.
 
 ===== Workers
 
-The Workers tab enables you to see the status of and restart CloudForms
-Management Engine Workers.
+The Workers tab enables you to see the status of and restart CloudForms Management Engine Workers.
 
 You can see additional information on and restart the following items.
 
-* C & U Metrics Collectors that collects capacity and utilization data.
-* C & U Metrics Processors, which processes the collected capacity and utilization data.
-* Database Replication Worker that is responsible for maintaining replication activities.
-* Event Handlers put events from the Event Monitor into the VMDB and starts CloudForms Management Engine processes if needed base on that information.
-* Event Monitors that communicate with the external cloud provider to deliver up to date event information.
-* Generic Workers that perform long running and priority processes.
-* Priority Workers that perform high priority, short processes.
-* Schedule Workers that maintains any items that run on a schedule.
-* Session Broker that maintains a single connection to the cloud providers .
-* Refresh Workers that runs the refresh processes.
-* Reporting Workers that generate reports.
-* SmartProxy Workers that run SmartState Analyses on virtual machine.
-* User Interface Worker that allows users access to the console.
-* Web Services Worker that maintains CloudForms Management Engine Web services.
-* VM Analysis Collectors that run and process SmartState Analyses on virtual machines.
+* +C & U Metrics Collectors+ that collects capacity and utilization data.
+* +C & U Metrics Processors+, which processes the collected capacity and utilization data.
+* +Database Replication Worker+ that is responsible for maintaining replication activities.
+* +Event Handlers+ put events from the Event Monitor into the VMDB and starts CloudForms Management Engine processes if needed base on that information.
+* +Event Monitors+ that communicate with the external cloud provider to deliver up to date event information.
+* +Generic Workers+ that perform long running and priority processes.
+* +Priority Workers+ that perform high priority, short processes.
+* +Schedule Workers+ that maintains any items that run on a schedule.
+* +Session Broker+ that maintains a single connection to the cloud providers .
+* +Refresh Workers+ that runs the refresh processes.
+* +Reporting Workers+ that generate reports.
+* +SmartProxy Workers+ that run SmartState Analyses on virtual machine.
+* +User Interface Worker+ that allows users access to the console.
+* +Web Services Worker+ that maintains CloudForms Management Engine Web services.
+* +VM Analysis Collectors+ that run and process SmartState Analyses on virtual machines.
 
 ====== Reloading Worker Display
 
 To Reload Worker Display:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click the Workers tab.
-. Click image:2106.png[] (Refresh Current Workers display).
+. Click the +Workers+ tab.
+. Click image:2106.png[] (+Refresh Current Workers display+).
 
 ====== Restarting a CloudForms Management Engine Worker
 
 To Restart a CloudForms Management Engine Worker:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click on the Workers tab.
+. Click on the +Workers+ tab.
 . Click on the worker you want to restart.
-. Click image:2102.png[] (Restart selected worker).
-. Click OK.
+. Click image:2102.png[] (+Restart selected worker+).
+. Click +OK+.
 
 ===== Server and Audit Logs
 
@@ -2154,68 +2109,63 @@ server level supersede the ones at the zone level.
 
 To Set the Location of the Log Depot for a Specific Server
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to collect logs for.
-. Click on the Collect Logs tab.
-. Click image:1851.png[] (Edit Log Depot Settings for the selected Server).
-. Select the Type of share.
+. Click on the +Collect Logs+ tab.
+. Click image:1851.png[] (+Edit Log Depot Settings for the selected Server+).
+. Select the +Type+ of share.
 image:6254.png[]
-. Using the fully qualified domain name (FQDN) of the depot server, type in the appropriate settings for the URI.
+. Using the fully qualified domain name (+FQDN+) of the depot server, type in the appropriate settings for the +URI+.
 image:6259.png[]
-. Enter your user ID and password, then click Validate to confirm the settings.
-. Click Save.
+. Enter your user ID and password, then click +Validate+ to confirm the settings.
+. Click +Save+.
 
 ====== Collecting the Current Log Set of a Server
 
 To Collect the Current Log Set of a Server
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to collect logs for.
-. Click on the Collect Logs tab.
-. Click image:2104.png[] (Collect), then click image:2104.png[] (Collect current logs). All current log files in as well as configuration files are collected.
-. Click OK. The status of the log retrieval shows in the CloudForms Management Engine console.
+. Click on the +Collect Logs+ tab.
+. Click image:2104.png[] (+Collect+), then click image:2104.png[] (+Collect current logs+). All current log files in as well as configuration files are collected.
+. Click +OK+. The status of the log retrieval shows in the CloudForms Management Engine console.
 
 ====== Collecting All Log Sets from a Server
 
 To Collect All Log Sets from a Server
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to collect logs for.
-. Click Collect Logs.
-. Click image:2104.png[] (Collect), then click image:2105.png[] (Collect all logs). All files in the logs directory as well as configuration files are collected.
-. Click OK. The status of the log retrieval shows in the CloudForms Management Engine console.
+. Click +Collect Logs+.
+. Click image:2104.png[] (+Collect+), then click image:2105.png[] (+Collect all logs+). All files in the logs directory as well as configuration files are collected.
+. Click +OK+. The status of the log retrieval shows in the CloudForms Management Engine console.
 
 ====== Viewing the Server, Audit, and Production Logs
 
-The server and audit logs roll over daily. The previous logs are stored
-as zipped files in the /var/www/miq/vmdb/log folder. The current logs can
-be easily viewed and downloaded from the Configure → Configuration, then
-click on the Diagnostics accordion.
+The server and audit logs roll over daily. The previous logs are stored as zipped files in the /var/www/miq/vmdb/log folder. The current logs can be easily viewed and downloaded from the +Configure → Configuration+, then click on the +Diagnostics+ accordion.
 
-Use the server log to see all actions taken by the server including
-communication with the SmartProxy and tasks.
+Use the server log to see all actions taken by the server including communication with the SmartProxy and tasks.
 
 ====== Viewing the Server Log
 
 To View the Server Log
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click CFME Log.
+. Click +CFME Log+.
 
-The CloudForms Management Engine server automatically retrieves the last
-1000 lines of the log.
+The CloudForms Management Engine server automatically retrieves the last 1000 lines of the log.
 
 ====== Reloading the Server Log
 
 To Reload the Server Log
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
 . Click CFME Log.
 . Click image:2106.png[] (Reload the Log Display).
@@ -2224,12 +2174,11 @@ To Reload the Server Log
 
 To Download the Server Log
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click CFME Log.
-. Click image:2107.png[] (Download the Entire Log File).
-
+. Click +CFME Log+.
+. Click image:2107.png[] (+Download the Entire Log File+).
 
 [NOTE]
 =========
@@ -2240,10 +2189,10 @@ Use the Audit Log to see changes to the user interface and authentication.
 
 To View the Audit Log:
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click Audit Log.
+. Click +Audit Log+.
 
 Result:: The server automatically retrieves the last 1000 lines of the log.
 
@@ -2251,11 +2200,11 @@ Result:: The server automatically retrieves the last 1000 lines of the log.
 
 To Reload the Audit Log
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click Audit Log.
-. Click image:2106.png[] (Reload the Audit Log Display).
+. Click +Audit Log+.
+. Click image:2106.png[] (+Reload the Audit Log Display+).
 
 ====== Downloading the Audit Log
 
@@ -2273,10 +2222,10 @@ Use the production log to see all actions performed using the console.
 
 To View the Production Log
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click Production Log.
+. Click +Production Log+.
 
 Result:: The CloudForms Management Engine server automatically retrieves the last 1000 lines of the log.
 
@@ -2284,78 +2233,71 @@ Result:: The CloudForms Management Engine server automatically retrieves the las
 
 To Reload the Production Log
 
-. Navigate to Configure → Configuration.
+. Navigate to +Configure → Configuration+.
 . Click on the Diagnostics accordion, then click the Zone that you want to view.
-. Click Production Log.
-. Click the CloudForms Management Engine Log tab.
-. Click image:2106.png[] (Reload the Product Log Display).
+. Click +Production Log+.
+. Click the +CloudForms Management Engine Log+ tab.
+. Click image:2106.png[] (+Reload the Product Log Display+).
 
 ====== Downloading the Production Log
 
 To Download the Production Log
 
-. Navigate to Configure → Configuration.
-. Click on the Diagnostics accordion, then click the Zone that you want to view.
+. Navigate to +Configure → Configuration+.
+. Click on the +Diagnostics+ accordion, then click the +Zone+ that you want to view.
 . Select the server that you want to view.
-. Click Production Log.
-. Click image:2107.png[] (Download the Production Log File).
+. Click +Production Log+.
+. Click image:2107.png[] (+Download the Production Log File+).
 
 
 === Database Operations
 
 ==== Viewing Information on the VMDB
 
-The Database accordion displays a summary of VMDB information, a list of
-all tables and indexes, settings for the tables, active client
-connection, and database utilization.
+The Database accordion displays a summary of VMDB information, a list of all tables and indexes, settings for the tables, active client connection, and database utilization.
 
 To View Information on the VMDB
 
-. Navigate to Configure → Configuration.
-. Click the Database accordion.
-. Click VMDB in the tree view on the left.
+. Navigate to +Configure → Configuration+.
+. Click the +Database+ accordion.
+. Click +VMDB+ in the tree view on the left.
 . Click the appropriate tab to view the desired information:
-* Summary: displays statistics about the database.
-* Tables: displays a clickable list of all the tables.
-* Indexes: displays a clickable list of all the indexes.
-* Settings: displays a list of all tables, their descriptions, and other valuable Information.
-* Client Connections: displays all current connections to the VMDB.
-* Utilization: displays usage charges for the disk and index nodes.
+* +Summary+: displays statistics about the database.
+* +Tables+: displays a clickable list of all the tables.
+* +Indexes+: displays a clickable list of all the indexes.
+* +Settings+: displays a list of all tables, their descriptions, and other valuable Information.
+* +Client Connections+: displays all current connections to the VMDB.
+* +Utilization+: displays usage charges for the disk and index nodes.
 
 
 ==== Database Regions and Replication
 
 ===== Database Regions and Replication
 
-Regions are used to create a central database for reporting and charting.
-Do not use the database at the top level for operational tasks such as
-SmartState Analysis or Capacity and Utilization data collection. Assign
-each server participating in the region a unique number during the
-regionalization process, then set your subordinate regions to replicate
-to the top region.
+Regions are used to create a central database for reporting and charting. Do not use the database at the top level for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. Assign each server participating in the region a unique number during the regionalization process, then set your subordinate regions to replicate to the top region.
 
-Note that the subordinate regions are not aware of each other from a
-database perspective. You cannot see information from one subordinate
-region in another. The only VMDB with visibility to all subordinate
-regions is the top level.
+[NOTE]
+========
+Only enable database synchronization on subordinate servers with replication worker settings already configured. Do not enable more than one Database Synchronization role per region.
+========
+
 
 For diagnostic information on replication, see Section "Monitoring Database Replication”.
 
 The following is an example of regionalized database scenario:
 
-. Create Region Number 99 to which all other VMDBs replicate.
-* Treat this as a read only database for reporting and charting.
-* Enable only the Reporting, Scheduler, and User Interface Server Roles.
-To perform database maintenance items, such as scheduled backups, on the top-level region (master), also enable the Database Operations role.
+. Create +Region Number 99+ to which all other VMDBs replicate.
+* Treat this as a +read only+ database for reporting and charting.
+* Enable only the +Reporting+, +Scheduler+, and +User Interface Server+ Roles.
+To perform database maintenance items, such as scheduled backups, on the top-level region (master), also enable the +Database Operations+ role.
 * No additional settings aside from assigning the region ID. No need to configure any replication.
-. Create Region Number 1
-.. Add replication worker settings pointing to the VMDB for Region 99.
-.. Enable Database Synchronization Server role on one Server in the Region. If you have a second Server in the same region, do not enable the DB Synchronization role.
-Do not enable more than one Database Synchronization Role per Region.
-. Create Region Number 2
-.. Add replication worker settings pointing to the VMDB for Region 99.
-.. Enable Database Synchronization Server role on one Server in the Region. If you have a second Server in the same region, do not enable the DB Synchronization role.
-Do not enable more than one Database Synchronization Role per Region.
+. +Create Region Number 1+
+.. Add replication worker settings pointing to the VMDB for +Region 99+.
+.. Enable +Database Synchronization Server+ role on one +Server+ in the +Region+. If you have a second +Server+ in the same region, do not enable the +DB Synchronization+ role.
+Do not enable more than one +Database Synchronization Role+ per Region.
+. +Create Region Number 2+
+.. Add replication worker settings pointing to the VMDB for +Region 99+.
+.. Enable +Database Synchronization Server+ role on one +Server+ in the +Region. If you have a second +Server+ in the same region, do not enable the +DB Synchronization+ role. Do not enable more than one +Database Synchronization Role+ per Region.
 
 [IMPORTANT]
 ==============
@@ -2368,12 +2310,12 @@ The process of creating a region takes a few minutes. The database is dropped an
 
 To Create a Region:
 
-. Start the appliance and log in to the black appliance console with a user name of admin and the default password. The Appliance Summary Screen displays.
-. Press Enter to manually configure settings.
-. Enter 12 to Stop EVM Server Processes.
-. Enter Y to confirm.
+. Start the appliance and log in to the black appliance console with a user name of admin and the default password. The +Appliance Summary Screen+ displays.
+. Press +Enter+ to manually configure settings.
+. Enter +12+ to Stop EVM Server Processes.
+. Enter +Y+ to confirm.
 . The menu reappears after all processes are complete.
-. Choose Configure Database.
+. Choose +Configure Database+.
 +
 [WARNING]
 ========
@@ -2382,10 +2324,10 @@ Do not use this number when creating a region as duplicating region numbers can 
 ========
 +
 . Enter a database region number that has not been used in your environment. Do not enter duplicate region numbers as this can corrupt the data.
-. Enter Y to confirm.
+. Enter +Y+ to confirm.
 . The menu reappears after all processes are complete.
-. Enter 13 to Start EVM Server Processes.
-. Enter Y to confirm.
+. Enter +13+ to Start EVM Server Processes.
+. Enter +Y+ to confirm.
 
 After a region is created, you can create subordinate regions as necessary and set up replication to the top level region.
 
@@ -2393,18 +2335,18 @@ After a region is created, you can create subordinate regions as necessary and s
 
 To Replicate a Database
 
-. Navigate to Configure → Configuration.
-. Click the Settings accordion and click Zones.
-. Click the Zone where the server is located and click the server name.
-. Click Workers.
-. In the Replication Worker area, enter the worker information:
-.. Database: the name of your VMDB.
-.. Port: the Port number on which the VMDB service is running.
-.. Username: the user name to connect to the VMDB user name.
-.. Password and Verify Password: the password for the user name.
-.. Host: the IP address or hostname of the top level VMDB.
-. Click Validate to confirm that the VMDB is accessible.
-. Click Save.
+. Navigate to +Configure → Configuration+.
+. Click the +Settings+ accordion and click +Zones+.
+. Click the +Zone+ where the server is located and click the server name.
+. Click +Workers+.
+. In the +Replication Worker+ area, enter the worker information:
+.. +Database+: the name of your VMDB.
+.. +Port+: the Port number on which the VMDB service is running.
+.. +Username+: the user name to connect to the VMDB user name.
+.. +Password+ and +Verify Password+: the password for the user name.
+.. +Host+: the IP address or hostname of the top level VMDB.
+. Click +Validate+ to confirm that the VMDB is accessible.
+. Click +Save+.
 
 
 ==== Enabling the Database Synchronization Role
@@ -2414,9 +2356,9 @@ sent automatically to the top region.
 
 To Enable the Database Synchronization Role:
 
-. Navigate to Configure → Configuration.
-. Click the Settings accordion and click Zones.
-. Click the Zone where the server is located and click the server name.
+. Navigate to +Configure → Configuration+.
+. Click the +Settings+ accordion and click +Zones+.
+. Click the +Zone+ where the server is located and click the server name.
 +
 [NOTE]
 ========
@@ -2434,42 +2376,42 @@ Schedule database backups on a regular basis to preserve data.
 
 To Schedule a Database Backup
 
-. Navigate to Configure → Configuration.
-. Click the Settings accordion and click Schedules.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Schedule).
-. In the Basic Information box, enter a Name and Description for the schedule.
+. Navigate to +Configure → Configuration+.
+. Click the +Settings+ accordion and click +Schedules+.
+. Click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Add a new Schedule+).
+. In the +Basic Information+ box, enter a +Name+ and +Description+ for the schedule.
 image:2108.png[]
-. Check Active to enable the backup schedule.
-. In the Action drop-down list, select Database Backup.
-. In the Database Backup Settings box, select a type of server for storing the backups from the Type drop-down list. You can use Network File System (NFS) or Samba.
+. Check +Active+ to enable the backup schedule.
+. In the +Action+ drop-down list, select +Database Backup+.
+. In the +Database Backup Settings+ box, select a type of server for storing the backups from the +Type+ drop-down list. You can use +Network File System+ (NFS) or +Samba+.
 image:2109.png[]
-* If you select Samba, enter the URI, User ID, and a valid Password. Click Validate to check the settings.
-* If you select Network File System, enter the URI.
-. In the Timer box, select the desired backup frequency from the Run list.
+* If you select +Samba+, enter the +URI+, +User ID+, and a valid +Password+. Click +Validate+ to check the settings.
+* If you select +Network File System+, enter the +URI+.
+. In the +Timer+ box, select the desired backup frequency from the +Run+ list.
 image:2110.png[]
-* Once: the backup runs one time.
-* Hourly: select the number of hours between backups from the drop-down list.
-* Daily: select the number of days between backups from the drop-down list.
-* Weekly: select the number of weeks between backups from the drop-down list.
-* Monthly: select the number of months between backups from the drop-down list.
-. Select a Time Zone for the schedule.
-. Type or select a Starting Date for the schedule.
-. Select a Starting Time based on a 24 hour clock.
-. Click Add.
+* +Once+: the backup runs one time.
+* +Hourly+: select the number of hours between backups from the drop-down list.
+* +Daily+: select the number of days between backups from the drop-down list.
+* +Weekly+: select the number of weeks between backups from the drop-down list.
+* +Monthly+: select the number of months between backups from the drop-down list.
+. Select a +Time Zone+ for the schedule.
+. Type or select a +Starting Date+ for the schedule.
+. Select a +Starting Time+ based on a 24 hour clock.
+. Click +Add+.
 
 ===== Running a Single Database Backup
 
 To Run a Single Database Backup
 
-. Navigate to Configure → Configuration.
-. Click the Diagnostics accordion and click the Region name.
-. Click the Database tab.
-. If you have created a backup schedule and want to use the same depot settings, select the schedule in the Backup Schedules box.
-. If you do not want to use the settings from a backup schedule, select a type of server for storing the backups from the Type drop-down list in the Database Backup Settings box. You can use Network File System (NFS) or Samba.
+. Navigate to +Configure → Configuration+.
+. Click the +Diagnostics+ accordion and click the +Region+ name.
+. Click the +Database+ tab.
+. If you have created a backup schedule and want to use the same depot settings, select the schedule in the +Backup Schedules+ box.
+. If you do not want to use the settings from a backup schedule, select a type of server for storing the backups from the Type drop-down list in the +Database Backup Settings+ box. You can use +Network File System+ (NFS) or +Samba+.
 image:2109.png[]
-* If you select Samba, enter the URI, User ID, and a valid Password. Click Validate to check the settings.
-* If you select Network File System, enter the URI.
-. Click Submit to run the database backup.
+* If you select +Samba+, enter the +URI+, +User ID+, and a valid +Password+. Click +Validate+ to check the settings.
+* If you select +Network File System+, enter the +URI+.
+. Click +Submit+ to run the database backup.
 
 ===== Restoring a Database from a Backup
 
@@ -2477,33 +2419,31 @@ If a database is corrupt or fails, restore it from a backup.
 
 To Restore a Database from a Backup
 
-. Save the database backup file as /tmp/evm_db.backup. CloudForms Management Engine looks specifically for this file when restoring a database from a backup.
-. Log in to the black appliance console with a user name of admin and the default password. The Appliance Summary Screen displays.
-. Press Enter to manually configure settings.
-. Enter 11 to Stop Server Processes. Stop the process on all servers that connect to this VMDB.
-. Enter Y to confirm.
-. After all processes are stopped, press Enter to return to the menu.
-. Press Enter again to manually configure settings.
-. Enter 6 to select Restore Database From Backup. If connections are open, the server may still be shutting down. Wait a minute and try again.
-. Enter y to keep the database backup after restoring from it. Enter n to delete it.
-. Press Y to confirm.
-. After the backup completes, press Enter to return to the menu.
-. Press Enter again to manually configure settings.
-. Enter 13 to Start Server Processes.
-. Enter Y to confirm.
+. Save the database backup file as +/tmp/evm_db.backup+. CloudForms Management Engine looks specifically for this file when restoring a database from a backup.
+. Log in to the black appliance console with a user name of admin and the default password. The +Appliance Summary Screen+ displays.
+. Press +Enter+ to manually configure settings.
+. Enter +11+ to Stop Server Processes. Stop the process on all servers that connect to this VMDB.
+. Enter +Y+ to confirm.
+. After all processes are stopped, press +Enter+ to return to the menu.
+. Press +Enter+ again to manually configure settings.
+. Enter +6+ to select Restore Database From Backup. If connections are open, the server may still be shutting down. Wait a minute and try again.
+. Enter +y+ to keep the database backup after restoring from it. Enter +n+ to delete it.
+. Press +Y+ to confirm.
+. After the backup completes, press +Enter+ to return to the menu.
+. Press +Enter+ again to manually configure settings.
+. Enter +13+ to Start Server Processes.
+. Enter +Y+ to confirm.
 
 ===== Running Database Garbage Collection
 
-The database server collects garbage automatically, but Red Hat may
-occasionally direct you to run database garbage collection manually in
-order to reclaim unused space in your VMDB.
+The database server collects garbage automatically, but Red Hat may occasionally direct you to run database garbage collection manually in order to reclaim unused space in your VMDB.
 
 To Run Database Garbage Collection:
 
-. Navigate to Configure → Configuration.
-. Click the Diagnostics accordion and click the Region name.
-. Click the Database tab.
-. In the Run Database Garbage Collection Now box, click Submit.
+. Navigate to +Configure → Configuration+.
+. Click the +Diagnostics+ accordion and click the +Region+ name.
+. Click the +Database+ tab.
+. In the +Run Database Garbage Collection Now+ box, click +Submit+.
 
 
 ==== Changing Database Password
@@ -2512,14 +2452,10 @@ To Run Database Garbage Collection:
 
 CloudForms Management Engine provides a default database password for the internal PostgreSQL database.
 
-To change the password, you need to stop the CloudForms Management Engine
-Service, change the password for the PostgreSQL database, run a command
-to change the password in the configuration file that emserverd uses to
-access the server, and restart the CloudForms Management Engine
-Appliance.
+To change the password, you need to stop the CloudForms Management Engine Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that emserverd uses to access the server, and restart the CloudForms Management Engine Appliance.
 
 . Stop the CloudForms Management Engine Service.
-* SSH into the appliance.
+* +SSH+ into the appliance.
 * To stop the CloudForms Management Engine service, run the following command:
 +
 -------
@@ -2562,7 +2498,7 @@ service evmserverd start
 ===== Changing the Password on the Worker Appliances
 
 . Stop the CloudForms Management Engine Service.
-* SSH into the appliance.
+* +SSH+ into the appliance.
 * To stop the CloudForms Management Engine service, run the following command:
 +
 --------
@@ -2586,24 +2522,22 @@ service evmserverd start
 ===========
 *Requisites for Replication*
 
-If you are using replication, and you have changed the password on the
-Master database, you will also need to update the password used for the
-Replication Worker on the subordinate regions.
+If you are using replication, and you have changed the password on the +Master+ database, you will also need to update the password used for the +Replication Worker+ on the subordinate regions.
 
-* Disable the Database Synchronization Role.
-* Update the Replication Worker's password.
-* Restart the Database Synchronization Role.
+* Disable the +Database Synchronization+ Role.
+* Update the +Replication Worker+'s password.
+* Restart the +Database Synchronization+ Role.
 ===========
 
 ===== Adding a New Appliance to an Existing Region with Non-default Password
 
 . Create the new appliance.
-. Start it, but do not go into any of the configuration options, instead SSH into the new appliance.
-. In the /var/www/miq/vmdb directory create a file called REGION. Its only contents should be the number of the Region that it is joining. (You could also just copy the REGION file from the VMDB Appliance.)
-. Edit the database.yml file in the /var/www/miq/vmdb directory. (You may want to save off the original.)
-* Replace the contents of the "production" section with the contents of the "base" section.
-* Edit the "host" parameter to match IP of the appliance hosting the VMDB.
-* Save the new database.yml.
+. Start it, but do not go into any of the configuration options, instead +SSH+ into the new appliance.
+. In the +/var/www/miq/vmdb+ directory create a file called REGION. Its only contents should be the number of the Region that it is joining. (You could also just copy the +REGION+ file from the VMDB Appliance.)
+. Edit the +database.yml+ file in the +/var/www/miq/vmdb+ directory. (You may want to save off the original.)
+* Replace the contents of the +"production"+ section with the contents of the +"base"+ section.
+* Edit the +"host"+ parameter to match IP of the appliance hosting the VMDB.
+* Save the new +database.yml+.
 * Run the following command to change the password in the configuration file that emserverd uses to access the server:
 +
 --------

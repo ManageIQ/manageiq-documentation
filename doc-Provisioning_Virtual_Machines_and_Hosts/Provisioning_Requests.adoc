@@ -156,7 +156,7 @@ The following procedure adds an ISO Datastore from your Red Hat Enterprise Virtu
 . Navigate to +Infrastructure → PXE+.
 . Click the +ISO Datastores+ accordion.
 . Click image:1847.png[](+Configuration+), image:1848.png[](+Add a new ISO Datastore+).
-. Select the Red Hat Enterprise Virtualization Manager Provider hosting the ISO Datastore.
+. Select the Cloud or Infrastructure provider hosting the ISO Datastore. 
 . Click +Add+.
 
 The ISO datastore is added to CloudForms Management Engine.
@@ -167,7 +167,7 @@ The following procedure refreshes the chosen ISO datastore and updates CloudForm
 
 . Navigate to +Infrastructure → PXE+.
 . Click the +ISO Datastores+ accordion, and select an ISO datastore.
-. Click image:1847.png[](+Configuration+), then click image:2003.png[](+Refresh+).
+. Click image:1847.png[](+Configuration+), then click image:2003.png[](+Refresh Relationships+).
 	
 === Creating System Image Types for ISO
 
@@ -221,6 +221,7 @@ RHEL ISO with the following modifications:
 * isolinux.cfg: modify default menu item "append" line to include "ks=cdrom"
 * ks.cfg: which must minimally include:
 +
+[SCREEN]
 ------
 Pre Install Scripts
 %pre
@@ -244,8 +245,6 @@ mount /dev/floppy /tmp/floppy
 |=======================================================================
 |Customization Type|Reason to Include|Script entries
 |Kickstart|Takes the values from the +Customize+ tab in +Provisioning Dialog+ and substitutes them into the script.|
-
-------
 #Configure Networking based on values from provisioning dialog
 <% if evm[:addr_mode].first == 'static' %>
   <% network_string = "network --onboot yes --device=eth0 --bootproto=static --noipv6" %>
@@ -256,30 +255,18 @@ mount /dev/floppy /tmp/floppy
 <% else %>
 network --device=eth0 --bootproto=dhcp
 <% end %>
-------
-
-
 |Kickstart|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+.|
-------
 rootpw --iscrypted <%= MiqPassword.md5crypt(evm[:root_password]) %>
-------
-
 |Kickstart|Sends status of the provision back to CloudForms Management Engine Server for display in the CloudForms Management Engine Console.|
-------
 # Callback to CFME during post-install
 wget --no-check-certificate <%= evm[:post_install_callback_url] %>
-------
-
 |Sysprep|Encrypts the root password from the +Customize+ tab in the +Provisioning Dialog+. The value for the +AdministratorPassword+ line must be inserted to use the password from the +Provision Dialog+ and encrypt it.|
-------
 <UserAccounts>
   <AdministratorPassword>
     <Value><%= MiqPassword.sysprep_crypt(evm[:root_password]) %></Value>
     <PlainText>false</PlainText>
   </AdministratorPassword>
 </UserAccounts>
-------
-
 |=======================================================================	
 	
 === Adding a Customization Template
@@ -393,7 +380,9 @@ After submission, the appliance assigns each provision request a +Request ID+. I
 Request 99 in region 123 results in Request ID 123000000000099.
 
 	
-=== Cloning a Virtual Machine (VMware Virtual Machines Only)
+=== Cloning a Virtual Machine 
+
+Virtual Machines can be cloned in other providers as well.
 
 . Navigate to +Infrastructure → Virtual Machines+, and check the virtual machine you want to clone.
 . Click image:2007.png[](+Lifecycle+), and then image:2339.png[](+Clone selected item+).
@@ -515,7 +504,7 @@ There are two ways to get the Intelligent Platform Management Interface (IPMI) H
 ====== Discovering the Management Interface for an IPMI Host
 
 . Navigate to +Infrastructure → Hosts+.
-. Click image:1847.png[]+(Configuration)+, then image:2119.png[]+(Discover Hosts)+.
+. Click image:1847.png[](+Configuration+), then image:2119.png[](+Discover Items+).
 . In +Discover+, check +IPMI+.
 . Optionally, in +IPMI Credentials+, type in a +User ID+ and +Password+.
 +
@@ -550,7 +539,7 @@ After discovering an IPMI host, add the credentials using the following procedur
 ====== Adding the Management Interface for an IPMI Host
 
 . Navigate to +Infrastructure → Hosts+.
-. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a New Host+).
+. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a New Item+).
 . In +Basic Information+, type in a +Name+ and the +IPMI IP address+.
 . In the +Credentials+ area, under +IPMI+ tab, type in the IPMI credentials
 .. Use +User ID+ to specify a login ID.

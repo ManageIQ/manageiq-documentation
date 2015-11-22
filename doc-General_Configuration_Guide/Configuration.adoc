@@ -155,15 +155,15 @@ To Create a Company Tag:
 
 . Navigate to +Configure → Configuration+.
 . Click on the +Settings+ accordion, then +Region+, then click on the +My Company Tags+ tab.
-. In the +Choose+ a Category area, select a category from the +Category+ list.
+. In the +Choose a Category+ area, select a category from the +Category+ list.
 [NOTE]
 =======
 * Some categories only allow one value to be assigned to a resource.
 * For some databases such as +PostgreSQL+, tags are case sensitive. For example, filtering by 'Linux' in title case give you different results from filtering by 'linux' in lower case.
 =======
 +
-. Click image:1848.png[](+New Entry+), and type a Name and Display Name for your new value.
-. Click image:2043.png[](+Click to add a new entry+) to confirm the entry.
+. Click image:1848.png[](+New Entry+), and type a +Name+ and +Description+ for your new value.
+. Click image:2043.png[](+Add this entry+) to confirm the entry.
 . Repeat these steps for each value you need.
 
 ===== Deleting a Company Tag
@@ -481,7 +481,7 @@ image:2057.png[]
 . Use +SmartProxy Server IP+ to specify the IP address of the server that you want SmartProxies installed in this zone to report to. If this is not set, then the IP address of the server that deployed the SmartProxy is used. This does not apply to embedded SmartProxies.
 . In the +Credentials → Windows Domain+ area, type in Windows domain credentials to be able to collect running processes from Windows virtual machines that are on a domain.
 image:2058.png[]
-. Optionally, you can configure +NTP servers= for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the +Operations → Server+ page.
+. Optionally, you can configure +NTP servers+ for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the +Operations → Server+ page.
 . In the +Settings+ area, set the number for +Max Active VM Scans+. The default is Unlimited.
 . Click +Save+.
 
@@ -543,7 +543,7 @@ image:2059.png[]
 * Use +Appliance Time Zone+ to set the time zone for this server.
 [NOTE]
 ==============
-This is the time zone used when created scheduled analyses. This is not the same as the Time Zone parameter, which is found by navigating to Configure → My Settings, then exploring the Display Settings area, and is the time zone displayed in the console.
+This is the time zone used when created scheduled analyses. This is not the same as the Time Zone parameter, which is found by navigating to +Configure → My Settings+, then exploring the +Display Settings+ area, and is the time zone displayed in the console.
 ==============
 * Use +Default Locale+ to specify the default language for this server.
 
@@ -601,6 +601,9 @@ image:2061.png[]
 To do this, log into the Virtual Center Web Service and attempt to open a virtual machine console. This should prompt you to install the required plug-in.
 The VSphere Web Client must be installed on VC version 5, and the provider must be registered to it. For Virtual Center version 4, the VMware VirtualCenter Management Webservice must be running.
 
+====== NTP Servers Settings
+In the +NTP Server+ area, you can specify the NTP servers to use as source for clock synchronization here. The NTP settings specified here will override Zone NTP settings. Enter one NTP server hostname or IP address in each text box.
+
 ====== Configuring SNMP
 
 You can use Simple Network Management Protocol (SNMP) traps to send alerts for various aspects of a Red Hat CloudForms environment.
@@ -633,18 +636,18 @@ To Enable the snmpd and snmptrapd Daemons"
 To Enable the Notifier Role:
 
 . Access each SNMP processing appliance using their web interaces.
-. Navigate to Configure → Configuration → Settings.
+. Navigate to +Configure → Configuration → Settings+.
 . Select the zone where the EVM server is located, and select the EVM server.
-. In the Server Control area, select the Notifier server role.
-. Click Save
+. In the +Server Control+ area, select the +Notifier+ server role.
+. Click +Save+.
 
 To Set the Failover Priority Role:
 
-. Navigate to Configure → Configuration → Diagnostics.
+. Navigate to +Configure → Configuration → Diagnostics+.
 . Select the zone where the EVM server is located.
-. Click Roles by Servers or Servers by Roles to view your servers.
-. In the Status of Roles for Servers in Zone Default Zone area, click the role that you want to set the priority for.
-. Click image:1847.png[](Configuration), and image:2097.png[](Promote Server) to make this the primary server for this role.
+. Click +Roles by Servers+ or +Servers by Roles+ to view your servers.
+. In the +Status of Roles for Servers+ in +Zone Default+ Zone area, click the role that you want to set the priority for.
+. Click image:1847.png[](+Configuration+), and image:2097.png[](+Promote Server+) to make this the primary server for this role.
 
 ====== Outgoing SMTP Email Settings
 
@@ -655,7 +658,7 @@ To use the email action in CloudForms Management Engine, set an email address to
 To be able to send any emails from the server, you must have the Notifier server role enabled. You can test the settings without the role enabled.
 ===========
 
-[IMAGE]
+image:OutgoingSMTP.png[]
 
 * Use +Host+ to specify the host name of the mail server.
 * Use +Port+ to specify the port for the mail server.
@@ -666,7 +669,7 @@ To be able to send any emails from the server, you must have the Notifier server
 * Use +User Name+ to specify the user name required for login authentication.
 * Use +Password+ to specify the password for login authentication.
 * Use +From Email Address+ to set the address you want to send the email from.
-* Use +To Email Address+ if you want to test your email settings.
+* Use +Test Email Address+ if you want to test your email settings. Click +Verify+.
 
 To Test Outgoing SMTP Email Server Settings:
 
@@ -679,26 +682,25 @@ Web services are used by the server to communicate with the SmartProxy.
 
 image:2064.png[]
 
-* Set Mode to invoke to enable 2-way Web services communication between the CloudForms Management Engine Appliance and the SmartProxy. Set Mode to disabled to use Web services from the SmartProxy to the CloudForms Management Engine Appliance only.
-When the CloudForms Management Engine Appliance has work for the SmartProxy, the work will be placed in a queue in the VMDB. The work will be completed either when the CloudForms Management Engine Appliance is able to contact the SmartProxy or when the next SmartProxy heartbeat occurs, whichever comes first.
-* If Web services are enabled, you have the option to use ws-security.
+* Set +Mode+ to invoke to enable 2-way Web services communication between the CloudForms Management Engine Appliance and the SmartProxy. Set +Mode+ to disabled to use Web services from the SmartProxy to the CloudForms Management Engine Appliance only. When the CloudForms Management Engine Appliance has work for the SmartProxy, the work will be placed in a queue in the VMDB. The work will be completed either when the CloudForms Management Engine Appliance is able to contact the SmartProxy or when the next SmartProxy heartbeat occurs, whichever comes first.
+* If +Web Services+ are enabled, you have the option to use +ws-security+.
 
 ====== Logging Settings
 
 image:2065.png[]
 
-* Use Log Level to set the level of detail you want in the log. You can select from fatal, error, warn, info, and debug. The default setting is 'info'.
+* Use +Log Level+ to set the level of detail you want in the log. You can select from +fatal+, +error+, +warn+, +info+, and +debug+. The default setting is 'info'.
 
 ====== Custom Support URL Settings
 
 image:2066.png[]
 
-* Use URL to specify a specific URL that you want to be accessible from the About Product Assistance area.
-* Use Description to set a label for the URL.
+* Use +URL+ to specify a specific URL that you want to be accessible from the +About Product Assistance+ area.
+* Use +Description+ to set a label for the +URL+.
 
 ===== Authentication
 
-Use the Authentication tab to specify how you want users authenticated on the console. You can use the VMDB or integrate with LDAP, LDAPS, Amazon, or an external IPA server.
+Use the +Authentication+ tab to specify how you want users authenticated on the console. You can use the VMDB or integrate with LDAP, LDAPS, Amazon, or an external IPA server.
 
 ====== Changing an Authentication Setting
 
@@ -716,9 +718,9 @@ To Change an Authentication Setting:
 
 image:2067.png[]
 
-* Use Session Timeout to set the period of inactivity before a user is logged out of the console.
-* Use Mode to set the type of authentication. Choose from Database (using the VMDB), LDAP (Lightweight Directory Authentication Protocol), LDAPS (Secure Lightweight Directory Authentication Protocol), or Amazon. The default is Database.
-If you choose Database, see Section “Creating a User” to create users. See section “LDAP Settings” for more information on configuration for LDAP and LDAPS. If you choose Amazon, see Section “Amazon Settings”.
+* Use +Session Timeout+ to set the period of inactivity before a user is logged out of the console.
+* Use +Mode+ to set the type of authentication. Choose from +Database+ (using the VMDB), +LDAP+ (Lightweight Directory Authentication Protocol), +LDAPS+ (Secure Lightweight Directory Authentication Protocol), or +Amazon+. The default is +Database+.
+If you choose +Database+, see Section +Creating a User+ to create users. See section +LDAP Settings+ for more information on configuration for LDAP and LDAPS. If you choose Amazon, see section +Amazon Settings+.
 
 ====== LDAP Settings
 
@@ -732,17 +734,7 @@ image:2068.png[]
 Select +Distinguished Name+ (CN=<user>) or +Distinguished Name+ (UID=<user>) to use just the user name, but be sure to enter the proper +User Suffix+ for either one. Choose the correct +Distinguished Name+ option for your directory service implementation.
 * Specify the +User Suffix+, such as acme.com for +User Principal Name+ or cn=users,dc=acme,dc=com for +Distinguished Name+, in +Base DN+.
 
-====== Amazon Settings
-
-If you choose Amazon as your authentication mode, required parameters are exposed under Amazon Primary AWS Account Settings for IAM. Be sure to validate your setting before saving them.
-
-* Type in an +Access Key+ provided by your Amazon account.
-* Type in a +Secret Key+ provided by your Amazon account.
-
-Users logging into CloudForms Management Engine with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
-Amazon users must be added as a CloudForms Management Engine user or belong to an IAM user group added to the list of CloudForms Management Engine groups.
-
-====== Role Settings
+====== LDAP Role Settings
 
 If you choose LDAP, you can use groups from your directory service to set the role for the authenticated LDAP User. The LDAP user must be in one of the Account Role Groups. See Section “LDAP Groups”.
 
@@ -752,13 +744,23 @@ Then, when logging in, the user would type either dbright (User Principal Name) 
 
 image:2069.png[]
 
-* Check Get Roles from Home Forest to use the LDAP roles from the LDAP users home forest.
-* Check Follow Referrals to lookup and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
-* Use Base DN to set the place in the directory tree from which you want to start searching for users.
-* Specify the user name to bind to the LDAP server in Bind DN. This user must have read access to all users and groups that will be used for CloudForms Management Engine authentication and role assignment.
-* Specify the password for the Bind DN user in Bind Password.
+* Check +Get Roles+ from Home Forest to use the LDAP roles from the LDAP users home forest.
+* Check +Follow Referrals+ to lookup and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
+* Use +Base DN+ to set the place in the directory tree from which you want to start searching for users.
+* Specify the user name to bind to the LDAP server in +Bind DN+. This user must have read access to all users and groups that will be used for CloudForms Management Engine authentication and role assignment.
+* Specify the password for the Bind DN user in +Bind Password+.
 
 Click Validate to verify your settings.
+
+====== Amazon Settings
+
+If you choose Amazon as your authentication mode, required parameters are exposed under +Amazon Primary AWS Account Settings+ for +IAM+. Be sure to validate your setting before saving them.
+
+* Type in an +Access Key+ provided by your Amazon account.
+* Type in a +Secret Key+ provided by your Amazon account.
+
+Users logging into CloudForms Management Engine with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
+Amazon users must be added as a CloudForms Management Engine user or belong to an IAM user group added to the list of CloudForms Management Engine groups.
 
 ====== Trusted Forests
 
@@ -965,11 +967,11 @@ The server may not start if the database settings are changed. Be sure to valida
 To Change a Database Setting:
 
 . Navigate to +Configure → Configuration+.
-. Click on the Settings accordion, then click Zones.
+. Click on the +Settings+ accordion, then click +Zones+.
 . Click the zone where the server is located.
 . Click on the server.
 . Click the +Database+ tab.
-. In the +Database+ area, select the +Type+ of database. You can select from +External Database on another Server+, +External PostgreSQL Database+, and +Internal Database on this Appliance+ (default). The rest of the possible settings will vary depending on which type of database you chose.
+. In the +Database+ area, select the +Type+ of database. You can select from +External Database on another CFME appliance+, +External Postgres Database+, and +Internal Database on this CFME Appliance+. 
 * Use +Hostname+ to specify the IP address or hostname of the external database server.
 * Use +Database Name+ to specify the name of your VMDB.
 * Specify the +User Name+ to connect to the VMDB.
@@ -1537,8 +1539,8 @@ image:2082.png[]
 . From the +Action+ list, select +Database backup+.
 . In the +Database Backup Settings+ area, select a type of server to put the backups. You can either use +Network File System+ or +Samba+.
 image:2108.png[]
-* If selecting +Samba+, enter the +URI+, +User ID+, and a valid +Password+. Then, click +Validate+ to check the settings.
-* If you choose +Network File System+, enter the +URI+.
+* If selecting +Samba+, enter the +Depot Name+, +URI+, +User ID+, and a valid +Password+. Then, click +Validate+ to check the settings. 
+* If you choose +Network File System+, enter the +Depot Name+ and +URI+. 
 . In the +Timer+ area, click the +Run+ list to specify how often to run the analysis. Your options after that depend on the +Run+ option you choose.
 image:2110.png[]
 * Click +Once+ to have the backup run only one time.
@@ -1874,8 +1876,8 @@ To Run a Single Backup:
 . If you do not want to use the settings from a backup schedule, or need to create settings, go into the +Database Backup Settings+ area.
 . Select a type of server to put the backups. You can either use +Network File System+ or +Samba+.
 image:2099.png[]
-* If selecting +Samba+, enter the +URI+, +User ID+, a +Password+, and a +Verify Password+. Click +Validate+ to check the settings.
-* If you choose +Network File System+, enter the +URI+.
+* If selecting +Samba+, enter the +Depot Name+, +URI+, +User ID+, a +Password+, and a valid +Password+. Click +Validate+ to check the settings.
+* If you choose +Network File System+, enter the +Depot Name+ and +URI+. 
 . Click +Submit+.
 
 Result: The database backup is run immediately. You can see the task by navigating to +Configure → Tasks+, then clicking on the +All Other Tasks+ tab.
@@ -2082,7 +2084,7 @@ To Restart a CloudForms Management Engine Worker:
 . Select the server that you want to view.
 . Click on the +Workers+ tab.
 . Click on the worker you want to restart.
-. Click image:2102.png[] (+Restart selected worker+).
+. Click image:1847.png[] (+Configuration+), then image:2102.png[] (+Restart selected worker+). 
 . Click +OK+.
 
 ===== Server and Audit Logs

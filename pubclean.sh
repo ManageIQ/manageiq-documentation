@@ -17,12 +17,12 @@ sleep 0.5
 for dir in `ls */ -d`
 do
 
-  if [ -d "${dir}/tmp"  ]
+  if [ -d "${dir}/build"  ]
   then
       echo "Cleaning " $dir
-      cd $dir && publican clean && cd ..
+      cd $dir && ccutil clean && cd ..
   else
-      echo "No tmp directory in" $dir
+      echo "No build directory in" $dir
       sleep 0.1
   fi
 

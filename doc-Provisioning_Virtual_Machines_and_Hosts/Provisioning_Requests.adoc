@@ -203,27 +203,25 @@ image:2323.png[]
 
 Add a customization template to provide +Kickstart+, +Cloud-Init+, or +Sysprep+ files for the initial loading of the operating system.
 
-*Cloud-Init Requirements*
-
+.Cloud-Init Requirements
 * When creating a template using Red Hat Virtualization, install the +cloud-init+ package on the source virtual machine. This enables Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
 * See the https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.4/html/Administration_Guide/index.html[Red Hat Enterprise Virtualization Administration Guide] for more information on using Cloud-Init in a Red Hat Enterprise Virtualization environment.
 * See the http://cloudinit.readthedocs.org/en/latest/[Cloud-Init Documentation] web site for example scripts.
 
-*Kickstart Requirements for ISO Provisioning*
-
+.Kickstart Requirements for ISO Provisioning
 * Name the +Kickstart+ file +ks.cfg+.
 * Set the new virtual machine to power down after provisioning is complete.
 * CFME must use the virtual machine payload feature of RHEV to create a floppy disk containing the data from the selected customization template.
 * Customize the installer to include the data written to the floppy disk payload.
 
-RHEL ISO with the following modifications:
-
-* isolinux.cfg: modify default menu item "append" line to include "ks=cdrom"
-* ks.cfg: which must minimally include:
+[example]
+.RHEL ISO with the following modifications:
+====
+* `isolinux.cfg` &ndash; modify default menu item +append+ line to include +ks=cdrom+
+* `ks.cfg` &ndash; which must minimally include:
 +
-[SCREEN]
-------
-Pre Install Scripts
+----
+### Pre Install Scripts
 %pre
 
 # Mount the floppy drive
@@ -234,9 +232,8 @@ mount /dev/floppy /tmp/floppy
 
 # Include ks.cfg file from the floppy (written by CFME based on selected customization template)
 %include /tmp/floppy/ks.cfg
-------
-+
-
+----
+====
 
 
 === Customization Script Additions for Virtual Machine and Instance Provisioning

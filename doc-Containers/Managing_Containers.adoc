@@ -1,0 +1,144 @@
+= Managing Containers
+
+== Core Concepts
+
+The following is a list of some of the core concepts and objects you will encounter when using CloudForms Management Engine with OpenShift or Atomic Enterprise Platform. Many of these objects come from Kubernetes, which is extended by OpenShift to provide a more feature-rich development life cycle platform.
+
+* *Node* is a machine that containers run on.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts
+
+* *Pod* is a group of containers. 
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#pods.
+
+* *Replication controller* ensures that there is always a certain number of pods available. 
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#replication-controllers.
+
+* *Service* is a base load balancer that provides traffic to pods.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#services.
+
+* *Namespace* is an ability to partition resources created by users into logical groups.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#namespaces.
+
+== Insight and Control
+
+CloudForms Management Engine is able to connect to OpenShift and Atomic Enterprise containers providers and supports managing them similarly to how infrastructure and cloud providers are managed. This allows you to gain control over different aspects of your environment and answer questions such as:
+
+* How many containers exist in my environment?
+* Does a specific node have enough resources?
+* How many distinct images are used?
+* Which image registries are used?
+
+When CloudForms Management Engine connects to a containers provider, it pulls information on different areas of the provider environment:
+
+* Entities such as pods, nodes, or services.
+* Basic relationships between the entities, such as: Which services are serving which pods?
+* Advanced insight into relationships, such as: Which two different containers are using the same image?
+* Additional information, such as events and metrics.
+
+=== Cross-Providers Insight
+
+Cross providers insight is a feature that connects all layers of infrastructure, cloud, and containers known to CloudForms Management Engine and collects data for analysis.
+
+It supports cross-linking with the following environments:
+* OpenStack
+* oVirt or RHEV
+* VMware vCenter
+
+The collected data includes information on traffic, storage, and so on. The information can be viewed on entity summary pages available from menu:Containers[Overview].
+
+=== Viewing a Containers Provider Summary
+
+A +Containers Provider+ summary page allows you to view information on different aspects of a containers provider, for example:
+
+* Status of the provider and its components.
+* Relationships between different entities of the containers provider. These are summarized in the +Relationships+ box on the right-hand side of the summary page.
+* Additional information on the number of aggregate node CPU cores or aggregate node memory.
+
+.Viewing a Containers Provider Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+
+=== Viewing a Container Nodes Summary
+
+A +Container Node+ summary page allows you to view information on different aspects of a container node, for example:
+
+* What are the versions of the underlying operating system and software?
+* How many entities are on a node?
+* What is the capacity and utilization?
+
+.Viewing a Container Nodes Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Nodes+.
+. Click the desired container node for viewing.
+
+=== Viewing a Containers Summary
+
+A +Containers+ summary page allows you to view information on different aspects of a container, for example:
+
+* Which node is the container running on?
+* Which part of a pod is the container?
+* What is the container ID?
+* What is the container image name?
+
+.Viewing a Containers Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Containers+.
+. Click the desired container for viewing.
+
+=== Viewing a Container Images Summary
+
+A +Container Images+ summary page allows you to view information on different aspects of a container image, for example:
+
+* Which containers are using the image?
+* Which image registry is the image coming from? Is it a certified registry? 
+
+.Viewing a Container Images Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Images+.
+. Click the desired image for viewing.
+
+=== Viewing an Image Registries Summary
+
+An +Image Registries+ summary page allows you to view information on different aspects of an image registry, for example:
+
+* How many images are coming from the registry? What are the images?
+* Which containers are using images from the registry?
+
+.Viewing an Image Registries Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Image Registries+.
+. Click the desired image registry for viewing.
+
+=== Viewing a Pods Summary
+
+A +Pods+ summary page allows you to view information on different aspects of a pod, for example:
+
+* Which containers are part of the pod?
+* Which services work with the pod?
+* Which services does the pod run on?
+* Is the pod controlled by a replicator?
+
+.Viewing a Pods Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Pods+.
+. Click the desired pod for viewing.
+
+=== Viewing a Replicators Summary
+
+A +Replicators+ summary page allows you to view information on different aspects of a replicator, for example:
+
+* What is the number of requested pods?
+* What is the number of current pods?
+
+.Viewing a Replicators Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Replicators+.
+. Click the desired replicator for viewing.
+
+

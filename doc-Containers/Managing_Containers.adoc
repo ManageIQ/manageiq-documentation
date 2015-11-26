@@ -1,50 +1,58 @@
 = Managing Containers
 
+Red Hat CloudForms 4.0 allows for container management along with image and flavor management for instances. The orchestration system can be OpenShift or Atomic Enterprise Platform, and it can work with both RHEV and VMware providers.
+
+The +Containers+ area in the top menu bar has options to manage containers, containers providers, images, nodes, registries, podes, and other components.
+
 == Core Concepts
 
 The following is a list of some of the core concepts and objects you will encounter when using CloudForms Management Engine with OpenShift or Atomic Enterprise Platform. Many of these objects come from Kubernetes, which is extended by OpenShift to provide a more feature-rich development life cycle platform.
 
 * *Node* is a machine that containers run on.
-  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts[OpenShift Enterprise 3.1 Architecture Information]
 
 * *Pod* is a group of containers. 
-  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#pods.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#pods[OpenShift Enterprise 3.1 Architecture Information].
 
 * *Replication controller* ensures that there is always a certain number of pods available. 
-  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#replication-controllers.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#replication-controllers[OpenShift Enterprise 3.1 Architecture Information].
 
 * *Service* is a base load balancer that provides traffic to pods.
-  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#services.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#services[OpenShift Enterprise 3.1 Architecture Information].
 
 * *Namespace* is an ability to partition resources created by users into logical groups.
-  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#namespaces.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#namespaces[OpenShift Enterprise 3.1 Architecture Information].
 
 == Insight and Control
 
-CloudForms Management Engine is able to connect to OpenShift and Atomic Enterprise containers providers and supports managing them similarly to how infrastructure and cloud providers are managed. This allows you to gain control over different aspects of your environment and answer questions such as:
+CloudForms Management Engine can connect to OpenShift and Atomic Enterprise Platform containers providers and supports managing them similarly to how infrastructure and cloud providers are managed. This allows you to gain control over different aspects of your environment and answer questions such as:
 
 * How many containers exist in my environment?
 * Does a specific node have enough resources?
 * How many distinct images are used?
 * Which image registries are used?
 
-When CloudForms Management Engine connects to a containers provider, it pulls information on different areas of the provider environment:
+When CloudForms Management Engine connects to a containers provider, it collects information on different areas of the provider environment:
 
 * Entities such as pods, nodes, or services.
 * Basic relationships between the entities, such as: Which services are serving which pods?
 * Advanced insight into relationships, such as: Which two different containers are using the same image?
-* Additional information, such as events and metrics.
+* Additional information, such as services, events, projects, namespaces, routes (OpenShift only), and metrics.
 
 === Cross-Providers Insight
 
 Cross providers insight is a feature that connects all layers of infrastructure, cloud, and containers known to CloudForms Management Engine and collects data for analysis.
 
 It supports cross-linking with the following environments:
+
 * OpenStack
 * oVirt or RHEV
 * VMware vCenter
 
-The collected data includes information on traffic, storage, and so on. The information can be viewed on entity summary pages available from menu:Containers[Overview].
+The collected data includes information on traffic, storage, and so on. The information on providers and entities is summarized on the +Overview+ page available from menu:Containers[Overview].
+
+[caption="Containers Overview"]
+image::containers-overview.png[Containers Overview, height=460]
 
 === Viewing a Containers Provider Summary
 
@@ -52,6 +60,10 @@ A +Containers Provider+ summary page allows you to view information on different
 
 * Status of the provider and its components.
 * Relationships between different entities of the containers provider. These are summarized in the +Relationships+ box on the right-hand side of the summary page.
++
+[caption="Entity Relationships"]
+image::entity-relationships.png[Entity Relationships, height=460]
++
 * Additional information on the number of aggregate node CPU cores or aggregate node memory.
 
 .Viewing a Containers Provider Summary
@@ -141,4 +153,30 @@ A +Replicators+ summary page allows you to view information on different aspects
 . In the +Relationships+ box on the right-hand side of the summary page, click +Replicators+.
 . Click the desired replicator for viewing.
 
+=== Using the Topology Widget
+
+The +Topology+ widget is an interactive topology graph, showing the relationships between the different entities of the containers providers that CloudForms Management Engine has access to.
+
+* The topology graph includes pods, containers, services, nodes, virtual machines, and hosts within the overall containers provider environment.
+* Selecting any individual graph node will display a summary of details for the individual node.
+* It is possible to drag elements to reposition the graph and to zoom in for details on a specific subset of items.
+
+[caption="Topology Widget"]
+image::topology-widget.png[Topology Widget, width=660]
+
+.Viewing the Topology Widget
+. Navigate to menu:Containers[Providers].
+. Click the desired containers provider for viewing the provider summary.
+. On the provider summary page, click +Topology+ in the +Overview+ box on the right-hand side of the page.
+
+=== Running a SmartState Analysis
+
+Perform a SmartState Analysis of a container image to inspect the packages included in an image and get information on all new or updated packages.
+
+.Running a SmartState Analysis
+. Navigate to menu:Containers[Container Images].
+. Check the container image to analyze. You can check multiple images.
+. Click  image:images/1847.png[] btn:[(Configuration)], and then  image:images/2147.png[] btn:[(Perform SmartState Analysis)].
+
+The container image is scanned. The process will copy over any required files and install any required packages for the image. After reloading the image page, all new or updated packages are listed.
 

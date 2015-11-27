@@ -32,7 +32,21 @@ image:7150.png[]
 
 In this region, we have several Red Hat CloudForms appliances acting as UI nodes and worker nodes. These worker nodes execute tasks on the providers in your environment.
 The Region also uses a region database that reports to a master database on the main Red Hat CloudForms appliance. All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
+
 	
+=== Tenants
+
+Red Hat CloudForms supports multi-tenancy, letting you isolate one tenantś resources and user accounts from another. In addition, tenants can be nested in a heirarchy, enabling those as the bottom to inherit permissions from those above. This configuration allows for granular user permissions to be set on specific tenants.
+
+Tenancy Models::
+
+A number of approaches exist for tenant planning:
+
+* *Tenantless* - Similar to the previous system without tenancy support, you can create a single large tenant and perform all your operations in there without any subdivision of resources or user accounts.
+* *Enterprise model* - A common scenarios is to create a single tenant, and then subdivide it based on the structures or departments within your organization. Those departments are then able to further subdivide their resources into distinct projects. With this model, you have a single URL for user access, while still having the ability to divide resources into nested heirarchical tenants.
+* *Multiple tenant model (CCP)* - Created with Certified Cloud Providers in mind, this model allows multiple tenants to enjoy complete isolation from other tenants, with separate branding and unique URLs.
+
+
 === CPU Sizing Assistant for a Dedicated VMDB Host
 
 To predict the number of appliances that can be supported by a dedicated VMDB host, see https://access.redhat.com/labs/cfmedbsizer/[DB CPU Sizing Assistant].

@@ -48,18 +48,27 @@ echo
 
 sleep 0.5
 
-mv *Defining_Policies_and_Profiles-en-US.pdf defining_policies_profiles.pdf
-mv *General_Configuration-en-US.pdf general_configuration.pdf
-mv *Managing_Infrastructure_and_Inventory-en-US.pdf infrastructure_inventory.pdf
-mv *Managing_Providers-en-US.pdf providers.pdf
-mv *Methods_Available_for_Automation-en-US.pdf methods_for_automation.pdf
-mv *Monitoring_Alerts_and_Reporting-en-US.pdf monitoring_alerts_reporting.pdf
-mv *Provisioning_Virtual_Machines_and_Hosts-en-US.pdf virtual_machines_hosts.pdf
-mv *Scripting_Actions_in_CloudForms-en-US.pdf scripting_actions.pdf
+mv ${TMPDIR}/*Defining_Policies_and_Profiles-en-US.pdf ${TMPDIR}/defining_policies_profiles.pdf
+mv ${TMPDIR}/*General_Configuration-en-US.pdf ${TMPDIR}/general_configuration.pdf
+mv ${TMPDIR}/*Managing_Infrastructure_and_Inventory-en-US.pdf ${TMPDIR}/infrastructure_inventory.pdf
+mv ${TMPDIR}/*Managing_Providers-en-US.pdf ${TMPDIR}/providers.pdf
+mv ${TMPDIR}/*Methods_Available_for_Automation-en-US.pdf ${TMPDIR}/methods_for_automation.pdf
+mv ${TMPDIR}/*Monitoring_Alerts_and_Reporting-en-US.pdf ${TMPDIR}/monitoring_alerts_reporting.pdf
+mv ${TMPDIR}/*Provisioning_Virtual_Machines_and_Hosts-en-US.pdf ${TMPDIR}/virtual_machines_hosts.pdf
+mv ${TMPDIR}/*Scripting_Actions_in_CloudForms-en-US.pdf ${TMPDIR}/scripting_actions.pdf
+
+# Print md5sums
+
+echo "Printing md5sums..."
+echo
+
+sleep 0.5
+
+md5sum ${TMPDIR}/*
 
 # Archive PDF files
 echo
-echo Archiving PDF files...
+echo "Archiving PDF files..."
 echo
 
 sleep 0.5

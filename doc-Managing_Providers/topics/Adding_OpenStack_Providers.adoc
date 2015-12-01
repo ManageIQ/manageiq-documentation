@@ -43,3 +43,23 @@ IMPORTANT: To enable discovery of OpenStack cloud providers, ensure that the [pa
 In order to collect inventory and metrics from an OpenStack environment, the CloudForms Management Engine Appliance requires that the adminURL endpoint for the OpenStack environment should be on a non-private network.
 Hence, the OpenStack adminURL endpoint should be assigned an IP address other than [literal]+192.168.x.x+. 
 ======
+
+[NOTE]
+======
+For Red Hat CloudForms to be able to receive events from a Red Hat OpenStack provider, the OpenStack configuration file must be modified. Specifically, the [label]#notification_driver# field must be defined.
+
+For Nova and Heat, in order to start getting notifications, manually change the configuration files as below and restart services.
+
+------
+/etc/heat/heat.conf
+notification_driver=glance.openstack.common.notifier.rpc_notifier
+notification_topics=notifications
+------
+
+------
+/etc/nova/nova.conf
+notification_driver=messaging
+notification_topics=notifications
+------
+======
+

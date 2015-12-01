@@ -1,0 +1,424 @@
+#!/usr/bin/python
+# -*- coding: UTF-8 -*-
+
+# This is a fork of https://svn.devel.redhat.com/repos/ecs/toolkit/rhev/errata/
+# created for RHOS Release Notes, where errata are sections of the Technical
+# Notes chapter.
+#
+# Generates XML file for use in the technical notes books, based on an errata.
+#
+# Usage: errata-list <errata_id> [--table] [component_map_file]
+#
+# Errata id should be of the form "RHaa-YYYY:nnnn", where:
+#
+# - aa indicates the advisory type (SA/BA/EA).
+# - yyyy indicates the year the advisory is being released.
+# - nnnn indicates the sequential identifier for the errata.
+#
+# Specifying --table generates output in the 'old' format, as used in the
+# RHEV 2.2 book. When this argument is ommitted the 'new' format, as used
+# for the RHEV 3.0 book, is generated instead.
+#
+# The component map file is a CSV mapping bugzilla components to  human 
+# readable names. This is used to generate meaningful section headings
+# in the 'new' format.  Where a mapping isnt found the raw component name
+# is used instead.
+#
+# If generating output in the 'old' format it makes no difference as the components
+# are not used in the output.
+
+import httplib
+import xmlrpclib
+import kerberos
+import codecs
+import re
+import sys
+from subprocess import *
+import os
+from xml.sax.saxutils import escape
+
+version = "1.0.2"
+class Usage( Exception ):
+	def __init__( self, msg ):
+		self.msg = msg
+
+class Error( Exception ):
+	def __init__( self, msg ):
+		self.msg = msg
+
+class Warn( Exception ):
+	def __init__( self, msg ):
+		self.msg = msg
+
+def main( argv=None ):
+	
+	if( argv is None ):
+		argv = sys.argv
+
+	numargs = len( argv )
+	format = "variablelist"
+	onlyids = False
+	filename = None
+
+	####################
+	# Argument parsing #
+	####################
+	try:
+		if( numargs < 2 or numargs > 4 ):
+			raise Usage( "Usage: errata-list <errata_id> [--table] [--onlyids] [component_map_file]" )
+
+		# Retrieve first arg, errata id - derive errata type.
+		raw_errata_id = sys.argv[1]
+		safe_errata_id = sys.argv[1].replace( ":","-" )
+		errata_type = argv[1][0:4]
+
+		if( errata_type != "RHEA" and errata_type != "RHBA" and errata_type != "RHSA" ):
+			raise Usage( "Usage: errata_id must be a valid errata identifier in RHEA-YYYY:NNNNN, RHBA-YYYY:NNNNN, or RHSA-YYYY:NNNNN format." )
+
+		# Set empty component map as default.
+		component_map = {}
+		# Retrieve other args, if present.
+		if( numargs >= 3 ):
+			for n in argv[2:]:
+				if( n == '--table' ):
+					format = "table"
+				elif( n == '--onlyids' ):
+					onlyids = True                     
+				else:
+					filename = n
+
+		component_map = load_map(filename)
+
+	except Usage, err:
+		print >>sys.stderr, err.msg
+		sys.exit( 2 )
+
+
+
+	##################
+	# Authentication #
+	##################
+
+	# Authenticate using Kerberos ticket, if one isn't found then the program bails out.
+	if(onlyids != True):
+		print "Fetching list of bugs for errata " + raw_errata_id + "..."
+
+	server = xmlrpclib.Server('https://errata.devel.redhat.com/errata/errata_service', transport = KerbTransport())
+	title = server.get_advisory_list( { "id": raw_errata_id} )[0]["synopsis"]
+
+	#########################
+	# List Bugs from errata #
+	#########################
+
+	bugs = list_bugs( server, raw_errata_id )
+
+	buglist = ""
+	for bug in bugs:
+		if( buglist == "" ):
+			buglist += bug
+		else:
+			buglist += "," + bug
+
+	if(onlyids == True):
+		print buglist
+		sys.exit()
+		
+	print "Fetched list of bugs for errata " + raw_errata_id + ", contains " + str( len( bugs ) ) + " bug%s:" % ("s"[len( bugs ) == 1:])
+	print "Fetching bug details..."
+
+	####################
+	# Load Bug Details #
+	####################
+	
+	components = load_bugs( bugs, component_map )
+
+	####################
+	# Save DocBook XML #
+	####################
+	save_xml( safe_errata_id, raw_errata_id, components, format, title )
+
+
+def load_map( filename=None ):
+	"""
+		Generates a mapping of bugzilla components to human readable names 
+		that will be used as section headings in the output.
+
+		Initially the mapping is pre-populated with a list of default values,
+		if a filename is provided then it is expected that the file contains
+		a list of comma separated (component,human readable name) entries to
+		merge with this list.
+		
+		Use of the component mapping also allows multiple components to be 
+		mapped to one meaningful group name.
+
+		Keyword arguments:
+		filename -- The filename from which the map should be loaded.
+	"""
+	
+	component_map = {}
+
+	# Components from underneath RHEV-M product.
+	component_map["RFEs"] = "General"
+	component_map["RHEVM Installation"] = "Installation"
+	component_map["RHEVM WPF Admin GUI"] = "Administration Portal"
+	component_map["Windows Client Tools"] = "Windows Client Tools"
+	component_map["Windows Guest Tools"] = "Windows Guest Tools"
+	component_map["distribution"] = "General"
+	component_map["jasperreports-server-pro"] = "Data Warehouse and Reports"
+	component_map["mingw-virt-viewer"] = "SPICE Client"
+	component_map["otopi"] = "Installation"
+	component_map["ovirt-engine-backend"] = "Backend"
+	component_map["ovirt-engine-cli"] = "Command Line Shell"
+	component_map["ovirt-engine-config"] = "Configuration Tool"
+	component_map["ovirt-engine-dwh"] = "Data Warehouse and Reports"
+	component_map["ovirt-engine-iso-uploader"] = "ISO Uploader"
+	component_map["ovirt-engine-log-collector"] = "Log Collector"
+	component_map["ovirt-engine-notification-service"] = "Notification Service"
+	component_map["ovirt-engine-reports"] = "Data Warehouse and Reports"
+	component_map["ovirt-engine-restapi"] = "REST API"
+	component_map["ovirt-engine-sdk"] = "Software Development Kit"
+	component_map["ovirt-engine-userportal"] = "User Portal"
+	component_map["ovirt-engine-webadmin-portal"] = "Administration Portal"
+	component_map["ovirt-guest-agent"] = "Guest Agent"
+	component_map["ovirt-host-deploy"] = "Backend"
+	component_map["rhevm-doc"] = "Documentation"
+	component_map["rhevm-migration"] = "Migration Tool"
+	component_map["spice-activex-win"] = "SPICE ActiveX Plugin"
+	component_map["spice-client-win"] = "SPICE Client"
+	component_map["spice-qxl-driver-win"] = "SPICE Video Driver"
+	component_map["spice-usb-share-win"] = "SPICE USB Redirection"
+	component_map["spice-vdagent-win"] = "SPICE Guest Agent"
+	component_map["usb-clerk-win"] = "SPICE USB Redirection"
+	
+	# Components from underneath RHEL product.
+	component_map["ovirt-node"] = "Node"
+	component_map["rhev-hypervisor5"] = "Hypervisor"
+	component_map["rhev-hypervisor6"] = "Hypervisor"
+	component_map["vdsm"] = "VDSM"
+
+	if filename is not None:
+		f = open( filename, "r" )
+		for line in f:
+			line_split = line.split( "," )
+			component_map[line_split[0]] = line_split[1]
+		f.close()
+
+	return component_map
+
+
+#
+# list_bugs( server )
+#
+# Lists the bug identifiers attached to the errata using the given
+# xmlrpc server connection and returns the list.
+#
+def list_bugs( server, raw_errata_id ):
+	"""
+		Retrieves the Bugzilla IDs for all bugs attached to the
+		specified errata using the specified Errata Tool XMLRPC
+		connection.
+
+		Keyword arguments:
+		server -- The XMLRPC connection.
+		raw_errata_id -- The identifier of the errata to query.
+	"""
+
+	erratabugs = ""
+	for i in server.getBugsForErrata( raw_errata_id ):
+		if erratabugs=="":
+			erratabugs=str(i)
+		else:
+			erratabugs=erratabugs+","+str(i)
+
+	bugs = erratabugs.split(',')
+	return bugs
+
+
+def load_bugs( bugs, component_map ):
+	"""
+	Load details about a list of bugs using python bugzilla. Marshall the 
+	retrieved bugs into components while applying any component mappings
+	that the user has defined.
+
+	Keyword arguments:
+	bugs -- The list of bugs to query.
+	component_map -- The component mapping to apply. An empty map means
+	that no mappings will be applied.
+	"""
+
+	# Now loop through each bug and get some more information, we will track the 
+	# information in a dictionary, keyed on the component name. This allows us to
+	# group bugs by component when we print them out later.
+	bugscnt = 0
+	components = {}
+	for bug in bugs:
+		# I did try doing this in one call, comma separated, but it looks like the 
+		# bugzilla-python command performs individual XMLRPC calls for each bug 
+		# anyway (instead of a search in one call) + the risk of blowing the max
+		# command length it is easier to do it inside the loop.
+		bugscnt = bugscnt + 1
+		print "Fetching BZ#" + bug + " (" + str(bugscnt) + "/" + str( len( bugs ) ) + ")..."
+		p = Popen("bugzilla " + "query -b " + bug + " --outputformat=\"%{component}*****%{bug_id}*****%{cf_release_notes}*****%{flag:requires_doc_text}*****\"", shell=True, stdout=PIPE).stdout
+		bugraw = ""
+		for i in p.readlines():
+			bugraw += i
+
+		bugfields = bugraw.split('*****')
+	
+		# If no fields were returned we need to bailout, generally it indicates the bug is on lockdown.
+		if(len(bugfields) < 4):
+			print "WARNING: No information found for bug %s." % str(bug)
+			continue
+
+		if(bugfields[3] != "+"):
+			print "WARNING: requires_doc_text flag is " + bugfields[3] + ", skipping."
+			continue
+
+		# Because the component name can have spaces it is returned enclosed in a few extra characters.
+		#component = bugfields[0][2:len(bugfields[0]) - 2]
+		component = bugfields[0][0:len(bugfields[0])]
+	
+		# Let's see if we have a 'nicer' name for the component in the component map.
+		if component in component_map:
+			component = component_map[component]
+
+		# Build the bug data to add to the component.
+		bugdata = {'bug_id': bugfields[1], 'release_notes': escape(bugfields[2])}
+
+		if( len( bugfields[2] ) == 0 ):
+			print "WARNING: release_notes field for BZ#" + bugfields[1] + " is empty!"
+			continue
+
+		if component in components:
+			components[component].append( bugdata )
+		else:
+			components[component]= [ bugdata ]
+
+	return components
+
+
+#
+# save_xml
+#
+# Save DocBook XML output for the given errata to safe_errata_id.xml, based on the 
+# provided bug and component information.
+#
+def save_xml( safe_errata_id, raw_errata_id, components, format="variablelist", title="" ):
+	"""
+	Generate an XML file for the given errata identifier based on the
+	component mappings and bug information supplied in components.
+
+	Keyword arguments:
+	safe_errata_id -- The errata id with the colon escaped for use as a file name 
+	and XML ID.
+	raw_errata_id -- The unescaped errata id for use as a heading.
+	components -- A dictionary mapping a list of component headings to bugzillas. Each
+	bugzilla is represented as a list containing the bug_id and the technical note.
+	"""
+
+	# Set up to write some docbook!
+	filename = safe_errata_id + '.adoc' 
+	f = open(filename, 'w')
+	f.write("[[" + safe_errata_id + "]]\n")
+	f.write("=== " + safe_errata_id + "\n")
+
+	# This is the format we use for RHEV 3.0, the table format is provided (non-default) in case we need to generate errata for the 2.2 book though.
+	if( format == "variablelist" ):
+		f.write("\n")
+		f.write("The bugs contained in this section are addressed by advisory " + raw_errata_id + ". Further information about this advisory is available at https://access.redhat.com/errata/" + raw_errata_id + ".html.\n")
+		f.write("\n")
+		# Let's go through all our components and print some data!
+		for component in sorted(components.keys()):
+			bugs = components[component]
+			f.write("==== " + component + "\n")
+			
+			f.write("\n")
+			for bug in bugs:
+				f.write("BZ#link:https://bugzilla.redhat.com/" + bug['bug_id'] + "[" + bug['bug_id'] + "]\n")
+				f.write("------\n")
+				f.write(bug['release_notes'] + "\n")
+				f.write("------\n")
+				f.write("\n")
+		
+	else:
+		f.write("<section id=\"sect-" + safe_errata_id + "\" >\n")
+		f.write("\t<title>" + raw_errata_id + ":</title>\n")
+		f.write("\t<para>\n")
+		f.write("\t\tThe following bugs are addressed by the <ulink url=\"https://rhn.redhat.com/errata/" + safe_errata_id + ".html\">" + raw_errata_id + "</ulink> update:\n")
+		f.write("\t</para>\n")
+		f.write("\t<table frame=\"all\" id=\"tbl-" + safe_errata_id + "\">\n")
+		f.write("\t\t<title>" + raw_errata_id + " Bug Fixes</title>\n")
+		f.write("\t\t<tgroup align=\"left\" cols=\"2\" colsep=\"1\" rowsep=\"1\">\n")
+		f.write("\t\t\t<colspec colname=\"number\" colnum=\"1\" colwidth=\"30*\" />\n")
+		f.write("\t\t\t<colspec colname=\"description\" colnum=\"2\" colwidth=\"70*\" />\n")
+		f.write("\t\t\t<thead>\n")
+		f.write("\t\t\t\t<row>\n")
+		f.write("\t\t\t\t\t<entry>\n")
+		f.write("\t\t\t\t\t\tRed Hat Bugzilla Number\n")
+		f.write("\t\t\t\t\t</entry>\n")
+		f.write("\t\t\t\t\t<entry>\n")
+		f.write("\t\t\t\t\t\tDescription\n")
+		f.write("\t\t\t\t\t</entry>\n")
+		f.write("\t\t\t\t</row>\n")
+		f.write("\t\t\t</thead>\n")
+		f.write("\t\t\t<tbody>\n")
+		
+		# Let's go through all our components and print some data!
+		for component in sorted(components.keys()):
+			bugs = components[component]
+			# Unlike the new format, we never used to care to much about the component,
+			# so skip straight to extracting bugs.
+			for bug in bugs:
+				f.write("\t\t\t\t<row>\n")
+				f.write("\t\t\t\t\t<entry>\n")
+				f.write("\t\t\t\t\t\t<ulink url=\"https://bugzilla.redhat.com/" + bug['bug_id'] + "\">" + bug['bug_id'] + "</ulink>\n")
+				f.write("\t\t\t\t\t</entry>\n")
+				f.write("\t\t\t\t\t<entry>\n")
+				f.write("\t\t\t\t\t\t<para>" + bug['release_notes'] + "</para>\n")
+				f.write("\t\t\t\t\t</entry>\n")
+				f.write("\t\t\t\t</row>\n")
+
+
+		f.write("\t\t\t</tbody>\n")
+		f.write("\t\t</tgroup>\n")
+		f.write("\t</table>\n")
+		f.write("</section>\n")
+
+	f.close()
+	print "Wrote " + filename + "!"
+
+
+# Autheniticate with Kerberos ticket.
+class KerbTransport(xmlrpclib.SafeTransport):
+    """Handles Kerberos Negotiation authentication to an XML-RPC server."""
+
+    def get_host_info(self, host):
+
+        host, extra_headers, x509 = xmlrpclib.Transport.get_host_info(self, host)
+
+        # Set the remote host principal
+        h = host
+        hostinfo = h.split(':')
+        service = "HTTP@" + hostinfo[0]
+
+        try:
+            rc, vc = kerberos.authGSSClientInit(service);
+        except kerberos.GSSError, e:
+            raise kerberos.GSSError(e)
+
+        try:
+            kerberos.authGSSClientStep(vc, "");
+        except kerberos.GSSError, e:
+            raise kerberos.GSSError(e)
+
+        extra_headers = [
+            ("Authorization", "negotiate %s" % kerberos.authGSSClientResponse(vc) )
+            ]
+
+        return host, extra_headers, x509
+
+
+if __name__ == "__main__":
+	sys.exit(main())
+
+

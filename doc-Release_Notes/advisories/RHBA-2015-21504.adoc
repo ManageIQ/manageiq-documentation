@@ -1,0 +1,220 @@
+[[RHBA-2015-21504]]
+=== RHBA-2015-21504
+
+The bugs contained in this section are addressed by advisory RHBA-2015:21504. Further information about this advisory is available at https://access.redhat.com/errata/RHBA-2015:21504.html.
+
+==== API
+
+BZ#link:https://bugzilla.redhat.com/1127780[1127780]
+------
+As there was a need for an ability to modify tags outside of the user interface, this enhancement enables tag management such as (add, delete, list etc) through web services similar to the functionality a user would have through the user interface. This is now available via REST API.
+------
+
+BZ#link:https://bugzilla.redhat.com/1202556[1202556]
+------
+The new version of CloudForms Management Engine adds the ability to import reports using both the command line and the REST API. This feature addresses the need to import reports without using the CloudForms Management Engine user interface.
+------
+
+BZ#link:https://bugzilla.redhat.com/1238268[1238268]
+------
+The new version of CloudForms Management Engine adds the capability to retrieve Reporting reports with RESTapi. The reports are returned in the JSON format in response to port standard RESTapi inventory calls.
+------
+
+BZ#link:https://bugzilla.redhat.com/1257748[1257748]
+------
+The new version of CloudForms Management Engine adds the ablity to change a user's password using the REST API. This feature was added to address the need to change the CloudForms Management Engine's administrator's password during deployment from the Red Hat Cloud Infrastructure product.
+------
+
+==== Appliance
+
+BZ#link:https://bugzilla.redhat.com/1056278[1056278]
+------
+In the previous version of CloudForms Management Engine all browser client access was logged in the production log as originating from the local host IP address (127.0.0.1), instead of being logged as originating from the IP address of the host from which the transactions were actually carried out. This bug was fixed by updating the version of Rails shipped with the appliance. Originating IP addresses for all transactions are now logged correctly in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1124520[1124520]
+------
+The new version of CloudForms Management Engine adds the ability to dynamically update the virtual machine hardware reconfiguration dialog box based on the limits defined by the lowest virtual machine hardware definition. The hardware definitions were hard coded in the previous version limiting the ability to reconfigure a virtual machine's memory to a maximum of 16GB. The user is now able to reconfigure virtual machine memory as desired.
+------
+
+BZ#link:https://bugzilla.redhat.com/1159009[1159009]
+------
+There was a need to provide users the ability to change from one v2_key to another.  This need arose as a customer has a development and production environment with different encryption keys.  After exporting and importing an automate model, the new database could no longer access these keys. Previously, the keys could be deleted, but there was a need for a way to migrate the data from being encrypted with one key into another.
+
+With this enhancement, fix_auth now converts old v2 keys.
+------
+
+BZ#link:https://bugzilla.redhat.com/1170760[1170760]
+------
+The new version of CloudForms Management Engine adds the ability to disable the admin user after adding LDAP as a user authentication mechanism. This feature adds the ability to protect the admin account from brute force attacks via the web user interface, as password constraints cannot otherwise be enforced for the admin account.
+------
+
+BZ#link:https://bugzilla.redhat.com/1174458[1174458]
+------
+In the previous version of CloudForms Management Engine, the password of the administrative user used to setup a trusted Active Directory forest would be logged to the evm log when saving the settings for the trust. This bug was a result of faulty programming logic, and was fixed by correcting the code. The administrative user's password is no longer logged when setting up a trusted Active Directory forest in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1180768[1180768]
+------
+The appliance image for the new version of CloudForms Management Engine adds separate mount points for the /var, /var/log, /var/log/audit, /home and /tmp directories. This enhancement allows CloudForms Management Engine implementations to remain compliant with STIG (Security Technical Implementation Guide) requirements.
+------
+
+BZ#link:https://bugzilla.redhat.com/1182644[1182644]
+------
+The new version of CloudForms Management Engine adds the ability to run the CloudForms appliance console as a non-root user. This ability allows the implementation to remain compliant with STIG (Security Technical Implementation Guide) requirements.
+------
+
+BZ#link:https://bugzilla.redhat.com/1183092[1183092]
+------
+The new version of CloudForms Management Engine no longer changes, deletes or overwrites the /etc/init/control-alt-delete.override and /var/www/miq/system/LINK/etc/init/control-alt-delete.override files. Any change to these files would result in breaking STIG (Security Technical Implementation Guide) compliance. This ability allows the implementation to remain compliant with STIG requirements.
+------
+
+BZ#link:https://bugzilla.redhat.com/1183094[1183094]
+------
+In the previous version of CloudForms Management Engine, it was not possible to use an OCSP responder to serve CRLs as the Apache http server shipped in that version did not support OCSP. This resulted in a high administrative overhead. This issue was fixed by upgrading the Apache http server to version 2.5 in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1206666[1206666]
+------
+The new version of CloudForms Management Engine removes the requirement to pass the LOCK_CONSOLE=false environment variable when starting the applicance console as the root user over a SSH connection. This makes it easier to start the console when operating in the Open Stack environment.
+------
+
+BZ#link:https://bugzilla.redhat.com/1221760[1221760]
+------
+The new version of CloudForms Management Engine adds the ability to do a full tree search when looking for users under a LDAP directory branch. This feature was added as the default configuration was not able to do a sub-tree search to find all users from the LDAP directory branch. This feature is available as a configuration option in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1222591[1222591]
+------
+In Red Hat CloudForms 3.2 (CloudForms Management Engine 5.4), the cloud-init function blocks SSH access for the root user to virtual machines hosted in Red Hat Enterprise Virtualization 3.4 environments. Note that this issue only occurs in Red Hat Enterprise Virtualization 3.4, and that cloud-init functions correctly for Red Hat Enterprise Virtualization 3.3 and Red Hat Enterprise Virtualization 3.5. This issue will be addressed in a future release.
+------
+
+BZ#link:https://bugzilla.redhat.com/1227426[1227426]
+------
+While migrating from the previous version of CloudForms Management Engine, some users would be deleted but the dashboard definitions for the users were not deleted from the database. This would result in the admin user's inability to generate widgets for groups containing these users. This bug was fixed by checking for and skipping over the residual data for deleted users. The admin user is able to generate widgets as expected in the new version of CloudForms Managetment Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1238423[1238423]
+------
+While migrating from the previous version of CloudForms Management Engine, a process id out of range error would be displayed after the evmserverd service was started. This error was a result of invalid text being written to the evm pid file by the upgrade process. This error was fixed by verifying the content of the pid file before passing it to ps. The process id out of range error is no longer seen in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1238443[1238443]
+------
+Migrating to the previous version of CloudForms Management Engine would fail with a DB:migrate failure error while un-installing rubyrep. This would happen as the replication workers had the VMDB password stored encrypted with the old key. This bug was fixed by ensuring that legacy keys were loaded before un-installing rubyrep, so the task could complete. Migrating to the new version of CloudForms Management Engine now succeeds as expected.
+------
+
+BZ#link:https://bugzilla.redhat.com/1247298[1247298]
+------
+Multi-tenancy provides a mechanism to group or isolate resources and identity via a single instance of the software serving multiple client organizations (tenants). It enables sharing of resources and costs across a large pool of users to allow for:
+-Centralization of infrastructure in locations with lower costs (e.g. real estate, electricity)
+-Peak-load capacity increases (users need not engineer for highest possible load-levels
+-Utilization and efficiency improvements for systems that are often only 10-20% utilized
+------
+
+BZ#link:https://bugzilla.redhat.com/1262984[1262984]
+------
+The new version of CloudForms Management Engine no longer ships with the outdated /var/www/miq/vmdb/certs/ca.cer certificate authority file. This file is no longer in use. Additionally, all references to the file in documentation have been removed.
+------
+
+BZ#link:https://bugzilla.redhat.com/1270148[1270148]
+------
+The new version of CloudForms Management Engine adds the ability to create tag names containing up to 50 characters. The previous version limited tag names to 30 characters. This increase in maximum tag name size was done to allow creation of tag names based on Cloud and OpenStack tenant names.
+------
+
+BZ#link:https://bugzilla.redhat.com/1278202[1278202]
+------
+Previously, there were permission denied errors when logging in with non-root users. This patch fixes the cfme-gemset RPM spec by separating the parts of the enable script that are for one-time setup into a setup script, and calling the setup script from the kickstart.
+------
+
+==== Automate
+
+BZ#link:https://bugzilla.redhat.com/1126934[1126934]
+------
+There was a need to have a quota rule using the space actually consumed by the template, rather than enforce quota on space allocated. This enhancement consolidates quota code to help facilitate resolution. Quota can now be enforced based on used space.
+------
+
+BZ#link:https://bugzilla.redhat.com/1215990[1215990]
+------
+The new version of CloudForms Management Engine enhances the Automate engine to allow the on_entry and on_error methods of a state machine to advance to the next state under valid conditions. For on_entry methods, it checks if the method is required to run. For on_error methods, it handles and recovers from errors.
+------
+
+BZ#link:https://bugzilla.redhat.com/1227045[1227045]
+------
+The new version of CloudForms Management Engine adds the ability to filter service catalog items during deployment. The new deployment model allows the service designer to factor in the dynamic nature of the deployment process, where the user can select a sub-set of services. Automate will exclude all other catalog service items during deployment.
+------
+
+BZ#link:https://bugzilla.redhat.com/1236174[1236174]
+------
+The new version of CloudForms Management Engine enhances the Automate engine to support multiple state machines to be executed in a single workspace. This allows for one state machine to call another state machine in the same workspace. If any one of the state machines in the chain ends with a retry or error, all the state machines end with a retry or error correspondingly.
+------
+
+BZ#link:https://bugzilla.redhat.com/1238391[1238391]
+------
+In the previous version of CloudForms Management Engine, providing a root password in the Customize tab while provisioning a virtual machine resulted in the password being logged in clear text to the evm log. This was because the method used to dump object data did not define the filters for sensitive data. This bug was fixed by adding the filter options to the object dump method. The root password is no longer logged while provisioning a virtual machine in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1254953[1254953]
+------
+There was a need to manage tags via Automate. This enhancement adds a new class method 'categories' to return an array of MiqAeService::MiqAeClassification objects, and exposes the entries method in the MiqAeService::MiqAeClassification to access the entries in a category.
+Automate methods can now access categories and entries.
+------
+
+==== Control
+
+BZ#link:https://bugzilla.redhat.com/1248848[1248848]
+------
+The new version of CloudForms Management Engine removes the user interface and code that provided support for Ruby expressions in conditions. This was done to enhance security of the CloudForms Management Engine appliance.
+------
+
+==== Performance
+
+BZ#link:https://bugzilla.redhat.com/1204108[1204108]
+------
+In the previous version of CloudForms Management Engine, a user could experience long delays in switching between tabs when provisioning virtual machines. This delay was due to the time taken to log debug session data. This bug was fixed by logging debug session data only when running in debug mode. Switching tabs when provisioning is a lot faster in the new version of CloudForms Management Engine.
+------
+
+==== Providers
+
+BZ#link:https://bugzilla.redhat.com/1140191[1140191]
+------
+The previous version of CloudForms Management Engine would fail to collect inventory from an OpenStack provider if accessing OpenStack security groups returned a HTTP 404 error due to the No-Op firewall operating in Neutron on OpenStack. This bug was fixed by changing code in the OpenStack connection library to handle HTTP 404 errors correctly. The new version of CloudForms Management Engine recovers correctly from not being able to collect security group information from OpenStack.
+------
+
+BZ#link:https://bugzilla.redhat.com/1202884[1202884]
+------
+The new version of CloudForms Management Engine adds the ability to gracefully shutdown virtual machines hosted on an OpenStack provider and shelve the OpenStack instance. This capability was already available for infrastructure providers.
+------
+
+BZ#link:https://bugzilla.redhat.com/1218746[1218746]
+------
+The new version of CloudForms Management Engine adds multi-tenant support for orchestrating stacks. This feature adds the ability to collect stack information from all tenants during an orchestration refresh, adds the option to select the tenant in the orchestration provisioning dialog and the ability to operate the stack on the selected tenant.
+------
+
+BZ#link:https://bugzilla.redhat.com/1223536[1223536]
+------
+The previous version of CloudForms Management Engine had a bug in the OpenStack inventory gathering code, which limited its ability to find OpenStack server instances to a maximum of 1000 instances. The bug was a result of the inventory code not supporting paginated queries for OpenStack server instances. This bug was fixed by adding pagination support to the query for OpenStack server instances. The new version of CloudForms Management Engine is able to list all OpenStack server instances for an OpenStack provider.
+------
+
+BZ#link:https://bugzilla.redhat.com/1234871[1234871]
+------
+The previous version of CloudForms Management Engine would report an undefined method error when discovering virtual machines on a Microsoft system center virtual machine manager (SCVMM) provider, if it found a disk-less virtual machine. This bug was a result of the virtual machine storage discovery code always expecting virtual machines to have disks. This bug was fixed by changing the code to handle the case of disk-less virtual machines gracefully. Virtual machine discovery on SCVMM providers completes successfully in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1250202[1250202]
+------
+In the previous version of CloudForms Management Engine, heat templates could be found only in the admin tenant, and no other tenant. This bug was caused by an outdated Fog gem. This bug was fixed by updating the Fog gem version available on the appliance. Heat templates are now found in all tenants in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1260196[1260196]
+------
+The new version of CloudForms Management Engine collects and stores inventory information about disks available for flavours on cloud providers.
+------
+
+BZ#link:https://bugzilla.redhat.com/1263744[1263744]
+------
+Cloud tenants description field length limit causes inventory collection to fail when OpenStack tenant description is over 255 characters. As a result, during the initial discovery of an Openstack environment, CloudForms receives 404 error responses for different instances causing the inventory collection to fail.
+
+Since OpenStack allows a tenant description value larger than 255 characters, CFME OpenStack inventory collection now supports tenant descriptions larger than 255 characters and inventory collection succeeds without any errors.
+------
+

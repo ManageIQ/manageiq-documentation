@@ -1,0 +1,190 @@
+= Managing Containers
+
+Red Hat CloudForms 4.0 allows for container management along with image and flavor management for instances. The orchestration system can be OpenShift or Atomic Enterprise Platform, and it can work with both RHEV and VMware providers.
+
+The +Containers+ area in the top menu bar has options to manage containers, containers providers, images, nodes, registries, podes, and other components.
+
+== Core Concepts
+
+The following is a list of some of the core concepts and objects you will encounter when using CloudForms Management Engine with OpenShift or Atomic Enterprise Platform. Many of these objects come from Kubernetes, which is extended by OpenShift to provide a more feature-rich development life cycle platform.
+
+* *Node* is a machine that containers run on.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts[OpenShift Enterprise 3.1 Architecture Information]
+
+* *Pod* is a group of containers. 
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#pods[OpenShift Enterprise 3.1 Architecture Information].
+
+* *Replication controller* ensures that there is always a certain number of pods available. 
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#replication-controllers[OpenShift Enterprise 3.1 Architecture Information].
+
+* *Service* is a base load balancer that provides traffic to pods.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#services[OpenShift Enterprise 3.1 Architecture Information].
+
+* *Namespace* is an ability to partition resources created by users into logical groups.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#namespaces[OpenShift Enterprise 3.1 Architecture Information].
+
+== Insight and Control
+
+CloudForms Management Engine can connect to OpenShift and Atomic Enterprise Platform containers providers and supports managing them similarly to how infrastructure and cloud providers are managed. This allows you to gain control over different aspects of your environment and answer questions such as:
+
+* How many containers exist in my environment?
+* Does a specific node have enough resources?
+* How many distinct images are used?
+* Which image registries are used?
+
+When CloudForms Management Engine connects to a containers provider, it collects information on different areas of the provider environment:
+
+* Entities such as pods, nodes, or services.
+* Basic relationships between the entities, for example: Which services are serving which pods?
+* Advanced insight into relationships, for example: Which two different containers are using the same image?
+* Additional information, such as services, events, projects, namespaces, routes (OpenShift only), and metrics.
+
+=== Cross-Providers Insight
+
+Cross-providers insight is a feature that connects all layers of infrastructure, cloud, and containers known to CloudForms Management Engine and collects data for analysis.
+
+It supports cross-linking with the following environments:
+
+* OpenStack
+* oVirt or RHEV
+* VMware vCenter
+
+The collected data includes information on traffic, storage, and so on.
+
+=== Working with the Containers Overview Page
+
+The information on all containers providers and entities known to CloudForms Management Engine is summarized on the Containers +Overview+ page. The +Overview+ page provides links to other summary pages which contain further information on the containers providers and entities.
+
+[caption="Containers Overview"]
+image::containers-overview.png[Containers Overview, height=460]
+
+.Working with the Containers Overview Page
+. Navigate to menu:Containers[Overview]. 
+. Click the desired containers provider or entity for viewing the summary with further information.
+
+=== Viewing a Containers Provider Summary
+
+A +Containers Provider+ summary page allows you to view information on different aspects of a containers provider, for example:
+
+* Status of the provider and its components.
+* Relationships between different entities of the containers provider. These relationships are summarized in the +Relationships+ box on the right-hand side of the summary page.
++
+[caption="Entity Relationships"]
+image::entity-relationships.png[Entity Relationships, height=460]
++
+* Additional information on the number of aggregate node CPU cores or aggregate node memory.
+
+.Viewing a Containers Provider Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+
+=== Viewing a Container Nodes Summary
+
+A +Container Node+ summary page allows you to view information on different aspects of a container node, for example:
+
+* How many entities are on a node?
+* What is the capacity and utilization?
+* What are the versions of the underlying operating system and software?
+
+.Viewing a Container Nodes Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Nodes+.
+. Click the desired container node for viewing.
+
+=== Viewing a Containers Summary
+
+A +Containers+ summary page allows you to view information on different aspects of a container, for example:
+
+* Which node is the container running on?
+* Which part of a pod is the container?
+* What is the container ID?
+* What is the container image name?
+
+.Viewing a Containers Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Containers+.
+. Click the desired container for viewing.
+
+=== Viewing a Container Images Summary
+
+A +Container Images+ summary page allows you to view information on different aspects of a container image, for example:
+
+* Which containers are using the image?
+* Which image registry is the image coming from? Is it a certified registry? 
+
+.Viewing a Container Images Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Images+.
+. Click the desired image for viewing.
+
+=== Viewing an Image Registries Summary
+
+An +Image Registries+ summary page allows you to view information on different aspects of an image registry, for example:
+
+* How many images are coming from the registry? What are the images?
+* Which containers are using images from the registry?
+
+.Viewing an Image Registries Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Image Registries+.
+. Click the desired image registry for viewing.
+
+=== Viewing a Pods Summary
+
+A +Pods+ summary page allows you to view information on different aspects of a pod, for example:
+
+* Which containers are part of the pod?
+* Which services work with the pod?
+* Which services does the pod run on?
+* Is the pod controlled by a replicator?
+
+.Viewing a Pods Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Pods+.
+. Click the desired pod for viewing.
+
+=== Viewing a Replicators Summary
+
+A +Replicators+ summary page allows you to view information on different aspects of a replicator, for example:
+
+* What is the number of requested pods?
+* What is the number of current pods?
+
+.Viewing a Replicators Summary
+. Navigate to menu:Containers[Providers]. 
+. Click the desired containers provider for viewing the provider summary.
+. In the +Relationships+ box on the right-hand side of the summary page, click +Replicators+.
+. Click the desired replicator for viewing.
+
+=== Using the Topology Widget
+
+The +Topology+ widget is an interactive topology graph, showing the relationships between the different entities of the containers providers that CloudForms Management Engine has access to.
+
+* The topology graph includes pods, containers, services, nodes, virtual machines, and hosts within the overall containers provider environment.
+* Selecting any individual graph node will display a summary of details for the individual node.
+* It is possible to drag elements to reposition the graph and to zoom in for details on a specific subset of items.
+
+[caption="Topology Widget"]
+image::topology-widget.png[Topology Widget, width=660]
+
+.Viewing the Topology Widget
+. Navigate to menu:Containers[Providers].
+. Click the desired containers provider for viewing the provider summary.
+. On the provider summary page, click +Topology+ in the +Overview+ box on the right-hand side of the page.
+
+=== Running a SmartState Analysis
+
+Perform a SmartState Analysis of a container image to inspect the packages included in an image and get information on all new or updated packages.
+
+.Running a SmartState Analysis
+. Navigate to menu:Containers[Container Images].
+. Check the container image to analyze. You can check multiple images.
+. Click  image:images/1847.png[] btn:[Configuration], and then  image:images/2147.png[] btn:[Perform SmartState Analysis].
++
+The container image is scanned. The process will copy over any required files and install any required packages for the image. After reloading the image page, all new or updated packages are listed.
+

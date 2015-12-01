@@ -43,4 +43,24 @@ IMPORTANT: If the Keystone service is configured to use SSL, you must enter the 
 
 NOTE: CloudForms Management Engine requires that the adminURL endpoint for all OpenStack services be on a non-private network.
 Accordingly, assign the adminURL endpoint an IP address of something other than [literal]+192.168.x.x+.
-The adminURL endpoint must be accessible to the CFME Appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment. 
+The adminURL endpoint must be accessible to the CFME Appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment.
+
+[NOTE]
+======
+For Red Hat CloudForms to be able to receive events from a Red Hat OpenStack provider, the OpenStack configuration file must be modified. Specifically, the [label]#notification_driver# field must be defined.
+
+For Nova and Heat, in order to start getting notifications, manually change the configuration files as below and restart services.
+
+------
+/etc/heat/heat.conf
+notification_driver=glance.openstack.common.notifier.rpc_notifier
+notification_topics=notifications
+------
+
+------
+/etc/nova/nova.conf
+notification_driver=messaging
+notification_topics=notifications
+------
+======
+

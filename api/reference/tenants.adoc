@@ -1,0 +1,133 @@
+
+
+[[tenant-management]]
+== Tenant Management
+
+Tenant management including CRUD operations is available via the REST API.
+Management of tenants is through:
+
+[source,data]
+----
+/api/tenants
+----
+
+* link:#creating-tenants[Creating Tenants]
+* link:#editing-tenants[Editing Tenants]
+* link:#deleting-tenants[Deleting Tenants]
+
+[[creating-tenants]]
+=== Creating Tenants
+
+Creating a Tenant is done via the *create* action as follows:
+
+----
+POST /api/tenants
+----
+
+[source,data]
+----
+{
+  "action" : "create",
+  "resource" : {
+    # New Tenant JSON
+  }
+}
+----
+
+And like other *create* actions, the new tenant data can simply be posted to
+the /api/tenants URL.
+
+----
+POST /api/tenants
+----
+
+[source,data]
+----
+{
+  # New Tenant JSON
+}
+----
+
+For example, creating a new tenant:
+
+----
+POST /api/tenants
+----
+
+[source,json]
+----
+{
+  "name" : "Test Tenant",
+  "description" : "Test Tenant Description",
+  "parent" : { "href" : "http://localhost:3000/api/tenants/1" }
+}
+----
+
+Parent can be specify by _id_ or _href_
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#tenants[Resource Attributes]
+page for a list of available attributes when creating Tenants.
+====
+
+[[editing-tenants]]
+=== Editing Tenants
+
+Editing a Tenant is available via the *edit* action with the *resource* specifying the
+attributes to update for that tenant.
+
+----
+POST /api/tenants/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit" ,
+  "resource" : {
+    "description" : "Updated Description for Tenant"
+  }
+}
+----
+
+NOTE: type is a restricted attribute and cannot be edited.
+
+[[deleting-tenants]]
+=== Deleting Tenants
+
+Deleting a Tenant is done via the delete method:
+
+----
+DELETE /api/tenants/:id
+----
+
+or via the *delete* action as follows:
+
+----
+POST /api/tenants/:id
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or by href:
+
+----
+POST /api/tenants
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/tenants/:id" }
+  ]
+}
+----
+

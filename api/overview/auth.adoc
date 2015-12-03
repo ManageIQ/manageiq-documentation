@@ -28,15 +28,15 @@ API call.
 
 Authentication tokens:
 
-* Are associated with the user credential
-* Provide the necessary identify for RBAC in subsequent REST calls
-* Expire after a certain amount of time - 10 minutes by default.
+* Are associated with the user credentials
+* Provide the necessary identify for RBAC in subsequent REST API calls
+* Expire after a certain amount of time with no REST API activity - 10 minutes by default.
 
 [[requesting-an-authentication-token]]
 ==== Requesting an authentication token
 
 [[request]]
-Request
+Request:
 
 [source,sh]
 ----
@@ -46,9 +46,7 @@ $ curl --user username:password
 ----
 
 [[response]]
-Response
-
-Response for the Authentication Token Request
+Response for the Authentication Token Request:
 
 [source,data]
 ----
@@ -56,8 +54,9 @@ HTTP/1.1 200 OK
 Content-Type: application/json
 
 {
-  "auth_token" : "af0245-238722-4d23db",
-  "expires_on" : "2013-12-07T18:20:07Z"
+  "auth_token": "93d98fd44cc5a401ff385ba87b21fd13",
+  "token_ttl": 600,
+  "expires_on": "2015-11-02T21:50:16Z"
 }
 ----
 
@@ -67,7 +66,7 @@ Content-Type: application/json
 [source,sh]
 ----
 $ curl -i -X GET -H "Accept: application/json"
-       -H "X-Auth-Token: af0245-238722-4d23db"
+       -H "X-Auth-Token: 93d98fd44cc5a401ff385ba87b21fd13"
        http://localhost:3000/api/services/1013
 ----
 
@@ -84,4 +83,51 @@ WWW-Authenticate: Basic realm="Application"
 When a request fails due to an invalid token, the client would then need
 to re-authenticate with the user credentials to obtain a new
 Authentication Token.
+
+
+[[requesting-an-authentication-token-for-ui-client]]
+==== Requesting an authentication token for a UI client
+
+While the default duration for a REST API token is 10 minutes, it is not sufficient for UI type clients
+where the token is needed for sessions that time-out much later.
+
+For such environments, it is possible to request a REST API token to leverage the administrative UI
+session timeout.  This is requested with the *requester_type* parameter witih the value *ui* as follows:
+
+
+[[request]]
+Request:
+
+[source,sh]
+----
+$ curl --user username:password
+        -i X GET -H "Accept: application/json"
+        http://localhost:3000/api/auth?requester_type=ui
+----
+
+[[response]]
+Response for the Authentication Token Request:
+
+[source,data]
+----
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "auth_token": "8789bcd6562beacbaf9f77927c2825e2",
+  "token_ttl": 3600,
+  "expires_on": "2015-11-02T23:24:03Z"
+}
+----
+
+[[api-token-ttl-configuration]]
+==== Configuring the REST API Token Duration
+
+
+[cols=",",options="header",width="70%"]
+|=================================================
+| Requester Type | Default Value | Configure->Configuration->Advanced
+| Default | 10 minutes | api: -> token_ttl: 10.minutes
+| ui | 1 hour | session: -> timeout: 3600
+|=================================================
 

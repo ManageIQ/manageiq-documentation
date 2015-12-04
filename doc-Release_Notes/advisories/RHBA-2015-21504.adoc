@@ -27,11 +27,6 @@ The new version of CloudForms Management Engine adds the ablity to change a user
 
 ==== Appliance
 
-BZ#link:https://bugzilla.redhat.com/1056278[1056278]
-------
-In the previous version of CloudForms Management Engine all browser client access was logged in the production log as originating from the local host IP address (127.0.0.1), instead of being logged as originating from the IP address of the host from which the transactions were actually carried out. This bug was fixed by updating the version of Rails shipped with the appliance. Originating IP addresses for all transactions are now logged correctly in the new version of CloudForms Management Engine.
-------
-
 BZ#link:https://bugzilla.redhat.com/1124520[1124520]
 ------
 The new version of CloudForms Management Engine adds the ability to dynamically update the virtual machine hardware reconfiguration dialog box based on the limits defined by the lowest virtual machine hardware definition. The hardware definitions were hard coded in the previous version limiting the ability to reconfigure a virtual machine's memory to a maximum of 16GB. The user is now able to reconfigure virtual machine memory as desired.
@@ -181,11 +176,6 @@ BZ#link:https://bugzilla.redhat.com/1140191[1140191]
 The previous version of CloudForms Management Engine would fail to collect inventory from an OpenStack provider if accessing OpenStack security groups returned a HTTP 404 error due to the No-Op firewall operating in Neutron on OpenStack. This bug was fixed by changing code in the OpenStack connection library to handle HTTP 404 errors correctly. The new version of CloudForms Management Engine recovers correctly from not being able to collect security group information from OpenStack.
 ------
 
-BZ#link:https://bugzilla.redhat.com/1202884[1202884]
-------
-The new version of CloudForms Management Engine adds the ability to gracefully shutdown virtual machines hosted on an OpenStack provider and shelve the OpenStack instance. This capability was already available for infrastructure providers.
-------
-
 BZ#link:https://bugzilla.redhat.com/1218746[1218746]
 ------
 The new version of CloudForms Management Engine adds multi-tenant support for orchestrating stacks. This feature adds the ability to collect stack information from all tenants during an orchestration refresh, adds the option to select the tenant in the orchestration provisioning dialog and the ability to operate the stack on the selected tenant.
@@ -216,5 +206,122 @@ BZ#link:https://bugzilla.redhat.com/1263744[1263744]
 Cloud tenants description field length limit causes inventory collection to fail when OpenStack tenant description is over 255 characters. As a result, during the initial discovery of an Openstack environment, CloudForms receives 404 error responses for different instances causing the inventory collection to fail.
 
 Since OpenStack allows a tenant description value larger than 255 characters, CFME OpenStack inventory collection now supports tenant descriptions larger than 255 characters and inventory collection succeeds without any errors.
+------
+
+==== Provisioning
+
+BZ#link:https://bugzilla.redhat.com/1216889[1216889]
+------
+After provisioning a virtual machine with more than 4 GB memory from CloudForms Management Engine 3.1, a virtual machine could not be powered on automatically. This happened because the memory reservation was larger than the allocated virtual machine memory. CloudForms 4.0 now validates memory reservation and reports an error message if it is larger than the allocated virtual machine's memory.
+------
+
+BZ#link:https://bugzilla.redhat.com/1234904[1234904]
+------
+Previously, the Virtual Machine Manager (VMM) server was  not loaded into the shell for Microsoft's System Center 2012 SP1 Virtual Machine Manager, causing virtual machine provisioning from templates to fail on System Center 2012 SP1 Virtual Machine Manager. System Center 2012 SP1 VMM environments now load the VMM server into the shell, and provisioning from a template succeeds.
+------
+
+BZ#link:https://bugzilla.redhat.com/1235822[1235822]
+------
+Previously, virtual machines on Red Hat Enterprise Virtualization Manager started slowly, and as a result the virtual machines could not run because they were in Powering Up status during the autostart_destination phase. This has been fixed by adding a loop in the code for the host to requeue a virtual machine's boot request. The virtual machine will automatically raise an error to fail the provisioning if it has not started after 120 attempts.
+------
+
+==== Reporting
+
+BZ#link:https://bugzilla.redhat.com/1238287[1238287]
+------
+Previous CloudForms Management Engine versions did not report a high watermark for the number of virtual machine sockets on a provider's hypervisors over a one-month period. This functionality has been added to the current version of CloudForms Management Engine. A report can now be queued to collect watermark information for sockets on each hypervisor per provider.
+------
+
+BZ#link:https://bugzilla.redhat.com/1243695[1243695]
+------
+Previously, the chargeback report editor did not save the time zone selected in the Chargeback Interval field. This error in the chargeback report editor has been fixed, and a local time zone can now be saved in reports.
+------
+
+==== SmartState Analysis
+
+BZ#link:https://bugzilla.redhat.com/1095243[1095243]
+------
+Previously, SmartState Analysis failed on Red Hat Enterprise Virtualization virtual machines that were stopped, returning the following error message: "no eligible proxy". This happened because the SmartState Analysis code involved hosts, while SmartState Analysis in Red Hat Enterprise Virtualization does not. The SmartState Analysis code now factors out proxies4job and related methods, implements Red Hat Enterprise Virtualization-specific versions, and ignores host affinity. As a result, SmartState Analysis on Red Hat Enterprise Virtualization stopped virtual machines performs correctly.
+------
+
+BZ#link:https://bugzilla.redhat.com/1202895[1202895]
+------
+In Red Hat Enterprise Virtualization 3.5, virtual machine OVF files no longer all reside on the master storage domain. As a result, performing SmartState Analysis on Red Hat Enterprise Virtualization 3.5 virtual machines residing on NFS storage domains failed due to a file not found error. The SmartState Analysis logic has been updated and it now runs successfully on those virtual machines.
+------
+
+==== Web UI
+
+BZ#link:https://bugzilla.redhat.com/1095468[1095468]
+------
+There was a need for a feature to display NTP Settings on Zone Summary page for the ease of use when setting up Appliances. This has been implemented in this release - Description, SmartProxy Server IP, and NTP Servers displayed are visible for the zone under zone summary page.
+------
+
+BZ#link:https://bugzilla.redhat.com/1095470[1095470]
+------
+Previously, when editing a catalog configuration, the form offers an "Assign Buttons" box. This was caused because text was set incorrectly for the button. The display text for the button has been fixed and the form now correctly says “Assign Catalog Items”.
+------
+
+BZ#link:https://bugzilla.redhat.com/1193652[1193652]
+------
+Previously, the report editor handled tags on entities incorrectly, which produced reports based on EVM groups that did not display the correct tags. This caused custom tags such as 'vms.managed.department' and 'miq_templates.managed.department' to be stripped to 'managed.department' form before being added to col_order. This fix allows tags on entities to be saved correctly by the report editor.
+------
+
+BZ#link:https://bugzilla.redhat.com/1234465[1234465]
+------
+Previously, automate exports used Windows line endings. This was caused because 'textarea' form element added \r\n characters in the data for the newline characters.
+
+With this release, 'miqSerializeForm' JS method was changed to replace '%0D%0A' with '%0A' in the serialized form data which has now fixed the issue and export is done correctly.
+------
+
+BZ#link:https://bugzilla.redhat.com/1234588[1234588]
+------
+Previously, there was an undefined method error when looking at bottlenecks under optimize using IE browser. This was caused due to double render issue of the bottlenecks page. 
+This patch fixes the double render issue caused by partial_bottlenecks_tl_detail.html.haml being rendered directly as well as indirectly via _bottlenecks_tabs.html.haml
+------
+
+BZ#link:https://bugzilla.redhat.com/1248039[1248039]
+------
+Previously, when using the Automate Import / Export, if there was another domain available, user was unable to import into a new empty domain.  This was because there was no option to import into the same name domain.
+
+This patch allows importing into a new domain with the same name as importing from which fixes the issue.
+------
+
+BZ#link:https://bugzilla.redhat.com/1252976[1252976]
+------
+Previously, Service Dialog Import / Export wasn't importing All of the Service Dialogs and required importing two to three times before dialogs got imported.
+
+Added SlickGrid plugins related to selections and checkboxes. SlickGrid uses an auto-adaptive display, where if the screen is too small or if the dataset is too large, it removes/re-adds rows to the table as you scroll. This was causing the issue where some of the items in the table weren't being selected to import. The fix was to use SlickGrid's built in plugins for handling row selection, and then serializing the data from the grid itself instead of from the form which has now resolved the issue.
+------
+
+BZ#link:https://bugzilla.redhat.com/1256674[1256674]
+------
+Previously, when using the remote console, there were two mouse cursors, one inside and the other outside of the VM moving at different rates. This was due to the styling in HTML5 console canvases.
+Disabling styling for HTML5 console canvases has resolved the issue as the cursors now move together at the same rate.
+------
+
+BZ#link:https://bugzilla.redhat.com/1263326[1263326]
+------
+Previously, clicking on "Migrate Selected Items" under lifecycle dropdown routed to an incorrect config screen. The caller method did not render flash message for sublist screens.
+
+This patch fixes respective 'button' methods to render flash message partially when tasks (clone, migrate, publish) are not supported for selected items. This is when user tries to perform these tasks from a list view of VMs through relationships. Thereby, the correct screen displays and the issue is now resolved.
+------
+
+BZ#link:https://bugzilla.redhat.com/1278463[1278463]
+------
+Previously, datastore scans are only supported against VMware datastores, but the scan feature is displayed no matter the source of the datastore. This was caused because the option to scan a datastore should only be displayed if the datastore itself belongs to a VMware provider.
+With this release, code was added to only allow SSA for VMware storage records. As a result, SSA button only shows when using a VMware datastore.
+------
+
+BZ#link:https://bugzilla.redhat.com/1280278[1280278]
+------
+Previously, there was no scrollbar in the group switcher list. Therefore, if a user was a member of many groups, one could not see all groups. 
+With this release, a scrollbar has been added to the group switcher list. As a result, one can now see all groups.
+------
+
+==== vulnerability
+
+BZ#link:https://bugzilla.redhat.com/1283019[1283019]
+------
+A privilege escalation flaw was discovered in CloudForms, where in certain situations, CloudForms could read encrypted data from the database and then write decrypted data back into the database. If the database was then exported or log files generated, a local attacker might be able to gain access to sensitive information.
 ------
 

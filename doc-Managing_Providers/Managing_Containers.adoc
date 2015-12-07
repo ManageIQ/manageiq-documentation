@@ -1,8 +1,8 @@
 = Managing Containers
 
-Red Hat CloudForms 4.0 allows for container management along with image and flavor management for instances. The orchestration system can be OpenShift Enterprise or Atomic Enterprise Platform, and it can work with both RHEV and VMware providers.
+Starting with Red Hat CloudForms 4.0, CloudForms Management Engine allows for container management. The orchestration system can be OpenShift Enterprise or Atomic Enterprise Platform, and it can work with both RHEV and VMware providers.
 
-The +Containers+ area in the top menu bar has options to manage containers, containers providers, images, nodes, registries, podes, and other components.
+The +Containers+ area in the top menu bar has options to manage containers, containers providers, images, nodes, registries, pods, and other components.
 
 == Core Concepts
 
@@ -14,7 +14,7 @@ The following is a list of some of the core concepts and objects you will encoun
 * *Pod* is a group of containers. 
   For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#pods[OpenShift Enterprise 3.1 Architecture Information].
 
-* *Replicator* ensures that there is always a certain number of pods available. 
+* *Replicator* ensures that there is always available a certain number of replicas of a specific pod.
   For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#replication-controllers[OpenShift Enterprise 3.1 Architecture Information].
 
 * *Container service* is a base load balancer that provides traffic to pods.
@@ -41,18 +41,18 @@ CloudForms Management Engine can connect to OpenShift Enterprise and Atomic Ente
 * How many distinct images are used?
 * Which image registries are used?
 
-When CloudForms Management Engine connects to a containers provider, it collects information on different areas of the provider environment:
+When CloudForms Management Engine connects to a containers environment, it collects information on different areas of the environment:
 
 * Entities such as pods, nodes, or services.
 * Basic relationships between the entities, for example: Which services are serving which pods?
 * Advanced insight into relationships, for example: Which two different containers are using the same image?
-* Additional information, such as services, events, projects, routes (OpenShift Enterprise only), and metrics.
+* Additional information, such as events, projects, routes (OpenShift Enterprise only), and metrics.
 
 === Cross-Providers Insight
 
 Cross-providers insight is a feature that connects all layers of infrastructure, cloud, and containers known to CloudForms Management Engine and collects data for analysis.
 
-It supports cross-linking with the following environments:
+It supports cross-linking all of the layers available in the following environments:
 
 * OpenStack
 * oVirt or RHEV
@@ -68,8 +68,8 @@ The information on all containers providers and entities known to CloudForms Man
 image::containers-overview.png[Containers Overview, height=460]
 
 .Working with the Containers Overview Page
-. Navigate to menu:Containers[Overview]. 
-. Click the desired containers provider or entity for viewing the summary with further information.
+. Navigate to menu:Containers[Overview].
+. Click the desired containers entity, or provider, if applicable, for viewing the summary with further information.
 
 === Viewing a Containers Provider Summary
 
@@ -115,7 +115,7 @@ A +Containers+ summary page allows you to view information on different aspects 
 * Which node is the container running on?
 * Which part of a pod is the container?
 * What is the container ID?
-* What is the container image name?
+* What is the container's image name?
 
 .Viewing a Containers Summary
 . Navigate to menu:Containers[Providers]. 
@@ -128,7 +128,7 @@ A +Containers+ summary page allows you to view information on different aspects 
 A +Container Images+ summary page allows you to view information on different aspects of a container image, for example:
 
 * Which containers are using the image?
-* Which image registry is the image coming from? Is it a certified registry? 
+* Which image registry is the image coming from?
 
 .Viewing a Container Images Summary
 . Navigate to menu:Containers[Providers]. 
@@ -142,6 +142,7 @@ An +Image Registries+ summary page allows you to view information on different a
 
 * How many images are coming from the registry? What are the images?
 * Which containers are using images from the registry?
+* What is the host and port of the registry?
 
 .Viewing an Image Registries Summary
 . Navigate to menu:Containers[Providers]. 
@@ -157,6 +158,7 @@ A +Pods+ summary page allows you to view information on different aspects of a p
 * Which services reference the pod?
 * Which nodes does the pod run on?
 * Is the pod controlled by a replicator?
+* What is the IP address of the pod?
 
 .Viewing a Pods Summary
 . Navigate to menu:Containers[Providers]. 
@@ -179,11 +181,11 @@ A +Replicators+ summary page allows you to view information on different aspects
 
 === Using the Topology Widget
 
-The +Topology+ widget is an interactive topology graph, showing the relationships between the different entities of the containers providers that CloudForms Management Engine has access to.
+The +Topology+ widget is an interactive topology graph, showing the status and relationships between the different entities of the containers providers that CloudForms Management Engine has access to.
 
-* The topology graph includes pods, containers, services, nodes, virtual machines, and hosts within the overall containers provider environment.
+* The topology graph includes pods, containers, services, nodes, virtual machines, hosts, routes, and replicators within the overall containers provider environment.
 * Selecting any individual graph node will display a summary of details for the individual node.
-* It is possible to drag elements to reposition the graph and to zoom in for details on a specific subset of items.
+* It is possible to drag elements to reposition the graph.
 
 [caption="Topology Widget"]
 image::topology-widget.png[Topology Widget, width=660]
@@ -202,7 +204,7 @@ Perform a SmartState Analysis of a container image to inspect the packages inclu
 . Check the container image to analyze. You can check multiple images.
 . Click  image:images/1847.png[] btn:[Configuration], and then  image:images/2147.png[] btn:[Perform SmartState Analysis].
 +
-The container image is scanned. The process will copy over any required files and install any required packages for the image. After reloading the image page, all new or updated packages are listed.
+The container image is scanned. The process will copy over any required files for the image. After reloading the image page, all new or updated packages are listed.
 +
 To monitor the status of container image SmartState Analysis tasks, navigate to menu:Configure[Tasks]. The status of each task is displayed including time started, time ended, what part of the task is currently running, and any errors encountered.
 

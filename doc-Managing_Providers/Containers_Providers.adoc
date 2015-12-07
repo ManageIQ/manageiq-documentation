@@ -60,6 +60,8 @@ NOTE: At the moment, the `management-infra-admin` role is needed to address the 
     oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}'
     management-admin-token-32f97
     management-admin-dockercfg-fvkso
++
+Replace `management-admin-token-32f97` with the name of your token.
 
 . To retrieve the token, run:
 
@@ -73,9 +75,9 @@ Now it is possible to use the token to add a containers provider in CloudForms M
 :leveloffset: 2
 = Configuring OpenShift Metrics
 
-To collect the `nodes`, `pods`, and `containers` metrics, it is required to run the OpenShift Metrics services inside your cluster. For more information, see the https://access.redhat.com/documentation/en/openshift-enterprise/3.1/installation-and-configuration/chapter-15-enabling-cluster-metrics[OpenShift Enterprise Metrics Documentation].
+To collect the node, pod, and container metrics, it is required to run the OpenShift Metrics services inside your cluster. For more information, see the https://access.redhat.com/documentation/en/openshift-enterprise/3.1/installation-and-configuration/chapter-15-enabling-cluster-metrics[OpenShift Enterprise Metrics Documentation].
 
-NOTE: Use the OpenShift master public host name as the `HAWKULAR_METRICS_HOSTNAME`, at the moment a limitation in CloudForms Management Engine is assuming that the provider *Host Name* is used also to collect the metrics.
+NOTE: Use the OpenShift master's public host name as the `HAWKULAR_METRICS_HOSTNAME`, at the moment a limitation in CloudForms Management Engine is assuming that the provider *Host Name* is used also to collect the metrics.
 
 NOTE: For the metrics collection to work properly, you also need to configure the CloudForms Management Engine to allow for all three +Capacity & Utilization+ server roles which are available under menu:Configure[Configuration > Server > Server Control]. For more information on capacity and utilization collection, see the _Deployment Planning Guide_ available from https://access.redhat.com/documentation/en/red-hat-cloudforms/.
 

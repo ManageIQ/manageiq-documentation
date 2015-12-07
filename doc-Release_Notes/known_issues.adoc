@@ -4,9 +4,57 @@
 These known issues exist in Red Hat CloudForms at this time:
 
 BZ#link:https://bugzilla.redhat.com/1225541[1225541]
-
+------
+At current, attempting to perform a Smart State analysis of a VMware vSphere 6 virtual machine with Virtual Disk Development Kit 6.0 returns an 'Unable to determine port' error, causing the analysis to fail. As a workaround, use Virtual Disk Development Kit 5.5. This issue will be resolved in a future release of Red Hat CloudForms.
 ------
 
-At current, attempting to perform a Smart State analysis of a VMware vSphere 6 virtual machine with Virtual Disk Development Kit 6.0 returns an 'Unable to determine port' error, causing the analysis to fail. As a workaround, use Virtual Disk Development Kit 5.5. This issue will be resolved in a future release of Red Hat CloudForms.
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1272369[1272369]
+------
+Currently, is not possible to edit tags on containers through the web user interface. This will be fixed in a future release so that editing tags on container entities no longer returns an error.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1279458[1279458]
+------
+In the current version of CloudForms Management Engine, the SmartState analysis tasks for container images are incorrectly categorized under  "All VM Analysis Tasks". This bug will be resolved in a forthcoming version of CloudForms Management Engine by correctly categorizing smart state analysis tasks.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1284005[1284005]
+------
+Currently, a user_id must be specified when adding a new container provider through the REST API. Specifying a user_id is not required to add a new container provider, or in the authentication process. This field and requirement will be removed in a future release.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1284257[1284257]
+------
+In the current version of CloudForms Management Engine, any SmartState analysis errors for container images are not reported properly in the UI, these are only logged in evm.log. Additionally, the SmartState analysis task is erroneously reported to have been completed successfully. This bug will be resolved in a forthcoming version of CloudForms Management engine by reporting specific errors in the user interface for failed analysis tasks.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1285455[1285455]
+------
+In the current version of CloudForms Management Engine, the UI only displays daily charts for monitoring container utilization, which delays the ability to monitor containers. This bug will be resolved in a forthcoming version of CloudForms Management Engine by displaying the hourly graphs if the daily graphs are not available to monitor container utilization within an hour of adding a container.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1286247[1286247]
+------
+In the current version of CloudForms Management Engine, following a specific sequence of navigation between pods and container utilization timeline can crash the user interface when displaying container details. The workaround for this bug is to reload the pages forcibly (by pressing F5), when navigating between pods and container utilization entities. This bug will be resolved in a forthcoming version of CloudForms Management Engine by correcting the code that generates the crashes.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1287310[1287310]
+------
+Currently, navigating from a specific pod under the Containers tab to the related service results in an error in the web user interface. This navigation issue will be fixed in a future release.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1287751[1287751]
+------
+Docker image tags can be re-assigned to different images (for example, with a different hash identifier). However, currently the SmartState Analysis task does not verify whether the hash ID of a scanned image matches with the one of the images in the database. This will be resolved in a future release by allowing the SmartState Analysis task to identify the images by verifying the hash ID.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1288131[1288131]
+------
+In the current version of CloudForms Management Engine, the provider link in the container provider timeline is incorrectly generated. Clicking on the link displays an error that the provider does not exist. This bug will be resolved by correcting code to generate the correct link. The provider link on the provider timeline should work as expected in the future release of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1288045[1288045]
+------
+Currently, if an inventory refresh takes place before OpenShift nodes have reported their capacity, the inventory refresh cannot process the entities. This typically happens if self-registration is disabled on the nodes, or if there are stale or unneeded nodes defined in the system. To work around this, remove the stale nodes from the system. This issue will be fixed in a future release by removing the strict requirement on the presence of node capacity.
 ------
 

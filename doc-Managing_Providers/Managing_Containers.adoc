@@ -1,31 +1,40 @@
 = Managing Containers
 
-Red Hat CloudForms 4.0 allows for container management along with image and flavor management for instances. The orchestration system can be OpenShift or Atomic Enterprise Platform, and it can work with both RHEV and VMware providers.
+Red Hat CloudForms 4.0 allows for container management along with image and flavor management for instances. The orchestration system can be OpenShift Enterprise or Atomic Enterprise Platform, and it can work with both RHEV and VMware providers.
 
 The +Containers+ area in the top menu bar has options to manage containers, containers providers, images, nodes, registries, podes, and other components.
 
 == Core Concepts
 
-The following is a list of some of the core concepts and objects you will encounter when using CloudForms Management Engine with OpenShift or Atomic Enterprise Platform. Many of these objects come from Kubernetes, which is extended by OpenShift to provide a more feature-rich development life cycle platform.
+The following is a list of some of the core concepts and objects you will encounter when using CloudForms Management Engine with OpenShift Enterprise or Atomic Enterprise Platform. Many of these objects come from Kubernetes, which is extended by OpenShift Enterprise to provide a more feature-rich development life cycle platform.
 
-* *Node* is a machine that containers run on.
-  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts[OpenShift Enterprise 3.1 Architecture Information]
+* *Node* is a machine that pods run on.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-2-infrastructure-components#node[OpenShift Enterprise 3.1 Architecture Information]
 
 * *Pod* is a group of containers. 
   For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#pods[OpenShift Enterprise 3.1 Architecture Information].
 
-* *Replication controller* ensures that there is always a certain number of pods available. 
+* *Replicator* ensures that there is always a certain number of pods available. 
   For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#replication-controllers[OpenShift Enterprise 3.1 Architecture Information].
 
-* *Service* is a base load balancer that provides traffic to pods.
+* *Container service* is a base load balancer that provides traffic to pods.
   For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#services[OpenShift Enterprise 3.1 Architecture Information].
 
-* *Namespace* is an ability to partition resources created by users into logical groups.
+* *Image* is a binary on which a container is based on. An image includes all of the requirements for running a single container, as well as metadata describing its needs and capabilities.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#docker-images[OpenShift Enterprise 3.1 Architecture Information].
+
+* *Image Registry* is a service for storing and retrieving images.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#docker-registries[OpenShift Enterprise 3.1 Architecture Information].
+
+* *Project (namespace)* is an ability to partition resources created by users into logical groups.
   For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#namespaces[OpenShift Enterprise 3.1 Architecture Information].
+
+* *Route* announces your service to the world.
+  For more information, see https://access.redhat.com/documentation/en/openshift-enterprise/3.1/architecture/chapter-3-core-concepts#routes[OpenShift Enterprise 3.1 Architecture Information].
 
 == Insight and Control
 
-CloudForms Management Engine can connect to OpenShift and Atomic Enterprise Platform containers providers and supports managing them similarly to how infrastructure and cloud providers are managed. This allows you to gain control over different aspects of your environment and answer questions such as:
+CloudForms Management Engine can connect to OpenShift Enterprise and Atomic Enterprise Platform containers providers and supports managing them similarly to how infrastructure and cloud providers are managed. This allows you to gain control over different aspects of your environment and answer questions such as:
 
 * How many containers exist in my environment?
 * Does a specific node have enough resources?
@@ -37,7 +46,7 @@ When CloudForms Management Engine connects to a containers provider, it collects
 * Entities such as pods, nodes, or services.
 * Basic relationships between the entities, for example: Which services are serving which pods?
 * Advanced insight into relationships, for example: Which two different containers are using the same image?
-* Additional information, such as services, events, projects, namespaces, routes (OpenShift only), and metrics.
+* Additional information, such as services, events, projects, routes (OpenShift Enterprise only), and metrics.
 
 === Cross-Providers Insight
 
@@ -49,7 +58,7 @@ It supports cross-linking with the following environments:
 * oVirt or RHEV
 * VMware vCenter
 
-The collected data includes information on traffic, storage, and so on.
+The collected information includes all the data available in other (infrastructure or cloud) providers.
 
 === Working with the Containers Overview Page
 
@@ -92,10 +101,17 @@ A +Container Node+ summary page allows you to view information on different aspe
 . In the +Relationships+ box on the right-hand side of the summary page, click +Nodes+.
 . Click the desired container node for viewing.
 
+==== Viewing a Container Nodes Timeline
+
+You can view the timeline of events for a node. To access the timeline from a container nodes summary page, click image:images/1994.png[] btn:[Monitoring], and then image:images/1995.png[] btn:[Timelines].
+
+For more information on working with timelines, see <<viewing_a_containers_provider_s_timeline>>.
+
 === Viewing a Containers Summary
 
 A +Containers+ summary page allows you to view information on different aspects of a container, for example:
 
+* What are the relationships of the container to a related node, pod, or image?
 * Which node is the container running on?
 * Which part of a pod is the container?
 * What is the container ID?
@@ -138,8 +154,8 @@ An +Image Registries+ summary page allows you to view information on different a
 A +Pods+ summary page allows you to view information on different aspects of a pod, for example:
 
 * Which containers are part of the pod?
-* Which services work with the pod?
-* Which services does the pod run on?
+* Which services reference the pod?
+* Which nodes does the pod run on?
 * Is the pod controlled by a replicator?
 
 .Viewing a Pods Summary
@@ -179,7 +195,7 @@ image::topology-widget.png[Topology Widget, width=660]
 
 === Running a SmartState Analysis
 
-Perform a SmartState Analysis of a container image to inspect the packages included in an image and get information on all new or updated packages.
+Perform a SmartState Analysis of a container image to inspect the packages included in an image.
 
 .Running a SmartState Analysis
 . Navigate to menu:Containers[Container Images].
@@ -187,4 +203,6 @@ Perform a SmartState Analysis of a container image to inspect the packages inclu
 . Click  image:images/1847.png[] btn:[Configuration], and then  image:images/2147.png[] btn:[Perform SmartState Analysis].
 +
 The container image is scanned. The process will copy over any required files and install any required packages for the image. After reloading the image page, all new or updated packages are listed.
++
+To monitor the status of container image SmartState Analysis tasks, navigate to menu:Configure[Tasks]. The status of each task is displayed including time started, time ended, what part of the task is currently running, and any errors encountered.
 

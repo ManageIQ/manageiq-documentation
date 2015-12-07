@@ -1,44 +1,46 @@
-= Start a Virtual Machine
 
-Request: 
+[[start-a-vm]]
+=== Starting a Virtual Machine
+
+==== Request:
 
 ----
 POST /api/vms/1921
 ----
 
-[source]
+[source,json]
 ----
 {
   "action": "start"
 }
 ----
 
-Response: 
+==== Response:
 
-[source]
+[source,json]
 ----
 {
   "success": true,
   "message": "VM id:1921 name:'aab_demo_vm' starting",
   "task_id": 610,
-  "task_href": "https://hostname/api/tasks/610",
-  "href": "https://hostname/api/vms/1921"
+  "task_href": "http://localhost:3000/api/tasks/610",
+  "href": "http://localhost:3000/api/vms/1921"
 }
 ----
 
-Querying task progress: 
+=== Querying Task Progress:
 
-Request: 
+==== Request:
 
 ----
 GET /api/tasks/620
 ----
 
-Response: 
+==== Response:
 
 ----
 {
-  "href": "https://hostname/api/tasks/610",
+  "href": "http://localhost:3000/api/tasks/610",
   "id": 610,
   "name": "VM id:1921 name:'aab_demo_vm' starting",
   "state": "Queued",

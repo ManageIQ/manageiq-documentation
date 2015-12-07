@@ -1,17 +1,22 @@
-= Trigger a Single Provisioning Request
 
-With provisioning requests: 
+[[trigger-a-single-provision-request]]
+=== Triggering a Single Provision Request
 
-* version defaults to "1.1" if not specified. 
-* user_name defaults to the REST API authenticated user if not specified. 
+With provisioning requests:
 
-Request: 
+* version defaults to "1.1" if not specified.
+* user_name defaults to the REST API authenticated user if not
+specified.
 
+==== Request:
+
+Provisioning requests are made available via the following entrypoint, either by specifying a _create_ action or by posting the request directly
+to */api/provision_requests*:
 ----
 POST /api/provision_requests
 ----
 
-[source]
+[source,json]
 ----
 {
   "version" : "1.1",
@@ -43,13 +48,15 @@ POST /api/provision_requests
 }
 ----
 
-Optionally, the action-based request format is also supported: 
+Optionally, the action-based request format is also supported:
+
+==== Request:
 
 ----
 POST /api/provision_requests
 ----
 
-[source]
+[source,json]
 ----
 {
   "action" : "create",
@@ -84,9 +91,9 @@ POST /api/provision_requests
 }
 ----
 
-Response: 
+==== Response:
 
-[source]
+[source,json]
 ----
 {
   "results": [

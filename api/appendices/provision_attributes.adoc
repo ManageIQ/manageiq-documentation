@@ -2,14 +2,17 @@
 [[provision-request-supported-attributes]]
 == Provision Request Supported Attributes
 
-* link:#requester-attributes[Requester Attributes]
-* link:#custom-attributes[Custom Attributes]
-* link:#environment-attributes[Environment Attributes]
-* link:#service-catalog-attributes[Service Catalog Attributes]
-* link:#schedule-attributes[Schedule Attributes]
-* link:#desktop-attributes[Desktop Attributes]
-* link:#network-attributes[Network Attributes]
-* link:#hardware-attributes[Hardware Attributes]
+[options="header",width="60%,20%"]
+|=====================================================================================
+| Attribute Class                                               | Provision Request Attribute Group
+| link:#requester-attributes[Requester Attributes]              | requester
+| link:#custom-attributes[Custom Attributes]                    | vm_fields
+| link:#service-catalog-attributes[Service Catalog Attributes]  | vm_fields
+| link:#schedule-attributes[Schedule Attributes]                | vm_fields
+| link:#network-attributes[Network Attributes]                  | vm_fields
+| link:#hardware-attributes[Hardware Attributes]                | vm_fields
+| link:#environment-attributes[Environment Attributes]          | additional_values
+|=====================================================================================
 
 [[requester-attributes]]
 === Requester Attributes
@@ -82,36 +85,6 @@
 | customization_template_script | string | Script Text | |
 |=====================
 
-[[environment-attributes]]
-=== Environment Attributes
-
-[cols="1<,1<,3<,2<,1<",options="header",]
-|=====================
-| Attribute | Type | Description | Values | Default
-| new_datastore_grow_increment | integer | Grow Increment (GB) | |
-| new_datastore_create | boolean | Create Datastore | | false
-| placement_cluster_name | integer | Name | |
-| new_datastore_aggregate | string | Aggregate | |
-| new_datastore_max_size | integer | Max Size (GB) | |
-| new_datastore_storage_controller | string | Controller | |
-| cluster_filter | integer | Filter | |
-| host_filter | integer | Filter | |
-| ds_filter | integer | Filter | |
-| new_datastore_volume | string | Volume | |
-| placement_host_name | integer | Name | |
-| placement_ds_name | integer | Name | |
-| new_datastore_fs_type | string | FS Type | NFS, VMFS | NFS
-| rp_filter | integer | Filter | |
-| new_datastore_thin_provision | string | Thin Provision | |
-| placement_auto | boolean | Choose Automatically | | false
-| new_datastore_size | integer | Size (GB) | |
-| new_datastore_autogrow | string | Autogrow | | false
-| placement_folder_name | integer | Name | |
-| new_datastore_name | string | Name | |
-| placement_rp_name | integer | Name | |
-| placement_dc_name | integer | Name | |
-|=====================
-
 [[service-catalog-attributes]]
 === Service Catalog Attributes
 
@@ -145,21 +118,6 @@
 | retirement_warn | integer | Retirement Warning | 1.week, 2.weeks, 30.days | 1.week
 |=====================
 
-[[desktop-attributes]]
-=== Desktop Attributes
-
-[cols="1<,1<,3<,2<,1<",options="header",]
-|=====================
-| Attribute | Type | Description | Value | Default
-| vdi_new_desktop_pool_name | string | Name | |
-| vdi_farm | string | Farm | |
-| vdi_new_desktop_pool_assignment | string | Desktop Pools Assignment | |
-| vdi_desktop_pool_create | boolean | Create Desktop Pool | | false
-| vdi_desktop_pool | string | Desktop Pools | |
-| vdi_enabled | boolean | Enabled | | false
-| vdi_desktop_pool_user_list | string | User List | |
-|=====================
-
 [[network-attributes]]
 === Network Attributes
 
@@ -185,5 +143,39 @@
 | vm_memory | string | Memory (MB) | 1024, 2048, 4096 | 1024
 | memory_reserve | integer | Memory (MB) | |
 | network_adapters | integer | Network Adapters | 1, 2, 3, 4 | 1
+|=====================
+
+[[environment-attributes]]
+=== Environment Attributes
+
+These attributes cannot be passed directly. To use these attributes, provide them in
+the *additional_values* attribute group and have customization methods use them and modify
+the request accordingly.
+
+[cols="1<,1<,3<,2<,1<",options="header",]
+|=====================
+| Attribute | Type | Description | Values | Default
+| new_datastore_grow_increment | integer | Grow Increment (GB) | |
+| new_datastore_create | boolean | Create Datastore | | false
+| placement_cluster_name | integer | Name | |
+| new_datastore_aggregate | string | Aggregate | |
+| new_datastore_max_size | integer | Max Size (GB) | |
+| new_datastore_storage_controller | string | Controller | |
+| cluster_filter | integer | Filter | |
+| host_filter | integer | Filter | |
+| ds_filter | integer | Filter | |
+| new_datastore_volume | string | Volume | |
+| placement_host_name | integer | Name | |
+| placement_ds_name | integer | Name | |
+| new_datastore_fs_type | string | FS Type | NFS, VMFS | NFS
+| rp_filter | integer | Filter | |
+| new_datastore_thin_provision | string | Thin Provision | |
+| placement_auto | boolean | Choose Automatically | | false
+| new_datastore_size | integer | Size (GB) | |
+| new_datastore_autogrow | string | Autogrow | | false
+| placement_folder_name | integer | Name | |
+| new_datastore_name | string | Name | |
+| placement_rp_name | integer | Name | |
+| placement_dc_name | integer | Name | |
 |=====================
 

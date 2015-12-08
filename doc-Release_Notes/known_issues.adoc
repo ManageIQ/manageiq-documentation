@@ -74,3 +74,25 @@ BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1288045[1288045]
 Currently, if an inventory refresh takes place before OpenShift nodes have reported their capacity, the inventory refresh cannot process the entities. This typically happens if self-registration is disabled on the nodes, or if there are stale or unneeded nodes defined in the system. To work around this, remove the stale nodes from the system. This issue will be fixed in a future release by removing the strict requirement on the presence of node capacity.
 ------
 
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=128956[1289156]
+------
+Currently, replication of the appliance database fails after migrating from Red Hat CloudForms 5.4 to Red Hat CloudForms 5.5. The following steps resolve this issue after the migration procedure:
+
+Disable database synchronization role on all Regional Database Appliances.
+
+Run the following command on the Master Database Appliance:
+# psql -d vmdb_production -c "delete from host_storages"
+
+Run the following commands on all Regional Database Appliances, replacing <region> with the region number of the Regional Database Appliance:
+# vmdb
+# bin/rake evm:dbsync:uninstall host_storages
+# psql -d vmdb_production -c "drop trigger if exists rr1_hosts_storages on host_storages"
+# psql -d vmdb_production -c "drop function if exists rr1_hosts_storages()"
+# psql -d vmdb_production -c "delete from rr<region>_pending_changes where change_table = 'hosts_storages'"
+# psql -d vmdb_production -c "delete from rr<region>_sync_state where table_name = 'hosts_storages'"
+# bin/rake evm:dbsync:prepare_replication_without_sync
+
+Finally, enable the database synchronization role on the Regional Database Appliances.
+------
+
+

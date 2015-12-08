@@ -655,7 +655,7 @@ To Enable the snmpd and snmptrapd Daemons"
 
 To Enable the Notifier Role:
 
-. Access each SNMP processing appliance using their web interaces.
+. Access each SNMP processing appliance using their web interfaces.
 . Navigate to +Configure → Configuration → Settings+.
 . Select the zone where the EVM server is located, and select the EVM server.
 . In the +Server Control+ area, select the +Notifier+ server role.
@@ -1120,7 +1120,7 @@ Table: ems_refresh
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
 |Parameters|Description
-|capture_vm_created_on_date|Set to false to turn off historical event retrieval. Set to true to turn on. By setting the flag to true CFME will try to set the "ems_created_on" column in the vms table after an ems refresh for new VMs and any VMs with a nil "ems_created_on" value. CFME looks at event information in our database as well as looking up historical event data from the managementsystem. This is optional since the historical lookup could timeout. Default: false
+|capture_vm_created_on_date|Set to false to turn off historical event retrieval. Set to true to turn on. By setting the flag to true CFME will try to set the "ems_created_on" column in the vms table after an ems refresh for new VMs and any VMs with a nil "ems_created_on" value. CFME looks at event information in our database as well as looking up historical event data from the management system. This is optional since the historical lookup could timeout. Default: false
 |collect_advanced_settings|Set to false if you do not want to collect advanced Virtual Machine settings during a management system refresh. This will increase the speed of the refresh, but less data will be collected. If the parameter is not listed, then the value is true. Default: true
 |ec2|
 |get_private_images|For EC2 refreshes only; whether or not to retrieve private images. Default: true
@@ -1274,7 +1274,7 @@ Table 3.12. server
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
 |Parameters|Description
-|case_sensitive_name_search|Specifiy if you want the search by name on configuration item screens to be case senstivite. Default: false
+|case_sensitive_name_search|Specify if you want the search by name on configuration item screens to be case senstive. Default: false
 |company|Specify the label you want to use for your company's tagging. This is the same as Company Name in Configuration-Operations- Server-Basic Info. Default: "My Company"
 |custom_logo|Specify if you want to use a custom logo. This is the same as Use Custom Logo in Configuration-Custom Logo-Logo Selection. Default: false
 |events|
@@ -1383,7 +1383,7 @@ Table: workers
 |memory_threshold|How much memory to allow the worker to grow to before gracefully requesting it to exit and restart. Default: 150.megabytes
 |nice_delta|Tells the worker monitor what Unix "nice" value to assign the workers when starting. A lower number is less nice to other processes. Default: 10
 |restart_interval|How long to let a worker remain up before asking it to restart. All queue based workers are set to 2.hours and every other worker does not get restarted by a 0.hours value. Default: 0.hours
-|starting_timeout|How long to wait before checking a worker's heartbeat when it is starting up to mark it as not reponding, similar to a grace period before you begin monitoring it. Default: 10.minutes
+|starting_timeout|How long to wait before checking a worker's heartbeat when it is starting up to mark it as not responding, similar to a grace period before you begin monitoring it. Default: 10.minutes
 |event_catcher|Associated with Event Monitor Server Role. Captures ems events and queues them up for the event_handler to process. Parameters specified here will override those set in the worker_base:default section.
 |ems_event_page_size|Internal system setting which sets the maximum page size for the event collector history. This should not be modified. Default: 100
 |ems_event_thread_shutdown_timeout|Internal system setting which determines how long the event catcher at shutdown will wait for the event monitor thread to stop. This should not be modified. Default: 10.seconds
@@ -1469,7 +1469,7 @@ Table: workers
 |poll_method|If set to normal, the worker checks for work the number of seconds set in the poll parameter. If set to escalate, the worker will increase the time between checks when there is no work to be done. Default: normal
 |generic_worker|Performs work that is not classified as any specific type of work. Processes all normal priority or non-specific queue items. Parameters specified here will override those set in the queue_worker_base:default section
 |count|Number of this type of worker. Default: 4
-|ems_refresh_worker|Performs all ems (management system) refreshes to keep the vmdb in sync with the state of the components of the virtual infrastrucutre in the various management systems. Parameters specified here will override those set in the queue_worker_base:default section
+|ems_refresh_worker|Performs all ems (management system) refreshes to keep the vmdb in sync with the state of the components of the virtual infrastructure in the various management systems. Parameters specified here will override those set in the queue_worker_base:default section
 |poll|How often the workers checks for work. This value only is only used when the worker has no more work to do from the queue. It will wait for an amount of time determined by the poll value and poll method. Therefore, if there is constant work on the queue, the worker will not wait in between messages. Default: 10.seconds
 |memory_threshold|How much memory to allow the worker to grow to before gracefully requesting it to exit and restart. Default: 2.gigabytes
 |nice_delta|Tells the worker monitor what Unix "nice" value to assign the workers when starting. A lower number is less nice to other processes. Default: 7
@@ -1626,7 +1626,7 @@ To Create a Project Quota:
 . Click on the +Access Control+ accordion, then click +Tenants+.
 . Click on the +Project+ where you want to add a Quota, click image:1847.png[] (+Configuration+), and image:plus_green.png[] (+Manage Quotas+) to create a Quota.
 . In the list of pre-built Quotas, mark +the _Enforced_ checkbox+ next to the Quota item you want to enable.
-. In the +Value+ field, enter the contstraints you want to apply to the Quota.
+. In the +Value+ field, enter the constraints you want to apply to the Quota.
 . Click +Save+.
 
 
@@ -2332,9 +2332,15 @@ All CFME databases in a multi-region deployment must use the same security key.
 
 ===== Creating a Region
 
-The process of creating a region takes a few minutes. The database is dropped and rebuilt to accommodate the region numbers.
+Use this procedure to create a region on a CloudForms Management Engine (CFME) Appliance that already has a database. The process of creating a region takes a few minutes. The database is dropped and rebuilt to accommodate the region numbers.
 
-To Create a Region:
+[NOTE]
+======
+In most cases, a region is created when you are deploying your CFME environment; essentially, on the first Appliance for the region. 
+To configure a database for CFME, follow the procedure described https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/installing-cloudforms-on-red-hat-enterprise-linux-openstack-platform/#configuring_a_database[here].
+======
+
++To Create a Region+:
 
 . Start the appliance and log in to the black appliance console with a user name of admin and the default password. The +Appliance Summary Screen+ displays.
 . Press +Enter+ to manually configure settings.

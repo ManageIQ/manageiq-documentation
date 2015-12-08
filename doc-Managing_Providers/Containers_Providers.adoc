@@ -6,21 +6,19 @@ The +Containers+ area in the top menu bar has options to add and manage containe
 
 The supported containers provider types that you can add in CloudForms Management Engine are:
 
-* *OpenShift Enterprise*. For information on adding this provider type, see <<Adding an OpenShift Provider>>.
+* *OpenShift Enterprise*. For information on adding this provider type, see <<Adding an OpenShift Enterprise Provider>>.
 * *Atomic Enterprise Platform*. For information on adding this provider type, see <<Adding an Atomic Enterprise Platform Provider>>.
 
-To successfully add an OpenShift or Atomic Enterprise Platform provider, you must first configure a service account in a provider's cluster. For more information, see <<Configuring Service Accounts>>.
+To successfully add an OpenShift Enterprise or Atomic Enterprise Platform provider, you must first configure a service account in a provider's cluster. For more information, see <<Configuring Service Accounts>>.
 
 :leveloffset: 2
 = Configuring Service Accounts
 
-To add an OpenShift or Atomic Enterprise Platform provider, you must create, in a provider's cluster, a specific `management` service account with the proper role, permissions, and authentication token.
+To add an OpenShift Enterprise or Atomic Enterprise Platform provider, you must create, in a provider's cluster, a specific `management` service account with the proper role, permissions, and authentication token.
 
-For more information on these topics, see the relevant documentation:
+For more information on these topics, see the relevant documentation for OpenShift Enterprise:
 
-- https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/design/service_accounts.md[Kubernetes Service Accounts]
-- https://github.com/kubernetes/kubernetes/blob/release-1.1/docs/admin/authentication.md[Kubernetes Authentication]
-- https://access.redhat.com/documentation/en/openshift-enterprise/3.1/developer-guide/chapter-4-service-accounts[OpenShift Service Accounts]
+* https://access.redhat.com/documentation/en/openshift-enterprise/3.1/developer-guide/chapter-4-service-accounts[OpenShift Service Accounts]
 
 To add a `management` service account in an OpenShift cluster, follow these steps:
 
@@ -62,6 +60,8 @@ NOTE: At the moment, the `management-infra-admin` role is needed to address the 
     oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}'
     management-admin-token-32f97
     management-admin-dockercfg-fvkso
++
+Replace `management-admin-token-32f97` with the name of your token.
 
 . To retrieve the token, run:
 
@@ -75,9 +75,11 @@ Now it is possible to use the token to add a containers provider in CloudForms M
 :leveloffset: 2
 = Configuring OpenShift Metrics
 
-To collect the `nodes`, `pods`, and `containers` metrics, it is required to run the OpenShift Metrics services inside your cluster. For more information, see the https://access.redhat.com/documentation/en/openshift-enterprise/3.1/installation-and-configuration/chapter-15-enabling-cluster-metrics[OpenShift Enterprise Metrics Documentation].
+To collect the node, pod, and container metrics, it is required to run the OpenShift Metrics services inside your cluster. For more information, see the https://access.redhat.com/documentation/en/openshift-enterprise/3.1/installation-and-configuration/chapter-15-enabling-cluster-metrics[OpenShift Enterprise Metrics Documentation].
 
-NOTE: Use the OpenShift master public host name as the `HAWKULAR_METRICS_HOSTNAME`, at the moment a limitation in CloudForms Management Engine is assuming that the provider *Host Name* is used also to collect the metrics.
+NOTE: Use the OpenShift master's public host name as the `HAWKULAR_METRICS_HOSTNAME`, at the moment a limitation in CloudForms Management Engine is assuming that the provider *Host Name* is used also to collect the metrics.
+
+NOTE: For the metrics collection to work properly, you also need to configure the CloudForms Management Engine to allow for all three +Capacity & Utilization+ server roles which are available under menu:Configure[Configuration > Server > Server Control]. For more information on capacity and utilization collection, see the _Deployment Planning Guide_ available from https://access.redhat.com/documentation/en/red-hat-cloudforms/.
 
 Once http://www.hawkular.org/[Hawkular Metrics] and https://github.com/kubernetes/heapster[Heapster] have been successfully deployed by OpenShift Metrics, it is possible to create a router for CloudForms Management Engine to access the metrics data:
 
@@ -88,7 +90,7 @@ Once http://www.hawkular.org/[Hawkular Metrics] and https://github.com/kubernete
       --stats-port=1937 \
       --host-network=false
 
-This router must, at the moment, be run on the master nodes to expose the metrics on the port *5000* to CloudForms Management Engine, hence the need for a `selector` on the `kubernetes.io/hostname` of the master node.
+This router must, at the moment, run on the master nodes to expose the metrics on the port *5000* to CloudForms Management Engine, hence the need for a `selector` on the `kubernetes.io/hostname` of the master node.
 
 As long as the router or routers are accessible from the same public host name of the master, it is possible to use different selectors and scale the number of replicas in order to achieve high availability.
 

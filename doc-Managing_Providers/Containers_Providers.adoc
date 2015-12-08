@@ -57,7 +57,7 @@ NOTE: At the moment, the `management-infra-admin` role is needed to address the 
 +
 . To obtain the `management` service account token name, run:
 
-    oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}'
+    $ oc get -n management-infra sa/management-admin --template='{{range .secrets}}{{printf "%s\n" .name}}{{end}}'
     management-admin-token-32f97
     management-admin-dockercfg-fvkso
 +
@@ -83,7 +83,9 @@ NOTE: For the metrics collection to work properly, you also need to configure th
 
 Once http://www.hawkular.org/[Hawkular Metrics] and https://github.com/kubernetes/heapster[Heapster] have been successfully deployed by OpenShift Metrics, it is possible to create a router for CloudForms Management Engine to access the metrics data:
 
-    oadm router management-metrics \
+    $ oc project default
+
+    $ oadm router management-metrics \
       --credentials=/etc/origin/master/openshift-router.kubeconfig \
       --service-account=router --ports='443:5000' \
       --selector='kubernetes.io/hostname=<INSERT MASTER HOSTNAME HERE>'

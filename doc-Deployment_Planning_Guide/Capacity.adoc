@@ -39,13 +39,13 @@ creation of capacity and utilization.
 
 . Navigate to +Configure → Configuration+.
 . Navigate to the +Server → Server Control+ area, and select the appropriate
-  capacity & utilization roles based on your configuration.
-. Click +Save+.
+  Capacity & Utilization roles from the list based on your configuration.
+. Click btn:[Save].
 
 Data collection begins immediately. However, the first collection begins
 5 minutes after the server is started, and every 10 minutes after that.
-Therefore, the longest the collection takes after enabling the capacity &
-utilization collector server role is 10 minutes. The first collection
+Therefore, the longest the collection takes after enabling the Capacity &
+Utilization collector server role is 10 minutes. The first collection
 from a particular provider may take a few minutes since CloudForms
 Management Engine is gathering data points going one month back in time.
 
@@ -55,7 +55,7 @@ Management Engine is gathering data points going one month back in time.
 In addition to setting the server role, you must also select which
 clusters and datastores to collect data for. For more information, see
 *General Configuration*. You must have super administrator rights to edit
-these settings
+these settings.
 ======
 
 === Data Collection for Red Hat Enterprise Virtualization 3.3 and 3.4
@@ -70,32 +70,32 @@ database is located. Usually, this is the RHEV-M server.
 . Using SSH, access the RHEV-M database server as the root user:
 +
 ------
-$ ssh root@example.postgres.server  
+$ ssh root@example.postgres.server
 ------
 +
 . Switch to the postgres user:
 +
 ------
-# su - postgres  
+# su - postgres
 ------
 +
 . Access the database prompt:
 +
 ------
--bash-4.1$ psql  
+-bash-4.1$ psql
 ------
 +
 . Create a new user for the CloudForms Management Engine:
 +
 ------
-postgres=# CREATE ROLE cfme LOGIN UNENCRYPTED PASSWORD 'smartvm' SUPERUSER VALID UNTIL 'infinity';  
+postgres=# CREATE ROLE cfme LOGIN UNENCRYPTED PASSWORD 'smartvm' SUPERUSER VALID UNTIL 'infinity';
 ------
 +
 . Exit to the RHEV-M database server prompt:
 +
 ------
 postgres=# \q
--bash-4.1$ exit  
+-bash-4.1$ exit
 ------
 +
 . Update the server's firewall to accept TCP communication on port
@@ -103,27 +103,27 @@ postgres=# \q
 +
 ------
 # iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
-# service iptables save  
+# service iptables save
 ------
 +
 . Enable external md5 authentication by appending the following line to
   +/var/lib/pgsql/data/pg_hba.conf+:
 +
 ------
-host    all      all    0.0.0.0/0     md5  
+host    all      all    0.0.0.0/0     md5
 ------
 +
 . Enable PostgreSQL to listen for remote connections by updating the
   listen_address line in +/var/lib/pgsql/data/postgresql.conf+:
 +
 ------
-listen_addresses  =  '*'  
+listen_addresses  =  '*'
 ------
 +
 . Reload the PostgreSQL configuration:
 +
 ------
-service postgresql reload  
+service postgresql reload
 ------
 +
 
@@ -138,7 +138,7 @@ provider.
 . Click image:1847.png[](+Configuration+), and then image:1851.png[](+Edit this Provider+).
 . In the Credentials area, click +C & U Database+.
 . Type in the credentials for the new database user you created.
-. Click +Save+.
+. Click btn:[Save].
 . Finally, restart the capacity and utilization data collector. For
   more information, see *General Configuration*.
 
@@ -157,13 +157,13 @@ to both the RHEL-OSP and RHEL Server Optional channels. Perform all steps on you
 ------
 # rhn-channel --add -c rhel-x86_64-server-6-ost-3 -c rhel-x86_64-server-optional-6
 # yum update -y
-# reboot  
+# reboot
 ------
 +
 . Install Ceilometer:
 +
 ------
-# yum install *ceilometer*  
+# yum install *ceilometer*
 ------
 +
 . Install and start the MongoDB store:
@@ -171,7 +171,7 @@ to both the RHEL-OSP and RHEL Server Optional channels. Perform all steps on you
 ------
 # yum install mongodb-server
 # sed -i '/--smallfiles/!s/OPTIONS=\"/OPTIONS=\"--smallfiles /' /etc/sysconfig/mongod
-# service mongod start  
+# service mongod start
 ------
 +
 . Create the following users and roles:
@@ -189,7 +189,7 @@ to both the RHEL-OSP and RHEL Server Optional channels. Perform all steps on you
 # for role in $RESELLER_ROLE $ADMIN_ROLE ; do
 keystone user-role-add --tenant_id $SERVICE_TENANT \
 --user_id $CEILOMETER_USER --role_id $role
-done  
+done
 ------
 +
 . Configure the authtoken in ceilometer.conf:
@@ -200,7 +200,7 @@ done
 # openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_protocol http
 # openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_tenant_name services
 # openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_user ceilometer
-# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_password $SERVICE_PASSWORD  
+# openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_password $SERVICE_PASSWORD
 ------
 +
 . Configure the user credentials in ceilometer.conf:
@@ -209,7 +209,7 @@ done
 # openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_auth_url http://127.0.0.1:35357/v2.0
 # openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_tenant_name services
 # openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_password $SERVICE_PASSWORD
-# openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_username ceilometer  
+# openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_username ceilometer
 ------
 +
 . Start the Ceilometer services:
@@ -217,7 +217,7 @@ done
 ------
 # for svc in compute central collector api ; do
   service openstack-ceilometer-$svc start
-  done  
+  done
 ------
 +
 . Register an endpoint with the service catalog. Replace +$EXTERNALIFACE+
@@ -232,14 +232,14 @@ done
 --service_id $CEILOMETER_SERVICE \
 --publicurl "http://$EXTERNALIFACE:8777/" \
 --adminurl "http://$EXTERNALIFACE:8777/" \
---internalurl "http://localhost:8777/"  
+--internalurl "http://localhost:8777/"
 ------
 +
 . Enable access to Ceilometer from external systems:
 +
 ------
 # iptables -I INPUT -p tcp -m multiport --dports 8777 -m comment --comment "001 ceilometer incoming" -j ACCEPT
-# iptables save  
+# iptables save
 ------
 +
 . Confirm the status of OpenStack and the Ceilometer services:
@@ -248,22 +248,22 @@ done
 # openstack-status
 # for svc in compute central collector api ; do
   service openstack-ceilometer-$svc status
-  done  
+  done
 ------
 +
 . Verify Ceilometer is working correctly by authenticating as a user
-  with instances running, for example admin. Pipe the sample for the
-  cpu meter to count lines and confirm that the value changes according
+  with instances running, for example +admin+. Pipe the sample for the
+  CPU meter to count lines, and confirm that the value changes according
   to the interval specified in +/etc/ceilometer/pipeline.yaml+. The
   default interval is 600 seconds.
 +
 ------
 # . ~/keystonerc_admin
-# ceilometer sample-list -m cpu |wc -l  
+# ceilometer sample-list -m cpu |wc -l
 ------
 +
 . Add the configured OpenStack provider to CloudForms Management
-  Engine. See section "Adding OpenStack Providers" in *Managing Proviers*.
+  Engine. See section "Adding OpenStack Providers" in link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-providers/#adding_openstack_providers[Managing Providers].
   After adding the provider, capacity and utilization data for your instances
   populate in a few minutes.
 
@@ -283,7 +283,7 @@ that are at the beginning or end of the requested interval are excluded.
 Days with less than 24 hourly data points would be inaccurate and
 including them would skew trend lines. Therefore, at least one full day
 of hourly data from midnight to midnight is necessary for displaying the
-capacity and utilization charts under the infrastructure tab
+capacity and utilization charts under the +Infrastructure+ tab.
 ======
 
 ==== Capacity and Utilization Charts for Host, Clusters, and Virtual Machines
@@ -536,4 +536,3 @@ the timeline to see specific information on the bottleneck.
 +
 . Expand the tree on the left side, until you can see the enterprise,
   provider, or datastore that you want to see the trend for.
-

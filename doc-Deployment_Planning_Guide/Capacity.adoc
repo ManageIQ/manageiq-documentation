@@ -37,10 +37,10 @@ creation of capacity and utilization.
 
 === Assigning the Capacity and Utilization Server Roles
 
-. Navigate to +Configure → Configuration+.
-. Navigate to the +Server → Server Control+ area, and select the appropriate
+. Navigate to *Configure → Configuration*.
+. Navigate to the *Server → Server Control* area, and select the appropriate
   Capacity & Utilization roles from the list based on your configuration.
-. Click btn:[Save].
+. Click *Save*.
 
 Data collection begins immediately. However, the first collection begins
 5 minutes after the server is started, and every 10 minutes after that.
@@ -53,8 +53,9 @@ Management Engine is gathering data points going one month back in time.
 [NOTE]
 ======
 In addition to setting the server role, you must also select which
-clusters and datastores to collect data for. For more information, see
-*General Configuration*. You must have super administrator rights to edit
+clusters and datastores to collect data for. For more information, see the
+https://access.redhat.com/documentation/en/red-hat-cloudforms/4.0/general-configuration/general-configuration[General Configuration] guide.
+ You must have super administrator rights to edit
 these settings.
 ======
 
@@ -107,14 +108,14 @@ postgres=# \q
 ------
 +
 . Enable external md5 authentication by appending the following line to
-  +/var/lib/pgsql/data/pg_hba.conf+:
+  `/var/lib/pgsql/data/pg_hba.conf`:
 +
 ------
 host    all      all    0.0.0.0/0     md5
 ------
 +
 . Enable PostgreSQL to listen for remote connections by updating the
-  listen_address line in +/var/lib/pgsql/data/postgresql.conf+:
+  `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
 +
 ------
 listen_addresses  =  '*'
@@ -130,17 +131,16 @@ service postgresql reload
 
 === Adding Database Credentials for Data Collection
 
-After creating the new user, add its credentials to the settings for the
-provider.
+After creating the new user, add the user's credentials to the settings for the provider.
 
-. From +Infrastructure → Providers+, click a provider to update its
+. From *Infrastructure → Providers*, click a provider to update its
   settings.
 . Click image:1847.png[](+Configuration+), and then image:1851.png[](+Edit this Provider+).
-. In the Credentials area, click +C & U Database+.
+. In the Credentials area, click *C & U Database*.
 . Type in the credentials for the new database user you created.
-. Click btn:[Save].
+. Click *Save*.
 . Finally, restart the capacity and utilization data collector. For
-  more information, see *General Configuration*.
+  more information, see the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.0/general-configuration/general-configuration[General Configuration] guide.
 
 === Data Collection for Red Hat Enterprise Linux OpenStack Platform
 
@@ -150,7 +150,7 @@ to accept queries from external systems.
 
 These instructions require a Red Hat Enterprise Linux 6.4 @base
 installation of RHEL-OSP and registration to a satellite that has access
-to both the RHEL-OSP and RHEL Server Optional channels. Perform all steps on your RHEL-OSP system.
+to both the `RHEL-OSP` and `RHEL Server Optional` channels. Perform all steps on your RHEL-OSP system.
 
 . Add the required channels and update your system:
 +
@@ -160,7 +160,7 @@ to both the RHEL-OSP and RHEL Server Optional channels. Perform all steps on you
 # reboot
 ------
 +
-. Install Ceilometer:
+. Install `Ceilometer`:
 +
 ------
 # yum install *ceilometer*
@@ -192,7 +192,7 @@ keystone user-role-add --tenant_id $SERVICE_TENANT \
 done
 ------
 +
-. Configure the authtoken in ceilometer.conf:
+. Configure the authtoken in `ceilometer.conf`:
 +
 ------
 # openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken auth_host 127.0.0.1
@@ -203,7 +203,7 @@ done
 # openstack-config --set /etc/ceilometer/ceilometer.conf keystone_authtoken admin_password $SERVICE_PASSWORD
 ------
 +
-. Configure the user credentials in ceilometer.conf:
+. Configure the user credentials in `ceilometer.conf`:
 +
 ------
 # openstack-config --set /etc/ceilometer/ceilometer.conf DEFAULT os_auth_url http://127.0.0.1:35357/v2.0
@@ -220,7 +220,7 @@ done
   done
 ------
 +
-. Register an endpoint with the service catalog. Replace +$EXTERNALIFACE+
+. Register an endpoint with the service catalog. Replace `$EXTERNALIFACE`
   with the IP address of your external interface:
 +
 ------
@@ -252,9 +252,9 @@ done
 ------
 +
 . Verify Ceilometer is working correctly by authenticating as a user
-  with instances running, for example +admin+. Pipe the sample for the
+  with instances running, for example `admin`. Pipe the sample for the
   CPU meter to count lines, and confirm that the value changes according
-  to the interval specified in +/etc/ceilometer/pipeline.yaml+. The
+  to the interval specified in `/etc/ceilometer/pipeline.yaml`. The
   default interval is 600 seconds.
 +
 ------
@@ -263,7 +263,7 @@ done
 ------
 +
 . Add the configured OpenStack provider to CloudForms Management
-  Engine. See section "Adding OpenStack Providers" in link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-providers/#adding_openstack_providers[Managing Providers].
+  Engine. See the "Adding OpenStack Providers" section in link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-providers/#adding_openstack_providers[Managing Providers].
   After adding the provider, capacity and utilization data for your instances
   populate in a few minutes.
 
@@ -283,7 +283,7 @@ that are at the beginning or end of the requested interval are excluded.
 Days with less than 24 hourly data points would be inaccurate and
 including them would skew trend lines. Therefore, at least one full day
 of hourly data from midnight to midnight is necessary for displaying the
-capacity and utilization charts under the +Infrastructure+ tab.
+capacity and utilization charts under the *Infrastructure* tab.
 ======
 
 ==== Capacity and Utilization Charts for Host, Clusters, and Virtual Machines
@@ -296,18 +296,13 @@ capacity and utilization charts under the +Infrastructure+ tab.
 | Virtual Machine | Y       | Y          | Y        | Y            | Y           | NA          | NA
 |=======================================================================
 
-For the procedure to view Capacity and Utilization Charts for a Host, see
-section Viewing Capacity and Utilization Charts for a Host in the Red Hat
-CloudForms 4.0 Managing Inventory and Infrastructure guide.
+For procedures to view capacity and utilization charts for hosts, clusters, and virtual machines, see the following sections in the link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-infrastructure-and-inventory/[Managing Infrastructure and Inventory] guide:
 
-For the procedure to view Capacity and Utilization Charts for a Cluster,
-see section Viewing Capacity and Utilization Charts for a Cluster in the
-Red Hat CloudForms 4.0 Managing Inventory and Infrastructure guide.
+* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-infrastructure-and-inventory/#viewing_capacity_and_utilization_charts_for_a_host[Viewing Capacity and Utilization Charts for a Host]
+* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-infrastructure-and-inventory/#viewing_capacity_and_utilization_charts_for_a_cluster[Viewing Capacity and Utilization Charts for a Cluster]
+* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-infrastructure-and-inventory/#to_view_capacity_and_utilization_charts_for_a_virtual_machine[Viewing Capacity and Utilization Charts for a
+Virtual Machine]
 
-For the procedure to view Capacity and Utilization Charts for a Virtual
-Machine, see section Viewing Capacity and Utilization Charts for a
-Virtual Machine in the Red Hat CloudForms 4.0 Managing Inventory and
-Infrastructure guide.
 
 ==== Capacity and Utilization Charts for Datastores
 
@@ -326,8 +321,7 @@ Charts created include:
 
 For the procedure to view Capacity and Utilization Charts for a
 Datastore, see section Viewing Capacity and Utilization Charts for a
-Datastore in the Red Hat CloudForms 4.0 Managing Inventory and
-Infrastructure guide.
+Datastore in the link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/managing-infrastructure-and-inventory/[Managing Infrastructure and Inventory] guide.
 
 === Chart Features
 
@@ -339,9 +333,9 @@ on a chart and shortcut menus.
 . Navigate to the chart you want to zoom. If you hover anywhere on the
   chart, two dashed lines will appear to target a coordinate of the
   chart.
-. Click image:2251.png[](+Click to zoom in+) in the lower left corner of the
+. Click image:2251.png[](*Click to zoom in*) in the lower left corner of the
   chart to zoom into it.
-. To go back to the regular view click image:2252.png[](+Click to zoom out+) on
+. To go back to the regular view click image:2252.png[](*Click to zoom out*) on
   the enlarged chart.
 
 ==== Drilling into Chart Data
@@ -353,21 +347,21 @@ on a chart and shortcut menus.
   display the virtual machines that were running at the time the data
   was captured.
 +
-* If you are viewing the +CPU+, +Disk+, +Memory+, or +Network+ charts,
-  selecting from the +Chart+ option will change all of the charts on
+* If you are viewing the *CPU*, *Disk*, *Memory*, or *Network* charts,
+  selecting from the *Chart* option will change all of the charts on
   the page to the new interval selected.
-* If you are viewing the +CPU+, +Disk+, +Memory+, or +Network+ charts,
-  selecting from the +Display+ option will allow you to drill into
-  the virtual machines or +Hosts+ that were running at the time.
-* If you are viewing the +VM+ or +Hosts+ chart, the +Display+ menu will
+* If you are viewing the *CPU*, *Disk*, *Memory*, or *Network* charts,
+  selecting from the *Display* option will allow you to drill into
+  the virtual machines or *Hosts* that were running at the time.
+* If you are viewing the *VM* or *Hosts* chart, the *Display* menu will
   allow you to view running or stopped virtual machines. The time
   of the data point will be displayed in addition to the virtual
-  machines that apply. From here, click on a virtual machine to go
+  machines that apply. From here, click on a virtual machine to view
   its details.
 
 === Optimization
 
-CloudForms Management Engines optimization functions allow you to view
+CloudForms Management Engine's optimization functions allow you to view
 utilization trends, and identify and project bottlenecks in your
 environment. In addition, you can predict where you have capacity for
 additional virtual machines.
@@ -378,7 +372,7 @@ For reporting of daily optimization data, incomplete days (days with less
 than 24 hourly data points from midnight to midnight) that are at the
 beginning or end of the requested interval are excluded. Days with less
 than 24 hourly data points would be inaccurate and including them would
-skew trend lines. Therefore, the optimize page requires at least two full
+skew trend lines. Therefore, the *Optimize* page requires at least two full
 days of daily data because all the charted values are derived from trend
 calculations and that requires at least two data points
 ======
@@ -393,34 +387,34 @@ details, or report view.
 
 This procedure shows you how to view utilization trend summary.
 
-. Navigate to +Optimize → Utilization+.
-. Click +Summary+ if it is not already selected.
+. Navigate to *Optimize → Utilization*.
+. Click *Summary* if it is not already selected.
 . Expand the tree on the left side, until you can see the desired
   providers, clusters, or datastores.
 . Click on the item.
-. Use the +Options+ section in the +Summary+ tab to change the
+. Use the *Options* section in the *Summary* tab to change the
   characteristics of the data.
 +
-* Use +Trends+ for past to select how far back you want to calculate
+* Use *Trends* to select how far back you want to calculate
   the trend.
-* Use +Selected Day+ for the date you want to see percent utilization
-  for in the chart on the Summary tab.
-* Use +Classification+ to only see trends for a specific applied tag.
-* Use +Time Profile+ to select an existing time profile. If the
+* Use *Selected Day* for the date you want to see percent utilization
+  for in the chart on the *Summary* tab.
+* Use *Classification* to only see trends for a specific applied tag.
+* Use *Time Profile* to select an existing time profile. If the
   logged on user does not have any time profiles available, this
   option will not show.
-* Select a +Time Zone+.
+* Select a *Time Zone*.
 
 ==== Viewing Detail Lines of a Utilization Trend
 
 This procedure shows you how to view detail lines of a utilization trend.
 
-. Navigate to +Optimize → Utilization+.
+. Navigate to *Optimize → Utilization*.
 . Expand the tree on the left side, until you can see the desired
   providers, clusters, or datastores.
 . Click on the item.
-. Click +Details+ if it is not already selected.
-. From the +Options+ area, select how far back you want to view the
+. Click *Details* if it is not already selected.
+. From the *Options* area, select how far back you want to view the
   trends for and any classifications you want to use.
 
 ==== Viewing a Report of a Utilization Trend
@@ -428,12 +422,12 @@ This procedure shows you how to view detail lines of a utilization trend.
 To find out more about resource utilization, view utilization trend
 reports.
 
-. Navigate to +Optimize → Utilization+.
+. Navigate to *Optimize → Utilization*.
 . Expand the tree on the left side, until you can see the desired
   providers, clusters, or datastores.
 . Click on the item.
-. Click +Report+ if it is not already selected.
-. From the +Options+ area, select how far back you want to view the
+. Click *Report* if it is not already selected.
+. From the *Options* area, select how far back you want to view the
   trends for and any classifications you want to use.
 
 === Planning
@@ -448,31 +442,30 @@ clusters you can place a new virtual machine.
 Use the CloudForms Management Engine planning feature to help you plan
 for a virtual machine placement.
 
-. Navigate to +Optimize → Planning+.
-. From Reference VM Selection, use the dropdowns to select the virtual
+. Navigate to *Optimize → Planning*.
+. From *Reference VM Selection*, use the dropdowns to select the virtual
   machine that is most like the one that you want to add.
 +
 image:2254.png[]
 +
-. Select the required VM Options, for what you want to base the
+. Select the required *VM Options* for what you want to base the
   calculations on.
 +
 image:2255.png[]
 +
-From the +Source+ list, select the type of data to use as the
-source for your projections. For example, select +Allocation+ to
+From the *Source* list, select the type of data to use as the
+source for your projections. For example, select *Allocation* to
 calculate based on the current allocation values of each resource
 (CPU, memory, or disk space) for the reference virtual machine. Use
-+Reservation+ to project based on the current guaranteed
+*Reservation* to project based on the current guaranteed
 value of the specific resource (CPU Speed, CPU count, memory, or disk
 space) although that amount may not be allocated to the virtual
-machine at a specific moment in time. Select +Usage+ if you want to
+machine at a specific moment in time. Select *Usage* if you want to
 calculate based on usage history of the reference virtual machine.
-Use +Manual Input+ to enter your own set of parameters for each
+Use *Manual Input* to enter your own set of parameters for each
 resource.
 +
-. From +Target Options+, select if you want to use clusters or hosts as
-  your targets.
+. From *Target Options / Limits*, select if you want to use clusters or hosts as your targets.
 +
 image:2256.png[]
 +
@@ -480,17 +473,17 @@ Also, select the limit of how high the projection can go for CPU,
 memory, and datastore space. If you are targeting hosts, you will be
 able to select a filter for which hosts can be targets.
 +
-. From +Trend Options+, select how far back you want to use the trend
-  data for, a +Time Profile+ and +Time Zone+ if applicable. Note that +Time
-  Profile+ will only show if the logged on user has a +Time Profile+
+. From *Trend Options*, select how far back you want to use the trend
+  data for, a *Time Profile* and *Time Zone* if applicable. Note that *Time
+  Profile* will only show if the logged on user has a *Time Profile*
   available.
-. Click +Submit+.
+. Click *Submit*.
 
-The +Summary+ tab shows the best clusters or hosts on which to
-place the virtual machines. The +Report+ tab shows the best fit and
+The *Summary* tab shows the best clusters or hosts on which to
+place the virtual machines. The *Report* tab shows the best fit and
 statistics on the reference virtual machine in a tabular format. From the
-+Report+ tab, you can also create a PDF of the report or download the data
-in txt or csv format.
+*Report* tab, you can also create a PDF of the report or download the data
+in `txt` or `csv` format.
 
 
 === Bottlenecks
@@ -504,17 +497,17 @@ report which can be downloaded for further analysis.
 To find out more about bottleneck capacity or utilization, view a
 bottleneck summary.
 
-. Navigate to +Optimize → Bottlenecks+.
-. Click +Summary+ if it is not already selected.
+. Navigate to *Optimize → Bottlenecks*.
+. Click *Summary* if it is not already selected.
 . Expand the tree on the left side, until you can see the desired
   providers, clusters, or datastores.
 . Click on the item.
-. Use the +Options+ section to change the characteristics of the data.
+. Use the *Options* section to change the characteristics of the data.
   image:2257.png[]
 +
-* Use +Event Groups+ to select if you want to see bottlenecks based
+* Use *Event Groups* to select if you want to see bottlenecks based
   on capacity, utilization or both.
-* Select a +Time Zone+.
+* Select a *Time Zone*.
 +
 
 Data is processed, and a timeline appears. Click on an icon in
@@ -522,17 +515,17 @@ the timeline to see specific information on the bottleneck.
 
 ==== Viewing a Report of the Bottlenecks Trend
 
-. Navigate to +Optimize → Bottlenecks+.
-. Click +Report+.
+. Navigate to *Optimize → Bottlenecks*.
+. Click *Report*.
 . Expand the tree on the left side, until you can see the desired
   providers, clusters, or datastores.
 . Click on the item.
-. Use the +Options+ section to change the characteristics of the data.
+. Use the *Options* section to change the characteristics of the data.
   image:2258.png[]
 +
-* Use +Event Groups+ to select if you want to see bottlenecks based
+* Use *Event Groups* to select if you want to see bottlenecks based
   on capacity, utilization or both.
-* Select a +Time Zone+.
+* Select a *Time Zone*.
 +
 . Expand the tree on the left side, until you can see the enterprise,
   provider, or datastore that you want to see the trend for.

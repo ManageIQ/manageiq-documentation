@@ -2,42 +2,42 @@
 = Configuring Host-Based Access Control Rules on your IPA Server
 
 Red Hat CloudForms provides support for external authentication using an IPA server.
-However, there are certain recommendations to enhance security to your appliance, such as creating a specific user group and host group that can access the appliance authentication service. 
+However, there are certain recommendations to enhance security to your appliance, such as creating a specific user group and host group that can access the appliance authentication service.
 
-Run the following steps on your IPA server. 
+Run the following steps on your IPA server:
 
-* Create a user group and restrict access to only the Red Hat CloudForms users 
+. Create a user group and restrict access to only the Red Hat CloudForms users:
 +
-----
+------
 
 [root@ipa ~]# ipa group-add cloudforms_users --desc="CloudForms Users"
 [root@ipa ~]# ipa group-add-member cloudforms_users --users=testuser1,testuser2
-----
+------
 
-* Create a host group and restrict access to your appliance hosts: 
+. Create a host group and restrict access to your appliance hosts:
 +
-----
+------
 
 [root@ipa ~]# ipa hostgroup-add cloudforms_hosts --desc "CloudForms hosts"
 [root@ipa ~]# ipa hostgroup-add-member cloudforms_hosts --hosts=appliance1.example.com,appliance2.example.com
-----
+------
 
-* Add rules to allow the host group and user group access to the Red Hat CloudForms HTTP service: 
+. Add rules to allow the host group and user group access to the Red Hat CloudForms HTTP service:
 +
-----
+------
 
 [root@ipa ~]# ipa hbacrule-add cloudforms_access --srchostcat=all
 [root@ipa ~]# ipa hbacrule-add-service cloudforms_access --hbacsvcs httpd-auth
 [root@ipa ~]# ipa hbacrule-add-user cloudforms_access --groups cloudforms_users
 [root@ipa ~]# ipa hbacrule-add-host cloudforms_access --hostgroups cloudforms_hosts
-----
+------
 
-* Remove the default rule on your IPA server to allow access to all: 
+. Remove the default rule on your IPA server to allow access to all:
 +
-----
+------
 
 [root@ipa ~]# ipa hbacrule-disable allow_all
-----
+------
 
 
-This ensures only users in the [literal]+cloudforms_users+ group can access the authentication service ([literal]+http-auth+) on the appliances in the [literal]+cloudforms_hosts+ host group. 
+This ensures only users in the `cloudforms_users` group can access the authentication service (`http-auth`) on the appliances in the `cloudforms_hosts` host group.

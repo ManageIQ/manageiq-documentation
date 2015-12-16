@@ -16,22 +16,20 @@ You can use a certificate signed by a trusted CA or, alternatively, generate a s
 See <<_chap_red_hat_cloudforms_security_guide_ssl_certs>> for more information on generating an SSL certificate.
 ====
 
-* [path]_/var/www/miq/vmdb/certs/server.cer_ - Signed or self-signed certificate for the database appliance.
-* [path]_/var/www/miq/vmdb/certs/server.cer.key_ - Private key for server certificate.
-* [path]_/var/www/miq/vmdb/certs/root.crt_ - The root certificate for CloudForms database server appliance.
+* `/var/www/miq/vmdb/certs/server.cer` - Signed or self-signed certificate for the database appliance.
+* `/var/www/miq/vmdb/certs/server.cer.key` - Private key for server certificate.
+* `/var/www/miq/vmdb/certs/root.crt` - The root certificate for CloudForms database server appliance.
   You can either use a self-signed certificate or a certificate signed by a trusted CA to generate your root certificate.
 
 It is also recommended to stop all Red Hat CloudForms services before configuring the database to use SSL.
 
-.Procedure: Configuring SSL on the database appliance
-. Log in as [literal]+root+ to the appliance where the database resides.
+To configure SSL on the database appliance:
+
+. Log in as `root` to the appliance where the database resides.
 . Stop the `evmserverd` and `rh-postgresql94-postgresql` services:
 +
 ----
 [root@cloudforms2 ~]# systemctl stop evmserverd
-----
-+
-----
 [root@cloudforms2 ~]# systemctl stop rh-postgresql94-postgresql
 ----
 
@@ -57,14 +55,14 @@ It is also recommended to stop all Red Hat CloudForms services before configurin
 [root@cloudforms2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt
 ----
 
-. Make sure that the security context is set correctly for the files in [path]_/var/www/miq/certs_:
+. Make sure that the security context is set correctly for the files in `/var/www/miq/certs`:
 +
 ----
 
 [root@cloudforms2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
 ----
 
-. Open the [path]_/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf_ file and uncomment and edit the `ssl` option:
+. Open the `/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf` file and uncomment and edit the `ssl` option:
 +
 ----
 
@@ -81,7 +79,7 @@ ssl_key_file  = '/var/www/miq/vmdb/certs/postgres.key'  # (change requires resta
 ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'      # (change requires restart)
 ----
 
-. Open the [path]_/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf_ file and locate the two lines that contain the following:
+. Open the `/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf` file and locate the two lines that contain the following:
 +
 [source]
 ----
@@ -90,7 +88,7 @@ host      all      all   all           md5
 #hostssl  all      all   all           md5
 ----
 +
-Modify the two lines to comment the [literal]+host+ entry and uncomment the [literal]+hostssl+ entry:
+Modify the two lines to comment the `host` entry and uncomment the `hostssl` entry:
 +
 [source]
 ----
@@ -105,20 +103,14 @@ This changes the incoming communication protocol to use SSL and refuse any unenc
 +
 ----
 [root@cloudforms1 ~]# systemctl start rh-postgresql94-postgresql
-----
-+
-----
 [root@cloudforms1 ~]# systemctl start evmserverd
 ----
 
-
 The database appliance now only accepts connections from connecting appliances using SSL.
-The next procedure sets up connecting appliances to communicate to the database using SSL.
-Use this procedure for each connecting appliance.
+The following procedure sets up connecting appliances to communicate to the database using SSL. Use this procedure for each connecting appliance:
 
-.Procedure: Configuring SSL on the connecting appliance
-. Log in as [literal]+root+ to the connecting appliance.
-. Create the [path]_.postgresql_ directory in your [literal]+root+ user home directory.
+. Log in as `root` to the connecting appliance.
+. Create the `.postgresql` directory in your `root` user home directory.
 +
 ----
 
@@ -127,7 +119,7 @@ Use this procedure for each connecting appliance.
 +
 The PostgreSQL client library, which CloudForms Management Engine also uses, looks to this directory for custom configuration files.
 
-. Copy the root certificate file from the database appliance to the [path]_/root/.postgresql_ directory on the connecting appliance:
+. Copy the root certificate file from the database appliance to the `/root/.postgresql` directory on the connecting appliance:
 +
 ----
 
@@ -136,7 +128,7 @@ The PostgreSQL client library, which CloudForms Management Engine also uses, loo
 +
 Where `[database_appliance_fqdn]` is the fully qualified domain name of the database appliance.
 
-. Test the connection between the connecting appliance and the database appliance using the +psql+:
+. Test the connection between the connecting appliance and the database appliance using the `psql`:
 +
 ----
 
@@ -149,8 +141,8 @@ Type "help" for help.
 vmdb_production=#
 ----
 +
-The +psql+ displays information about the SSL connection, which indicates that the configuration succeeded.
-Enter +\q+ to leave +psql+.
+The `psql` displays information about the SSL connection, which indicates that the configuration succeeded.
+Enter `\q` to leave `psql`.
 
 
 Complete this procedure for each external appliance.

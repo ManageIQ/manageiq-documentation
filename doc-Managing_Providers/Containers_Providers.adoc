@@ -83,14 +83,13 @@ NOTE: For the metrics collection to work properly, you also need to configure th
 
 Once http://www.hawkular.org/[Hawkular Metrics] and https://github.com/kubernetes/heapster[Heapster] have been successfully deployed by OpenShift Metrics, it is possible to create a router for CloudForms Management Engine to access the metrics data:
 
-    $ oc project default
-
-    $ oadm router management-metrics \
-      --credentials=/etc/origin/master/openshift-router.kubeconfig \
-      --service-account=router --ports='443:5000' \
-      --selector='kubernetes.io/hostname=<INSERT MASTER HOSTNAME HERE>'
-      --stats-port=1937 \
-      --host-network=false
+    # oadm router management-metrics \
+    -n default \
+    --credentials=/etc/origin/master/openshift-router.kubeconfig \
+    --service-account=router --ports='443:5000' \
+    --selector='kubernetes.io/hostname=<INSERT MASTER HOST NAME HERE>'
+    --stats-port=1937 \
+    --host-network=false
 
 This router must, at the moment, run on the master nodes to expose the metrics on the port *5000* to CloudForms Management Engine, hence the need for a `selector` on the `kubernetes.io/hostname` of the master node.
 

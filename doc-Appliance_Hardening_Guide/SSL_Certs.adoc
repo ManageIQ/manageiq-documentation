@@ -9,21 +9,21 @@ It is recommended to replace this certificate with your own certificate, either 
 
 The first step is to determine the host name of your appliance or database appliance by running the following command:
 
-----
+------
 
 $ hostname
-----
+------
 
-The next step is to create a Certificate Signing Request (CSR) using the +openssl+ command:
+The next step is to create a Certificate Signing Request (CSR) using the `openssl` command:
 
-----
+------
 
 [root@ ~]# openssl req -new -newkey rsa:2048 -out appliance.csr -keyout appliance.key
-----
+------
 
 This command generates a 2048-bit RSA private key and asks for a passphrase for the key.
 
-----
+------
 
 Generating a 2048 bit RSA private key
 ..................+++
@@ -31,15 +31,15 @@ Generating a 2048 bit RSA private key
 writing new private key to 'appliance.key'
 Enter PEM pass phrase: **********
 Verifying - Enter PEM pass phrase: **********
-----
+------
 
 The command then provides a questionnaire requesting certain details for the key.
 Fill out this questionnaire.
-Use the output of the +hostname+ command to specify the [literal]+Common Name+.
+Use the output of the `hostname` command to specify the `Common Name`.
 
 For example:
 
-----
+------
 
 Country Name (2 letter code) [XX]:US
 State or Province Name (full name) []:North Carolina
@@ -53,29 +53,29 @@ Please enter the following 'extra' attributes
 to be sent with your certificate request
 A challenge password []:
 An optional company name []:
-----
+------
 
 Running the command produces two files:
 
-* [path]_appliance.key_ - The private key
-* [path]_appliance.csr_ - The Certificate Signing Request (CSR)
+* `appliance.key` - The private key
+* `appliance.csr` - The Certificate Signing Request (CSR)
 
 At this stage, you would send the CSR to a trusted Certificate Authority (CA) and in return they would send you a signed certificate.
 
 == Creating a Self-signed Certificate
 
-As an alternative to obtaining a signed certificate, you can use the [path]_appliance.key_ and [path]_appliance.csr_ files to create a self-signed certificate by running the following +openssl+ commands:
+As an alternative to obtaining a signed certificate, you can use the `appliance.key` and `appliance.csr` files to create a self-signed certificate by running the following `openssl` commands:
 
-----
+------
 
 [root@ ~]# openssl rsa -in appliance.key -out server.cer.key
 [root@ ~]# openssl x509 -in appliance.csr -out server.cer -req -signkey server.cer.key -days 3650
-----
+------
 
 This produces two files:
 
-* [path]_server.cer.key_ - The private key for your signed certificate
-* [path]_server.cer_ - The self-signed certificate
+* `server.cer.key` - The private key for your signed certificate
+* `server.cer` - The self-signed certificate
 
 [[_enabling_the_appliance_to_use_your_certificate]]
 == Enabling Your Certificate
@@ -84,18 +84,18 @@ Despite whether you used a trusted CA or self-signed the certificate, you should
 
 Copy the certificate and key files to the certificate directory on the appliance:
 
-----
+------
 
 [root@ ~]# cp ~/server.cer.key /var/www/miq/vmdb/certs/server.cer.key
 [root@ ~]# cp ~/server.cer /var/www/miq/vmdb/certs/server.cer
-----
+------
 
 After the certificate and key files have been copied, restart the appliance:
 
-----
+------
 
 [root@ ~]# systemctl restart evmserverd
-----
+------
 
 The appliance now uses your own certificate.
 

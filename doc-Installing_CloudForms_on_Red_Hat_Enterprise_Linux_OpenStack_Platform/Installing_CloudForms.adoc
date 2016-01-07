@@ -10,161 +10,127 @@ After installing the CloudForms Management Engine Appliance, you must configure 
 
 === Obtaining the CloudForms Management Engine Appliance
 
-. Go to https://access.redhat.com and log in to the Red Hat Customer Portal using your customer account details.
-. Click +Downloads+ in the menu bar.
-. Click +A-Z+ to sort the product downloads alphabetically.
-. Click +Red Hat CloudForms+ and then +Download Latest+ to access the product download page.
-. From the list of installers and images, select the +CFME VMware Virtual Appliance+ download link.
+. Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Click *Downloads* in the menu bar.
+. Click *A-Z* to sort the product downloads alphabetically.
+. Click *Red Hat CloudForms* and then *Download Latest* to access the product download page.
+. From the list of installers and images, select the *CFME VMware Virtual Appliance* download link.
 
 === Uploading the Appliance on OpenStack
 
 Log in to your OpenStack dashboard to upload your CloudForms Management Engine Appliance.
 
 . Log in to the OpenStack dashboard.
-. In the +Project+ tab, navigate to +Compute → Images+.
-. Click +Create Image+.
-. In +Name+, enter a name for the image.
-. From +Image Source+ list, select +Image Location+. Note that currently
-  only images available via an HTTP URL are supported.
-. In +Image Location+, add an external (HTTP) URL to load the image from.
-  For example, +http://example.com/image.iso+.
-  From the +Format+ list, select the image format. For example, +ISO - Optical Disk Image+.
-. Specify the +Architecture+. For example, +i386+ for a 32-bit architecture
-  or +x86-64+ for a 64-bit architecture.
-. Leave the +Minimum Disk (GB)+ and +Minimum RAM (MB)+ fields empty.
-. Check the +Public+ box to make the appliance available to all users.
-. Check the +Protected+ box to protect the image from being accidentally deleted.
-. Click +Create Image+.
+. In the *Project* tab, navigate to menu:Compute[Images].
+. Click *Create Image*.
+. In *Name*, enter a name for the image.
+. From *Image Source* list, select *Image Location*. Note that currently only images available via an HTTP URL are supported.
+. In *Image Location*, add an external (HTTP) URL to load the image from.
+  For example, *http://example.com/image.iso*.
+. From the *Format* list, select the image format. For example, `ISO - Optical Disk Image`.
+. Specify the *Architecture*. For example, `i386` for a 32-bit architecture or `x86-64` for a 64-bit architecture.
+. Leave the *Minimum Disk (GB)* and *Minimum RAM (MB)* fields empty.
+. Check the *Public* box to make the appliance available to all users.
+. Check the *Protected* box to protect the image from being accidentally deleted.
+. Click *Create Image*.
 
 You have successfully uploaded the CloudForms Management Engine Appliance.
 
 [NOTE]
 ======
-As a result of this procedure, the appliance image is placed in a queue
-to be uploaded. It may take some time before the Status of the image
-changes from Queued to Active.
+As a result of this procedure, the appliance image is placed in a queue to be uploaded. It may take some time before the Status of the image changes from Queued to Active.
 ======
 
 === Adding a Rule to a Security Group
 
-Security groups specify what IP traffic is allowed to reach an instance
-on its public IP address. Security group rules are processed before
-network traffic reaches firewall rules defined within the guest itself.
+Security groups specify what IP traffic is allowed to reach an instance on its public IP address. Security group rules are processed before network traffic reaches firewall rules defined within the guest itself.
 
 
 [NOTE]
 ======
-In the default configuration, the default security group accepts all
-connections from the default source; all instances within the default
-group can talk to each other on any port.
+In the default configuration, the default security group accepts all connections from the default source; all instances within the default group can talk to each other on any port.
 ======
 
-. From the OpenStack dashboard, in the +Project+ tab, click +Access &
-  Security+ under the +Compute+ menu.
-. In +Security Groups+, click +Manage Rules+ on the row for the default
-  security group.
+. From the OpenStack dashboard, navigate to menu:Project[Compute > Access & Security].
+. Navigate to menu:Security Groups[Manage Rules] on the row for the default security group.
 image:7216.png[title="Manage Security Group Rules: default"]
-. Click +Add Rule+.
+. Click *Add Rule*.
 image:4941.png[title="Add Rule Dialog"]
 . Configure the rule.
-.. Select +Custom TCP Rule+ from the +Rule+ list.
-.. Select +Ingress+ from the +Direction+ list.
-.. Select +Port+ from the +Open Port+ list.
-.. Specify 443 in the +Port+ field.
-.. Select +CIDR+ from the +Remote+ list.
-.. Specify +0.0.0.0/0+ in the +CIDR+ field.
-.. Click +Add+.
+.. Select menu:Rule[Custom TCP Rule].
+.. Select menu:Direction[Ingress].
+.. Select *Port* from the *Open Port* list.
+.. Specify `443` in the *Port* field.
+.. Select *CIDR* from the *Remote* list.
+.. Specify `0.0.0.0/0` in the *CIDR* field.
+.. Click *Add*.
 
 === Creating a Custom Flavor for CloudForms Management Engine
 
-A flavor is a resource allocation profile that specifies, for example,
-how many virtual CPUs and how much RAM can be allocated to an instance.
-You can, for example, run CloudForms Management Engine on a Red Hat
-OpenStack m1.large flavor, which specifies a virtual machine with 4
-cores, 8GB RAM, and 80GB disk space. Creating a flavor to run CloudForms
-Management Engine is optional.
+A flavor is a resource allocation profile that specifies, for example, how many virtual CPUs and how much RAM can be allocated to an instance. You can, for example, run CloudForms Management Engine on a Red Hat OpenStack m1.large flavor, which specifies a virtual machine with 4
+cores, 8GB RAM, and 80GB disk space. Creating a flavor to run CloudForms Management Engine is optional.
 
-The following procedure demonstrates creating a flavor with the minimum
-requirements (4 cores, 6GB RAM, 40GB disk space) for CloudForms
-Management Engine. For more information about flavors, see the Red Hat
-Enterprise Linux OpenStack Platform Administration User Guide.
+The following procedure demonstrates creating a flavor with the minimum requirements (4 cores, 6GB RAM, 40GB disk space) for CloudForms Management Engine. For more information about flavors, see the Red Hat Enterprise Linux OpenStack Platform Administration User Guide.
 
 . Log in to the OpenStack dashboard as admin.
-. In the +Admin+ tab, navigate to +System → Flavors+.
-. Click +Create Flavor+. The +Create Flavor+ dialog is displayed.
-. Configure the settings to define a flavor that meets CloudForms
-  Management Engine system requirements.
+. In the *Admin* tab, navigate to menu:System[Flavors].
+. Click *Create Flavor*. The *Create Flavor* dialog is displayed.
+. Configure the settings to define a flavor that meets CloudForms Management Engine system requirements.
 .. Enter a name for the flavor.
 .. Enter the following settings:
 +
-* +VCPUs+: 4
-* +RAM MB+: 6144
-* +Root Disk GB+: 45
-* +Ephemeral Disk GB+: 0
-* +Swap Disk MB+: 0
+* *VCPUs*: 4
+* *RAM MB*: 6144
+* *Root Disk GB*: 45
+* *Ephemeral Disk GB*: 0
+* *Swap Disk MB*: 0
 +
-. Click +Create Flavor+.
+. Click *Create Flavor*.
 
 A new flavor specific to CloudForms Management Engine is created.
 
 === Launching the CloudForms Management Engine Instance
 
-. From the OpenStack Dashboard, in the +Project+ tab, click +Instances+
-  under the +Compute+ menu.
-. Click +Launch Instance+.
+. From the OpenStack dashboard, navigate to menu:Project[Compute > Instances].
+. Click *Launch Instance*.
 . Enter a name for the instance.
-. Select the custom flavor for your instance. The flavor selection
-  determines the computing resources available to your instance. The
-  resources used by the flavor are displayed in the +Flavor Details+
-  pane.
-. Enter +1+ in the +Instance Count+ field.
-. Select a boot option from the +Instance Boot Source+ list:
+. Select the custom flavor for your instance. The flavor selection determines the computing resources available to your instance. The resources used by the flavor are displayed in the *Flavor Details* pane.
+. Enter *1* in the *Instance Count* field.
+. Select a boot option from the *Instance Boot Source* list:
 +
-* +Boot from image+ - displays a new field for +Image Name+. Select the image from the drop-down list.
-* +Boot from snapshot+ - displays a new field for +Instance Snapshot+. Select the snapshot from the drop-down list.
-* +Boot from volume+ - displays a new field for +Volume+. Select the volume from the drop-down list.
-* +Boot from image (creates a new volume)+ - boot from an image and create a volume by choosing +Device Size+ and +Device Name+ for your volume. Some volumes can be persistent. To ensure the volume is deleted when the instance is deleted, select +Delete on Terminate+.
-* +Boot from volume snapshot (creates a new volume)+ - boot from volume snapshot and create a new volume by choosing +Volume Snapshot+ from the drop-down list and adding a +Device Name+ for your volume. Some volumes can be persistent. To ensure the volume is deleted when the instance is deleted, select +Delete on Terminate+.
+* *Boot from image* - displays a new field for *Image Name*. Select the image from the drop-down list.
+* *Boot from snapshot* - displays a new field for *Instance Snapshot*. Select the snapshot from the drop-down list.
+* *Boot from volume* - displays a new field for  *Volume*. Select the volume from the drop-down list.
+* *Boot from image (creates a new volume)* - boot from an image and create a volume by choosing *Device Size* and *Device Name* for your volume. Some volumes can be persistent. To ensure the volume is deleted when the instance is deleted, select *Delete on Terminate*.
+* *Boot from volume snapshot (creates a new volume)* - boot from volume snapshot and create a new volume by choosing *Volume Snapshot* from the drop-down list and adding a *Device Name* for your volume. Some volumes can be persistent. To ensure the volume is deleted when the instance is deleted, select *Delete on Terminate*.
 +
-. Click +Networking+ and select a network for the instance by clicking the +++ (plus) button for the network from +Available Networks+.
-. Click +Launch+.
+. Click *Networking* and select a network for the instance by clicking the *+* (plus) button for the network from *Available Networks*.
+. Click *Launch*.
 
 === Adding a Floating IP Address
 
-When you create an instance, Red Hat Enterprise Linux OpenStack Platform
-automatically assigns it a fixed IP address in the network to which the
-instance belongs. This IP address is permanently associated with the
-instance until the instance is terminated.
+When you create an instance, Red Hat Enterprise Linux OpenStack Platform automatically assigns it a fixed IP address in the network to which the instance belongs. This IP address is permanently associated with the instance until the instance is terminated.
 
-In addition to the fixed address, you can also assign a floating IP
-address to an instance. Unlike fixed IP addresses, you can modify
-floating IP addresses associations at any time, regardless of the state
-of the instances involved.
+In addition to the fixed address, you can also assign a floating IP address to an instance. Unlike fixed IP addresses, you can modify floating IP addresses associations at any time, regardless of the state of the instances involved.
 
-. At the command-line on your RHEL OpenStack Platform host, create a
-  pool of floating IP addresses using the +nova-manage floating create+
-  command. Replace *IP_BLOCK* with the desired block of IP addresses
-  expressed in CIDR notation.
+. At the command-line on your RHEL OpenStack Platform host, create a pool of floating IP addresses using the `nova-manage floating create` command. Replace *IP_BLOCK* with the desired block of IP addresses expressed in CIDR notation.
 +
 ------
 $ nova-manage floating create IP_BLOCK  
 ------
 +
-. In the +Project+ tab, navigate to +Compute → Access & Security+.
-. In the Floating IPs tab, click Allocate IP To Project. The Allocate Floating IP window is displayed.
+. In the *Project* tab, navigate to menu:Compute[Access & Security].
+. Click menu:Floating IPs[Allocate IP To Project]. The *Allocate Floating IP* window is displayed.
 image:7218.png[title="Allocate Floating IP"]
-. Click +Allocate IP+ to allocate a floating IP from the pool. The
-  allocated IP address appears in the +Floating IPs+ table.
-. Select the newly allocated IP address from the +Floating IPs+ table.
-  Click +Associate+ to assign the IP address to a specific instance.
+. Click *Allocate IP* to allocate a floating IP from the pool. The allocated IP address appears in the *Floating IPs* table.
+. Select the newly allocated IP address from the *Floating IPs* table.
+  Click *Associate* to assign the IP address to a specific instance.
 image:7217.png[title="Manage Floating IP Associations"]
 . Select an instance with which to associate the floating IP Address.
-. Click +Associate+ to associate the IP address with the selected
-  instance.
+. Click *Associate* to associate the IP address with the selected instance.
 
 [NOTE]
 ======
-To disassociate a floating IP address from an instance when it is no
-longer required, click +Release Floating IPs+.
+To disassociate a floating IP address from an instance when it is no longer required, click *Release Floating IPs*.
 ======
 

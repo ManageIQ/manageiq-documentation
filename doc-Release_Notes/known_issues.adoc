@@ -6,23 +6,22 @@ These known issues exist in Red Hat CloudForms at this time:
 BZ#link:https://bugzilla.redhat.com/1225541[1225541]
 
 [subs="verbatim,quotes"]
-----
-At current, attempting to perform a Smart State analysis of a VMware vSphere 6 virtual machine with Virtual Disk Development Kit 6.0 returns an 'Unable to determine port' error, causing the analysis to fail. This occurs because this version of the VDDK is not installed in the directory where CFME expects it. By installing VDDK 6.0 in the appropriate directory, this is resolved.
+------
+At current, attempting to perform a Smart State analysis of a VMware vSphere 6 virtual machine with Virtual Disk Development Kit 6.0 returns an Unable to determine port error, causing the analysis to fail. This occurs because this version of the VDDK is not installed in the directory where CFME expects it. By installing VDDK 6.0 in the appropriate directory, this is resolved.
 
 1. Download VDDK 6.0 from the VMware website.
-2. Copy the downloaded GZIP file to the +/tmp+ directory on the appliance.
+2. Copy the downloaded GZIP file to the /tmp directory on the appliance.
 3. Decompress the GZIP archive file.
-4. Prepare the +/usr/lib/vmware-vix-disklib+ directory:
+4. Prepare the /usr/lib/vmware-vix-disklib directory:
    a. If the directory already exists, back up and remove the contents of this directory.
-   b. If the directory does not exist, create it:
-      # mkdir /usr/lib/vmware-vix-disklib
-5. Under the decompressed archive file in the +/tmp+ directory, there are several sub-directories. Copy the following directories and their contents into the +/usr/lib/vmware-vix-disklib+ directory:
+   b. If the directory does not exist, create it: # mkdir /usr/lib/vmware-vix-disklib.
+5. Under the decompressed archive file in the /tmp directory, there are several sub-directories. Copy the following directories and their contents into the /usr/lib/vmware-vix-disklib directory:
   * bin64
   * include
   * lib64
 
 This issue will be resolved in a future release of Red Hat CloudForms.
-----
+------
 
 BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1272369[1272369]
 ------
@@ -94,5 +93,3 @@ Run the following commands on all Regional Database Appliances, replacing <regio
 
 Finally, enable the database synchronization role on the Regional Database Appliances.
 ------
-
-

@@ -11,10 +11,10 @@ To host OpenShift Enterprise, virtual machines require the following:
 * SSH key access from all appliances running the Automation Role to the virtual machines
 
 * Ruby 1.9.3 or higher
-			
+
 * Red Hat recommends creating a virtual machine template meeting these requirements to enable efficient deployment of multiple instances.
 You can use your preferred source, for example PXE, ISO, or Clone, when creating the virtual machine so long as the requirements are met for OpenShift Enterprise installation.
-	
+
 Use the following procedure to prepare a template virtual machine:
 
 . Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
@@ -28,7 +28,104 @@ Use the following procedure to prepare a template virtual machine:
 . Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the `ifcfg-eth0` file.
 
 . Power off the virtual machine and use the Red Hat Enterprise Virtualization console to create a template from the virtual machine.
-			
+
 DNS is an important element of the environment, as machines must be able to connect bi-directionally to any resource in the network using the hostname.
 That means that new virtual machines instantiated from the template need to register to your DNS system automatically.
 
+
+
+NEW
+
+== Preparing a Virtual Machine for OpenShift Enterprise
+
+Initial blurb?
+
+=== Requirements
+
+To host OpenShift Enterprise, virtual machines require the following:
+
+* Red Hat Enterprise Linux 6.4 or higher
+
+* Network access, with valid IP addresses and access to the OpenShift Enterprise sources, for example through Red Hat Subscription Manager or Red Hat Satellite
+
+* SSH key access from all appliances running the Automation Role to the virtual machines
+
+* Ruby 1.9.3 or higher
+
+* Red Hat recommends creating a virtual machine template meeting these requirements to enable efficient deployment of multiple instances.
+You can use your preferred source, for example PXE, ISO, or Clone, when creating the virtual machine so long as the requirements are met for OpenShift Enterprise installation.
+
+* DNS is an important element of the environment, as machines must be able to connect bi-directionally to any resource in the network using the hostname.
+That means that new virtual machines instantiated from the template need to register to your DNS system automatically.
+
+**See if any of this stuff goes in the following procedures:**
+
+Use the following procedure to prepare a template virtual machine:
+
+. Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
+
+. Register the virtual machine with Red Hat Subscription Manager and update the system using `yum update`.
+
+. Install Ruby 1.9.3 using `yum install`.
+
+. Copy the SSH key from your appliance to the virtual machine. Confirm you can open an SSH session from the appliance to the virtual machine.
+
+. Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the `ifcfg-eth0` file.
+
+. Power off the virtual machine and use the Red Hat Enterprise Virtualization console to create a template from the virtual machine.
+
+
+=== Creating a virtual machine in RHEV with the required properties
+
+Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
+
+From: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6-Beta/html-single/Virtual_Machine_Management_Guide/index.html#Creating_a_new_virtual_machine_from_a_blank_template
+
+Create a new virtual machine and configure the required settings.
+⁠
+
+==== Procedure 2.1. Creating a New Virtual Machine
+
+. Click the *Virtual Machines* tab.
+. Click the *New VM* button to open the New Virtual Machine window (insert screenshot?)
+
+. Enter a *Name* for the virtual machine.
+. Select a Linux variant from the *Operating System* drop-down list. OpenShift requires Red Hat Enterprise Linux 6.4 or higher.
+. Click the *Show Advanced Options* button, and:
+.. From the *System* tab, specify the virtual machine's *Memory Size*. (REQ FOR OPENSHIFT?)
+.. From the *Boot Options* tab, choose the *First Device* that the virtual machine will boot from. You can accept the default settings for all other fields, or change them if required. For more details on all fields in the New Virtual Machine window, see (LINK TO RHEV GUIDE) Section A.1, “Explanation of Settings in the New Virtual Machine and Edit Virtual Machine Windows”.
+. Click *OK*.
+
+The new virtual machine is created and displays in the list of virtual machines in the Red Hat Enterprise Virtualization Manager with a status of `Down`. Before you can use this virtual machine, add at least one network interface and one virtual disk, and install an operating system.
+
+
+===== 2.2. Adding a Network Interface to the Virtual Machine
+
+. Click the *Virtual Machines* tab and select the virtual machine you created.
+. Click the *Network Interfaces* tab in the details pane.
+. Click *New*. (ADD DIAGRAM?) Figure 2.2. New Network Interface window
+. Enter the *Name* of the network interface.
+. Use the drop-down lists to select the *Profile* and the *Type* of the network interface. The *Profile* and *Type* drop-down lists are populated in accordance with the profiles and network types available to the cluster and the network interface cards available to the virtual machine.
+. Select the *Custom MAC address* check box and enter a MAC address for the network interface card as required.
+. Click *OK*.
+
+The new network interface is listed in the *Network Interfaces* tab in the details pane of the virtual machine. The *Link State* is set to *Up* by default when the network interface card is defined on the virtual machine and connected to the network.
+For more details on the fields in the New Network Interface window, see  (LINK TO RHEV GUIDE) Section A.2, “Explanation of Settings in the New Network Interface and Edit Network Interface Windows”.
+
+
+==== 2.3. Adding a Virtual Disk
+Configure storage for your virtual machine by adding a virtual disk. (Recommendation for Openshift? Do we need the below?)
+Image is the default type of disk. You can also add a Direct LUN disk or a Cinder (OpenStack Volume) disk. Image disk creation is managed entirely by the Manager. Direct LUN disks require externally prepared targets that already exist. Cinder disks require access to an instance of OpenStack Volume that has been added to the Red Hat Enterprise Virtualization environment using the External Providers window; see Adding an OpenStack Volume (Cinder) Instance for Storage Management for more information. Existing disks are either floating disks or shareable disks attached to virtual machines.
+⁠
+
+Procedure 2.3. Adding Disks to Virtual Machines
+
+. Click the *Virtual Machines* tab and select a virtual machine.
+. Click the *Disks* tab in the details pane.
+. Click *New*. (need diagram?) The New Virtual Disk Window Figure 2.3. The New Virtual Disk Window
+. Use the appropriate radio buttons to switch between *Image*, *Direct LUN*, or Cinder*. (relevant???) Virtual disks added in the User Portal can only be *Image* disks. *Direct LUN* and *Cinder* disks can be added in the Administration Portal.
+. Enter a *Size(GB)*, *Alias*, and *Description* for the new disk. (recommendations for size?)
+. Use the drop-down lists and check boxes to configure the disk. See (LINK HERE) Section A.3, “Explanation of Settings in the New Virtual Disk and Edit Virtual Disk Windows” for more details on the fields for all disk types.
+. Click *OK*.
+
+The new disk appears in the details pane after a short time.

@@ -1,5 +1,7 @@
 # ManageIQ Documentation
 
+[![Join the chat at https://gitter.im/ManageIQ/manageiq_docs](https://badges.gitter.im/ManageIQ/manageiq_docs.svg)](https://gitter.im/ManageIQ/manageiq_docs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 This repo contains the documentation for
 
 * [ManageIQ](http://manageiq.org/)

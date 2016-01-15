@@ -134,20 +134,126 @@ The new disk appears in the details pane after a short time.
 ⁠
 Procedure 2.4. Starting Virtual Machines
 
-. Click the Virtual Machines tab and select a virtual machine with a status of Down.
+. Click the Virtual Machines tab and select a virtual machine with a status of `Down`.
 . Click the run ( ) button.
-. Alternatively, right-click the virtual machine and select Run.
+. Alternatively, right-click the virtual machine and select *Run*.
 
-The Status of the virtual machine changes to Up, and the operating system installation begins. Open a console to the virtual machine if one does not open automatically.
+* The Status of the virtual machine changes to `Up`, and the operating system installation begins. Open a console to the virtual machine if one does not open automatically.
 ⁠
 2.4.2. Opening a Console to a Virtual Machine
 Use Remote Viewer to connect to a virtual machine.
 ⁠
-
 Procedure 2.5. Connecting to Virtual Machines
 
-    Install Remote Viewer if it is not already installed. See Section 1.4.1, “Installing Console Components”.
-    Click the Virtual Machines tab and select a virtual machine.
-    Click the console button or right-click the virtual machine and select Console.
-        If the connection protocol is set to SPICE, a console window will automatically open for the virtual machine.
-        If the connection protocol is set to VNC, a console.vv file will be downloaded. Click on the file and a console window will automatically open for the virtual machine.
+. Install `Remote Viewer` if it is not already installed. See (ADD LINK) Section 1.4.1, “Installing Console Components”.
+. Click the *Virtual Machines* tab and select a virtual machine.
+. Click the console button or right-click the virtual machine and select *Console*.
+
+* If the connection protocol is set to SPICE, a console window will automatically open for the virtual machine.
+* If the connection protocol is set to VNC, a `console.vv` file will be downloaded. Click on the file and a console window will automatically open for the virtual machine.
+
+. Follow the prompts in the Red Hat Enterprise Linux installation to install the virtual machine's operating system. (Link for more information, see ??)
+
+==== Registering the virtual machine
+
+Register the virtual machine to the Red Hat Content Delivery Network (is that right?) with the following steps:
+
+. After the installation is complete, reboot the instance and log in as the root user.
+. Update the /etc/sysconfig/network-scripts/ifcfg-eth0 file so it only contains the following values:
++
+------
+TYPE=Ethernet
+DEVICE=eth0
+ONBOOT=yes
+BOOTPROTO=dhcp
+NM_CONTROLLED=no
+------
++
+. Reboot the machine.
+. Register the machine with the Content Delivery Network:
+------
+# subscription-manager register
+------
+..  Enter your Customer Portal user name and password when prompted:
++
+------
+Username: admin@example.com
+Password:
+------
++
+..  Find entitlement pools containing the channel:
++
+------
+# subscription-manager list --available | grep -A8 "Red Hat Enterprise Linux Server"
+------
++
+.. Use the pool identifiers located in the previous step to attach the Red Hat Enterprise Linux Server entitlement to the system:
++
+------
+# subscription-manager attach --pool=pool_id
+------
++
+.. Enable the required channel:
++
+------
+# subscription-manager repos --enable=rhel-7-server-rpms
+------
++
+* (change) For RHEL OpenStack Platform 7, the required channels are rhel-7-server-openstack-7.0-rpms and rhel-7-server-rh-common-rpms. For more information, see "Subscribe to the Required Channels" in the Installation Reference.
+
+.. Update the system:
++
+------
+# yum -y update
+------
++
+. FIX NUMBERING Un-register the virtual machine so that the resulting image does not contain the same subscription details for every instance cloned based on it.
++
+------
+# subscription-manager repos --disable=*
+# subscription-manager unregister
+# yum clean all
+------
++
+. Power off the instance:
++
+------
+# poweroff
+------
+
+The virtual machine is now registered to the Red Hat Content Delivery Network (is that what we call it?).
+
+==== Creating a virtual machine template
+
+6.3.1. Creating a Template
+Create a template from an existing virtual machine to use as a blueprint for creating additional virtual machines (OR SOMETHING ELSE?_).
+
+Important
+Before you create a template, you must seal the source virtual machine to ensure all system-specific details are removed from the virtual machine. This is necessary to prevent the same details from appearing on multiple virtual machines created based on the same template. (add link) See Section 6.4.1, “Sealing a Linux Virtual Machine for Deployment as a Template”.
+⁠
+
+Procedure 6.3. Creating a Template
+
+. Click the *Virtual Machines* tab and select the source virtual machine.
+. Ensure the virtual machine is powered down and has a status of `Down`.
+. Click *Make Template*.
+⁠
+(diagram)The New Template window - Figure 6.1. The New Template window
+. Enter a *Name*, *Description*, and *Comment* for the template.
+. Select the cluster with which to associate the template from the *Cluster* drop-down list. By default, this is the same as that of the source virtual machine.
+. Optionally, select a CPU profile for the template from the *CPU Profile* drop-down list.
+. Optionally, select the *Create as a Sub Template* version check box, select a *Root Template*, and enter a *Sub Version Name* to create the new template as a sub template of an existing template.
+. In the *Disks Allocation* section, enter an alias for the disk in the *Alias* text field, and select the storage domain on which to store the disk from the *Target* list. By default, these are the same as those of the source virtual machine.
+. Select the *Allow all users to access this Template* check box to make the template public.
+. Select the *Copy VM permissions* check box to copy the permissions of the source virtual machine to the template.
+. Click *OK*.
+
+The virtual machine displays a status of `Image Locked` while the template is being created. The process of creating a template may take up to an hour depending on the size of the virtual machine disk and the capabilities of your storage hardware. When complete, the template is added to the *Templates* tab. You can now create new virtual machines based on the template.
+
+Note
+When a template is made, the virtual machine is copied so that both the existing virtual machine and its template are usable after template creation.
+
+
+FINAL PARAGRAPH.
+
+Any other steps from top? Install Ruby, etc -- add here.

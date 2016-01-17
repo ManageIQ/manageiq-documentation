@@ -1,38 +1,39 @@
 [[Use_Cases]]
 == Use Cases
 
-See the following use case examples of how ServiceNow can be integrated with automation workflow.
+The following examples show how ServiceNow can be integrated with automation workflows.
 
-=== Provision VM from Template
-The Cloud and Infrastructure Provision VM from Template state machines contain *RegisterCMDB* and *ActivateCMDB* states.
+=== Provisioning a Virtual Machine from a Template
 
-To create a new ServiceNow record during VM provisioning, amend the *ActiveCMDB* state to call the create method, for example:
+The Cloud and Infrastructure *Provision VM from Template* State Machines contain *RegisterCMDB* and *ActivateCMDB* states.
+
+To create a new ServiceNow record during virtual machine provisioning, amend the *ActiveCMDB* state to call the `create` method, for example:
 -------
 /Integration/ServiceNow/CMDB/create
 -------
 image:6667.png[StateActiveCMDBActiveCMDBstate]
 
-=== VM Retirement
+=== Virtual Machine Retirement
 
-The Cloud and Infrastructure Default retirement state machines contain *DeactivateCMDB* and *RemoveFromCMDB* states.
+The Cloud and Infrastructure default *Retirement* State Machines contain *DeactivateCMDB* and *RemoveFromCMDB* states.
 
-To update a VM ServiceNow record during VM retirement, amend the DeactivateCMDB state to call the update_patch method, for example:
+To update a virtual machine's ServiceNow record during virtual machine retirement, amend the *DeactivateCMDB* state to call the `update_patch` method, for example:
 -------
 Integration/ServiceNow/CMDB/update_patch?description=VM%20${/#vm.guid}%20retired%20from%20CloudForms
 -------
 image:6668.png[StateActiveCMDBDeactiveCMDBstate]
 
 
-To delete a VM ServiceNow record during VM retirement, amend the RemoveFromCMDB state to call the delete method, for example:
+To delete a virtual machine's ServiceNow record during virtual machine retirement, amend the *RemoveFromCMDB* state to call the `delete` method, for example:
 -------
 /Integration/ServiceNow/CMDB/delete
 -------
 image:6669.png[StateRemoveFromCMDBRemovefromCMDBstate] 
 
 
-=== VM Reconfiguration (VMware Only)
+=== Virtual Machine Reconfiguration (VMware Only)
 
-Create a new System Event instance to update the ServiceNow record after a VM reconfiguration request has been approved and completed.
+Create a new *System Event* instance to update the ServiceNow record after a virtual machine reconfiguration request has been approved and completed.
 
 Create a new */System/Event/ReconfigVM_Task_Complete* instance with a relationship value:
 -------

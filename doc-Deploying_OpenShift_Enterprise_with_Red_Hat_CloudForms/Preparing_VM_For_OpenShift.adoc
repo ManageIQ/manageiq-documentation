@@ -58,24 +58,9 @@ You can use your preferred source, for example PXE, ISO, or Clone, when creating
 * DNS is an important element of the environment, as machines must be able to connect bi-directionally to any resource in the network using the hostname.
 That means that new virtual machines instantiated from the template need to register to your DNS system automatically.
 
-**See if any of this stuff goes in the following procedures:**
+Use the following procedures to prepare a template virtual machine.
 
-Use the following procedure to prepare a template virtual machine:
-
-. Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
-
-. Register the virtual machine with Red Hat Subscription Manager and update the system using `yum update`.
-
-. Install Ruby 1.9.3 using `yum install`.
-
-. Copy the SSH key from your appliance to the virtual machine. Confirm you can open an SSH session from the appliance to the virtual machine.
-
-. Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the `ifcfg-eth0` file.
-
-. Power off the virtual machine and use the Red Hat Enterprise Virtualization console to create a template from the virtual machine.
-
-
-=== Creating a virtual machine in RHEV with the required properties
+=== Creating a virtual machine in Red Hat Enterprise Virtualization
 
 Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
 
@@ -138,7 +123,7 @@ Procedure 2.4. Starting Virtual Machines
 . Click the run ( ) button.
 . Alternatively, right-click the virtual machine and select *Run*.
 
-* The Status of the virtual machine changes to `Up`, and the operating system installation begins. Open a console to the virtual machine if one does not open automatically.
+* The virtual machine status changes to `Up`, and the operating system installation begins. Open a console to the virtual machine if one does not open automatically.
 ⁠
 2.4.2. Opening a Console to a Virtual Machine
 Use Remote Viewer to connect to a virtual machine.
@@ -215,22 +200,51 @@ Password:
 # yum clean all
 ------
 +
-. Power off the instance:
+
+The virtual machine is now registered to the Red Hat Content Delivery Network (is that what we call it?).
+
+
+==== Configuring the virtual machine
+
+. Install Ruby 1.9.3:
++
+------
+# yum install ruby
+------
++
+. Copy the SSH key from your appliance to the virtual machine:
++
+------
+# COMMAND
+------
++
+. Confirm you can open an SSH session from the appliance to the virtual machine:
++
+------
+# COMMANDS
+------
++
+. Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the ifcfg-eth0 file.
++
+------
+# COMMANDS
+------
++
+. Power off the virtual machine:
 +
 ------
 # poweroff
 ------
-
-The virtual machine is now registered to the Red Hat Content Delivery Network (is that what we call it?).
 
 ==== Creating a virtual machine template
 
 6.3.1. Creating a Template
 Create a template from an existing virtual machine to use as a blueprint for creating additional virtual machines (OR SOMETHING ELSE?_).
 
-Important
+[IMPORTANT]
+======
 Before you create a template, you must seal the source virtual machine to ensure all system-specific details are removed from the virtual machine. This is necessary to prevent the same details from appearing on multiple virtual machines created based on the same template. (add link) See Section 6.4.1, “Sealing a Linux Virtual Machine for Deployment as a Template”.
-⁠
+======
 
 Procedure 6.3. Creating a Template
 
@@ -250,10 +264,10 @@ Procedure 6.3. Creating a Template
 
 The virtual machine displays a status of `Image Locked` while the template is being created. The process of creating a template may take up to an hour depending on the size of the virtual machine disk and the capabilities of your storage hardware. When complete, the template is added to the *Templates* tab. You can now create new virtual machines based on the template.
 
-Note
+
+[NOTE]
+======
 When a template is made, the virtual machine is copied so that both the existing virtual machine and its template are usable after template creation.
+======
 
-
-FINAL PARAGRAPH.
-
-Any other steps from top? Install Ruby, etc -- add here.
+ADD FINAL PARAGRAPH.

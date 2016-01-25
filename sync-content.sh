@@ -25,21 +25,56 @@ function printHelp() {
 
 }
 
+# Check if there are any working changes
+if ! git diff-files --quiet --ignore-submodules --
+then
+
+  echo 'You have local changes to files in this branch - cannot run script!'
+  echo ''
+  echo 'Please commit all changes on this branch.'
+  echo ''
+
+  exit 2
+
+fi
+
+# Check if a guide has been specified
 if [ "$1" == "" ]; then
 
-  echo 'No guide name supplied - exiting...'
+  echo 'No guide name specified - exiting...'
   echo ''
 
   printHelp
 
 fi
 
+# Check if the specified guide is valid
+if [ ! -d "$1" ]; then
+
+  echo 'Invalid guide name specified - exiting...'
+  echo ''
+  
+  exit 2
+
+fi 
+
+# Check if a branch name has been specified
 if [ "$2" == "" ]; then
 
-  echo 'No target branch name supplied - exiting...'
+  echo 'No target branch name specified - exiting...'
   echo ''
 
   printHelp
+
+fi
+
+# Check if the specified branch name is valid
+if [ !  `git branch | grep $2` ]; then
+
+  echo 'Invalid branch specified - exiting...'
+  echo ''
+
+  exit 2
 
 fi
 
@@ -70,6 +105,11 @@ echo ''
 
 git checkout $TO_BRANCH
 
+echo ''
+echo 'Ensuring ' $2 ' is up to date...'
+
+git pull
+
 git apply mypatch.patch
 
 git add $1
@@ -85,5 +125,7 @@ git commit
 echo ''
 
 git checkout $FROM_BRANCH
+
+rm mypatch.patch
 
 echo ''

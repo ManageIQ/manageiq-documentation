@@ -28,16 +28,18 @@ function printHelp() {
 if [ "$1" == "" ]; then
 
   echo 'No guide name supplied - exiting...'
+  echo ''
 
-  printHelp()
+  printHelp
 
 fi
 
 if [ "$2" == "" ]; then
 
   echo 'No target branch name supplied - exiting...'
+  echo ''
 
-  printHelp()
+  printHelp
 
 fi
 

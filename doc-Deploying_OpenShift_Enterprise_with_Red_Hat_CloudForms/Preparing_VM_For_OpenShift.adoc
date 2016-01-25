@@ -15,18 +15,16 @@ To host OpenShift Enterprise, virtual machines require the following:
 * Ruby 1.9.3 or higher
 
 * Red Hat recommends creating a virtual machine template meeting these requirements to enable efficient deployment of multiple instances.
-You can use your preferred source, for example PXE, ISO, or Clone, when creating the virtual machine so long as the requirements are met for OpenShift Enterprise installation.
+You can use your preferred source, for example PXE, ISO, or Clone, when creating the virtual machine as long as the requirements are met for OpenShift Enterprise installation.
 
 * DNS is an important element of the environment, as machines must be able to connect bi-directionally to any resource in the network using the hostname.
 That means that new virtual machines instantiated from the template need to register to your DNS system automatically.
 
 Use the following procedures to prepare a template virtual machine to host OpenShift Enterprise.
 
-https://access.redhat.com/documentation/en/openshift-enterprise/
-
 === Creating a Virtual Machine in Red Hat Enterprise Virtualization
 
-Create a new Red Hat Enterprise Linux virtual machine on Red Hat Enterprise Virtualization and configure the required settings with the following steps.
+Create and configure a new Red Hat Enterprise Linux virtual machine on Red Hat Enterprise Virtualization with the following steps.
 
 [NOTE]
 ======
@@ -36,15 +34,15 @@ For more information on installing virtual machines on Red Hat Enterprise Virtua
 ==== Creating a New Virtual Machine
 
 . Click the *Virtual Machines* tab in Red Hat Enterprise Virtualization Manager.
-. Click the *New VM* button to open the New Virtual Machine window:
+. Click the *New VM* button to open the *New Virtual Machine* window:
 image:7316.png[]
 . Enter a *Name* for the virtual machine.
-. Select a Linux variant from the *Operating System* drop-down list. OpenShift requires Red Hat Enterprise Linux 6.4 or higher.
+. Select a Linux variant from the *Operating System* drop-down list. OpenShift Enterprise requires Red Hat Enterprise Linux 6.4 or higher.
 . Click the *Show Advanced Options* button, and:
 .. From the *System* tab, specify the virtual machine's *Memory Size*.
 .. From the *Boot Options* tab, choose the *First Device* that the virtual machine will boot from.
 
-* If you have selected CD-ROM as a boot device, tick this check box and select a CD-ROM image from the drop-down menu. The images must be available in the ISO domain.
+* If you have selected *CD-ROM* as a boot device, tick this check box and select a CD-ROM image from the drop-down menu. The images must be available in the ISO domain.
 .. You can accept the default settings for all other fields, or change them if required.
 . Click *OK*.
 
@@ -58,7 +56,7 @@ The new virtual machine is created and displays in the list of virtual machines 
 . Click *New*.
 . Enter the *Name* of the network interface:
 image:7320.png[]
-. Use the drop-down lists to select the *Profile* and the *Type* of the network interface. The *Profile* and *Type* drop-down lists are populated in accordance with the profiles and network types available to the cluster and the network interface cards available to the virtual machine.
+. Use the drop-down lists to select the *Profile* and the *Type* of the network interface. The *Profile* and *Type* drop-down lists are populated in accordance with the profiles and network types available to the cluster, and the network interface cards available to the virtual machine.
 . Select the *Custom MAC address* check box and enter a MAC address for the network interface card as required.
 . Click *OK*.
 
@@ -70,41 +68,40 @@ Configure storage for your virtual machine by adding a virtual disk. To add a di
 
 . From the *Virtual Machines* tab, select your virtual machine.
 . Click the *Disks* tab in the details pane.
-. Click *New*.
-image:7319.png[]
-. Use the appropriate radio buttons to switch between *Image*, *Direct LUN*, or Cinder*. (relevant???) Virtual disks added in the User Portal can only be *Image* disks. *Direct LUN* and *Cinder* disks can be added in the Administration Portal.
-. Enter a *Size(GB)*, *Alias*, and *Description* for the new disk. (recommendations for size?)
+. Click *Add* to open the *Add Virtual Disk* window:
+image:6578.png[]
+. Use the radio buttons choose between *Internal* and the *External (Direct LUN)* disks.
+.  Select the *Attach Disk* check box to choose an existing disk from the list and select the *Activate* check box. Alternatively, enter the *Size*, *Alias*, and *Description* for the new disk.
 . Use the drop-down lists and check boxes to configure the disk.
 . Click *OK*.
 
-The new disk appears in the details pane after a short time.
+The new disk appears in the details pane of the virtual machine after a short time.
 
 ==== Installing the Virtual Machine Operating System
 
 Install Red Hat Enterprise Linux 6.4 or higher from an ISO as a basic server on the new virtual machine.
 
 . Click the *Virtual Machines* tab and select a virtual machine with a status of `Down`.
-. Click the run (image:5033.png[]) button.
-. Alternatively, right-click the virtual machine and select *Run*.
-
-* The virtual machine status changes to `Up`, and the operating system installation begins. Open a console to the virtual machine if one does not open automatically.
-⁠
-2.4.2. Opening a Console to a Virtual Machine
-Use Remote Viewer to connect to a virtual machine.
-⁠
-Procedure 2.5. Connecting to Virtual Machines
-
-. Install `Remote Viewer` if it is not already installed. See (ADD LINK) Section 1.4.1, “Installing Console Components”.
+. Click the run (image:5033.png[]) button. Alternatively, right-click the virtual machine and select *Run*. The virtual machine status changes to `Up`, and the operating system installation begins.
+. Open a `Remote Viewer` console to the virtual machine if one does not open automatically.
+* If `Remote Viewer` is not already installed, install the `virt-viewer` package with the following command, then restart your web browser:
++
+------
+# yum install virt-viewer
+------
++
 . Click the *Virtual Machines* tab and select a virtual machine.
 . Click the console button or right-click the virtual machine and select *Console*.
 
 * If the connection protocol is set to SPICE, a console window will automatically open for the virtual machine.
 * If the connection protocol is set to VNC, a `console.vv` file will be downloaded. Click on the file and a console window will automatically open for the virtual machine.
 
-. Follow the prompts in the Red Hat Enterprise Linux installer to install the virtual machine's operating system. For more information on installing Red Hat Enterprise Linux 6, see the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html[Red Hat Enterprise Linux Installation Guide].
+. Follow the prompts in the Red Hat Enterprise Linux installer to install the virtual machine's operating system.
+
+For more information on installing Red Hat Enterprise Linux 6, see the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html[Red Hat Enterprise Linux Installation Guide].
 
 
-=== Registering the virtual machine
+=== Registering the Virtual Machine
 
 Register the virtual machine to the Red Hat Content Delivery Network with the following steps:
 
@@ -121,9 +118,11 @@ NM_CONTROLLED=no
 +
 . Reboot the machine.
 . Register the machine with the Content Delivery Network:
++
 ------
 # subscription-manager register
 ------
++
 ..  Enter your Customer Portal user name and password when prompted:
 +
 ------
@@ -149,13 +148,13 @@ Password:
 # subscription-manager repos --enable=rhel-6-server-rpms
 ------
 +
-.. Update the system:
+. Update the system:
 +
 ------
 # yum -y update
 ------
 +
-. FIX NUMBERING Un-register the virtual machine so that the resulting image does not contain the same subscription details for every instance cloned based on it.
+. Un-register the virtual machine so that the resulting image does not contain the same subscription details for every instance cloned based on it.
 +
 ------
 # subscription-manager repos --disable=*
@@ -167,7 +166,7 @@ Password:
 The virtual machine is now registered to the Red Hat Content Delivery Network.
 
 
-=== Configuring the virtual machine
+=== Configuring the Virtual Machine
 
 . Install Ruby 1.9.3:
 +
@@ -202,7 +201,7 @@ The virtual machine is now registered to the Red Hat Content Delivery Network.
 # poweroff
 ------
 
-=== Creating a virtual machine template
+=== Creating a Virtual Machine Template
 
 To create a virtual machine template, you must first generalize (seal) the virtual machine before creating a template based on that virtual machine.
 
@@ -217,11 +216,12 @@ Before you create a template, you must seal the source virtual machine to ensure
 
 . Log in to the virtual machine.
 . Flag the system for re-configuration by running the following command as root:
++
 ------
 # touch /.unconfigured
 ------
 +
-. Run the following command to remove ssh host keys:
+. Run the following command to remove SSH host keys:
 +
 ------
 # rm -rf /etc/ssh/ssh_host_*
@@ -246,7 +246,7 @@ Before you create a template, you must seal the source virtual machine to ensure
 The virtual machine is sealed and can be made into a template. You can deploy Linux virtual machines from this template without experiencing configuration file conflicts.
 
 
-==== Creating a Template
+==== Creating a Virtual Machine Template
 
 . Click the *Virtual Machines* tab and select the source virtual machine.
 . Ensure the virtual machine is powered down and has a status of `Down`.

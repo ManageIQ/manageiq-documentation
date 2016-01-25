@@ -2,44 +2,6 @@
 
 == Preparing a Virtual Machine for OpenShift Enterprise
 
-To host OpenShift Enterprise, virtual machines require the following:
-
-* Red Hat Enterprise Linux 6.4 or higher
-
-* Network access, with valid IP addresses and access to the OpenShift Enterprise sources, for example through Red Hat Subscription Manager or Red Hat Satellite
-
-* SSH key access from all appliances running the Automation Role to the virtual machines
-
-* Ruby 1.9.3 or higher
-
-* Red Hat recommends creating a virtual machine template meeting these requirements to enable efficient deployment of multiple instances.
-You can use your preferred source, for example PXE, ISO, or Clone, when creating the virtual machine so long as the requirements are met for OpenShift Enterprise installation.
-
-Use the following procedure to prepare a template virtual machine:
-
-. Install Red Hat Enterprise Linux 6.4 from ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
-
-. Register the virtual machine with Red Hat Subscription Manager and update the system using `yum update`.
-
-. Install Ruby 1.9.3 using `yum install`.
-
-. Copy the SSH key from your appliance to the virtual machine. Confirm you can open an SSH session from the appliance to the virtual machine.
-
-. Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the `ifcfg-eth0` file.
-
-. Power off the virtual machine and use the Red Hat Enterprise Virtualization console to create a template from the virtual machine.
-
-DNS is an important element of the environment, as machines must be able to connect bi-directionally to any resource in the network using the hostname.
-That means that new virtual machines instantiated from the template need to register to your DNS system automatically.
-
-
-
-NEW
-
-== Preparing a Virtual Machine for OpenShift Enterprise
-
-Initial blurb?
-
 === Requirements
 
 To host OpenShift Enterprise, virtual machines require the following:
@@ -60,29 +22,30 @@ That means that new virtual machines instantiated from the template need to regi
 
 Use the following procedures to prepare a template virtual machine to host OpenShift Enterprise.
 
+https://access.redhat.com/documentation/en/openshift-enterprise/
+
 === Creating a Virtual Machine in Red Hat Enterprise Virtualization
 
-Install Red Hat Enterprise Linux 6.4 or higher from an ISO as a basic server on a new virtual machine using Red Hat Enterprise Virtualization.
+Create a new Red Hat Enterprise Linux virtual machine on Red Hat Enterprise Virtualization and configure the required settings with the following steps.
 
-From: https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6-Beta/html-single/Virtual_Machine_Management_Guide/index.html#Creating_a_new_virtual_machine_from_a_blank_template
-
-Create a new virtual machine and configure the required settings.
-⁠
+[NOTE]
+======
+For more information on installing virtual machines on Red Hat Enterprise Virtualization, see the https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.5/html-single/Administration_Guide/index.html#chap-Virtual_Machines[Red Hat Enterprise Virtualization Installation Guide].⁠
+======
 
 ==== Creating a New Virtual Machine
 
-. Click the *Virtual Machines* tab.
-. Click the *New VM* button to open the New Virtual Machine window (insert screenshot?)
-
+. Click the *Virtual Machines* tab in Red Hat Enterprise Virtualization Manager.
+. Click the *New VM* button to open the New Virtual Machine window:
+image:7316.png[]
 . Enter a *Name* for the virtual machine.
 . Select a Linux variant from the *Operating System* drop-down list. OpenShift requires Red Hat Enterprise Linux 6.4 or higher.
 . Click the *Show Advanced Options* button, and:
-.. From the *System* tab, specify the virtual machine's *Memory Size*. (REQ FOR OPENSHIFT?)
+.. From the *System* tab, specify the virtual machine's *Memory Size*.
 .. From the *Boot Options* tab, choose the *First Device* that the virtual machine will boot from.
 
 * If you have selected CD-ROM as a boot device, tick this check box and select a CD-ROM image from the drop-down menu. The images must be available in the ISO domain.
-
-You can accept the default settings for all other fields, or change them if required. For more details on all fields in the New Virtual Machine window, see (LINK TO RHEV GUIDE) Section A.1, “Explanation of Settings in the New Virtual Machine and Edit Virtual Machine Windows”.
+.. You can accept the default settings for all other fields, or change them if required.
 . Click *OK*.
 
 The new virtual machine is created and displays in the list of virtual machines in the Red Hat Enterprise Virtualization Manager with a status of `Down`. Before you can use this virtual machine, add at least one network interface and one virtual disk, and install an operating system.
@@ -92,17 +55,14 @@ The new virtual machine is created and displays in the list of virtual machines 
 
 . From the *Virtual Machines* tab, select the virtual machine you created.
 . Click the *Network Interfaces* tab in the details pane.
-. Click *New*. (ADD DIAGRAM?) Figure 2.2. New Network Interface window
-. Enter the *Name* of the network interface.
+. Click *New*.
+. Enter the *Name* of the network interface:
+image:7320.png[]
 . Use the drop-down lists to select the *Profile* and the *Type* of the network interface. The *Profile* and *Type* drop-down lists are populated in accordance with the profiles and network types available to the cluster and the network interface cards available to the virtual machine.
 . Select the *Custom MAC address* check box and enter a MAC address for the network interface card as required.
 . Click *OK*.
 
 The new network interface is listed in the *Network Interfaces* tab in the details pane of the virtual machine. The *Link State* is set to *Up* by default when the network interface card is defined on the virtual machine and connected to the network.
-
-(INSTEAD OF THIS, POINT ONE GENERAL LINK TO THE RHEV GUIDE - ADMIN or USER in 3.5 TO GIVE MORE INFO.)
-For more details on the fields in the New Network Interface window, see  (LINK TO RHEV GUIDE) Section A.2, “Explanation of Settings in the New Network Interface and Edit Network Interface Windows”.
-
 
 ==== Adding a Virtual Disk
 
@@ -110,18 +70,21 @@ Configure storage for your virtual machine by adding a virtual disk. To add a di
 
 . From the *Virtual Machines* tab, select your virtual machine.
 . Click the *Disks* tab in the details pane.
-. Click *New*. (need diagram?) The New Virtual Disk Window Figure 2.3. The New Virtual Disk Window
+. Click *New*.
+image:7319.png[]
 . Use the appropriate radio buttons to switch between *Image*, *Direct LUN*, or Cinder*. (relevant???) Virtual disks added in the User Portal can only be *Image* disks. *Direct LUN* and *Cinder* disks can be added in the Administration Portal.
 . Enter a *Size(GB)*, *Alias*, and *Description* for the new disk. (recommendations for size?)
-. Use the drop-down lists and check boxes to configure the disk. See (LINK HERE) Section A.3, “Explanation of Settings in the New Virtual Disk and Edit Virtual Disk Windows” for more details on the fields for all disk types.
+. Use the drop-down lists and check boxes to configure the disk.
 . Click *OK*.
 
 The new disk appears in the details pane after a short time.
 
 ==== Installing the Virtual Machine Operating System
-⁠
+
+Install Red Hat Enterprise Linux 6.4 or higher from an ISO as a basic server on the new virtual machine.
+
 . Click the *Virtual Machines* tab and select a virtual machine with a status of `Down`.
-. Click the run ( ) button.
+. Click the run (image:5033.png[]) button.
 . Alternatively, right-click the virtual machine and select *Run*.
 
 * The virtual machine status changes to `Up`, and the operating system installation begins. Open a console to the virtual machine if one does not open automatically.
@@ -138,11 +101,12 @@ Procedure 2.5. Connecting to Virtual Machines
 * If the connection protocol is set to SPICE, a console window will automatically open for the virtual machine.
 * If the connection protocol is set to VNC, a `console.vv` file will be downloaded. Click on the file and a console window will automatically open for the virtual machine.
 
-. Follow the prompts in the Red Hat Enterprise Linux installer to install the virtual machine's operating system. For more information, on installing Red Hat Enterprise Linux 6, see https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html
+. Follow the prompts in the Red Hat Enterprise Linux installer to install the virtual machine's operating system. For more information on installing Red Hat Enterprise Linux 6, see the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html[Red Hat Enterprise Linux Installation Guide].
+
 
 === Registering the virtual machine
 
-Register the virtual machine to the Red Hat Content Delivery Network (is that right?) with the following steps:
+Register the virtual machine to the Red Hat Content Delivery Network with the following steps:
 
 . After the installation is complete, reboot the instance and log in as the root user.
 . Update the `/etc/sysconfig/network-scripts/ifcfg-eth0` file so it only contains the following values:
@@ -182,11 +146,9 @@ Password:
 .. Enable the required channel:
 +
 ------
-# subscription-manager repos --enable=rhel-7-server-rpms
+# subscription-manager repos --enable=rhel-6-server-rpms
 ------
 +
-* (change) For RHEL OpenStack Platform 7, the required channels are rhel-7-server-openstack-7.0-rpms and rhel-7-server-rh-common-rpms. For more information, see "Subscribe to the Required Channels" in the Installation Reference.
-
 .. Update the system:
 +
 ------
@@ -202,7 +164,7 @@ Password:
 ------
 +
 
-The virtual machine is now registered to the Red Hat Content Delivery Network (is that what we call it?).
+The virtual machine is now registered to the Red Hat Content Delivery Network.
 
 
 === Configuring the virtual machine
@@ -224,6 +186,9 @@ The virtual machine is now registered to the Red Hat Content Delivery Network (i
 ------
 # COMMANDS
 ------
+
+
+
 +
 . Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the ifcfg-eth0 file.
 +
@@ -239,21 +204,53 @@ The virtual machine is now registered to the Red Hat Content Delivery Network (i
 
 === Creating a virtual machine template
 
-6.3.1. Creating a Template
-Create a template from an existing virtual machine to use as a blueprint for creating additional virtual machines (OR SOMETHING ELSE?_).
+To create a virtual machine template, you must first generalize (seal) the virtual machine before creating a template based on that virtual machine.
+
+Then you can create a template from the existing virtual machine to use as a blueprint for creating additional virtual machines.
 
 [IMPORTANT]
 ======
-Before you create a template, you must seal the source virtual machine to ensure all system-specific details are removed from the virtual machine. This is necessary to prevent the same details from appearing on multiple virtual machines created based on the same template. (add link) See Section 6.4.1, “Sealing a Linux Virtual Machine for Deployment as a Template”.
+Before you create a template, you must seal the source virtual machine to ensure all system-specific details are removed from the virtual machine. This is necessary to prevent the same details from appearing on multiple virtual machines created based on the same template. For more information, see (add link) see the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.5/html/Administration_Guide/sect-Sealing_Virtual_Machines_in_Preparation_for_Deployment_as_Templates.html[Red Hat Enterprise Virtualization Administration Guide].
 ======
 
-Procedure 6.3. Creating a Template
+==== Sealing a Linux Virtual Machine Manually for Deployment as a Template
+
+. Log in to the virtual machine.
+. Flag the system for re-configuration by running the following command as root:
+------
+# touch /.unconfigured
+------
++
+. Run the following command to remove ssh host keys:
++
+------
+# rm -rf /etc/ssh/ssh_host_*
+------
++
+. Set `HOSTNAME=localhost.localdomain` in `/etc/sysconfig/network`.
+. Run the following command to remove `/etc/udev/rules.d/70-*``:
++
+------
+# rm -rf /etc/udev/rules.d/70-*
+------
++
+. Remove the `HWADDR` line and `UUID` line from `/etc/sysconfig/network-scripts/ifcfg-eth*`.
+. Optionally, delete all the logs from `/var/log` and build logs from `/root`.
+. Run the following command to shut down the virtual machine:
++
+------
+# poweroff
+------
++
+
+The virtual machine is sealed and can be made into a template. You can deploy Linux virtual machines from this template without experiencing configuration file conflicts.
+
+
+==== Creating a Template
 
 . Click the *Virtual Machines* tab and select the source virtual machine.
 . Ensure the virtual machine is powered down and has a status of `Down`.
 . Click *Make Template*.
-⁠
-(diagram)The New Template window - Figure 6.1. The New Template window
 . Enter a *Name*, *Description*, and *Comment* for the template.
 . Select the cluster with which to associate the template from the *Cluster* drop-down list. By default, this is the same as that of the source virtual machine.
 . Optionally, select a CPU profile for the template from the *CPU Profile* drop-down list.
@@ -270,5 +267,3 @@ The virtual machine displays a status of `Image Locked` while the template is be
 ======
 When a template is made, the virtual machine is copied so that both the existing virtual machine and its template are usable after template creation.
 ======
-
-ADD FINAL PARAGRAPH.

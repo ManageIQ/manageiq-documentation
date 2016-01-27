@@ -101,7 +101,7 @@ Install Red Hat Enterprise Linux 6.4 or higher from an ISO as a basic server on 
 For more information on installing Red Hat Enterprise Linux 6, see the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html[Red Hat Enterprise Linux Installation Guide].
 
 
-=== Registering the Virtual Machine
+=== Registering and Configuring the Virtual Machine
 
 Register the virtual machine to the Red Hat Content Delivery Network with the following steps:
 
@@ -154,7 +154,14 @@ Password:
 # yum -y update
 ------
 +
-. Un-register the virtual machine so that the resulting image does not contain the same subscription details for every instance cloned based on it.
+. Install Ruby 1.9.3:
++
+------
+# yum install ruby
+------
++
+
+. Then, un-register the virtual machine so that the resulting image does not contain the same subscription details for every instance cloned based on it.
 +
 ------
 # subscription-manager repos --disable=*
@@ -165,41 +172,6 @@ Password:
 
 The virtual machine is now registered to the Red Hat Content Delivery Network.
 
-
-=== Configuring the Virtual Machine
-
-. Install Ruby 1.9.3:
-+
-------
-# yum install ruby
-------
-+
-. Copy the SSH key from your appliance to the virtual machine:
-+
-------
-# COMMAND
-------
-+
-. Confirm you can open an SSH session from the appliance to the virtual machine:
-+
-------
-# COMMANDS
-------
-
-
-
-+
-. Prepare the virtual machine to become a template by clearing the UDEV rules for Network and unique details from the ifcfg-eth0 file.
-+
-------
-# COMMANDS
-------
-+
-. Power off the virtual machine:
-+
-------
-# poweroff
-------
 
 === Creating a Virtual Machine Template
 
@@ -212,7 +184,7 @@ Then you can create a template from the existing virtual machine to use as a blu
 Before you create a template, you must seal the source virtual machine to ensure all system-specific details are removed from the virtual machine. This is necessary to prevent the same details from appearing on multiple virtual machines created based on the same template. For more information, see (add link) see the link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.5/html/Administration_Guide/sect-Sealing_Virtual_Machines_in_Preparation_for_Deployment_as_Templates.html[Red Hat Enterprise Virtualization Administration Guide].
 ======
 
-==== Sealing a Linux Virtual Machine Manually for Deployment as a Template
+==== Sealing a Linux Virtual Machine for Deployment as a Template
 
 . Log in to the virtual machine.
 . Flag the system for re-configuration by running the following command as root:
@@ -243,7 +215,7 @@ Before you create a template, you must seal the source virtual machine to ensure
 ------
 +
 
-The virtual machine is sealed and can be made into a template. You can deploy Linux virtual machines from this template without experiencing configuration file conflicts.
+The virtual machine is sealed and can now be made into a template. You can deploy Linux virtual machines from this template without experiencing configuration file conflicts.
 
 
 ==== Creating a Virtual Machine Template

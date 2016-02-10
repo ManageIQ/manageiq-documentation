@@ -1,0 +1,129 @@
+[[RHBA-2015-0159]]
+=== RHBA-2015-0159
+
+The bugs contained in this section are addressed by advisory RHBA-2015:0159. Further information about this advisory is available at https://access.redhat.com/errata/RHBA-2015:0159.html.
+
+==== API
+
+BZ#link:https://bugzilla.redhat.com/1290196[1290196]
+------
+Previously, the 'terminate' action was not exposed in the Red Hat CloudForms REST API. This prevented users from integrating CloudForms with external IP process applications to manage the complete life cycle of instances. With this update, this functionality has now been exposed in the REST API.
+------
+
+==== Appliance
+
+BZ#link:https://bugzilla.redhat.com/1290187[1290187]
+------
+In the previous version of CloudForms Management Engine, it was not possible to configure the appliance to authenticate against a Red Hat IPA domain server if the IPA domain name was composed of only a top-level domain name. This was due to validation that required the IPA domain name to contain a sub-domain name and a top-level domain name. This bug was fixed by relaxing the validation rule to allow the IPA domain name to be composed of only a top-level domain name. With this change, it is possible to configure an appliance running the new version of CloudForms Manamgent Engine to authenticate against an IPA domain with a domain name composed of only a top-level domain.
+------
+
+BZ#link:https://bugzilla.redhat.com/1290192[1290192]
+------
+In the previous version of CloudForms Management Engine, the wrong time zone and backup start time was displayed when editing the CloudForms Management Engine database backup schedule. This bug was caused by storing the incorrect timezone when creating the database backup schedule. This bug was fixed by correctly saving the timezone when creating the database backup schedule. The correct time zone and backup start time is displayed when editing the database backup schedule in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1300336[1300336]
+------
+This update adds the activerecord-session_store Ruby gem, which is required for `session_store: sql` functionality. This resolve an issue that caused failures in workers under certain circumstances.
+------
+
+==== Automate
+
+BZ#link:https://bugzilla.redhat.com/1287158[1287158]
+------
+The new version of CloudForms Management Engine now displays the MIQ and Red Hat Automate domain versions in the user interface. This provides an easy way to lookup the MIQ and Red Hat domain versions after updating the CloudForms rpm packages. This is necessary as the admin needs to reset the automate model to update the MIQ and Red Hat domains after the CloudForms rpm package update.
+------
+
+BZ#link:https://bugzilla.redhat.com/1289594[1289594]
+------
+The new version of CloudForms Management Engine adds the ability to dynamically assign customization specifications during provisioning. This is done by exposing the customization_specs method that automate scripts can use to retrieve a list of customization specifications from an Enterprise Management system (EMS). The set_customization_spec method was also enhanced to lookup the customization specification by object or string, and dynamically assign the specification when provisioning a virtual machine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1291729[1291729]
+------
+In the previous version of CloudForms Management Engine, an implicit null conversion error would be reported if a text box in a service dialog was left empty when calling CatalogItemInitialization. This was because as all text boxes were required to contain a value by the dialog parser code by default. This bug was fixed by changing the dialog parser code to accept empty text boxes in the service dialog. The implicit null conversion error is no longer reported when calling CatalogItemInitialization in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1292220[1292220]
+------
+In the previous version of CloudForms Management Engine, looking up a virtual machine's network device information in automate methods would result in an error. This was because network association was missing from the vm.hardware.nics network object. This bug was fixed by exposing network information from the hardware service model. It is now possible to use the vm.hardware.nics object in automate methods.
+------
+
+BZ#link:https://bugzilla.redhat.com/1296581[1296581]
+------
+In the previous version of CloudForms Management Engine, running a control policy containing an action type that invoked a custom automation always failed with an error that the user_id was not specified in the automation request. This error was caused by missing user id, miq_group_id and tenant_id arguments in the automation request. This bug was fixed by passing the missing user_id, miq_group_id and tenant_id arguments in the automation request. Invoking a custom automation now works as expected in the new version of CloudForms Management Engine.
+------
+
+==== Providers
+
+BZ#link:https://bugzilla.redhat.com/1291812[1291812]
+------
+The new version of CloudForms Management Engine adds the ability to pause and shutdown virtual machines on an OpenStack provider. The ability to start OpenStack virtual machines from a shut down, suspended, or paused state was already available in the previous version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1291878[1291878]
+------
+The new version of CloudForms Management Engine now collects memory usage statistics from OpenStack Ceilometer, in addition to CPU, disk and network statistics that were being collected in the previous version. The memory usage statistics, along with the CPU, disk and network statistics gives a complete picture of resource utilization on an OpenStack provider.
+------
+
+BZ#link:https://bugzilla.redhat.com/1292488[1292488]
+------
+With this update, it is now possible to specify the path to a CA certificate for OpenStack providers to allow SSL connectivity.
+------
+
+BZ#link:https://bugzilla.redhat.com/1298969[1298969]
+------
+This update adds the ability to gracefully shut down virtual machines hosted on an OpenStack provider, and shelve the OpenStack instance. This capability was already available for infrastructure providers.
+------
+
+==== Provisioning
+
+BZ#link:https://bugzilla.redhat.com/1290175[1290175]
+------
+In the previous version of CloudForms Management Engine, customization of virtual machines provisioned on a Red Hat Enterprise Virtualization Manager (RHEV-M) provider using cloud-init scripts would not work. This was due to a change in the RHEV-M provisioning API that required an additional option in the provisioning request to enable cloud initialization. Additionally, this cloud initialization option works correctly only in RHEV-M versions 3.5.6.0 and later. Cloud initialization for virtual machines provisioned on Red Hat Enterprise Virtualization providers works as expected in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1290215[1290215]
+------
+In the previous version of CloudForms Management Engine, editing a catalog item could fail with an undefined method error if a resource pool or EMS folder was removed from the catalog item. This bug was fixed by changing the code to allow for removal of the resource pool or EMS folder from the catalog item. Editing a catalog item no longer fails in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1293711[1293711]
+------
+In the previous version of CloudForms Management Engine, after choosing a tenant other then the default tenant when ordering a multi tenant orchestration service on an OpenStack provider, the tenant selection list was disabled when attempting to reconfigure the service. This bug was caused by an error in the script that provided the tenant selection list. This bug was fixed by correcting the error in the script that provided the entries for the tenant selection list. The tenant selection list in the orchestration reconfiguration dialog works as expected in the new version of CloudForms Management Engine.
+------
+
+==== Reporting
+
+BZ#link:https://bugzilla.redhat.com/1289689[1289689]
+------
+The new version of CloudForms Management Engine adds the ability to share reports with more than one group. This allows users from multiple groups to see a shared report. This also allows a user in multiple groups to see reports shared with different groups, without having to change groups.
+------
+
+==== Web UI
+
+BZ#link:https://bugzilla.redhat.com/1287755[1287755]
+------
+In the previous version of CloudForms Management Engine, users with only view permission for reports were unable to view saved reports. This was because the Saved Reports accordion only had an option to modify or delete saved reports. If the user did not have those permissions, the user would not be able to view the saved reports. This bug was fixed by adding a View option under the Saved Reports accordion. Users with only view permissions are now able to view saved reports in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1292574[1292574]
+------
+In the previous version of CloudForms Management Engine, a saved report file name would include the current date when downloaded, rather then the date on which the report was saved. This was because the time stamp in the report footer, from which the file name was derived, was set to the current time when downloading. This bug was fixed by changing the time stamp in the report footer to the time when the report was last run. Saved report file names now include the report saved date upon downloading in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1296160[1296160]
+------
+The previous version of CloudForms Management Engine had a user interface bug in Automate's custom service dialog editor where the user was not able to drag or remove existing elements in a service dialog. This bug was caused by errors in the drag and drop mechanism code. This bug was fixed by correcting the code errors. Users are now able to edit Automate service dialogs as expected in the new version of CloudForms Management Engine.
+------
+
+BZ#link:https://bugzilla.redhat.com/1297953[1297953]
+------
+This update adds support for dynamic fields in service dialogs, making it possible to order services with dynamic fields in the Self Service Portal.
+------
+
+BZ#link:https://bugzilla.redhat.com/1298968[1298968]
+------
+This update resolves an issue that prevented users from creating service dialogs for dynamic drop-down list element types by making it possible to save a DialogFieldDropDownList without values when it is dynamic.
+------
+

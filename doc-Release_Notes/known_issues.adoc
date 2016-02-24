@@ -93,3 +93,11 @@ Run the following commands on all Regional Database Appliances, replacing <regio
 
 Finally, enable the database synchronization role on the Regional Database Appliances.
 ------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1298986[1298986]
+------
+In the current version of CloudForms Management Engine, it is not possible to run a virtual machine after it has been retired. But, the OpenStack provider still allows a retired virtual machine to be powered on from the OpenStack console. This will result in CloudForms Management Engine reporting the virtual machine to be powered on while retired. In this case, retiring the virtual machine has to be enforced by the CloudForms Management Engine administrator.
+For example:
+* Change the State Machine workflow and define the end state of the retired virtual machine to be deleted or removed from provider inventory instead of being stopped or suspended.
+* Write a Control Policy that watches the provider for virtual machine Start Events and shut down the virtual machine if it has been retired. 
+------

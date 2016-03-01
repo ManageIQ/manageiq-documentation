@@ -1,0 +1,355 @@
+
+[[service-management]]
+== Service Management
+
+Service management is provided via the following collections:
+
+[cols="<,<",options="header",width="50%"]
+|==========================
+| Path | Description
+| /api/service_catalogs | Service Catalogs
+| /api/service_templates | Service Templates
+| /api/services | Services
+| /api/service_requests | Service Requests
+|==========================
+
+[[service-catalogs]]
+=== Service Catalogs
+
+Full CRUD is available on service catalogs.
+
+* link:#creating-service-catalogs[Creating Service Catalogs]
+* link:#editing-service-catalogs[Editing Service Catalogs]
+* link:#assigning-service-template[Assigning/Unassigning Service Templates from Service Catalogs]
+* link:#ordering-services[Ordering Services]
+* link:#deleting-service-catalogs[Deleting Service Catalogs]
+
+[[creating-service-catalogs]]
+==== Creating Service Catalogs
+
+[source,data]
+----
+/api/service_catalogs
+----
+
+Creating service catalog is provided via the following actions:
+
+[cols="<,<,<",options="header",]
+|===============================
+| Method | Versions | Comment
+| create | 2.0.0  | Preferred
+| add | since v1.0 |
+|===============================
+
+
+Example of creating service catalog with _create_ method:
+
+----
+POST /api/service_catalogs
+----
+
+[source,json]
+----
+{
+   "action" : "create",
+   "resource" : {
+     "name" : "Sample Service Catalog",
+     "description" : "Description of Sample Service Catalog",
+     "service_templates" : [
+       { "href" : "http://localhost:3000/api/service_templates/3" },
+       { "href" : "http://localhost:3000/api/service_templates/4" }
+     ]
+   }
+}
+----
+
+Optionally without the create action signature:
+
+[source,json]
+----
+{
+  "name" : "Sample Service Catalog",
+  "description" : "Description of Sample Service Catalog",
+  "service_templates" : [
+    { "href" : "http://localhost:3000/api/service_templates/3" },
+    { "href" : "http://localhost:3000/api/service_templates/4" }
+  ]
+}
+----
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#service-catalogs[Resource Attributes]
+page for a list of available attributes when creating Service Catalogs.
+====
+
+[[editing-service-catalogs]]
+==== Editing Service Catalogs
+
+Editing a service catalog via the _edit_ action as follows:
+
+----
+POST /api/service_catalogs/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "description" : "Updated Description of Third Service Catalog"
+   }
+}
+----
+
+[[assigning-service-templates]]
+==== Assigning Service Templates
+
+Assign and Unassigning service templates to service catalogs is done
+via the _assign_ and _unassign_ actions as follows:
+
+----
+POST /api/service_catalogs/:id
+----
+
+[source,json]
+----
+{
+  "action" : "assign",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/service_templates/5" },
+    { "href" : "http://localhost:3000/api/service_templates/6" }
+  ]
+}
+----
+
+----
+POST /api/service_catalogs/:id
+----
+
+[source,json]
+----
+{
+  "action" : "unassign",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/service_templates/1" },
+    { "href" : "http://localhost:3000/api/service_templates/2" }
+  ]
+}
+----
+
+[[ordering-services]]
+==== Ordering Services Service Templates
+
+Ordering services is done by triggering an _order_ action on service templates
+in a service catalog as follows:
+
+----
+POST /api/service_catalogs/:id/service_templates
+----
+
+[source,json]
+----
+{
+  "action" : "order",
+  "resource" : {
+    "href" : "http://localhost:3000/api/service_templates/3",
+    "option_0_vm_target_name" : "test-vm-0001",
+    "option_0_vm_target_hostname" : "test-vm-0001"
+  }
+}
+----
+
+[[deleting-service-catalogs]]
+==== Deleting Service Catalogs
+
+Single service catalogs can simply be deleted via the DELETE method
+as follows:
+
+----
+DELETE /api/service_catalogs/:id
+----
+
+Multiple service catalogs can also be deleted with a single request as follows:
+
+----
+POST /api/service_catalogs
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/service_catalogs/11" },
+    { "href" : "http://localhost:3000/api/service_catalogs/12" },
+    { "href" : "http://localhost:3000/api/service_catalogs/13" }
+  ]
+}
+----
+
+[[service-templates]]
+=== Service Templates
+
+Basic Edits and Delete of Service Templates is available.
+
+[source,data]
+----
+/api/service_templates
+----
+
+Editing a single service template as follows:
+
+----
+POST /api/service_templates/:id
+----
+
+[source,data]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "name" : "svc_template_01",
+    "description" : "This is a sample service template"
+  }
+}
+----
+
+Deleting single service template via the DELETE method or multiple as
+follows:
+
+----
+DELETE /api/service_templates/:id
+----
+
+or
+
+----
+POST /api/service_templates
+----
+
+[source,data]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/service_templates/11" },
+    { "href" : "http://localhost:3000/api/service_templates/12" }
+  ]
+}
+----
+
+
+[[services]]
+=== Services ===
+
+Once services are ordered from a service catalogs, they can be:
+
+* link:#service-editing[Edited] (Basic)
+* link:#service-retiring-now[Retired now]
+* link:#service-retiring-future[Retired in future]
+* link:#service-deleting[Deleted]
+
+Services URL:
+
+[source,data]
+----
+/api/services
+----
+
+[[service-editing]]
+==== Service Editing
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+   "action" : "edit",
+   "resource" : {
+     "name" : "Updated Service Name",
+     "description" : "Updated Service Description"
+   }
+}
+----
+
+[[service-retiring-now]]
+==== Service Retiring (now)
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "retire"
+}
+----
+
+[[service-retiring-future]]
+==== Service Retiring (future)
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "retire",
+  "resource" : { "date" : "10/30/2015", "warn" : "5" }
+}
+----
+
+[[service-deleting]]
+==== Deleting Services
+
+----
+DELETE /api/services/:id
+----
+
+Or via the delete action for deleting multiple services:
+
+----
+POST /api/services
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/services/101",
+    { "href" : "http://localhost:3000/api/services/102",
+    { "href" : "http://localhost:3000/api/services/103"
+    ...
+  ]
+}
+----
+
+
+[[service-requests]]
+=== Service Requests ===
+
+Once services are ordered from a catalog, service requests can be
+monitored as follows:
+
+----
+GET /api/service_requests/:id
+----
+
+Additionally, tasks of the specific requests can be queried:
+
+----
+GET /api/service_requests/:id?expand=request_tasks
+----
+
+or optionally via the tasks alias:
+
+----
+GET /api/service_requests/:id?expand=tasks
+----
+

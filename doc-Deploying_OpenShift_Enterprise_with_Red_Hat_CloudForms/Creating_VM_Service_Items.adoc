@@ -1,0 +1,37 @@
+[[creating_vm_service_items]]
+
+== Creating Virtual Machine Service Items
+
+The number of virtual machine service items required corresponds to the number of servers you want to deploy in your OpenShift Enterprise service bundle. For example:
+
+* A single OpenShift Enterprise All-In-One bundle requires ONE virtual machine service item.
+* A broker and node located on separate servers requires TWO virtual machine service items.
+* A four node and one broker bundle requires FIVE virtual machine service items.
+
+Virtual machine service items are represented individually but can be configured identically.
+If desired, you can separate brokers from nodes on different hosts by adjusting those settings when creating the service items.
+
+Use the following procedure to create virtual machine service items:
+
+. Log in to the CloudForms Management Engine appliance and navigate to menu:Services[Catalogs].
+. Select the *Catalog Items* accordion.
+. Click menu:Configuration[Add a New Catalog Item] to create a new service item.
+image:6227.png[]
+. Select a destination platform from the *Catalog Item Type* list.
+image:6228.png[]
+. Enter a name and description for the service item. Red Hat recommends using the OpenShift Enterprise role as the name.
+For example, if the service item is a broker, then call it `OpenShift Enterprise Broker`.
+image:6229.png[]
+. Select the *Request Info* tab and set the virtual machine options.
+* Select a virtual machine as a base template that conforms to the minimum requirements for OpenShift Enterprise.
+* Enter a name for the virtual machine. CloudForms Management Engine assigns numbers automatically to ensure no conflicts.
+Red Hat recommends using a name similar to the service item name, for example `OSE-BROKER`.
+* Set the virtual machine to *start/power on*.
+. After creating the service items, tag them with their role. This enables CloudForms Management Engine to install the correct role on the service item at the time of deployment.
+Click menu:Policy[Edit Tags].
+image:6230.png[]
+. Within the policy settings for the service item, assign the required *OpenShift Enterprise Policy* tags.
+* For a broker, assign the *Broker OSE Policy*.
+* For a node, assign the *Node OSE Policy*.
+* For an All-In-One OpenShift Enterprise server, assign all the *OSE Policy* tags to the service item: *Broker*, *Node*, *msgServer*, and *dbServer*.		
+image:6231.png[]

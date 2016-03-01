@@ -1,0 +1,33 @@
+[[preparing_cfme_for_openshift_deployment]]
+== Preparing CloudForms Management Engine for OpenShift Deployment
+
+=== The oo-install-ose Tool
+
+Installation of OpenShift Enterprise requires CloudForms Management Engine 5.3.2 or greater, and the oo-install-ose tool. The oo-install-ose tool is a technology preview feature.
+
+Download the oo-install-ose tool here: https://bugzilla.redhat.com/attachment.cgi?id=979818[BZ#1181872 oo-installer]
+
+oo-install-ose documentation is available here: https://install.openshift.com
+
+Red Hat recommends locating the oo-install-ose tool in the `/root/` directory of the CloudForms Management Engine appliance, although this can be changed.
+Ensure that execution permission is enabled for the oo-install-ose files, and place the files on all appliances that have the Automation role enabled in your environment.
+
+=== CloudForms Management Engine Categories and Tags
+To facilitate the deployment of OpenShift Enterprise, create the *OSE Policy* and *OSE Status* tag categories if they do not already exist on your system.
+	
+. Navigate to menu:Automate[Simulation].
+
+. In the *Object Details* field, select *Request* in the */System/Process/* list.
+
+. Enter *create* in the *Message* field.
+			
+. Enter *osetags* in the *Request* field.
+
+. In the *Object Attribute* field, select *None* in the *Type* list.
+
+. In the *Simulation Parameters* field, select *Execute Methods*.
+
+. Click *Submit*.
+
+. The *OSE Policy* and *OSE Status* categories and tags are automatically created. The `automation.log` file displays creation progress.
+	

@@ -1,0 +1,95 @@
+[[_chap_red_hat_cloudforms_security_guide_updates]]
+= Registering and Updating CloudForms Management Engine
+
+An important part of securing Red Hat CloudForms Management Engine is to ensure your appliances use the latest packages.
+Package updates to the appliance contain patches for any software bugs, including possible security bugs.
+
+The *Red Hat Updates* page enables you to edit register and update appliances.
+This includes either registering the appliance to Red Hat's Content Delivery Network (CDN) or to a Red Hat Satellite server.
+
+The following tools are used during the update process:
+
+* `Yum` provides package installation, updates, and dependency checking.
+* `Red Hat Subscription Manager` manages subscriptions and entitlements.
+* `Red Hat Satellite Server` runs at customer locations providing local system registration and updates from inside the customer's firewall.
+
+IMPORTANT: The update worker synchronizes the VMDB with the status of available CloudForms Management Engine content every 12 hours.
+
+NOTE: Servers with the `RHN Mirror` role also act as a repository for other Appliances to pull CloudForms Management Engine packages updates.
+
+The *Red Hat Updates* page enables you to register appliances.
+You need the following to register:
+
+* Your Red Hat Account login or Red Hat Network Satellite login
+* A Red Hat subscription that covers your product
+
+. Log in to the Appliance as the `root` user.
+. Navigate to menu:Configure[Configuration]. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
+. In *Red Hat Software Updates*, click *Edit Registration*.
+. You can register the CloudForms Management Engine Appliance using one of three available options:
++
+* Red Hat Subscription Management
+* Red Hat Satellite 5
+* Red Hat Satellite 6
++
+The Subscription Management Service you register with will provide your systems with updates and allow additional management.
+
+.To register with Red Hat Subscription Management:
+.. In *Register to*, select *Red Hat Subscription Management*.
+.. Enter *Red Hat Subscription Management Address*. The default is `subscription.rhn.redhat.com`.
+.. Enter *Repository Name*. The default is `cf-me-5.4-for-rhel-6-rpms rhel-server-rhscl-6-rpms`, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+.. To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
+.. Enter your Red Hat account information; click *Validate*.
+.. Click *Save*.
+
+.To register with Red Hat Satellite 5:
+.. In *Register to*, select *Red Hat Satellite 5*.
+.. Enter *Red Hat Satellite 5 Address*. The default is `subscription.rhn.redhat.com`.
+.. Enter *Repository Name*. The default is `rhel-x86_64-server-6-cf-me-4.0 rhel-x86_64-server-6-rhscl-1`, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+.. To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
+.. Enter your Red Hat Satellite account information.
+.. Click *Save*.
+
+.To register with Red Hat Satellite 6:
+.. In *Register to*, select *Red Hat Satellite 6*.
+.. Enter *Red Hat Satellite 6 Address*. The default is `subscription.rhn.redhat.com`.
+.. Enter *Repository Name*. The default is `cf-me-5.4-for-rhel-6-rpms rhel-server-rhscl-6-rpms`, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+.. To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
+.. Enter your Red Hat Satellite account information; click *Validate*.
+.. Click *Save*.
+
+After registering, the following options are available in the *Appliance Updates* section of the *Red Hat Updates* tab:
+
+[cols="1,1", frame="all", options="header"]
+|===
+|
+
+              Option
+
+
+|
+
+              Use
+
+
+|
+             Check for Updates
+
+
+|
+            Checks for available updates using yum.
+
+|
+              Register
+
+
+|
+            Attempts to register the appliance if it is not already registered. CloudForms Management Engine subscribes to the `rhel-x86_64-server-6-cf-me-3` RHN channel for RHN-registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, CloudForms Management Engine checks for updates after registering.
+|
+               Apply CFME Update
+
+
+|
+            Applies updates to CloudForms Management Engine packages only. Specifically, this option runs the `yum -y update cfme-appliance` command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated.
+
+|===

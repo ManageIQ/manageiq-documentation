@@ -1,0 +1,69 @@
+= Adding an OpenStack Infrastructure Provider
+
+After initial installation and creation of a CloudForms Management Engine environment, add an OpenStack Infrastructure provider to the appliance. CloudForms Management Engine supports operating with the OpenStack `admin` tenant.
+When creating an OpenStack Infrastructure provider in CloudForms Management Engine, select the OpenStack Infrastructure provider's `admin` user because it is the default administrator of the OpenStack `admin` tenant.
+When using the `admin` credentials, a user in CloudForms Management Engine provisions into the `admin` tenant, and sees images, networks, and instances that are associated with the `admin` tenant. 
+
+. Navigate to menu:Infrastructure[Providers]. 
+. Click  image:images/1847.png[Configuration] (*Configuration*), then click  image:images/1848.png[Add a New Infrastructure Provider] (*Add a New Infrastructure Provider*). 
+. Enter the *Name* of the provider to add.
+  The *Name* is how the device is labeled in the console. 
+. Select *OpenStack Platform Director* from the *Type* list. 
+. Enter the *Host Name or IP address(IPv4 or IPv6)* of the provider. 
++
+[IMPORTANT]
+======
+The *Host Name* must use a unique fully qualified domain name. 
+======
++
+. Select the *API Version* of your Keystone service from the list. The default is `Keystone v2`.
++
+[IMPORTANT]
+======
+If the Keystone service is configured to use SSL, you must enter the SSL port for Keystone. 
+======
++
+. Select the appropriate *Zone* for the provider.
+  By default, the zone is set to *default*. 
+. In the *Credentials* area, under *Default*, provide the login credentials required for the OpenStack Infrastructure administrative user: 
+* Enter the user name in the *Username* field. 
+* Enter the password in the *Password* field. 
+* Confirm the user password in the *Confirm Password* field. 
+* Click *Validate* to confirm that the CloudForms Management Engine can connect to the OpenStack Infrastructure instance using the user name and password. 
+. Under *AMQP*, provide the login credentials required for the Advanced Message Queuing Protocol messaging service: 
+* Enter the administrative user name in the *Username* field. 
+* Enter the user password in the *Password* field. 
+* Confirm the user password in the *Confirm Password* field. 
+* Click *Validate* to confirm CFME can connect to the messaging service. 
+. Under *RSA key pair*, provide the user name and private key required to connect via SSH to all hosts in the provider: 
++
+* Enter the administrative user name in the *Username* field. 
+* Enter the private key from the machine on which OpenStack was deployed in the *Private Key* field. 
+. Click *Add*. 
+
+[NOTE]
+======
+CloudForms Management Engine requires that the adminURL endpoint for all OpenStack services be on a non-private network.
+Accordingly, assign the adminURL endpoint an IP address of something other than `192.168.x.x`.
+The adminURL endpoint must be accessible to the CFME Appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment.
+======
+
+[NOTE]
+======
+For Red Hat CloudForms to be able to receive events from a Red Hat OpenStack provider, the OpenStack configuration file must be modified. Specifically, the `notification_driver` field must be defined.
+
+For Nova and Heat, in order to start getting notifications, manually change the configuration files as below and restart services.
+
+------
+/etc/heat/heat.conf
+notification_driver=glance.openstack.common.notifier.rpc_notifier
+notification_topics=notifications
+------
+
+------
+/etc/nova/nova.conf
+notification_driver=messaging
+notification_topics=notifications
+------
+======
+

@@ -1,0 +1,118 @@
+[[known_issues]]
+== Known Issues
+
+These known issues exist in {product-title} at this time:
+
+BZ#link:https://bugzilla.redhat.com/1225541[1225541]
+
+[subs="verbatim,quotes"]
+------
+At current, attempting to perform a Smart State analysis of a VMware vSphere 6 virtual machine with Virtual Disk Development Kit 6.0 returns an Unable to determine port error, causing the analysis to fail. This occurs because this version of the VDDK is not installed in the directory where {product-title} expects it. By installing VDDK 6.0 in the appropriate directory, this is resolved.
+
+1. Download VDDK 6.0 from the VMware website.
+2. Copy the downloaded GZIP file to the /tmp directory on the appliance.
+3. Decompress the GZIP archive file.
+4. Prepare the /usr/lib/vmware-vix-disklib directory:
+   a. If the directory already exists, back up and remove the contents of this directory.
+   b. If the directory does not exist, create it: # mkdir /usr/lib/vmware-vix-disklib.
+5. Under the decompressed archive file in the /tmp directory, there are several sub-directories. Copy the following directories and their contents into the /usr/lib/vmware-vix-disklib directory:
+  * bin64
+  * include
+  * lib64
+
+This issue will be resolved in a future release of {product-title}.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1272369[1272369]
+------
+Currently, it is not possible to edit tags on containers through the web user interface. This will be fixed in a future release so that editing tags on container entities no longer returns an error.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1279458[1279458]
+------
+In the current version of {product-title}, the SmartState analysis tasks for container images are incorrectly categorized under  "All VM Analysis Tasks". This bug will be resolved in a forthcoming version of {product-title} by correctly categorizing smart state analysis tasks.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1284005[1284005]
+------
+Currently, a user_id must be specified when adding a new container provider through the REST API. However, specifying a user_id is not normally required to add a new container provider, or in the authentication process. This field and requirement will be removed in a future release.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1284257[1284257]
+------
+In the current version of {product-title}, any SmartState analysis errors for container images are not reported properly in the UI, these are only logged in evm.log. Additionally, the SmartState analysis task is erroneously reported to have been completed successfully. This bug will be resolved in a forthcoming version of {product-title} by reporting specific errors in the user interface for failed analysis tasks.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1285455[1285455]
+------
+In the current version of {product-title}, the UI only displays daily charts for monitoring container utilization, which delays the ability to monitor containers. This bug will be resolved in a forthcoming version of {product-title} by displaying the hourly graphs if the daily graphs are not available to monitor container utilization within an hour of adding a container.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1286247[1286247]
+------
+In the current version of {product-title}, following a specific sequence of navigation between pods and containers Utilization pages or Timeline pages can cause the user interface to crash when displaying container details. As a workaround, reload the pages forcibly by pressing F5 when navigating between pods and containers Utilization pages or Timeline Pages. This bug will be resolved in a forthcoming version of {product-title} by correcting the code that generates the crashes.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1287310[1287310]
+------
+Currently, navigating from a specific pod under the Containers tab to the related service results in an error in the web user interface. This navigation issue will be fixed in a future release.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1287751[1287751]
+------
+Docker image tags can be re-assigned to different images (for example, with a different hash identifier). However, currently the SmartState Analysis task does not verify whether the hash ID of a scanned image matches with the one of the images in the database. This will be resolved in a future release by allowing the SmartState Analysis task to identify the images by verifying the hash ID.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1288131[1288131]
+------
+In the current version of {product-title}, the provider link in the container provider timeline is incorrectly generated. Clicking on the link displays an error that the provider does not exist. This bug will be resolved by correcting code to generate the correct link. The provider link on the provider timeline should work as expected in the future release of {product-title}.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1288045[1288045]
+------
+Currently, if an inventory refresh takes place before OpenShift nodes have reported their capacity, the inventory refresh cannot process the entities. This typically happens if self-registration is disabled on the nodes, or if there are stale or unneeded nodes defined in the system. To work around this, remove the stale nodes from the system. This issue will be fixed in a future release by removing the strict requirement on the presence of node capacity.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=128956[1289156]
+------
+Currently, replication of the appliance database fails after migrating from {product-title} 5.4 to {product-title} 5.5. The following steps resolve this issue after the migration procedure:
+
+Disable database synchronization role on all Regional Database Appliances.
+
+Run the following command on the Master Database Appliance:
+# psql -d vmdb_production -c "delete from host_storages"
+
+Run the following commands on all Regional Database Appliances, replacing <region> with the region number of the Regional Database Appliance:
+# vmdb
+# bin/rake evm:dbsync:uninstall host_storages
+# psql -d vmdb_production -c "drop trigger if exists rr1_hosts_storages on host_storages"
+# psql -d vmdb_production -c "drop function if exists rr1_hosts_storages()"
+# psql -d vmdb_production -c "delete from rr<region>_pending_changes where change_table = 'hosts_storages'"
+# psql -d vmdb_production -c "delete from rr<region>_sync_state where table_name = 'hosts_storages'"
+# bin/rake evm:dbsync:prepare_replication_without_sync
+
+Finally, enable the database synchronization role on the Regional Database Appliances.
+------
+
+BZ#link:https://bugzilla.redhat.com/show_bug.cgi?id=1298986[1298986]
+------
+In the current version of {product-title}, it is not possible to run a virtual machine after it has been retired. But, the OpenStack provider still allows a retired virtual machine to be powered on from the OpenStack console. This will result in {product-title} reporting the virtual machine to be powered on while retired. In this case, retiring the virtual machine has to be enforced by the {product-title} administrator.
+For example:
+* Change the State Machine workflow and define the end state of the retired virtual machine to be deleted or removed from provider inventory instead of being stopped or suspended.
+* Write a Control Policy that watches the provider for virtual machine Start Events and shut down the virtual machine if it has been retired. 
+------
+
+BZ#link:https://bugzilla.redhat.com/1035394[1035394]
+
+------
+Currently, the category_create method does not work as expected. When a request is made to create a category by running "$evm.execute('category_create', :name=> "organization", :single_value => false, :description => "Organization")", the user interface  shows the value provided for :description in the Display Name field and the value provided for :example_text is displayed in the Description field. This issue is caused due to a discrepancy between the graphical user interface and the backend. 
+The workaround for this issue is to use the following mapping:
+
+$evm.execute('category_create',
+             :name         => "tag_name",
+             :description  => "Display Name",
+             :example_text => "Description",
+             :single_value => false)
+
+This issue will be resolved in a future release of {product-title}.
+------

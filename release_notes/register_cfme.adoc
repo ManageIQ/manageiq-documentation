@@ -1,0 +1,106 @@
+[[registering_and_updating_cloudforms_management_engine]]
+== Registering and Updating {product-title}
+
+The *Red Hat Updates* page, accessible from menu:Configure[Configuration > Region], enables you to edit customer information, register appliances, and update appliances. Editing customer information enables you to determine
+the registration point, User ID, and password.
+{product-title} prompts you to update the Server URL when updating the registration point to a local Red Hat Satellite. The *Status of Available Servers* area provides options to refresh, register, check for updates,
+and to update. The *Red Hat Updates* page enables the Content Delivery Network (CDN) to assign the necessary update packages to the {product-title} Server.
+
+Using the *Check For Updates* task button, the CDN assigns any necessary update packages to your server and notifies you. Click *Update*, and the {product-title} packages install and update.
+
+Three steps are required to update the {product-title} Appliance:
+
+. Register the {product-title} for updates if it is not already registered.
+. Update the {product-title} Appliance.
+. Update other system packages.
+
+The following tools are used during the update process:
+
+* `yum` provides package installation, updates, and dependency checking.
+* Red Hat Subscription Manager manages subscriptions and entitlements.
+* Red Hat Satellite Server runs at customer locations providing local system registration and updates from inside the customer's firewall.
+
+[IMPORTANT]
+======
+The update worker synchronizes the VMDB with the status of available {product-title} content every 12 hours.
+======
+
+[NOTE]
+======
+Servers with the *RHN Mirror* role also act as a repository for other Appliances to pull {product-title} packages updates.
+======
+
+=== Registering Appliances
+
+The *Red Hat Updates* page enables you to register appliances. You will need the following to register:
+
+* Your Red Hat Account login or Red Hat Network Satellite login
+* A subscription that covers your product
+
+image::cfme-register-appliance.png[]
+
+. Navigate to menu:Configure[Configuration]. Select *Region* in the accordion menu, and click the *Red Hat Updates* tab.
+. In *Red Hat Software Updates*, click *Edit Registration*.
+. You can register the {product-title} Appliance using one of three available options:
+* Red Hat Subscription Management
+* Red Hat Satellite 6
+The Subscription Management Service you register with will provide your systems with updates and allow additional management.
+** To register with Red Hat Subscription Management:
+.. In Register to, select *Red Hat Subscription Management*.
+.. Enter *Red Hat Subscription Management Address*. The default is *subscription.rhn.redhat.com*. 
+.. Enter *Repository Name*. The default is *cf-me-5.6-for-rhel-7-rpms rhel-server-rhscl-7-rpms* footnoteref:[Optional, For installing required sssd packages on base OS RHEL 7.1, subscribe to *rhel-7-server-optional-rpms* repository.]
+.. To use an HTTP proxy, select *Use HTTP Proxy*.
+.. Enter your account information, and click *Validate*.
+.. Click *Save*.
+** To register with Red Hat Satellite 6:
+.. In *Register to*, select *Red Hat Satellite 6*.
+.. Enter Red Hat Satellite 6 Address. The default is *subscription.rhn.redhat.com*.
+.. Enter *Repository Name*. The default is *cf-me-5.6-for-rhel-7-rpms rhel-server-rhscl-7-rpms*. footnoteref:[Optional]
+.. To use an HTTP proxy, select *Use HTTP Proxy*.
+.. Enter your account information, and click *Validate*.
+.. Click *Save*.
+
+=== Updating Appliances
+
+The *Red Hat Updates* page enables you to check for updates and update registered appliances.
+
+. Navigate to menu:Configure[Configuration]. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
+. After registering, the following options are available in the *Appliance Updates* section of the *Red Hat Updates* tab:
+
+[width="100%",cols="30%,70%",options="header",]
+|=======================================================================
+|Option|Use
+|Check for Updates| Checks for available updates using yum.
+|Register|Attempts to register the appliance if it is not already registered. {product-title} subscribes to the `rhel-x86_64-server-6-cf-me-4` RHN channel for RHN registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, {product-title} checks for updates after registering.
+|Apply {product-title} Update|Applies updates to {product-title} packages only. Specifically, this option runs the `yum -y update cfme-appliance` command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated.
+|=======================================================================
+
+=== Updating the Appliance Operating System
+
+Users update {product-title} packages through the web console under menu:Configure[Configuration > Settings > Region > Red Hat Updates]. However, updating the Appliance's operating system requires a manual update using the `yum` command.
+
+. Log in to the Appliance as the root user.
+. Run the `yum update` command and confirm any updates.
++
+----
+# yum update
+  ...
+  Transaction Summary
+  =================================================
+  Upgrade  52 Packages
+  
+  Total download size: 34 M
+  Is this ok [y/N]: Y  
+----
++
+
+[IMPORTANT]
+======
+Scheduled downtime is required while updating system packages for the following reasons:
+
+* Some updates may interrupt {product-title} operations.
+* Updates for the PostgreSQL database server suspend {product-title} operations.
+* System updates may require a reboot of the {product-title} Appliance.
+======
+
+

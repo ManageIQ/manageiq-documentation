@@ -1,0 +1,87 @@
+[[retirement]]
+== Retirement
+
+=== Retiring Virtual Machines
+
+==== Retiring Virtual Machines and Instances
+
+When a virtual machine or instance is no longer required, it can be retired. Once a virtual machine or instance reaches its retirement date, it is immediately shut down and not allowed to restart. If an attempt to restart is made, {product-title} will shut down the virtual machine or instance.
+
+There are three built-in policies involved with retirement.
+* If the virtual machine or instance reaches its retirement date, it will be stopped even if it is running.
+* If a retired virtual machine or instance is requested to start through {product-title}, the virtual machine or instance will not be allowed to start.
+* If a provider starts a retired virtual machine or instance outside of {product-title}, the virtual machine or instance will be stopped.
+
+{product-title} provides a number of ways to retire a virtual machine or instance.
+* By using the allocated buttons in the {product-title} console.
+* When creating a provision request, a retirement date can be set up.
+                
+==== Using the {product-title} Console to Retire
+
+Through the {product-title} console, you can retire a virtual machine on a specific date or immediately.
+               
+==== Retiring a Virtual Machine Immediately
+
+. Navigate to +Services → Workloads+.
+. Select the virtual machine or instance that you want to retire.
+. Click image:2007.png[](+Lifecycle+), then image:2010.png[](+Retire this VM/Instance+).
+
+The virtual machine or instance is immediately stopped, and will be shut down if an attempt is made to restart it.
+   
+==== Setting a Retirement Date for a Virtual Machine or Instance
+
+. Navigate to +Services → Workloads+.
+. Select the virtual machine that you want to set a retirement date for.
+. Click image:2007.png[](+Lifecycle+), then image:2008.png[](+Set/remove retirement date+).
+. Select a date using the calendar control.
+. Click +Save+.
+
+The retirement date is set, and displays in the virtual machine or instance summary screen.
+
+==== Removing a Retirement Date for a Virtual Machine or Instance
+
+. Navigate to +Services → Workloads+.
+. Select the virtual machine or instance that you want to remove the retirement date from.
+. Click image:2007.png[](+Lifecycle+), then click image:2008.png[](+Set Retirement Date+).
+. Click image:2009.png[](+Remove Retirement Date+).
+
+=== Setting Retirement in a Provision Request
+                
+If you are using {product-title} to provision, you can set when you want retirement in the provision request. To see how to create a request, go to Provisioning Requests. A warning email will be sent to the owner before the retirement.
+               
+==== Scheduling Retirement in a Provision Request
+
+After provisioning either a Cloud Instance or Virtual Machine, a multi-tabbed screen appears where you can set up your provision requests. The +Schedule+ tab allows you to choose to power on the virtual machines or instances after they are created, and to set a retirement date. If you select a retirement period, you will be prompted for when you want a retirement warning.
+image:2363.png[]
+
+=== Extending Retirement Dates 
+
+{product-title} +Automate+ includes a method to extend the retirement of a virtual machine or instance by 14 days. This section describes how to create a button that invokes this method and how to edit the method to change the number of days.
+
+==== Creating a Custom Button to Extend Retirement
+
+. Navigate to +Automate → Customization+.
+. Click the +Buttons+ accordion.
+. From the +Object Types+ tree, select +VM and Instance+.
+. Navigate to the button group to which you want to add this button. (If you do not have a button group, add one and then create the button.)
+. Click image:1847.png[](+Configuration+), then image:1848.png[](+Add a new Button+).
+. Type in a button text and button hover text, and select the image you want to use.
+. In +Object Details+, select +Request+ from the +/System/Process/+ dropdown. By default, the message is +create+. Do not change it.
+. In +Request+, type +vm_retire_extend+ .
+. Click +Add+.
+
+==== Changing the Number of Days to Extend Retirement
+
+. Navigate to +Automate → Explorer+.
+. Click +DOMAIN → Cloud → VM → Retirement → Email → vm_retire_extend+.
+[NOTE]
+======
+DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+
+This example uses the +Cloud+ Namespace, but you can also use the +Infrastructure+ namespace.
+======
+. Click image:1847.png[](+Configuration+), then image:1851.png[](+Edit this Instance+).
+. In the Value field, change the +vm_retire_extend_days+ attribute to the new value.
+. Click +Save+.
+image:6299.png[]
+

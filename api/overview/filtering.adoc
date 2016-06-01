@@ -23,15 +23,18 @@ filter[]="or attribute op value"
 
 Where op supports the following operators:
 
-[cols=",",options="header",]
+[cols="1,1,3",options="header"]
 |=================================================
 | Operator | Description | Operands
-|= | Equality | Numeric or string. For String, supports % wildcard
-|!= | Inequality | Numeric or string. For String, supports % wildcard
-|< | Less Than | Numeric
-|\<= | Less Than or Equal | Numeric
-|>= | Greater Than or Equal | Numeric
-|> | Greater Than | Numeric
+|=   | Equality              .2+|
+Numeric or string. For String, supports % or * as wildcard
+
+NULL or nil can also be specified instead of quoted string
+|!=  | Inequality
+|<   | Less Than             | Numeric
+|\<= | Less Than or Equal    | Numeric
+|>=  | Greater Than or Equal | Numeric
+|>   | Greater Than          | Numeric
 |=================================================
 
 
@@ -42,4 +45,19 @@ Example Query VMs named sample* and return name and vendor
 ----
 GET /api/vms?expand=resources&attributes=name,vendor&filter[]="name='sample%'"
 ----
+
+Example Query looking for services that are retired but have an unspecified service_id
+
+----
+GET /api/services?expand=resources&attributes=retired&filter[]=service_id=nil&filter[]=retired=true
+----
+
+Attributes specified via the filter[] parameter can include virtual attributes, including
+one level association of the virtual attribute as follows:
+
+----
+GET /api/vms?attributes=name,vendor,hardware&filter[]="vendor='vmware'"&filter[]="hardware.memory_mb>=8192"
+----
+
+Here filtering on the virtual attribute _hardware_ including the one level association _memory_mb_ off hardware.
 

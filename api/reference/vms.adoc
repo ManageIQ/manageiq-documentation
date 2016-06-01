@@ -4,12 +4,16 @@
 
 Management of Virtual Machines adds support of the following actions:
 
-[cols="<,<",options="header",]
+[cols="1,3",options="header"]
 |=====================
 | Action | Description
 | start | Starts a VM
 | stop | Stops a VM
 | suspend | Suspends a VM
+| refresh | Refreshes a VM
+| reset | Resets a VM
+| reboot_guest | Reboots guest in VM
+| shutdown_guest | Shuts down guest in VM
 | scan | Scans a VM (Perform SmartState Analysis)
 | set_owner | Sets the owner of a VM
 | add_event | Adding an Event to a VM
@@ -22,6 +26,10 @@ Management of Virtual Machines adds support of the following actions:
 * link:#start-vm[Starting a VM]
 * link:#stop-vm[Stopping a VM]
 * link:#suspend-vm[Suspending a VM]
+* link:#refresh-vm[Refreshing a VM]
+* link:#reset-vm[Resets a VM]
+* link:#reboot-guest-vm[Reboots guest in VM]
+* link:#shutdown-guest-vm[Shuts down guest in VM]
 * link:#scan-vm[Scanning a VM]
 * link:#set-owner-vm[Setting Owner of a VM]
 * link:#add-event-vm[Adding an Event to a VM]
@@ -127,6 +135,46 @@ GET /api/vms/:id?expand=accounts,software
 ----
 {
   "action" : "suspend"
+}
+----
+
+[[refresh-vm]]
+=== Refreshing a VM
+
+[source,json]
+----
+{
+  "action" : "refresh"
+}
+----
+
+[[reset-vm]]
+=== Resetting a VM
+
+[source,json]
+----
+{
+  "action" : "reset"
+}
+----
+
+[[reboot-guest-vm]]
+=== Rebooting guest in VM
+
+[source,json]
+----
+{
+  "action" : "reboot_guest"
+}
+----
+
+[[shutdown-guest-vm]]
+=== Shuts down guest in VM
+
+[source,json]
+----
+{
+  "action" : "shutdown_guest"
 }
 ----
 

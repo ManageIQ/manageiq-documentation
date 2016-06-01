@@ -6,6 +6,7 @@ This page lists the available attributes when creating resources with the REST A
 
 * link:#categories[Categories]
 * link:#chargeback-rates[Chargeback Rates]
+* link:#groups[Groups]
 * link:#providers[Providers]
 * link:#roles[Roles]
 * link:#service-catalogs[Service Catalogs]
@@ -23,7 +24,7 @@ POST /api/categories
 
 ==== Required attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | name | string | Name
@@ -32,7 +33,7 @@ POST /api/categories
 
 ==== Optional attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | example_text | string | Detailed description
@@ -52,7 +53,7 @@ POST /api/rates
 
 ==== Required attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | rate | string | Rate
@@ -60,7 +61,7 @@ POST /api/rates
 
 ==== Optional attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | description | string | Description of the chargeback rate
@@ -74,6 +75,33 @@ POST /api/rates
 
 ___
 
+[[groups]]
+=== Group Attributes
+
+----
+POST /api/groups
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| description | string | Description
+| role | hash | Role the group is assigned to, requires an *href*, *id* or *name* attribute in the hash
+| tenant | hash | Tenant the group belongs to, requires an *href* or *id* attribute in the hash
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| filters | hash | Hash that contains the *belongsto* and *managed* arrays of filters to assign to the group.
+|=====================
+
+___
+
 [[providers]]
 === Provider Attributes
 
@@ -83,7 +111,7 @@ POST /api/providers
 
 ==== Required attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | name | string | Name of the provider
@@ -93,7 +121,7 @@ POST /api/providers
 
 ==== Optional attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | api_version | string | API Version for communicating with the Provider
@@ -108,7 +136,7 @@ POST /api/providers
 
 Credentials hash specification attributes are:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Type | Auth Types | Auth Attributes
 | ManageIQ::Providers::Amazon::CloudManager            | default                     | userid, password
@@ -136,7 +164,7 @@ POST /api/roles
 
 ==== Required Attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | name | string | Name of user role
@@ -144,7 +172,7 @@ POST /api/roles
 
 ==== Optional Attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | features | array | Features to assign to the role. Array of { "identifier" OR "href" OR "id" : ... }
@@ -160,7 +188,7 @@ ___
 POST /api/service_catalogs
 ----
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | name | string | Name of service catalog
@@ -169,7 +197,7 @@ POST /api/service_catalogs
 
 ==== Optional attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | service_templates | array | Array of Service Template hashes to assign to the new Service Catalog.
@@ -188,7 +216,7 @@ POST /api/tags
 
 ==== Required attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | name | string | Name of tag
@@ -213,7 +241,7 @@ POST /api/tenants
 
 ==== Required attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | name | string | Name of Tenant
@@ -222,7 +250,7 @@ POST /api/tenants
 
 ==== Optional attributes:
 
-[cols="1<,1<,3<",options="header",width="100%"]
+[cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
 | description | string | Description of Tenant
@@ -232,4 +260,34 @@ POST /api/tenants
 | login_text | string | Login text
 | subdomain | string | Subdomain
 |=====================
+
+---
+
+[[users]]
+=== User Attributes
+
+----
+POST /api/users
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| userid | string | Username
+| password | string | Password
+| name | string | Full Name
+| group | hash | Group the user belongs to, requires a *description*, *href* or *id* attribute in the hash
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| email | string | E-mail Address
+|=====================
+
+___
 

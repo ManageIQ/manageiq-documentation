@@ -19,6 +19,7 @@ Queries to services and related service dialogs are provided via the following c
 * link:#querying-service-provision-dialogs[Querying Service and Provision Dialogs]
 * link:#querying-service-dialogs[Querying Service Dialogs]
 * link:#querying-users[Querying Users]
+* link:#querying-vms[Querying VMs]
 
 [[querying-pictures]]
 === Querying Pictures pertaining to services
@@ -125,5 +126,29 @@ Optionally, specific user attribute can also be queried as follows:
 ----
 GET /api/services/:id?attributes=user.name,user.email
 GET /api/services/:id?attributes=user.name,user.email
+----
+
+[[querying-vms]]
+=== Querying VMs of Services
+
+This is made available via the _vms_ subcollection of services as follows:
+
+----
+GET /api/services/:id/vms
+
+GET /api/services/:id?expand=vms
+----
+
+It is also possible to fetch additional attributes for the vms of a service all within
+the same request by using the _vms._ prefix in the attributes specification as follows:
+
+----
+GET /api/services/:id?expand=vms&attributes=vms.num_cpu
+----
+
+Accessing decorators for VM resources is also made available here as follows:
+
+----
+GET /api/services/:id?expand=vms&attributes=vms.num_cpu&decorators=vms.supports_console?
 ----
 

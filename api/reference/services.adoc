@@ -7,10 +7,10 @@ Service management is provided via the following collections:
 [cols="<,<",options="header",width="50%"]
 |==========================
 | Path | Description
-| /api/service_catalogs | Service Catalogs
-| /api/service_templates | Service Templates
-| /api/services | Services
-| /api/service_requests | Service Requests
+| /api/service_catalogs | link:#service-catalogs[Service Catalogs]
+| /api/service_templates | link:#service-templates[Service Templates]
+| /api/services | link:#services[Services]
+| /api/service_requests | link:#service-requests[Service Requests]
 |==========================
 
 [[service-catalogs]]
@@ -22,6 +22,7 @@ Full CRUD is available on service catalogs.
 * link:#editing-service-catalogs[Editing Service Catalogs]
 * link:#assigning-service-template[Assigning/Unassigning Service Templates from Service Catalogs]
 * link:#ordering-services[Ordering Services]
+* link:#refresh-service-dialog-fields[Refresh Service Dialog Fields]
 * link:#deleting-service-catalogs[Deleting Service Catalogs]
 
 [[creating-service-catalogs]]
@@ -160,6 +161,60 @@ POST /api/service_catalogs/:id/service_templates
 }
 ----
 
+[[refresh-service-dialog-fields]]
+==== Refresh Service Dialog Fields
+
+Refreshing dialog fields is done via a _refresh_dialog_fields_ action as shown in the following cases:
+
+===== Refresh Dialog Fields of Service Templates Service Dialogs
+
+Refreshing dialog fields for a service template service dialogs is done as follows:
+
+----
+POST /api/service_catalogs/:id/service_templates
+----
+
+[source,json]
+----
+{
+  "action" : "refresh_dialog_fields",
+  "resource" : {
+    "href" : "http://localhost:3000/api/service_templates/3",
+    "dialog_fields" : {
+      "my_field1" : "my field1 value",
+      "my_field2" : "my field2 value",
+      "my_field3" : "my field3 value",
+      ...
+    },
+    "fields" : [ "my_field1", "my_field3" ]
+  }
+}
+----
+
+===== Refresh Dialog Fields of Service Dialogs
+
+Refreshing dialog fields for a service dialog is done as follows:
+
+----
+POST /api/service_dialogs/:id
+----
+
+[source,json]
+----
+{
+  "action" : "refresh_dialog_fields",
+  "resource" : {
+    "dialog_fields" : {
+      "my_field1" : "my field1 value",
+      "my_field2" : "my field2 value",
+      "my_field3" : "my field3 value",
+      ...
+    },
+    "fields" : [ "my_field1", "my_field3" ]
+  }
+}
+----
+
 [[deleting-service-catalogs]]
 ==== Deleting Service Catalogs
 
@@ -248,6 +303,7 @@ Once services are ordered from a service catalogs, they can be:
 * link:#service-editing[Edited] (Basic)
 * link:#service-retiring-now[Retired now]
 * link:#service-retiring-future[Retired in future]
+* link:#service-reconfiguring[Reconfigured]
 * link:#service-deleting[Deleted]
 
 Services URL:
@@ -301,6 +357,30 @@ POST /api/services/:id
 {
   "action" : "retire",
   "resource" : { "date" : "10/30/2015", "warn" : "5" }
+}
+----
+
+[[service-reconfiguring]]
+==== Service Reconfiguring
+
+When a service is defined with a Reconfigure Automation Entrypoint, the _reconfigure_ action is shown
+as a valid action for that service.
+
+This action takes any of the dialog fields the service supports during reconfiguration.
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "reconfigure",
+  "resource" : {
+    "field1" : "updated field1 value",
+    "field2" : "updated field2 value",
+    ...
+  }
 }
 ----
 

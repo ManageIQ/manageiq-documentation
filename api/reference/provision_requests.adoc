@@ -9,6 +9,14 @@ Provisioning requests are made available via the following entrypoint.
 /api/provision_requests
 ----
 
+* link:#creating-requests[Creating Requests]
+* link:#approving-denying-requests[Approving or Denying Requests]
+* link:#monitoring-requests[Monitoring Requests]
+
+
+[[creating-requests]]
+=== Creating Requests
+
 Either by specifying a _create_ action or by posting the request directly
 to */api/provision_requests*.
 
@@ -72,8 +80,47 @@ Example: Store a request_id from an external system so the system can be notifie
 | miq_custom_attributes | hash | Custom attributes applied to the virtual machine and stored in the database as part of provisioning
 |=====================
 
-[[monitoring-request]]
-=== Monitoring Request
+[[approving-denying-requests]]
+=== Approving or Denying Requests
+
+If a provision is not auto approved, it can be approved or denied via the actions _approve_ and _deny_ on the 
+provision request resource.
+
+[[approving-request]]
+==== Approving a Request
+
+[source,data]
+----
+POST /api/provision_requests/:id
+----
+
+[source,json]
+----
+{
+  "action" : "approve",
+  "reason" : "reason for approval"
+}
+----
+
+[[denying-request]]
+==== Denying a Request
+
+[source,data]
+----
+POST /api/provision_requests/:id
+----
+
+[source,json]
+----
+{
+  "action" : "deny",
+  "reason" : "reason for denial"
+}
+----
+
+
+[[monitoring-requests]]
+=== Monitoring Requests
 
 Once a provision request is created, the response result will include the queryable 
 provision request itself, i.e. */api/provision_requests/:id*

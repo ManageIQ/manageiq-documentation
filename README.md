@@ -11,6 +11,23 @@ This repo contains the documentation for
 
 The documentation in this repository is built and deployed using [AsciiBinder](http://asciibinder.org).  If you're new to AsciiBinder, head over there and read up on how to contribute documentation.
 
+### Quick setup
+
+* Be sure to have a Ruby installed with the bundler gem (if you don't have bundler, just run `gem install bundler`)
+* Clone the manageiq_docs repo.
+* `cd` into the new manageiq_docs repo directory.
+* `bundle install`
+* `bundle exec ascii_binder` - This will build the documentation into the _preview directory
+* `open _preview/manageiq/master/welcome/index.html`
+
+Alternately, if you want to "live edit" the docs, replace the last two steps with:
+
+* Install the LiveReload browser extension: http://livereload.com/extensions/
+* `bundle exec ascii_binder watch`
+* `open _preview/manageiq/master/welcome/index.html`
+* Go to the open page in the browser and enable the LiveReload extension for that page.
+* Edit the docs.  When you save, it will auto-build and then the webpage will reload automatically showing your changes.
+
 ## Contacts
 
 For questions or comments about the documentation system, try one of the following:

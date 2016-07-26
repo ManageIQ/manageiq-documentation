@@ -33,7 +33,6 @@ Alternately, if you want to "live edit" the docs, replace the last two steps wit
 For questions or comments about the documentation system, try one of the following:
 
 * The [manageiq_docs](https://gitter.im/ManageIQ/manageiq_docs) channel on [Gitter](https://gitter.im).
-* The [#manageiq](http://manageiq.org/community/irc/) IRC channel on [FreeNode](http://www.freenode.net/).
 * The [talk.manageiq.org](http://talk.manageiq.org) forum.
 
 ## License

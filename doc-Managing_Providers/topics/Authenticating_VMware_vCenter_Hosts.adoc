@@ -1,0 +1,59 @@
+[[authenticating_vmware_hosts]]
+= Authenticating VMware vCenter Hosts
+
+The procedure below describes how to authenticate the VMware vCenter hosts. 
+
+. Navigate to menu:Compute[Infrastructure > Providers]. 
+. Click on a provider to display its summary screen. 
+. On the summary screen, click *Hosts* in the #Relationships# information box to display the hosts on that provider. 
+. Select the hosts to authenticate.
+  You can select all hosts using the *Check All* option. 
+. Click  image:1847.png[Configuration] (*Configuration*)			
+. Click  image:1851.png[Edit Selected items] (*Edit Selected items*).
+. In the *Credentials* area, under *Default*, provide the VMware ESXi login credentials:
+* Enter the user name in the *Username* field. 
+* Enter the password in the *Password* field. 
+* Confirm the password in the *Confirm Password* field. 
+* Click *Validate* to confirm {product-title} can connect to the VMware vCenter host. 
+. If editing multiple hosts, select a host from the *Select Host to validate against* list; provide the VMware ESXi login credentials and click *Validate*.
+. Click *Save*.
+
+== Using a Non-Administrator Account for Host Credentials
+
+After adding a VMware vCenter infrastructure provider, you must authenticate its hosts to enable full functionality. You can use administrator credentials, or create another user assigned to a role (See the VMware documentation for instructions on how to create a role) created for {product-title}. The following privileges should be enabled for the non-administrator user:
+
+From the Global group, check:
+
+* Cancel task
+* Diagnostics
+* Log Event
+* Set custom attribute
+* Settings
+
+The entire set of privileges for the following groups should be checked:
+
+* Alarms
+* Datastores
+* dvPort Group
+* Host
+* Network
+* Resource
+* Scheduled Task
+* Tasks
+* Virtual Machine
+* vSphere Distributed Switch
+
+Additionally, you must assign the new role to the following objects:
+
+* *Datacenter*: At the Datacenter the {product-title} user/group must have at least the read-only role at the Datacenter level (Not Propagated) to be able to see the datacenter. Without this access, relationships cannot be made. Specifically, the datastores will not show up.
+* *Cluster*: Each Cluster that the {product-title} needs access to must have the new role assigned and propagated.
+* *Folders*: Each Folder that {product-title} needs access to must have the new role assigned and propagated.
+* *Datastores*: Each Datastore that {product-title} needs access to must have the new role assigned and propagated.
+* *Networking*: Each vLAN or Port Group that {product-title} needs access to must have the new role assigned and propagated.
+
+
+
+
+
+
+

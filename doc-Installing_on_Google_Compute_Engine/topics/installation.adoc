@@ -1,0 +1,61 @@
+[[installing-cloudforms]]
+== Installing {product-title}
+
+{product-title} is able to be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the installation process takes you through the steps of uploading the appliance to a supported virtualization or cloud provider.
+
+[IMPORTANT]
+======
+After installing the {product-title} appliance, you must configure the database for {product-title}. See xref:configuring_a_database[].
+======
+
+ifdef::miq[]
+=== Obtaining the Appliance
+
+. In a browser, navigate to link:manageiq.org/download[].
+. Select *Google Compute Engine* from the *--Choose your platform--* list.
+. Select *Stable (darga-2)* from the *--Choose a release--* list.
+. Follow the instructions to download the appliance.
+endif::miq[]
+
+ifdef::cfme[]
+=== Obtaining the Appliance
+
+. Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Click *Downloads* in the menu bar.
+. Click *A-Z* to sort the product downloads alphabetically.
+. Click menu:Red Hat CloudForms[Download Latest] to access the product download page.
+. From the list of installers and images, select the *Google Compute Engine* download link.
+endif::cfme[]
+
+=== Uploading the Appliance on Google Compute Engine
+
+When the {product-title} Google Compute Engine appliance has finished downloading to your system, upload the appliance with the following steps:
+
+. Log in to the Google Cloud Platform dashboard.
+. Click on *Home* in the top left of the screen.
+. Click image:GCE-products-services.png[] to show the *Products and Services* menu. Click *Storage*.
+. Create a bucket by clicking *Create Bucket*, and configure the following details:
+.. Enter a unique *Name* for the bucket using lower case alphanumeric characters, hyphens, and/or underscores.
+.. Configure your location from the dropdown list.
+.. Click *Create*.
+. Click *Upload Files* and browse to the location of the {product-title} Google Compute Engine appliance you downloaded. Select the `tar.gz` file on your local machine, and click *Open* to begin the upload.
+. When the upload is complete, click image:GCE-products-services.png[] menu:Products & services[Compute Engine] on the left menu.
+. Create an image by clicking *Images* from the left menu, then *Create Image*. Fill in the following details about the image:
+.. Enter a unique *Name* for the image using lower case alphanumeric characters and/or hyphens.
+.. Add a *Description* if desired.
+.. Configure *Encryption* if desired. This defaults to `Automatic (recommended)`.
+.. In *Source*, use the dropdown to select `Cloud Storage file`. This shows the *Cloud Storage file* field.
+.. In *Cloud Storage file*, click *Browse* to bring up the *Select object* window. Select the bucket containing the image you uploaded and click the *>* symbol to locate the `tar.gz` image inside the bucket. Select the image and click *Select*.
+.. Click *Create*. Creating the image will take a few minutes. When the image is created, the screen will refresh and the new image will appear in the *Images* list.
+. Create a virtual machine instance by navigating to menu:VM instances[Create Instance], and configure the following fields:
+.. Enter a unique *Name* for the virtual machine instance using lower case alphanumeric characters and/or hyphens.
+.. Select the *Zone* closest to your location.
+.. Under *Boot disk*, click *Change* to bring up the *Boot disk* window. Click the *Your Image* tab and select the disk you previously created. Click *Select*.
+.. Under *Firewall*, select the check box for *Allow HTTPS traffic*.
+.. Configure any other fields as desired, and click *Create*.
+
+Your new virtual machine instance, as well as the external IP address for accessing the {product-title} interface, appears under *VM instances*.
+
+
+
+

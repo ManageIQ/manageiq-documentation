@@ -1,0 +1,165 @@
+[[installing-cloudforms]]
+== Installing {product-title}
+
+{product-title} can be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the following installation process takes you through the steps of uploading the {product-title} appliance to Microsoft Azure.
+
+[IMPORTANT]
+======
+After installing the {product-title} appliance, you must configure the database for {product-title}. See xref:configuring_a_database[].
+======
+
+
+ifdef::miq[]
+=== Obtaining the Appliance
+
+. In a browser, navigate to link:manageiq.org/download[].
+. Select *Microsoft Azure* from the *--Choose your platform--* list.
+. Select *Stable (darga-2)* from the *--Choose a release--* list.
+. Follow the instructions to download the appliance.
+endif::miq[]
+
+ifdef::cfme[]
+=== Obtaining the {product-title} Appliance
+
+. Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Click *Downloads* in the menu bar.
+. Click *A-Z* to sort the product downloads alphabetically.
+. Click menu:Red Hat CloudForms[Download Latest] to access the product download page.
+. From the list of installers and images, select the {product-title} appliance specified for Microsoft Azure download link.
+endif::cfme[]
+
+=== Uploading the {product-title} Appliance to Microsoft Azure
+
+In order to upload the {product-title} appliance file to Microsoft Azure, ensure the following requirements are met:
+
+* Approximately 2 GB of space for each VHD image; 40+ GB for the {product-title} appliance.
+* Administrator access to the Azure portal.
+* Depending on your infrastructure, allow time for the upload.
+
+[NOTE]
+======
+These are the procedural steps as of the time of writing. For more information, consult the following Azure documentation. 
+
+* https://azure.microsoft.com/en-us/documentation/articles/powershell-azure-resource-manager
+
+The steps covered in the following article are for a Windows machine, however, most of the items are common between Windows and Linux.
+
+* https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-create-powershell
+======
+
+You can upload the appliance to an Azure environment using the following two methods. Red Hat recommends using the PowerShell (AzureRm module) method.
+
+* Using Azure PowerShell script
+* Using Azure Command-Line Interface (Azure CLI)
+
+==== Uploading the {product-title} Appliance Using Azure Powershell Script
+
+[NOTE]
+======
+Make sure Azure Resource Manager cmdlets are available. See *To install the cmdlets* section in https://msdn.microsoft.com/en-us/library/mt125356.aspx[Azure Resource Manager Cmdlets].
+======
+
+. Log in to *Azure Resource Manager* using the cmdlet:
++
+------
+## Customize for Your Environment
+$SubscriptionName = "my subscription"
+
+Login-AzureRmAccount
+Select-AzureRmSubscription -SubscriptionName $SubscriptionName
+------
++  
+When prompted, enter your user name and password for the Azure Portal.
+
+. Upload the VHD file to a storage account. As shown in the example script below, you will first create a *Resource Group* through the Portal UI or Powershell. Additionally, create the storage container defined in "BlobDestinationContainer" in advance.
++
+------
+Example Script:
+
+## Customize for Your Environment
+$SubscriptionName = "my subscription"
+
+$ResourceGroupName = "test"
+$StorageAccountName = "test"
+
+$BlobNameSource = "cfme-test.vhd"
+$BlobSourceContainer = "templates"
+$LocalImagePath = "C:\tmp\$BlobNameSource"
+
+##
+
+# Upload VHD to a "templates" directory. You can pass a few arguments, such as `NumberOfUploaderThreads 8`. The default number of uploader threads is `8`. See https://msdn.microsoft.com/en-us/library/mt603554.aspx
+
+Add-AzureRmVhd -ResourceGroupName $ResourceGroupName -Destination https://$StorageAccountName.blob.core.windows.net/$BlobSourceContainer/$BlobNameSource -LocalFilePath $LocalImagePath -NumberOfUploaderThreads 8
+------
++
+. Create a virtual machine. Then, define your VM and VHD name, your system/deployment name and size. Next, you will set the appropriate Storage, Network and Configuration options for your environment.
++
+------
+Example Script:
+
+## Customize for Your Environment
+
+$BlobNameDest = "cfme-test.vhd"
+$BlobDestinationContainer = "vhds"
+$VMName = "cfme-test"
+$DeploySize= "Standard_A3"
+$vmUserName = "user1"
+
+$InterfaceName = "test-nic"
+$VNetName = "test-vnet"
+$PublicIPName = "test-public-ip"
+
+$SSHKey = <your ssh public key>
+
+##
+
+$StorageAccount = Get-AzureRmStorageAccount -ResourceGroup $ResourceGroupName -Name $StorageAccountName
+
+$SourceImageUri = "https://$StorageAccountName.blob.core.windows.net/templates/$BlobNameSource"
+$Location = $StorageAccount.Location
+$OSDiskName = $VMName
+
+# Network
+$Subnet1Name = "default"
+$VNetAddressPrefix = "10.1.0.0/16"
+$VNetSubnetAddressPrefix = "10.1.0.0/24"
+$PIp = New-AzureRmPublicIpAddress -Name $PublicIPName -ResourceGroupName $ResourceGroupName -Location $Location -AllocationMethod Dynamic -Force
+$SubnetConfig = New-AzureRmVirtualNetworkSubnetConfig -Name $Subnet1Name -AddressPrefix $VNetSubnetAddressPrefix
+$VNet = New-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName -Location $Location -AddressPrefix $VNetAddressPrefix -Subnet $SubnetConfig -Force
+$Interface = New-AzureRmNetworkInterface -Name $InterfaceName -ResourceGroupName $ResourceGroupName -Location $Location -SubnetId $VNet.Subnets[0].Id -PublicIpAddressId $PIp.Id -Force
+
+# Specify the VM Name and Size
+$VirtualMachine = New-AzureRmVMConfig -VMName $VMName -VMSize $DeploySize
+
+# Add User
+$cred = Get-Credential -UserName $VMUserName -Message "Setting user credential - use blank password"
+$VirtualMachine = Set-AzureRmVMOperatingSystem -VM $VirtualMachine -Linux -ComputerName $VMName -Credential $cred
+
+# Add NIC
+$VirtualMachine = Add-AzureRmVMNetworkInterface -VM $VirtualMachine -Id $Interface.Id
+
+# Add Disk
+$OSDiskUri = $StorageAccount.PrimaryEndpoints.Blob.ToString() + $BlobDestinationContainer + "/" + $BlobNameDest
+
+$VirtualMachine = Set-AzureRmVMOSDisk -VM $VirtualMachine -Name $OSDiskName -VhdUri $OSDiskUri -CreateOption fromImage -SourceImageUri $SourceImageUri -Linux
+
+# Set SSH key
+Add-AzureRmVMSshPublicKey -VM $VirtualMachine -Path “/home/$VMUserName/.ssh/authorized_keys” -KeyData $SSHKey
+
+# Create the VM
+New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $VirtualMachine
+------
++
+
+
+==== Uploading the {product-title} Appliance Using Azure Command-Line Interface
+
+Although it is recommended to use the PowerShell method, you can upload the appliance to an Azure environment using the CLI method. See https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-azure-resource-manager/ for steps on how to create and manage Azure resources using the Azure Command-Line Interface (Azure CLI).
+
+
+
+
+
+
+

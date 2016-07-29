@@ -1,0 +1,105 @@
+[[configuration_management_providers]]
+= Configuration Management Providers
+
+Currently, {product-title} has two configuration management providers integrated in it to review and monitor the configuration items and changes to them to eliminate the confusion and error brought about by the existence of different providers. These configuration systems are used for recording and reporting status and change activity for these configuration items.
+
+== Red Hat Satellite 6
+
+Satellite 6 is a subscription and system management tool that provides a way to provision hosts (both virtual and bare metal) and configure them using a set of Puppet modules. {product-title} provides functionality to integrate with a Red Hat Satellite 6 server and take advantage of its features. This includes:
+
+* Monitoring the inventory of your Red Hat Satellite 6 server, including independent hosts and hosts provisioned using hostgroups.
+* Reprovisioning existing bare metal system hosts to new host groups.
+* Applying {product-title} policy tags to hosts.
+
+[IMPORTANT]
+======
+{product-title} only reprovisions existing systems in a Red Hat Satellite 6 environment. Provisioning systems from Red Hat Satellite 6's bare metal discovery service is planned for a future release.
+======
+
+:leveloffset: 3 
+include::Defining_the_Workflow.adoc[]
+
+:leveloffset: 3
+include::Defining_the_Hostgroup_Hierarchy.adoc[]
+
+:leveloffset: 3
+include::Adding_a_Satellite_6_Provider.adoc[]
+
+:leveloffset: 3
+include::Triggering_a_Refresh_of_a_Satellite_6_Provider.adoc[]
+
+:leveloffset: 3
+include::Displaying_Red_Hat_Satellite_6_Contents.adoc[]
+
+:leveloffset: 3
+include::Reprovisioning_a_Bare_Metal_Host.adoc[]
+
+:leveloffset: 3
+include::Tagging_a_Bare_Metal_Host.adoc[]
+
+:leveloffset: 1
+== Ansible Tower
+
+Ansible is an open source IT automation project that delivers an enterprise solution for IT automation via Ansible Tower. The latest version of {product-title} is integrated with Ansible Tower, which provides the ability to automate the provisioning and configuration of infrastructure resources and applications within each architectural tier, as requested through the {product-title} self-service provisioning portal. This includes deploying Red Hat Satellite agents on bare metal machines when the use case requires it.
+
+=== Adding a New Ansible Tower Configuration Management Provider
+
+To add a new Ansible Tower configuration management provider, follow this procedure:
+
+. Navigate to menu:Configuration[Configuration Management > Providers].
+. Under the image:1847.png[Configuration] *Configuration* tab, select *Add a new Provider*.
+. In the *Add a new Configuration Management Provider* area:
+.. Type a *Name* for the new provider.
+.. In the *Type* field, select *Ansible Tower* from the drop down.
+.. Type the *URL* location.
+. Click the *Verify Peer Certificate* checkbox.
+. In the *Credentials* area, provide the *Username* and *Password*, and *Confirm Password* details.
+. Click *Validate*.
+. Click *Add*.
+
+=== Refreshing an Ansible Tower Configuration Management Provider
+
+To refresh relationships of all items related to an existing Ansible Tower configuration management provider including inventory, hosts, virtual machines, and clusters, follow this procedure:
+
+. Navigate to menu:Configuration[Configuration Management > Providers].
+. Select the desired provider from the *All Configuration Management Providers* list.
+. Under the image:1847.png[Configuration] *Configuration* tab, select *Refresh Relationships and Power states*.
+. The *Refresh relationships for all items related to the selected items?* dialog box is displayed. Click *OK*.
+
+=== Viewing All Ansible Tower Providers
+
+To view all Ansible Tower providers, follow this procedure:
+
+. Navigate to menu:Configuration[Configuration Management > Providers].
+. Under *All Configuration Manager Providers*, select *Ansible Tower Providers*.
+
+=== Viewing All Ansible Tower Configured Systems
+
+To view all the Ansible Tower configured systems, follow this procedure:
+
+. Navigate to menu:Configuration[Configuration Management > Configured Systems].
+. Under *All Configured Systems*, select *Ansible Tower Configured Systems*.
+
+=== Executing an Ansible Playbook on a Newly Provisioned Virtual Machine
+
+{product-title} allows you to execute an Ansible playbook on a newly provisioned virtual machine.
+
+==== Prerequisites
+
+* You need to set up Ansible Tower to communicate with {product-title}. For instructions, see the Ansible Tower quick start documentation on the Ansible Tower website, http://docs.ansible.com/ansible-tower/latest/html/quickstart/index.html.
+* You need to create an Ansible playbook in GitHub and add it as a synchronization job in Ansible Tower. For instructions, see the Ansible Tower documentation on the Ansible website, https://www.ansible.com/tower.
+* You need to synchronize trusted content to Red Hat Satellite.
+
+==== Procedure Overview
+
+. A user requests a self-service catalog item from {product-title}. For more information on self service, see _Introduction to the Self Service Portal_.
+. The user then connects {product-title} to the infrastructure provider and creates the virtual machines. For more information, see _Provisioning Virtual Machines and Hosts_.
+. Upon successful creation of virtual machines, {product-title} reaches out to Ansible Tower and creates host(s) in the inventory to match the virtual machine(s) created. It also initiates a job on Ansible Tower to execute the appropriate playbook(s). For instructions on creating playbooks, see the Ansible Tower documentation on the Ansible website, https://www.ansible.com/tower.
+. The virtual machine(s) subscribes to Red Hat Satellite and pulls trusted content from it as part of the playbook.
+
+
+
+
+
+
+

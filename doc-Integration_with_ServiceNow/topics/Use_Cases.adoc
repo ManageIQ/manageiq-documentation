@@ -1,0 +1,44 @@
+[[Use_Cases]]
+== Use Cases
+
+The following examples show how ServiceNow can be integrated with automation workflows.
+
+=== Provisioning a Virtual Machine from a Template
+
+The Cloud and Infrastructure *Provision VM from Template* State Machines contain *RegisterCMDB* and *ActivateCMDB* states.
+
+To create a new ServiceNow record during virtual machine provisioning, amend the *ActiveCMDB* state to call the `create` method, for example:
+-------
+/Integration/ServiceNow/CMDB/create
+-------
+image:6667.png[StateActiveCMDBActiveCMDBstate]
+
+=== Virtual Machine Retirement
+
+The Cloud and Infrastructure default *Retirement* State Machines contain *DeactivateCMDB* and *RemoveFromCMDB* states.
+
+To update a virtual machine's ServiceNow record during virtual machine retirement, amend the *DeactivateCMDB* state to call the `update_patch` method, for example:
+[subs="verbatim,attributes"]
+-------
+Integration/ServiceNow/CMDB/update_patch?description=VM%20${/#vm.guid}%20retired%20from%20{productname_short}
+-------
+image:6668.png[StateActiveCMDBDeactiveCMDBstate]
+
+
+To delete a virtual machine's ServiceNow record during virtual machine retirement, amend the *RemoveFromCMDB* state to call the `delete` method, for example:
+-------
+/Integration/ServiceNow/CMDB/delete
+-------
+image:6669.png[StateRemoveFromCMDBRemovefromCMDBstate] 
+
+
+=== Virtual Machine Reconfiguration (VMware Only)
+
+Create a new *System Event* instance to update the ServiceNow record after a virtual machine reconfiguration request has been approved and completed.
+
+Create a new */System/Event/ReconfigVM_Task_Complete* instance with a relationship value:
+-------
+/Integration/ServiceNow/CMDB/update_patch
+-------
+image:6670.png[ReconfigVMTaskComplete] 
+

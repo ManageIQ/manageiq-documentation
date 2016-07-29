@@ -1,0 +1,1307 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE book [
+<!ENTITY % sgml.features "IGNORE">
+<!ENTITY % xml.features "INCLUDE">
+<!ENTITY % DOCBOOK_ENTS PUBLIC "-//OASIS//ENTITIES DocBook Character Entities V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/dbcentx.mod">
+%DOCBOOK_ENTS;
+]>
+<?asciidoc-toc maxdepth="3"?><book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+<info>
+<title>Appliance Hardening Guide</title><subtitle>Instructions on enhancing the security of your ManageIQ Appliances</subtitle>
+
+<date>2016-07-05</date>
+<productname>ManageIQ</productname>
+<productnumber>0</productnumber>
+<abstract>
+   <para>This guide provides a few procedures to help enhance security to your ManageIQ appliances. This includes customizing passwords, restricting unnecessary communication, and encryption key and certificate generation.</para>
+</abstract>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml"/>
+</info>
+<preface xml:id="chap_red_hat_cloudforms_security_guide_introduction_to_securing_red_hat_cloudforms">
+<title>Introduction to Hardening ManageIQ</title>
+<simpara>The ManageIQ appliance is distributed as a virtual machine image, which provides users with a simple installation process.
+The appliance also contains a set of factory default settings that can expose appliances to vulnerabilities if left unset.
+This guide provides a set of procedures to enhance security on your ManageIQ appliance.
+This ensures your appliance has enhanced protection against any unwarranted intrusion.</simpara>
+<simpara>It is recommended to perform these steps immediately after installing all appliances in your infrastructure.</simpara>
+</preface>
+<chapter xml:id="ssh_security">
+<title>SSH Security</title>
+<section xml:id="chap_red_hat_cloudforms_security_guide_setting_the_root_password_on_the_appliance">
+<title>Setting the Root Password on the Appliance</title>
+<simpara>The ManageIQ appliance is a virtual machine image that runs on a Red Hat Enterprise Linux-based operating system.
+This means users can access the base operating system through SSH.
+This is why it is advisable to change the default password.
+Continuing to use the default password leaves the appliance vulnerable to any user attempting to gain root access.</simpara>
+<simpara>Changing the <literal>root</literal> password on the appliance 'uses' <literal>the</literal> same process as changing any user password on a Linux-based system.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Access your appliance through SSH as the <literal>root</literal> user:</simpara>
+<screen>[user@localhost ~]$ ssh root@10.1.1.205</screen>
+<simpara>Substitute <literal>10.1.1.205</literal> with the address of your appliance.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the <literal>passwd</literal> command, which changes the password for the current user:</simpara>
+<screen>[root@ ~]# passwd</screen>
+</listitem>
+<listitem>
+<simpara>Enter and Confirm and new password for the <literal>root</literal> user.</simpara>
+<screen>Changing password for user root.
+New password: ************
+Confirm password: ************</screen>
+</listitem>
+<listitem>
+<simpara>Log out of the appliance.</simpara>
+</listitem>
+</orderedlist>
+<simpara>The ManageIQ appliance now has a non-default <literal>root</literal> password.
+This prevents unauthorized access to your appliance through SSH.</simpara>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_setting_ssh_keys">
+<title>Setting SSH Keys on the Appliance</title>
+<simpara>Another recommended practice is to use SSH keys to access the appliance from a single machine.
+An SSH key provides access from one machine to another through the SSH protocol.
+The following procedure shows how to create an SSH key on your local machine and add it to the appliance.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Check the <literal>.ssh/</literal> directory in your home directory for any existing key pairs:</simpara>
+<screen>[user@localhost ~]$ ls ~/.ssh/</screen>
+<simpara>A key pair usually consists of two files.
+One file is the private key, which stays on your local machine, and the other is the public key, which you copy to another machine.
+But files are named the same except the public key ends with a <literal>.pub</literal> extension.</simpara>
+<simpara>If a key pair already exists, you can use this key pair.
+Otherwise, use the next few steps to create your own.</simpara>
+</listitem>
+<listitem>
+<simpara>On your local machine, start the key pair generation process using the <literal>ssh-keygen</literal> command:</simpara>
+<screen>[user@localhost ~]$ ssh-keygen -t rsa</screen>
+</listitem>
+<listitem>
+<simpara>A prompt asks for the file and location to store these keys:</simpara>
+<screen>Enter file in which to save the key (/home/user/.ssh/id_rsa):</screen>
+<simpara>Accept the default path if you do not have a <literal>id_rsa</literal> key pair.</simpara>
+</listitem>
+<listitem>
+<simpara>Another prompt asks for a passphrase:</simpara>
+<screen>Enter passphrase (empty for no passphrase):</screen>
+<simpara>This encrypts the key pair with a password.
+This protects the key pair if it ever falls into the wrong hands.
+Alternatively, you can leave the passphrase empty, which provides an automatic login between your local machine and the remote machine.</simpara>
+</listitem>
+<listitem>
+<simpara>The <literal>ssh-keygen</literal> command generates two files:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>The private key - the default is <emphasis><phrase role="path">/home/user/.ssh/id_rsa</phrase></emphasis></simpara>
+</listitem>
+<listitem>
+<simpara>The public key - the default is <emphasis><phrase role="path">/home/user/.ssh/id_rsa.pub</phrase></emphasis></simpara>
+<simpara>Copy the public key to the appliance using the <literal>ssh-copy-id</literal> command:</simpara>
+<screen>[user@localhost ~]$ ssh-copy-id ~/.ssh/id_rsa.pub root@10.1.1.205</screen>
+<simpara>The command copies the public key to the appliance.
+You might receive a prompt for the password of the root user on the appliance.</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>Test the SSH key authentication:</simpara>
+<screen>[user@localhost ~]$ ssh root@10.1.1.205</screen>
+<simpara>This authenticates using the SSH key pair.
+If you entered a passphrase for the key, the command prompts you for the passphrase.</simpara>
+</listitem>
+<listitem>
+<simpara>As an additional security measure, edit the <literal>/etc/ssh/sshd_config</literal> on the appliance and modify the following parameter:</simpara>
+<screen>PermitRootLogin without-password</screen>
+<simpara>This forces the <literal>root</literal> user account to use certificates instead of passwords for SSH login.
+This means only your local system can access the appliance.</simpara>
+</listitem>
+</orderedlist>
+<simpara>The appliance now restricts access to only a single machine using the SSH key.</simpara>
+</section>
+</chapter>
+<chapter xml:id="appliance_security">
+<title>Appliance Security</title>
+<section xml:id="chap_red_hat_cloudforms_security_guide_setting_the_password_for_the_administrative_user">
+<title>Setting the Password for the Administrative User</title>
+<simpara>ManageIQ uses a unique <literal>admin</literal> user to control all functions in the web-based user interface.
+After installing the appliance, change the default password of the <literal>admin</literal> to restrict administrative access to the appliance’s UI.</simpara>
+<simpara>Changing the <literal>admin</literal> password uses the same process as changing any standard user in the appliance.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Access the appliance through your web browser and log in.</simpara>
+</listitem>
+<listitem>
+<simpara>Navigate to <menuchoice><guimenu>Settings</guimenu> <guimenuitem>Configuration</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the accordion tree on the left, click on <emphasis role="strong">Access Control</emphasis>, then select the <emphasis role="strong">Administrator</emphasis> under the <emphasis role="strong">Users</emphasis> section.
+This displays the details for the <literal>admin</literal> user.</simpara>
+</listitem>
+<listitem>
+<simpara>On the details page, select manu:Configuration[Edit this user] from the toolbar.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter a new password in the <emphasis role="strong">Change Password / Confirm Password</emphasis> fields.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Save</emphasis> at the bottom of the page.</simpara>
+</listitem>
+<listitem>
+<simpara>Log out of the user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>Test your new password by logging into the user interface. Additionally, test your new password in the appliance console.</simpara>
+</listitem>
+</orderedlist>
+<simpara>The ManageIQ appliance now has a non-default <literal>admin</literal> password.
+This restricts access to your appliance’s administrative functions.</simpara>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_updates">
+<title>Registering and Updating ManageIQ</title>
+<simpara>An important part of securing ManageIQ  is to ensure your appliances use the latest packages.
+Package updates to the appliance contain patches for any software bugs, including possible security bugs.</simpara>
+<simpara>The <emphasis role="strong">Red Hat Updates</emphasis> page enables you to edit register and update appliances.
+This includes either registering the appliance to Red Hat’s Content Delivery Network (CDN) or to a Red Hat Satellite server.</simpara>
+<simpara>The following tools are used during the update process:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><literal>Yum</literal> provides package installation, updates, and dependency checking.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>Red Hat Subscription Manager</literal> manages subscriptions and entitlements.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>Red Hat Satellite Server</literal> runs at customer locations providing local system registration and updates from inside the customer’s firewall.</simpara>
+</listitem>
+</itemizedlist>
+<important>
+<simpara>The update worker synchronizes the VMDB with the status of available ManageIQ content every 12 hours.</simpara>
+</important>
+<note>
+<simpara>Servers with the <literal>RHN Mirror</literal> role also act as a repository for other appliances to pull ManageIQ packages updates.</simpara>
+</note>
+<simpara>The <emphasis role="strong">Red Hat Updates</emphasis> page enables you to register appliances.
+You need the following to register:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Your Red Hat Account login or Red Hat Network Satellite login</simpara>
+</listitem>
+<listitem>
+<simpara>A Red Hat subscription that covers your product</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the appliance as the <literal>root</literal> user.</simpara>
+</listitem>
+<listitem>
+<simpara>Navigate to <menuchoice><guimenu>Settings</guimenu> <guimenuitem>Configuration</guimenuitem></menuchoice>. Select <emphasis role="strong">Region</emphasis> in the accordion menu and click the <emphasis role="strong">Red Hat Updates</emphasis> tab.</simpara>
+</listitem>
+<listitem>
+<simpara>In <emphasis role="strong">Red Hat Software Updates</emphasis>, click <emphasis role="strong">Edit Registration</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>You can register the ManageIQ appliance using one of two available options:</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>Red Hat Subscription Management</simpara>
+</listitem>
+<listitem>
+<simpara>Red Hat Satellite 6</simpara>
+<simpara>The Subscription Management Service you register with will provide your systems with updates and allow additional management.</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="loweralpha">
+<title>To register with Red Hat Subscription Management:</title>
+<listitem>
+<simpara>In <emphasis role="strong">Register to</emphasis>, select <emphasis role="strong">Red Hat Subscription Management</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter <emphasis role="strong">Red Hat Subscription Management Address</emphasis>. The default is <literal>subscription.rhn.redhat.com</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter <emphasis role="strong">Repository Name</emphasis>. The default is <literal>cf-me-5.4-for-rhel-6-rpms rhel-server-rhscl-6-rpms</literal>, which are the ManageIQ repository and the Red Hat Software Collections repository.</simpara>
+</listitem>
+<listitem>
+<simpara>To use a HTTP proxy, select <emphasis role="strong">Use HTTP Proxy</emphasis> and enter your proxy details.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter your Red Hat account information; click <emphasis role="strong">Validate</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+<orderedlist numeration="loweralpha">
+<title>To register with Red Hat Satellite 6:</title>
+<listitem>
+<simpara>In <emphasis role="strong">Register to</emphasis>, select <emphasis role="strong">Red Hat Satellite 6</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter <emphasis role="strong">Red Hat Satellite 6 Address</emphasis>. The default is <literal>subscription.rhn.redhat.com</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter <emphasis role="strong">Repository Name</emphasis>. The default is <literal>cf-me-5.4-for-rhel-6-rpms rhel-server-rhscl-6-rpms</literal>, which are the ManageIQ repository and the Red Hat Software Collections repository.</simpara>
+</listitem>
+<listitem>
+<simpara>To use a HTTP proxy, select <emphasis role="strong">Use HTTP Proxy</emphasis> and enter your proxy details.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter your Red Hat Satellite account information; click <emphasis role="strong">Validate</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+<simpara>After registering, the following options are available in the <emphasis role="strong">appliance Updates</emphasis> section of the <emphasis role="strong">Red Hat Updates</emphasis> tab:</simpara>
+<table frame="all" rowsep="1" colsep="1">
+<title>Options Available in the appliance Updates Section of the Red Hat Updates Tab</title>
+<tgroup cols="2">
+<colspec colname="col_1" colwidth="50*"/>
+<colspec colname="col_2" colwidth="50*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Option</entry>
+<entry align="left" valign="top">Use</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>Check for Updates</simpara></entry>
+<entry align="left" valign="top"><simpara>Checks for available updates using yum.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Register</simpara></entry>
+<entry align="left" valign="top"><simpara>Attempts to register the appliance if it is not already registered. ManageIQ subscribes to the <literal>rhel-x86_64-server-6-cf-me-3</literal> RHN channel for RHN-registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, ManageIQ checks for updates after registering.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Apply CFME Update</simpara></entry>
+<entry align="left" valign="top"><simpara>Applies updates to ManageIQ packages only. Specifically, this option runs the <literal>yum -y update cfme-appliance</literal> command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated.</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_hbac">
+<title>Configuring Host-Based Access Control Rules on your IPA Server</title>
+<simpara>ManageIQ provides support for external authentication using an IPA server.
+However, there are certain recommendations to enhance security to your appliance, such as creating a specific user group and host group that can access the appliance authentication service.</simpara>
+<simpara>Run the following steps on your IPA server:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Create a user group and restrict access to only the ManageIQ users:</simpara>
+<screen>[root@ipa ~]# ipa group-add {productname_short_l}_users --desc="{productname_short_l} Users"
+[root@ipa ~]# ipa group-add-member {productname_short_l}_users --users=testuser1,testuser2</screen>
+</listitem>
+<listitem>
+<simpara>Create a host group and restrict access to your appliance hosts:</simpara>
+<screen>[root@ipa ~]# ipa hostgroup-add {productname_short_l}_hosts --desc "ManageIQ hosts"
+[root@ipa ~]# ipa hostgroup-add-member {productname_short_l}_hosts --hosts=appliance1.example.com,appliance2.example.com</screen>
+</listitem>
+<listitem>
+<simpara>Add rules to allow the host group and user group access to the ManageIQ HTTP service:</simpara>
+<screen>[root@ipa ~]# ipa hbacrule-add {productname_short_l}_access --srchostcat=all
+[root@ipa ~]# ipa hbacrule-add-service {productname_short_l}_access --hbacsvcs httpd-auth
+[root@ipa ~]# ipa hbacrule-add-user {productname_short_l}_access --groups {productname_short_l}_users
+[root@ipa ~]# ipa hbacrule-add-host {productname_short_l}_access --hostgroups {productname_short_l}_hosts</screen>
+</listitem>
+<listitem>
+<simpara>Remove the default rule on your IPA server to allow access to all:</simpara>
+<screen>[root@ipa ~]# ipa hbacrule-disable allow_all</screen>
+</listitem>
+</orderedlist>
+<simpara>This ensures only users in the <literal>{productname_short_l}_users</literal> group can access the authentication service (<literal>http-auth</literal>) on the appliances in the <literal>{productname_short_l}_hosts</literal> host group.</simpara>
+</section>
+</chapter>
+<chapter xml:id="server_security">
+<title>Server Security</title>
+<section xml:id="chap_red_hat_cloudforms_security_guide_firewall">
+<title>Configuring the Firewall</title>
+<simpara>A new appliance starts with a few standard ports open:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>22 for SSH communication</simpara>
+</listitem>
+<listitem>
+<simpara>80 for HTTP access to the appliance</simpara>
+</listitem>
+<listitem>
+<simpara>443 for HTTPS access to the appliance</simpara>
+</listitem>
+<listitem>
+<simpara>5432 for the appliance database</simpara>
+</listitem>
+</itemizedlist>
+<simpara>You might need to restrict or open access to certain services on your appliance in the future.
+In such situations, use the following method:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Use <literal>firewalld</literal> to enable a service or port.
+For example, to open the LDAP port:</simpara>
+<screen>[root@ ~]# firewall-cmd --zone=public --permanent --add-port=389/tcp</screen>
+</listitem>
+</itemizedlist>
+<simpara>The following table lists the appliance’s main services and their respective ports.</simpara>
+<table frame="all" rowsep="1" colsep="1">
+<title>Ports Used by ManageIQ</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>Administrator (Internet Browser)</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME appliance (User Interface)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Access to CFME appliance User Interface</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Administrator (Internet Browser)</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME appliance (User Interface)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP</simpara></entry>
+<entry align="left" valign="top"><simpara>80</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Redirect Web Browser to HTTPS service (443)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>Service Catalog or other integration through Web Service</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME appliance (Web Service)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Access to CFME appliance Web Service</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>NFS Server</simpara></entry>
+<entry align="left" valign="top"><simpara>NFS</simpara></entry>
+<entry align="left" valign="top"><simpara>2049</simpara></entry>
+<entry align="left" valign="top"><simpara>2049</simpara></entry>
+<entry align="left" valign="top"><simpara>Embedded NFS VM scanning</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (User Interface)</simpara></entry>
+<entry align="left" valign="top"><simpara>Any Virtual Machine</simpara></entry>
+<entry align="left" valign="top"><simpara>TCP</simpara></entry>
+<entry align="left" valign="top"><simpara>903</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>VM Remote Console (if using MKS plug-in)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (User Interface)</simpara></entry>
+<entry align="left" valign="top"><simpara>Any Virtual Machine</simpara></entry>
+<entry align="left" valign="top"><simpara>TCP</simpara></entry>
+<entry align="left" valign="top"><simpara>5900-5999</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>VM Remote Console (if using VNC)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (any role)</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME appliance running the VMDB (or MS SQL)</simpara></entry>
+<entry align="left" valign="top"><simpara>PostgreSQL Named Pipes</simpara></entry>
+<entry align="left" valign="top"><simpara>5432 (1433 MS SQL)</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance connectivity to the CFME Database (PostgreSQL or MS SQL)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME Subordinate Region VMDB appliance(Database Synchronization)</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME Master Region VMDB appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>PostgreSQL Named Pipes</simpara></entry>
+<entry align="left" valign="top"><simpara>5432 (1433 MS SQL)</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Regional VMDB node replication up to Master VMDB node (PostgreSQL only)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance(Authentication through LDAP)</simpara></entry>
+<entry align="left" valign="top"><simpara>LDAP Server (AD or other)</simpara></entry>
+<entry align="left" valign="top"><simpara>LDAP</simpara></entry>
+<entry align="left" valign="top"><simpara>389</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>LDAP integration</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (Authentication through LDAPs)</simpara></entry>
+<entry align="left" valign="top"><simpara>LDAP Server (AD or other)</simpara></entry>
+<entry align="left" valign="top"><simpara>LDAPs</simpara></entry>
+<entry align="left" valign="top"><simpara>636</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>LDAPS integration</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>SNMP Agent</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME appliance (Notifier)</simpara></entry>
+<entry align="left" valign="top"><simpara>SNMP (UDP)</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>161</simpara></entry>
+<entry align="left" valign="top"><simpara>SNMP Polling</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (Notifier)</simpara></entry>
+<entry align="left" valign="top"><simpara>SNMP Server</simpara></entry>
+<entry align="left" valign="top"><simpara>SNMP (TCP)</simpara></entry>
+<entry align="left" valign="top"><simpara>162</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>SNMP Trap Send</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (Notifier)</simpara></entry>
+<entry align="left" valign="top"><simpara>Mail server</simpara></entry>
+<entry align="left" valign="top"><simpara>SMTP</simpara></entry>
+<entry align="left" valign="top"><simpara>25</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>SNMP Trap Send</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (any role)</simpara></entry>
+<entry align="left" valign="top"><simpara>NTP Server</simpara></entry>
+<entry align="left" valign="top"><simpara>NTP</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>123</simpara></entry>
+<entry align="left" valign="top"><simpara>Time Source</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME SmartProxy installed on VMWare ESX Server</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>1139</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication with SmartProxy</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME SmartProxy installed on VMWare ESX Server</simpara></entry>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>SmartProxy Heartbeat</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>DNS Server</simpara></entry>
+<entry align="left" valign="top"><simpara>UDP</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>53</simpara></entry>
+<entry align="left" valign="top"><simpara>DNS Lookups</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>Red Hat Enterprise Virtualization Ports Used by ManageIQ</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (SmartProxy)</simpara></entry>
+<entry align="left" valign="top"><simpara>RHEV-M Server</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>8443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>API communications to RHEV-M environment (Inventory, Operations, SmartProxy)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (C&amp;U)</simpara></entry>
+<entry align="left" valign="top"><simpara>RHEV-M Server</simpara></entry>
+<entry align="left" valign="top"><simpara>PostgreSQL</simpara></entry>
+<entry align="left" valign="top"><simpara>5432</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>RHEV-M History Database (Database connectivity not enabled by default). See <link xlink:href="https://access.redhat.com/site/solutions/63277">How to access the RHEV-M Postgres DB from a remote machine</link>.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHEV-H Hosts or RHEL Hypervisors</simpara></entry>
+<entry align="left" valign="top"><simpara>SSH</simpara></entry>
+<entry align="left" valign="top"><simpara>22</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>SSH connections.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHEV-H Hosts or RHEL Hypervisors</simpara></entry>
+<entry align="left" valign="top"><simpara>DirectLUN</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Direct LUN hook must be installed and enabled for embedded VM scanning on FC or iSCSI storage devices. Not a tcp/udp connection.</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>Red Hat OpenStack Platform Ports Used by ManageIQ</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (Keystone)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP REST API</simpara></entry>
+<entry align="left" valign="top"><simpara>5000</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Authentication and Service Entry Point</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (Nova)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP REST API</simpara></entry>
+<entry align="left" valign="top"><simpara>8774</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Compute Resources</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (C&amp;U)</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (Ceilometer)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP REST API</simpara></entry>
+<entry align="left" valign="top"><simpara>8777</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Metrics for Capacity and Utilization</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (Glance)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP REST API</simpara></entry>
+<entry align="left" valign="top"><simpara>9292</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Authentication and Service Entry Point</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (AMQP)</simpara></entry>
+<entry align="left" valign="top"><simpara>AMQP</simpara></entry>
+<entry align="left" valign="top"><simpara>5672</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Events Integration</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (Neutron)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP REST API</simpara></entry>
+<entry align="left" valign="top"><simpara>9696</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Networking</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>RHOS (Cinder)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP REST API</simpara></entry>
+<entry align="left" valign="top"><simpara>8776</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Block Storage</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>VMware vSphere Ports Used by ManageIQ</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance(Management System Inventory, Management System Operations, C &amp; U Data Collection, SmartProxy)</simpara></entry>
+<entry align="left" valign="top"><simpara>vCenter</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance running any of these roles will initiate communication with vCenter on this port.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (SmartProxy)</simpara></entry>
+<entry align="left" valign="top"><simpara>ESX, ESXi Host</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (SmartProxy)</simpara></entry>
+<entry align="left" valign="top"><simpara>ESX Hosts(if analyzing VMs through Host)</simpara></entry>
+<entry align="left" valign="top"><simpara>SOAP over HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>902</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to Hosts.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance (SmartProxy)</simpara></entry>
+<entry align="left" valign="top"><simpara>vCenter (if analyzing VMs through VC)</simpara></entry>
+<entry align="left" valign="top"><simpara>SOAP over HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>902</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to vCenters.</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance(SmartProxy)</simpara></entry>
+<entry align="left" valign="top"><simpara>ESX Hosts (not needed for ESXi)</simpara></entry>
+<entry align="left" valign="top"><simpara>SSH</simpara></entry>
+<entry align="left" valign="top"><simpara>22</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance console access (ssh) to ESX hosts</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>SCVMM Ports Used by ManageIQ</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Hyper-V Host (VMM agent)</simpara></entry>
+<entry align="left" valign="top"><simpara>WinRM/RPC/NetBIOS/SMB (over TCP)</simpara></entry>
+<entry align="left" valign="top"><simpara>80/135/139/445</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to Host</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Hyper-V Host (file transfer)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS (using BITS)</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to Host</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>VM Guest Agent (file transfer)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS (using BITS)</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to VM Guest Agent</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>VMWare ESX 3.0/3.5 Host (file transfer)</simpara></entry>
+<entry align="left" valign="top"><simpara>SFTP</simpara></entry>
+<entry align="left" valign="top"><simpara>22</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to ESX Host</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>VMware ESXi Host (file transfer)</simpara></entry>
+<entry align="left" valign="top"><simpara>SSH/HTTPS (using BITS)</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to ESX Host</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>WSUS Server (data channel)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP</simpara></entry>
+<entry align="left" valign="top"><simpara>80/443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to Server</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>SQL Server database (remote)</simpara></entry>
+<entry align="left" valign="top"><simpara>TDS</simpara></entry>
+<entry align="left" valign="top"><simpara>1433</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance connectivity to the Database (MS SQL)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Load Balancer</simpara></entry>
+<entry align="left" valign="top"><simpara>Load balancer config provider</simpara></entry>
+<entry align="left" valign="top"><simpara>80/443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Hyper-V host in untrusted domain or perimeter network (File Transfer)</simpara></entry>
+<entry align="left" valign="top"><simpara>TCP</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance connectivity to the host</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Hyper-V Host (file transfer)</simpara></entry>
+<entry align="left" valign="top"><simpara>BITS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME appliance to Host</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>VMWare Web Services</simpara></entry>
+<entry align="left" valign="top"><simpara>WCF</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>Azure Ports Used by ManageIQ</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>SQL Management (*.database.windows.net)</simpara></entry>
+<entry align="left" valign="top"><simpara>TDS</simpara></entry>
+<entry align="left" valign="top"><simpara>1433</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>CFME appliance connectivity to the Database (MS SQL)</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Upload into Storage (*.blob.core.windows.net)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTP/HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>80/443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Service Bus Relay HTTP Mode (*.servicebus.windows.net)</simpara></entry>
+<entry align="left" valign="top"><simpara>SB over HTTP</simpara></entry>
+<entry align="left" valign="top"><simpara>80</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Service Bus Pubsub over REST (*.servicebus.windows.net)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+</row>
+<row>
+<entry align="left" valign="top"><simpara>CFME appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Access Control (*.accesscontrol.windows.net)</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"/>
+</row>
+</tbody>
+</tgroup>
+</table>
+<table frame="all" rowsep="1" colsep="1">
+<title>Google Compute Engine Ports Used by CloudForms Management Engine</title>
+<tgroup cols="6">
+<colspec colname="col_1" colwidth="17*"/>
+<colspec colname="col_2" colwidth="17*"/>
+<colspec colname="col_3" colwidth="17*"/>
+<colspec colname="col_4" colwidth="17*"/>
+<colspec colname="col_5" colwidth="17*"/>
+<colspec colname="col_6" colwidth="17*"/>
+<thead>
+<row>
+<entry align="left" valign="top">Initiator (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Receiver (CFME Role if applicable)</entry>
+<entry align="left" valign="top">Application</entry>
+<entry align="left" valign="top">TCP Port</entry>
+<entry align="left" valign="top">UDP Port</entry>
+<entry align="left" valign="top">Purpose</entry>
+</row>
+</thead>
+<tbody>
+<row>
+<entry align="left" valign="top"><simpara>CFME Appliance</simpara></entry>
+<entry align="left" valign="top"><simpara>Google Cloud SDK</simpara></entry>
+<entry align="left" valign="top"><simpara>HTTPS</simpara></entry>
+<entry align="left" valign="top"><simpara>443</simpara></entry>
+<entry align="left" valign="top"/>
+<entry align="left" valign="top"><simpara>Communication from CFME Appliance to Google Cloud Platform resources</simpara></entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<important>
+<simpara>To provide your ManageIQ infrastructure with an extra layer of security, use a network layer firewall to restrict port access.</simpara>
+</important>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_ssl_certs">
+<title>Generating SSL Certificates for Your Appliance and Database</title>
+<simpara>It is important to enhance the security of SSL communication of your appliances, which, depending on your setup, may include your database appliance.
+The appliance image ships with a default SSL certificate.
+It is recommended to replace this certificate with your own certificate, either signed by a trusted Certificate Authority (CA) or self-signed.</simpara>
+<section xml:id="creating_a_certificate_signing_request">
+<title>Creating a Certificate Signing Request</title>
+<simpara>The first step is to determine the host name of your appliance or database appliance by running the following command:</simpara>
+<screen>$ hostname</screen>
+<simpara>The next step is to create a Certificate Signing Request (CSR) using the <literal>openssl</literal> command:</simpara>
+<screen>[root@ ~]# openssl req -new -newkey rsa:2048 -out appliance.csr -keyout appliance.key</screen>
+<simpara>This command generates a 2048-bit RSA private key and asks for a passphrase for the key.</simpara>
+<screen>Generating a 2048 bit RSA private key
+..................+++
+...........................+++
+writing new private key to 'appliance.key'
+Enter PEM pass phrase: **********
+Verifying - Enter PEM pass phrase: **********</screen>
+<simpara>The command then provides a questionnaire requesting certain details for the key.
+Fill out this questionnaire.
+Use the output of the <literal>hostname</literal> command to specify the <literal>Common Name</literal>.</simpara>
+<simpara>For example:</simpara>
+<screen>Country Name (2 letter code) [XX]:US
+State or Province Name (full name) []:North Carolina
+Locality Name (eg, city) [Default City]:Raleigh
+Organization Name (eg, company) [Default Company Ltd]:ManageIQ
+Organizational Unit Name (eg, section) []:Customer Content Services
+Common Name (eg, your name or your server's hostname) []:$(hostname)
+Email Address []:example@example.com
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:</screen>
+<simpara>Running the command produces two files:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><literal>appliance.key</literal> - The private key</simpara>
+</listitem>
+<listitem>
+<simpara><literal>appliance.csr</literal> - The Certificate Signing Request (CSR)</simpara>
+</listitem>
+</itemizedlist>
+<simpara>At this stage, you would send the CSR to a trusted Certificate Authority (CA) and in return they would send you a signed certificate.</simpara>
+</section>
+<section xml:id="creating_a_self_signed_certificate">
+<title>Creating a Self-signed Certificate</title>
+<simpara>As an alternative to obtaining a signed certificate, you can use the <literal>appliance.key</literal> and <literal>appliance.csr</literal> files to create a self-signed certificate by running the following <literal>openssl</literal> commands:</simpara>
+<screen>[root@ ~]# openssl rsa -in appliance.key -out server.cer.key
+[root@ ~]# openssl x509 -in appliance.csr -out server.cer -req -signkey server.cer.key -days 3650</screen>
+<simpara>This produces two files:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><literal>server.cer.key</literal> - The private key for your signed certificate</simpara>
+</listitem>
+<listitem>
+<simpara><literal>server.cer</literal> - The self-signed certificate</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="enabling_the_appliance_to_use_your_certificate">
+<title>Enabling Your Certificate</title>
+<simpara>Despite whether you used a trusted CA or self-signed the certificate, you should now have your own certificate for your appliance.</simpara>
+<simpara>Copy the certificate and key files to the certificate directory on the appliance:</simpara>
+<screen>[root@ ~]# cp ~/server.cer.key /var/www/miq/vmdb/certs/server.cer.key
+[root@ ~]# cp ~/server.cer /var/www/miq/vmdb/certs/server.cer</screen>
+<simpara>After the certificate and key files have been copied, restart the appliance:</simpara>
+<screen>[root@ ~]# systemctl restart evmserverd</screen>
+<simpara>The appliance now uses your own certificate.</simpara>
+<simpara>If your environment consists of multiple appliances connecting to a single database appliance, you can use your certificate and key files to set up SSL for the database connection.
+For more information, see <xref linkend="chap_red_hat_cloudforms_security_guide_setting_ssl_for_the_database_appliance"/>.</simpara>
+<important>
+<simpara>Updates from the Red Hat Content Delivery Network might overwrite these certificate and key files.
+Make sure to copy your own certificate and key files to the certificate directory after performing an update to your appliance.</simpara>
+</important>
+<note>
+<simpara>See also the following article for information on replacing SSL certificates in ManageIQ : <link xlink:href="https://access.redhat.com/articles/449033">https://access.redhat.com/articles/449033</link>.</simpara>
+</note>
+</section>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_creating_keys">
+<title>Creating Custom Encryption Keys</title>
+<simpara>To avoid storing passwords in plain text, ManageIQ appliances use an encryption key to encode and decode passwords.
+Each appliance stores the key in the <literal>/var/www/miq/vmdb/certs/v2_key</literal>. Changing the encryption key is recommended during setting up new ManageIQ appliances only.</simpara>
+<important>
+<simpara>Red Hat does not recommend changing the encryption key for an existing appliance as the ability to decrypt the password will be lost, affecting all stored passwords in ManageIQ.</simpara>
+</important>
+<simpara>To generate a new encryption key:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the console of your master appliance as the <literal>root</literal> user.</simpara>
+</listitem>
+<listitem>
+<simpara>Run the <literal>appliance_console</literal> command. The ManageIQ appliance information screen appears.</simpara>
+</listitem>
+<listitem>
+<simpara>Press any key to view the appliance menu.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">Generate Custom Encryption Key</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>A prompt asks if for confirmation to overwrite the existing key.
+Enter <literal>Y</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter <literal>1</literal> for <literal>1) Create key</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>The appliance generates the new key.
+Press any key to complete this procedure.</simpara>
+</listitem>
+</orderedlist>
+<simpara>This completes the procedure for generating the new key.
+If you have external ManageIQ appliances, you must share this key to ensure your whole ManageIQ infrastructure is using consistent encryption.
+Failure to use the same key results in encryption and decryption problems.</simpara>
+<simpara>To copy an encryption key:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the console of an external appliance as the <literal>root</literal> user.</simpara>
+</listitem>
+<listitem>
+<simpara>Run the <literal>appliance_console</literal> command. The ManageIQ appliance information screen appears.</simpara>
+</listitem>
+<listitem>
+<simpara>Press any key to view the appliance menu.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">Generate Custom Encryption Key</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>A prompt asks if for confirmation to overwrite the existing key.
+Enter <literal>Y</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <literal>Fetch key from remote machine</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the hostname or IP address of the master appliance.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the username for SSH access to the master appliance.
+Use the default <literal>root</literal> user.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the password for SSH access to the master appliance.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the location of the remote key.
+Accept the default as <literal>/var/www/miq/vmdb/certs/v2_key</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>The appliance copies the new key from the remote server.
+Press any key to complete this procedure.</simpara>
+</listitem>
+</orderedlist>
+<simpara>After distributing the new key, all appliances require an update to the database configuration.
+For all appliances, log in as the <literal>root</literal> user and run the following commands replacing <literal>dbpassword</literal> with your database password:</simpara>
+<screen>[root@{productname_short_l} ~]# fix_auth --databaseyml --hostname localhost --password dbpassword
+[root@{productname_short_l} ~]# systemctl restart evmserverd</screen>
+<simpara>This completes the new encryption key generation for your ManageIQ infrastructure.</simpara>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_scap">
+<title>Applying SCAP Standards</title>
+<simpara>The Security Content Automation Protocol (SCAP) is a set of standards to assist with vulnerability management and policy compliance. ManageIQ provides a set of SCAP standards to apply to your appliance. View these SCAP rules in the <literal>/var/www/miq/lib/appliance_console/config/scap_rules.yml</literal> file.</simpara>
+<simpara>To apply the SCAP standards to your appliance’s server:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the appliance as the <literal>root</literal> user.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the <literal>appliance_console</literal> command. The ManageIQ Appliance summary screen displays.</simpara>
+</listitem>
+<listitem>
+<simpara>Press <literal>Enter</literal> to manually configure settings.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <literal>Harden Appliance Using SCAP Configuration</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>The appliance console displays the following:</simpara>
+<screen>Harden Appliance Using SCAP Configuration
+
+Locking down the appliance for SCAP...</screen>
+<simpara>The appliance applies the SCAP settings from the <literal>scap_rules.yml</literal> file.</simpara>
+</listitem>
+<listitem>
+<simpara>When complete, press any key to return to the summary screen.</simpara>
+</listitem>
+</orderedlist>
+<simpara>The appliance now meets the SCAP standards set in the <literal>scap_rules.yml</literal> file.</simpara>
+</section>
+</chapter>
+<chapter xml:id="database_security">
+<title>Database Security</title>
+<section xml:id="chap_red_hat_cloudforms_security_guide_setting_the_password_for_the_database_appliance">
+<title>Restricting Hosts Access to the Database</title>
+<simpara>Strengthening the host-based authentication (HBA) settings on a database appliance helps with preventing unauthorized access from external hosts.
+The HBA settings restrict access to an IP address range so that only hosts within that range have access.</simpara>
+<simpara>Restricting access to the database requires modifications to the <literal>/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf</literal> file.
+This file contains a text-based table with some initial settings:</simpara>
+<screen># TYPE    DATABASE USER  ADDRESS       METHOD
+local     all      all                 peer map=usermap
+host      all      all   all           md5
+#hostssl  all      all   all           md5</screen>
+<simpara>This format for this table uses the following header columns:</simpara>
+<variablelist>
+<varlistentry>
+<term>TYPE</term>
+<listitem>
+<simpara>This defines the access type, either local access from the database host (<literal>local</literal>), remote access from an external host regardless of encryption (<literal>host</literal>), external access with encryption (<literal>hostssl</literal>), or external access without encryption (<literal>nohostssl</literal>).</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>DATABASE</term>
+<listitem>
+<simpara>The name of the database the host can access.
+Use <literal>all</literal> for all databases.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>USER</term>
+<listitem>
+<simpara>The name of the user the host can use to access the database.
+Use <literal>all</literal> for all users.</simpara>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>ADDRESS</term>
+<listitem>
+<simpara>The IP address of the host or address range of hosts with access to the database.
+This can either be:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>A single address:</simpara>
+<screen>host    all      all   192.168.1.10           md5</screen>
+</listitem>
+<listitem>
+<simpara>An address range using a CIDR mask:</simpara>
+<screen>host    all      all   192.168.1.0/24           md5</screen>
+</listitem>
+<listitem>
+<simpara>An address range using a separate subnet mask value</simpara>
+<screen>host    all      all   192.168.1.0  255.255.255.0            md5</screen>
+<note>
+<simpara><literal>ADDRESS</literal> is not required for <literal>local</literal> connections.</simpara>
+</note>
+</listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+<varlistentry>
+<term>METHOD</term>
+<listitem>
+<simpara>The authentication method, which includes:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><literal>trust</literal> - Allow the connection unconditionally. This method allows anyone that can connect to the PostgreSQL database server to login as any PostgreSQL user they wish, without the need for a password or any other authentication.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>reject</literal> - Reject the connection unconditionally. This is useful for "filtering out" certain hosts from a group, for example a <literal>reject</literal> line could block a specific host from connecting, while a later line allows the remaining hosts in a specific network to connect.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>md5</literal> - Require the client to supply an MD5-encrypted password for authentication.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>password</literal> - Require the client to supply an unencrypted password for authentication. Since the password is sent in clear text over the network, this should not be used on untrusted networks.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>ident</literal> - Obtain the operating system user name of the client by contacting the ident server on the client and check if it matches the requested database user name. Ident authentication can only be used on TCP/IP connections. When specified for local connections, peer authentication will be used instead.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>peer</literal> - Obtain the client’s operating system user name from the operating system and check if it matches the requested database user name. This is only available for local connections.</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</varlistentry>
+</variablelist>
+<simpara>Using a combination of these options, you create a series of rules that govern which hosts can access your database and which hosts are denied.
+For example, you might change the default HBA rules to only allow remote access to the ManageIQ  database (<literal>vmdb_production</literal>) from hosts in a certain subnet.
+The modified HBA table would looks like this:</simpara>
+<screen># TYPE  DATABASE          USER  ADDRESS         METHOD
+local   all               all                   peer map=usermap
+host    vmdb_production   all   192.168.1.0/24  md5
+#hostssl all              all   all             md5</screen>
+<simpara>These restrictions help when structuring your ManageIQ appliances in relationships.
+For example, use these database restrictions to grant access only between a master database appliance in one region and appliances connecting from a separate region.</simpara>
+</section>
+<section xml:id="chap_red_hat_cloudforms_security_guide_setting_ssl_for_the_database_appliance">
+<title>Configuring the Database to use SSL</title>
+<simpara>ManageIQ initially connects to the database through an unencrypted communication.
+If using multiple appliances connecting to a single database appliance, you can set up the database connection to use SSL.
+An SSL connection encrypts the communication between the ManageIQ and the database.</simpara>
+<simpara>The procedures in this section use the SSL certificate and key files listed below.
+These files can be found on your main ManageIQ database appliance.</simpara>
+<note>
+<simpara>The appliance image ships with a default SSL certificate and it is recommended to change this certificate.
+You can use a certificate signed by a trusted CA or, alternatively, generate a self-signed certificate.</simpara>
+<simpara>See <xref linkend="chap_red_hat_cloudforms_security_guide_ssl_certs"/> for more information on generating an SSL certificate.</simpara>
+</note>
+<itemizedlist>
+<listitem>
+<simpara><literal>/var/www/miq/vmdb/certs/server.cer</literal> - Signed or self-signed certificate for the database appliance.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>/var/www/miq/vmdb/certs/server.cer.key</literal> - Private key for server certificate.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>/var/www/miq/vmdb/certs/root.crt</literal> - The root certificate for ManageIQ database server appliance.
+You can either use a self-signed certificate or a certificate signed by a trusted CA to generate your root certificate.</simpara>
+</listitem>
+</itemizedlist>
+<simpara>It is also recommended to stop all ManageIQ services before configuring the database to use SSL.</simpara>
+<simpara>To configure SSL on the database appliance:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in as <literal>root</literal> to the appliance where the database resides.</simpara>
+</listitem>
+<listitem>
+<simpara>Stop the <literal>evmserverd</literal> and <literal>rh-postgresql94-postgresql</literal> services:</simpara>
+<screen>[root@{productname_short_l}2 ~]# systemctl stop evmserverd
+[root@{productname_short_l}2 ~]# systemctl stop rh-postgresql94-postgresql</screen>
+</listitem>
+<listitem>
+<simpara>Install the server key file in the correct location and set the ownership and permissions for it:</simpara>
+<screen>[root@{productname_short_l}2 ~]# install -m 600 -o postgres -g postgres \
+/var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key</screen>
+</listitem>
+<listitem>
+<simpara>Install the server certificate file in the correct location and set the ownership and permissions for it:</simpara>
+<screen>[root@{productname_short_l}2 ~]# install -m 644 -o postgres -g postgres \
+/var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt</screen>
+</listitem>
+<listitem>
+<simpara>Install the database appliance certificate file as the root certificate in the correct location and set the ownership and permissions for it:</simpara>
+<screen>[root@{productname_short_l}2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt</screen>
+</listitem>
+<listitem>
+<simpara>Make sure that the security context is set correctly for the files in <literal>/var/www/miq/certs</literal>:</simpara>
+<screen>[root@{productname_short_l}2 ~]# restorecon -R -v /var/www/miq/vmdb/certs</screen>
+</listitem>
+<listitem>
+<simpara>Open the <literal>/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf</literal> file and uncomment and edit the <literal>ssl</literal> option:</simpara>
+<screen>ssl=on</screen>
+<simpara>In the same file, locate the options <literal>ssl_cert_file</literal>, <literal>ssl_key_file</literal>, and <literal>ssl_ca_file</literal> that specify the location of SSL certificates and edit them so that they are uncommented and point to the correct certificate files:</simpara>
+<screen>ssl_cert_file = '/var/www/miq/vmdb/certs/postgres.crt'  # (change requires restart)
+ssl_key_file  = '/var/www/miq/vmdb/certs/postgres.key'  # (change requires restart)
+ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'      # (change requires restart)</screen>
+</listitem>
+<listitem>
+<simpara>Open the <literal>/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf</literal> file and locate the two lines that contain the following:</simpara>
+<screen>host      all      all   all           md5
+#hostssl  all      all   all           md5</screen>
+<simpara>Modify the two lines to comment the <literal>host</literal> entry and uncomment the <literal>hostssl</literal> entry:</simpara>
+<screen>#host     all      all   all           md5
+hostssl   all      all   all           md5</screen>
+<simpara>This changes the incoming communication protocol to use SSL and refuse any unencrypted PostgreSQL connections.</simpara>
+</listitem>
+<listitem>
+<simpara>Start the <literal>rh-postgresql94-postgresql</literal> and <literal>evmserverd</literal> services so that the changes take effect:</simpara>
+<screen>[root@{productname_short_l}1 ~]# systemctl start rh-postgresql94-postgresql
+[root@{productname_short_l}1 ~]# systemctl start evmserverd</screen>
+</listitem>
+</orderedlist>
+<simpara>The database appliance now only accepts connections from connecting appliances using SSL.
+The following procedure sets up connecting appliances to communicate to the database using SSL. Use this procedure for each connecting appliance:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in as <literal>root</literal> to the connecting appliance.</simpara>
+</listitem>
+<listitem>
+<simpara>Create the <literal>.postgresql</literal> directory in your <literal>root</literal> user home directory.</simpara>
+<screen>[root@{productname_short_l}2 ~]# mkdir /root/.postgresql</screen>
+<simpara>The PostgreSQL client library, which ManageIQ also uses, looks to this directory for custom configuration files.</simpara>
+</listitem>
+<listitem>
+<simpara>Copy the root certificate file from the database appliance to the <literal>/root/.postgresql</literal> directory on the connecting appliance:</simpara>
+<screen>[root@{productname_short_l}2 ~]# scp root@[database_appliance_fqdn]:/var/www/miq/vmdb/certs/root.crt /root/.postgresql/root.crt</screen>
+<simpara>Where <literal>[database_appliance_fqdn]</literal> is the fully qualified domain name of the database appliance.</simpara>
+</listitem>
+<listitem>
+<simpara>Test the connection between the connecting appliance and the database appliance using the <literal>psql</literal>:</simpara>
+<screen>[root@localhost ~]# psql -h [database_appliance_fqdn] -d vmdb_production
+Password: ********
+psql (9.2.8)
+SSL connection (cipher: DHE-RSA-AES256-SHA, bits: 256)
+Type "help" for help.
+
+vmdb_production=#</screen>
+<simpara>The <literal>psql</literal> displays information about the SSL connection, which indicates that the configuration succeeded.
+Enter <literal>\q</literal> to leave <literal>psql</literal>.</simpara>
+</listitem>
+</orderedlist>
+<simpara>Complete this procedure for each external appliance.
+This enhances the security of all database transactions in your ManageIQ infrastructure.</simpara>
+</section>
+</chapter>
+</book>

@@ -1,17 +1,58 @@
 [[_to_create_chargeback_rates]]
 = Creating Chargeback Rates
 
-{product-title} allows you to create your own set of computing and storage costs.
+{product-title} allows you to create your own set of computing and storage costs to use for billing.
+
+Chargeback rates can be configured at a single rate or in tiers, where one rate is assigned to one usage range, and another rate is assigned to a different usage range.
+
+You can also assign fixed and variable rates per tier if desired.
+
+
+== Creating a Chargeback Rate
 
 . Navigate to menu:Cloud Intelligence[Chargeback].
 . Click the *Rates* accordion and select either *Compute* or *Storage*.
 
-* Use *Compute* to set chargeback rates for CPU, disk I/O, memory, network I/O, and fixed items.
-* Use *Storage* to set chargeback rates for fixed and storage items.
+* Use *Compute* to set chargeback rates for CPU, disk I/O, fixed compute cost, memory, and network I/O items.
+* Use *Storage* to set chargeback rates for fixed storage cost and disk storage.
 . Click  image:1847.png[] *(Configuration)*,  image:1862.png[] *(Add a new Chargeback Rate)* to create a new chargeback rate.
 . Type in a *Description* for the chargeback rate.
+. Select a currency.
 . For each item that you want to set, type in a rate and select a time option.
 . Click *Add*.
 
 
+== Creating a Tiered Chargeback Rate
 
+Tiered chargeback rates can be configured for either compute and storage usage.
+
+The following example shows a scenario to create a chargeback rate for allocated CPU usage in Euro per week measured by the following tiers, plus fixed and variable costs:
+
+* Tier 1: 0-2 CPU = 1 Euro fixed + 0.5 Euro variable
+* Tier 2: 2-4 CPU = 0.8 Euro fixed + 0.4 Euro variable
+* Tier 3: 4 CPU and above = 0.6 Euro fixed + 0.2 Euro variable
+
+.Example: Creating a tiered chargeback rate
+[example]
+
+. Navigate to menu:Cloud Intelligence[Chargeback].
+. Click the *Rates* accordion and select *Compute* to create a CPU chargeback rate.
+. Click  image:images/1847.png[] *(Configuration)*,  image:images/1862.png[] *(Add a new Chargeback Rate)*.
+. Type in a *Description* for the chargeback rate.
+. Select *Euro* for currency.
+. For each item that you want to set, select the time, and fill in the range and rates. For this example, in the *Allocated CPU Count*, configure:
+* In *Per Time*, select *Hourly*.
+* In *Range*, specify the CPU range: *Start* remains as `0.0` and *Finish* is `2`.
+* In *Rate*, specify `1` for the *Fixed* rate, and `0.5` for the *Variable* rate.
+* Click *Add* under *Actions* to create a new, blank *Allocated CPU Count* line.
+* In the new line in *Range*, specify the CPU range: *Start* is `2` and *Finish* is `4`.
+* In *Rate*, specify `0.8` for the *Fixed* rate, and `0.4` for the *Variable* rate.
+* Click *Add* under *Actions* to create another new, blank *Allocated CPU Count* line.
+* In the new line in *Range*, specify the CPU range: *Start* is `4` and leave *Finish* as `Infinity`.
+* In *Rate*, specify `0.6` for the *Fixed* rate, and `0.2` for *Variable*.
++
+image:images/Tiered_Chargeback.png[]
++
+* Click *Add* at the bottom of the screen to save the chargeback rate.
+
+The rate can now be assigned.

@@ -3,17 +3,12 @@
 
 Although the {product-title} appliance comes configured to be integrated immediately into your environment, you can make some changes to its configuration.
 
-[NOTE]
-======
-The {product-title} appliance is intended to have minimal configuration options.
-======
-
 === Changing Configuration Settings
 
 The procedure describes how to make changes to the configuration settings on the {product-title} appliance.
 
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-. Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
+. Log in to the appliance using the SSH key.
+. Enter the `sudo appliance_console` command. The CloudForms Management Engine appliance summary screen displays.
 . Press `Enter` to manually configure settings.
 . Press the number for the item you want to change, and press `Enter`. The options for your selection are displayed.
 . Follow the prompts to make the changes.
@@ -26,7 +21,7 @@ The {product-title} appliance console automatically logs out after five minutes 
 
 === Advanced Configuration Settings
 
-After logging in, you can use the following menu items for advanced configuration of the appliance:
+You can use the following options for advanced configuration of the appliance:
 
 * Use *Set DHCP Network Configuration* to use DHCP to obtain the IP address and network configuration for your {product-title} appliance. The appliance is initially configured as a DHCP client with bridged networking.
 * Use *Set Static Network Configuration* if you have a specific IP address and network settings you need to use for the {product-title} appliance.
@@ -56,22 +51,21 @@ A valid fully qualified hostname for the {product-title} appliance is required f
 [[configuring_a_database]]
 === Configuring a Database for {product-title}
 
-Before using {product-title}, configure the database options for it. {product-title} provides two options for database configuration:
+{product-title} uses a database to store information about the cloud environment it manages. You must configure a database for the appliance before you can use it to administer your cloud infrastructure. {product-title} provides the following two options for database configuration:
 
-* Install an internal PostgreSQL database to the appliance
-* Configure the appliance to use an external PostgreSQL database
+* Configuring an internal PostgreSQL database
+* Configuring an external PostgreSQL database
 
-
-=== Configuring an Internal Database
+==== Configuring an Internal Database
 
 [IMPORTANT]
 ======
-Before installing an internal database, add a disk to the infrastructure hosting your appliance. See the documentation specific to your infrastructure for instructions on how to add a disk. As a storage disk usually cannot be added while a virtual machine is running, Red Hat recommends adding the disk before starting the appliance. {product-title} only supports installing of an internal VMDB on blank disks. The installation will fail if the disks are not blank.
+Before installing an internal database, add a disk to the infrastructure hosting your appliance. See the storage documentation specific to your infrastructure for instructions on how to add a disk. As a storage disk usually cannot be added while a virtual machine is running, Red Hat recommends adding the disk before starting the appliance. {product-title} only supports installing of an internal VMDB on blank disks. The installation will fail if the disks are not blank.
 ======
 
-. Start the appliance and open a terminal from your virtualization or cloud provider.
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-. Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
+. Start the appliance and open a terminal console.
+. Log in to the appliance using the SSH key.
+. Enter the `sudo appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
 . Select *8) Configure Database* from the menu.
 . You are prompted to create or fetch an encryption key.
@@ -88,7 +82,7 @@ Choose disk:
 +
 Enter *1* to choose `/dev/vdb` for the database location.
 
-. When prompted, enter a unique three digit region ID to create a new region.
+. When prompted, enter a unique three digit region ID to create a new region. As your deployment grows, you can add more regions in the future to manage multiple appliances.
 +
 [IMPORTANT]
 ======
@@ -99,23 +93,25 @@ Creating a new region destroys any existing data on the chosen database.
 
 {product-title} configures the internal database.
 
-=== Configuring an External Database
+==== Configuring an External Database
 
-The `postgresql.conf` file used with {product-title} databases requires specific settings for correct operation. For example, it must correctly reclaim table space, control session timeouts, and format the PostgreSQL server log for improved system support. Due to these requirements, Red Hat recommends that external {product-title} databases use a `postgresql.conf` file based on the standard file used by the {product-title} appliance.
+Based on your setup, you will choose to configure the appliance to use an external PostgreSQL database. For example, we can only have one database in a single region. However, a region can be segmented into multiple zones where each zone provides specific functionality, such as Database, User Interface, Reporting among others. The appliances in these zones must be configured to use an external database.
+
+Note that the `postgresql.conf` file used with {product-title} databases requires specific settings for correct operation. For example, it must correctly reclaim table space, control session timeouts, and format the PostgreSQL server log for improved system support. Due to these requirements, Red Hat recommends that external {product-title} databases use a `postgresql.conf` file based on the standard file used by the {product-title} appliance.
 
 Ensure you configure the settings in the `postgresql.conf` to suit your system. For example, customize the `shared_buffers` setting according to the amount of real storage available in the external system hosting the PostgreSQL instance. In addition, depending on the aggregate number of appliances expected to connect to the PostgreSQL instance, it may be
 necessary to alter the `max_connections` setting.
 
-Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix {product-title} databases with other types of databases in a single PostgreSQL instance.
-
 [NOTE]
 ======
-{product-title} 4.x requires PostgreSQL version 9.4.
+* {product-title} 4.x requires PostgreSQL version 9.4.
+
+* Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix {product-title} databases with other types of databases in a single PostgreSQL instance.
 ======
 
-. Start the appliance and open a terminal console from your virtualization or cloud provider.
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-. Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
+. Start the appliance and open a terminal console.
+. Log in to the appliance using the SSH key.
+. Enter the `sudo appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
 . Select *8) Configure Database* from the menu.
 . You are prompted to create or fetch a security key.
@@ -132,11 +128,11 @@ Because the `postgresql.conf` file controls the operation of all databases manag
 
 === Configuring a Worker Appliance for {product-title}
 
-You can configure a worker appliance through the terminal. These steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database.
+You can use multiple appliances to facilitate horizontal scaling, as well as for dividing up work by roles. Accordingly, configure an appliance to handle work for one or many roles, with workers within the appliance carrying out the duties for which they are configured. You can configure a worker appliance through the terminal. The following steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database.
 
-. Start the appliance and open a terminal from your virtualization or cloud provider.
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-. Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
+. Start the appliance and open a terminal console.
+. Log in to the appliance using the SSH key.
+. Enter the `sudo appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
 . Select *8) Configure Database* from the menu.
 . You are prompted to create or fetch a security key. Select the option to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
@@ -146,9 +142,5 @@ You can configure a worker appliance through the terminal. These steps demonstra
 . Enter the database username or leave blank for the default (`root`).
 . Enter the chosen database user's password.
 . Confirm the configuration if prompted.
-
-
-
-
 
 

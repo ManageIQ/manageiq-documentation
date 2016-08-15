@@ -40,16 +40,17 @@ include::Tagging_a_Bare_Metal_Host.adoc[]
 :leveloffset: 1
 == Ansible Tower
 
-Ansible Tower is a management tool designed to help automate infrastructure operations. Ansible Tower provides the ability to automate provisioning and configuration of infrastructure resources and applications in {product-title}, as requested through the self-service provisioning portal. This also includes deploying Red Hat Satellite agents on bare metal machines as required.
+Ansible Tower is a management tool integrated with {product-title}, designed to help automate infrastructure operations. {product-title} allows you to execute Ansible Tower jobs using service catalogs and Automate. No custom configuration or Ruby scripting is needed in {product-title}, as configuration is done in Ansible Tower using playbooks. 
 
-{product-title} allows you to execute Ansible Tower jobs using service catalogs and Automate. No custom configuration or Ruby scripting is needed in {product-title}, as configuration is done in Ansible Tower using playbooks. You can use the large library of existing Ansible playbooks as {product-title} state machines to automate tasks such as backups, package updates, and maintenance in your {product-title} environment. This can be particularly useful for quickly applying changes across large environments with many virtual machines or instances. Using Ansible Tower, you can schedule Ansible playbook runs and monitor current and historical results, allowing for troubleshooting or identification of issues before they occur.
+You can use the large library of existing Ansible playbooks as {product-title} state machines to automate tasks such as backups, package updates, and maintenance in your {product-title} environment. This also includes deploying Red Hat Satellite agents on bare metal machines as required. This can be particularly useful for quickly applying changes across large environments with many virtual machines or instances. Using Ansible Tower, you can schedule Ansible playbook runs and monitor current and historical results, allowing for troubleshooting or identification of issues before they occur.
 
 The basic workflow when using {product-title} with an Ansible Tower provider is as follows:
 
 . Create an Ansible playbook which performs a specific task.
 . A new Ansible Tower job template is created from the playbook, which is then retrieved by {product-title}.
-. From the Ansible Tower job template, a new catalog item is created in {product-title}, optionally with a service dialog that allows the user to enter parameters if needed.
-. The user orders the service from the {product-title} user interface, and if configured fills out any arguments (for example, limiting the task to run on a specific set of virtual machines). The job executes.
+. From the Ansible Tower job template, create a new catalog item in {product-title}, optionally with a service dialog that allows the user to enter parameters if needed.
+. The user orders the service from the {product-title} user interface, and fills out any additional arguments (for example, limiting the task to run on a specific set of virtual machines). 
+. The job executes.
 
 
 [NOTE]
@@ -59,7 +60,7 @@ For more information on Ansible playbooks, see the link:https://docs.ansible.com
 
 === Adding an Ansible Tower Provider
 
-To add an Ansible Tower provider:
+To access your Ansible Tower inventory from {product-title}, you must add Ansible Tower as a provider. 
 
 . Navigate to menu:Configuration[Configuration Management > Providers].
 . Under image:1847.png[Configuration] *Configuration*, click  image:1862.png[Add a new Provider] *Add a new Provider*.
@@ -81,7 +82,7 @@ After adding the Ansible Tower provider, refresh its relationships and power sta
 
 Refresh relationships of all items related to an existing Ansible Tower configuration management provider including inventory, hosts, virtual machines, and clusters.
 
-You can refresh inventory from {product-title}, or by enabling the *Update on Launch* option for inventory groups in Ansible Tower. The *Update on Launch* option allows Ansible to automatically update inventory using a dynamic inventory script before launching a Tower job from a playbook. See the link:http://docs.ansible.com/ansible-tower/index.html[Ansible Tower documentation] for more information.
+You can refresh inventory from {product-title}, or by enabling the *Update on Launch* option for inventory groups in Ansible Tower. The *Update on Launch* option allows Ansible Tower to automatically update inventory using a dynamic inventory script before launching an Ansible Tower job from a playbook. See the link:http://docs.ansible.com/ansible-tower/index.html[Ansible Tower documentation] for more information.
 
 [IMPORTANT]
 ======
@@ -98,6 +99,8 @@ image:refresh.png[Refresh_Ansible_Provider]
 +
 . Click *OK*.
 
+{product-title} then queries the Ansible Tower API and obtains an inventory of all available hosts and job templates.
+
 === Viewing Ansible Tower Providers and Inventory
 
 {product-title} automatically updates its inventory from Ansible Tower. This includes system groups (known as Inventories in Ansible Tower), basic information about individual systems, and available Ansible Tower job templates to be executed from the service catalog or automate.
@@ -113,6 +116,7 @@ To view a list of Ansible Tower providers and inventory:
 . Under *All Configuration Manager Providers*, select the *Ansible Tower Providers* accordion menu to display a list of providers. 
 . Click your Ansible Tower provider to expand and list the inventory groups on that Ansible Tower system. The inventory groups can be expanded to view the systems contained within each group, as well as configuration details for these systems.
 
+Similarly, all discovered job templates are accessed under the provider by expanding the menu:Configuration[Configuration Management > Ansible Tower Job Templates] accordion menu.
 
 
 === Viewing Ansible Tower Configured Systems
@@ -145,7 +149,7 @@ Then, create an Ansible Tower service catalog item:
 . Click  image:1847.png[Configuration] (*Configuration*), then  image:1862.png[Create Service Dialog from this Job Template] (*Create Service Dialog from this Job Template*).
 . Enter a *Service Dialog Name* (for example, _ansible_tower_job_)and click *Save*.
 . Navigate to menu:Services[Catalogs]. Click *Catalog Items*.
-.  Click  image:1847.png[Configuration] (*Configuration*), then  image:1862.png[Add a New Catalog Item] (*Add a New Catalog Item*) to create a new catalog item with at minimum the following details:
+.  Click  image:1847.png[Configuration] (*Configuration*), then  image:1862.png[Add a New Catalog Item] (*Add a New Catalog Item*) to create a new catalog item with the following details, at minimum:
 - For *Catalog Item type*, select `Ansible Tower`.
 - Enter a *Name* for the service catalog item.
 - Check *Display in Catalog*.
@@ -167,10 +171,6 @@ image:Order_AT_Catalog_Item.png[]
 +
 . Click *Order* for the catalog item.
 . Enter any variables requested and click *Submit*.
-
-
-
-// (the service I ordered had an extra screen come up after -- Options > Limit, and Extra Variables: var_second, and *Submit*) . Document with the extra variables?
 
 {product-title} takes you to the *Requests* queue page and show the status of the job.
 
@@ -209,7 +209,7 @@ To configure a custom button to execute an Ansible Tower job on a virtual machin
   * Configure *Object Details* fields with the following request details:
     ** For *System/Process*, select *Request*.
     ** For *Message*, enter *create*.
-    ** For *Request*, enter *Ansible_Tower_Job*. (QUESTION: Why name it this?)
+    ** For *Request*, enter *Ansible_Tower_Job*. 
   * Configure *Attribute/Value Pairs* with the following parameters:
     ** *job_template_name* is the Ansible Tower job template name to associate with the button. The *job_template_name* field is mandatory; other parameters are provided by the Tower job dialog.
   * Configure *Visibility* to all users, or limit visibility by role as desired.

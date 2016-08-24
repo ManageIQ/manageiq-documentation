@@ -838,20 +838,20 @@ To configure {product-title} to use LDAP for authentication, complete the follow
 . Configure your *LDAP Settings*:
 * Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
-* From the *User Type* list, select one of the following: [NOTE: NEED DETAILS ON WHAT THESE USER TYPES DO AND HOW EXACTLY TO CONFIGURE. IS THIS FOR WHEN YOU LOG IN?]
+* From the *User Type* list, select one of the following: [QUESTION: When do you use each user type, and how do you configure the values for them?]
 ** Select *User Principal Name* to type the user name in the format of user@domainname. 
 ** Select *Email Address* to login with the user's email address.
-** Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one [NOTE: WHAT'S THE PROPER SUFFIX?]. Choose the correct *Distinguished Name* option for your directory service implementation.
-** Select *SAM Account Name* to  NEEDINFO ????
+** Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one [QUESTION: What is the proper suffix?]. Choose the correct *Distinguished Name* option for your directory service implementation.
+** Select *SAM Account Name*.
 * Specify the *User Suffix*, such as acme.com for *User Principal Name* or cn=users,dc=acme,dc=com for *Distinguished Name*, in *Base DN*.
 +
 image:2068.png[]
 
 . Configure your *Role Settings*:
 If you choose LDAP or LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the Account Role Groups. See xref:ldap_groups[] for more information.
-* Check *Get User Groups from LDAP* to *[QUESTION: What does this set?]*. ADD IMPORTANT HERE
+* Check *Get User Groups from LDAP* to [QUESTION: What exactly does this set?]. 
 +
-[NOTE]
+[IMPORTANT]
 ======
 If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 
@@ -868,6 +868,8 @@ Then, when logging in, the user would type either dbright (User Principal Name) 
 image:2069.png[]
 
 . Click *Validate* to verify your settings.
+
+To assign account roles using LDAP groups, see xref:ldap_groups[].
 
 ====== Trusted Forests
 
@@ -892,13 +894,98 @@ To add settings for a trusted forest:
 
 LDAP authentication has now been configured in your CloudForms environment.
 
-
 // Break this procedure here, or contain in the same section?
 
-[NOTE]
-============
-To assign account roles using LDAP groups, see xref:ldap_groups[].
-============
+[[ldap_groups]]
+====== Assigning Account Roles Using LDAP Groups
+
+After configuring LDAP authentication as described in xref:ldap_settings[], you can assign account roles. You can either create groups that match your pre-existing LDAP groups by name, or add the default groups from {product-title} to the LDAP server you are connecting to.
+
+When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not a member of any of the defined LDAP groups, then the user will be denied access to {product-title}.
+
+There are two ways to use LDAP groups with {product-title}:
+
+* Assign pre-existing groups from your LDAP server to {product-title} account roles.
+* Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
+
+
+====== Using Pre-Existing LDAP Groups to Assign Account Roles
+
+. Navigate to menu:Settings[Configuration].
+. Click on the *Access Control* accordion, then click *Groups*.
+. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
+. Enter a description for the group in the *Description* field.
+. There are two ways to specify the group to use:
+* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server [QUESTION: Which step was this specified in? How is "Adding A Group" configured, as there is no *LDAP Group* field?].
++
+image:2090.png[]
++
+* Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list that appears in the *LDAP Group Information* area to choose a group.
+. Select a *Role* to map to the group.
+. Select a *Project/Tenant* to map to the group.
+. Select any filters to apply to what this group can view in the *Assign Filters* area:
+.. In the *My Company Tags* tab, select tags to limit the user to items containing those tags. The items that have changed show in a blue italicized font.
+.. In the *Host & Clusters* tab, select the host and clusters to limit the user to. The items that have changed show in a blue italicized font.
+image:2093.png[]
+.. In the *VMs & Templates* tab, select the folders created in your virtual infrastructure to limit the user to. The items that have changed show in a blue italicized font.
+. Click *Add*.
+
+To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
+
+
+====== Using Groups Named by {product-title} to Assign Account Roles
+
+In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
+This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
+
+
+.Account Role and Directory Service Group Names
+
+[width="100%",cols="50%,50%",options="header",]
+|=======================================================================
+|Directory Service Distribution Group Name|Account Role
+|EvmGroup-administrator|Administrator
+|EvmGroup-approver|Approver
+|EvmGroup-auditor|Auditor
+|EvmGroup-desktop|Desktop
+|EvmGroup-operator|Operator
+|EvmGroup-security|Security
+|EvmGroup-super_administrator|Super Administrator
+|EvmGroup-support|Support
+|EvmGroup-user|User
+|EvmGroup-user_limited_self_server|User Limited Self Service
+|EvmGroup-user_self_service|User Self Service
+|EvmGroup-vm_user|Vm User
+|EvmRole-tenant_administrator|Tenant Administrator
+|EvmRole-tenant_quota_administrator|Tenant Quota Administrator
+|=======================================================================
+
+. Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
+. Navigate to menu:Settings[Configuration].
+. Click the *Settings* accordion, then select your server under *Zones*.
+. Click the *Authentication* tab and enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[]. (QUESTION: What are the required settings?)
+
+[[ldap_lookup_priority]]
+====== Configuring Lookup Priority for LDAP Groups
+
+{product-title} can have multiple LDAP groups configured, which the appliance (?) will attempt to authenticate with one by one until it succeeds. However, the lookup priority of these groups can be arranged as desired. To configure the order in which {product-title} looks up LDAP groups:
+
+. Navigate to menu:Settings[Configuration].
+. Click on the *Access Control* accordion, then click *Groups*.
+. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Edit Sequence of User Groups for LDAP Look Up*) to prioritize which group a user will default to if LDAP returns multiple matching groups.
+. Select one or more consecutive groups and use the arrow buttons to move the user group higher or lower in priority.
+. Click *Save*. 
+
+
+To test your configuration:
+
+. Log out of the {product-title} user interface.
+. Log back in as an LDAP user that is assigned to one or more of the matching groups.
+. Change groups by clicking on the user pull down on the top right of the screen. There should be a dropdown list of the groups the user is authorized for. 
+
+//INSERT SCREENSHOT OF DROPDOWN!
+
+
 
 [[amazon_settings]]
 ====== Amazon Settings
@@ -1764,6 +1851,11 @@ To delete a user:
 User groups create filters and assign roles to users. You can either create your own user groups, or leverage your LDAP directory service to assign groups of users to account roles.
 For a list of what each pre-defined account role can do, see xref:roles[].
 
+[NOTE]
+======
+To assign account roles using LDAP groups, see xref:ldap_groups[].
+======
+
 ==== Creating a User Group
 
 To create a user group:
@@ -1782,96 +1874,6 @@ image:2088.png[]
 . Click the *VMs & Templates* tab. This shows folders that you have created in your virtual infrastructure.
 . Check the boxes for the folders that you want to limit this user to. The items that have changed will show in blue italicized font.
 . Click *Add*.
-
-
-[[ldap_groups]]
-==== Assigning Account Roles Using LDAP Groups
-
-After configuring LDAP authentication as described in xref:ldap_settings[], you can assign account roles. You can either create groups that match your pre-existing LDAP groups by name, or add {product-title} default groups to the LDAP (FOREST/NETWORK?) you are connecting to.
-
-When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not a member of any of the defined groups, then the user will be denied access to {product-title}. *CLARIFY*
-
-There are two ways to use LDAP groups with {product-title}:
-
-* Assign pre-existing groups from your LDAP server to {product-title} account roles.
-* Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
-
-
-===== Using Pre-Existing LDAP Groups to Assign Account Roles
-
-. Navigate to menu:Settings[Configuration].
-. Click on the *Access Control* accordion, then click *Groups*.
-. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a description for the group in the *Description* field.
-. There are two ways to specify the group to use:
-* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under [LINK Operations-Server].
-+
-image:2090.png[]
-+
-* Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list that appears in the *LDAP Group Information* area to choose a group.
-. Select a *Role* to map to the group.
-. Select a *Project/Tenant* to map to the group.
-. Select any filters to apply to what this group can view in the *Assign Filters* area:
-.. In the *My Company Tags* tab, select tags to limit the user to items containing those tags. The items that have changed show in a blue italicized font.
-.. In the *Host & Clusters* tab, select the host and clusters to limit the user to. The items that have changed show in a blue italicized font.
-image:2093.png[]
-.. In the *VMs & Templates* tab, select the folders created in your virtual infrastructure to limit the user to. The items that have changed show in a blue italicized font.
-. Click *Add*.
-
-To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
-
-
-===== Using Groups Named by {product-title} to Assign Account Roles
-
-In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
-This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
-
-
-.Account Role and Directory Service Group Names
-
-[width="100%",cols="50%,50%",options="header",]
-|=======================================================================
-|Directory Service Distribution Group Name|Account Role
-|EvmGroup-administrator|Administrator
-|EvmGroup-approver|Approver
-|EvmGroup-auditor|Auditor
-|EvmGroup-desktop|Desktop
-|EvmGroup-operator|Operator
-|EvmGroup-security|Security
-|EvmGroup-super_administrator|Super Administrator
-|EvmGroup-support|Support
-|EvmGroup-user|User
-|EvmGroup-user_limited_self_server|User Limited Self Service
-|EvmGroup-user_self_service|User Self Service
-|EvmGroup-vm_user|Vm User
-|EvmRole-tenant_administrator|Tenant Administrator
-|EvmRole-tenant_quota_administrator|Tenant Quota Administrator
-|=======================================================================
-
-. Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
-. Navigate to menu:Settings[Configuration].
-. Click the *Settings* accordion, then select your server under *Zones*.
-. Click the *Authentication* tab and enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[]. (DOES THIS MAKE SENSE?)?????
-
-[[ldap_lookup_priority]]
-==== Configuring Lookup Priority for LDAP Groups
-
-{product-title} can have multiple LDAP groups configured, which the appliance (?) will attempt to authenticate with one by one until it succeeds. However, the lookup priority of these groups can be arranged as desired. To configure the order in which {product-title} looks up LDAP groups:
-
-. Navigate to menu:Settings[Configuration].
-. Click on the *Access Control* accordion, then click *Groups*.
-. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Edit Sequence of User Groups for LDAP Look Up*) to prioritize which group a user will default to if LDAP returns multiple matching groups.
-. Select one or more consecutive groups and use the arrow buttons to move the user group higher or lower in priority.
-. Click *Save*. 
-
-
-To test your configuration:
-
-. Log out of the {product-title} user interface.
-. Log back in as an LDAP user that is assigned to one or more of the matching groups.
-. Change groups by clicking on the user pull down on the top right of the screen. There should be a dropdown list of the groups the user is authorized for. 
-
-//INSERT SCREENSHOT OF DROPDOWN!
 
 
 [[roles]]

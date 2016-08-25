@@ -835,21 +835,22 @@ To configure {product-title} to use LDAP for authentication, complete the follow
 . Navigate to menu:Settings[Configuration]. Select the *Authentication* tab.
 . Select a *Session Timeout* to set the period of inactivity before a user is logged out of the console.
 . Select *LDAP* or *LDAPS* from the *Mode* list. This exposes additional required parameters under *LDAP Settings*.
-. Configure your *LDAP Settings*:
+. Configure your *LDAP Settings* (the following example configures a Red Hat Identity Management LDAP server):
 * Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
-* From the *User Type* list, select one of the following: [QUESTION: When do you use each user type, and how do you configure the values for them?]
-** Select *User Principal Name* to type the user name in the format of user@domainname. 
-** Select *Email Address* to login with the user's email address.
-** Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one [QUESTION: What is the proper suffix?]. Choose the correct *Distinguished Name* option for your directory service implementation.
-** Select *SAM Account Name*.
+* From the *User Type* list, select one of the following and configure the values for your LDAP server:
+** *User Principal Name*: Type the user name in the format of user@domainname. 
+** *Email Address*: Logs in with the user's email address.
+** *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>): Uses just the user name. Be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation. 
+** *SAM Account Name*:
+//Fix.
 * Specify the *User Suffix*, such as acme.com for *User Principal Name* or cn=users,dc=acme,dc=com for *Distinguished Name*, in *Base DN*.
 +
-image:2068.png[]
+image:LDAP-authentication-full.png[]
 
 . Configure your *Role Settings*:
-If you choose LDAP or LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the Account Role Groups. See xref:ldap_groups[] for more information.
-* Check *Get User Groups from LDAP* to [QUESTION: What exactly does this set?]. 
+If you choose LDAP or LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the account role groups. See xref:ldap_groups[] for more information.
+* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This will be used for mapping a user's authorization to a {product-title} role. 
 +
 [IMPORTANT]
 ======
@@ -862,12 +863,11 @@ Then, when logging in, the user would type either dbright (User Principal Name) 
 * Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest.
 * Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
 * Use *Base DN* to set the place in the directory tree from which you want to start searching for users.
-* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment.
-* Specify the password for the Bind DN user in *Bind Password*.
-+
-image:2069.png[]
-
+* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment. This example uses a service account user, `svc-ldap`, with access to all LDAP users.
+* Enter the password for the Bind DN user in *Bind Password*.
 . Click *Validate* to verify your settings.
+
+LDAP authentication has now been configured in your CloudForms environment.
 
 To assign account roles using LDAP groups, see xref:ldap_groups[].
 
@@ -886,13 +886,12 @@ To add settings for a trusted forest:
 . Click the *Zone* where the Server is located.
 . Click on the *Server*.
 . Click *Authentication*.
-. Check *Get Role* from *LDAP*, and enter all items in the *Role Settings Area*.
-. In the *Trusted Forest Settings* area, click image:1848.png[](*Click to add a new forest*).
+. Check *Get User Groups from LDAP*, and enter all items in the *Role Settings Area*.
+. In the *Trusted Forest Settings* area, click image:green-plus.png[](*Click to add a new forest*).
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
-(NOTE:need more details on what to configure)
 . Click *Save*.
 
-LDAP authentication has now been configured in your CloudForms environment.
+After adding other trusted LDAP forests, you can then change the order in which {product-title} looks up the forests for authentication. For instructions, see xref:ldap_lookup_priority[].
 
 // Break this procedure here, or contain in the same section?
 
@@ -905,7 +904,7 @@ When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not
 
 There are two ways to use LDAP groups with {product-title}:
 
-* Assign pre-existing groups from your LDAP server to {product-title} account roles.
+* Use pre-existing groups from your LDAP server to assign {product-title} account roles.
 * Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
 
 
@@ -916,13 +915,13 @@ There are two ways to use LDAP groups with {product-title}:
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
 . Enter a description for the group in the *Description* field.
 . There are two ways to specify the group to use:
-* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server [QUESTION: Which step was this specified in? How is "Adding A Group" configured, as there is no *LDAP Group* field?].
-+
-image:2090.png[]
-+
+* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server [QUESTION: Which field do you add this in? There is no longer an LDAP Group field].
 * Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list that appears in the *LDAP Group Information* area to choose a group.
 . Select a *Role* to map to the group.
 . Select a *Project/Tenant* to map to the group.
++
+image:Assign_LDAP-Roles.png[]
++
 . Select any filters to apply to what this group can view in the *Assign Filters* area:
 .. In the *My Company Tags* tab, select tags to limit the user to items containing those tags. The items that have changed show in a blue italicized font.
 .. In the *Host & Clusters* tab, select the host and clusters to limit the user to. The items that have changed show in a blue italicized font.
@@ -968,7 +967,7 @@ This group must be in the LDAP directory source you specified for the server. Se
 [[ldap_lookup_priority]]
 ====== Configuring Lookup Priority for LDAP Groups
 
-{product-title} can have multiple LDAP groups configured, which the appliance (?) will attempt to authenticate with one by one until it succeeds. However, the lookup priority of these groups can be arranged as desired. To configure the order in which {product-title} looks up LDAP groups:
+{product-title} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. However, the lookup priority of these groups can be arranged as desired. To configure the order in which {product-title} looks up LDAP groups:
 
 . Navigate to menu:Settings[Configuration].
 . Click on the *Access Control* accordion, then click *Groups*.
@@ -981,11 +980,9 @@ To test your configuration:
 
 . Log out of the {product-title} user interface.
 . Log back in as an LDAP user that is assigned to one or more of the matching groups.
-. Change groups by clicking on the user pull down on the top right of the screen. There should be a dropdown list of the groups the user is authorized for. 
+. Change groups by clicking on the user dropdown menu on the top right of the screen. The dropdown list will show the groups the user is authorized for. 
 
 //INSERT SCREENSHOT OF DROPDOWN!
-
-
 
 [[amazon_settings]]
 ====== Amazon Settings

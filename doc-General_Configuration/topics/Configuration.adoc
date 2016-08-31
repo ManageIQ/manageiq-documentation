@@ -290,7 +290,7 @@ If there are any problems with the file, such as an incorrect column name, unkno
 ifdef::cfme[]
 ===== Registering and Updating {product-title}
 
-You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
+You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management. 
 
 The following tools are used during the update process:
 
@@ -812,7 +812,7 @@ To change an authentication setting:
 . Click the zone where the server is located.
 . Click on the server.
 . Click on the *Authentication* tab.
-. Make any required changes. If you select `LDAP`, `LDAPS`, or `Amazon` as the authentication mode, click Validate to confirm your settings in the *Role Settings* area.
+. Make any required changes. If you select `LDAP`, `LDAPS`, or `Amazon` as the authentication mode, click *Validate* to confirm your settings in the *Role Settings* area.
 . Click *Save*.
 
 ====== Authentication Settings
@@ -821,26 +821,45 @@ image:2067.png[]
 
 * Use *Session Timeout* to set the period of inactivity before a user is logged out of the console.
 * Use *Mode* to set the type of authentication. Choose from *Database* (using the VMDB), *LDAP* (Lightweight Directory Authentication Protocol), *LDAPS* (Secure Lightweight Directory Authentication Protocol), or *Amazon*. The default is *Database*.
-If you choose *Database*, see xref:creating_a_user[] to create users. See xref:ldap_settings[] for more information on configuration for LDAP and LDAPS. If you choose Amazon, see xref:amazon_settings[].
+** If you choose *Database*, see xref:creating_a_user[] to create users. 
+** If you choose *LDAP* or *LDAPS*, see xref:ldap_settings[] for more information on configuration. 
+** If you choose *Amazon*, see xref:amazon_settings[].
 
 [[ldap_settings]]
-====== LDAP Settings
+====== Configuring LDAP Authentication
 
-If you choose LDAP or LDAPS as your authentication mode, required parameters are exposed under *LDAP Settings*. Be sure to validate your setting before saving them.
+If you choose LDAP or LDAPS as your authentication mode, the required parameters are exposed under *LDAP Settings*. Be sure to validate your settings before saving them.
 
-image:2068.png[]
+To configure {product-title} to use LDAP for authentication, complete the following steps:
 
-* Use *LDAP Host Name* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user.
+. Navigate to menu:Settings[Configuration]. Select the *Authentication* tab.
+. Select a *Session Timeout* to set the period of inactivity before a user is logged out of the console.
+. Select *LDAP* or *LDAPS* from the *Mode* list. This exposes additional required parameters under *LDAP Settings*.
+. Configure your *LDAP Settings* (the following example configures a Red Hat Identity Management LDAP server):
+* Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
-* From the *User Type* list, select *User Principal Name* to type the user name in the format of user@domainname. Select *Email Address* to login with the users email address.
-Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation.
+* From the *User Type* list, select one of the following and configure the values for your LDAP server:
+** *User Principal Name*: Type the user name in the format of user@domainname. 
+** *Email Address*: Logs in with the user's email address.
+** *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>): Uses just the user name. Be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation. 
+** *SAM Account Name*:
+
+//Fix.
+
 * Specify the *User Suffix*, such as acme.com for *User Principal Name* or cn=users,dc=acme,dc=com for *Distinguished Name*, in *Base DN*.
-
-====== LDAP Role Settings
-
-If you choose LDAP, you can use groups from your directory service to set the role for the authenticated LDAP User. The LDAP user must be in one of the Account Role Groups. See xref:ldap_groups[] for more information.
-
-If you do not check Get User Groups from LDAP, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
++
+image:LDAP-authentication-full.png[]
++
+. Configure your *Role Settings*:
+If you choose LDAP or LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the account role groups. See xref:ldap_groups[] for more information.
+* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This will be used for mapping a user's authorization to a {product-title} role. 
++
+[IMPORTANT]
+======
+If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
+======
+* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest.
+* Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
 For example, dbright@acme.com when using User Principal Name, cn=dan bright,ou=users,dc=acme,dc=com when using Distinguished Name (CN=<user>), or uid=dan bright,ou=users,dc=acme,dc=com when using Distinguished Name (UID=<user>).
 Then, when logging in, the user would type either dbright (User Principal Name) or dan bright (Distinguished Name). If the user is not defined in the VMDB, they will be denied access to {product-title}.
 
@@ -848,46 +867,22 @@ image:2069.png[]
 
 * Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP users home forest.
 * Check *Follow Referrals* to lookup and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
-* Use *Base DN* to set the place in the directory tree from which you want to start searching for users.
-* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment.
-* Specify the password for the Bind DN user in *Bind Password*.
-<<<<<<< HEAD
+* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment. This example uses a service account user, `svc-ldap`, with access to all LDAP users.
+* Enter the password for the Bind DN user in *Bind Password*.
+. Click *Validate* to verify your settings.
 
-Click *Validate* to verify your settings.
+LDAP authentication has now been configured in your CloudForms environment.
 
-[[amazon_settings]]
-====== Amazon Settings
+To assign account roles using LDAP groups, see xref:ldap_groups[].
 
-If you choose Amazon as your authentication mode, required parameters are exposed under *Amazon Primary AWS Account Settings* for *IAM*. Be sure to validate your setting before saving them.
-
-* Type in an *Access Key* provided by your Amazon account.
-* Type in a *Secret Key* provided by your Amazon account.
-
-=======
-
-Click *Validate* to verify your settings.
-
-[[amazon_settings]]
-====== Amazon Settings
-
-If you choose Amazon as your authentication mode, required parameters are exposed under *Amazon Primary AWS Account Settings* for *IAM*. Be sure to validate your setting before saving them.
-
-* Type in an *Access Key* provided by your Amazon account.
-* Type in a *Secret Key* provided by your Amazon account.
-
->>>>>>> 7bac871... more edits
-Users logging into {product-title} with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
-Amazon users must be added as a {product-title} user or belong to an IAM user group added to the list of {product-title} groups.
 
 ====== Trusted Forests
 
-If a user has group memberships in another LDAP Forest, then specify the settings to access the memberships in the trusted forest.
+If a user has group memberships in another LDAP Forest, specify the settings to access the memberships in the trusted forest.
 
 When trusted forests are added to the authentication configuration, they are used only for finding groups that a user is a member of. {product-title} will first collect all of the user's groups from the primary LDAP directory. Then it will collect any additional groups that the user is a member of from all of the configured forests.
 
 The collected LDAP groups are used to match, by name, against the groups defined in {product-title}. The user must be a member of at least one matching LDAP group to be successfully authenticated.
-
-====== Adding Settings for a Trusted Forest
 
 To add settings for a trusted forest:
 
@@ -896,10 +891,116 @@ To add settings for a trusted forest:
 . Click the *Zone* where the Server is located.
 . Click on the *Server*.
 . Click *Authentication*.
-. Check *Get Role* from *LDAP*, and enter all items in the *Role Settings Area*.
-. In the *Trusted Forest Settings* area, click image:1848.png[](*Click to add a new forest*).
+. Check *Get User Groups from LDAP*, and enter all items in the *Role Settings Area*.
+. In the *Trusted Forest Settings* area, click image:green-plus.png[](*Click to add a new forest*).
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
 . Click *Save*.
+
+After adding other trusted LDAP forests, you can then change the order in which {product-title} looks up the forests for authentication. For instructions, see xref:ldap_lookup_priority[].
+
+// Break this procedure here, or contain in the same section?
+
+[[ldap_groups]]
+====== Assigning Account Roles Using LDAP Groups
+
+After configuring LDAP authentication as described in xref:ldap_settings[], you can assign account roles. You can either create groups that match your pre-existing LDAP groups by name, or add the default groups from {product-title} to the LDAP server you are connecting to.
+
+When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not a member of any of the defined LDAP groups, then the user will be denied access to {product-title}.
+
+There are two ways to use LDAP groups with {producttitle}:
+
+* Use pre-existing groups from your LDAP server to assign {product-title} account roles.
+* Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
+
+
+====== Using Pre-Existing LDAP Groups to Assign Account Roles
+
+. Navigate to menu:Settings[Configuration].
+. Click on the *Access Control* accordion, then click *Groups*.
+. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
+. Enter a description for the group in the *Description* field.
+. There are two ways to specify the group to use:
+* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server [QUESTION: Which field do you add this in? There is no longer an LDAP Group field].
+* Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list that appears in the *LDAP Group Information* area to choose a group.
+. Select a *Role* to map to the group.
+. Select a *Project/Tenant* to map to the group.
++
+image:Assign_LDAP-Roles.png[]
++
+. Select any filters to apply to what this group can view in the *Assign Filters* area:
+.. In the *My Company Tags* tab, select tags to limit the user to items containing those tags. The items that have changed show in a blue italicized font.
+.. In the *Host & Clusters* tab, select the host and clusters to limit the user to. The items that have changed show in a blue italicized font.
+image:2093.png[]
+.. In the *VMs & Templates* tab, select the folders created in your virtual infrastructure to limit the user to. The items that have changed show in a blue italicized font.
+. Click *Add*.
+
+To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
+
+
+====== Using Groups Named by {product-title} to Assign Account Roles
+
+In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
+This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
+
+
+.Account Role and Directory Service Group Names
+
+[width="100%",cols="50%,50%",options="header",]
+|=======================================================================
+|Directory Service Distribution Group Name|Account Role
+|EvmGroup-administrator|Administrator
+|EvmGroup-approver|Approver
+|EvmGroup-auditor|Auditor
+|EvmGroup-desktop|Desktop
+|EvmGroup-operator|Operator
+|EvmGroup-security|Security
+|EvmGroup-super_administrator|Super Administrator
+|EvmGroup-support|Support
+|EvmGroup-user|User
+|EvmGroup-user_limited_self_server|User Limited Self Service
+|EvmGroup-user_self_service|User Self Service
+|EvmGroup-vm_user|Vm User
+|EvmRole-tenant_administrator|Tenant Administrator
+|EvmRole-tenant_quota_administrator|Tenant Quota Administrator
+|=======================================================================
+
+. Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
+. Navigate to menu:Settings[Configuration].
+. Click the *Settings* accordion, then select your server under *Zones*.
+. Click the *Authentication* tab and enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[]. (QUESTION: What are the required settings?)
+
+[[ldap_lookup_priority]]
+====== Configuring Lookup Priority for LDAP Groups
+
+{product-title} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. However, the lookup priority of these groups can be arranged as desired. To configure the order in which {product-title} looks up LDAP groups:
+
+. Navigate to menu:Settings[Configuration].
+. Click on the *Access Control* accordion, then click *Groups*.
+. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Edit Sequence of User Groups for LDAP Look Up*) to prioritize which group a user will default to if LDAP returns multiple matching groups.
+. Select one or more consecutive groups and use the arrow buttons to move the user group higher or lower in priority.
+. Click *Save*. 
+
+
+To test your configuration:
+
+. Log out of the {product-title} user interface.
+. Log back in as an LDAP user that is assigned to one or more of the matching groups.
+. Change groups by clicking on the user dropdown menu on the top right of the screen. The dropdown list will show the groups the user is authorized for. 
+
+//INSERT SCREENSHOT OF DROPDOWN!
+
+[[amazon_settings]]
+====== Amazon Settings
+
+If you choose Amazon as your authentication mode, required parameters are exposed under *Amazon Primary AWS Account Settings* for *IAM*. Be sure to validate your setting before saving them.
+
+* Type in an *Access Key* provided by your Amazon account.
+* Type in a *Secret Key* provided by your Amazon account.
+
+Users logging into {product-title} with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
+Amazon users must be added as a {product-title} user or belong to an IAM user group added to the list of {product-title} groups.
+
+
 
 ====== External Authentication (httpd)
 
@@ -1753,6 +1854,12 @@ To delete a user:
 User groups create filters and assign roles to users. You can either create your own user groups, or leverage your LDAP directory service to assign groups of users to account roles.
 For a list of what each pre-defined account role can do, see xref:roles[].
 
+[NOTE]
+======
+To assign account roles using LDAP groups, see xref:ldap_groups[].
+======
+
+
 ==== Creating a User Group
 
 To create a user group:
@@ -1772,69 +1879,6 @@ image:2088.png[]
 . Check the boxes for the folders that you want to limit this user to. The items that have changed will show in blue italicized font.
 . Click *Add*.
 
-[[ldap_groups]]
-==== LDAP Groups
-
-When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not a member of any of the defined groups, then the user will be denied access to {product-title}.
-There are two ways to use LDAP groups with {product-title}:
-
-* Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
-* Assign pre-existing groups from your LDAP server to {product-title} account roles.
-
-
-==== Using {product-title}s Named Groups to Assign Account Roles
-
-In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
-This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
-
-
-==== Account Role and Directory Service Group Names
-
-[width="100%",cols="50%,50%",options="header",]
-|=======================================================================
-|Directory Service Distribution Group Name|Account Role
-|EvmGroup-administrator|Administrator
-|EvmGroup-approver|Approver
-|EvmGroup-auditor|Auditor
-|EvmGroup-desktop|Desktop
-|EvmGroup-operator|Operator
-|EvmGroup-security|Security
-|EvmGroup-super_administrator|Super Administrator
-|EvmGroup-support|Support
-|EvmGroup-user|User
-|EvmGroup-user_limited_self_server|User Limited Self Service
-|EvmGroup-user_self_service|User Self Service
-|EvmGroup-vm_user|Vm User
-|EvmRole-tenant_administrator|Tenant Administrator
-|EvmRole-tenant_quota_administrator|Tenant Quota Administrator
-|=======================================================================
-
-. Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
-. Navigate to menu:Settings[Configuration], then click on the *Settings* accordion, then *Zones*, then the *Authentication* tab, you can enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[].
-
-==== Using Pre-existing LDAP Groups to Assign Account Roles
-
-To use pre-existing LDAP groups to assign account roles:
-
-. Navigate to menu:Settings[Configuration].
-. Click on the *Access Control* accordion, then click *Groups*.
-. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a description for the group in the *Description* field.
-. There are two ways to specify the group to use:
-* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server.
-+
-image:2090.png[]
-+
-* Select *Look Up LDAP Groups* to find a list of groups, then use the drop down list that appears in the *LDAP Group Information* area to choose a group.
-. Select a *Role* to map to the group.
-. Select any *filters* to apply to what this group can view in the *Assign Filters* area:
-.. Select the filters to apply to the user. The items that have changed show in a bold, blue font.
-.. Click the *Host & Clusters* tab.
-.. Select the host and clusters to limit the user to. The items that have changed show in a bold, blue font.
-image:2093.png[]
-.. Click the *VMs & Templates* tab. This shows folders that you have created in your virtual infrastructure.
-.. Select the folders to limit the user to. The items that have changed show in a bold, blue font.
-. Click *Add*.
 
 [[roles]]
 ==== Roles
@@ -2399,7 +2443,7 @@ The region number must be unique on each {product-title} instance where replicat
 Configure a {product-title} instance to act as a remote copy where data from the global copy will be replicated. This procedure must only be performed on instances where the *Database Synchronization* role will be enabled. This procedure must be performed before enabling that role.
 
 . Navigate to menu:Settings[Configuration].
-. Click the *Settings* accordion.
+. Click the *Settings* accordion. 
 . Click the region where the instance is located.
 . Click *Replication*.
 . Select *Remote* from the *Type* list.
@@ -2570,16 +2614,16 @@ To restore a database from a backup:
 . Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a backup.
 . Log in to the appliance console with a user name of `admin` and the default password. The *Appliance Summary Screen* displays.
 . Press *Enter* to manually configure settings.
-. Enter `13` to stop server processes on all servers that connect to this VMDB.
+. Enter `11` to `Stop Server Processes`. Stop the process on all servers that connect to this VMDB.
 . Enter `Y` to confirm.
 . After all processes are stopped, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `7` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
+. Enter `6` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
 . Enter `y` to keep the database backup after restoring from it. Enter `n` to delete it.
 . Press `Y` to confirm.
 . After the backup completes, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `14` to `Start Server Processes`.
+. Enter `13` to `Start Server Processes`.
 . Enter `Y` to confirm.
 
 ==== Running Database Garbage Collection
@@ -2698,3 +2742,11 @@ If you are using replication, and you have changed the password on the *Master* 
 service evmserverd restart
 ------
 +
+
+
+
+
+
+
+
+

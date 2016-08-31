@@ -803,27 +803,23 @@ image:2066.png[]
 
 Use the *Authentication* tab to specify how you want users authenticated on the console. You can use the VMDB or integrate with LDAP, LDAPS, Amazon, or an external IPA server.
 
-====== Changing an Authentication Setting
+====== Changing Authentication Settings
 
-To change an authentication setting:
+To change authentication settings:
 
 . Navigate to menu:Settings[Configuration].
-. Click on the *Settings* accordion, then click *Zones*.
+. Click the *Settings* accordion, then click *Zones*.
 . Click the zone where the server is located.
-. Click on the server.
-. Click on the *Authentication* tab.
-. Make any required changes. If you select `LDAP`, `LDAPS`, or `Amazon` as the authentication mode, click *Validate* to confirm your settings in the *Role Settings* area.
+. Click the server.
+. Click the *Authentication* tab.
+. Use *Session Timeout* to set the period of inactivity before a user is logged out of the console.
+. Set the authentication method in *Mode*. Choose from *Database* (using the VMDB), *LDAP* (Lightweight Directory Authentication Protocol), *LDAPS* (Secure Lightweight Directory Authentication Protocol), *Amazon*, or *External (httpd)*. The default is *Database*.
+* If you choose *Database*, see xref:creating_a_user[] for steps to create users. 
+* If you choose *LDAP* or *LDAPS*, see xref:ldap_settings[] for configuration steps.
+* If you choose *Amazon*, see xref:amazon_settings[] for configuration steps.
+* If you choose *External (httpd)*, see xref:external_ipa_auth[] for configuration steps.
 . Click *Save*.
 
-====== Authentication Settings
-
-image:2067.png[]
-
-* Use *Session Timeout* to set the period of inactivity before a user is logged out of the console.
-* Use *Mode* to set the type of authentication. Choose from *Database* (using the VMDB), *LDAP* (Lightweight Directory Authentication Protocol), *LDAPS* (Secure Lightweight Directory Authentication Protocol), or *Amazon*. The default is *Database*.
-** If you choose *Database*, see xref:creating_a_user[] to create users. 
-** If you choose *LDAP* or *LDAPS*, see xref:ldap_settings[] for more information on configuration. 
-** If you choose *Amazon*, see xref:amazon_settings[].
 
 [[ldap_settings]]
 ====== Configuring LDAP Authentication
@@ -839,46 +835,51 @@ To configure {product-title} to use LDAP for authentication, complete the follow
 * Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
 * From the *User Type* list, select one of the following and configure the values for your LDAP server:
-** *User Principal Name*: Type the user name in the format of user@domainname. 
+** *User Principal Name*: Type the user name in the format of user@domainname, for example, `dbright@acme.com`. (In this case, the user would log on as `dbright`.)
 ** *Email Address*: Logs in with the user's email address.
-** *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>): Uses just the user name. Be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation. 
-** *SAM Account Name*:
-
-//Fix.
-
-* Specify the *User Suffix*, such as acme.com for *User Principal Name* or cn=users,dc=acme,dc=com for *Distinguished Name*, in *Base DN*.
+** *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>): Uses just the user name. Be sure to enter the correct *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation: for example, `cn=dan bright,ou=users,dc=acme,dc=com` or `uid=dan bright,ou=users,dc=acme,dc=com`. (In this case, the user would log on as `dan bright`.)
+** *SAM Account Name*: User logon for Active Directory clients and servers using legacy Windows versions.
+* Specify the *User Suffix*, such as `acme.com` for *User Principal Name* or `cn=users,dc=acme,dc=com` for *Distinguished Name*, in *Base DN*.
 +
+[NOTE]
+======
+To get details of your LDAP settings related to a specific user, run:
+
+  # ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password | grep -i dbright
+  
+To search for your LDAP server's distinguished name (DN) values, run:
+
+  ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password
+======
++
+.Example: LDAP Configuration
 image:LDAP-authentication-full.png[]
 +
 . Configure your *Role Settings*:
-If you choose LDAP or LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the account role groups. See xref:ldap_groups[] for more information.
-* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This will be used for mapping a user's authorization to a {product-title} role. 
+In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the account role groups. See xref:ldap_groups[] for more information.
+* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires names to match groups on the
+LDAP server side.
 +
 [IMPORTANT]
 ======
 If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 ======
-* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest.
+* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option requires *Get User Groups from LDAP* checked as well.
 * Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
-For example, dbright@acme.com when using User Principal Name, cn=dan bright,ou=users,dc=acme,dc=com when using Distinguished Name (CN=<user>), or uid=dan bright,ou=users,dc=acme,dc=com when using Distinguished Name (UID=<user>).
-Then, when logging in, the user would type either dbright (User Principal Name) or dan bright (Distinguished Name). If the user is not defined in the VMDB, they will be denied access to {product-title}.
-
-image:2069.png[]
-
-* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP users home forest.
-* Check *Follow Referrals* to lookup and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
-* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment. This example uses a service account user, `svc-ldap`, with access to all LDAP users.
+* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment, for example , a service account user with access to all LDAP users.
 * Enter the password for the Bind DN user in *Bind Password*.
++
 . Click *Validate* to verify your settings.
+. Click *Save*.
 
-LDAP authentication has now been configured in your CloudForms environment.
+LDAP authentication is now configured in your CloudForms environment.
 
 To assign account roles using LDAP groups, see xref:ldap_groups[].
 
 
 ====== Trusted Forests
 
-If a user has group memberships in another LDAP Forest, specify the settings to access the memberships in the trusted forest.
+Optionally, if a user has group memberships in another LDAP forest, specify the settings to access the memberships in the trusted forest.
 
 When trusted forests are added to the authentication configuration, they are used only for finding groups that a user is a member of. {product-title} will first collect all of the user's groups from the primary LDAP directory. Then it will collect any additional groups that the user is a member of from all of the configured forests.
 
@@ -887,11 +888,11 @@ The collected LDAP groups are used to match, by name, against the groups defined
 To add settings for a trusted forest:
 
 . Navigate to menu:Settings[Configuration].
-. Click on the *Settings* accordion, then click *Zones*.
-. Click the *Zone* where the Server is located.
-. Click on the *Server*.
-. Click *Authentication*.
-. Check *Get User Groups from LDAP*, and enter all items in the *Role Settings Area*.
+. Click the *Settings* accordion, then click *Zones*.
+. Click the *Zone* where the server is located.
+. Click the *Server*.
+. Click the *Authentication* tab.
+. Check *Get User Groups from LDAP*, and enter all items in the *Role Settings* area.
 . In the *Trusted Forest Settings* area, click image:green-plus.png[](*Click to add a new forest*).
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
 . Click *Save*.
@@ -905,9 +906,9 @@ After adding other trusted LDAP forests, you can then change the order in which 
 
 After configuring LDAP authentication as described in xref:ldap_settings[], you can assign account roles. You can either create groups that match your pre-existing LDAP groups by name, or add the default groups from {product-title} to the LDAP server you are connecting to.
 
-When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not a member of any of the defined LDAP groups, then the user will be denied access to {product-title}.
+When leveraging your LDAP groups, if the LDAP user is not a member of any of the defined LDAP groups, then the user will be denied access to {product-title}.
 
-There are two ways to use LDAP groups with {producttitle}:
+There are two ways to use LDAP groups with {product-title}:
 
 * Use pre-existing groups from your LDAP server to assign {product-title} account roles.
 * Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
@@ -916,12 +917,12 @@ There are two ways to use LDAP groups with {producttitle}:
 ====== Using Pre-Existing LDAP Groups to Assign Account Roles
 
 . Navigate to menu:Settings[Configuration].
-. Click on the *Access Control* accordion, then click *Groups*.
+. Click the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a description for the group in the *Description* field.
+. Enter a description for the group in *Description*.
 . There are two ways to specify the group to use:
 * Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server [QUESTION: Which field do you add this in? There is no longer an LDAP Group field].
-* Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list that appears in the *LDAP Group Information* area to choose a group.
+* Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list in the *LDAP Group Information* area to choose a group.
 . Select a *Role* to map to the group.
 . Select a *Project/Tenant* to map to the group.
 +
@@ -972,7 +973,7 @@ This group must be in the LDAP directory source you specified for the server. Se
 [[ldap_lookup_priority]]
 ====== Configuring Lookup Priority for LDAP Groups
 
-{product-title} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. However, the lookup priority of these groups can be arranged as desired. To configure the order in which {product-title} looks up LDAP groups:
+{product-title} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. The lookup priority of these groups can be rearranged; to configure the order in which {product-title} looks up LDAP groups:
 
 . Navigate to menu:Settings[Configuration].
 . Click on the *Access Control* accordion, then click *Groups*.
@@ -980,14 +981,29 @@ This group must be in the LDAP directory source you specified for the server. Se
 . Select one or more consecutive groups and use the arrow buttons to move the user group higher or lower in priority.
 . Click *Save*. 
 
+====== Testing LDAP Configuration
 
-To test your configuration:
+To test that your LDAP or LDAPS group configuration is working correctly with {product-title}:
 
 . Log out of the {product-title} user interface.
 . Log back in as an LDAP user that is assigned to one or more of the matching groups.
-. Change groups by clicking on the user dropdown menu on the top right of the screen. The dropdown list will show the groups the user is authorized for. 
+. Change groups by clicking on the user dropdown menu on the top right of the user interface. The dropdown list will show the groups the user is authorized for. 
 
-//INSERT SCREENSHOT OF DROPDOWN!
+.Troubleshooting LDAP configuration
+
+To test a problematic CloudForms and Active Directory LDAP configuration, you can run the following to see if the user been pulled from Active Directory with the right group. For example:
+
+  # ldapsearch -x -H ldap://ldap-example:389 -LLL \ -b "ou=people,dc=example,dc=com" -s sub \ -D "ui=:userid,ou=People,dc=example,dc=com" -w :password \ "(objectclass=organizationalPerson) 
+  
+To test if the user belongs to right group, include one of the following lines in the ldapsearch command:
+
+  (&(objectClass=user)(sAMAccountName=yourUserName) (memberof=CN=YourGroup,OU=Users,DC=YourDomain,DC=com)) 
+  
+or
+
+  -b "ou=groups, dc=example,dc=com"
+
+
 
 [[amazon_settings]]
 ====== Amazon Settings
@@ -1001,7 +1017,7 @@ Users logging into {product-title} with Amazon authentication enter their own IA
 Amazon users must be added as a {product-title} user or belong to an IAM user group added to the list of {product-title} groups.
 
 
-
+[[external_ipa_auth]]
 ====== External Authentication (httpd)
 
 When external authentication is enabled, users can log in to the {product-title} appliance using their IPA server credentials. The appliance creates user accounts automatically and imports relevant information from the IPA Server.

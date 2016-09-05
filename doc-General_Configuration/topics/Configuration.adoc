@@ -832,18 +832,19 @@ To configure {product-title} to use LDAP for authentication, complete the follow
 . Select a *Session Timeout* to set the period of inactivity before a user is logged out of the console.
 . Select *LDAP* or *LDAPS* from the *Mode* list. This exposes additional required parameters under *LDAP Settings*.
 . Configure your *LDAP Settings* (the following example configures a Red Hat Identity Management LDAP server):
-* Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user.
+* Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user. Note, {product-title} supports using a maximum of 3 possible *LDAP Host Names*.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
 * From the *User Type* list, select one of the following and configure the values for your LDAP server:
 ** *User Principal Name*: Type the user name in the format of user@domainname, for example, `dbright@acme.com`. (In this case, the user would log on as `dbright`.)
 ** *Email Address*: Logs in with the user's email address.
-** *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>): Uses just the user name. Be sure to enter the correct *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation: for example, `cn=dan bright,ou=users,dc=acme,dc=com` or `uid=dan bright,ou=users,dc=acme,dc=com`. (In this case, the user would log on as `dan bright`.)
+** *Distinguished Name* (CN=<user>): Uses just the user name. Be sure to enter the correct *User Suffix*. Choose the correct *Distinguished Name* option for your directory service implementation: for example, `cn=dan bright,ou=users,dc=acme,dc=com` (The user logs on as `dan bright`.)
+** *Distinguished Name* (UID=<user>): Uses just the UID. Be sure to enter the correct *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation: for example, `uid=dan bright,ou=users,dc=acme,dc=com`. (The user logs on as `dan bright`.)
 ** *SAM Account Name*: User logon for Active Directory clients and servers using legacy Windows versions.
 * Specify the *User Suffix*, such as `acme.com` for *User Principal Name* or `cn=users,dc=acme,dc=com` for *Distinguished Name*, in *Base DN*.
 +
 [NOTE]
 ======
-To get details of your LDAP settings related to a specific user, run:
+The `ldapsearch(1)` command can be used to get details of your LDAP settings. To get details related to a specific user, run:
 
   # ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password | grep -i dbright
   
@@ -856,15 +857,14 @@ To search for your LDAP server's distinguished name (DN) values, run:
 image:LDAP-authentication-full.png[]
 +
 . Configure your *Role Settings*:
-In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be in one of the account role groups. See xref:ldap_groups[] for more information.
-* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires names to match groups on the
-LDAP server side.
+In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be assigned one of the account role groups. See xref:ldap_groups[] for more information.
+* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires group names on the LDAP server to match {product-title} group names.
 +
 [IMPORTANT]
 ======
 If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 ======
-* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option requires *Get User Groups from LDAP* checked as well.
+* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is checked.
 * Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
 * Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment, for example , a service account user with access to all LDAP users.
 * Enter the password for the Bind DN user in *Bind Password*.
@@ -919,10 +919,10 @@ There are two ways to use LDAP groups with {product-title}:
 . Navigate to menu:Settings[Configuration].
 . Click the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a description for the group in *Description*.
+. Enter a description for the group in *Description*. (REMOVE?)
 . There are two ways to specify the group to use:
-* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server [QUESTION: Which field do you add this in? There is no longer an LDAP Group field].
-* Select *Look Up LDAP Groups* to find a list of groups, then use the dropdown list in the *LDAP Group Information* area to choose a group.
+* In the *Description* field, enter the canonical name (`cn`) for a valid LDAP group assigned to users requiring access to {product-title}.
+* Select *Look Up LDAP Groups* to find a list of groups assigned to a specific user in LDAP, then use the *LDAP Group for User* dropdown list to choose a group.
 . Select a *Role* to map to the group.
 . Select a *Project/Tenant* to map to the group.
 +
@@ -940,7 +940,7 @@ To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
 
 ====== Using Groups Named by {product-title} to Assign Account Roles
 
-In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
+In your directory service, define a distribution group for one or more of the account roles with the names shown in the table below.
 This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
 
 
@@ -988,6 +988,12 @@ To test that your LDAP or LDAPS group configuration is working correctly with {p
 . Log out of the {product-title} user interface.
 . Log back in as an LDAP user that is assigned to one or more of the matching groups.
 . Change groups by clicking on the user dropdown menu on the top right of the user interface. The dropdown list will show the groups the user is authorized for. 
+
+[EDIT - NEED MORE DETAILS ON WHAT TO CHECK, ie. WHAT MESSAGES SHOW SUCCESS AND FAILURE.] You can also check your logs to verify your LDAP configuration is working correctly.
+
+/var/www/miq/vmdb/log/audit.log
+
+/var/www/miq/vmdb/log/evm.log
 
 .Troubleshooting LDAP configuration
 
@@ -1844,12 +1850,10 @@ To create a user:
 +
 image:2086.png[]
 +
-[NOTE]
+[IMPORTANT]
 ======
-* If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service.
-* Use all lowercase to be sure that the user can be found in the VMDB. For example, jdunn@acme.com when using User Principal Name, cn=Jack Dunn,ou=users,dc=acme,dc=com when using Distinguished Name (CN=<user>), or uid=JackDunn,ou=users,dc=acme,dc=com when using Distinguished Name (UID=<user>).
-* Then, when logging in, the user would type either jdunn for User Principal Name or Jack Dunn for Distinguished Name. If the user is not defined in the VMDB, they will be denied access to {product-title}. The password field will not be used.
-* When the user logs in they should use their LDAP password.
+* If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB. 
+* When the user logs in, they use their LDAP password.
 ======
 . Select a *Group*.
 . Click *Add*.

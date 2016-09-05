@@ -30,7 +30,33 @@ A SmartProxy agent must configured in each storage location, and must be visible
 
 === Requirements
 
-To use {product-title}, the following requirements must be met:
+To use {product-title}, certain virtual hardware, database, and browser requirements must be met in your environment. 
+
+
+==== Virtual Hardware Requirements
+
+The {product-title} appliance requires the following virtual hardware at minimum:
+
+* 4 VCPUs
+* 8 GB RAM
+* 44 GB HDD + optional database disk
+
+==== Database Requirements
+
+Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
+
+* Virtual Machine Count: the most important factor in the calculation of virtual machine database (VMDB) size over time.
+* Host Count: the number of hosts associated with the provider.
+* Storage Count: the number of individual storage elements as seen from the perspective of the provider or host. It is not the total number of virtual disks for all virtual machines.
+
+Use the following table as a guideline to calculate minimum requirements for your database:
+
+image:5780.png[]
+
+
+==== Browser Requirements
+
+To use {product-title}, the following browser requirements must be met:
 
 * One of the following web browsers:
 ** Mozilla Firefox for versions supported under Mozilla's Extended Support Release (ESR)
@@ -38,14 +64,21 @@ To use {product-title}, the following requirements must be met:
 ** Google Chrome for Business
 * A monitor with minimum resolution of 1280x1024.
 * Adobe Flash Player 9 or above. At the time of publication, you can access it at http://www.adobe.com/products/flashplayer/
-* The {product-title} appliance must already be installed and activated in your enterprise environment.
-* The SmartProxy must have visibility to the virtual machines and cloud instances that you want to control.
-* The resources that you want to control must have a SmartProxy associated with them.
+
 
 [IMPORTANT]
 ======
 Due to browser limitations, Red Hat supports logging in to only one tab for each multi-tabbed browser. Console settings are saved for the active tab only. For the same reason, {product-title} does not guarantee that the browser's *Back* button will produce the desired results. Red Hat recommends using the breadcrumbs provided in the Console.
 ======
+
+==== Additional Requirements
+
+Additionally, the following must be configured to use {product-title}:
+
+* The {product-title} appliance must already be installed and activated in your enterprise environment.
+* The SmartProxy must have visibility to the virtual machines and cloud instances that you want to control.
+* The resources that you want to control must have a SmartProxy associated with them.
+
 
 === Terminology
 
@@ -140,7 +173,7 @@ Zones:: {product-title} Infrastructure can be organized into zones to configure 
 Zones can be based on geographic location, network location, or function. When first started, new servers are put into the default zone.
 
 ifdef::cfme[]
-=== Getting Help and Giving Feedback
+=== Getting Support
 
 If you experience difficulty with a procedure described in this documentation, visit the Red Hat Customer Portal at http://access.redhat.com. Through the Customer Portal, you can:
 
@@ -150,15 +183,6 @@ If you experience difficulty with a procedure described in this documentation, v
 
 Red Hat also hosts a large number of electronic mailing lists for discussion of Red Hat software and technology.
 You can find a list of publicly available mailing lists at https://www.redhat.com/mailman/listinfo. Click on the name of any mailing list to subscribe to that list or to access the list archives.
-
-=== Documentation Feedback
-
-If you find a typographical error in this manual, or if you have thought of a way to make this manual better, please submit a report to GSS through the customer portal.
-
-When submitting a report, be sure to mention the manual's identifier: `Deployment Planning Guide`
-
-If you have a suggestion for improving the documentation, try to be as specific as possible when describing it.
-If you have found an error, please include the section number and some of the surrounding text so we can find it easily.
 endif::cfme[]
 
 

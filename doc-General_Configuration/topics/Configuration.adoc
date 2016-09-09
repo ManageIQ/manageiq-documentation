@@ -837,8 +837,8 @@ To configure {product-title} to use LDAP for authentication, complete the follow
 * From the *User Type* list, select one of the following and configure the values for your LDAP server:
 ** *User Principal Name*: Type the user name in the format of user@domainname, for example, `dbright@acme.com`. (In this case, the user would log on as `dbright`.)
 ** *Email Address*: Logs in with the user's email address.
-** *Distinguished Name* (CN=<user>): Uses just the user name. Be sure to enter the correct *User Suffix*. Choose the correct *Distinguished Name* option for your directory service implementation: for example, `cn=dan bright,ou=users,dc=acme,dc=com` (The user logs on as `dan bright`.)
-** *Distinguished Name* (UID=<user>): Uses just the UID. Be sure to enter the correct *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation: for example, `uid=dan bright,ou=users,dc=acme,dc=com`. (The user logs on as `dan bright`.)
+** *Distinguished Name* (CN=<user>): Uses the common name for the user. Be sure to enter the correct *User Suffix* and *Distinguished Name* option for your directory service implementation: for example, `cn=dan bright,ou=users,dc=acme,dc=com`. (The user logs on as `dan bright`.)
+** *Distinguished Name* (UID=<user>): Uses the user ID (UID). Be sure to enter the correct *User Suffix* and *Distinguished Name* option for your directory service implementation: for example, `uid=dan bright,ou=users,dc=acme,dc=com`. (The user logs on as `dan bright`.)
 ** *SAM Account Name*: User logon for Active Directory clients and servers using legacy Windows versions.
 * Specify the *User Suffix*, such as `acme.com` for *User Principal Name* or `cn=users,dc=acme,dc=com` for *Distinguished Name*, in *Base DN*.
 +
@@ -850,7 +850,7 @@ The `ldapsearch(1)` command can be used to get details of your LDAP settings. To
   
 To search for your LDAP server's distinguished name (DN) values, run:
 
-  ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password
+  # ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password
 ======
 +
 .Example: LDAP Configuration
@@ -899,31 +899,35 @@ To add settings for a trusted forest:
 
 After adding other trusted LDAP forests, you can then change the order in which {product-title} looks up the forests for authentication. For instructions, see xref:ldap_lookup_priority[].
 
-// Break this procedure here, or contain in the same section?
 
 [[ldap_groups]]
-====== Assigning Account Roles Using LDAP Groups
+====== Assigning {product-title} Account Roles Using LDAP Groups
 
-After configuring LDAP authentication as described in xref:ldap_settings[], you can assign account roles. You can either create groups that match your pre-existing LDAP groups by name, or add the default groups from {product-title} to the LDAP server you are connecting to.
+After configuring LDAP authentication as described in xref:ldap_settings[], you can associate {product-title} account roles with your LDAP users. The LDAP server defines the groups and users for {product-title}, while {product-title} defines the account roles, and maps the roles to the privileges the LDAP user has. 
 
-When leveraging your LDAP groups, if the LDAP user is not a member of any of the defined LDAP groups, then the user will be denied access to {product-title}.
+There are two ways to associate your LDAP groups with {product-title} account roles:
 
-There are two ways to use LDAP groups with {product-title}:
+* Create groups in {product-title} that match your existing LDAP groups by name, and assign the groups account roles; or
+* Create groups on your LDAP server based on the default account roles in {product-title}.
 
-* Use pre-existing groups from your LDAP server to assign {product-title} account roles.
-* Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
+The users in your LDAP groups then inherit the {product-title} account roles for the LDAP group(s) they are in. 
+ 
+The authentication process then happens as such:
 
+`LDAPuser1` attempts to log into {product-title}, so {product-title} queries the LDAP server to verify it knows `LDAPuser1`. The LDAP server then confirms that it knows `LDAPuser1`, and provides information about the LDAP groups `LDAPuser1` belongs to: `Group1`. {product-title} then looks up `Group1` and discovers that `Group1` has several roles: `Role1`, `Role2` and `Role3`. {product-title} then associates `LDAPuser1` with `Group1` in {product-title}, and then allows the user to perform tasks allowable by those roles.
 
-====== Using Pre-Existing LDAP Groups to Assign Account Roles
+====== Using Existing LDAP Groups to Assign Account Roles
+
+This section provides instructions for mapping your existing LDAP groups to account roles in {product-title}. As a result, the users in the LDAP group will then be assigned to the CFME roles associated with that group.
 
 . Navigate to menu:Settings[Configuration].
 . Click the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. There are two ways to specify the group to use: (EDIT)
-* In the *Description* field, enter the (common name (`cn`) for) your existing LDAP group assigned to users requiring access to {product-title}.
-* Select *Look Up LDAP Groups* to bring up the *LDAP Group Look Up* options.
+. There are two ways to specify the group to use:
+* In the *Description* field, enter the (common name (`cn`) for your existing LDAP group assigned to users requiring access to {product-title}.
+*  Select *Look Up LDAP Groups* to find a list of groups assigned to a specific user in LDAP, then use the *LDAP Group for User* list to choose a group.
 .. In *User to Look Up*, enter the common name (`cn`) for a user in your LDAP group.
-.. In *Username*, enter the (distinguished name?)
+.. In *Username*, enter ??.
 .. In *Password*, enter the user's password. Click *Retrieve*.
 . Select a *Role* to map to the group.
 . Select a *Project/Tenant* to map to the group.
@@ -942,10 +946,13 @@ To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
 
 ====== Using Groups Named by {product-title} to Assign Account Roles
 
-In your directory service, define a distribution group for one or more of the account roles with the names shown in the table below.
+You can also configure access control for LDAP users by creating groups on your LDAP server based on {product-title} account roles. 
+
+Your LDAP group names must match the account role names in {product-title}. The LDAP users in that group are then automatically assigned to that specific account role.
+
+. In your LDAP directory service, define a distribution group for one or more of the account roles with the names shown in the table below.
 This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
-
-
++
 .Account Role and Directory Service Group Names
 
 [width="100%",cols="50%,50%",options="header",]
@@ -966,11 +973,12 @@ This group must be in the LDAP directory source you specified for the server. Se
 |EvmRole-tenant_administrator|Tenant Administrator
 |EvmRole-tenant_quota_administrator|Tenant Quota Administrator
 |=======================================================================
-
++
 . Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
 . Navigate to menu:Settings[Configuration].
 . Click the *Settings* accordion, then select your server under *Zones*.
-. Click the *Authentication* tab and enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[]. (QUESTION: What are the required settings?)
+. Click the *Authentication* tab and enable *Get User Groups from LDAP* after typing in all of the required LDAP authentication settings. See xref:ldap_settings[].
+
 
 [[ldap_lookup_priority]]
 ====== Configuring Lookup Priority for LDAP Groups
@@ -991,19 +999,22 @@ To test that your LDAP or LDAPS group configuration is working correctly with {p
 . Log back in as an LDAP user that is assigned to one or more of the matching groups.
 . Change groups by clicking on the user dropdown menu on the top right of the user interface. The dropdown list will show the groups the user is authorized for. 
 
-[EDIT - NEED MORE DETAILS ON WHAT TO CHECK, ie. WHAT MESSAGES SHOW SUCCESS AND FAILURE.] You can also check your logs to verify your LDAP configuration is working correctly.
+You can also check the logs in `/var/www/miq/vmdb/log/audit.log` or `/var/www/miq/vmdb/log/evm.log` to verify your LDAP configuration is working correctly. 
 
-/var/www/miq/vmdb/log/audit.log
+First, run the following command in a terminal to view the log messages in real time:
 
-/var/www/miq/vmdb/log/evm.log
+  tail -f /var/www/miq/vmdb/log/audit.log
+
+Then log into the CloudForms user interface as an LDAP user, while checking `/var/www/miq/vmdb/log/audit.log` for updated status, success, or failure messages. Alternatively, you can test your LDAP configuration by viewing the logs in `/var/www/miq/vmdb/log/evm.log` with `grep`, which are more verbose.
+
 
 .Troubleshooting LDAP configuration
 
-To test a problematic CloudForms and Active Directory LDAP configuration, you can run the following to see if the user been pulled from Active Directory with the right group. For example:
+To test a problematic {product-title} LDAP configuration, run the following to see if the user been pulled from LDAP with the right group. For example:
 
   # ldapsearch -x -H ldap://ldap-example:389 -LLL \ -b "ou=people,dc=example,dc=com" -s sub \ -D "ui=:userid,ou=People,dc=example,dc=com" -w :password \ "(objectclass=organizationalPerson) 
   
-To test if the user belongs to right group, include one of the following lines in the ldapsearch command:
+To test if the user belongs to right group, include one of the following lines in the `ldapsearch` command:
 
   (&(objectClass=user)(sAMAccountName=yourUserName) (memberof=CN=YourGroup,OU=Users,DC=YourDomain,DC=com)) 
   

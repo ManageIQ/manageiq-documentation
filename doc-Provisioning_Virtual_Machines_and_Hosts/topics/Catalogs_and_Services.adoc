@@ -30,9 +30,9 @@ Catalogs are used to create groups of virtual machines or instances for provisio
 . Create an instance in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class that calls the method.
 +
 [NOTE]
-======
+====
 DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-======
+====
 +
 . Associate method with Automate instance.
 . Create a *Catalog Bundle*, adding each of the catalog items to it. Select the *Service Dialog* you created. Use the instance created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the *Entry Point*. Check *Display in Catalog* box.
@@ -55,14 +55,14 @@ image:2357.png[]
 image:Catalogitem-statemachine.png[]
 +
 [NOTE]
-======
+====
 The entry point must be a State Machine since the *Provisioning Entry Point* list is filtered to only show State Machine class instances. No other entry points will be available from the *Provisioning Entry Point* field.
-======
+====
 +
 [NOTE]
-======
+====
 You can only choose from the catalogs and dialogs you have already created. If you haven't done so, leave the values blank and edit later.
-======
+====
 +
 . In the *Details* subtab, write a *Long Description* for the catalog item.
 . In the *Request Info* subtab, select provisioning options that apply to the provider chosen. For more information, refer to the sections on Provisioning Virtual Machines and Provisioning Instances.
@@ -93,14 +93,14 @@ When provisioning a service, input will be needed from the requester. *Service D
 .. Type in a *Label*, *Name*, and *Description* for this element.
 +
 [IMPORTANT]
-======
+====
 *Name* must use only alphanumeric characters and underscores without spaces. It is also used to retrieve the value of this element in the method used with the dialog and must start with *dialog_service_type*
-======
+====
 +
 .. Select a *Type* for an element type. All *Type* options have a *Required* and *Default Value* field. Check *Required* or set *Required* to *true* if the element is required to proceed. You can also specify a default value. The rest of the options presented are based on which type of element you select.
 +
 [width="100%",cols="40%,60%",options="header",]
-|=======================================================================
+|====
 |Element Types|Additional Info
 |Check Box|Check *Default Value* if you want this check box checked by default.
 |Date Control|Use *Date Control* to create a field where users can select a date. If you want users to be able to select a date and time, use the *Date/Time Control* option.
@@ -110,7 +110,7 @@ When provisioning a service, input will be needed from the requester. *Service D
 |Tag Control|Select a *Category* of tags you want assigned to the virtual machines associated with this service dialog. Check *Single Select* if only one tag can be selected.
 |Text Area Box|Provides text area for users to type in some text. You can also leave a message to users by typing in the *Default Value* field or leave it as blank.
 |Text Box|This element type serves the same purpose as *Text Area Box* with the option to check *Protected* so the text is shown as asterisks (*), instead of plain text.
-|=======================================================================
+|====
 +
 . Click *Save*.
 
@@ -139,9 +139,9 @@ You can share service dialogs between appliances using the export and import fea
 You will need to create a method that connects the values in the dialog with the provisioning request. The method should be created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class of the *Automate* model.
 
 [NOTE]
-======
+====
 *DOMAIN* must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-======
+====
 
 A method is provided below that was created for the following scenario:
 
@@ -256,9 +256,9 @@ Service methods have been split based on purpose.
 . Service Class is located at menu:DOMAIN[Service > Provisioning > StateMachines > Methods] and menu:Domain[Service > Retirement > StateMachines > Methods].
 +
 [NOTE]
-======
+====
 *DOMAIN* must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-======
+====
 +
 . Click the *Methods* tab.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Add a New Method*).
@@ -274,9 +274,9 @@ image:6297.png[]
 . Service Class is located at menu:DOMAIN[Service > Provisioning > StateMachines > Methods] and menu:Domain[Service > Retirement > StateMachines > Methods].
 +
 [NOTE]
-======
+====
 *DOMAIN* must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-======
+====
 +
 . Click the *Instances* tab.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Add a new Instance*).
@@ -289,9 +289,9 @@ The instance is created so that it can be called from the *ServiceProvision* cla
 image:6298.png[]
 
 [NOTE]
-======
+====
 After the method has been created, it must be mapped to an instance in the `DOMAIN/Service/Service/Provisioning/StateMachines` class. The name of the instance must be specified as the *Entry Point*. This method must be called before the provision job begins.
-======
+====
 
 ===== Associating a Method with an Automate Instance
 
@@ -302,9 +302,9 @@ Service methods have been split based on purpose.
 . Service Class is located at menu:DOMAIN[Service > Provisioning > StateMachines > Methods] and menu:Domain[Service > Retirement > StateMachines > Methods].
 +
 [NOTE]
-======
+====
 *DOMAIN* must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-======
+====
 +
 . Either create a new instance or select the *clone_to_service* instance.
 . Click image:1847.png[](*Configuration*), then image:1851.png[](*Edit Selected Instance*).
@@ -329,9 +329,9 @@ image:2362.png[]
 A catalog bundle is created and visible in the *Service Catalog* accordion.
 
 [NOTE]
-======
+====
 You should also create and specify an Entry Point in the `DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that is part of a bundle. If you do not, then the pre and post provision processing will occur for each item in the bundle in addition to processing for the *Catalog Bundle*. To set the entry point, go into each *Catalog Item* and check *Display in Catalog*. Then, you will see the *Entry Point* field.
-======
+====
 
 ===== Provisioning a Service
 

@@ -8,11 +8,11 @@ When using the `admin` credentials, a user in {product-title} provisions into th
 
 
 [NOTE]
-===================
+=====
 You can set whether {product-title} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the *ceilometer* service on the undercloud to store events. See xref:openstack-events-uc[] for instructions.
 
 For more information about OpenStack Telemetry, see https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/architecture-guide/chapter-1-components#comp-telemetry[OpenStack Telemetry (ceilometer)] from the https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/architecture-guide/architecture-guide[Red Hat OpenStack Platform Architecture Guide].
-===================
+=====
 
 
 . Navigate to menu:Compute[Infrastructure > Providers].
@@ -50,16 +50,20 @@ NOTE: For more information, see the definition of host aggregates and availabili
 
 
 [NOTE]
-======
+====
 {product-title} requires that the adminURL endpoint for all OpenStack services be on a non-private network.
 Accordingly, assign the adminURL endpoint an IP address of something other than `192.168.x.x`.
 The adminURL endpoint must be accessible to the {product-title} Appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment. Additionally, all the Keystone endpoints must be accessible, otherwise refresh will fail.
-======
+====
 
 [[openstack-events-uc]]
 == Configuring the Undercloud to Store Events
 
 To allow {product-title} to receive events from a Red Hat OpenStack Platform environment, you must configure the *notification_driver* option for the Compute service and Orchestration service in that environment. To do so, edit _undercloud.conf_, and set _store_events_ to _true_ before installing the undercloud. See https://access.redhat.com/documentation/en/red-hat-openstack-platform/version-8/director-installation-and-usage/#chap-Installing_the_Undercloud[Installing the Undercloud] and https://access.redhat.com/documentation/en/red-hat-openstack-platform/version-8/director-installation-and-usage/#sect-Configuring_the_Director[Configuring the Director] from the https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/director-installation-and-usage/director-installation-and-usage[Red Hat OpenStack Director Installation and Usage] for related details.
+
+
+
+
 
 
 

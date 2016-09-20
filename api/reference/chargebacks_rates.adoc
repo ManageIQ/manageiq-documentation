@@ -59,7 +59,7 @@ Example getting additional rates details
 ==== Request:
 
 ----
-GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,group,rate
+GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,group,source,friendly_rate
 ----
 
 ==== Response:
@@ -76,14 +76,16 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "id": 8,
       "description": "Fixed Compute Cost 2",
       "group": "fixed",
-      "rate": "0"
+      "source": "compute_2",
+      "friendly_rate": "0.0 Hourly"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/7",
       "id": 7,
       "description": "Fixed Compute Cost 1",
       "group": "fixed",
-      "rate": "0"
+      "source": "compute_1",
+      "friendly_rate": "1.0 Hourly"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/6",
@@ -91,7 +93,8 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "description": "Used Disk I/O in KBps",
       "group": "disk_io",
       "metric": "disk_usage_rate_average",
-      "rate": "0.005"
+      "source": "used",
+      "friendly_rate": "Hourly @ 0.0 + 1.0 per Kbps from 0.0 to Infinity"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/5",
@@ -99,7 +102,8 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "description": "Used Network I/O in KBps",
       "group": "net_io",
       "metric": "net_usage_rate_average",
-      "rate": "0.005"
+      "source": "used",
+      "friendly_rate": "Hourly @ 0.0 + 0.0 per Kbps from 0.0 to Infinity"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/4",
@@ -107,7 +111,8 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "description": "Allocated Memory in MB",
       "group": "memory",
       "metric": "derived_memory_available",
-      "rate": "0"
+      "source": "allocated",
+      "friendly_rate": "Hourly @ 0.0 + 1.0 per Megabytes from 0.0 to Infinity"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/3",
@@ -115,7 +120,8 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "description": "Used Memory in MB",
       "group": "memory",
       "metric": "derived_memory_used",
-      "rate": "0.02"
+      "source": "used",
+      "friendly_rate": "Hourly @ 0.0 + 0.0 per Megabytes from 0.0 to Infinity"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/2",
@@ -123,7 +129,8 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "description": "Allocated CPU Count",
       "group": "cpu",
       "metric": "derived_vm_numvcpus",
-      "rate": "0"
+      "source": "allocated",
+      "friendly_rate": "Hourly @ 0.0 + 1.0 per Cpu from 0.0 to Infinity"
     },
     {
       "href": "http://localhost:3000/api/chargebacks/1/rates/1",
@@ -131,7 +138,8 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
       "description": "Used CPU in MHz",
       "group": "cpu",
       "metric": "cpu_usagemhz_rate_average",
-      "rate": "0.02"
+      "source": "used",
+      "friendly_rate": "Hourly @ 0.0 + 0.0 per Megahertz from 0.0 to Infinity"
     }
   ]
 }
@@ -154,11 +162,12 @@ POST /api/rates
 [source,json]
 ----
 {
-  "description" : "Allocated NICs",
-  "enabled" : true,
-  "rate" : "0.01",
-  "per_time" : "hourly",
-  "group" : "net_io"
+  "per_time" : "daily",
+  "chargeback_rate_id" : 1,
+  "description": "My CPU allocation rate",
+  "group" : "cpu",
+  "per_unit" : "megahertz",
+  "source" : "allocated"
 }
 ----
 
@@ -171,12 +180,15 @@ POST /api/rates
     {
       "id": 16,
       "enabled": true,
-      "description": "Allocated NICs",
-      "group": "net_io",
-      "rate": "0.01",
-      "per_time": "hourly",
-      "created_on": "2015-11-10T19:19:59Z",
-      "updated_on": "2015-11-10T19:19:59Z"
+      "description": "My CPU allocation rate",
+      "group": "cpu",
+      "source": "allocated",
+      "per_time": "daily",
+      "per_unit": "megahertz",
+      "friendly_rate": "",
+      "chargeback_rate_id": 1,
+      "created_on": "2016-08-16T08:27:22Z",
+      "updated_on": "2016-08-16T08:27:22Z"
     }
   ]
 }

@@ -290,7 +290,7 @@ If there are any problems with the file, such as an incorrect column name, unkno
 ifdef::cfme[]
 ===== Registering and Updating {product-title}
 
-You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management. 
+You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
 
 The following tools are used during the update process:
 
@@ -316,8 +316,6 @@ You need the following to register your appliance:
 
 * Your Red Hat account login or Red Hat Network Satellite login
 * A Red Hat subscription that covers your product
-
-image::../common/cfme-register-appliance.png[]
 
 To register your appliance with Red Hat Subscription Management or Red Hat Satellite 6, first configure the region with your registration details. These settings will apply to all appliances in this region.
 
@@ -351,8 +349,6 @@ To register your appliance:
 . Click *Register* to subscribe the appliance and attach subscriptions.
 
 Registering and attaching subscriptions takes a few minutes. The subscription process is complete when the appliance reports that it is `Subscribed` under *Update Status*, and `Registered` under *Last Message*.
-
-image::../common/appliance_subscribed.png[]
 
 You can now apply updates to your appliance.
 
@@ -555,8 +551,8 @@ To create a default analysis profile:
 . Click on the *Settings* accordion, then click *Analysis Profiles*.
 . Click on the analysis profile you want to set as the default.
 . Click image:1851.png[] (*Edit the selected Analysis Profile*).
-. For a virtual machine profile, enter default in lower case in *Name*. For a host profile, enter host default.
-image:2056.png[]
+. For a virtual machine profile, enter `default` in lower case in *Name*. For a host profile, enter host default.
+image:set_default_analysis_profile.png[]
 . Click *Save*.
 
 
@@ -2389,7 +2385,7 @@ The region number must be unique on each {product-title} instance where replicat
 Configure a {product-title} instance to act as a remote copy where data from the global copy will be replicated. This procedure must only be performed on instances where the *Database Synchronization* role will be enabled. This procedure must be performed before enabling that role.
 
 . Navigate to menu:Settings[Configuration].
-. Click the *Settings* accordion. 
+. Click the *Settings* accordion.
 . Click the region where the instance is located.
 . Click *Replication*.
 . Select *Remote* from the *Type* list.
@@ -2560,16 +2556,16 @@ To restore a database from a backup:
 . Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a backup.
 . Log in to the appliance console with a user name of `admin` and the default password. The *Appliance Summary Screen* displays.
 . Press *Enter* to manually configure settings.
-. Enter `11` to `Stop Server Processes`. Stop the process on all servers that connect to this VMDB.
+. Enter `13` to stop server processes on all servers that connect to this VMDB.
 . Enter `Y` to confirm.
 . After all processes are stopped, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `6` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
+. Enter `7` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
 . Enter `y` to keep the database backup after restoring from it. Enter `n` to delete it.
 . Press `Y` to confirm.
 . After the backup completes, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `13` to `Start Server Processes`.
+. Enter `14` to `Start Server Processes`.
 . Enter `Y` to confirm.
 
 ==== Running Database Garbage Collection
@@ -2688,11 +2684,3 @@ If you are using replication, and you have changed the password on the *Master* 
 service evmserverd restart
 ------
 +
-
-
-
-
-
-
-
-

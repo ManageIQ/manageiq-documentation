@@ -22,6 +22,7 @@ This menu displays the status of your servers and their roles and provides acces
 This menu enables you to modify the configuration of your {product-title} infrastructure. You can also create analysis profiles and schedules for these profiles.
 
 
+[[settings]]
 === Settings
 
 The options under the *Settings* menu provide a hierarchical view of options that allow you to configure global options for the infrastructure of your {product-title} environment. At the top level, you have *Settings* including users, LDAP Groups, account roles, capacity and utilization collection, tag categories, values, and imports, custom variable imports, and license uploads. When you click on *Settings* and expand it, you can configure *Analysis Profiles*, *Zones*, and *Schedules*.
@@ -30,6 +31,7 @@ image:2041.png[]
 
 When you go the *Settings* area, you are automatically taken to the server list under *Zones*.
 
+[[regions]]
 ==== Regions
 
 Use *Regions* for centralizing data which is collected from public and private virtualization environments. A region is ultimately represented as a single database for the VMDB. Regions are particularly useful when multiple geographical locations need to be managed as they enable all the data collection to happen at each particular location and avoid data collection traffic across slow links between networks.
@@ -57,6 +59,7 @@ image:7150.png[]
 
 In this region, we have several {product-title} appliances acting as UI nodes and worker nodes. These worker nodes execute tasks on the providers in your environment. The Region also uses a region database that reports to a master database on the main {product-title} appliance. All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
 
+[[region-scope]]
 ===== Region Scope
 
 Regions are used to consolidate data from multiple VMDBs to a central database. The database at the top level, the master VMDB, cannot be used for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. It is intended for use as a reporting database that includes all information across multiple subordinate regions. The subordinate regions replicate their information to the master.
@@ -79,19 +82,23 @@ The subordinate regions are not aware of each other from a database perspective.
 * Has no knowledge of the other regions.
 * Replicates its data up to the master region.
 
+[[region-settings]]
 ===== Region Settings
 
 In the *Region* area, set items that apply to your entire {product-title} infrastructure such as users, LDAP Groups, capacity and utilization collection, company tags and tag categories, and licensing.
 Regions are also used for database replication.
 
+[[capacity-and-utilization-collections]]
 ===== Capacity and Utilization Collections
 
+[[capacity-and-utilization-collection-settings]]
 ====== Capacity and Utilization Collection Settings
 
 Use *C & U Collection Settings* to select specifically which clusters and datastores you want to collect usage data for. By selecting a cluster, you are choosing to collect data for all hosts and virtual machines that are part of that cluster. You must also have a server with the Capacity & Utilization *Coordinator*, *Data Collector*, and *Data Processor* roles enabled as well. See Section *Server Control Settings*.
 
 After a provider has been discovered and its relationships refreshed, the clusters, hosts, and datastores show under menu:Settings[Configuration], then by clicking on the menu:Settings[Region > C & U Collection tab].
 
+[[enabling-a-cluster,-host,-or-datastore-for-capacity-and-utilization-collection]]
 ====== Enabling a Cluster, Host, or Datastore for Capacity and Utilization Collection
 
 To enable a cluster, host, or datastore for Capacity and Utilization Collection:
@@ -108,8 +115,10 @@ To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
 =========================
 
+[[tags]]
 ===== Tags
 
+[[company-tag-categories-and-tags]]
 ====== Company Tag Categories and Tags
 
 {product-title} allows you to create your own set of tags and tag categories. Use tags to create a customized, searchable index for your resources. Depending on your database type, your tags may be case sensitive. After creating these values, you can apply them to your resources. There are two kinds of tags.
@@ -123,6 +132,7 @@ As new clusters, hosts, and datastores are discovered, you will need to come bac
 If you entered a *Company Name* under menu:Settings[Configuration], then clicking on the *Settings* tab, then the *Server* your desired server, that name will appear on the tab instead of *My Company*.
 ======
 
+[[creating-a-tag-category]]
 ====== Creating a Tag Category
 
 To create a tag category:
@@ -154,6 +164,7 @@ Repeat these steps for each category you need. After you have created the catego
 If no values are created for a category, you are unable to assign a value from that category nor be able to filter by that category.
 ======
 
+[[deleting-a-tag-category]]
 ====== Deleting a Tag Category
 
 To delete a tag category:
@@ -168,6 +179,7 @@ To delete a tag category:
 When you delete a tag category, the category values are removed, and any tags from the category are unassigned from all resources.
 ======
 
+[[creating-a-company-tag]]
 ====== Creating a Company Tag
 
 To create a company tag:
@@ -185,6 +197,7 @@ To create a company tag:
 . Click *Add* under the *Actions* column, and type a *Name* and *Description* for your new value.
 . Click *Add* once again to add the new entry to the table.
 
+[[deleting-a-company-tag]]
 ====== Deleting a Company Tag
 
 To delete a company tag:
@@ -201,6 +214,7 @@ When you delete a tag, the tag is also deleted from any resource to which it was
 . Click *OK* to confirm.
 
 
+[[importing-tags-for-virtual-machines]]
 ====== Importing Tags for Virtual Machines
 
 You can import a *CSV* file with tag assignments into the VMDB. For the import to be successful, be aware of the following:
@@ -219,6 +233,7 @@ rhel6,Department,Support
 +
 
 
+[[importing-tags-for-a-virtual-machine-from-a-csv-file]]
 ====== Importing Tags for a Virtual Machine from a CSV File
 
 To import tags for a virtual machine from a CSV file:
@@ -236,6 +251,7 @@ If there are any problems with the file, such as an incorrect column name, unkno
 +
 . Click *Apply*.
 
+[[importing-custom-values-for-virtual-machines-and-hosts]]
 ====== Importing Custom Values for Virtual Machines and Hosts
 
 You can import a *CSV* file with asset tag information into the VMDB for a virtual machine or import custom values for hosts.
@@ -269,6 +285,7 @@ esxd2.galaxy.local,16199125,16569419
 
 For hosts, the value for custom_1 will show in the *Host Summary* page as the *Custom Identifier* in the *Properties* area. All of the custom values will show in the *Custom Fields* area.
 
+[[importing-asset-tags-for-a-virtual-machine-from-a-csv-file]]
 ====== Importing Asset Tags for a Virtual Machine from a CSV File
 
 To import asset tags for a virtual machine from a CSV file
@@ -288,6 +305,7 @@ If there are any problems with the file, such as an incorrect column name, unkno
 . Click *Apply*.
 
 ifdef::cfme[]
+[[registering-and-updating]]
 ===== Registering and Updating {product-title}
 
 You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
@@ -308,6 +326,7 @@ The update worker synchronizes the VMDB with the status of available {product-ti
 Servers with the `RHN Mirror` role also act as a repository for other appliances to pull {product-title} package updates.
 ======
 
+[[registering-appliances]]
 ====== Registering Appliances
 
 Before you can access and apply package updates, you must register and subscribe the {product-title} appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server.
@@ -424,6 +443,7 @@ If the appliance is registered to Red Hat Satellite, you can use content views t
 ======
 
 
+[[updating-the-appliance-operating-system]]
 ====== Updating the Appliance Operating System
 
 Updating the appliance’s operating system requires a manual update using the `yum` command. This command updates all RPMs on the appliance, not just {product-title} packages, and is supported only when used as part of migration.
@@ -446,6 +466,7 @@ To update the appliance operating system:
 . Restart the appliance as required.
 
 
+[[subscription-management-for-virtual-environments]]
 ====== Subscription Management for Virtual Environments
 
 Customers can license {product-title} for a limited set of providers. This ability is enabled by providing entitlement certificates that describe the features to be enabled. {product-title} can be shipped as a bundled product with other Red Hat products like Red Hat OpenStack Platform and Red Hat OpenShift, providing advanced management capabilities to these products.
@@ -462,12 +483,15 @@ Entitlements provides the following enhancements:
 
 endif::cfme[]
 
+[[profiles]]
 ==== Profiles
 
+[[creating-an-analysis-profile]]
 ===== Creating an Analysis Profile
 
 You can create an analysis profile by referring to the sample profiles provided in the console. You can copy the sample profile or create a new one.
 
+[[creating-a-host-analysis-profile]]
 ===== Creating a Host Analysis Profile
 
 To create a host analysis profile:
@@ -487,6 +511,7 @@ Finally, set the # number of days that you want to collect event log entries for
 image:2046.png[]
 . Click *Add*.
 
+[[creating-a-virtual-machine-analysis-profile]]
 ===== Creating a Virtual Machine Analysis Profile
 
 To create a virtual machine analysis profile:
@@ -513,6 +538,7 @@ If you set this to 0, it will go as far back as there is data available.
 image:2054.png[]
 . Click *Add*.
 
+[[editing-an-analysis-profile]]
 ===== Editing an Analysis Profile
 
 To edit an analysis profile:
@@ -526,6 +552,7 @@ To edit an analysis profile:
 
 The changes are added to the analysis profile. The virtual machines or hosts must be re-analyzed to collect the new or modified information.
 
+[[copying-an-analysis-profile]]
 ===== Copying an Analysis Profile
 
 To copy an analysis profile:
@@ -538,6 +565,7 @@ To copy an analysis profile:
 . Make required changes.
 . Click *Add*.
 
+[[setting-a-default-analysis-profile]]
 ===== Setting a Default Analysis Profile
 
 If you want to set an analysis profile to be used for all virtual machines, you can create a default profile.
@@ -553,6 +581,7 @@ image:set_default_analysis_profile.png[]
 . Click *Save*.
 
 
+[[zones]]
 ==== Zones
 
 You can organize your {product-title} Infrastructure into zones to configure failover and isolate traffic. A provider that is discovered by a server in a specific zone gets monitored and managed in that zone.
@@ -568,6 +597,7 @@ If Appliance A dispatches a job of analyzing twenty virtual machines, this job c
 Only users assigned the super administrator role can create zones. There must always be at least one zone. Default zone is provided. This can be removed only after you have created your own zones.
 ======
 
+[[creating-a-zone]]
 ===== Creating a Zone
 
 To create a zone:
@@ -584,6 +614,7 @@ image:2058.png[]
 . In the *Settings* area, set the number for *Max Active VM Scans*. The default is `Unlimited`.
 . Click *Save*.
 
+[[deleting-a-zone]]
 ===== Deleting a Zone
 
 To delete a zone:
@@ -600,6 +631,7 @@ You cannot delete a zone if there are servers assigned to it.
 . Click image:1847.png[] (*Configuration*), then click image:gui_delete.png[] (*Delete this Zone*).
 . Click *OK* to confirm.
 
+[[editing-a-zone]]
 ===== Editing a Zone
 
 To edit a zone:
@@ -611,6 +643,7 @@ To edit a zone:
 . Make the required changes.
 . Click *Save*.
 
+[[servers]]
 ==== Servers
 
 Server settings enables you to control how each {product-title} server operates including authentication, logging, and email.
@@ -621,6 +654,7 @@ If you have multiple servers in your environment that are reporting to one centr
 The server selection options are only available if you have multiple servers sharing one VMDB.
 ======
 
+[[changing-server-settings]]
 ===== Changing Server Settings
 
 To change server settings:
@@ -633,6 +667,7 @@ To change server settings:
 . Make any required changes.
 . Click *Save*.
 
+[[basic-information-settings]]
 ====== Basic Information Settings
 image:2059.png[]
 
@@ -648,6 +683,7 @@ This is the time zone used when created scheduled analyses. This is not the same
 +
 * Use *Default Locale* to specify the default language for this server.
 
+[[server-control-settings]]
 ====== Server Control Settings
 
 Server role defines what a server can do. Red Hat recommends that Database Operations, Event Monitor, Reporting, Scheduler, SmartState Analysis, User Interface, Provider Inventory, Provider Operations, and Web Services be enabled on at least one server in each zone.
@@ -661,6 +697,7 @@ These roles are enabled by default on all servers.
 * If you are using more than one {product-title} appliance, be sure to set this on all of the appliances.
 ======
 
+[[server-roles]]
 ====== Server Roles
 
 [width="100%",cols="30%,70%a",options="header",]
@@ -686,6 +723,7 @@ These roles are enabled by default on all servers.
 |=======================================================================
 
 
+[[vmware-console-settings]]
 ====== VMware Console Settings
 
 If you are using the {product-title} Control feature set, then you have the ability to connect to a Web console for virtual machines that are registered to a host. To use this feature, you must have VNC installed, the appropriate version of the VMware MKS plug-in or the appropriate VMRC viewer installed in your Web browser.
@@ -704,9 +742,11 @@ image:2061.png[]
 To do this, log into the Virtual Center Web Service and attempt to open a virtual machine console. This should prompt you to install the required plug-in.
 The VSphere Web Client must be installed on VC version 5, and the provider must be registered to it. For Virtual Center version 4, the VMware VirtualCenter Management Webservice must be running.
 
+[[ntp-servers-settings]]
 ====== NTP Servers Settings
 In the *NTP Servers* area, you can specify the NTP servers to use as source for clock synchronization here. The NTP settings specified here will override Zone NTP settings. Enter one NTP server hostname or IP address in each text box.
 
+[[configuring-snmp]]
 ====== Configuring SNMP
 
 You can use Simple Network Management Protocol (SNMP) traps to send alerts for various aspects of a {product-title} environment.
@@ -752,6 +792,7 @@ To set the failover priority role:
 . In the *Status of Roles for Servers* in *Zone Default* Zone area, click the role that you want to set the priority for.
 . Click image:1847.png[](*Configuration*), and image:2097.png[](*Promote Server*) to make this the primary server for this role.
 
+[[outgoing-smtp-email-settings]]
 ====== Outgoing SMTP Email Settings
 
 To use the email action in {product-title}, set an email address to send emails from.
@@ -774,6 +815,7 @@ image:OutgoingSMTP.png[]
 * Use *From E-mail Address* to set the address you want to send the email from.
 * Use *Test E-mail Address* if you want to test your email settings. Click *Verify* to send a test email.
 
+[[web-services-settings]]
 ====== Web Services Settings
 
 Web services are used by the server to communicate with the SmartProxy.
@@ -783,12 +825,14 @@ image:2064.png[]
 * Set *Mode* to invoke to enable 2-way Web services communication between the {product-title} appliance and the SmartProxy. Set *Mode* to disabled to use Web services from the SmartProxy to the {product-title} appliance only. When the {product-title} appliance has work for the SmartProxy, the work will be placed in a queue in the VMDB. The work will be completed either when the {product-title} appliance is able to contact the SmartProxy or when the next SmartProxy heartbeat occurs, whichever comes first.
 * If *Web Services* are enabled, you have the option to use *ws-security*.
 
+[[logging-settings]]
 ====== Logging Settings
 
 image:2065.png[]
 
 * Use *Log Level* to set the level of detail you want in the log. You can select from *fatal*, *error*, *warn*, *info*, and *debug*. The default setting is 'info'.
 
+[[custom-support-url-settings]]
 ====== Custom Support URL Settings
 
 image:2066.png[]
@@ -796,10 +840,12 @@ image:2066.png[]
 * Use *URL* to specify a specific URL that you want to be accessible from the *About Product Assistance* area.
 * Use *Description* to set a label for the *URL*.
 
+[[authentication]]
 ===== Authentication
 
 Use the *Authentication* tab to specify how you want users authenticated on the console. You can use the VMDB or integrate with LDAP, LDAPS, Amazon, or an external IPA server.
 
+[[changing-an-authentication-setting]]
 ====== Changing an Authentication Setting
 
 To change an authentication setting:
@@ -812,6 +858,7 @@ To change an authentication setting:
 . Make any required changes. If you select `LDAP`, `LDAPS`, or `Amazon` as the authentication mode, click Validate to confirm your settings in the *Role Settings* area.
 . Click *Save*.
 
+[[authentication-settings]]
 ====== Authentication Settings
 
 image:2067.png[]
@@ -833,6 +880,7 @@ image:2068.png[]
 Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation.
 * Specify the *User Suffix*, such as acme.com for *User Principal Name* or cn=users,dc=acme,dc=com for *Distinguished Name*, in *Base DN*.
 
+[[ldap-role-settings]]
 ====== LDAP Role Settings
 
 If you choose LDAP, you can use groups from your directory service to set the role for the authenticated LDAP User. The LDAP user must be in one of the Account Role Groups. See xref:ldap_groups[] for more information.
@@ -862,6 +910,7 @@ If you choose Amazon as your authentication mode, required parameters are expose
 Users logging into {product-title} with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
 Amazon users must be added as a {product-title} user or belong to an IAM user group added to the list of {product-title} groups.
 
+[[trusted-forests]]
 ====== Trusted Forests
 
 If a user has group memberships in another LDAP Forest, then specify the settings to access the memberships in the trusted forest.
@@ -870,6 +919,7 @@ When trusted forests are added to the authentication configuration, they are use
 
 The collected LDAP groups are used to match, by name, against the groups defined in {product-title}. The user must be a member of at least one matching LDAP group to be successfully authenticated.
 
+[[adding-settings-for-a-trusted-forest]]
 ====== Adding Settings for a Trusted Forest
 
 To add settings for a trusted forest:
@@ -884,6 +934,7 @@ To add settings for a trusted forest:
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
 . Click *Save*.
 
+[[external-authentication-(httpd)]]
 ====== External Authentication (httpd)
 
 When external authentication is enabled, users can log in to the {product-title} appliance using their IPA server credentials. The appliance creates user accounts automatically and imports relevant information from the IPA Server.
@@ -1011,6 +1062,7 @@ $ ssh root@appliance.test.company.com
 ----
 ====
 
+[[workers-1]]
 ===== Workers
 
 Use the Workers page to specify the number of workers and amount of memory allowed to be used for each type.
@@ -1020,6 +1072,7 @@ Use the Workers page to specify the number of workers and amount of memory allow
 Only make these changes when directed to by Red Hat Support.
 ======
 
+[[changing-settings-for-a-worker]]
 ====== Changing Settings for a Worker
 
 To change the settings for a worker (except replication worker)
@@ -1033,6 +1086,7 @@ To change the settings for a worker (except replication worker)
 . If applicable, change Count or Memory Threshold using the dropdown boxes.
 . Click *Save*.
 
+[[database]]
 ===== Database
 
 Use the Database page to specify the location of your Virtual Machine Database (VMDB) and its login credentials. By default, the type is PostgreSQL on the Server.
@@ -1042,6 +1096,7 @@ Use the Database page to specify the location of your Virtual Machine Database (
 The server may not start if the database settings are changed. Be sure to validate your new settings before restarting the server.
 ==========
 
+[[changing-a-database-setting]]
 ====== Changing a Database Setting
 
 To change a database setting:
@@ -1062,12 +1117,15 @@ To change a database setting:
 
 During the restart, you are unable to access the server. When the restart is complete, the new database settings are in effect.
 
+[[customization-and-logos]]
 ===== Customization and Logos
 
+[[custom-logos]]
 ====== Custom Logos
 
 Use *Custom Logos* to display your own logo in the corner of the console or on the {product-title} login panel.
 
+[[uploading-a-custom-logo-to-the-console]]
 ====== Uploading a Custom Logo to the Console
 
 To upload a custom logo to the console:
@@ -1084,6 +1142,7 @@ image:2071.png[]
 . Check *Use Custom Logo* Image to add the logo to your console.
 . Click *Save*.
 
+[[customizing-the-login-background]]
 ====== Customizing the Login Background
 
 To customize the login background:
@@ -1102,6 +1161,7 @@ image:2073.png[]
 . Check *Use Custom Login Image* to add the logo to your console.
 . Click *Save*.
 
+[[customizing-the-login-panel-text]]
 ====== Customizing the Login Panel Text
 
 To customize the login panel text:
@@ -1116,6 +1176,7 @@ image:2075.png[]
 . Check *Use Custom Login Text* box to add the text to the screen.
 . Click *Save*.
 
+[[advanced-settings]]
 ===== Advanced Settings
 
 You may be instructed by Red Hat to edit some configuration settings manually. This feature is available for a limited number of options and can only be used by users assigned the super administrator role. Changing
@@ -1126,6 +1187,7 @@ settings using this procedure may disable your {product-title} server.
 Only make manual changes to your configuration files if directed to do so by Red Hat.
 =========
 
+[[editing-configuration-files-manually]]
 ====== Editing Configuration Files Manually
 
 To edit configuration files manually:
@@ -1140,6 +1202,7 @@ To edit configuration files manually:
 . Click *Save*.
 
 
+[[configuration-parameters]]
 ====== Configuration Parameters
 
 Table: authentication
@@ -1560,12 +1623,15 @@ Table: workers
 |restart_interval|Queue workers restart interval. Default: 2.hours
 |=======================================================================
 
+[[schedules]]
 ==== Schedules
 
+[[scheduling-smartstate-analyses-and-backups]]
 ===== Scheduling SmartState Analyses and Backups
 
 From the *Schedules* area in *Settings*, you can schedule the analyses of virtual machines, hosts, clusters, and datastores to keep the information current. Depending on which resource you want to analyze, you can filter which ones to analyze. You may also specify only one virtual machine or perform an analysis on all virtual machines. In addition, you can schedule compliance checks, and database backups.
 
+[[scheduling-a-smartstate-analysis-or-compliance-check]]
 ====== Scheduling a SmartState Analysis or Compliance Check
 
 To schedule a SmartState Analysis or Compliance Check:
@@ -1639,6 +1705,7 @@ If you change the *Time Zone*, you will need to reset the stating date and time.
 . Select a *Starting Time* (UTC) based on a 24 hour clock in the selected time zone.
 . Click *Add*.
 
+[[modifying-a-schedule]]
 ====== Modifying a Schedule
 
 To modify a schedule:
@@ -1650,10 +1717,12 @@ To modify a schedule:
 . Make the required changes.
 . Click *Save*.
 
+[[access-control]]
 === Access Control
 
 From navigating to menu:Settings[Configuration], then clicking on the *Access Control* accordion, you have a hierarchy of the configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, and tenants.
 
+[[creating-a-tenant]]
 ==== Creating a Tenant
 
 To create a tenant:
@@ -1665,6 +1734,7 @@ To create a tenant:
 . Enter a description for the Tenant in the *Description* field.
 . Click *Add*.
 
+[[creating-a-project]]
 ==== Creating a Project
 
 To create a project:
@@ -1676,6 +1746,7 @@ To create a project:
 . Enter a description for the Project in the *Description* field.
 . Click *Add*.
 
+[[creating-a-project-quota]]
 ==== Creating a Project Quota
 
 To create a project quota:
@@ -1688,6 +1759,7 @@ To create a project quota:
 . Click *Save*.
 
 
+[[tagging-tenants-and-projects]]
 ==== Tagging Tenants and Projects
 To tag tenants and projects:
 
@@ -1720,6 +1792,7 @@ image:2086.png[]
 . Select a *Group*.
 . Click *Add*.
 
+[[deleting-a-user]]
 ==== Deleting a User
 
 For security reasons, delete any user that no longer needs access to the information or functions of the server.
@@ -1731,11 +1804,13 @@ To delete a user:
 . Select the user you want to delete.
 . Click image:1847.png[] (*Configuration*), and image:gui_delete.png[] (*Delete selected Users*) to delete a user.
 
+[[groups]]
 ==== Groups
 
 User groups create filters and assign roles to users. You can either create your own user groups, or leverage your LDAP directory service to assign groups of users to account roles.
 For a list of what each pre-defined account role can do, see xref:roles[].
 
+[[creating-a-user-group]]
 ==== Creating a User Group
 
 To create a user group:
@@ -1765,12 +1840,14 @@ There are two ways to use LDAP groups with {product-title}:
 * Assign pre-existing groups from your LDAP server to {product-title} account roles.
 
 
-==== Using {product-title}s Named Groups to Assign Account Roles
+[[using-named-groups-to-assign-account-roles]]
+==== Using Named Groups to Assign Account Roles
 
 In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
 This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
 
 
+[[account-role-and-directory-service-group-names]]
 ==== Account Role and Directory Service Group Names
 
 [width="100%",cols="50%,50%",options="header",]
@@ -1795,6 +1872,7 @@ This group must be in the LDAP directory source you specified for the server. Se
 . Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
 . Navigate to menu:Settings[Configuration], then click on the *Settings* accordion, then *Zones*, then the *Authentication* tab, you can enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[].
 
+[[using-pre-existing-ldap-groups-to-assign-account-roles]]
 ==== Using Pre-existing LDAP Groups to Assign Account Roles
 
 To use pre-existing LDAP groups to assign account roles:
@@ -1830,6 +1908,7 @@ When you create a user group, you must specify a role to give the group rights t
 If you have enabled Get Role from LDAP under LDAP Settings, then the role is determined by the LDAP users group membership in the directory service. See xref:ldap_settings[].
 ==========
 
+[[account-roles-and-descriptions]]
 ===== Account Roles and Descriptions
 
 [width="100%",cols="30%,70%",options="header",]
@@ -1851,6 +1930,7 @@ If you have enabled Get Role from LDAP under LDAP Settings, then the role is det
 |Vm User|User of virtual machines. Can access all functions on the virtual machine including changing power state and viewing its console. Cannot assign policy, but can view policy simulation from virtual machine page.
 |=======================================================================
 
+[[creating-a-role]]
 ==== Creating a Role
 
 To create a role:
@@ -1864,6 +1944,7 @@ image:2095.png[]
 image:2096.png[]
 . Click *Add*.
 
+[[diagnostics]]
 === Diagnostics
 
 From navigating to menu:Settings[Configuration], then clicking on the *Diagnostics* tab, you can also see the status of the different {product-title} roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information.
@@ -1873,6 +1954,7 @@ The Diagnostics area is designed in a hierarchy.
 * At the *zone* level, you can see {product-title} roles by servers and servers by roles. In addition, you can set log collection values for a specific zone, and collect gap data for capacity and utilization.
 * At the *server* level, you can see the workers for each server, set log collection values for a specific server, and view current logs.
 
+[[region-diagnostics]]
 ==== Region Diagnostics
 
 Using the console, you can set the priority of server regional roles, review and reset replication, and create backups of your database either on demand or on a schedule.
@@ -1901,6 +1983,7 @@ The reason for tertiary is to ensure that if a server with crucial roles such as
 Tertiary roles simply show as active in the console.
 
 
+[[region-aware-server-roles]]
 ==== Region Aware Server Roles
 
 [width="100%",cols="50%,25%,25%",options="header",]
@@ -1917,6 +2000,7 @@ Tertiary roles simply show as active in the console.
 |=======================================================================
 
 
+[[setting-the-priority-of-a-failover-role]]
 ==== Setting the Priority of a Failover Role
 
 To set the priority of a failover role:
@@ -1928,10 +2012,12 @@ To set the priority of a failover role:
 . Click image:1847.png[] (*Configuration*), and image:2097.png[] (*Promote Server*) to make this the primary server for this role.
 . Click image:1847.png[] (*Configuration*), and image:gui_delete.png[] (*Demote Server*) to demote the priority of this server for this role.
 
+[[zone-diagnostics]]
 ==== Zone Diagnostics
 
 The console provides a way to see all the server roles that a server has been assigned and if these roles are running. This is especially helpful when you have multiple servers with different server roles. For each zone you can also set a central place for all logs to be collected, and collect capacity and utilization data that may be missing.
 
+[[viewing-the-status-of-server-roles]]
 ===== Viewing the Status of Server Roles
 
 To view the status of server roles:
@@ -1940,6 +2026,7 @@ To view the status of server roles:
 . Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
 . Depending on how you want to view your servers, click either *Roles by Servers* or the *Servers by Roles*.
 
+[[setting-server-role-priorities]]
 ===== Setting Server Role Priorities
 
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
@@ -1955,6 +2042,7 @@ There are three role priorities.
 
 * *Tertiary*: If all appliances with primary roles or secondary roles are down, one of the tertiary would be activated. The reason for tertiary is to ensure that if a Server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities. Tertiary roles simply show as active in the console.
 
+[[zone-aware-server-roles]]
 ===== Zone Aware Server Roles
 
 [width="100%",cols="50%,25%,25%",options="header",]
@@ -1979,6 +2067,7 @@ There are three role priorities.
 |=======================================================================
 
 
+[[setting-the-priority-of-a-failover-role-1]]
 ===== Setting the Priority of a Failover Role
 
 To set the priority of a failover role:
@@ -1990,6 +2079,7 @@ To set the priority of a failover role:
 . Click image:2097.png[] (*Promote Server to primary for this role*) to make this the primary Server for this role.
 . Click image:2098.png[] (*Demote Server to normal for this role*) to demote the priority of this Server for this role.
 
+[[removing-an-inactive-server]]
 ====== Removing an Inactive Server
 
 To remove an inactive server:
@@ -1999,6 +2089,7 @@ To remove an inactive server:
 . Click on the name of the server in the tree view.
 . Click image:gui_delete.png[] (*Delete Server*). This button is available only if the server is inactive.
 
+[[zone-log-collections]]
 ===== Zone Log Collections
 
 If you have multiple servers reporting to one central VMDB, then you can collect the configuration files and logs from the console of any of the servers. While you can set this either at the zone or server level,
@@ -2019,6 +2110,7 @@ Log depot options include:
 See your network administrator if you need to set up one of these shares. You
 will also need a user that has write access to that location.
 
+[[setting-the-location-of-the-log-depot]]
 ====== Setting the Location of the Log Depot
 
 To set the location of the log depot:
@@ -2036,6 +2128,7 @@ image:6254.png[]
 . If required, enter your user *ID* and *password* then click *Validate* to confirm the settings.
 . Click *Save*.
 
+[[collecting-and-downloading-logs-from-all-servers-in-a-zone]]
 ====== Collecting and Downloading Logs from All Servers in a Zone
 
 To collect and download logs from all servers in a zone:
@@ -2046,10 +2139,12 @@ To collect and download logs from all servers in a zone:
 . Click image:2104.png[](*Collect all logs*). All files in the logs directory as well as configuration files are collected from the selected zone.
 . Click *OK*. The status of the log retrieval shows in the {product-title} console.
 
+[[capacity-and-utilization-repair]]
 ===== Capacity and Utilization Repair
 
 Under certain circumstances, it is possible that {product-title} is not able to collect capacity and utilization data. This could be due to password expiration, a change in rights to the cloud provider and this change didn't provide enough granularity to the {product-title} service account, or network connectivity. The gap data is collected directly by extracting the monthly performance data. Gap collection need to be completed for each zone individually. Therefore, the procedure below need to be repeated for each zone.
 
+[[repairing-capacity-and-utilization-data]]
 ====== Repairing Capacity and Utilization Data
 
 To repair capacity and utilization data:
@@ -2072,10 +2167,12 @@ Do not select more than one week unless instructed to do so by Red Hat Support.
 After the gap collection has completed for this zone, repeat these same steps for the next zone. You can check for completion by going to the clusters page and checking for the capacity and utilization data for the time period specified.
 
 
+[[server-diagnostics]]
 ==== Server Diagnostics
 
 Under *Diagnostics* for a server, you can view the status of {product-title} workers running on the server, set log collection setting for only that server, and view the server's current {product-title} and audit logs.
 
+[[workers]]
 ===== Workers
 
 The *Workers* tab enables you to see the status of and restart {product-title} workers.
@@ -2098,6 +2195,7 @@ You can see additional information on and restart the following items:
 * *Web Services Worker* that maintains {product-title} Web services.
 * *VM Analysis Collectors* that run and process SmartState Analyses on virtual machines.
 
+[[reloading-worker-display]]
 ====== Reloading Worker Display
 
 To reload worker display:
@@ -2108,9 +2206,10 @@ To reload worker display:
 . Click the *Workers* tab.
 . Click image:2106.png[] (*Refresh Current Workers display*).
 
-====== Restarting a {product-title} Worker
+[[restarting-a-worker]]
+====== Restarting a Worker
 
-To restart a {product-title} worker:
+To restart a worker:
 
 . Navigate to menu:Settings[Configuration].
 . Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
@@ -2120,8 +2219,10 @@ To restart a {product-title} worker:
 . Click image:1847.png[] (*Configuration*), then image:2102.png[] (*Restart selected worker*).
 . Click *OK*.
 
+[[server-and-audit-logs]]
 ===== Server and Audit Logs
 
+[[collecting-server-logs-and-configuration-files]]
 ====== Collecting Server Logs and Configuration Files
 
 While you can designate a central location to collect logs for all
@@ -2140,6 +2241,7 @@ See your network administrator to set up one of these shares. You also
 need a user that has write access to that location. Settings at the
 server level supersede the ones at the zone level.
 
+[[setting-the-location-of-the-log-depot-for-a-specific-server]]
 ====== Setting the Location of the Log Depot for a Specific Server
 
 To set the location of the log depot for a specific server
@@ -2157,6 +2259,7 @@ image:6254.png[]
 . Enter your user ID and password, then click *Validate* to confirm the settings.
 . Click *Save*.
 
+[[collecting-the-current-log-set-of-a-server]]
 ====== Collecting the Current Log Set of a Server
 
 To Collect the Current Log Set of a Server
@@ -2168,6 +2271,7 @@ To Collect the Current Log Set of a Server
 . Click image:2104.png[] (*Collect*), then click image:2104.png[] (*Collect current logs*). All current log files in as well as configuration files are collected.
 . Click *OK*. The status of the log retrieval shows in the {product-title} console.
 
+[[collecting-all-log-sets-from-a-server]]
 ====== Collecting All Log Sets from a Server
 
 To Collect All Log Sets from a Server
@@ -2179,12 +2283,14 @@ To Collect All Log Sets from a Server
 . Click image:2104.png[] (*Collect*), then click image:2104.png[] (*Collect all logs*). All files in the logs directory as well as configuration files are collected.
 . Click *OK*. The status of the log retrieval shows in the {product-title} console.
 
+[[viewing-the-server,-audit,-and-production-logs]]
 ====== Viewing the Server, Audit, and Production Logs
 
 The server and audit logs roll over daily. The previous logs are stored as zipped files in the `/var/www/miq/vmdb/log` folder. The current logs can be easily viewed and downloaded from the menu:Settings[Configuration], then click on the *Diagnostics* accordion.
 
 Use the server log to see all actions taken by the server including communication with the SmartProxy and tasks.
 
+[[viewing-the-server-log]]
 ====== Viewing the Server Log
 
 To view the server log:
@@ -2196,6 +2302,7 @@ To view the server log:
 
 The {product-title} server automatically retrieves the last 1000 lines of the log.
 
+[[reloading-the-server-log]]
 ====== Reloading the Server Log
 
 To reload the server log:
@@ -2206,6 +2313,7 @@ To reload the server log:
 . Click *CFME Log*.
 . Click image:2106.png[] (Reload the Log Display).
 
+[[downloading-the-server-log]]
 ====== Downloading the Server Log
 
 To download the server log:
@@ -2221,6 +2329,7 @@ To download the server log:
 Use the *Audit Log* to see changes to the user interface and authentication.
 ======
 
+[[viewing-the-audit-log]]
 ====== Viewing the Audit Log
 
 To view the audit log:
@@ -2232,6 +2341,7 @@ To view the audit log:
 
 The server automatically retrieves the last 1000 lines of the log.
 
+[[reloading-the-audit-log]]
 ====== Reloading the Audit Log
 
 To reload the audit log:
@@ -2242,6 +2352,7 @@ To reload the audit log:
 . Click *Audit Log*.
 . Click image:2106.png[] (*Reload the Audit Log Display*).
 
+[[downloading-the-audit-log]]
 ====== Downloading the Audit Log
 
 To download the audit log:
@@ -2252,6 +2363,7 @@ To download the audit log:
 . Click Audit Log.
 . Click image:2107.png[] (*Download the Entire Audit Log File*).
 
+[[viewing-the-production-log]]
 ====== Viewing the Production Log
 
 Use the production log to see all actions performed using the console.
@@ -2265,6 +2377,7 @@ To view the production log:
 
 The {product-title} server automatically retrieves the last 1000 lines of the log.
 
+[[reloading-the-production-log]]
 ====== Reloading the Production Log
 
 To reload the production log:
@@ -2275,6 +2388,7 @@ To reload the production log:
 . Click *Production Log*.
 . Click image:2106.png[] (*Reload the Product Log Display*).
 
+[[downloading-the-production-log]]
 ====== Downloading the Production Log
 
 To download the production log:
@@ -2286,8 +2400,10 @@ To download the production log:
 . Click image:2107.png[] (*Download the Production Log File*).
 
 
+[[database-operations]]
 === Database Operations
 
+[[viewing-information-on-the-vmdb]]
 ==== Viewing Information on the VMDB
 
 The *Database* accordion displays a summary of VMDB information, a list of all tables and indexes, settings for the tables, active client connection, and database utilization.
@@ -2306,6 +2422,7 @@ To view information on the VMDB:
 * *Utilization*: displays usage charges for the disk and index nodes.
 
 
+[[database-regions-and-replication]]
 ==== Database Regions and Replication
 
 Regions are used to create a central database for reporting and charting. Do not use the database at the top level for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. Assign each server participating in the region a unique number during the regionalization process, then set your subordinate regions to replicate to the top region.
@@ -2316,8 +2433,6 @@ Only enable database synchronization on subordinate servers with replication wor
 ======
 
 For diagnostic information on replication, see xref:monitoring_database_replication[].
-
-===== Database Regions and Replication
 
 The following is an example of regionalized database scenario:
 
@@ -2377,6 +2492,7 @@ You must configure at least one remote copy before you can configure the global 
 The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
 ======
 
+[[configuring-a-remote-copy]]
 ===== Configuring a Remote Copy
 
 Configure a {product-title} instance to act as a remote copy where data from the global copy will be replicated. This procedure must only be performed on instances where the *Database Synchronization* role will be enabled. This procedure must be performed before enabling that role.
@@ -2388,6 +2504,7 @@ Configure a {product-title} instance to act as a remote copy where data from the
 . Select *Remote* from the *Type* list.
 . Click *Save*.
 
+[[configuring-the-global-copy]]
 ===== Configuring the Global Copy
 
 Configure a {product-title} instance to act as the global copy from which data is replicated to remote copies. This procedure must only be performed on servers where the *Database Synchronization* role will be enabled. These settings must be completed before enabling that role.
@@ -2416,6 +2533,7 @@ View the status of replication between the global copy and remote copies. The fo
 . Click the region where the instance is located.
 . Click the *Replication* tab.
 
+[[resetting-database-replication]]
 ===== Resetting Database Replication
 
 You can reset the replication relationship between the global copy and remote copies by temporarily removing and re-enabling the subscription from the global copy.
@@ -2438,6 +2556,7 @@ You can reset the replication relationship between the global copy and remote co
 . Click *Save*.
 
 
+[[running-a-single-backup]]
 ===== Running a Single Backup
 
 To run a single backup:
@@ -2457,6 +2576,7 @@ image:2099.png[]
 
 The database backup is run immediately. You can see the task by navigating to menu:Settings[Tasks], then clicking on the *All Other Tasks* tab.
 
+[[restoring-a-database-from-backup]]
 ===== Restoring a Database from Backup
 
 To restore a database from backup:
@@ -2470,8 +2590,10 @@ To restore a database from backup:
 If directed by Red Hat, you can run database garbage collection to reclaim unused space in your VMDB. Generally, the database server does this automatically.
 
 
+[[backing-up-and-restoring-a-database]]
 ==== Backing Up and Restoring a Database
 
+[[enabling-the-database-synchronization-role]]
 ===== Enabling the Database Synchronization Role
 
 When you start the replication worker, all of the information in the subordinate database is sent to the top region (99). The worker also creates triggers so that future changes made to subordinate regions are
@@ -2495,6 +2617,7 @@ image:4999.png[]
 . Click *Save*.
 
 //////////////////////////////////////////////
+[[scheduling-a-database-backup]]
 ===== Scheduling a Database Backup
 
 Schedule database backups on a regular basis to preserve data.
@@ -2531,6 +2654,7 @@ image:2110.png[]
 . Click *Add*.
 //////////////////////////////////////////////
 
+[[running-a-single-database-backup]]
 ===== Running a Single Database Backup
 
 To run a single database backup:
@@ -2544,6 +2668,7 @@ To run a single database backup:
 * If you select *Network File System*, enter the *URI*.
 . Click *Submit* to run the database backup.
 
+[[restoring-a-database-from-a-backup]]
 ===== Restoring a Database from a Backup
 
 If a database is corrupt or fails, restore it from a backup.
@@ -2565,6 +2690,7 @@ To restore a database from a backup:
 . Enter `14` to `Start Server Processes`.
 . Enter `Y` to confirm.
 
+[[running-database-garbage-collection]]
 ==== Running Database Garbage Collection
 
 The database server collects garbage automatically, but Red Hat may occasionally direct you to run database garbage collection manually in order to reclaim unused space in your VMDB.
@@ -2577,8 +2703,10 @@ To run database garbage collection:
 . In the *Run Database Garbage Collection Now* box, click *Submit*.
 
 
+[[changing-database-password]]
 ==== Changing Database Password
 
+[[changing-the-password-on-the-database-appliance]]
 ===== Changing the Password on the Database Appliance
 
 {product-title} provides a default database password for the internal PostgreSQL database.
@@ -2626,6 +2754,7 @@ service evmserverd start
 . Verify that you can log in to the {product-title} console.
 
 
+[[changing-the-password-on-the-worker-appliances]]
 ===== Changing the Password on the Worker Appliances
 
 . Stop the {product-title} service:
@@ -2660,6 +2789,7 @@ If you are using replication, and you have changed the password on the *Master* 
 . Restart the *Database Synchronization* Role.
 ===========
 
+[[adding-a-new-appliance-to-an-existing-region-with-a-non-default-password]]
 ===== Adding a New Appliance to an Existing Region with a Non-default Password
 
 . Create the new appliance.

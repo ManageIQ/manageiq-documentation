@@ -934,7 +934,8 @@ To add settings for a trusted forest:
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
 . Click *Save*.
 
-[[external-authentication-(httpd)]]
+
+[[external-authentication-httpd]]
 ====== External Authentication (httpd)
 
 When external authentication is enabled, users can log in to the {product-title} appliance using their IPA server credentials. The appliance creates user accounts automatically and imports relevant information from the IPA Server.
@@ -1014,7 +1015,7 @@ External Auth:  IPA.server.FQDN
 . Press `Enter`.
 . Enter `10` to select Configure External Authentication (httpd). The currently configured IPA server hostname and domain are displayed.
 . Enter `y` to un-configure the IPA client.
-
+SSHing
 *Optional Configuration Using the Appliance Console CLI*
 
 In addition to using the appliance console, external authentication can optionally be configured and un-configured using the appliance console command line interface.
@@ -1061,6 +1062,213 @@ $ ssh root@appliance.test.company.com
 [appliance]# /bin/appliance_console_cli --uninstall-ipa
 ----
 ====
+
+
+[[external-authentication-SAML]]
+====== Configuring External Authentication Using SAML
+
+This procedure outlines how to manually configure an appliance to use SAML external authentication. While other SAML identity providers can be used with {product-title}, this procedure covers using Red Hat Single Sign-On (SSO) 7.0, which is implemented using the Apache HTTP server's `mod_auth_mellon` module.
+
+
+[NOTE]
+======
+The current SAML implementation only secures the {product-title} appliance’s web administrative user interface with SAML. The REST API and self service user interface do not currently support SAML.
+======
+
+*Requirements*
+
+The following is required in order to enable SAML authentication to the appliance:
+
+* A CloudForms 4.1 appliance
+* A SAML identity provider (e.g. Red Hat Single Sign-On (SSO) 7.0 or later)
+
+[[configure-apache-SAML]]
+*Configuring the HTTP Server for SAML*
+
+The Apache HTTP server first must be configured to work with SAML authentication. All SAML-related certificates and keys are accessed from `/etc/httpd/saml2/`. 
+
+. Log into the {product-title} appliance as root using SSH, then create the `/etc/httpd/saml2/` directory:
++
+------
+# mkdir -p /etc/httpd/saml2
+------
++
+. Copy the `httpd` remote user and SAML template configuration files to the appliance:
++
+------
+# TEMPLATE_DIR="/opt/rh/cfme-appliance/TEMPLATE"
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf        \
+    /etc/httpd/conf.d/
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-saml.conf \
+    /etc/httpd/conf.d/
+------
++
+[NOTE]
+============
+The following are notable SAML configuration defaults in the `manageiq-external-auth-saml.conf` file:
+
+* Identity Provider Files (i.e. Red Hat SSO)    
+** Metadata File: `/etc/httpd/saml2/idp-metadata.xml`
+
+* Service Provider Files (i.e. `mod_auth_mellon`) 
+** Private Key File: `/etc/httpd/saml2/miqsp-key.key`
+** Certificate File: `/etc/httpd/saml2/miqsp-cert.cert`
+** Metadata File: `/etc/httpd/saml2/miqsp-metadata.xml`
+
+Other `mod_auth_mellon` parameters, such as endpoints and protected URLs, must not be modified as the appliance expects them to be defined as such.
+============
++
+. Generate the service provider files on the appliance using the Apache HTTP server's `mod_auth_mellon` command `mellon_create_metadata.sh`:
++
+------
+# cd /etc/httpd/saml2
+# /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh https://<miq-appliance> https://<miq-appliance>/saml2
+------
++
+The `mellon_create_metadata.sh` script creates file names based on the appliance URL, which must be renamed to match the expected file names from the `manageiq-external-auth-saml.conf` file:
++
+------
+# mv https_<miq-appliance>.key  miqsp-key.key
+# mv https_<miq-appliance>.cert miqsp-cert.cert
+# mv https_<miq-appliance>.xml  miqsp-metadata.xml
+------
++
+. Now that the service provider's `metadata.xml` file has been generated, the service provider definition can be defined in the SAML identity provider.
+For Red Hat SSO, a realm can be created for one or more appliances with individual clients defined one per appliance, where the client ID is specified as the URL of the appliance.
++
+To add a client in the Red Hat SSO {product-title} realm:
++
+.. Select and import the `miqsp-metadata.xml` file created for `mod_auth_mellon`.
+.. Set the client ID as `https://<miq-appliance>`.
+.. Set the client protocol as `saml`.
++
+. Then update the client definition (in SSO?) for the appliance with the following:
++
+[options="header"]
+|=========================================================================================
+| Setting                                     | Value
+| Name ID Format                              | username
+| Valid Redirect URIs                         | https://<miq-appliance>/saml2/postResponse
+| Master SAML Processing URL                  | https://<miq-appliance>/saml2
+| Assertion Consumer Service POST Binding URL | https://<miq-appliance>/saml2/postResponse
+| Logout Service Redirect Binding URL         | https://<miq-appliance>/saml2/logout
+|=========================================================================================
++
+Then obtain the identity provider’s `idp-metadata.xml` metadata file as follows:
++
+------
+# cd /etc/httpd/saml2
+# curl -s -o idp-metadata.xml \
+  http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
+------
++
+. In CloudForms 4.1, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
++
+------
+# vi idp-metadata.xml
+
+  ...
+  <SingleLogoutService
+<   Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
+---
+>   Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
+    Location=
+  ...
+------
++
+. Restart the HTTP server on the appliance:
++
+------
+# systemctl restart httpd
+------
++
+See _SAML Assertions_ in xref:saml-assertions[] for more information. (Needed to perform this procedure?)
+
+[[configure-appliance-UI-SAML]]
+*Configure the Appliance Administrative User Interface*
+
+After configuring the HTTP server for SAML, update the {product-title} appliance so that the administrative user interface works with SAML authentication.
+
+. Login to the appliance as `admin`, and navigate to menu:Settings[Configuration > Authentication].
+. Set the mode to *External (httpd)*.
+. Check *Enable SAML*. This enables the SAML login button on the appliance login screen, then redirects to the SAML protected page for authentication, and supports the SAML logout process.
+. Check *Enable Single Signon*. With this option enabled, initial access to the appliance's administrative user interface redirects to the SAML identity provider authentication screen. Logging out from the appliance returns the user to the appliance login screen, allowing them to log in as `admin` unless *Disable Local Login* is also checked.
+. Optional: Check *Disable Local Login* to disable the `admin` login to appliance and only allow SAML based authentication. Note that if there are issues with the identity provider or you require `admin` access to the appliance, you cannot log in through the appliance login screen until you re-enable local login as described in xref:re-enable-local-login[].
+. Check *Get User Groups from External Authentication (httpd)*
++
+[IMPORTANT]
+======
+Ensure the user’s groups are created on the appliance and appropriate roles are assigned to those groups.
+======
++
+. Click *Save*.
++
+Complete the above steps on each appliance in menu:Settings[Configuration > Access Control].
+
+You can now log into your {product-title} appliance using your SAML credentials.
+
+[[re-enable-local-login]]
+*Re-enabling Local Login (Optional)*
+
+If you disabled local login in the administrative user interface but need the ability to log in as `admin`, local login can be re-enabled using one of the following methods:
+
+.Re-enabling Local Login from the Appliance Administrative User Interface
+
+This method requires the identity provider to be available, and the ability to login as a user with enough administrative privileges to update {product-title} authentication settings.
+
+. Log in to the appliance user interface as the administrative user.
+. Navigate to menu:Settings[Configuration > Authentication].
+. Uncheck *Disable Local Login*. 
+. Click *Save*.
+
+.Re-enabling Local Login from the Appliance Console:
+
+. Use SSH to log into the appliance as `root`.
+. Run the `appliance_console` command.
+. Select *Update External Authentication Options*.
+. Select *Enable Local Login*.
+. Apply the updates.
+
+Alternatively, run the following command after using SSH to log into the appliance as root:
+
+------
+# appliance_console_cli --extauth-opts local_login_disabled=false
+------
+
+[[saml-assertions]]
+*SAML Assertions*
+
+To authenticate to the appliance, the following remote user parameters are looked at by the appliance upon a successful login and redirect from the identity provider.
+
+[options="header",cols="<2,<1",width="70%"]
+|==============================================
+| HTTP Environment           | SAML Assertion
+| REMOTE_USER                | username
+| REMOTE_USER_EMAIL          | email
+| REMOTE_USER_FIRSTNAME      | firstname
+| REMOTE_USER_LASTNAME       | lastname
+| REMOTE_USER_FULLNAME       | fullname
+| REMOTE_USER_GROUPS         | groups
+|==============================================
+
+For Red Hat SSO, the above SAML assertions can be defined for the appliance client in Red Hat SSO as mappers.
+
+[options="header",cols="<1,<2,<1,<1"]
+|============================================================================
+| Name       | Category                  | Type           | Property  
+| username   | AttributeStatement Mapper | User Property  | username
+| email      | AttributeStatement Mapper | User Property  | email
+| firstname  | AttributeStatement Mapper | User Property  | firstName
+| lastname   | AttributeStatement Mapper | User Property  | lastName
+| fullname   | AttributeStatement Mapper | User Attribute | fullName
+| groups     | Group Mapper              | Group List     | groups
+|============================================================================
+
+[IMPORTANT]
+======
+The `fullName` attribute was not available in the default database as of this writing and was added as a user attribute.
+======
+
 
 [[workers-1]]
 ===== Workers

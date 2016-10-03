@@ -13,6 +13,7 @@ The following options are available when making provisioning requests:
 * Schedule the provisioning
 image:2315.png[]
 
+[[requirements-for-provisioning-virtual-machines-and-instances]]
 === Requirements for Provisioning Virtual Machines and Instances
 
 {product-title} supports the provisioning of VMware ESX hosts/hypervisors. To provision a virtual machine from VMware providers, you must have an appliance with the Automation Engine role enabled.
@@ -24,6 +25,7 @@ If you are using a Windows template, the following configuration is required:
 
 See the VMware documentation for a complete list of customization requirements.
 
+[[requirements-for-provisioning-virtual-machines-from-red-hat-enterprise-virtualization-manager]]
 === Requirements for Provisioning Virtual Machines from Red Hat Enterprise Virtualization Manager
 
 [width="100%",cols="50%,50%a",options="header",]
@@ -53,6 +55,7 @@ Must have {product-title} appliance in each Cluster with this storage type.
 Local storage - Not yet supported (Red Hat does not recommend due to single point of failure).
 |====
 
+[[pxe-provisioning]]
 === PXE Provisioning
 
 PXE is a boot method that allows you to load files from across a network link. {product-title} uses it for files required for provisioning virtual machines. PXE can be used for provisioning for either Red Hat Enterprise Virtualization Manager or VMware.
@@ -89,6 +92,7 @@ PXE is a boot method that allows you to load files from across a network link. {
 * Sample PXE menu item that downloads WinPE ISO, mount in memdisk and boot into WinPE environment
 
 
+[[connecting-to-a-pxe-server]]
 ==== Connecting to a PXE Server
 
 The following procedure connects to a PXE server and adds its details to {product-title}.
@@ -109,6 +113,7 @@ Next, create PXE Image types to associate with the customization templates and t
 ====
 
 
+[[creating-system-image-types-for-pxe]]
 ==== Creating System Image Types for PXE
 
 The following procedure creates a system image type for PXE servers.
@@ -128,6 +133,7 @@ image:2317.png[]
 After creating the System Image Types, assign the types to each image on your PXE servers. To do this, you will select each image on the PXE server and identify its type.
 ====
 
+[[setting-the-pxe-image-type-for-a-pxe-image]]
 ==== Setting the PXE Image Type for a PXE Image
 
 The following procedure sets the image type for a chosen PXE image.
@@ -140,6 +146,7 @@ image:2319.png[]
 Click *Save*.
 image:2320.png[]
 
+[[iso-provisioning]]
 === ISO Provisioning
 
 {product-title} also allows ISO provisioning from Red Hat Enterprise Virtualization Manager datastores. To use this feature, you will need to do the following before creating a provision request.
@@ -150,6 +157,7 @@ image:2320.png[]
 . Set the *ISO Image Type*.
 . *Create* a customization template.
 
+[[adding-an-iso-datastore]]
 ==== Adding an ISO Datastore
 
 The following procedure adds an ISO Datastore from your Red Hat Enterprise Virtualization environment.
@@ -162,6 +170,7 @@ The following procedure adds an ISO Datastore from your Red Hat Enterprise Virtu
 
 The ISO datastore is added to {product-title}.
 
+[[refreshing-an-iso-datastore]]
 ==== Refreshing an ISO Datastore
 
 The following procedure refreshes the chosen ISO datastore and updates {product-title} with available ISOs.
@@ -170,6 +179,7 @@ The following procedure refreshes the chosen ISO datastore and updates {product-
 . Click the *ISO Datastores* accordion, and select an ISO datastore.
 . Click image:1847.png[](*Configuration*), then click image:2003.png[](*Refresh Relationships*).
 
+[[creating-system-image-types-for-iso]]
 ==== Creating System Image Types for ISO
 
 The following procedure creates a system image type for ISO Servers.
@@ -189,6 +199,7 @@ image:2322.png[]
 After creating the system image types, assign the types to each image on your ISO servers. To do this, you will select each image on the ISO server and identify its type.
 ====
 
+[[setting-the-image-type-for-an-iso-image]]
 ==== Setting the Image Type for an ISO Image
 
 The following procedure sets the image type for an ISO image.
@@ -200,13 +211,14 @@ The following procedure sets the image type for an ISO image.
 image:2323.png[]
 . Click *Save*.
 
+[[customization-templates-for-virtual-machine-and-instance-provisioning]]
 === Customization Templates for Virtual Machine and Instance Provisioning
 
 Add a customization template to provide *Kickstart*, *Cloud-Init*, or *Sysprep* files for the initial loading of the operating system.
 
 .Cloud-Init Requirements
 * When creating a template using Red Hat Virtualization, install the *cloud-init* package on the source virtual machine. This enables Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
-* See the https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.5/html/Administration_Guide/index.html[Red Hat Enterprise Virtualization Administration Guide] for more information on using Cloud-Init in a Red Hat Enterprise Virtualization environment.
+* See https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6/html-single/Virtual_Machine_Management_Guide/index.html#sect-Using_Cloud-Init_to_Automate_the_Configuration_of_Virtual_Machines[Using Cloud-Init to Automate the Configuration of Virtual Machines] in the Red Hat Enterprise Virtualization _Administration Guide_ for more information on using Cloud-Init in a Red Hat Enterprise Virtualization environment.
 * See the http://cloudinit.readthedocs.org/en/latest/[Cloud-Init Documentation] web site for example scripts.
 
 .Kickstart Requirements for ISO Provisioning
@@ -237,6 +249,7 @@ mount /dev/floppy /tmp/floppy
 ====
 
 
+[[customization-script-additions-for-virtual-machine-and-instance-provisioning]]
 === Customization Script Additions for Virtual Machine and Instance Provisioning
 
 [width="100%",cols="30%,30%,40%a",options="header",]
@@ -267,6 +280,7 @@ wget --no-check-certificate <%= evm[:post_install_callback_url] %>
 </UserAccounts>
 |====
 
+[[adding-a-customization-template]]
 === Adding a Customization Template
 
 . Navigate to menu:Compute[Infrastructure > PXE].
@@ -283,6 +297,7 @@ image:2324.png[]
 The default dialogs show all possible parameters for provisioning. To limit the options shown, see xref:provisioning-dialogs-customizing[].
 ====
 
+[[provisioning-virtual-machines]]
 === Provisioning Virtual Machines
 
 There are three types of provisioning requests available in {product-title}:
@@ -291,6 +306,7 @@ There are three types of provisioning requests available in {product-title}:
 . Clone a virtual machine
 . Publish a virtual machine to a template
 
+[[provisioning-a-virtual-machine-from-a-template]]
 ==== Provisioning a Virtual Machine from a Template
 
 You can provision virtual machines through various methods. One method is to provision a virtual machine directly from a template stored on a provider.
@@ -388,6 +404,7 @@ After submission, the appliance assigns each provision request a *Request ID*. I
 Request 99 in region 123 results in Request ID 123000000000099.
 
 
+[[cloning-a-virtual-machine]]
 ==== Cloning a Virtual Machine
 
 Virtual machines can be cloned in other providers as well.
@@ -398,6 +415,7 @@ Virtual machines can be cloned in other providers as well.
 . Schedule the request on the *Schedule* tab.
 . Click *Submit*.
 
+[[publishing-a-virtual-machine-to-a-template-(vmware-virtual-machines-only)]]
 ==== Publishing a Virtual Machine to a Template (VMware Virtual Machines Only)
 
 . Navigate to menu:Compute[Infrastructure > Virtual Machines], and check the virtual machine you want to publish as a template.
@@ -406,10 +424,12 @@ Virtual machines can be cloned in other providers as well.
 . Schedule the request on the *Schedule* tab.
 . Click *Submit*.
 
+[[provisioning-instances]]
 === Provisioning Instances
 
 Cloud instances follow the same process (Request, Approval, Deployment) as a standard virtual machine from virtualization infrastructure. First, a user makes a request for instances and specifies the image, tags, availability zone and hardware profile flavor. Second, the request goes through the approval phase. Finally, {product-title} executes the request.
 
+[[provisioning-an-ec2-instance-from-an-image]]
 ==== Provisioning an EC2 Instance from an Image
 
 . Navigate to menu:Compute[Clouds > Instances].
@@ -452,10 +472,12 @@ After submission, the appliance assigns each provision request a *Request ID*. I
 Request 99 in region 123 results in Request ID 123000000000099.
 
 
+[[provisioning-an-openstack-instance-from-an-image]]
 ==== Provisioning an OpenStack Instance from an Image
 
 include::Provisioning_Requests-openstack.adoc[]
 
+[[provisioning-a-google-compute-engine-instance-from-an-image]]
 ==== Provisioning a Google Compute Engine Instance from an Image
 
 From Red Hat {product-title} 4.1, a Google Compute Engine instance can be provisioned. Some functionality available in other cloud providers is currently unavailable when provisioning from Google Compute Engine.
@@ -494,6 +516,7 @@ After submission, the appliance assigns each provision request a *Request ID*. I
 Request 99 in region 123 results in Request ID 123000000000099.
 
 
+[[requirements-for-provisioning-a-host]]
 ==== Requirements for Provisioning a Host
 
 {product-title} can provision hosts using PXE and Intelligent Platform Management Interface (IPMI) technologies. Before you provision your first host, configure the following prerequisites:
@@ -506,10 +529,12 @@ Request 99 in region 123 results in Request ID 123000000000099.
 * Enable IPMI on provisioning hosts and add them to the {product-title} Infrastructure.
 
 
+[[ipmi-hosts]]
 ===== IPMI Hosts
 
 There are two ways to get the Intelligent Platform Management Interface (IPMI) Host into the VMDB. You can either use the {product-title}'s discovery process or add the host using its IP address and credentials.
 
+[[discovering-the-management-interface-for-an-ipmi-host]]
 ====== Discovering the Management Interface for an IPMI Host
 
 . Navigate to menu:Compute[Infrastructure > Hosts].
@@ -531,6 +556,7 @@ You can also add IPMI credentials after the host has been discovered. See sectio
 After the host is discovered, you can add credentials for IPMI.
 ====
 
+[[adding-ipmi-credentials-to-a-discovered-host]]
 ====== Adding IPMI Credentials to a Discovered Host
 
 After discovering an IPMI host, add the credentials using the following procedure.
@@ -545,6 +571,7 @@ After discovering an IPMI host, add the credentials using the following procedur
 . Click *Validate* to test the credentials.
 . Click *Save*.
 
+[[adding-the-management-interface-for-an-ipmi-host]]
 ====== Adding the Management Interface for an IPMI Host
 
 . Navigate to menu:Compute[Infrastructure > Hosts].
@@ -559,10 +586,12 @@ After discovering an IPMI host, add the credentials using the following procedur
 
 The IPMI host is added to the {product-title} environment; an operating system can now be provisioned onto it.
 
+[[customization-templates-for-host-provisioning]]
 ===== Customization Templates for Host Provisioning
 
 Add a customization template to provide Kickstart files for the initial loading of the operating system. There are certain sections to use to allow for interactions with the provisioning dialogs provided by {product-title}.
 
+[[customization-script-additions]]
 ===== Customization Script Additions
 
 [width="100%",cols="1,1,3a",options="header",]
@@ -607,6 +636,7 @@ wget --no-check-certificate <%= evm[:post_install_callback_url] %>
 
 |====
 
+[[adding-a-customization-template-1]]
 ====== Adding a Customization Template
 
 . Navigate to menu:Compute[Infrastructure > PXE].
@@ -623,6 +653,7 @@ image:2325.png
 The default dialogs show all possible parameters for provisioning. To limit the options shown, xref:provisioning-dialogs-customizing[].
 ====
 
+[[provisioning-a-host]]
 ==== Provisioning a Host
 
 After setting up the IPMI and PXE environments, you are ready to provision a host. Currently, you can only provision in the cluster where the template is located or you can create a template in each cluster and let a {product-title} Automate method automatically switch the selected template in the provision object.
@@ -676,6 +707,7 @@ Edit the dialogs to:
 . Create custom dialogs for specific users.
 
 
+[[adding-a-provision-dialog-for-all-users]]
 ===== Adding a Provision Dialog for All Users
 
 . Login to the {product-title} console for the {product-title} server where you want to change the dialog.
@@ -698,6 +730,7 @@ If you set `:required:` to `true`, the field must have a value for the provision
 
 If you are using *Provisioning Profiles*, you can specify a specific file that holds the customizations. To do this, you must create an instance mapping to this file in the {product-title} *Applications/provisioning/profile/VM provisioning by group* class. By default, if you are using provisioning profiles and the group does not have a defined instance, the appropriate default dialog file will be used based on the type of provisioning selected.
 
+[[creating-a-custom-provision-dialog]]
 ===== Creating a Custom Provision Dialog
 
 . Navigate to menu:Automate[Customization].
@@ -729,6 +762,7 @@ If you set `:required:` to `true`, the field must have a value for the provision
 
 Enter the name of the new dialog into the dialog name field in the appropriate {product-title} *Applications/provisioning/profile instance*. This dialog can now be referred to in an instance in the Provisioning Profiles class so that it can be used for groups of users.
 
+[[provisioning-profiles]]
 ==== Provisioning Profiles
 
 Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or {product-title} groups. To use provisioning profiles:
@@ -739,6 +773,7 @@ Provisioning profiles can be used to customize the dialogs and the state machine
 The diagram below shows where provisioning profiles are called during the entire provisioning process.
 image:2344.png[]
 
+[[creating-a-provisioning-profile-instance]]
 ===== Creating a Provisioning Profile Instance
 
 . Navigate to menu:Automate[Explorer].
@@ -764,6 +799,7 @@ Be sure that the custom dialog file exists. If it does not, an error will appear
 . Click *Add*.
 
 
+[[setting-provisioning-scope-tags]]
 ===== Setting Provisioning Scope Tags
 
 Some non-default placement methods, for example the *redhat_best_placement_with_scope* or *vmware_best_fit_with_scope* methods, may require you to set *Provisioning Scope* tags for a host and a datastore.

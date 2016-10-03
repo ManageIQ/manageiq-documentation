@@ -1181,8 +1181,7 @@ Then obtain the identity provider’s `idp-metadata.xml` metadata file as follow
 ------
 # systemctl restart httpd
 ------
-+
-See _SAML Assertions_ in xref:saml-assertions[] for more information. (Needed to perform this procedure?)
+
 
 [[configure-appliance-UI-SAML]]
 *Configure the Appliance Administrative User Interface*
@@ -1195,50 +1194,28 @@ After configuring the HTTP server for SAML, update the {product-title} appliance
 . Check *Enable Single Signon*. With this option enabled, initial access to the appliance's administrative user interface redirects to the SAML identity provider authentication screen. Logging out from the appliance returns the user to the appliance login screen, allowing them to log in as `admin` unless *Disable Local Login* is also checked.
 . Optional: Check *Disable Local Login* to disable the `admin` login to appliance and only allow SAML based authentication. Note that if there are issues with the identity provider or you require `admin` access to the appliance, you cannot log in through the appliance login screen until you re-enable local login as described in xref:re-enable-local-login[].
 . Check *Get User Groups from External Authentication (httpd)*
-+
+. Click *Save*.
+
 [IMPORTANT]
 ======
-Ensure the user’s groups are created on the appliance and appropriate roles are assigned to those groups.
+Ensure the user’s groups are created on the appliance and appropriate roles are assigned to those groups. See _SAML Assertions_ in xref:saml-assertions[] for more information on the parameters used by the {product-title} appliance.
+
+For example, to configure user groups from your SAML identity provider to work with {product-title}:
+
+  . In your SAML identity provider, specify your existing user groups in similar format to the following: `REMOTE_USER_GROUPS=Administrators;CloudAdministrators;Users`
+  . On your {product-title} appliance, create the equivalent groups. See _Creating a User Group_ in xref:creating-a-user-group[].
+  . On your {product-title} appliance, assign EVM roles to the groups. See _Creating a Role_ in xref:creating-a-role[].
 ======
-+
-. Click *Save*.
-+
+
 Complete the above steps on each appliance in menu:Settings[Configuration > Access Control].
 
 You can now log into your {product-title} appliance using your SAML credentials.
 
-[[re-enable-local-login]]
-*Re-enabling Local Login (Optional)*
-
-If you disabled local login in the administrative user interface but need the ability to log in as `admin`, local login can be re-enabled using one of the following methods:
-
-.Re-enabling Local Login from the Appliance Administrative User Interface
-
-This method requires the identity provider to be available, and the ability to login as a user with enough administrative privileges to update {product-title} authentication settings.
-
-. Log in to the appliance user interface as the administrative user.
-. Navigate to menu:Settings[Configuration > Authentication].
-. Uncheck *Disable Local Login*. 
-. Click *Save*.
-
-.Re-enabling Local Login from the Appliance Console:
-
-. Use SSH to log into the appliance as `root`.
-. Run the `appliance_console` command.
-. Select *Update External Authentication Options*.
-. Select *Enable Local Login*.
-. Apply the updates.
-
-Alternatively, run the following command after using SSH to log into the appliance as root:
-
-------
-# appliance_console_cli --extauth-opts local_login_disabled=false
-------
-
 [[saml-assertions]]
 *SAML Assertions*
 
-To authenticate to the appliance, the following remote user parameters are looked at by the appliance upon a successful login and redirect from the identity provider.
+To authenticate to the {product-title} appliance using SAML, the following remote user parameters are looked at by the appliance upon a successful login and redirect from the identity provider. These parameters are used by the appliance to obtain group authentication information.
+
 
 [options="header",cols="<2,<1",width="70%"]
 |==============================================
@@ -1268,6 +1245,36 @@ For Red Hat SSO, the above SAML assertions can be defined for the appliance clie
 ======
 The `fullName` attribute was not available in the default database as of this writing and was added as a user attribute.
 ======
+
+
+
+[[re-enable-local-login]]
+*Re-enabling Local Login (Optional)*
+
+If you disabled local login in the administrative user interface but need the ability to log in as `admin`, local login can be re-enabled using one of the following methods:
+
+.Re-enabling Local Login from the Appliance Administrative User Interface
+
+This method requires the identity provider to be available, and the ability to login as a user with enough administrative privileges to update {product-title} authentication settings.
+
+. Log in to the appliance user interface as the administrative user.
+. Navigate to menu:Settings[Configuration > Authentication].
+. Uncheck *Disable Local Login*. 
+. Click *Save*.
+
+.Re-enabling Local Login from the Appliance Console:
+
+. Use SSH to log into the appliance as `root`.
+. Run the `appliance_console` command.
+. Select *Update External Authentication Options*.
+. Select *Enable Local Login*.
+. Apply the updates.
+
+Alternatively, run the following command after using SSH to log into the appliance as root:
+
+------
+# appliance_console_cli --extauth-opts local_login_disabled=false
+------
 
 
 [[workers-1]]

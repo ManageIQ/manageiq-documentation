@@ -1,0 +1,147 @@
+// https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#install-config-cluster-metrics
+
+In order for {product-title_short} to collect node, pod, and container metrics on your OpenShift Enterprise, you must first enable _cluster metrics_ on your OpenShift deployment. This involves running the OpenShift Metrics services inside your cluster. If cluster metrics are already enabled on OpenShift, skip this section and proceed to xref:Obtaining_OpenShift_Enterprise_Management_Token[].
+
+[NOTE]
+===================
+This section is an abridged version of a more detailed chapter, namely https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#install-config-cluster-metrics[Enabling Cluster Metrics] from https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/[OpenShift Enterprise Installation and Configuration]. Refer to that chapter for more information.
+===================
+
+[[ose-metrics-prep]]
+== Configuring Required Service Accounts
+
+Cluster metrics requires the following service accounts:
+
+. *metrics-deployer*
+. *heapster*
+
+[IMPORTANT]
+===============
+If you deployed OpenShift using `openshift-ansible-3.0.20`, then the service account and roles required for enabling metrics will already be installed. You can skip this section and go to xref:ose-metrics-storage[].
+===============
+
+To create these accounts:
+
+. Log in as an administrator to any node within the OpenShift Enterprise cluster.
+. Open a terminal.
+. Switch to the *openshift-infra* project:
++
+[literal,subs="+quotes"]
+--------------------------
+$ oc project openshift-infra
+--------------------------
+. Create a service account for the Metrics Deployer (namely, *metrics-deployer*):
++
+[literal,subs="+quotes"]
+--------------------------
+$ oc create -f - <<API
+  apiVersion: v1
+  kind: ServiceAccount
+  metadata:
+    name: metrics-deployer
+  secrets:
+  - name: metrics-deployer
+  API
+--------------------------
+. Configure the *metrics-deployer* account to have *edit* permissions to the *openshift-infra* project:
++
+[literal,subs="+quotes"]
+--------------------------
+$ oadm policy add-role-to-user \
+    edit system:serviceaccount:openshift-infra:metrics-deployer
+--------------------------
++
+The *metrics-deployer* account will be used by the Metrics Deployer, which is described in xref:ose-metrics-storage[].
+. The *heapster* account will be automatically created later on in xref:ose-metrics-deploy[]. However, you should pre-emptively grant it *cluster-reader* permission to the *openshift-infra* project:
++
+[literal,subs="+quotes"]
+--------------------------
+$ oadm policy add-cluster-role-to-user \
+    cluster-reader system:serviceaccount:openshift-infra:heapster
+--------------------------
+
+[[ose-metrics-storage]]
+== Choosing a Storage Option
+
+The _Metrics Deployer_ installs and configures the components required for OpenShift Enterprise metrics. By default, the Metrics Deployer uses _self-signed certificates_ to secure communication between components. This document assumes that you will use this default; for information on alternative secure communication setups, see https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#metrics-deployer-using-secrets[Using Secrets] from https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/[OpenShift Enterprise Installation and Configuration].
+
+Before deploying OpenShift metrics, choose a storage option:
+
+.Persistent storage
+With _persistent storage_, OpenShift metrics will be stored on a persistent volume. This offers protection to metrics data by allowing it to survive a pod recreation or restart. OpenShift metrics requires a specifically configured persistent volume; see https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/architecture/#architecture-additional-concepts-storage[Persistent Volumes] from https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/architecture/[OpenShift Enterprise Architecture]. 
+
+//When preparing the persistent volume, note its _size_, as this will be used later in xref:ose-metrics-deploy[].
+
+.Non-persistent storage
+With _non-persistent storage_, you no longer need to provision and configure a volume to store metric data. This makes the deployment easier; however, this option does not offer the same protection as persistent storage.
+
+See https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#metrics-data-storage[Metrics Data Storage] from https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/[OpenShift Enterprise Installation and Configuration] for more information.
+
+[[ose-metrics-deploy]]
+== Deploying the Metrics Components
+
+OpenShift Enterprise uses _Hawkular Metrics_ as its metrics engine. The Metrics Deployer will install the Hawkular Metrics service; however, you need to provide an external hostname at which {product-title_short} can reach the Hawkular Metrics service. The base configuration of the Metrics Deployer are defined in `/usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml`.
+
+After choosing a storage option, log in as an administrator to any node within the OpenShift Enterprise cluster. From there, open a terminal and run the corresponding command:
+
+Deploying with persistent storage::
+[literal,subs="+quotes"]
+--------------------------
+$ oc new-app \
+    -f /usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml \
+    -p HAWKULAR_METRICS_HOSTNAME=_HAWKULARHOST_
+--------------------------
+
+Deploying with non-persistent storage::
+[literal,subs="+quotes"]
+--------------------------
+$ oc new-app \
+    -f /usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml \
+    -p HAWKULAR_METRICS_HOSTNAME=_HAWKULARHOST_ \
+    -p USE_PERSISTENT_STORAGE=false
+--------------------------
+
+///////
+--> Deploying template metrics-deployer-template for "/usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml"
+     With parameters:
+      IMAGE_PREFIX=registry.access.redhat.com/openshift3/
+      IMAGE_VERSION=3.1.1
+      MASTER_URL=https://kubernetes.default.svc:443
+      HAWKULAR_METRICS_HOSTNAME=hawkular.example.com
+      REDEPLOY=false
+      USE_PERSISTENT_STORAGE=true
+      CASSANDRA_NODES=1
+      CASSANDRA_PV_SIZE=1Gi
+      METRIC_DURATION=7
+--> Creating resources ...
+    Pod "metrics-deployer-7da46" created
+--> Success
+    Run 'oc status' to view your app.
+///////
+
+
+For either command, replace _HAWKULARHOST_ with the external hostname that {product-title_short} will use to reach the Hawkular Metrics service. _HAWKULARHOST_ must be a fully-qualified domain name.
+
+Either of these commands will deploy the required metrics components and create the necessary service accounts. In particular, the metrics components will be configured to also use the specified _HAWKULARHOST_ as its public endpoint.
+
+[[ose-metrics-finish]]
+== Applying the Hawkular Metrics Settings to OpenShift Enterprise 
+
+After deploying the metrics components, configure OpenShift Enterprise to use them. To do so:
+
+. Open the OpenShift Master Configuration file -- namely, `/etc/origin/master/master-config.yaml`. For more information on this file, see https://access.redhat.com/documentation/en/openshift-container-platform/3.3/single/installation-and-configuration/#master-configuration-files[Master Configuration Files] from the https://access.redhat.com/documentation/en/openshift-container-platform/3.3/single/installation-and-configuration/[OpenShift Container Platform Installation and Configuration].
+. Add a *metricsPublicURL* parameter to the *assetConfig* section. Specify the _HAWKULARHOST_ you specified in xref:ose-metrics-deploy[]:
++
+[literal,subs="+quotes"]
+--------------------------
+assetConfig:
+    ...
+    metricsPublicURL: "https://_HAWKULARHOST_/hawkular/metrics"
+--------------------------
+. Restart your OpenShift Enterprise deployment:
++
+[literal,subs="+quotes"]
+--------------------------
+$ sudo systemctl restart httpd
+$ sudo systemctl restart atomic-openshift-master
+--------------------------

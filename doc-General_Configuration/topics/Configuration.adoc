@@ -1069,6 +1069,7 @@ $ ssh root@appliance.test.company.com
 
 This procedure outlines how to manually configure an appliance to use SAML external authentication. While other SAML identity providers can be used with {product-title}, this procedure covers using Red Hat Single Sign-On (SSO) 7.0, which is implemented using the Apache HTTP server's `mod_auth_mellon` module.
 
+To enable external authentication using SAML, complete the following steps to configure your HTTP server, then your {product-title} appliance.
 
 [NOTE]
 ======
@@ -1087,7 +1088,7 @@ The following is required in order to enable SAML authentication to the applianc
 
 The Apache HTTP server first must be configured to work with SAML authentication. All SAML-related certificates and keys are accessed from `/etc/httpd/saml2/`. 
 
-. Log into the {product-title} appliance as root using SSH, then create the `/etc/httpd/saml2/` directory:
+. Log into the {product-title} appliance as root using SSH, and create the `/etc/httpd/saml2/` directory:
 +
 ------
 # mkdir -p /etc/httpd/saml2
@@ -1097,10 +1098,8 @@ The Apache HTTP server first must be configured to work with SAML authentication
 +
 ------
 # TEMPLATE_DIR="/opt/rh/cfme-appliance/TEMPLATE"
-# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf        \
-    /etc/httpd/conf.d/
-# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-saml.conf \
-    /etc/httpd/conf.d/
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf /etc/httpd/conf.d/
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-saml.conf /etc/httpd/conf.d/
 ------
 +
 [NOTE]
@@ -1125,7 +1124,9 @@ Other `mod_auth_mellon` parameters, such as endpoints and protected URLs, must n
 # /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh https://<miq-appliance> https://<miq-appliance>/saml2
 ------
 +
-The `mellon_create_metadata.sh` script creates file names based on the appliance URL, which must be renamed to match the expected file names from the `manageiq-external-auth-saml.conf` file:
+The `mellon_create_metadata.sh` script creates file names based on the appliance URL.
++
+. Rename the files created by the `mellon_create_metadata.sh` script to match the expected file names from the `manageiq-external-auth-saml.conf` file:
 +
 ------
 # mv https_<miq-appliance>.key  miqsp-key.key
@@ -1142,7 +1143,7 @@ To add a client in the Red Hat SSO {product-title} realm:
 .. Set the client ID as `https://<miq-appliance>`.
 .. Set the client protocol as `saml`.
 +
-. Then update the client definition (in SSO?) for the appliance with the following:
+. Update the client definition for the appliance in Red Hat SSO with the following:
 +
 [options="header"]
 |=========================================================================================
@@ -1154,7 +1155,7 @@ To add a client in the Red Hat SSO {product-title} realm:
 | Logout Service Redirect Binding URL         | https://<miq-appliance>/saml2/logout
 |=========================================================================================
 +
-Then obtain the identity provider’s `idp-metadata.xml` metadata file as follows:
+. Obtain the identity provider’s `idp-metadata.xml` metadata file as follows:
 +
 ------
 # cd /etc/httpd/saml2
@@ -1184,7 +1185,7 @@ Then obtain the identity provider’s `idp-metadata.xml` metadata file as follow
 
 
 [[configure-appliance-UI-SAML]]
-*Configure the Appliance Administrative User Interface*
+*Configuring the Appliance Administrative User Interface*
 
 After configuring the HTTP server for SAML, update the {product-title} appliance so that the administrative user interface works with SAML authentication.
 
@@ -1270,7 +1271,7 @@ This method requires the identity provider to be available, and the ability to l
 . Select *Enable Local Login*.
 . Apply the updates.
 
-Alternatively, run the following command after using SSH to log into the appliance as root:
+Alternatively, log into the appliance as root using SSH, and run the following command:
 
 ------
 # appliance_console_cli --extauth-opts local_login_disabled=false

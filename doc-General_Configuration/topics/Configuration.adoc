@@ -2875,8 +2875,8 @@ If you are using replication, and you have changed the password on the *Master* 
 . Restart the *Database Synchronization* Role.
 ===========
 
-[[adding-a-new-appliance-to-an-existing-region-with-a-non-default-password]]
-===== Adding a New Appliance to an Existing Region with a Non-default Password
+[[adding-a-new-appliance-to-an-existing-region* Click *Hourly* to run the backup hourly. You will be prompted to select the number of hours between each analysis.
+gion with a Non-default Password
 
 . Create the new appliance.
 . Start the appliance, but do not go into any of the configuration options, instead *SSH* into the new appliance.
@@ -2899,9 +2899,28 @@ service evmserverd restart
 +
 
 
+[[configuring-database-maintenance]]
+==== Configuring Scheduled Database Maintenance
 
+You can schedule hourly or periodic database maintenance through the appliance console. Performing regular PostgreSQL database maintenance helps to maintain a more responsive {product-title} environment.
 
+Hourly database maintenance tasks such as reindexing is useful for highly active database tables with such as metrics, workers, and servers. 
 
+You also may want to perform periodic database maintenance to truncate empty metrics tables and reorganize the database. Periodic maintenance can be configured to run hourly, daily, weekly, or monthly, at a specified hour and on a specified day.
 
+To configure hourly and periodic database maintenance:
+
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
+. Press any key.
+. Select `10` to configure the automatic database maintenance schedule through a dialog.
+.. For *Configure Hourly Database Maintenance?* Type `y` or `n`.
+.. For *Configure Periodic Database Maintenance?* Type `y` or `n`.
+
+The next options depend on the periodic database maintenance frequency you choose, and are specified using the same dialog. The dialog finishes configuration with a *"Database maintenance configuration updated"* message when complete. 
+
+To reset your database maintenance settings, enter *10) Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog to delete the previous settings. 
+
+To configure a new database maintenance schedule, enter *10) Configure Database Maintenance* once again and configure the values using the dialog.
 
 

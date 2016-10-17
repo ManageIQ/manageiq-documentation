@@ -3,6 +3,7 @@
 
 Currently, {product-title} has two configuration management providers integrated in it to review and monitor the configuration items and changes to them to eliminate the confusion and error brought about by the existence of different providers. These configuration systems are used for recording and reporting status and change activity for these configuration items.
 
+[[red-hat-satellite-6]]
 == Red Hat Satellite 6
 
 Satellite 6 is a subscription and system management tool that provides a way to provision hosts (both virtual and bare metal) and configure them using a set of Puppet modules. {product-title} provides functionality to integrate with a Red Hat Satellite 6 server and take advantage of its features. This includes:
@@ -38,6 +39,7 @@ include::Reprovisioning_a_Bare_Metal_Host.adoc[]
 include::Tagging_a_Bare_Metal_Host.adoc[]
 
 :leveloffset: 1
+[[ansible-tower]]
 == Ansible Tower
 
 Ansible Tower is a management tool integrated with {product-title}, designed to help automate infrastructure operations. {product-title} allows you to execute Ansible Tower jobs using service catalogs and Automate. No custom configuration or Ruby scripting is needed in {product-title}, as configuration is done in Ansible Tower using playbooks. 
@@ -55,9 +57,10 @@ The basic workflow when using {product-title} with an Ansible Tower provider is 
 
 [NOTE]
 ====
-For more information on Ansible playbooks, see the link:https://docs.ansible.com/ansible/playbooks.html[Ansible documentation].
+For more information on Ansible playbooks, see the link:https://docs.ansible.com/ansible/playbooks.html[Ansible playbook documentation].
 ====
 
+[[adding-an-ansible-tower-provider]]
 === Adding an Ansible Tower Provider
 
 To access your Ansible Tower inventory from {product-title}, you must add Ansible Tower as a provider. 
@@ -79,6 +82,7 @@ image:Add_Ansible_Provider.png[Add_Ansible_Provider]
 After adding the Ansible Tower provider, refresh its relationships and power states in order to view the current inventory.
 
 
+[[refreshing-an-ansible-tower-provider]]
 === Refreshing an Ansible Tower Provider
 
 Refresh relationships of all items related to an existing Ansible Tower configuration management provider including inventory, hosts, virtual machines, and clusters.
@@ -99,6 +103,7 @@ To refresh an Ansible Tower provider's inventory in {product-title}:
 
 {product-title} then queries the Ansible Tower API and obtains an inventory of all available hosts and job templates.
 
+[[viewing-ansible-tower-providers-and-inventory]]
 === Viewing Ansible Tower Providers and Inventory
 
 {product-title} automatically updates its inventory from Ansible Tower. This includes system groups (known as Inventories in Ansible Tower), basic information about individual systems, and available Ansible Tower job templates to be executed from the service catalog or Automate.
@@ -117,6 +122,7 @@ To view a list of Ansible Tower providers and inventory:
 Similarly, all discovered job templates are accessed under the provider by expanding the menu:Configuration[Configuration Management > Ansible Tower Job Templates] accordion menu.
 
 
+[[viewing-ansible-tower-configured-systems]]
 === Viewing Ansible Tower Configured Systems
 
 To view the systems in your Ansible Tower inventory:
@@ -124,7 +130,8 @@ To view the systems in your Ansible Tower inventory:
 . Navigate to menu:Configuration[Configuration Management > Configured Systems].
 . Under *All Configured Systems*, select *Ansible Tower Configured Systems* to display a list.
 
-=== Executing an Ansible Tower Job Template from a {product-title} Service Catalog
+[[executing-an-ansible-tower-job-template-from-a-service-catalog]]
+=== Executing an Ansible Tower Job Template from a Service Catalog
 
 You can execute an Ansible Tower playbook from {product-title} by creating a service catalog item from an Ansible Tower job template. 
 
@@ -176,10 +183,11 @@ The service item's details can be viewed in menu:Services[My Services] in {produ
 
 [NOTE]
 ====
-Instead of running a single job at a time, multiple service catalog items can also be grouped together as a catalog bundle to create one deployment with multiple job templates. See https://access.redhat.com/documentation/en/red-hat-{product-title}/4.1/provisioning-virtual-machines-and-hosts/chapter-5-catalogs-and-services[Catalogs and Services] in _Provisioning Virtual Machines and Hosts_ for more information.
+Instead of running a single job at a time, multiple service catalog items can also be grouped together as a catalog bundle to create one deployment with multiple job templates. See https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/provisioning-virtual-machines-and-hosts/chapter-5-catalogs-and-services#catalogs-services[Catalogs and Services] in _Provisioning Virtual Machines and Hosts_ for more information.
 ====
 
 
+[[executing-an-ansible-tower-job-using-a-custom-automate-button]]
 === Executing an Ansible Tower Job Using a Custom Automate Button
 
 {product-title} can execute Ansible Tower jobs on virtual machines or instances using custom buttons in Automate.

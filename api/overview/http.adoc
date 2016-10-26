@@ -2,18 +2,19 @@
 [[http-basics]]
 == HTTP Basics
 
-1.  <<rest-api-entry-point,REST Entry Point>>
-2.  <<supported-content-types,Supported Content Types>>
-3.  <<url-paths,URL Paths>>
-4.  <<methods-and-related-urls,Methods and related URLs>>
-5.  <<updating-resources,Updating resources>>
-6.  <<return-codes,Return Codes>>
+* <<rest-api-entry-point,REST Entry Point>>
+** <<entry-point-details, Entry Point Details>>
+* <<supported-content-types,Supported Content Types>>
+* <<url-paths,URL Paths>>
+* <<methods-and-related-urls,Methods and related URLs>>
+* <<updating-resources,Updating resources>>
+* <<return-codes,Return Codes>>
 
 
 '''''
 
 [[rest-api-entry-point]]
-== REST API entry Point
+== REST API Entry Point
 
 The REST API is made available via the /api URL prefix. It can be
 accessed on the Appliance server directly via HTTP using the default
@@ -36,19 +37,22 @@ https://<applianceHost_fqdn>/api
 {
   "name" : "API",
   "description" : "REST API",
-  "version" : "2.0.0",
+  "version" : "2.3.0",
   "versions" : [
     {
-      "name" : "2.0.0",
-      "href" : "http://localhost:3000/api/v2.0.0"
+      "name" : "2.3.0",
+      "href" : "http://localhost:3000/api/v2.3.0"
     }
   ],
+  ...
   "collections" : [
+    ...
     {
       "name" : "providers",
       "href" : "http://localhost:3000/api/providers",
       "description" : "Providers"
     },
+    ...
     {
       "name" : "vms",
       "href" : "http://localhost:3000/api/vms",
@@ -64,6 +68,75 @@ https://<applianceHost_fqdn>/api
 * /api/v2.0.0/
 * Versions lists current and any earlier API versions that are still exposed via their respective entry points:
 * /api/v**Version**/
+
+[[entry-point-details]]
+=== Entry Point Details
+
+An authenticated request of the entry point:
+
+[source,data]
+----
+GET /api
+----
+
+returns the following structure:
+
+[source,json]
+----
+{
+  "name": "API",
+  "description": "REST API",
+  "version": "2.3.0",
+  "versions": [
+    {
+      "name": "2.3.0",
+      "href": "http://localhost:3000/api/v2.3.0"
+    }
+  ],
+  "settings": {
+  },
+  "identity": {
+    "userid": "admin",
+    "name": "Administrator",
+    "user_href": "http://localhost:3000/api/users/1",
+    "group": "EvmGroup-super_administrator",
+    "group_href": "http://localhost:3000/api/groups/2",
+    "role": "EvmRole-super_administrator",
+    "role_href": "http://localhost:3000/api/roles/1",
+    "tenant": "My Company",
+    "groups": [
+      "EvmGroup-super_administrator"
+    ]
+  },
+  "server_info": {
+    "version": "master",
+    "build": "20161104133757_01d7244",
+    "appliance": "EVM"
+  },
+  "product_info": {
+    "name": "ManageIQ",
+    "name_full": "ManageIQ",
+    "copyright": "Copyright (c) 2016 ManageIQ. Sponsored by Red Hat Inc.",
+    "support_website": "http://www.manageiq.org",
+    "support_website_text": "ManageIQ.org"
+  },
+  "collections": [
+    {
+      "name": "arbitration_profiles",
+      "href": "http://localhost:3000/api/arbitration_profiles",
+      "description": "Arbitration Profiles"
+    },
+    ...
+    {
+      "name": "zones",
+      "href": "http://localhost:3000/api/zones",
+      "description": "Zones"
+    }
+  ]
+}
+----
+
+Where *settings* and *identity* are specific to the authenticated user.
 
 '''''
 
@@ -104,7 +177,7 @@ the following example:
 [[methods-and-related-urls]]
 == Methods and related URLs
 
-The basic HTTP Methods used for the API are GET, POST, PUT, PATCH and DELETE.
+The basic HTTP Methods used for the API are GET, POST, PUT, PATCH, OPTIONS and DELETE.
 
 [cols=",",options="header",]
 |=======================================================================
@@ -115,6 +188,9 @@ The basic HTTP Methods used for the API are GET, POST, PUT, PATCH and DELETE.
 |POST /api/:collection/:id |Perform an Action on a resource in the collection
 |PUT /api/:collection/:id |Update a specific resource
 |PATCH /api/:collection/:id |Update a specific resource
+|OPTIONS /api/:collection |Return metadata about the collection
+
+Please refer to link:../appendices/collection_metadata.html[Collection Metadata] for details
 |DELETE /api/:collection/:id |Delete a specific resource
 |=======================================================================
 

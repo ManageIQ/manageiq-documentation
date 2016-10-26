@@ -3,22 +3,22 @@
 == Collection Filtering
 
 When querying collections, filters can be specified by providing
-one or more filter[]='...' parameter.
+one or more filter[]=... parameter.
 
 ----
-GET /api/:collection?filter[]="..."&filter[]="..."&filter[]="..."
+GET /api/:collection?filter[]=...&filter[]=...&filter[]=...
 ----
 
 Syntax for a filter is as follows:
 
 ----
-filter[]="attribute op value"
+filter[]=attribute op value
 ----
 
 By default, filters are logically anded together, for a logical or, prefix the attribute with "or" as follows:
 
 ----
-filter[]="or attribute op value"
+filter[]=or attribute op value
 ----
 
 Where op supports the following operators:
@@ -43,7 +43,7 @@ When strings, value to be quoted in single or double quotes.
 Example Query VMs named sample* and return name and vendor
 
 ----
-GET /api/vms?expand=resources&attributes=name,vendor&filter[]="name='sample%'"
+GET /api/vms?expand=resources&attributes=name,vendor&filter[]=name='sample%'
 ----
 
 Example Query looking for services that are retired but have an unspecified service_id
@@ -56,7 +56,7 @@ Attributes specified via the filter[] parameter can include virtual attributes, 
 one level association of the virtual attribute as follows:
 
 ----
-GET /api/vms?attributes=name,vendor,hardware&filter[]="vendor='vmware'"&filter[]="hardware.memory_mb>=8192"
+GET /api/vms?attributes=name,vendor,hardware&filter[]=vendor='vmware'&filter[]=hardware.memory_mb>=8192
 ----
 
 Here filtering on the virtual attribute _hardware_ including the one level association _memory_mb_ off hardware.

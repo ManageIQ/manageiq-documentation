@@ -902,7 +902,7 @@ To search for your LDAP server's distinguished name (DN) values, run:
 image:LDAP-authentication-full.png[]
 +
 . Configure your *Role Settings*:
-In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be assigned one of the account role groups. See xref:ldap_groups[] for more information.
+In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be assigned one of the account role groups. See xref:assigning_account_roles_using_ldap_groups[] for more information.
 * Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires group names on the LDAP server to match {product-title} group names.
 +
 [IMPORTANT]
@@ -919,7 +919,7 @@ If you do not check *Get User Groups from LDAP*, the user must be defined in the
 
 LDAP authentication is now configured in your CloudForms environment.
 
-To assign account roles using LDAP groups, see xref:ldap_groups[].
+To assign account roles using LDAP groups, see xref:assigning_account_roles_using_ldap_groups[].
 
 
 [[trusted-forests]]
@@ -973,7 +973,7 @@ This section provides instructions for mapping your existing LDAP groups to acco
 * In the *Description* field, enter the (common name (`cn`) for your existing LDAP group assigned to users requiring access to {product-title}.
 *  Select *Look Up LDAP Groups* to find a list of groups assigned to a specific user in LDAP, then use the *LDAP Group for User* list to choose a group.
 .. In *User to Look Up*, enter the common name (`cn`) for a user in your LDAP group.
-.. In *Username*, enter ??.
+.. Enter the *Username*.
 .. In *Password*, enter the user's password. Click *Retrieve*.
 . Select a *Role* to map to the group.
 . Select a *Project/Tenant* to map to the group.
@@ -1162,7 +1162,7 @@ External Auth:  IPA.server.FQDN
 . Press `Enter`.
 . Enter `10` to select Configure External Authentication (httpd). The currently configured IPA server hostname and domain are displayed.
 . Enter `y` to un-configure the IPA client.
-SSHing
+
 *Optional Configuration Using the Appliance Console CLI*
 
 In addition to using the appliance console, external authentication can optionally be configured and un-configured using the appliance console command line interface.
@@ -1209,7 +1209,6 @@ $ ssh root@appliance.test.company.com
 [appliance]# /bin/appliance_console_cli --uninstall-ipa
 ----
 ====
-
 
 [[external-authentication-SAML]]
 ====== Configuring External Authentication Using SAML
@@ -1423,7 +1422,6 @@ Alternatively, log into the appliance as root using SSH, and run the following c
 ------
 # appliance_console_cli --extauth-opts local_login_disabled=false
 ------
-
 
 [[workers-1]]
 ===== Workers
@@ -1895,8 +1893,8 @@ Table: workers
 |password|Stores password for destination database in encrypted format.
 |host|Host of the destination database.
 |port|Port of the destination database. Default: 5432
-|include_tables|Lists tables included in the replication. Do NOT modify unless specifically instructed to do so by ManageIQ support. Default: include all, exclude_tables is used instead.
-|exclude_tables|Lists tables not to be included in the replication. Do NOT modify unless specifically instructed to do so by ManageIQ support.
+|include_tables|Lists tables included in the replication. Do NOT modify unless specifically instructed to do so by {product-title} support. Default: include all, exclude_tables is used instead.
+|exclude_tables|Lists tables not to be included in the replication. Do NOT modify unless specifically instructed to do so by {product-title} support.
 |options|
 |replication_trace|Set to true to capture all replication tracing in the log. Default: false
 |schedule_worker|Settings for Scheduler Server Role and any other work that runs on a schedule. Parameters specified here will override those set in the worker_base:default section.
@@ -2174,7 +2172,7 @@ For a list of what each pre-defined account role can do, see xref:roles[].
 
 [NOTE]
 ======
-To assign account roles using LDAP groups, see xref:ldap_groups[].
+To assign account roles using LDAP groups, see xref:assigning_account_roles_using_ldap_groups[].
 ======
 
 [[creating-a-user-group]]
@@ -2185,7 +2183,7 @@ To create a user group:
 . Navigate to menu:Settings[Configuration].
 . Click on the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a name for the group in the *Description* field. To ensure compatibility with tags, use underscores in place of spaces. For example, `{product-title}-test_group`.
+. Enter a name for the group in the *Description* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
 . Select a role to map to this group.
 . Select the *Project/Tenant* this group must belong to.
 . Select any filters that you want applied to what this group can view in the *Assign Filters* area.
@@ -2197,72 +2195,6 @@ image:2088.png[]
 . Check the boxes for the folders that you want to limit this user to. The items that have changed will show in blue italicized font.
 . Click *Add*.
 
-[[ldap_groups]]
-==== LDAP Groups
-
-When leveraging your LDAP groups, if you are using LDAP and the LDAP user is not a member of any of the defined groups, then the user will be denied access to {product-title}.
-There are two ways to use LDAP groups with {product-title}:
-
-* Create groups with a specific set of names as provided by {product-title}. These groups automatically get assigned to a specific role.
-* Assign pre-existing groups from your LDAP server to {product-title} account roles.
-
-
-[[using-named-groups-to-assign-account-roles]]
-==== Using Named Groups to Assign Account Roles
-
-In your directory service, define a distribution group for each of the account roles with the names shown in the table below.
-This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
-
-
-[[account-role-and-directory-service-group-names]]
-==== Account Role and Directory Service Group Names
-
-[width="100%",cols="50%,50%",options="header",]
-|=======================================================================
-|Directory Service Distribution Group Name|Account Role
-|EvmGroup-administrator|Administrator
-|EvmGroup-approver|Approver
-|EvmGroup-auditor|Auditor
-|EvmGroup-desktop|Desktop
-|EvmGroup-operator|Operator
-|EvmGroup-security|Security
-|EvmGroup-super_administrator|Super Administrator
-|EvmGroup-support|Support
-|EvmGroup-user|User
-|EvmGroup-user_limited_self_server|User Limited Self Service
-|EvmGroup-user_self_service|User Self Service
-|EvmGroup-vm_user|Vm User
-|EvmRole-tenant_administrator|Tenant Administrator
-|EvmRole-tenant_quota_administrator|Tenant Quota Administrator
-|=======================================================================
-
-. Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
-. Navigate to menu:Settings[Configuration], then click on the *Settings* accordion, then *Zones*, then the *Authentication* tab, you can enable *Get User Groups from LDAP* after typing in all of the required settings. See xref:ldap_settings[].
-
-[[using-pre-existing-ldap-groups-to-assign-account-roles]]
-==== Using Pre-existing LDAP Groups to Assign Account Roles
-
-To use pre-existing LDAP groups to assign account roles:
-
-. Navigate to menu:Settings[Configuration].
-. Click on the *Access Control* accordion, then click *Groups*.
-. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a description for the group in the *Description* field.
-. There are two ways to specify the group to use:
-* Type in the *cn* for the group in *LDAP Group*. This group must be in the LDAP directory source you specified under Operations-Server.
-+
-image:2090.png[]
-+
-* Select *Look Up LDAP Groups* to find a list of groups, then use the drop down list that appears in the *LDAP Group Information* area to choose a group.
-. Select a *Role* to map to the group.
-. Select any *filters* to apply to what this group can view in the *Assign Filters* area:
-.. Select the filters to apply to the user. The items that have changed show in a bold, blue font.
-.. Click the *Host & Clusters* tab.
-.. Select the host and clusters to limit the user to. The items that have changed show in a bold, blue font.
-image:2093.png[]
-.. Click the *VMs & Templates* tab. This shows folders that you have created in your virtual infrastructure.
-.. Select the folders to limit the user to. The items that have changed show in a bold, blue font.
-. Click *Add*.
 
 [[roles]]
 ==== Roles
@@ -2272,7 +2204,7 @@ When you create a user group, you must specify a role to give the group rights t
 
 [NOTE]
 ==========
-If you have enabled Get Role from LDAP under LDAP Settings, then the role is determined by the LDAP users group membership in the directory service. See xref:ldap_settings[].
+If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service. See xref:ldap_settings[].
 ==========
 
 [[account-roles-and-descriptions]]
@@ -3178,11 +3110,6 @@ If you are using replication, and you have changed the password on the *Master* 
 service evmserverd restart
 ------
 +
-
-
-
-
-
 
 
 

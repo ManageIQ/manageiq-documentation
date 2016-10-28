@@ -1,12 +1,14 @@
 [[working-with-requests]]
 == Working with Requests
 
+[[provisioning-request-approval-methods]]
 === Provisioning Request Approval Methods
 
 In this chapter, you will learn about the different approval methods. The request can be approved manually in the {product-title} console, set for automatic approval by setting options in the *Automate Explorer*, or by using an external method.
 image:2348.png[]
 When using an external method, the approval actually takes place on the external system and is sent directly for execution. This chapter discusses how to view and edit requests in the {product-title} Console, how to approve a request, and how to set automatic approval parameters.
 
+[[working-with-provisioning-requests]]
 === Working with Provisioning Requests
 
 After a provisioning request is sent, if you have proper authority, you can copy, edit, delete, approve, or deny a request.
@@ -17,11 +19,13 @@ After submission, the appliance assigns each provision request a *Request ID*. I
 
 *Request 99* in *region 123* results in *Request ID 123000000000099*.
 
+[[reloading-the-status-of-provisioning-requests]]
 ==== Reloading the Status of Provisioning Requests
 
 . Navigate to menu:Services[Requests].
 . Click image:2106.png[](*Reload the current display*).
 
+[[approving-a-provisioning-request]]
 ==== Approving a Provisioning Request
 
 After a user creates provisioning request, administrators have the ability to approve the request and allow {product-title} to complete virtual machine or instance creation.
@@ -31,6 +35,7 @@ After a user creates provisioning request, administrators have the ability to ap
 . Type in a *Reason* for the approval.
 . Click image:1852.png[](*Approve this request*).
 
+[[denying-a-provisioning-request]]
 ==== Denying a Provisioning Request
 
 . Navigate to menu:Services[Requests].
@@ -38,6 +43,7 @@ After a user creates provisioning request, administrators have the ability to ap
 . Type in a *Reason* for the denial.
 . Click image:2009.png[](*Deny this request*).
 
+[[copying-a-provisioning-request]]
 ==== Copying a Provisioning Request
 
 . Navigate to menu:Services[Requests].
@@ -50,6 +56,7 @@ After a user creates provisioning request, administrators have the ability to ap
 If the logged in user is not same as the requester or the request has been already approved or denied, you cannot edit or delete the request.
 ====
 
+[[editing-a-provisioning-request]]
 ==== Editing a Provisioning Request
 
 . Navigate to menu:Services[Requests].
@@ -58,6 +65,7 @@ If the logged in user is not same as the requester or the request has been alrea
 . Make changes to the request.
 . Click *Submit*.
 
+[[deleting-a-provisioning-request]]
 ==== Deleting a Provisioning Request
 
 . Navigate to menu:Services[Requests].
@@ -65,10 +73,12 @@ If the logged in user is not same as the requester or the request has been alrea
 . Click image:1861.png[](*Delete this request*).
 . Click *OK* to confirm.
 
+[[automatically-approving-requests]]
 ==== Automatically Approving Requests
 
 You can set thresholds for automatic approval of provisioning requests and, therefore, remove the requirement to manually approve the request. You can do this either as a global default or on a per template basis.
 
+[[enabling-global-defaults-for-automatic-approval]]
 ===== Enabling Global Defaults for Automatic Approval
 
 To enable a global set of default approval values, edit the defaults instance by navigating to menu:Automate[Explorer], then menu:DOMAIN[Cloud|Infrastructure > VM > Provisioning > StateMachines > ProvisionRequestApproval] in the accordion menu. The parameters in this instance are used by the methods in that same class. By default, the maximum number of virtual machines or instances that can be automatically approved for provisioning is 1. To skip the check for the maximum number of virtual machines, set this field to 0. Set this field to -1 to force manual approval. At a minimum, you must change this parameter for all others to be validated.
@@ -100,6 +110,7 @@ Do not change any values other than those listed below. Doing so may prevent the
 
 The thresholds for automatic approval are set. The next time a provision request is created these thresholds will be checked. If the requirements are met, the provisioning request will be approved with no user intervention.
 
+[[template-specific-approval-defaults]]
 ===== Template Specific Approval Defaults
 
 {product-title} provides tags that can be used to set default automatic approval values on a per template or image basis. These values *supersede* those in the *Automate* model. Use these tags to eliminate the need for manual approval for all provisioning requests. To enable automatic approval, assign the tags directly to templates or images.
@@ -113,6 +124,7 @@ The thresholds for automatic approval are set. The next time a provision request
 |Auto Approve Max VM (prov_max_vms)|Sets the maximum number of virtual machines or instances that can be automatically approved in a single provisioning request. Sample Values: 1, 2, 3, 4, 5
 |====
 
+[[assigning-tags-to-a-template-for-auto-approval]]
 ===== Assigning Tags to a Template for Auto Approval
 
 . Navigate to menu:Compute[Infrastructure > Virtual Machines].
@@ -122,6 +134,7 @@ The thresholds for automatic approval are set. The next time a provision request
 
 The thresholds for automatic approval for a specific template are set. The next time a provision request is created for this template these thresholds will be checked. If the requirements are met, the provisioning request will be approved with no user intervention.
 
+[[setting-provisioning-notification-email-addresses]]
 ===== Setting Provisioning Notification Email Addresses
 
 {product-title} contains a set of Automate instances for provisioning. These Automate instances also include email fields to set the sender and recipient of provisioning notifications, such as requests. These fields are set to *evmadmin@company.com* as a default.

@@ -1,10 +1,12 @@
 [[catalogs-services]]
 == Catalogs and Services
 
+[[about-catalogs-and-services]]
 === About Catalogs and Services
 
 Through the use of catalogs, {product-title} provides support for multi-tier service provisioning to deploy layered workloads across hybrid environments. You can create customized dialogs that will give consumers of the services the ability to input just a few parameters and provision the entire service.
 
+[[terminology]]
 === Terminology
 
 *Terminology*
@@ -18,9 +20,8 @@ Through the use of catalogs, {product-title} provides support for multi-tier ser
 *Service Dialogs*:: Made up of fully customizable tabs, items, and values for use with Service provisioning.
 *Template*:: A template is a copy of a preconfigured virtual machine, designed to capture installed software and software configurations, as well as the hardware configuration, of the original virtual machine.
 
+[[catalogs]]
 === Catalogs
-
-==== Catalogs
 
 Catalogs are used to create groups of virtual machines or instances for provisioning. For example, a complete package of a database server, desktop with specialized software already on it, and a firewall. You will need to complete the following steps to create and provision a service catalog.
 
@@ -38,6 +39,7 @@ DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If nece
 . Create a *Catalog Bundle*, adding each of the catalog items to it. Select the *Service Dialog* you created. Use the instance created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the *Entry Point*. Check *Display in Catalog* box.
 . Provision a service.
 
+[[creating-a-catalog-item]]
 ==== Creating a Catalog Item
 
 Create a catalog item for each virtual machine or cloud instance that will be part of the service.
@@ -69,10 +71,12 @@ You can only choose from the catalogs and dialogs you have already created. If y
 . Click *Add*.
 
 
+[[service-dialogs]]
 ==== Service Dialogs
 
 When provisioning a service, input will be needed from the requester. *Service Dialogs* are used to take input from the user. This input is connected to a method in the *Automate* model that defines how the users input is translated into the provision request. Before creating a *Service Dialog*, be sure to plan what items you need the user to input.
 
+[[adding-a-service-dialog]]
 ===== Adding a Service Dialog
 
 . Navigate to menu:Automate[Customization].
@@ -114,6 +118,7 @@ When provisioning a service, input will be needed from the requester. *Service D
 +
 . Click *Save*.
 
+[[importing-service-dialogs]]
 ===== Importing Service Dialogs
 
 You can share service dialogs between appliances using the export and import features.
@@ -123,6 +128,7 @@ You can share service dialogs between appliances using the export and import fea
 . In the *Import* area, click *Browse* to select an import file.
 . Click *Upload*.
 
+[[exporting-service-dialogs]]
 ===== Exporting Service Dialogs
 
 You can share service dialogs between appliances using the export and import features.
@@ -132,8 +138,10 @@ You can share service dialogs between appliances using the export and import fea
 . In the *Export* area, select the service dialogs that you want to export.
 . Click *Export*.
 
+[[methods]]
 ==== Methods
 
+[[creating-a-method-to-associate-with-the-dialog]]
 ===== Creating a Method to Associate with the Dialog
 
 You will need to create a method that connects the values in the dialog with the provisioning request. The method should be created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class of the *Automate* model.
@@ -248,6 +256,7 @@ exit MIQ_OK
 ------
 
 
+[[creating-a-method-in-the-service-class]]
 ===== Creating a Method in the Service Class
 
 Service methods have been split based on purpose.
@@ -268,6 +277,7 @@ Service methods have been split based on purpose.
 . Click *Add*.
 image:6297.png[]
 
+[[creating-an-instance-in-the-service-class]]
 ===== Creating an Instance in the Service Class
 
 . Navigate to menu:Automate[Explorer].
@@ -293,6 +303,7 @@ image:6298.png[]
 After the method has been created, it must be mapped to an instance in the `DOMAIN/Service/Service/Provisioning/StateMachines` class. The name of the instance must be specified as the *Entry Point*. This method must be called before the provision job begins.
 ====
 
+[[associating-a-method-with-an-automate-instance]]
 ===== Associating a Method with an Automate Instance
 
 Service methods have been split based on purpose.
@@ -313,6 +324,7 @@ Service methods have been split based on purpose.
 
 Now that the catalog items, service dialog, dialog methods, and service provision instance have been created, you can create the catalog bundle.
 
+[[creating-a-catalog-bundle]]
 ==== Creating a Catalog Bundle
 
 . Navigate to menu:Services[Catalogs].
@@ -333,6 +345,7 @@ A catalog bundle is created and visible in the *Service Catalog* accordion.
 You should also create and specify an Entry Point in the `DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that is part of a bundle. If you do not, then the pre and post provision processing will occur for each item in the bundle in addition to processing for the *Catalog Bundle*. To set the entry point, go into each *Catalog Item* and check *Display in Catalog*. Then, you will see the *Entry Point* field.
 ====
 
+[[provisioning-a-service]]
 ===== Provisioning a Service
 
 . Navigate to menu:Services[Catalogs].

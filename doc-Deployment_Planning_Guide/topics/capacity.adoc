@@ -44,10 +44,15 @@ In addition to setting the server role, you must also select which clusters and 
 ====
 
 [[data_collection_for_rhev_33_34]]
-=== Data Collection for Red Hat Enterprise Virtualization 3.3 and 3.4
+=== Data Collection for Red Hat Enterprise Virtualization
+
+[NOTE]
+====
+The procedure applies to version numbers RHEV 3.x and RHV 4.x. 
+====
 
 To collect capacity and utilization data for Red Hat Enterprise
-Virtualization 3.3 and 3.4, you must add {product-title} as
+Virtualization, you must add {product-title} as
 a user to the RHEV-M database.
 
 Perform this procedure on the PostgreSQL server where the history
@@ -85,11 +90,18 @@ postgres=# \q
 ------
 +
 . Update the server's firewall to accept TCP communication on port
-  5432:
+  5432.
+* For RHEV 3.x:
 +
 ------
 # iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
 # service iptables save
+------
++
+* For RHV 4.x:
++
+------
+# firewall-cmd --add-port=5432/tcp --permanent
 ------
 +
 . Enable external md5 authentication by appending the following line to
@@ -106,10 +118,17 @@ host    all      all    0.0.0.0/0     md5
 listen_addresses  =  '*'
 ------
 +
-. Reload the PostgreSQL configuration:
+. Reload the PostgreSQL configuration.
+* For RHEV 3.x:
 +
 ------
-service postgresql reload
+# service postgresql reload
+------
++
+* For RHV 4.x:
++
+------
+# systemctl reload postgresql
 ------
 +
 

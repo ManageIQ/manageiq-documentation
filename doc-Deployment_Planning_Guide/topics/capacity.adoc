@@ -48,7 +48,7 @@ In addition to setting the server role, you must also select which clusters and 
 
 [NOTE]
 ====
-The procedure applies to version numbers RHEV 3.x and RHV 4.x. 
+The procedure applies to version numbers Red Hat Enterprise Virtualization 3.x and Red Hat Virtualization 4.x. 
 ====
 
 To collect capacity and utilization data for Red Hat Enterprise
@@ -89,16 +89,15 @@ postgres=# \q
 -bash-4.1$ exit
 ------
 +
-. Update the server's firewall to accept TCP communication on port
-  5432.
-* For RHEV 3.x:
+. Update the server's firewall to accept TCP communication on port 5432.
+* For Red Hat Enterprise Virtualization 3.x:
 +
 ------
 # iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
 # service iptables save
 ------
 +
-* For RHV 4.x:
+* For Red Hat Virtualization 4.x:
 +
 ------
 # firewall-cmd --add-port=5432/tcp --permanent
@@ -119,13 +118,13 @@ listen_addresses  =  '*'
 ------
 +
 . Reload the PostgreSQL configuration.
-* For RHEV 3.x:
+* For Red Hat Enterprise Virtualization 3.x:
 +
 ------
 # service postgresql reload
 ------
 +
-* For RHV 4.x:
+* For Red Hat Virtualization 4.x:
 +
 ------
 # systemctl reload postgresql

@@ -903,16 +903,19 @@ image:LDAP-authentication-full.png[]
 +
 . Configure your *Role Settings*:
 In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be assigned one of the account role groups. See xref:assigning_account_roles_using_ldap_groups[] for more information.
-* Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires group names on the LDAP server to match {product-title} group names.
+* For LDAP users not belonging to a group:
+** Select a {product-title} group from the *Default Group for Users* list. This default group can be used for all LDAP users who use LDAP for authentication only. Do not select *Get User Groups from LDAP*, which will hide the *Default Group for Users* option.
+* For LDAP users belonging to a group:
+** Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires group names on the LDAP server to match {product-title} group names.
 +
 [IMPORTANT]
 ======
 If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 ======
-* Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is checked.
-* Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
-* Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment, for example , a service account user with access to all LDAP users.
-* Enter the password for the Bind DN user in *Bind Password*.
+** Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is checked.
+** Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
+** Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment, for example , a service account user with access to all LDAP users.
+** Enter the password for the Bind DN user in *Bind Password*.
 +
 . Click *Validate* to verify your settings.
 . Click *Save*.

@@ -40,11 +40,30 @@ The Region also uses a region database that reports to a master database on the 
 {product-title} can be configured in a highly available setup. In this case, all PostgreSQL instances must be running on a server that is deployed from the {product-title} appliance. 
 ifdef::cfme[]
 For more information, see the following example reference architecture:
-https://access.redhat.com/articles/1571263[Implementing Highly Available CloudForms Appliances]. Note, this reference architecture was written for a  previous version of CloudForms.
+https://access.redhat.com/articles/1571263[Implementing Highly Available CloudForms Appliances]. Note, this reference architecture was written for a previous version of CloudForms.
 endif::cfme[]
 ====
 
+[[central-administration]]
+=== Centralized Administration
 
+Centralized administration capabilities in {product-title} currently includes support for the following life cycle management operations. These operations can be initiated from the master region, and processed and executed on the remote region.
+
+* Provision virtual machine ad-hoc from master
+* Provision virtual machine from template
+* Provision service from master
+* Virtual machine power operations from master
+* Virtual machine retirement from master
+* Virtual machine reconfigure
+
+With centralized administration, the remote_queue_put leverages a new system-to-system REST API request to forward the original request to the target region. This request will be put on the local queue in the target region; the request will then be delivered by a worker in the target region as if it was queued there all along.
+
+image:central-admin.png[Centralized Administration diagram]
+
+[NOTE]
+====
+The operations initiated from the master region are subject to the role-based access control (RBAC) rules on the master region, which also includes the role-based access control of all the remote regions from replication. 
+====
 
 [[tenants]]
 === Tenants

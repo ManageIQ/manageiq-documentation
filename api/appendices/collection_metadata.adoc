@@ -31,13 +31,13 @@ What gets returned is the following structure:
 | attributes | Physical attributes of the collection
 | virtual_attributes | Virtual attributes of the collection
 | relationships | Physical or Virtual associations to other resources
-| data | Additional meta-data for the collection
+| data | Optional meta-data for the collection
 |===================================================================
 
 The following is an example for the *groups* collection:
 
 ----
-OPTIONS /api/:collection
+OPTIONS /api/groups
 ----
 
 [source,json]
@@ -95,3 +95,91 @@ OPTIONS /api/:collection
 }
 ----
 
+[[optional-metadata]]
+=== Optional Metadata
+
+Most collections do not declare additional metadata as shown by the empty _data_ hash entry above.
+Optional metadata is made available as needed for API clients. They are generally used to provide additional
+information needed for user-interfaces, help complete or validate data for additional API calls, etc.
+
+Currently, optional metadata is made available for the following collections:
+
+[cols="1",options="header",width="30%"]
+|=====================
+| Collection
+| /api/arbitration_rules
+| /api/container_deployments
+|=====================
+
+There is no enforced structure for the _data_ element as each collection may need to provide
+different types of metadata. The following are partial meta-data examples:
+
+[source,data]
+----
+OPTIONS /api/arbitration_rules
+----
+
+[source,json]
+----
+{
+  "attributes" : [
+    ...
+  ],
+  "virtual_attributes" : [
+    ...
+  ],
+  "relationships" : [
+    ...
+  ],
+  "data" : {
+    "field_values": [
+      "User-id",
+      "User-name",
+      "User-email",
+      "User-userid",
+      "User-first_name",
+      "User-last_name",
+      ...
+    ]
+  }
+}
+----
+
+[source,data]
+----
+OPTIONS /api/container_deployments
+----
+
+[source,json]
+----
+{
+  "attributes" : [
+    ...
+  ],
+  "virtual_attributes" : [
+    ...
+  ],
+  "relationships" : [
+    ...
+  ],
+  "data" : {
+    "deployment_types" : [
+      "origin",
+      "openshift-enterprise"
+    ],
+    "provision" : [
+      {
+        "provider" : {
+          ...
+        },
+        "templates" : [
+          ...
+        ]
+      }
+    ],
+    "providers" : [
+      ...
+    ]
+  }
+}
+----

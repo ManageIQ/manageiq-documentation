@@ -76,10 +76,12 @@ $ ssh root@example.postgres.server
 -bash-4.1$ psql
 ------
 +
-. Create a new user for the {product-title}:
+. Create a new user for the {product-title} and grant read-only access to tables and views: 
 +
 ------
-postgres=# CREATE ROLE cfme LOGIN UNENCRYPTED PASSWORD 'smartvm' SUPERUSER VALID UNTIL 'infinity';
+postgres=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
+
+postgres=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
 ------
 +
 . Exit to the RHEV-M database server prompt:

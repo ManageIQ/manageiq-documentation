@@ -47,7 +47,7 @@ endif::cfme[]
 [[central-administration]]
 === Centralized Administration
 
-Centralized administration capabilities in {product-title} currently includes support for the following life cycle management operations. These operations can be initiated from the master region, and processed and executed on the remote region.
+{product-title} includes centralized administration capabilities with support for the following life cycle management operations that can be initiated from the master region and processed and executed on the remote region.
 
 * Provision virtual machine ad-hoc from master
 * Provision virtual machine from template
@@ -56,13 +56,13 @@ Centralized administration capabilities in {product-title} currently includes su
 * Virtual machine retirement from master
 * Virtual machine reconfigure
 
-With centralized administration, the remote_queue_put leverages a new system-to-system REST API request to forward the original request to the target region. This request will be put on the local queue in the target region; the request will then be delivered by a worker in the target region as if it was queued there all along.
+image:centralized_admin.png[Centralized Administration Diagram]
 
-image:central-admin.png[Centralized Administration diagram]
+With centralized administration, the remote_queue_put leverages a new system-to-system REST API request to forward the original request to the target region. This request is put on the local queue in the target region which is then delivered by a worker in the target region as if it was queued there all along. As a result, a {product-title_short} operator in the master region can be seen as provisioning on-behalf of a remote region. 
 
 [NOTE]
 ====
-The operations initiated from the master region are subject to the role-based access control (RBAC) rules on the master region, which also includes the role-based access control of all the remote regions from replication. 
+The operations initiated from the master region are subject to the role-based access control (RBAC) rules on the master region, which also includes the role-based access control of all remote regions from replication. 
 ====
 
 [[tenants]]

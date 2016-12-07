@@ -3,10 +3,9 @@
 
 // Should this be in Managing Providers, or Managing Infrastructure and Inventory?
 
-
 == Configuring Automatic Tagging for Container Entities
 
-Container object labels in OpenShift Container Platform can be used to automatically create tags in {product-title}. This is done by mapping existing OpenShift labels to tags and tag categories in {product-title}.
+Container object labels in OpenShift Container Platform can be used to automatically create tags in {product-title}. This is done by mapping existing OpenShift labels to {product-title} tags and tag categories.
 
 Labels from OpenShift can be mapped to {product-title} tags for the following container entities:
 
@@ -18,69 +17,46 @@ Labels from OpenShift can be mapped to {product-title} tags for the following co
 * Pods
 * Container builds
 
+Note that tags created by this method are completely managed by the system and cannot be manually assigned or unassigned.
+Deleting a mapping rule immediately deletes the resulting tags.
+
 View a container entity's OpenShift labels on container entities on the entity's details page. OpenShift labels are listed under the *Labels* heading. (on its summary page? On nodes and what else?)
 
 To configure automatic tagging on container entities using OpenShift labels:
 
-. Note the label you want to map to a {product-title} tag. To find the label:
+. Note the OpenShift label you want to map to a {product-title} tag. To find the label:
 .. Navigate to menu:Compute[Containers > Nodes].
 .. Select a node to open its summary page.
-.. Under *Labels*, note the label(s) to map to {product-title} tag. For example, this node has six labels that were created in OpenShift and collected in CloudForms inventory:
+.. Under *Labels*, note the label(s) to map to {product-title} tag(s). For example, this node has six labels that were created in OpenShift and collected in CloudForms inventory:
 +
 image:OCPnode-summary.png[]
 +
 [NOTE]
 ====
-To create an OpenShift label, see [Add the link to OpenShift 3.0 CLI reference to create labels - from enablement video] Any new label added in OpenShift will be added during the next EMS (WHAT'S EMS? CHECK VIDEO.) refresh.
+To create an OpenShift label, see https://docs.openshift.com/container-platform/3.3/cli_reference/basic_cli_operations.html[Developer CLI Operations] in the OpenShift Container Platform _CLI Reference_ guide. A new label added in OpenShift will only show up in {product-title} after the next OpenShift provider refresh.
 ====
 +
 // Demo 53:00
 . Navigate to *Configuration* and select the region.
 . Click the *Map Tags* tab.
 . Click *Add* to create a new mapping rule.
-.. Select a container entity to tag from the Entity list, or select *<All>* to tag all entities.
-.. Specify the OpenShift container label you noted in the previous step in *Label* (WHERE DOES IT COME FROM?). This example uses the zone tag `east`.
-.. Specify a {product-title} tag category in *Category* to map the label to. If the tag category does not exist yet it will be created automatically.
-.. Click *Add*.
+.. Select a container entity to tag from the *Entity* list, or select *<All>* to tag all entities.
+.. Specify the OpenShift container label you noted in the previous step in *Label*. 
+.. Specify a {product-title} tag category in *Category* to map the label to. If the tag category does not exist yet in {product-title}, it will be created automatically.
 +
 image:Add_mapping.png[]
 +
-. Refresh the server (what do you need to refresh? how?)) to complete the mapping:
-//////
+.. Click *Add*.
+The mapping will show in the table on the *Map Tags* tab.
++
+. Refresh the provider to complete the mapping:
 .. Navigate to menu:Compute[Containers > Providers].
-.. selection the provider to refresh.
+.. Select the provider to refresh.
 .. Click  image:1847.png[] (*Configuration*), and then  image:2003.png[] (*Refresh Items and Relationships*).
-//////
 
-The label will display on the entity's summary page under *Smart Management* under *Company Tags*.
+The container label will display on the entity's summary page under *Smart Management* under *Company Tags*.
 
 You can use the tags to create reports. See https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2-beta/single/monitoring-alerts-and-reporting/[Monitoring, Alerts, and Reporting] for details on creating reports. 
-
-From video: LABELS ONLY SUPPORTED IN PROJECT, NODES BY PROJECT.  (What does that mean?)
-
-If you remove the label from Map Tags, it will be deleted.
-
-
-////
-
-Beni’s info:
-
-
-5.7 exposes in UI a new feature: configuring automatic tagging of container entities according to their labels in kubernetes/openshift:
-https://bugzilla.redhat.com/show_bug.cgi?id=1383405 (cfme-future)
-https://bugzilla.redhat.com/show_bug.cgi?id=1391137 (5.7.0)
-https://github.com/ManageIQ/manageiq/pull/11591
-(this PR has many screenshots, although they don't 100% match final code)
-
-very quick summary of the feature:
-
-It lives under top right menu -> Configuration -> ManageIQ Region 0 -> new tab called "Map Tags".
-There user can add "mapping rules", e.g. given openshift/kubernetes labels with key "zone", automatically tag with category named "Zone" — then an entity labeled "zone=japan" label would be get a "Zone : Japan" tag (in *addition* to showing the label in Labels table), "zone=us-east" would get "Zone : us-east" tag etc.
-
-- These rules take effect on each refresh.  If the label changes/disappears, so do the produced tag.
-- The category name user types is *not* one of a categories in My Company Categories tab, a new category is created automatically and it must be distinct from existing category names.
-- The tags created this way are completely managed by the system, they can't be manually assigned/unassigned.
-- Deleting a mapping rule immediately deletes the resulting tags.
 
 
 

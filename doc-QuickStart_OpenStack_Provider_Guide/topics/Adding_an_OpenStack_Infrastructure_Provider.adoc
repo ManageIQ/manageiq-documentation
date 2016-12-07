@@ -1,0 +1,94 @@
+
+== Adding an OpenStack Infrastructure Provider
+
+After you have deployed your _{product-title}_ appliance, you can begin managing your OpenStack environment by adding it as an _OpenStack Infrastructure provider_. Supply the details of the `admin` account to get access to the resources in the `admin` tenant:
+
+
+. Navigate to `Infrastructure > Providers`.
+. Click  image:1847.png[Configuration] (*Configuration*), then click  image:1848.png[Add a New Infrastructure Provider] (*Add a New Infrastructure Provider*). 
+. Enter the *Name* of the provider to add.
+  The *Name* is how the device is labeled in the console. 
+. Select *OpenStack Platform Director* from the *Type* list. 
+. Enter the *Host Name or IP address(IPv4 or IPv6)* of the provider. 
++
+[IMPORTANT]
+======
+The *Host Name* must use a unique fully-qualified domain name (FQDN). 
+======
++
+. Select the *API Version* of the keystone service from the list. The default is `Keystone v2`.
++
+[IMPORTANT]
+======
+If the keystone service is configured to use SSL, you must enter the keystone SSL port. 
+======
++
+. Select the appropriate `Zone` for the provider. By default, the zone is set to `default`.
+. In the *Credentials* area, under *Default*, provide the login credentials required for the OpenStack Infrastructure administrative user: 
+* Enter the user name in the *Username* field. 
+* Enter the password in the *Password* field. 
+* Confirm the user password in the *Confirm Password* field. 
+* Click *Validate* to confirm that the _{product-title}_ can connect to the OpenStack Infrastructure instance using the user name and password. 
+. Under *AMQP*, provide the login credentials required for the Advanced Message Queuing Protocol messaging service: 
+* Enter the administrative user name in the *Username* field. 
+* Enter the user password in the *Password* field. 
+* Confirm the user password in the *Confirm Password* field. 
+* Click *Validate* to confirm CFME can connect to the messaging service. 
+. Under *RSA key pair*, provide the user name and private key required to connect via SSH to all hosts in the provider: 
++
+* Enter the administrative user name in the *Username* field. 
+* Enter the private key from the machine on which OpenStack was deployed in the *Private Key* field. 
+. Click *Add*. 
+
+
+NOTE: _{product-title}_ requires that the _adminURL_ endpoint for all OpenStack services be on a non-private network. As a result, you should assign the adminURL endpoint an IP address of something other than `192.168.x.x`. The adminURL endpoint must be accessible to the CFME Appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment. In addition, make sure that all the keystone endpoints are accessible, otherwise the _refresh_ process will fail.
+
+
+=== Configuring {product-title} to Receive Events
+
+To allow {product-title} to receive events from a Red Hat OpenStack Platform environment, you must configure the *notification_driver* option for the Compute service and Orchestration service in that environment.
+
+. Edit _/etc/heat/heat.conf_, and specify the following options:
++
+------
+notification_driver=glance.openstack.common.notifier.rpc_notifier
+notification_topics=notifications
+------
++
+. Edit _/etc/nova/nova.conf_, and specify the following options:
++
+------
+notification_driver=messaging
+notification_topics=notifications
+------
++
+. Restart the Compute service and Orchestration services:
++
+------
+# systemctl restart openstack-heat-api.service \ 
+  openstack-heat-api-cfn.service \
+  openstack-heat-engine.service \
+  openstack-heat-api-cloudwatch.service
+# systemctl restart openstack-nova-compute.service
+------
+
+
+=== Configuring the Telemetry Service to Store Events
+
+By default, the Telemetry service does not store events emitted by other services in a Red Hat OpenStack Platform environment. The following procedure outlines how to enable the Telemetry service to store such events so that they are exposed to {product-title} when a Red Hat OpenStack Platform environment is added as an infrastructure provider.
+
+. On the director node, edit _undercloud.conf_, and set _store_events_ to _true_.
+. Create an environment file called _ceilometer.yaml_, and add the following contents:
++
+------
+parameter_defaults:
+  CeilometerStoreEvents: true
+------
++
+. Add the environment file to the _overcloud deploy_ command:
++
+------
+# openstack overcloud deploy --templates -e ~/ceilometer.yaml
+------
+
+

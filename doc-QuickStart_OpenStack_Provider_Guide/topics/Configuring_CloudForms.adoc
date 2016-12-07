@@ -1,0 +1,62 @@
+[[configuring_a_database]]
+=== Configuring a Database for {product-title}
+
+Before using _{product-title}_, you will need to configure the database options for it. _{product-title}_ provides two options for database configuration:
+
+* Install an internal PostgreSQL database to the appliance
+* Configure the appliance to use an external PostgreSQL database
+
+[NOTE]
+=======
+See link:https://access.redhat.com/documentation/en/red-hat-cloudforms/version-4.0/deployment-planning-guide/#cpu_sizing_assistant_for_a_dedicated_vmdb_host[CPU Sizing Assistant for a Dedicated VMDB Host] in the Deployment Planning Guide for guidelines on CPU requirements.
+=======
+
+
+=== Configuring an Internal Database
+
+[IMPORTANT]
+======
+Before installing an internal database, add a disk to the infrastructure hosting your appliance. See the documentation specific to your infrastructure for instructions on how to add a disk. As a storage disk usually cannot be added while a virtual machine is running, Red Hat recommends adding the disk before starting the appliance. {product-title} only supports installing of an internal VMDB on blank disks. The installation will fail if the disks are not blank.
+======
+
+. Start the appliance and open a terminal from your virtualization or cloud provider.
+. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
+. Enter the `appliance_console` command. The _{product-title}_ Appliance summary screen displays.
+. Press *Enter* to manually configure settings.
+. Select *8) Configure Database* from the menu.
+. You are prompted to create or fetch an encryption key.
+* If this is the first CFME appliance, choose *1) Create key*.
+* If this is not the first CFME appliance, choose *2) Fetch key* from remote machine to fetch the key from the first CFME appliance. All CFME appliances in a multi-region deployment must use the same key.
+. Choose *1) Internal* for the database location.
+. Choose a disk for the database. For example:
++
+----
+1)  /dev/vdb: 20480
+
+Choose disk:
+----
++
+Enter *1* to choose `/dev/vdb` for the database location.
+
+. When prompted, enter a unique three-digit region ID to create a new region.
++
+[IMPORTANT]
+======
+Creating a new region destroys any existing data on the chosen database.
+======
++
+.  Confirm the configuration when prompted.
+
+_{product-title}_ configures the internal database.
+
+=== Configuring an External Database
+
+The `postgresql.conf` file used with _{product-title}_ databases requires specific settings for correct operation. For example, it must correctly reclaim table space, control session timeouts, and format the PostgreSQL server log for improved system support. Due to these requirements, Red Hat recommends that external _{product-title}_ databases use a `postgresql.conf` file based on the standard file used by the _{product-title}_ appliance.
+
+Ensure you configure the settings in the `postgresql.conf` to suit your system. For example, customize the `shared_buffers` setting according to the amount of real storage available in the external system hosting the PostgreSQL instance. In addition, depending on the aggregate number of appliances expected to connect to the PostgreSQL instance, it may be
+necessary to alter the `max_connections` setting.
+
+Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix _{product-title}_ databases with other types of databases in a single PostgreSQL instance.
+
+
+

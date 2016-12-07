@@ -1,0 +1,34 @@
+[IMPORTANT]
+====
+Before installing an internal database, add a disk to the infrastructure hosting your appliance. See the documentation specific to your infrastructure for instructions on how to add a disk. As a storage disk usually cannot be added while a virtual machine is running, Red Hat recommends adding the disk before starting the appliance. Red Hat CloudForms only supports installing of an internal VMDB on blank disks. The installation will fail if the disks are not blank.
+====
+
+. Start the appliance and open a terminal from your virtualization or cloud provider.
+. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
+. Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
+. Press *Enter* to manually configure settings.
+. Select *8) Configure Database* from the menu.
+. You are prompted to create or fetch an encryption key.
+* If this is the first {product-title} appliance, choose *1) Create key*.
+* If this is not the first {product-title} appliance, choose *2) Fetch key* from remote machine to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
+. Choose *1) Internal* for the database location.
+. Choose a disk for the database. For example:
++
+----
+1)  /dev/vdb: 20480
+
+Choose disk:
+----
++
+Enter *1* to choose `/dev/vdb` for the database location.
+
+. When prompted, enter a unique three digit region ID to create a new region.
++
+[IMPORTANT]
+====
+Creating a new region destroys any existing data on the chosen database.
+====
++
+.  Confirm the configuration when prompted.
+
+{product-title} configures the internal database.

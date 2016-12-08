@@ -2799,7 +2799,7 @@ The region number must be unique on each {product-title} instance where replicat
 [[configuring-a-remote-copy]]
 ===== Configuring a Remote Copy
 
-Configure a {product-title} instance to act as a remote copy where data from the global copy will be replicated.
+Configure a {product-title} instance to act as a remote copy from which data will be replicated to the global copy.
 
 . Navigate to the user settings in the top-right menu.
 . Click *Configuration*.
@@ -2812,9 +2812,7 @@ Configure a {product-title} instance to act as a remote copy where data from the
 [[configuring-the-global-copy]]
 ===== Configuring the Global Copy
 
-Configure a {product-title} instance to act as the global copy from which data is replicated to remote copies.
-
-image:centralized_admin_enable.png[Enable Centralized Administration]
+Configure a {product-title} instance to act as the global copy to which data is replicated from the remote copies.
 
 . Navigate to the user settings in the top-right menu.
 . Click *Configuration*.
@@ -2823,15 +2821,19 @@ image:centralized_admin_enable.png[Enable Centralized Administration]
 . Click *Replication*.
 . Select *Global* from the *Type* list.
 . Click *Add Subscription*.
+image:centralized_admin_disabled.png[Centralized Administration Config]
 .. Enter the name of the database on the remote copy in the *Database* field.
 .. Enter the IP address or fully qualified domain name of the remote copy in the *Host* field.
 .. Enter the name of a database user able to access the database in the *Username* field.
 .. Enter the password of the database user in the *Password* field.
 .. Enter the port by which the database is accessed in the *Port* field.
-.. In *Central Admin Enabled*, select *Yes* to enable central administration. 
+.. In *Actions*, click the menu on the right to see a list of actions, including *Enable Central Admin*, *Validate*, and *Delete*. You can also *Update* your existing subscription.
+* Click *Enable Central Admin*. Note that central administration can only be enabled after the initial data sync is complete. So you must save the subscription before this can be done. 
+* If *Central Admin Enabled* shows _Yes_, that is if centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*. You can also *Validate* or *Delete* your subscription.
+image:centralized_admin_enabled.png[Centralized Administration Enabled]
 . Click *Save*.
 
-Database replication and centralized administration is now configured to support life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
+Database replication and centralized administration is now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
 
 [[monitoring_database_replication]]
 ===== Monitoring Database Replication

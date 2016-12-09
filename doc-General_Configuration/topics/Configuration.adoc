@@ -2814,6 +2814,8 @@ Configure a {product-title} instance to act as a remote copy from which data wil
 
 Configure a {product-title} instance to act as the global copy to which data is replicated from the remote copies.
 
+image:add-subscription.png[Add Subscription]
+
 . Navigate to the user settings in the top-right menu.
 . Click *Configuration*.
 . Click the *Settings* accordion.
@@ -2821,19 +2823,43 @@ Configure a {product-title} instance to act as the global copy to which data is 
 . Click *Replication*.
 . Select *Global* from the *Type* list.
 . Click *Add Subscription*.
-image:centralized_admin_disabled.png[Centralized Administration Config]
 .. Enter the name of the database on the remote copy in the *Database* field.
 .. Enter the IP address or fully qualified domain name of the remote copy in the *Host* field.
 .. Enter the name of a database user able to access the database in the *Username* field.
 .. Enter the password of the database user in the *Password* field.
 .. Enter the port by which the database is accessed in the *Port* field.
-.. In *Actions*, click the menu on the right to see a list of actions, including *Enable Central Admin*, *Validate*, and *Delete*. You can also *Update* your existing subscription.
-* Click *Enable Central Admin*. Note that central administration can only be enabled after the initial data sync is complete. So you must save the subscription before this can be done. 
-* If *Central Admin Enabled* shows _Yes_, that is if centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*. You can also *Validate* or *Delete* your subscription.
-image:centralized_admin_enabled.png[Centralized Administration Enabled]
+.. In *Actions*, click *Accept*. You can also *Update* your subscription if required, or click the menu on the right in order to *Validate* or *Discard*.
 . Click *Save*.
 
-Database replication and centralized administration is now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
+[NOTE]
+====
+Central administration can only be enabled after the initial data sync is complete. So you must save the subscription before this can be done.
+====
+
+[[enabling-disabling-central-admin]]
+===== Enabling / Disabling Centralized Administration
+
+Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, you can enable centralized administration after the initial data sync is complete.
+
+image:centralized_admin_disabled.png[Centralized Administration Config]
+
+. Navigate to the user settings in the top-right menu.
+. Click *Configuration*.
+. Click the *Settings* accordion.
+. Click the region where the instance is located.
+. Click *Replication*.
+. For your saved subscription, click the menu in *Actions*, then click *Enable Central Admin*. You can also *Validate* your subscription. 
+
+Once centralized administration is enabled, *Central Admin Enabled* will change to _Yes_.
+
+[NOTE]
+====
+If centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*, or *Delete* your saved subscription. 
+====
+
+image:centralized_admin_enabled.png[Centralized Administration Enabled]
+
+Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
 
 [[monitoring_database_replication]]
 ===== Monitoring Database Replication

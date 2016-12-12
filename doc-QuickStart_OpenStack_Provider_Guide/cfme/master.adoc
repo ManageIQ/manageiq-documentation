@@ -33,44 +33,6 @@ include::common/cfme-install-appliance-as-vm.adoc[]
 
 include::topics/configuration-quick.adoc[]
 
-[[registering-appliances]]
-=== Registering Your Appliance
-
-include::common/configuration-register-appliance.adoc[]
-
-[[Updating_Appliances]]
-==== Updating Your Appliance
-
-include::common/configuration-update-appliance.adoc[]
-
-=== Configuring {product-title_short} Metrics for SmartState Analysis
-
-You can also configure {product-title_short} to perform a _SmartState Analysis_. This type of analysis collects details such as accounts, drivers, network information, hardware, and security patches on assets managed by the OpenStack provider. Enabling SmartState Analysis involves two steps:
-
-. xref:cf-caputils[], and 
-. xref:cf-smartproxy[]
-
-These steps are required to allow {product-title_short} to collect metrics from OpenStack and use them to perform a SmartState analysis. You can choose different servers to perform either function; the following sections assume that you will.
-
-
-[[cf-caputils]]
-==== Configuring {product-title_short} Capacity and Utilization
-
-include::common/cap-util-note-metrics-collection.adoc[]
-
-// https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/managing-providers/#configuring_openshift_metrics
-
-To enable these server roles:
-
-include::common/cap-util-assign-server-roles.adoc[]
-
-For more information, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/deployment-planning-guide/#capacity_and_utilization_collection[Capacity and Utilization Collection] from the _Deployment Planning Guide_.
-
-[[cf-smartproxy]]
-==== Enabling SmartState Analysis
-
-include::common/smartstate.adoc[]
-
 == Adding an OpenStack Infrastructure Provider
 
 // see topics/Adding_OpenStack_Providers.adoc for singlesourcable
@@ -123,41 +85,15 @@ include::common/provisioning-requests-openstack.adoc[]
 
 include::topics/catalogs-services.adoc[]
 
-[NOTE]
-==================
-For more information about catalogs and services, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/provisioning-virtual-machines-and-hosts/#catalogs-services[Catalogs and Services] from https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2-beta/single/provisioning-virtual-machines-and-hosts/[Provisioning Virtual Machines and Hosts]. 
-==================
+[[_sect_reports]]
+== Reports
 
-[[adding-a-service-dialog]]
-=== Creating a Service Dialog
+include::topics/reports.adoc[]
 
-When provisioning a service, input will be needed from the requester. *Service Dialogs* are used to take input from the user. This input is connected to a method in the *Automate* model that defines how user input is translated into the provision request. Before creating a *Service Dialog*, be sure to plan what items you need the user to input.
+[[_sect_chargeback]]
+== Chargeback
 
-include::common/service-dialog-creation.adoc[]
-
-[[creating-an-empty-catalog]]
-=== Creating a Catalog
-
-A catalog is a way to organize or categorize catalog items and bundles. Before you can associate a catalog item into a catalog, create an empty catalog first:
-
-. Navigate to menu:Services[Catalogs].
-. Click the *Catalogs* accordion.
-. Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a New Catalog*).
-. Enter a *Name* and *Description*, leaving everything else blank.
-. Click *Add*.
-
-[[creating-a-catalog-item]]
-==== Creating a Catalog Item
-
-include::catalog-item-creation-openstack.adoc[]
-
-[[ordering-a-catalog-item]]
-==== Ordering a Catalog Item
-
-include::common/catalog-order.adoc[]
-
-
-
+include::topics/chargeback.adoc[]
 
 [appendix]
 [[provisioning-dialogs-customizing]]
@@ -181,3 +117,18 @@ include::topics/Viewing_Capacity_and_Utilization_Charts_for_an_Instance.adoc[]
 include::topics/Further_reading.adoc[]
 
 
+[[tenant-mapping]]
+== Tenant Mapping
+
+include::common/openstack/tenant-mapping.adoc[]
+
+In previous releases, {product-title_short} and OpenStack tenants were disparate and unrelated entities. Tenant mapping creates a one-to-one association between tenants from both products.
+
+=== Managing Tenants
+
+You can manage tenants through two different sections of the {product-title_short} interface:
+
+* To view OpenStack tenants, navigate to menu:Compute[Clouds > Tenants]
+* To view the {product-title_short} tenants, navigate to menu:Compute[Administrator | EVM > Configuration]. Under the *Access Control* accordion, click *Tenants*. 
+
+The {product-title_short} view provides a heirarchy, with the top _root_ level being the base {product-title_short} tenant. Every cloud provider is a child tenant of the base {product-title_short} tenant. Each OpenStack tenant is nested under its corresponding cloud provider. 

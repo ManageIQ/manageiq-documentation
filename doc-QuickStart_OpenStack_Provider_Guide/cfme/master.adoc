@@ -44,6 +44,7 @@ include::common/openstack/adding-an-openstack-infrastructure-provider.adoc[]
 
 include::common/openstack/configure-undercloud-to-store-events.adoc[]
 
+[[add-openstack-oc]]
 == Adding an OpenStack Cloud Provider
 
 include::common/openstack/adding-an-openstack-cloud-provider.adoc[]
@@ -53,8 +54,60 @@ include::common/openstack/adding-an-openstack-cloud-provider.adoc[]
 
 include::common/openstack/configure-overcloud-to-store-events.adoc[]
 
+[[perform-smartstate-analysis]]
+== Performing a SmartState Analysis
 
-/////////////////
+Red Hat CloudForms can analyze a cloud Instance or infrastructure host to collect metadata such as user accounts, applications, software patches, and other internal information. This key CloudForms feature is called SmartState Analysis. SmartState analysis can be initiated manually or automatically using Control Policies.
+
+include::common/smartstate-analysis-instances.adoc[]
+
+[[policies]]
+== Managing Policies
+
+include::topics/managing-policies.adoc[]
+
+[[instances]]
+== Managing Instances
+
+Cloud instance provision goes through three phases:
+
+. Request: This includes ownership information, tags, virtual hardware requirements, the operating system, and any customization required. 
+. Approval: Provisioning requests are then approved or denied. This phase can happen automatically or manually.
+. Provision: Approved provisioning requests are executed. 
+
+[[provisioning-an-openstack-instance-from-an-image]]
+=== Provisioning an OpenStack Instance from an Image
+
+include::common/provisioning-requests-openstack.adoc[]
+
+[[catalogs-services]]
+== Catalogs and Services
+
+include::topics/catalogs-services.adoc[]
+
+[[_sect_reports]]
+== Reports
+
+include::topics/reports.adoc[]
+
+[[_sect_chargeback]]
+== Chargeback
+
+include::topics/chargeback.adoc[]
+
+[appendix]
+[[provisioning-dialogs-customizing]]
+=== Customizing Provisioning Dialogs
+
+include::common/provisioning-dialogs-customization.adoc[]
+
+[appendix]
+[[provision-keypairs]]
+=== Managing Keypairs
+
+include::common/provisioning-requests-keypairs.adoc[]
+
+///////////////////////////////////////////////////
 include::topics/Adding_OpenStack_Providers.adoc[]
 include::topics/Adding_an_OpenStack_Infrastructure_Provider.adoc[]
 include::topics/CFME_Lifecycle.adoc[]
@@ -64,3 +117,18 @@ include::topics/Viewing_Capacity_and_Utilization_Charts_for_an_Instance.adoc[]
 include::topics/Further_reading.adoc[]
 
 
+[[tenant-mapping]]
+== Tenant Mapping
+
+include::common/openstack/tenant-mapping.adoc[]
+
+In previous releases, {product-title_short} and OpenStack tenants were disparate and unrelated entities. Tenant mapping creates a one-to-one association between tenants from both products.
+
+=== Managing Tenants
+
+You can manage tenants through two different sections of the {product-title_short} interface:
+
+* To view OpenStack tenants, navigate to menu:Compute[Clouds > Tenants]
+* To view the {product-title_short} tenants, navigate to menu:Compute[Administrator | EVM > Configuration]. Under the *Access Control* accordion, click *Tenants*. 
+
+The {product-title_short} view provides a heirarchy, with the top _root_ level being the base {product-title_short} tenant. Every cloud provider is a child tenant of the base {product-title_short} tenant. Each OpenStack tenant is nested under its corresponding cloud provider. 

@@ -5,7 +5,7 @@
 
 == Configuring Automatic Tagging for Container Entities
 
-Container object labels in OpenShift Container Platform can be used to automatically create tags in {product-title}. This is done by mapping existing OpenShift labels to {product-title} tags and tag categories.
+Container object labels in OpenShift can be used to automatically create tags in {product-title}. This is done by mapping existing OpenShift labels to {product-title} tags and tag categories.
 
 Labels from OpenShift can be mapped to {product-title} tags for the following container entities:
 
@@ -20,14 +20,14 @@ Labels from OpenShift can be mapped to {product-title} tags for the following co
 Note that tags created by this method are completely managed by the system and cannot be manually assigned or unassigned.
 Deleting a mapping rule immediately deletes the resulting tags.
 
-View a container entity's OpenShift labels on container entities on the entity's details page. OpenShift labels are listed under the *Labels* heading.
+View a container entity's OpenShift labels on container entities on the entity's details page. OpenShift labels are listed in a table under the *Labels* heading, and consist of two parts: a _key_ (listed in the left column of the *Labels* table) and a _value_ (listed in the right column of the *Labels* table).
 
 To configure automatic tagging on container entities using OpenShift labels:
 
-. Note the OpenShift label you want to map to a {product-title} tag. To find the label:
+. Note the _key_ of the OpenShift label you want to map to a {product-title} tag. (This example shows tagging for a node, but the same steps can be also used for tagging other container entities.)
 .. Navigate to menu:Compute[Containers > Nodes].
 .. Select a node to open its summary page.
-.. Under *Labels*, note the label(s) to map to {product-title} tag(s). For example, this node has six labels that were created in OpenShift and collected in CloudForms inventory:
+.. Under *Labels*, note the label(s) to map to {product-title} tag(s). This node has six labels (key/value pairs) that were created in OpenShift and collected in {product-title}  inventory:
 +
 image:OCPnode-summary.png[]
 +
@@ -41,10 +41,10 @@ To create an OpenShift label, see https://docs.openshift.com/container-platform/
 . Click the *Map Tags* tab.
 . Click *Add* to create a new mapping rule.
 .. Select a container entity to tag from the *Entity* list, or select *<All>* to tag all entities.
-.. Specify the OpenShift container label you noted in the previous step in *Label*. 
+.. Specify the _key_ from the OpenShift container label you noted earlier. 
 .. Specify a {product-title} tag category in *Category* to map the label to. If the tag category does not exist yet in {product-title}, it will be created automatically.
 +
-image:Add_mapping.png[]
+image:Add_label_mapping.png[]
 +
 .. Click *Add*.
 The mapping will show in the table on the *Map Tags* tab.
@@ -54,9 +54,13 @@ The mapping will show in the table on the *Map Tags* tab.
 .. Select the provider to refresh.
 .. Click  image:1847.png[] (*Configuration*), and then  image:2003.png[] (*Refresh Items and Relationships*).
 
-The container label will display on the entity's summary page under *Smart Management* under *Company Tags*.
+The container label will display on the entity's summary page under *Smart Management* under *Company Tags* as `<Category> : <value>`.
 
-You can use the tags to create reports. See https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2-beta/single/monitoring-alerts-and-reporting/[Monitoring, Alerts, and Reporting] for details on creating reports. 
+image:OCP-autotagged.png[]
+
+Any container entity with the OpenShift `zone` label will be tagged automatically as `category1` in {product-title}. If the _value_ for `zone` is `south`, for example, the entity will be tagged as `category1 : south`.
+
+You can use these tags to create reports. See https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2-beta/single/monitoring-alerts-and-reporting/[Monitoring, Alerts, and Reporting] for details on creating reports. 
 
 
 

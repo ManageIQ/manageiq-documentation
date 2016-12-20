@@ -1,26 +1,7 @@
 [[configuration]]
 == Configuration
 
-The options under the *Configuration* menu allow you to configure global options for your {product-title} environment, view diagnostic information, and view analytics on the servers in the environment. The menu displays the {product-title} environment at the enterprise, zone, and server levels.
-
-There are four main areas:
-
-* *Settings*
-+
-This menu enables you to modify the configuration of your {product-title} infrastructure. You can also create analysis profiles and schedules for these profiles.
-+
-* *Access Control*
-+
-This menu enables you to modify the configuration of your {product-title} infrastructure. You can also create analysis profiles and schedules for these profiles.
-+
-* *Diagnostics*
-+
-This menu displays the status of your servers and their roles and provides access to logs.
-+
-* *Database*
-+
-This menu enables you to modify the configuration of your {product-title} infrastructure. You can also create analysis profiles and schedules for these profiles.
-
+include::common/configuration-gui.adoc[]
 
 [[settings]]
 === Settings
@@ -308,7 +289,7 @@ ifdef::cfme[]
 [[registering-and-updating]]
 ===== Registering and Updating {product-title}
 
-You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management. 
+You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
 
 The following tools are used during the update process:
 
@@ -329,60 +310,13 @@ Servers with the `RHN Mirror` role also act as a repository for other appliances
 [[registering-appliances]]
 ====== Registering Appliances
 
-Before you can access and apply package updates, you must register and subscribe the {product-title} appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server.
+include::common/configuration-register-appliance.adoc[]
 
-You need the following to register your appliance:
-
-* Your Red Hat account login or Red Hat Network Satellite login
-* A Red Hat subscription that covers your product
-
-To register your appliance with Red Hat Subscription Management or Red Hat Satellite 6, first configure the region with your registration details. These settings will apply to all appliances in this region.
-
-To configure registration for a region:
-
-. Log in to the appliance as the `admin` user.
-. Navigate to menu:Settings[Configuration].
-. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
-. Click *Edit Registration*.
-. Configure registration details for the {product-title} appliance using one of two available options:
-.. To register with Red Hat Subscription Management:
-... In *Register to*, select *Red Hat Subscription Management*.
-... Enter the *Red Hat Subscription Management Address*. The default is `subscription.rhn.redhat.com`.
-... Enter the *Repository Name(s)*. The default is `cf-me-5.7-for-rhel-7-rpms rhel-server-rhscl-7-rpms`, which are the {product-title} repository and the Red Hat Software Collections repository.
-... To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
-... Enter your Red Hat account information and click *Validate*.
-... After your credentials are validated, click *Save*.
-.. To register with Red Hat Satellite 6:
-... In *Register to*, select *Red Hat Satellite 6*.
-... Enter the *Red Hat Satellite 6 Address*. The default is `subscription.rhn.redhat.com`.
-... Enter the *Repository Name(s)*. The default is `cf-me-5.7-for-rhel-7-rpms rhel-server-rhscl-7-rpms`, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
-... To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
-... Enter your Red Hat Satellite account information and click *Validate*.
-... After your credentials are validated, click *Save*.
-
-Your appliance now appears in the *Appliance Updates* list as `Not registered`.
-
-To register your appliance:
-
-. Select the appliance from the *Appliance Updates* list.
-. Click *Register* to subscribe the appliance and attach subscriptions.
-
-Registering and attaching subscriptions takes a few minutes. The subscription process is complete when the appliance reports that it is `Subscribed` under *Update Status*, and `Registered` under *Last Message*.
-
-You can now apply updates to your appliance.
 
 [[Updating_Appliances]]
 ====== Updating Appliances
 
-An important part of securing {product-title} is to ensure your appliances use the latest packages.
-Package updates to the appliance contain patches for any software bugs, including possible security bugs.
-
-The *Red Hat Updates* tab enables you to check for updates and update registered appliances. Any services requiring a restart to apply updates are automatically restarted as part of the *Red Hat Updates* process.
-
-. Navigate to menu:Settings[Configuration].
-. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
-. Click *Check For Updates* to search the Content Delivery Network (CDN) for any updated CloudForms packages. If an appliance update is available, it will be listed with the available version.
-. Click *Apply CFME Update* to install and update {product-title} packages. The {product-title} service will be automatically restarted as needed.
+include::common/configuration-update-appliance.adoc[]
 
 
 [IMPORTANT]
@@ -643,6 +577,19 @@ To edit a zone:
 . Make the required changes.
 . Click *Save*.
 
+[[adding-smartproxy-affinity-to-a-zone]]
+===== Adding SmartProxy Affinity to a Zone:
+
+Enable SmartProxy Affinity for zones containing servers with the SmartProxy role to run a SmartState Analysis. 
+
+To add SmartProxy Affinity to a zone:
+
+. Navigate to menu:Settings[Configuration].
+. Click on the *Settings* accordion, then click *Zones*.
+. Click the zone in which you want to enable SmartProxy Affinity.
+. Click the *SmartProxy Affinity* tab and click the appropriate server.
+. Click *Save*.
+
 [[servers]]
 ==== Servers
 
@@ -716,7 +663,7 @@ These roles are enabled by default on all servers.
 |RHN Mirror|An appliance with RHN Mirror enabled acts as a server containing a repository with the latest {product-title} packages. This also configures other appliances within the same region to point to the chosen RHN Mirror server for updates. This provides a low bandwidth method to update environments with multiple appliances.
 |Reporting|This role is enabled by default. The Reporting role specifies which {product-title} servers can generate reports. If you do not have a {product-title} server set to this role in a zone, then no reports can be generated in that zone. You should have at least one of these in each zone.
 |Scheduler|This role is enabled by default. The Scheduler sends messages to start all scheduled activities such as report generation and SmartState Analysis. This role also controls all system schedules such as capacity and utilization data gathering. One server in each zone must be assigned this role or scheduled {product-title} events will not occur. If more than one {product-title} server in a specific zone has this role, only one will be active at a time.
-|SmartProxy|Enabling the SmartProxy role turns on the embedded SmartProxy on the {product-title} server. The embedded SmartProxy can analyze virtual machines that are registered to a Host and templates that are associated with a provider. To provide visibility to repositories, install the SmartProxy on a host from the {product-title} console. This SmartProxy can also analyze virtual machines on the host on which it is installed.
+|SmartProxy|Enabling the SmartProxy role turns on the embedded SmartProxy on the {product-title} server. The embedded SmartProxy can analyze virtual machines that are registered to a host and templates that are associated with a provider. To provide visibility to repositories, install the SmartProxy on a host from the {product-title} console. This SmartProxy can also analyze virtual machines on the host on which it is installed. Enabling the SmartProxy role on an appliance requires selecting the SmartProxy Affinity for a zone to run a SmartState Analysis. By default, no selections are enabled under SmartProxy Affinity.   
 |SmartState Analysis|This role is enabled by default. The SmartState Analysis role controls which {product-title} servers can control SmartState Analyses and process the data from the analysis. You should have at least one of these in each zone.
 |User Interface|This role is enabled by default. Uncheck User Interface if you do not want users to be able to access this {product-title} server using the {product-title} console. For example, you may want to turn this off if the {product-title} server is strictly being used for capacity and utilization or reporting generation. More than one {product-title} server can have this role in a zone.
 |Web Services|This role is enabled by default. Uncheck Web Services to stop this {product-title} server from acting as a Web service provider. More than one {product-title} server can have this role in a zone.
@@ -857,7 +804,7 @@ To change authentication settings:
 . Click the *Authentication* tab.
 . Use *Session Timeout* to set the period of inactivity before a user is logged out of the console.
 . Set the authentication method in *Mode*. Choose from *Database* (using the VMDB), *LDAP* (Lightweight Directory Authentication Protocol), *LDAPS* (Secure Lightweight Directory Authentication Protocol), *Amazon*, or *External (httpd)*. The default is *Database*.
-* If you choose *Database*, see xref:creating_a_user[] for steps to create users. 
+* If you choose *Database*, see xref:creating_a_user[] for steps to create users.
 * If you choose *LDAP* or *LDAPS*, see xref:ldap_settings[] for configuration steps.
 * If you choose *Amazon*, see xref:amazon_settings[] for configuration steps.
 * If you choose *External (httpd)*, see xref:external_ipa_auth[] for configuration steps.
@@ -892,7 +839,7 @@ Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to 
 The `ldapsearch(1)` command can be used to get details of your LDAP settings. To get details related to a specific user, run:
 
   # ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password | grep -i dbright
-  
+
 To search for your LDAP server's distinguished name (DN) values, run:
 
   # ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password
@@ -952,15 +899,15 @@ After adding other trusted LDAP forests, you can then change the order in which 
 [[assigning_account_roles_using_ldap_groups]]
 ====== Assigning {product-title} Account Roles Using LDAP Groups
 
-After configuring LDAP authentication as described in xref:ldap_settings[], you can associate {product-title} account roles with your LDAP users. The LDAP server defines the groups and users for {product-title}, while {product-title} defines the account roles, and maps the roles to the privileges the LDAP user has. 
+After configuring LDAP authentication as described in xref:ldap_settings[], you can associate {product-title} account roles with your LDAP users. The LDAP server defines the groups and users for {product-title}, while {product-title} defines the account roles, and maps the roles to the privileges the LDAP user has.
 
 There are two ways to associate your LDAP groups with {product-title} account roles:
 
 * Create groups in {product-title} that match your existing LDAP groups by name, and assign the groups account roles; or
 * Create groups on your LDAP server based on the default account roles in {product-title}.
 
-The users in your LDAP groups then inherit the {product-title} account roles for the LDAP group(s) they are in. 
- 
+The users in your LDAP groups then inherit the {product-title} account roles for the LDAP group(s) they are in.
+
 The authentication process then happens as such:
 
 `LDAPuser1` attempts to log into {product-title}, so {product-title} queries the LDAP server to verify it knows `LDAPuser1`. The LDAP server then confirms that it knows `LDAPuser1`, and provides information about the LDAP groups `LDAPuser1` belongs to: `Group1`. {product-title} then looks up `Group1` and discovers that `Group1` has several roles: `Role1`, `Role2` and `Role3`. {product-title} then associates `LDAPuser1` with `Group1` in {product-title}, and then allows the user to perform tasks allowable by those roles.
@@ -995,7 +942,7 @@ To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
 
 ====== Using Groups Named by {product-title} to Assign Account Roles
 
-You can also configure access control for LDAP users by creating groups on your LDAP server based on {product-title} account roles. 
+You can also configure access control for LDAP users by creating groups on your LDAP server based on {product-title} account roles.
 
 Your LDAP group names must match the account role names in {product-title}. The LDAP users in that group are then automatically assigned to that specific account role.
 
@@ -1038,7 +985,7 @@ This group must be in the LDAP directory source you specified for the server. Se
 . Click on the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Edit Sequence of User Groups for LDAP Look Up*) to prioritize which group a user will default to if LDAP returns multiple matching groups.
 . Select one or more consecutive groups and use the arrow buttons to move the user group higher or lower in priority.
-. Click *Save*. 
+. Click *Save*.
 
 ====== Testing LDAP Configuration
 
@@ -1046,9 +993,9 @@ To test that your LDAP or LDAPS group configuration is working correctly with {p
 
 . Log out of the {product-title} user interface.
 . Log back in as an LDAP user that is assigned to one or more of the matching groups.
-. Change groups by clicking on the user dropdown menu on the top right of the user interface. The dropdown list will show the groups the user is authorized for. 
+. Change groups by clicking on the user dropdown menu on the top right of the user interface. The dropdown list will show the groups the user is authorized for.
 
-You can also check the logs in `/var/www/miq/vmdb/log/audit.log` or `/var/www/miq/vmdb/log/evm.log` to verify your LDAP configuration is working correctly. 
+You can also check the logs in `/var/www/miq/vmdb/log/audit.log` or `/var/www/miq/vmdb/log/evm.log` to verify your LDAP configuration is working correctly.
 
 First, run the following command in a terminal to view the log messages in real time:
 
@@ -1061,12 +1008,12 @@ Then log into the CloudForms user interface as an LDAP user, while checking `/va
 
 To test a problematic {product-title} LDAP configuration, run the following to see if the user been pulled from LDAP with the right group. For example:
 
-  # ldapsearch -x -H ldap://ldap-example:389 -LLL \ -b "ou=people,dc=example,dc=com" -s sub \ -D "ui=:userid,ou=People,dc=example,dc=com" -w :password \ "(objectclass=organizationalPerson) 
-  
+  # ldapsearch -x -H ldap://ldap-example:389 -LLL \ -b "ou=people,dc=example,dc=com" -s sub \ -D "ui=:userid,ou=People,dc=example,dc=com" -w :password \ "(objectclass=organizationalPerson)
+
 To test if the user belongs to right group, include one of the following lines in the `ldapsearch` command:
 
-  (&(objectClass=user)(sAMAccountName=yourUserName) (memberof=CN=YourGroup,OU=Users,DC=YourDomain,DC=com)) 
-  
+  (&(objectClass=user)(sAMAccountName=yourUserName) (memberof=CN=YourGroup,OU=Users,DC=YourDomain,DC=com))
+
 or
 
   -b "ou=groups, dc=example,dc=com"
@@ -1235,7 +1182,7 @@ The following is required in order to enable SAML authentication to the applianc
 [[configure-apache-SAML]]
 *Configuring the HTTP Server for SAML*
 
-The Apache HTTP server first must be configured to work with SAML authentication. All SAML-related certificates and keys are accessed from `/etc/httpd/saml2/`. 
+The Apache HTTP server first must be configured to work with SAML authentication. All SAML-related certificates and keys are accessed from `/etc/httpd/saml2/`.
 
 . Log into the {product-title} appliance as root using SSH, and create the `/etc/httpd/saml2/` directory:
 +
@@ -1255,10 +1202,10 @@ The Apache HTTP server first must be configured to work with SAML authentication
 ============
 The following are notable SAML configuration defaults in the `manageiq-external-auth-saml.conf` file:
 
-* Identity Provider Files (i.e. Red Hat SSO)    
+* Identity Provider Files (i.e. Red Hat SSO)
 ** Metadata File: `/etc/httpd/saml2/idp-metadata.xml`
 
-* Service Provider Files (i.e. `mod_auth_mellon`) 
+* Service Provider Files (i.e. `mod_auth_mellon`)
 ** Private Key File: `/etc/httpd/saml2/miqsp-key.key`
 ** Certificate File: `/etc/httpd/saml2/miqsp-cert.cert`
 ** Metadata File: `/etc/httpd/saml2/miqsp-metadata.xml`
@@ -1382,7 +1329,7 @@ For Red Hat SSO, the above SAML assertions can be defined for the appliance clie
 
 [options="header",cols="<1,<2,<1,<1"]
 |============================================================================
-| Name       | Category                  | Type           | Property  
+| Name       | Category                  | Type           | Property
 | username   | AttributeStatement Mapper | User Property  | username
 | email      | AttributeStatement Mapper | User Property  | email
 | firstname  | AttributeStatement Mapper | User Property  | firstName
@@ -1409,7 +1356,7 @@ This method requires the identity provider to be available, and the ability to l
 
 . Log in to the appliance user interface as the administrative user.
 . Navigate to menu:Settings[Configuration > Authentication].
-. Uncheck *Disable Local Login*. 
+. Uncheck *Disable Local Login*.
 . Click *Save*.
 
 .Re-enabling Local Login from the Appliance Console:
@@ -1770,7 +1717,7 @@ Table 3.12. server
 |listening_port|Specify the port number on which the web server is listening. Note that this does not set the port that VMDB listens on. When deploying the SmartHost from the {product-title} appliance, it tells the SmartHost (miqhost) what port to talk to the VMDB on. Default: "443"
 |mks_version|Specify the version of the VMware MKS Plugin to use for the VM Console. This is the same as VMware MKS Plugin Version in Configuration-Operations- Server-VM Console. Default : 2.1.0.0
 |name|Set the name to display for the {product-title} appliance that you are logged on to in the appliance console. This is the same as appliance Name in Configuration-Operations- Server-Basic Information. Default : EVM
-|role|Specify the roles for this {product-title} Server, separated by commas without spaces. The possible values are automate, database_operations, database_synchronization, ems_inventory, ems_metrics_collector, ems_metrics_coordinator, ems_metrics_processor, ems_operations, event, notifier, reporting, scheduler, smartproxy, smartstate, user_interface, web_services. This is the same as Server Roles in Configuration-Operations- Server- Server Control. Default: database_operations, event, reporting, scheduler, smartstate, ems_operations, ems_inventory, user_interface, web_services 
+|role|Specify the roles for this {product-title} Server, separated by commas without spaces. The possible values are automate, database_operations, database_synchronization, ems_inventory, ems_metrics_collector, ems_metrics_coordinator, ems_metrics_processor, ems_operations, event, notifier, reporting, scheduler, smartproxy, smartstate, user_interface, web_services. This is the same as Server Roles in Configuration-Operations- Server- Server Control. Default: database_operations, event, reporting, scheduler, smartstate, ems_operations, ems_inventory, user_interface, web_services
 |session_store|Where to store the session information for all web requests. The possible values are sql, memory, or cache. SQL stores the session information in the database regardless of the type of database server. Memory stores all the session information in memory of the server process. Cache stores the information in a memcache server. Default: cache
 |startup_timeout|The amount of time in seconds that the server will wait and prevent logins during server startup before assuming the server has timed out starting and will redirect the user to the log page after login. Default: 300
 |timezone|Set the timezone for the {product-title} appliance. Default: UTC
@@ -2149,7 +2096,7 @@ image:2086.png[]
 +
 [IMPORTANT]
 ======
-* If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB. 
+* If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB.
 * When the user logs in, they use their LDAP password.
 ======
 . Select a *Group*.
@@ -2800,7 +2747,7 @@ The region number must be unique on each {product-title} instance where replicat
 Configure a {product-title} instance to act as a remote copy where data from the global copy will be replicated. This procedure must only be performed on instances where the *Database Synchronization* role will be enabled. This procedure must be performed before enabling that role.
 
 . Navigate to menu:Settings[Configuration].
-. Click the *Settings* accordion. 
+. Click the *Settings* accordion.
 . Click the region where the instance is located.
 . Click *Replication*.
 . Select *Remote* from the *Type* list.
@@ -3120,7 +3067,7 @@ service evmserverd restart
 
 You can schedule hourly or periodic database maintenance through the appliance console. Performing regular PostgreSQL database maintenance helps to maintain a more responsive {product-title} environment.
 
-Hourly database maintenance tasks, such as reindexing, are useful for highly active database tables such as metrics, workers, and servers. 
+Hourly database maintenance tasks, such as reindexing, are useful for highly active database tables such as metrics, workers, and servers.
 
 You also may want to perform periodic database maintenance to truncate empty metrics tables and reorganize the database. Periodic maintenance can be configured to run hourly, daily, weekly, or monthly, at a specified hour and on a specified day.
 
@@ -3138,10 +3085,8 @@ To configure hourly and periodic database maintenance:
 .. For *Configure Hourly Database Maintenance?* Type `y` or `n`.
 .. For *Configure Periodic Database Maintenance?* Type `y` or `n`.
 
-The next options depend on the periodic database maintenance frequency you choose, and are specified using the same dialog. The dialog finishes configuration with a *"Database maintenance configuration updated"* message when complete. 
+The next options depend on the periodic database maintenance frequency you choose, and are specified using the same dialog. The dialog finishes configuration with a *"Database maintenance configuration updated"* message when complete.
 
-To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings. 
+To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings.
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
-
-

@@ -1,0 +1,83 @@
+[[installing-cloudforms-aws]]
+== Installing {product-title}
+
+{product-title} is able to be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the installation process takes you through the steps of uploading the appliance to a supported virtualization or cloud provider.
+
+[IMPORTANT]
+====
+After installing the {product-title} appliance, you must configure the database for {product-title}. See xref:configuring_a_database[].
+====
+
+ifdef::miq[]
+[[obtaining-the-appliance]]
+=== Obtaining the appliance
+
+. In a browser, navigate to link:manageiq.org/download[].
+. Select *Amazon* from the *--Choose your platform--* list.
+. Select *Stable (euwe-2)* from the *--Choose a release--* list.
+. Follow the instructions to download the appliance.
+endif::miq[]
+
+ifdef::cfme[]
+[[obtaining-the-appliance]]
+=== Obtaining the Appliance
+
+. Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Click *Downloads* in the menu bar.
+. Click *A-Z* to sort the product downloads alphabetically.
+. Click menu:Red Hat CloudForms[Download Latest] to access the product download page.
+. From the list of installers and images, select the *CFME EC2 Virtual Appliance* download link.
+endif::cfme[]
+
+[[uploading-the-appliance-on-amazon-ec2]]
+=== Uploading the Appliance to an Amazon S3 Bucket
+
+Uploading the {product-title} appliance file onto Amazon EC2's systems has the following requirements:
+
+* 44 GB of space on the chosen datastore.
+* 8 GB RAM.
+* 4 VCPUs.
+* An Amazon S3 bucket to store disk images.
+* A VM import service role (IAM role) named `vmimport`. 
+* Depending on your infrastructure, allow time for the upload.
+
+To upload the image:
+
+. Upload to the Amazon S3 Bucket the {product-title} appliance VHD image from your local file system using your choice of tool.
+
+[NOTE]
+====
+These are the prerequisites and procedural steps as of the time of writing. For more information on creating an Amazon S3 Bucket and VM Import Service Role, consult the Amazon EC2 documentation.
+====
+[[importing-the-appliance-on-amazon-ec2]]
+=== Importing the Appliance to Amazon Elastic Compute Cloud (Amazon EC2)
+To import the appliance:
+
+. Create a containers.json file: 
++  
+----
+[
+  {
+  "Description": "NAME OF INSTANCE",
+  "Format": "vhd",
+  "UserBucket": {
+        "S3Bucket": "BUCKET WITH UPLOADED .VHD IMAGE",
+        "S3Key": "NAME OF .VHD IMAGE"
+      }
+  }
+]
+----
++
+. Use AWS-CLI tools to import the image. Run the following command:
++
+----
+aws ec2 import-image --disk-containers file://containers.json --region BUCKET_REGION
+----
++
+. Check the progress of your imported image by running the following command:
++
+----
+aws ec2 describe-import-image-tasks --region BUCKET_REGION --import-task-ids import-ami-AMI_ID_GOT_FROM_REPONSE
+----
++
+

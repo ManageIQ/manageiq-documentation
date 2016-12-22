@@ -44,32 +44,7 @@ DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If nece
 
 Create a catalog item for each virtual machine or cloud instance that will be part of the service.
 
-. Navigate to menu:Services[Catalogs].
-. Click the *Catalog Items* accordion.
-. Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a New Catalog Item*).
-. Select the *Catalog Item Type* you are adding. The dialogs that appear will be filtered based on the selected type of provider. For example, you will only see templates residing on Red Hat Providers, if the *Catalog Item Type* is *Redhat*.
-image:2357.png[]
-. In the *Basic Info* subtab:
-.. Type a *Name/Description*.
-.. Check *Display in Catalog* to edit *Catalog*, *Dialog*, and *Entry Point(NS/Cls/Inst)* options.
-... *Provisioning Entry Point (Domain/NS/Cls/Inst)* requires you to select an Automate instance to run upon provisioning.
-... *Retirement Entry Point (Domain/NS/Cls/Inst)* requires you to select an Automate instance to run upon retirement.
-image:Catalogitem-statemachine.png[]
-+
-[NOTE]
-====
-The entry point must be a State Machine since the *Provisioning Entry Point* list is filtered to only show State Machine class instances. No other entry points will be available from the *Provisioning Entry Point* field.
-====
-+
-[NOTE]
-====
-You can only choose from the catalogs and dialogs you have already created. If you haven't done so, leave the values blank and edit later.
-====
-+
-. In the *Details* subtab, write a *Long Description* for the catalog item.
-. In the *Request Info* subtab, select provisioning options that apply to the provider chosen. For more information, refer to the sections on Provisioning Virtual Machines and Provisioning Instances.
-. Click *Add*.
-
+include::common/catalog-item-creation.adoc[]
 
 [[service-dialogs]]
 ==== Service Dialogs
@@ -79,44 +54,7 @@ When provisioning a service, input will be needed from the requester. *Service D
 [[adding-a-service-dialog]]
 ===== Adding a Service Dialog
 
-. Navigate to menu:Automate[Customization].
-. Click the *Service Dialogs* accordion.
-. Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a new Dialog*).
-. In *Dialog Information*, type in a *Label* and *Description*. Check the boxes for the buttons you want available at the bottom of the dialog form. The description will appear as hover text.
-. Click *Add*.
-. Select the dialog you just created.
-. Click image:1847.png[](*Configuration*), and then image:1851.png[](*Edit this Dialog*).
-. Add a tab to the dialog.
-.. Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Tab to this Dialog*).
-.. Type in a *Label* and *Description* for this tab.
-. Add a box to this tab.
-.. Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Box to this Tab*).
-.. Type in a *Label* and *Description* for this box.
-. Add an element to this box. Elements are controls that accept input.
-.. Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Element to this Box*).
-.. Type in a *Label*, *Name*, and *Description* for this element.
-+
-[IMPORTANT]
-====
-*Name* must use only alphanumeric characters and underscores without spaces. It is also used to retrieve the value of this element in the method used with the dialog and must start with *dialog_service_type*
-====
-+
-.. Select a *Type* for an element type. All *Type* options have a *Required* and *Default Value* field. Check *Required* or set *Required* to *true* if the element is required to proceed. You can also specify a default value. The rest of the options presented are based on which type of element you select.
-+
-[width="100%",cols="40%,60%",options="header",]
-|====
-|Element Types|Additional Info
-|Check Box|Check *Default Value* if you want this check box checked by default.
-|Date Control|Use *Date Control* to create a field where users can select a date. If you want users to be able to select a date and time, use the *Date/Time Control* option.
-|Date/Time Control|Use *Date/Time Control* to create a field where users can select a date and time. Only one *Date Control* or *Date/Time Control* element can be present in a dialog.
-|Drop Down Dynamic List|Use *Drop Down Dynamic List* if you want the list options to be created using automate methods. Use *Entry Point (NS/Cls/Inst)* to select an automate instance. Check *Show Refresh Button* to allow users to refresh the list options manually.
-|Radio Button|This element type serves the same purpose as *Drop Down List* but displays options using radio buttons.
-|Tag Control|Select a *Category* of tags you want assigned to the virtual machines associated with this service dialog. Check *Single Select* if only one tag can be selected.
-|Text Area Box|Provides text area for users to type in some text. You can also leave a message to users by typing in the *Default Value* field or leave it as blank.
-|Text Box|This element type serves the same purpose as *Text Area Box* with the option to check *Protected* so the text is shown as asterisks (*), instead of plain text.
-|====
-+
-. Click *Save*.
+include::common/service-dialog-creation.adoc[]
 
 [[importing-service-dialogs]]
 ===== Importing Service Dialogs
@@ -348,10 +286,7 @@ You should also create and specify an Entry Point in the `DOMAIN/Service/Provisi
 [[provisioning-a-service]]
 ===== Provisioning a Service
 
-. Navigate to menu:Services[Catalogs].
-. Click the *Service Catalogs* accordion, and select the service to provision.
-. Click *Order*. The dialog appears.
-. Select the options in the *Service* dialog.
+include::common/catalog-order.adoc[]
 
 The parameters are passed to the children based on the method tied to the choices made in the dialog.
 

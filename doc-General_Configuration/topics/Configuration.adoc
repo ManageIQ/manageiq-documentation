@@ -2727,9 +2727,11 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 . Enter `21` to quit the advanced settings menu.
 
 [[configuring_database_replication]]
-==== Configuring Database Replication
+==== Configuring Database Replication and Centralized Administration
 
-To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version.
+To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version. 
+
+You can configure centralized administration via the database replication configuration steps described in this section. Once configured, {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy. 
 
 [NOTE]
 ======
@@ -2744,9 +2746,10 @@ The region number must be unique on each {product-title} instance where replicat
 [[configuring-a-remote-copy]]
 ===== Configuring a Remote Copy
 
-Configure a {product-title} instance to act as a remote copy where data from the global copy will be replicated. This procedure must only be performed on instances where the *Database Synchronization* role will be enabled. This procedure must be performed before enabling that role.
+Configure a {product-title} instance to act as a remote copy from which data will be replicated to the global copy.
 
-. Navigate to menu:Settings[Configuration].
+. Navigate to the user settings in the top-right menu.
+. Click *Configuration*.
 . Click the *Settings* accordion.
 . Click the region where the instance is located.
 . Click *Replication*.
@@ -2756,21 +2759,54 @@ Configure a {product-title} instance to act as a remote copy where data from the
 [[configuring-the-global-copy]]
 ===== Configuring the Global Copy
 
-Configure a {product-title} instance to act as the global copy from which data is replicated to remote copies. This procedure must only be performed on servers where the *Database Synchronization* role will be enabled. These settings must be completed before enabling that role.
+Configure a {product-title} instance to act as the global copy to which data is replicated from the remote copies.
 
-. Navigate to menu:Settings[Configuration].
+image:add-subscription.png[Add Subscription]
+
+. Navigate to the user settings in the top-right menu.
+. Click *Configuration*.
 . Click the *Settings* accordion.
 . Click the region where the instance is located.
 . Click *Replication*.
 . Select *Global* from the *Type* list.
-. Add a subscription:
-.. Click *Add Subscrption*.
+. Click *Add Subscription*.
 .. Enter the name of the database on the remote copy in the *Database* field.
 .. Enter the IP address or fully qualified domain name of the remote copy in the *Host* field.
 .. Enter the name of a database user able to access the database in the *Username* field.
 .. Enter the password of the database user in the *Password* field.
 .. Enter the port by which the database is accessed in the *Port* field.
+.. In *Actions*, click *Accept*. You can also *Update* your subscription if required, or click the menu on the right in order to *Validate* or *Discard*.
 . Click *Save*.
+
+[NOTE]
+====
+Central administration can only be enabled after the initial data sync is complete. You must save the subscription before this can be done.
+====
+
+[[enabling-disabling-central-admin]]
+===== Enabling / Disabling Centralized Administration
+
+Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, you can enable centralized administration after the initial data sync is complete.
+
+image:centralized_admin_disabled.png[Centralized Administration Config]
+
+. Navigate to the user settings in the top-right menu.
+. Click *Configuration*.
+. Click the *Settings* accordion.
+. Click the region where the instance is located.
+. Click *Replication*.
+. For your saved subscription, click the menu in *Actions*, then click *Enable Central Admin*. You can also *Validate* your subscription. 
+
+Once centralized administration is enabled, *Central Admin Enabled* will change to _Yes_.
+
+[NOTE]
+====
+If centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*, or *Delete* your saved subscription. 
+====
+
+image:centralized_admin_enabled.png[Centralized Administration Enabled]
+
+Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
 
 [[monitoring_database_replication]]
 ===== Monitoring Database Replication
@@ -2796,14 +2832,13 @@ You can reset the replication relationship between the global copy and remote co
 .. Click *OK*.
 . Click *Save*.
 . Re-add the subscription:
-.. Click *Add Subscrption*.
+.. Click *Add Subscription*.
 .. Enter the name of the database on the remote copy in the *Database* field.
 .. Enter the IP address or fully qualified domain name of the remote copy in the *Host* field.
 .. Enter the name of a database user able to access the database in the *Username* field.
 .. Enter the password of the database user in the *Password* field.
 .. Enter the port by which the database is accessed in the *Port* field.
 . Click *Save*.
-
 
 [[running-a-single-backup]]
 ===== Running a Single Backup

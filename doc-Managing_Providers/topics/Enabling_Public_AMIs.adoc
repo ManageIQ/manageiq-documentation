@@ -3,10 +3,15 @@
 
 By default, public AMIs from an Amazon EC2 provider are not viewable in {product-title}. To make these images viewable, you must edit the main configuration file for the appliance.
 
+Note that syncing all public images can require quite some additional memory resources.
+Also take into account that syncing happens in every configured Amazon Provider which will need a similar
+amount of resources.
+
 . Navigate to menu:Settings[Settings > Configuration > Zone > Advanced].
 . Select the configuration file to edit from the *File* list. If not already automatically selected, select *EVM Server Main Configuration*.
 . Set the *get_public_images* parameter:
 .. Set the parameter to *get_public_images: true* to make public images viewable.
 .. Set the parameter to *get_public_images: false* to make public images not viewable.
-
+. Optionally configure an array of filters in *public_images_filters* to restrict which images are synced.
+See http://docs.aws.amazon.com/sdkforruby/api/Aws/EC2/Client.html#describe_images-instance_method
 

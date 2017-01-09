@@ -28,10 +28,23 @@ The following is needed in order to enable AD Trust Authentication to the Applia
 [[configure-ipa-ad-trust-server]]
 == Set up and configure an IPA server for AD Trust Authentication
 
-* IPA Server based on FreeIPA 3.3.3 or later is recommended
+* Configure an IPA Server based on FreeIPA 3.3.3 or later
 
 Instructions for setting up and configuring cross-realm trust between an IPA domain and an AD (Active Directory) domain
 can be found at http://www.freeipa.org/page/Active_Directory_trust_setup[freeipa.org Active Directory Trust Setup]
+
+* Add necessary user attributes to the SSSD configuration on the IPA server
+
+The SSSD configuration file on the IPA Server must be updated to list needed user attributes.
+
+Add the following entry to the SSSD configuration file /etc/sssd/sssd.conf
+
+```bash
+[ifp]
+user_attributes = +mail, +givenname, +sn, +displayname
+```
+
+* DNS Configuration Significance
 
 Special care should be made when configuring DNS as improper DNS configurations can result in poor performance
 and improper functionality.  For more details refer to the following documents:

@@ -2671,17 +2671,6 @@ To view information on the VMDB:
 
 Regions are used to create a central database for reporting and charting. Do not use the database at the top level for operational tasks such as SmartState analysis or capacity and utilization data collection. Assign each server participating in the region a unique number during the regionalization process, then set your subordinate regions to replicate to the top region.
 
-The following is an example of regionalized database scenario:
-
-. Create *Region Number 99* to which all other VMDBs replicate.
-* Treat this as a *read only* database for reporting and charting.
-* Enable only the *Reporting*, *Scheduler*, and *User Interface Server* Roles.
-To perform database maintenance items, such as scheduled backups, on the top-level region (master), also enable the *Database Operations* role.
-* No additional settings aside from assigning the region ID. No need to configure any replication.
-. *Create Region Number 1*.
-. *Create Region Number 2*.
-
-
 [IMPORTANT]
 ======
 All {product-title} databases in a multi-region deployment must use the same security key.
@@ -3013,6 +3002,12 @@ service evmserverd start
 ------
 +
 
+[IMPORTANT]
+====
+*Requisites for Replication* 
+
+If you change the password on the remote database, you will need to change the password in the subscription.
+====
 
 [[adding-a-new-appliance-to-an-existing-region]]
 ==== Adding a New Appliance to an Existing Region with a Non-default Password

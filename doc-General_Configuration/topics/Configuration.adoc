@@ -1439,8 +1439,6 @@ Only make these changes when directed to by Red Hat Support.
 [[changing-settings-for-a-worker]]
 ====== Changing Settings for a Worker
 
-To change the settings for a worker (except replication worker)
-
 . Navigate to menu:Settings[Configuration].
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the server is located.
@@ -1885,21 +1883,6 @@ Table: workers
 |duration|Qpid Specific. Length of time (in seconds) the receiver should wait for a message from the Qpid broker before timing out. Default: 10.seconds
 |capacity|Qpid Specific. The total number of messages that can be held locally by the Qpid client before it needs to fetch more messages from the broker. Default: 50.seconds
 |amqp_port|Port used for AMQP. Default: 5672
-|replication_worker:|Performs database replication tasks. Settings for Database Synchronization Server Role. Parameters specified here will override those set in the queue_worker_base:default section.
-|connection_pool_size|Maximum number of database connections allowed per process. Default: 5
-|memory_threshold|How much memory to allow the worker to grow to before gracefully requesting it to exit and restart. Default: 200.megabytes
-|poll|How often the workers checks for work. This value only is only used when the worker has no more work to do from the queue. It will wait for an amount of time determined by the poll value and poll method. Therefore, if there is constant work on the queue, the worker will not wait in between messages. Default: 60.seconds
-|replication:|This section contains information for the destination database for the replication.
-|destination:|
-|database|Name of destination database. Default: vmdb_production
-|username: root|Username for the destination database. Default: root
-|password|Stores password for destination database in encrypted format.
-|host|Host of the destination database.
-|port|Port of the destination database. Default: 5432
-|include_tables|Lists tables included in the replication. Do NOT modify unless specifically instructed to do so by {product-title} support. Default: include all, exclude_tables is used instead.
-|exclude_tables|Lists tables not to be included in the replication. Do NOT modify unless specifically instructed to do so by {product-title} support.
-|options|
-|replication_trace|Set to true to capture all replication tracing in the log. Default: false
 |schedule_worker|Settings for Scheduler Server Role and any other work that runs on a schedule. Parameters specified here will override those set in the worker_base:default section.
 |db_diagnostics_interval|How frequently to collect database diagnostics statistics. Default: 30.minutes
 |job_proxy_dispatcher_interval|How often to check for available SmartProxies for SmartState Analysis jobs. Default: 15.seconds
@@ -2267,7 +2250,7 @@ also set priorities for the server roles that provide failover.
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
 * Only server roles that support failover can be marked as primary. These roles only allow one server to be active at a time.
-These are *Notifier*, *Capacity & Utilization Coordinator*, *Database Synchronization*, *Event Monitor*, *Scheduler*, *Storage Inventory*, and *Provider Inventory*.
+These are *Notifier*, *Capacity & Utilization Coordinator*, *Event Monitor*, *Scheduler*, *Storage Inventory*, and *Provider Inventory*.
 
 * All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
 
@@ -2293,7 +2276,6 @@ Tertiary roles simply show as active in the console.
 |Role|More than one per Region|Can have Priority Set
 |Automation Engine|Y|N
 |Database Operations|Y|N
-|Database Synchronization|N|Y
 |Notifier|N|Y
 |Reporting|Y|N
 |Scheduler|N|Y
@@ -2333,7 +2315,7 @@ To view the status of server roles:
 
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
-* Only server roles that support failover can be marked as primary. These are *Notifier*, *Capacity & Utilization Coordinator*, *Database Synchronization*, *Event Monitor*, *Scheduler*, *Storage Inventory*, and *Provider Inventory*.
+* Only server roles that support failover can be marked as primary. These are *Notifier*, *Capacity & Utilization Coordinator*, *Event Monitor*, *Scheduler*, *Storage Inventory*, and *Provider Inventory*.
 * All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
 
 There are three role priorities.
@@ -2355,7 +2337,6 @@ There are three role priorities.
 |Capacity & Utilization Data Collector|Y|N
 |Capacity & Utilization Data Processor|Y|N
 |Database Operations|Y|N
-|Database Synchronization|N|Y
 |Event Monitor|N|Y
 |Provider Inventory|N|Y
 |Provider Operations|Y|N
@@ -2483,7 +2464,6 @@ You can see additional information on and restart the following items:
 
 * *C & U Metrics Collectors* that collects capacity and utilization data.
 * *C & U Metrics Processors*, which processes the collected capacity and utilization data.
-* *Database Replication Worker* that is responsible for maintaining replication activities.
 * *Event Handlers* put events from the Event Monitor into the VMDB and starts {product-title} processes if needed base on that information.
 * *Event Monitors* that communicate with the external cloud provider to deliver up to date event information.
 * *Generic Workers* that perform long running and priority processes.
@@ -2729,28 +2709,6 @@ To view information on the VMDB:
 
 Regions are used to create a central database for reporting and charting. Do not use the database at the top level for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. Assign each server participating in the region a unique number during the regionalization process, then set your subordinate regions to replicate to the top region.
 
-[NOTE]
-======
-Only enable database synchronization on subordinate servers with replication worker settings already configured. Do not enable more than one Database Synchronization role per region.
-======
-
-For diagnostic information on replication, see xref:monitoring_database_replication[].
-
-The following is an example of regionalized database scenario:
-
-. Create *Region Number 99* to which all other VMDBs replicate.
-* Treat this as a *read only* database for reporting and charting.
-* Enable only the *Reporting*, *Scheduler*, and *User Interface Server* Roles.
-To perform database maintenance items, such as scheduled backups, on the top-level region (master), also enable the *Database Operations* role.
-* No additional settings aside from assigning the region ID. No need to configure any replication.
-. *Create Region Number 1*
-.. Add replication worker settings pointing to the VMDB for *Region 99*.
-.. Enable *Database Synchronization Server* role on one *Server* in the *Region*. If you have a second *Server* in the same region, do not enable the *DB Synchronization* role.
-Do not enable more than one *Database Synchronization Role* per Region.
-. *Create Region Number 2*
-.. Add replication worker settings pointing to the VMDB for *Region 99*.
-.. Enable *Database Synchronization Server* role on one *Server* in the *Region*. If you have a second *Server* in the same region, do not enable the *DB Synchronization* role. Do not enable more than one *Database Synchronization Role* per Region.
-
 [IMPORTANT]
 ======
 All {product-title} databases in a multi-region deployment must use the same security key.
@@ -2825,16 +2783,6 @@ Configure a {product-title} instance to act as the global copy from which data i
 .. Enter the port by which the database is accessed in the *Port* field.
 . Click *Save*.
 
-[[monitoring_database_replication]]
-===== Monitoring Database Replication
-
-View the status of replication between the global copy and remote copies. The following procedure must be performed on {product-title} instances configured to act as remote copies.
-
-. Navigate to menu:Settings[Configuration].
-. Click the *Diagnostics* accordion.
-. Click the region where the instance is located.
-. Click the *Replication* tab.
-
 [[resetting-database-replication]]
 ===== Resetting Database Replication
 
@@ -2894,29 +2842,6 @@ If directed by Red Hat, you can run database garbage collection to reclaim unuse
 
 [[backing-up-and-restoring-a-database]]
 ==== Backing Up and Restoring a Database
-
-[[enabling-the-database-synchronization-role]]
-===== Enabling the Database Synchronization Role
-
-When you start the replication worker, all of the information in the subordinate database is sent to the top region (99). The worker also creates triggers so that future changes made to subordinate regions are
-sent automatically to the top region.
-
-[NOTE]
-======
-Only enable database synchronization on subordinate servers with replication worker settings already configured. Do not enable more than one Database Synchronization role per region.
-======
-
-To enable the database synchronization role:
-
-. Navigate to menu:Settings[Configuration].
-. Click the *Settings* accordion and click *Zones*.
-. Click the *Zone* where the server is located and click the server name.
-. Click *Server*.
-. In the *Server Control* area, set *Database Synchronization* to `ON`.
-+
-image:4999.png[]
-+
-. Click *Save*.
 
 //////////////////////////////////////////////
 [[scheduling-a-database-backup]]
@@ -3084,11 +3009,7 @@ service evmserverd start
 ===========
 *Requisites for Replication*
 
-If you are using replication, and you have changed the password on the *Master* database, you will also need to update the password used for the *Replication Worker* on the subordinate regions. To do this:
-
-. Disable the *Database Synchronization* Role.
-. Update the *Replication Worker*'s password.
-. Restart the *Database Synchronization* Role.
+If you change the password on the remote database, you will need to change the password in the subscription. 
 ===========
 
 [[adding-a-new-appliance-to-an-existing-region-with-a-non-default-password]]

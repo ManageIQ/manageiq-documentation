@@ -25,53 +25,53 @@
 | EVMVmAccounts                | GET    | /api/vms/:id/accounts     | |
 | EVMVmList                    | GET    | /api/vms                  | |
 |                              | GET    | /api/hosts/:id?attributes=vms| |
-|                              | GET    | /api/hosts?filter[]="guid='....'"&expand=resources&attributes=vms| |
+|                              | GET    | /api/hosts?filter[]=guid='....'&expand=resources&attributes=vms| |
 | EVMVmSoftware                | GET    | /api/vms:id/software      | |
 | FindClusterById              | GET    | /api/clusters/:id         | |
 | FindClustersById             | GET    | /api/clusters/:id         | |
 | FindDatastoreById            | GET    | /api/data_stores/:id      | |
 | FindDatastoresById           | GET    | /api/data_stores/:id      | |
-| FindEmsByGuid                | GET    | /api/providers?filter[]="guid='....'" | |
+| FindEmsByGuid                | GET    | /api/providers?filter[]=guid='....' | |
 | FindHostByGuid               | GET    | /api/hosts?filter[]='guid='....'" | |
 | FindHostsByGuid              | GET    | /api/hosts?filter[]='guid='....'" | |
 | FindResourcePoolById         | GET    | /api/resource_pools/:id   | |
 | FindResourcePoolsById        | GET    | /api/resource_pools       | |
-|                              | GET    | /api/resource_pools?filter[]="id=:id"&filter[]="or id=:id"&... | |
-| FindVmByGuid                 | GET    | /api/vms?filter[]="guid='....'"| |
-| FindVmsByGuid                | GET    | /api/vms?filter[]="guid='....'"&filter[]="or guid='....'"&... | |
+|                              | GET    | /api/resource_pools?filter[]=id=:id&filter[]=or id=:id&... | |
+| FindVmByGuid                 | GET    | /api/vms?filter[]=guid='....'| |
+| FindVmsByGuid                | GET    | /api/vms?filter[]=guid='....'&filter[]=or guid='....'&... | |
 | GetClusterList               | GET    | /api/clusters | |
-|                              | GET    | /api/clusters?filter[]="ems_id=:id" | |
+|                              | GET    | /api/clusters?filter[]=ems_id=:id | |
 |                              | GET    | /api/providers/:id?attributes=ems_clusters | |
 | GetClustersByList            | GET    | /api/clusters/:id | |
-|                              | GET    | /api/clusters?filter[]="id=:id"&filter[]="or id=:id"&... | |
+|                              | GET    | /api/clusters?filter[]=id=:id&filter[]=or id=:id&... | |
 | GetClustersByTag             | GET    | /api/clusters?by_tag=:tag_path | |
 | GetDatastoreByList           | GET    | /api/data_stores | |
 | GetDatastoreByTag            | GET    | /api/data_stores?by_tag=:tag_path | |
 | GetEmsByList                 | GET    | /api/providers | |
 |                              | GET    | /api/providers/:id | |
-|                              | GET    | /api/providers?filter[]="...."&expand=resources | |
+|                              | GET    | /api/providers?filter[]=....&expand=resources | |
 | GetEmsList                   | GET    | /api/providers | |
 | GetHostsByList               | GET    | /api/hosts | |
-|                              | GET    | /api/hosts?filter[]="...."&expand=resources | |
+|                              | GET    | /api/hosts?filter[]=....&expand=resources | |
 | GetHostList                  | GET    | /api/hosts | |
 |                              | GET    | /api/providers/:id?attributes=hosts | |
-|                              | GET    | /api/providers?filter[]="guid='....'"&expand=resources&attributes=hosts | |
+|                              | GET    | /api/providers?filter[]=guid='....'&expand=resources&attributes=hosts | |
 | GetResourcePoolList          | GET    | /api/providers/:id?attributes=resource_pools| |
-|                              | GET    | /api/providers?filter[]="guid='....'"&expand=resources&attributes=resource_pools| |
+|                              | GET    | /api/providers?filter[]=guid='....'&expand=resources&attributes=resource_pools| |
 | GetResourcePoolsByList       | GET    | /api/resource_pools | |
 |                              | GET    | /api/resource_pools/:id | |
-|                              | GET    | /api/resource_pools?filter[]="...."&expand=resources | |
+|                              | GET    | /api/resource_pools?filter[]=....&expand=resources | |
 | GetResourcePoolsByTag        | GET    | /api/resource_pools?by_tag=:tag_path | |
 | GetTemplatesByTag            | GET    | /api/templates?by_path=:tag_path| |
 | GetVmList                    | GET    | /api/hosts/:id?attributes=vms| |
-|                              | GET    | /api/hosts?filter[]="guid='....'"&expand=resources&attributes=vms| |
+|                              | GET    | /api/hosts?filter[]=guid='....'&expand=resources&attributes=vms| |
 | GetVmsByList                 | GET    | /api/vms | |
 |                              | GET    | /api/vms/:id | |
-|                              | GET    | /api/vms?filter[]="...."&expand=resources | |
+|                              | GET    | /api/vms?filter[]=....&expand=resources | |
 | GetVmsByTag                  | GET    | /api/vms?by_path=:tag_path | |
 | HostGetTags                  | GET    | /api/hosts/:id/tags | |
 |                              | GET    | /api/hosts/:id?expand=tags | |
-|                              | GET    | /api/hosts?filter[]="guid='....'"&expand=resources,tags | |
+|                              | GET    | /api/hosts?filter[]=guid='....'&expand=resources,tags | |
 | ResourcePoolGetTags          | GET    | /api/resource_pools/:id/tags | |
 |                              | GET    | /api/resource_pools/:id?expand=tags | |
 | VmGetTags                    | GET    | /api/vms/:id/tags | |
@@ -89,21 +89,21 @@
 | EmsSetTag                    | POST   | /api/providers/:id/tags | assign | link:../reference/tagging.html#assigning-tags[Assigning Tags]
 | EVMActionList                | GET    | /api/policies/:id/policy_actions | | link:../reference/policy_collections.html#policy-actions[Policy Actions]
 |                              | GET    | /api/policies/:id?expand=policy_actions | |
-|                              | GET    | /api/policies?filter[]="guid='....'"&expand=resources,policy_actions | |
+|                              | GET    | /api/policies?filter[]=guid='....'&expand=resources,policy_actions | |
 | EVMAddLifecycleEvent         | POST   | /api/vms/:id | add_lifecycle_event | link:../examples/add_lifecycle_event_vm.html[Add Lifecycle Event to VM]
 | EVMAssignPolicy              | POST   | /api/hosts/:id/policies | assign | link:../reference/policies.html#assigning-policies-to-a-resource[Assigning Policies]
 | EVMConditionList             | GET    | /api/policies/:id/conditions | | link:../reference/policy_collections.html#policy-conditions[Policy Conditions]
 |                              | GET    | /api/policies/:id?expand=conditions | |
-|                              | GET    | /api/policies?filter[]="guid='....'"&expand=resources,conditions | |
+|                              | GET    | /api/policies?filter[]=guid='....'&expand=resources,conditions | |
 | EVMEventList                 | GET    | /api/policies/:id/events | | link:../reference/policy_collections.html#policy-events[Policy Events]
 |                              | GET    | /api/policies/:id?expand=events | |
-|                              | GET    | /api/policies?filter[]="guid='....'"&expand=resources,events | |
+|                              | GET    | /api/policies?filter[]=guid='....'&expand=resources,events | |
 | EVMGetPolicy                 | GET    | /api/policies | | link:../reference/policies.html#querying-policies[Querying Policies]
 |                              | GET    | /api/policies/:id | | 
-|                              | GET    | /api/policies?filter[]="name='....'" | | 
+|                              | GET    | /api/policies?filter[]=name='....' | |
 | EVMPolicyList                | GET    | /api/hosts/:id/policies | | link:../reference/policies.html[Policy Management]
 |                              | GET    | /api/hosts/:id?expand=policies | | 
-|                              | GET    | /api/hosts?filter[]="guid='....'"&expand=resources,policies | | 
+|                              | GET    | /api/hosts?filter[]=guid='....'&expand=resources,policies | |
 | EVMVmEventByProperty         | POST   | /api/vms/:id | add_event | link:../examples/add_event_vm.html[Add VM Event]
 | EVMVmScanByProperty          | POST   | /api/vms/:id | scan | link:../examples/scan_vm.html[Scan VM]
 | EVMSmartStart                | POST   | /api/vms/:id | start | link:../examples/start_vm.html[Start VM]

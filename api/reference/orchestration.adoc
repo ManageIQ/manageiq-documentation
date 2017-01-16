@@ -1,0 +1,165 @@
+
+[[orchestration-support]]
+== Orchestration Support
+
+Support for Orchestration is provided by the following:
+
+* link:#orchestration-templates[Orchestration Templates]
+
+[[orchestration-templates]]
+=== Orchestration Templates ===
+
+Management of Orchestration Templates is provided with the following collection:
+
+[source,data]
+----
+/api/orchestration_templates
+----
+
+Full CRUD actions on Orchestration Templates is available:
+
+
+* link:#querying-orchestration-templates[Querying Orchestration Templates]
+* link:#creating-orchestration-templates[Creating Orchestration Templates]
+* link:#editing-orchestration-templates[Editing Orchestration Templates]
+* link:#deleting-orchestration-templates[Deleting Orchestration Templates]
+
+[[querying-orchestration-templates]]
+=== Querying Orchestration Templates
+
+Querying all Orchestration Templates in the system:
+
+----
+GET /api/orchestration_templates
+----
+
+Getting details on a specific Orchestration Template:
+
+----
+GET /api/orchestration_templates/:id
+----
+
+[[creating-orchestration-templates]]
+=== Creating Orchestration Templates
+
+Orchestration Templates can be created via a POST to the Orchestration Templates collection or via the *create* action signature which also
+allows creation of multiple Orchestration Templates in a single request.
+
+----
+POST /api/orchestration_templates
+----
+
+[source,json]
+----
+{
+  "name" : "azure-single-vm-from-user-image",
+  "type" : "OrchestrationTemplateAzure",
+  "description" : "Create a single VM from a user image",
+  "content" : " ... ",
+  "orderable" : true,
+  ...
+}
+----
+
+or creating multiple Orchestration Templates:
+
+[source,json]
+----
+{
+  "action" : "create",
+  "resources" : [
+    { "description" : "sample_orchestration_template1", ... },
+    { "description" : "sample_orchestration_template2", ... },
+    ...
+  ]
+}
+----
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#orchestration_templates[Resource Attributes]
+page for a list of available attributes when creating Orchestration Templates.
+====
+
+[[editing-orchestration-templates]]
+=== Editing Orchestration Templates
+
+----
+POST /api/orchestration_templates/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "description" : "updated_sample_orchestration_template",
+  }
+}
+----
+
+or editing multiple Orchestration Templates:
+
+----
+POST /api/orchestration_templates
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/orchestration_templates/101",
+      "description" : "updated_sample_orchestration_template1"
+    },
+    {
+      "href" : "http://localhost:3000/api/orchestration_templates/102",
+      "description" : "updated_sample_orchestration_template2"
+    },
+    ...
+  ]
+}
+----
+
+
+[[deleting-orchestration-templates]]
+=== Deleting Orchestration Templates
+
+Orchestration Templates can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/orchestration_templates/101
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/orchestration_templates/101
+----
+
+Deleting multiple Orchestration Templates can be done as follows:
+
+----
+POST /api/orchestration_templates
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/orchestration_templates/101" },
+    { "href" : "http://localhost:3000/api/orchestration_templates/102" },
+    ...
+  ]
+}
+----
+

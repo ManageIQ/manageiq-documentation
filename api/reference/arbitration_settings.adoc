@@ -1,0 +1,154 @@
+
+[[arbitration-settings]]
+== Arbitration Settings
+
+Management of Arbitration Settings is provided via the following collection:
+
+[source,data]
+----
+/api/arbitration_settings
+----
+
+Full CRUD actions on arbitration_settings is available:
+
+* link:#querying-arbitration-settings[Querying Arbitration Settings]
+* link:#creating-arbitration-settings[Creating Arbitration Settings]
+* link:#editing-arbitration-settings[Editing Arbitration Settings]
+* link:#deleting-arbitration-settings[Deleting Arbitration Settings]
+
+[[querying-arbitration-settings]]
+=== Querying Arbitration Settings
+
+Querying all arbitration settings in the system is simply:
+
+----
+GET /api/arbitration_settings
+----
+
+Getting details on a specific Arbitration Setting:
+
+----
+GET /api/arbitration_settings/:id
+----
+
+[[creating-arbitration-settings]]
+=== Creating Arbitration Settings
+
+Arbitration Settings can be created via a POST to the arbitration_settings collection or via the *create* action
+signature which also allows creation of multiple arbitration_settings in a single request.
+
+----
+POST /api/arbitration_settings
+----
+
+[source,json]
+----
+{
+  "name" : "test setting",
+  "display_name" : "Test Setting",
+  "value" : "default_config"
+}
+----
+
+or creating multiple arbitration settings:
+
+[source,json]
+----
+{
+  "action" : "create",
+  "resources" : [
+    { "name" : "test setting", "display_name" : "Test Setting", ... },
+    { "name" : "dev setting",  "display_name" : "Development Setting", ... },
+    ...
+  ]
+}
+----
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#arbitration_settings[Resource Attributes]
+page for a list of available attributes when creating Arbitration Settings.
+====
+
+[[editing-arbitration-settings]]
+=== Editing Arbitration Settings
+
+----
+POST /api/arbitration_settings/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "display_name" : "New Test Setting"
+  }
+}
+----
+
+or editing multiple arbitration_settings:
+
+----
+POST /api/arbitration_settings
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/arbitration_settings/101",
+      "value" : "default_config"
+    },
+    {
+      "href" : "http://localhost:3000/api/arbitration_settings/102",
+      "value" : "default_config"
+    },
+    ...
+  ]
+}
+----
+
+
+[[deleting-arbitration-settings]]
+=== Deleting Arbitration Settings
+
+Arbitration Settings can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/arbitration_settings/101
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/arbitration_settings/101
+----
+
+Deleting multiple Arbitration Settings can be done as follows:
+
+----
+POST /api/arbitration_settings
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/arbitration_settings/101" },
+    { "href" : "http://localhost:3000/api/arbitration_settings/102" },
+    ...
+  ]
+}
+----
+

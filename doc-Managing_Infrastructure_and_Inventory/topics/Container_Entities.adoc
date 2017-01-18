@@ -5,7 +5,7 @@
 
 == Configuring Automatic Tagging for Container Entities
 
-Container object labels in OpenShift can be used to automatically create tags and tag categories in {product-title}, by mapping to existing OpenShift labels. Labels from Kubernetes can also be mapped to tags in this way.
+Container object labels in OpenShift can be used to automatically create tags and tag categories in {product-title}. This is done by mapping {product-title} tags to existing OpenShift or Kubernetes labels.
 
 Labels from OpenShift can be mapped to {product-title} tags for the following container entities:
 
@@ -17,21 +17,23 @@ Labels from OpenShift can be mapped to {product-title} tags for the following co
 * Pods
 * Container builds
 
-Note that tags created by this method are completely managed by the system and cannot be manually assigned or unassigned.
-Deleting a mapping rule immediately deletes the resulting tags.
+[NOTE]
+====
+Tags automatically created from OpenShift labels are completely managed by the {product-title} system and cannot be manually assigned or unassigned. Deleting a mapping rule from {product-title} immediately deletes the resulting tags.
+====
 
-View a container entity's OpenShift labels on the entity's details page under *Labels*. 
+You can view a container entity's OpenShift labels on the entity's details page under *Labels*. 
 
 The following example shows how to configure tagging for a node, but the same steps can be used for mapping labels to tags on other container entities.
 
 To configure automatic tagging on container entities using labels:
 
-. Note the _key_ of the OpenShift label you want to map to a {product-title} tag. 
+. Note the _key_ of the OpenShift label you want to map to a {product-title} tag. OpenShift labels consist of two parts: a _key_ and a _value_.
 .. Navigate to menu:Compute[Containers > Nodes].
 .. Select a node to open its summary page.
-.. Under *Labels*, note the label(s) to map to {product-title} tag(s). OpenShift labels consist of two parts: a _key_ (listed in the left column of the *Labels* table) and a _value_ (listed in the right column of the *Labels* table). 
+.. Under *Labels*, note the label(s) to map to {product-title} tag(s). Any OpenShift labels will list the _key_ in the left column of the *Labels* table, and the _value_ in the right column of the *Labels* table.
 +
-This node has six labels (key/value pairs) that were created in OpenShift and collected in {product-title} inventory:
+This node has six labels (key/value pairs) that were created in OpenShift and collected in the {product-title} inventory:
 +
 image:OCPnode-summary.png[]
 +
@@ -45,7 +47,7 @@ To create an OpenShift label, see https://docs.openshift.com/container-platform/
 . Click the *Map Tags* tab.
 . Click *Add* to create a new mapping rule.
 .. Select a container entity to tag from the *Entity* list, or select *<All>* to tag all entities.
-.. Specify the _key_ from the OpenShift label you noted earlier. 
+.. Specify the _key_ from the OpenShift label you noted earlier in the *Label* field. 
 .. Specify a {product-title} tag category in *Category* to map the label to. If the tag category does not exist yet in {product-title}, it will be created automatically.
 +
 image:Add_label_mapping.png[]

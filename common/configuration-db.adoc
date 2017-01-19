@@ -12,16 +12,19 @@ Before installing an internal database, add a disk to the infrastructure hosting
 * If this is the first {product-title} appliance, choose *1) Create key*.
 * If this is not the first {product-title} appliance, choose *2) Fetch key* from remote machine to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
 . Choose *1) Internal* for the database location.
-. Choose a disk for the database. For example:
+. Choose a disk for the database. This can be either a disk you attached previously, or a partition on the current disk. 
+For example:
 +
 ----
-1)  /dev/vdb: 20480
-
-Choose disk:
+1) /dev/vdb: 20480
+2) Don't partition the disk 
 ----
 +
-Enter *1* to choose `/dev/vdb` for the database location.
-
+* Enter *1* to choose `/dev/vdb` for the database location. This selects the default disk shown to use for the database.
+* If you choose *Don't partition the disk*, a prompt will confirm this choice. (Why does the menu offer choice #2 to not partition the database disk?  Why is there a menu choice to *not* partition it?  What happens if I select this choice?)
+. Enter *Y* or *N* for *Configure this server as a dedicated database instance?*
+* Select *Y* to configure the appliance only as a database. The resulting appliance will not have a user interface. This option is the default, and also can be chosen by pressing *Enter*.
+* Select *N* to configure the appliance with a user interface.
 . When prompted, enter a unique three digit region ID to create a new region.
 +
 [IMPORTANT]
@@ -29,6 +32,6 @@ Enter *1* to choose `/dev/vdb` for the database location.
 Creating a new region destroys any existing data on the chosen database.
 ====
 +
-.  Confirm the configuration when prompted.
+.  Create and confirm a password for the database.
 
 {product-title} configures the internal database.

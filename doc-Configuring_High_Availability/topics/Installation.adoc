@@ -1,0 +1,86 @@
+[[installation]]
+== Installing the Database Cluster and Engine Appliances
+
+This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database servers, and two engine appliances.
+
+=== Installing the Primary Database Server
+
+The primary database server functions as an external database to the {product-title} engine appliances.
+
+. Create a virtual machine with a dedicated disk space of at least 4GB for database, and install the CloudForms appliance on it.
+. SSH into the {product-title} appliance to enter the appliance console.
+. Configure the hostname by selecting *Set Hostname*.
+. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Select *Configure Database*.
+. Select *Create key* to create the encryption key.
+. Select *Create Internal Database*.
+. Select the database disk. {product-title} then activates the configuration.
+. For *Configure this server as a dedicated database instance?*, select `y`.
+. Create the database password.
+
+
+You can check the configuration on the appliance console details screen. If configured successfully, *Local Database Server* shows as `running (primary)`.
+
+
+=== Installing a {product-title} Engine Appliance
+
+Configure a {product-title} engine appliance to point to the primary database server. From the engine appliance, you can then configure the database itself.
+
+. Create a virtual machine with at least 4GB dedicated disk space for the database.
+. SSH into the {product-title} appliance to enter the appliance console.
+. Configure the hostname by selecting *Set Hostname*.
+. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Select *Configure Database*.
+. Configure this appliance to use the encryption key from the primary database appliance:
+.. For *Encryption Key*, select *Fetch key from remote machine*.
+.. Enter the hostname for the primary database appliance you previously configured containing the encryption key.
+.. Enter the primary database appliance's username.
+.. Enter the primary database appliance's password.
+.. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
+. Configure the database:
+.. Select *Create Region in External Database*, since the database is external to the engine appliances.
+.. Provide the primary database server as the remote key location and its credentials.
+. Assign a unique database region number. Note that creating a database region will destroy any existing data and cannot be undone.
+.. For *Are you sure you want to continue?* Select `y`.
+. Enter the primary database server's name and access details:
+.. Enter the hostname for the primary database appliance.
+.. Enter a name to identify the database.
+.. Enter the primary database appliance's username.
+.. Enter a password for the database and confirm the password.
+
+You can check the configuration on the appliance console details screen. When configured successfully, *{product-title_abbr_uc} Server* will show as `running`, and *{product-title_abbr_uc} Database* will show the name of the primary database server.
+
+=== Installing Additional {product-title} Engine Appliances
+
+Install a second virtual machine with a {product-title} engine appliance and any additional engine appliances using the following steps:
+
+. Create a virtual machine with at least 4GB dedicated disk space for the database.
+. SSH into the {product-title} appliance to enter the appliance console.
+. Configure the hostname by selecting *Set Hostname*.
+. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Select *Configure Database*.
+. Configure this appliance to use the encryption key from the primary database appliance:
+.. For *Encryption Key*, select *Fetch key from remote machine*.
+.. Enter the hostname for the primary database appliance you previously configured containing the encryption key.
+.. Enter the primary database appliance's username.
+.. Enter the primary database appliance's password.
+.. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
+.. Select *Join Region in External Database* from the appliance console menu.
+. Enter the primary database server's name and access details:
+.. Enter the hostname for the primary database appliance.
+.. Enter a name to identify the database.
+.. Enter the primary database appliance's username.
+.. Enter a password for the database and confirm the password.
+
+
+=== Installing the Standby Database Server
+
+The standby database server is a copy of the primary database appliance and takes over the role of primary database in case of failure.
+
+. Create a virtual machine with a dedicated disk space of at least 4GB for database, and install the CloudForms appliance on it.
+. SSH into the {product-title} appliance to enter the appliance console.
+. Configure the hostname by selecting *Set Hostname*.
+. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+
+
+

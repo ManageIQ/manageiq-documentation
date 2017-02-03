@@ -73,22 +73,22 @@ $ ssh root@example.postgres.server
 . Access the database prompt:
 +
 ------
--bash-4.1$ psql
+# psql ovirt_engine_history
 ------
 +
 . Create a new user for the {product-title} and grant read-only access to tables and views: 
 +
 ------
-postgres=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
+ovirt_engine_history=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
 
-postgres=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
+ovirt_engine_history=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
 ------
 +
 . Exit to the RHEV-M database server prompt:
 +
 ------
-postgres=# \q
--bash-4.1$ exit
+ovirt_engine_history=# \q
+# exit
 ------
 +
 . Update the server's firewall to accept TCP communication on port 5432.

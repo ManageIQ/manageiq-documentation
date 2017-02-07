@@ -6,17 +6,18 @@
 
 Currently, the _appliance_console_cli_ feature is a subset of the full functionality of the _appliance_console_ itself, that covers functions most likely to be scripted using the command-line interface (CLI). After starting the {product-title} appliance, log in with a user name of _root_ and the default password of _smartvm_. This displays the Bash prompt for the root user. Then, you can enter the _appliance_console_cli_ or _appliance_console_cli --help_ command to see a list of options available with the command, or simply enter appliance_console_cli [options] directly to use a specific option.
 
-.appliance_console_cli options
+
+.Database Congiguration Options
 [cols="1,1", frame="all"]
 |===
 |
 
-							Database Configuration
+							Option
 
 
 |
 
-&#160;
+							Description
 
 |
 
@@ -31,17 +32,675 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							$
+							--internal (-i)
 
 
 |
 
-							end of string
+							create a database on the current appliance
+
+
+
+|
+
+							--dbdisk
+
+
+|
+
+							database disk device path (for configuring an internal database)
+
+
+
+|
+
+							--hostname (-h)
+
+
+|
+
+							database hostname
+
+
+|
+
+							--port
+
+
+|
+
+							database port (defaults to 5432)
+
+
+|
+
+							--username (-U)
+
+
+|
+
+							database username (defaults to root)
+
+
+|
+
+							--password (-p)
+
+
+|
+
+							database password
+
+
+|
+
+							--dbname (-d)
+
+
+|
+
+							database name (defaults to vmdb_production)
+
+
+|
+|===
+
+
+.v2_key Options
+[cols="1,1", frame="all"]
+|===
+|
+
+							Option
+
+
+|
+
+							Description
+
+|
+
+							--key (-k)
+
+
+|
+
+							create a new v2_key
+
+
+|
+
+							--fetch_key (-K)
+
+
+|
+
+							fetch the v2_key from the given host
+
+
+|
+
+							--force_key (-f)
+
+
+|
+
+							create or fetch the key even if one exists
+
+
+|
+
+							--sshlogin
+
+
+|
+
+							ssh username for fetching the v2_key (defaults to root)
+
+
+|
+
+							--sshpassword
+
+
+|
+
+							ssh password for fetching the v2_key
 
 
 
 |
 |===
+
+
+.IPA Server Options
+[cols="1,1", frame="all"]
+|===
+|
+
+							Option
+
+
+|
+
+							Description
+
+|
+
+							--ipaserver (-e)
+
+
+|
+
+							IPA server FQDN
+
+
+|
+
+							--ipaprincipal (-n)
+
+
+|
+
+							IPA server principal (default: admin)
+
+
+|
+
+							--ipapassword (-w)
+
+
+|
+
+							IPA server password
+
+
+|
+
+							--ipadomain (-o)
+
+
+|
+
+							IPA server domain (optional)
+
+
+|
+
+							--iparealm (-l)
+
+
+|
+
+							IPA server realm (optional)
+
+
+|
+|===
+
+.Certificate Options
+[cols="1,1", frame="all"]
+|===
+|
+
+							Option
+
+
+|
+
+							Description
+
+|
+
+							--ca (-c)
+
+
+|
+
+							CA name used for certmonger (default: ipa)
+
+
+|
+
+							--internal (-i)
+
+
+|
+
+							create a database on the current appliance
+
+
+|
+
+							--postgres-client-cert (-g)
+
+
+|
+
+							install certs for postgres client
+
+
+|
+
+							--postgres-server-cert 
+
+
+|
+
+							install certs for postgres server
+
+
+|
+
+							--http-cert
+
+
+|
+
+							install certs for http server
+
+
+|
+
+							--extauth-opts (-x)
+
+
+|
+
+							external authentication options
+
+
+|
+|===
+
+.Other Options
+[cols="1,1", frame="all"]
+|===
+|
+
+							Option
+
+
+|
+
+							Description
+
+|
+
+							--tmpdisk
+
+
+|
+
+							initialize the given device for temp storage (volume mounted at /var/www/miq_tmp)
+
+
+|
+
+							--host (-H)
+
+
+|
+
+							set the appliance hostname to the given name
+
+
+|
+
+							--verbose (-v)
+
+
+|
+
+							print more debugging info
+
+
+|
+|===
+
+//////
+
+.appliance_console_cli options
+[cols="1,1", frame="all"]
+|===
+|
+
+							Options
+
+
+|
+
+Description
+
+|
+
+							*Database Configuration options*
+
+
+|
+
+							&#160;
+
+
+
+|
+
+							--region (-r)
+
+
+|
+
+							create a new region in the database (requires database credentials passed)
+
+
+
+|
+
+							--internal (-i)
+
+
+|
+
+							create a database on the current appliance
+
+
+
+|
+
+							--dbdisk
+
+
+|
+
+							database disk device path (for configuring an internal database)
+
+
+
+|
+
+							--hostname (-h)
+
+
+|
+
+							database hostname
+
+
+|
+
+							--port
+
+
+|
+
+							database port (defaults to 5432)
+
+
+|
+
+							--username (-U)
+
+
+|
+
+							database username (defaults to root)
+
+
+|
+
+							--password (-p)
+
+
+|
+
+							database password
+
+
+|
+
+							--dbname (-d)
+
+
+|
+
+							database name (defaults to vmdb_production)
+
+
+|
+
+							*v2_key Options*
+
+
+
+|
+
+&#160;
+
+|
+
+							--key (-k)
+
+
+|
+
+							create a new v2_key
+
+
+|
+
+							--fetch_key (-K)
+
+
+|
+
+							fetch the v2_key from the given host
+
+
+|
+
+							--force_key (-f)
+
+
+|
+
+							create or fetch the key even if one exists
+
+
+|
+
+							--sshlogin
+
+
+|
+
+							ssh username for fetching the v2_key (defaults to root)
+
+
+|
+
+							--sshpassword
+
+
+|
+
+							ssh password for fetching the v2_key
+
+
+
+|
+
+							*Other Options* 
+
+
+|
+
+							&#160;
+
+
+|
+
+							--tmpdisk
+
+
+|
+
+							initialize the given device for temp storage (volume mounted at /var/www/miq_tmp)
+
+
+|
+
+							--host (-H)
+
+
+|
+
+							set the appliance hostname to the given name
+
+
+|
+
+							--verbose (-v)
+
+
+|
+
+							print more debugging info
+
+
+|
+
+							*IPA Server Options*
+
+
+|
+
+							&#160;
+
+
+|
+
+							--ipaserver (-e)
+
+
+|
+
+							IPA server FQDN
+
+
+|
+
+							--ipaprincipal (-n)
+
+
+|
+
+							IPA server principal (default: admin)
+
+
+|
+
+							--ipapassword (-w)
+
+
+|
+
+							IPA server password
+
+
+|
+
+							--ipadomain (-o)
+
+
+|
+
+							IPA server domain (optional)
+
+
+|
+
+							--iparealm (-l)
+
+
+|
+
+							IPA server realm (optional)
+
+
+|
+
+							*Certificate Options*
+
+
+|
+
+							&#160;
+
+
+|
+
+							--ca (-c)
+
+
+|
+
+							CA name used for certmonger (default: ipa)
+
+
+|
+
+							--internal (-i)
+
+
+|
+
+							create a database on the current appliance
+
+
+|
+
+							--postgres-client-cert (-g)
+
+
+|
+
+							install certs for postgres client
+
+
+|
+
+							--postgres-server-cert 
+
+
+|
+
+							install certs for postgres server
+
+
+|
+
+							--http-cert
+
+
+|
+
+							install certs for http server
+
+
+|
+
+							--extauth-opts (-x)
+
+
+|
+
+							external authentication options
+
+
+|
+|===
+
+//////
 
 :numbered:
 

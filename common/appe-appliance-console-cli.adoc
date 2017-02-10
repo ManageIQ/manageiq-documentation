@@ -1,13 +1,11 @@
 :numbered!:
 
-[appendix]
-[[appe_appliance_console]]
-== appliance_console_cli 
+The `appliance_console_cli` feature is currently a subset of the full functionality of the `appliance_console` itself, and covers functions most likely to be scripted using the command-line interface (CLI). 
 
-Currently, the _appliance_console_cli_ feature is a subset of the full functionality of the _appliance_console_ itself, that covers functions most likely to be scripted using the command-line interface (CLI). After starting the {product-title} appliance, log in with a user name of _root_ and the default password of _smartvm_. This displays the Bash prompt for the root user. Then, you can enter the _appliance_console_cli_ or _appliance_console_cli --help_ command to see a list of options available with the command, or simply enter appliance_console_cli [options] directly to use a specific option.
+. After starting the {product-title} appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the root user. 
+. Enter the `appliance_console_cli` or `appliance_console_cli --help` command to see a list of options available with the command, or simply enter `appliance_console_cli --option <argument>` directly to use a specific option.
 
-
-.Database Congiguration Options
+.Database Configuration Options
 [cols="1,1", frame="all"]
 |===
 |
@@ -69,7 +67,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							database port (defaults to 5432)
+							database port (defaults to `5432`)
 
 
 |
@@ -79,7 +77,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							database username (defaults to root)
+							database username (defaults to `root`)
 
 
 |
@@ -99,7 +97,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							database name (defaults to vmdb_production)
+							database name (defaults to `vmdb_production`)
 
 
 |
@@ -155,7 +153,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							ssh username for fetching the v2_key (defaults to root)
+							ssh username for fetching the v2_key (defaults to `root`)
 
 
 |
@@ -185,6 +183,17 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 							Description
 
+
+|
+
+							--host (-H)
+
+
+|
+
+							set the appliance hostname to the given name
+
+
 |
 
 							--ipaserver (-e)
@@ -202,7 +211,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							IPA server principal (default: admin)
+							IPA server principal (default: `admin`)
 
 
 |
@@ -222,7 +231,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							IPA server domain (optional)
+							IPA server domain (optional). Will be based on the appliance domain name if not specified.
 
 
 |
@@ -232,11 +241,19 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							IPA server realm (optional)
+							IPA server realm (optional). Will be based on the domain name of the ipaserver if not specified.
 
 
 |
 |===
+
+[NOTE]
+====
+* In order to configure authentication through an IPA server, in addition to using *Configure External Authentication (httpd)* in the `appliance_console`, external authentication can be optionally configured via the `appliance_console_cli` (command-line interface).
+
+* Specifying *--host* will update the hostname of the appliance. If this step was already performed via the `appliance_console` and the necessary updates made to `/etc/hosts` if DNS is not properly configured, the *--host* option can be omitted.
+====
+
 
 .Certificate Options
 [cols="1,1", frame="all"]
@@ -257,7 +274,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							CA name used for certmonger (default: ipa)
+							CA name used for certmonger (default: `ipa`)
 
 
 |
@@ -297,7 +314,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							install certs for http server
+							install certs for http server (to create certs/httpd* values for a unique key)
 
 
 |
@@ -312,6 +329,11 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 |===
+
+[NOTE]
+====
+The certificate options augment the functionality of the `certmonger` tool and enable creating a certificate signing request (CSR), and specifying `certmonger` the directories to store the keys.
+====
 
 .Other Options
 [cols="1,1", frame="all"]
@@ -332,17 +354,7 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 
 |
 
-							initialize the given device for temp storage (volume mounted at /var/www/miq_tmp)
-
-
-|
-
-							--host (-H)
-
-
-|
-
-							set the appliance hostname to the given name
+							initialize the given device for temp storage (volume mounted at `/var/www/miq_tmp`)
 
 
 |
@@ -358,349 +370,41 @@ Currently, the _appliance_console_cli_ feature is a subset of the full functiona
 |
 |===
 
-//////
-
-.appliance_console_cli options
-[cols="1,1", frame="all"]
-|===
-|
-
-							Options
-
-
-|
-
-Description
-
-|
-
-							*Database Configuration options*
-
-
-|
-
-							&#160;
-
-
-
-|
-
-							--region (-r)
-
-
-|
-
-							create a new region in the database (requires database credentials passed)
-
-
-
-|
-
-							--internal (-i)
-
-
-|
-
-							create a database on the current appliance
-
-
-
-|
-
-							--dbdisk
-
-
-|
-
-							database disk device path (for configuring an internal database)
-
-
-
-|
-
-							--hostname (-h)
-
-
-|
-
-							database hostname
-
-
-|
-
-							--port
-
-
-|
-
-							database port (defaults to 5432)
-
-
-|
-
-							--username (-U)
-
-
-|
-
-							database username (defaults to root)
-
-
-|
-
-							--password (-p)
-
-
-|
-
-							database password
-
-
-|
-
-							--dbname (-d)
-
-
-|
-
-							database name (defaults to vmdb_production)
-
-
-|
-
-							*v2_key Options*
-
-
-
-|
-
-&#160;
-
-|
-
-							--key (-k)
-
-
-|
-
-							create a new v2_key
-
-
-|
-
-							--fetch_key (-K)
-
-
-|
-
-							fetch the v2_key from the given host
-
-
-|
-
-							--force_key (-f)
-
-
-|
-
-							create or fetch the key even if one exists
-
-
-|
-
-							--sshlogin
-
-
-|
-
-							ssh username for fetching the v2_key (defaults to root)
-
-
-|
-
-							--sshpassword
-
-
-|
-
-							ssh password for fetching the v2_key
-
-
-
-|
-
-							*Other Options* 
-
-
-|
-
-							&#160;
-
-
-|
-
-							--tmpdisk
-
-
-|
-
-							initialize the given device for temp storage (volume mounted at /var/www/miq_tmp)
-
-
-|
-
-							--host (-H)
-
-
-|
-
-							set the appliance hostname to the given name
-
-
-|
-
-							--verbose (-v)
-
-
-|
-
-							print more debugging info
-
-
-|
-
-							*IPA Server Options*
-
-
-|
-
-							&#160;
-
-
-|
-
-							--ipaserver (-e)
-
-
-|
-
-							IPA server FQDN
-
-
-|
-
-							--ipaprincipal (-n)
-
-
-|
-
-							IPA server principal (default: admin)
-
-
-|
-
-							--ipapassword (-w)
-
-
-|
-
-							IPA server password
-
-
-|
-
-							--ipadomain (-o)
-
-
-|
-
-							IPA server domain (optional)
-
-
-|
-
-							--iparealm (-l)
-
-
-|
-
-							IPA server realm (optional)
-
-
-|
-
-							*Certificate Options*
-
-
-|
-
-							&#160;
-
-
-|
-
-							--ca (-c)
-
-
-|
-
-							CA name used for certmonger (default: ipa)
-
-
-|
-
-							--internal (-i)
-
-
-|
-
-							create a database on the current appliance
-
-
-|
-
-							--postgres-client-cert (-g)
-
-
-|
-
-							install certs for postgres client
-
-
-|
-
-							--postgres-server-cert 
-
-
-|
-
-							install certs for postgres server
-
-
-|
-
-							--http-cert
-
-
-|
-
-							install certs for http server
-
-
-|
-
-							--extauth-opts (-x)
-
-
-|
-
-							external authentication options
-
-
-|
-|===
-
-//////
-
+.Example Usage
+----
+$ ssh root@appliance.test.company.com
+----
+
+To create a new database locally on the server using `/dev/sdb`:
+----
+# appliance_console_cli --internal --dbdisk /dev/sdb --region 0 --password smartvm
+----
+
+To copy the v2_key from a host _some.example.com_ to local machine:
+----
+# appliance_console_cli --fetch_key some.example.com --sshlogin root --sshpassword smartvm
+----
+
+You could combine the two to join a region where _db.example.com_ is the appliance hosting the database:
+----
+# appliance_console_cli --fetch_key db.example.com --sshlogin root --sshpassword smartvm --hostname db.example.com --password mydatabasepassword
+----
+
+To configure external authentication:
+----
+# appliance_console_cli --host appliance.test.company.com
+                        --ipaserver ipaserver.test.company.com
+                        --ipadomain test.company.com
+                        --iparealm TEST.COMPANY.COM
+                        --ipaprincipal admin
+                        --ipapassword smartvm1
+----
+
+To uninstall external authentication:
+----
+# appliance_console_cli  --uninstall-ipa
+----
+
+ 
 :numbered:
 

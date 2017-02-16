@@ -20,7 +20,7 @@ image:2315.png[]
 
 If you are using a Windows template, the following configuration is required:
 
-* To customize settings that are inside the operating system, Sysprep must be copied to the appropriate directory on your vCenter computer. Usually this location is: `class="directory">C:\Documents and Settings\All Users\Application Data\VMware\VMware VirtualCenter\sysprep`. Copy the Sysprep tools to the relevant operating system subdirectory. If you are running a standard Win2008 operating system, this step is unnecessary as Sysprep is included as standard.
+* To customize settings that are inside the operating system, Sysprep must be copied to the appropriate directory on your vCenter computer. Usually this location is: `C:\Documents and Settings\All Users\Application Data\VMware\VMware VirtualCenter\sysprep`. Copy the Sysprep tools to the relevant operating system subdirectory. If you are running a standard Win2008 operating system, this step is unnecessary as Sysprep is included as standard.
 * The Windows template must have the latest version of VMware tools for its ESX Server. Check the VMware Site for more information. If you are creating a new password for the Administrator account, the Administrators password must be blank on the template. This is a limitation of Microsoft Sysprep.
 
 See the VMware documentation for a complete list of customization requirements.
@@ -351,7 +351,7 @@ image:2328.png[]
 .. Under *Count*, select the number of virtual machines you want to create in this request.
 .. Use *Naming* to specify a *VM Name* and *VM Description*. When provisioning multiple virtual machines, a number will be appended to the *VM Name*.
 . Click the *Environment* tab to decide where you want the new virtual machines to reside.
-.. If provisioning from a template on VMware, you can either let {product-title} decide for you by checking *Choose Automatically*, or select a specific cluster, resource pool, folder, host, and datastore. VMware virtual machines can also be provisioned to a clustered datastore by selecting it under *Datastore*.
+.. If provisioning from a template on VMware, you can either let {product-title} decide for you by checking *Choose Automatically*, or select a specific cluster, resource pool, folder, host, and datastore. VMware virtual machines can also be provisioned to a clustered datastore by selecting it under *Datastore*. Additionally, you can assign a storage profile to a VMware virtual machine under *Datastore* to configure the virtual machine to operate using a storage profile from that datastore.
 +
 Note, read-only datastores are excluded when provisioning a virtual machine.
 +
@@ -415,7 +415,7 @@ Virtual machines can be cloned in other providers as well.
 . Schedule the request on the *Schedule* tab.
 . Click *Submit*.
 
-[[publishing-a-virtual-machine-to-a-template-(vmware-virtual-machines-only)]]
+[[publishing-a-virtual-machine-to-a-template-vmware]]
 ==== Publishing a Virtual Machine to a Template (VMware Virtual Machines Only)
 
 . Navigate to menu:Compute[Infrastructure > Virtual Machines], and check the virtual machine you want to publish as a template.
@@ -475,7 +475,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 [[provisioning-an-openstack-instance-from-an-image]]
 ==== Provisioning an OpenStack Instance from an Image
 
-include::Provisioning_Requests-openstack.adoc[]
+include::common/provisioning-requests-openstack.adoc[]
 
 [[provisioning-a-google-compute-engine-instance-from-an-image]]
 ==== Provisioning a Google Compute Engine Instance from an Image
@@ -521,7 +521,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 {product-title} can provision hosts using PXE and Intelligent Platform Management Interface (IPMI) technologies. Before you provision your first host, configure the following prerequisites:
 
-* Provisioning requires the *Automation Engine* server role be enabled. Confirm your server role settings in menu:Settings[Configuration > Server > Server Control].
+* Provisioning requires the *Automation Engine* server role be enabled. Confirm your server role settings in the settings menu, then menu:Configuration[Server > Server Control].
 * Make a PXE server accessible to the {product-title} server.
 * Create a customization template for hosts. This customization template must contain host-specific additions, documented in the Customization Templates for Host Provisioning section.
 * Create system image types for the host.
@@ -694,17 +694,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 [[provisioning-dialogs-customizing]]
 ==== Customizing Provisioning Dialogs
 
-The default set of provisioning dialogs shows all possible options. However, {product-title} also provides the ability to customize which tabs and fields are shown. You can decide what fields are required to submit the provisioning request or set default values.
-
-For each type of provisioning, there is a dialog that can be created to adjust what options are presented. While samples are provided containing all possible fields for provisioning, you can remove what fields are shown. However, you cannot add fields or tabs.
-
-Edit the dialogs to:
-
-. Hide or show provisioning tabs.
-. Hide or show fields. If you hide an attribute, the default will be used, unless you specify otherwise.
-. Set default values for a field.
-. Specify if a field is required to submit the request.
-. Create custom dialogs for specific users.
+include::common/provisioning-dialogs-customization.adoc[]
 
 
 [[adding-a-provision-dialog-for-all-users]]
@@ -825,8 +815,4 @@ To set the scope for a datastore:
 [[provision-keypairs]]
 ==== Managing Key Pairs
 
-include::Provisioning_Requests-keypairs.adoc[]
-
-
-
-
+include::common/provisioning-requests-keypairs.adoc[]

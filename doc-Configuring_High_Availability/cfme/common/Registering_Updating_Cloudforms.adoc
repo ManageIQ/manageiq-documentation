@@ -1,0 +1,161 @@
+[[Registering_Updating_Cloudforms]]
+= Registering and Updating Red Hat CloudForms
+
+You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from menu:Settings[Configuration > Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the CloudForms server. The subscription management service you register with will provide your systems with updates and allow additional management. 
+
+The following tools are used during the update process:
+
+* `Yum` provides package installation, updates, and dependency checking.
+* `Red Hat Subscription Manager` manages subscriptions and entitlements.
+* `Red Hat Satellite Server` provides local system registration and updates from inside the customer’s firewall.
+
+[IMPORTANT]
+======
+The update worker synchronizes the VMDB with the status of available CloudForms content every 12 hours.
+======
+
+[NOTE]
+======
+Servers with the `RHN Mirror` role also act as a repository for other appliances to pull CloudForms package updates.
+======
+
+== Registering Appliances
+
+Before you can access and apply package updates, you must register and subscribe the CloudForms appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server.
+
+You need the following to register your appliance:
+
+* Your Red Hat account login or Red Hat Network Satellite login
+* A Red Hat subscription that covers your product
+
+image::common/cfme-register-appliance.png[]
+
+To register your appliance with Red Hat Subscription Management or Red Hat Satellite 6, first configure the region with your registration details. These settings will apply to all appliances in this region.
+
+To configure registration for a region:
+
+. Log in to the appliance as the `admin` user.
+. Navigate to menu:Settings[Configuration].
+. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
+. Click *Edit Registration*.
+. Configure registration details for the CloudForms appliance using one of two available options:
+.. To register with Red Hat Subscription Management:
+... In *Register to*, select *Red Hat Subscription Management*.
+... Enter the *Red Hat Subscription Management Address*. The default is `subscription.rhn.redhat.com`.
+... Enter the *Repository Name(s)*. The default is `cf-me-5.5-for-rhel-7-rpms rhel-server-rhscl-7-rpms`, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+... To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
+... Enter your Red Hat account information and click *Validate*.
+... After your credentials are validated, click *Save*.
+.. To register with Red Hat Satellite 6:
+... In *Register to*, select *Red Hat Satellite 6*.
+... Enter the *Red Hat Satellite 6 Address*. The default is `subscription.rhn.redhat.com`.
+... Enter the *Repository Name(s)*. The default is `cf-me-5.5-for-rhel-7-rpms rhel-server-rhscl-7-rpms`, which are the Red Hat CloudForms repository and the Red Hat Software Collections repository.
+... To use a HTTP proxy, select *Use HTTP Proxy* and enter your proxy details.
+... Enter your Red Hat Satellite account information and click *Validate*.
+... After your credentials are validated, click *Save*.
+
+Your appliance now appears in the *Appliance Updates* list as `Not registered`.
+
+To register your appliance:
+
+. Select the appliance from the *Appliance Updates* list.
+. Click *Register* to subscribe the appliance and attach subscriptions.
+
+Registering and attaching subscriptions takes a few minutes. The subscription process is complete when the appliance reports that it is `Subscribed` under *Update Status*, and `Registered` under *Last Message*.
+
+image::common/appliance_subscribed.png[]
+
+You can now apply updates to your appliance.
+
+[[Updating_Appliances]]
+== Updating Appliances
+
+An important part of securing Red Hat CloudForms is to ensure your appliances use the latest packages.
+Package updates to the appliance contain patches for any software bugs, including possible security bugs.
+
+The *Red Hat Updates* tab enables you to check for updates and update registered appliances. Any services requiring a restart to apply updates are automatically restarted as part of the *Red Hat Updates* process.
+
+. Navigate to menu:Settings[Configuration].
+. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
+. Click *Check For Updates* to search the Content Delivery Network (CDN) for any updated CloudForms packages. If an appliance update is available, it will be listed with the available version.
+. Click *Apply CFME Update* to install and update CloudForms packages. The CloudForms service will be automatically restarted as needed.
+
+
+[IMPORTANT]
+======
+Red Hat recommends updating the appliance using the *Red Hat Updates* tab only, which automatically restarts services and the appliance if needed. Running updates from the command line requires manually restarting the CloudForms service and sometimes the appliance. If updating the CloudForms appliance from the command line, use the `yum -y update cfme-appliance` command to update only CloudForms and its dependencies, and to avoid any potential incompatibilities that could be introduced by running `yum update`.
+======
+
+
+The following options are available in the *Appliance Updates* section of *Red Hat Updates*:
+
+.Options Available in Appliance Updates
+[cols="1,1", frame="all", options="header"]
+|===
+|
+
+              Option
+
+
+|
+
+              Use
+
+|
+             Refresh List
+
+
+|
+            Refreshes the list of appliances.
+
+
+|
+             Check for Updates
+
+
+|
+            Checks for all available CloudForms updates using `yum`.
+
+|
+              Register
+
+
+|
+            Attempts to register the appliance if it is not already registered. CloudForms subscribes to the `rhel-x86_64-server-6-cf-me-3` RHN channel for RHN-registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, CloudForms automatically checks for updates after registering.
+|
+               Apply CFME Update
+
+
+|
+            Applies updates to CloudForms packages only. Specifically, this option runs the `yum -y update cfme-appliance` command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated. The appliance may be rebooted automatically during this process.
+
+
+|===
+
+
+[NOTE]
+======
+If the appliance is registered to Red Hat Satellite, you can use content views to manage updates for CloudForms. For more information, see https://access.redhat.com/documentation/en/red-hat-satellite/6.2/content-management-guide/chapter-7-creating-content-views[Creating Content Views] in the _Red Hat Satellite 6 Content Management Guide_.
+======
+
+
+== Updating the Appliance Operating System
+
+Updating the appliance’s operating system requires a manual update using the `yum` command. This command updates the CloudForms packages, plus all RPMs on the appliance, and is supported only when used as part of migration.
+
+[IMPORTANT]
+======
+Scheduled downtime is required while updating system packages for the following reasons:
+
+* Some updates may interrupt CloudForms operations.
+* Updates for the PostgreSQL database server suspend CloudForms operations.
+* System updates may require a reboot of the CloudForms appliance.
+
+Red Hat recommends updating the appliance using the *Red Hat Updates* tab in the CloudForms user interface, which automatically restarts services and the appliance if needed. See xref:Updating_Appliances[] for instructions.
+======
+
+To update the appliance operating system:
+
+. Log in to the appliance console as the root user.
+. Run the `yum update` command and confirm any updates.
+. Restart the appliance as required.

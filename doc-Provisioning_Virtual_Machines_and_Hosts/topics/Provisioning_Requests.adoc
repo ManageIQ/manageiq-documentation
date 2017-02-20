@@ -26,14 +26,14 @@ If you are using a Windows template, the following configuration is required:
 See the VMware documentation for a complete list of customization requirements.
 
 [[requirements-for-provisioning-virtual-machines-from-red-hat-enterprise-virtualization-manager]]
-=== Requirements for Provisioning Virtual Machines from Red Hat Enterprise Virtualization Manager
+=== Requirements for Provisioning Virtual Machines from Red Hat Virtualization Manager
 
 [width="100%",cols="50%,50%a",options="header",]
 |====
 |Item|Requirements
-|Red Hat Enterprise Virtualization Manager version 3.0 or higher|Red Hat Enterprise Virtualization Manager properly installed with API in default location https://server:8443/api
-|Red Hat Enterprise Virtualization Manager History Database|
-Red Hat Enterprise Virtualization Manager Data Warehouse (DWH) properly installed with access to the PostgreSQL database on the Red Hat Enterprise Virtualization Manager server. Port 5432 open in iptables.
+|Red Hat Virtualization Manager version 3.0 or higher|Red Hat Virtualization Manager properly installed with API in default location https://server:8443/api
+|Red Hat Virtualization Manager History Database|
+Red Hat Virtualization Manager Data Warehouse (DWH) properly installed with access to the PostgreSQL database on the Red Hat Virtualization Manager server. Port 5432 open in iptables.
 
 md5 authentication allowed to {product-title} appliances in `pg_hba.conf`.
 
@@ -44,9 +44,9 @@ Credentials provided during database setup to be used in {product-title} UI.
 |Storage Supported for {product-title} Virtual Machine Analysis|
 NFS - {product-title} server must be able to mount NFS storage domain.
 
-iSCSI / FCP - Cluster must use full Red Hat Enterprise Linux (not Red Hat Enterprise Virtualization Hypervisor) Hosts.
+iSCSI / FCP - Cluster must use full Red Hat Enterprise Linux (not Red Hat Virtualization Hypervisor) Hosts.
 
-DirectLUN Hook installed on each host and registered to Red Hat Enterprise Virtualization Managers.
+DirectLUN Hook installed on each host and registered to Red Hat Virtualization Managers.
 
 Must have {product-title} appliance in each Cluster with this storage type.
 
@@ -58,7 +58,7 @@ Local storage - Not yet supported (Red Hat does not recommend due to single poin
 [[pxe-provisioning]]
 === PXE Provisioning
 
-PXE is a boot method that allows you to load files from across a network link. {product-title} uses it for files required for provisioning virtual machines. PXE can be used for provisioning for either Red Hat Enterprise Virtualization Manager or VMware.
+PXE is a boot method that allows you to load files from across a network link. {product-title} uses it for files required for provisioning virtual machines. PXE can be used for provisioning for either Red Hat Virtualization Manager or VMware.
 
 *Procedure Overview*
 
@@ -149,9 +149,9 @@ image:2320.png[]
 [[iso-provisioning]]
 === ISO Provisioning
 
-{product-title} also allows ISO provisioning from Red Hat Enterprise Virtualization Manager datastores. To use this feature, you will need to do the following before creating a provision request.
+{product-title} also allows ISO provisioning from Red Hat Virtualization Manager datastores. To use this feature, you will need to do the following before creating a provision request.
 
-. Add the *ISO Datastore*. The Red Hat Enterprise Virtualization Manager system must have already been discovered or added into the VMDB. For more information, see Managing Providers.
+. Add the *ISO Datastore*. The Red Hat Virtualization Manager system must have already been discovered or added into the VMDB. For more information, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/managing_providers/#adding_a_red_hat_enterprise_virtualization_manager_provider[Adding a Red Hat Enterprise Virtualization Manager Provider] in _Managing Providers_.
 . Refresh the *ISO Datastore*.
 . Create a *System Image Type*.
 . Set the *ISO Image Type*.
@@ -160,7 +160,7 @@ image:2320.png[]
 [[adding-an-iso-datastore]]
 ==== Adding an ISO Datastore
 
-The following procedure adds an ISO Datastore from your Red Hat Enterprise Virtualization environment.
+The following procedure adds an ISO Datastore from your Red Hat Virtualization environment.
 
 . Navigate to menu:Compute[Infrastructure > PXE].
 . Click the *ISO Datastores* accordion.
@@ -218,19 +218,19 @@ Add a customization template to provide *Kickstart*, *Cloud-Init*, or *Sysprep* 
 
 .Cloud-Init Requirements
 * When creating a template using Red Hat Virtualization, install the *cloud-init* package on the source virtual machine. This enables Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
-* See https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6/html-single/Virtual_Machine_Management_Guide/index.html#sect-Using_Cloud-Init_to_Automate_the_Configuration_of_Virtual_Machines[Using Cloud-Init to Automate the Configuration of Virtual Machines] in the Red Hat Enterprise Virtualization _Administration Guide_ for more information on using Cloud-Init in a Red Hat Enterprise Virtualization environment.
+* See https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6/html-single/Virtual_Machine_Management_Guide/index.html#sect-Using_Cloud-Init_to_Automate_the_Configuration_of_Virtual_Machines[Using Cloud-Init to Automate the Configuration of Virtual Machines] in the Red Hat Virtualization _Administration Guide_ for more information on using Cloud-Init in a Red Hat Virtualization environment.
 * See the http://cloudinit.readthedocs.org/en/latest/[Cloud-Init Documentation] web site for example scripts.
 
 .Kickstart Requirements for ISO Provisioning
-* Name the *Kickstart* file *ks.cfg*.
+* The *Kickstart* file must be named *ks.cfg*.
 * Set the new virtual machine to power down after provisioning is complete.
-* CFME must use the virtual machine payload feature of RHEV to create a floppy disk containing the data from the selected customization template.
+* {product-title_short} must use the virtual machine payload feature of Red Hat Virtualization to create a floppy disk containing the data from the selected customization template.
 * Customize the installer to include the data written to the floppy disk payload.
 
 [example]
 .RHEL ISO with the following modifications:
 ====
-* `isolinux.cfg` &ndash; modify default menu item *append* line to include *ks=cdrom*
+* `isolinux.cfg` &ndash; add *ks=cdrom* to the *append* line
 * `ks.cfg` &ndash; which must minimally include:
 
 ----
@@ -345,7 +345,7 @@ image:2328.png[]
 . For templates on Red Hat providers:
 .. Select the *Name* of a template to use.
 .. For *Provision Type*, select either *ISO*, *PXE*, or *Native Clone*. You must select *Native Clone* in order to use a Cloud-Init template.
-... If *Native Clone* is selected, select *Linked Clone* to create a linked clone to the virtual machine instead of a full clone. This is equivalent to _Thin Template Provisioning_ in Red Hat Enterprise Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
+... If *Native Clone* is selected, select *Linked Clone* to create a linked clone to the virtual machine instead of a full clone. This is equivalent to _Thin Template Provisioning_ in Red Hat Virtualization. Since a snapshot is required to create a linked clone, this box is only enabled if a snapshot is present. Select the snapshot to use for the linked clone.
 ... If *ISO* is selected, select an ISO *Image* to use for provisioning.
 ... If *PXE* is selected, select a PXE *Server* and *Image* to use for provisioning.
 .. Under *Count*, select the number of virtual machines you want to create in this request.
@@ -357,8 +357,8 @@ Note, read-only datastores are excluded when provisioning a virtual machine.
 +
 .. If provisioning from a template on Red Hat, you can either let {product-title} decide for you by checking *Choose Automatically*, or select a datacenter, cluster, host and datastore.
 . Click the *Hardware* tab to set hardware options.
-image:2330.png[]
-.. In *VM Hardware*, set the number of CPUs, amount of memory, and disk format: thin, pre-allocated/thick or same as the provisioning template (default).
+image:provision-vms.png[]
+.. In *Hardware*, set the number of sockets, cores per socket, memory in MB, and disk format: thin, pre-allocated/thick or same as the provisioning template (default).
 .. For VMware provisioning, set the *VM Limits* of CPU and memory the virtual machine can use.
 .. For VMware provisioning, set the *VM Reservation* amount of CPU and memory.
 . Click *Network* to set the vLan adapter. Additional networking settings that are internal to the operating system appear on the *Customize* tab.
@@ -373,7 +373,7 @@ A VMware virtual machine can be provisioned to a DVPortgroup by selecting it fro
 . Click *Customize* to customize the operating system of the new virtual machine. These options vary based on the operating system of the template.
 image:2336.png[]
 . For Windows provisioning:
-.. To use a customer specification from the provider, click *Specification*. To select an appropriate template, choose from the list in the custom specification area. The values that are honored by {product-title} display.
+.. To use a custom specification from the provider, click *Specification*. To select an appropriate template, choose from the list in the custom specification area. The values that are honored by {product-title} display.
 +
 [NOTE]
 ====
@@ -411,7 +411,7 @@ Virtual machines can be cloned in other providers as well.
 
 . Navigate to menu:Compute[Infrastructure > Virtual Machines], and check the virtual machine you want to clone.
 . Click image:2007.png[](*Lifecycle*), and then image:2339.png[](*Clone selected item*).
-. Fill in the options as shown in *To Provision* from a template using the provided dialogs. Be sure to check the *Catalog Tab*.
+. Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
 . Schedule the request on the *Schedule* tab.
 . Click *Submit*.
 
@@ -420,7 +420,7 @@ Virtual machines can be cloned in other providers as well.
 
 . Navigate to menu:Compute[Infrastructure > Virtual Machines], and check the virtual machine you want to publish as a template.
 . Click image:2007.png[](*Lifecycle*), and then image:2340.png[](*Publish selected VM to a Template*).
-. Fill in the options as shown in *To Provision* from a template using the provided dialogs. Be sure to check the *Catalog* tab.
+. Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
 . Schedule the request on the *Schedule* tab.
 . Click *Submit*.
 
@@ -544,11 +544,11 @@ There are two ways to get the Intelligent Platform Management Interface (IPMI) H
 +
 [NOTE]
 ====
-You can also add IPMI credentials after the host has been discovered. See section To Add IPMI Credentials
+You can also add IPMI credentials after the host has been discovered. See section xref:adding-ipmi-credentials-to-a-discovered-host[].
 ====
 +
 . In *Subnet Range*, type in a range of IP addresses. For quickest results, use the actual IP address in both fields.
-. Click *Discover*.
+. Click *Start*.
 +
 
 [NOTE]
@@ -650,7 +650,7 @@ image:2325.png
 . Click *Add*.
 [NOTE]
 ====
-The default dialogs show all possible parameters for provisioning. To limit the options shown, xref:provisioning-dialogs-customizing[].
+The default dialogs show all possible parameters for provisioning. To limit the options shown, see xref:provisioning-dialogs-customizing[].
 ====
 
 [[provisioning-a-host]]
@@ -794,7 +794,7 @@ Be sure that the custom dialog file exists. If it does not, an error will appear
 
 Some non-default placement methods, for example the *redhat_best_placement_with_scope* or *vmware_best_fit_with_scope* methods, may require you to set *Provisioning Scope* tags for a host and a datastore.
 
-To enable these resources for all groups, set the scope to *All*. To limit access to a select group, create a tag in the *Provisioning Scope* category with the exact name of the user group and set this tag on the desired resources. See Tags in General Configuration for information on creating tags.
+To enable these resources for all groups, set the scope to *All*. To limit access to a select group, create a tag in the *Provisioning Scope* category with the exact name of the user group and set this tag on the desired resources. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/general_configuration/#regions[Tags] in _General Configuration_ for information on creating tags.
 
 To set the scope for a host:
 

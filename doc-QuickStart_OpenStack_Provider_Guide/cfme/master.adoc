@@ -7,11 +7,27 @@ OpenStack Documentation Team <rhos-docs@redhat.com>
 :experimental:
 
 :cfme:
+:openstack:
 
 // Custom attributes
 include::common/attributes/cfme.adoc[]
 
 include::topics/common/introduction.adoc[]
+
+== Key {product-title} Features for OpenStack Cloud Providers
+
+{product-title} provides several interface features specific to OpenStack cloud providers:
+
+* The {product-title_short} *Topology* widget (xref:using-the-topology-widget[]) provides an interactive visualization of the OpenStack cloud. 
+* {product-title_short} provides a user interface for managing OpenStack storage resources (xref:storage_managers[]).
+* _Custom buttons_, which allows you to provide automation for specific actions to OpenStack tenants (xref:custom-button-tenants[]).
+
+When adding an OpenStack cloud provider, you can also:
+
+* Enable _tenant mapping_. This creates a one-to-one association between tenants in {product-title_short} and OpenStack.
+* Connect to OpenStack through the Keystone V3 API. This API enables multiple OpenStack identity domains. Domains are high-level containers for projects, users, and groups. Users of different domains can be represented in different authentication back ends.
+
+For information about tenant mapping and the Keystone V3 API, see xref:add-openstack-oc[]
 
 [[installing-cloudforms]]
 == Installing and Configuring {product-title}
@@ -49,6 +65,20 @@ Red Hat CloudForms can analyze a cloud Instance or infrastructure host to collec
 
 include::common/smartstate-analysis-instances.adoc[]
 
+[[using-the-topology-widget]]
+== Using the Topology Widget
+
+The *Topology* widget is an interactive topology graph, showing the status and relationships between the different resources and entities of the OpenStack providers that {product-title} has access to.
+
+* The topology graph includes instances, nodes, and other cloud resources within the overall OpenStack cloud provider environment.
+include::common/topology_widget.adoc[]
+
+To view an OpenStack provider through the *Topology* widget:
+
+. Navigate to menu:Compute[Cloud > Providers].
+. Click the desired OpenStack cloud provider for viewing the provider summary.
+. On the provider summary page, click *Topology* in the *Overview* box on the right-hand side of the page.
+
 [[policies]]
 == Managing Policies
 
@@ -59,14 +89,55 @@ include::topics/managing-policies.adoc[]
 
 Cloud instance provision goes through three phases:
 
-. Request: This includes ownership information, tags, virtual hardware requirements, the operating system, and any customization required. 
-. Approval: Provisioning requests are then approved or denied. This phase can happen automatically or manually.
-. Provision: Approved provisioning requests are executed. 
+. Request: This includes ownership information, tags, virtual hardware requirements, the operating system, and any customization required. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/provisioning_virtual_machines_and_hosts/#provisioning-requests[Provisioning Requests] from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/provisioning_virtual_machines_and_hosts/[Provisioning Virtual Machines and Hosts] guide for more details.
+. Approval: Provisioning requests are then approved or denied. This phase can happen automatically or manually. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/provisioning_virtual_machines_and_hosts/#provisioning-request-approval-methods[Provisioning Request Approval Methods] from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/provisioning_virtual_machines_and_hosts/[Provisioning Virtual Machines and Hosts] guide for more details.
+. Provision: Approved provisioning requests are executed. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/provisioning_virtual_machines_and_hosts/#working-with-provisioning-requests[Working with Provisioning Requests] from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/provisioning_virtual_machines_and_hosts/[Provisioning Virtual Machines and Hosts] guide for more details.
 
 [[provisioning-an-openstack-instance-from-an-image]]
 === Provisioning an OpenStack Instance from an Image
 
 include::common/provisioning-requests-openstack.adoc[]
+
+[[storage_managers]]
+== Managing Storage
+
+include::common/openstack/storage-manager-available.adoc[]
+
+For more information, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/managing_providers/#storage_managers[Storage Managers] from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/managing_providers/[Managing Providers] guide.
+
+=== Managing Block Storage
+
+The OpenStack Block Storage service (`openstack-cinder`) provides and manages persistent block storage resources that OpenStack infrastructure instances can consume. {product-title_short} provides an interface for managing these resources (volumes, volume backups, and volume snapshots).
+
+To create a volume:
+
+include::common/openstack/cinder-volume-create.adoc[]
+
+To attach a volume to an instance (for example, one created through xref:provisioning-an-openstack-instance-from-an-image[]):
+
+include::common/openstack/cinder-instance-attach.adoc[]
+
+To view a timeline of storage manager events:
+
+include::common/openstack/cinder-view-timeline.adoc[]
+
+To back up a volume:
+
+include::common/openstack/cinder-backup-create.adoc[]
+
+To take a volume snapshot:
+
+include::common/openstack/cinder-snapshot-create.adoc
+
+For more information about available options for block storage resources in {product-title_short}, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/managing_providers/#openstack_block_storage_managers[OpenStack Block Storage Managers] (from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/managing_providers/[Managing Providers] guide).
+
+=== Managing Object Storage
+
+The OpenStack Object Storage (`openstack-swift`) service provides cloud object storage. The object store summary page shows details including the object store's size, parent cloud, storage manager, cloud tenant, and the number of cloud objects on the object store.
+
+To view the summary page of an object store:
+
+include::common/openstack/swift-view-stores.adoc[]
 
 [[catalogs-services]]
 == Catalogs and Services
@@ -83,17 +154,47 @@ include::topics/reports.adoc[]
 
 include::topics/chargeback.adoc[]
 
-[appendix]
+/// [appendix]
 [[provisioning-dialogs-customizing]]
-=== Customizing Provisioning Dialogs
+== Customizing Provisioning Dialogs
 
 include::common/provisioning-dialogs-customization.adoc[]
 
+[[custom-button-tenants]]
+== Creating Custom Buttons for Cloud Tenants
+
+{product-title_short} also allows you to create _custom buttons_ for cloud tenants. This is useful for providing shortcuts to functionalities and features frequently used by specific tenants.
+
+[NOTE]
+==========
+This capability is made possible through the _Automate_ model. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/scripting_actions_in_cloudforms/#understanding-the-automate-model[Understanding the Automate Model] from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/scripting_actions_in_cloudforms/[Scripting Actions in CloudForms] guide for more details.
+==========
+
+The following subsections summarize the two main steps for creating a custom button for cloud tenants.
+
+[[create-custom-button-group]]
+=== Creating a Custom Button Group
+
+A _button group_ is a label for a collection of buttons under an _object type_. To create one:
+
+include::common/automate-custom-button-group.adoc[]
+
+The button group will show in the *Cloud Tenant* object type. When it does, create a custom button for any tenant within the OpenStack Cloud (see xref:create-a-custom-button[]).
+
+[[create-a-custom-button]]
+=== Creating a Custom Button
+
+include::common/automate-custom-button.adoc[]
+
+The button will show in the object type you added the button to. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/scripting_actions_in_cloudforms/#invoking-automate[Invoking Automate] from the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/scripting_actions_in_cloudforms/[Scripting Actions in CloudForms] guide for more in-depth coverage.
+
+
 [appendix]
 [[provision-keypairs]]
-=== Managing Keypairs
+== Managing Keypairs
 
 include::common/provisioning-requests-keypairs.adoc[]
+
 
 ///////////////////////////////////////////////////
 include::topics/Adding_OpenStack_Providers.adoc[]

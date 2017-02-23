@@ -1,5 +1,25 @@
+[[database_failover]]
+== Configuring Database Failover
+
+The failover monitor daemon must run on all of the non-database appliances to check for failures. In case of a database failure, it modifies the database configuration accordingly.
+
+[IMPORTANT]
+====
+This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, the standby database appliance will not react and take over operations in case of a primary database failure. 
+====
+
+[[failover_monitor]]
+=== Configuring the Failover Monitor
+
+Configure the failover monitor only on the non-database appliances with the following steps:
+
+. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
+. Select *Start Database Failover Monitor*.
+
+
+
 [[failover_testing]]
-== Testing Database Failover
+=== Testing Database Failover
 
 Test that failover is working correctly between your databases with the following steps:
 
@@ -23,19 +43,21 @@ You can check the status of the simulated failure by viewing the most recent `ha
 ----
 ====
 +
-. Check the appliance console summary screen for the primary database. If configured correctly, the *{product-title_abbr_uc} Database* value in the appliance console summary should have switched from the hostname of the old primary database to the hostname of the new primary on all engine appliances.
+. Check the appliance console summary screen for the primary database. If configured correctly, the *{product-title_abbr_uc} Database* value in the appliance console summary should have switched from the hostname of the old primary database to the hostname of the new primary on all standard appliances.
 
 
 [IMPORTANT]
 ====
-Upon database server failover, the standby server becomes the primary. However, in this version of {product-title}, the failed node cannot switch to standby automatically and must be manually configured. Data replication from the new primary to the failed and recovered node does not happen by default, so the failed node must be reintroduced into the configuration.
+Upon database server failover, the standby server becomes the primary. However, the failed node cannot switch to standby automatically and must be manually configured. Data replication from the new primary to the failed and recovered node does not happen by default, so the failed node must be reintroduced into the configuration.
 ====
 
 
 [[reintroducing_the_failed_node]]
 === Reintroducing the Failed Node
 
-In the current version of {product-title}, manual steps are required to reintroduce the failed primary database node back into the cluster as a standby:
+Manual steps are required to reintroduce the failed primary database node back into the cluster as a standby. This allows for greater control over the configuration, and to diagnose the failure.
+
+To reintroduce the failed node:
 
 . Stop the local pgsql service:
 +
@@ -67,7 +89,7 @@ logfile=/var/log/repmgr/repmgrd.log
 +
 [NOTE]
 ====
-If the `follow` command times out and `postgresql.log` reports a message similar to `requested WAL segment 000000020000000000000004 has already been removed`, you can correct this by removing the contents of the data directory and reinitializing the standby as described in xref:replication-configuring-standby[] to re-add the node. 
+If the `follow` command times out and `postgresql.log` reports a message similar to `requested WAL segment 000000020000000000000004 has already been removed`, you can correct this by removing the contents of the data directory and reinitializing the standby as described in xref:configuring_standby_db[] to re-add the node. 
 
 This occurs when the write ahead log (WAL) required to catch up the standby server is no longer available on the primary. See the https://www.postgresql.org/docs/9.5/static/continuous-archiving.html[PostgreSQL documentation] for more information on the WAL log.
 ====

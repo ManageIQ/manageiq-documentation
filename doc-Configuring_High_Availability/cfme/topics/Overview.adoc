@@ -1,45 +1,36 @@
 [[Overview]]
 == Environment Overview
 
-A {product-title} environment is comprised of an engine tier and a database tier. Redundancy is imparted on both tiers for high availability.
+This guide describes how to configure database high availability in a {product-title} environment. This configuration allows for disaster mitigation: a failure in the primary database does not result in downtime, as the standby database takes over the failed database’s processes. This is made possible by database replication between two or more database servers. In {product-title_short}, these servers are database-only {product-title_short} appliances which do not have `emserverd` processes enabled.
 
-There are two failover mechanisms providing high availability: the _repmgr_ tool and a failover monitor.
-
-_repmgr_ row-oriented replication provides the PostgreSQL database tier redundancy, which operates in a primary-hot standby manner. The data replication is asynchronous and in the event of primary database failure, the standby database assumes the role of primary, orchestrated by the _repmgr_ tool. The engine appliance is connected to both the primary and standby databases, and can then continue running normally even in the case of a node failure.
+In this configuration, only one database is writable at any given time. This procedure also does not provide scalability or a multi-master database setup. While a {product-title} environment is comprised of an engine tier and a database tier, this configuration affects only the database tier and does not provide load balancing for the appliances.
 
 [NOTE]
 ====
-In the current version of {product-title}, manual steps are required to reintroduce the failed database node back as the standby server. See xref:reintroducing_the_failed_node[].
+Manual steps are required to reintroduce the failed database node back as the standby server. See xref:reintroducing_the_failed_node[].
 ====
-
-The redundant engine appliances are load balanced using HAProxy or another load balancer solution.
-
-ifdef::cfme[]
-
-The following diagram gives an overview of the configuration described in this guide, with the example IP addresses used in the procedures:
-
-image:CloudForms_HA_Architecture_431939_1216_ECE.png[]
-
-endif::cfme[]
 
 [[requirements]]
 === Requirements
 
-For a high availability {product-title} environment, you need a virtualization host containing at minimum four virtual machines with {product-title} installed, consisting of:
+For a high availability {product-title} environment, you need a virtualization host containing at minimum four virtual machines with {product-title_short} installed, consisting of:
 
 - One virtual machine for the primary external database containing a minimum of 4GB dedicated disk space
 - One virtual machine for the standby external database containing a minimum of 4GB dedicated disk space
-- Two virtual machines for the {product-title} engine appliances
+- Two virtual machines for the standard {product-title_short} appliances
 
 ifdef::cfme[]
 See https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_ for information on setting up the correct disk space for the database appliances.
+
+Red Hat recommends using a DNS server for a high availability configuration, as DNS names can be updated more quickly than IP addresses when restoring an operation in a different location, network, or datacenter.
 endif::cfme[]
+
 
 [NOTE]
 ====
-You must use the same {product-title} appliance template for virtual machines created for the engine appliances, as well as for the database servers. 
+It is essential to use the same {product-title} appliance template version to install each virtual machine in this environment. 
 
 ifdef::cfme[]
-See the https://access.redhat.com/products/red-hat-cloudforms[Red Hat Customer Portal] for the appliance download appropriate to the platform on which you are running {product-title}.
+See the https://access.redhat.com/products/red-hat-cloudforms[Red Hat Customer Portal] to obtain the appliance download for the platform you are running {product-title_short} on.
 endif::cfme[]
 ====

@@ -47,15 +47,35 @@ The {product-title} appliance requires the following virtual hardware at minimum
 [[database-requirements]]
 ==== Database Requirements
 
-Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
+Red Hat recommends allocating the virtual machine disk fully at the time of creation. Four main factors affect the size of your database over time:
 
 * Virtual Machine Count: the most important factor in the calculation of virtual machine database (VMDB) size over time.
 * Host Count: the number of hosts associated with the provider.
 * Storage Count: the number of individual storage elements as seen from the perspective of the provider or host. It is not the total number of virtual disks for all virtual machines.
+* Metrics Count: {product-title_short} will create a number of records per minute, rolled up hourly and daily, for each provider instance once capacity and utilization is enabled. See the second table for information on VMDB sizing to include metrics gathering.
 
-Use the following table as a guideline to calculate minimum requirements for your database:
+
+
+Use the following table as a guideline to calculate minimum requirements for your database without capacity and utilization enabled:
 
 image:5780.png[]
+
+[NOTE]
+=====
+When enabling capacity and utilization for metrics gathering over a period of time, it is recommended that the VMDB size scale accordingly. Evaluate the number of instances in your provider inventory and storage duration requirements to plan for increased VMDB sizing requirements. 
+=====
+
+Use the following information below to plan for your increased VMDB needs when working with metrics gathering:
+
+* Realtime metrics data are stored for 4 hours.
+
+* Rollup metrics data are stored for 6 months.
+
+The table below details the number of records created for a single OpenStack instance:
+
+image:metricsTimeTable.png[]
+
+* Metrics data storage times can be configured by editing the Advanced Settings.
 
 
 [[browser-requirements]]

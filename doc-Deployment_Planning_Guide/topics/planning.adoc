@@ -8,7 +8,7 @@ This guide provides some general guidelines to planning a deployment on {product
 
 Regions are used for centralizing data which is collected from public and private virtualization environments. A region is ultimately represented as a single database for the VMDB. Regions are particularly useful when multiple geographical locations need to be managed, as they enable all the data collection to happen at each particular location and avoid data collection traffic across slow links between networks.
 
-When multiple regions are being used, each with their own unique ID, a master region can be created to centralize the data of all the children regions into a single master database. To do this, configure each child region to replicate its data to the master region database (Red Hat recommends use of region 99). This parent and child region is a one-to-many relationship.
+When multiple regions are being used, each with their own unique ID, a master region can be created to centralize the data of all the children regions into a single master database. To do this, configure each child region to replicate its data to the master region database (Red Hat recommends use of region 99, though any number up to three digits will work). This parent and child region is a one-to-many relationship.
 
 Regions can contain multiple zones, which in turn contain appliances. Zones are used for further segregating network traffic along with enabling failover configurations. Each appliance has the capability to be configured for a number of specialized server roles. These roles are limited to the zone containing the appliance they run on.
 
@@ -34,6 +34,37 @@ image:7150.png[]
 In this region, we have several {product-title} appliances acting as UI nodes and worker nodes. These worker nodes execute tasks on the providers in your environment.
 The Region also uses a region database that reports to a master database on the main {product-title} appliance. All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
 
+
+[NOTE]
+====
+{product-title} can be configured in a highly available setup. In this case, all PostgreSQL instances must be running on a server that is deployed from the {product-title} appliance. 
+ifdef::cfme[]
+For more information, see the following example reference architecture:
+https://access.redhat.com/articles/1571263[Implementing Highly Available CloudForms Appliances]. Note, this reference architecture was written for a previous version of CloudForms.
+endif::cfme[]
+====
+
+[[central-administration]]
+=== Centralized Administration
+
+{product-title} includes centralized administration capabilities, where operations can be initiated from the global region and processed and executed on the remote region. This includes the following life cycle management operations:
+
+* Virtual machine provisioning
+* Service provisioning
+* Virtual machine power operations
+* Virtual machine retirement
+* Virtual machine reconfiguration
+
+image:centralized_admin.png[Centralized Administration Diagram]
+
+With centralized administration, the remote_queue_put leverages a new system-to-system REST API request to forward the original request to the remote region. This request is put in the local queue in the remote region, which is then delivered by a worker in the remote region as if it was queued there all along. As a result, a {product-title_short} operator in the global region can be seen as provisioning on behalf of a remote region. 
+
+[NOTE]
+====
+The operations initiated from the global region are subject to the role-based access control (RBAC) rules on the remote region. The user in the remote region which matches the logged-in user's *user ID* will be used to enforce RBAC in the target region. The operation will fail on the remote system if the user does not have the required permissions. 
+====
+
+For information on how to configure centralized administration via database replication, see the section on _Configuring Database Replication and Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/general-configuration/[General Configuration] guide.
 
 [[tenants]]
 === Tenants

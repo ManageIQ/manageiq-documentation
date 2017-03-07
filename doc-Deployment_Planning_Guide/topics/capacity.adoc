@@ -44,10 +44,15 @@ In addition to setting the server role, you must also select which clusters and 
 ====
 
 [[data_collection_for_rhev_33_34]]
-=== Data Collection for Red Hat Enterprise Virtualization 3.3 and 3.4
+=== Data Collection for Red Hat Enterprise Virtualization
+
+[NOTE]
+====
+The procedure applies to version numbers Red Hat Enterprise Virtualization 3.x and Red Hat Virtualization 4.x. 
+====
 
 To collect capacity and utilization data for Red Hat Enterprise
-Virtualization 3.3 and 3.4, you must add {product-title} as
+Virtualization, you must add {product-title} as
 a user to the RHEV-M database.
 
 Perform this procedure on the PostgreSQL server where the history
@@ -68,28 +73,36 @@ $ ssh root@example.postgres.server
 . Access the database prompt:
 +
 ------
--bash-4.1$ psql
+# psql ovirt_engine_history
 ------
 +
-. Create a new user for the {product-title}:
+. Create a new user for the {product-title} and grant read-only access to tables and views:
 +
 ------
-postgres=# CREATE ROLE cfme LOGIN UNENCRYPTED PASSWORD 'smartvm' SUPERUSER VALID UNTIL 'infinity';
+ovirt_engine_history=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
+
+ovirt_engine_history=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
 ------
 +
 . Exit to the RHEV-M database server prompt:
 +
 ------
-postgres=# \q
--bash-4.1$ exit
+ovirt_engine_history=# \q
+# exit
 ------
 +
-. Update the server's firewall to accept TCP communication on port
-  5432:
+. Update the server's firewall to accept TCP communication on port 5432.
+* For Red Hat Enterprise Virtualization 3.x:
 +
 ------
 # iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
 # service iptables save
+------
++
+* For Red Hat Virtualization 4.x:
++
+------
+# firewall-cmd --add-port=5432/tcp --permanent
 ------
 +
 . Enable external md5 authentication by appending the following line to
@@ -106,10 +119,17 @@ host    all      all    0.0.0.0/0     md5
 listen_addresses  =  '*'
 ------
 +
-. Reload the PostgreSQL configuration:
+. Reload the PostgreSQL configuration.
+* For Red Hat Enterprise Virtualization 3.x:
 +
 ------
-service postgresql reload
+# service postgresql reload
+------
++
+* For Red Hat Virtualization 4.x:
++
+------
+# systemctl reload postgresql
 ------
 +
 
@@ -248,7 +268,7 @@ done
 ------
 +
 . Add the configured OpenStack provider to {product-title}. See
-ifdef::cfme[link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/managing-providers/#adding_openstack_providers[Adding OpenStack Providers] in _Managing Providers_.]
+ifdef::cfme[link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/managing-providers/#adding_openstack_providers[Adding OpenStack Providers] in _Managing Providers_.]
 ifdef::miq[Managing Providers]
   After adding the provider, capacity and utilization data for your instances
   populate in a few minutes.
@@ -288,9 +308,9 @@ capacity and utilization charts under the menu:Compute[Infrastructure] tab.
 ifdef::cfme[]
 For procedures to view capacity and utilization charts for hosts, clusters, and virtual machines, see the following sections in _Managing Infrastructure and Inventory_:
 
-* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/managing-infrastructure-and-inventory/#viewing_capacity_and_utilization_charts_for_a_host[Viewing Capacity and Utilization Charts for a Host]
-* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/managing-infrastructure-and-inventory/#viewing_capacity_and_utilization_charts_for_a_cluster[Viewing Capacity and Utilization Charts for a Cluster]
-* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/managing-infrastructure-and-inventory/#to_view_capacity_and_utilization_charts_for_a_virtual_machine[Viewing Capacity and Utilization Charts for a
+* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/managing-infrastructure-and-inventory/#viewing_capacity_and_utilization_charts_for_a_host[Viewing Capacity and Utilization Charts for a Host]
+* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/managing-infrastructure-and-inventory/#viewing_capacity_and_utilization_charts_for_a_cluster[Viewing Capacity and Utilization Charts for a Cluster]
+* link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/managing-infrastructure-and-inventory/#to_view_capacity_and_utilization_charts_for_a_virtual_machine[Viewing Capacity and Utilization Charts for a
 Virtual Machine]
 endif::cfme[]
 
@@ -312,7 +332,7 @@ Charts created include:
 |====
 
 ifdef::cfme[]
-See link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/managing-infrastructure-and-inventory/[Viewing Capacity and Utilization Charts for a Datastore] in _Managing Infrastructure and Inventory_ for more information.
+See link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/managing-infrastructure-and-inventory/[Viewing Capacity and Utilization Charts for a Datastore] in _Managing Infrastructure and Inventory_ for more information.
 endif::cfme[]
 
 [[chart-features]]
@@ -496,7 +516,7 @@ report which can be downloaded for further analysis.
 ** xref:assigning_the_capacity_and_utilization_server_roles[]
 ** xref:data_collected[]
 * Additionally, configure your {product-title} for collecting capacity and utilization reports for clusters and datastores by following this procedure:
-.. Navigate to menu:Settings[Configuration]. 
+.. From the settings menu, select *Configuration*.
 .. Select *Region* from the *Settings* tab in the left pane of the appliance. 
 .. In the right pane, under the *C & U Collection* tab, check the boxes for *Collect for All Clusters* under *Clusters* and *Collect for All Datastores* under *Datastores*, or check the boxes for the clusters/datastores you desire.
 +
@@ -559,6 +579,7 @@ the timeline to see specific information on the bottleneck.
 +
 . Expand the tree on the left side, until you can see the enterprise,
   provider, or datastore that you want to see the trend for.
+
 
 
 

@@ -11,7 +11,7 @@ The {product-title} appliance is intended to have minimal configuration options.
 [[changing-configuration-settings]]
 === Changing Configuration Settings
 
-The procedure describes how to make changes to the configuration settings on the {product-title} appliance.
+The following procedure describes how to make changes to the configuration settings on the {product-title} appliance.
 
 . After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
 . Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
@@ -28,32 +28,7 @@ The {product-title} appliance console automatically logs out after five minutes 
 [[advanced-configuration-settings]]
 === Advanced Configuration Settings
 
-After logging in, you can use the following menu items for advanced configuration of the appliance:
-
-* Use *Set DHCP Network Configuration* to use DHCP to obtain the IP address and network configuration for your {product-title} appliance. The appliance is initially configured as a DHCP client with bridged networking.
-* Use *Set Static Network Configuration* if you have a specific IP address and network settings you need to use for the {product-title} appliance.
-* Use *Test Network Configuration* to check that name resolution is working correctly.
-* Use *Set Hostname* to specify a hostname for the {product-title} appliance.
-+
-[IMPORTANT]
-====
-A valid fully qualified hostname for the {product-title} appliance is required for SmartState analysis to work correctly,
-====
-+
-* Use *Set Timezone, Date, and Time* to configure the time zone, date, and time for the {product-title} appliance.
-* Use *Restore Database from Backup* to restore the VMDB database from a previous backup.
-* Use *Setup Database Region* to create regions for VMDB replication.
-* Use *Configure Database* to configure the VMDB database. Use this option to configure the database for the appliance after installing and running it for the first time.
-* Use *Extend Temporary Storage* to add temporary storage to the appliance. The appliance formats an unpartitioned disk attached to the appliance host and mounts it at `/var/www/miq_tmp`. The appliance uses this temporary storage directory to perform certain image download functions.
-* Use *Configure External Authentication (httpd)* to configure authentication through an IPA server.
-* Use *Generate Custom Encryption Key* to regenerate the encryption key used to encode plain text password.
-* Use *Harden Appliance Using SCAP Configuration* to apply Security Content Automation Protocol (SCAP) standards to the appliance. You can view these SCAP rules in the `/var/www/miq/lib/appliance_console/config/scap_rules.yml` file.
-* Use *Stop Server Processes* to stop all server processes. You may need to do this to perform maintenance.
-* Use *Start Server Processes* to start the server. You may need to do this after performing maintenance.
-* Use *Restart Appliance* to restart the {product-title} appliance. You can either restart the appliance and clear the logs or just restart the appliance.
-* Use *Shut Down Appliance* to power down the appliance and exit all processes.
-* Use *Summary Information* to go back to the network summary screen for the {product-title} appliance.
-* Use *Quit* to leave the {product-title} appliance console.
+include::configuration-advanced.adoc[]
 
 [[configuring_a_database]]
 === Configuring a Database for {product-title}
@@ -66,40 +41,7 @@ Before using {product-title}, configure the database options for it. {product-ti
 [[configuring-an-internal-database]]
 === Configuring an Internal Database
 
-[IMPORTANT]
-====
-Before installing an internal database, add a disk to the infrastructure hosting your appliance. See the documentation specific to your infrastructure for instructions on how to add a disk. As a storage disk usually cannot be added while a virtual machine is running, Red Hat recommends adding the disk before starting the appliance. Red Hat CloudForms only supports installing of an internal VMDB on blank disks. The installation will fail if the disks are not blank.
-====
-
-. Start the appliance and open a terminal from your virtualization or cloud provider.
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-. Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
-. Press *Enter* to manually configure settings.
-. Select *8) Configure Database* from the menu.
-. You are prompted to create or fetch an encryption key.
-* If this is the first {product-title} appliance, choose *1) Create key*.
-* If this is not the first {product-title} appliance, choose *2) Fetch key* from remote machine to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
-. Choose *1) Internal* for the database location.
-. Choose a disk for the database. For example:
-+
-----
-1)  /dev/vdb: 20480
-
-Choose disk:
-----
-+
-Enter *1* to choose `/dev/vdb` for the database location.
-
-. When prompted, enter a unique three digit region ID to create a new region.
-+
-[IMPORTANT]
-====
-Creating a new region destroys any existing data on the chosen database.
-====
-+
-.  Confirm the configuration when prompted.
-
-{product-title} configures the internal database.
+include::configuration-db.adoc[]
 
 [[configuring-an-external-database]]
 === Configuring an External Database
@@ -150,5 +92,3 @@ You can configure a worker appliance through the terminal. These steps demonstra
 . Enter the database username or leave blank for the default (`root`).
 . Enter the chosen database user's password.
 . Confirm the configuration if prompted.
-
-

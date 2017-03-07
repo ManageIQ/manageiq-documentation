@@ -64,16 +64,6 @@ To reintroduce the failed node:
 ------
 # systemctl stop $APPLIANCE_PG_SERVICE
 ------
-. Correct time synchronization is required to reintroduce the failed node. To synchronize the time between the primary and standby appliances, configure the following on all of the database and appliance nodes:
-.. Edit `/etc/ntp.conf` with valid NTP server information.
-.. Run the following to restart the time synchronization services:
-+
-------
-# systemctl disable chronyd.service
-# systemctl stop chronyd.service
-# systemctl enable ntpd.service
-# systemctl start ntpd.service
-------   
 +
 . Run `pg_rewind` on the failed primary server as the `postgres` user:
 +
@@ -101,6 +91,7 @@ logfile=/var/log/repmgr/repmgrd.log
 . Run `repmgr standby follow` as the `postgres` user on the failed primary server to add it as a standby server:
 +
 ------
+# su - postgres
 $ repmgr -f /etc/repmgr.conf -D $APPLIANCE_PG_DATA -h <new_master_ip> -U root -d vmdb_production standby follow
 ------
 +
@@ -110,10 +101,10 @@ If the `follow` command times out and `postgresql.log` reports a message similar
 
 Correct this by running the following steps:
 
-. Delete all database-related data from the failed node and delete the `/data` folder on the failed primary database:
+. Delete all database data and the replication manager configuration file from failed node:
 +
 ----
-# rm -rf /opt/rh/cfme-appliance/TEMPLATE/var/opt/rh/rh-postgresql95/lib/pgsql/data/*
+# rm -rf /var/opt/rh/rh-postgresql95/lib/pgsql/data/*
 # rm /etc/repmgr.conf
 ----
 +
@@ -126,7 +117,15 @@ For more information on the WAL log, see the https://www.postgresql.org/docs/9.5
 . Start and enable `repmgrd` for automatic failover:
 +
 ------
-# systemctl start rh-postgresql95-repmgr && systemctl enable rh-postgresql95-repmgr
+# systemctl start rh-postgresql95-repmgr
+# systemctl enable rh-postgresql95-repmgr
 ------
++
+. Reboot the appliance:
++
+------
+# reboot
+------
+
 
 Your {product-title_short} environment is now re-configured for high availability.

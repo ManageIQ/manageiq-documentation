@@ -41,9 +41,11 @@ For Amazon EC2 (AWS) and Google Cloud Engine (GCE) support, OpenShift must be in
 == Working with the Containers Overview Page
 
 The information on all containers providers and entities known to {product-title} is summarized on the Containers *Overview* page. The *Overview* page provides links to other summary pages which contain further information on the containers providers and entities.
+The *Overview* page also provides metrics for *Aggregated Node Utilization*, *Network Utilization Trend*, *New Image Usage Trend*, *Node Utilization*, and *Pod Creation and Deletion Trends*.
+
 
 [caption="Containers Overview"]
-image:containers-overview.png[Containers Overview, height=460]
+image:containers-overview.png[Containers Overview]
 
 .Working with the Containers Overview Page
 . Navigate to menu:Compute[Containers > Overview].
@@ -189,7 +191,7 @@ A *Container Services* summary page allows you to view information on different 
 
 
 [[viewing-a-volumes-summary]]
-=== Viewing a Volumes Summary
+== Viewing a Volumes Summary
 
 A *Volumes* summary page allows you to view information on the persistent volumes of a container provider, for example:
 
@@ -200,15 +202,15 @@ A *Volumes* summary page allows you to view information on the persistent volume
 
 
 .Viewing a Volumes Summary
-. Navigate to menu:Compute[Containers > Volumes].
+. Navigate to menu:Compute[Containers > Providers].
 . Click the desired containers provider for viewing the provider summary.
 . In the *Relationships* box on the right-hand side of the summary page, click *Volumes*.
-. Click the desired container for viewing.
-. Alternatively, you can access the desired volume from menu:Containers[Volumes].
+. Click the desired volume for viewing to open the volume's summary.
+. Alternatively, you can access the desired volume from menu:Compute[Containers > Volumes].
 
 
 [[viewing-a-container-builds-summary]]
-=== Viewing a Container Builds Summary
+== Viewing a Container Builds Summary
 
 A *Container Builds* summary page allows you to view different aspects of a container build, for example:
 
@@ -219,27 +221,40 @@ A *Container Builds* summary page allows you to view different aspects of a cont
 
 
 .Viewing a Container Builds Summary
-. Navigate to menu:Compute[Containers > Container Builds].
+. Navigate to menu:Compute[Containers > Providers].
 . Click the desired containers provider for viewing the provider summary.
 . In the *Relationships* box on the right-hand side of the summary page, click *Container Builds*.
-. Click the desired container for viewing.
+. Click the desired container build for viewing to open the volume's summary.
 . Alternatively, you can access the desired container build from menu:Containers[Container Builds].
 
 
-[[using-the-topology-widget]]
-=== Using the Topology Widget
+[[viewing-a-container-templates-summary]]
+== Viewing a Container Templates Summary
 
+A *Container Templates* summary page allows you to view different aspects of a container template, for example:
+
+* What project is the template associated with?
+* What objects does the template contain?
+* What parameters can be used with the template's objects?
+* What is the template's version number?
+
+.Viewing a Container Templates Summary
+. Navigate to menu:Compute[Containers > Providers].
+. Click the desired containers provider for viewing the provider summary.
+. In the *Relationships* box on the right-hand side of the summary page, click *Container Templates*.
+. Click the desired container template to view the template's summary.
+
+Alternatively, you can access a list of container templates from menu:Containers[Container Templates]. Click on a template to view its summary.
+
+
+
+[[using-the-topology-widget]]
+== Using the Topology Widget
 
 The *Topology* widget is an interactive topology graph, showing the status and relationships between the different entities of the containers providers that {product-title} has access to.
 
 * The topology graph includes pods, containers, services, nodes, virtual machines, hosts, routes, and replicators within the overall containers provider environment.
-* Each entity in the graph displays a color indication of its status.
-* Hovering over any individual graph element will display a summary of details for the individual element.
-* Double-click the entities in the graph to navigate to their summary pages.
-* It is possible to drag elements to reposition the graph.
-* Click the legend at the top of the graph to show or hide entities.
-* Click *Display Names* on the right-hand side of the page to show or hide entity names.
-
+include::common/topology_widget.adoc[]
 
 .Using the Topology Widget
 . Navigate to menu:Compute[Containers > Providers].
@@ -259,10 +274,4 @@ Perform a SmartState Analysis of a container image to inspect the packages inclu
 
 The container image is scanned. The process will copy over any required files for the image. After reloading the image page, all new or updated packages are listed.
 
-To monitor the status of container image SmartState Analysis tasks, navigate to menu:Settings[Tasks]. The status of each task is displayed including time started, time ended, what part of the task is currently running, and any errors encountered.
-
-
-
-
-
-
+To monitor the status of container image SmartState Analysis tasks, navigate to the settings menu, then *Tasks*. The status of each task is displayed including time started, time ended, what part of the task is currently running, and any errors encountered.

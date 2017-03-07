@@ -1,0 +1,103 @@
+[[database_failover]]
+== Configuring Database Failover
+
+The failover monitor daemon must run on all of the non-database appliances to check for failures. In case of a database failure, it modifies the database configuration accordingly.
+
+[IMPORTANT]
+====
+This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, the standby database appliance will not react and take over operations in case of a primary database failure. 
+====
+
+[[failover_monitor]]
+=== Configuring the Failover Monitor
+
+Configure the failover monitor only on the non-database appliances with the following steps:
+
+. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
+. Select *Start Database Failover Monitor*.
+
+
+
+[[failover_testing]]
+=== Testing Database Failover
+
+Test that failover is working correctly between your databases with the following steps:
+
+. Simulate a failure by stopping the database on the primary server:
++
+----
+# systemctl stop rh-postgresql95-postgresql
+----
++ 
+. To check the status of the database, run:
++
+----
+# systemctl status rh-postgresql95-postgresql
+----
++
+[NOTE]
+====
+You can check the status of the simulated failure by viewing the most recent `ha_admin.log` log on the engine appliances: 
+----
+# tail -f /var/www/miq/vmdb/log/ha_admin.log
+----
+====
++
+. Check the appliance console summary screen for the primary database. If configured correctly, the *{product-title_abbr_uc} Database* value in the appliance console summary should have switched from the hostname of the old primary database to the hostname of the new primary on all standard appliances.
+
+
+[IMPORTANT]
+====
+Upon database server failover, the standby server becomes the primary. However, the failed node cannot switch to standby automatically and must be manually configured. Data replication from the new primary to the failed and recovered node does not happen by default, so the failed node must be reintroduced into the configuration.
+====
+
+
+[[reintroducing_the_failed_node]]
+=== Reintroducing the Failed Node
+
+Manual steps are required to reintroduce the failed primary database node back into the cluster as a standby. This allows for greater control over the configuration, and to diagnose the failure.
+
+To reintroduce the failed node:
+
+. Stop the local pgsql service:
++
+------
+# systemctl stop $APPLIANCE_PG_SERVICE
+------
++
+. Run `pg_rewind` on the failed primary server as the `postgres` user:
++
+------
+# pg_rewind -D $APPLIANCE_PG_DATA --source-server="host=<new_master_ip> user=root password=<db_password> dbname=vmdb_production"
+------
++
+. Add the following lines for standby configuration to the `/etc/repmgr.conf` file:
++
+------
+failover=automatic
+promote_command='repmgr standby promote'
+follow_command='repmgr standby follow'
+logfile=/var/log/repmgr/repmgrd.log
+------
++
+. Copy over `/var/lib/pgsql/.pgpass` from the new primary server to the failed primary server.
+. Run `repmgr standby follow` as the `postgres` user on the failed primary server to add it as a standby server:
++
+------
+# repmgr -f /etc/repmgr.conf -D $APPLIANCE_PG_DATA -h <new_master_ip> -U root -d vmdb_production standby follow
+------
++
+[NOTE]
+====
+If the `follow` command times out and `postgresql.log` reports a message similar to `requested WAL segment 000000020000000000000004 has already been removed`, you can correct this by removing the contents of the data directory and reinitializing the standby as described in xref:configuring_standby_db[] to re-add the node. 
+
+This occurs when the write ahead log (WAL) required to catch up the standby server is no longer available on the primary. See the https://www.postgresql.org/docs/9.5/static/continuous-archiving.html[PostgreSQL documentation] for more information on the WAL log.
+====
++
+. Start and enable `repmgrd` for automatic failover:
++
+------
+# systemctl start rh-postgresql95-repmgr && systemctl enable rh-postgresql95-repmgr
+------
+
+Your {product-title_short} environment is now re-configured for high availability.

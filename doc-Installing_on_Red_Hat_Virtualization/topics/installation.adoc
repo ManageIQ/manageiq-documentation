@@ -1,0 +1,167 @@
+[[installing-cloudforms]]
+== Installing {product-title}
+
+{product-title} is able to be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the installation process takes you through the steps of uploading the appliance to a supported virtualization or cloud provider.
+
+[IMPORTANT]
+=====
+After installing the {product-title} appliance, you must configure the database for {product-title}. See xref:configuring_a_database[].
+=====
+
+ifdef::miq[]
+[[obtaining-the-appliance]]
+=== Obtaining the appliance
+
+. In a browser, navigate to link:manageiq.org/download[].
+. Select *Red Hat Virtualization* from the *--Choose your platform--* list.
+. Select *Stable (darga-2)* from the *--Choose a release--* list.
+. Follow the instructions to download the appliance.
+endif::miq[]
+
+ifdef::cfme[]
+[[obtaining-the-appliance]]
+=== Obtaining the Appliance
+
+. Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Click *Downloads* in the menu bar.
+. Click *A-Z* to sort the product downloads alphabetically.
+. Click menu:Red Hat CloudForms[Download Latest] to access the product download page.
+. From the list of installers and images, select the *CFME Red Hat Virtual Appliance* download link.
+endif::cfme[]
+
+[[uploading-the-appliance-on-red-hat-virtualization-manager]]
+=== Uploading the Appliance on Red Hat Virtualization Manager
+
+The method for uploading the {product-title_short} appliance differs depending on the Red Hat Virtualization version you are using.
+
+In Red Hat Virtualization 4.0 and newer, upload the `QCOW2` appliance image using the Red Hat Virtualization Administration Portal.
+
+In Red Hat Enterprise Virtualization 3.6 and earlier, upload the `OVA` appliance image using the Image Uploader tool. You can also use this method for Red Hat Virtualization 4.0 systems.
+
+Uploading the {product-title} appliance file onto Red Hat Virtualization requires:
+
+* 44 GB of storage space on both the export domain and the local partition where `/tmp` resides, as the `OVF` archive is locally expanded into that directory.
+* 8 GB RAM.
+* 4 vCPUs.
+
+
+[[uploading-the-appliance-using-the-admin-portal]]
+==== Uploading the Appliance Using the Administration Portal
+
+In Red Hat Virtualization 4.0 and newer, upload the `QCOW2` appliance image using the Red Hat Virtualization Administration Portal.
+After uploading the image, create a disk and attach it to a virtual machine.
+
+.Prerequisites:
+
+* You must configure the Image I/O Proxy when running `engine-setup`. See https://access.redhat.com/documentation/en/red-hat-virtualization/4.1-Beta/paged/installation-guide/33-configuring-the-red-hat-virtualization-manager[Configuring the Red Hat Virtualization Manager] in the  _Red Hat Virtualization Installation Guide_ for more information.
+* Internet Explorer 10, Firefox 35, or Chrome 13 or greater is required to perform this upload procedure. Previous browser versions do not support the required HTML5 APIs. 
+* You must import the required certificate authority into the web browser used to access the Administration Portal.
+
+[NOTE]
+====
+To import the certificate authority, browse to `https://<engine_address>/ovirt-engine/services/pki-resource?resource=ca-certificate&format=X509-PEM-CA` and select all the trust settings. Refer to the instructions to install the certificate authority in https://access.redhat.com/solutions/95103[Firefox], https://access.redhat.com/solutions/17864[Internet Explorer], or https://access.redhat.com/solutions/1168383[Google Chrome]. 
+====
+
+To upload the appliance:
+
+. Open the *Upload Image* screen in the Administration Portal:
+* From the *Disks* tab, select *Start* from the *Upload* drop-down.
+* Alternatively, from the *Storage* tab select the storage domain, then select the *Disks* sub-tab, and select *Start* from the *Upload* drop-down.
+. In the *Upload Image* screen, click *Browse* and select the image on the local disk.
+. Set *Image Type* to *QCOW2*.
+. Fill in the *Disk Option* fields. See https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#Add_Virtual_Disk_dialogue_entries[Explanation of Settings in the New Virtual Disk Window] in the _Red Hat Virtualization Administration Guide_ for a description of the relevant fields.
+. Click *OK*. 
+
+A progress bar will indicate the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* drop-down. 
+
+See the https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#Uploading_a_Disk_Image_to_a_Storage_Domain[Uploading a Disk Image to a Storage Domain] in the _Red Hat Virtualization Administration Guide_ for more information.
+
+
+[[uploading-the-appliance-with-the-image-uploader]]
+==== Uploading the Appliance with the Image Uploader
+
+In Red Hat Enterprise Virtualization 3.6 and earlier, upload the appliance as an `OVA` image using the Image Uploader tool. Red Hat Virtualization 4.0 supports this method as well.
+
+Refer to
+https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#sect-The_Image_Uploader_Tool[The Image Uploader Tool]
+to for details on using the Image Uploader.
+
+To install the Image Uploader, install the `rhevm-image-uploader` package containing the `engine-image-uploader` script to your local machine:
+
+----
+# yum install rhevm-image-uploader
+----
+
+
+Upload the {product-title} appliance using the Image Uploader tool:
+
+. Change to the directory containing the {product-title} appliance.
+. Run the following command:
++
+----
+# engine-image-uploader -N `newimagename` -e `myexportdomain` -v -m upload cfme-rhevm-5.3-15.x86_64.rhevm.ova
+----
++
+Substitute `newimagename` with your chosen name for the image, and substitute `myexportdomain` with your chosen export storage domain.
++
+====
+[NOTE]
+It is recommended to use `-v` (verbose logging) when using the `engine-image-uploader` script to see the progression of the upload. 
+====
++
+. Enter the password of the default administrative user for your Red Hat Enterprise Virtualization Manager when prompted.
++
+----
+Please provide the REST API password for the admin@internal oVirt Engine user (CTRL+D to abort): **********
+----
++
+
+[IMPORTANT]
+====
+Ensure your Red Hat Enterprise Virtualization Manager has administrator access to the chosen export storage domain.
+====
+
+It takes approximately 90 minutes to upload the {product-title} appliance file to the Red Hat Enterprise Virtualization Manager. Once the `OVF` is uploaded and imported as a template, add a network adapter to the template itself.
+
+
+[[uploading-the-appliance-manually]]
+==== Uploading the Appliance Manually
+
+The following procedure provides manual upload instructions if the Image Uploader tool is not available or fails to upload.
+
+. Log into a *host* in your Red Hat Virtualization system with a mount to the *Export storage domain*.
+. Change to the *Export storage domain's* directory.
+. Copy the {product-title} appliance `OVF` archive to this directory.
+. Extract the `OVF` file using the `tar` command:
++
+----
+$ tar xvf cfme-rhevm-5.3-15.x86_64.rhevm.ova
+----
++
+. Set the following permissions:
++
+----
+chown -R 36:36 images/
+chown -R 36:36 master/
+----
++
+
+
+[[running]]
+=== Running {product-title}
+
+After uploading the appliance to the export storage domain, import it as a template and create a virtual machine. Use the following procedure as a guide.
+
+
+. Import the appliance image from the export storage domain as a template in a Red Hat Virtualization data storage domain. Use the `newimagename` you specified when you uploaded the image to find the image to import as a template. Once the import is complete, check the template for a network interface (NIC). If the template does not include one, create a NIC for it.
+. Create a new virtual machine using the {product-title} appliance template as a basis. See the Red Hat Virtualization Administration Guide for instructions.
+. Add a database disk if you are hosting the database on the same machine as the appliance.
+. Start the newly created {product-title} appliance virtual machine.
+
+Your Red Hat Virtualization environment now contains a running {product-title} appliance.
+
+
+
+
+
+

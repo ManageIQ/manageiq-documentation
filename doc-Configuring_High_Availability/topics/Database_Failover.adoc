@@ -68,7 +68,8 @@ To reintroduce the failed node:
 . Run `pg_rewind` on the failed primary server as the `postgres` user:
 +
 ------
-# pg_rewind -D $APPLIANCE_PG_DATA --source-server="host=<new_master_ip> user=root password=<db_password> dbname=vmdb_production"
+# su - postgres
+$ pg_rewind -D $APPLIANCE_PG_DATA --source-server="host=<new_master_ip> user=root password=<db_password> dbname=vmdb_production"
 ------
 +
 . Add the following lines for standby configuration to the `/etc/repmgr.conf` file:
@@ -80,24 +81,70 @@ follow_command='repmgr standby follow'
 logfile=/var/log/repmgr/repmgrd.log
 ------
 +
-. Copy over `/var/lib/pgsql/.pgpass` from the new primary server to the failed primary server.
+. Copy the `/var/lib/pgsql/.pgpass` file from the new primary server to the failed primary server. Change the file's ownership to the `postgres` user and group, and the permissions to 600:
++
+------
+# chown postgres:postgres /var/lib/pgsql/.pgpass
+# chmod 600 /var/lib/pgsql/.pgpass
+------
++
 . Run `repmgr standby follow` as the `postgres` user on the failed primary server to add it as a standby server:
 +
 ------
-# repmgr -f /etc/repmgr.conf -D $APPLIANCE_PG_DATA -h <new_master_ip> -U root -d vmdb_production standby follow
+# su - postgres
+$ repmgr -f /etc/repmgr.conf -D $APPLIANCE_PG_DATA -h <new_master_ip> -U root -d vmdb_production standby follow
 ------
 +
-[NOTE]
-====
-If the `follow` command times out and `postgresql.log` reports a message similar to `requested WAL segment 000000020000000000000004 has already been removed`, you can correct this by removing the contents of the data directory and reinitializing the standby as described in xref:configuring_standby_db[] to re-add the node. 
-
-This occurs when the write ahead log (WAL) required to catch up the standby server is no longer available on the primary. See the https://www.postgresql.org/docs/9.5/static/continuous-archiving.html[PostgreSQL documentation] for more information on the WAL log.
-====
+If the `follow` command times out and `postgresql.log` reports a message similar to `requested WAL segment 000000020000000000000004 has already been removed`, you can correct this by removing the contents of the data directory and reinitializing the standby to re-add the node. This occurs when the write ahead log (WAL) required to catch up the standby server is no longer available on the primary.
++
+Correct this by running the following steps:
++
+.. Delete all database data and the replication manager configuration file from failed node:
++
+----
+# rm -rf /var/opt/rh/rh-postgresql95/lib/pgsql/data/*
+# rm /etc/repmgr.conf
+----
++
+.. Delete the failed database node entry from new primary database appliance:
+... Check the failed node ID from the output and delete the entry; the ID is the same as the cluster ID provided during installation. 
+... Delete the node. For example, if the cluster ID is `1`, run `vmdb_production=#delete from repl_nodes where id = 1` to delete the failed node:
++
+----
+# psql vmdb_production
+vmdb_production=#select * from repl_nodes
+vmdb_production=#delete from repl_nodes table where id = $cluster_node_id_of_failed node
+----
++
+.. Delete the replication slot information for the failed database node. 
+... Check the `replication_slot` information for the failed node in the `pg_replication_slots` table:
+* The failed node is marked with `f` in the `active` column in the `pg_replication_slots` table. If it is `t`, there is a standby database appliance connected with ID 1; this appliance must be shut down before deleting the replication slot. 
+* When the standby node is disconnected, the active column will be changed to `f`.
+... Delete the slot:
+* The slot number is the same as the `cluster_id`; then delete the replication slot. For example, if the cluster ID is `1`, run `vmdb_production=#select pg_drop_replication_slot('repmgr_slot_1')` to delete the slot:
++
+----
+# psql vmdb_production
+vmdb_production=#select * from pg_replication_slots
+vmdb_production=#select pg_drop_replication_slot('repmgr_slot_$failed_node_cluster_id')
+----
++
+.. Reinitialize the standby database as described in xref:configuring_standby_db[] to re-add the node.
++
+For more information on the WAL log, see the https://www.postgresql.org/docs/9.5/static/continuous-archiving.html[PostgreSQL documentation].
 +
 . Start and enable `repmgrd` for automatic failover:
 +
 ------
-# systemctl start rh-postgresql95-repmgr && systemctl enable rh-postgresql95-repmgr
+# systemctl start rh-postgresql95-repmgr
+# systemctl enable rh-postgresql95-repmgr
 ------
++
+. Reboot the appliance:
++
+------
+# reboot
+------
+
 
 Your {product-title_short} environment is now re-configured for high availability.

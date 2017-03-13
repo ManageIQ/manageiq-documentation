@@ -9,6 +9,15 @@ This chapter outlines the steps for installing and configuring the {product-titl
 The primary database appliance functions as an external database to the standard {product-title_short} appliances.
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
+. Configure time synchronization on the appliance:
+.. Edit `/etc/chronyd.conf` with valid NTP server information.
+.. Re-synchronize time information across the appliances:
++
+------
+# systemctl enable chronyd.service
+# systemctl start chronyd.service
+------
++
 . SSH into the {product-title_short} appliance to enter the appliance console.
 . Configure the hostname by selecting *Set Hostname*.
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
@@ -61,6 +70,15 @@ The hostname must be visible to all appliances that communicate with this databa
 Configure a standard {product-title_short} appliance to point to the primary database server. This appliance does not serve as a database server. From the standard appliance, you can then configure the database itself.
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
+. Configure time synchronization on the appliance:
+.. Edit `/etc/chronyd.conf` with valid NTP server information.
+.. Re-synchronize time information across the appliances:
++
+------
+# systemctl enable chronyd.service
+# systemctl start chronyd.service
+------
++
 . SSH into the {product-title_short} appliance to enter the appliance console.
 . Configure the hostname by selecting *Set Hostname*.
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
@@ -91,6 +109,15 @@ You can check the configuration on the appliance console details screen. When co
 The standby database appliance is a copy of the primary database appliance and takes over the role of primary database in case of failure.
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
+. Configure time synchronization on the appliance:
+.. Edit `/etc/chronyd.conf` with valid NTP server information.
+.. Re-synchronize time information across the appliances:
++
+------
+# systemctl enable chronyd.service
+# systemctl start chronyd.service
+------
++
 . SSH into the {product-title_short} appliance to enter the appliance console.
 . Configure the hostname by selecting *Set Hostname*.
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
@@ -105,7 +132,7 @@ The steps to configure the standby database appliance are similar to that of the
 ====
 The current {product-title_short} version contains a known limitation when configuring a dedicated database disk from the appliance console menu.
 
-To work around this, create and mount the dedicated database partition manually with exactly same information from the primary database before configuring the standby database appliance as below. [ADD STEPS?]
+To work around this, create and mount the dedicated database partition manually with the same information from the primary database, before configuring the standby database appliance as below.
 See https://bugzilla.redhat.com/show_bug.cgi?id=1412940 for more information.
 ====
 
@@ -141,6 +168,15 @@ Install a second virtual machine with a standard {product-title_short} appliance
 
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
+. Configure time synchronization on the appliance:
+.. Edit `/etc/chronyd.conf` with valid NTP server information.
+.. Re-synchronize time information across the appliances:
++
+------
+# systemctl enable chronyd.service
+# systemctl start chronyd.service
+------
++
 . SSH into the {product-title_short} appliance to enter the appliance console.
 . Configure the hostname by selecting *Set Hostname*.
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.

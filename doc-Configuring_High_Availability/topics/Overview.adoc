@@ -32,23 +32,11 @@ See the https://access.redhat.com/products/red-hat-cloudforms[Red Hat Customer P
 endif::cfme[]
 ====
 
-.Time Synchronization
-
-Correct time synchronization is required before installing the appliances. After installing the appliances, configure time synchronization on all appliances with the following steps:
-
-. Edit `/etc/ntp.conf` with valid NTP server information.
-. Run the following to restart the time synchronization services:
-+
-------
-# systemctl disable chronyd.service
-# systemctl stop chronyd.service
-# systemctl enable ntpd.service
-# systemctl start ntpd.service
-------   
-
+Correct time synchronization is required before installing the cluster. After installing the appliances, configure time synchronization on all appliances using `chronyd`.
 
 ifdef::cfme[]
-.Recommendations
-
+[NOTE]
+====
 Red Hat recommends using a DNS server for a high availability configuration, as DNS names can be updated more quickly than IP addresses when restoring an operation in a different location, network, or datacenter.
+====
 endif::cfme[]

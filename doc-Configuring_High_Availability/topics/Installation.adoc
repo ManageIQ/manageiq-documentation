@@ -91,6 +91,12 @@ Configure a standard {product-title_short} appliance to point to the primary dat
 .. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
 . Configure the database:
 .. Select *Create Region in External Database*, since the database is external to the appliances.
++
+[IMPORTANT]
+====
+Creating a database region will destroy any existing data and cannot be undone.
+====
++
 .. Provide the primary database appliance as the remote key location and its credentials.
 .. Assign a unique database region number. Note that creating a database region will destroy any existing data and cannot be undone.
 .. For *Are you sure you want to continue?* Select `y`.
@@ -153,7 +159,7 @@ On the standby database appliance, configure the following:
 The hostname must be visible to all appliances that communicate with this database, including the engine appliances and any global region databases.
 ====
 +
-.. Select `y` to configure Replication Manager for automatic failover.
+.. Select `y` to configure the replication manager for automatic failover.
 .. Confirm that the replication standby server configuration details are correct, and select `y` to apply the configuration.
 
 The standby server will then run an initial synchronization with the primary database, and start locally in standby mode.

@@ -140,11 +140,13 @@ For more information on the WAL log, see the https://www.postgresql.org/docs/9.5
 # systemctl enable rh-postgresql95-repmgr
 ------
 +
-. To apply the changes, stop the cluster, then restart the service:
+. To apply the changes, stop the cluster, then restart the service as the `postgres` user:
 +
 ------
-# pg_ctl -D $APPLIANCE_PG_DATA stop
-# systemctl start $APPLIANCE_PG_SERVICE
+# su - postgres
+$ pg_ctl -D $APPLIANCE_PG_DATA stop
+$ pg_ctl -D $APPLIANCE_PG_DATA status
+$ exit
 ------
 
 Your {product-title_short} environment is now re-configured for high availability.

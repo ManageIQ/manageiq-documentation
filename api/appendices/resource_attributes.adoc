@@ -4,14 +4,100 @@
 
 This page lists the available attributes when creating resources with the REST API
 
+* link:#arbitration_profiles[Arbitration Profiles]
+* link:#arbitration_rules[Arbitration Rules]
+* link:#arbitration_settings[Arbitration Settings]
 * link:#categories[Categories]
+* link:#blueprints[Blueprints]
 * link:#chargeback-rates[Chargeback Rates]
 * link:#groups[Groups]
+* link:#orchestration_templates[Orchestration Templates]
 * link:#providers[Providers]
 * link:#roles[Roles]
+* link:#services[Services]
 * link:#service-catalogs[Service Catalogs]
 * link:#tags[Tags]
 * link:#tenants[Tenants]
+
+___
+
+[[arbitration_profiles]]
+=== Arbitration Profile Attributes
+
+----
+POST /api/arbitration_profiles
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name
+| provider | hash | Provider for the Arbitration Profile, requires an *href* or *id* attribute in the hash
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| description | string | Description
+| availability_zone | hash | Availability Zone for the Arbitration Profile, requires an *href* or *id* attribute in the hash
+|=====================
+
+___
+
+[[arbitration_rules]]
+=== Arbitration Rule Attributes
+
+----
+POST /api/arbitration_rules
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| operation | string | Operation
+| expression | hash | Expression hash
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| description | string | Description
+| arbitration_profile_id | integer | Id of the Arbitration Profile
+|=====================
+
+___
+
+[[arbitration_settings]]
+=== Arbitration Settings Attributes
+
+----
+POST /api/arbitration_settings
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name
+| display_name | string | Display Name
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| value | text | Value of Setting (nil if unspecified)
+|=====================
 
 ___
 
@@ -44,6 +130,34 @@ POST /api/categories
 
 ___
 
+[[blueprints]]
+=== Blueprint Attributes
+
+----
+POST /api/blueprints
+----
+
+==== Recommended attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name
+| description | string | Description
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| ui_properties | hash | Blueprint details
+| status | string | Status
+| version | string | Version
+|=====================
+
+___
+
 [[chargeback-rates]]
 === Chargeback Rate Attributes
 
@@ -56,7 +170,7 @@ POST /api/rates
 [cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
-| chargeback_rate_id | integer | Reference to parent Chargeback |
+| chargeback_rate_id | integer | Reference to parent Chargeback
 | group | string | Group rate belongs to, i.e. *cpu*, *memory*, *net_io*, *disk_io*, etc.
 | source | string | The input value for calculation, i.e. *allocated*, *used*, etc. |
 |=====================
@@ -99,6 +213,36 @@ POST /api/groups
 |=====================
 | Attribute | Type | Description
 | filters | hash | Hash that contains the *belongsto* and *managed* arrays of filters to assign to the group.
+|=====================
+
+___
+
+[[orchestration_templates]]
+=== Orchestration Templates
+
+----
+POST /api/orchestration_templates
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name
+| content | text | Template content
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| type | string | Type
+| description | string | Description
+| ems_id | integer | Id of the provider
+| draft | boolean | *true* or *false*
+| orderable | boolean | *true* or *false*
 |=====================
 
 ___
@@ -178,6 +322,32 @@ POST /api/roles
 | Attribute | Type | Description
 | features | array | Features to assign to the role. Array of { "identifier" OR "href" OR "id" : ... }
 | settings | hash | Settings for the role, normally: { "restrictions" : { "vms" : "user" OR "user_or_group" } }
+|=====================
+
+___
+
+[[services]]
+=== Service Attributes
+
+----
+POST /api/services
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| description | string | Description
+| parent_service | hash | Parent service *href* or *id* reference
 |=====================
 
 ___

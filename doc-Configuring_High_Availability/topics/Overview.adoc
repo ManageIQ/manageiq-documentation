@@ -21,12 +21,9 @@ For a high availability {product-title} environment, you need a virtualization h
 
 ifdef::cfme[]
 See https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_ for information on setting up the correct disk space for the database appliances.
-
-Red Hat recommends using a DNS server for a high availability configuration, as DNS names can be updated more quickly than IP addresses when restoring an operation in a different location, network, or datacenter.
 endif::cfme[]
 
-
-[NOTE]
+[IMPORTANT]
 ====
 It is essential to use the same {product-title} appliance template version to install each virtual machine in this environment. 
 
@@ -34,3 +31,12 @@ ifdef::cfme[]
 See the https://access.redhat.com/products/red-hat-cloudforms[Red Hat Customer Portal] to obtain the appliance download for the platform you are running {product-title_short} on.
 endif::cfme[]
 ====
+
+Correct time synchronization is required before installing the cluster. After installing the appliances, configure time synchronization on all appliances using `chronyd`.
+
+ifdef::cfme[]
+[NOTE]
+====
+Red Hat recommends using a DNS server for a high availability configuration, as DNS names can be updated more quickly than IP addresses when restoring an operation in a different location, network, or datacenter.
+====
+endif::cfme[]

@@ -2065,9 +2065,9 @@ To create a tenant:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. Click on the top-level *Tenant*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add child Tenant to this Tenant*) to create a Tenant.
-. Enter a name for the Tenant in the *Name* field.
-. Enter a description for the Tenant in the *Description* field.
+. Click on the top-level *Tenant*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add child Tenant to this Tenant*) to create a tenant.
+. Enter a name for the tenant in the *Name* field.
+. Enter a description for the tenant in the *Description* field.
 . Click *Add*.
 
 [[creating-a-project]]
@@ -2077,21 +2077,22 @@ To create a project:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. Click on the *Tenant* where you want to add a *Project*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add Project to this Tenant*) to create a Project.
-. Enter a name for the Project in the *Name* field.
-. Enter a description for the Project in the *Description* field.
+. Click on the *Tenant* where you want to add a *Project*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add Project to this Tenant*) to create a project.
+. Enter a name for the project in the *Name* field.
+. Enter a description for the project in the *Description* field.
 . Click *Add*.
 
 [[creating-a-project-quota]]
-==== Creating a Project Quota
+==== Managing Tenant and Project Quota
 
-To create a project quota:
+Use the following procedure to allocate or edit quotas for tenants and projects.
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. Click on the *Project* where you want to add a Quota, click image:1847.png[] (*Configuration*), and image:1851.png[] (*Manage quotas for the Selected Item*) to create a quota.
-. In the list of pre-built quotas, mark *the _Enforced_ checkbox* next to the quota item you want to enable.
+. Click on the *Tenant* or *Project* where you want to add a quota, click image:1847.png[] (*Configuration*), and image:1851.png[] (*Manage quotas for the Selected Item*) to create a quota.
+. In the list of pre-built quotas, switch *Enforced* next to the quota item you want to enable to `Yes`.
 . In the *Value* field, enter the constraints you want to apply to the quota.
+image:manage-quotas.png[]
 . Click *Save*.
 
 
@@ -2101,8 +2102,8 @@ To tag tenants and projects:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. In the *Tenant or Project entry*, click the *Policy* drop-down menu, and select *Edit 'My Company' Tags for this Tenant*.
-. In the *Tag Assignment* table, click *Select a customer tag to assign*, and select a tag from the list. In the next column, set a corresponding value.
+. Select the tenant or project then click *Policy* , and select *Edit My Company Tags for this Tenant*.
+. In *Tag Assignment*, click *Select a customer tag to assign*, and select a tag from the list. In the next column, set a corresponding value.
 . Click *Save*.
 
 
@@ -2216,6 +2217,28 @@ image:2095.png[]
 . Under *Product Features (Editing)*, navigate to the appropriate feature and enable or disable it.
 image:2096.png[]
 . Click *Add*.
+
+
+[[multitenancy]]
+==== Multitenancy
+
+Multitenancy in {product-title} allows for siloed organizations which have separate authentication and users, different branding, and different security. Tenants can be totally separate or they can be in a parent-child or peer relationship. Tenants in a relationship can share or inherit certain configuration. Additionally, tenants can have projects as children. A project is a self-contained tenant, that is it cannot have a child tenant, and is useful to allocate resources to a small group or team within a larger organization. Besides, as {product-title_short} supports nested tenancy, you can subdivide and create child tenants, and they in turn can have child tenants, and so on.
+
+[NOTE]
+====
+Even if you choose not to add any additional tenants there is always tenancy as everything is in a single tenant, called tenant zero, which is your {product-title_short} appliance itself. 
+====
+
+Note that the following two roles are associated with tenancy in {product-title_short}:
+ 
+* Tenant administrator
+* Tenant quota administrator
+
+[IMPORTANT]
+====
+Tenant administrator and tenant quota administrator roles are like administrator and super administrator. These roles are not limited to the tenant upon which they are acting and act across all tenants, therefore should be considered privileged users. Keep in mind these are not roles inside a tenant.
+====
+
 
 [[diagnostics]]
 === Diagnostics

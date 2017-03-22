@@ -1,12 +1,12 @@
 [[installation]]
 == Installing the Appliances
 
-This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two standard appliances.
+This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two {product-title_short} appliances.
 
 [[installation_primary_db]]
-=== Installing the Primary Database Appliance
+=== Installing the Primary Database-Only Appliance
 
-The primary database appliance functions as an external database to the standard {product-title_short} appliances.
+The primary database-only appliance functions as an external database to the {product-title_short} appliances.
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
 . Configure time synchronization on the appliance:
@@ -25,7 +25,7 @@ The primary database appliance functions as an external database to the standard
 . Select *Create key* to create the encryption key. You can create a new key, or use an existing key on your system by selecting *Fetch key from remote machine* and following the prompts.
 . Select *Create Internal Database*.
 . Select the database disk. {product-title_short} then activates the configuration.
-. For *Configure this server as a dedicated database instance?*, select `y`. Selecting this option configures this appliance as a database appliance only, and therefore `evmserverd` processes will not run. 
+. For *Configure this server as a dedicated database instance?*, select `y`. Selecting this option configures this appliance as a database-only appliance, and therefore `evmserverd` processes will not run. 
 +
 [WARNING]
 ====
@@ -43,9 +43,9 @@ You can check the configuration on the appliance console details screen. If conf
 
 
 [[configuring_primary_db]]
-=== Configuring the Primary Database Appliance
+=== Configuring the Primary Database-Only Appliance
 
-On the primary database appliance, initialize the nodes in the database cluster to configure the database replication:
+On the primary database-only appliance, initialize the nodes in the database cluster to configure the database replication:
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Primary*.
@@ -54,20 +54,20 @@ On the primary database appliance, initialize the nodes in the database cluster 
 .. Enter the cluster database name.
 .. Enter the cluster database username.
 .. Enter the cluster database password and confirm the password.
-.. Enter the primary database appliance hostname or IP address.
+.. Enter the primary database-only appliance hostname or IP address.
 +
 [NOTE]
 ====
-The hostname must be visible to all appliances that communicate with this database, including the standard appliances and any global region databases.
+The hostname must be visible to all appliances that communicate with this database, including the {product-title_short} appliances and any global region databases.
 ====
 +
 .. Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
 
 
-[[installation_standard_appliance]]
-=== Installing a Standard {product-title} Appliance
+[[installation_appliance]]
+=== Installing a {product-title_short} Appliance
 
-Configure a standard {product-title_short} appliance to point to the primary database server. This appliance does not serve as a database server. From the standard appliance, you can then configure the database itself.
+Configure a {product-title_short} appliance to point to the primary database server. This appliance does not serve as a database server. From this appliance, you can then configure the database itself.
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
 . Configure time synchronization on the appliance:
@@ -83,11 +83,11 @@ Configure a standard {product-title_short} appliance to point to the primary dat
 . Configure the hostname by selecting *Set Hostname*.
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
 . Select *Configure Database*.
-. Configure this appliance to use the encryption key from the primary database appliance:
+. Configure this appliance to use the encryption key from the primary database-only appliance:
 .. For *Encryption Key*, select *Fetch key from remote machine*.
-.. Enter the hostname for the primary database appliance you previously configured containing the encryption key.
-.. Enter the primary database appliance's username.
-.. Enter the primary database appliance's password.
+.. Enter the hostname for the primary database-only appliance you previously configured containing the encryption key.
+.. Enter the primary database-only appliance's username.
+.. Enter the primary database-only appliance's password.
 .. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
 . Configure the database:
 .. Select *Create Region in External Database*, since the database is external to the appliances.
@@ -97,22 +97,22 @@ Configure a standard {product-title_short} appliance to point to the primary dat
 Creating a database region will destroy any existing data and cannot be undone.
 ====
 +
-.. Provide the primary database appliance as the remote key location and its credentials.
+.. Provide the primary database-only appliance as the remote key location and its credentials.
 .. Assign a unique database region number. Note that creating a database region will destroy any existing data and cannot be undone.
 .. For *Are you sure you want to continue?* Select `y`.
-. Enter the primary database appliance's name and access details:
-.. Enter the hostname for the primary database appliance.
+. Enter the primary database-only appliance's name and access details:
+.. Enter the hostname for the primary database-only appliance.
 .. Enter a name to identify the database.
-.. Enter the primary database appliance's username.
+.. Enter the primary database-only appliance's username.
 .. Enter a password for the database and confirm the password.
 
-You can check the configuration on the appliance console details screen. When configured successfully, *{product-title_abbr_uc} Server* will show as `running`, and *{product-title_abbr_uc} Database* will show the name of the primary database appliance.
+You can check the configuration on the appliance console details screen. When configured successfully, *{product-title_abbr_uc} Server* will show as `running`, and *{product-title_abbr_uc} Database* will show the name of the primary database-only appliance.
 
 
 [[installation_standby_db]]
-=== Installing the Standby Database Appliance
+=== Installing the Standby Database-Only Appliance
 
-The standby database appliance is a copy of the primary database appliance and takes over the role of primary database in case of failure.
+The standby database-only appliance is a copy of the primary database-only appliance and takes over the role of primary database in case of failure.
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
 . Configure time synchronization on the appliance:
@@ -130,19 +130,19 @@ The standby database appliance is a copy of the primary database appliance and t
 
 
 [[configuring_standby_db]]
-=== Configuring the Standby Database Appliance
+=== Configuring the Standby Database-Only Appliance
 
-The steps to configure the standby database appliance are similar to that of the primary database appliance, in that they prepare the appliance to be database-only, but as the standby.
+The steps to configure the standby database-only appliance are similar to that of the primary database-only appliance, in that they prepare the appliance to be database-only, but as the standby.
 
 [NOTE]
 ====
 The current {product-title_short} version contains a known limitation when configuring a dedicated database disk from the appliance console menu.
 
-To work around this, create and mount the dedicated database partition manually with the same information from the primary database, before configuring the standby database appliance as below.
+To work around this, create and mount the dedicated database partition manually with the same information from the primary database, before configuring the standby database-only appliance as below.
 See https://bugzilla.redhat.com/show_bug.cgi?id=1412940 for more information.
 ====
 
-On the standby database appliance, configure the following:
+On the standby database-only appliance, configure the following:
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Standby*.
@@ -151,8 +151,8 @@ On the standby database appliance, configure the following:
 .. Enter the cluster database name.
 .. Enter the cluster database username.
 .. Enter the cluster database password.
-.. Enter the primary database appliance hostname or IP address.
-.. Enter the standby database appliance hostname or IP address.
+.. Enter the primary database-only appliance hostname or IP address.
+.. Enter the standby database-only appliance hostname or IP address.
 +
 [NOTE]
 ====
@@ -167,10 +167,10 @@ The standby server will then run an initial synchronization with the primary dat
 Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`. 
 
 
-[[installation_standard_appliances_addl]]
-=== Installing Additional {product-title} Appliances
+[[installation_appliances_addl]]
+=== Installing Additional {product-title_short} Appliances
 
-Install a second virtual machine with a standard {product-title_short} appliance and any additional appliances in the region using the following steps:
+Install a second virtual machine with a {product-title_short} appliance and any additional appliances in the region using the following steps:
 
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
@@ -187,17 +187,17 @@ Install a second virtual machine with a standard {product-title_short} appliance
 . Configure the hostname by selecting *Set Hostname*.
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
 . Select *Configure Database*.
-. Configure this appliance to use the encryption key from the primary database appliance:
+. Configure this appliance to use the encryption key from the primary database-only appliance:
 .. For *Encryption Key*, select *Fetch key from remote machine*.
-.. Enter the hostname for the primary database appliance you previously configured containing the encryption key.
-.. Enter the primary database appliance's username.
-.. Enter the primary database appliance's password.
+.. Enter the hostname for the primary database-only appliance you previously configured containing the encryption key.
+.. Enter the primary database-only appliance's username.
+.. Enter the primary database-only appliance's password.
 .. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
 .. Select *Join Region in External Database* from the appliance console menu.
-. Enter the primary database appliance's name and access details:
-.. Enter the hostname for the primary database appliance.
+. Enter the primary database-only appliance's name and access details:
+.. Enter the hostname for the primary database-only appliance.
 .. Enter a name to identify the database.
-.. Enter the primary database appliance's username.
+.. Enter the primary database-only appliance's username.
 .. Enter a password for the database and confirm the password.
 
 

@@ -67,9 +67,28 @@ The operations initiated from the global region are subject to the role-based ac
 For information on how to configure centralized administration via database replication, see the section on _Configuring Database Replication and Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/general-configuration/[General Configuration] guide.
 
 [[tenants]]
-=== Tenants
+=== Tenancy
 
-{product-title} supports multi-tenancy, letting you isolate one tenant's resources and user accounts from another. In addition, tenants can be nested in a hierarchy, enabling those at the bottom to inherit permissions from those above. This configuration allows for granular user permissions to be set on specific tenants.
+{product-title} supports multi-tenancy, letting you isolate one tenant’s resources and user accounts from another. It allows for siloed organizations that have separate authentication and users, different branding, and different security. 
+
+Tenants can be totally separate or they can be in a parent-child or peer relationship. Tenants in a relationship can share or inherit a certain configuration. You can subdivide and create child tenants and they, in turn, can have child tenants, and so on. The ability to have multi-level (nested) tenants in a hierarchy enables those at the bottom to inherit permissions from those above. This configuration allows for granular user permissions to be set on specific tenants.  
+
+Besides, tenants can also have projects as children. A project is a self-contained tenant, that is it cannot have a child tenant, and is useful to allocate resources to a small group or team within a larger organization.
+
+[NOTE]
+====
+If you choose not to add any additional tenants, everything is in a single base tenant which is your {product-title_short} appliance itself which in {product-title_short} is sometimes referred as 'tenant zero'.
+====
+
+In {product-title_short}, the following two roles are associated with tenancy:
+ 
+* Tenant administrator
+* Tenant quota administrator
+
+[IMPORTANT]
+====
+Tenant administrator and tenant quota administrator roles are like administrator and super administrator. These roles are not limited to the tenant upon which they are acting and act across all tenants, therefore should be considered privileged users. Keep in mind these are not roles inside a tenant.
+====
 
 Tenancy Models::
 
@@ -79,6 +98,64 @@ A number of approaches exist for tenant planning:
 * *Enterprise model* - A common scenarios is to create a single tenant, and then subdivide it based on the structures or departments within your organization. Those departments are then able to further subdivide their resources into distinct projects. With this model, you have a single URL for user access, while still having the ability to divide resources into nested hierarchical tenants.
 * *Multiple tenant model (CCP)* - Created with Certified Cloud Providers in mind, this model allows multiple tenants to enjoy complete isolation from other tenants, with separate branding and unique URLs.
 
+Tenancy Configuration::
+
+You can create and configure tenancy using the {product-title_short} user interface in the same place you setup users, groups and roles by selecting *Configuration* from the settings menu, and then clicking on the *Access Control* accordion. See the section on https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/general_configuration/#access-control[Access Control] in the _General Configuration_ guide for procedures on how to create tenants and projects, users and groups, and related procedures.
+
+Tenancy in Automation::
+
+One of the features of tenancy is that each tenant can have its own automate domain. Tenant-based domains can help in several use cases, such as, if you have:
+
+• groups that need their own naming routines
+• to tackle varying types of approval needs
+• some departments that use different end ticketing systems
+• customer who is a holding company or centralized IT organization for managing different business units
+
+Note that just like standard domain are nested, you can also add automate domains that are nested at the tenant level. For the procedure on how to create a new automate domain and other related procedures, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/scripting_actions_in_cloudforms/[Scripting Actions in CloudForms].
+
+Tenancy Quota and Reporting::
+
+You can allocate and enforce quotas for the following attributes.
+
+* Virtual CPUs
+* Memory in GB
+* Storage in GB
+* Number of virtual machines
+* Number of templates
+
+See the section on https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/general_configuration/#access-control[Managing Tenant and Project Quotas] in the _General Configuration_ guide for procedures on how to create and manage quotas.
+
+You can generate or schedule a report for *Tenant Quotas* similar to other reports. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/monitoring_alerts_and_reporting/#sect_reports[Reports] in the _Monitoring Alerts, and Reporting_ guide for procedures on how to view or schedule a report. 
+
+*Example*:
+
+image:tenant-quota-report.png[]
+
+* Total Quota: Total quota enforced per attribute for a tenant
+* In Use: Amount currently in use by tenants
+* Allocated: Amount of quota given to all child tenants
+* Available: Total Quota (-) In Use (-) Allocated
+
+[NOTE]
+====
+You will see in the report all of the tenants but there is no nesting information available yet.
+====
+
+Tenancy Chargeback::
+
+You have the ability to do tenancy in chargeback where you are able to assign rates and have a different rate for each tenant. You can make use of the default rate or create your own set of rates depending on the tenant. As well, there is an ability to create chargeback reports by tenant. 
+
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/monitoring_alerts_and_reporting/#sect_chargeback[Chargeback] in the _Monitoring Alerts, and Reporting_ guide for information on how to create and assign default or custom chargeback rates, and how {product-title_short} calculates chargeback costs. 
+
+
+Tenancy Service Catalogs::
+
+Similar to automate domains, you can have service catalog at each level of tenancy. Once you add a service catalog at a particular level of tenancy, it is visible to that tenant and its children (unless you use tagging to exclude).
+
+Tenancy Providers::
+
+Providers can be added at any level of tenancy. Once added, it is visible to any child or lower tenants, making it possible to easily separate resources that are owned or accessed by one group, and should not be available to other tenants. 
+   
 
 [[example-postgresql-configuration-file]]
 === Example PostgreSQL Configuration File

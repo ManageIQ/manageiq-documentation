@@ -2964,7 +2964,7 @@ To run database garbage collection:
 
 {product-title} provides a default database password for the internal PostgreSQL database.
 
-To change the password, you need to stop the {product-title} Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `emserverd` uses to access the server, and restart the {product-title} appliance.
+To change the password, you need to stop the {product-title} Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `evmserverd` uses to access the server, and restart the {product-title} appliance.
 
 . Stop the {product-title} service:
 .. SSH into the appliance.
@@ -2992,7 +2992,7 @@ ALTER USER root WITH PASSWORD 'newpassword';
 \q
 ------
 +
-. Change the password in the configuration file that `emserverd` uses to access the server:
+. Change the password in the configuration file that `evmserverd` uses to access the server:
 +
 ------
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
@@ -3018,7 +3018,7 @@ service evmserverd start
 service evmserverd stop
 ------
 +
-. Change the password in the configuration file that `emserverd` uses to access the server:
+. Change the password in the configuration file that `evmserverd` uses to access the server:
 +
 ------
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
@@ -3048,7 +3048,7 @@ If you change the password on the remote database, you will need to change the p
 .. Replace the contents of the *"production"* section with the contents of the *"base"* section.
 .. Edit the *"host"* parameter to match the IP of the appliance hosting the VMDB.
 .. Save the new *database.yml*.
-. Run the following command to change the password in the configuration file that `emserverd` uses to access the server:
+. Run the following command to change the password in the configuration file that `evmserverd` uses to access the server:
 +
 ------
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword

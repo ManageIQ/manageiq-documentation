@@ -1,17 +1,17 @@
 [[database_failover]]
 == Configuring Database Failover
 
-The failover monitor daemon must run on all of the non-database appliances to check for failures. In case of a database failure, it modifies the database configuration accordingly.
+The failover monitor daemon must run on all of the non-database {product-title_short} appliances to check for failures. In case of a database failure, it modifies the database configuration accordingly.
 
 [IMPORTANT]
 ====
-This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, the standby database appliance will not react and take over operations in case of a primary database failure. 
+This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, the standby database-only appliance will not react and take over operations in case of a primary database failure. 
 ====
 
 [[failover_monitor]]
 === Configuring the Failover Monitor
 
-Configure the failover monitor only on the non-database appliances with the following steps:
+Configure the failover monitor only on the non-database {product-title_short} appliances  with the following steps:
 
 . In the appliance console menu, select *Configure Application Database Failover Monitor*. 
 . Select *Start Database Failover Monitor*.
@@ -43,7 +43,7 @@ You can check the status of the simulated failure by viewing the most recent `ha
 ----
 ====
 +
-. Check the appliance console summary screen for the primary database. If configured correctly, the *{product-title_abbr_uc} Database* value in the appliance console summary should have switched from the hostname of the old primary database to the hostname of the new primary on all standard appliances.
+. Check the appliance console summary screen for the primary database. If configured correctly, the *{product-title_abbr_uc} Database* value in the appliance console summary should have switched from the hostname of the old primary database to the hostname of the new primary on all {product-title_short} appliances.
 
 
 [IMPORTANT]
@@ -106,7 +106,7 @@ Correct this by running the following steps:
 # rm /etc/repmgr.conf
 ----
 +
-.. Delete the failed database node entry from new primary database appliance:
+.. Delete the failed database node entry from new primary database-only appliance:
 ... Check the failed node ID from the output and delete the entry; the ID is the same as the cluster ID provided during installation. 
 ... Delete the node. For example, if the cluster ID is `1`, run `vmdb_production=#delete from repl_nodes where id = 1` to delete the failed node:
 +
@@ -118,7 +118,7 @@ vmdb_production=#delete from repl_nodes table where id = $cluster_node_id_of_fai
 +
 .. Delete the replication slot information for the failed database node. 
 ... Check the `replication_slot` information for the failed node in the `pg_replication_slots` table:
-* The failed node is marked with `f` in the `active` column in the `pg_replication_slots` table. If it is `t`, there is a standby database appliance connected with ID 1; this appliance must be shut down before deleting the replication slot. 
+* The failed node is marked with `f` in the `active` column in the `pg_replication_slots` table. If it is `t`, there is a standby database-only appliance connected with ID 1; this appliance must be shut down before deleting the replication slot. 
 * When the standby node is disconnected, the active column will be changed to `f`.
 ... Delete the slot:
 * The slot number is the same as the `cluster_id`; then delete the replication slot. For example, if the cluster ID is `1`, run `vmdb_production=#select pg_drop_replication_slot('repmgr_slot_1')` to delete the slot:

@@ -54,12 +54,12 @@ After uploading the image, create a disk and attach it to a virtual machine.
 .Prerequisites:
 
 * You must configure the Image I/O Proxy when running `engine-setup`. See https://access.redhat.com/documentation/en/red-hat-virtualization/4.1-Beta/paged/installation-guide/33-configuring-the-red-hat-virtualization-manager[Configuring the Red Hat Virtualization Manager] in the  _Red Hat Virtualization Installation Guide_ for more information.
-* Internet Explorer 10, Firefox 35, or Chrome 13 or greater is required to perform this upload procedure. Previous browser versions do not support the required HTML5 APIs. 
+* Internet Explorer 10, Firefox 35, or Chrome 13 or greater is required to perform this upload procedure. Previous browser versions do not support the required HTML5 APIs.
 * You must import the required certificate authority into the web browser used to access the Administration Portal.
 
 [NOTE]
 ====
-To import the certificate authority, browse to `https://<engine_address>/ovirt-engine/services/pki-resource?resource=ca-certificate&format=X509-PEM-CA` and select all the trust settings. Refer to the instructions to install the certificate authority in https://access.redhat.com/solutions/95103[Firefox], https://access.redhat.com/solutions/17864[Internet Explorer], or https://access.redhat.com/solutions/1168383[Google Chrome]. 
+To import the certificate authority, browse to `https://<engine_address>/ovirt-engine/services/pki-resource?resource=ca-certificate&format=X509-PEM-CA` and select all the trust settings. Refer to the instructions to install the certificate authority in https://access.redhat.com/solutions/95103[Firefox], https://access.redhat.com/solutions/17864[Internet Explorer], or https://access.redhat.com/solutions/1168383[Google Chrome].
 ====
 
 To upload the appliance:
@@ -70,9 +70,9 @@ To upload the appliance:
 . In the *Upload Image* screen, click *Browse* and select the image on the local disk.
 . Set *Image Type* to *QCOW2*.
 . Fill in the *Disk Option* fields. See https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#Add_Virtual_Disk_dialogue_entries[Explanation of Settings in the New Virtual Disk Window] in the _Red Hat Virtualization Administration Guide_ for a description of the relevant fields.
-. Click *OK*. 
+. Click *OK*.
 
-A progress bar will indicate the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* drop-down. 
+A progress bar will indicate the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* drop-down.
 
 See the https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#Uploading_a_Disk_Image_to_a_Storage_Domain[Uploading a Disk Image to a Storage Domain] in the _Red Hat Virtualization Administration Guide_ for more information.
 
@@ -105,7 +105,7 @@ Substitute `newimagename` with your chosen name for the image, and substitute `m
 +
 ====
 [NOTE]
-It is recommended to use `-v` (verbose logging) when using the `engine-image-uploader` script to see the progression of the upload. 
+It is recommended to use `-v` (verbose logging) when using the `engine-image-uploader` script to see the progression of the upload.
 ====
 +
 . Enter the password of the default administrative user for your Red Hat Enterprise Virtualization Manager when prompted.
@@ -130,11 +130,12 @@ The following procedure provides manual upload instructions if the image uploade
 
 . Log into a *host* in your Red Hat Virtualization system with a mount to the *Export storage domain*.
 . Change to the *Export storage domain's* directory.
-. Copy the {product-title} appliance `OVA` archive to this directory.
-. Extract the `OVA` file using the `tar` command:
+. Copy the {product-title} appliance `OVF` archive to this directory.
+. Run the `ls` command to locate the directory named after a GUID, and change to that directory.
+. Extract the `OVF` file using the `tar` command, substituting the `.ova` filename with your download:
 +
 ----
-$ tar xvf cfme-rhevm-5.3-15.x86_64.rhevm.ova
+$ tar xvf ../cfme-rhevm-5.7.0.17-1.x86_64.rhevm.ova
 ----
 +
 . Set the following permissions:
@@ -158,11 +159,3 @@ After uploading the appliance to the export storage domain, import it as a templ
 . Start the newly created {product-title} appliance virtual machine.
 
 Your Red Hat Virtualization environment now contains a running {product-title} appliance.
-
-
-
-
-
-
-
-

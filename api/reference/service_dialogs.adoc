@@ -1,0 +1,60 @@
+
+[[service-dialogs]]
+== Service Dialogs
+
+Management of Service Dialogs is provided via the collection:
+
+[source,data]
+----
+/api/service_dialogs
+----
+
+The following action is provided on service_dialogs resources:
+
+* link:#deleting-service-dialogs[Deleting Service Dialogs]
+
+[[deleting-service-dialogs]]
+=== Deleting Service Dialogs
+
+Deleting a Service Dialog can be done via the _delete_ action as follows:
+
+[source,data]
+----
+POST /api/service_dialogs/:id
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or via the DELETE HTTP method as follows:
+
+[source,data]
+----
+DELETE /api/service_dialogs/:id
+----
+
+One can also delete multiple Service Dialogs via the _delete_ action on the
+collection with references to the service dialogs to delete as follows:
+
+[source,data]
+----
+POST /api/service_dialogs
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/service_dialogs/101" },
+    { "href" : "http://localhost:3000/api/service_dialogs/102" },
+    { "href" : "http://localhost:3000/api/service_dialogs/103" },
+    ...
+  ]
+}
+----
+

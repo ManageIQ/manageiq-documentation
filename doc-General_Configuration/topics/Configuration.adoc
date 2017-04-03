@@ -108,10 +108,6 @@ As new clusters, hosts, and datastores are discovered, you will need to come bac
 
 * *System tags* are assigned automatically by {product-title}.
 
-[NOTE]
-======
-If you entered a *Company Name* in *Configuration*, then click on the *Settings* tab, then the *Server* your desired server, that name will appear on the tab instead of *My Company*.
-======
 
 [[creating-a-tag-category]]
 ====== Creating a Tag Category
@@ -1177,7 +1173,7 @@ The current SAML implementation only secures the {product-title} appliance’s w
 
 The following is required in order to enable SAML authentication to the appliance:
 
-* A CloudForms 4.2 appliance
+* A CloudForms 4.5 appliance
 * A SAML identity provider (e.g. Red Hat Single Sign-On (SSO) 7.0 or later)
 
 [[configure-apache-SAML]]
@@ -1260,7 +1256,7 @@ To add a client in the Red Hat SSO {product-title} realm:
   http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
 ------
 +
-. In CloudForms 4.2, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
+. In CloudForms 4.5, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
 +
 ------
 # vi idp-metadata.xml
@@ -1305,7 +1301,7 @@ For example, to configure user groups from your SAML identity provider to work w
   . On your {product-title} appliance, assign EVM roles to the groups. See _Creating a Role_ in xref:creating-a-role[].
 ======
 
-Complete the above steps on each appliance in the settings menu, then menu:Configuration[Access Control].
+Complete the above steps on each appliance in the settings menu, then navigate to menu:Configuration[Access Control].
 
 You can now log into your {product-title} appliance using your SAML credentials.
 
@@ -1435,43 +1431,65 @@ During the restart, you are unable to access the server. When the restart is com
 [[custom-logos]]
 ====== Custom Logos
 
-Use *Custom Logos* to display your own logo in the corner of the console or on the {product-title} login panel.
+Use *Custom Logos* to display your own logo in the corner of the {product-title} user interface and on the login screen. Use the procedures below to upload a custom logo to the user interface, and to customize the login background and login panel text on the user interface.
+
+[NOTE]
+====
+* If you have upgraded from an earlier {product-title} version and your custom logo was already in use before migration, although your logo image file is still in place in `vmdb/public/upload` you may have to uncheck and recheck the option to *Use Custom Logo Image* to re-enable displaying your custom logo. See xref:uploading-a-custom-logo-to-the-console[] for the procedure on how to access the *Use Custom Logo Image* option, or if you want to upload another custom logo to the user interface and customize the login background image and login panel text. 
+
+* Additionally, ensure the option to use configuration settings for the tenant under *Access Control* is set to `Yes`; see xref:display-custom-settings[] for the procedure on how to set the configuration settings.
+====
+
 
 [[uploading-a-custom-logo-to-the-console]]
-====== Uploading a Custom Logo to the Console
+====== Uploading a Custom Logo to the User Interface
 
-To upload a custom logo to the console:
+[NOTE]
+====
+Make sure the desired logo is accessible from the computer where you are running the {product-title_short} user interface. The file must be in portable network graphics (png) format with dimensions of 350 px x 70 px.
+====
 
-. Make sure the desired logo is accessible from the computer where you are running the console. The file must be in portable network graphics (png) format with dimensions of 350 x 70.
+To upload a custom logo to the user interface:
+
 . From the settings menu, select *Configuration*.
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the {product-title} server is located.
 . Click on the server.
 . Click the *Custom Logos* tab.
 image:2071.png[]
-. Click *Browse* in the *Custom Logo Image (Shown on top right of all screens)* area to go to the location where the logo file is located.
+. In *Custom Logo Image (Shown on top right of all screens)*, click *Choose file* to go to the location where the logo file is located.
 . Click *Upload*. The icon is displayed above the file name box, and an option is shown to use the logo.
-. Check *Use Custom Logo* Image to add the logo to your console.
+. Check *Use Custom Logo Image* to add the logo to your user interface.
 . Click *Save*.
+
+[NOTE]
+====
+To enable displaying your custom logo, ensure the option to use configuration settings for the tenant under *Access Control* is set to `Yes`. See xref:display-custom-settings[] for the procedure on how to set the configuration settings.
+====
 
 [[customizing-the-login-background]]
 ====== Customizing the Login Background
 
+[NOTE]
+====
+Make sure the background image that you want to use is accessible from the computer where you are running the user interface. The file must be in PNG format with dimensions of 1280 px x 1000 px.
+====
+
 To customize the login background:
 
-. Make sure the logo that you want to use is accessible from the computer where you are running the console. The file must be in PNG format with dimensions of 1280 x 1000.
 . From the settings menu, select *Configuration*.
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the server is located.
 . Click on the server.
 . Click the *Custom Logos* tab.
-. Click *Browse* in the *Custom Login Background Image* area to go to the location where the logo file is located.
+. In *Custom Login & 'About' Screen Background Image*, click *Choose file* to go to the location where the background image file is located.
 +
-image:2073.png[]
+image:custom-login-about-background-image.png[]
 +
 . Click *Upload*. The icon is displayed above the file name box, and an option is shown to use the logo.
-. Check *Use Custom Login Image* to add the logo to your console.
+. Check *Use Custom Login Background Image* to add the background image to the login screen of the user interface.
 . Click *Save*.
+
 
 [[customizing-the-login-panel-text]]
 ====== Customizing the Login Panel Text
@@ -1479,13 +1497,30 @@ image:2073.png[]
 To customize the login panel text:
 
 . From the settings menu, select *Configuration*.
+. Navigate to menu:Settings[Configuration].
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the server is located.
 . Click on the server.
 . Click the *Custom Logos* tab.
-. In *Custom Login Panel Text*, type in the text that you want to show on the console's login screen.
-image:2075.png[]
-. Check *Use Custom Login Text* box to add the text to the screen.
+. In *Custom Login Panel Text*, enter the text that you want to display on the login screen.
+. Click *Use Custom Login Text* to switch it to `Yes`.
+image:custom-login-panel-text.png[]
+. Click *Save*.
+
+
+[[display-custom-settings]]
+====== Displaying the Custom Configuration Settings
+
+To enable displaying your custom logo in the corner of the {product-title} user interface and on the login screen: 
+
+. From the settings menu, select *Configuration*.
+. Click the *Access Control* accordion.
+. Click *Tenants*, then click *My Company*.
+. Click image:1847.png[](*Configuration*), then click image:1851.png[](*Edit this item*).
++
+image:use-configuration-settings.png[]
++
+. Click *Use Configuration Settings* to switch it to `Yes`.
 . Click *Save*.
 
 [[advanced-settings]]
@@ -1504,7 +1539,7 @@ Only make manual changes to your configuration files if directed to do so by Red
 
 To edit configuration files manually:
 
-. From the settings menu, select *Configuration*.
+. From the settings menu, click *Configuration*.
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the server is located.
 . Click on the server.
@@ -1559,6 +1594,7 @@ Table: ems_refresh
 |get_private_images|For EC2 refreshes only; whether or not to retrieve private images. Default: true
 |get_public_images|For EC2 refreshes only; whether or not to retrieve public images. Default: false. Warning: setting get_public_images to true loads several thousand images in the VMDB by default and may cause performance issues.
 |get_shared_images|For EC2 refreshes only; whether or not to retrieve shared images. Default: true
+|public_images_filters|For EC2 refreshes only; a filter to reduce the number of public images. Default: all public images
 |ignore_terminated_instances|For EC2 refreshes only; whether or not to ignore terminated instances. Default: true
 |full_refresh_threshold|The number of targeted refreshes requested before they are rolled into a full refresh. For example, if the system and/or the user target a refresh against 7 VMs and 2 Hosts (9 targets), when the refresh actually occurs it will do a partial refresh against those 9 targets only. However, if a 10th had been added, the system would perform a full EMS refresh instead. Default: 100
 |raise_vm_snapshot_complete_if_created_within:|Raises vm_snapshot_complete event for a snapshot being added to VMDB only if the create time in Virtual Center is within the configured period of time. This prevents raising events for old snapshots when a new VC is added to {product-title}. Default: 15.minutes
@@ -1663,9 +1699,9 @@ Table 3.9. log_depot
 [width="100%",cols="30%,70%",options="header",]
 |=======================================================================
 |Parameters|Description
-|uri|Specify the uri for the log depot. This is the same as URI in menu:Configuration[Diagnostics Collect Logs] in the appliance console. Default: blank
-|username|Specify the user name for the log depot. This is the same as User ID in menu:Configuration[Diagnostics Collect Logs] in the appliance console. Default: blank
-|password|Specify the password for the user for the log depot. This is the same as Password in menu:Configuration[Diagnostics Collect Logs] in the appliance console. Default: blank
+|uri|Specify the URI for the log depot. This is the same as the URI in menu:Configuration[Diagnostics > Collect Logs] in the appliance console. Default: blank
+|username|Specify the user name for the log depot. This is the same as the user ID in menu:Configuration[Diagnostics > Collect Logs] in the appliance console. Default: blank
+|password|Specify the password for the user for the log depot. This is the same as the password in menu:Configuration[Diagnostics > Collect Logs] in the appliance console. Default: blank
 |=======================================================================
 
 Table: performance
@@ -2751,7 +2787,7 @@ Once you configure a {product-title} instance to act as a global copy, and one o
 
 image:centralized_admin_disabled.png[Centralized Administration Config]
 
-. Navigate to the the settings menu.
+. Navigate to the settings menu.
 . Click *Configuration*.
 . Click the *Settings* accordion.
 . Click the region where the instance is located.
@@ -2767,7 +2803,7 @@ If centralized administration is currently enabled, you can *Disable Central Adm
 
 image:centralized_admin_enabled.png[Centralized Administration Enabled]
 
-Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
+Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.5/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
 
 [[resetting-database-replication]]
 ===== Resetting Database Replication
@@ -2924,7 +2960,7 @@ To run database garbage collection:
 
 {product-title} provides a default database password for the internal PostgreSQL database.
 
-To change the password, you need to stop the {product-title} Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `emserverd` uses to access the server, and restart the {product-title} appliance.
+To change the password, you need to stop the {product-title} Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `evmserverd` uses to access the server, and restart the {product-title} appliance.
 
 . Stop the {product-title} service:
 .. SSH into the appliance.
@@ -2952,7 +2988,7 @@ ALTER USER root WITH PASSWORD 'newpassword';
 \q
 ------
 +
-. Change the password in the configuration file that `emserverd` uses to access the server:
+. Change the password in the configuration file that `evmserverd` uses to access the server:
 +
 ------
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
@@ -2978,7 +3014,7 @@ service evmserverd start
 service evmserverd stop
 ------
 +
-. Change the password in the configuration file that `emserverd` uses to access the server:
+. Change the password in the configuration file that `evmserverd` uses to access the server:
 +
 ------
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
@@ -3008,7 +3044,7 @@ If you change the password on the remote database, you will need to change the p
 .. Replace the contents of the *"production"* section with the contents of the *"base"* section.
 .. Edit the *"host"* parameter to match the IP of the appliance hosting the VMDB.
 .. Save the new *database.yml*.
-. Run the following command to change the password in the configuration file that `emserverd` uses to access the server:
+. Run the following command to change the password in the configuration file that `evmserverd` uses to access the server:
 +
 ------
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
@@ -3050,3 +3086,4 @@ The next options depend on the periodic database maintenance frequency you choos
 To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings.
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
+

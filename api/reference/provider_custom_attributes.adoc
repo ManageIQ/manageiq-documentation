@@ -1,0 +1,186 @@
+
+[[provider-custom-attributes]]
+== Provider Custom Attributes
+
+Custom Attributes can be managed for Providers. This is done via the
+custom_attributes sub-collection as follows:
+
+[source,data]
+----
+/api/providers/:id/custom_attributes
+----
+
+* link:#querying-provider-custom-attributes[Querying Provider Custom Attributes]
+* link:#specifying-custom-attributes[Specifying Custom Attributes]
+* link:#custom-attribute-actions[Custom Attribute Actions]
+* link:#add-provider-custom-attributes[Adding Provider Custom Attributes]
+* link:#edit-provider-custom-attributes[Editing Provider Custom Attributes]
+* link:#delete-provider-custom-attributes[Deleting Provider Custom Attributes]
+
+[[querying-provider-custom-attributes]]
+=== Querying Provider Custom Attributes
+
+Custom attributes of a Provider can be asked for by expanding the subcollection as follows:
+
+----
+GET /api/providers/:id?expand=custom_attributes
+----
+
+Optionally, just the custom attributes of a Provider can be queried:
+
+----
+GET /api/providers/:id/custom_attributes
+----
+
+[[specifying-attribute-actions]]
+=== Specifying Attribute Actions
+
+Custom attributes are specified as follows:
+
+[source,json]
+----
+{
+  "name" : "...",
+  "value" : "...",
+  "section" : "..."
+}
+----
+
+For adding custom attributes, *name* field is required.
+
+For editing a custom attribute, specify the custom attribute either by *name*:
+
+[source,json]
+----
+{
+  "name" : "...",
+  "value" : "..."
+}
+----
+
+Or by *href*:
+
+[source,json]
+----
+{
+  "href" : "http://localhost:3000/api/providers/:id/custom_attributes/:id",
+  "value" : "..."
+}
+----
+
+[[custom-attribute-actions]]
+=== Custom Attribute Actions
+
+[cols="1,3",options="header",width="60%"]
+|=====================
+| Action | Description
+| add | Adding Custom Attributes to a Provider
+| edit | Editing Custom Attributes of a Provider
+| delete | Deleting Custom Attributes from a Provider
+|=====================
+
+[[add-provider-custom-attributes]]
+=== Adding Provider Custom Attributes
+
+Adding custom attributes to a Provider:
+
+----
+POST /api/providers/:id/custom_attributes
+----
+
+[source,json]
+----
+{
+  "action" : "add",
+  "resources" : [
+    { ... },
+    { ... },
+    ...
+  ]
+}
+----
+
+For example, adding two custom attributes:
+
+[source,json]
+----
+{
+  "action" : "add",
+  "resources" : [
+    { "name" : "ca1", "value" : "value 1" },
+    { "name" : "ca2", "value" : "value 2" }
+  ]
+}
+----
+
+
+[[edit-provider-custom-attributes]]
+=== Editing Provider Custom Attributes
+
+Editing custom attributes of a Provider:
+
+----
+POST /api/providers/:id/custom_attributes
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    { ... },
+    { ... },
+    ...
+  ]
+}
+----
+
+For example:
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    { "name" : "ca_name1", "value" : "updated custom attribute value 1" },
+    { "name" : "ca_name2", "value" : "updated custom attribute value 2" }
+  ]
+}
+----
+
+[[delete-provider-custom-attributes]]
+=== Deleting Provider Custom Attributes
+
+Deleting custom attributes of a Provider:
+
+----
+POST /api/providers/:id/custom_attributes
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { ... },
+    { ... },
+    ...
+  ]
+}
+----
+
+
+In the following example, a request to delete custom attributes of a Provider by name and by href:
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    { "name" : "ca_name1" },
+    { "href" : "http://localhost:3000/api/providers/:id/custom_attributes/:id" }
+  ]
+}
+----
+
+

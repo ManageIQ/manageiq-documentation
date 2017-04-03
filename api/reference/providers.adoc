@@ -10,12 +10,60 @@ is available via the REST API. Management of providers is through:
 /api/providers
 ----
 
+* link:#querying-providers[Querying Providers]
 * link:#creating-providers[Creating Providers]
 * link:#specifying-credentials[Specifying Credentials]
 * link:#editing-providers[Editing Providers]
 * link:#deleting-providers[Deleting Providers]
 * link:#refresh-providers[Refresh Providers]
 * link:#foreman-support[Foreman Support]
+
+[[querying-providers]]
+=== Querying Providers
+
+Providers can be queried as follows:
+
+[source,data]
+----
+GET /api/providers
+----
+
+A specific provider can also be queried by its id:
+
+[source,data]
+----
+GET /api/providers/:id
+----
+
+Foreman type providers can be queried by specifying the provider_class as follows:
+
+[source,data]
+----
+GET /api/providers?provider_class=provider
+----
+
+[[cloud-networks]]
+==== Cloud Networks
+
+The Cloud Networks of a provider can be queried by asking for the _cloud_networks_ subcollection as follows:
+
+[source,data]
+----
+GET /api/providers/:id/cloud_networks
+----
+
+[source,data]
+----
+GET /api/providers/:id/cloud_networks/:cloud_network_id
+----
+
+Or expanding the Cloud Networks in addition to the provider as follows:
+
+[source,data]
+----
+GET /api/providers/:id?expand=cloud_networks
+----
+
 
 [[creating-providers]]
 === Creating Providers
@@ -79,20 +127,22 @@ POST /api/providers
 
 If zone is not specified, the Default zone will be used.
 
-The *type* attribute specifies the supported provider class names.
-This list primarily includes:
+The *type* attribute specifies the supported provider class names which include:
 
 [cols="<",width="60%"]
 |===================================================
 | ManageIQ::Providers::Amazon::CloudManager
-| ManageIQ::Providers::Atomic::ContainerManager
 | ManageIQ::Providers::Azure::CloudManager
+| ManageIQ::Providers::Google::CloudManager
+| ManageIQ::Providers::Hawkular::MiddlewareManager
 | ManageIQ::Providers::Kubernetes::ContainerManager
 | ManageIQ::Providers::Microsoft::InfraManager
 | ManageIQ::Providers::Openshift::ContainerManager
-| ManageIQ::Providers::Openstack::InfraManager
+| ManageIQ::Providers::OpenshiftEnterprise::ContainerManager
 | ManageIQ::Providers::Openstack::CloudManager
+| ManageIQ::Providers::Openstack::InfraManager
 | ManageIQ::Providers::Redhat::InfraManager
+| ManageIQ::Providers::Vmware::CloudManager
 | ManageIQ::Providers::Vmware::InfraManager
 |===================================================
 
@@ -274,6 +324,16 @@ POST /api/providers?provider_class=provider
   }
 }
 ----
+
+When creating providers with provider_class as _provider_,
+the *type* attribute specifies the supported provider class names which include:
+
+[cols="<",width="60%"]
+|===================================================
+| ManageIQ::Providers::AnsibleTower::Provider
+| ManageIQ::Providers::Foreman::Provider
+| ManageIQ::Providers::Openstack::Provider
+|===================================================
 
 NOTE: When managing providers of _provider_ provider_class, Tagging and Policy management
 does not currently apply. So requests including the tags, policies and policy_profiles 

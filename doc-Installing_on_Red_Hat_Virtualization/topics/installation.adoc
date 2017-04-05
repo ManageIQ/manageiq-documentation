@@ -128,20 +128,11 @@ It takes approximately 90 minutes to upload the {product-title} appliance file t
 
 The following procedure provides manual upload instructions if the image uploader tool is not available or fails to upload.
 
-. Log into a *host* in your Red Hat Virtualization system with a mount to the *Export storage domain*.
-. Change to the *Export storage domain's* directory.
+. Log into a host in your Red Hat Virtualization system with a mount to the export storage domain.
+. Change to the export storage domain's directory.
 . Copy the {product-title} appliance `OVF` archive to this directory.
-. Run the `ls` command to locate the directory named after a GUID, and change to that directory. For example:
-+
-----
-[root@localhost rhvexports]# ls
-4a8fc2b1-0a57-47fd-b622-7e170981305b    __DIRECT_IO_TEST__
-cfme-rhevm-5.7.0.17-1.x86_64.rhevm.ova
-
-[root@localhost rhvexports]# cd 4a8fc2b1-0a57-47fd-b622-7e170981305b/
-----
-+
-. Extract the `OVF` file using the `tar` command, substituting the `.ova` filename with your download:
+. Run the `ls` command to locate the directory named after a GUID, and change to that directory.
+. Extract the `OVF` file using the `tar` command, substituting the `.ova` filename with your download. For example:
 +
 ----
 [root@localhost 4a8fc2b1-0a57-47fd-b622-7e170981305b]# tar xvf ../cfme-rhevm-5.7.0.17-1.x86_64.rhevm.ova
@@ -155,7 +146,7 @@ master/vms/647d5765-17fe-436d-aff1-82243e79976a/
 master/vms/647d5765-17fe-436d-aff1-82243e79976a/647d5765-17fe-436d-aff1-82243e79976a.ovf
 ----
 +
-. Set the following permissions on the `images` and `master` directories so the appliance can be imported as a template:
+. Change ownership of the `images` and `master` export directories so the appliance can be imported as a template:
 +
 ----
 [root@localhost 4a8fc2b1-0a57-47fd-b622-7e170981305b]# chown -R 36:36 master/

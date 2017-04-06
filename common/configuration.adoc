@@ -18,7 +18,7 @@ ifdef::login[]
 . After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
 endif::login[]
 ifdef::ssh[]
-. Log in to the appliance using the SSH key.
+. Log into the appliance using the SSH key.
 endif::ssh[]
 . Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
 . Press `Enter` to manually configure settings.
@@ -52,16 +52,17 @@ include::configuration-db.adoc[]
 [[configuring-an-external-database]]
 === Configuring an External Database
 
+Based on your setup, you will choose to configure the appliance to use an external PostgreSQL database. For example, we can only have one database in a single region. However, a region can be segmented into multiple zones, such as database zone, user interface zone, and reporting zone, where each zone provides a specific function. The appliances in these zones must be configured to use an external database. 
+
 The `postgresql.conf` file used with {product-title} databases requires specific settings for correct operation. For example, it must correctly reclaim table space, control session timeouts, and format the PostgreSQL server log for improved system support. Due to these requirements, Red Hat recommends that external {product-title} databases use a `postgresql.conf` file based on the standard file used by the {product-title} appliance.
 
 Ensure you configure the settings in the `postgresql.conf` to suit your system. For example, customize the `shared_buffers` setting according to the amount of real storage available in the external system hosting the PostgreSQL instance. In addition, depending on the aggregate number of appliances expected to connect to the PostgreSQL instance, it may be
 necessary to alter the `max_connections` setting.
 
-Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix {product-title} databases with other types of databases in a single PostgreSQL instance.
-
 [NOTE]
 ====
-{product-title} 4.x requires PostgreSQL version 9.4.
+* {product-title} 4.x requires PostgreSQL version 9.4.
+* Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix {product-title} databases with other types of databases in a single PostgreSQL instance.
 ====
 
 . Start the appliance and open a terminal console.
@@ -69,15 +70,21 @@ ifdef::login[]
 . After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
 endif::login[]
 ifdef::ssh[]
-. Log in to the appliance using the SSH key.
+. Log into the appliance using the SSH key.
 endif::ssh[]
 . Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
-. Select *8) Configure Database* from the menu.
+. Select *5) Configure Database* from the menu.
 . You are prompted to create or fetch a security key.
-* If this is the first {product-title} appliance, select the option to create a key.
-* If this is not the first {product-title} appliance, select the option to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
-. Choose *2) External* for the database location.
+* If this is the first {product-title} appliance, choose *1) Create key*.
+* If this is not the first {product-title} appliance, choose *2) Fetch key from remote machine* to fetch the key from the first appliance. 
++
+[NOTE]
+====
+All {product-title_short} appliances in a multi-region deployment must use the same key.
+====
++
+. Choose *2) Create Region in External Database* for the database location.
 . Enter the database hostname or IP address when prompted.
 . Enter the database name or leave blank for the default (`vmdb_production`).
 . Enter the database username or leave blank for the default (`root`).
@@ -89,20 +96,26 @@ endif::ssh[]
 [[configuring-a-worker-appliance]]
 === Configuring a Worker Appliance
 
-You can configure a worker appliance through the terminal. These steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database.
+You can use multiple appliances to facilitate horizontal scaling, as well as for dividing up work by roles. Accordingly, configure an appliance to handle work for one or many roles, with workers within the appliance carrying out the duties for which they are configured. You can configure a worker appliance through the terminal. The following steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database. 
 
 . Start the appliance and open a terminal console.
 ifdef::login[]
 . After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
 endif::login[]
 ifdef::ssh[]
-. Log in to the appliance using the SSH key.
+. Log into the appliance using the SSH key.
 endif::ssh[]
 . Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
-. Select *8) Configure Database* from the menu.
-. You are prompted to create or fetch a security key. Select the option to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
-. Choose *2) External* for the database location.
+. Select *5) Configure Database* from the menu.
+. You are prompted to create or fetch a security key. Since this is not the first {product-title} appliance, choose *2) Fetch key from remote machine*. For worker and multi-region setups, use this option to copy key from another appliance. 
++
+[NOTE]
+====
+All {product-title_short} appliances in a multi-region deployment must use the same key.
+====
++
+. Choose *2) Create Region in External Database* for the database location.
 . Enter the database hostname or IP address when prompted.
 . Enter the database name or leave blank for the default (`vmdb_production`).
 . Enter the database username or leave blank for the default (`root`).

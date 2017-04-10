@@ -160,12 +160,42 @@ The Red Hat Virtualization export domain shows the {product-title} appliance in 
 [[running]]
 === Running {product-title}
 
-After uploading the appliance to the export storage domain, import it as a template and create a virtual machine. Use the following procedure as a guide.
+After uploading the appliance to the export storage domain, import it as a template and create a virtual machine. 
+//Use the following procedure as a guide.
 
-
-. Import the appliance image from the export storage domain as a template in a Red Hat Virtualization data storage domain. Use the `newimagename` you specified when you uploaded the image to find the image to import as a template. Once the import is complete, check the template for a network interface (NIC). If the template does not include one, create a NIC for it.
-. Create a new virtual machine using the {product-title} appliance template as a basis. See the Red Hat Virtualization Administration Guide for instructions.
-. Add a database disk if you are hosting the database on the same machine as the appliance.
-. Start the newly created {product-title} appliance virtual machine.
+. Import the appliance image from the export storage domain as a template in a Red Hat Virtualization data storage domain: 
+.. Click the *Storage* tab, then select the export storage domain you uploaded the image to.
+.. From the details pane, click the *Template Import* tab, and select the image (`newimagename`) you uploaded.
+.. Click *Import*, and specify the *Cluster* and *CPU Profile* as desired.
+.. Click *OK*.
++
+You can check the import status on the *Events* tab. See https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/virtual_machine_management_guide/#sect-Exporting_and_Importing_Virtual_Machines_and_Templates[Exporting and Importing Virtual Machines and Templates] in the Red Hat Virtualization _Virtual Machine Management Guide_ for additional information.
++
+. Check if the template has a network interface (NIC). If the template does not include one, create a NIC for it:
+.. From the *Templates* tab, select the template you imported to view its details.
+.. From the details pane, click the *Network Interfaces* tab to check if a NIC is listed. If there is an existing NIC, continue to the next step. If no existing NIC is shown:
+... Create a NIC by clicking *New* in the *Network Interfaces* tab.  
+... In the *New Network Interface* dialog, specify any values as desired or leave the defaults. 
+... Click *OK*.
++
+The new NIC shows in the *Network Interfaces* tab.
++
+. Create a new virtual machine using the {product-title} appliance template as a basis:
+.. From the *Templates* tab, select the {product-title_short} template.
+.. Click *New VM* to open the *New Virtual Machine* dialog. 
+.. Specify a name for the virtual machine, and any other details as desired. 
+.. Click *OK*.
++
+The virtual machine is created. To view the virtual machine, select the data center, then the *Virtual Machines* tab to view a list of all virtual machines.
+. Add a database disk if you are hosting the database on the same machine as the appliance:
+//From BZ1411114 - “how big?  Thin or thick provisioned?  (Anything else to consider?)
+.. To add a disk, select your virtual machine from the *Virtual Machines* tab.
+.. From the details pane, click the *Disks* tab. 
+.. Click *New* to open the *New Virtual Disk* dialog.
+.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.
+.. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
+.. Specify any other values as desired.
+.. Click *OK* to create the disk.
+. To start the {product-title} appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
 
 Your Red Hat Virtualization environment now contains a running {product-title} appliance.

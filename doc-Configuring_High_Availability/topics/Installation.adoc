@@ -1,7 +1,7 @@
 [[installation]]
 == Installing the Appliances
 
-This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two {product-title_short} appliances.
+This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two (at minimum) {product-title_short} appliances.
 
 [[installation_primary_db]]
 === Installing the Primary Database-Only Appliance
@@ -42,36 +42,18 @@ Do not create a region at this stage in the procedure.
 You can check the configuration on the appliance console details screen. If configured successfully, *Local Database Server* shows as `running (primary)`.
 
 
-[[configuring_primary_db]]
-=== Configuring the Primary Database-Only Appliance
-
-On the primary database-only appliance, initialize the nodes in the database cluster to configure the database replication:
-
-. In the appliance console menu, select *Configure Database Replication*. 
-. Select *Configure Server as Primary*.
-. Set an unique identifier number for the server and enter the database name and credentials:
-.. Select a number to uniquely identify the node in the replication cluster.
-.. Enter the cluster database name.
-.. Enter the cluster database username.
-.. Enter the cluster database password and confirm the password.
-.. Enter the primary database-only appliance hostname or IP address.
-+
-[NOTE]
-====
-The hostname must be visible to all appliances that communicate with this database, including the {product-title_short} appliances and any global region databases.
-====
-+
-.. Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
-
-
 [[installation_appliance]]
 === Installing a {product-title_short} Appliance
 
-Configure a {product-title_short} appliance to point to the primary database server. This appliance does not serve as a database server. From this appliance, you can then configure the database itself.
+Install and configure a {product-title_short} appliance to point to the primary database server. This appliance does not serve as a database server. 
+
+From this appliance, you can then create a database region and configure the primary database.
 
 [NOTE]
 ====
-After installing and configuring an empty database appliance in xref:installation_primary_db[] and xref:configuring_primary_db[], the steps in this section create the database schema used by {product-title_short} on the primary database appliance, and prepare the initial data. This must be completed before the secondary database server can be configured in xref:installation_standby_db[].
+After installing and configuring an empty database-only appliance in xref:installation_primary_db[], the steps in this section create the database schema used by {product-title_short} on the primary database-only appliance, and prepare the initial data. Region metadata is required to configure the primary database-only appliance as a primary node in the replication cluster. 
+
+This must be configured from the {product-title_short} appliance before the primary and secondary database-only appliances can be configured.
 ====
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en/red-hat-cloudforms/4.2/paged/deployment-planning-guide/chapter-2-planning[Planning] in the _Deployment Planning Guide_.
@@ -112,6 +94,31 @@ Creating a database region will destroy any existing data and cannot be undone.
 .. Enter a password for the database and confirm the password.
 
 You can check the configuration on the appliance console details screen. When configured successfully, *{product-title_abbr_uc} Server* will show as `running`, and *{product-title_abbr_uc} Database* will show the name of the primary database-only appliance.
+
+
+[[configuring_primary_db]]
+=== Configuring the Primary Database-Only Appliance
+
+On the primary database-only appliance, initialize the nodes in the database cluster to configure the database replication:
+
+. In the appliance console menu, select *Configure Database Replication*. 
+. Select *Configure Server as Primary*.
+. Set an unique identifier number for the server and enter the database name and credentials:
+.. Select a number to uniquely identify the node in the replication cluster.
+.. Enter the cluster database name.
+.. Enter the cluster database username.
+.. Enter the cluster database password and confirm the password.
+.. Enter the primary database-only appliance hostname or IP address.
++
+[NOTE]
+====
+The hostname must be visible to all appliances that communicate with this database, including the {product-title_short} appliances and any global region databases.
+====
++
+.. Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
+
+
+
 
 
 [[installation_standby_db]]

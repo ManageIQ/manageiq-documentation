@@ -758,3 +758,61 @@ standard_conforming_strings = off	# MIQ Value not sure why this is enabled
 
 
 
+[[load-balancer]]
+=== Using a Load Balancer
+
+Deploying several {product-title_short} appliances with a load balancer can be useful for performance.
+
+//Ask SMEs Colin's questions from Comment 9, 10, 11: Any way we can turn off the memcached server running on these hosts? (unrelated resource contention issues suggest this would be useful)
+
+However, running several appliances using a load balancer can cause login issues from the Self Service user interface because `memcached`, the service storing the session in memory, is shared (by appliances on the load balancer ?). To prevent this, configure your environment to run the `memcached` service on only one appliance with the steps below.
+
+The following example shows configuration on two appliances, `appliance1` and `appliance2`:
+
+. On `appliance1`, open the 11211 port in the firewall:
++
+----
+# firewall-cmd --add-port=11211/tcp --permanent
+# firewall-cmd --reload
+----
++
+. On `appliance1`, configure the following in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
++
+----
+:session:
+  :memcache_server: 127.0.0.1:11211
+  :memcache_server_opts: "-l 0.0.0.0 -I 1M"
+----
++
+This configures `memcached` to run on `appliance1`, but listen to all servers (-l 0.0.0.0). The `memcache_server: option` line, which specifies where it connects to, remains set as itself (127.0.0.1).
++
+. Click *Save*.
+. Restart `appliance1`:
++
+----
+# systemctl restart appliance1
+----
+
+. Configure `appliance2` to point to `appliance1`, using the IP address for `appliance1` in the below example. Configure the following in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
++
+----
+:session:
+  :memcache_server: <appliance1>:11211        
+  :memcache_server_opts: "-l 127.0.0.1 -I 1M"   
+----
++
+. Click *Save*.
+. Restart `appliance2`:
++
+----
+# systemctl restart appliance2
+----
+
+You can then get an API token from `appliance1`, and use it to access the API from `appliance2`. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/red_hat_cloudforms_rest_api/#using-authentication-tokens[Using Authentication Tokens] in the _REST API_ guide for instructions.
+
+The shared `memcached` service now runs only on `appliance1`, and any other appliance accesses `memcached` from that appliance. Configure additional appliances with the steps for `appliance2`.
+
+[IMPORTANT]
+====
+When using this configuration, always start the appliance that owns `memcached` first, and ensure that `memcached` is running before starting the additional appliances. Starting another appliance before the `memcached` appliance may result in start or login issues.
+====

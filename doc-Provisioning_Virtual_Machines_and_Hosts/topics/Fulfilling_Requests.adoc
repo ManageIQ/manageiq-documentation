@@ -30,26 +30,29 @@ After a request has been approved, {product-title} then goes through the steps r
 [[quotas]]
 ==== Quotas
 
-Quotas allow you to establish maximum usage thresholds for an owner or group for provisioned virtual machines or instances and are integrated into provisioning profiles. These maximums are checked after the approval but before the actual provision request is started. The quota is set for the group as a whole.
+Quotas allow you to establish maximum usage thresholds for an user,
+group, or tenant for provisioned virtual machines or instances and are
+integrated into provisioning profiles. These maximums are checked
+after the approval but before the actual provision request is started.
+The quota is set for the tenant or group as a whole.
 
-[[editing-the-default-quota]]
-===== Editing the Default Quota
+[[Applying-user-or-group-quota]]
+===== Applying User or Group Quotas
 
 . Log in as a user with administrator or super administrator rights to the {product-title} console.
 . Navigate to menu:Automate[Explorer].
-. From the accordion menu, click menu:DOMAIN[Cloud > VM > Provisioning > StateMachines > ProvisionRequestQuotaVerification].
+. Copy the menu:ManageIQ[System > CommonMethods > QuotaStateMachine > quota] instance to a custom DOMAIN.
+. From the accordion menu, click menu:DOMAIN[System > CommonMethods > QuotaStateMachine > quota].
 +
 [NOTE]
 ====
-*DOMAIN* must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-
-This example uses the *Cloud* namespace, but can also use the *Infrastructure* namespace.
+By default, quotas are applied to tenants and do not require any change in menu:Automate[Explorer].
 ====
 +
 . Click image:1847.png[](*Configuration*), image:1851.png[](*Edit this instance*).
-image:6279.png[]
-.. Set the values for *Owner - Max CPUs Allowed*, *Owner - Max Memory Allowed*, or *Owner - Max Storage Allowed* to be the maximums for a specific owner.
-.. Set the values for *Group - Max CPUs Allowed*, *Group - Max Memory Allowed*, or *Group - Max Storage Allowed* to be the maximums for a specific user group.
+image:6300.png[]
+.. Set the value for *Quota Source Type* to _user_ or _group_.
+.. Set the values for *VM Warning Count*, *VM Maximum Count*, *Storage Warning Limit*, *Storage Maximum Limit*, *CPU Warning Count*, *CPU Maximum Count*, *Memory Warning Limit*, or *Memory Maximum Limit* to be the maximums for a specific user or group.
 . Click *Save*.
 
 [[using-tags-for-owner-and-group-quotas]]
@@ -75,6 +78,11 @@ Quota tags can be assigned directly to *either* a group or owner *not* to a conf
 . Click image:1941.png[](*Policy*), then click image:1851.png[](*Edit Tags*).
 . Select the appropriate customer tag to assign, then the value.
 . Click *Save*.
+
+[NOTE]
+====
+When quotas are applied by both automate instance and tagging, the tagged values will have higher precedence.
+====
 
 [[state-machines]]
 ===== State Machines

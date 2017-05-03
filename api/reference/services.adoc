@@ -246,12 +246,60 @@ POST /api/service_catalogs
 [[service-templates]]
 === Service Templates
 
-Basic Edits and Delete of Service Templates is available.
+Management of Service Templates is available via the following collection:
 
 [source,data]
 ----
 /api/service_templates
 ----
+
+Full CRUD is available on service_templates.
+
+* link:#creating-service-templates[Creating Service Templates]
+* link:#editing-service-templates[Editing Service Templates]
+* link:#deleting-service-templates[Deleting Service Templates]
+
+
+[[creating-service-templates]]
+==== Creating Service Templates
+
+Service Templates can be created via a POST to the /api/service_templates collection:
+
+[source,data]
+----
+/api/service_templates
+----
+
+[source,json]
+----
+{
+  "name" : "Atomic Service Template",
+  "service_type" : "atomic",
+  "prov_type"    : "amazon",
+  "display"      : "false",
+  "config_info"  : {
+    "miq_request_dialog_name" : "Dialog_Name",
+    "placement_auto"          : [true, 1],
+    "number_of_vms"           : [1, "1"],
+    "src_vm_id"               : [11, "test_vm"],
+    "vm_name"                 : "AtomicVMName",
+    "schedule_type"           : ["immediately", "Immediately on Approval"],
+    "instance_type"           : [21, "instance_flavor"],
+    "src_ems_id"              : [5, "test_provider"],
+    "provision"               : {
+      "fqname"    : "/Sample/System/ProvisionEndpoint",
+      "dialog_id" : 21
+    },
+    "retirement"              : {
+      "fqname"    : "/Sample/System/RetirementEndpoint",
+      "dialog_id" : 22
+    }
+  }
+}
+----
+
+[[editing-service-templates]]
+==== Editing Service Templates
 
 Editing a single service template as follows:
 
@@ -270,14 +318,31 @@ POST /api/service_templates/:id
 }
 ----
 
-Deleting single service template via the DELETE method or multiple as
-follows:
+[[deleting-service-templates]]
+==== Deleting Service Templates
 
+Deleting single service template via the DELETE method:
+
+[source,data]
 ----
 DELETE /api/service_templates/:id
 ----
 
-or
+or via the _delete_ action as follows:
+
+[source,data]
+----
+POST /api/service_templates/:id
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+Multiple service templates can also be deleted in bulk as follows:
 
 ----
 POST /api/service_templates
@@ -358,6 +423,10 @@ Once services are ordered from a catalog, they can be:
 * link:#service-suspended[Suspended]
 * link:#service-deleting[Deleted]
 
+Resources can also be added or removed from services as shown here:
+
+* link:#service-add-remove-resources[Adding and Removing Resources from Services]
+
 Other than service creates and edits, service actions return the action response as
 in the following example:
 
@@ -404,6 +473,145 @@ POST /api/services/:id
      "description" : "Updated Service Description"
    }
 }
+----
+
+[[service-add-remove-resources]]
+==== Adding and Removing Resources from Services
+
+Adding and removing resources from services is made available with the following actions:
+
+
+[cols="1",options="header",width="30%"]
+|=====================
+| Action
+| add_resource
+| remove_resource
+| remove_all_resources
+|=====================
+
+The following example adds a single resource to a service:
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "add_resource",
+  "resource" : {
+    { "resource" : { "href" : "http://localhost:3000/api/vms/11" } }
+  }
+}
+----
+
+The following example bulk adds resources to multiple services:
+
+----
+POST /api/services
+----
+
+[source,json]
+----
+{
+   "action" : "add_resource",
+   "resources" : [
+      {
+        "href" : "http://localhost:3000/api/services/3",
+        "resource" : { "href" : "http://localhost:3000/api/vms/11" }
+      },
+      {
+        "href" : "http://localhost:3000/api/services/3",
+        "resource" : { "href" : "http://localhot:3000/api/vms/12" }
+      },
+      {
+        "href" : "http://localhost:3000/api/services/4",
+        "resource" : { "href" : "http://localhost:3000/api/vms/21" }
+      },
+      {
+        "href" : "http://localhost:3000/api/services/5",
+        "resource" : { "href" : "http://localhost:3000/api/vms/22" }
+      }
+   ]
+}
+----
+
+The following example removes a single resource from a service:
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "remove_resource",
+  "resource" : {
+     { "resource" : { "href" : "http://localhost:3000/api/vms/11" } }
+  }
+}
+----
+
+The following example bulk removes resources from multiple services:
+
+----
+POST /api/services
+----
+
+[source,json]
+----
+{
+  "action" : "remove_resource",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/services/3",
+      "resource" : { "href" : "http://localhost:3000/api/vms/11" }
+    },
+    {
+      "href" : "http://localhost:3000/api/services/3",
+      "resource" : { "href" : "http://localhot:3000/api/vms/12" }
+    },
+    {
+      "href" : "http://localhost:3000/api/services/4",
+      "resource" : { "href" : "http://localhost:3000/api/vms/21" }
+    },
+    {
+      "href" : "http://localhost:3000/api/services/5",
+      "resource" : { "href" : "http://localhost:3000/api/vms/22" }
+    }
+  ]
+}
+----
+
+The following example removes all resources from a single service:
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "remove_all_resources"
+}  
+----
+
+The following example bulk removes all resources from multiple services:
+
+----
+POST /api/services
+----
+
+[source,json]
+----
+{
+  "action" : "remove_all_resources",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/services/11" },
+    { "href" : "http://localhost:3000/api/services/12" },
+    { "href" : "http://localhost:3000/api/services/13" }
+  ]
+}  
 ----
 
 [[service-retiring-now]]
@@ -533,6 +741,8 @@ POST /api/services
 
 * link:#querying-service-requests[Querying Service Requests]
 * link:#approving-denying-service-requests[Approving or Denying Service Requests]
+* link:#adding-approvers-service-requests[Adding Approvers to Service Requests]
+* link:#removing-approvers-service-requests[Removing Approvers to Service Requests]
 
 [[querying-service-requests]]
 ==== Querying Service Requests
@@ -591,6 +801,130 @@ POST /api/service_requests/:id
 {
   "action" : "deny",
   "reason" : "reason for denial"
+}
+----
+
+
+[[adding-approvers-service-requests]]
+==== Adding Approvers to Service Requests
+
+Approvers can be added to service requests with the _add_approver_ action.  Approvers can be specified by
+_user_id_ or _user_ reference including an _href_ or _id_ of the approver.
+
+[source,data]
+----
+POST /api/service_requests/:id
+----
+
+[source,json]
+----
+{
+  "action" : "add_approver",
+  "resource" : {
+    "user_id" : 11 
+  }
+}
+----
+
+Or one of the following signatures:
+
+[source,json]
+----
+{
+  "action" : "add_approver",
+  "resource" : {
+    "user" : { "id" : 11  }
+  }
+}
+----
+
+[source,json]
+----
+{
+  "action" : "add_approver",
+  "resource" : {
+    "user" : { "href" : "http://localhost:3000/api/users/11" }
+  }
+}
+----
+
+Approvers can also be added in bulk as follows:
+
+
+[source,data]
+----
+POST /api/service_requests
+----
+
+[source,json]
+----
+{
+  "action" : "add_approver",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/service_requests/101",
+      "user_id" : 11
+    },
+    {
+      "href" : "http://localhost:3000/api/service_requests/102",
+      "user" : { "id" : 11 }
+    },
+    {
+      "href" : "http://localhost:3000/api/service_requests/103",
+      "user" : { "href" : "http://localhost:3000/api/users/11" }
+    }
+  ]
+}
+----
+
+
+[[removing-approvers-service-requests]]
+==== Removing Approvers from Service Requests
+
+Approvers can be removed from service requests with the _remove_approver_ action. 
+Approvers can be specified by _user_id_ or _user_ reference including an _href_ or _id_ of the approver.
+
+[source,data]
+----
+POST /api/service_requests/:id
+----
+
+[source,json]
+----
+{
+  "action" : "remove_approver",
+  "resource" : {
+    "user_id" : 11 
+  }
+}
+----
+
+Approvers can also be removed in bulk as follows:
+
+
+[source,data]
+----
+POST /api/service_requests
+----
+
+[source,json]
+----
+{
+  "action" : "remove_approver",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/service_requests/101",
+      "user_id" : 11
+    },
+    {
+      "href" : "http://localhost:3000/api/service_requests/102",
+      "user" : { "id" : 11 }
+    },
+    {
+      "href" : "http://localhost:3000/api/service_requests/103",
+      "user" : { "href" : "http://localhost:3000/api/users/11" }
+    }
+  ]
 }
 ----
 

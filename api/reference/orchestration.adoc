@@ -22,6 +22,7 @@ Full CRUD actions on Orchestration Templates is available:
 * link:#querying-orchestration-templates[Querying Orchestration Templates]
 * link:#creating-orchestration-templates[Creating Orchestration Templates]
 * link:#editing-orchestration-templates[Editing Orchestration Templates]
+* link:#copying-orchestration-templates[Copying Orchestration Templates]
 * link:#deleting-orchestration-templates[Deleting Orchestration Templates]
 
 [[querying-orchestration-templates]]
@@ -122,6 +123,49 @@ POST /api/orchestration_templates
 }
 ----
 
+[[copying-orchestration-templates]]
+=== Copying Orchestration Templates
+
+This capability allows orchestration templates to be copied onto new orchestration templates with updated content
+via the _copy_ action as follows:
+
+----
+POST /api/orchestration_templates/:id
+----
+
+[source,json]
+----
+{
+  "action" : "copy",
+  "resource" : {
+    "content" : "{ 'Description' : 'Copied Test Content' }\n"
+  }
+}
+----
+
+or copying multiple Orchestration Templates:
+
+----
+POST /api/orchestration_templates
+----
+
+[source,json]
+----
+{
+  "action" : "copy",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/orchestration_templates/101",
+      "content" : "{ 'Description' : 'Copied Test Content 1' }\n"
+    },
+    {
+      "href" : "http://localhost:3000/api/orchestration_templates/102",
+      "content" : "{ 'Description' : 'Copied Test Content 2' }\n"
+    },
+    ...
+  ]
+}
+----
 
 [[deleting-orchestration-templates]]
 === Deleting Orchestration Templates

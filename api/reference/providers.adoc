@@ -16,6 +16,7 @@ is available via the REST API. Management of providers is through:
 * link:#editing-providers[Editing Providers]
 * link:#deleting-providers[Deleting Providers]
 * link:#refresh-providers[Refresh Providers]
+* link:#import-vm-providers[Import Vm to Provider]
 * link:#foreman-support[Foreman Support]
 
 [[querying-providers]]
@@ -64,6 +65,31 @@ Or expanding the Cloud Networks in addition to the provider as follows:
 GET /api/providers/:id?expand=cloud_networks
 ----
 
+[[load-balancers]]
+==== Load Balancers
+
+Load Balancers of providers can be queried via the load_balancers subcollection as follows:
+
+Query all Load Balancers of a provider:
+
+[source,data]
+----
+GET /api/providers/:id/load_balancers
+----
+
+Query a specific Load Balancer of a provider:
+
+[source,data]
+----
+GET /api/providers/:id/load_balancers/:load_balancer_id
+----
+
+Or expanding the Load Balancers for the specific provider as follows:
+
+[source,data]
+----
+GET /api/providers/:id?expand=load_balancers
+----
 
 [[creating-providers]]
 === Creating Providers
@@ -138,7 +164,6 @@ The *type* attribute specifies the supported provider class names which include:
 | ManageIQ::Providers::Kubernetes::ContainerManager
 | ManageIQ::Providers::Microsoft::InfraManager
 | ManageIQ::Providers::Openshift::ContainerManager
-| ManageIQ::Providers::OpenshiftEnterprise::ContainerManager
 | ManageIQ::Providers::Openstack::CloudManager
 | ManageIQ::Providers::Openstack::InfraManager
 | ManageIQ::Providers::Redhat::InfraManager
@@ -290,6 +315,35 @@ POST /api/providers
   ]
 }
 ----
+
+[[import-vm-providers]]
+=== Import Vm to Provider
+
+Importing a VM into a provider is supported via the _import_vm_ action.
+
+This is currently supported for importing a Vm from a VMware vCenter provider
+into a Red Hat Virtualization provider.
+
+----
+POST /api/providers/:id
+----
+
+[source,json]
+----
+{
+  "action" : "import_vm"
+  "resource" : {
+    "source" : { "href" : "http://localhost:3000/api/vms/11" },
+    "target" : {
+      "name"       : "new_vm_name",
+      "cluster"    : { "href" : "http://localhost:3000/api/clusters/201" },
+      "data_store" : { "href" : "http://localhost:3000/api/data_stores/301" },
+      "sparse"     : true
+    }
+  }
+}
+----
+
 
 [[foreman-support]]
 === Foreman Support

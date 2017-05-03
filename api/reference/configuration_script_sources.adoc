@@ -1,0 +1,155 @@
+
+[[configuration-script-sources]]
+== Configuration Script Sources
+
+Management of Configuration Script Sources is provided via the following collection:
+
+[source,data]
+----
+/api/configuration_script_sources
+----
+
+Full CRUD actions on configuration script sources is available:
+
+* link:#querying-configuration-script-sources[Querying Configuration Script Sources]
+* link:#creating-configuration-script-sources[Creating Configuration Script Sources]
+* link:#editing-configuration-script-sources[Editing Configuration Script Sources]
+* link:#deleting-configuration-script-sources[Deleting Configuration Script Sources]
+
+[[querying-configuration-script-sources]]
+=== Querying Configuration Script Sources
+
+Querying all configuration script sources in the system is simply:
+
+----
+GET /api/configuration_script_sources
+----
+
+Getting details on a specific Action:
+
+----
+GET /api/configuration_script_sources/:id
+----
+
+[[creating-configuration-script-sources]]
+=== Creating Configuration Script Sources
+
+Configuration Script Sources can be created via a POST to the configuration_script_sources collection or via the *create* action
+signature which also allows creation of multiple configuration script sources in a single request.
+
+----
+POST /api/configuration_script_sources
+----
+
+[source,json]
+----
+{
+  "name" : "My Project",
+  "description" : "My Project's Description",
+  "manager_resource" : { "href" : "http://localhost:3000/api/providers/7" },
+  "related" : {}
+}
+----
+
+or creating multiple configuration script sources:
+
+[source,json]
+----
+{
+  "action" : "create",
+  "resources" : [
+    { "name" : "My First Project", "description" : "My First Project Description", ... },
+    { "name" : "My Second Project", "description" : "My Second Project Description", ... },
+    ...
+  ]
+}
+----
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#configuration-script-sources[Resource Attributes]
+page for a list of available attributes when creating Configuration Script Sources.
+====
+
+[[editing-configuration-script-sources]]
+=== Editing Configuration Script Sources
+
+----
+POST /api/configuration_script_sources/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "description" : "Updated Project Description"
+  }
+}
+----
+
+or editing multiple configuration script sources:
+
+----
+POST /api/configuration_script_sources
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/configuration_script_sources/101",
+      "description" : "Updated Project Description 1"
+    },
+    {
+      "href" : "http://localhost:3000/api/configuration_script_sources/102",
+      "description" : "Updated Project Description 2"
+    },
+    ...
+  ]
+}
+----
+
+
+[[deleting-configuration-script-sources]]
+=== Deleting Configuration Script Sources
+
+Configuration Script Sources can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/configuration_script_sources/101
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/configuration_script_sources/101
+----
+
+Deleting multiple Configuration Script Sources can be done as follows:
+
+----
+POST /api/configuration_script_sources
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/configuration_script_sources/101" },
+    { "href" : "http://localhost:3000/api/configuration_script_sources/102" },
+    ...
+  ]
+}
+----
+

@@ -4,20 +4,22 @@
 . From the *Type* list, select *OpenShift Container Platform*.
 . Enter the appropriate *Zone* for the provider. If you do not specify a zone, it is set to `default`.
 . Under *Endpoints* in the *Default* tab, configure the following for the OpenShift provider: 
-.. Select a *Security Protocol* method to specify how to authenticate to the provider:
-* *SSL*: Authenticate to the provider securely using a public Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a public Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate to the provider with a self-signed certificate. For this option, copy your certificate's text to the *Trusted CA Certificates* box in PEM format.
+.. Select a *Security Protocol* method to specify how to authenticate the provider:
+* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
+* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
 +
 [NOTE]
 ====
-Run the following command on your OpenShift Container Platform provider to obtain your custom certificate:
+To obtain your OpenShift Container Platform provider's CA certificate, run the `oc get secret` command on your provider, substituting values for your provider and token as needed. To obtain a token for your provider, see xref:Obtaining_OpenShift_Container_Platform_Management_Token[].
+
+For example:
 
   # oc get secret --namespace management-infra management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
   
 Paste the output (a block of text starting with `-----BEGIN CERTIFICATE-----`) into the *Trusted CA Certificates* field.
 ====
 +
-* *SSL without validation*: Authenticate to the provider insecurely (not recommended).
+* *SSL without validation*: Authenticate the provider insecurely (not recommended).
 .. Enter the *Hostname* or IPv4 or IPv6 address of the provider.
 +
 [IMPORTANT]
@@ -31,15 +33,13 @@ The *Hostname* must use a unique fully qualified domain name.
 .. Enter the same token in the *Confirm Token* field.
 .. Click *Validate* to confirm that {product-title} can connect to the OpenShift Container Platform provider.
 . Under *Endpoints* in the *Hawkular* tab, configure the following for Hawkular capacity and utilization metrics collection:
-.. Select a *Security Protocol* method to specify how to authenticate to the provider:
-* *SSL*: Authenticate to the provider securely using a public Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a public Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate to the provider with a self-signed certificate. For this option, copy your certificate's text to the *Trusted CA Certificates* box in PEM format.
-* *SSL without validation*: Authenticate to the provider insecurely using SSL. (Not recommended)
+.. Select a *Security Protocol* method to specify how to authenticate the provider:
+* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
+* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
+* *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
 .. Enter the *Hostname* or IPv4 or IPv6 address of the provider.
 .. Enter the *API Port* if your Hawkular provider uses a non-standard port for access. The default port is `443`.
 .. Click *Validate* to confirm that {product-title} can connect to the Hawkular endpoint.
 . Click *Add*.
 
-
-//Need a note about enabling C&U roles like in RHV?
 

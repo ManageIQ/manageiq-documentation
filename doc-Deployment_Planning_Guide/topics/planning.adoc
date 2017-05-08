@@ -763,9 +763,7 @@ standard_conforming_strings = off	# MIQ Value not sure why this is enabled
 
 Deploying several {product-title_short} appliances with a load balancer can be useful for performance.
 
-//Ask SMEs Colin's questions from Comment 9, 10, 11: Any way we can turn off the memcached server running on these hosts? (unrelated resource contention issues suggest this would be useful)
-
-However, running several appliances using a load balancer can cause login issues from the Self Service user interface because `memcached`, the service storing the session in memory, is shared (by appliances on the load balancer ?). To prevent this, configure your environment to run the `memcached` service on only one appliance with the steps below.
+However, running several appliances behind a load balancer can cause login issues from the Self Service user interface because `memcached`, the service storing the session in memory, is not shared between the appliances. To prevent this, configure your environment using the steps below to run the `memcached` service on one appliance and have it shared with the other appliances.
 
 The following example shows configuration on two appliances, `appliance1` and `appliance2`:
 
@@ -776,7 +774,7 @@ The following example shows configuration on two appliances, `appliance1` and `a
 # firewall-cmd --reload
 ----
 +
-. On `appliance1`, configure the following in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
+. On `appliance1`, configure the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
 +
 ----
 :session:
@@ -793,7 +791,7 @@ This configures `memcached` to run on `appliance1`, but listen to all servers (-
 # systemctl restart appliance1
 ----
 
-. Configure `appliance2` to point to `appliance1`, using the IP address for `appliance1` in the below example. Configure the following in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
+. Configure `appliance2` to point to `appliance1` by specifying the IP address for `appliance1` in the `memcache_server: option` line. Configure this in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
 +
 ----
 :session:
@@ -814,5 +812,5 @@ The shared `memcached` service now runs only on `appliance1`, and any other appl
 
 [IMPORTANT]
 ====
-When using this configuration, always start the appliance that owns `memcached` first, and ensure that `memcached` is running before starting the additional appliances. Starting another appliance before the `memcached` appliance may result in start or login issues.
+When using this configuration, always start the appliance that owns `memcached` first, and ensure that `memcached` is running before starting the additional appliances. Starting another appliance before the `memcached` appliance may result in starting or login issues.
 ====

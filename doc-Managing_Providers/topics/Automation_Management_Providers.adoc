@@ -9,29 +9,43 @@
 
 *Ansible Tower* is a management tool integrated with {product-title_short}, designed to help automate infrastructure operations utilizing existing Ansible Tower providers in your inventory. {product-title_short} allows you to execute Ansible Tower jobs using service catalogs and Automate. Using Ansible Tower, you can schedule Ansible playbook runs and monitor current and historical results, allowing for troubleshooting or identification of issues before they occur.
 
+[NOTE]
+====
+In {product-title},the Ansible role is disabled by default. Navigate to the settings menu, then *Configuration* &#8594; *Settings* and select the desired server under *Zones*. Set the *Server Role* for *Embedded Ansible* to *On* to enable the role.
+====
+
+
 [[ansible-inside]]
 == Ansible
 
-Ansible integrates with {product-title} to provide automation solutions, using Playbooks, for Service, Policy and Alert actions. 
-Ansible Playbooks consist of series of _plays_ or tasks that define automation across a set of hosts,
+Ansible integrates with {product-title} to provide automation solutions, using playbooks, for Service, Policy and Alert actions. 
+Ansible playbooks consist of series of _plays_ or tasks that define automation across a set of hosts,
 known as the inventory. 
 
-Ranging from simple to complex tasks, Ansible Playbooks can support cloud management:
+Ranging from simple to complex tasks, Ansible playbooks can support cloud management:
 
-* *Services* - allow a Playbook to back a {product-title_short} service catalog item.
-* *Control Actions* - {product-title_short} policies can execute Playbooks as actions based on events from providers.
-* *Control Alerts* - set a Playbook to launch prompted by a {product-title_short} alert.
+* *Services* - allow a playbook to back a {product-title_short} service catalog item.
+* *Control Actions* - {product-title_short} policies can execute playbooks as actions based on events from providers.
+* *Control Alerts* - set a playbook to launch prompted by a {product-title_short} alert.
 
 Ansible is built into {product-title_short} so there is nothing to install. The basic workflow when using Ansible in {product-title} is as follows:
 
-* Add a source control repository that contains your Playbooks.
+* Add a source control repository that contains your playbooks.
 * Establish credentials with your inventory. 
-* Back your services, alerts and policies using available Playbooks. 
+* Back your services, alerts and policies using available playbooks. 
 
+[[verifying-embedded-ansible-worker-state]]
+=== Verifying the Embedded Ansible Worker State
+Verify that the embedded Ansible worker has started to utilize its features. 
+
+. Navigate to the settings menu, then *Configuration* &#8594; *Diagnostics* and click on the desired server.
+. Click on the *Workers* tab. 
+
+A table of all workers and current status will appear from which you can confirm the state of your embedded Ansible worker. 
 
 [[adding-a-playbook-repository]]
 === Adding a Playbook Repository
-Add a repository so that {product-title} can discover and make available your Playbooks.
+Add a repository so that {product-title} can discover and make available your playbooks.
  
 . Navigate to menu:Automation[Ansible > Repositories].
 . Click *Add*.
@@ -44,10 +58,27 @@ Add a repository so that {product-title} can discover and make available your Pl
 . Check the appropriate box for any *SCM Update Options*.
 . Click *Add*.
 
-Once you have synced a repository, its Playbooks will become available to {product-title_short}.  
+Once you have synced a repository, its playbooks will become available to {product-title_short}.  
+
+[[refreshing-repositories]]
+=== Refreshing Repositories 
+{product-title} allows you to refresh a targeted playbook repository or all repositories in your inventory to ensure your playbooks are current. 
+
+Refresh a targeted repository:
+
+. Navigate to menu:Automation[Ansible > Repositories].
+. Click on a repository.  
+. Click  image:1847.png[Configuration] (*Configuration*), then  image:2003.png[Refresh this Repository] (*Refresh this Repository*).
+
+Alternately, you can refresh some or all repositories from the list view:
+ 
+. Navigate to menu:Automation[Ansible > Repositories].
+. Check those repositories to refresh. Click *Check All* to select all repositories.
+. Click  image:1847.png[Configuration] (*Configuration*), then  image:2003.png[Refresh Selected Ansible Repositories] (*Refresh Selected Ansible Repositories*).
 
 [[adding-credentials]]
 === Adding Credentials
+{product-title} can store credentials used by playbooks. Credentials saved in {product-title_short} are matched and executed with a playbook when run.   
 
 . Navigate to menu:Automation[Ansible > Credentials].
 . Click  image:1847.png[Configuration] (*Configuration*), then  image:1862.png[Add a New Credential] (*Add a New Credential*).

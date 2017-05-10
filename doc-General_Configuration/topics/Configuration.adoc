@@ -2724,15 +2724,15 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 . Log in to the appliance as the *root* user.
 . Enter `appliance_console`, and press *Enter*.
 . Press any key.
-. Enter `16` to stop EVM server processes.
+. Select `Stop EVM Server Processes`.
 . Enter `Y` to confirm.
-. Choose *Configure Database*.
+. Choose `Configure Database`.
 . Enter a database region number that has not been used in your environment. Do not enter duplicate region numbers because this can corrupt the data.
 . Enter `Y` to confirm.
 . The menu reappears after all processes are complete.
-. Enter `17` to start EVM server processes.
+. Select `Start EVM Server Processes`.
 . Enter `Y` to confirm.
-. Enter `21` to quit the advanced settings menu.
+. Select *Quit* to exit the advanced settings menu.
 
 [[configuring_database_replication]]
 ==== Configuring Database Replication and Centralized Administration
@@ -2936,19 +2936,31 @@ If a database is corrupt or fails, restore it from a backup.
 To restore a database from a backup:
 
 . Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a backup.
-. Log in to the appliance console with a user name of `admin` and the default password. The *Appliance Summary Screen* displays.
+. Stop the `regmgrd` service: 
++
+----
+# systemctl stop rh-postgresql95-repmgr
+----
++
+. Log in to the appliance console with a user name of `admin` and the default password. The appliance summary screen displays.
 . Press *Enter* to manually configure settings.
-. Enter `11` to `Stop Server Processes`. Stop the process on all servers that connect to this VMDB.
+. Select `Stop EVM Server Processes` to stop processes on all servers that connect to this VMDB.
 . Enter `Y` to confirm.
 . After all processes are stopped, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `6` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
+. Select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
 . Enter `y` to keep the database backup after restoring from it. Enter `n` to delete it.
 . Press `Y` to confirm.
 . After the backup completes, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `13` to `Start Server Processes`.
+. Select `Start EVM Server Processes` to restart all processes on servers that connect to this VMDB..
 . Enter `Y` to confirm.
+. Start the `regmgrd` service: 
++
+----
+# systemctl start rh-postgresql95-repmgr
+----
+
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection

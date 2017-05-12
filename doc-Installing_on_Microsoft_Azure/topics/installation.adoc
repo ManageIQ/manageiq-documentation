@@ -162,11 +162,118 @@ New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $Vir
 
 Although it is recommended to use the PowerShell method, you can upload the appliance to an Azure environment using the CLI method. See https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-azure-resource-manager/ for steps on how to create and manage Azure resources using the Azure Command-Line Interface (Azure CLI).
 
+Prerequisites:
+
+* link:https://azure.microsoft.com/en-us/free/[Microsoft Azure Account]
+* link:https://access.redhat.com/[Red Hat Customer Portal Account]
 
 
+===== Install Azure CLI 2.0
+
+Complete the steps below to install Azure CLI 2.0 using curl. Refer to link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli for other installation methods.
+
+. Make sure Python is updated and install the prerequisite packages.
+----
+$ sudo yum update
+$ sudo yum install -y gcc libffi-devel python-devel openssl-devel
+----
+. Install Azure CLI 2.0.
+----
+$ curl -L https://aka.ms/InstallAzureCli | bash
+----
 
 
+===== Converting and Aligning the {product-title} Virtual Appliance Image
 
+Azure requires that uploaded Virtual Hard Disk (VHD) files are in a fixed format. The downloaded {product-title_short} virtual appliance image (.vhd) file is dynamic. The Azure command-line interface (CLI), currently, does not automatically convert the dynamic VHD file to fixed during upload. When uploading using the Azure CLI, the {product-title_short} virtual appliance image (.vhd) file must be converted from dynamic to fixed, and properly aligned. All VHD files provisioned for Microsoft Azure must be aligned to the nearest 1 MB boundary and be in a fixed-size VHD format.
 
+[NOTE]
+====
+If you attempt to upload a dynamic VHD file or one that is not properly aligned, virtual appliance provisioning will not work.
+====
+
+Complete the following procedure to ensure the {product-title} dynamic VHD file is aligned correctly, and is in a fixed-size VHD format.
+
+. Convert the dynamic VHD file, downloaded in xref:obtaining-the-appliance[], to RAW format.
++
+----
+$ qemu-img convert -f vpc -O raw _<image-name.vhd>_ _<image-name.raw>_
+
+Example:
+
+$ qemu-img convert -f vpc -O raw _cfme-azure-5.7.2.1-1.x86_64.vhd_ _cfme-azure-5.7.2.1-1.x86_64.raw_
+----
++
+. Copy and paste the script below into a new bash shell script file, for example, _aligned-size.sh_. Change rawdisk="image-name" to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
++
+----
+#!/bin/bash
+rawdisk="cfme-azure-5.7.2.1-1.x86_64.raw"
+MB=$((1024 * 1024))
+size=$(qemu-img info -f raw --output json "$rawdisk" | gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
+rounded_size=$((($size/$MB + 1) * $MB))
+echo "rounded size = $rounded_size"
+export rounded_size
+----
++
+. Run the shell script. The file name _aligned-size.sh_ is used in this example.
++
+----
+$ sh aligned-size.sh
+
+rounded size = 34361835520
+----
++
+. Resize the virtual appliance image using the rounded size.
++
+----
+$ qemu-img resize -f raw <image-name.raw> <rounded_size>
+
+Example:
+
+$ qemu-img resize -f raw _cfme-azure-5.7.2.1-1.x86_64.raw_ 34361835520
+
+Image resized.
+----
++
+. Convert the appliance image to a fixed-size VHD file.
++
+----
+$ qemu-img convert -f raw -o subformat=fixed -O vpc <image-name.raw> <image-name.vhd>
+
+Example:
+
+qemu-img convert -f raw -o subformat=fixed -O vpc cfme-azure-5.7.2.1-1.x86_64.raw cfme-azure-5.7.2.1-1.x86_64.vhd
+----
++
+. Get the virtual size for the VHD file.
++
+----
+$ qemu-img info --output=json -f vpc <path-to-image>
+
+Example:
+
+$ qemu-img info --output=json -f vpc cfme-azure-5.7.2.1-1.x86_64.vhd
+
+{
+  "virtual-size": 34361835520,
+  "filename": "cfme-azure-5.7.2.1-1.x86_64.vhd",
+  "cluster-size": 2097152,
+  "format": "vpc",
+  "actual-size": 2133401600,
+  "dirty-flag": false
+}
+----
+. Divide the virtual-size value by 1024, twice. If the result is a whole number, the VHD file is aligned properly. The example below shows that the file is properly aligned.
+----
+34361835520 / 1024 / 1024 = 32770
+----
+
+[IMPORTANT]
+====
+qemu-img version 1.5.3 is used in this procedure. Check the qemu-img version using the command: yum info qemu-img. If the version is 2.2.1 or later, add the option force_size in the conversion command, for example, subformat=fixed,force_size. 
+====
+
+The {product-title} Azure Virtual Appliance Image is ready for uploading and provisioning in Microsoft Azure.
 
 

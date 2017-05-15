@@ -44,6 +44,18 @@ include::common/cap-util-assign-server-roles.adoc[]
 In addition to setting the server role, you must also select which clusters and datastores to collect data for. For more information, see General Configuration. You must have super administrator rights to edit these settings.
 ====
 
+[[adding-database-credentials-for-data-collection]]
+=== Adding Database Credentials for Data Collection
+
+After creating the new user, add the user's credentials to the settings for the provider.
+
+. From menu:Compute[Infrastructure > Providers], select an infrastructure provider to update its settings.
+. Click image:1847.png[]*Configuration*, and then image:1851.png[]*Edit Selected Infrastructure Provider*.
+. In the *Credentials* area, click *C & U Database*.
+. Type in the credentials for the new database user you created.
+. Click *Save*.
+. Restart the capacity and utilization data collector.
+
 [[data_collection_for_rhev_33_34]]
 === Data Collection for Red Hat Enterprise Virtualization
 
@@ -134,18 +146,6 @@ listen_addresses  =  '*'
 ------
 +
 
-
-[[adding-database-credentials-for-data-collection]]
-=== Adding Database Credentials for Data Collection
-
-After creating the new user, add the user's credentials to the settings for the provider.
-
-. From menu:Compute[Infrastructure > Providers], select an infrastructure provider to update its settings.
-. Click image:1847.png[]*Configuration*, and then image:1851.png[]*Edit Selected Infrastructure Provider*.
-. In the *Credentials* area, click *C & U Database*.
-. Type in the credentials for the new database user you created.
-. Click *Save*.
-. Restart the capacity and utilization data collector.
 
 [[data_collection_for_osp]]
 === Data Collection for Red Hat Enterprise Linux OpenStack Platform
@@ -284,7 +284,7 @@ Once enabled, it may take a few minutes to propagate to {product-title_short}.
 
   
 [[data_collected]]
-=== Data Collected
+=== Capacity and Utilization Data Collected
 
 {product-title} generates charts from the collected data
 which can be used to plan your hardware and virtual machine needs.
@@ -383,34 +383,9 @@ Capacity and utilization charts for host, clusters, virtual machines, and datast
   machines that apply. From here, click on a virtual machine to view
   its details.
 
-[[optimization]]
-=== Optimization
-
-{product-title}'s optimization functions allow you to view
-utilization trends, and identify and project bottlenecks in your
-environment. In addition, you can predict where you have capacity for
-additional virtual machines.
-
-[NOTE]
-====
-For reporting of daily optimization data, incomplete days (days with less
-than 24 hourly data points from midnight to midnight) that are at the
-beginning or end of the requested interval are excluded. Days with less
-than 24 hourly data points would be inaccurate and including them would
-skew trend lines. Therefore, the *Optimize* page requires at least two full
-days of daily data because all the charted values are derived from trend
-calculations and that requires at least two data points
-====
-
-[[utilization-trends]]
-=== Utilization Trends
-
-{product-title} allows you to view the resource utilization
-of your clusters, providers, and datastores. You can choose from summary,
-details, or report view.
 
 ifdef::cfme[]
-For more information about data optimization features and utilization trend reports, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/managing_infrastructure_and_inventory/sect_datastores#data_optimization_features[Data Optimization Features] in _Managing Infrastructure and Inventory_.
+For more information about data optimization, utilization trends and bottlenecks, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/managing_infrastructure_and_inventory/sect_datastores#data_optimization_features[Data Optimization Features] in _Managing Infrastructure and Inventory_.
 endif::cfme[]
 
 [[planning-where-to-put-a-new-virtual-machine]]

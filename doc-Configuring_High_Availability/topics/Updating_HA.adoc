@@ -1,10 +1,15 @@
 [[updating-ha]]
 == Applying Updates in a High Availability Environment
 
-Applying minor updates and errata to appliances in a high availability environment must be performed in a specific order to avoid a database migration (to the next major version?).
+Applying minor updates and errata to appliances in a high availability environment must be performed in a specific order to avoid migrating your databases to the next major {product-title_short} version.
 
 //////
 Later, link to migrating a HA environment in the migration guide.
+
+IMPORTANT
+This procedure details applying minor updates (errata, z-stream) to CloudForms appliances.
+For instructions on migrating between major CloudForms releases, see [ADD LINK TO “1.5. Migrating High Availability Environments from CFME 5.7 to 5.8”, added in https://bugzilla.redhat.com/show_bug.cgi?id=1448775]
+
 //////
 
 .Prerequisites
@@ -32,8 +37,6 @@ Follow this procedure to update the environment with platform updates, but witho
 . Power off the {product-title_short} appliances.
 . Power off the database-only (VMDB) appliances.
 . Back up each appliance:
-// Q: Same as in 1.2 Back Up Current Appliances, steps 1-3?
-// https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/migrating_to_red_hat_cloudforms_4.2/index#back_up_current_appliances Same method for non-DB and database-only appliances? 
 .. Back up the database of your appliance. Take a snapshot if possible.
 .. Back up the following files for disaster recovery, noting which appliance each comes from:
   * `/var/www/miq/vmdb/GUID`
@@ -51,24 +54,14 @@ Follow this procedure to update the environment with platform updates, but witho
 This step is not required on the database-only appliances, as `evmserverd` does not run on them.
 ====
 +
-. Apply updates to each appliance by running: 
-//(Q: Is there an order to which appliances you update first?) On each appliance, run:
+. Apply updates by running the following on each appliance: 
 +
 ------
 # yum update
 ------
 +
-//Q: Where does the below step go?
-. On one of the {product-title_short} (non-database) appliances, apply any database migration updates and reset the Red Hat and ManageIQ automation domains:
-+
-------
-# vmdb
-# rake db:migrate
-# rake evm:automate:reset
-------
-+
 . Power off the {product-title_short} appliances. 
-. Reboot the databases (database appliances?).
+. Reboot the database-only appliances.
 . Wait five minutes, then start the {product-title_short} appliances again.
 
 The appliances in your high availability environment are now up to date.

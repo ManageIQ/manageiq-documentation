@@ -173,10 +173,12 @@ Prerequisites:
 Complete the steps below to install Azure CLI 2.0 using curl. Refer to link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli for other installation methods.
 
 . Make sure Python is updated and install the prerequisite packages.
++
 ----
 $ sudo yum update
 $ sudo yum install -y gcc libffi-devel python-devel openssl-devel
 ----
++
 . Install Azure CLI 2.0.
 ----
 $ curl -L https://aka.ms/InstallAzureCli | bash
@@ -185,26 +187,26 @@ $ curl -L https://aka.ms/InstallAzureCli | bash
 
 ===== Converting and Aligning the {product-title} Virtual Appliance Image
 
-Azure requires that uploaded Virtual Hard Disk (VHD) files are in a fixed format. The downloaded {product-title_short} virtual appliance image (.vhd) file is dynamic. The Azure command-line interface (CLI), currently, does not automatically convert the dynamic VHD file to fixed during upload. When uploading using the Azure CLI, the {product-title_short} virtual appliance image (.vhd) file must be converted from dynamic to fixed, and properly aligned. All VHD files provisioned for Microsoft Azure must be aligned to the nearest 1 MB boundary and be in a fixed-size VHD format.
+Azure requires that uploaded Virtual Hard Disk (VHD) files are in a fixed format. The downloaded {product-title_short} virtual appliance image .vhd file is dynamic. The Azure command-line interface (CLI), currently, does not automatically convert the dynamic .vhd file to fixed during upload. When uploading using the Azure CLI, the {product-title_short} virtual appliance image .vhd file must be converted from dynamic to fixed, and properly aligned. All .vhd files provisioned for Microsoft Azure must be aligned to the nearest 1 MB boundary and be in a fixed-size VHD format.
 
 [NOTE]
 ====
-If you attempt to upload a dynamic VHD file or one that is not properly aligned, virtual appliance provisioning will not work.
+If you attempt to upload a dynamic .vhd file or one that is not properly aligned, virtual appliance provisioning will not work.
 ====
 
-Complete the following procedure to ensure the {product-title} dynamic (.vhd) file is aligned correctly, and is in a fixed-size VHD format.
+Complete the following procedure to ensure the {product-title} dynamic .vhd file is aligned correctly, and is in a fixed-size VHD format.
 
-. Convert the dynamic (.vhd) file, downloaded in xref:obtaining-the-appliance[], to RAW format.
+. Convert the dynamic .vhd file, downloaded in xref:obtaining-the-appliance[], to RAW format.
 +
 ----
-$ qemu-img convert -f vpc -O raw _<image-name.vhd>_ _<image-name.raw>_
+$ qemu-img convert -f vpc -O raw <image-name.vhd> <image-name.raw>
 
 Example:
 
-$ qemu-img convert -f vpc -O raw _cfme-azure-5.7.2.1-1.x86_64.vhd_ _cfme-azure-5.7.2.1-1.x86_64.raw_
+$ qemu-img convert -f vpc -O raw cfme-azure-5.7.2.1-1.x86_64.vhd cfme-azure-5.7.2.1-1.x86_64.raw
 ----
 +
-. Copy and paste the script below into a new bash shell script file, for example, _aligned-size.sh_. Change rawdisk="image-name" to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
+. Copy and paste the script below into a new bash shell script file, for example, `aligned-size.sh`. Change rawdisk="image-name" to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
 +
 ----
 #!/bin/bash
@@ -216,7 +218,7 @@ echo "rounded size = $rounded_size"
 export rounded_size
 ----
 +
-. Run the shell script. The file name _aligned-size.sh_ is used in this example.
+. Run the shell script. The file name `aligned-size.sh` is used in this example.
 +
 ----
 $ sh aligned-size.sh
@@ -231,12 +233,12 @@ $ qemu-img resize -f raw <image-name.raw> <rounded_size>
 
 Example:
 
-$ qemu-img resize -f raw _cfme-azure-5.7.2.1-1.x86_64.raw_ 34361835520
+$ qemu-img resize -f raw cfme-azure-5.7.2.1-1.x86_64.raw 34361835520
 
 Image resized.
 ----
 +
-. Convert the appliance image to a fixed-size VHD file.
+. Convert the appliance image to a fixed-size .vhd file.
 +
 ----
 $ qemu-img convert -f raw -o subformat=fixed -O vpc <image-name.raw> <image-name.vhd>
@@ -246,7 +248,7 @@ Example:
 qemu-img convert -f raw -o subformat=fixed -O vpc cfme-azure-5.7.2.1-1.x86_64.raw cfme-azure-5.7.2.1-1.x86_64.vhd
 ----
 +
-. Get the virtual size for the VHD file.
+. Get the virtual size for the .vhd file.
 +
 ----
 $ qemu-img info --output=json -f vpc <path-to-image>
@@ -264,10 +266,13 @@ $ qemu-img info --output=json -f vpc cfme-azure-5.7.2.1-1.x86_64.vhd
   "dirty-flag": false
 }
 ----
-. Divide the virtual-size value by 1024, twice. If the result is a whole number, the (.vhd) file is aligned properly. The example below shows that the file is properly aligned.
+. Divide the virtual-size value by 1024, twice. If the result is a whole number, the .vhd file is aligned properly. The example below shows that the file is properly aligned.
++
 ----
 34361835520 / 1024 / 1024 = 32770
 ----
++
+
 
 [IMPORTANT]
 ====

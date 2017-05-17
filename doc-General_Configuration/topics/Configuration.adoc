@@ -2760,10 +2760,8 @@ Configure a {product-title} instance to act as the global copy to which data is 
 
 image:add-subscription.png[Add Subscription]
 
-. Navigate to the settings menu.
-. Click *Configuration*.
-. Click the *Settings* accordion.
-. Click the region where the instance is located.
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
 . Click *Replication*.
 . Select *Global* from the *Type* list.
 . Click *Add Subscription*.
@@ -2920,31 +2918,39 @@ To run a single database backup:
 [[restoring-a-database-from-a-backup]]
 ===== Restoring a Database from a Backup
 
-If a database is corrupt or fails, restore it from a backup.
+If a database is corrupt or fails, restore it from a backup. You can restore a backup from a local file, NFS, or Samba.
 
 To restore a database from a backup:
 
-. Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a backup.
-. Stop the `regmgrd` service: 
+. Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a local backup.
+. If you are restoring a database backup on a high availability environment, stop the `repmgrd` service. This is not required in other {product-title_short} configurations.
 +
 ----
 # systemctl stop rh-postgresql95-repmgr
 ----
 +
-. Log in to the appliance console with a user name of `admin` and the default password. The appliance summary screen displays.
-. Press *Enter* to manually configure settings.
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
 . Select `Stop EVM Server Processes` to stop processes on all servers that connect to this VMDB.
 . Enter `Y` to confirm.
 . After all processes are stopped, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
-. Enter `y` to keep the database backup after restoring from it. Enter `n` to delete it.
+. Select `Restore Database From Backup`, then specify the location to restore the backup from in the `Restore Database File` menu:
+.. If you saved the database backup file locally as `/tmp/evm_db.backup`, select `Local file`. You can also restore from a `Network File System (nfs)` or `Samba (smb)`.
+.. Specify the location of the backup file.
++
+[NOTE]
+====
+The appliance console menu may respond slowly if connections are open and the server is still shutting down. If this occurs, wait a minute and try again.
+====
++
+. Enter `Y` to keep the database backup after restoring from it. Enter `N` to delete it.
 . Press `Y` to confirm.
 . After the backup completes, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
 . Select `Start EVM Server Processes` to restart all processes on servers that connect to this VMDB.
 . Enter `Y` to confirm.
-. Start the `regmgrd` service: 
+. If you are restoring a database backup on a high availability environment, start the `repmgrd` service. This is not required in other {product-title_short} configurations.
 +
 ----
 # systemctl start rh-postgresql95-repmgr

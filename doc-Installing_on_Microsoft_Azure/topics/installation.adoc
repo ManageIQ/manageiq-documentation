@@ -168,7 +168,7 @@ Prerequisites:
 * link:https://access.redhat.com/[Red Hat Customer Portal Account]
 
 
-===== Install Azure CLI 2.0
+===== Installing Azure CLI 2.0
 
 Complete the steps below to install Azure CLI 2.0 using curl. Refer to link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli for other installation methods.
 
@@ -192,9 +192,9 @@ Azure requires that uploaded Virtual Hard Disk (VHD) files are in a fixed format
 If you attempt to upload a dynamic VHD file or one that is not properly aligned, virtual appliance provisioning will not work.
 ====
 
-Complete the following procedure to ensure the {product-title} dynamic VHD file is aligned correctly, and is in a fixed-size VHD format.
+Complete the following procedure to ensure the {product-title} dynamic (.vhd) file is aligned correctly, and is in a fixed-size VHD format.
 
-. Convert the dynamic VHD file, downloaded in xref:obtaining-the-appliance[], to RAW format.
+. Convert the dynamic (.vhd) file, downloaded in xref:obtaining-the-appliance[], to RAW format.
 +
 ----
 $ qemu-img convert -f vpc -O raw _<image-name.vhd>_ _<image-name.raw>_
@@ -264,7 +264,7 @@ $ qemu-img info --output=json -f vpc cfme-azure-5.7.2.1-1.x86_64.vhd
   "dirty-flag": false
 }
 ----
-. Divide the virtual-size value by 1024, twice. If the result is a whole number, the VHD file is aligned properly. The example below shows that the file is properly aligned.
+. Divide the virtual-size value by 1024, twice. If the result is a whole number, the (.vhd) file is aligned properly. The example below shows that the file is properly aligned.
 ----
 34361835520 / 1024 / 1024 = 32770
 ----
@@ -274,6 +274,6 @@ $ qemu-img info --output=json -f vpc cfme-azure-5.7.2.1-1.x86_64.vhd
 qemu-img version 1.5.3 is used in this procedure. Check the qemu-img version using the command: yum info qemu-img. If the version is 2.2.1 or later, add the option force_size in the conversion command, for example, subformat=fixed,force_size. 
 ====
 
-The {product-title} Azure Virtual Appliance Image is ready for uploading and provisioning in Microsoft Azure.
+The {product-title} Azure virtual appliance image is ready for uploading and provisioning in Microsoft Azure.
 
 

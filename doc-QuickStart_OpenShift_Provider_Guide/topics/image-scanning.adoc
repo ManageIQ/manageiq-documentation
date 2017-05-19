@@ -1,10 +1,10 @@
 == Configuring Image Scanning
 
-{product-title} manages vulnerability scanning of container images. When the OpenShift provider is added, OpenShift images from the internal registry are discovered. To enable image scanning, perform the following configuration steps:
+{product-title} manages vulnerability scanning of container images. When an OpenShift provider is added, OpenShift images from the internal registry are discovered. To enable image scanning, perform the following configuration steps:
 
 . Navigate to menu:Compute[Containers > Providers].
 . Select the checkboxes of the OpenShift providers on which to enable scanning.
-. From the *Policy* pull-down menu, click *Manage Policies*
+. From the *Policy* pull-down menu, click *Manage Policies*.
 . Select the *OpenSCAP profile* checkbox.
 . Click *Save*.
 
@@ -12,19 +12,20 @@ This action will trigger a SmartState analysis, or scan, of all images reference
 
 == Scheduling A Recurring Scan
 
-Software vulnerability databases are updated frequently. To apply these updates a rescan is required. To schedule a recurring scan of container images:
+Software vulnerability databases are updated frequently. To apply these updates, a rescan is required. To schedule a recurring scan of container images:
 
 image::schedule_openscap_scan.png[]
 
-. From the settings menu, select *Configuration*
+. From the settings menu, select *Configuration*.
 . From menu:Settings[Zones] in the left pane of the appliance, select *Schedules*.
-. From the drop-down menu click menu:Configuration[Add a new Schedule].
+. From the drop-down menu, click menu:Configuration[Add a new Schedule].
 . Type an arbitrary *Name*.
 . Type an arbitrary *Description*.
 . Ensure the *Active* checkbox is selected.
-. Select Action *Container Image Analysis*
-. Select Filter *All Container Images for Containers Provider*, *OpenShift*.
-. Select *Run* schedule *Weekly* every *Week*, or whatever schedule is appropriate for your needs.
+. In *Action*, select *Container Image Analysis*.
+. In *Filter*, select *All Container Images for Containers Provider*, *OpenShift*.
+. In *Run*, set the schedule as desired.
+. Set the *Time Zone*, *Starting Date*, and *Starting Time*.
 . Click *Add*.
 
 == Working with Images
@@ -64,11 +65,11 @@ The default OpenSCAP policy profile cannot be edited. To customize scanning poli
 . Select menu:Policy Profiles[All Policy Profiles > OpenSCAP Profile].
 . Select menu:Configuration[Copy this Policy Profile].
 
-The copied profile may be edited as required. Be sure to assign the customized profile to the OpenShift provider.
+The copied profile can be edited as required. Be sure to assign the customized profile to the OpenShift provider.
 
 == Controlling OpenShift Pod Execution
 
-Through the default policy profile, non-compliant images receive control policy action *Mark as Non-Compliant*. This action annotates the *image* object (not to be confused with the *imagestream* object) with _images.openshift.io/deny-execution=true_. This annotation may be used to prevent nodes from running non-compliant images.
+Through the default policy profile, non-compliant images receive the control policy action *Mark as Non-Compliant*. This action annotates the *image* object (not to be confused with the *imagestream* object) with _images.openshift.io/deny-execution=true_. This annotation may be used to prevent nodes from running non-compliant images.
 ifdef::cfme[Refer to link:https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html/cluster_administration/admin-guide-image-policy[OpenShift Image Policy documentation] for configuration details.]
 ifdef::miq[Refer to link:https://docs.openshift.org/latest/admin_guide/image_policy.html[OpenShift Image Policy documentation] for configuration details.]
 

@@ -3,12 +3,12 @@
 {product-title} manages vulnerability scanning of container images. When the OpenShift provider is added, OpenShift images from the internal registry are discovered. To enable image scanning, perform the following configuration steps:
 
 . Navigate to menu:Compute[Containers > Providers].
-. Select the *OpenShift* provider checkbox.
+. Select the checkboxes of the OpenShift providers on which to enable scanning.
 . From the *Policy* pull-down menu, click *Manage Policies*
 . Select the *OpenSCAP profile* checkbox.
 . Click *Save*.
 
-This action will trigger a SmartState analysis, or scan, of all images referenced by the OpenShift provider. The initial scan may take several hours to complete, depending on the number and size of images. OpenShift scanning pods are scheduled for a maximum of three at a time.
+This action will trigger a SmartState analysis, or scan, of all images referenced by the OpenShift provider. The initial scan may take several hours to complete, depending on the number and size of images. OpenShift limits the number of scanning pods. Only three images can be scanned simultaneously.
 
 == Scheduling A Recurring Scan
 
@@ -55,8 +55,6 @@ If the image scan policy has been updated since the last scan, compliance condit
 == OpenSCAP Policy Profile
 
 {product-title} is pre-configured with a default scanning policy profile. This includes conditions to scan and identify compliance, as well as annotate compliance failure. SmartState analysis is performed when new images are added to OpenShift.
-
-Enabling deny-execution annotation (external link)
 
 === Customizing the Scanning Policy Profile
 

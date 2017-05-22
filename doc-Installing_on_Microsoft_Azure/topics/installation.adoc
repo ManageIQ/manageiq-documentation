@@ -1,11 +1,11 @@
 [[installing-cloudforms]]
 == Installing {product-title}
 
-{product-title} can be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the following installation process takes you through the steps of uploading the {product-title} appliance to Microsoft Azure.
+{product-title} can be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the following process takes you through the steps of uploading the {product-title} appliance to Microsoft Azure.
 
 [IMPORTANT]
 ====
-After installing the {product-title} appliance, you must configure the database for {product-title}; see xref:configuring_a_database[Configuring a Database for {product-title}].
+After uploading the {product-title} appliance, you must configure the database for {product-title}; see xref:configuring_a_database[Configuring a Database for {product-title}].
 ====
 
 ifdef::miq[]
@@ -39,24 +39,16 @@ You can upload the appliance to an Azure environment using the following two met
 
 To upload the {product-title} appliance file to Microsoft Azure, ensure the following requirements are met:
 
-* Approximately 2 GB of space for each VHD image; 44+ GB of space, 8 GB RAM, and 4 VCPUs for the {product-title} appliance.
+* Approximately 2 GB of space for each VHD image; 44+ GB of space, 16 GB RAM, and 4 VCPUs for the {product-title} appliance.
 * link:https://azure.microsoft.com/en-us/free/[Microsoft Azure Account]. 
 * Administrator access to the Azure portal.
 * xref:converting-aligning-cfme-appliance-image[Converting and Aligning the {product-title} Virtual Appliance Image]
 * Depending on your infrastructure, allow time for the upload.
 
 
-Importantly, Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image .vhd file is dynamic by default. Currently, the Azure Powershell script and Azure CLI does not automatically convert the dynamic .vhd file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method.
-
-[NOTE]
+[IMPORTANT]
 ====
-These are the procedural steps as of the time of writing. For more information, see the following Azure documentation. 
-
-* https://azure.microsoft.com/en-us/documentation/articles/powershell-azure-resource-manager
-
-The steps covered in the following article are for a Windows machine, however, most of the items are common between Windows and Linux.
-
-* https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-create-powershell
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image .vhd file is dynamic by default. Currently, the Azure Powershell script and Azure CLI does not automatically convert the dynamic .vhd file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method.
 ====
 
 
@@ -262,10 +254,22 @@ New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $Vir
 +
 
 
+[NOTE]
+====
+These are the procedural steps as of the time of writing. For more information, see the following Azure documentation. 
+
+* https://azure.microsoft.com/en-us/documentation/articles/powershell-azure-resource-manager
+
+The steps covered in the following article are for a Windows machine, however, most of the items are common between Windows and Linux.
+
+* https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-create-powershell
+====
+
+
 [[uploading-the-appliance-using-azure-cli]]
 ==== Uploading and Provisioning the {product-title_short} Virtual Appliance Using Azure Command-Line Interface
 
-Although it is recommended to use the PowerShell method, you can upload the appliance to an Azure environment using the Azure Command-Line Interface (Azure CLI). See link:https://azure.microsoft.com/en-us/documentation/articles/xplat-cli-azure-resource-manager/[] for steps on how to create and manage Azure resources using the Azure CLI. 
+Although it is recommended to use the PowerShell method, you can upload the appliance to an Azure environment using the Azure Command-Line Interface (Azure CLI).
 
 
 [[install-azure-cli]]
@@ -351,12 +355,12 @@ For a menu, please type: appliance_console
 +
 . Enter `sudo appliance_console` at the prompt. The summary screen appears.
 
-You have successfully provisioned a Red Hat CloudForms virtual appliance in Microsoft Azure. 
+You have successfully provisioned a {product-title} virtual appliance in Microsoft Azure. 
 
 
 [NOTE]
 ====
-The exported storage connection string does not persist after a system reboot. If any of the commands in the following steps fail, export the storage connection string again using the commands:
+The exported storage connection string does not persist after a system reboot. If any of the commands in the above steps fail, export the storage connection string again using the following commands:
 
 . Get the storage account connection string.
 +
@@ -382,5 +386,7 @@ $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;Endpoin
 ----
 +
 ====
+
+
 
 

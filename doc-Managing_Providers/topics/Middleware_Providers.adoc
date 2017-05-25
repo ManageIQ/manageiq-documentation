@@ -1,47 +1,54 @@
 [[middleware_providers]]
-= Middleware Providers
+= Middleware Management Providers
 
+In {product-title}, a middleware provider is a middleware management environment that you can add to a {product-title} appliance to manage and interact with the resources in that environment. This chapter describes the middleware provider that you can add to {product-title}, and how to manage them. 
 
-
-[[middleware-management]]
-== Middleware Management
-
-The middleware provider extends {product-title} management capabilities to JBoss Middleware application containers running in managed virtual machines, hosts, and Linux containers. The provider delivers inventory, events, metrics, and power operations. Middleware management in {product-title} is a provider based on the Hawkular open source project.  When feature complete, the middleware management provider will replace the current Red Hat middleware management offering, JBoss Operations Network.
+The middleware provider extends {product-title_short} management capabilities to JBoss Middleware application containers running in managed virtual machines, hosts, and Linux containers. The provider delivers inventory, events, metrics, and power operations. Middleware management in {product-title_short} is a provider based on the Hawkular open source project.  When feature complete, the middleware provider will replace the current Red Hat middleware management offering, JBoss Operations Network.
 
 ifdef::cfme[]
 [NOTE]
 ====
-middleware management providers are available as a technology preview in this release of {product-title}. For more information on the support scope for features marked as technology previews, see link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview Features Support Scope].
+This release of the middleware provider is a Technology Preview. Technology Previews provide early access to upcoming product innovations, allowing you to test new features and provide feedback during the development process. Technology Preview releases are _not_ intended for production use. For more information on the support scope for features marked as technology previews, see link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview Features Support Scope].
 ====
 endif::cfme[]
 
 [[adding_a_middleware_provider]]
-=== Adding Middleware Management Providers
+== Adding a Middleware Provider
 
-.To add a middleware management provider:
+After initial installation and creation of a {product-title} environment, add a middleware provider to the appliance. 
 
 . Navigate to menu:Middleware[Providers].
 . Click  image:1847.png[] (*Configuration*), then click  image:1862.png[] (*Add a New Middleware Provider*).
-. In the Add a New Middleware Provider screen, enter the following:
-
-* *Name* - Enter a name for the provider, for example, Middleware Manager.
-* *Type* - Select *Hawkular*.
-* *Zone* - Accept the default.
+. Enter a *Name* for the provider, for example, Middleware Manager.
+. From the *Type* list, select  *Hawkular*.
+. Accept the default *Zone*.
+. Under *Endpoints*, configure the following for the middleware provider:
+.. Select a *Security protocol* method to specify how to authenticate to the provider:
 +
-*Endpoints*
-
-* *Hostname (or IPv4 or IPv6 address)* Host name of the machine where you installed the middleware manager.
+[NOTE]
+====
+To use SSL to authenticate the provider, the middleware management server must be started with the service option `HAWKULAR_USE_SSL=true`.
+====
 +
-* *API Port* - Port of the middleware manager. The default is 8080.
-* *User Name* - The user name used to start the middleware manager.  This should match the `*HAWKULAR_USERNAME*`.
-* *Password* - This should match the `*HAWKULAR_PASSWORD*`.
-* *Confirm Password* - Reenter the password.
+** *SSL* (SSL with validation) – Authenticate the provider securely using a trusted certificate authority. This requires that you have already configured your public and private keys in the *_/client-secrets_* directory as either two .PEM files or as a single .pkcs12 file.
+** *SSL trusting custom CA*  – Authenticate the provider with a self-signed certificate.  For this option, copy your certificate’s text to the *Trusted CA Certificates* field in .PEM format.
+** *SSL without validation* – Authenticate the provider insecurely (not recommended).  
+** *Non-SSL*  – Select if you do not want to use SSL.
+.. Enter the *Hostname* or IPv4 or IPv6 address of the machine where you installed the middleware manager.
 +
-. Before you add the provider, click the *Validate* button to confirm that the user has the proper credentials.
+////
+The Hostname must use a unique fully qualified domain name?
+////
++
+.. Enter the *API Port* of the middleware manager. The default is 8080.
+.. Enter the *User Name* used to start the middleware manager.  This should match the `*HAWKULAR_USERNAME*`.
+.. Enter the *Password*  used to start the middleware manager. This should match the `*HAWKULAR_PASSWORD*`.
+.. Reenter the password in the *Confirm Password* field.
+.. Click *Validate* to confirm that the user has the proper credentials. 
 . Click *Add*.
 . Click  image:1847.png[] (*Configuration*), then click  image:2003.png[] (*Refresh Items and Relationships*).
 
-{product-title} displays the Summary screen.
+{product-title} displays the summary screen:
 
 image:MW_Provider_Summary.png[Provider Summary Screen]
 

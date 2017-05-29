@@ -48,19 +48,15 @@ To upload the {product-title} appliance file to Microsoft Azure, ensure the foll
 
 [IMPORTANT]
 ====
-Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image .vhd file is dynamic by default. Currently, the Azure Powershell script and Azure CLI does not automatically convert the dynamic .vhd file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method.
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image .vhd file is dynamic by default. Currently, the Azure Powershell script and Azure CLI do not automatically convert the dynamic .vhd file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method.
 ====
 
 
 [[converting-aligning-cfme-appliance-image]]
 ==== Converting and Aligning the {product-title_short} Virtual Appliance Image
 
-Complete the following procedure to ensure the {product-title} dynamic .vhd file is aligned correctly, and is in a fixed-size VHD format. 
+Complete the following procedure to ensure the {product-title_short} dynamic .vhd file is properly aligned to the nearest 1 MB boundary, and is in a fixed-size VHD format. 
 
-[NOTE]
-====
-All .vhd files provisioned for Microsoft Azure must be aligned to the nearest 1 MB boundary and be in a fixed-size VHD format. If you attempt to upload a dynamic .vhd file or one that is not properly aligned, virtual appliance provisioning will not work.
-====
 
 . Convert the dynamic .vhd file you downloaded in xref:obtaining-the-appliance[] to RAW format.
 +
@@ -153,7 +149,7 @@ The {product-title} Azure virtual appliance image is ready for uploading and pro
 [[uploading-the-appliance-using-azure-powershell-script]]
 ==== Uploading the {product-title_short} Virtual Appliance Using Azure Powershell Script
 
-Complete the following steps to upload the {product-title} virtual appliance image you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
+Complete the following steps to upload the {product-title_short} virtual appliance image you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
 
 [NOTE]
 ====
@@ -295,7 +291,7 @@ $ curl -L https://aka.ms/InstallAzureCli | bash
 
 .Upload and Provision the {product-title_short} Virtual Appliance Using Azure CLI:
 
-Complete the following steps to upload and provision the {product-title} virtual appliance you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
+Complete the following steps to upload and provision the {product-title_short} virtual appliance you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
 
 
 . Upload the image to the storage container. It may take several minutes. Note: Enter `az storage container list` to get the list of storage containers.
@@ -305,18 +301,21 @@ $ az storage blob upload --account-name <storage-account-name> --container-name 
 
 Example:
 
-$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.7.2.1-1.x86_64.vhd --name cfme-azure-5.7.2.1-1.x86_64.vhd 
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.7.2.1-1.x86_64.vhd --name cfme-azure-5.7.2.1-1.x86_64.vhd
+ 
 Percent complete: %100.0
 ----
 +
-. Get the URL for the uploaded .vhd file. You will need to use this URL in the following step.
+. Get the URL for the uploaded .vhd file using the following command. You will need to use this URL in the next step.
 +
 ----
 $ az storage blob url -c <container-name> -n <image-name>.vhd
 
 Example:
 
-$ az storage blob url -c azrhelclistcont -n cfme-azure-5.7.2.1-1.x86_64.vhd "https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.7.2.1-1.x86_64.vhd"
+$ az storage blob url -c azrhelclistcont -n cfme-azure-5.7.2.1-1.x86_64.vhd 
+
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.7.2.1-1.x86_64.vhd"
 ----
 +
 . Create the virtual machine. Note that the following command uses `--generate-ssh-keys`. In this example, the private/public key pair `/home/clouduser/.ssh/id_rsa` and `/home/clouduser/.ssh/id_rsa.pub` are created.
@@ -360,7 +359,7 @@ For a menu, please type: appliance_console
 +
 . Enter `sudo appliance_console` at the prompt. The summary screen appears.
 
-You have successfully provisioned a {product-title} virtual appliance in Microsoft Azure. 
+You have successfully provisioned a {product-title_short} virtual appliance in Microsoft Azure. 
 
 
 [NOTE]

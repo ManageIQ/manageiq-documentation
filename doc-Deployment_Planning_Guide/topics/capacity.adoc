@@ -18,9 +18,9 @@ creation of capacity and utilization.
 
 * The Capacity & Utilization Coordinator role checks to see if it is
   time to collect data, somewhat like a scheduler. If it is time, a job
-  is queued for the capacity and utilization data collector. The
-  coordinator role is required to complete capacity and utilization
-  data collection. If more than one Server in a specific zone has this
+  is queued for the Capacity & Utilization Data Collector. The
+  Coordinator role is required to complete capacity and utilization
+  data collection. If more than one server in a specific zone has this
   role, only one will be active at a time.
 
 * The Capacity & Utilization Data Collector performs the actual
@@ -42,6 +42,18 @@ include::common/cap-util-assign-server-roles.adoc[]
 ====
 In addition to setting the server role, you must also select which clusters and datastores to collect data for. For more information, see the _General Configuration_ guide. You must have super administrator rights to edit these settings.
 ====
+
+[[adding-database-credentials-for-data-collection]]
+=== Adding Database Credentials for Data Collection
+
+After creating the new user, add the user's credentials to the settings for the provider.
+
+. From menu:Compute[Infrastructure > Providers], select an infrastructure provider to update its settings.
+. Click image:1847.png[]*Configuration*, and then image:1851.png[]*Edit Selected Infrastructure Provider*.
+. In the *Credentials* area, click *C & U Database*.
+. Type in the credentials for the new database user you created.
+. Click *Save*.
+. Restart the Capacity and Utilization Data Collector.
 
 [[data_collection_for_rhev_33_34]]
 === Data Collection for Red Hat Enterprise Virtualization
@@ -133,18 +145,6 @@ listen_addresses  =  '*'
 ------
 +
 
-
-[[adding-database-credentials-for-data-collection]]
-=== Adding Database Credentials for Data Collection
-
-After creating the new user, add the user's credentials to the settings for the provider.
-
-. From menu:Compute[Infrastructure > Providers], select an infrastructure provider to update its settings.
-. Click image:1847.png[]*Configuration*, and then image:1851.png[]*Edit Selected Infrastructure Provider*.
-. In the *Credentials* area, click *C & U Database*.
-. Type in the credentials for the new database user you created.
-. Click *Save*.
-. Restart the capacity and utilization data collector.
 
 [[data_collection_for_osp]]
 === Data Collection for Red Hat Enterprise Linux OpenStack Platform
@@ -274,7 +274,7 @@ ifdef::miq[Managing Providers]
   populate in a few minutes.
 
 [[data_collected]]
-=== Data Collected
+=== Capacity and Utilization Data Collected
 
 {product-title} generates charts from the collected data
 which can be used to plan your hardware and virtual machine needs.
@@ -294,9 +294,9 @@ capacity and utilization charts under the menu:Compute[Infrastructure] tab.
 ====
 
 [[capacity-and-utilization-charts-for-host,-clusters,-and-virtual-machines]]
-==== Capacity and Utilization Charts for Host, Clusters, and Virtual Machines
+==== Capacity and Utilization Charts for Hosts, Clusters, and Virtual Machines
 
-.Capacity and Utilization Charts for Host, Clusters, and Virtual Machines
+.Capacity and Utilization Charts for Hosts, Clusters, and Virtual Machines
 [width="100%",cols="3,1,1,1,1,1,1,1",options="header",]
 |=======================================================================
 | Resource Type | CPU Usage | CPU States | Disk I/O | Memory Usage | Network I/O | Running VMS | Running Hosts
@@ -374,6 +374,7 @@ on a chart and shortcut menus.
   machines that apply. From here, click on a virtual machine to view
   its details.
 
+////
 
 [[utilization-trends]]
 === Utilization Trends
@@ -386,6 +387,8 @@ ifdef::cfme[]
 For more information about data optimization features and utilization trend reports, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/managing_infrastructure_and_inventory/sect_datastores#data_optimization_features[Data Optimization Features] in _Managing Infrastructure and Inventory_.
 endif::cfme[]
 
+////
+
 [[planning-where-to-put-a-new-virtual-machine]]
 === Planning Where to Put a New Virtual Machine
 
@@ -393,6 +396,13 @@ You can use the data collected in the VMDB to plan where you can put
 additional virtual machines. {product-title} allows you to
 use a reference virtual machine as an example to plan on which hosts and 
 clusters you can place a new virtual machine.
+
+ifdef::cfme[]
+[NOTE]
+====
+For information about utilization trends and identifying bottlenecks in your environment, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/managing_infrastructure_and_inventory/#data-optimization[Data Optimization] in _Managing Infrastructure and Inventory_.
+====
+endif::cfme[]
 
 . Navigate to menu:Optimize[Planning].
 . From *Reference VM Selection*, use the dropdowns to select the virtual

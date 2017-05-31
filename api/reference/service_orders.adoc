@@ -2,7 +2,7 @@
 [[service-orders]]
 == Service Orders
 
-The Service Orders collection and actions are provided for managing Shopping Carts and their related
+The service orders collection and actions are provided for managing Shopping Carts and their related
 service requests.
 
 [source,data]
@@ -18,6 +18,7 @@ Available actions on service_orders instances include:
 | create | Creating the Shopping Cart
 | clear | Clearing the Shopping Cart
 | order | Ordering all service requests in the Shopping Cart
+| copy | Copying the Shopping Cart
 | delete | Deleting the Shopping Cart
 |=====================
 
@@ -36,6 +37,7 @@ services are ordered from a service template.
 * link:#adding-service-requests[Adding Service Requests]
 * link:#removing-service-requests[Removing Service Requests]
 * link:#clearing-service-orders[Clearing Service Orders]
+* link:#copying-service-orders[Copying Service Orders]
 * link:#deleting-service-orders[Deleting Service Orders]
 * link:#ordering-service-orders[Ordering Service Orders]
 
@@ -207,6 +209,51 @@ POST /api/service_orders/cart
 ----
 {
   "action" : "clear"
+}
+----
+
+[[copying-service-orders]]
+=== Copying Service Orders
+
+A service order can be copied into a new service order via the _copy_ action:
+
+[source,data]
+----
+POST /api/service_orders/:id
+----
+
+[source,json]
+----
+{
+   "action" : "copy",
+   "resource" : {
+      "name" : "new_service_order_name"
+   }
+}
+----
+
+Service orders can also be copied in bulk as follows:
+
+[source,data]
+----
+POST /api/service_orders/:id
+----
+
+[source,json]
+----
+{
+   "action" : "copy",
+   "resources" : [
+      {
+        "href" : "http://localhost:3000/api/service_orders/1",
+        "name" : "new_service_order_name_1"
+      },
+      {
+        "href" : "http://localhost:3000/api/service_orders/2",
+        "name" : "new_service_order_name_2"
+      },
+      ...
+   ]
 }
 ----
 

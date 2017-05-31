@@ -36,6 +36,14 @@ The *Hostname* must use a unique fully qualified domain name.
 .. Select a *Security Protocol* method to specify how to authenticate the provider:
 * *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
 * *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
++
+[NOTE]
+====
+In OpenShift, the default deployment of the router generates certificates during installation, which can be used with the *SSL trusting custom CA* option. Connecting a Hawkular endpoint with this option requires the CA certificate that the cluster uses for service certificates, which is stored in `/etc/origin/master/service-signer.crt` on the first master in a cluster. You can also obtain the certificate from the cluster by running the following on your provider:
+
+  # oc get secrets $(oc get secrets -n default -o jsonpath='{.items[?(@.type=="kubernetes.io/service-account-token")].metadata.name}{"\n"}' | grep  -Eo "router.+" | awk '{print $1}') -n default -o jsonpath='{.data.ca\.crt}{"\n"}' | base64 -d
+====
++
 * *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
 .. Enter the *Hostname* or IPv4 or IPv6 address of the provider.
 .. Enter the *API Port* if your Hawkular provider uses a non-standard port for access. The default port is `443`.

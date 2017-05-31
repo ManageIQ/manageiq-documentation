@@ -2,7 +2,7 @@
 [[instance-management]]
 == Instance Management
 
-Management of Instances adds support for the following actions:
+Management of instances adds support for the following actions:
 
 [cols="1,2",options="header",]
 |=====================
@@ -38,7 +38,7 @@ These actions can be triggered on individual instance resources:
 /api/instances/:id
 ----
 
-As simply as POSTing the following action to an Instance.
+As simply as POSTing the following action to an instance.
 
 [source,json]
 ----
@@ -79,6 +79,32 @@ Instances are queried via the primary collection URL:
 
 Filtering, sorting and paging as mentioned on the
 link:../overview/query.html[Querying] page.
+
+[[load-balancers]]
+==== Load Balancers
+
+Load Balancers of an instance can be queried via the load_balancers subcollection as follows:
+
+Query all Load Balancers of an instance:
+
+[source,data]
+----
+GET /api/instances/:id/load_balancers
+----
+
+Query a specific Load Balancer of an instance:
+
+[source,data]
+----
+GET /api/instances/:id/load_balancers/:load_balancer_id
+----
+
+Or expanding the Load Balancers for the specific instance as follows:
+
+[source,data]
+----
+GET /api/instances/:id?expand=load_balancers
+----
 
 [[start-instance]]
 === Starting an Instance

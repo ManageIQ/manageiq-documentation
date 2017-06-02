@@ -59,6 +59,14 @@ This step is not required on the database-only appliances, as `evmserverd` does 
 # yum update
 ------
 +
+. On one of the {product-title_short} (non-database) appliances, apply any database schema updates included in the errata, and reset the Red Hat and ManageIQ automation domains: 
++
+------
+# vmdb
+# rake db:migrate 
+# rake evm:automate:reset
+------
++
 . Power off the {product-title_short} appliances. 
 . Reboot the database-only appliances.
 . Wait five minutes, then start the {product-title_short} appliances again.

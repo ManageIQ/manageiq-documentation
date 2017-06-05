@@ -64,7 +64,7 @@ Before using {product-title}, configure the database options for it. {product-ti
 * Configure the appliance to use an external PostgreSQL database
 
 [[configuring-an-internal-database]]
-=== Configuring an Internal Database
+==== Configuring an Internal Database
 
 [IMPORTANT]
 ====
@@ -102,18 +102,21 @@ Creating a new region destroys any existing data on the chosen database.
 {product-title} configures the internal database.
 
 [[configuring-an-external-database]]
-=== Configuring an External Database
+==== Configuring an External Database
+
+Based on your setup, you will choose to configure the appliance to use an external PostgreSQL database. For example, we can only have one database in a single region. However, a region can be segmented into multiple zones, such as database zone, user interface zone, and reporting zone, where each zone provides a specific function. The appliances in these zones must be configured to use an external database.
 
 The `postgresql.conf` file used with {product-title} databases requires specific settings for correct operation. For example, it must correctly reclaim table space, control session timeouts, and format the PostgreSQL server log for improved system support. Due to these requirements, Red Hat recommends that external {product-title} databases use a `postgresql.conf` file based on the standard file used by the {product-title} appliance.
 
 Ensure you configure the settings in the `postgresql.conf` to suit your system. For example, customize the `shared_buffers` setting according to the amount of real storage available in the external system hosting the PostgreSQL instance. In addition, depending on the aggregate number of appliances expected to connect to the PostgreSQL instance, it may be
 necessary to alter the `max_connections` setting.
 
-Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix {product-title} databases with other types of databases in a single PostgreSQL instance.
 
 [NOTE]
 ====
-{product-title} 4.x requires PostgreSQL version 9.4.
+* {product-title} 4.x requires PostgreSQL version 9.4.
+
+* Because the `postgresql.conf` file controls the operation of all databases managed by a single instance of PostgreSQL, do not mix {product-title} databases with other types of databases in a single PostgreSQL instance.
 ====
 
 . Start the appliance and open a terminal console from your virtualization or cloud provider.
@@ -136,7 +139,7 @@ Because the `postgresql.conf` file controls the operation of all databases manag
 [[configuring-a-worker-appliance]]
 === Configuring a Worker Appliance
 
-You can configure a worker appliance through the terminal. These steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database.
+You can use multiple appliances to facilitate horizontal scaling, as well as for dividing up work by roles. Accordingly, configure an appliance to handle work for one or many roles, with workers within the appliance carrying out the duties for which they are configured. You can configure a worker appliance through the terminal. The following steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database.
 
 . Start the appliance and open a terminal from your virtualization or cloud provider.
 . After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.

@@ -1,0 +1,163 @@
+[[virtual-template-requests]]
+== Virtual Template Management
+
+Management of Virtual Templates is provided via the following collection:
+
+[source, data]
+----
+/api/virtual_templates
+----
+
+Full CRUD actions on virtual templates are available:
+
+* link:#querying-virtual-templates[Querying Virtual Templates]
+* link:#creating-virtual-templates[Creating Virtual Templates]
+* link:#editing-virtual-templates[Editing Virtual Templates]
+* link:#deleting-virtual-templates[Deleting Virtual Templates]
+
+[[querying-virtual-templates]]
+=== Querying Virtual Templates
+
+Querying all virtual templates in the system is simply:
+
+----
+GET /api/virtual_templates
+----
+
+Getting a specific virtual template:
+
+----
+GET /api/virtual_templates/:id
+----
+
+[[creating-virtual-templates]]
+=== Creating Virtual Templates
+
+Virtual Templates can be created via a POST to the Virtual Templates collection or via the *create* action
+signature which allows creation of multiple virtual templates in a single request.
+
+----
+POST /api/virtual_templates
+----
+
+[source,json]
+----
+{
+    "name": "virtual_template1",
+    "vendor": "amazon",
+    "cloud_subnet_id": "300",
+    "availability_zone_id": "245",
+    "type":"ManageIQ::Providers::Amazon::CloudManager::VirtualTemplate"
+}
+----
+
+or creating multiple virtual templates:
+
+[source,json]
+----
+{
+  "action": "create",
+  "resources": [
+    {
+      "name": "virtual_template1",
+      "vendor": "amazon",
+      "cloud_subnet_id": "300",
+      "availability_zone_id": "245",
+      "type":"ManageIQ::Providers::Amazon::CloudManager::VirtualTemplate"
+    },
+    {
+      "name": "virtual_template2",
+      "vendor": "google",
+      "cloud_subnet_id": "345",
+      "availability_zone_id": "562",
+      "type":"ManageIQ::Providers::Google::CloudManager::VirtualTemplate"
+    }
+  ]
+}
+----
+
+[[editing-virtual-templates]]
+=== Editing Virtual Templates
+
+----
+POST /api/virtual_templates/:id
+----
+
+[source,json]
+----
+{
+  "action": "edit",
+  "resource": {
+    "name": "edited_name"
+  }
+}
+----
+
+or editing multiple virtual templates:
+
+----
+POST /api/virtual_templates
+----
+
+[source,json]
+----
+{
+  "action": "edit",
+  "resources": [
+    {
+      "href": "http://localhost:3000/api/virtual_templates/24",
+      "name": "firstedit"
+    },
+    {
+      "href": "http://localhost:3000/api/virtual_templates/25",
+      "name": "secondedit"
+    }
+  ]
+}
+----
+
+[[deleting-virtual-templates]]
+=== Deleting Virtual Templates
+
+Virtual Templates can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/virtual_templates/10
+----
+
+[source,json]
+----
+{
+  "action": "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/virtual_templates/10
+----
+
+Deleting multiple virtual templates can be done as follows:
+
+----
+POST /api/virtual_templates
+----
+
+[source,json]
+----
+{
+  "action": "delete",
+  "resources": [
+    {
+      "href": "http://localhost:3000/api/virtual_templates/10"
+    },
+    {
+      "href": "http://localhost:3000/api/virtual_templates/11"
+    }
+  ]
+}
+----
+
+
+

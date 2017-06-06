@@ -13,6 +13,7 @@ is available via the REST API. Management of providers is through:
 * link:#querying-providers[Querying Providers]
 * link:#creating-providers[Creating Providers]
 * link:#specifying-credentials[Specifying Credentials]
+* link:#specifying-connection-configurations[Specifying Connection Configurations]
 * link:#editing-providers[Editing Providers]
 * link:#deleting-providers[Deleting Providers]
 * link:#refresh-providers[Refresh Providers]
@@ -221,6 +222,64 @@ Compound credentials set:
   ]
 }
 ----
+
+[[specifying-connection-configurations]]
+=== Specifying Connection Configurations
+When creating or updating providers, connection configurations can be set. Connection configurations can be used
+to specify resources such as an amqp event provider for Openstack or for adding Hawkular metrics.
+
+Hawkular metrics:
+
+[source,json]
+----
+{
+  "name": "Openshift Provider",
+  "type": "ManageIQ::Providers::Openshift::ContainerManager",
+  ...
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "role"                  : "hawkular",
+        "hostname"              : "hawkular_host",
+        "port"                  : "1443",
+        "security_protocol"     : "ssl-without-validation",
+        "certificate_authority" : "-----BEGIN CERTIFICATE-----",
+        "verify_ssl": 0
+      },
+      "authentication": {
+        "role"     :  "hawkular",
+        "auth_key" :  "hawkular_auth_key"
+      }
+    }
+  ]
+}
+----
+
+Amqp event provider:
+[source,json]
+----
+{
+  "name": "Openstack Provider",
+  "type": "ManageIQ::Providers::Openstack::CloudManager",
+  ...
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "role"              : "amqp",
+        "hostname"          : "amqphost.com",
+        "port"              : "5672",
+        "security_protocol" : "non-ssl"
+      },
+      "authentication": {
+        "userid"   : "amqp_userid",
+        "password" : "amqp_password",
+        "role"     : "amqp"
+      }
+    }
+  ]
+}
+----
+
 
 [[editing-providers]]
 === Editing Providers

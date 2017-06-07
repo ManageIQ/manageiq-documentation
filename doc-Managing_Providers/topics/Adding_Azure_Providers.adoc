@@ -2,34 +2,37 @@
 
 = Adding Azure Providers
 
-{product-title} now supports Microsoft Azure providers. 
-
-[IMPORTANT]
-====
-Before {product-title} can be authenticated to Microsoft Azure, a series of prerequisite steps must be followed on the Azure portal; see https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/[Create Active Directory application and service principal account using the Azure portal]. The link describes how to configure the Azure Active Directory (AAD), create the application your organization is developing, and also how to obtain the Tenant ID, Subscription ID, Client ID and Client Key to add the application that will allow you to connect the Azure instance as a provider to {product-title}. In the above link, note that during *Assign Application to Role*, in step 3, select the *Contributor* role and not the *Reader* role. Currently, all of these steps can be performed using either the Azure Resource Manager or Service Manager (Classic) mode. 
-====
-
-After a service principal account (instance of an application in a directory) has been created using the Azure portal, the following four pieces of information will be available within the Azure Active Directory (AAD) module:
-
-* Tenant ID
-* Subscription ID
-* Client ID
-* Client Key
-
-You can now use the following procedure to implement the above items in {product-title} for adding an Azure cloud provider.
-
-*To Add an Azure Cloud Provider*:
+{product-title} supports Microsoft Azure providers. Before {product-title_short} can be authenticated to Microsoft Azure, you must complete a series of prerequisite steps using the Azure portal; see https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/[Create Active Directory application and service principal account using the Azure portal]. Follow the steps to set up an Azure Active Directory (Azure AD) and assign the required permissions to it, then create an Azure Active Directory application, and obtain the *Application ID* (Client ID), *Directory ID* (Tenant ID), *Subscription ID*, and *Key Value* (Client Key) that are required to add and connect to the Azure instance as a provider in {product-title_short}. Currently, all of these steps can be performed using either the Azure Resource Manager or Service Manager (Classic) mode. 
 
 [NOTE]
 ====
-When adding an Azure cloud provider, select a region from a list of possible regions; one provider will be created for the selected region.
+When following the prerequisite steps using the Azure portal:
+
+* The *Application ID* obtained during _Get Application ID and Authentication Key_ is your *Client ID*. In the same section, after providing a description and a duration for the key, the *VALUE* displayed after clicking *Save* is your *Client Key*. If you choose an expiring key, make sure to note the expiration date, as you will need to generate a new key before that day in order to avoid an interruption.
+
+* The *Directory ID* obtained during _Get Tenant ID_ is your *Tenant ID*.
+
+* During _Assign Application to Role_, select the *Contributor* role and not the *Reader* role.
+
+* To obtain your *Subscription ID*, log in to the Azure portal and click *Subscriptions* on the slide-out menu on the left. Find the appropriate subscription and see your Azure *Subscription ID* associated with it. The Azure *Subscription ID* is like a billing unit for all of the services consumed in your Azure account, including virtual machines and storage. The *Subscription ID* is in the form of a Globally Unique Identifier (GUID).
 ====
+
+So, after a service principal account (instance of an application in a directory) has been created using the Azure portal, the following four pieces of information will be available within the Azure Active Directory (AAD) module.
+
+* Directory ID (Tenant ID)
+* Subscription ID
+* Application ID (Client ID)
+* Client Key
+
+You can then use these values in the procedure below to add an Azure cloud instance as a provider to {product-title_short}.
+
+*To Add an Azure Cloud Provider*:
 
 . Navigate to menu:Compute[Clouds > Providers].
 . Click image:1847.png[] (*Configuration*), then click image:1862.png[] (*Add a New Cloud Provider*).
 . Enter a *Name* for the provider.
 . From the *Type* list, select *Azure*.
-. Select a region from the *Region* list.
+. Select a region from the *Region* list. One provider will be created for the selected region.
 . Enter *Tenant ID*.
 . Enter *Subscription ID*.
 . Enter *Zone*.

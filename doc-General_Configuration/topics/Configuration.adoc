@@ -645,7 +645,8 @@ These roles are enabled by default on all servers.
 
 [NOTE]
 ====
-Server roles that are in an active/active high availability configuration _(load balancing and failover protection)_ are active in more than one location; whereas, roles that are in an active/passive _(primary/secondary in the case of {product-title_short})_ high availability configuration _(failover protection)_, if more than one {product-title_short} server in a specific zone or region has this role, only one will be active _(primary)_ at a time and a failover has to occur to the passive _(secondary)_ appliance with that role.
+* Server roles that are in an active/active high availability configuration _(load balancing and failover protection)_ are active in more than one location; whereas, roles that are in an active/passive _(primary/secondary in the case of {product-title_short})_ high availability configuration _(failover protection)_, if more than one {product-title_short} server in a specific zone or region has this role, only one will be active _(primary)_ at a time and a failover has to occur to the passive _(secondary)_ appliance with that role.
+* For information on region and zone diagnostics and server role priorities, see xref:diagnostics[].
 ====
 
 [width="100%",cols="50%,70%a,30%,55%",options="header",]
@@ -2235,8 +2236,10 @@ The Diagnostics area is designed in a hierarchy.
 
 Using the console, you can set the priority of server regional roles, review and reset replication, and create backups of your database either on demand or on a schedule.
 
-Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {product-title} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can
-also set priorities for the server roles that provide failover.
+Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {product-title} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can also set priorities for the server roles that provide failover.
+
+[[server-role-priorities]]
+===== Server Role Priorities
 
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
@@ -2258,6 +2261,9 @@ In the console, secondary roles are displayed normally with the word "secondary"
 The reason for tertiary is to ensure that if a server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities.
 Tertiary roles simply show as active in the console.
 
+See xref:server-roles[] for a list of zone and region aware server roles and their priorities.
+
+////
 
 [[region-aware-server-roles]]
 ==== Region Aware Server Roles
@@ -2274,6 +2280,7 @@ Tertiary roles simply show as active in the console.
 |Web Services|Y|N
 |=======================================================================
 
+////
 
 [[setting-the-priority-of-a-failover-role]]
 ==== Setting the Priority of a Failover Role
@@ -2292,6 +2299,8 @@ To set the priority of a failover role:
 
 The console provides a way to see all the server roles that a server has been assigned and if these roles are running. This is especially helpful when you have multiple servers with different server roles. For each zone you can also set a central place for all logs to be collected, and collect capacity and utilization data that may be missing.
 
+See xref:server-roles[] for a list of zone and region aware server roles and their priorities.
+
 [[viewing-the-status-of-server-roles]]
 ===== Viewing the Status of Server Roles
 
@@ -2300,6 +2309,8 @@ To view the status of server roles:
 . From the settings menu, select *Configuration*.
 . Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
 . Depending on how you want to view your servers, click either *Roles by Servers* or the *Servers by Roles*.
+
+////
 
 [[setting-server-role-priorities]]
 ===== Setting Server Role Priorities
@@ -2316,6 +2327,7 @@ There are three role priorities.
 * *Secondary*: This is the default priority. There can be multiple secondaries. When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role. In the console, secondary roles are displayed normally with the word "secondary".
 
 * *Tertiary*: If all appliances with primary roles or secondary roles are down, one of the tertiary would be activated. The reason for tertiary is to ensure that if a Server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities. Tertiary roles simply show as active in the console.
+
 
 [[zone-aware-server-roles]]
 ===== Zone Aware Server Roles
@@ -2341,6 +2353,7 @@ There are three role priorities.
 |=======================================================================
 
 
+
 [[setting-the-priority-of-a-failover-role-1]]
 ===== Setting the Priority of a Failover Role
 
@@ -2352,6 +2365,8 @@ To set the priority of a failover role:
 . From the *Status of Roles* for *Servers* in *Zone Default Zone* area, click on the role that you want to set the priority for.
 . Click image:2097.png[] (*Promote Server to primary for this role*) to make this the primary Server for this role.
 . Click image:2098.png[] (*Demote Server to normal for this role*) to demote the priority of this Server for this role.
+
+////
 
 [[removing-an-inactive-server]]
 ====== Removing an Inactive Server

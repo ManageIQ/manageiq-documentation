@@ -298,20 +298,95 @@ POST /api/service_templates
 [[services]]
 === Services ===
 
-Once services are ordered from a service catalogs, they can be:
-
-* link:#service-editing[Edited] (Basic)
-* link:#service-retiring-now[Retired now]
-* link:#service-retiring-future[Retired in future]
-* link:#service-reconfiguring[Reconfigured]
-* link:#service-deleting[Deleted]
-
-Services URL:
+Accessing services is via the *services* collection as follows:
 
 [source,data]
 ----
 /api/services
 ----
+
+or addressing an individual Service via the *services* resource:
+
+[source,data]
+----
+/api/services/:id
+----
+
+[[creating-services]]
+==== Creating Services ====
+
+In general, services are created once ordered from service catalogs.
+
+Service resources can also be created as follows:
+
+[source,data]
+----
+POST /api/services
+----
+
+[source,json]
+----
+{
+  "action" : "create",
+  "resource" : {
+    "name" : "test_service_name",
+    "description" : "Test Service",
+    "parent_service" : { "href" : "http://localhost:3000/api/services/15" }
+  }
+}
+----
+
+In the above example _parent_service_ is an _href_ or _id_ reference to an existing service.
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#services[Resource Attributes]
+page for a list of available attributes when creating Services.
+====
+
+[[service-actions]]
+==== Service Actions ====
+
+Once services are ordered from a catalog, they can be:
+
+* link:#service-editing[Edited] (Basic)
+* link:#service-retiring-now[Retired now]
+* link:#service-retiring-future[Retired in future]
+* link:#service-reconfiguring[Reconfigured]
+* link:#service-started[Started]
+* link:#service-stopped[Stopped]
+* link:#service-suspended[Suspended]
+* link:#service-deleting[Deleted]
+
+Other than service creates and edits, service actions return the action response as
+in the following example:
+
+Request:
+
+----
+POST /api/services/12
+----
+
+[source,json]
+----
+{
+  "action" : "start"
+}
+----
+
+Response:
+
+[source,json]
+----
+{
+  "success": true,
+  "message": "Service id:12 name:'SampleService' starting",
+  "task_id": 62,
+  "task_href": "http://localhost:3000/api/tasks/62",
+  "href": "http://localhost:3000/api/services/12"
+}
+----
+
 
 [[service-editing]]
 ==== Service Editing
@@ -384,6 +459,48 @@ POST /api/services/:id
 }
 ----
 
+[[service-started]]
+==== Starting Services
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "start"
+}
+----
+
+[[service-stopped]]
+==== Stopping Services
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "stop"
+}
+----
+
+[[service-suspended]]
+==== Suspending Services
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "suspend"
+}
+----
+
 [[service-deleting]]
 ==== Deleting Services
 
@@ -414,6 +531,12 @@ POST /api/services
 [[service-requests]]
 === Service Requests ===
 
+* link:#querying-service-requests[Querying Service Requests]
+* link:#approving-denying-service-requests[Approving or Denying Service Requests]
+
+[[querying-service-requests]]
+==== Querying Service Requests
+
 Once services are ordered from a catalog, service requests can be
 monitored as follows:
 
@@ -431,5 +554,43 @@ or optionally via the tasks alias:
 
 ----
 GET /api/service_requests/:id?expand=tasks
+----
+
+[[approving-denying-service-requests]]
+==== Approving or Denying Service Requests
+
+If a service request is not auto approved, it can be approved or denied via the actions _approve_ and _deny_ on the
+service request resource.
+
+[[approving-service-request]]
+===== Approving a Service Request
+
+[source,data]
+----
+POST /api/service_requests/:id
+----
+
+[source,json]
+----
+{
+  "action" : "approve",
+  "reason" : "reason for approval"
+}
+----
+
+[[denying-service-request]]
+==== Denying a Service Request
+
+[source,data]
+----
+POST /api/service_requests/:id
+----
+
+[source,json]
+----
+{
+  "action" : "deny",
+  "reason" : "reason for denial"
+}
 ----
 

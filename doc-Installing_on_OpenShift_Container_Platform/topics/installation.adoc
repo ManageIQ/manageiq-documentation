@@ -273,7 +273,7 @@ pods/cfme-1-s3bnp
 Allow approximately five minutes once pods are in running state for {product-title} to start responding on HTTPS.  
 ====
 +
-------
+----
 $ oc describe pods <cfme_pod_name>
 ...
 Conditions:
@@ -281,7 +281,58 @@ Conditions:
   Ready     True
 Volumes:
 ...
-------
+----
++
+. After you have successfully validated your {product-title_short} deployment, disable automatic image change triggers to prevent unintended upgrades.
++
+By default, on initial deployments the automatic image change trigger is enabled. This could potentially start an unintended upgrade on a deployment if a newer image is found in the ImageStream.
++
+Disable the automatic image change triggers for {product-title_short} DCs on each project with the following commands:
++
+----
+$ oc set triggers dc --manual -l app=cloudforms
+deploymentconfig "memcached" updated
+deploymentconfig "postgresql" updated
+
+$ oc set triggers dc --from-config --auto -l app=cloudforms
+deploymentconfig "memcached" updated
+deploymentconfig "postgresql" updated
+----
++
+[NOTE]
+====
+The config change trigger is kept enabled; if you desire to have full control of your deployments, you can alternatively turn it off. 
+====
+
+// (HOW? What does this do and what advantages does turning it off have?)
+
+[[scaling]]
+=== Scaling {product-title_short} Appliances
+
+StatefulSets allow scaling of {product-title_short} appliances.
+
+//WHAT ARE THEY? Provide context or link to OCP docs.
+
+[IMPORTANT]
+====
+Each new replica will consume a physical volume. Before you attempt scaling, ensure you have enough physical volumes available to scale. 
+====
+
+.Example: Scaling to two replicas/servers
+----
+$ oc scale statefulset manageiq --replicas=2
+statefulset "manageiq" scaled
+$ oc get pods
+NAME                 READY     STATUS    RESTARTS   AGE
+manageiq-0           1/1       Running   0          34m
+manageiq-1           1/1       Running   0          5m
+memcached-1-mzeer    1/1       Running   0          1h
+postgresql-1-dufgp   1/1       Running   0          1h
+----
+
+The newly created replicas will join the existing {product-title_short} region. For a StatefulSet with `N` replicas, when pods are being deployed, they are created sequentially, in order from {0..N-1}.
+
+//Note: As of Origin 1.5 StatefulSets are a beta feature, be aware functionality might be limited.
 
 
 [[pod-access-and-routes]]

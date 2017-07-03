@@ -2944,6 +2944,71 @@ To restore a database from a backup:
 # systemctl start rh-postgresql95-repmgr
 ----
 
+[[binary-backup-and-restore-database]]
+===== Performing a Binary Backup and Restoring the Database
+Preserve data by performing a full binary backup from a remote server, and restore it to the same server. 
+This includes all databases, users and roles, replication slots and other objects. 
+The result of this is a full replacement of the PG data directory on the target database server using the `pg_basebackup` utility.
+
+==== Performing a Binary Backup
+
+Create a backup from the remote server and store it as a tar file inside the appliance-backup directory. 
+
+. SSH into the database server as the *root* user.
++
+. Enter the `pg_basebackup` command.
+-----
+# pg_basebackup -x -h <ADDRESS> -U root -Ft -z -D miq-backup<WHAT IS CFME directory?>
+-----
+
+==== Restoring a Database from the  Backup
+If a database is corrupt or fails, restore it from a backup.
+
+. Copy the existing backup to the target VM
++
+-----
+# scp miq-backup/base.tar.gz root@<ip@ of DB server>:/var/www/cfme
+-----
++
+. SSH to the target VM and stop both the EVM and PostgreSQL servers.
++
+-----
+# ssh root@<DB SERVER IP>
+# systemctl stop evmserverd
+# systemctl stop $APPLIANCE_PG_SERVICE
+-----
++
+. Rename the existing data directory. 
++
+-----
+# mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
+-----
++
+. Create a clean data directory
++
+-----
+# mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Unzip the tar file to the new directory
++
+-----
+# tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data 
+-----
++
+. Correct permissions
++
+-----
+# chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data  
+# chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Restart the PostgreSQL and EVM servers
++
+-----
+# systemctl start $APPLIANCE_PG_SERVICE
+# systemctl start evmserverd
+-----
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection

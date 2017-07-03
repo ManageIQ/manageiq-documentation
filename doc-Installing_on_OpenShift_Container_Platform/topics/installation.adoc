@@ -27,13 +27,13 @@ The {product-title_short} deployment uses three files to create the appliance: `
 
 To avoid deployment failures due to resource starvation, Red Hat recommends the following minimum cluster size for a test environment:
 
-* 1 master node with at least 8 VCPUs and 12GB of RAM
-* 2 nodes with at least 4 VCPUs and 8GB of RAM
+* 1 master node with at least 8 vCPUs and 12GB of RAM
+* 2 nodes with at least 4 vCPUs and 8GB of RAM
 * 25GB of storage for {product-title_short} physical volume use
 
 These recommendations assume {product-title_short} is the only application running on this cluster. Alternatively, you can provision an infrastructure node to run registry, metrics, router, and logging pods.
 
-Each {product-title_short} application pod will consume at least 3GB of RAM on initial deployment (without providers added). RAM consumption increases depending on the appliance use. For example, after providers are added, expect higher resource consumption.
+Each {product-title_short} application pod will consume at least 3GB of RAM on initial deployment (without providers added). RAM consumption increases depending on the appliance use. For example, after adding providers, expect higher resource consumption.
 
 
 [[preparing-for-deployment]]
@@ -95,7 +95,9 @@ Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` an
 +
 [NOTE]
 ====
-Red Hat recommends setting permissions for the pv-app (privileged pod volume) as 777, uid/gid 0 (owned by root). For more information on configuring persistent storage in OpenShift Container Platform, see the https://access.redhat.com/documentation/en/openshift-container-platform/3.3/single/installation-and-configuration/#configuring-persistent-storage[OpenShift Container Platform Installation and Configuration] guide.	
+For NFS-backed volumes, ensure your NFS server firewall is configured to allow traffic on port 2049 (TCP) from the OpenShift cluster.
+
+Red Hat recommends setting permissions for the pv-app (privileged pod volume) as 777, uid/gid 0 (owned by root). For more information on configuring persistent storage in OpenShift Container Platform, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/installation_and_configuration/#configuring-persistent-storage[OpenShift Container Platform Installation and Configuration] guide.	
 ====
 +
 .. Run the following commands to create the two persistent volumes: 
@@ -167,7 +169,7 @@ cloudforms   CloudForms appliance with persistent storage   18 (1 blank)      12
 $ oc process --parameters -n <your-project> cloudforms
 ------
 +
-Use the following command to customize the deployment configuration parameters:
+To customize the deployment configuration parameters, run:
 +
 ------
 $ oc edit dc/<deployconfig_name>
@@ -187,27 +189,27 @@ $ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,MEMORY_POSTGR
 +
 [IMPORTANT]
 ====
-The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {product-title_short} application, which eventually constructs the route to the {product-title_short} pod. If you do not specify the `APPLICATION_DOMAIN` parameter, the {product-title_short} application will not be accessible after the deployment; however, this can be fixed by changing the route. For more information on OpenShift template parameters, see the https://docs.openshift.com/container-platform/3.3/dev_guide/templates.html#templates-parameters[OpenShift Container Platform Developer Guide].
+The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {product-title_short} application, which eventually constructs the route to the {product-title_short} pod. If you do not specify the `APPLICATION_DOMAIN` parameter, the {product-title_short} application will not be accessible after the deployment; however, this can be fixed by changing the route. For more information on OpenShift template parameters, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/developer_guide/#dev-guide-templates[OpenShift Container Platform Developer Guide].
 ====
 
 [[deploying-the-appliance-external-db]]
 ==== Deploying the {product-title_short} Appliance Using an External Database
 
-Before attempting to deploy {product-title_short} using an external DB deployment, ensure the following conditions are satisfied:
+Before attempting to deploy {product-title_short} using an external database deployment, ensure the following conditions are satisfied:
 
 * Your OpenShift cluster can access the external PostgreSQL server
 * The {product-title_short} user, password, and role have been created on the external PostgreSQL server
-* The intended {product-title_short} database is created and ownership has been assigned to the {product-title_short} user
+* The intended {product-title_short} database is created, and ownership has been assigned to the {product-title_short} user
 
 To deploy the appliance:
 
-. Import the CFME external database template:
+. Import the {product-title_short} external database template:
 +
 ----
 $ oc create -f templates/cfme-template-ext-db.yaml
 ----
 +
-. Launch the deployment with the following command. The database server IP is required, and the other settings must match your remote PostgreSQL server.
+. Launch the deployment with the following command. The database server IP address is required, and the other settings must match your remote PostgreSQL server.
 +
 ----
 $ oc new-app --template=cloudforms-ext-db -p DATABASE_IP=<server_ip> -p DATABASE_USER=<user> -p DATABASE_PASSWORD=<password> -p DATABASE_NAME=<database_name>
@@ -216,7 +218,7 @@ $ oc new-app --template=cloudforms-ext-db -p DATABASE_IP=<server_ip> -p DATABASE
 [[verifying-the-configuration]]
 === Verifying the Configuration
 
-Verify the deployment was successful by running the following commands as the user under the {product-title} project/namespace:
+Verify the deployment was successful by running the following commands as the user under the {product-title} project:
 
 [NOTE]
 ====
@@ -309,30 +311,29 @@ The config change trigger is kept enabled; if you desire to have full control of
 [[scaling]]
 === Scaling {product-title_short} Appliances
 
-StatefulSets allow scaling of {product-title_short} appliances.
+StatefulSets in OpenShift allow scaling of {product-title_short} appliances. See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
 
-//WHAT ARE THEY? Provide context or link to OCP docs.
 
 [IMPORTANT]
 ====
-Each new replica will consume a physical volume. Before you attempt scaling, ensure you have enough physical volumes available to scale. 
+Each new replica, or server, will consume a physical volume. Before scaling, ensure you have enough physical volumes available to scale. 
 ====
+
+The following example shows scaling using StatefulSets:
 
 .Example: Scaling to two replicas/servers
 ----
-$ oc scale statefulset manageiq --replicas=2
-statefulset "manageiq" scaled
+$ oc scale statefulset cloudforms --replicas=2
+statefulset "cloudforms" scaled
 $ oc get pods
 NAME                 READY     STATUS    RESTARTS   AGE
-manageiq-0           1/1       Running   0          34m
-manageiq-1           1/1       Running   0          5m
+cloudforms-0           1/1       Running   0          34m
+cloudforms-1           1/1       Running   0          5m
 memcached-1-mzeer    1/1       Running   0          1h
 postgresql-1-dufgp   1/1       Running   0          1h
 ----
 
 The newly created replicas will join the existing {product-title_short} region. For a StatefulSet with `N` replicas, when pods are being deployed, they are created sequentially, in order from {0..N-1}.
-
-//Note: As of Origin 1.5 StatefulSets are a beta feature, be aware functionality might be limited.
 
 
 [[pod-access-and-routes]]
@@ -350,3 +351,33 @@ cloudforms   cfme.apps.e2e.example.com  cloudforms:443-tcp   passthrough        
 ------
 A route should have been deployed via template for HTTPS access on the CloudForms pod. Examine the output and point your web browser to the reported URL/host (in this example, `cfme.apps.e2e.example.com`).
 
+
+[[building-images]]
+=== Building Images on OpenShift
+
+You can build the images from this repository using OpenShift:
+----
+$ oc -n <your-namespace> new-build --context-dir=images/cfme-app https://github.com/CloudForms/cloudforms-pods#master
+----
+
+Additionally, Red Hat recommends setting the following `dockerStrategy` parameters to ensure a fresh build every time:
+----
+$ oc edit bc -n <your-namespace> cloudforms-pods
+
+strategy:
+  dockerStrategy:
+    forcePull: true
+    noCache: true
+----
+To execute a new build after the first (automatically started) build, run:
+----
+$ oc start-build -n <your-namespace> cloudforms-pods
+----
+Configure the following template parameters on the newly built image:
+------
+$ oc new-app --template=cloudforms \
+  -n <your-namespace> \
+  -p APPLICATION_IMG_NAME=<your-docker-registry>:5000/<your-namespace>/cloudforms-pods \
+  -p APPLICATION_IMG_TAG=latest \
+  ...
+------

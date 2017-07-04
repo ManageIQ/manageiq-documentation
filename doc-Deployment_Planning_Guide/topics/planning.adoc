@@ -80,7 +80,7 @@ A tenant can also contain a self-contained child tenant known as a 'project'. A 
 If you do not add any additional tenants, all resources and user accounts are contained in a single base tenant which is your {product-title_short} appliance itself. In {product-title_short}, is sometimes referred as 'tenant zero'.
 ====
 
-Tenancy Account Roles::
+.Tenancy Account Roles
 
 In {product-title_short}, the following two account roles are associated with tenancy:
  
@@ -96,21 +96,21 @@ endif::cfme[]
 Tenant administrator and tenant quota administrator roles are like administrator and super administrator. These roles are not limited to the tenant upon which they are acting and act across all tenants, and therefore should be considered privileged users. These are not roles inside a tenant.
 ====
 
-Tenancy Models::
+.Tenancy Models
 
 The following two approaches exist for tenancy planning:
 
 * *Tenantless* - You can create a single large tenant, sometimes referred as 'tenant zero', and perform all your operations in there without any subdivision of resources or user accounts.
 * *Enterprise model* - A common scenario is to create a single tenant, and then subdivide it based on the structures or departments within your organization. Those departments are then able to further subdivide their resources into distinct projects. With this model, you have a single URL for user access, while still having the ability to divide resources into nested hierarchical tenants.
 
-Tenancy Configuration::
+.Tenancy Configuration
 
 You can create and configure tenancy using the {product-title_short} user interface in the same place you set up users, groups and roles by selecting *Configuration* from the settings menu, and then clicking on the *Access Control* accordion. 
 ifdef::cfme[] 
 See the section on https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/general_configuration/#access-control[Access Control] in the _General Configuration_ guide for procedures on how to create tenants and projects, users, and groups. 
 endif::cfme[]
 
-Tenancy in Automation::
+.Tenancy in Automation
 
 One of the features of tenancy is that each tenant can have its own automate domain. Tenant-based domains can help in several use cases, such as if you have:
 
@@ -124,7 +124,7 @@ ifdef::cfme[]
 For the procedure on how to create a new automate domain, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/scripting_actions_in_cloudforms/[Scripting Actions in CloudForms]. 
 endif::cfme[]
 
-Tenancy Quota and Reporting::
+.Tenancy Quota and Reporting
 
 You can allocate and enforce quotas for the following attributes:
 
@@ -143,7 +143,14 @@ ifdef::cfme[]
 See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/monitoring_alerts_and_reporting/#sect_reports[Reports] in the _Monitoring, Alerts, and Reporting_ guide for procedures on how to view or schedule a report.
 endif::cfme[] 
 
-The following example shows a tenant quota report:
+[NOTE]
+====
+Currently, in tenant quota reports you will see all of the tenants but there is no nesting information available by parent and child tenants.
+====
+
+.Example:
+
+In the following example of a tenant quota report, _DevOps Teams_ is a parent tenant and _Team Alpha_ and _Team Bravo_ are child tenants.
 
 image:tenant-quotas-report.png[]
 
@@ -153,7 +160,7 @@ image:tenant-quotas-report.png[]
 * Available: _Total Quota_ minus (-) _In Use_ minus (-) _Allocated_
 
 
-Tenancy Chargeback::
+.Tenancy Chargeback
 
 You have the ability to do tenancy in chargeback where you are able to assign rates and have a different rate for each tenant. You can make use of the default rate or create your own set of rates depending on the tenant. As well, there is an ability to create chargeback reports by tenant. 
 
@@ -161,11 +168,11 @@ ifdef::cfme[]
 See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/monitoring_alerts_and_reporting/#sect_chargeback[Chargeback] in the _Monitoring Alerts, and Reporting_ guide for information on how to create and assign default or custom chargeback rates, and how {product-title_short} calculates chargeback costs. 
 endif::cfme[]
 
-Tenancy Service Catalogs::
+.Tenancy Service Catalogs
 
 Similar to automate domains, you can have service catalogs at each level of tenancy. Once you add a service catalog at a particular level of tenancy, it is visible to that tenant and its children (unless you use tagging to exclude).
 
-Tenancy Providers::
+.Tenancy Providers
 
 Providers can be added at any level of tenancy. Once added, a provider is visible to any child or lower tenants, making it possible to easily separate resources that are owned or accessed by one group, and should not be available to other tenants. 
    

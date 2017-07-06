@@ -2945,24 +2945,29 @@ To restore a database from a backup:
 ----
 
 [[binary-backup-and-restore-database]]
-===== Performing a Binary Backup and Restoring the Database
-Preserve data by performing a full binary backup from a remote server, and restore it to the same server. 
+==== Performing a Binary Backup and Restoring the Database
+Preserve data at the file system level by performing a binary backup. 
 This includes all databases, users and roles, replication slots and other objects. 
-The result of this is a full replacement of the PG data directory on the target database server using the `pg_basebackup` utility.
+This procedure uses the `pg_basebackup` utility to create a full replacement of the PostgreSQL data directory, capturing the exact state of the database when the backup finishes.
 
-==== Performing a Binary Backup
+===== Performing a Binary Backup
 
-Create a backup from the remote server and store it as a tar file inside the appliance-backup directory. 
+Create a binary backup and store it as a tar file inside the {product-title_short} backup directory. 
+
+[NOTE]
+======
+PostgreSQL superuser with _Replication_ permissions are required to perform this procedure. 
+======
 
 . SSH into the database server as the *root* user.
 +
-. Enter the `pg_basebackup` command.
+. Run the `pg_basebackup` command to create the backup.
 -----
 # pg_basebackup -x -h <ADDRESS> -U root -Ft -z -D miq-backup<WHAT IS CFME directory?>
 -----
 
-==== Restoring a Database from the  Backup
-If a database is corrupt or fails, restore it from a backup.
+===== Restoring a Database from the Backup
+Restore your PostgreSQL binary backup using the following steps. This process will require stopping both EVM and PostgreSQL services before restoring data.  
 
 . Copy the existing backup to the target VM
 +
@@ -2970,10 +2975,15 @@ If a database is corrupt or fails, restore it from a backup.
 # scp miq-backup/base.tar.gz root@<ip@ of DB server>:/var/www/cfme
 -----
 +
-. SSH to the target VM and stop both the EVM and PostgreSQL servers.
+. SSH to the target VM
 +
 -----
 # ssh root@<DB SERVER IP>
+-----
++
+. Stop both the EVM and PostgreSQL servers.
++
+-----
 # systemctl stop evmserverd
 # systemctl stop $APPLIANCE_PG_SERVICE
 -----
@@ -2984,19 +2994,19 @@ If a database is corrupt or fails, restore it from a backup.
 # mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
 -----
 +
-. Create a clean data directory
+. Create a clean data directory.
 +
 -----
 # mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
 -----
 +
-. Unzip the tar file to the new directory
+. Unzip the tar file to the new directory.
 +
 -----
 # tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data 
 -----
 +
-. Correct permissions
+. Correct permissions.
 +
 -----
 # chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data  

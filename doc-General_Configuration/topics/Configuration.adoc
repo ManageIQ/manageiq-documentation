@@ -2955,7 +2955,7 @@ The appliance console menu may respond slowly if connections are open and the se
 [[binary-backup-and-restore-database]]
 ==== Performing a Binary Backup and Restoring the Database
 Preserve data at the file system level by performing a binary backup. 
-This includes all databases, users and roles, replication slots and other objects. 
+This includes all databases, users and roles, and other objects. 
 This procedure uses the `pg_basebackup` utility to create a full replacement of the PostgreSQL data directory, capturing the exact state of the database when the backup finishes.
 
 ===== Performing a Binary Backup
@@ -2964,14 +2964,14 @@ Create a binary backup and store it as a tar file inside the {product-title_shor
 
 [NOTE]
 ======
-PostgreSQL superuser with _Replication_ permissions are required to perform this procedure. 
+PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure. 
 ======
 
-. SSH into the database server as the *root* user.
+. SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
 +
 . Run the `pg_basebackup` command to create the backup.
 -----
-# pg_basebackup -x -h <ADDRESS> -U root -Ft -z -D miq-backup<WHAT IS CFME directory?>
+# pg_basebackup -x -h <DB_SERVER_IP> -U root -Ft -z -D cfme-backup
 -----
 
 ===== Restoring a Database from the Backup
@@ -2980,13 +2980,13 @@ Restore your PostgreSQL binary backup using the following steps. This process wi
 . Copy the existing backup to the target VM
 +
 -----
-# scp miq-backup/base.tar.gz root@<ip@ of DB server>:/var/www/cfme
+# scp cfme-backup/base.tar.gz root@<DB_SERVER_IP>:/var/www/cfme
 -----
 +
 . SSH to the target VM
 +
 -----
-# ssh root@<DB SERVER IP>
+# ssh root@<DB_SERVER_IP>
 -----
 +
 . Stop both the EVM and PostgreSQL servers.

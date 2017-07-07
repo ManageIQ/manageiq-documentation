@@ -2731,16 +2731,18 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 
 To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version. 
 
-You can configure centralized administration via the database replication configuration steps described in this section. Once configured, {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy. 
-
 [NOTE]
-======
-You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
-======
+====
+When you configure database replication in this version of {product-title_short}, centralized administration gets automatically enabled and no further configuration is needed.
+====
 
-[NOTE]
+Centralized administration in {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy. 
+
+[IMPORTANT]
 ======
-The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
+* You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
+
+* The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
 ======
 
 [[configuring-a-remote-copy]]
@@ -2761,7 +2763,7 @@ Configure a {product-title} instance to act as a remote copy from which data wil
 
 Configure a {product-title} instance to act as the global copy to which data is replicated from the remote copies.
 
-image:add-subscription.png[Add Subscription]
+image:add-subscription-global.png[Add Subscription]
 
 . Log in to the appliance as the *root* user.
 . Enter `appliance_console`, and press *Enter*.
@@ -2778,33 +2780,14 @@ image:add-subscription.png[Add Subscription]
 
 [NOTE]
 ====
-Central administration can only be enabled after the initial data sync is complete. You must save the subscription before this can be done.
+Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, centralized administration is automatically enabled after the initial data sync is complete.
 ====
 
-[[enabling-disabling-central-admin]]
-===== Enabling / Disabling Centralized Administration
+Database replication and centralized administration are now enabled on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. 
 
-Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, you can enable centralized administration after the initial data sync is complete.
-
-image:centralized_admin_disabled.png[Centralized Administration Config]
-
-. Navigate to the settings menu.
-. Click *Configuration*.
-. Click the *Settings* accordion.
-. Click the region where the instance is located.
-. Click *Replication*.
-. For your saved subscription, click the menu in *Actions*, then click *Enable Central Admin*. You can also *Validate* your subscription. 
-
-Once centralized administration is enabled, *Central Admin Enabled* will change to _Yes_.
-
-[NOTE]
-====
-If centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*, or *Delete* your saved subscription. 
-====
-
-image:centralized_admin_enabled.png[Centralized Administration Enabled]
-
-Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.5/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
+ifdef::cfme[]
+See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
+endif::cfme[]
 
 [[resetting-database-replication]]
 ===== Resetting Database Replication

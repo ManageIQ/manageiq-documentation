@@ -17,7 +17,6 @@ postgresql-1-wfv59   1/1       Running   0          24m
 $ oc deploy cloudforms --retry
 Retried #1
 Use 'oc logs -f dc/cloudforms' to track its progress.
-```
 ------
 +
 . Allow a few seconds for the failed pod to get re-scheduled, then check events and logs:
@@ -33,10 +32,10 @@ Events:
 +
 Liveness and readiness probe failures, like in the output above, indicate the pod is taking longer than expected to come online. In this case, check the pod logs.
 +
-. As the cfme-app container is `systemd` based, use `oc rsh` instead of `oc logs` to obtain journal dumps:
+. As the `cfme-app` container is `systemd` based, use `oc rsh` instead of `oc logs` to obtain journal dumps:
 +
 ------
-$ oc rsh <pod-name> journalctl -x`
+$ oc rsh <pod-name> journalctl -x
 ------
 +
 . Transferring all logs from the `cfme-app` pod to a directory on the host for further examination can be useful for troubleshooting. Transfer the logs with the `oc rsync` command:

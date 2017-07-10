@@ -77,7 +77,7 @@ Users:					system:serviceaccount:<your-namespace>:cfme-anyuid
 .. As the admin user, add the default service account by running:
 +
 ------
-$ oadm policy add-scc-to-user privileged system:serviceaccount:<your-namespace>:default
+$ oc adm policy add-scc-to-user privileged system:serviceaccount:<your-namespace>:default
 ------
 +
 .. Verify that your default service account is now included in the `privileged` security context constraints (SCCs):
@@ -91,7 +91,7 @@ Users:                  system:serviceaccount:openshift-infra:build-controller,s
 +
 A basic {product-title_short} deployment needs at least two persistent volumes (PVs) to store {product-title_short} data. As the admin user, create two persistent volumes: one to host the {product-title_short} PostgreSQL database, and one to host the application data. 
 +
-Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v1.5/cfme-templates/[GitHub]. Edit settings within the files to match your environment, and at minimum, configure the correct NFS server host and appropriate path.
+Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v1.5/cfme-templates/[GitHub]. 
 +
 [NOTE]
 ====
@@ -99,6 +99,8 @@ For NFS-backed volumes, ensure your NFS server firewall is configured to allow t
 
 Red Hat recommends setting permissions for the pv-app (privileged pod volume) as 777, uid/gid 0 (owned by root). For more information on configuring persistent storage in OpenShift Container Platform, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/installation_and_configuration/#configuring-persistent-storage[OpenShift Container Platform Installation and Configuration] guide.	
 ====
++
+.. Configure your NFS server host details within these files, and edit any other settings needed to match your environment.
 +
 .. Run the following commands to create the two persistent volumes: 
 +
@@ -125,9 +127,9 @@ Red Hat recommends validating NFS share connectivity from an OpenShift node befo
 +
 By default, OpenShift Container Platform can import five tags per image stream, but the {product-title_short} repositories contain more than five images for deployments.
 +
-You can modify this setting on the master node at `/etc/origin/master/master-config.yml` so OpenShift can import additional images. 
+You can modify this setting on the master node at `/etc/origin/master/master-config.yaml` so OpenShift can import additional images. 
 +
-.. Add the following at the end of the `/etc/origin/master/master-config.yml` file: 
+.. Add the following at the end of the `/etc/origin/master/master-config.yaml` file: 
 +
 ----
 ...
@@ -289,7 +291,7 @@ Volumes:
 +
 By default, on initial deployments the automatic image change trigger is enabled. This could potentially start an unintended upgrade on a deployment if a newer image is found in the ImageStream.
 +
-Disable the automatic image change triggers for {product-title_short} DCs on each project with the following commands:
+Disable the automatic image change triggers for {product-title_short} deployment configurations (DCs) on each project with the following commands:
 +
 ----
 $ oc set triggers dc --manual -l app=cloudforms
@@ -315,12 +317,12 @@ StatefulSets in OpenShift allow scaling of {product-title_short} appliances. See
 
 [IMPORTANT]
 ====
-Each new replica, or server, will consume a physical volume. Before scaling, ensure you have enough physical volumes available to scale. 
+Each new replica (server) consumes a physical volume. Before scaling, ensure you have enough physical volumes available to scale. 
 ====
 
 The following example shows scaling using StatefulSets:
 
-.Example: Scaling to two replicas/servers
+.Example: Scaling to two replicas
 ----
 $ oc scale statefulset cloudforms --replicas=2
 statefulset "cloudforms" scaled

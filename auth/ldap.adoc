@@ -134,7 +134,7 @@ example, customizing the main *[domain/example.com]* section for the particular 
     cache_credentials = True
 =>  entry_cache_timeout = 600
 
-=>  ldap_user_extra_attrs = mail, givenname, sn, displayname
+=>  ldap_user_extra_attrs = mail, givenname, sn, displayname, domainname
 
     [sssd]
 =>  domains = example.com
@@ -152,7 +152,7 @@ example, customizing the main *[domain/example.com]* section for the particular 
 =>  [ifp]
 =>  default_domain_suffix = example.com
 =>  allowed_uids = apache, root
-=>  user_attributes = +mail, +givenname, +sn, +displayname
+=>  user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 ----
 
 ==== Testing SSSD Updates
@@ -176,7 +176,7 @@ systemctl restart sssd
 Example query of user attributes for user evmuser.  This primarily validates the _ldap_user__ attributes of *sssd.conf*.
 
 ----
-# dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserAttr string:evmuser array:string:mail,givenname,sn,displayname
+# dbus-send --print-reply --system --dest=org.freedesktop.sssd.infopipe /org/freedesktop/sssd/infopipe org.freedesktop.sssd.infopipe.GetUserAttr string:evmuser array:string:mail,givenname,sn,displayname,domainname
 ----
 
 Query groups of user evmuser.  This primarily validates the _ldap_group__ attributes of *sssd.conf*.

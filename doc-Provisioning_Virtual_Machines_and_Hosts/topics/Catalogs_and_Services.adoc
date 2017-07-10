@@ -1,60 +1,19 @@
 [[catalogs-services]]
 == Catalogs and Services
 
-[[about-catalogs-and-services]]
-=== About Catalogs and Services
-
 Through the use of catalogs, {product-title} provides support for multi-tier service provisioning to deploy layered workloads across hybrid environments. You can create customized dialogs that will give consumers of the services the ability to input just a few parameters and provision the entire service.
 
-[[terminology]]
-=== Terminology
+.Terminology:
 
-*Terminology*
+*Catalog Bundle*:: A group of templates.
+*Catalog Item*:: A single template.
+*Template*:: A template is a copy of a preconfigured virtual machine, designed to capture the installed software and software configurations, as well as the hardware configuration of the original virtual machine.
+*Dialog Tabs*:: Part of a service dialog.
+*Element*:: An item on a tab in a dialog. It can be a button, check box, drop down list, radio button, tag control, text area box, or a text box.
+*Provisioning Dialogs*:: Dialogs created for host provisioning, virtual machine migration, or virtual machine provisioning. The dialog name must be added to the appropriate provision instance to be processed.
+*Service Catalog*:: A catalog item or catalog bundle that is available for provisioning.
+*Service Dialogs*:: Made up of fully customizable tabs, items, and values for use with service provisioning.
 
-*Catalog Bundle*:: A grouping of Templates.
-*Catalog Item*:: A single Template or a group of Templates (catalog bundle).
-*Dialog Tabs*:: Part of a Service Dialog.
-*Element*:: An item on a tab in a Dialog. It can be a Button, Check Box, Drop Down List, Radio Button, Tag Control, Text Area Box, or a Text Box.
-*Provisioning Dialogs*:: Dialogs created for Host Provisioning, VM Migration, or VM Provisioning. The dialog name must be added to the appropriate provision instance to be processed.
-*Service Catalog*:: A catalog item or Catalog bundle that is available for provisioning.
-*Service Dialogs*:: Made up of fully customizable tabs, items, and values for use with Service provisioning.
-*Template*:: A template is a copy of a preconfigured virtual machine, designed to capture installed software and software configurations, as well as the hardware configuration, of the original virtual machine.
-
-[[catalogs]]
-=== Catalogs
-
-Catalogs are used to create groups of virtual machines or instances for provisioning. For example, a complete package of a database server, desktop with specialized software already on it, and a firewall. You will need to complete the following steps to create and provision a service catalog.
-
-. Create *Catalog Items* for each virtual machine or instance that will be part of the service.
-. Create a *Service* dialog. For example, create a dropdown with three options small, medium, and large.
-. Create a method for the Service Dialog. This method defines what each of the options means to each of the individual virtual machines or cloud instances for the service. This method is called from a service provisioning instance in the Automate model.
-. Create an instance in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class that calls the method.
-+
-[NOTE]
-====
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-====
-+
-. Associate method with Automate instance.
-. Create a *Catalog Bundle*, adding each of the catalog items to it. Select the *Service Dialog* you created. Use the instance created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the *Entry Point*. Check *Display in Catalog* box.
-. Provision a service.
-
-[[creating-a-catalog-item]]
-==== Creating a Catalog Item
-
-Create a catalog item for each virtual machine or cloud instance that will be part of the service.
-
-include::common/catalog-item-creation.adoc[]
-
-[[create-playbook-service-catalog-item]]
-===== Creating an Ansible Playbook Service Catalog Item
-
-include::common/create-playbook-service-catalog-item.adoc[]
-
-[[create-tower-catalog-item]]
-===== Creating an Ansible Tower Service Catalog Item
-
-include::common/create-tower-catalog-item.adoc[]
 
 [[service-dialogs]]
 ==== Service Dialogs
@@ -88,6 +47,7 @@ You can share service dialogs between appliances using the export and import fea
 . In the *Import/Export* accordion, click *Service Dialog Import/Export*.
 . In the *Export* area, select the service dialogs that you want to export.
 . Click *Export*.
+
 
 [[methods]]
 ==== Methods
@@ -275,6 +235,27 @@ Service methods have been split based on purpose.
 
 Now that the catalog items, service dialog, dialog methods, and service provision instance have been created, you can create the catalog bundle.
 
+
+[[catalogs]]
+=== Catalogs
+
+Catalogs are used to create groups of virtual machines or instances for provisioning. For example, a complete package of a database server, desktop with specialized software already on it, and a firewall. You will need to complete the following steps to create and provision a service catalog.
+
+. Create *Catalog Items* for each virtual machine or instance that will be part of the service.
+. Create a *Service* dialog. For example, create a dropdown with three options small, medium, and large.
+. Create a method for the Service Dialog. This method defines what each of the options means to each of the individual virtual machines or cloud instances for the service. This method is called from a service provisioning instance in the Automate model.
+. Create an instance in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class that calls the method.
++
+[NOTE]
+====
+DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+====
++
+. Associate method with Automate instance.
+. Create a *Catalog Bundle*, adding each of the catalog items to it. Select the *Service Dialog* you created. Use the instance created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the *Entry Point*. Check *Display in Catalog* box.
+. Provision a service.
+
+
 [[creating-a-catalog-bundle]]
 ==== Creating a Catalog Bundle
 
@@ -295,6 +276,24 @@ A catalog bundle is created and visible in the *Service Catalog* accordion.
 ====
 You should also create and specify an Entry Point in the `DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that is part of a bundle. If you do not, then the pre and post provision processing will occur for each item in the bundle in addition to processing for the *Catalog Bundle*. To set the entry point, go into each *Catalog Item* and check *Display in Catalog*. Then, you will see the *Entry Point* field.
 ====
+
+[[creating-a-catalog-item]]
+==== Creating a Catalog Item
+
+Create a catalog item for each virtual machine or cloud instance that will be part of the service.
+
+include::common/catalog-item-creation.adoc[]
+
+[[create-playbook-service-catalog-item]]
+===== Creating an Ansible Playbook Service Catalog Item
+
+include::common/create-playbook-service-catalog-item.adoc[]
+
+[[create-tower-catalog-item]]
+===== Creating an Ansible Tower Service Catalog Item
+
+include::common/create-tower-catalog-item.adoc[]
+
 
 [[provisioning-a-service]]
 ===== Provisioning a Service

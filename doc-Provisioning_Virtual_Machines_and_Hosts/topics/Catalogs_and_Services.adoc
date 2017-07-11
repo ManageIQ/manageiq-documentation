@@ -3,7 +3,22 @@
 
 Through the use of catalogs, {product-title} provides support for multi-tier service provisioning to deploy layered workloads across hybrid environments. You can create customized dialogs that will give consumers of the services the ability to input just a few parameters and provision the entire service.
 
-.Terminology:
+.Terminology
+[width="100%",cols="40%,60%",options="header",]
+|====
+|Type|Information
+|Catalog Bundle|A group of templates.
+|Catalog Item|A single template.
+|Template|A template is a copy of a preconfigured virtual machine, designed to capture the installed software and software configurations, as well as the hardware configuration of the original virtual machine.
+|Dialog Tabs|Part of a service dialog.
+|Element|An item on a tab in a dialog. It can be a button, check box, drop down list, radio button, tag control, text area box, or a text box.
+|Provisioning Dialogs|Dialogs created for host provisioning, virtual machine migration, or virtual machine provisioning. The dialog name must be added to the appropriate provision instance to be processed.
+|Service Catalog|A catalog item or catalog bundle that is available for provisioning.
+|Service Dialogs|Made up of fully customizable tabs, items, and values for use with service provisioning.
+|====
+
+
+////
 
 *Catalog Bundle*:: A group of templates.
 *Catalog Item*:: A single template.
@@ -14,11 +29,14 @@ Through the use of catalogs, {product-title} provides support for multi-tier ser
 *Service Catalog*:: A catalog item or catalog bundle that is available for provisioning.
 *Service Dialogs*:: Made up of fully customizable tabs, items, and values for use with service provisioning.
 
+////
+
+
 
 [[service-dialogs]]
 ==== Service Dialogs
 
-When provisioning a service, input will be needed from the requester. *Service Dialogs* are used to take input from the user. This input is connected to a method in the *Automate* model that defines how the users input is translated into the provision request. Before creating a *Service Dialog*, be sure to plan what items you need the user to input.
+When provisioning a service, input will be needed from the requester. Service dialogs are used to take input from the user. This input is connected to a method in the Automate model that defines how the users input is translated into the provision request. Before creating a service dialog, be sure to plan what items you need the user to input.
 
 [[adding-a-service-dialog]]
 ===== Adding a Service Dialog
@@ -64,7 +82,7 @@ You will need to create a method that connects the values in the dialog with the
 
 A method is provided below that was created for the following scenario:
 
-* You want to provision a three-tiered Service that contains catalog items of web, app and DB. Each of these virtual machines (or cloud instances) has been tagged under the *Service* category with the appropriate value. Then, added as a catalog item and combined into a catalog bundle.
+* You want to provision a three-tiered service that contains catalog items of web, app and DB. Each of these virtual machines (or cloud instances) has been tagged under the *Service* category with the appropriate value. Then, added as a catalog item and combined into a catalog bundle.
 * The *Service Dialog* captures the selection of small, medium or large application in a dropdown called *service_type*. When referring to a value captured in an element in a dialog, the name of the element should be prefixed with *dialog_*. For example, *service_type* becomes *dialog_service_type* when used in the method.
 * The method will set the memory sizes for each of the catalog items based on the *service_type* selection.
 
@@ -182,8 +200,8 @@ Service methods have been split based on purpose.
 +
 . Click the *Methods* tab.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Add a New Method*).
-. Type in a *Name* and *Display Name*.
-. In the *Data* field, type in the method contents.
+. Enter a *Name* and *Display Name*.
+. In the *Data* field, enter the method contents.
 . Click *Validate* and wait for your data entry to be successfully validated.
 . Click *Add*.
 image:6297.png[]
@@ -201,8 +219,8 @@ image:6297.png[]
 +
 . Click the *Instances* tab.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Add a new Instance*).
-. Type in a *Name* and *Display Name*.
-. In the *Fields* area, type in the method's name in *Value*.
+. Enter a *Name* and *Display Name*.
+. In the *Fields* area, enter the method's name in *Value*.
 . Click *Add*.
 
 The instance is created so that it can be called from the *ServiceProvision* class.
@@ -233,8 +251,6 @@ Service methods have been split based on purpose.
 . In the *configurechilddialog* value, put the path to the method.
 . Click *Save* or *Add* if you are adding this to a new instance.
 
-Now that the catalog items, service dialog, dialog methods, and service provision instance have been created, you can create the catalog bundle.
-
 
 [[catalogs]]
 === Catalogs
@@ -262,7 +278,7 @@ DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If nece
 . Navigate to menu:Services[Catalogs].
 . Click the *Catalog Items* accordion.
 . Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a New Catalog Bundle*).
-. In *Basic Info*, type in a name and description:
+. In *Basic Info*, enter a name and description:
 image:2362.png[]
 . Click *Display in Catalog*.
 . Select the appropriate dialog name.

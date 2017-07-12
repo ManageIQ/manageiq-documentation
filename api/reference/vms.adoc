@@ -18,6 +18,7 @@ Management of Virtual Machines adds support of the following actions:
 | set_owner | Sets the owner of a VM
 | add_event | Adding an Event to a VM
 | add_lifecycle_event | Add a Lifecycle Event to a VM
+| edit | Edits a VM
 | delete | Deletes a VM in the Appliance
 |=====================
 
@@ -34,6 +35,7 @@ Management of Virtual Machines adds support of the following actions:
 * link:#set-owner-vm[Setting Owner of a VM]
 * link:#add-event-vm[Adding an Event to a VM]
 * link:#add-lifecycle-event-vm[Adding a Lifecycle Event to a VM]
+* link:#edit-vm[Editing a VM]
 * link:#delete-vm[Deleting a VM]
 
 [[targeting-vms]]
@@ -233,6 +235,74 @@ NOTE: event_time above is optional. If skipped, current time will be used.
   }
 }
 ----
+
+[[edit-vm]]
+=== Editing a VM
+
+Basic information of VMs can be edited. This includes the following:
+
+[options=header,cols="2,4",width=80%]
+|======================
+| VM Info | Attribute
+| description | description
+| custom attributes | custom_1 ... custom_9
+| parent resource | parent_resource - resource href reference
+| child resources | child_resources - array of resource href references
+|======================
+
+VM resources can be edited as follows:
+
+[source,data]
+----
+POST /api/vms/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "description" : "Updated VM Description",
+    "custom_1" : "custom_attribute_1",
+    "parent_resource" : { "href" : "http://localhost:3000/api/vms/11" },
+    "child_resources" : [
+      { "href" : "http://localhost:3000/api/vms/101" },
+      { "href" : "http://localhost:3000/api/vms/102" },
+      { "href" : "http://localhost:3000/api/vms/103" },
+      { "href" : "http://localhost:3000/api/vms/104" }
+    ]
+  }
+}
+----
+
+VMs can also be edited in Bulk as follows:
+
+[source,data]
+----
+POST /api/vms
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/vms/11",
+      "custom_9" : "vm_class_a"
+    },
+    {
+      "href" : "http://localhost:3000/api/vms/12",
+      "custom_9" : "vm_class_a"
+    },
+    {
+      "href" : "http://localhost:3000/api/vms/13",
+      "custom_9" : "vm_class_a"
+    }
+  ]
+}
+----
+
 
 [[delete-vm]]
 === Deleting a VM

@@ -2942,6 +2942,98 @@ The appliance console menu may respond slowly if connections are open and the se
 # systemctl start rh-postgresql95-repmgr
 ----
 
+[[binary-backup-and-restore-database]]
+==== Performing a Binary Backup and Restoring the Database
+Preserve data at the file system level by performing a binary backup. 
+This includes all databases, users and roles, and other objects. 
+
+[NOTE]
+====
+This procedure uses the `pg_basebackup` utility to perform a remote database backup and create a full replacement of the PostgreSQL data directory, capturing the exact state of the database when the backup finishes. For more information on the `pg_basebackup` utility, see the PostgreSQL documentation.
+====
+
+===== Performing a Binary Backup
+
+Create a binary backup and store it as a `gzip` tar file inside the {product-title_short} backup directory. 
+
+[IMPORTANT]
+======
+PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure. 
+======
+
+. SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
++
+. Run the `pg_basebackup` command to create the backup.
++
+-----
+# pg_basebackup -x -h hostname -U root -Ft -z -D filename
+-----
++
+> where:
+>
+> *-h* _hostname_ 
+>     
+>     Specifies the IP address of the database server.
+>
+> *-D* _filename_
+>
+>    Specifies the name of the directory created to contain the backup.
+
+ 
+===== Restoring a Database from the Backup
+Restore your PostgreSQL binary backup using the following steps. This process will require stopping both EVM and PostgreSQL services before restoring data.  
+
+. Copy the existing backup to the target VM
++
+-----
+# scp filename/base.tar.gz root@hostname:/var/www/miq
+-----
++
+. SSH to the target VM.no
+
++
+-----
+# ssh root@hostname
+-----
++
+. Stop both the EVM and PostgreSQL servers.
++
+-----
+# systemctl stop evmserverd
+# systemctl stop $APPLIANCE_PG_SERVICE
+-----
++
+. Rename the existing data directory. 
++
+-----
+# mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
+-----
++
+. Create a clean data directory.
++
+-----
+# mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Unzip the tar file to the new directory.
++
+-----
+# tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Correct permissions.
++
+-----
+# chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data  
+# chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Restart the PostgreSQL and EVM servers.
++
+-----
+# systemctl start $APPLIANCE_PG_SERVICE
+# systemctl start evmserverd
+-----
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection

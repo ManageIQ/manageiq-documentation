@@ -65,14 +65,14 @@ $ qemu-img convert -f vpc -O raw <image-name.vhd> <image-name.raw>
 
 Example:
 
-$ qemu-img convert -f vpc -O raw cfme-azure-5.7.2.1-1.x86_64.vhd cfme-azure-5.7.2.1-1.x86_64.raw
+$ qemu-img convert -f vpc -O raw cfme-azure-5.8.0.17-1.x86_64.vhd cfme-azure-5.8.0.17-1.x86_64.raw
 ----
 +
 . Copy and paste the script below into a new bash shell script file, for example, `aligned-size.sh`. Change _rawdisk="image-name"_ to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
 +
 ----
 #!/bin/bash
-rawdisk="cfme-azure-5.7.2.1-1.x86_64.raw"
+rawdisk="cfme-azure-5.8.0.17-1.x86_64.raw"
 MB=$((1024 * 1024))
 size=$(qemu-img info -f raw --output json "$rawdisk" | gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 rounded_size=$((($size/$MB + 1) * $MB))
@@ -95,7 +95,7 @@ $ qemu-img resize -f raw <image-name.raw> <rounded_size>
 
 Example:
 
-$ qemu-img resize -f raw cfme-azure-5.7.2.1-1.x86_64.raw 34361835520
+$ qemu-img resize -f raw cfme-azure-5.8.0.17-1.x86_64.raw 34361835520
 
 Image resized.
 ----
@@ -103,11 +103,11 @@ Image resized.
 . Convert the appliance image to a fixed-size .vhd file.
 +
 ----
-$ qemu-img convert -f raw -o subformat=fixed -O vpc <image-name.raw> <image-name.vhd>
+$ qemu-img convert -f raw -o subformat=fixed,force_size -O vpc <image-name.raw> <image-name.vhd>
 
 Example:
 
-qemu-img convert -f raw -o subformat=fixed -O vpc cfme-azure-5.7.2.1-1.x86_64.raw cfme-azure-5.7.2.1-1.x86_64.vhd
+qemu-img convert -f raw -o subformat=fixed,force_size -O vpc cfme-azure-5.8.0.17-1.x86_64.raw cfme-azure-5.8.0.17-1.x86_64.vhd
 ----
 +
 . Get the virtual size for the .vhd file.
@@ -117,11 +117,11 @@ $ qemu-img info --output=json -f vpc <path-to-image>
 
 Example:
 
-$ qemu-img info --output=json -f vpc cfme-azure-5.7.2.1-1.x86_64.vhd
+$ qemu-img info --output=json -f vpc cfme-azure-5.8.0.17-1.x86_64.vhd
 
 {
   "virtual-size": 34361835520,
-  "filename": "cfme-azure-5.7.2.1-1.x86_64.vhd",
+  "filename": "cfme-azure-5.8.0.17-1.x86_64.vhd",
   "cluster-size": 2097152,
   "format": "vpc",
   "actual-size": 2133401600,
@@ -139,7 +139,7 @@ $ qemu-img info --output=json -f vpc cfme-azure-5.7.2.1-1.x86_64.vhd
 
 [IMPORTANT]
 ====
-qemu-img version 1.5.3 is used in this procedure. Check the qemu-img version using the command: `yum info qemu-img`. If the version is 2.2.1 or later, add the option _force_size_ in the conversion command, for example, _subformat=fixed,force_size_. 
+qemu-img version 2.7.1 is used in this procedure. Check the qemu-img version using the command: `yum info qemu-img`. If the version is lower than 2.2.1, remove the option _force_size_ from the conversion command, for example, _subformat=fixed_. 
 ====
 
 The {product-title} Azure virtual appliance image is ready for uploading and provisioning in Microsoft Azure.
@@ -301,7 +301,7 @@ $ az storage blob upload --account-name <storage-account-name> --container-name 
 
 Example:
 
-$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.7.2.1-1.x86_64.vhd --name cfme-azure-5.7.2.1-1.x86_64.vhd
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.0.17-1.x86_64.vhd --name cfme-azure-5.8.0.17-1.x86_64.vhd
  
 Percent complete: %100.0
 ----
@@ -313,9 +313,9 @@ $ az storage blob url -c <container-name> -n <image-name>.vhd
 
 Example:
 
-$ az storage blob url -c azrhelclistcont -n cfme-azure-5.7.2.1-1.x86_64.vhd 
+$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.0.17-1.x86_64.vhd 
 
-"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.7.2.1-1.x86_64.vhd"
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.0.17-1.x86_64.vhd"
 ----
 +
 . Create the virtual machine. Note that the following command uses `--generate-ssh-keys`. In this example, the private/public key pair `/home/clouduser/.ssh/id_rsa` and `/home/clouduser/.ssh/id_rsa.pub` are created.
@@ -325,7 +325,7 @@ $ az vm create --resource-group <resource-group> --location <azure-region> --use
 
 Example:
 
-az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.7.2.1-1.x86_64.vhd
+az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.0.17-1.x86_64.vhd
 
 {
   "fqdns": "",

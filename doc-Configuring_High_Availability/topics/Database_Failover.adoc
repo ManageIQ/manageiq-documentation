@@ -112,8 +112,8 @@ Correct this by running the following steps:
 +
 ----
 # psql vmdb_production
-vmdb_production=#select * from repl_nodes
-vmdb_production=#delete from repl_nodes table where id = $cluster_node_id_of_failed node
+vmdb_production=#select * from repl_nodes;
+vmdb_production=#delete from repl_nodes table where id = $cluster_node_id_of_failed node;
 ----
 +
 .. Delete the replication slot information for the failed database node. 
@@ -125,8 +125,8 @@ vmdb_production=#delete from repl_nodes table where id = $cluster_node_id_of_fai
 +
 ----
 # psql vmdb_production
-vmdb_production=#select * from pg_replication_slots
-vmdb_production=#select pg_drop_replication_slot('repmgr_slot_$failed_node_cluster_id')
+vmdb_production=#select * from pg_replication_slots;
+vmdb_production=#select pg_drop_replication_slot('repmgr_slot_$failed_node_cluster_id');
 ----
 +
 .. Reinitialize the standby database as described in xref:configuring_standby_db[] to re-add the node.

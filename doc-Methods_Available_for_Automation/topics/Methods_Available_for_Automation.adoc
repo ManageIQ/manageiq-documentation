@@ -2878,7 +2878,7 @@ The following methods can be used on a virtual machine or template object.
 						
 | 
 							
-								Create a snapshot of the object. The *name* parameter is not required for Red Hat Virtualization virtual machines when creating a snapshot. 
+								Create a snapshot of the object. The *name* parameter is not used for Red Hat Virtualization virtual machines when creating a snapshot. 
 							
 						
 
@@ -3595,6 +3595,21 @@ The following methods can be used on a virtual machine or template object.
     $evm.log("info","#{@method} - VM:<#{vm.name}> Creating Snapshot:<#{snap_name}> Description:<#{snap_desc}>")
     vm.create_snapshot(snap_name, snap_desc)
   end
+----
+
+[source,ruby]
+----
+
+  ####################
+  # Red Hat Virtualization Virtual Machines
+  # Method: createSnapshot
+  #
+  ####################
+
+	def createSnapshot(vm, snap_desc=snap_name)
+		$evm.log("info","#{@method} - VM:<#{vm.name}> Creating Snapshot:<#{snap_name}> Description:<#{snap_desc}>")
+		vm.create_snapshot(snap_desc)
+	end
 ----
 
 [[_sect_vms_vm]]

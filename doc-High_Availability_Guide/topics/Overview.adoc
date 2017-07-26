@@ -10,10 +10,6 @@ This guide describes two types of appliances used in high availability:
 
 Unlike the high availability method configured in older versions of {product-title_short} using `pacemaker`, the built-in database high availability in {product-title_short} 4.2 and newer is achieved by `repmgr` database replication with PostgreSQL. 
 
-////
-we monitor the repmgr metadata about what database servers are present in the cluster. When the database we (a particular server) are configured against goes down, we start polling each of the configured standby servers to monitor which one comes up as the new primary. The promotion is orchestrated either by repmgrd on the database servers or is done manually. When we find that a standby has been promoted we reconfigure {product-title_short} (by writing the new IP address in the `database.yml` file) to point to the new primary.
-////
-
 In this configuration, a failover monitor daemon is configured and running on each {product-title_short} (non-database) server. The failover monitor watches the `repmgr` metadata about the database-only appliances present in the cluster. When the primary database-only appliance goes down, the {product-title_short} appliances start polling each of the configured standby database-only appliances to monitor which one comes up as the new primary. The promotion is orchestrated either by `repmgrd` on the database-only servers or is done manually. When the {product-title_short} appliances find that a standby has been promoted, {product-title_short} reconfigures the setup by writing the new IP address in the `database.yml` file to point to the new primary.
 
 

@@ -285,7 +285,7 @@ ifdef::cfme[]
 [[registering-and-updating]]
 ===== Registering and Updating {product-title}
 
-You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
+You can register appliances, edit customer information, and apply {product-title_short} updates from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
 
 The following tools are used during the update process:
 
@@ -310,15 +310,29 @@ include::common/configuration-register-appliance.adoc[]
 
 
 [[Updating_Appliances]]
-====== Updating Appliances
+====== Updating the {product-title_short} Application
 
-include::common/configuration-update-appliance.adoc[]
+An important part of securing {product-title} is to ensure your appliances use the latest software packages.     
 
+The *Red Hat Updates* tab in the {product-title_short} user interface enables you to check for updates and update registered appliances. Any services requiring a restart to apply updates are automatically restarted as part of the *Red Hat Updates* process.
 
 [IMPORTANT]
+====
+Using the *Red Hat Updates* tab only applies software updates for the CloudForms application. See xref:appliance_package_updates[] for instructions on applying Red Hat errata. To upgrade your {product-title_short} appliance to a newer version, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/migrating_to_red_hat_cloudforms_4.5/[_Migrating to CloudForms 4.5_].    
+====
+
+To apply updates to the {product-title_short} application:
+
+. From the settings menu, select *Configuration*.
+. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
+. Click *Check For Updates* to search the Content Delivery Network (CDN) for any updated {product-title_short} packages. If an appliance update is available, it will be listed with the available version.
+. Click *Apply CFME Update* to install and update {product-title} packages. The {product-title_short} service will be automatically restarted as needed.
+
+[NOTE]
 ======
-Red Hat recommends updating the appliance using the *Red Hat Updates* tab only, which automatically restarts services and the appliance if needed. Running updates from the command line requires manually restarting the {product-title} service and sometimes the appliance. If updating the {product-title} appliance from the command line, use the `yum -y update cfme-appliance` command to update only {product-title} and its dependencies, and to avoid any potential incompatibilities that could be introduced by running `yum update`.
+If the appliance is registered to Red Hat Satellite, you can use content views to manage updates for {product-title}. For more information, see https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/content-management-guide#Creating_Content_Views[Creating Content Views] in the Red Hat Satellite 6 _Content Management Guide_.
 ======
+
 
 
 The following options are available in the *Appliance Updates* section of *Red Hat Updates*:
@@ -355,7 +369,7 @@ The following options are available in the *Appliance Updates* section of *Red H
 
 
 |
-            Attempts to register the appliance if it is not already registered. {product-title} subscribes to the `rhel-x86_64-server-6-cf-me-3` RHN channel for RHN-registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, {product-title} automatically checks for updates after registering.
+            Attempts to register the appliance if it is not already registered. {product-title} subscribes to the `cf-me-5.8-for-rhel-7-rpms rhel-server-rhscl-7-rpms` repositories, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, {product-title} automatically checks for updates after registering.
 |
                Apply CFME Update
 
@@ -367,33 +381,76 @@ The following options are available in the *Appliance Updates* section of *Red H
 |===
 
 
-[NOTE]
-======
-If the appliance is registered to Red Hat Satellite, you can use content views to manage updates for {product-title}. For more information, see https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/content-management-guide#Creating_Content_Views[Creating Content Views] in the Red Hat Satellite 6 _Content Management Guide_.
-======
 
 
-[[updating-the-appliance-operating-system]]
-====== Updating the Appliance Operating System
 
-Updating the appliance’s operating system requires a manual update using the `yum` command. This command updates all RPMs on the appliance, not just {product-title} packages, and is supported only when used as part of migration.
+[[appliance_package_updates]]
+====== Updating All Packages on the Appliance
+
+You can apply updates to the appliance using the yum command or Red Hat Satellite. This updates all RPMs on the appliance, not just the {product-title} packages. Yum can be used at any time to update any single package or the entire appliance to any new or updated packages available on the subscription. 
+
+[WARNING]
+====
+Updates to the the operating system, {product-title_short} application or dependent packages may introduce incompatibilities in customized environments. Before applying updates to the appliance, back up the appliance or take a snapshot so that changes can be reverted in production environments if needed.    
+====
+
 
 [IMPORTANT]
-======
+====
 Scheduled downtime is required while updating system packages for the following reasons:
 
-* Some updates may interrupt {product-title} operations.
-* Updates for the PostgreSQL database server suspend {product-title} operations.
-* System updates may require a reboot of the {product-title} appliance.
+* Some updates may interrupt {product-title_short} operations.
+* Updates for the PostgreSQL database server suspend {product-title_short} operations.
+* System updates may require a reboot of the {product-title_short} appliance.
+====
 
-Red Hat recommends updating the appliance using the *Red Hat Updates* tab in the {product-title} user interface, which automatically restarts services and the appliance if needed. See xref:Updating_Appliances[] for instructions.
-======
+To update all packages on the appliance using `yum`, follow the procedure below. To update packages on the appliance using Red Hat Satellite, see https://access.redhat.com/documentation/en-us/red_hat_satellite/6.2/html/host_configuration_guide/chap-red_hat_satellite-host_configuration_guide-viewing_and_applying_errata[Viewing and Applying Errata] and https://access.redhat.com/documentation/en-us/red_hat_satellite/6.2/html/host_configuration_guide/sect-host_configuration_guide-configuring_and_running_remote_commands[Configuring and Running Remote Commands] in the Red Hat Satellite 6 documentation for more information.
 
-To update the appliance operating system:
+. Log into each appliance console as the root user and perform the following steps:
+.. Stop the CloudForms application (the evmserver process) with the following command:
++
+------
+# systemctl stop evmserverd
+------
++  
+.. Apply the software updates:
++
+------
+# yum update    
+------
++
+[IMPORTANT]
+====
+Do not reboot or restart yet.
+====
++      
+. Log into each server containing an internal database and perform the following steps:
+.. Stop the database with the following command:
++
+------
+# systemctl stop rh-postgresql95-postgresql.service
+------
++
+.. Apply the software updates:
++
+------
+# yum update
+------
++
+.. Reboot the server unless the errata or the command `needs-restarting` advises a restart is safe: 
++
+------
+# systemctl restart rh-postgresql95-postgresql.service 
+------
++                
+. Log into the appliance console on each appliance as the root user and perform the following steps:
+.. Reboot the server unless the errata or the command `needs-restarting` advises a restart is safe:
++
+------
+# reboot
+------
 
-. Log in to the appliance console as the root user.
-. Run the `yum update` command and confirm any updates.
-. Restart the appliance as required.
+
 
 
 [[subscription-management-for-virtual-environments]]
@@ -524,7 +581,7 @@ If Appliance A dispatches a job of analyzing twenty virtual machines, this job c
 
 [NOTE]
 ======
-Only users assigned the super administrator role can create zones. There must always be at least one zone. Default zone is provided. This can be removed only after you have created your own zones.
+Only users assigned the super administrator role can create zones. There must always be at least one zone. The *Default Zone* is provided and cannot be deleted. 
 ======
 
 [[creating-a-zone]]
@@ -642,6 +699,12 @@ These roles are enabled by default on all servers.
 
 [[server-roles]]
 ====== Server Roles
+
+[NOTE]
+====
+* Server roles that are in an active/active high availability configuration _(load balancing and failover protection)_ are active in more than one location; whereas, roles that are in an active/passive _(primary/secondary in the case of {product-title_short})_ high availability configuration _(failover protection)_, if more than one {product-title_short} server in a specific zone or region has this role, only one will be active _(primary)_ at a time and a failover has to occur to the passive _(secondary)_ appliance with that role.
+* For information on region and zone diagnostics and server role priorities, see xref:diagnostics[].
+====
 
 [width="100%",cols="50%,70%a,30%,55%",options="header",]
 |=======================================================================
@@ -954,17 +1017,20 @@ This group must be in the LDAP directory source you specified for the server. Se
 |EvmGroup-administrator|Administrator
 |EvmGroup-approver|Approver
 |EvmGroup-auditor|Auditor
+|EvmGroup-consumption_administrator|Consumption Administrator
+|EvmGroup-container_administrator|Container Administrator
+|EvmGroup-container_operator|Container Operator
 |EvmGroup-desktop|Desktop
 |EvmGroup-operator|Operator
 |EvmGroup-security|Security
 |EvmGroup-super_administrator|Super Administrator
 |EvmGroup-support|Support
-|EvmGroup-user|User
-|EvmGroup-user_limited_self_server|User Limited Self Service
-|EvmGroup-user_self_service|User Self Service
-|EvmGroup-vm_user|Vm User
 |EvmRole-tenant_administrator|Tenant Administrator
 |EvmRole-tenant_quota_administrator|Tenant Quota Administrator
+|EvmGroup-user|User
+|EvmGroup-user_limited_self_service|User Limited Self Service
+|EvmGroup-user_self_service|User Self Service
+|EvmGroup-vm_user|Vm User
 |=======================================================================
 +
 . Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
@@ -977,6 +1043,11 @@ This group must be in the LDAP directory source you specified for the server. Se
 ====== Configuring Lookup Priority for LDAP Groups
 
 {product-title} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. The lookup priority of these groups can be rearranged; to configure the order in which {product-title} looks up LDAP groups:
+
+[NOTE]
+====
+On initial login, a user's _current group_ assignment is the highest priority group. User group membership, on subsequent logins, is set as the last assigned group from the prior session.
+====
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Groups*.
@@ -2054,7 +2125,14 @@ To modify a schedule:
 [[access-control]]
 === Access Control
 
-From the settings menu, select *Configuration*. Click on the *Access Control* accordion to see a hierarchy of the configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, and tenants.
+From the settings menu, select *Configuration*. Click on the *Access Control* accordion to see a hierarchy of the configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, tenants, and projects. 
+
+ifdef::cfme[]
+[NOTE]
+====
+For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
+====
+endif::cfme[]
 
 [[creating-a-tenant]]
 ==== Creating a Tenant
@@ -2063,9 +2141,9 @@ To create a tenant:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. Click on the top-level *Tenant*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add child Tenant to this Tenant*) to create a Tenant.
-. Enter a name for the Tenant in the *Name* field.
-. Enter a description for the Tenant in the *Description* field.
+. Click on the top-level *Tenant*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add child Tenant to this Tenant*) to create a tenant.
+. Enter a name for the tenant in the *Name* field.
+. Enter a description for the tenant in the *Description* field.
 . Click *Add*.
 
 [[creating-a-project]]
@@ -2075,21 +2153,22 @@ To create a project:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. Click on the *Tenant* where you want to add a *Project*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add Project to this Tenant*) to create a Project.
-. Enter a name for the Project in the *Name* field.
-. Enter a description for the Project in the *Description* field.
+. Click on the *Tenant* where you want to add a *Project*, click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add Project to this Tenant*) to create a project.
+. Enter a name for the project in the *Name* field.
+. Enter a description for the project in the *Description* field.
 . Click *Add*.
 
 [[creating-a-project-quota]]
-==== Creating a Project Quota
+==== Managing Tenant and Project Quotas
 
-To create a project quota:
+Use the following procedure to allocate or edit quotas for tenants and projects.
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. Click on the *Project* where you want to add a Quota, click image:1847.png[] (*Configuration*), and image:1851.png[] (*Manage quotas for the Selected Item*) to create a quota.
-. In the list of pre-built quotas, mark *the _Enforced_ checkbox* next to the quota item you want to enable.
+. Click on the *Tenant* or *Project* where you want to add a quota, click image:1847.png[] (*Configuration*), and image:1851.png[] (*Manage quotas for the Selected Item*) to create a quota.
+. In the list of pre-built quotas, switch *Enforced* next to the quota item you want to enable to `Yes`.
 . In the *Value* field, enter the constraints you want to apply to the quota.
+image:manage-quotas.png[]
 . Click *Save*.
 
 
@@ -2099,8 +2178,8 @@ To tag tenants and projects:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Tenants*.
-. In the *Tenant or Project entry*, click the *Policy* drop-down menu, and select *Edit 'My Company' Tags for this Tenant*.
-. In the *Tag Assignment* table, click *Select a customer tag to assign*, and select a tag from the list. In the next column, set a corresponding value.
+. Select the tenant or project, then click *Policy*, and select *Edit My Company Tags for this Tenant*.
+. In *Tag Assignment*, click *Select a customer tag to assign*, and select a tag from the list. In the next column, set a corresponding value.
 . Click *Save*.
 
 
@@ -2112,7 +2191,7 @@ To create a user:
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Users*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new User*) to create a user.
-. Type in a *Full Name*, *Username*, *Password* with confirmation, *Email Address*, and choose a *Group* for the user.
+. Enter a *Full Name*, *Username*, *Password* with confirmation, *Email Address*, and choose a *Group* for the user.
 +
 image:2086.png[]
 +
@@ -2188,6 +2267,8 @@ If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is
 |Administrator|Administrator of the virtual infrastructure. Can access all infrastructure functionality. Cannot change server configuration.
 |Approver|Approver of processes, but not operations. Can view items in the virtual infrastructure, view all aspects of policies and assign policies to policy profiles. Cannot perform actions on infrastructure items.
 |Auditor|Able to see virtual infrastructure for auditing purposes. Can view all infrastructure items. Cannot perform actions on them.
+|Container Administrator|Administrator with capabilities to configure, view and execute tasks on all containers and related underlying infrastructure. Has access to Nodes, Pods and Projects dashboards. 
+|Container Operator|This role can view and execute tasks related to containers and related underlying infrastructure. The Container Operator has access to locked versions of the same dashboards as the Container Administrator. 
 |Desktop|Access to VDI pages.
 |Operator|Performs operations of virtual infrastructure. Can view and perform all functions on virtual infrastructure items including starting and stopping virtual machines. Cannot assign policy, but can view policy simulation from Virtual Machine page.
 |Security|Enforces security for the virtual environment. Can assign policies to policy profiles, control user accounts, and view all parts of virtual infrastructure. Cannot create policies or perform actions on virtual infrastructure.
@@ -2215,6 +2296,7 @@ image:2095.png[]
 image:2096.png[]
 . Click *Add*.
 
+
 [[diagnostics]]
 === Diagnostics
 
@@ -2230,8 +2312,10 @@ The Diagnostics area is designed in a hierarchy.
 
 Using the console, you can set the priority of server regional roles, review and reset replication, and create backups of your database either on demand or on a schedule.
 
-Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {product-title} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can
-also set priorities for the server roles that provide failover.
+Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {product-title} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can also set priorities for the server roles that provide failover.
+
+[[server-role-priorities]]
+===== Server Role Priorities
 
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
@@ -2270,6 +2354,7 @@ Tertiary roles simply show as active in the console.
 |=======================================================================
 
 
+
 [[setting-the-priority-of-a-failover-role]]
 ==== Setting the Priority of a Failover Role
 
@@ -2287,6 +2372,7 @@ To set the priority of a failover role:
 
 The console provides a way to see all the server roles that a server has been assigned and if these roles are running. This is especially helpful when you have multiple servers with different server roles. For each zone you can also set a central place for all logs to be collected, and collect capacity and utilization data that may be missing.
 
+
 [[viewing-the-status-of-server-roles]]
 ===== Viewing the Status of Server Roles
 
@@ -2296,21 +2382,6 @@ To view the status of server roles:
 . Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
 . Depending on how you want to view your servers, click either *Roles by Servers* or the *Servers by Roles*.
 
-[[setting-server-role-priorities]]
-===== Setting Server Role Priorities
-
-If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
-
-* Only server roles that support failover can be marked as primary. These are *Notifier*, *Capacity & Utilization Coordinator*, *Event Monitor*, *Scheduler*, *Storage Inventory*, and *Provider Inventory*.
-* All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
-
-There are three role priorities.
-
-* *Primary*: There can only be one primary per zone per role. When an appliance is started, the system looks to see if any role is set to primary. If that is the case, the role is activated on that appliance and deactivated from the secondary. In the console, primary roles are shown in bold letters. The text turns red if the server goes down.
-
-* *Secondary*: This is the default priority. There can be multiple secondaries. When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role. In the console, secondary roles are displayed normally with the word "secondary".
-
-* *Tertiary*: If all appliances with primary roles or secondary roles are down, one of the tertiary would be activated. The reason for tertiary is to ensure that if a Server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities. Tertiary roles simply show as active in the console.
 
 [[zone-aware-server-roles]]
 ===== Zone Aware Server Roles
@@ -2336,17 +2407,6 @@ There are three role priorities.
 |=======================================================================
 
 
-[[setting-the-priority-of-a-failover-role-1]]
-===== Setting the Priority of a Failover Role
-
-To set the priority of a failover role:
-
-. From the settings menu, select *Configuration*.
-. Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
-. Depending on how you want to view your servers, click either the *Roles by Servers* tab or the *Servers by Roles* tab.
-. From the *Status of Roles* for *Servers* in *Zone Default Zone* area, click on the role that you want to set the priority for.
-. Click image:2097.png[] (*Promote Server to primary for this role*) to make this the primary Server for this role.
-. Click image:2098.png[] (*Demote Server to normal for this role*) to demote the priority of this Server for this role.
 
 [[removing-an-inactive-server]]
 ====== Removing an Inactive Server
@@ -2713,31 +2773,33 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 . Log in to the appliance as the *root* user.
 . Enter `appliance_console`, and press *Enter*.
 . Press any key.
-. Enter `16` to stop EVM server processes.
+. Select `Stop EVM Server Processes`.
 . Enter `Y` to confirm.
-. Choose *Configure Database*.
+. Choose `Configure Database`.
 . Enter a database region number that has not been used in your environment. Do not enter duplicate region numbers because this can corrupt the data.
 . Enter `Y` to confirm.
 . The menu reappears after all processes are complete.
-. Enter `17` to start EVM server processes.
+. Select `Start EVM Server Processes`.
 . Enter `Y` to confirm.
-. Enter `21` to quit the advanced settings menu.
+. Select *Quit* to exit the advanced settings menu.
 
 [[configuring_database_replication]]
 ==== Configuring Database Replication and Centralized Administration
 
 To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version. 
 
-You can configure centralized administration via the database replication configuration steps described in this section. Once configured, {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy. 
-
 [NOTE]
-======
-You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
-======
+====
+Configuring database replication in this version of {product-title_short} automatically enables centralized administration, eliminating the need for further configuration.
+====
 
-[NOTE]
+Centralized administration in {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy. 
+
+[IMPORTANT]
 ======
-The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
+* You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
+
+* The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
 ======
 
 [[configuring-a-remote-copy]]
@@ -2758,12 +2820,10 @@ Configure a {product-title} instance to act as a remote copy from which data wil
 
 Configure a {product-title} instance to act as the global copy to which data is replicated from the remote copies.
 
-image:add-subscription.png[Add Subscription]
+image:add-subscription-global.png[Add Subscription]
 
-. Navigate to the settings menu.
-. Click *Configuration*.
-. Click the *Settings* accordion.
-. Click the region where the instance is located.
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
 . Click *Replication*.
 . Select *Global* from the *Type* list.
 . Click *Add Subscription*.
@@ -2777,33 +2837,14 @@ image:add-subscription.png[Add Subscription]
 
 [NOTE]
 ====
-Central administration can only be enabled after the initial data sync is complete. You must save the subscription before this can be done.
+Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, centralized administration is automatically enabled after the initial data sync is complete.
 ====
 
-[[enabling-disabling-central-admin]]
-===== Enabling / Disabling Centralized Administration
+Database replication and centralized administration are now enabled on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. 
 
-Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, you can enable centralized administration after the initial data sync is complete.
-
-image:centralized_admin_disabled.png[Centralized Administration Config]
-
-. Navigate to the settings menu.
-. Click *Configuration*.
-. Click the *Settings* accordion.
-. Click the region where the instance is located.
-. Click *Replication*.
-. For your saved subscription, click the menu in *Actions*, then click *Enable Central Admin*. You can also *Validate* your subscription. 
-
-Once centralized administration is enabled, *Central Admin Enabled* will change to _Yes_.
-
-[NOTE]
-====
-If centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*, or *Delete* your saved subscription. 
-====
-
-image:centralized_admin_enabled.png[Centralized Administration Enabled]
-
-Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.5/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
+ifdef::cfme[]
+See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
+endif::cfme[]
 
 [[resetting-database-replication]]
 ===== Resetting Database Replication
@@ -2920,24 +2961,137 @@ To run a single database backup:
 [[restoring-a-database-from-a-backup]]
 ===== Restoring a Database from a Backup
 
-If a database is corrupt or fails, restore it from a backup.
+If a database is corrupt or fails, restore it from a backup. You can restore a backup from a local file, NFS, or Samba.
 
 To restore a database from a backup:
 
-. Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a backup.
-. Log in to the appliance console with a user name of `admin` and the default password. The *Appliance Summary Screen* displays.
-. Press *Enter* to manually configure settings.
-. Enter `11` to `Stop Server Processes`. Stop the process on all servers that connect to this VMDB.
+. Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a local backup.
+. If you are restoring a database backup on a high availability environment, stop the `regmgrd` service. This is not required in other {product-title_short} configurations.
++
+----
+# systemctl stop rh-postgresql95-repmgr
+----
++
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
+. Select `Stop EVM Server Processes` to stop processes on all servers that connect to this VMDB.
 . Enter `Y` to confirm.
 . After all processes are stopped, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `6` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
-. Enter `y` to keep the database backup after restoring from it. Enter `n` to delete it.
+. Select `Restore Database From Backup`, then specify the location to restore the backup from in the `Restore Database File` menu:
+.. If you saved the database backup file locally as `/tmp/evm_db.backup`, select `Local file`. You can also restore from a `Network File System (nfs)` or `Samba (smb)`.
+.. Specify the location of the backup file.
++
+[NOTE]
+====
+The appliance console menu may respond slowly if connections are open and the server is still shutting down. If this occurs, wait a minute and try again.
+====
++
+. Enter `Y` to keep the database backup after restoring from it. Enter `N` to delete it.
 . Press `Y` to confirm.
 . After the backup completes, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `13` to `Start Server Processes`.
+. Select `Start EVM Server Processes` to restart all processes on servers that connect to this VMDB.
 . Enter `Y` to confirm.
+. If you are restoring a database backup on a high availability environment, start the `regmgrd` service. This is not required in other {product-title_short} configurations.
++
+----
+# systemctl start rh-postgresql95-repmgr
+----
+
+[[binary-backup-and-restore-database]]
+==== Performing a Binary Backup and Restoring the Database
+Preserve data at the file system level by performing a binary backup. 
+This includes all databases, users and roles, and other objects. 
+
+[NOTE]
+====
+This procedure uses the `pg_basebackup` utility to perform a remote database backup and create a full replacement of the PostgreSQL data directory, capturing the exact state of the database when the backup finishes. For more information on the `pg_basebackup` utility, see the PostgreSQL documentation.
+====
+
+===== Performing a Binary Backup
+
+Create a binary backup and store it as a `gzip` tar file inside the {product-title_short} backup directory. 
+
+[IMPORTANT]
+======
+PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure. 
+======
+
+. SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
++
+. Run the `pg_basebackup` command to create the backup.
++
+-----
+# pg_basebackup -x -h hostname -U root -Ft -z -D filename
+-----
++
+> where:
+>
+> *-h* _hostname_ 
+>     
+>     Specifies the IP address of the database server.
+>
+> *-D* _filename_
+>
+>    Specifies the name of the directory created to contain the backup.
+
+ 
+===== Restoring a Database from the Backup
+Restore your PostgreSQL binary backup using the following steps. This process will require stopping both EVM and PostgreSQL services before restoring data.  
+
+. Copy the existing backup to the target VM
++
+-----
+# scp filename/base.tar.gz root@hostname:/var/www/miq
+-----
++
+. SSH to the target VM.no
+
++
+-----
+# ssh root@hostname
+-----
++
+. Stop both the EVM and PostgreSQL servers.
++
+-----
+# systemctl stop evmserverd
+# systemctl stop $APPLIANCE_PG_SERVICE
+-----
++
+. Rename the existing data directory. 
++
+-----
+# mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
+-----
++
+. Create a clean data directory.
++
+-----
+# mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Unzip the tar file to the new directory.
++
+-----
+# tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Correct permissions.
++
+-----
+# chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data  
+# chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Restart the PostgreSQL and EVM servers.
++
+-----
+# systemctl start $APPLIANCE_PG_SERVICE
+# systemctl start evmserverd
+-----
+
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection

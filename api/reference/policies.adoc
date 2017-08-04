@@ -2,7 +2,7 @@
 [[policy-management]]
 == Policy Management
 
-Management of Policies and Policy profiles is provided in the following forms:
+Management of policies and policy profiles is provided in the following forms:
 
 * Querying of policies via the primary collection:
 
@@ -39,6 +39,9 @@ and posting *assign* or *unassign* actions to the policy_profiles subcollection.
 
 * link:#querying-policies[Querying Policies]
 * link:#querying-policies-of-resources[Querying Policies of a Resource]
+* link:#creating-policies[Creating Policies]
+* link:#editing-policies[Editing Policies]
+* link:#deleting-policies[Deleting Policies]
 * link:#policy-actions[Policy and Policy Profiles Actions]
 * link:#resource-policy-management[Resource Policy Management]
 * link:#policy-specification[Policy specification]
@@ -197,6 +200,139 @@ or just the policies themselves as follows:
 GET /api/policy_profiles/:id/policies
 ----
 
+[[creating-policies]]
+=== Creating Policies
+
+Policies can be created via a POST to the policies collection or via the *create* action
+signature which also allows creation of multiple policies in a single request.
+
+----
+POST /api/policies
+----
+
+[source,json]
+----
+{
+  "name" : "sample_policy",
+  "description" : "Sample Policy",
+  "mode" : "compliance",
+  "towhat" : "ManageIQ::Providers::Redhat::InfraManager",
+  "condition_ids" : [11, 12],
+  "policy_contents" : [
+    {
+      "event_id" : 201,
+      "actions" : [
+        {
+          "action_id" : 3001,
+          "opts" : { "qualifier" : "failure" }
+        }
+      ]
+    }
+  ]
+}
+----
+
+or creating multiple policies:
+
+[source,json]
+----
+{
+  "action" : "create",
+  "resources" : [
+    { "name" : "sample_policy_1", "description" : "Sample Policy 1", ... },
+    { "name" : "sample_policy_2", "description" : "Sample Policy 2", ... },
+    ...
+  ]
+}
+----
+
+[NOTE]
+====
+Please refer to the link:../appendices/resource_attributes.html#policies[Resource Attributes]
+page for a list of available attributes when creating policies.
+====
+
+[[editing-policies]]
+=== Editing Policies
+
+----
+POST /api/policies/:id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "description" : "Updated Policy Description"
+  }
+}
+----
+
+or editing multiple policies:
+
+----
+POST /api/policies
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resources" : [
+    {
+      "href" : "http://localhost:3000/api/policies/101",
+      "description" : "Updated Policy Description 1"
+    },
+    {
+      "href" : "http://localhost:3000/api/policies/102",
+      "description" : "Updated Policy Description 2"
+    },
+    ...
+  ]
+}
+----
+
+[[deleting-policies]]
+=== Deleting Policies
+
+Policies can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/policies/101
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/policies/101
+----
+
+Deleting multiple policies can be done as follows:
+
+----
+POST /api/policies
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/policies/101" },
+    { "href" : "http://localhost:3000/api/policies/102" },
+    ...
+  ]
+}
+----
+
 [[policy-actions]]
 === Policy and Policy Profiles Actions
 
@@ -232,7 +368,7 @@ policy_profiles subcollection of resources. Policy management is available on th
 [[policy-specification]]
 ==== Policy specification
 
-Policies and Policy Profiles can be specified using one of the following forms:
+Policies and policy profiles can be specified using one of the following forms:
 
 By href:
 

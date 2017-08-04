@@ -1,59 +1,49 @@
 [[catalogs-services]]
 == Catalogs and Services
 
-[[about-catalogs-and-services]]
-=== About Catalogs and Services
+Through the use of catalogs, {product-title} provides support for multi-tier service provisioning to deploy layered workloads across hybrid environments. You can create customized dialogs that will give consumers of the services the ability to input just a few parameters and provision the entire service. The following table lists the terminology associated with catalogs that you will use within the CloudForms user interface for service provisioning.
 
-Through the use of catalogs, {product-title} provides support for multi-tier service provisioning to deploy layered workloads across hybrid environments. You can create customized dialogs that will give consumers of the services the ability to input just a few parameters and provision the entire service.
+.Terminology
+[width="100%",cols="40%,60%",options="header",]
+|====
+|Type|Information
+|Catalog Bundle|A group of templates.
+|Catalog Item|A single template.
+|Template|A template is a copy of a preconfigured virtual machine, designed to capture the installed software and software configurations, as well as the hardware configuration of the original virtual machine.
+|Dialog Tabs|Part of a service dialog.
+|Element|An item on a tab in a dialog. It can be a button, check box, drop down list, radio button, tag control, text area box, or a text box.
+|Provisioning Dialogs|Dialogs created for host provisioning, virtual machine migration, or virtual machine provisioning. The dialog name must be added to the appropriate provision instance to be processed.
+|Service Catalog|A catalog item or catalog bundle that is available for provisioning.
+|Service Dialogs|Made up of fully customizable tabs, items, and values for use with service provisioning.
+|====
 
-[[terminology]]
-=== Terminology
 
-*Terminology*
+////
 
-*Catalog Bundle*:: A grouping of Templates.
-*Catalog Item*:: A single Template or a group of Templates (catalog bundle).
-*Dialog Tabs*:: Part of a Service Dialog.
-*Element*:: An item on a tab in a Dialog. It can be a Button, Check Box, Drop Down List, Radio Button, Tag Control, Text Area Box, or a Text Box.
-*Provisioning Dialogs*:: Dialogs created for Host Provisioning, VM Migration, or VM Provisioning. The dialog name must be added to the appropriate provision instance to be processed.
-*Service Catalog*:: A catalog item or Catalog bundle that is available for provisioning.
-*Service Dialogs*:: Made up of fully customizable tabs, items, and values for use with Service provisioning.
-*Template*:: A template is a copy of a preconfigured virtual machine, designed to capture installed software and software configurations, as well as the hardware configuration, of the original virtual machine.
+*Catalog Bundle*:: A group of templates.
+*Catalog Item*:: A single template.
+*Template*:: A template is a copy of a preconfigured virtual machine, designed to capture the installed software and software configurations, as well as the hardware configuration of the original virtual machine.
+*Dialog Tabs*:: Part of a service dialog.
+*Element*:: An item on a tab in a dialog. It can be a button, check box, drop down list, radio button, tag control, text area box, or a text box.
+*Provisioning Dialogs*:: Dialogs created for host provisioning, virtual machine migration, or virtual machine provisioning. The dialog name must be added to the appropriate provision instance to be processed.
+*Service Catalog*:: A catalog item or catalog bundle that is available for provisioning.
+*Service Dialogs*:: Made up of fully customizable tabs, items, and values for use with service provisioning.
 
-[[catalogs]]
-=== Catalogs
+////
 
-Catalogs are used to create groups of virtual machines or instances for provisioning. For example, a complete package of a database server, desktop with specialized software already on it, and a firewall. You will need to complete the following steps to create and provision a service catalog.
 
-. Create *Catalog Items* for each virtual machine or instance that will be part of the service.
-. Create a *Service* dialog. For example, create a dropdown with three options small, medium, and large.
-. Create a method for the Service Dialog. This method defines what each of the options means to each of the individual virtual machines or cloud instances for the service. This method is called from a service provisioning instance in the Automate model.
-. Create an instance in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class that calls the method.
-+
-[NOTE]
-====
-DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-====
-+
-. Associate method with Automate instance.
-. Create a *Catalog Bundle*, adding each of the catalog items to it. Select the *Service Dialog* you created. Use the instance created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the *Entry Point*. Check *Display in Catalog* box.
-. Provision a service.
-
-[[creating-a-catalog-item]]
-==== Creating a Catalog Item
-
-Create a catalog item for each virtual machine or cloud instance that will be part of the service.
-
-include::common/catalog-item-creation.adoc[]
 
 [[service-dialogs]]
 ==== Service Dialogs
 
-When provisioning a service, input will be needed from the requester. *Service Dialogs* are used to take input from the user. This input is connected to a method in the *Automate* model that defines how the users input is translated into the provision request. Before creating a *Service Dialog*, be sure to plan what items you need the user to input.
+When provisioning a service, input will be needed from the requester. Service dialogs are used to take input from the user. This input is connected to a method in the Automate model that defines how the users input is translated into the provision request. Before creating a service dialog, be sure to plan what items you need the user to input.
 
 [[adding-a-service-dialog]]
 ===== Adding a Service Dialog
-
+[IMPORTANT]
+====
+When creating a service dialog for use with Ansible playbook catalog items, variable elements must use the prefix *param_* when assigning the value. For example, a new variable labeled *key1* should have its value set as *param_key1*.
+====
 include::common/service-dialog-creation.adoc[]
 
 [[importing-service-dialogs]]
@@ -76,6 +66,7 @@ You can share service dialogs between appliances using the export and import fea
 . In the *Export* area, select the service dialogs that you want to export.
 . Click *Export*.
 
+
 [[methods]]
 ==== Methods
 
@@ -91,7 +82,7 @@ You will need to create a method that connects the values in the dialog with the
 
 A method is provided below that was created for the following scenario:
 
-* You want to provision a three-tiered Service that contains catalog items of web, app and DB. Each of these virtual machines (or cloud instances) has been tagged under the *Service* category with the appropriate value. Then, added as a catalog item and combined into a catalog bundle.
+* You want to provision a three-tiered service that contains catalog items of web, app and DB. Each of these virtual machines (or cloud instances) has been tagged under the *Service* category with the appropriate value. Then, added as a catalog item and combined into a catalog bundle.
 * The *Service Dialog* captures the selection of small, medium or large application in a dropdown called *service_type*. When referring to a value captured in an element in a dialog, the name of the element should be prefixed with *dialog_*. For example, *service_type* becomes *dialog_service_type* when used in the method.
 * The method will set the memory sizes for each of the catalog items based on the *service_type* selection.
 
@@ -209,8 +200,8 @@ Service methods have been split based on purpose.
 +
 . Click the *Methods* tab.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Add a New Method*).
-. Type in a *Name* and *Display Name*.
-. In the *Data* field, type in the method contents.
+. Enter a *Name* and *Display Name*.
+. In the *Data* field, enter the method contents.
 . Click *Validate* and wait for your data entry to be successfully validated.
 . Click *Add*.
 image:6297.png[]
@@ -228,8 +219,8 @@ image:6297.png[]
 +
 . Click the *Instances* tab.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Add a new Instance*).
-. Type in a *Name* and *Display Name*.
-. In the *Fields* area, type in the method's name in *Value*.
+. Enter a *Name* and *Display Name*.
+. In the *Fields* area, enter the method's name in *Value*.
 . Click *Add*.
 
 The instance is created so that it can be called from the *ServiceProvision* class.
@@ -260,7 +251,26 @@ Service methods have been split based on purpose.
 . In the *configurechilddialog* value, put the path to the method.
 . Click *Save* or *Add* if you are adding this to a new instance.
 
-Now that the catalog items, service dialog, dialog methods, and service provision instance have been created, you can create the catalog bundle.
+
+[[catalogs]]
+=== Catalogs
+
+Catalogs are used to create groups of virtual machines or instances for provisioning. For example, a complete package of a database server, desktop with specialized software already on it, and a firewall. You will need to complete the following steps to create and provision a service catalog.
+
+. Create *Catalog Items* for each virtual machine or instance that will be part of the service.
+. Create a *Service* dialog. For example, create a dropdown with three options small, medium, and large.
+. Create a method for the Service Dialog. This method defines what each of the options means to each of the individual virtual machines or cloud instances for the service. This method is called from a service provisioning instance in the Automate model.
+. Create an instance in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class that calls the method.
++
+[NOTE]
+====
+DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+====
++
+. Associate method with Automate instance.
+. Create a *Catalog Bundle*, adding each of the catalog items to it. Select the *Service Dialog* you created. Use the instance created in the `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the *Entry Point*. Check *Display in Catalog* box.
+. Provision a service.
+
 
 [[creating-a-catalog-bundle]]
 ==== Creating a Catalog Bundle
@@ -268,7 +278,7 @@ Now that the catalog items, service dialog, dialog methods, and service provisio
 . Navigate to menu:Services[Catalogs].
 . Click the *Catalog Items* accordion.
 . Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a New Catalog Bundle*).
-. In *Basic Info*, type in a name and description:
+. In *Basic Info*, enter a name and description:
 image:2362.png[]
 . Click *Display in Catalog*.
 . Select the appropriate dialog name.
@@ -283,14 +293,16 @@ A catalog bundle is created and visible in the *Service Catalog* accordion.
 You should also create and specify an Entry Point in the `DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that is part of a bundle. If you do not, then the pre and post provision processing will occur for each item in the bundle in addition to processing for the *Catalog Bundle*. To set the entry point, go into each *Catalog Item* and check *Display in Catalog*. Then, you will see the *Entry Point* field.
 ====
 
-<<<<<<< HEAD
-=======
+
+
+
 [[creating-a-catalog-item]]
 ==== Creating a Catalog Item
 
 Create a catalog item for each virtual machine or cloud instance that will be part of the service.
 
 include::common/catalog-item-creation.adoc[]
+
 
 [[creating-a-generic-catalog-item]]
 ==== Creating a Generic Catalog Item
@@ -315,14 +327,6 @@ Create a service catalog item from an Ansible Tower template you can use to exec
 include::common/create-tower-catalog-item.adoc[]
 
 
->>>>>>> cf34cd9... add generic catalog item procedure
-[[provisioning-a-service]]
-===== Provisioning a Service
-
-include::common/catalog-order.adoc[]
-
-The parameters are passed to the children based on the method tied to the choices made in the dialog.
-
 
 [[provisioning-a-service]]
 ===== Provisioning a Service
@@ -330,6 +334,9 @@ The parameters are passed to the children based on the method tied to the choice
 include::common/catalog-order.adoc[]
 
 The parameters are passed to the children based on the method tied to the choices made in the dialog.
+
+
+
 
 
 

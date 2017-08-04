@@ -12,11 +12,17 @@ ifdef::ssh[]
 endif::ssh[] 
 . Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
-. Select *8) Configure Database* from the menu.
+. Select *5) Configure Database* from the menu.
 . You are prompted to create or fetch an encryption key.
 * If this is the first {product-title} appliance, choose *1) Create key*.
-* If this is not the first {product-title} appliance, choose *2) Fetch key* from remote machine to fetch the key from the first {product-title} appliance. All {product-title} appliances in a multi-region deployment must use the same key.
-. Choose *1) Internal* for the database location.
+* If this is not the first {product-title} appliance, choose *2) Fetch key from remote machine* to fetch the key from the first appliance. For worker and multi-region setups, use this option to copy key from another appliance. 
++
+[NOTE]
+====
+All {product-title_short} appliances in a multi-region deployment must use the same key.
+====
++
+. Choose *1) Create Internal Database* for the database location.
 . Choose a disk for the database. This can be either a disk you attached previously, or a partition on the current disk. 
 +
 [IMPORTANT]
@@ -33,8 +39,8 @@ If there is an unpartitioned disk attached to the virtual machine, the dialog wi
 +
 * Enter *1* to choose `/dev/vdb` for the database location. This option creates a logical volume using this device and mounts the volume to the appliance in a location appropriate for storing the database. The default location is `/var/opt/rh/rh-postgresql95/lib/pgsql`, which can be found in the environment variable `$APPLIANCE_PG_MOUNT_POINT`.
 * Enter *2* to continue without partitioning the disk. A second prompt will confirm this choice. Selecting this option results in using the root filesystem for the data directory (not advised in most cases). 
-. Enter *Y* or *N* for *Configure this server as a dedicated database instance?*
-* Select *Y* to configure the appliance _only_ as a database. As a result, the appliance is configured as a basic PostgreSQL server, without a user interface. 
+. Enter *Y* or *N* for *Should this appliance run as a standalone database server?*
+* Select *Y* to configure the appliance as a database-only appliance. As a result, the appliance is configured as a basic PostgreSQL server, without a user interface. 
 * Select *N* to configure the appliance with the full administrative user interface.
 . When prompted, enter a unique number to create a new region.
 +

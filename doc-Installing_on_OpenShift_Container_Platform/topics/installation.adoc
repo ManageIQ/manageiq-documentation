@@ -212,28 +212,6 @@ $ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,MEMORY_POSTGR
 The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {product-title_short} application, which eventually constructs the route to the {product-title_short} pod. If you do not specify the `APPLICATION_DOMAIN` parameter, the {product-title_short} application will not be accessible after the deployment; however, this can be fixed by changing the route. For more information on OpenShift template parameters, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/developer_guide/#dev-guide-templates[OpenShift Container Platform Developer Guide].
 ====
 
-[[deploying-the-appliance-external-db]]
-==== Deploying the {product-title_short} Appliance Using an External Database
-
-Before attempting to deploy {product-title_short} using an external database deployment, ensure the following conditions are satisfied:
-
-* Your OpenShift cluster can access the external PostgreSQL server
-* The {product-title_short} user, password, and role have been created on the external PostgreSQL server
-* The intended {product-title_short} database is created, and ownership has been assigned to the {product-title_short} user
-
-To deploy the appliance:
-
-. Import the {product-title_short} external database template:
-+
-----
-$ oc create -f templates/cfme-template-ext-db.yaml
-----
-+
-. Launch the deployment with the following command. The database server IP address is required, and the other settings must match your remote PostgreSQL server.
-+
-----
-$ oc new-app --template=cloudforms-ext-db -p DATABASE_IP=<server_ip> -p DATABASE_USER=<user> -p DATABASE_PASSWORD=<password> -p DATABASE_NAME=<database_name>
-----
 
 [[verifying-the-configuration]]
 === Verifying the Configuration

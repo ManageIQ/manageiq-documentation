@@ -18,7 +18,7 @@ In such situations, use the following method:
 [root@ ~]# firewall-cmd --zone=public --permanent --add-port=389/tcp
 ------
 
-The following table lists the appliance's main services and their respective ports.
+The following table lists the appliance's main services and their respective ports. 
 
 .Ports Used by {product-title}
 [cols="1,1,1,1,1,1", frame="all", options="header"]
@@ -517,6 +517,9 @@ The following table lists the appliance's main services and their respective por
 
 |===
 
+
+The following tables detail the ports used by {product-title} to communicate with providers.
+
 .Red Hat Enterprise Virtualization Ports Used by {product-title}
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
@@ -919,7 +922,7 @@ The following table lists the appliance's main services and their respective por
 
 |
 
-                            OpenShift Master (or Load Balancer)
+                            OpenShift Master server (or Load Balancer)
 
 
 |
@@ -938,37 +941,64 @@ The following table lists the appliance's main services and their respective por
 
 |
 
-			                 Communication from CFME Appliance to OpenShift API
-                       
-                       
-                       |
-
-                                                   CFME Appliance
+                        Communication from CFME appliance to the OpenShift API. Used by the master API when routers also run on the masters so that the router can bind to 443.
 
 
-                       |
+|
 
-                                                   OpenShift Routers (or Load Balancer)
-
-
-                       |
-
-                                                   HTTPS
+                         CFME Appliance
 
 
-                       |
+|
 
-                                                   443
-
-
-                       |
+                         OpenShift Routers (or Load Balancer)
 
 
+|
 
-                       |
+                         HTTPS
 
-                       			                 Communication from CFME Appliance to OpenShift Services (metrics, etc.)
-                       
+
+|
+
+                         443
+
+
+|
+
+
+
+|
+
+                        Communication from CFME appliance to OpenShift services (metrics, etc.). Used by the master if the routers are not running on master.
+
+|
+
+                        CFME Appliance
+
+
+|
+
+                        OpenShift Master server
+
+
+|
+
+                        HTTPS
+
+
+|
+
+                        5000
+
+
+|
+
+
+
+|
+
+		                 Recommended port for CFME appliance connectivity to Hawkular (metrics)
 
 |===
 

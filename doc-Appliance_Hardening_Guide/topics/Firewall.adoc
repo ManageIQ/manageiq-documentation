@@ -11,11 +11,11 @@ A new appliance starts with a few standard ports open:
 You might need to restrict or open access to certain services on your appliance in the future.
 In such situations, use the following method:
 
-* Use `firewalld` to enable a service or port.
+* Use `firewalld` to enable a service or port, specifying the zone in use.
   For example, to open the LDAP port:
 +
 ------
-[root@ ~]# firewall-cmd --zone=public --permanent --add-port=389/tcp
+[root@ ~]# firewall-cmd --zone=manageiq --permanent --add-port=389/tcp
 ------
 
 The following table lists the appliance's main services and their respective ports. 
@@ -922,7 +922,7 @@ The following tables detail the ports used by {product-title} to communicate wit
 
 |
 
-                            OpenShift Master server (or Load Balancer)
+                            OpenShift Master Node(s) (or Load Balancer)
 
 
 |
@@ -932,7 +932,7 @@ The following tables detail the ports used by {product-title} to communicate wit
 
 |
 
-                            8443
+                            8443 or 443
 
 
 |
@@ -941,7 +941,7 @@ The following tables detail the ports used by {product-title} to communicate wit
 
 |
 
-                        Communication from CFME appliance to the OpenShift API. Used by the master API when routers also run on the masters so that the router can bind to 443.
+                        Required for communication to the OpenShift API. Dependent on OpenShift configuration.
 
 
 |
@@ -951,7 +951,7 @@ The following tables detail the ports used by {product-title} to communicate wit
 
 |
 
-                         OpenShift Routers (or Load Balancer)
+                         OpenShift Infrastructure Node(s) (or Load Balancer)
 
 
 |
@@ -970,7 +970,7 @@ The following tables detail the ports used by {product-title} to communicate wit
 
 |
 
-                        Communication from CFME appliance to OpenShift services (metrics, etc.). Used by the master if the routers are not running on master.
+                        Metrics and logging
 
 |
 
@@ -998,7 +998,7 @@ The following tables detail the ports used by {product-title} to communicate wit
 
 |
 
-		                 Recommended port for CFME appliance connectivity to Hawkular (metrics)
+		                 Appliance connectivity to Hawkular for metrics. (Recommended port)
 
 |===
 

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## Sprint 67 ending 2017-08-21
+- [(Bz1477927)](https://bugzilla.redhat.com/show_bug.cgi?id=1477927) [(#488)](https://github.com/ManageIQ/manageiq_docs/pull/488)
+- [(Bz#1480413)](https://bugzilla.redhat.com/show_bug.cgi?id=1480413) updatecontentmove miq [(#483)](https://github.com/ManageIQ/manageiq_docs/pull/483)
+- Removed note about known issue after customer feedback [(#480)](https://github.com/ManageIQ/manageiq_docs/pull/480)
+- [(BZ1466952)](https://bugzilla.redhat.com/show_bug.cgi?id=1466952) Provide clarification for enabling clusters in Managing Providers guide [(#474)](https://github.com/ManageIQ/manageiq_docs/pull/474)
+
+
 ## Sprint 66 ending 2017-08-07
 - Add missing character to install instruction [(#468)](https://github.com/ManageIQ/manageiq_docs/pull/468)
 - Updated the text on buttons for removing objects [(#466)](https://github.com/ManageIQ/manageiq_docs/pull/466)

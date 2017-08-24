@@ -93,7 +93,8 @@ To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 
 [NOTE]
 =========================
-As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
+. As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
+. *Collect for All Clusters* must be checked to be able to collect capacity and utilization data from cloud providers such as Red Hat OpenStack Platform or Amazon EC2.
 =========================
 
 [[tags]]
@@ -283,7 +284,7 @@ If there are any problems with the file, such as an incorrect column name, unkno
 
 ifdef::cfme[]
 [[registering-and-updating]]
-===== Registering and Updating {product-title}
+===== Registering {product-title}
 
 You can register appliances, edit customer information, and apply {product-title_short} updates from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
 
@@ -308,150 +309,10 @@ Servers with the `RHN Mirror` role also act as a repository for other appliances
 
 include::common/configuration-register-appliance.adoc[]
 
-
-[[Updating_Appliances]]
-====== Updating the {product-title_short} Application
-
-An important part of securing {product-title} is to ensure your appliances use the latest software packages.     
-
-The *Red Hat Updates* tab in the {product-title_short} user interface enables you to check for updates and update registered appliances. Any services requiring a restart to apply updates are automatically restarted as part of the *Red Hat Updates* process.
-
-[IMPORTANT]
-====
-Using the *Red Hat Updates* tab only applies software updates for the CloudForms application. See xref:appliance_package_updates[] for instructions on applying Red Hat errata. To upgrade your {product-title_short} appliance to a newer version, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/migrating_to_red_hat_cloudforms_4.6/[_Migrating to CloudForms 4.6_].    
-====
-
-To apply updates to the {product-title_short} application:
-
-. From the settings menu, select *Configuration*.
-. Select *Region* in the accordion menu and click the *Red Hat Updates* tab.
-. Click *Check For Updates* to search the Content Delivery Network (CDN) for any updated {product-title_short} packages. If an appliance update is available, it will be listed with the available version.
-. Click *Apply CFME Update* to install and update {product-title} packages. The {product-title_short} service will be automatically restarted as needed.
-
 [NOTE]
-======
-If the appliance is registered to Red Hat Satellite, you can use content views to manage updates for {product-title}. For more information, see https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/content-management-guide#Creating_Content_Views[Creating Content Views] in the Red Hat Satellite 6 _Content Management Guide_.
-======
-
-
-
-The following options are available in the *Appliance Updates* section of *Red Hat Updates*:
-
-.Options Available in Appliance Updates
-[cols="1,1", frame="all", options="header"]
-|===
-|
-
-              Option
-
-
-|
-
-              Use
-
-|
-             Refresh List
-
-
-|
-            Refreshes the list of appliances.
-
-
-|
-             Check for Updates
-
-
-|
-            Checks for all available {product-title} updates using `yum`.
-
-|
-              Register
-
-
-|
-            Attempts to register the appliance if it is not already registered. {product-title} subscribes to the `cf-me-5.9-for-rhel-7-rpms rhel-server-rhscl-7-rpms` repositories, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, {product-title} automatically checks for updates after registering.
-|
-               Apply CFME Update
-
-
-|
-            Applies updates to {product-title} packages only. Specifically, this option runs the `yum -y update cfme-appliance` command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated. The appliance may be rebooted automatically during this process.
-
-
-|===
-
-
-
-
-
-[[appliance_package_updates]]
-====== Updating All Packages on the Appliance
-
-You can apply updates to the appliance using the yum command or Red Hat Satellite. This updates all RPMs on the appliance, not just the {product-title} packages. Yum can be used at any time to update any single package or the entire appliance to any new or updated packages available on the subscription. 
-
-[WARNING]
 ====
-Updates to the the operating system, {product-title_short} application or dependent packages may introduce incompatibilities in customized environments. Before applying updates to the appliance, back up the appliance or take a snapshot so that changes can be reverted in production environments if needed.    
+To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/migrating_to_red_hat_cloudforms_4.6/[Updating {product-title}] in _Migrating to {product-title} 4.6_.
 ====
-
-
-[IMPORTANT]
-====
-Scheduled downtime is required while updating system packages for the following reasons:
-
-* Some updates may interrupt {product-title_short} operations.
-* Updates for the PostgreSQL database server suspend {product-title_short} operations.
-* System updates may require a reboot of the {product-title_short} appliance.
-====
-
-To update all packages on the appliance using `yum`, follow the procedure below. To update packages on the appliance using Red Hat Satellite, see https://access.redhat.com/documentation/en-us/red_hat_satellite/6.2/html/host_configuration_guide/chap-red_hat_satellite-host_configuration_guide-viewing_and_applying_errata[Viewing and Applying Errata] and https://access.redhat.com/documentation/en-us/red_hat_satellite/6.2/html/host_configuration_guide/sect-host_configuration_guide-configuring_and_running_remote_commands[Configuring and Running Remote Commands] in the Red Hat Satellite 6 documentation for more information.
-
-. Log into each appliance console as the root user and perform the following steps:
-.. Stop the CloudForms application (the evmserver process) with the following command:
-+
-------
-# systemctl stop evmserverd
-------
-+  
-.. Apply the software updates:
-+
-------
-# yum update    
-------
-+
-[IMPORTANT]
-====
-Do not reboot or restart yet.
-====
-+      
-. Log into each server containing an internal database and perform the following steps:
-.. Stop the database with the following command:
-+
-------
-# systemctl stop rh-postgresql95-postgresql.service
-------
-+
-.. Apply the software updates:
-+
-------
-# yum update
-------
-+
-.. Reboot the server unless the errata or the command `needs-restarting` advises a restart is safe: 
-+
-------
-# systemctl restart rh-postgresql95-postgresql.service 
-------
-+                
-. Log into the appliance console on each appliance as the root user and perform the following steps:
-.. Reboot the server unless the errata or the command `needs-restarting` advises a restart is safe:
-+
-------
-# reboot
-------
-
-
-
 
 [[subscription-management-for-virtual-environments]]
 ====== Subscription Management for Virtual Environments

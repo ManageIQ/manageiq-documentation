@@ -383,13 +383,16 @@ The following four items are required to make a service available to users from 
 . *Service Catalog Item*: A service catalog item is the actual service which combines a service dialog with a provisioning dialog.
 
 
-.Create a Provisioning Dialog
+.Provisioning Dialog
 
 Every provider in {product-title_short} comes with a sample provisioning dialog covering the options specific to that provider. To have a look at the sample provisioning dialog for Red Hat Virtualization, go to menu:Automation[Automate > Customization > Provisioning Dialogs > VM Provision] and select *Sample RedHat VM Provisioning Dialog*. This is a textual representation of the dialog you will get when you provision a virtual machine or instance.
 
+. You can start the virtual machine provisioning process by clicking menu:Compute[Infrastructure > Virtual Machines], then click image:2007.png[](*Lifecycle*), and then image:1862.png[](*Provision VMs*).
+. Select the image you are going to use, then click *Continue*. You can go through the steps in the provisioning dialog.
+
 .Create a Service Dialog
 
-When users access a service, the majority of options available to them are preset and cannot be altered. A service dialog exposes some of those options to the user so that even if they are ordering a basic RHEL 7 machine, for example, they can at least choose the amount of memory, virtual CPUs, or other options available to the instance they order. In cases where certain fields must be unique, such as the name of virtual machines in Red Hat Virtualization, users must enter their own unique name for the virtual machine they choose or the operation will fail, so this field must be exposed.
+Using a service dialog, you can determine which options the users get to change. When users access a service, the majority of options available to them are preset and cannot be altered. A service dialog exposes some of those options to the user so that even if they are ordering a basic RHEL 7 machine, for example, they can at least choose the amount of memory, virtual CPUs, or other options available to the instance they order. In cases where certain fields must be unique, such as the name of virtual machines in Red Hat Virtualization, users must enter their own unique name for the virtual machine they choose or the operation will fail, so this field must be exposed.
 
 [NOTE]
 ====
@@ -492,18 +495,24 @@ The last step in creating a service is to create a catalog item to represent tha
 .. Select the service dialog you created from the *Dialog* list.
 . Click the *Details* tab:
 .. Enter a description of the catalog item using HTML tags.
-. Click the *Request Info* tab to enter the request details:
+. Click the *Request Info* tab to enter the request details. Enter the same data you did in the traditional provisioning dialog.
 ..  In the *Catalog* tab, select the template on which to base the virtual machine from the *Selected VM* area.
 .. Enter `changeme` as the default name of the virtual machine in *VM Name*.
 .. In the Network tab, select *rhevm* from the *vLan* list.
 . Click *Add*.
 
 
+[NOTE]
+====
+In {product-title_short}, service catalog items can be more complex than a single virtual machine and are provisioned through a series of automation workflows. The service dialog you created will be used to gather information from the customer, hiding all the complexity of the details needed to actually deploy any of the components.
+====
+
 .Summary
 
-As part of the above sample service, you created a provisioning dialog that defines the options that can be set on a virtual machine and, you created a service dialog which allows us to expose certain options to be set by the user. For our example, the service name, virtual machine name, virtual machine description, and virtual machine characteristics are configurable. Then, you created a service catalog and finally a catalog item. The catalog item combines the service dialog with all of the options in the provisioning dialog. You can now provision a virtual machine through Red Hat Virtualization using the Service User Interface (SUI).
+As part of the above sample service, you created a provisioning dialog that defines the options that can be set on a virtual machine and you created a service dialog which allows us to expose certain options to be set by the user. For our example, the service name, virtual machine name, virtual machine description, and virtual machine characteristics are configurable. Then, you created a service catalog and finally a catalog item. The catalog item combines the service dialog with all of the options in the provisioning dialog. You can now provision a virtual machine through Red Hat Virtualization using the Service User Interface (SUI). 
 
-.Provision a Virtual Machine
+
+.Provision a Virtual Machine Using the Service User Interface (SUI)
 
 . Log in to the Service User Interface at https://<your_cloudforms_appliance>/self_service.
 . Click the *Service Catalog* tab.

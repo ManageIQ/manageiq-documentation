@@ -11,14 +11,14 @@ A new appliance starts with a few standard ports open:
 You might need to restrict or open access to certain services on your appliance in the future.
 In such situations, use the following method:
 
-* Use `firewalld` to enable a service or port.
+* Use `firewalld` to enable a service or port, specifying the zone in use.
   For example, to open the LDAP port:
 +
 ------
-[root@ ~]# firewall-cmd --zone=public --permanent --add-port=389/tcp
+[root@ ~]# firewall-cmd --zone=manageiq --permanent --add-port=389/tcp
 ------
 
-The following table lists the appliance's main services and their respective ports.
+The following table lists the appliance's main services and their respective ports. 
 
 .Ports Used by {product-title}
 [cols="1,1,1,1,1,1", frame="all", options="header"]
@@ -517,6 +517,9 @@ The following table lists the appliance's main services and their respective por
 
 |===
 
+
+The following tables detail the ports used by {product-title} to communicate with providers.
+
 .Red Hat Enterprise Virtualization Ports Used by {product-title}
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
@@ -878,6 +881,103 @@ The following table lists the appliance's main services and their respective por
 
 |===
 
+
+.OpenShift Container Platform Ports Used by CloudForms Management Engine
+[cols="1,1,1,1,1,1", frame="all", options="header"]
+|===
+|
+
+                            Initiator (CFME Role if applicable)
+
+
+|
+
+                            Receiver (CFME Role if applicable)
+
+
+|
+
+                            Application
+
+
+|
+
+                            TCP Port
+
+
+|
+
+                            UDP Port
+
+
+|
+
+                            Purpose
+
+
+|
+
+                            CFME Appliance
+
+
+|
+
+                            OpenShift Master Node(s) (or Load Balancer)
+
+
+|
+
+                            HTTPS
+
+
+|
+
+                            8443 or 443
+
+
+|
+
+
+
+|
+
+                        Required for communication to the OpenShift API. Dependent on OpenShift configuration.
+
+
+|
+
+                         CFME Appliance
+
+
+|
+
+                         OpenShift Infrastructure Node(s) (or Load Balancer)
+
+
+|
+
+                         HTTPS
+
+
+|
+
+                         443
+
+
+|
+
+
+
+|
+
+                        Metrics and logging
+
+|
+
+
+|===
+
+
 .VMware vSphere Ports Used by {product-title}
 [cols="1,1,1,1,1,1", frame="all", options="header"]
 |===
@@ -934,7 +1034,7 @@ The following table lists the appliance's main services and their respective por
 |
 |
 
-                            CFME appliance running any of these roles will initiate communication with vCenter on this port.
+                            CFME appliance running any of these roles will initiate communication with vCenter on this port
 
 
 
@@ -972,7 +1072,7 @@ The following table lists the appliance's main services and their respective por
 
 |
 
-                            ESX Hosts(if analyzing VMs through Host)
+                            ESX Hosts (if analyzing VMs through host)
 
 
 |
@@ -988,8 +1088,7 @@ The following table lists the appliance's main services and their respective por
 |
 |
 
-                            Communication from CFME appliance to Hosts.
-
+                            Communication from CFME appliance to hosts
 
 
 |
@@ -1015,7 +1114,7 @@ The following table lists the appliance's main services and their respective por
 |
 |
 
-                            Communication from CFME appliance to vCenters.
+                            Communication from CFME appliance to vCenters
 
 
 
@@ -1662,6 +1761,9 @@ The following table lists the appliance's main services and their respective por
 			                 Communication from CFME Appliance to Google Cloud Platform resources
 
 |===
+
+
+
 
 IMPORTANT: To provide your {product-title} infrastructure with an extra layer of security, use a network layer firewall to restrict port access.
 

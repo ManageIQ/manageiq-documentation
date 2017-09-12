@@ -5,11 +5,11 @@ After configuring the appliances as described in xref:installation[], configure 
 
 // CORRECT?
 
-The following steps highlight the configuration requirements for the load balancer, which in this case is HAProxy. The load balancer is assigned a Virtual IP for the {product-title_short} user interface and is pointed to one of the many {product-title_short} appliances behind the load balancer in a round robin fashion.
+The following steps highlight the configuration requirements for the load balancer, which in this case is HAProxy. The load balancer is assigned a virtual IP address for the {product-title_short} user interface and is pointed to one of the many {product-title_short} appliances behind the load balancer in a round robin fashion.
 
-Additionally, to avoid the HAProxy server being a single point of failure, two redundant HAProxy servers are configured in active-passive mode. The failover is orchestrated by using the `keepalived` daemon. `keepalived` monitors the health of the active load balancer and in case of a failure, the Virtual IP is failed over to the passive load balancer, which then becomes active. The Virtual IP is configured by`keepalived`.
+Additionally, to avoid the HAProxy server being a single point of failure, two redundant HAProxy servers are configured in active-passive mode. The failover is orchestrated by using the `keepalived` daemon. `keepalived` monitors the health of the active load balancer and in case of a failure, the virtual IP is failed over to the passive load balancer, which then becomes active. The virtual IP is configured by`keepalived`.
 
-The Virtual IP is the single IP address that is used as the point of access to the {product-title_short} appliance user interfaces and is configured in the HAProxy configuration along with a load balancer profile. When an end user accesses the Virtual IP, it directs traffic to the appropriate {product-title_short} appliance based on the configured HAProxy policy.
+The virtual IP is the single IP address that is used as the point of access to the {product-title_short} appliance user interfaces and is configured in the HAProxy configuration along with a load balancer profile. When an end user accesses the virtual IP, it directs traffic to the appropriate {product-title_short} appliance based on the configured HAProxy policy.
 
 
 [NOTE]
@@ -17,7 +17,7 @@ The Virtual IP is the single IP address that is used as the point of access to t
 Additional configuration is required to run HAProxy on Red Hat OpenStack Platform. See the https://access.redhat.com/documentation/en/red-hat-openstack-platform/10/single/networking-guide/[OpenStack Networking Guide] for more information.
 ====
 
-This configuration uses two HAProxy servers and a Virtual IP (configured by `keepalived`). The following example procedure uses the following IP addresses and names; substitute values for your environment as needed:
+This configuration uses two HAProxy servers and a virtual IP (configured by `keepalived`). The following example procedure uses the following IP addresses and names; substitute values for your environment as needed:
 
 * HAProxy1: 10.19.137.131 (cf-hap1.example.com)
 * HAProxy2: 10.19.137.132 (cf-hap2.example.com)
@@ -233,7 +233,7 @@ listen apache-8443
 +
 [NOTE]
 ====
-* The Virtual IP in this configuration is 10.19.137.135 (cf-haproxy.example.com).
+* The virtual IP in this configuration is 10.19.137.135 (cf-haproxy.example.com).
 * The IP of {product-title_abbr_uc} Appliance 1 is 10.19.137.130 (cfme1.example.com).
 * The IP of {product-title_abbr_uc} Appliance 2 is 10.19.137.129 (cfme2.example.com).
 ====
@@ -290,7 +290,7 @@ On the backup node (`cf-hap2`):
        valid_lft forever preferred_lft forever
 ------
 
-Notice the Virtual IP 10.19.137.135 has been started by `keepalived` (VRRP).
+Notice the virtual IP 10.19.137.135 has been started by `keepalived` (VRRP).
 
 Simulate a failure on the master node:
 
@@ -298,7 +298,7 @@ Simulate a failure on the master node:
 [root@cf-hap1 ~]# systemctl stop keepalived
 ------
 
-Notice the Virtual IP failover on the master node (`cf-hap1`):
+Notice the virtual IP failover on the master node (`cf-hap1`):
 
 ------
 [root@cf-hap1 ~]# ip addr show dev eth0

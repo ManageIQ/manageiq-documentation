@@ -93,7 +93,8 @@ To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 
 [NOTE]
 =========================
-As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
+. As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
+. *Collect for All Clusters* must be checked to be able to collect capacity and utilization data from cloud providers such as Red Hat OpenStack Platform or Amazon EC2.
 =========================
 
 [[tags]]
@@ -283,9 +284,9 @@ If there are any problems with the file, such as an incorrect column name, unkno
 
 ifdef::cfme[]
 [[registering-and-updating]]
-===== Registering and Updating {product-title}
+===== Registering {product-title}
 
-You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
+You can register appliances, edit customer information, and apply {product-title_short} updates from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
 
 The following tools are used during the update process:
 
@@ -308,93 +309,10 @@ Servers with the `RHN Mirror` role also act as a repository for other appliances
 
 include::common/configuration-register-appliance.adoc[]
 
-
-[[Updating_Appliances]]
-====== Updating Appliances
-
-include::common/configuration-update-appliance.adoc[]
-
-
-[IMPORTANT]
-======
-Red Hat recommends updating the appliance using the *Red Hat Updates* tab only, which automatically restarts services and the appliance if needed. Running updates from the command line requires manually restarting the {product-title} service and sometimes the appliance. If updating the {product-title} appliance from the command line, use the `yum -y update cfme-appliance` command to update only {product-title} and its dependencies, and to avoid any potential incompatibilities that could be introduced by running `yum update`.
-======
-
-
-The following options are available in the *Appliance Updates* section of *Red Hat Updates*:
-
-.Options Available in Appliance Updates
-[cols="1,1", frame="all", options="header"]
-|===
-|
-
-              Option
-
-
-|
-
-              Use
-
-|
-             Refresh List
-
-
-|
-            Refreshes the list of appliances.
-
-
-|
-             Check for Updates
-
-
-|
-            Checks for all available {product-title} updates using `yum`.
-
-|
-              Register
-
-
-|
-            Attempts to register the appliance if it is not already registered. {product-title} subscribes to the `rhel-x86_64-server-6-cf-me-3` RHN channel for RHN-registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, {product-title} automatically checks for updates after registering.
-|
-               Apply CFME Update
-
-
-|
-            Applies updates to {product-title} packages only. Specifically, this option runs the `yum -y update cfme-appliance` command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated. The appliance may be rebooted automatically during this process.
-
-
-|===
-
-
 [NOTE]
-======
-If the appliance is registered to Red Hat Satellite, you can use content views to manage updates for {product-title}. For more information, see https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/content-management-guide#Creating_Content_Views[Creating Content Views] in the Red Hat Satellite 6 _Content Management Guide_.
-======
-
-
-[[updating-the-appliance-operating-system]]
-====== Updating the Appliance Operating System
-
-Updating the appliance’s operating system requires a manual update using the `yum` command. This command updates all RPMs on the appliance, not just {product-title} packages, and is supported only when used as part of migration.
-
-[IMPORTANT]
-======
-Scheduled downtime is required while updating system packages for the following reasons:
-
-* Some updates may interrupt {product-title} operations.
-* Updates for the PostgreSQL database server suspend {product-title} operations.
-* System updates may require a reboot of the {product-title} appliance.
-
-Red Hat recommends updating the appliance using the *Red Hat Updates* tab in the {product-title} user interface, which automatically restarts services and the appliance if needed. See xref:Updating_Appliances[] for instructions.
-======
-
-To update the appliance operating system:
-
-. Log in to the appliance console as the root user.
-. Run the `yum update` command and confirm any updates.
-. Restart the appliance as required.
-
+====
+To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/migrating_to_red_hat_cloudforms_4.6/[Updating {product-title}] in _Migrating to {product-title} 4.6_.
+====
 
 [[subscription-management-for-virtual-environments]]
 ====== Subscription Management for Virtual Environments
@@ -1187,7 +1105,7 @@ The current SAML implementation only secures the {product-title} appliance’s w
 
 The following is required in order to enable SAML authentication to the appliance:
 
-* A CloudForms 4.5 appliance
+* A CloudForms 4.6 appliance
 * A SAML identity provider (e.g. Red Hat Single Sign-On (SSO) 7.0 or later)
 
 [[configure-apache-SAML]]
@@ -1270,7 +1188,7 @@ To add a client in the Red Hat SSO {product-title} realm:
   http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
 ------
 +
-. In CloudForms 4.5, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
+. In CloudForms 4.6, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
 +
 ------
 # vi idp-metadata.xml
@@ -2073,7 +1991,7 @@ From the settings menu, select *Configuration*. Click on the *Access Control* ac
 ifdef::cfme[]
 [NOTE]
 ====
-For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
+For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
 ====
 endif::cfme[]
 
@@ -2177,7 +2095,7 @@ To create a user group:
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a name for the group in the *Description* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
+. Enter a name for the group in the *Name* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
 . Select a role to map to this group.
 . Select the *Project/Tenant* this group must belong to.
 . Select any filters that you want applied to what this group can view in the *Assign Filters* area.
@@ -2786,7 +2704,7 @@ Once you configure a {product-title} instance to act as a global copy, and one o
 Database replication and centralized administration are now enabled on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. 
 
 ifdef::cfme[]
-See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
+See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
 endif::cfme[]
 
 [[resetting-database-replication]]
@@ -2942,6 +2860,98 @@ The appliance console menu may respond slowly if connections are open and the se
 # systemctl start rh-postgresql95-repmgr
 ----
 
+[[binary-backup-and-restore-database]]
+==== Performing a Binary Backup and Restoring the Database
+Preserve data at the file system level by performing a binary backup. 
+This includes all databases, users and roles, and other objects. 
+
+[NOTE]
+====
+This procedure uses the `pg_basebackup` utility to perform a remote database backup and create a full replacement of the PostgreSQL data directory, capturing the exact state of the database when the backup finishes. For more information on the `pg_basebackup` utility, see the PostgreSQL documentation.
+====
+
+===== Performing a Binary Backup
+
+Create a binary backup and store it as a `gzip` tar file inside the {product-title_short} backup directory. 
+
+[IMPORTANT]
+======
+PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure. 
+======
+
+. SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
++
+. Run the `pg_basebackup` command to create the backup.
++
+-----
+# pg_basebackup -x -h hostname -U root -Ft -z -D filename
+-----
++
+> where:
+>
+> *-h* _hostname_ 
+>     
+>     Specifies the IP address of the database server.
+>
+> *-D* _filename_
+>
+>    Specifies the name of the directory created to contain the backup.
+
+ 
+===== Restoring a Database from the Backup
+Restore your PostgreSQL binary backup using the following steps. This process will require stopping both EVM and PostgreSQL services before restoring data.  
+
+. Copy the existing backup to the target VM
++
+-----
+# scp filename/base.tar.gz root@hostname:/var/www/miq
+-----
++
+. SSH to the target VM.no
+
++
+-----
+# ssh root@hostname
+-----
++
+. Stop both the EVM and PostgreSQL servers.
++
+-----
+# systemctl stop evmserverd
+# systemctl stop $APPLIANCE_PG_SERVICE
+-----
++
+. Rename the existing data directory. 
++
+-----
+# mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
+-----
++
+. Create a clean data directory.
++
+-----
+# mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Unzip the tar file to the new directory.
++
+-----
+# tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Correct permissions.
++
+-----
+# chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data  
+# chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Restart the PostgreSQL and EVM servers.
++
+-----
+# systemctl start $APPLIANCE_PG_SERVICE
+# systemctl start evmserverd
+-----
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection
@@ -3090,4 +3100,6 @@ The next options depend on the periodic database maintenance frequency you choos
 To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings.
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
+
+
 

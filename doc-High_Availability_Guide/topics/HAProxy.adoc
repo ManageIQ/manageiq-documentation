@@ -3,8 +3,6 @@
 
 After configuring the appliances as described in xref:installation[], configure a load balancer to direct traffic to the {product-title_short} appliances.
 
-// CORRECT?
-
 The following steps highlight the configuration requirements for the load balancer, which in this case is HAProxy. The load balancer is assigned a virtual IP address for the {product-title_short} user interface and is pointed to one of the many {product-title_short} appliances behind the load balancer in a round robin fashion.
 
 Additionally, to avoid the HAProxy server being a single point of failure, two redundant HAProxy servers are configured in active-passive mode. The failover is orchestrated by using the `keepalived` daemon. `keepalived` monitors the health of the active load balancer and in case of a failure, the virtual IP is failed over to the passive load balancer, which then becomes active. The virtual IP is configured by`keepalived`.

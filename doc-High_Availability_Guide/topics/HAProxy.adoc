@@ -1,9 +1,13 @@
 [[configuring_HAProxy]]
 == Configuring the HAProxy Load Balancer
 
-The following steps highlight the configuration requirements for the load balancer, which in this case is HAProxy. The load balancer is assigned a Virtual IP for the {product-title} user interface and is pointed to one of the many engine appliances behind the load balancer in a round robin fashion.
+After configuring the appliances as described in xref:installation[], configure a load balancer to direct traffic to the {product-title_short} appliances.
 
-To avoid the HAProxy server being a single point of failure, two redundant HAProxy servers are configured in active-passive mode. The failover is orchestrated by using Keepalived. Keepalived monitors the health of the active load balancer and in case of a failure, the Virtual IP is failed over to the passive load balancer, which then becomes active. The Virtual IP is configured by Keepalived.
+The following steps highlight the configuration requirements for the load balancer, which in this case is HAProxy. The load balancer is assigned a virtual IP address for the {product-title_short} user interface and is pointed to one of the many {product-title_short} appliances behind the load balancer in a round robin fashion.
+
+Additionally, to avoid the HAProxy server being a single point of failure, two redundant HAProxy servers are configured in active-passive mode. The failover is orchestrated by using the `keepalived` daemon. `keepalived` monitors the health of the active load balancer and in case of a failure, the virtual IP is failed over to the passive load balancer, which then becomes active. The virtual IP is configured by`keepalived`.
+
+The virtual IP is the single IP address that is used as the point of access to the {product-title_short} appliance user interfaces and is configured in the HAProxy configuration along with a load balancer profile. When an end user accesses the virtual IP, it directs traffic to the appropriate {product-title_short} appliance based on the configured HAProxy policy.
 
 
 [NOTE]
@@ -11,11 +15,14 @@ To avoid the HAProxy server being a single point of failure, two redundant HAPro
 Additional configuration is required to run HAProxy on Red Hat OpenStack Platform. See the https://access.redhat.com/documentation/en/red-hat-openstack-platform/10/single/networking-guide/[OpenStack Networking Guide] for more information.
 ====
 
-This configuration uses two HAProxy servers and a Virtual IP (configured by Keepalived). The following example procedure uses the following IP addresses and names; substitute values for your environment as needed:
+This configuration uses two HAProxy servers and a virtual IP (configured by `keepalived`). The following example procedure uses the following IP addresses and names; substitute values for your environment as needed:
 
-* Haproxy1: 10.19.137.131 (cf-hap1.example.com)
-* Haproxy2: 10.19.137.132 (cf-hap2.example.com)
-* Virtual IP (to be configured by keepalived): 10.19.137.135 (cf-ha.example.com)
+* HAProxy1: 10.19.137.131 (cf-hap1.example.com)
+* HAProxy2: 10.19.137.132 (cf-hap2.example.com)
+* Virtual IP (to be configured by `keepalived`): 10.19.137.135 (cf-ha.example.com)
+
+The following diagram shows the HAProxy configuration:
+image:CloudForms_HA_Architecture_431939_0917_ECE-01.png[] 
 
 
 To configure HAProxy load balancing:
@@ -54,7 +61,7 @@ Enabled: 1
 +
 [NOTE]
 ====
-Keepalived uses VRRP (Virtual Redundancy Router Protocol). VRRP communication between routers uses multicast IPv4 address 224.0.0.18 and IP protocol number 112.
+`keepalived` uses VRRP (Virtual Redundancy Router Protocol) to monitor the servers and determine which node is the master and which node is the backup. VRRP communication between routers uses multicast IPv4 address 224.0.0.18 and IP protocol number 112.
 ====
 +
 ------
@@ -73,7 +80,7 @@ Keepalived uses VRRP (Virtual Redundancy Router Protocol). VRRP communication be
 [root@cf-hap2~]# firewall-cmd --reload
 ------
 +
-. Install and configure Keepalived on both servers.
+. Install and configure `keepalived` on both servers.
 .. On the `cf-hap1` server, run the following:
 +
 ------
@@ -124,7 +131,7 @@ chk_haproxy
 }
 ------
 +
-.. On both servers, configure IP forwarding and non-local binding by appending the following to  sysctl.conf file. In order for the Keepalived service to forward network packets properly to the real servers, each router node must have IP forwarding turned on in the kernel.
+.. On both servers, configure IP forwarding and non-local binding by appending the following to the `sysctl.conf` file. In order for the `keepalived` service to forward network packets properly to the real servers, each router node must have IP forwarding turned on in the kernel.
 On the `cf-hap1` server, run the following:
 +
 ------
@@ -199,37 +206,37 @@ defaults
     timeout server          1m
     timeout http-keep-alive     10s
     timeout check           10s
-# Cloud Forms Management UI URL
+# CloudForms Management UI URL
 listen apache
   bind 10.19.137.135:80
   mode tcp
   balance roundrobin
-  server cf-ha1 10.19.137.130:80 check inter 1s
-  server cf-ha2 10.19.137.129:80  check inter 1s
+  server cfme1 10.19.137.130:80 check inter 1s
+  server cfme2 10.19.137.129:80  check inter 1s
 #
 listen apache-443
   bind 10.19.137.135:443
   mode tcp
   balance roundrobin
-  server cf-ha1 10.19.137.130:443 check inter 1s
-  server cf-ha2 10.19.137.129:443  check inter 1s
+  server cfme1 10.19.137.130:443 check inter 1s
+  server cfme2 10.19.137.129:443  check inter 1s
 #
 listen apache-8443
   bind 10.19.137.135:8443
   mode tcp
   balance roundrobin
-  server cf-ha1 10.19.137.130:8443 check inter 1s
-  server cf-ha2 10.19.137.129:8443  check inter 1s
+  server cfme1 10.19.137.130:8443 check inter 1s
+  server cfme2 10.19.137.129:8443  check inter 1s
 ------
 +
 [NOTE]
 ====
-* The Virtual IP in this configuration is 10.19.137.135 (cf-haproxy.example.com).
-* The IP of {product-title_abbr_uc} 1 Engine Appliance is 10.19.137.130 (cf-ha1.example.com).
-* The IP of {product-title_abbr_uc} 2 Engine Appliance is 10.19.137.129 (cf-ha2.example.com).
+* The virtual IP in this configuration is 10.19.137.135 (cf-haproxy.example.com).
+* The IP of {product-title_abbr_uc} Appliance 1 is 10.19.137.130 (cfme1.example.com).
+* The IP of {product-title_abbr_uc} Appliance 2 is 10.19.137.129 (cfme2.example.com).
 ====
 +
-. On each server, start the keepalived and haproxy services:
+. On each server, start the `keepalived` and `haproxy` services:
 +
 ------
 [root@cf-hap1~]# systemctl enable keepalived
@@ -281,7 +288,7 @@ On the backup node (`cf-hap2`):
        valid_lft forever preferred_lft forever
 ------
 
-Notice the Virtual IP 10.19.137.135 has been started by keepalived (VRRP).
+Notice the virtual IP 10.19.137.135 has been started by `keepalived` (VRRP).
 
 Simulate a failure on the master node:
 
@@ -289,7 +296,7 @@ Simulate a failure on the master node:
 [root@cf-hap1 ~]# systemctl stop keepalived
 ------
 
-Notice the Virtual IP failover on the master node (`cf-hap1`):
+Notice the virtual IP failover on the master node (`cf-hap1`):
 
 ------
 [root@cf-hap1 ~]# ip addr show dev eth0

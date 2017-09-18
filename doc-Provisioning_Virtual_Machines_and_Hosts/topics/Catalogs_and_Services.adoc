@@ -364,4 +364,170 @@ include::common/catalog-order.adoc[]
 The parameters are passed to the children based on the method tied to the choices made in the dialog.
 
 
+[[example-service-provisioning]]
+=== Example: Creating a Service
+
+{product-title} provides the ability to define services, which can include one or more virtual machines or instances, and can be deployed across hybrid environments. Services can be made available to users through the self-service user interface (SUI) that allows users to order predefined IT services without IT operations getting involved.
+
+==== Creating a Service for Provisioning a Virtual Machine through Red Hat Virtualization (RHV)
+
+
+The following three items are required to make a service available to users from the {product-title_short} self-service user interface:
+
+. *Service Dialog*: A service dialog is where you allow users to configure virtual machine or instance options. A service dialog determines which options users get to change. You can choose the options presented to the user. You could just give them the option to set the service name, or you could have them change all of the provisioning dialog options. 
+
+. *Service Catalog*: A service catalog is used to group service dialogs together.
+
+. *Service Catalog Item*: A service catalog item is the actual service which combines a service dialog with a provisioning dialog.
+
+
+.Examining the Provisioning Dialog
+
+Understanding provisioning dialogs is important to work with services in {product-title_short}. Every provider in {product-title_short} comes with a sample provisioning dialog covering the options specific to that provider. A provisioning dialog presents the basic configuration options for a virtual machine or instance. When you begin the process of provisioning a virtual machine or instance via {product-title_short}, you are presented with a provisioning dialog where you set certain options for the virtual machine or instance. The options presented are dependent on the provider you are using. For instance, a cloud provider might have flavors of instances, whereas an infrastructure provider might allow you to set the memory size or number of CPUs on a virtual machine.
+
+To see the sample provisioning dialog for Red Hat Virtualization: 
+
+. Navigate to menu:Automation[Automate > Customization].
+. Expand the *Provisioning Dialogs* accordion and select *Sample RedHat VM Provisioning Dialog* under *VM Provision*. 
+
+This is a textual representation of the dialog you will get when you provision a virtual machine.
+
+
+.Create a Service Dialog
+
+Using a service dialog, you can determine which options the users get to change. When users access a service, the majority of options available to them are preset and cannot be altered. A service dialog exposes some of those options to the user so that even if they are ordering a basic RHEL 7 machine, for example, they can at least choose the amount of memory, virtual CPUs, or other options available to the instance they order. In cases where certain fields must be unique, such as the name of virtual machines in Red Hat Virtualization, users must enter their own unique name for the virtual machine they choose or the operation will fail, so this field must be exposed.
+
+[NOTE]
+====
+You cannot create a service without assigning it a service dialog, so even if you do not want to expose any details to users, you must create at least a simple service dialog with a *Submit* and *Cancel* button.
+====
+
+A service dialog contains three components:
+
+* One or more *Tabs*.
+* Inside the tabs, one or more *Boxes*.
+* Inside the boxes, one or more *Elements*. Elements are controls that accept input. Elements contain methods, like check boxes, drop-down lists or text fields, to fill in the options on the provisioning dialog.
+
+[IMPORTANT]
+====
+The names of the elements must correspond to the options used in the provisioning dialog.
+====
+
+The following procedure outlines how to create a service dialog for your sample service:
+
+. Navigate to menu:Automation[Automate > Customization].
+. Click the *Service Dialogs* accordion.
+. Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a new Dialog*).
+. Enter basic details under *Dialog Information*:
+.. Enter `Provision RHV VM` in *Label*, and enter a description for the dialog in *Description*. 
+.. Select the *Submit* and *Cancel* buttons.
+. Add a new tab to the dialog:
+.. Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Tab to this Dialog*).
+.. Enter `General` in *Label*. 
+.. Optionally, enter a description for the tab in *Description*.
+. Add a new box to the tab:
+.. Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Box to this Tab*).
+.. Enter `Service and VM Name` in *Label*.
+.. Optionally, enter a description for the box in *Description*.
+.. Add a new element for the service name.
+... Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Element to this Box*).
+... Enter `Service Name` in *Label*.
+... Enter `service_name` in *Name*
+... Select *Text Box* from the *Type* list.
+... Select *String* from the *Value Type* list.
+.. Add a new element for the virtual machine name:
+... Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Element to this Box*).
+... Enter `VM Name` in *Label*.
+... Enter `vm_name` in *Name*
+... Select *Text Box* from the *Type* list.
+... Select *String* from the *Value Type* list if it's not already selected. The default value is `String`.
+.. Add a new element for the virtual machine description:
+... Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Element to this Box*).
+... Enter `VM Description` in *Label*.
+... Enter `vm_name` in *Name*
+... Select *Text Box* from the *Type* list.
+... Select *String* from the *Value Type* list.
+. Add a new box to the tab:
+.. Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Box to this Tab*).
+.. Enter `VM Characteristics` in *Label*.
+.. Optionally, enter a description for the box in *Description*.
+.. Add a new element for the number of CPUs:
+... Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Element to this Box*).
+... Enter `Number of CPUs` in *Label*.
+... Enter `option_0_cores_per_socket` in *Name*
+... Select *Drop Down List* from the *Type* list.
+... In the *Entries* area, click + to add entries for the values `1`, `2`, and `4` and their description.
+.. Add a new element for VM memory:
+... Click image:1862.png[](*Add*), then image:1862.png[](*Add a New Element to this Box*).
+... Enter `VM Memory` in *Label*.
+... Enter `option_0_vm_memory` in *Name*.
+... Select *Drop Down List* from the *Type* list.
+... In the *Entries* area, click + to add entries for the values `1024`, `2048`, and `4096` and their description.
+. Click *Save*.
+
+Your service dialog is now added in the *Service Dialogs* accordion.
+
+
+.Create a Catalog
+
+Now that you have created a service dialog, you can attach the service dialog to new services you create. Before you can create a service, however, you must create a catalog in which the catalog item can be stored. This catalog must be available at the time you create the catalog item, or you will not be able to create the catalog item. However, you can change the catalog to which the catalog item belongs after the catalog item is initially created.
+
+The following procedure outlines how to create a catalog:
+
+. Navigate to menu:Services[Catalogs].
+. Click the *Catalogs* accordion.
+. Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a new Catalog*).
+. Enter a name for the catalog in *Name*.
+. Enter a description for the catalog in *Description*.
+. Click *Add*.
+
+
+.Create a Catalog Item
+
+The last step in creating a service is to create a catalog item to represent that service in a catalog.
+
+. Navigate to menu:Services[Catalog].
+. Click the *Catalog Items* accordion.
+. Click image:1847.png[](*Configuration*), and then image:1862.png[](*Add a new Catalog Item*).
+. Select *RHEV* from the *Catalog Item Type* list.
+. Enter the basic details in the Basic Info tab:
+.. Enter a name for the catalog item in *Name*.
+.. Enter a description for the catalog item in *Description*.
+.. Select *Display in Catalog*.
+.. Select the catalog you created from the *Catalog* list.
+.. Select the service dialog you created from the *Dialog* list.
+. Click the *Details* tab:
+.. Enter a description of the catalog item using HTML tags.
+. Click the *Request Info* tab to enter the request details. Enter the same data you did in the traditional provisioning dialog.
+..  In the *Catalog* tab, select the template on which to base the virtual machine from the *Selected VM* area.
+.. Enter `changeme` as the default name of the virtual machine in *VM Name*.
+.. In the Network tab, select *rhevm* from the *vLan* list.
+. Click *Add*.
+
+
+[NOTE]
+====
+In {product-title_short}, service catalog items can be more complex than a single virtual machine and are provisioned through a series of automation workflows. The service dialog you created will be used to gather information from the customer, hiding all the complexity of the details needed to actually deploy any of the components.
+====
+
+.Summary
+
+As part of the above sample service, you created a provisioning dialog that defines the options that can be set on a virtual machine and you created a service dialog which allows us to expose certain options to be set by the user. For our example, the service name, virtual machine name, virtual machine description, and virtual machine characteristics are configurable. Then, you created a service catalog and finally a catalog item. The catalog item combines the service dialog with all of the options in the provisioning dialog. You can now provision a virtual machine through Red Hat Virtualization using the Service User Interface (SUI). 
+
+
+.Provision a Virtual Machine Using the Service User Interface (SUI)
+
+. Log in to the Service User Interface at https://<your_cloudforms_appliance>/self_service.
+. Click the *Service Catalog* tab.
+. Click the service you created.
+. In the *Service and VM Name*:
+.. Enter the service name in *Service Name*.
+.. Enter the virtual machine name in *VM Name*.
+.. Enter the virtual machine description in *VM Description*.
+. In *VM Characteristics*, enter *Number of CPUs* and *VM Memory*.
+. Click *Add to Shopping Cart* and access the shopping cart by clicking its icon on the upper-right corner of the screen.
+. Click *Order*. You have ordered a new provisioning request. You can follow the progress and see other details of your order request by selecting it from the *Orders* tab.
+
+See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/introduction_to_the_self_service_user_interface/[Introduction to the Self Service User Interface] for more information about using the Service user interface.
+
 

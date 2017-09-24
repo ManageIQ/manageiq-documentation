@@ -42,113 +42,175 @@ To upload the {product-title} appliance file to Microsoft Azure, ensure the foll
 * Approximately 2 GB of space for each VHD image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {product-title} appliance.
 * link:https://azure.microsoft.com/en-us/free/[Microsoft Azure Account]. 
 * Administrator access to the Azure portal.
-* xref:converting-aligning-cfme-appliance-image[Converting and Aligning the {product-title} Virtual Appliance Image]
 * Depending on your infrastructure, allow time for the upload.
 
 
 [IMPORTANT]
 ====
-Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image .vhd file is dynamic by default. Currently, the Azure Powershell script and Azure CLI do not automatically convert the dynamic .vhd file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method.
+* Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. Currently, the Azure Powershell script and Azure CLI do not automatically convert a dynamic .vhd file to fixed during upload. In {product-title_short} 4.5.2 and newer, the virtual appliance image file, `cfme-azure-5.8.2.0-1.x86_64.vhd` and newer, is in a fixed format and can be uploaded to an Azure environment and provisioned without requiring any additional manipulations with the image. 
+
+* The virtual appliance image file in {product-title_short} 4.2 and prior is still dynamic by default. Therefore, the virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method. See the _Installing {product-title} on Microsoft Azure_ guide relevant to your environment for the correct steps to upload the {product-title_short} virtual appliance image to Azure.    
 ====
 
+[[create-resources-for-appliance-in-azure]]
+==== Create Resources for the Appliance in Microsoft Azure
 
-[[converting-aligning-cfme-appliance-image]]
-==== Converting and Aligning the {product-title_short} Virtual Appliance Image
+Complete the following steps to create resources in Microsoft Azure. Note than if you already have resources you can use, you can skip this section and go directly to xref:uploading-the-appliance-using-azure-powershell-script[] or xref:uploading-the-appliance-using-azure-cli[].
 
-Complete the following procedure to ensure the {product-title_short} dynamic .vhd file is properly aligned to the nearest 1 MB boundary, and is in a fixed-size VHD format. 
+[NOTE]
+====
+For a complete Azure CLI 2.0 command reference, see link:https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest[Azure CLI 2.0: Command reference - az].
+====
 
-
-. Convert the dynamic .vhd file you downloaded in xref:obtaining-the-appliance[] to RAW format.
+. Create a resource group in an Azure region.
 +
-----
-$ qemu-img convert -f vpc -O raw <image-name.vhd> <image-name.raw>
+------
+$ az group create --name <resource-group> --location <azure-region>
 
 Example:
 
-$ qemu-img convert -f vpc -O raw cfme-azure-5.9.0.17-1.x86_64.vhd cfme-azure-5.9.0.17-1.x86_64.raw
-----
-+
-. Copy and paste the script below into a new bash shell script file, for example, `aligned-size.sh`. Change _rawdisk="image-name"_ to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
-+
-----
-#!/bin/bash
-rawdisk="cfme-azure-5.9.0.17-1.x86_64.raw"
-MB=$((1024 * 1024))
-size=$(qemu-img info -f raw --output json "$rawdisk" | gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
-rounded_size=$((($size/$MB + 1) * $MB))
-echo "rounded size = $rounded_size"
-export rounded_size
-----
-+
-. Run the shell script. The file name `aligned-size.sh` is used in this example.
-+
-----
-$ sh aligned-size.sh
-
-rounded size = 34361835520
-----
-+
-. Resize the virtual appliance image using the rounded size.
-+
-----
-$ qemu-img resize -f raw <image-name.raw> <rounded_size>
-
-Example:
-
-$ qemu-img resize -f raw cfme-azure-5.9.0.17-1.x86_64.raw 34361835520
-
-Image resized.
-----
-+
-. Convert the appliance image to a fixed-size .vhd file.
-+
-----
-$ qemu-img convert -f raw -o subformat=fixed,force_size -O vpc <image-name.raw> <image-name.vhd>
-
-Example:
-
-qemu-img convert -f raw -o subformat=fixed,force_size -O vpc cfme-azure-5.9.0.17-1.x86_64.raw cfme-azure-5.9.0.17-1.x86_64.vhd
-----
-+
-. Get the virtual size for the .vhd file.
-+
-----
-$ qemu-img info --output=json -f vpc <path-to-image>
-
-Example:
-
-$ qemu-img info --output=json -f vpc cfme-azure-5.9.0.17-1.x86_64.vhd
-
+[clouduser@localhost]$ az group create --name azrhelclirsgrp --location southcentralus
 {
-  "virtual-size": 34361835520,
-  "filename": "cfme-azure-5.9.0.17-1.x86_64.vhd",
-  "format": "vpc",
-  "actual-size": 3158839296,
-  "dirty-flag": false
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp",
+  "location": "southcentralus",
+  "managedBy": null,
+  "name": "azrhelclirsgrp",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
 }
-----
-. Divide the virtual-size value by 1024, twice. If the result is a whole number, the .vhd file is aligned properly. The example below shows that the file is properly aligned.
+------
 +
-----
-34361835520 / 1024 / 1024 = 32770
-----
+. Create a storage account; see xref:storage-sku-types[SKU type descriptions].
++
+------
+$ az storage account create -l <azure-region> -n <storage-account-name> -g <resource-group --sku <sku_type>
+
+Example:
+
+[clouduser@localhost]$ az storage account create -l southcentralus -n azrhelclistact -g azrhelclirsgrp --sku Standard_LRS
+{
+  "accessTier": null,
+  "creationTime": "2017-04-05T19:10:29.855470+00:00",
+  "customDomain": null,
+  "encryption": null,
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Storage/storageAccounts/azrhelclistact",
+  "kind": "Storage",
+  "lastGeoFailoverTime": null,
+  "location": "southcentralus",
+  "name": "azrhelclistact",
+  "primaryEndpoints": {
+    "blob": "https://azrhelclistact.blob.core.windows.net/",
+    "file": "https://azrhelclistact.file.core.windows.net/",
+    "queue": "https://azrhelclistact.queue.core.windows.net/",
+    "table": "https://azrhelclistact.table.core.windows.net/"
+},
+"primaryLocation": "southcentralus",
+"provisioningState": "Succeeded",
+"resourceGroup": "azrhelclirsgrp",
+"secondaryEndpoints": null,
+"secondaryLocation": null,
+"sku": {
+  "name": "Standard_LRS",
+  "tier": "Standard"
+},
+"statusOfPrimary": "available",
+"statusOfSecondary": null,
+"tags": {},
+  "type": "Microsoft.Storage/storageAccounts"
+}
+
+------
++
+. Get the storage account connection string.
++
+------
+$ az storage account show-connection-string -n <storage-account-name> -g <resource-group>
+
+Example:
+
+[clouduser@localhost]$ az storage account show-connection-string -n azrhelclistact -g azrhelclirsgrp
+{
+  "connectionString": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
+}
+------
++
+. Export the connection string. Copy the connection string and paste it into the following command. This connects your system to the storage account.
++
+------
+$ export AZURE_STORAGE_CONNECTION_STRING="<storage-connection-string>"
+
+Example:
+
+[clouduser@localhost]$ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
+------
++
+. Create the storage container.
++
+------
+$ az storage container create -n <container-name>
+
+Example:
+
+[clouduser@localhost]$ az storage container create -n azrhelclistcont
+{
+  "created": true
+}
+------
++
+. Create a virtual network.
++
+------
+$ az network vnet create -g <resource group> --name <vnet-name> --subnet-name <subnet-name>
+
+Example:
+
+[clouduser@localhost]$ az network vnet create --resource-group azrhelclirsgrp --name azrhelclivnet1 --subnet-name azrhelclisubnet1
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+      "10.0.0.0/16"
+      ]
+  },
+  "dhcpOptions": {
+    "dnsServers": []
+  },
+  "etag": "W/\"\"",
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Network/virtualNetworks/azrhelclivnet1",
+  "location": "southcentralus",
+  "name": "azrhelclivnet1",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "azrhelclirsgrp",
+  "resourceGuid": "0f25efee-e2a6-4abe-a4e9-817061ee1e79",
+  "subnets": [
+    {
+      "addressPrefix": "10.0.0.0/24",
+      "etag": "W/\"\"",
+      "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Network/virtualNetworks/azrhelclivnet1/subnets/azrhelclisubnet1",
+      "ipConfigurations": null,
+      "name": "azrhelclisubnet1",
+      "networkSecurityGroup": null,
+      "provisioningState": "Succeeded",
+      "resourceGroup": "azrhelclirsgrp",
+      "resourceNavigationLinks": null,
+      "routeTable": null
+    }
+  ],
+  "tags": {},
+  "type": "Microsoft.Network/virtualNetworks",
+  "virtualNetworkPeerings": null
+  }
+}
+------
 +
 
-
-
-[IMPORTANT]
-====
-qemu-img version 2.7.1 is used in this procedure. Check the qemu-img version using the command: `yum info qemu-img`. If the version is lower than 2.2.1, remove the option _force_size_ from the conversion command, for example, _subformat=fixed_. 
-====
-
-The {product-title} Azure virtual appliance image is ready for uploading and provisioning in Microsoft Azure.
 
 
 
 [[uploading-the-appliance-using-azure-powershell-script]]
 ==== Uploading the {product-title_short} Virtual Appliance Using Azure Powershell Script
-
-Complete the following steps to upload the {product-title_short} virtual appliance image you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
 
 [NOTE]
 ====
@@ -301,8 +363,6 @@ $ export AZURE_STORAGE_KEY="zG7Dc29I7ysKik/Xiqk3tQN43CtLpObmJom+Hze6ko/ZiwXhdElk
 
 
 .Upload and Provision the {product-title_short} Virtual Appliance Using Azure CLI:
-
-Complete the following steps to upload and provision the {product-title_short} virtual appliance you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
 
 
 . Upload the image to the storage container. It may take several minutes. Note: Enter `az storage container list` to get the list of storage containers.

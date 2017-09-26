@@ -25,7 +25,7 @@ The primary database-only appliance functions as an external database to the {pr
 . Select *Create key* to create the encryption key. You can create a new key, or use an existing key on your system by selecting *Fetch key from remote machine* and following the prompts.
 . Select *Create Internal Database*.
 . Select the database disk. {product-title_short} then activates the configuration.
-. For *Should this appliance run as a standalone database server?*, select `Y`. Selecting this option configures this appliance as a database-only appliance, and therefore the {product-title_abbr_uc} application and `evmserverd` processes will not run. This is required in highly available database deployments.
+. For *Should this appliance run as a standalone database server?*, select `y`. Selecting this option configures this appliance as a database-only appliance, and therefore the {product-title_abbr_uc} application and `evmserverd` processes will not run. This is required in highly available database deployments.
 +
 [WARNING]
 ====
@@ -84,7 +84,6 @@ This must be configured from the {product-title_short} appliance before the prim
 Creating a database region will destroy any existing data and cannot be undone.
 ====
 +
-.. Provide the primary database-only appliance as the remote key location and its credentials.
 .. Assign a unique database region number. Note that creating a database region will destroy any existing data and cannot be undone.
 .. For *Are you sure you want to continue?* Select `y`.
 . Enter the primary database-only appliance's name and access details:
@@ -103,7 +102,7 @@ On the primary database-only appliance, initialize the nodes in the database clu
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Primary*.
-. Set an unique identifier number for the server and enter the database name and credentials:
+. Set a unique identifier number for the server and enter the database name and credentials:
 .. Select a number to uniquely identify the node in the replication cluster.
 .. Enter the cluster database name.
 .. Enter the cluster database username.
@@ -150,7 +149,8 @@ On the standby database-only appliance, configure the following:
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Standby*.
-. Set an unique identifier number for the standby server and enter the database name and credentials:
+. Select the database disk. {product-title_short} then activates the configuration.
+. Set a unique identifier number for the standby server and enter the database name and credentials:
 .. Select a number to uniquely identify the node in the replication cluster.
 .. Enter the cluster database name.
 .. Enter the cluster database username.
@@ -175,7 +175,6 @@ Verify the configuration on the appliance console details screen for the standby
 === Installing Additional {product-title_short} Appliances
 
 Install a second virtual machine with a {product-title_short} appliance and any additional appliances in the region using the following steps:
-
 
 . Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
 . Configure time synchronization on the appliance:
@@ -203,6 +202,7 @@ Install a second virtual machine with a {product-title_short} appliance and any 
 .. Enter a name to identify the database.
 .. Enter the primary database-only appliance's username.
 .. Enter a password for the database and confirm the password.
+
 
 
 

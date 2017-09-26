@@ -1,13 +1,11 @@
 [[updating-ha]]
-== Applying Updates in a High Availability Environment
+== Updating a Highly Available {product-title_short} Environment
 
 Applying software package minor updates (referred to as _errata_) to appliances in a high availability environment must be performed in a specific order to avoid migrating your databases to the next major {product-title_short} version.
 
 //////
 Errata definition from https://access.redhat.com/documentation/en-US/Red_Hat_Satellite/6.1/html/User_Guide/chap-Red_Hat_Satellite-User_Guide-Viewing_and_Applying_Errata.html
 Later, link to migrating a HA environment in the migration guide.
-
-As it's 5.7/4.2, no need for ADD LINK TO “1.5. Migrating High Availability Environments from CFME 5.7 to 5.8”, added in https://bugzilla.redhat.com/show_bug.cgi?id=1448775]
 
 //////
 
@@ -23,11 +21,13 @@ To verify if your appliance is registered and subscribed to the correct update c
 
 Appliances must be subscribed to the following channels:
 
-* `cf-me-5.7-for-rhel-7-rpms`
+* `cf-me-5.8-for-rhel-7-rpms`
 * `rhel-7-server-rpms`
 * `rhel-server-rhscl-7-rpms`
 
-If any appliance shows it is not registered or is missing a subscription to any of these channels, see _Registering and Updating {product-title}_ in https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/general_configuration/[General Configuration] to register and subscribe the appliance.
+
+If any appliance shows it is not registered or is missing a subscription to any of these channels, see _Registering and Updating {product-title}_ in https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/[General Configuration] to register and subscribe the appliance.
+
 
 .Updating the Appliances
 
@@ -48,11 +48,6 @@ Follow this procedure to update appliances in your environment without migrating
 # systemctl stop evmserverd
 ------
 +
-[NOTE]
-====
-This step is not required on the database-only appliances, as `evmserverd` does not run on them.
-====
-+
 . Apply updates by running the following on each appliance: 
 +
 ------
@@ -72,4 +67,5 @@ This step is not required on the database-only appliances, as `evmserverd` does 
 . Wait five minutes, then start the {product-title_short} appliances again.
 
 The appliances in your high availability environment are now up to date.
+
 

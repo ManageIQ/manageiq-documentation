@@ -20,18 +20,20 @@ This configuration uses two HAProxy servers and a virtual IP (configured by `kee
 * HAProxy1: 10.19.137.131 (cf-hap1.example.com)
 * HAProxy2: 10.19.137.132 (cf-hap2.example.com)
 * Virtual IP (to be configured by `keepalived`): 10.19.137.135 (cf-ha.example.com)
+* {product-title_abbr_uc} Appliance 1: 10.19.137.130 (cfme1.example.com)
+* {product-title_abbr_uc} Appliance 2: 10.19.137.129 (cfme2.example.com)
 
-The following diagram shows the HAProxy configuration:
+The following diagram shows the HAProxy configuration in this procedure:
 image:CloudForms_HA_Architecture_431939_0917_ECE-01.png[] 
 
 
 To configure HAProxy load balancing:
 
-. Install two servers (virtual or physical) running Red Hat Enterprise Linux 7.2, to be used as the HAProxy servers.
+. Install two servers (virtual or physical) running Red Hat Enterprise Linux 7.2 or above, to be used as the HAProxy servers.
 . Configure subscriptions on both HAProxy servers (`cf-hap1` and `cf-hap2`) so that the `rhel-7-server-rpms` repository is enabled:
 +
 ------
-[root@cf-hap1~]# subscription-manager repos --list-enabled
+[root@cf-hap1 ~]# subscription-manager repos --list-enabled
 +-------------------------------------------+
 Available Repositories in /etc/yum.repos.d/redhat.repo
 +-------------------------------------------+
@@ -44,7 +46,7 @@ Enabled: 1
 ------
 +
 ------
-[root@cf-hap2~]# subscription-manager repos --list-enabled
+[root@cf-hap2 ~]# subscription-manager repos --list-enabled
 +-------------------------------------------+
 Available Repositories in /etc/yum.repos.d/redhat.repo
 +-------------------------------------------+
@@ -65,19 +67,25 @@ Enabled: 1
 ====
 +
 ------
-[root@cf-hap1~]# firewall-cmd --permanent  --add-port=80/tcp --add-port=443/tcp --add-port=8443/tcp && firewall-cmd --reload
-[root@cf-hap1~]# firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 \ --in-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
-[root@cf-hap1~]# firewall-cmd --direct --permanent --add-rule ipv4 filter OUTPUT 0 \ --out-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
-[root@cf-hap1~]# firewall-cmd --reload
+[root@cf-hap1 ~]# firewall-cmd --permanent  --add-port=80/tcp --add-port=443/tcp --add-port=8443/tcp && firewall-cmd --reload
+
+[root@cf-hap1 ~]# firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 \ --in-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
+
+[root@cf-hap1 ~]#firewall-cmd --direct --permanent --add-rule ipv4 filter OUTPUT 0 \ --out-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
+
+[root@cf-hap1 ~]# firewall-cmd --reload
 ------
 +
 .. On the `cf-hap2` server, repeat the same commands by running the following:
 +
 ------
-[root@cf-hap2~]# firewall-cmd --permanent  --add-port=80/tcp --add-port=443/tcp --add-port=8443/tcp && firewall-cmd --reload
-[root@cf-hap2~]# firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 \ --in-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
-[root@cf-hap2~]# firewall-cmd --direct --permanent --add-rule ipv4 filter OUTPUT 0 \ --out-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
-[root@cf-hap2~]# firewall-cmd --reload
+[root@cf-hap2 ~]# firewall-cmd --permanent  --add-port=80/tcp --add-port=443/tcp --add-port=8443/tcp && firewall-cmd --reload
+
+[root@cf-hap2 ~]# firewall-cmd --direct --permanent --add-rule ipv4 filter INPUT 0 \ --in-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
+
+[root@cf-hap2 ~]# firewall-cmd --direct --permanent --add-rule ipv4 filter OUTPUT 0 \ --out-interface eth0 --destination 224.0.0.18 --protocol vrrp -j ACCEPT
+
+[root@cf-hap2 ~]# firewall-cmd --reload
 ------
 +
 . Install and configure `keepalived` on both servers.
@@ -86,7 +94,7 @@ Enabled: 1
 ------
 [root@cf-hap1 ~]# yum install keepalived -y
 
-[root@cf-hap2 haproxy]# cat /etc/keepalived/keepalived.conf
+[root@cf-hap1 ~]# cat /etc/keepalived/keepalived.conf
 vrrp_script chk_haproxy {
 script "killall -0 haproxy" # check the haproxy process
 interval 2 # every 2 seconds
@@ -111,7 +119,7 @@ chk_haproxy
 ------
 [root@cf-hap2 ~]# yum install keepalived -y
 
-[root@cf-hap2 haproxy]# cat /etc/keepalived/keepalived.conf
+[root@cf-hap2 ~]# cat /etc/keepalived/keepalived.conf
 vrrp_script chk_haproxy {
 script "killall -0 haproxy" # check the haproxy process
 interval 2 # every 2 seconds
@@ -135,7 +143,7 @@ chk_haproxy
 On the `cf-hap1` server, run the following:
 +
 ------
-[root@cf-hap1]# cat /etc/sysctl.conf
+[root@cf-hap1 ~]# cat /etc/sysctl.conf
 # System default settings live in /usr/lib/sysctl.d/00-system.conf.
 # To override those settings, enter new settings here, or in an /etc/sysctl.d/<name>.conf file
 #
@@ -147,7 +155,7 @@ net.ipv4.ip_nonlocal_bind = 1
 .. On the `cf-hap2` server, run the following:
 +
 ------
-[root@cf-hap2]# cat /etc/sysctl.conf
+[root@cf-hap2 ~]# cat /etc/sysctl.conf
 # System default settings live in /usr/lib/sysctl.d/00-system.conf.
 # To override those settings, enter new settings here, or in an /etc/sysctl.d/<name>.conf file
 #
@@ -159,13 +167,13 @@ net.ipv4.ip_nonlocal_bind = 1
 .. Verify that the `sysctl.conf` settings were saved on each server:
 +
 ------
-[root@cf-hap1]# sysctl -p
+[root@cf-hap1 ~]# sysctl -p
 net.ipv4.ip_forward = 1
 net.ipv4.ip_nonlocal_bind = 1
 ------
 +
 ------
-[root@cf-hap2]# sysctl -p
+[root@cf-hap2 ~]# sysctl -p
 net.ipv4.ip_forward = 1
 net.ipv4.ip_nonlocal_bind = 1
 ------
@@ -178,10 +186,10 @@ net.ipv4.ip_nonlocal_bind = 1
 [root@cf-hap2 ~]# yum install haproxy -y
 ------
 +
-. Configure the appropriate IPs for load balancing as follows:
+. Configure the appropriate IPs for load balancing on the `cf-hap1` server as follows:
 +
 ------
-[root@cf-haproxy ~]# cat /etc/haproxy/haproxy.cfg
+[root@cf-hap1 ~]# cat /etc/haproxy/haproxy.cfg
 global
     log                 127.0.0.1 local0
     chroot              /var/lib/haproxy
@@ -210,21 +218,21 @@ defaults
 listen apache
   bind 10.19.137.135:80
   mode tcp
-  balance roundrobin
+  balance source
   server cfme1 10.19.137.130:80 check inter 1s
   server cfme2 10.19.137.129:80  check inter 1s
 #
 listen apache-443
   bind 10.19.137.135:443
   mode tcp
-  balance roundrobin
+  balance source
   server cfme1 10.19.137.130:443 check inter 1s
   server cfme2 10.19.137.129:443  check inter 1s
 #
 listen apache-8443
   bind 10.19.137.135:8443
   mode tcp
-  balance roundrobin
+  balance source
   server cfme1 10.19.137.130:8443 check inter 1s
   server cfme2 10.19.137.129:8443  check inter 1s
 ------
@@ -235,6 +243,57 @@ listen apache-8443
 * The IP of {product-title_abbr_uc} Appliance 1 is 10.19.137.130 (cfme1.example.com).
 * The IP of {product-title_abbr_uc} Appliance 2 is 10.19.137.129 (cfme2.example.com).
 ====
++
+. Configure the appropriate IPs for load balancing on the `cf-hap2` server as well:
++
+------
+[root@cf-hap2 ~]# cat /etc/haproxy/haproxy.cfg
+global
+    log                 127.0.0.1 local0
+    chroot              /var/lib/haproxy
+    pidfile             /var/run/haproxy.pid
+    maxconn         4000
+    user                haproxy
+    group               haproxy
+    daemon
+defaults
+    mode                        http
+    log                         global
+    option                      httplog
+    option                      dontlognull
+    option             http-server-close
+    option     forwardfor       except 127.0.0.0/8
+    option                      redispatch
+    retries                     3
+    timeout http-request    10s
+    timeout queue           1m
+    timeout connect         10s
+    timeout client              1m
+    timeout server          1m
+    timeout http-keep-alive     10s
+    timeout check           10s
+# CloudForms Management UI URL
+listen apache
+  bind 10.19.137.135:80
+  mode tcp
+  balance source
+  server cfme1 10.19.137.130:80 check inter 1s
+  server cfme2 10.19.137.129:80  check inter 1s
+#
+listen apache-443
+  bind 10.19.137.135:443
+  mode tcp
+  balance source
+  server cfme1 10.19.137.130:443 check inter 1s
+  server cfme2 10.19.137.129:443  check inter 1s
+#
+listen apache-8443
+  bind 10.19.137.135:8443
+  mode tcp
+  balance source
+  server cfme1 10.19.137.130:8443 check inter 1s
+  server cfme2 10.19.137.129:8443  check inter 1s
+------
 +
 . On each server, start the `keepalived` and `haproxy` services:
 +
@@ -277,7 +336,7 @@ On the master node (`cf-hap1`):
 On the backup node (`cf-hap2`):
 
 ------
-[root@cf-hap2 haproxy]# ip addr show dev eth0
+[root@cf-hap2 ~]# ip addr show dev eth0
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
     link/ether 00:01:a4:ac:33:a6 brd ff:ff:ff:ff:ff:ff
     inet 10.19.137.132/21 brd 10.19.143.255 scope global eth0
@@ -313,7 +372,7 @@ Notice the virtual IP failover on the master node (`cf-hap1`):
 The backup node (`cf-hap2`) shows the following:
 
 ------
-[root@cf-hap2]# ip addr show dev eth0
+[root@cf-hap2 ~]# ip addr show dev eth0
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc pfifo_fast state UP qlen 1000
     link/ether 00:01:a4:ac:33:a6 brd ff:ff:ff:ff:ff:ff
     inet 10.19.137.132/21 brd 10.19.143.255 scope global eth0

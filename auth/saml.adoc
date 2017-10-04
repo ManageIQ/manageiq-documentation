@@ -102,12 +102,15 @@ Adding a Client in the KeyCloak ManageIQ Realm:
 The Client definition for the appliance can then be updated with the following:
 [options="header"]
 |=========================================================================================
-| Setting                                     | Value
-| Name ID Format                              | username
-| Valid Redirect URIs                         | https://<miq-appliance>/saml2/postResponse
-| Master SAML Processing URL                  | https://<miq-appliance>/saml2
-| Assertion Consumer Service POST Binding URL | https://<miq-appliance>/saml2/postResponse
-| Logout Service Redirect Binding URL         | https://<miq-appliance>/saml2/logout
+| Setting                                         | Value
+| Name ID Format                                  | username
+| Valid Redirect URIs                             | https://<miq-appliance>/saml2/paosResponse
+|                                                 | https://<miq-appliance>/saml2/postResponse
+| Base URL                                        | https://<miq-appliance>/
+| Master SAML Processing URL                      | https://<miq-appliance>/saml2
+| Assertion Consumer Service POST Binding URL     | https://<miq-appliance>/saml2/postResponse
+| Assertion Consumer Service Redirect Binding URL | https://<miq-appliance>/saml2/postResponse
+| Logout Service Redirect Binding URL             | https://<miq-appliance>/saml2/logout
 |=========================================================================================
 
 The Identity Provider's Metadata file idp-metadata.xml can then be obtained as follows:
@@ -116,21 +119,6 @@ The Identity Provider's Metadata file idp-metadata.xml can then be obtained as f
 # cd /etc/httpd/saml2
 # curl -s -o idp-metadata.xml \
     http://<keycloak-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
-```
-
-As of this writing, the following change is necessary for the SAML Logout to work between
-mod_auth_mellon and KeyCloak:
-
-```
-# vi idp-metadata.xml
-
-  ...
-  <SingleLogoutService
-<   Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST"
----
->   Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect"
-    Location=
-  ...
 ```
 
 Finally, restart Apache on the appliance as follows:
@@ -156,22 +144,32 @@ the appliance upon a successful login and redirect from the Identity Provider.
 | REMOTE_USER_GROUPS         | groups
 |==============================================
 
-For KeyCloak, the above SAML Assertions can be defined for the Appliance Client in KeyCloak as
+For KeyCloak, the above SAML Assertions can be created for the Appliance Client in KeyCloak as
 Mappers.
 
-[options="header",cols="<1,<2,<1,<1"]
-|============================================================================
-| Name       | Category                  | Type           | Property  
-| username   | AttributeStatement Mapper | User Property  | username
-| email      | AttributeStatement Mapper | User Property  | email
-| firstname  | AttributeStatement Mapper | User Property  | firstName
-| lastname   | AttributeStatement Mapper | User Property  | lastName
-| fullname   | AttributeStatement Mapper | User Attribute | fullName
-| groups     | Group Mapper              | Group List     | groups
-|============================================================================
+[options="header",cols="6*^"]
+|============================================================================================================
+| Name       | Mapper Type    | Property  | Friendly Name | SAML Attribute Name | SAML Attribute Name Format
+| username   | User Property  | username  | username      | username            | Basic
+| email      | User Property  | email     | email         | email               | Basic
+| firstname  | User Property  | firstName | firstname     | firstname           | Basic
+| lastname   | User Property  | lastName  | lastname      | lastname            | Basic
+|============================================================================================================
 
-*Note:* the fullName attribute was not available in the default database as of this writing
-and was added as a user attribute.
+[options="header",cols="6*^"]
+|============================================================================================================
+| Name       | Mapper Type    | User Attribute  | Friendly Name | SAML Attribute Name | SAML Attribute Name Format
+| fullname   | User Attribute | fullName        | fullname      | fullname            | Basic
+|============================================================================================================
+
+[options="header",cols="6*^"]
+|============================================================================================================
+| Name       | Mapper Type    | Group attribute name  | Friendly Name | SAML Attribute Name | SAML Attribute Name Format
+| groups     | Group List     | groups                | groups        | groups              | Basic
+|============================================================================================================
+
+*Note:* The fullName attribute was not available in the default database as of this writing
+and must be added to each user as a user attribute.
 
 [[configure-admin-ui]]
 == Configure Administrative UI 
@@ -182,12 +180,12 @@ to be SAML aware and function accordingly.
 Login as admin, then in _Configure->Configuration->Authentication_
 
 * Set mode to External (httpd)
-* Check: _Enable SAML_ - This will enable the SAML login button on the login screen, the redirects
-to the SAML protected page for authentication as well as supporting the SAML logout process.
 * Check: _Enable Single Signon_ - With this option enabled, initial access to the Appliance Administrative UI will
 redirect to the SAML Identity Provider authentication screen.  Note that logouts from the Appliance will
 return the user to the Appliance login screen allowing them to login as admin unless _Disable Local Login_
 is checked below.
+* Check: _Enable SAML_ - This enables the SAML login button on the login screen, the redirects
+to the SAML protected page for authentication, and supports the SAML logout process.
 * Optional: Check: _Disable Local Login_ - Do this *only* if you need to disable _admin_ login to appliance and only
 allow SAML based authentication.  Note that if there are issues with the Identity Provider or you need
 admin access to the appliance you won't be able to login until you re-enable the Local Login

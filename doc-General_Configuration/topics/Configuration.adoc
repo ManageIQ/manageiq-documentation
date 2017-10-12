@@ -2056,16 +2056,17 @@ To create a user:
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Users*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new User*) to create a user.
-. Enter a *Full Name*, *Username*, *Password* with confirmation, *Email Address*, and choose a *Group* for the user.
+. Enter a *Full Name*, *Username*, *Password* with confirmation, and *Email Address* for the user. 
 +
 image:2086.png[]
 +
 [IMPORTANT]
-======
+====
 * If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB.
 * When the user logs in, they use their LDAP password.
-======
-. Select a *Group*.
+====
++
+. Select one or more groups from *Available Groups*.
 . Click *Add*.
 
 [[deleting-a-user]]
@@ -2083,16 +2084,18 @@ To delete a user:
 [[groups]]
 ==== Groups
 
-User groups create filters and assign roles to users. You can either create your own user groups, or leverage your LDAP directory service to assign groups of users to account roles.
+User groups create filters and assign roles to users. You can either create your own  groups, or leverage your LDAP directory service to assign groups of users to account roles.
 For a list of what each pre-defined account role can do, see xref:roles[].
 
+A user can exist in multiple groups. However, a group can only be assigned one account role.
+
 [NOTE]
-======
+====
 To assign account roles using LDAP groups, see xref:assigning_account_roles_using_ldap_groups[].
-======
+====
 
 [[creating-a-user-group]]
-==== Creating a User Group
+==== Creating a Group
 
 To create a user group:
 
@@ -2100,7 +2103,7 @@ To create a user group:
 . Click on the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
 . Enter a name for the group in the *Name* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
-. Select a role to map to this group.
+. Select a *Role* to map to this group.
 . Select the *Project/Tenant* this group must belong to.
 . Select any filters that you want applied to what this group can view in the *Assign Filters* area.
 . Check the boxes for the filters you want applied to this user. The items that have changed will show in blue italicized font.
@@ -2111,17 +2114,31 @@ image:2088.png[]
 . Check the boxes for the folders that you want to limit this user to. The items that have changed will show in blue italicized font.
 . Click *Add*.
 
+After creating a group, assign one or more users to the group by editing a user.
 
 [[roles]]
 ==== Roles
 
-When you create a user group, you must specify a role to give the group rights to resources in the console, and then assign a user to a group.
-{product-title} provides a default group of roles, but you can also create your own as well as copy the default groups. The table below shows the function available to each group.
+When you create a group, you must specify a role to give the group rights to resources in the console. The group's role determines the scope of access for the users that are members of the group. 
+
+image:CloudForms_General_Config_Roles_460469_1017_JCS.png[]
+
+A group can only be assigned one role when the local database is used for authentication, as shown in the above image.
+
+{product-title} provides a default group of roles, but you can also create your own, or copy and edit the default groups. 
 
 [NOTE]
-==========
+====
 If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service. See xref:ldap_settings[].
-==========
+====
+
+To view details of a role and its level of access:
+
+. From the settings menu, select *Configuration*.
+. Click on the *Access Control* accordion, then click *Roles*.
+. Click on a role from the list to display role information and the product features the role can access (marked by a checkmark). You can expand the categories under *Product Features* to see further detail.
+
+The table below shows a summary of the functions available to each role. 
 
 [[account-roles-and-descriptions]]
 ===== Account Roles and Descriptions
@@ -2154,8 +2171,8 @@ To create a role:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Roles*.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Role).
-. In the *Role Information* area, type a name for the new role. For *VM & Template Access Restriction*, select if you want to limit users with this role to only see virtual machines specifically used by the user, by the user or its group, or all virtual machines.
+. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Role). Alternatively, you can copy an existing role to a new role by clicking *Copy this to a new Role*.
+. In the *Role Information* area, type a name for the new role. For *VM & Template Access Restriction*, select if you want to limit users with this role to only see virtual machines owned by the user, owned by the user or its group, or all virtual machines.
 image:2095.png[]
 . Under *Product Features (Editing)*, navigate to the appropriate feature and enable or disable it.
 image:2096.png[]

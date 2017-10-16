@@ -11,11 +11,6 @@ In {product-title}, an automation management provider is a management tool that 
 
 *Ansible Tower* is a management tool integrated with {product-title_short}, designed to help automate infrastructure operations utilizing existing Ansible Tower providers in your inventory. {product-title_short} allows you to execute Ansible Tower jobs using service catalogs and Automate. Using Ansible Tower, you can schedule Ansible playbook runs and monitor current and historical results, allowing for troubleshooting or identification of issues before they occur.
 
-[NOTE]
-====
-In {product-title}, the Ansible role is disabled by default. Navigate to the settings menu, then *Configuration* &#8594; *Settings* and select the desired server under *Zones*. Set the *Server Role* for *Embedded Ansible* to *On* to enable the role.
-====
-
 
 [[ansible-inside]]
 == Ansible
@@ -32,9 +27,24 @@ Ranging from simple to complex tasks, Ansible playbooks can support cloud manage
 
 Ansible is built into {product-title_short} so there is nothing to install. The basic workflow when using Ansible in {product-title} is as follows:
 
+* Enable the *Embedded Ansible* server role.
 * Add a source control repository that contains your playbooks.
 * Establish credentials with your inventory. 
 * Back your services, alerts and policies using available playbooks. 
+
+
+[[enabling-embedded-ansible-server-role]]
+=== Enabling the Embedded Ansible Server Role
+In {product-title}, the Ansible role is disabled by default. Enable the server role to utilize Ansible Automation Inside. 
+
+[NOTE]
+====
+Configure your {product-title_short} appliance network identity (hostname/IP address) before enabling the Ansible server role. Restart the `evmserverd` service on the appliance with the enabled Ansible role after making any changes to the hostname or IP address.
+====
+
+. Navigate to the settings menu, then *Configuration* &#8594; *Settings*.
+. Select the desired server under *Zones*.
+. Set the *Server Role* for *Embedded Ansible* to *On*. 
 
 [[verifying-embedded-ansible-worker-state]]
 === Verifying the Embedded Ansible Worker State
@@ -52,7 +62,7 @@ Add a repository so that {product-title} can discover and make available your pl
 [NOTE]
 
 ====
-Configure your {product-title_short] appliance network identity (hostname/IP address) before adding Ansible playbook repositories. Restart the `evmserverd` service after changing the hostname or IP address to ensure repositories add properly.
+Configure your {product-title_short} appliance network identity (hostname/IP address) before adding Ansible playbook repositories. Restart the `evmserverd` service after changing the hostname or IP address to ensure repositories add properly.
 ====
  
 . Navigate to menu:Automation[Ansible > Repositories].

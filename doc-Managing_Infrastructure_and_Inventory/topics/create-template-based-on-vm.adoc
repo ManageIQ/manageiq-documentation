@@ -3,31 +3,42 @@
 
 A template is a copy of a virtual machine that you can use to simplify the subsequent, repeated creation of similar virtual machines. Templates capture the configuration of software, configuration of hardware, and the software installed on the virtual machine on which the template is based. 
 
+[NOTE]
+====
+Virtual machines must meet the following criteria to publish as templates:
+
+* The VM must not be blank, archived or orphaned. 
+* The VM must be associated with a Red Hat Virtualization Provider.
+* The Red Hat Virtualization provider must support `publish VM`. (Available in ovirt-engine-4.0 and higher, with the option of `use_ovirt_engine_sdk` set to true in the settings.yml)
+* The VM power state is `OFF`.
+* Sealing a template is not supported for Windows OS VMs. 
+====
+
 Create a template based on an existing virtual machine:
 
 . Navigate to menu:Compute[Infrastructure > Providers].
 . Click on a Red Hat Virtualization provider.  
-. Select a virtual machine. 
+. Select a VM. 
 . Click image:2007.png[Lifecycle] (*Lifecycle*), then click image:import.png[Publish selected VM to a Template] (*Publish selected VM to a Template*).
 . Under the *Request* tab provide *Request Information* and identify a *Manager*:
 .. Enter an *E-Mail* address.
 .. Provide a *First* and *Last* name in the individual fields.
 .. Enter a *Manager* name. 
-. Under the *Catalog* tab:
-.. Select the source virtual machine from the *Name* field.
+. Use fields in the *Catalog* tab to identify the source VM and provide details for the template:
+.. Select the source VM from the *Name* field.
 .. (Optional) Check *Seal Template*.
 +
 [NOTE]
 ====
-Sealing, which uses the `virt-sysprep` command, removes system-specific details from a virtual machine before creating a template based on that virtual machine. This prevents the original virtual machine's details from appearing in subsequent virtual machines that are created using the same template. It also ensures the functionality of other features, such as predictable vNIC order. 
+Sealing, which uses the `virt-sysprep` command, removes system-specific details from a virtual machine before creating a template based on that VM. This prevents the original VM's details from appearing in subsequent VMs that are created using the same template. It also ensures the functionality of other features, such as predictable vNIC order. 
 ====
 +
-.. Choose the number of VMs to include, from the drop-down menu.
-.. Provide a *VM Name* and *Description*.
+.. The *Number of VMs* indicates the output will be a single template. 
+.. Provide a *Name* and *Description* for the created template. 
 . Under the *Environment* tab, specify information for the storage domain in which to create the template's disks.
-.. Check *Choose Automatically* to allow {product-title_short} to select where the template is stored. 
-.. Select the cluster with which to associate the template from the Cluster drop-down list. By default, this is the same as that of the source virtual machine.
-.. Choose a *Datastore* to associate with the template. (not sure how this works. Is it a datastore to associate or include???)
-. The *Schedule* tab allows users to input information on provisioning and retirement of the VM. 
+.. Check *Choose Automatically* to allow {product-title_short} to determine the destination cluster and datastore.  
+.. Select the cluster with which to associate the template from the *Cluster* drop-down list. By default, this is identical to the cluster of the source VM.
+.. Choose a *Datastore* for the destination to create the template's disks. 
+. Provide provisioning and retirement information for VMs based on the template in the *Schedule* tab
 .. Select *Schedule* or *Immediately on Approval* for *Schedule Info* to determine when to provision the VM.
-.. Set the * Time to Retirement* under *Lifespan* by selection from options in the drop-down menu. 
+.. Set the *Time to Retirement* under *Lifespan* using the drop-down menu. 

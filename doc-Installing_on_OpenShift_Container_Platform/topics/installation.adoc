@@ -348,7 +348,7 @@ cloudforms   cfme.apps.e2e.example.com  cloudforms:443-tcp   passthrough        
 ------
 A route should have been deployed via template for HTTPS access on the CloudForms pod. Examine the output and point your web browser to the reported URL/host (in this example, `cfme.apps.e2e.example.com`).
 
-
+ifdef::miq[]
 [[building-images]]
 === Building Images on OpenShift
 
@@ -371,10 +371,12 @@ To execute a new build after the first (automatically started) build, run:
 $ oc start-build -n <your-namespace> cloudforms-pods
 ----
 Configure the following template parameters on the newly built image:
-------
+----
 $ oc new-app --template=cloudforms \
   -n <your-namespace> \
   -p APPLICATION_IMG_NAME=<your-docker-registry>:5000/<your-namespace>/cloudforms-pods \
   -p APPLICATION_IMG_TAG=latest \
   ...
-------
+----
+
+endif::miq[]

@@ -29,6 +29,7 @@ ifdef::cfme[]
 . From the list of installers and images, select the {product-title} appliance specified for Microsoft Azure download link.
 endif::cfme[]
 
+ifdef::miq[]
 [[uploading-the-appliance-to-microsoft-azure]]
 === Uploading the {product-title} Virtual Appliance to Microsoft Azure
 
@@ -65,14 +66,14 @@ $ qemu-img convert -f vpc -O raw <image-name.vhd> <image-name.raw>
 
 Example:
 
-$ qemu-img convert -f vpc -O raw cfme-azure-5.8.0.17-1.x86_64.vhd cfme-azure-5.8.0.17-1.x86_64.raw
+$ qemu-img convert -f vpc -O raw cfme-azure-5.8.2.3-1.x86_64.vhd cfme-azure-5.8.2.3-1.x86_64.raw
 ----
 +
 . Copy and paste the script below into a new bash shell script file, for example, `aligned-size.sh`. Change _rawdisk="image-name"_ to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
 +
 ----
 #!/bin/bash
-rawdisk="cfme-azure-5.8.0.17-1.x86_64.raw"
+rawdisk="cfme-azure-5.8.2.3-1.x86_64.raw"
 MB=$((1024 * 1024))
 size=$(qemu-img info -f raw --output json "$rawdisk" | gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 rounded_size=$((($size/$MB + 1) * $MB))
@@ -95,7 +96,7 @@ $ qemu-img resize -f raw <image-name.raw> <rounded_size>
 
 Example:
 
-$ qemu-img resize -f raw cfme-azure-5.8.0.17-1.x86_64.raw 34361835520
+$ qemu-img resize -f raw cfme-azure-5.8.2.3-1.x86_64.raw 34361835520
 
 Image resized.
 ----
@@ -107,7 +108,7 @@ $ qemu-img convert -f raw -o subformat=fixed,force_size -O vpc <image-name.raw> 
 
 Example:
 
-qemu-img convert -f raw -o subformat=fixed,force_size -O vpc cfme-azure-5.8.0.17-1.x86_64.raw cfme-azure-5.8.0.17-1.x86_64.vhd
+qemu-img convert -f raw -o subformat=fixed,force_size -O vpc cfme-azure-5.8.2.3-1.x86_64.raw cfme-azure-5.8.2.3-1.x86_64.vhd
 ----
 +
 . Get the virtual size for the .vhd file.
@@ -117,11 +118,11 @@ $ qemu-img info --output=json -f vpc <path-to-image>
 
 Example:
 
-$ qemu-img info --output=json -f vpc cfme-azure-5.8.0.17-1.x86_64.vhd
+$ qemu-img info --output=json -f vpc cfme-azure-5.8.2.3-1.x86_64.vhd
 
 {
   "virtual-size": 34361835520,
-  "filename": "cfme-azure-5.8.0.17-1.x86_64.vhd",
+  "filename": "cfme-azure-5.8.2.3-1.x86_64.vhd",
   "format": "vpc",
   "actual-size": 3158839296,
   "dirty-flag": false
@@ -312,7 +313,7 @@ $ az storage blob upload --account-name <storage-account-name> --container-name 
 
 Example:
 
-$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.0.17-1.x86_64.vhd --name cfme-azure-5.8.0.17-1.x86_64.vhd
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.2.3-1.x86_64.vhd --name cfme-azure-5.8.2.3-1.x86_64.vhd
  
 Finished[#############################################################]  100.0000%
 ----
@@ -324,9 +325,9 @@ $ az storage blob url -c <container-name> -n <image-name>.vhd
 
 Example:
 
-$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.0.17-1.x86_64.vhd 
+$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.2.3-1.x86_64.vhd 
 
-"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.0.17-1.x86_64.vhd"
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd"
 ----
 +
 . Log in to Azure.
@@ -361,7 +362,310 @@ $ az vm create --resource-group <resource-group> --location <azure-region> --use
 
 Example:
 
-az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.0.17-1.x86_64.vhd
+az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd
+
+{
+  "fqdns": "",
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/cfme-appliance-1",
+  "location": "southcentralus",
+  "macAddress": "00-0X-XX-XX-XX-XX",
+  "powerState": "VM running",
+  "privateIpAddress": "10.0.0.4",
+  "publicIpAddress": "12.84.121.147",
+  "resourceGroup": "azrhelclirsgrp"
+}
+----
++
+Make a note of the public IP address. You will need this to log in to the virtual machine in the next step.
+. Start an SSH session and log in to the appliance.
++
+----
+$ ssh -i <path-to-ssh-key> <admin-username@public-IP-address>
+
+Example:
+
+$ ssh  -i /home/clouduser/.ssh/id_rsa clouduser@12.84.121.147
+The authenticity of host '12.84.121.147' can't be established.
+Are you sure you want to continue connecting (yes/no)? yes
+Warning: Permanently added '12.84.121.147' (ECDSA) to the list of known hosts.
+
+Welcome to the Appliance Console
+
+For a menu, please type: appliance_console
+----
++
+. Enter `sudo appliance_console` at the prompt. The summary screen appears.
+
+You have successfully provisioned a {product-title_short} virtual appliance in Microsoft Azure.
+
+
+[NOTE]
+====
+The exported storage connection string does not persist after a system reboot. If any of the commands in the above steps fail, export the storage connection string again using the following commands:
+
+. Get the storage account connection string.
++
+----
+$ az storage account show-connection-string -n <storage-account-name> -g <resource-group>
+
+Example:
+
+$ az storage account show-connection-string -n azrhelclistact -g azrhelclirsgrp
+{
+  "connectionString": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
+}
+----
++
+. Export the connection string. Copy the connection string and paste it into the following command. This connects your system to the storage account.
++
+----
+$ export AZURE_STORAGE_CONNECTION_STRING="<storage-connection-string>"
+
+Example:
+
+$ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
+----
++
+====
+endif::miq[]
+
+
+ifdef::cfme[]
+[[uploading-the-appliance-to-microsoft-azure]]
+=== Uploading the {product-title} Virtual Appliance to Microsoft Azure
+
+You can upload the appliance to an Azure environment using the following two methods. 
+
+* Using Azure PowerShell script
+* Using Azure Command-Line Interface (Azure CLI)
+
+To upload the {product-title} appliance file to Microsoft Azure, ensure the following requirements are met:
+
+* Approximately 2 GB of space for each VHD image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {product-title} appliance.
+* link:https://azure.microsoft.com/en-us/free/[Microsoft Azure Account]. 
+* Administrator access to the Azure portal.
+* Depending on your infrastructure, allow time for the upload.
+
+
+[IMPORTANT]
+====
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure Powershell script and Azure CLI do not automatically convert a dynamic .vhd file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files are now available for download in a fixed format, therefore can be uploaded to an Azure environment and provisioned without requiring any additional manipulations with the image.
+====
+
+
+[[install-azure-cli]]
+==== Install the Azure Command-Line Interface
+
+[NOTE]
+====
+For a complete Azure CLI 2.0 command reference, see link:https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest[Azure CLI 2.0: Command reference - az].
+====
+
+. Import the Microsoft repository key. 
++
+----
+$ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+----
++
+. Create a local Azure CLI repository entry.
++
+----
+$ sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+----
++
+. Update the yum package index.
++
+----
+$ yum check-update
+----
++
+. Install the Azure CLI.
++
+----
+$ sudo yum install azure-cli
+----
++
+. Log in to Azure.
++
+----
+$ az login
+
+Example:
+
+To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code GJP8Y33XY to authenticate.
+
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "528c646b-83jb-4527-1a04-10d294fd0cc2",
+    "isDefault": true,
+    "name": "Demo Azure account",
+    "state": "Enabled",
+    "tenantId": "7e7cfe6b-cff0-e4d8-a446-57a76c9b4958",
+    "user": {
+      "name": "clouduser",
+      "type": "user"
+    }
+  }
+]
+----
++
+
+
+
+[[uploading-the-appliance-using-azure-powershell-script]]
+==== Uploading the {product-title_short} Virtual Appliance Using Azure Powershell Script
+
+
+[NOTE]
+====
+Make sure Azure Resource Manager cmdlets are available. See *To install the cmdlets* section in https://msdn.microsoft.com/en-us/library/mt125356.aspx[Azure Resource Manager Cmdlets].
+====
+
+. Log in to *Azure Resource Manager* using the cmdlet:
++
+------
+## Customize for Your Environment
+$SubscriptionName = "my subscription"
+
+Login-AzureRmAccount
+Select-AzureRmSubscription -SubscriptionName $SubscriptionName
+------
++  
+When prompted, enter your user name and password for the Azure Portal.
+
+. Upload the .vhd file to a storage account. As shown in the example script below, you will first create a *Resource Group* through the Portal UI or Powershell. Additionally, create the storage container defined in "BlobDestinationContainer" in advance.
++
+------
+Example Script:
+
+## Customize for Your Environment
+$SubscriptionName = "my subscription"
+
+$ResourceGroupName = "test"
+$StorageAccountName = "test"
+
+$BlobNameSource = "cfme-test.vhd"
+$BlobSourceContainer = "templates"
+$LocalImagePath = "C:\tmp\$BlobNameSource"
+
+##
+
+# Upload VHD to a "templates" directory. You can pass a few arguments, such as `NumberOfUploaderThreads 8`. The default number of uploader threads is `8`. See https://msdn.microsoft.com/en-us/library/mt603554.aspx
+
+Add-AzureRmVhd -ResourceGroupName $ResourceGroupName -Destination https://$StorageAccountName.blob.core.windows.net/$BlobSourceContainer/$BlobNameSource -LocalFilePath $LocalImagePath -NumberOfUploaderThreads 8
+------
++
+. Create a virtual machine. Then, define your VM and VHD name, your system/deployment name and size. Next, you will set the appropriate Storage, Network and Configuration options for your environment.
++
+------
+Example Script:
+
+## Customize for Your Environment
+
+$BlobNameDest = "cfme-test.vhd"
+$BlobDestinationContainer = "vhds"
+$VMName = "cfme-test"
+$DeploySize= "Standard_A3"
+$vmUserName = "user1"
+
+$InterfaceName = "test-nic"
+$VNetName = "test-vnet"
+$PublicIPName = "test-public-ip"
+
+$SSHKey = <your ssh public key>
+
+##
+
+$StorageAccount = Get-AzureRmStorageAccount -ResourceGroup $ResourceGroupName -Name $StorageAccountName
+
+$SourceImageUri = "https://$StorageAccountName.blob.core.windows.net/templates/$BlobNameSource"
+$Location = $StorageAccount.Location
+$OSDiskName = $VMName
+
+# Network
+$Subnet1Name = "default"
+$VNetAddressPrefix = "10.1.0.0/16"
+$VNetSubnetAddressPrefix = "10.1.0.0/24"
+$PIp = New-AzureRmPublicIpAddress -Name $PublicIPName -ResourceGroupName $ResourceGroupName -Location $Location -AllocationMethod Dynamic -Force
+$SubnetConfig = New-AzureRmVirtualNetworkSubnetConfig -Name $Subnet1Name -AddressPrefix $VNetSubnetAddressPrefix
+$VNet = New-AzureRmVirtualNetwork -Name $VNetName -ResourceGroupName $ResourceGroupName -Location $Location -AddressPrefix $VNetAddressPrefix -Subnet $SubnetConfig -Force
+$Interface = New-AzureRmNetworkInterface -Name $InterfaceName -ResourceGroupName $ResourceGroupName -Location $Location -SubnetId $VNet.Subnets[0].Id -PublicIpAddressId $PIp.Id -Force
+
+# Specify the VM Name and Size
+$VirtualMachine = New-AzureRmVMConfig -VMName $VMName -VMSize $DeploySize
+
+# Add User
+$cred = Get-Credential -UserName $VMUserName -Message "Setting user credential - use blank password"
+$VirtualMachine = Set-AzureRmVMOperatingSystem -VM $VirtualMachine -Linux -ComputerName $VMName -Credential $cred
+
+# Add NIC
+$VirtualMachine = Add-AzureRmVMNetworkInterface -VM $VirtualMachine -Id $Interface.Id
+
+# Add Disk
+$OSDiskUri = $StorageAccount.PrimaryEndpoints.Blob.ToString() + $BlobDestinationContainer + "/" + $BlobNameDest
+
+$VirtualMachine = Set-AzureRmVMOSDisk -VM $VirtualMachine -Name $OSDiskName -VhdUri $OSDiskUri -CreateOption fromImage -SourceImageUri $SourceImageUri -Linux
+
+# Set SSH key
+Add-AzureRmVMSshPublicKey -VM $VirtualMachine -Path “/home/$VMUserName/.ssh/authorized_keys” -KeyData $SSHKey
+
+# Create the VM
+New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $VirtualMachine
+------
++
+
+
+[NOTE]
+====
+These are the procedural steps as of the time of writing. For more information, see the following Azure documentation. 
+
+* https://azure.microsoft.com/en-us/documentation/articles/powershell-azure-resource-manager
+
+The steps covered in the following article are for a Windows machine, however, most of the items are common between Windows and Linux.
+
+* https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-create-powershell
+====
+
+
+[[uploading-the-appliance-using-azure-cli]]
+==== Uploading and Provisioning the {product-title_short} Virtual Appliance Using Azure Command-Line Interface
+
+You can upload the appliance to an Azure environment using the Azure Command-Line Interface (Azure CLI) following the process below.
+
+
+. Upload the image to the storage container. It may take several minutes. Note: Enter `az storage container list` to get the list of storage containers.
++
+----
+$ az storage blob upload --account-name <storage-account-name> --container-name <container-name> --type page --file <path-to-vhd> --name <image-name>.vhd
+
+Example:
+
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.2.3-1.x86_64.vhd --name cfme-azure-5.8.2.3-1.x86_64.vhd
+ 
+Finished[#############################################################]  100.0000%
+----
++
+. Get the URL for the uploaded .vhd file using the following command. You will need to use this URL in the next step.
++
+----
+$ az storage blob url -c <container-name> -n <image-name>.vhd
+
+Example:
+
+$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.2.3-1.x86_64.vhd 
+
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd"
+----
++
+. Create the virtual machine. Note that the following command uses `--generate-ssh-keys`. In this example, the private/public key pair `/home/clouduser/.ssh/id_rsa` and `/home/clouduser/.ssh/id_rsa.pub` are created.
++
+----
+$ az vm create --resource-group <resource-group> --location <azure-region> --use-unmanaged-disk --name <vm-name> --storage-account <storage-account-name> --os-type linux --admin-username <administrator-name> --generate-ssh-keys --image <URL>
+
+Example:
+
+az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd
 
 {
   "fqdns": "",
@@ -427,6 +731,9 @@ $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;Endpoin
 +
 ====
 
-
-
+[IMPORTANT]
+====
+After uploading the {product-title} appliance, you must configure the database for {product-title}; see xref:configuring_a_database[Configuring a Database for {product-title}].
+====
+endif::cfme[]
 

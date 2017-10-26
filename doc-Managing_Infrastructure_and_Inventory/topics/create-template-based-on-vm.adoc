@@ -1,26 +1,26 @@
 [[create_template_based_on_vm]]
 = Creating a Template Based on a Virtual Machine
 
-A template is a copy of a virtual machine that you can use to simplify the subsequent, repeated creation of similar virtual machines. Templates capture the configuration of software, configuration of hardware, and the software installed on the virtual machine on which the template is based. 
+A template is a copy of a virtual machine (VM) that you can use to simplify the subsequent, repeated creation of similar VMs. Templates capture the configuration of software, configuration of hardware, and the software installed on the VM on which the template is based. 
 
 [NOTE]
 ====
 Virtual machines must meet the following criteria to publish as templates:
 
 * The VM must not be blank, archived or orphaned. 
-* The VM must be associated with a Red Hat Virtualization Provider.
-* The Red Hat Virtualization provider must support `publish vm`. (Available in ovirt-engine-4.0 and higher, with the option of `use_ovirt_engine_sdk` set to true in the settings.yml)
-* The VM power state is `off`.
+* The VM must be associated with a {virt-product-title} provider.
+* {virt-product-title} provider 4.0 or higher, with `use_ovirt_engine_sdk` set to `true` in `/var/www/miq/vmdb/config/settings.yml`. 
+* The VM power state is `OFF`.
 * Sealing a template is not supported for Windows OS VMs. 
 ====
 
-Create a template based on an existing virtual machine:
+To create a template based on an existing virtual machine:
 
 . Navigate to menu:Compute[Infrastructure > Providers].
-. Click on a Red Hat Virtualization provider.  
+. Click on a {virt-product-title} provider.  
 . Select a VM. 
 . Click image:2007.png[Lifecycle] (*Lifecycle*), then click image:import.png[Publish selected VM to a Template] (*Publish selected VM to a Template*).
-. Under the *Request* tab provide *Request Information* and identify a *Manager*:
+. Under the *Request* tab, provide *Request Information* and identify a *Manager*:
 .. Enter an *E-Mail* address.
 .. Provide a *First* and *Last* name in the individual fields.
 .. Enter a *Manager* name. 
@@ -44,7 +44,7 @@ Or, manually enter cluster and datastore information using the following steps:
 +
 .. Select the cluster with which to associate the template from the *Cluster* drop-down list. By default, this is identical to the cluster of the source VM.
 .. Choose a *Datastore* for the destination to create the template's disks. 
-. Provide provisioning and retirement information for VMs based on the template in the *Schedule* tab
+. Provide provisioning and retirement information for VMs based on the template in the *Schedule* tab.
 .. Select *Schedule* or *Immediately on Approval* for *Schedule Info* to determine when to provision the VM.
 .. Set the *Time to Retirement* under *Lifespan* using the drop-down menu. 
 . Click *Submit*. 

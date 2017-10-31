@@ -29,15 +29,16 @@ ifdef::cfme[]
 . From the list of installers and images, select the {product-title} appliance specified for Microsoft Azure download link.
 endif::cfme[]
 
-[[uploading-the-appliance-to-microsoft-azure]]
-=== Uploading the {product-title} Virtual Appliance to Microsoft Azure
 
-You can upload the appliance to an Azure environment using the following two methods. 
+[[uploading-the-appliance-to-microsoft-azure]]
+=== Uploading and Provisioning the {product-title} Virtual Appliance in Microsoft Azure
+
+You can upload and provision the appliance in an Azure environment using the following two methods. 
 
 * Using Azure PowerShell script
 * Using Azure Command-Line Interface (Azure CLI)
 
-To upload the {product-title} appliance file to Microsoft Azure, ensure the following requirements are met:
+To upload the {product-title} appliance file in Microsoft Azure, ensure the following requirements are met:
 
 * Approximately 2 GB of space for each VHD image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {product-title} appliance.
 * link:https://azure.microsoft.com/en-us/free/[Microsoft Azure Account]. 
@@ -47,74 +48,14 @@ To upload the {product-title} appliance file to Microsoft Azure, ensure the foll
 
 [IMPORTANT]
 ====
-Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure Powershell script and Azure CLI do not automatically convert a dynamic .vhd file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.0-1.x86_64.vhd` and newer) are available for download in a fixed format, and can be uploaded to an Azure environment and provisioned without requiring any additional manipulations with the image.   
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure Powershell script and Azure CLI do not automatically convert a dynamic .vhd file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.3-1.x86_64.vhd` and newer) are available for download in a fixed format and therefore can be uploaded and provisioned in an Azure environment without requiring any additional manipulations with the image.   
 ====
-
-
-
-[[install-azure-cli]]
-==== Install the Azure Command-Line Interface
-
-[NOTE]
-====
-For a complete Azure CLI 2.0 command reference, see link:https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest[Azure CLI 2.0: Command reference - az].
-====
-
-. Import the Microsoft repository key. 
-+
-----
-$ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
-----
-+
-. Create a local Azure CLI repository entry.
-+
-----
-$ sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
-----
-+
-. Update the yum package index.
-+
-----
-$ yum check-update
-----
-+
-. Install the Azure CLI.
-+
-----
-$ sudo yum install azure-cli
-----
-+
-. Log in to Azure.
-+
-----
-$ az login
-
-Example:
-
-To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code GJP8Y33XY to authenticate.
-
-[
-  {
-    "cloudName": "AzureCloud",
-    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "isDefault": true,
-    "name": "Demo Azure account",
-    "state": "Enabled",
-    "tenantId": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
-    "user": {
-      "name": "clouduser",
-      "type": "user"
-    }
-  }
-]
-----
-+
 
 
 [[create-resources-for-appliance-in-azure]]
 ==== Create Resources for the Appliance in Microsoft Azure
 
-Complete the following steps to create resources in Microsoft Azure. Note that if you already have resources you can use, you can skip this section and go directly to either xref:uploading-the-appliance-using-azure-powershell-script[] or xref:uploading-the-appliance-using-azure-cli[] depending on your preferred method for uploading the {product-title_short} appliance to Azure.
+Complete the following steps to create resources in Microsoft Azure. Note that if you already have resources you can use, you can skip this section and go directly to either xref:uploading-the-appliance-using-azure-powershell-script[] or xref:uploading-the-appliance-using-azure-cli[] depending on your preferred method for uploading the {product-title_short} appliance in Azure.
 
 [NOTE]
 ====
@@ -367,7 +308,6 @@ New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $Vir
 ------
 +
 
-
 [NOTE]
 ====
 These are the procedural steps as of the time of writing. For more information, see the following Azure documentation. 
@@ -383,7 +323,68 @@ The steps covered in the following article are for a Windows machine, however, m
 [[uploading-the-appliance-using-azure-cli]]
 ==== Uploading and Provisioning the {product-title_short} Virtual Appliance Using Azure Command-Line Interface
 
-You can upload the appliance to an Azure environment using the Azure Command-Line Interface (Azure CLI) following the process below.
+
+.Install the Azure Command-Line Interface
+
+[NOTE]
+====
+For a complete Azure CLI 2.0 command reference, see link:https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest[Azure CLI 2.0: Command reference - az].
+====
+
+. Import the Microsoft repository key. 
++
+----
+$ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
+----
++
+. Create a local Azure CLI repository entry.
++
+----
+$ sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
+----
++
+. Update the yum package index.
++
+----
+$ yum check-update
+----
++
+. Install the Azure CLI.
++
+----
+$ sudo yum install azure-cli
+----
++
+. Log in to Azure.
++
+----
+$ az login
+
+Example:
+
+To sign in, use a web browser to open the page https://aka.ms/devicelogin and enter the code GJP8Y33XY to authenticate.
+
+[
+  {
+    "cloudName": "AzureCloud",
+    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "isDefault": true,
+    "name": "Demo Azure account",
+    "state": "Enabled",
+    "tenantId": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+    "user": {
+      "name": "clouduser",
+      "type": "user"
+    }
+  }
+]
+----
++
+
+
+.Upload and Provision the {product-title_short} Virtual Appliance Using Azure Command-Line Interface
+
+You can now upload and provision the appliance in an Azure environment using the Azure Command-Line Interface (Azure CLI).
 
 
 . Upload the image to the storage container. It may take several minutes. Note: Enter `az storage container list` to get the list of storage containers.
@@ -490,6 +491,7 @@ $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;Endpoin
 ----
 +
 ====
+
 
 .Possible Next Steps:
 

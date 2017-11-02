@@ -29,130 +29,190 @@ ifdef::cfme[]
 . From the list of installers and images, select the {product-title} appliance specified for Microsoft Azure download link.
 endif::cfme[]
 
-[[uploading-the-appliance-to-microsoft-azure]]
-=== Uploading the {product-title} Virtual Appliance to Microsoft Azure
 
-You can upload the appliance to an Azure environment using the following two methods. 
+[[uploading-the-appliance-to-microsoft-azure]]
+=== Uploading and Provisioning the {product-title} Virtual Appliance in Microsoft Azure
+
+You can upload and provision the appliance in an Azure environment using the following two methods. 
 
 * Using Azure PowerShell script
 * Using Azure Command-Line Interface (Azure CLI)
 
-To upload the {product-title} appliance file to Microsoft Azure, ensure the following requirements are met:
+To upload the {product-title} appliance file in Microsoft Azure, ensure the following requirements are met:
 
 * Approximately 2 GB of space for each VHD image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {product-title} appliance.
 * link:https://azure.microsoft.com/en-us/free/[Microsoft Azure Account]. 
 * Administrator access to the Azure portal.
-* xref:converting-aligning-cfme-appliance-image[Converting and Aligning the {product-title} Virtual Appliance Image]
 * Depending on your infrastructure, allow time for the upload.
 
 
 [IMPORTANT]
 ====
-Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image .vhd file is dynamic by default. Currently, the Azure Powershell script and Azure CLI do not automatically convert the dynamic .vhd file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image .vhd file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image .vhd file using either the Azure PowerShell or Azure CLI method.
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure Powershell script and Azure CLI do not automatically convert a dynamic .vhd file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.3-1.x86_64.vhd` and newer) are available for download in a fixed format and therefore can be uploaded and provisioned in an Azure environment without requiring any additional manipulations with the image.   
 ====
 
 
-[[converting-aligning-cfme-appliance-image]]
-==== Converting and Aligning the {product-title_short} Virtual Appliance Image
+[[create-resources-for-appliance-in-azure]]
+==== Create Resources for the Appliance in Microsoft Azure
 
-Complete the following procedure to ensure the {product-title_short} dynamic .vhd file is properly aligned to the nearest 1 MB boundary, and is in a fixed-size VHD format. 
+Complete the following steps to create resources in Microsoft Azure. Note that if you already have resources you can use, you can skip this section and go directly to either xref:uploading-the-appliance-using-azure-powershell-script[] or xref:uploading-the-appliance-using-azure-cli[] depending on your preferred method for uploading the {product-title_short} appliance in Azure.
 
+[NOTE]
+====
+For a complete Azure CLI 2.0 command reference, see link:https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest[Azure CLI 2.0: Command reference - az].
+====
 
-. Convert the dynamic .vhd file you downloaded in xref:obtaining-the-appliance[] to RAW format.
+. Create a resource group in an Azure region.
 +
-----
-$ qemu-img convert -f vpc -O raw <image-name.vhd> <image-name.raw>
+------
+$ az group create --name <resource-group> --location <azure-region>
 
 Example:
 
-$ qemu-img convert -f vpc -O raw cfme-azure-5.9.0.17-1.x86_64.vhd cfme-azure-5.9.0.17-1.x86_64.raw
-----
-+
-. Copy and paste the script below into a new bash shell script file, for example, `aligned-size.sh`. Change _rawdisk="image-name"_ to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
-+
-----
-#!/bin/bash
-rawdisk="cfme-azure-5.9.0.17-1.x86_64.raw"
-MB=$((1024 * 1024))
-size=$(qemu-img info -f raw --output json "$rawdisk" | gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
-rounded_size=$((($size/$MB + 1) * $MB))
-echo "rounded size = $rounded_size"
-export rounded_size
-----
-+
-. Run the shell script. The file name `aligned-size.sh` is used in this example.
-+
-----
-$ sh aligned-size.sh
-
-rounded size = 34361835520
-----
-+
-. Resize the virtual appliance image using the rounded size.
-+
-----
-$ qemu-img resize -f raw <image-name.raw> <rounded_size>
-
-Example:
-
-$ qemu-img resize -f raw cfme-azure-5.9.0.17-1.x86_64.raw 34361835520
-
-Image resized.
-----
-+
-. Convert the appliance image to a fixed-size .vhd file.
-+
-----
-$ qemu-img convert -f raw -o subformat=fixed,force_size -O vpc <image-name.raw> <image-name.vhd>
-
-Example:
-
-qemu-img convert -f raw -o subformat=fixed,force_size -O vpc cfme-azure-5.9.0.17-1.x86_64.raw cfme-azure-5.9.0.17-1.x86_64.vhd
-----
-+
-. Get the virtual size for the .vhd file.
-+
-----
-$ qemu-img info --output=json -f vpc <path-to-image>
-
-Example:
-
-$ qemu-img info --output=json -f vpc cfme-azure-5.9.0.17-1.x86_64.vhd
-
+[clouduser@localhost]$ az group create --name azrhelclirsgrp --location southcentralus
 {
-  "virtual-size": 34361835520,
-  "filename": "cfme-azure-5.9.0.17-1.x86_64.vhd",
-  "format": "vpc",
-  "actual-size": 3158839296,
-  "dirty-flag": false
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp",
+  "location": "southcentralus",
+  "managedBy": null,
+  "name": "azrhelclirsgrp",
+  "properties": {
+    "provisioningState": "Succeeded"
+  },
+  "tags": null
 }
-----
-. Divide the virtual-size value by 1024, twice. If the result is a whole number, the .vhd file is aligned properly. The example below shows that the file is properly aligned.
+------
 +
-----
-34361835520 / 1024 / 1024 = 32770
-----
+. Create a storage account; see xref:storage-sku-types[SKU type descriptions].
 +
+------
+$ az storage account create -l <azure-region> -n <storage-account-name> -g <resource-group --sku <sku_type>
 
+Example:
 
+[clouduser@localhost]$ az storage account create -l southcentralus -n azrhelclistact -g azrhelclirsgrp --sku Standard_LRS
+{
+  "accessTier": null,
+  "creationTime": "2017-04-05T19:10:29.855470+00:00",
+  "customDomain": null,
+  "encryption": null,
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Storage/storageAccounts/azrhelclistact",
+  "kind": "Storage",
+  "lastGeoFailoverTime": null,
+  "location": "southcentralus",
+  "name": "azrhelclistact",
+  "primaryEndpoints": {
+    "blob": "https://azrhelclistact.blob.core.windows.net/",
+    "file": "https://azrhelclistact.file.core.windows.net/",
+    "queue": "https://azrhelclistact.queue.core.windows.net/",
+    "table": "https://azrhelclistact.table.core.windows.net/"
+},
+"primaryLocation": "southcentralus",
+"provisioningState": "Succeeded",
+"resourceGroup": "azrhelclirsgrp",
+"secondaryEndpoints": null,
+"secondaryLocation": null,
+"sku": {
+  "name": "Standard_LRS",
+  "tier": "Standard"
+},
+"statusOfPrimary": "available",
+"statusOfSecondary": null,
+"tags": {},
+  "type": "Microsoft.Storage/storageAccounts"
+}
 
-[IMPORTANT]
-====
-qemu-img version 2.7.1 is used in this procedure. Check the qemu-img version using the command: `yum info qemu-img`. If the version is lower than 2.2.1, remove the option _force_size_ from the conversion command, for example, _subformat=fixed_. 
-====
+------
++
+. Get the storage account connection string.
++
+------
+$ az storage account show-connection-string -n <storage-account-name> -g <resource-group>
 
-The {product-title} Azure virtual appliance image is ready for uploading and provisioning in Microsoft Azure.
+Example:
 
+[clouduser@localhost]$ az storage account show-connection-string -n azrhelclistact -g azrhelclirsgrp
+{
+  "connectionString": "DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
+}
+------
++
+. Export the connection string. Copy the connection string and paste it into the following command. This connects your system to the storage account.
++
+------
+$ export AZURE_STORAGE_CONNECTION_STRING="<storage-connection-string>"
+
+Example:
+
+[clouduser@localhost]$ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
+------
++
+. Create the storage container.
++
+------
+$ az storage container create -n <container-name>
+
+Example:
+
+[clouduser@localhost]$ az storage container create -n azrhelclistcont
+{
+  "created": true
+}
+------
++
+. Create a virtual network.
++
+------
+$ az network vnet create -g <resource group> --name <vnet-name> --subnet-name <subnet-name>
+
+Example:
+
+[clouduser@localhost]$ az network vnet create --resource-group azrhelclirsgrp --name azrhelclivnet1 --subnet-name azrhelclisubnet1
+{
+  "newVNet": {
+    "addressSpace": {
+      "addressPrefixes": [
+      "10.0.0.0/16"
+      ]
+  },
+  "dhcpOptions": {
+    "dnsServers": []
+  },
+  "etag": "W/\"\"",
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Network/virtualNetworks/azrhelclivnet1",
+  "location": "southcentralus",
+  "name": "azrhelclivnet1",
+  "provisioningState": "Succeeded",
+  "resourceGroup": "azrhelclirsgrp",
+  "resourceGuid": "0f25efee-e2a6-4abe-a4e9-817061ee1e79",
+  "subnets": [
+    {
+      "addressPrefix": "10.0.0.0/24",
+      "etag": "W/\"\"",
+      "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Network/virtualNetworks/azrhelclivnet1/subnets/azrhelclisubnet1",
+      "ipConfigurations": null,
+      "name": "azrhelclisubnet1",
+      "networkSecurityGroup": null,
+      "provisioningState": "Succeeded",
+      "resourceGroup": "azrhelclirsgrp",
+      "resourceNavigationLinks": null,
+      "routeTable": null
+    }
+  ],
+  "tags": {},
+  "type": "Microsoft.Network/virtualNetworks",
+  "virtualNetworkPeerings": null
+  }
+}
+------
++
 
 
 [[uploading-the-appliance-using-azure-powershell-script]]
 ==== Uploading the {product-title_short} Virtual Appliance Using Azure Powershell Script
 
-Complete the following steps to upload the {product-title_short} virtual appliance image you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
-
 [NOTE]
 ====
-Make sure Azure Resource Manager cmdlets are available. See *To install the cmdlets* section in https://msdn.microsoft.com/en-us/library/mt125356.aspx[Azure Resource Manager Cmdlets].
+Make sure Azure Resource Manager cmdlets are available; see link:https://msdn.microsoft.com/en-us/library/mt125356.aspx[Azure Resource Manager Cmdlets] for the latest installation information.
 ====
 
 . Log in to *Azure Resource Manager* using the cmdlet:
@@ -248,7 +308,6 @@ New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $Vir
 ------
 +
 
-
 [NOTE]
 ====
 These are the procedural steps as of the time of writing. For more information, see the following Azure documentation. 
@@ -264,69 +323,36 @@ The steps covered in the following article are for a Windows machine, however, m
 [[uploading-the-appliance-using-azure-cli]]
 ==== Uploading and Provisioning the {product-title_short} Virtual Appliance Using Azure Command-Line Interface
 
-You can upload the appliance to an Azure environment using the Azure Command-Line Interface (Azure CLI) following the process below.
 
+.Install the Azure Command-Line Interface
 
-.Install Azure CLI 2.0:
+[NOTE]
+====
+For a complete Azure CLI 2.0 command reference, see link:https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest[Azure CLI 2.0: Command reference - az].
+====
 
-Complete the steps below to install Azure CLI 2.0 using curl. See link:https://docs.microsoft.com/en-us/cli/azure/install-azure-cli[] for other installation methods.
-
-. Make sure Python is updated and install the prerequisite packages.
+. Import the Microsoft repository key. 
 +
 ----
-$ sudo yum update
-$ sudo yum install -y gcc libffi-devel python-devel openssl-devel
+$ sudo rpm --import https://packages.microsoft.com/keys/microsoft.asc
 ----
 +
-. Install Azure CLI 2.0.
+. Create a local Azure CLI repository entry.
 +
 ----
-$ curl -L https://aka.ms/InstallAzureCli | bash
+$ sudo sh -c 'echo -e "[azure-cli]\nname=Azure CLI\nbaseurl=https://packages.microsoft.com/yumrepos/azure-cli\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/azure-cli.repo'
 ----
 +
-. Export Azure environment variables.
+. Update the yum package index.
 +
 ----
-$ export AZURE_STORAGE_ACCOUNT=<azure-storage-account-name>
-$ export AZURE_STORAGE_KEY="<azure-storage-account-key>"
-
-Example:
-
-$ export AZURE_STORAGE_ACCOUNT=xyzgroup9401
-$ export AZURE_STORAGE_KEY="zG7Dc29I7ysKik/Xiqk3tQN43CtLpObmJom+Hze6ko/ZiwXhdElknABzUbZ/zie5vW1XyTlGsgbaVf0fUijf2w=="
+$ yum check-update
 ----
 +
-
-
-
-
-.Upload and Provision the {product-title_short} Virtual Appliance Using Azure CLI:
-
-Complete the following steps to upload and provision the {product-title_short} virtual appliance you converted to a fixed-size VHD format and properly aligned per requirement using the procedure in xref:converting-aligning-cfme-appliance-image[].
-
-
-. Upload the image to the storage container. It may take several minutes. Note: Enter `az storage container list` to get the list of storage containers.
+. Install the Azure CLI.
 +
 ----
-$ az storage blob upload --account-name <storage-account-name> --container-name <container-name> --type page --file <path-to-vhd> --name <image-name>.vhd
-
-Example:
-
-$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.9.0.17-1.x86_64.vhd --name cfme-azure-5.9.0.17-1.x86_64.vhd
- 
-Finished[#############################################################]  100.0000%
-----
-+
-. Get the URL for the uploaded .vhd file using the following command. You will need to use this URL in the next step.
-+
-----
-$ az storage blob url -c <container-name> -n <image-name>.vhd
-
-Example:
-
-$ az storage blob url -c azrhelclistcont -n cfme-azure-5.9.0.17-1.x86_64.vhd 
-
-"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.9.0.17-1.x86_64.vhd"
+$ sudo yum install azure-cli
 ----
 +
 . Log in to Azure.
@@ -341,17 +367,56 @@ To sign in, use a web browser to open the page https://aka.ms/devicelogin and en
 [
   {
     "cloudName": "AzureCloud",
-    "id": "528c646b-83jb-4527-1a04-10d294fd0cc2",
+    "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     "isDefault": true,
     "name": "Demo Azure account",
     "state": "Enabled",
-    "tenantId": "7e7cfe6b-cff0-e4d8-a446-57a76c9b4958",
+    "tenantId": "xxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     "user": {
       "name": "clouduser",
       "type": "user"
     }
   }
 ]
+----
++
+
+
+.Upload and Provision the {product-title_short} Virtual Appliance Using Azure Command-Line Interface
+
+You can now upload and provision the appliance in an Azure environment using the Azure Command-Line Interface (Azure CLI).
+
+
+. Upload the image to the storage container. It may take several minutes. Note: Enter `az storage container list` to get the list of storage containers.
++
+----
+$ az storage blob upload --account-name <storage-account-name> --container-name <container-name> --type page --file <path-to-vhd> --name <image-name>.vhd
+
+Example:
+
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.2.3-1.x86_64.vhd --name cfme-azure-5.8.2.3-1.x86_64.vhd
+ 
+Finished[#############################################################]  100.0000%
+----
++
+. Get the URL for the uploaded .vhd file using the following command. You will need to use this URL in the next step.
++
+----
+$ az storage blob url -c <container-name> -n <image-name>.vhd
+
+Example:
+
+$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.2.3-1.x86_64.vhd 
+
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd"
+----
++
+. Create a reusable image from a blob and then use a managed disk.
++
+----
+Example:
+
+$ az image create -n <image-name> -g <cfme-appliance-group> --os-type <linux> --source <https://cfmestorageaccount.blob.core.windows.net/cfmestoragecontainer/cfme-azure-5.8.2.3-1.x86_64.vhd>
 ----
 +
 . Create the virtual machine. Note that the following command uses `--generate-ssh-keys`. In this example, the private/public key pair `/home/clouduser/.ssh/id_rsa` and `/home/clouduser/.ssh/id_rsa.pub` are created.
@@ -361,7 +426,7 @@ $ az vm create --resource-group <resource-group> --location <azure-region> --use
 
 Example:
 
-az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.9.0.17-1.x86_64.vhd
+az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd
 
 {
   "fqdns": "",
@@ -428,6 +493,18 @@ $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;Endpoin
 ====
 
 
+.Possible Next Steps:
 
+* You will need to create a data disk for the database; see link:https://docs.microsoft.com/en-us/azure/virtual-machines/linux/add-disk[] for information about how to add a persistent disk to store your data. 
+
+* See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#database-requirements[Database Requirements] for some general guidelines for your database requirements.
+
+* For information about Azure ports used by {product-title}, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/appliance_hardening_guide/#chap_red_hat_cloudforms_security_guide_firewall[].
+
+
+[IMPORTANT]
+====
+After uploading the {product-title} appliance, you must configure the database for {product-title}; see xref:configuring_a_database[Configuring a Database for {product-title}].
+====
 
 

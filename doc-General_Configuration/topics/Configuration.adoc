@@ -93,7 +93,8 @@ To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 
 [NOTE]
 =========================
-As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
+. As new clusters, hosts, and datastores are discovered, you will need to come back to this configuration to enable collection of capacity and utilization data unless you have used the *Collect for All* check boxes.
+. *Collect for All Clusters* must be checked to be able to collect capacity and utilization data from cloud providers such as Red Hat OpenStack Platform or Amazon EC2.
 =========================
 
 [[tags]]
@@ -283,9 +284,9 @@ If there are any problems with the file, such as an incorrect column name, unkno
 
 ifdef::cfme[]
 [[registering-and-updating]]
-===== Registering and Updating {product-title}
+===== Registering {product-title}
 
-You can register appliances, edit customer information, and update appliances from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
+You can register appliances, edit customer information, and apply {product-title_short} updates from the *Red Hat Updates* tab, accessible from the settings menu, and navigating to menu:Configuration[Region] in the user interface. You can register your appliance to either Red Hat Content Delivery Network (CDN) or to a Red Hat Satellite server, which assign the necessary update packages to the {product-title} server. The subscription management service you register with will provide your systems with updates and allow additional management.
 
 The following tools are used during the update process:
 
@@ -308,93 +309,10 @@ Servers with the `RHN Mirror` role also act as a repository for other appliances
 
 include::common/configuration-register-appliance.adoc[]
 
-
-[[Updating_Appliances]]
-====== Updating Appliances
-
-include::common/configuration-update-appliance.adoc[]
-
-
-[IMPORTANT]
-======
-Red Hat recommends updating the appliance using the *Red Hat Updates* tab only, which automatically restarts services and the appliance if needed. Running updates from the command line requires manually restarting the {product-title} service and sometimes the appliance. If updating the {product-title} appliance from the command line, use the `yum -y update cfme-appliance` command to update only {product-title} and its dependencies, and to avoid any potential incompatibilities that could be introduced by running `yum update`.
-======
-
-
-The following options are available in the *Appliance Updates* section of *Red Hat Updates*:
-
-.Options Available in Appliance Updates
-[cols="1,1", frame="all", options="header"]
-|===
-|
-
-              Option
-
-
-|
-
-              Use
-
-|
-             Refresh List
-
-
-|
-            Refreshes the list of appliances.
-
-
-|
-             Check for Updates
-
-
-|
-            Checks for all available {product-title} updates using `yum`.
-
-|
-              Register
-
-
-|
-            Attempts to register the appliance if it is not already registered. {product-title} subscribes to the `rhel-x86_64-server-6-cf-me-3` RHN channel for RHN-registered appliances, and to the products designated by Red Hat product certification for subscription-manager registered appliances. The Red Hat Enterprise Linux channels are enabled by default on registration. In addition, {product-title} automatically checks for updates after registering.
-|
-               Apply CFME Update
-
-
-|
-            Applies updates to {product-title} packages only. Specifically, this option runs the `yum -y update cfme-appliance` command. This command installs every package listed in the dependency tree if it is not already installed. If a specific version of a package is required, that version of the package is installed or upgraded. No other packages, such as PostgreSQL or Red Hat Enterprise Linux, are updated. The appliance may be rebooted automatically during this process.
-
-
-|===
-
-
 [NOTE]
-======
-If the appliance is registered to Red Hat Satellite, you can use content views to manage updates for {product-title}. For more information, see https://access.redhat.com/documentation/en/red-hat-satellite/6.2/single/content-management-guide#Creating_Content_Views[Creating Content Views] in the Red Hat Satellite 6 _Content Management Guide_.
-======
-
-
-[[updating-the-appliance-operating-system]]
-====== Updating the Appliance Operating System
-
-Updating the appliance’s operating system requires a manual update using the `yum` command. This command updates all RPMs on the appliance, not just {product-title} packages, and is supported only when used as part of migration.
-
-[IMPORTANT]
-======
-Scheduled downtime is required while updating system packages for the following reasons:
-
-* Some updates may interrupt {product-title} operations.
-* Updates for the PostgreSQL database server suspend {product-title} operations.
-* System updates may require a reboot of the {product-title} appliance.
-
-Red Hat recommends updating the appliance using the *Red Hat Updates* tab in the {product-title} user interface, which automatically restarts services and the appliance if needed. See xref:Updating_Appliances[] for instructions.
-======
-
-To update the appliance operating system:
-
-. Log in to the appliance console as the root user.
-. Run the `yum update` command and confirm any updates.
-. Restart the appliance as required.
-
+====
+To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/migrating_to_red_hat_cloudforms_4.6-beta/[Updating {product-title}] in _Migrating to {product-title} 4.6-beta_.
+====
 
 [[subscription-management-for-virtual-environments]]
 ====== Subscription Management for Virtual Environments
@@ -524,7 +442,7 @@ If Appliance A dispatches a job of analyzing twenty virtual machines, this job c
 
 [NOTE]
 ======
-Only users assigned the super administrator role can create zones. There must always be at least one zone. Default zone is provided. This can be removed only after you have created your own zones.
+Only users assigned the super administrator role can create zones. There must always be at least one zone. The *Default Zone* is provided and cannot be deleted.
 ======
 
 [[creating-a-zone]]
@@ -576,7 +494,7 @@ To edit a zone:
 [[adding-smartproxy-affinity-to-a-zone]]
 ===== Adding SmartProxy Affinity to a Zone:
 
-Enable SmartProxy Affinity for zones containing servers with the SmartProxy role to run a SmartState Analysis. 
+Enable SmartProxy Affinity for zones containing servers with the SmartProxy role to run a SmartState Analysis.
 
 To add SmartProxy Affinity to a zone:
 
@@ -642,6 +560,12 @@ These roles are enabled by default on all servers.
 
 [[server-roles]]
 ====== Server Roles
+
+[NOTE]
+====
+* Server roles that are in an active/active high availability configuration _(load balancing and failover protection)_ are active in more than one location; whereas, roles that are in an active/passive _(primary/secondary in the case of {product-title_short})_ high availability configuration _(failover protection)_, if more than one {product-title_short} server in a specific zone or region has this role, only one will be active _(primary)_ at a time and a failover has to occur to the passive _(secondary)_ appliance with that role.
+* For information on region and zone diagnostics and server role priorities, see xref:diagnostics[].
+====
 
 [width="100%",cols="50%,70%a,30%,55%",options="header",]
 |=======================================================================
@@ -812,13 +736,13 @@ To change authentication settings:
 
 If you choose LDAP or LDAPS as your authentication mode, the required parameters are exposed under *LDAP Settings*. Be sure to validate your settings before saving them.
 
-To configure {product-title} to use LDAP for authentication, complete the following steps:
+To configure {product-title_short} to use LDAP for authentication, complete the following steps:
 
 . From the settings menu, select *Configuration*. Select the *Authentication* tab.
 . Select a *Session Timeout* to set the period of inactivity before a user is logged out of the console.
 . Select *LDAP* or *LDAPS* from the *Mode* list. This exposes additional required parameters under *LDAP Settings*.
 . Configure your *LDAP Settings* (the following example configures a Red Hat Identity Management LDAP server):
-* Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title} will search each host name in order until it finds one that authenticates the user. Note, {product-title} supports using a maximum of 3 possible *LDAP Host Names*.
+* Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title_short} will search each host name in order until it finds one that authenticates the user. Note, {product-title_short} supports using a maximum of 3 possible *LDAP Host Names*.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
 * From the *User Type* list, select *User Principal Name* to type the user name in the format of user@domainname. Select *Email Address* to login with the users email address.
 Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation.
@@ -848,17 +772,17 @@ image:LDAP-authentication-full.png[]
 . Configure your *Role Settings*:
 In both LDAP and LDAPS, you can use groups from your directory service to set the role for the authenticated LDAP user. The LDAP user must be assigned one of the account role groups. See xref:assigning_account_roles_using_ldap_groups[] for more information.
 * For LDAP users not belonging to a group:
-** Select a {product-title} group from the *Default Group for Users* list. This default group can be used for all LDAP users who use LDAP for authentication only. Do not select *Get User Groups from LDAP*, which will hide the *Default Group for Users* option.
+** Select a {product-title_short} group from the *Default Group for Users* list. This default group can be used for all LDAP users who use LDAP for authentication only. Do not select *Get User Groups from LDAP*, which will hide the *Default Group for Users* option.
 * For LDAP users belonging to a group:
-** Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title} role. This requires group names on the LDAP server to match {product-title} group names.
+** Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This is used for mapping a user's authorization to a {product-title_short} role. This requires group names on the LDAP server to match {product-title_short} group names.
 +
 [IMPORTANT]
 ======
 If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 ======
-** Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is checked.
+** Check *Get Roles from Home Forest* to use the LDAP roles from the LDAP user's home forest. This will allow you to discover groups on your LDAP server and create {product-title_short} groups based on your LDAP server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is checked.
 ** Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
-** Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title} authentication and role assignment, for example , a service account user with access to all LDAP users.
+** Specify the user name to bind to the LDAP server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title_short} authentication and role assignment, for example , a service account user with access to all LDAP users.
 ** Enter the password for the Bind DN user in *Bind Password*.
 +
 . Click *Validate* to verify your settings.
@@ -874,9 +798,9 @@ To assign account roles using LDAP groups, see xref:assigning_account_roles_usin
 
 Optionally, if a user has group memberships in another LDAP forest, specify the settings to access the memberships in the trusted forest.
 
-When trusted forests are added to the authentication configuration, they are used only for finding groups that a user is a member of. {product-title} will first collect all of the user's groups from the primary LDAP directory. Then it will collect any additional groups that the user is a member of from all of the configured forests.
+When trusted forests are added to the authentication configuration, they are used only for finding groups that a user is a member of. {product-title_short} will first collect all of the user's groups from the primary LDAP directory. Then it will collect any additional groups that the user is a member of from all of the configured forests.
 
-The collected LDAP groups are used to match, by name, against the groups defined in {product-title}. The user must be a member of at least one matching LDAP group to be successfully authenticated.
+The collected LDAP groups are used to match, by name, against the groups defined in {product-title_short}. The user must be a member of at least one matching LDAP group to be successfully authenticated.
 
 To add settings for a trusted forest:
 
@@ -890,34 +814,38 @@ To add settings for a trusted forest:
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
 . Click *Save*.
 
-After adding other trusted LDAP forests, you can then change the order in which {product-title} looks up the forests for authentication. For instructions, see xref:ldap_lookup_priority[].
+After adding other trusted LDAP forests, you can then change the order in which {product-title_short} looks up the forests for authentication. For instructions, see xref:ldap_lookup_priority[].
 
 
 [[assigning_account_roles_using_ldap_groups]]
-====== Assigning {product-title} Account Roles Using LDAP Groups
+====== Assigning {product-title_short} Account Roles Using LDAP Groups
 
-After configuring LDAP authentication as described in xref:ldap_settings[], you can associate {product-title} account roles with your LDAP users. The LDAP server defines the groups and users for {product-title}, while {product-title} defines the account roles, and maps the roles to the privileges the LDAP user has.
+After configuring LDAP authentication as described in xref:ldap_settings[], you can associate {product-title_short} account roles with your LDAP users. The LDAP server defines the groups and users for {product-title_short}, while {product-title_short} defines the account roles, and maps the roles to the privileges the LDAP user has.
 
-There are two ways to associate your LDAP groups with {product-title} account roles:
+There are two ways to associate your LDAP groups with {product-title_short} account roles:
 
-* Create groups in {product-title} that match your existing LDAP groups by name, and assign the groups account roles; or
-* Create groups on your LDAP server based on the default account roles in {product-title}.
+* Create groups in {product-title_short} that match your existing LDAP groups by name, and assign the groups account roles; or
+* Create groups on your LDAP server based on the default account roles in {product-title_short}.
 
-The users in your LDAP groups then inherit the {product-title} account roles for the LDAP group(s) they are in.
+The users in your LDAP groups then inherit the {product-title_short} account roles for the LDAP group(s) they are in.
 
 The authentication process then happens as such:
 
-`LDAPuser1` attempts to log into {product-title}, so {product-title} queries the LDAP server to verify it knows `LDAPuser1`. The LDAP server then confirms that it knows `LDAPuser1`, and provides information about the LDAP groups `LDAPuser1` belongs to: `Group1`. {product-title} then looks up `Group1` and discovers that `Group1` has several roles: `Role1`, `Role2` and `Role3`. {product-title} then associates `LDAPuser1` with `Group1` in {product-title}, and then allows the user to perform tasks allowable by those roles.
+. `LDAPuser1` attempts to log into {product-title_short}, so {product-title_short} queries the LDAP server to verify it knows `LDAPuser1`.
+. The LDAP server then confirms that it knows `LDAPuser1`, and provides information about the LDAP groups `LDAPuser1` belongs to: `Group1`.
+. {product-title_short} then looks up `Group1`, and discovers that `Group1` is associated with `Role1`.
+. {product-title_short} then associates `LDAPuser1` with `Group1` in {product-title_short}, and then allows the user to perform tasks allowable by that role.
+
 
 ====== Using Existing LDAP Groups to Assign Account Roles
 
-This section provides instructions for mapping your existing LDAP groups to account roles in {product-title}. As a result, the users in the LDAP group will then be assigned to the CFME roles associated with that group.
+This section provides instructions for mapping your existing LDAP groups to account roles in {product-title_short}. As a result, the users in the LDAP group will then be assigned to the CFME roles associated with that group.
 
 . From the settings menu, select *Configuration*.
 . Click the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
 . There are two ways to specify the group to use:
-* In the *Description* field, enter the (common name (`cn`) for your existing LDAP group assigned to users requiring access to {product-title}.
+* In the *Description* field, enter the (common name (`cn`) for your existing LDAP group assigned to users requiring access to {product-title_short}.
 *  Select *Look Up LDAP Groups* to find a list of groups assigned to a specific user in LDAP, then use the *LDAP Group for User* list to choose a group.
 .. In *User to Look Up*, enter the common name (`cn`) for a user in your LDAP group.
 .. Enter the *Username*.
@@ -937,11 +865,11 @@ image:2093.png[]
 To configure the LDAP group lookup priority, see xref:ldap_lookup_priority[].
 
 
-====== Using Groups Named by {product-title} to Assign Account Roles
+====== Using Groups Named by {product-title_short} to Assign Account Roles
 
-You can also configure access control for LDAP users by creating groups on your LDAP server based on {product-title} account roles.
+You can also configure access control for LDAP users by creating groups on your LDAP server based on {product-title_short} account roles.
 
-Your LDAP group names must match the account role names in {product-title}. The LDAP users in that group are then automatically assigned to that specific account role.
+Your LDAP group names must match the account role names in {product-title_short}. The LDAP users in that group are then automatically assigned to that specific account role.
 
 . In your LDAP directory service, define a distribution group for one or more of the account roles with the names shown in the table below.
 This group must be in the LDAP directory source you specified for the server. See xref:ldap_settings[].
@@ -954,20 +882,23 @@ This group must be in the LDAP directory source you specified for the server. Se
 |EvmGroup-administrator|Administrator
 |EvmGroup-approver|Approver
 |EvmGroup-auditor|Auditor
+|EvmGroup-consumption_administrator|Consumption Administrator
+|EvmGroup-container_administrator|Container Administrator
+|EvmGroup-container_operator|Container Operator
 |EvmGroup-desktop|Desktop
 |EvmGroup-operator|Operator
 |EvmGroup-security|Security
 |EvmGroup-super_administrator|Super Administrator
 |EvmGroup-support|Support
-|EvmGroup-user|User
-|EvmGroup-user_limited_self_server|User Limited Self Service
-|EvmGroup-user_self_service|User Self Service
-|EvmGroup-vm_user|Vm User
 |EvmRole-tenant_administrator|Tenant Administrator
 |EvmRole-tenant_quota_administrator|Tenant Quota Administrator
+|EvmGroup-user|User
+|EvmGroup-user_limited_self_service|User Limited Self Service
+|EvmGroup-user_self_service|User Self Service
+|EvmGroup-vm_user|Vm User
 |=======================================================================
 +
-. Make each user of your directory service that you want to have access to {product-title} a member of one of these groups.
+. Make each user of your directory service that you want to have access to {product-title_short} a member of one of these groups.
 . From the settings menu, select *Configuration*.
 . Click the *Settings* accordion, then select your server under *Zones*.
 . Click the *Authentication* tab and enable *Get User Groups from LDAP* after typing in all of the required LDAP authentication settings. See xref:ldap_settings[].
@@ -976,7 +907,7 @@ This group must be in the LDAP directory source you specified for the server. Se
 [[ldap_lookup_priority]]
 ====== Configuring Lookup Priority for LDAP Groups
 
-{product-title} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. The lookup priority of these groups can be rearranged; to configure the order in which {product-title} looks up LDAP groups:
+{product-title_short} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. The lookup priority of these groups can be rearranged; to configure the order in which {product-title_short} looks up LDAP groups:
 
 [NOTE]
 ====
@@ -991,9 +922,9 @@ On initial login, a user's _current group_ assignment is the highest priority gr
 
 ====== Testing LDAP Configuration
 
-To test that your LDAP or LDAPS group configuration is working correctly with {product-title}:
+To test that your LDAP or LDAPS group configuration is working correctly with {product-title_short}:
 
-. Log out of the {product-title} user interface.
+. Log out of the {product-title_short} user interface.
 . Log back in as an LDAP user that is assigned to one or more of the matching groups.
 . Change groups by clicking on the user dropdown menu on the top right of the user interface. The dropdown list will show the groups the user is authorized for.
 
@@ -1008,7 +939,7 @@ Then log into the CloudForms user interface as an LDAP user, while checking `/va
 
 .Troubleshooting LDAP configuration
 
-To test a problematic {product-title} LDAP configuration, run the following to see if the user been pulled from LDAP with the right group. For example:
+To test a problematic {product-title_short} LDAP configuration, run the following to see if the user been pulled from LDAP with the right group. For example:
 
   # ldapsearch -x -H ldap://ldap-example:389 -LLL \ -b "ou=people,dc=example,dc=com" -s sub \ -D "ui=:userid,ou=People,dc=example,dc=com" -w :password \ "(objectclass=organizationalPerson)
 
@@ -1030,14 +961,14 @@ If you choose Amazon as your authentication mode, required parameters are expose
 * Type in an *Access Key* provided by your Amazon account.
 * Type in a *Secret Key* provided by your Amazon account.
 
-Users logging into {product-title} with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
-Amazon users must be added as a {product-title} user or belong to an IAM user group added to the list of {product-title} groups.
+Users logging into {product-title_short} with Amazon authentication enter their own IAM Access Key as the username and IAM Secret Key as the password.
+Amazon users must be added as a {product-title_short} user or belong to an IAM user group added to the list of {product-title_short} groups.
 
 
 [[external_ipa_auth]]
 ====== External Authentication (httpd)
 
-When external authentication is enabled, users can log in to the {product-title} appliance using their IPA server credentials. The appliance creates user accounts automatically and imports relevant information from the IPA Server.
+When external authentication is enabled, users can log in to the {product-title_short} appliance using their IPA server credentials. The appliance creates user accounts automatically and imports relevant information from the IPA Server.
 
 The appliance contains IPA client software for connecting to IPA servers, but it is not configured by default. External authentication is enabled by first configuring it in the web interface, then in the console.
 Disabling external authentication and returning to internal database authentication also requires steps in both the web interface and the console.
@@ -1165,20 +1096,20 @@ $ ssh root@appliance.test.company.com
 [[external-authentication-SAML]]
 ====== Configuring External Authentication Using SAML
 
-This procedure outlines how to manually configure an appliance to use SAML external authentication. While other SAML identity providers can be used with {product-title}, this procedure covers using Red Hat Single Sign-On (SSO) 7.0, which is implemented using the Apache HTTP server's `mod_auth_mellon` module.
+This procedure outlines how to manually configure an appliance to use SAML external authentication. While other SAML identity providers can be used with {product-title_short}, this procedure covers using Red Hat Single Sign-On (SSO) 7.0, which is implemented using the Apache HTTP server's `mod_auth_mellon` module.
 
-To enable external authentication using SAML, complete the following steps to configure your HTTP server, then your {product-title} appliance.
+To enable external authentication using SAML, complete the following steps to configure your HTTP server, then your {product-title_short} appliance.
 
 [NOTE]
 ======
-The current SAML implementation only secures the {product-title} appliance’s web administrative user interface with SAML. The REST API and self service user interface do not currently support SAML.
+The current SAML implementation only secures the {product-title_short} appliance’s web administrative user interface with SAML. The REST API and self service user interface do not currently support SAML.
 ======
 
 *Requirements*
 
 The following is required in order to enable SAML authentication to the appliance:
 
-* A CloudForms 4.5 appliance
+* A CloudForms 4.6 appliance
 * A SAML identity provider (e.g. Red Hat Single Sign-On (SSO) 7.0 or later)
 
 [[configure-apache-SAML]]
@@ -1186,7 +1117,7 @@ The following is required in order to enable SAML authentication to the applianc
 
 The Apache HTTP server first must be configured to work with SAML authentication. All SAML-related certificates and keys are accessed from `/etc/httpd/saml2/`.
 
-. Log into the {product-title} appliance as root using SSH, and create the `/etc/httpd/saml2/` directory:
+. Log into the {product-title_short} appliance as root using SSH, and create the `/etc/httpd/saml2/` directory:
 +
 ------
 # mkdir -p /etc/httpd/saml2
@@ -1235,7 +1166,7 @@ The `mellon_create_metadata.sh` script creates file names based on the appliance
 . Now that the service provider's `metadata.xml` file has been generated, the service provider definition can be defined in the SAML identity provider.
 For Red Hat SSO, a realm can be created for one or more appliances with individual clients defined one per appliance, where the client ID is specified as the URL of the appliance.
 +
-To add a client in the Red Hat SSO {product-title} realm:
+To add a client in the Red Hat SSO {product-title_short} realm:
 +
 .. Select and import the `miqsp-metadata.xml` file created for `mod_auth_mellon`.
 .. Set the client ID as `https://<miq-appliance>`.
@@ -1261,7 +1192,7 @@ To add a client in the Red Hat SSO {product-title} realm:
   http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
 ------
 +
-. In CloudForms 4.5, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
+. In CloudForms 4.6-beta, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
 +
 ------
 # vi idp-metadata.xml
@@ -1285,7 +1216,7 @@ To add a client in the Red Hat SSO {product-title} realm:
 [[configure-appliance-UI-SAML]]
 *Configuring the Appliance Administrative User Interface*
 
-After configuring the HTTP server for SAML, update the {product-title} appliance so that the administrative user interface works with SAML authentication.
+After configuring the HTTP server for SAML, update the {product-title_short} appliance so that the administrative user interface works with SAML authentication.
 
 . Login to the appliance as `admin`, and navigate to the settings menu, then menu:Configuration[Authentication].
 . Set the mode to *External (httpd)*.
@@ -1297,23 +1228,23 @@ After configuring the HTTP server for SAML, update the {product-title} appliance
 
 [IMPORTANT]
 ======
-Ensure the user’s groups are created on the appliance and appropriate roles are assigned to those groups. See _SAML Assertions_ in xref:saml-assertions[] for more information on the parameters used by the {product-title} appliance.
+Ensure the user’s groups are created on the appliance and appropriate roles are assigned to those groups. See _SAML Assertions_ in xref:saml-assertions[] for more information on the parameters used by the {product-title_short} appliance.
 
-For example, to configure user groups from your SAML identity provider to work with {product-title}:
+For example, to configure user groups from your SAML identity provider to work with {product-title_short}:
 
   . In your SAML identity provider, specify your existing user groups in similar format to the following: `REMOTE_USER_GROUPS=Administrators;CloudAdministrators;Users`
-  . On your {product-title} appliance, create the equivalent groups. See _Creating a User Group_ in xref:creating-a-user-group[].
-  . On your {product-title} appliance, assign EVM roles to the groups. See _Creating a Role_ in xref:creating-a-role[].
+  . On your {product-title_short} appliance, create the equivalent groups. See _Creating a User Group_ in xref:creating-a-user-group[].
+  . On your {product-title_short} appliance, assign EVM roles to the groups. See _Creating a Role_ in xref:creating-a-role[].
 ======
 
 Complete the above steps on each appliance in the settings menu, then navigate to menu:Configuration[Access Control].
 
-You can now log into your {product-title} appliance using your SAML credentials.
+You can now log into your {product-title_short} appliance using your SAML credentials.
 
 [[saml-assertions]]
 *SAML Assertions*
 
-To authenticate to the {product-title} appliance using SAML, the following remote user parameters are looked at by the appliance upon a successful login and redirect from the identity provider. These parameters are used by the appliance to obtain group authentication information.
+To authenticate to the {product-title_short} appliance using SAML, the following remote user parameters are looked at by the appliance upon a successful login and redirect from the identity provider. These parameters are used by the appliance to obtain group authentication information.
 
 
 [options="header",cols="<2,<1",width="70%"]
@@ -1354,7 +1285,7 @@ If you disabled local login in the administrative user interface but need the ab
 
 .Re-enabling Local Login from the Appliance Administrative User Interface
 
-This method requires the identity provider to be available, and the ability to login as a user with enough administrative privileges to update {product-title} authentication settings.
+This method requires the identity provider to be available, and the ability to login as a user with enough administrative privileges to update {product-title_short} authentication settings.
 
 . Log in to the appliance user interface as the administrative user.
 . From the settings menu, select menu:Configuration[Authentication].
@@ -1436,11 +1367,11 @@ During the restart, you are unable to access the server. When the restart is com
 [[custom-logos]]
 ====== Custom Logos
 
-Use *Custom Logos* to display your own logo in the corner of the {product-title} user interface and on the login screen. Use the procedures below to upload a custom logo to the user interface, and to customize the login background and login panel text on the user interface.
+Use *Custom Logos* to display your own logo in the corner of the {product-title_short} user interface and on the login screen. Use the procedures below to upload a custom logo to the user interface, and to customize the login background and login panel text on the user interface.
 
 [NOTE]
 ====
-* If you have upgraded from an earlier {product-title} version and your custom logo was already in use before migration, although your logo image file is still in place in `vmdb/public/upload` you may have to uncheck and recheck the option to *Use Custom Logo Image* to re-enable displaying your custom logo. See xref:uploading-a-custom-logo-to-the-console[] for the procedure on how to access the *Use Custom Logo Image* option, or if you want to upload another custom logo to the user interface and customize the login background image and login panel text. 
+* If you have upgraded from an earlier {product-title} version and your custom logo was already in use before migration, although your logo image file is still in place in `vmdb/public/upload` you may have to uncheck and recheck the option to *Use Custom Logo Image* to re-enable displaying your custom logo. See xref:uploading-a-custom-logo-to-the-console[] for the procedure on how to access the *Use Custom Logo Image* option, or if you want to upload another custom logo to the user interface and customize the login background image and login panel text.
 
 * Additionally, ensure the option to use configuration settings for the tenant under *Access Control* is set to `Yes`; see xref:display-custom-settings[] for the procedure on how to set the configuration settings.
 ====
@@ -1516,7 +1447,7 @@ image:custom-login-panel-text.png[]
 [[display-custom-settings]]
 ====== Displaying the Custom Configuration Settings
 
-To enable displaying your custom logo in the corner of the {product-title} user interface and on the login screen: 
+To enable displaying your custom logo in the corner of the {product-title} user interface and on the login screen:
 
 . From the settings menu, select *Configuration*.
 . Click the *Access Control* accordion.
@@ -2059,7 +1990,14 @@ To modify a schedule:
 [[access-control]]
 === Access Control
 
-From the settings menu, select *Configuration*. Click on the *Access Control* accordion to see a hierarchy of the configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, and tenants.
+From the settings menu, select *Configuration*. Click on the *Access Control* accordion to see a hierarchy of the configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, tenants, and projects.
+
+ifdef::cfme[]
+[NOTE]
+====
+For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
+====
+endif::cfme[]
 
 [[creating-a-tenant]]
 ==== Creating a Tenant
@@ -2118,16 +2056,17 @@ To create a user:
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Users*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new User*) to create a user.
-. Enter a *Full Name*, *Username*, *Password* with confirmation, *Email Address*, and choose a *Group* for the user.
+. Enter a *Full Name*, *Username*, *Password* with confirmation, and *Email Address* for the user. 
 +
-image:2086.png[]
+image:available_groups.png[]
 +
 [IMPORTANT]
-======
+====
 * If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB.
 * When the user logs in, they use their LDAP password.
-======
-. Select a *Group*.
+====
++
+. Select one or more groups from *Available Groups*.
 . Click *Add*.
 
 [[deleting-a-user]]
@@ -2145,24 +2084,26 @@ To delete a user:
 [[groups]]
 ==== Groups
 
-User groups create filters and assign roles to users. You can either create your own user groups, or leverage your LDAP directory service to assign groups of users to account roles.
+User groups create filters and assign roles to users. You can either create your own  groups, or leverage your LDAP directory service to assign groups of users to account roles.
 For a list of what each pre-defined account role can do, see xref:roles[].
 
+A user can exist in multiple groups. However, a group can only be assigned one account role.
+
 [NOTE]
-======
+====
 To assign account roles using LDAP groups, see xref:assigning_account_roles_using_ldap_groups[].
-======
+====
 
 [[creating-a-user-group]]
-==== Creating a User Group
+==== Creating a Group
 
 To create a user group:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Groups*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
-. Enter a name for the group in the *Description* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
-. Select a role to map to this group.
+. Enter a name for the group in the *Name* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
+. Select a *Role* to map to this group.
 . Select the *Project/Tenant* this group must belong to.
 . Select any filters that you want applied to what this group can view in the *Assign Filters* area.
 . Check the boxes for the filters you want applied to this user. The items that have changed will show in blue italicized font.
@@ -2173,17 +2114,31 @@ image:2088.png[]
 . Check the boxes for the folders that you want to limit this user to. The items that have changed will show in blue italicized font.
 . Click *Add*.
 
+After creating a group, assign one or more users to the group by editing a user.
 
 [[roles]]
 ==== Roles
 
-When you create a user group, you must specify a role to give the group rights to resources in the console, and then assign a user to a group.
-{product-title} provides a default group of roles, but you can also create your own as well as copy the default groups. The table below shows the function available to each group.
+When you create a group, you must specify a role to give the group rights to resources in the console. The group's role determines the scope of access for the users that are members of the group. 
+
+image:CloudForms_General_Config_Roles_460469_1017_JCS.png[]
+
+A group can only be assigned one role when the local database is used for authentication, as shown in the above image.
+
+{product-title} provides a default group of roles, but you can also create your own, or copy and edit the default groups. 
 
 [NOTE]
-==========
+====
 If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service. See xref:ldap_settings[].
-==========
+====
+
+To view details of a role and its level of access:
+
+. From the settings menu, select *Configuration*.
+. Click on the *Access Control* accordion, then click *Roles*.
+. Click on a role from the list to display role information and the product features the role can access (marked by a checkmark). You can expand the categories under *Product Features* to see further detail.
+
+The table below shows a summary of the functions available to each role. 
 
 [[account-roles-and-descriptions]]
 ===== Account Roles and Descriptions
@@ -2194,6 +2149,8 @@ If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is
 |Administrator|Administrator of the virtual infrastructure. Can access all infrastructure functionality. Cannot change server configuration.
 |Approver|Approver of processes, but not operations. Can view items in the virtual infrastructure, view all aspects of policies and assign policies to policy profiles. Cannot perform actions on infrastructure items.
 |Auditor|Able to see virtual infrastructure for auditing purposes. Can view all infrastructure items. Cannot perform actions on them.
+|Container Administrator|Administrator with capabilities to configure, view and execute tasks on all containers and related underlying infrastructure. Has access to Nodes, Pods and Projects dashboards.
+|Container Operator|This role can view and execute tasks related to containers and related underlying infrastructure. The Container Operator has access to locked versions of the same dashboards as the Container Administrator.
 |Desktop|Access to VDI pages.
 |Operator|Performs operations of virtual infrastructure. Can view and perform all functions on virtual infrastructure items including starting and stopping virtual machines. Cannot assign policy, but can view policy simulation from Virtual Machine page.
 |Security|Enforces security for the virtual environment. Can assign policies to policy profiles, control user accounts, and view all parts of virtual infrastructure. Cannot create policies or perform actions on virtual infrastructure.
@@ -2214,12 +2171,13 @@ To create a role:
 
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Roles*.
-. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Role).
-. In the *Role Information* area, type a name for the new role. For *VM & Template Access Restriction*, select if you want to limit users with this role to only see virtual machines specifically used by the user, by the user or its group, or all virtual machines.
+. Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Role). Alternatively, you can copy an existing role to a new role by clicking *Copy this to a new Role*.
+. In the *Role Information* area, type a name for the new role. For *VM & Template Access Restriction*, select if you want to limit users with this role to only see virtual machines owned by the user, owned by the user or its group, or all virtual machines.
 image:2095.png[]
 . Under *Product Features (Editing)*, navigate to the appropriate feature and enable or disable it.
 image:2096.png[]
 . Click *Add*.
+
 
 [[diagnostics]]
 === Diagnostics
@@ -2236,8 +2194,10 @@ The Diagnostics area is designed in a hierarchy.
 
 Using the console, you can set the priority of server regional roles, review and reset replication, and create backups of your database either on demand or on a schedule.
 
-Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {product-title} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can
-also set priorities for the server roles that provide failover.
+Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {product-title} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can also set priorities for the server roles that provide failover.
+
+[[server-role-priorities]]
+===== Server Role Priorities
 
 If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
@@ -2276,6 +2236,7 @@ Tertiary roles simply show as active in the console.
 |=======================================================================
 
 
+
 [[setting-the-priority-of-a-failover-role]]
 ==== Setting the Priority of a Failover Role
 
@@ -2293,6 +2254,7 @@ To set the priority of a failover role:
 
 The console provides a way to see all the server roles that a server has been assigned and if these roles are running. This is especially helpful when you have multiple servers with different server roles. For each zone you can also set a central place for all logs to be collected, and collect capacity and utilization data that may be missing.
 
+
 [[viewing-the-status-of-server-roles]]
 ===== Viewing the Status of Server Roles
 
@@ -2302,21 +2264,6 @@ To view the status of server roles:
 . Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
 . Depending on how you want to view your servers, click either *Roles by Servers* or the *Servers by Roles*.
 
-[[setting-server-role-priorities]]
-===== Setting Server Role Priorities
-
-If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
-
-* Only server roles that support failover can be marked as primary. These are *Notifier*, *Capacity & Utilization Coordinator*, *Event Monitor*, *Scheduler*, *Storage Inventory*, and *Provider Inventory*.
-* All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
-
-There are three role priorities.
-
-* *Primary*: There can only be one primary per zone per role. When an appliance is started, the system looks to see if any role is set to primary. If that is the case, the role is activated on that appliance and deactivated from the secondary. In the console, primary roles are shown in bold letters. The text turns red if the server goes down.
-
-* *Secondary*: This is the default priority. There can be multiple secondaries. When an appliance is started, if no primary is found in the zone, the first appliance to start takes the role. In the console, secondary roles are displayed normally with the word "secondary".
-
-* *Tertiary*: If all appliances with primary roles or secondary roles are down, one of the tertiary would be activated. The reason for tertiary is to ensure that if a Server with crucial roles such as Provider Inventory or Event Monitor goes down, you have a way to associate those roles to different appliances by organizing the priorities. Tertiary roles simply show as active in the console.
 
 [[zone-aware-server-roles]]
 ===== Zone Aware Server Roles
@@ -2342,17 +2289,6 @@ There are three role priorities.
 |=======================================================================
 
 
-[[setting-the-priority-of-a-failover-role-1]]
-===== Setting the Priority of a Failover Role
-
-To set the priority of a failover role:
-
-. From the settings menu, select *Configuration*.
-. Click on the *Diagnostics* accordion, then click the *Zone* that you want to view.
-. Depending on how you want to view your servers, click either the *Roles by Servers* tab or the *Servers by Roles* tab.
-. From the *Status of Roles* for *Servers* in *Zone Default Zone* area, click on the role that you want to set the priority for.
-. Click image:2097.png[] (*Promote Server to primary for this role*) to make this the primary Server for this role.
-. Click image:2098.png[] (*Demote Server to normal for this role*) to demote the priority of this Server for this role.
 
 [[removing-an-inactive-server]]
 ====== Removing an Inactive Server
@@ -2719,31 +2655,33 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 . Log in to the appliance as the *root* user.
 . Enter `appliance_console`, and press *Enter*.
 . Press any key.
-. Enter `16` to stop EVM server processes.
+. Select `Stop EVM Server Processes`.
 . Enter `Y` to confirm.
-. Choose *Configure Database*.
+. Choose `Configure Database`.
 . Enter a database region number that has not been used in your environment. Do not enter duplicate region numbers because this can corrupt the data.
 . Enter `Y` to confirm.
 . The menu reappears after all processes are complete.
-. Enter `17` to start EVM server processes.
+. Select `Start EVM Server Processes`.
 . Enter `Y` to confirm.
-. Enter `21` to quit the advanced settings menu.
+. Select *Quit* to exit the advanced settings menu.
 
 [[configuring_database_replication]]
 ==== Configuring Database Replication and Centralized Administration
 
-To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version. 
-
-You can configure centralized administration via the database replication configuration steps described in this section. Once configured, {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy. 
+To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version.
 
 [NOTE]
-======
-You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
-======
+====
+Configuring database replication in this version of {product-title_short} automatically enables centralized administration, eliminating the need for further configuration.
+====
 
-[NOTE]
+Centralized administration in {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy.
+
+[IMPORTANT]
 ======
-The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
+* You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
+
+* The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
 ======
 
 [[configuring-a-remote-copy]]
@@ -2764,12 +2702,10 @@ Configure a {product-title} instance to act as a remote copy from which data wil
 
 Configure a {product-title} instance to act as the global copy to which data is replicated from the remote copies.
 
-image:add-subscription.png[Add Subscription]
+image:add-subscription-global.png[Add Subscription]
 
-. Navigate to the settings menu.
-. Click *Configuration*.
-. Click the *Settings* accordion.
-. Click the region where the instance is located.
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
 . Click *Replication*.
 . Select *Global* from the *Type* list.
 . Click *Add Subscription*.
@@ -2783,33 +2719,14 @@ image:add-subscription.png[Add Subscription]
 
 [NOTE]
 ====
-Central administration can only be enabled after the initial data sync is complete. You must save the subscription before this can be done.
+Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, centralized administration is automatically enabled after the initial data sync is complete.
 ====
 
-[[enabling-disabling-central-admin]]
-===== Enabling / Disabling Centralized Administration
+Database replication and centralized administration are now enabled on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy.
 
-Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, you can enable centralized administration after the initial data sync is complete.
-
-image:centralized_admin_disabled.png[Centralized Administration Config]
-
-. Navigate to the settings menu.
-. Click *Configuration*.
-. Click the *Settings* accordion.
-. Click the region where the instance is located.
-. Click *Replication*.
-. For your saved subscription, click the menu in *Actions*, then click *Enable Central Admin*. You can also *Validate* your subscription. 
-
-Once centralized administration is enabled, *Central Admin Enabled* will change to _Yes_.
-
-[NOTE]
-====
-If centralized administration is currently enabled, you can *Disable Central Admin* or *Re-Enable Central Admin*, or *Delete* your saved subscription. 
-====
-
-image:centralized_admin_enabled.png[Centralized Administration Enabled]
-
-Database replication and centralized administration are now configured on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy. See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en/red-hat-cloudforms/4.5/single/deployment-planning-guide/[Deployment Planning Guide] for an overview of the feature.
+ifdef::cfme[]
+See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
+endif::cfme[]
 
 [[resetting-database-replication]]
 ===== Resetting Database Replication
@@ -2926,24 +2843,136 @@ To run a single database backup:
 [[restoring-a-database-from-a-backup]]
 ===== Restoring a Database from a Backup
 
-If a database is corrupt or fails, restore it from a backup.
+If a database is corrupt or fails, restore it from a backup. You can restore a backup from a local file, NFS, or Samba.
 
 To restore a database from a backup:
 
-. Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a backup.
-. Log in to the appliance console with a user name of `admin` and the default password. The *Appliance Summary Screen* displays.
-. Press *Enter* to manually configure settings.
-. Enter `11` to `Stop Server Processes`. Stop the process on all servers that connect to this VMDB.
+. Save the database backup file as `/tmp/evm_db.backup`. {product-title} looks specifically for this file when restoring a database from a local backup.
+. If you are restoring a database backup on a high availability environment, stop the `regmgrd` service. This is not required in other {product-title_short} configurations.
++
+----
+# systemctl stop rh-postgresql95-repmgr
+----
++
+. Log in to the appliance as the *root* user.
+. Enter `appliance_console`, and press *Enter*.
+. Select `Stop EVM Server Processes` to stop processes on all servers that connect to this VMDB.
 . Enter `Y` to confirm.
 . After all processes are stopped, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `6` to select `Restore Database From Backup`. If connections are open, the server may still be shutting down. Wait a minute and try again.
-. Enter `y` to keep the database backup after restoring from it. Enter `n` to delete it.
+. Select `Restore Database From Backup`, then specify the location to restore the backup from in the `Restore Database File` menu:
+.. If you saved the database backup file locally as `/tmp/evm_db.backup`, select `Local file`. You can also restore from a `Network File System (nfs)` or `Samba (smb)`.
+.. Specify the location of the backup file.
++
+[NOTE]
+====
+The appliance console menu may respond slowly if connections are open and the server is still shutting down. If this occurs, wait a minute and try again.
+====
++
+. Enter `Y` to keep the database backup after restoring from it. Enter `N` to delete it.
 . Press `Y` to confirm.
 . After the backup completes, press *Enter* to return to the menu.
 . Press *Enter* again to manually configure settings.
-. Enter `13` to `Start Server Processes`.
+. Select `Start EVM Server Processes` to restart all processes on servers that connect to this VMDB.
 . Enter `Y` to confirm.
+. If you are restoring a database backup on a high availability environment, start the `regmgrd` service. This is not required in other {product-title_short} configurations.
++
+----
+# systemctl start rh-postgresql95-repmgr
+----
+
+[[binary-backup-and-restore-database]]
+==== Performing a Binary Backup and Restoring the Database
+Preserve data at the file system level by performing a binary backup.
+This includes all databases, users and roles, and other objects.
+
+[NOTE]
+====
+This procedure uses the `pg_basebackup` utility to perform a remote database backup and create a full replacement of the PostgreSQL data directory, capturing the exact state of the database when the backup finishes. For more information on the `pg_basebackup` utility, see the PostgreSQL documentation.
+====
+
+===== Performing a Binary Backup
+
+Create a binary backup and store it as a `gzip` tar file inside the {product-title_short} backup directory.
+
+[IMPORTANT]
+======
+PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure.
+======
+
+. SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
++
+. Run the `pg_basebackup` command to create the backup.
++
+-----
+# pg_basebackup -x -h hostname -U root -Ft -z -D filename
+-----
++
+> where:
+>
+> *-h* _hostname_
+>
+>     Specifies the IP address of the database server.
+>
+> *-D* _filename_
+>
+>    Specifies the name of the directory created to contain the backup.
+
+
+===== Restoring a Database from the Backup
+Restore your PostgreSQL binary backup using the following steps. This process will require stopping both EVM and PostgreSQL services before restoring data.
+
+. Copy the existing backup to the target VM
++
+-----
+# scp filename/base.tar.gz root@hostname:/var/www/miq
+-----
++
+. SSH to the target VM.no
+
++
+-----
+# ssh root@hostname
+-----
++
+. Stop both the EVM and PostgreSQL servers.
++
+-----
+# systemctl stop evmserverd
+# systemctl stop $APPLIANCE_PG_SERVICE
+-----
++
+. Rename the existing data directory.
++
+-----
+# mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
+-----
++
+. Create a clean data directory.
++
+-----
+# mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Unzip the tar file to the new directory.
++
+-----
+# tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Correct permissions.
++
+-----
+# chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data
+# chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
+-----
++
+. Restart the PostgreSQL and EVM servers.
++
+-----
+# systemctl start $APPLIANCE_PG_SERVICE
+# systemctl start evmserverd
+-----
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection
@@ -3035,7 +3064,7 @@ service evmserverd start
 
 [IMPORTANT]
 ====
-*Requisites for Replication* 
+*Requisites for Replication*
 
 If you change the password on the remote database, you will need to change the password in the subscription.
 ====
@@ -3092,4 +3121,5 @@ The next options depend on the periodic database maintenance frequency you choos
 To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings.
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
+
 

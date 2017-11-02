@@ -15,7 +15,7 @@ While gems can be imported into automation methods using `require`, it is recomm
 It is the responsibility of the author of such custom automation to own the life cycle of any gem being referenced in those methods. 
 
 ifdef::cfme[]
-The link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.5/release-notes/release-notes[Red Hat CloudForms 4.5 Release Notes], list Ruby gems that have been added, updated, or removed in the latest version of CloudForms Management Engine.
+The link:https://access.redhat.com/documentation/en/red-hat-cloudforms/4.6-beta/release-notes/release-notes[Red Hat CloudForms 4.6-beta Release Notes], list Ruby gems that have been added, updated, or removed in the latest version of CloudForms Management Engine.
 
 For lists of Ruby gems included in different CloudForms Management Engine releases, see the following article:
 
@@ -2878,7 +2878,7 @@ The following methods can be used on a virtual machine or template object.
 						
 | 
 							
-								Create a snapshot of the object
+								Create a snapshot of the object. The *name* parameter is not used for Red Hat Virtualization virtual machines when creating a snapshot. 
 							
 						
 
@@ -3597,6 +3597,21 @@ The following methods can be used on a virtual machine or template object.
   end
 ----
 
+[source,ruby]
+----
+
+  ####################
+  # Red Hat Virtualization Virtual Machines
+  # Method: createSnapshot
+  #
+  ####################
+
+	def createSnapshot(vm, snap_desc=snap_name)
+		$evm.log("info","#{@method} - VM:<#{vm.name}> Creating Snapshot:<#{snap_name}> Description:<#{snap_desc}>")
+		vm.create_snapshot(snap_desc)
+	end
+----
+
 [[_sect_vms_vm]]
 ==== VMs (vm)
 
@@ -3822,6 +3837,8 @@ See after the table for usage examples.
 include::Category_and_Tags_Methods_Example1.adoc[]
 
 include::Quota2.adoc[]
+
+
 
 
 

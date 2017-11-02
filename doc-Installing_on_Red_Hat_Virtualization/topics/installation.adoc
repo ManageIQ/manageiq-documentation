@@ -12,6 +12,8 @@ ifdef::miq[]
 [[obtaining-the-appliance]]
 === Obtaining the appliance
 
+The following procedure outlines how to obtain a copy of the appliance from the ManageIQ homepage.
+
 . In a browser, navigate to link:manageiq.org/download[].
 . Select *Red Hat Virtualization* from the *--Choose your platform--* list.
 . Select *Stable (fine-2)* from the *--Choose a release--* list.
@@ -22,6 +24,8 @@ ifdef::cfme[]
 [[obtaining-the-appliance]]
 === Obtaining the Appliance
 
+The following procedure outlines how to obtain a copy of the appliance from the Customer Portal.
+
 . Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
 . Click *Downloads* in the menu bar.
 . Click *A-Z* to sort the product downloads alphabetically.
@@ -29,8 +33,8 @@ ifdef::cfme[]
 . From the list of installers and images, select the *CFME Red Hat Virtual Appliance* download link.
 endif::cfme[]
 
-[[uploading-the-appliance-on-red-hat-virtualization-manager]]
-=== Uploading the Appliance on Red Hat Virtualization Manager
+[[uploading-the-appliance-on-red-hat-virtualization]]
+=== Uploading the Appliance on Red Hat Virtualization
 
 The method for uploading the {product-title_short} appliance differs depending on the Red Hat Virtualization version you are using.
 
@@ -41,7 +45,7 @@ In Red Hat Enterprise Virtualization 3.6 and earlier, upload the `OVA` appliance
 Uploading the {product-title} appliance file to Red Hat Virtualization requires:
 
 * 44 GB of storage space on both the export domain and the local partition where `/tmp` resides, as the `OVF` archive is locally expanded into that directory.
-* 8 GB RAM.
+* 12 GB RAM.
 * 4 vCPUs.
 
 
@@ -62,17 +66,17 @@ After uploading the image, create a disk and attach it to a virtual machine.
 To import the certificate authority, browse to `https://<engine_address>/ovirt-engine/services/pki-resource?resource=ca-certificate&format=X509-PEM-CA` and select all the trust settings. Refer to the instructions to install the certificate authority in https://access.redhat.com/solutions/95103[Firefox], https://access.redhat.com/solutions/17864[Internet Explorer], or https://access.redhat.com/solutions/1168383[Google Chrome].
 ====
 
-To upload the appliance:
+To upload the appliance::
 
-. Open the *Upload Image* screen in the Administration Portal:
-* From the *Disks* tab, select *Start* from the *Upload* drop-down.
-* Alternatively, from the *Storage* tab select the storage domain, then select the *Disks* sub-tab, and select *Start* from the *Upload* drop-down.
-. In the *Upload Image* screen, click *Browse* and select the image on the local disk.
+. Log in to the Administration Portal.
+. Click the *Disks* tab.
+. Select *Start* from the *Upload* menu.
+. Click *Browse*, and select the image on the local disk.
 . Set *Image Type* to *QCOW2*.
 . Fill in the *Disk Option* fields. See https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#Add_Virtual_Disk_dialogue_entries[Explanation of Settings in the New Virtual Disk Window] in the _Red Hat Virtualization Administration Guide_ for a description of the relevant fields.
 . Click *OK*.
 
-A progress bar will indicate the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* drop-down.
+A progress bar will indicate the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* menu.
 
 See the https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1-beta/html-single/administration_guide/#Uploading_a_Disk_Image_to_a_Storage_Domain[Uploading a Disk Image to a Storage Domain] in the _Red Hat Virtualization Administration Guide_ for more information.
 
@@ -128,14 +132,14 @@ It takes approximately 90 minutes to upload the {product-title} appliance file t
 
 The following procedure provides manual upload instructions if the image uploader tool is not available or fails to upload.
 
-. Log into a host in your Red Hat Virtualization system with a mount to the export storage domain.
+. Log in to a host in your Red Hat Virtualization system with a mount to the export storage domain.
 . Change to the export storage domain's directory.
 . Copy the {product-title} appliance `OVF` archive to this directory.
 . Run the `ls` command to locate the directory named after a GUID, and change to that directory.
 . Extract the `OVF` file using the `tar` command, substituting the `.ova` filename with your download. For example:
 +
 ----
-[root@localhost 4a8fc2b1-0a57-47fd-b622-7e170981305b]# tar xvf ../cfme-rhevm-5.7.0.17-1.x86_64.rhevm.ova
+[root@localhost 4a8fc2b1-0a57-47fd-b622-7e170981305b]# tar xvf ../cfme-rhevm-5.9.0.17-1.x86_64.rhevm.ova
 images/
 images/896d49ac-a5e4-4b73-8448-9778bb76ce32/
 images/896d49ac-a5e4-4b73-8448-9778bb76ce32/26e85696-78a4-4a82-aedd-bf60a4aa7dae.meta
@@ -192,11 +196,14 @@ The virtual machine is created. To view the virtual machine, select the data cen
 .. To add a disk, select your virtual machine from the *Virtual Machines* tab.
 .. From the details pane, click the *Disks* tab. 
 .. Click *New* to open the *New Virtual Disk* dialog.
-.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.
+.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.
 .. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
 .. Specify any other values as desired.
 .. Click *OK* to create the disk.
 . To start the {product-title} appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
 
 Your Red Hat Virtualization environment now contains a running {product-title} appliance.
+
+
+
 

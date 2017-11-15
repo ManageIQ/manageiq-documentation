@@ -1,24 +1,38 @@
 [appendix]
 
 [[example-cloudformation-provisioning-via-services]]
-== Example: CloudFormation Provisioning via Services
+== Example: Using Amazon CloudFormation Template for Service Provisioning
 
-After creating your template, you can add it as a catalog item to the service catalog. Stacks can then be created from templates and launched from the service catalog.
+{product-title_short} supports Amazon CloudFormation orchestration templates that make deploying complex services easier in the cloud.
 
-[[adding-a-new-service-dialog]]
+[[ex-adding-orchestration-template]]
+==== Creating an Orchestration Template
+
+Complete the following procedure to add new orchestration templates. 
+
+. Navigate to menu:Services[Catalogs] and select *Orchestration Templates* in the accordion menu.
+. Click image:1847.png[Configuration] *Configuration*, then click image:1848.png[Green_Plus_Sign] *Create a new Orchestration Template*. 
+. Enter a *Name* and *Description* for your template. 
+. Select *Amazon CloudFormation* from the *Template Type* list.
+. Select *Draft* to create a draft template.
+. Add your template in the area below for the selected *Template Type*. You can author your own stack template, or can add it here from other sources.
+. Click *Add*.
+
+You can add this template as a catalog item to a service catalog. Stacks can then be created from templates and launched from the service catalog.
+
+[[ex-adding-service-dialog]]
 === Creating a Service Dialog
 
-Complete the following procedure to create a new service dialog based on the input parameters defined in the orchestration template.
+Complete the following procedure to create a service dialog based on the input parameters defined in the orchestration template.
 
 . Navigate to menu:Services[Catalogs] and click *Orchestration Templates* in the accordion menu.
-. From *All Orchestration Templates*, select the orchestration template you want to create a service dialog from.
-. Click image:1847.png[Configuration] *Configuration*, then click image:1848.png[Green_Plus_Sign] *Create Service Dialog* from *Orchestration Template*. The *Adding a new Service Dialog from Orchestration Template* window is displayed.
-image:7156.png[Adding_a_new_Service_Dialog_from_Orchestration_Template]
-. In *Service Dialog Information*, add a *Service Dialog Name*.
+. Expand *All Orchestration Templates*, then click the orchestration template you created using the above procedure, that you want to create a service dialog from.
+. Click image:1847.png[Configuration]*Configuration*, then click image:1848.png[Green_Plus_Sign]*Create Service Dialog from Orchestration Template*.
+. Enter a name for the service dialog in *Service Dialog Name*.
 . Click *Save*.
 
 
-[[adding-a-new-catalog]]
+[[ex-adding-a-new-catalog]]
 === Creating a Catalog
 
 Complete the following procedure to create a new catalog.
@@ -26,78 +40,53 @@ Complete the following procedure to create a new catalog.
 image:7149.png[Adding_a_New_Catalog]
 
 . Navigate to menu:Services[Catalogs] and select *Catalogs* in the accordion menu.
-. Click image:1847.png[Configuration] *Configuration*, then click image:1848.png[Green_Plus_Sign] *Add a New Catalog*. The *Adding a new Catalog* window is displayed.
+. Click image:1847.png[Configuration] *Configuration*, then click image:1848.png[Green_Plus_Sign] *Add a New Catalog*. 
 . In *Basic Info*, add *Name* and *Description* for the new catalog.
 . You can assign catalog items in *Assign Catalog Item*.
 . Click *Add*.
 
 
-[[adding-orchestration-catalog-item]]
+[[ex-adding-orchestration-catalog-item]]
 === Creating an Orchestration Catalog Item
 
 Complete the following procedure to create a new orchestration catalog item.
 
 . Navigate to menu:Services[Catalogs] and select *Catalog Items* in the accordion menu.
-. Click image:1847.png[Configuration] *Configuration*, then click image:1848.png[Green_Plus_Sign] *Add a New Catalog Item*. The *Adding a new Service Catalog Item* window is displayed.
-+
-image:7146.png[Adding_a_new_Service_Catalog_Item]
-+
+. Click image:1847.png[Configuration] *Configuration*, then click image:1848.png[Green_Plus_Sign] *Add a New Catalog Item*. 
 . Select *Orchestration* from the *Catalog Item Type* list.
-+
-image:7147.png[Basic_Info]
-+
 . Enter the basic details in the *Basic Info*:
 .. Enter a *Name* and *Description* for the new service catalog item. 
 .. Select *Display in Catalog* box.
 .. Select the appropriate catalog from the *Catalog* list.
 .. Select the appropriate dialog from the *Dialog* list.
-.. Select the *Orchestration Template* from the list.
+.. Select the orchestration template from the *Orchestration Template* list.
+.. Select the provider from the *Provider* list.
 . Click *Add*.
 
-[[ordering-service]]
+[[ex-ordering-service]]
 === Ordering Service
 
-Complete the following procedure to order your service catalog item.
+Complete the following procedure to order your catalog item from the service catalog.
 
-. Navigate to menu:Services[Catalogs] and select *Service Catalogs* in the accordion menu. From *All Services* catalogs, select the *catalog item* that you want to order. The *Service* window with the name and description of the service to be ordered is displayed.
-image:7172.png[Service_Catalog]
-. Click *Order*. The *Order Service* window with *Options* and *Parameter* is displayed.
-image:7173.png[Order_Service]
-. Enter stack name in *Stack Name*.
-. The *On Failure* value is Rollback by default.
-. *Timeout* is optional. You can type the number of seconds to timeout the provision at the provider side. 
-+
-[NOTE]
-====
-The number of seconds get converted (rounded) to minutes when ordering the provision through Red Hat OpenStack Platform. For example, 100 seconds rounds to two minutes.
-====
-+
-. You can use the default parameter values from the template, or enter new values as appropriate. 
-+
-[NOTE]
-====
-The parameters vary per dialog; therefore, the parameters shown in the *Order Service* window may or may not exist depending on the dialog.
-====
-+
+. Navigate to menu:Services[Catalogs] and select *Service Catalogs* in the accordion menu. 
+. Expand *All Services*, then click the catalog item you want to order from the service catalog.
+. Click *Order*. You will see the *Order Service* window with *Options* and *Parameters*.
+. Enter the name of the stack in *Stack Name*.
+. Select the value of *On Failure* if stack creation fails. The default is *Rollback*.
+. Optionally, enter *Timeout* in minutes.
+. Set the remaining parameters as needed that will vary depending on the dialog. 
 . Click *Submit*.
 
-The order request is submitted. After a request has been approved, the various stages of fulfillment are executed. You can see the progress status of the provisioning process in menu:Services[Requests].
+The provisioning service request is submitted. Once a request has been approved, the various stages of fulfillment will be processed. You can monitor the request status and other details in menu:Services[Requests]. 
 
-[[orchestration-stacks]]
-=== Orchestration Stacks
+[[ex-orchestration-stacks]]
+=== Orchestration Stack
 
-After ordering a service, you can see the progress state of the provisioning process in menu:Services[Requests].
-
-. Initially, the *Request State* shows *Pending* with its *Approval State* as *Pending Approval*.
-image:7177.png[Requests]
-. After the request is *Approved*, the various stages of fulfillment are executed, and reflect accordingly under *Request State*.
-image:7178.png[Request_State]
-image:7179.png[Request_State]
-. After the *Request State* is *Finished*, you can see the stack entry created in menu:Compute[Clouds > Stacks]. In the screen capture below, you can see the heat-stack we created from the catalog item ordered from the *Service Catalog* as shown in the previous section.
+Once the status of the provisioning request in menu:Services[Requests] is *Finished*, you will see the newly deployed stack in menu:Compute[Clouds > Stacks]. 
 image:7180.png[Catalog_Item_State]
-. You can click on the stack to see a summary of its properties and relationships, and the instance(s) included in the stack. You can click on the instance(s) to see all instance details.
+Select the stack to see a summary of its properties, resources, among other details including the running instances that are part of the stack. 
 image:7181.png[Stack_Summary]
 
-You have now deployed instances and its associated collection of resources (called a stack) using an orchestration template.
+You have now deployed instances and associated collection of resources (referred to as stack) using an orchestration template.
 
 

@@ -1,12 +1,14 @@
 [[installing-cloudforms]]
 == Installing {product-title}
 
-{product-title} is able to be installed and ready to configure in a few quick steps. After downloading {product-title} as a virtual machine image template from the Red Hat Customer Portal, the installation process takes you through the steps of uploading the appliance to a Red Hat Virtualization environment.
+Installing {product-title} consists of the following steps:
 
-[IMPORTANT]
-=====
-After installing the {product-title} appliance, you must configure the database for {product-title}. See xref:configuring_a_database[].
-=====
+. Downloading the appliance for your environment as a virtual machine image template.
+. Setting up a virtual machine based on the appliance.
+. Configuring the {product-title_short} appliance.
+
+After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
+
 
 ifdef::miq[]
 [[obtaining-the-appliance]]
@@ -16,7 +18,7 @@ The following procedure outlines how to obtain a copy of the appliance from the 
 
 . In a browser, navigate to link:manageiq.org/download[].
 . Select *Red Hat Virtualization* from the *--Choose your platform--* list.
-. Select *Stable (fine-2)* from the *--Choose a release--* list.
+. Select *Stable* from the *--Choose a release--* list.
 . Follow the instructions to download the appliance.
 endif::miq[]
 
@@ -29,8 +31,8 @@ The following procedure outlines how to obtain a copy of the appliance from the 
 . Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
 . Click *Downloads* in the menu bar.
 . Click *A-Z* to sort the product downloads alphabetically.
-. Click menu:Red Hat CloudForms[Download Latest] to access the product download page.
-. From the list of installers and images, select the *CFME Red Hat Virtual Appliance* download link.
+. Click *Red Hat CloudForms* to access the product download page.
+. From the list of installers and images, click the *Download Now* link for *CFME Red Hat Virtual Appliance*.
 endif::cfme[]
 
 [[uploading-the-appliance-on-red-hat-virtualization]]
@@ -57,7 +59,7 @@ After uploading the image, create a disk and attach it to a virtual machine.
 
 .Prerequisites:
 
-* You must configure the Image I/O Proxy when running `engine-setup`. See https://access.redhat.com/documentation/en/red-hat-virtualization/4.1/paged/installation-guide/33-configuring-the-red-hat-virtualization-manager[Configuring the Red Hat Virtualization Manager] in the  _Red Hat Virtualization Installation Guide_ for more information.
+* You must configure the Image I/O Proxy when running `engine-setup`. See https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/installation_guide/red_hat_enterprise_virtualization_manager_configuration_overview[Configuring the Red Hat Virtualization Manager] in the  _Red Hat Virtualization Installation Guide_ for more information.
 * Internet Explorer 10, Firefox 35, or Chrome 13 or greater is required to perform this upload procedure. Previous browser versions do not support the required HTML5 APIs.
 * You must import the required certificate authority into the web browser used to access the Administration Portal.
 
@@ -196,7 +198,8 @@ The virtual machine is created. To view the virtual machine, select the data cen
 .. To add a disk, select your virtual machine from the *Virtual Machines* tab.
 .. From the details pane, click the *Disks* tab. 
 .. Click *New* to open the *New Virtual Disk* dialog.
-.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.
+ifdef::cfme[.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.]
+ifdef::miq[.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See "Database Requirements" in the _Deployment Planning Guide_ for size considerations.]
 .. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
 .. Specify any other values as desired.
 .. Click *OK* to create the disk.

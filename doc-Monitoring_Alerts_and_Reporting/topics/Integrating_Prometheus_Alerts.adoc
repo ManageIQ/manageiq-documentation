@@ -14,12 +14,11 @@ It is possible to view ongoing alerts in {product-title_short} and manage their 
 * View alert data and related objects.
 * Assign and acknowledge alerts in the alerts list screen.
 
-=== Integrating Prometheus alerts in {product-title_short}
+=== Integrating Prometheus Alerts in {product-title_short}
 
-.Complete the following prerequisite steps on the OpenShift Container Platform:
+Complete the following prerequisite steps on the OpenShift Container Platform:
 
 . Deploy and Configure Prometheus on OpenShift; see https://docs.openshift.com/container-platform/3.7/install_config/cluster_metrics.html#openshift-prometheus[Prometheus on OpenShift Container Platform].
-
 . Add Prometheus to an OpenShift cluster and configure alert definitions. 
 .. See intructions below to define alerts (currently has to be done on the Prometheus side):
 +
@@ -47,11 +46,28 @@ $ oc edit configmap -n openshift-metrics prometheus
 . Reload the Prometheus configuration. You can do this by deleting the Prometheus pod, then redeploying with the new configuration.
 
 
-.Complete the following steps to set up Prometheus alerts in {product-title_short}:
+Complete the following procedure to enable Prometheus alerts in {product-title_short}:
 
-. In the {product-title_short} user interface, navigate to menu:Control[Explorer]. Create one container node alert based on *All datawarehouse alerts*, and one provider alert based on *All datawarehouse alerts*.
-. Add each new alert to an alert profile.
-. Assign *Prometheus node Profile* and *Prometheus Provider Profile* to the enterprise.
+. In the {product-title_short} user interface, navigate to menu:Control[Explorer], then click *Alert Profiles* in the accordion menu.
++
+[NOTE]
+====
+Creating a profile is not required since both profiles, Node and Provider, are created automatically during the installation.
+====
++
+. Click to expand *Node Alert Profiles*, then click *Prometheus Node Profile*. 
+. Click *Configuration*, then click *Edit assignments for this Alert Profile*. Assign the profile to *The Enterprise* from the *Assign To* list.
+. Click *Save*.
+. Click to expand *Provider Alert Profiles*, then click *Prometheus Provider Profile*. 
+. Click *Configuration*, then click *Edit assignments for this Alert Profile*. Assign the profile to *The Enterprise* from the *Assign To* list.
+. Click *Save*.
++
+[NOTE]
+====
+Alerts that were triggered before assigning the profiles to the enterprise will not appear in {product-title_short} at all.
+====
++
 . Add a Prometheus alerts endpoint.
+
 
 

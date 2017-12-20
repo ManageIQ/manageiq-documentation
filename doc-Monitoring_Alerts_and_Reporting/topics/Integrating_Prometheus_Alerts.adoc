@@ -1,9 +1,9 @@
 [[integrating_prometheus_alerts]]
-=== Integrating Prometheus Alerts
+== OpenShift Prometheus Alerts
 
 [NOTE]
 ====
-This feature is available with this release of {product-title} as technology preview only. For more information on the support scope for features marked as technology previews, see https://access.redhat.com/support/offerings/techpreview[Technology Preview Features Support Scope].
+This feature is available with this release of {product-title} as a technology preview only. For more information on the support scope for features marked as technology previews, see https://access.redhat.com/support/offerings/techpreview[Technology Preview Features Support Scope].
 ====
 
 Prometheus is used as an external alerting component. {product-title} integrates Prometheus alerts for use with OpenShift Container Platform. {product-title_short} collects EmsEvents from Prometheus, generates alerts based on these events, and then attaches alerts to inventory objects.
@@ -14,14 +14,42 @@ It is possible to view ongoing alerts in {product-title_short} and manage their 
 * View alert data and related objects.
 * Assign and acknowledge alerts in the alerts list screen.
 
-.Prerequisites
+=== Integrating Prometheus alerts in {product-title_short}
 
-* Create an Ansible role for deploying Prometheus on OpenShift.
-* Add Prometheus to an OpenShift cluster and configure alert definitions.
+.Complete the following prerequisite steps on the OpenShift Container Platform:
 
-Complete the following procedure to setup Prometheus alerts in {product-title_short}.
+. Deploy and Configure Prometheus on OpenShift; see https://docs.openshift.com/container-platform/3.7/install_config/cluster_metrics.html#openshift-prometheus[Prometheus on OpenShift Container Platform].
 
-. In {product-title_short}, navigate to menu:Control[Explorer]. Create one container node alert based on *All datawarehouse alerts*, and one provider alert based on *All datawarehouse alerts*.
+. Add Prometheus to an OpenShift cluster and configure alert definitions. 
+.. See intructions below to define alerts (currently has to be done on the Prometheus side):
++
+----
+$ oc edit configmap -n openshift-metrics prometheus
+# Supported annotations:
+# severity: ERROR|WARNING|INFO. defaults to ERROR.
+# miqTarget: ContainerNode|ExtManagementSystem, defaults to ContainerNode.
+# miqIgnore: "true|false", should ManageIQ pick up this alert, defaults to true.
+  prometheus.rules: |
+    groups:
+    - name: example-rules
+      interval: 30s # defaults to global interval
+      rules:
+      - alert: "Node Down"
+        expr: up{job="kubernetes-nodes"} == 0
+        annotations:
+          miqTarget: "ContainerNode"
+          severity: "ERROR"
+          url: "https://www.example.com/fixing_instructions"
+          message: "Node {{$labels.instance}} is down"
+
+----
++
+. Reload the Prometheus configuration. You can do this by deleting the Prometheus pod, then redeploying with the new configuration.
+
+
+.Complete the following steps to set up Prometheus alerts in {product-title_short}:
+
+. In the {product-title_short} user interface, navigate to menu:Control[Explorer]. Create one container node alert based on *All datawarehouse alerts*, and one provider alert based on *All datawarehouse alerts*.
 . Add each new alert to an alert profile.
 . Assign *Prometheus node Profile* and *Prometheus Provider Profile* to the enterprise.
 . Add a Prometheus alerts endpoint.

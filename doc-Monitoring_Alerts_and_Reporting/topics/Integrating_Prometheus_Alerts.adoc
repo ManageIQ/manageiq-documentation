@@ -3,16 +3,16 @@
 
 [NOTE]
 ====
-This feature is available with this release of {product-title} as a technology preview only. For more information on the support scope for features marked as technology previews, see https://access.redhat.com/support/offerings/techpreview[Technology Preview Features Support Scope].
+This feature is currently available as a technology preview only. For more information on the support scope for features marked as technology previews, see https://access.redhat.com/support/offerings/techpreview[Technology Preview Features Support Scope].
 ====
 
-Prometheus is used as an external alerting component. {product-title_short} integrates Prometheus alerts for use with OpenShift Container Platform. {product-title_short} collects EmsEvents from Prometheus, generates alerts based on these events, and then attaches alerts to inventory objects.
+Prometheus is used as an external alerting component. {product-title_short} integrates Prometheus alerts for use with OpenShift Container Platform. {product-title_short} collects events from Prometheus, generates alerts based on these events, and then attaches alerts to inventory objects.
 
-It is possible to view ongoing alerts in {product-title_short} and manage their life cycle, including the ability to:
+It is possible to view ongoing alerts in {product-title_short} by navigating to menu:Monitor[Alerts] and manage their life cycle, including the ability to:
 
-* View active alerts per provider in the alert dashboard.
+* View active alerts per provider in the *Overview* screen.
 * View alert data and related objects.
-* Assign and acknowledge alerts in the alerts list screen.
+* Comment, assign, and acknowledge alerts in the *All Alerts* screen.
 
 === Configuring Prometheus Alerts in {product-title_short}
 
@@ -20,7 +20,7 @@ Configuring and enabling Prometheus alerts in {product-title_short} comprises th
 
 . Deploying and configuring Prometheus on OpenShift.
 . Assigning Prometheus alert profiles to the enterprise in {product-title_short}.
-. Adding OpenShift Containers Providers and Prometheus alert endpoints in {product-title_short}.
+. Adding an OpenShift Containers Provider with a Prometheus alert endpoint in {product-title_short}.
 
 ==== Deploying and Configuring Prometheus on OpenShift
 
@@ -38,6 +38,9 @@ $ oc edit configmap -n openshift-metrics prometheus
     - name: example-rules
       interval: 30s # defaults to global interval
       rules:
+
+      <<
+
       - alert: "NodeDown"
         expr: up{job="kubernetes-nodes"} == 0
         annotations:
@@ -81,9 +84,9 @@ Alerts triggered before assigning the profiles to the enterprise will not appear
 +
 
 
-==== Adding OpenShift Containers Providers and Prometheus Alert Endpoints
+==== Adding an OpenShift Containers Provider with a Prometheus Alert Endpoint
 
-Complete the following procedure using the {product-title_short} user interface to add OpenShift Containers Provider and Prometheus alerts endpoints.
+Complete the following procedure using the {product-title_short} user interface to add an OpenShift Containers Provider with a Prometheus alert endpoint.
 
 . Navigate to menu:Compute[Containers > Providers].
 . Click  image:1847.png[Configuration] (*Configuration*), then click  image:1862.png[Add New Containers Provider] (*Add New Containers Provider*).

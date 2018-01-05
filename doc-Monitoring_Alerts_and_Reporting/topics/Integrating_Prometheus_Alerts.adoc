@@ -38,10 +38,7 @@ $ oc edit configmap -n openshift-metrics prometheus
     - name: example-rules
       interval: 30s # defaults to global interval
       rules:
-
-      <<
-
-      - alert: "NodeDown"
+      - alert: "NodeDown" << Alert starts here
         expr: up{job="kubernetes-nodes"} == 0
         annotations:
           miqTarget: "ContainerNode"
@@ -97,21 +94,15 @@ Complete the following procedure using the {product-title_short} user interface 
 . In the *Default* tab, add the default endpoints for the OpenShift provider: 
 .. Select a *Security Protocol* method to specify how to authenticate the provider:
 * *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
+* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate and paste into the *Trusted CA Certificates* box, in PEM format.
 +
 [NOTE]
 ====
-To obtain your OpenShift Container Platform provider's CA certificate, run the `oc get secret` command on your provider, substituting values for your provider and token as needed. To obtain a token for your provider, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token[Obtaining an OpenShift Container Platform Management Token].
-
-For example:
-
-  # oc get secret --namespace management-infra management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
-  
-Paste the output (a block of text starting with `-----BEGIN CERTIFICATE-----`) into the *Trusted CA Certificates* field.
+You can obtain your OpenShift Container Platform provider's CA certificate for all endpoints (default, metrics, alerts) at `/etc/origin/master/ca.crt`. Paste the output (a block of text starting with `-----BEGIN CERTIFICATE-----`) into the *Trusted CA Certificates* field.
 ====
 +
 * *SSL without validation*: Authenticate the provider insecurely (not recommended).
-.. Enter the *Hostname* or IPv4 or IPv6 address of the provider.
+.. Enter the *Hostname* (or IPv4 or IPv6 address) of the provider.
 +
 [IMPORTANT]
 ====
@@ -119,13 +110,24 @@ The *Hostname* must use a unique fully qualified domain name.
 ====
 +
 .. Enter the *API Port* of the provider. The default port is `8443`.
+.. Enter a token for your provider in the *Token* box.
++
+[NOTE]
+====
+To obtain a token for your provider, run the `oc get secret` command on your provider; see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token[Obtaining an OpenShift Container Platform Management Token].
+
+For example:
+
+# oc get secret --namespace management-infra management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
+====
++
 .. Click *Validate* to confirm that {product-title_short} can connect to the OpenShift Container Platform provider.
 . Add the Prometheus alerts endpoints in the *Alerts* tab:
 .. Select a *Security Protocol* method to specify how to authenticate the service:
 * *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
+* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate and paste into the *Trusted CA Certificates* box, in PEM format.
 * *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
-.. Enter the *Hostname* or IPv4 or IPv6 address of the provider. 
+.. Enter the *Hostname* (or IPv4 or IPv6 address) or alert *Route*. 
 .. Enter the *API Port* if your Prometheus provider uses a non-standard port for access. The default port is `443`.
 .. Click *Validate* to confirm that {product-title_short} can connect to the alerts service.
 . Click *Add*.

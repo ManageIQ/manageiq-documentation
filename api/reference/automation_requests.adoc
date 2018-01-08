@@ -10,6 +10,7 @@ Automation requests are made available via the following entrypoint.
 ----
 
 * link:#creating-requests[Creating Requests]
+* link:#editing-requests[Editing Requests]
 * link:#approving-denying-requests[Approving or Denying Requests]
 * link:#monitoring-requests[Monitoring Requests]
 
@@ -41,6 +42,68 @@ As an example:
 }
 ----
 
+[[editing-requests]]
+=== Editing Requests
+
+Updating requests can be performed by posting an _edit_ action as follows:
+
+[source,data]
+----
+POST /api/automation_requests/11
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "attrs" : {
+        "var1" : "updated value1",
+        "var2" : "updated value2",
+        "minimum_memory" : 4096
+      }
+    }
+  }
+}
+----
+
+Response:
+
+[source,json]
+----
+{
+  "href": "http://localhost:3000/api/automation_requests/11",
+  "id": 11,
+  "options": {
+    "message": "create",
+    "namespace": "System",
+    "class_name": "Request",
+    "instance_name": "InspectME",
+    "user_id": "1",
+    "attrs": {
+      "var1" : "updated value1",
+      "var2" : "updated value2",
+      "minimum_memory" : 4096
+    }
+  },
+  "tenant_id": "1",
+  "approval_state": "approved",
+  "status": "Ok",
+  "request_type": "automation",
+  "description": "Automation Task",
+  "type": "AutomationRequest",
+  "created_on": "2018-01-08T13:48:00Z",
+  "updated_on": "2018-01-08T13:56:15Z",
+  "requester_id": "1",
+  "requester_name": "Administrator",
+  "request_state": "pending",
+  "message": "Automation Request - Request Created",
+  "userid": "admin",
+  "process": true
+}
+
+----
 [[approving-denying-requests]]
 === Approving or Denying Requests
 

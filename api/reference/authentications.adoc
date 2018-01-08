@@ -14,6 +14,7 @@ Full CRUD actions on authentications is available:
 * link:#querying-authentications[Querying Authentications]
 * link:#creating-authentications[Creating Authentications]
 * link:#editing-authentications[Editing Authentications]
+* link:#refreshing-authentications[Refreshing Authentications]
 * link:#deleting-authentications[Deleting Authentications]
 
 [[querying-authentications]]
@@ -159,6 +160,70 @@ POST /api/authentications
 }
 ----
 
+[[refreshing-authentications]]
+=== Refreshing Authentications
+
+Authentications can be refreshed by posting a *refresh* action to a single
+resource or to multiple resources in bulk by targeting the collection.
+
+----
+POST /api/authentications/:id
+----
+
+[source,json]
+----
+{
+  "action" : "refresh"
+}
+----
+
+or refreshing multiple authentications:
+
+----
+POST /api/authentications
+----
+
+[source,json]
+----
+{
+  "action" : "refresh",
+  "resources" : [
+    { "id" : 51 },
+    { "id" : 52 }
+  ]
+}
+----
+
+Example:
+
+----
+POST /api/authentications/51
+----
+
+[source,json]
+----
+{
+  "action" : "refresh"
+}
+----
+
+Response:
+
+[source,json]
+----
+{
+  "success" : true,
+  "message" : "Refreshing Authentication id:51 name:'SampleCredentials'",
+  "task_id" : "8",
+  "task_href" : "http://localhost:3000/api/tasks/8",
+  "tasks" : [
+    {
+      "id" : "8",
+      "href" : "http://localhost:3000/api/tasks/8"
+    }
+  ]
+}
+----
 
 [[deleting-authentications]]
 === Deleting Authentications

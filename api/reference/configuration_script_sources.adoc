@@ -14,6 +14,7 @@ Full CRUD actions on configuration script sources is available:
 * link:#querying-configuration-script-sources[Querying Configuration Script Sources]
 * link:#creating-configuration-script-sources[Creating Configuration Script Sources]
 * link:#editing-configuration-script-sources[Editing Configuration Script Sources]
+* link:#refresh-configuration-script-sources[Refresh Configuration Script Sources]
 * link:#deleting-configuration-script-sources[Deleting Configuration Script Sources]
 
 [[querying-configuration-script-sources]]
@@ -112,6 +113,70 @@ POST /api/configuration_script_sources
 }
 ----
 
+[[refresh-configuration-script-sources]]
+=== Refresh Configuration Script Sources
+
+Configuration script sources can be refreshed by posting a *refresh* action to a single
+resource or to multiple resources in bulk by targeting the collection.
+
+----
+POST /api/configuration_script_sources/:id
+----
+
+[source,json]
+----
+{
+  "action" : "refresh"
+}
+----
+
+or refreshing multiple configuration script sources:
+
+----
+POST /api/configuration_script_sources
+----
+
+[source,json]
+----
+{
+  "action" : "refresh",
+  "resources" : [
+    { "id" : 101 },
+    { "id" : 102 }
+  ]
+}
+----
+
+Example:
+
+----
+POST /api/configuration_script_sources/101
+----
+
+[source,json]
+----
+{
+  "action" : "refresh"
+}
+----
+
+Response:
+
+[source,json]
+----
+{
+  "success" : true,
+  "message" : "Refreshing ConfigurationScriptSource id:101 name:'Test Configuration Script Source'",
+  "task_id" : "7",
+  "task_href" : "http://localhost:3000/api/tasks/7",
+  "tasks" : [
+    {
+      "id" : "7",
+      "href" : "http://localhost:3000/api/tasks/7"
+    }
+  ]
+}
+----
 
 [[deleting-configuration-script-sources]]
 === Deleting Configuration Script Sources

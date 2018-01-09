@@ -83,62 +83,8 @@ Alerts triggered before assigning the profiles to the enterprise will not appear
 
 ==== Adding an OpenShift Containers Provider with a Prometheus Alert Endpoint
 
-Complete the following procedure using the {product-title_short} user interface to add an OpenShift Containers Provider with a Prometheus alert endpoint.
+You will now add an OpenShift Containers Provider with a Prometheus Alert Endpoint using the {product-title_short} user interface; see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_providers/#adding_openshift_provider[Adding an OpenShift Container Platform Provider]. 
 
-. Navigate to menu:Compute[Containers > Providers].
-. Click  image:1847.png[Configuration] (*Configuration*), then click  image:1862.png[Add New Containers Provider] (*Add New Containers Provider*).
-. Enter a *Name* for the provider.
-. From the *Type* list, select *OpenShift Container Platform*.
-. Enter the appropriate *Zone* for the provider. If you do not specify a zone, it is set to `default`.
-. From the *Alerts* list, select *Prometheus* to enable external alerts. Selecting *Prometheus* adds an *Alerts* tab to the lower pane to configure the Prometheus alerts service. Alerts are disabled by default.
-. From the *Metrics* list, select *Prometheus* to enable external metrics. Selecting *Prometheus* adds a *Metrics* tab to the lower pane to configure the Prometheus metrics service.
-. In the *Default* tab, add the default endpoints for the OpenShift provider: 
-.. Select a *Security Protocol* method to specify how to authenticate the provider:
-* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate and paste into the *Trusted CA Certificates* box, in PEM format.
-+
-[NOTE]
-====
-You can obtain your OpenShift Container Platform provider's CA certificate for all endpoints (default, metrics, alerts) at `/etc/origin/master/ca.crt`. Paste the output (a block of text starting with `-----BEGIN CERTIFICATE-----`) into the *Trusted CA Certificates* field.
-====
-+
-* *SSL without validation*: Authenticate the provider insecurely (not recommended).
-.. Enter the *Hostname* (or IPv4 or IPv6 address) of the provider.
-+
-[IMPORTANT]
-====
-The *Hostname* must use a unique fully qualified domain name.
-====
-+
-.. Enter the *API Port* of the provider. The default port is `8443`.
-.. Enter a token for your provider in the *Token* box.
-+
-[NOTE]
-====
-To obtain a token for your provider, run the `oc get secret` command on your provider; see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token[Obtaining an OpenShift Container Platform Management Token].
-
-For example:
-
-# oc get secret --namespace management-infra management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
-====
-+
-.. Click *Validate* to confirm that {product-title_short} can connect to the OpenShift Container Platform provider.
-. In the *Metrics* tab, add the Prometheus metrics endpoint:
-.. Select a *Security Protocol* method to specify how to authenticate the service:
-* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate and paste into the *Trusted CA Certificates* box, in PEM format.
-* *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
-.. Enter the *Hostname* (or IPv4 or IPv6 address). 
-.. Enter the *API Port* if your Prometheus provider uses a non-standard port for access. The default port is `443`.
-.. Click *Validate* to confirm that {product-title_short} can connect to the metrics.
-. In the *Alerts* tab, add the Prometheus alerts endpoint:
-.. Select a *Security Protocol* method to specify how to authenticate the service:
-* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate and paste into the *Trusted CA Certificates* box, in PEM format.
-* *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
-.. Enter the *Hostname* (or IPv4 or IPv6 address) or alert *Route*. 
-.. Enter the *API Port* if your Prometheus provider uses a non-standard port for access. The default port is `443`.
-.. Click *Validate* to confirm that {product-title_short} can connect to the alerts service.
-. Click *Add*.
+Once you have completed the procedure, you will have OpenShift Prometheus alerts enabled in {product-title_short}, and can manage their life cyle from the menu:Monitor[Alerts] screen in the user interface.
 
 

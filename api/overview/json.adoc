@@ -38,11 +38,11 @@ throughout:
 [cols="<,<,<",options="header",]
 |=======================================================================
 |Name |Explanation |Example serialization
-|*Integer* |Integer value|{ "id" : 10 }
+|*Integer* |Integer value|{ "memsize" : 2048 }
 |*String* |JSON string |{ "state" : "running" }
 |*URL* |Absolute URL |{ "href" : "http://SERVER/vms/1/start" }
 |*Timestamp* |Timestamp in ISO8601 format |{ "created" : "2013-12-05T08:15:30Z" }
-|*Array[T]* |Array where each entry has type T |{ "vms" : [ { "id" : 1 }, { "id" : 2 }] }
+|*Array[T]* |Array where each entry has type T |{ "vms" : [ { "id" : "1" }, { "id" : "2" }] }
 |*Ref[T]* |A reference to a T, used to model relations, the T is a valid Resource identifier |{ "vm" : { "href" : URL } }
 |*Collection* |Array[T] where T represents a Ref[T], this might allow actions to be executed on all members as a single unit |{ "vms" : { "count" : 2, "resources" : [ { "href" : URL}, { "href" : URL } ], "actions" : [] }
 |*Struct* |A structure with sub-attributes |"power_state": {"state" : "ON", "last_boot_time" : "2013-05-29T15:28Z", "state_change_time" : "2013-05-29T15:28Z"}
@@ -60,7 +60,7 @@ resources and collections defined in this API.
 [cols="<,<,<",options="header",]
 |======================================================================
 |Attribute | Type | Description
-|id | Integer | An integer identifier for the referenced resource
+|id | String | A string identifier for the referenced resource
 |href | Ref(self) | A unique self reference
 |name | String | A human name of the resource
 |======================================================================
@@ -69,7 +69,7 @@ resources and collections defined in this API.
 [source,json]
 ----
 {
-  "id" : 10,
+  "id" : "10",
   "href" : "http://localhost:3000/api/vms/10",
   "name" : "first_vm"
 }
@@ -279,7 +279,7 @@ Actions in a resource:
 [source,json]
 ----
 {
-  "id"    : Integer,
+  "id"    : String,
   "href"  : Ref(self),
   "name"  : "resource human name",
   "actions" : [

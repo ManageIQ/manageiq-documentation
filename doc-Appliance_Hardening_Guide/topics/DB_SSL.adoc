@@ -18,7 +18,7 @@ See <<_chap_red_hat_cloudforms_security_guide_ssl_certs>> for more information o
 
 * `/var/www/miq/vmdb/certs/server.cer` - Signed or self-signed certificate for the database appliance.
 * `/var/www/miq/vmdb/certs/server.cer.key` - Private key for server certificate.
-* `/var/www/miq/vmdb/certs/root.crt` - The root certificate for {product-title} database server appliance.
+* `/var/www/miq/vmdb/certs/root.crt` - The root CA certificate used to sign the CA certificate for the {product-title} database.
   You can either use a self-signed certificate or a certificate signed by a trusted CA to generate your root certificate.
 
 It is also recommended to stop all {product-title} services before configuring the database to use SSL.
@@ -26,19 +26,19 @@ It is also recommended to stop all {product-title} services before configuring t
 To configure SSL on the database appliance:
 
 . Log in as `root` to the appliance where the database resides.
-. Stop the `evmserverd` and `rh-postgresql94-postgresql` services:
+. Stop the `evmserverd` and `rh-postgresql95-postgresql` services:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# systemctl stop evmserverd
-[root@{productname_short_l}2 ~]# systemctl stop rh-postgresql94-postgresql
+[root@{product-title_short_l}2 ~]# systemctl stop evmserverd
+[root@{product-title_short_l}2 ~]# systemctl stop rh-postgresql95-postgresql
 ----
 
 . Install the server key file in the correct location and set the ownership and permissions for it:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# install -m 600 -o postgres -g postgres \
+[root@{product-title_short_l}2 ~]# install -m 600 -o postgres -g postgres \
 /var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
 ----
 
@@ -46,7 +46,7 @@ To configure SSL on the database appliance:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# install -m 644 -o postgres -g postgres \
+[root@{product-title_short_l}2 ~]# install -m 644 -o postgres -g postgres \
 /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
 ----
 
@@ -54,16 +54,16 @@ To configure SSL on the database appliance:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt
+[root@{product-title_short_l}2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt
 ----
 
 . Make sure that the security context is set correctly for the files in `/var/www/miq/certs`:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
+[root@{product-title_short_l}2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
 ----
-. Open the `/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf` file and uncomment and edit the `ssl` option:
+. Open the `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` file and uncomment and edit the `ssl` option:
 +
 ----
 
@@ -80,7 +80,7 @@ ssl_key_file  = '/var/www/miq/vmdb/certs/postgres.key'  # (change requires resta
 ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'      # (change requires restart)
 ----
 
-. Open the `/var/opt/rh/rh-postgresql94/lib/pgsql/data/pg_hba.conf` file and locate the two lines that contain the following:
+. Open the `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf` file and locate the two lines that contain the following:
 +
 [source]
 ----
@@ -100,12 +100,12 @@ hostssl   all      all   all           md5
 +
 This changes the incoming communication protocol to use SSL and refuse any unencrypted PostgreSQL connections.
 
-. Start the `rh-postgresql94-postgresql` and `evmserverd` services so that the changes take effect:
+. Start the `rh-postgresql95-postgresql` and `evmserverd` services so that the changes take effect:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}1 ~]# systemctl start rh-postgresql94-postgresql
-[root@{productname_short_l}1 ~]# systemctl start evmserverd
+[root@{product-title_short_l}1 ~]# systemctl start rh-postgresql95-postgresql
+[root@{product-title_short_l}1 ~]# systemctl start evmserverd
 ----
 
 The database appliance now only accepts connections from connecting appliances using SSL.
@@ -116,7 +116,7 @@ The following procedure sets up connecting appliances to communicate to the data
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# mkdir /root/.postgresql
+[root@{product-title_short_l}2 ~]# mkdir /root/.postgresql
 ----
 +
 The PostgreSQL client library, which {product-title} also uses, looks to this directory for custom configuration files.
@@ -125,7 +125,7 @@ The PostgreSQL client library, which {product-title} also uses, looks to this di
 +
 [subs="verbatim,attributes"]
 ----
-[root@{productname_short_l}2 ~]# scp root@[database_appliance_fqdn]:/var/www/miq/vmdb/certs/root.crt /root/.postgresql/root.crt
+[root@{product-title_short_l}2 ~]# scp root@[database_appliance_fqdn]:/var/www/miq/vmdb/certs/root.crt /root/.postgresql/root.crt
 ----
 +
 Where `[database_appliance_fqdn]` is the fully qualified domain name of the database appliance.
@@ -152,7 +152,7 @@ This enhances the security of all database transactions in your {product-title} 
 
 ==== Hardening TLS Protocol Version
  
-After configuring the database to use SSL, protocol TLS version 1.2 is used as default. The older versions of this protocol (TLS 1.0 and 1.1) are still available for clients to choose. You can disable older versions by inserting the following lines into `/var/opt/rh/rh-postgresql94/lib/pgsql/data/postgresql.conf`:
+After configuring the database to use SSL, protocol TLS version 1.2 is used as default. The older versions of this protocol (TLS 1.0 and 1.1) are still available for clients to choose. You can disable older versions by inserting the following lines into `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
  
 ----
 ssl_ciphers = 'TLSv1.2:!aNULL'

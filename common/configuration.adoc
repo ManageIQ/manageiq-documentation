@@ -1,17 +1,15 @@
 [[Configuring-cloudforms]]
 == Configuring {product-title}
 
-Although the {product-title} appliance comes configured to be integrated immediately into your environment, you can make some changes to its configuration.
+After installing {product-title_short} and running it for the first time, you must perform some basic configuration. To configure {product-title_short}, you must at a minimum:
 
-[NOTE]
-====
-The {product-title} appliance is intended to have minimal configuration options.
-====
+. Add a disk to the infrastructure hosting your appliance.
+. Configure the database. 
 
-[[changing-configuration-settings]]
-=== Changing Configuration Settings
+Configure the {product-title_short} appliance using the internal appliance console.
 
-The following procedure describes how to make changes to the configuration settings on the {product-title} appliance.
+[[accessing-appliance-console]]
+=== Accessing the Appliance Console
 
 . Start the appliance and open a terminal console.
 ifdef::login[]
@@ -28,20 +26,17 @@ endif::ssh[]
 
 [NOTE]
 ====
-The {product-title} appliance console automatically logs out after five minutes of inactivity.
+The {product-title_short} appliance console automatically logs out after five minutes of inactivity.
 ====
 
-[[advanced-configuration-settings]]
-=== Advanced Configuration Settings
 
-include::configuration-advanced.adoc[]
-
+ifdef::cfme[]
 [[configuring_a_database]]
-=== Configuring a Database for {product-title}
+=== Configuring a Database
 
-Before using {product-title}, configure the database options for it. {product-title} provides two options for database configuration:
+{product-title_short} uses a database to store information about the environment. Before using {product-title_short}, configure the database options for it; {product-title_short} provides the following two options for database configuration:
 
-* Install an internal PostgreSQL database to the appliance
+* Install an internal PostgreSQL database to the appliance 
 * Configure the appliance to use an external PostgreSQL database
 
 [[configuring-an-internal-database]]
@@ -92,6 +87,7 @@ All {product-title_short} appliances in a multi-region deployment must use the s
 . Confirm the configuration if prompted.
 
 {product-title} will then configure the external database.
+endif::cfme[]
 
 [[configuring-a-worker-appliance]]
 === Configuring a Worker Appliance

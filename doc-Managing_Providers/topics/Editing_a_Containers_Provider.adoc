@@ -20,37 +20,45 @@ The *Type* value is unchangeable.
 +
 [NOTE]
 ====
-To obtain your OpenShift Container Platform provider's CA certificate, run the `oc get secret` command on your provider, substituting values for your provider and token as needed. To obtain a token for your provider, see xref:Obtaining_OpenShift_Container_Platform_Management_Token[].
-
-For example:
-
-  # oc get secret --namespace management-infra management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
-  
-Paste the output (a block of text starting with `-----BEGIN CERTIFICATE-----`) into the *Trusted CA Certificates* field.
+You can obtain your OpenShift Container Platform provider's CA certificate for all endpoints (default, metrics, alerts) from `/etc/origin/master/ca.crt`. Paste the output (a block of text starting with `-----BEGIN CERTIFICATE-----`) into the *Trusted CA Certificates* field.
 ====
 +
 * *SSL without validation*: Authenticate the provider insecurely (not recommended).
-.. Enter the *Hostname* or IPv4 or IPv6 address of the provider.
+.. Enter the *Hostname* (or IPv4 or IPv6 address) of the provider.
 +
 [IMPORTANT]
 ====
 The *Hostname* must use a unique fully qualified domain name.
 ====
 +
-.. Enter the *API Port* of the provider.
-  The default port is `8443`.
-.. To change the OpenShift management token, click *Change stored token*, and enter the new token in the *Token* field. This is the token obtained earlier in xref:Obtaining_OpenShift_Container_Platform_Management_Token[].
-.. Enter the same token in the *Confirm Token* field.
+.. Enter the *API Port* of the provider. The default port is `8443`.
+.. Enter a token for your provider in the *Token* box.
++
+[NOTE]
+====
+To obtain a token for your provider, run the `oc get secret` command on your provider; see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token[Obtaining an OpenShift Container Platform Management Token].
+
+For example:
+
+# oc get secret --namespace management-infra management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
+====
++
 .. Click *Validate* to confirm that {product-title} can connect to the OpenShift Container Platform provider.
-. Under *Endpoints* in the *Hawkular* tab, configure the following for Hawkular capacity and utilization metrics collection:
+. Under *Endpoints* in the *Metrics* tab, configure the following for gathering capacity and utilization metrics for Hawkular or Prometheus based on the selection:
 .. Select a *Security Protocol* method to specify how to authenticate the provider:
 * *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
 * *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
 * *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
-.. Enter the *Hostname* or IPv4 or IPv6 address of the provider.
-.. Enter the *API Port* if your Hawkular provider uses a non-standard port for access. The default port is `443`.
-.. Click *Validate* to confirm that {product-title} can connect to the Hawkular endpoint.
+.. Enter the *Hostname* (or IPv4 or IPv6 address) of the provider.
+.. Enter the *API Port* if your provider uses a non-standard port for access. The default port is `443`.
+.. Click *Validate* to confirm that {product-title} can connect to the endpoint.
+. Under *Endpoints* in the *Alerts* tab, configure the following for Prometheus alerting from the cluster.
+* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
+* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
+* *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
+.. Enter the *Hostname* (or IPv4 or IPv6 address) of the provider.
+.. Enter the *API Port* if your provider uses a non-standard port for access. The default port is `443`.
+.. Click *Validate* to confirm that {product-title} can connect to the endpoint.
 . Click *Save*.
-
 
 

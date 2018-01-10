@@ -1,0 +1,71 @@
+
+[[cloud-volumes]]
+== Cloud Volumes
+
+Management of Cloud Volumes is provided via the following collection:
+
+[source,data]
+----
+/api/cloud_volumes
+----
+
+The following actions are available on cloud_volumes:
+
+* link:#querying-cloud-volumes[Querying Cloud Volumes]
+* link:#deleting-cloud-volumes[Deleting Cloud Volumes]
+
+[[querying-cloud-volumes]]
+=== Querying Cloud Volumes
+
+Querying all cloud volumes in the system is simply:
+
+----
+GET /api/cloud_volumes
+----
+
+Getting details on a specific Cloud Volume:
+
+----
+GET /api/cloud_volumes/:id
+----
+
+[[deleting-cloud-volumes]]
+=== Deleting Cloud Volumes
+
+Cloud Volumes can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/cloud_volumes/101
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/cloud_volumes/101
+----
+
+Deleting multiple Cloud Volumes can be done as follows:
+
+----
+POST /api/cloud_volumes
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/cloud_volumes/101" },
+    { "href" : "http://localhost:3000/api/cloud_volumes/102" },
+    ...
+  ]
+}
+----
+

@@ -11,6 +11,8 @@ This page lists the available attributes when creating resources with the REST A
 * link:#chargeback-rates[Chargeback Rates]
 * link:#conditions[Conditions]
 * link:#configuration-script-sources[Configuration Script Sources]
+* link:#generic-objects[Generic Objects]
+* link:#generic-object-definitions[Generic Object Definitions]
 * link:#groups[Groups]
 * link:#orchestration_templates[Orchestration Templates]
 * link:#policies[Policies]
@@ -223,6 +225,69 @@ POST /api/configuration_script_sources
 | description | string | Description
 | name | string | Project Name
 | related | hash | Related attributes and values
+|=====================
+
+___
+
+[[generic-objects]]
+=== Generic Objects
+
+----
+POST /api/generic_objects
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name of the generic object
+| generic_object_definition | hash | Generic object definition to create new generic object for, requires an *href* or *id* attribute in the hash
+|=====================
+
+----
+POST /api/generic_object_definitions/:id/generic_objects
+----
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name of the generic object
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| uid | string | Uid string
+| property_attributes | hash | Attribute/Value pairs to define for the generic object
+| associations | hash | Hash containing association keys each being an array of resource references
+|=====================
+
+___
+
+[[generic-object-definitions]]
+=== Generic Object Definitions
+
+==== Required attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| name | string | Name of the generic object definition
+|=====================
+
+==== Optional attributes:
+
+[cols="2,1,3",options="header",width="100%"]
+|=====================
+| Attribute | Type | Description
+| description | string | Description for the generic object definition
+| properties | hash | Hash containing the *attributes*, *associations* and *methods* of the generic object definition
+| picture | hash | Picture to use, either an *href* or *id* of the picture resource, or the actual picture including the *extension* and Base64 encoded *content*
 |=====================
 
 ___

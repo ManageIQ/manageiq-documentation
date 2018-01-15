@@ -449,6 +449,60 @@ Querying all the Generic Objects defined for a specific Service:
 GET /api/services/:id/generic_objects
 ----
 
+Querying Generic Objects and related picture and image_href for a specific Service:
+
+===== Request:
+
+----
+GET /api/services/:id?expand=generic_objects&attributes=generic_objects.picture
+----
+
+===== Response:
+
+[source,json]
+----
+{
+  "href" : "http://localhost:3000/api/services/645",
+  "id" : "645",
+  "name" : "Test Azure Service",
+  "description" : "Azure",
+  "guid" : "6ce8f6c2-7f93-4a7e-b618-da9acab470ac",
+  "options": {  },
+  "display": false,
+  "created_at" : "2017-08-07T16:52:46Z",
+  "updated_at" : "2017-08-07T16:52:46Z",
+  "miq_group_id" : "1",
+  "retired": false,
+  "tenant_id" : "1",
+  "initiator" : "user",
+  "generic_objects": [
+    {
+      "href" : "http://localhost:3000/api/services/645/generic_objects/1",
+      "id" : "1",
+      "name" : "generic_object_1",
+      "generic_object_definition_id" : "1",
+      "created_at" : "2017-08-15T17:35:08Z",
+      "updated_at" : "2017-09-07T12:05:14Z",
+      "properties": {
+         "vms" : [ 615 ],
+         "start" : true
+      },
+      "picture" : {
+        "href" : "http://localhost:3000/api/picture/1",
+        "id" : "1",
+        "resource_id" : "1",
+        "resource_type" : "GenericObjectDefinition",
+        "image_href" : "http://localhost:3000/pictures/1.png",
+        "extension" : "png"
+      }
+    }
+  ],
+  "actions" : {
+    ...
+  }
+}
+----
+
 [[creating-generic-objects]]
 ==== Creating Generic Objects
 

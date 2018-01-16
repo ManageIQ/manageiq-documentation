@@ -423,9 +423,10 @@ Once services are ordered from a catalog, they can be:
 * link:#service-suspended[Suspended]
 * link:#service-deleting[Deleted]
 
-Resources can also be added or removed from services as shown here:
+Additional Service actions include:
 
 * link:#service-add-remove-resources[Adding and Removing Resources from Services]
+* link:#service-add-provider-vms[Adding Provider VMs to Services]
 
 Other than service creates and edits, service actions return the action response as
 in the following example:
@@ -613,6 +614,34 @@ POST /api/services
   ]
 }  
 ----
+
+[[service-add-provider-vms]]
+==== Adding Provider VMs to Services
+
+For cases where VMs are created externally, i.e. via Ansible Playbooks, this
+action allows the system to identify the VMs created and link those VMs
+back to the service.
+
+[source,data]
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "add_provider_vms",
+  "resource" : {
+    "provider" : { "href" : "http://localhot:3000/api/providers/11" }
+    "uid_ems" : [
+      "provider_vm_id1",
+      "provider_vm_id2",
+      ...
+    ]
+  }
+}
+----
+
 
 [[service-retiring-now]]
 ==== Service Retiring (now)

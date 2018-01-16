@@ -15,6 +15,7 @@ Full CRUD actions on users is available:
 * link:#querying-users[Querying Users]
 * link:#creating-users[Creating Users]
 * link:#editing-users[Editing Users]
+* link:#editing-authenticated-user[Editing Authenticated User]
 * link:#deleting-users[Deleting Users]
 
 [[querying-users]]
@@ -121,6 +122,42 @@ POST /api/users
   ]
 }
 ----
+
+[[editing-authenticated-user]]
+=== Editing Authenticated User
+
+An API Authenticated User can edit some of their own attributes without having 
+general user edit permissions. Editable attributes for the authenticated user are:
+
+[width="30%"]
+|===================
+| password
+| email
+| settings
+|===================
+
+Users can also update their currently selected group with the *set_current_group* action
+as follows:
+
+----
+POST /api/users/:id
+----
+
+[source,json]
+----
+{
+  "action" : "set_current_group",
+  "resource" : {
+    "group" : { "description" : "EvmGroup-auditor" }
+  }
+}
+----
+
+[NOTE]
+=====
+The group reference can be via *description*, *href*, or *id*. Also, only a group that
+the user belongs to can be specified.
+=====
 
 
 [[deleting-users]]

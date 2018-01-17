@@ -772,6 +772,7 @@ POST /api/services
 * link:#approving-denying-service-requests[Approving or Denying Service Requests]
 * link:#adding-approvers-service-requests[Adding Approvers to Service Requests]
 * link:#removing-approvers-service-requests[Removing Approvers to Service Requests]
+* link:#editing-request-tasks[Editing Request Tasks]
 
 [[querying-service-requests]]
 ==== Querying Service Requests
@@ -783,10 +784,17 @@ monitored as follows:
 GET /api/service_requests/:id
 ----
 
-Additionally, request tasks of the specific requests can be queried:
+NOTE: The request tasks of service requests can be queried by
+expanding the request_tasks as follows:
 
 ----
 GET /api/service_requests/:id?expand=request_tasks
+----
+
+or by fetching them directly as follows:
+
+----
+GET /api/service_requests/:id/request_tasks?expand=resources
 ----
 
 [[approving-denying-service-requests]]
@@ -948,6 +956,28 @@ POST /api/service_requests
       "user" : { "href" : "http://localhost:3000/api/users/11" }
     }
   ]
+}
+----
+
+[[editing-request-tasks]]
+=== Editing Request Tasks
+
+Request tasks of Service Requests can be updated as follows:
+
+----
+POST /api/service_requests/:id/request_tasks/:request_task_id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "request_param_a" : "value_a",
+      "request_param_b" : "value_b"
+    }
+  }
 }
 ----
 

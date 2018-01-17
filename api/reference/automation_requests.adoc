@@ -13,6 +13,7 @@ Automation requests are made available via the following entrypoint.
 * link:#editing-requests[Editing Requests]
 * link:#approving-denying-requests[Approving or Denying Requests]
 * link:#monitoring-requests[Monitoring Requests]
+* link:#editing-request-tasks[Editing Request Tasks]
 
 [[creating-requests]]
 === Creating Requests
@@ -194,5 +195,33 @@ expanding the request_tasks subcollection as follows:
 
 ----
 GET /api/automation_requests/:id?expand=request_tasks
+----
+
+or by fetching them directly as follows:
+
+----
+GET /api/automation_requests/:id/request_tasks?expand=resources
+----
+
+[[editing-request-tasks]]
+=== Editing Request Tasks
+
+Request tasks for Automation Requests can be updated as follows:
+
+----
+POST /api/automation_requests/:id/request_tasks/:request_task_id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "request_param_a" : "value_a",
+      "request_param_b" : "value_b"
+    }
+  }
+}
 ----
 

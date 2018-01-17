@@ -14,6 +14,7 @@ The following actions are provided on service_dialogs resources:
 * link:#creating-service-dialogs[Creating Service Dialogs]
 * link:#editing-service-dialogs[Editing Service Dialogs]
 * link:#copying-service-dialogs[Copying Service Dialogs]
+* link:#refreshing-dialog-fields-service-dialogs[Refreshing Dialog Fields of Service Dialogs]
 * link:#deleting-service-dialogs[Deleting Service Dialogs]
 
 [[creating-service-dialogs]]
@@ -189,6 +190,34 @@ POST /api/service_dialogs
     },
     ...
   ]
+}
+----
+
+[[refreshing-dialog-fields-service-dialogs]]
+=== Refreshing Dialog Fields of Service Dialogs
+
+Refreshing dialog fields for a service dialog is done as follows:
+
+----
+POST /api/service_dialogs/:id
+----
+
+[source,json]
+----
+{
+  "action" : "refresh_dialog_fields",
+  "resource" : {
+    "resource_action_id" : "6",
+    "target_id" : "12",
+    "target_type" : "service_template_ansible_tower",
+    "dialog_fields" : {
+      "my_field1" : "my field1 value",
+      "my_field2" : "my field2 value",
+      "my_field3" : "my field3 value",
+      ...
+    },
+    "fields" : [ "my_field1", "my_field3" ]
+  }
 }
 ----
 

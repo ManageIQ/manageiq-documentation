@@ -26,16 +26,17 @@ Utilizing the Ansible service linking module requires installing the manageiq-cl
 
 ==== Example
 
-In the following playbook task examples, a virtual machine is deployed to Amazon EC2 and linked back to the service.
+In the following playbook task examples, a virtual machine is deployed to Amazon EC2 and linked back to the service. Examples are provided for linking the resource to its service by both an href slug and as an object. 
  
 [NOTE]
 ====
-This example utilizes the `syncrou.manageiq-vmdb`role. This role allows {product-title_short} users to modify and/or change VMDB objects using an Ansible playbook. For information on implementing and utilizing roles when writing Ansible playbooks for {product-title_short}, see xref:adding-ansible-roles[]. For more information on Ansible Galaxy and roles, see the Ansible Galaxy documentation. 
+* This example utilizes the `syncrou.manageiq-vmdb`role. This role allows {product-title_short} users to modify and/or change VMDB objects using an Ansible playbook. For information on implementing and utilizing roles when writing Ansible playbooks for {product-title_short}, see xref:adding-ansible-roles[]. 
+* For more information on Ansible Galaxy and roles, see the Ansible Galaxy documentation. 
 ====
 
 . Create and register the resource.
 +
-```
+-----
 - name: Create Ec2 Instance
   ec2:
     key_name: "{{ key }}"
@@ -49,11 +50,11 @@ This example utilizes the `syncrou.manageiq-vmdb`role. This role allows {product
     vpc_subnet_id: "{{ subnet }}"
     assign_public_ip: yes
   register: ec2
-```
+-----
 +
-. Call the `add_provider_vms` method as an action to link to the service.
+. Call the `add_provider_vms` method as an action to link to the service via an href slug.
 +
-```
+-----
 - name: Service Linking via an href slug
   manageiq_vmdb:
     href: "href_slug::services/80"
@@ -63,4 +64,19 @@ This example utilizes the `syncrou.manageiq-vmdb`role. This role allows {product
         - "{{ ec2.instances[0].id }}"
       provider:
         id: 24
-```
+------
++
+. Or, link to the service as an object.
+
+-----
+- name: Service Linking via an object
+  manageiq_vmdb:
+    vmdb: "{{ vmdb_object }}"
+    action: add_provider_vms
+    data:
+      uid_ems:
+        - "{{ ec2.instances[0].id }}"
+      provider:
+        id: 24
+
+-----

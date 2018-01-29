@@ -16,24 +16,21 @@ When using this role in a playbook on a {product-title} appliance, add an empty 
 
 ==== Role Variables
 
-The `manageiq_automate` role employees the following variables when implemented in a playbook run on a {product-title_short} appliance. Variables are defined in `defaults/main.yml` and `vars/main.yml`.
-
-|Name|Default|Description|
-|----|--------|-----------|
-|`auto_commit`|`True`|If set to False it will not auto commit back to ManageIQ each call to a set_ method in the manageiq_automate module.|
-|`manageiq_validate_certs`|`True`|If set to False in the manageiq_connection dictionary or passed in via extra_vars or assigned in the playbook vars then the lookup will allow self signed certificates to be used when using SSL REST API connection urls.|
+The `manageiq_automate` role employees the following variables when implemented in a playbook run on a {product-title_short} appliance. Variables are defined in `defaults/main.yml` and `vars/main.yml`. 
 
 
+`auto_commit`: By default is set to `True`. If set to False it will not auto commit back to ManageIQ each call to a set_ method in the manageiq_automate module.
+
+`manageiq_validate_certs`: By default is set to `True`. If set to False in the manageiq_connection dictionary or passed in via extra_vars or assigned in the playbook vars then the lookup will allow self signed certificates to be used when using SSL REST API connection urls.|
 
 
-Use the `manageiq-automate`role by following the steps below:
 
-==== Install the `manageiq-automate` role. 
+==== Installing the `manageiq-automate` role. 
 
 . ssh into the {product-title_short} appliance as `root`. 
 +
 ------
-ssh root@<hostname>.com
+ssh root@<hostname or IP address>
 ------
 +
 . Install the role using the `ansible galaxy` command.
@@ -44,7 +41,7 @@ ansible-galaxy install syncrou.manageiq-automate
 
 ==== Example Playbook
 
-The example below uses variable substitution, setting tasks to retrieve the list of method parameters which are used to modify object attributes. A final task uses the `set_retry` module to update the retry interval. 
+The example below utilizes the `manageiq-automate` role.  Using variable substitution, playbooks tasks retrieve  method parameters which are then used to modify object attributes. A final task uses the `set_retry` module to update the retry interval. 
 -----
 - name: Siphon Method Parameters into an object
   hosts: localhost
@@ -53,13 +50,6 @@ The example below uses variable substitution, setting tasks to retrieve the list
   - auto_commit: True
   - object: root
   - interval: 600
-  # Only needed if this playbook is NOT run on a ManageIQ Appliance
-  - manageiq_connection:
-        url: 'http://localhost:3000'
-        username: 'admin'
-        password: 'password'
-        automate_workspace: 'automate_workspaces/1234'
-        manageiq_validate_certs: false
 
   gather_facts: False
   roles:

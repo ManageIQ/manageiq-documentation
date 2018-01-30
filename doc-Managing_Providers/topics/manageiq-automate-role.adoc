@@ -6,12 +6,14 @@ The `manageiq-automate` role allows users of {product-title} Automate to modify 
 
 [NOTE]
 ====
-When using this role in a playbook on a {product-title} appliance with Embedded Ansible activated, add an empty roles directory at the root of the playbook. {product-title_short} will automatically install the role once it sees the requirements.yml file in the playbook. In the roles directory, include a requirements.yml file with the following contents:
+When using this role in a playbook on a {product-title} appliance with Embedded Ansible activated, add an empty `roles` directory at the root of the playbook. In the `roles` directory, include a `requirements.yml` file with the following contents:
 
 -----
 ---
 - src: syncrou.manageiq-automate
 -----
+
+{product-title_short} will automatically install the role once it sees the `requirements.yml` file in the playbook.
 ====
 
 ==== Role Variables
@@ -19,9 +21,9 @@ When using this role in a playbook on a {product-title} appliance with Embedded 
 The `manageiq_automate` role employs the following variables when implemented in a playbook run on a {product-title_short} appliance. Variables are defined in `defaults/main.yml` and `vars/main.yml`. 
 
 
-`auto_commit`: By default is set to `True`. If set to False it will not auto commit back to ManageIQ each call to a set_ method in the manageiq_automate module.
+_auto_commit_: By default is set to `True`. If set to False it will not auto commit back to {product-title_short} each call to a `set_` method in the `manageiq_automate` module.
 
-`manageiq_validate_certs`: By default is set to `True`. If set to False in the manageiq_connection dictionary or passed in via extra_vars or assigned in the playbook vars then the lookup will allow self signed certificates to be used when using SSL REST API connection urls.|
+_manageiq_validate_certs_: By default is set to `True`. If passed in via _extra_vars_ or assigned in the playbook variables then the lookup will allow self-signed certificates to be used when using SSL REST API connection URLs.
 
 
 

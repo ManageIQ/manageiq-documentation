@@ -14,11 +14,12 @@ Regions can contain multiple zones, which in turn contain appliances. Zones are 
 
 Only one failover type of each server role can run in a zone. If multiple appliances have the same failover role, the extras are used as backups that activate only if the primary appliance fails. Non-failover server roles can run on multiple appliances simultaneously in a zone, so resources can be adjusted according to the workload those roles are responsible for.
 
+
 The following diagram demonstrates an example of the multiple regions working together in a {product-title} environment.
 
 image:7151.png[]
 
-The Master appliance is located in Chicago and contains a master region and a subregion that manages the worker appliances. The Mahwah technology center contains a single subregion that manages two zones.
+The master appliance is located in Chicago and contains a master region and a subregion that manages the worker appliances. The Mahwah technology center contains a single subregion that manages two zones.
 Likewise, the San Diego technology center contains a single subregion managing a single zone.
 
 [NOTE]
@@ -32,17 +33,23 @@ The following diagram provides a closer look at a region:
 image:7150.png[]
 
 In this region, we have several {product-title} appliances acting as UI nodes and worker nodes. These worker nodes execute tasks on the providers in your environment.
-The Region also uses a region database that reports to a master database on the main {product-title} appliance. All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
+The region also uses a region database that reports to a master database on the main {product-title} appliance. All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
 
 
 [NOTE]
 ====
-{product-title} can be configured in a highly available setup. In this case, all PostgreSQL instances must be running on a server that is deployed from the {product-title} appliance. 
+{product-title_short} can be configured in a highly available setup. In this case, all PostgreSQL instances must be running on a server that is deployed from the {product-title_short} appliance. High availability is achieved by database replication between two or more database servers.
 ifdef::cfme[]
-For more information, see the following example reference architecture:
-https://access.redhat.com/articles/1571263[Implementing Highly Available CloudForms Appliances]. Note, this reference architecture was written for a previous version of CloudForms.
+For more information, see the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/high_availability_guide/[High Availability Guide]. 
 endif::cfme[]
 ====
+
+=== Roles 
+
+Server roles define what a server can do. Assigning different server roles to appliances can allow them to focus on specific functions. When planning a deployment, consider which roles to assign to each appliance. Some server roles are enabled by default in {product-title_short}.
+
+Some roles are also dependent on other roles. For example, because the {product-title_short} user interface relies on the API for access, the Web Services role must be enabled with the User Interface role for users to log in to the appliance. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html/general_configuration/configuration#server-roles[Server Roles] in _General Configuration_
+for details on each server role and its function.
 
 [[central-administration]]
 === Centralized Administration

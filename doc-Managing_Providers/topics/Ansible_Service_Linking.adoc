@@ -3,10 +3,11 @@
 
 {product-title} provides a module allowing inventoried resources such as virtual machines created using Ansible playbooks to link back to the services used to generate them. During service ordering of a playbook the `add_provider_vms` module will allow the playbook to connect back to the worker appliance and identify the provider resources it was responsible for generating. Once linked, the newly generated resources are available to {product-title_short}'s life cycle management features.
 
-Linking VMs back to the service that created it requires implementing the following tasks in the playbook used for provisioning.
+Linking VMs back to the service that created it requires implementing the following tasks in the playbook used for provisioning. 
 
 . Create a resource and register it.
 . Link the service using the 'add_provider_vms` method to the newly created resource. 
+
 
 
 ==== Example
@@ -15,8 +16,9 @@ In the following playbook task examples, a virtual machine is deployed to Amazon
  
 [NOTE]
 ====
-* This example utilizes the `syncrou.manageiq-vmdb`role. This role allows {product-title_short} users to modify and/or change VMDB objects using an Ansible playbook. For information on implementing and utilizing roles when writing Ansible playbooks for {product-title_short}, see xref:adding-ansible-roles[]. 
+* This example utilizes the `syncrou.manageiq-vmdb`role. This role allows {product-title_short} users to modify and/or change VMDB objects using an Ansible playbook. For information on implementing and utilizing roles when writing Ansible playbooks for {product-title_short}, see xref:installing-ansible-roles[]. 
 * For more information on Ansible Galaxy and roles, see the Ansible Galaxy documentation. 
+* Please note the provider ID in order to successfully link to the service. 
 ====
 
 . Create and register the resource.

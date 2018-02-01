@@ -97,8 +97,6 @@ $ oc new-project <project_name> \
 ‎| `cfme-orchestrator`|`anyuid`|DESCRIPTION NEEDED
 |`cfme-privileged` | `privileged`| DESCRIPTION NEEDED
 | `cfme-httpd`| `anyuid`| DESCRIPTION NEEDED
-|`cfme-orchestrator` |`view` |DESCRIPTION NEEDED 
-|`cfme-orchestrator` |`edit` |DESCRIPTION NEEDED 
 |====
 +
 To configure the SCCs, run the following commands as the admin user:
@@ -106,53 +104,44 @@ To configure the SCCs, run the following commands as the admin user:
 .. Add the `cfme-anyuid` service account to the `anyuid` SCC:
 +
 ----
-$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-namespace>:cfme-anyuid
+$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-project>:cfme-anyuid
 ----
 +
 .. Add the `cfme-orchestrator` service account to the `anyuid` SCC:
 +
 ----
-$ oc adm policy add-scc-to-user anyuid 
-System:serviceaccount:cloudforms:cfme-orchestrator
+$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-project>:cfme-orchestrator
 ----
 +
 .. Add the `cfme-privileged` service account to the `privileged` SCC:
 +
 ----
-$ oc adm policy add-scc-to-user privileged 
-System:serviceaccount:cloudforms:cfme-privileged
+$ oc adm policy add-scc-to-user privileged system:serviceaccount:<your-project>:cfme-privileged
 ----
 +
 .. Add the `cfme-httpd` service account to the `anyuid` SCC:
 +
 ----
-$ oc adm policy add-scc-to-user anyuid 
-System:serviceaccount:cloudforms:cfme-httpd
-----
-+
-.. Add the `cfme-orchestrator` service account to the `view` SCC:
-+
-----
-$ oc policy add-role-to-user view 
-system:serviceaccount:cloudforms:cfme-orchestrator -n cloudforms
-----
-+
-.. Add the `cfme-orchestrator` service account to the `view` SCC (or give the `cfme-orchestrator` service account edit and view access?):
-+
-----
-$ oc policy add-role-to-user edit 
-system:serviceaccount:cloudforms:cfme-orchestrator -n cloudforms
+$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-project>:cfme-httpd
 ----
 +
 . Verify the SCCs are added correctly to the service accounts:
 +
 ----
 $ oc describe scc anyuid | grep Users
-Users:					system:serviceaccount:<your-namespace>:cfme-anyuid
+Users:					system:serviceaccount:<your-project>:cfme-anyuid,system:serviceaccount:<your-project>:cfme-orchestrator,system:serviceaccount:<your-project>:cfme-httpd
 $ oc describe scc privileged | grep Users
-Users:                  system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:default:router,system:serviceaccount:default:registry,system:serviceaccount:<your-namespace>:default
+Users:                  system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:<your-project>:cfme-privileged,system:serviceaccount:<your-project>:default
 ----
 +
+. Add the `view` and `edit` roles to the `cfme-orchestrator` service account:
++
+----
+$ oc policy add-role-to-user view system:serviceaccount:<your-project>:cfme-orchestrator -n <your-project>
+$ oc policy add-role-to-user edit system:serviceaccount:<your-project>:cfme-orchestrator -n <your-project>
+----
++
+
 //TODO: Add more verification commands above.
 
 ////
@@ -162,22 +151,22 @@ MOVE VERIFY STEPS DOWN
 +
 ------
 $ oc describe scc anyuid | grep Users
-Users:					system:serviceaccount:<your-namespace>:cfme-anyuid
+Users:					system:serviceaccount:<your-project>:cfme-anyuid
 ------
 +
-. Add your default service account to the `privileged` security context. The default service account for your namespace (project) must be added to the `privileged` security context constraints (SCCs) before they can run privileged pods.
+. Add your default service account to the `privileged` security context. The default service account for your project (project) must be added to the `privileged` security context constraints (SCCs) before they can run privileged pods.
 +
 .. As the admin user, add the default service account by running:
 +
 ------
-$ oc adm policy add-scc-to-user privileged system:serviceaccount:<your-namespace>:default
+$ oc adm policy add-scc-to-user privileged system:serviceaccount:<your-project>:default
 ------
 +
 .. Verify that your default service account is now included in the `privileged` security context constraints (SCCs):
 +
 ------
 $ oc describe scc privileged | grep Users
-Users:                  system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:default:router,system:serviceaccount:default:registry,system:serviceaccount:<your-namespace>:default
+Users:                  system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:default:router,system:serviceaccount:default:registry,system:serviceaccount:<your-project>:default
 ------
 +
 ////
@@ -436,16 +425,16 @@ The newly created replicas will join the existing {product-title_short} region. 
 [[pod-access-and-routes]]
 === Obtaining Pod Access and Routes
 
-To open a shell on the CloudForms pod, run:
-------
+To open a shell on the pod, run:
+----
 $ oc rsh <pod_name> bash -l
-------
+----
 To obtain host information from the route:
-------
+----
 $ oc get routes
 NAME         HOST/PORT                   PATH                SERVICE      TERMINATION   LABELS
 cloudforms   cfme.apps.e2e.example.com  cloudforms:443-tcp   passthrough                app=cloudforms
-------
+----
 A route should have been deployed via template for HTTPS access on the CloudForms pod. Examine the output and point your web browser to the reported URL/host (in this example, `cfme.apps.e2e.example.com`).
 
 ifdef::miq[]
@@ -454,12 +443,12 @@ ifdef::miq[]
 
 You can build the images from this repository using OpenShift:
 ----
-$ oc -n <your-namespace> new-build --context-dir=images/cfme-app https://github.com/CloudForms/cloudforms-pods#master
+$ oc -n <your-project> new-build --context-dir=images/cfme-app https://github.com/CloudForms/cloudforms-pods#master
 ----
 
 Additionally, Red Hat recommends setting the following `dockerStrategy` parameters to ensure a fresh build every time:
 ----
-$ oc edit bc -n <your-namespace> cloudforms-pods
+$ oc edit bc -n <your-project> cloudforms-pods
 
 strategy:
   dockerStrategy:
@@ -468,13 +457,13 @@ strategy:
 ----
 To execute a new build after the first (automatically started) build, run:
 ----
-$ oc start-build -n <your-namespace> cloudforms-pods
+$ oc start-build -n <your-project> cloudforms-pods
 ----
 Configure the following template parameters on the newly built image:
 ----
 $ oc new-app --template=cloudforms \
-  -n <your-namespace> \
-  -p APPLICATION_IMG_NAME=<your-docker-registry>:5000/<your-namespace>/cloudforms-pods \
+  -n <your-project> \
+  -p APPLICATION_IMG_NAME=<your-docker-registry>:5000/<your-project>/cloudforms-pods \
   -p APPLICATION_IMG_TAG=latest \
   ...
 ----

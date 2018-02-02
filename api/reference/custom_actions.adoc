@@ -2,7 +2,7 @@
 [[custom-actions]]
 == Custom Actions
 
-With button groups and custom buttons defined on model instances, the REST API provides visibility
+With button groups and custom buttons defined on records, the REST API provides visibility
 to custom actions that represent the custom buttons for the related resources. The custom actions
 are not returned when querying collections, they are only available when fetching an
 individual resource, e.g. /api/:collection/:id
@@ -24,7 +24,7 @@ for the following collections:
 | /api/vms
 |=====================
 
-* _custom_actions_ return the custom buttons as layed out in the UI on the resource.
+* _custom_actions_ return the custom buttons as laid out in the UI on the resource.
 The information returned includes any Resource Actions and related Dialogs for the custom button.
 * _custom_action_buttons_ return the array of custom buttons without the custom button groups
 hierarchy or details on related dialogs.
@@ -227,12 +227,13 @@ GET /api/vms/173?attributes=custom_actions,custom_action_buttons
 
 ----
 
-When custom buttons are defined on a VM, the returned VM resource is extended with custom actions which
-can be triggered via a POST action.
+When custom action buttons are defined on a VM, the returned VM resource is extended
+with custom actions which can be triggered via a POST action.
 
 The action name to trigger the action is the lower-cased name of the custom button.
 
-As an example, here's a VM without custom buttons:
+As an example, here's a VM without custom buttons so all actions returned
+are the common ones defined by the system:
 
 [source,json]
 ----
@@ -283,7 +284,7 @@ As an example, here's a VM without custom buttons:
 }
 ----
 
-Here is an example of a VM with custom buttons:
+Here is an example of a VM with the additional custom buttons _analyze_ and _ping_ defined:
 
 [source,json]
 ----
@@ -370,7 +371,7 @@ POST /api/vms/173
 
 ==== Response:
 
-Responses from custom action are the normal action responses from the REST API:
+Responses from custom actions are the normal action responses from the REST API:
 
 [source,json]
 ----

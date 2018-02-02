@@ -19,6 +19,7 @@ Management of Generic Objects is provided with the following collections:
   - link:#querying-generic-objects[Querying Generic Objects]
   - link:#creating-generic-objects[Creating Generic Objects]
   - link:#editing-generic-objects[Editing Generic Objects]
+  - link:#calling-generic-object-methods[Calling Generic Object Methods]
   - link:#deleting-generic-objects[Deleting Generic Objects]
 
 [[generic-object-definitions]]
@@ -582,6 +583,81 @@ POST /api/generic_objects/:id
   }
 }
 ----
+
+[[calling-generic-object-methods]]
+==== Calling Generic Object Methods
+
+When generic objects have methods defined in their definitions, those methods are exposed with the
+generic objects as actions.
+
+The following example shows a generic object with two methods _method_a_ and
+_method_b_:
+
+
+[source,data]
+----
+GET /api/generic_objects/101
+----
+
+[source,json]
+----
+{
+  "href" : "http://localhost:3000/api/generic_objects/101",
+  "id"   : "101",
+  "name" : "sample_object",
+  "generic_object_definition_id" : "5",
+  "property_attributes" : {
+    "widget" : "a sample widget",
+    "object_flag" : true
+  },
+  "actions" : [
+    {
+      "name" : "edit",
+      "method" : "post",
+      "href" : "http://localhost:3000/api/generic_objects/101"
+    },
+    {
+      "name" : "delete",
+      "method" : "post",
+      "href" : "http://localhost:3000/api/generic_objects/101"
+    },
+    {
+      "name" : "delete",
+      "method" : "delete",
+      "href" : "http://localhost:3000/api/generic_objects/101"
+    },
+    {
+      "name" : "method_a",
+      "method" : "post",
+      "href" : "http://localhost:3000/api/generic_objects/101"
+    },
+    {
+      "name" : "method_b",
+      "method" : "post",
+      "href" : "http://localhost:3000/api/generic_objects/101"
+    }
+  ]
+}
+----
+
+With the above sample generic object, the custom methods can be invoked like any other action as follows:
+
+[source,data]
+----
+POST /api/generic_objects/101
+----
+
+[source,json]
+----
+{
+  "action" : "method_a",
+  "resource" : {
+    "attr1" : "value 1",
+    "attr2" : "value 2"
+  }
+}
+----
+
 
 [[deleting-generic-objects]]
 ==== Deleting Generic Objects

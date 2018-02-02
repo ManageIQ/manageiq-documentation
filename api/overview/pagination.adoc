@@ -1,8 +1,8 @@
 
-[[paging]]
-== Paging
+[[pagination]]
+== Pagination
 
-Paging is enabled by default. When querying collections and the _limit_ query parameter is not specified, only 1000
+Pagination is enabled by default. When querying collections and the _limit_ query parameter is not specified, only 1000
 resources are returned by default. This is driven by the new advanced setting:
 
 [source,data]
@@ -54,7 +54,7 @@ GET /api/vms?offset=2&limit=2&sort_by=name&expand=resources
 }
 ----
 
-With paging enabled by default, collection queries now return the following:
+With pagination enabled by default, collection queries now return the following:
 
 * "pages" metadata which is the total number of pages for the _limit_ specified (or the default 1000).
 * "links" metadata section which includes the necessary URL's for fetching the current page,
@@ -72,8 +72,8 @@ the result will be limited to the first max_results_per_page resources.
 .About max_results_per_page
 ====
 
-If the default value for max_results_per_page does not meet your needs, It can be changed using 
+If the default value for max_results_per_page does not meet your needs, it can be changed using
 the Advanced Settings feature in the UI. It is recommended however that it is not set to some arbitrarily large
-number in an effort to circumvent the paging feature. The paging feature is designed to prevent excessive
-load, and certainly requesting millions of records which is easy to do with the metric rollups/event streams APIs.
+number in an effort to circumvent the pagination feature. The pagination feature is designed to prevent excessive
+load, which is easy to do with collections such as metric rollups and event streams that may have millions of records.
 ====

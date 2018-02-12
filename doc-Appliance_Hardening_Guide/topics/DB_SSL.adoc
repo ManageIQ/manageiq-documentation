@@ -3,10 +3,10 @@
 
 {product-title} initially connects to the database through an unencrypted communication.
 If using multiple appliances connecting to a single database appliance, you can set up the database connection to use SSL.
-An SSL connection encrypts the communication between the {product-title} and the database.
+An SSL connection encrypts the communication between the {product-title_short} and the database.
 
 The procedures in this section use the SSL certificate and key files listed below.
-These files can be found on your main {product-title} database appliance.
+These files can be found on your main {product-title_short} database appliance.
 
 [NOTE]
 ====
@@ -18,10 +18,10 @@ See <<_chap_red_hat_cloudforms_security_guide_ssl_certs>> for more information o
 
 * `/var/www/miq/vmdb/certs/server.cer` - Signed or self-signed certificate for the database appliance.
 * `/var/www/miq/vmdb/certs/server.cer.key` - Private key for server certificate.
-* `/var/www/miq/vmdb/certs/root.crt` - The root CA certificate used to sign the CA certificate for the {product-title} database.
+* `/var/www/miq/vmdb/certs/root.crt` - The root CA certificate used to sign the CA certificate for the {product-title_short} database.
   You can either use a self-signed certificate or a certificate signed by a trusted CA to generate your root certificate.
 
-It is also recommended to stop all {product-title} services before configuring the database to use SSL.
+It is also recommended to stop all {product-title_short} services before configuring the database to use SSL.
 
 To configure SSL on the database appliance:
 
@@ -30,15 +30,15 @@ To configure SSL on the database appliance:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{product-title_short_l}2 ~]# systemctl stop evmserverd
-[root@{product-title_short_l}2 ~]# systemctl stop rh-postgresql95-postgresql
+[root@appliance2 ~]# systemctl stop evmserverd
+[root@appliance2 ~]# systemctl stop rh-postgresql95-postgresql
 ----
 
 . Install the server key file in the correct location and set the ownership and permissions for it:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{product-title_short_l}2 ~]# install -m 600 -o postgres -g postgres \
+[root@appliance2 ~]# install -m 600 -o postgres -g postgres \
 /var/www/miq/vmdb/certs/server.cer.key /var/www/miq/vmdb/certs/postgres.key
 ----
 
@@ -46,22 +46,26 @@ To configure SSL on the database appliance:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{product-title_short_l}2 ~]# install -m 644 -o postgres -g postgres \
+[root@appliance2 ~]# install -m 644 -o postgres -g postgres \
 /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/postgres.crt
 ----
 
-. Install the database appliance certificate file as the root certificate in the correct location and set the ownership and permissions for it:
+. Install the database appliance certificate file as the root certificate in the correct location and set the ownership and permissions for it.
++
+If you are using a self-signed certificate, run:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{product-title_short_l}2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt
+[root@appliance2 ~]# install -m 644 -o postgres -g postgres /var/www/miq/vmdb/certs/server.cer /var/www/miq/vmdb/certs/root.crt
 ----
-
++
+If you are using a third-party certificate, edit this command to install your root certificate.
++
 . Make sure that the security context is set correctly for the files in `/var/www/miq/certs`:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{product-title_short_l}2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
+[root@appliance2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
 ----
 . Open the `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` file and uncomment and edit the `ssl` option:
 +

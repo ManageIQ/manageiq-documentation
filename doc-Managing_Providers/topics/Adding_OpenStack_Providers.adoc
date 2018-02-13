@@ -70,12 +70,7 @@ By default, the Telemetry service does not store events emitted by other service
 parameter_defaults:
   CeilometerStoreEvents: true
 ------
-+
-. Add the environment file to the _overcloud deploy_ command:
-+
-------
-# openstack overcloud deploy --templates -e ~/ceilometer.yaml
-------
+. Please see the below *NOTE*.
 
 If your OpenStack cloud provider was not deployed through the undercloud, you can also set this manually. To do so:
 
@@ -85,31 +80,11 @@ If your OpenStack cloud provider was not deployed through the undercloud, you ca
 ------
 store_events = True
 ------
-+
-. Edit _/etc/heat/heat.conf_, and specify the following options:
-+
-------
-notification_driver=glance.openstack.common.notifier.rpc_notifier
-notification_topics=notifications
-------
-+
-. Edit _/etc/nova/nova.conf_, and specify the following options:
-+
-------
-notification_driver=messaging
-notification_topics=notifications
-------
-+
-. Restart the Compute service and Orchestration services:
-+
-------
-# systemctl restart openstack-heat-api.service \
-  openstack-heat-api-cfn.service \
-  openstack-heat-engine.service \
-  openstack-heat-api-cloudwatch.service
-# systemctl restart openstack-nova-compute.service
-------
 
+[NOTE]
+====
+Passing the newly created environment file to the overcloud deployment is environment specific and requires executing commands in particular order depending on use of variables. For further information please see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/director_installation_and_usage/[_Director Installation and Usage_] in the Red Hat OpenStack Platform documentation.
+====
 
 
 

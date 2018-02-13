@@ -10,7 +10,7 @@ The ultimate goal of the deployment is to be able to deconstruct the {product-ti
 [[prerequisites]]
 === Prerequisites
 
-To successfully deploy a {product-title} appliance on OpenShift Container Platform, you need a functioning *OpenShift Container Platform 3.5* or newer install with the following configured:
+To successfully deploy a {product-title} appliance on OpenShift Container Platform, you need a functioning *OpenShift Container Platform 3.7* or newer install with the following configured:
 
 * NFS or other compatible volume provider
 * A `cluster-admin` user
@@ -18,7 +18,7 @@ To successfully deploy a {product-title} appliance on OpenShift Container Platfo
 
 [IMPORTANT]
 ====
-OpenShift Container Platform 3.5 is required for this installation. Red Hat has not tested this procedure with earlier versions of OpenShift Container Platform.
+OpenShift Container Platform 3.7 is required for this installation. Red Hat has not tested this procedure with earlier versions of OpenShift Container Platform.
 ====
 
 The {product-title_short} deployment uses three files to create the appliance: `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
@@ -110,7 +110,7 @@ Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` an
 ====
 For NFS-backed volumes, ensure your NFS server firewall is configured to allow traffic on port 2049 (TCP) from the OpenShift cluster.
 
-Red Hat recommends setting permissions for the pv-app (privileged pod volume) as 777, uid/gid 0 (owned by root). For more information on configuring persistent storage in OpenShift Container Platform, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/installation_and_configuration/#configuring-persistent-storage[OpenShift Container Platform Installation and Configuration] guide.	
+Red Hat recommends setting permissions for the pv-app (privileged pod volume) as 777, uid/gid 0 (owned by root). For more information on configuring persistent storage in OpenShift Container Platform, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/installation_and_configuration/#configuring-persistent-storage[OpenShift Container Platform Installation and Configuration] guide.	
 ====
 +
 .. Configure your NFS server host details within these files, and edit any other settings needed to match your environment.
@@ -204,7 +204,7 @@ $ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,MEMORY_POSTGR
 +
 [IMPORTANT]
 ====
-The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {product-title_short} application, which eventually constructs the route to the {product-title_short} pod. If you do not specify the `APPLICATION_DOMAIN` parameter, the {product-title_short} application will not be accessible after the deployment; however, this can be fixed by changing the route. For more information on OpenShift template parameters, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/developer_guide/#dev-guide-templates[OpenShift Container Platform Developer Guide].
+The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {product-title_short} application, which eventually constructs the route to the {product-title_short} pod. If you do not specify the `APPLICATION_DOMAIN` parameter, the {product-title_short} application will not be accessible after the deployment; however, this can be fixed by changing the route. For more information on OpenShift template parameters, see the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-templates[OpenShift Container Platform Developer Guide].
 ====
 
 [[deploying-the-appliance-external-db]]
@@ -318,14 +318,16 @@ deploymentconfig "postgresql" updated
 +
 [NOTE]
 ====
-The configuration change trigger is kept enabled; to have full control of your deployments, you can alternatively turn it off. See the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/developer_guide/#dev-guide-triggering-builds[OpenShift Container Platform Developer Guide] for more information on deployment triggers.
+The configuration change trigger is kept enabled; to have full control of your deployments, you can alternatively turn it off. See the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-triggering-builds[OpenShift Container Platform Developer Guide] for more information on deployment triggers.
 ====
 
 
 [[scaling]]
 === Scaling {product-title_short} Appliances
 
-StatefulSets in OpenShift allow scaling of {product-title_short} appliances. See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
+StatefulSets in OpenShift allow scaling of {product-title_short} appliances. 
+
+//See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
 
 
 [IMPORTANT]

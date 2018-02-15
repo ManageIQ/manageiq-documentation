@@ -1,0 +1,158 @@
+[[external_active_directory]]
+= Configuring Authentication with Active Directory
+//source content https://access.redhat.com/solutions/2751431
+
+This procedure outlines how to configure {product-title_short} to authenticate against an existing Active Directory (AD) configuration using external HTTP authentication. This provides Active Directory users access to the {product-title_short} appliance user interface, as well as the REST API.
+
+
+// EDIT A SUMMARY FOR THIS To enable external authentication using Active Directory complete the following steps to configure your HTTP server, then your {product-title_short} appliance.
+
+// Do we need Network Manager step from MIQ docs still?)
+
+. Connect to the {product-title_short} using SSH.
+. Run `realm discover` to determine what Active Directory realms are available:
++
+----
+# realm discover
+example.com
+  type: kerberos
+  realm-name: EXAMPLE.COM
+  domain-name: example.com
+  configured: kerberos-member
+  server-software: active-directory
+  client-software: sssd
+  required-package: oddjob
+  required-package: oddjob-mkhomedir
+  required-package: sssd
+  required-package: adcli
+  required-package: samba-common
+  login-formats: %U@example.com
+  login-policy: allow-realm-logins
+----
++
+. Using the above information for your realm, join the Active Directory realm with a user that has enough permissions to be able to browse the directory:
++
+----
+# realm join example.com -U user
+Password for user: ******
+----
++
+. Allow all realm users to log in using `realm permit`:
++
+----
+# realm permit --all
+----
++
+. Edit the `/etc/sssd/sssd.conf` file with your Active Directory domain details. Refer to the following example for formatting:
+//certain lines have arrows upstream. highlight these for replacing values?
++
+----
+[domain/example.com]
+  ad_domain = example.com
+  krb5_realm = EXAMPLE.COM
+  realmd_tags = manages-system joined-with-samba
+  cache_credentials = True
+  id_provider = ad
+  krb5_store_password_if_offline = True
+  default_shell = /bin/bash
+  ldap_id_mapping = True
+  use_fully_qualified_names = True
+  fallback_homedir = /home/%d/%u
+  access_provider = ad
+ ldap_user_extra_attrs = mail, givenname, sn, displayname, domainname
+
+[sssd]
+domains = example.com
+config_file_version = 2
+services = nss, pam, ifp
+default_domain_suffix = example.com
+
+[nss]
+homedir_substring = /home
+
+[pam]
+default_domain_suffix = example.com
+
+[ifp]
+default_domain_suffix = example.com
+allowed_uids = apache, root
+user_attributes = +mail, +givenname, +sn, +displayname, +domainname
+----
++
+. Restart and enable the `sssd` service:
++
+----
+# systemctl restart sssd
+# systemctl enable sssd
+----
++
+//Do we need the upstream step for chgrp apache? Added just in case
+. Make sure the Kerberos keytab created by `realm join` above is readable by Apache:
++
+----
+# chgrp apache /etc/krb5.keytab
+# chmod 640 /etc/krb5.keytab
+----
++
+. Copy the following `httpd` configuration files into the correct respective directories with the following commands:
++
+----
+# TEMPLATE_DIR="/opt/rh/cfme-appliance/TEMPLATE"
+# cp ${TEMPLATE_DIR}/etc/pam.d/httpd-auth /etc/pam.d/httpd-auth
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf /etc/httpd/conf.d/
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth.conf.erb /etc/httpd/conf.d/manageiq-external-auth.conf
+----
++
+. Edit the `/etc/httpd/conf.d/manageiq-external-auth.conf` file to point to your Kerberos domain hosted by your Active Directory domain by adding the lines for `KrbAuthRealms`, `Krb5KeyTab` and `KrbServiceName` for your environment:
+// do we edit only the lines that say "add line?"
++
+----
+<Location /dashboard/kerberos_authenticate>
+  AuthType           Kerberos
+  AuthName           "Kerberos Login"
+  KrbMethodNegotiate On
+  KrbMethodK5Passwd  Off
+  KrbAuthRealms      example.com     
+  Krb5KeyTab         /etc/krb5.keytab 
+  KrbServiceName     Any                   
+  Require            pam-account httpd-auth
+
+  ErrorDocument 401  /proxy_pages/invalid_sso_credentials.js
+</Location>
+----
++
+. Set the appropriate SELinux booleans:
++
+----
+# setsebool -P allow_httpd_mod_auth_pam on
+# setsebool -P httpd_dbus_sssd          on
+----
++
+. Restart and enable the `httpd` service:
++
+----
+# systemctl restart httpd
+# systemctl enable httpd
+----
+
+Complete authentication setup by configuring the following from the {product-title_short} user interface:
+
+. Log in to the web interface as an administrative user.
+. Navigate to the settings menu, then menu:Configuration[Authentication].
+. Select a *Session Timeout* if required.
+. Select *External (httpd)* as the authentication *Mode*.
+. Select *Enable Single Sign-On* to allow single sign-on using Kerberos tickets from client machines that authenticate to the same Active Directory domain as the appliance.
+. In the *Role Settings* area, select *Get User Groups from External Authentication (httpd)*.
+. Click *Save*.
+//add screenshot from article.
+
+[IMPORTANT]
+======
+* The configuration steps for the {product-title_short} user interface must be completed on each user interface and web services enabled appliance (appliances with `user_interface` or `web_services` server roles enabled).
+
+* Make sure the user's Active Directory group for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
+======
+
+{product-title_short} is now configured to use authentication from your Active Directory domain.
+
+

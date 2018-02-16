@@ -3,7 +3,7 @@
 
 {product-title} can be installed on OpenShift Container Platform in a few quick steps. 
 
-This procedure uses a template to deploy a multi-pod {product-title_short} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as basic user information and commands. 
+This procedure uses a template to deploy a multi-pod {product-title_short} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as information and commands for the application developer using the deployment. 
 
 The ultimate goal of the deployment is to be able to deconstruct the {product-title_short} appliance into several containers running on a pod or a series of pods. 
 
@@ -16,7 +16,7 @@ To successfully deploy a {product-title_short} appliance on OpenShift Container 
 
 * NFS or other compatible volume provider
 * A `cluster-admin` user
-* A basic user
+* A regular user (such as an application developer)
 
 [IMPORTANT]
 ====
@@ -25,21 +25,18 @@ OpenShift Container Platform 3.7 is required for this installation. Red Hat has 
 
 The {product-title_short} deployment uses three files to create the appliance: `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
 
-These files create the OpenShift pods comprising the appliance, and are available from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog].
+These files create the OpenShift pods comprising the appliance, and are available from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog]:
+
+// Check these.
+* {product-title_short} appliance image
+* Memcached image
+* PostgreSQL image
+* Embedded Ansible image 
+* Apache image
+
+To download the files to your system, navigate to each container image page, and click the *Get this image* tab. Select *Red Hat OpenShift* from the *Choose your platform:* list, then follow the instructions on that page to pull the image to your system.
 
 //Download them first? Refer to another section for instructions?
-
-////
-
-
-Needs editing after GA?
-
-To download the files to your system, navigate to each of the following pages and click the *Get this image* tab. Select *OpenShift* from the *Choose your platform:* list, then follow the instructions on that page to pull the image:
-
-* https://access.redhat.com/containers/#/registry.access.redhat.com/cloudforms45/cfme-openshift-app[{product-title_short} appliance image]
-* https://access.redhat.com/containers/#/registry.access.redhat.com/cloudforms45/cfme-openshift-memcached[Memcached image]
-* https://access.redhat.com/containers/#/registry.access.redhat.com/cloudforms45/cfme-openshift-postgresql[PostgreSQL image]
-////
 
 /////
 OpenShift Container Platform 3.5 includes these files by default.
@@ -73,7 +70,7 @@ The following limitations exist when deploying this version of {product-title_sh
 
 To prepare for deploying the {product-title_short} appliance to OpenShift Container Platform, create a project, configure security contexts, and create pod volumes.
 
-. As a basic user, log in to OpenShift: 
+. As a regular user, log in to OpenShift: 
 +
 ------
 $ oc login -u <user> -p <password>
@@ -233,7 +230,7 @@ $ systemctl restart atomic-openshift-master
 
 To deploy the appliance on OpenShift Container Platform, create the {product-title_short} template and verify it is available in your project. 
 
-. As a basic user, create the {product-title_short} template: 
+. As a regular user, create the {product-title_short} template: 
 +
 ------
 $ oc create -f templates/cfme-template.yaml
@@ -303,7 +300,7 @@ $ oc new-app --template=cloudforms-ext-db -p DATABASE_IP=<server_ip> -p DATABASE
 [[verifying-the-configuration]]
 === Verifying the Configuration
 
-Verify the deployment was successful by running the following commands as a basic user under the {product-title_short} project:
+Verify the deployment was successful by running the following commands as a regular user under the {product-title_short} project:
 
 [NOTE]
 ====

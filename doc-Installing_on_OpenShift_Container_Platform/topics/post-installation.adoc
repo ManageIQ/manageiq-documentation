@@ -1,0 +1,175 @@
+[[post-installation]]
+== Managing {product-title_short} with OpenShift
+
+This section includes post-installation tasks to manage your {product-title_short} deployment.
+
+[[scaling]]
+=== Scaling {product-title_short} Appliances
+
+StatefulSets in OpenShift manage the deployment and scaling of a set of pods, in this case {product-title_short} appliances. StatefulSets ensure ordering that applications will come up by providing unique identities for pods. 
+
+//See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
+
+
+[IMPORTANT]
+====
+Each new replica (server) consumes a physical volume. Before scaling, ensure you have enough physical volumes available to scale. 
+====
+
+The following example shows scaling using StatefulSets:
+
+.Example: Scaling to two replicas
+----
+$ oc scale statefulset cloudforms --replicas=2
+statefulset "cloudforms" scaled
+$ oc get pods
+NAME                 READY     STATUS    RESTARTS   AGE
+cloudforms-0           1/1       Running   0          34m
+cloudforms-1           1/1       Running   0          5m
+memcached-1-mzeer    1/1       Running   0          1h
+postgresql-1-dufgp   1/1       Running   0          1h
+----
+
+The newly created replicas will join the existing {product-title_short} region. Each new pod is numbered in the order it is deployed, starting with 0 and increasing sequentially. For example, replicas in a StatefulSet will be numbered _cloudforms-0_ _cloudforms-1_, and so on.
+
+//Old wording - remove once new is OK. For a StatefulSet with `N` replicas, when pods are being deployed, they are created sequentially, in order from {0..N-1}.
+
+
+ifdef::miq[]
+[[building-images]]
+=== Building Images on OpenShift
+
+You can build the images from this repository using OpenShift:
+----
+$ oc -n <your-project> new-build --context-dir=images/cfme-app https://github.com/CloudForms/cloudforms-pods#master
+----
+
+Additionally, Red Hat recommends setting the following `dockerStrategy` parameters to ensure a fresh build every time:
+----
+$ oc edit bc -n <your-project> cloudforms-pods
+
+strategy:
+  dockerStrategy:
+    forcePull: true
+    noCache: true
+----
+To execute a new build after the first (automatically started) build, run:
+----
+$ oc start-build -n <your-project> cloudforms-pods
+----
+Configure the following template parameters on the newly built image:
+----
+$ oc new-app --template=cloudforms \
+  -n <your-project> \
+  -p APPLICATION_IMG_NAME=<your-docker-registry>:5000/<your-project>/cloudforms-pods \
+  -p APPLICATION_IMG_TAG=latest \
+  ...
+----
+
+endif::miq[]
+
+
+[[creating-backups]]
+=== [WIP] Creating Backups
+
+// 35:10
+
+Create a persistent volume for backups using the PV backup template (`cfme-pv-backup-example.yaml`) in case you need to restore to a previous version.
+
+. Create the backup persistent volume:
++
+----
+$ oc create -f cfme-pv-backup-example.yaml
+----
++
+. Create the backup persistent volume claim (PVC):
++
+----
+$ oc create -f cfme-backup-pvc.yaml
+----
++
+. Verify the persistent volume claim was created:
++
+----
+$ oc get pvc
+----
++
+. Backup secrets, such as database encryption keys and credentials.
++
+[IMPORTANT]
+====
+Be careful where you back up your secrets. For example, do not back up secrets on a public site such as GitHub.
+====
++
+----
+$ oc get secret -o yaml --export=true > secrets.yaml
+$ oc get pvc -o yaml --export=true > pvc.yaml
+----
++
+. Initiate the database backup:
++
+----
+$ oc create -f cfme-backup-job.yaml
+----
+
+This step creates a container, connects to the database pod, pg_basebackup.
+
+[[backup-restore]]
+=== [WIP] Restoring to a Backup
+
+You can restore to a database backup created in xref:creating-backups[] the restore template (`cfme-restore-job.yaml`).
+
+The job will look for `cfme-backup` and `cfme-postgresql` PVs by default, and the latest successful backup will be restored by default. If existing data is found on prod PG volume, it will be renamed and left on the volume.
+
+[IMPORTANT]
+====
+You must perform a database restore on an offline environment. All pods must be scaled down to 0, and not running.
+====
+
+. Shut down all pods:
++
+----
+$ COMMAND FOR STOPPING pods
+----
++
+. To initiate the database restore, create the restore template:
++
+----
+$ oc create -f cfme-restore-job.yaml
+----
+
+After [what happens], you can scale pods back up.
+
+[[uninstalling]]
+=== Uninstalling {product-title} from a Project
+
+If no longer needed, you can uninstall the {product-title} pod from your project. Note the following commands do not remove SCC permissions, or the project itself.
+
+[IMPORTANT]
+====
+Use this procedure if only {product-title} exists in the project.
+====
+
+. Inside the project, run the following as a regular user:
++
+------
+$ oc delete all --all
+------
++
+. Wait approximately 30 seconds for the command to process, then run:
++
+------
+$ oc delete pvc --all
+------
+
+
+logs are stored in the server persistent volume. 
+you can use oc rsync to copy them out
+oc rsh to get a shell on the CFME appliance & source /etc/default.env
+
+systemd is no longer in the pod? how is troubleshooting affected in this version?
+
+
+
+
+

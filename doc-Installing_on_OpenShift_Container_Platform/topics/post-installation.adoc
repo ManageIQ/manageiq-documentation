@@ -1,12 +1,12 @@
 [[post-installation]]
 == Managing {product-title_short} with OpenShift
 
-This section includes post-installation tasks to manage your {product-title_short} deployment.
+This section includes common tasks to manage your {product-title_short} deployment from OpenShift.
 
 [[scaling]]
 === Scaling {product-title_short} Appliances
 
-StatefulSets in OpenShift manage the deployment and scaling of a set of pods, in this case {product-title_short} appliances. StatefulSets ensure ordering that applications will come up by providing unique identities for pods. 
+StatefulSets in OpenShift manage the deployment and scaling of a set of pods (in this case, {product-title_short} appliances). StatefulSets ensure ordering that applications will come up by providing unique identities for pods. 
 
 //See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
 
@@ -70,13 +70,13 @@ endif::miq[]
 
 
 [[creating-backups]]
-=== [WIP] Creating Backups
+=== Creating a Backup
 
 // 35:10
 
 Create a persistent volume for backups using the PV backup template (`cfme-pv-backup-example.yaml`) in case you need to restore to a previous version.
 
-. Create the backup persistent volume:
+. Create the persistent volume for the backup:
 +
 ----
 $ oc create -f cfme-pv-backup-example.yaml
@@ -94,11 +94,11 @@ $ oc create -f cfme-backup-pvc.yaml
 $ oc get pvc
 ----
 +
-. Backup secrets, such as database encryption keys and credentials.
+. Back up secrets, such as database encryption keys and credentials.
 +
 [IMPORTANT]
 ====
-Be careful where you back up your secrets. For example, do not back up secrets on a public site such as GitHub.
+Be careful to back up secrets in a secure location.
 ====
 +
 ----
@@ -112,14 +112,14 @@ $ oc get pvc -o yaml --export=true > pvc.yaml
 $ oc create -f cfme-backup-job.yaml
 ----
 
-This step creates a container, connects to the database pod, pg_basebackup.
+This step creates a container, connects to the database pod, pg_basebackup. ?
 
 [[backup-restore]]
-=== [WIP] Restoring to a Backup
+=== Restoring to a Backup
 
-You can restore to a database backup created in xref:creating-backups[] the restore template (`cfme-restore-job.yaml`).
+You can restore to a database backup created in xref:creating-backups[] using the restore template (`cfme-restore-job.yaml`).
 
-The job will look for `cfme-backup` and `cfme-postgresql` PVs by default, and the latest successful backup will be restored by default. If existing data is found on prod PG volume, it will be renamed and left on the volume.
+The restore job will look for `cfme-backup` and `cfme-postgresql` PVs by default, and the latest successful backup will be restored by default. If existing data is found on prod PG volume, it will be renamed and left on the volume.
 
 [IMPORTANT]
 ====
@@ -129,7 +129,7 @@ You must perform a database restore on an offline environment. All pods must be 
 . Shut down all pods:
 +
 ----
-$ COMMAND FOR STOPPING pods
+$ oc stop all pods
 ----
 +
 . To initiate the database restore, create the restore template:
@@ -138,7 +138,7 @@ $ COMMAND FOR STOPPING pods
 $ oc create -f cfme-restore-job.yaml
 ----
 
-After [what happens], you can scale pods back up.
+After [INSERT RESULT], you can scale pods back up.
 
 [[uninstalling]]
 === Uninstalling {product-title} from a Project
@@ -162,12 +162,6 @@ $ oc delete all --all
 $ oc delete pvc --all
 ------
 
-
-logs are stored in the server persistent volume. 
-you can use oc rsync to copy them out
-oc rsh to get a shell on the CFME appliance & source /etc/default.env
-
-systemd is no longer in the pod? how is troubleshooting affected in this version?
 
 
 

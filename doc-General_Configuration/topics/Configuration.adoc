@@ -311,7 +311,7 @@ include::common/configuration-register-appliance.adoc[]
 
 [NOTE]
 ====
-To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/migrating_to_red_hat_cloudforms_4.6-beta/[Updating {product-title}] in _Migrating to {product-title} 4.6-beta_.
+To update your appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/migrating_to_red_hat_cloudforms_4.6/[Updating {product-title}] in _Migrating to {product-title} 4.6_.
 ====
 
 [[subscription-management-for-virtual-environments]]
@@ -734,9 +734,16 @@ Use the *Authentication* tab to specify how you want users authenticated on the 
 ifdef::cfme[]
 [NOTE]
 ====
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_authentication_for_cloudforms/[_Managing Authentication_] for information on configuring different types of authentication for {product-title_short}.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/[_Managing Authentication_] for information on configuring different types of authentication for {product-title_short}.
 ====
 endif::cfme[]
+
+ifdef::miq[]
+[NOTE]
+====
+See the _Managing Authentication_ guide for information on configuring different types of authentication for {product-title_short}.
+====
+endif::miq[]
 
 
 [[changing-authentication-settings]]
@@ -1217,7 +1224,7 @@ To add a client in the Red Hat SSO {product-title_short} realm:
   http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
 ------
 +
-. In CloudForms 4.6-beta, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
+. In CloudForms 4.6, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
 +
 ------
 # vi idp-metadata.xml
@@ -2022,7 +2029,7 @@ From the settings menu, select *Configuration*. Click on the *Access Control* ac
 ifdef::cfme[]
 [NOTE]
 ====
-For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
+For information about tenancy in {product-title_short}, and the difference between a tenant and project, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#tenants[Tenancy] in the _Deployment Planning Guide_.
 ====
 endif::cfme[]
 
@@ -2083,7 +2090,7 @@ To create a user:
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Users*.
 . Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new User*) to create a user.
-. Enter a *Full Name*, *Username*, *Password* with confirmation, and *Email Address* for the user.
+. Enter a *Full Name*, *Username*, *Password* with confirmation, and *Email Address* for the user. An email address is required; omitting the user email address can result in unsuccessful provisioning requests.
 +
 image:available_groups.png[]
 +
@@ -2092,8 +2099,11 @@ image:available_groups.png[]
 * If you are using LDAP, but did not enable *Get User Groups from LDAP* in your server's *Authentication* tab, you will need to define a user. The UserID must match exactly the user's name as defined in your directory service. Use all lowercase characters to ensure the user can be found in the VMDB.
 * When the user logs in, they use their LDAP password.
 ifdef::cfme[]
-* For more information on configuring LDAP authentication in {product-title_short}, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
+* For more information on configuring LDAP authentication in {product-title_short}, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
 endif::cfme[]
+ifdef::miq[]
+For more information on configuring LDAP authentication in {product-title_short}, see _Configuring LDAP or LDAPS Authentication_ in _Managing Authentication_.
+endif::miq[]
 ====
 +
 . Select one or more groups from *Available Groups*.
@@ -2122,9 +2132,16 @@ A user can exist in multiple groups. However, a group can only be assigned one a
 ifdef::cfme[]
 [NOTE]
 ====
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_authentication_for_cloudforms/#assigning_account_roles_using_ldap_groups[Assigning CloudForms Account Roles Using LDAP Groups] in _Managing Authentication_.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/#assigning_account_roles_using_ldap_groups[Assigning CloudForms Account Roles Using LDAP Groups] in _Managing Authentication_.
 ====
 endif::cfme[]
+
+ifdef::miq[]
+[NOTE]
+====
+See _Assigning CloudForms Account Roles Using LDAP Groups_ in _Managing Authentication_.
+====
+endif::miq[]
 
 [[creating-a-user-group]]
 ==== Creating a Group
@@ -2166,8 +2183,11 @@ A group can only be assigned one role when the local database is used for authen
 ====
 If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service. 
 ifdef::cfme[]
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
 endif::cfme[]
+ifdef::miq[]
+See _Configuring LDAP or LDAPS Authentication_ in _Managing Authentication_.
+endif::miq[]
 ====
 
 To view details of a role and its level of access:
@@ -2210,10 +2230,10 @@ To create a role:
 . From the settings menu, select *Configuration*.
 . Click on the *Access Control* accordion, then click *Roles*.
 . Click image:1847.png[] (Configuration), and image:plus_green.png[] (Add a new Role). Alternatively, you can copy an existing role to a new role by clicking *Copy this to a new Role*.
-. In the *Role Information* area, type a name for the new role. For *VM & Template Access Restriction*, select if you want to limit users with this role to only see virtual machines owned by the user, owned by the user or its group, or all virtual machines.
-image:2095.png[]
-. Under *Product Features (Editing)*, navigate to the appropriate feature and enable or disable it.
-image:2096.png[]
+. In the *Role Information* area, type a name for the new role. For *Access Restriction for Services, VMs, and Templates*, select if you want to limit users with this role to only see resources owned by the user or their group, owned by the user, or all resources (*None*):
+image:Role_info.png[]
+. Under *Product Features (Editing)*, navigate to the appropriate feature and enable or disable it:
+image:Product_features_editing.png[]
 . Click *Add*.
 
 
@@ -2763,7 +2783,7 @@ Once you configure a {product-title} instance to act as a global copy, and one o
 Database replication and centralized administration are now enabled on your instances. Centralized administration supports life cycle management operations, including virtual machine power operations and retirement, that can be initiated from the global copy and processed and executed on the remote copy.
 
 ifdef::cfme[]
-See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
+See the section on _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for an overview of the feature.
 endif::cfme[]
 
 [[resetting-database-replication]]
@@ -3159,3 +3179,4 @@ The next options depend on the periodic database maintenance frequency you choos
 To reset your database maintenance settings, enter *Configure Database Maintenance* again from the appliance console menu, and confirm that you want to unconfigure the settings in the configuration dialog. This deletes the current settings.
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
+

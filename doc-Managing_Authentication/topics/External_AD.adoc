@@ -9,7 +9,7 @@ This procedure outlines how to configure {product-title_short} to authenticate a
 
 // Do we need Network Manager step from MIQ docs still?)
 
-. Connect to the {product-title_short} using SSH.
+. Connect to the {product-title_short} appliance using SSH.
 . Run `realm discover` to determine what Active Directory realms are available:
 +
 ----
@@ -135,9 +135,9 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # systemctl enable httpd
 ----
 
-Complete authentication setup by configuring the following from the {product-title_short} user interface:
+Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled. Follow these steps from the {product-title_short} user interface:
 
-. Log in to the web interface as an administrative user.
+. Log in to the user interface as an administrative user.
 . Navigate to the settings menu, then menu:Configuration[Authentication].
 . Select a *Session Timeout* if required.
 . Select *External (httpd)* as the authentication *Mode*.
@@ -147,11 +147,9 @@ Complete authentication setup by configuring the following from the {product-tit
 //add screenshot from article.
 
 [IMPORTANT]
-======
-* The configuration steps for the {product-title_short} user interface must be completed on each user interface and web services enabled appliance (appliances with `user_interface` or `web_services` server roles enabled).
-
-* Make sure the user's Active Directory group for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
-======
+====
+Make sure the user's Active Directory group for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
+====
 
 {product-title_short} is now configured to use authentication from your Active Directory domain.
 

@@ -4,17 +4,19 @@
 
 The *My Services* tab lists all service requests individually with a summary of information associated with each service, including the *Service Name*, its current *Power State* represented by an icon, *Number of VMs*, *Owner*, date *Created*, and *Retires* date. Additionally, you can see the chargeback cost per service for a virtual machine's month-to-date usage. You can filter or sort services by those entities, and by *Relative Cost*. 
 
-On the same screen, you have the option to edit the service name and description, edit tags, set ownership, retire the service now or at a later date, or remove the service by click more options _(represented by three dots)_ next to the service. You also have options to perform power operations, that is start, stop, or suspend, at the service level. 
+On the same screen, you have the option to edit the service name and description, edit tags, set ownership, retire the service now or at a later date, or remove the service by clicking more options _(represented by three dots)_ next to the service. You also have options to perform power operations, that is start, stop, or suspend, at the service level. 
 
 You can perform most of the above tasks in bulk (except editing service details and power operations). To do so, select multiple services and then click the designated button for the required task on the upper right corner of the screen.    
 
 image:sui-services.png[]
 
-Click on a service to see more details, including information about associated virtual machines and snapshots under *Resources*, and associated parent catalog item under *Relationships*. You can click more options _(represented by three dots)_ to perform power operations at the resource level, or you can click *View Details* (or on the virtual machine name) to see more information about the resource, including compliance, retirement, timeline of power events, utilization, Smart State analysis, disk usage, and perform power operations. 
+Click on a service to see more details, including information about associated virtual machines and snapshots under *Resources*, and associated parent catalog item under *Relationships*.
 
-Click *Snapshots* to view available snapshots, or create or delete snapshots via the *Configuration* button on the next screen. A snapshot is a copy of the virtual machine's disk file (VMDK) that captures the entire state of the virtual machine at a point in time. 
+Virtual Machine dashboard:
 
-// Use *Revert* under more options _(represented by three dots)_ to return a virtual machine to a previous state when you took the snapshot.
+You can click on the virtual machine name or *View Details* under more options _(represented by three dots)_, to see the virtual machine dashboard. The dashboard shows more information of the virtual machine resource, including compliance, retirement, snapshots, timeline of power events, utlilization of CPU, Memory, and Storage, Smart State analysis, tags, custom attributes, disk usage. Additionally, you can also perform power operations at the resource level, and view and create snapshots. 
+
+Click *Snapshots* to view available snapshots, or create or delete snapshots via the *Configuration* button on the next screen. A snapshot is a copy of the virtual machine's disk file (VMDK) that captures the entire state of the virtual machine at a point in time. Click *Revert* under more options _(represented by three dots)_ to return a virtual machine to a previous state when you took the snapshot.
 
 [[html5-console]]
 === Accessing the HTML5 Console
@@ -80,7 +82,7 @@ Follow this procedure to remove a service.
 
 Follow this procedure to edit the name and description of a service.
 
-. From the *Services* screen, click on more options next to the service you want to edit, then click *Edit*. Alternatively, click on the service. Click the image:ssui-service-settings-button.png[] button located on the upper-right corner of the screen, then select *Edit*. An *Edit Service* screen appears.
+. From the *My Services* screen, click on more options next to the service you want to edit, then click *Edit*. Alternatively, click on the service. Click the image:ssui-service-settings-button.png[] button located on the upper-right corner of the screen, then select *Edit*. An *Edit Service* screen appears.
 . Edit the name and description of the service as required.
 image:ssui-edit-service.png[]
 . Click *Save*.
@@ -100,7 +102,7 @@ Cockpit must be pre-configured and running on the virtual machine.
 
 You can open the Cockpit console for a virtual machine from the image:ssui-access-button.png[Access Button] button. 
 
-. From the *Services* screen, click on the service associated with the virtual machine you want to open the Cockpit console for.
+. From the *My Services* screen, click on the service associated with the virtual machine you want to open the Cockpit console for.
 . In *Resources*, click *Access* next to the virtual machine and select *Open Cockpit Console*. A notification will appear to show the Cockpit interface is loading. 
 . The Cockpit interface for the virtual machine will open in a new browser window. If you get a security warning by the browser, you will need to add this connection to the security exceptions. Click *Advanced → Add Exception → Confirm Security Exception*. After that, you will see the login screen.
 image:cockpit-login-nb.png[Cockpit Login]
@@ -112,7 +114,34 @@ image:cockpit-ui-nb.png[Cockpit UI]
 
 Follow this procedure to perform power operations on virtual machines, such as start, stop, or suspend, depending on the current state of the virtual machine. 
 
-. From the *Services* screen, click on the required service.
+. From the *My Services* screen, click on the required service.
 . Under *Resources*, click more options _(represented by three dots)_ where you have the option to start, stop, or suspend the virtual machine. Alternatively, click on the virtual machine name to see more details about the resource, including the *Power Operations* button.
 
 
+[[create-snaphots]]
+=== Creating Virtual Machine Snapshots
+
+To create a snapshot from the Services screen:
+
+. From the *My Services* screen, click on the service associated with the virtual machine you want to create a snapshot for.
+. In *Resources*, click *Snapshots* next to the virtual machine you want to create a snapshot for, then select *Create* to create a snapshot. The *Create Snapshot* window appears.
+. Enter a name for the snapshot.
+. Optional: Select *Memory* if you want to capture the state of the virtual machine's memory.
+. Optional: Enter a *Description*.
+. Click *Create*.
+
+To create a snapshot from the Resources screen:
+
+. From the *My Services* screen, click on the service associated with the virtual machine you want to create a snapshot for.
+. In *Resources*, click on the virtual machine you want to create a snapshot for.
+. On the virtual machine dashboard, click the *Snapshots* button, then select *Create*. The *Create Snapshot* window appears.
+. Enter a name for the snapshot.
+. Optional: Select *Memory* if you want to capture the state of the virtual machine's memory.
+. Optional: Enter a *Description*.
+. Click *Create*. 
+
+[[view-snaphots]]
+=== Viewing Virtual Machine Snapshots
+
+. From the *My Services* screen, click on the service associated with the virtual machine you want to view snapshots for.
+. In *Resources*, click *Snapshots* next to the virtual machine and select *View* to view available snapshots. Alternatively, click on the virtual machine, then click *Snapshots* to view available snapshots.

@@ -1,14 +1,12 @@
 [[post-installation]]
-== Managing {product-title_short} with OpenShift
+== Managing {product-title} with OpenShift
 
-This section includes common tasks to manage your {product-title_short} deployment from OpenShift.
+This section includes common tasks to manage your {product-title} deployment from OpenShift.
 
 [[scaling]]
 === Scaling {product-title_short} Appliances
 
 StatefulSets in OpenShift manage the deployment and scaling of a set of pods (in this case, {product-title_short} appliances). StatefulSets ensure ordering that applications will come up by providing unique identities for pods. 
-
-//See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
 
 
 [IMPORTANT]
@@ -31,8 +29,6 @@ postgresql-1-dufgp   1/1       Running   0          1h
 ----
 
 The newly created replicas will join the existing {product-title_short} region. Each new pod is numbered in the order it is deployed, starting with 0 and increasing sequentially. For example, replicas in a StatefulSet will be numbered _cloudforms-0_ _cloudforms-1_, and so on.
-
-//Old wording - remove once new is OK. For a StatefulSet with `N` replicas, when pods are being deployed, they are created sequentially, in order from {0..N-1}.
 
 
 ifdef::miq[]
@@ -72,8 +68,6 @@ endif::miq[]
 [[creating-backups]]
 === Creating a Backup
 
-// 35:10
-
 Create a persistent volume for backups using the PV backup template (`cfme-pv-backup-example.yaml`) in case you need to restore to a previous version.
 
 . Create the persistent volume for the backup:
@@ -112,7 +106,7 @@ $ oc get pvc -o yaml --export=true > pvc.yaml
 $ oc create -f cfme-backup-job.yaml
 ----
 
-This step creates a container, connects to the database pod, pg_basebackup. ?
+This step creates a container, and connects to the database pod, `pg_basebackup`.
 
 [[backup-restore]]
 === Restoring to a Backup
@@ -138,7 +132,7 @@ $ oc stop all pods
 $ oc create -f cfme-restore-job.yaml
 ----
 
-After [INSERT RESULT], you can scale pods back up.
+After the restore job is complete, you can scale the pods back up.
 
 [[uninstalling]]
 === Uninstalling {product-title} from a Project

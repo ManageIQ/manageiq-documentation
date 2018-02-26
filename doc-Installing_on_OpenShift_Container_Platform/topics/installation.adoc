@@ -12,9 +12,9 @@ Running the {product-title_short} appliance in a series of pods has several adva
 There are two options for installing {product-title_short} on OpenShift:
 
 * During OpenShift Container Platform 3.7 installation:
-** When you install OCP 3.7, you have the option to install {product-title_short} inside OpenShift at the time. This method leverages the Ansible installer to run and deploy the {product-title_short} template, instead of building the environment manually. See [OPENSHIFT GUIDE] for details.
+** When you install OpenShift Container Platform 3.7, you have the option to install {product-title_short} inside OpenShift at the time. This method leverages the Ansible installer to run and deploy the {product-title_short} template, instead of building the environment manually. See the  https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/release_notes/index#ocp-37-installation[OpenShift Container Platform 3.7 Release Notes] for details.
 * Manual install on an existing OpenShift Container Platform environment:
-** Deploy {product-title_short} pods using the {product-title_short} template (yaml files). This is the method described in this guide.
+** Deploy {product-title_short} pods using the {product-title_short} template (_.yaml_ file). This is the method described in this guide.
 
 After deployment, you can configure the {product-title_short} environment to use any external authentication configurations supported by {product-title_short}.
 
@@ -58,15 +58,15 @@ The following limitations exist when deploying this version of {product-title_sh
 
 The {product-title_short} deployment uses three files to create the appliance: `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
 
-_These template files, and others, are available in OpenShift 3.7. They can also be found in GitHub (supported?):_ https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v3.7/cfme-templates
+These template files, and others, are available in OpenShift 3.7. They can also be found in GitHub at: https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v3.7/cfme-templates
 
 These image files create the OpenShift pods comprising the appliance, and are available from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog]:
 
 // Check these.
-* {product-title_short} appliance image ?
+* {product-title_short} appliance image 
 * Memcached image
 * PostgreSQL image
-* Embedded Ansible image ?
+* Embedded Ansible image 
 * Httpd image
 
 To download the files to your system, navigate to each container image page, and click the *Get this image* tab. Select *Red Hat OpenShift* from the *Choose your platform:* list, then follow the instructions on that page to pull the image to your system.
@@ -74,7 +74,7 @@ To download the files to your system, navigate to each container image page, and
 //Download them first? Refer to another section for instructions?
 
 /////
-OpenShift Container Platform 3.5 includes these files by default.
+OpenShift Container Platform 3.5 includes these files by default. Does 3.7?
 /////
 
 
@@ -97,20 +97,7 @@ $ oc new-project <your_project> \
 --display-name="<display_name>"
 ----
 +
-. As the admin user, configure security context constraints (SCCs) for your OpenShift service accounts. The following table provides details on the SCCs:
-+
-.Required Security Context Constraints (SCCs)
-[cols="1,1,1", frame="all", options="header"]
-|====
-|  Service Account|  Security Context Constraint (SCC)|  Description
-|  `cfme-anyuid`|`anyuid`|Allows pods using `cfme-anyuid` to run as root because the {product-title_short} image requires the root user.
-‎| `cfme-orchestrator`|`anyuid`|DESCRIPTION NEEDED
-| `cfme-httpd`| `anyuid`| DESCRIPTION NEEDED
-|`cfme-privileged` | `privileged`| DESCRIPTION NEEDED
-|====
-+
-To configure the SCCs, run the following commands as the admin user:
-+
+. As the admin user, configure security context constraints (SCCs) for your OpenShift service accounts:
 .. Add the `cfme-anyuid` service account to the `anyuid` SCC:
 +
 ----
@@ -143,6 +130,11 @@ Users:					system:serviceaccount:<your-project>:cfme-anyuid,system:serviceaccoun
 $ oc describe scc privileged | grep Users
 Users:					system:admin,system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:logging:aggregated-logging-fluentd,system:serviceaccount:<your-project>:cfme-privileged
 ----
+
+[NOTE]
+====
+For more information on SCCs, see the https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html[OpenShift documentation].
+====
 
 . Add the `view` and `edit` roles to the `cfme-orchestrator` service account:
 +

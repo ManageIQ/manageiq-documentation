@@ -1,110 +1,153 @@
 [[installing-cloudforms]]
 == Installing {product-title}
 
-{product-title} can be installed on OpenShift Container Platform in a few quick steps. 
+{product-title} can be installed on OpenShift Container Platform in a few steps. 
 
-This procedure uses a template to deploy a multi-pod {product-title} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as basic user information and commands. 
+This procedure uses a template to deploy a multi-pod {product-title_short} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as information and commands for the application developer using the deployment. 
 
-The ultimate goal of the deployment is to be able to deconstruct the {product-title} appliance into several containers running on a pod or a series of pods. 
+The ultimate goal of the deployment is to be able to deconstruct the {product-title_short} appliance into several containers running on a pod or a series of pods. 
+
+Running the {product-title_short} appliance in a series of pods has several advantages. For example, running each worker in a separate pod allows OpenShift Container Platform to manage worker processes and reduce worker memory consumption. OpenShift can also easily scale workers by adding or removing pods, and perform upgrades by using images.
+
+There are two options for installing {product-title_short} on OpenShift:
+
+* During OpenShift Container Platform 3.7 installation:
+** When you install OpenShift Container Platform 3.7, you have the option to install {product-title_short} inside OpenShift at the time. This method leverages the Ansible installer to run and deploy the {product-title_short} template, instead of building the environment manually. See the  https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/release_notes/index#ocp-37-installation[OpenShift Container Platform 3.7 Release Notes] for details.
+* Manual install on an existing OpenShift Container Platform environment:
+** Deploy {product-title_short} pods using the {product-title_short} template (_.yaml_ file). This is the method described in this guide.
+
+After deployment, you can configure the {product-title_short} environment to use any external authentication configurations supported by {product-title_short}.
 
 [[prerequisites]]
 === Prerequisites
 
-To successfully deploy a {product-title} appliance on OpenShift Container Platform, you need a functioning *OpenShift Container Platform 3.7* or newer install with the following configured:
+To successfully deploy a {product-title_short} appliance on OpenShift Container Platform, you need a functioning *OpenShift Container Platform 3.7* install with the following configured:
 
 * NFS or other compatible volume provider
 * A `cluster-admin` user
-* A basic user
+* A regular user (such as an application developer)
 
 [IMPORTANT]
 ====
 OpenShift Container Platform 3.7 is required for this installation. Red Hat has not tested this procedure with earlier versions of OpenShift Container Platform.
 ====
 
-The {product-title_short} deployment uses three files to create the appliance: `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
-
-These files create the OpenShift pods comprising the appliance, and are available from the Red Hat Container Catalog.
-
-To download the files to your system, navigate to each of the following pages and click the *Get this image* tab. Select *OpenShift* from the *Choose your platform:* list, then follow the instructions on that page to pull the image:
-
-* https://access.redhat.com/containers/#/registry.access.redhat.com/cloudforms45/cfme-openshift-app[{product-title_short} appliance image]
-* https://access.redhat.com/containers/#/registry.access.redhat.com/cloudforms45/cfme-openshift-memcached[Memcached image]
-* https://access.redhat.com/containers/#/registry.access.redhat.com/cloudforms45/cfme-openshift-postgresql[PostgreSQL image]
-
-
-/////
-OpenShift Container Platform 3.5 includes these files by default.
-/////
-
 ==== Cluster Sizing
 
 To avoid deployment failures due to resource starvation, Red Hat recommends the following minimum cluster size for a test environment:
 
-* 1 master node with at least 8 vCPUs and 12GB of RAM
-* 2 nodes with at least 4 vCPUs and 8GB of RAM
-* 25GB of storage for {product-title_short} physical volume use
+* 1 master node with at least 8 vCPUs and 12GB RAM
+* 2 schedulable nodes with at least 4 vCPUs and 8GB RAM
+* 25GB storage for {product-title_short} physical volume use
 
 These recommendations assume {product-title_short} is the only application running on this cluster. Alternatively, you can provision an infrastructure node to run registry, metrics, router, and logging pods.
 
-Each {product-title_short} application pod will consume at least 3GB of RAM on initial deployment (without providers added). RAM consumption increases depending on the appliance use. For example, after adding providers, expect higher resource consumption.
+Each {product-title_short} application pod will consume at least 3GB RAM on initial deployment (without providers added). RAM consumption increases depending on the appliance use. For example, after adding providers, expect higher resource consumption.
+
+==== Limitations
+
+The following limitations exist when deploying this version of {product-title_short} on OpenShift Container Platform 3.7:
+
+* This configuration cannot run on public OpenShift (OpenShift.io and OpenShift Dedicated environments) because of necessary privileges
+* The Embedded Ansible pod must run as a privileged pod
+* OpenShift cannot independently scale workers 
+* A highly available database is not supported in PostgreSQL pods
+
+
+==== Templates and Images
+
+The {product-title_short} deployment uses three files to create the appliance: `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
+
+These template files, and others, are available in OpenShift 3.7. They can also be found in GitHub at: https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v3.7/cfme-templates
+
+These image files create the OpenShift pods comprising the appliance, and are available from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog]:
+
+// Check these.
+* {product-title_short} appliance image 
+* Memcached image
+* PostgreSQL image
+* Embedded Ansible image 
+* Httpd image
+
+To download the files to your system, navigate to each container image page, and click the *Get this image* tab. Select *Red Hat OpenShift* from the *Choose your platform:* list, then follow the instructions on that page to pull the image to your system.
+
+//Download them first? Refer to another section for instructions?
+
+/////
+OpenShift Container Platform 3.5 includes these files by default. Does 3.7?
+/////
 
 
 [[preparing-for-deployment]]
 === Preparing to Deploy {product-title_short}
 
-To prepare for deploying the {product-title_short} appliance to OpenShift Container Platform, create a project, configure security contexts, and create pod volumes.
+To prepare for deploying the {product-title_short} appliance to OpenShift Container Platform, create a project, configure security contexts, and create persistent storage.
 
-. As a basic user, log in to OpenShift: 
+. As a regular user, log in to OpenShift: 
 +
-------
+----
 $ oc login -u <user> -p <password>
-------
+----
 +
-. Create a project with your desired parameters. The `<project_name>` is mandatory, but `<description>` and `<display_name>` are optional: 
+. Create a project with your desired parameters. The project name (`<your_project>` in this example) is mandatory, but `<description>` and `<display_name>` are optional: 
 +
-------
-$ oc new-project <project_name> \
+----
+$ oc new-project <your_project> \
 --description="<description>" \
 --display-name="<display_name>"
-------
+----
 +
-. Add the `cfme-anyuid` service account to the `anyuid` security context constraint (SCC). 
+. As the admin user, configure security context constraints (SCCs) for your OpenShift service accounts:
+.. Add the `cfme-anyuid` service account to the `anyuid` SCC:
 +
-Because the {product-title_short} image requires the root user, the `cfme-anyuid` service account for your namespace (project) must be added to the `anyuid` SCC before pods using the service account can run as root. 
+----
+$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-project>:cfme-anyuid
+----
 +
-.. As the admin user, add the `cfme-anyuid` service account by running:
+.. Add the `cfme-orchestrator` service account to the `anyuid` SCC:
 +
-------
-$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-namespace>:cfme-anyuid
-------
+----
+$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-project>:cfme-orchestrator
+----
 +
-.. Verify that the `cfme-anyuid` service account is now included in the `anyuid` SCC:
+.. Add the `cfme-httpd` service account to the `anyuid` SCC:
 +
-------
+----
+$ oc adm policy add-scc-to-user anyuid system:serviceaccount:<your-project>:cfme-httpd
+----
++ 
+.. Add the `cfme-privileged` service account to the `privileged` SCC:
++
+----
+$ oc adm policy add-scc-to-user privileged system:serviceaccount:<your-project>:cfme-privileged
+----
++
+. Verify the SCCs are added correctly to the service accounts and project:
++
+----
 $ oc describe scc anyuid | grep Users
-Users:					system:serviceaccount:<your-namespace>:cfme-anyuid
-------
-+
-. Add your default service account to the `privileged` security context. The default service account for your namespace (project) must be added to the `privileged` security context constraints (SCCs) before they can run privileged pods.
-+
-.. As the admin user, add the default service account by running:
-+
-------
-$ oc adm policy add-scc-to-user privileged system:serviceaccount:<your-namespace>:default
-------
-+
-.. Verify that your default service account is now included in the `privileged` security context constraints (SCCs):
-+
-------
+Users:					system:serviceaccount:<your-project>:cfme-anyuid,system:serviceaccount:<your-project>:cfme-httpd,system:serviceaccount:<your-project>:cfme-orchestrator
 $ oc describe scc privileged | grep Users
-Users:                  system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:default:router,system:serviceaccount:default:registry,system:serviceaccount:<your-namespace>:default
-------
+Users:					system:admin,system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:logging:aggregated-logging-fluentd,system:serviceaccount:<your-project>:cfme-privileged
+----
+
+[NOTE]
+====
+For more information on SCCs, see the https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html[OpenShift documentation].
+====
+
+. Add the `view` and `edit` roles to the `cfme-orchestrator` service account:
 +
-. Prepare persistent storage for the deployment. (Skip this step if you have already configured persistent storage.) 
+----
+$ oc policy add-role-to-user view system:serviceaccount:<your-project>:cfme-orchestrator -n <your-project>
+$ oc policy add-role-to-user edit system:serviceaccount:<your-project>:cfme-orchestrator -n <your-project>
+----
++
+. As the admin user, prepare persistent storage for the deployment. (Skip this step if you have already configured persistent storage.) 
 +
 A basic {product-title_short} deployment needs at least two persistent volumes (PVs) to store {product-title_short} data. As the admin user, create two persistent volumes: one to host the {product-title_short} PostgreSQL database, and one to host the application data. 
 +
-Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v1.5/cfme-templates/[GitHub]. 
+Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v1.7/cfme-templates/[GitHub]. 
 +
 [NOTE]
 ====
@@ -122,13 +165,31 @@ $ oc create -f cfme-pv-db-example.yaml
 $ oc create -f cfme-pv-server-example.yaml
 ------
 +
-.. Verify the pod volumes were created successfully: 
+.. Process the templates, editing the NFS_HOST parameter (mandatory) and any other parameters:
++ 
+----
+$ oc process cfme-pv-db-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
+
+$ oc process cfme-pv-server-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
+----
++
+[NOTE]
+====
+There are three parameters required to process the template. Only NFS_HOST is required, PV_SIZE and BASE_PATH contain defaults that do not need editing unless desired:
+
+* PV_SIZE - Defaults to the recommended PV size for the App/DB template (5Gi/15Gi respectively)
+* BASE_PATH - Defaults to /exports
+* NFS_HOST - No Default - Hostname or IP address of the NFS server
+====
++
+.. Verify the persistent volumes were created successfully: 
 +
 ------
 $ oc get pv
-NAME       CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS      CLAIM  REASON   AGE
-cfme-pv01   15Gi        RWO           Recycle         Available                   30s
-cfme-pv02   5Gi         RWO           Recycle         Available                   19s
+NAME                CAPACITY   ACCESSMODES   RECLAIMPOLICY   STATUS      CLAIM         STORAGECLASS   REASON    AGE
+cfme-app            5Gi        RWO           Retain          Available                                          16s
+
+cfme-db             15Gi       RWO           Retain          Available                                          49s
 ------
 +
 [NOTE]
@@ -161,12 +222,12 @@ $ systemctl restart atomic-openshift-master
 [[deploying-the-appliance]]
 === Deploying the {product-title_short} Appliance
 
-To deploy the appliance on OpenShift Container Platform, create the {product-title} template and verify it is available in your project. 
+To deploy the appliance on OpenShift Container Platform, create the {product-title_short} template and verify it is available in your project. 
 
-. As a basic user, create the {product-title} template: 
+. As a regular user, create the {product-title_short} template: 
 +
 ------
-$ oc create -f templates/cfme-template.yaml
+$ oc create -f cfme-template.yaml
 template "cloudforms" created
 ------
 +
@@ -190,13 +251,13 @@ To customize the deployment configuration parameters, run:
 $ oc edit dc/<deployconfig_name>
 ------
 +
-. To deploy {product-title} from template using default settings, run: 
+. To deploy {product-title_short} from template using default settings, run: 
 +
 ------
 $ oc new-app --template=cloudforms
 ------
 +
-Alternatively, to deploy {product-title} from a template using customized settings, add the `-p` option and the desired parameters to the command. For example: 
+Alternatively, to deploy {product-title_short} from a template using customized settings, add the `-p` option and the desired parameters to the command. For example: 
 +
 ------
 $ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,MEMORY_POSTGRESQL_LIMIT=4Gi,APPLICATION_DOMAIN=hostname
@@ -233,22 +294,23 @@ $ oc new-app --template=cloudforms-ext-db -p DATABASE_IP=<server_ip> -p DATABASE
 [[verifying-the-configuration]]
 === Verifying the Configuration
 
-Verify the deployment was successful by running the following commands as a basic user under the {product-title} project:
+Verify the deployment was successful by running the following commands as a regular user under the {product-title_short} project:
 
 [NOTE]
 ====
 The first deployment can take several minutes to complete while OpenShift downloads the necessary images. 
 ====
 
-. Confirm the {product-title} pod is bound to the correct security context constraints. 
+. Confirm the {product-title_short} pod is bound to the correct security context constraints. 
 .. List and obtain the name of the `cfme-app` pod: 
 +
 ------
 $ oc get pod
 NAME                 READY     STATUS    RESTARTS   AGE
-cloudforms-1-fzwzm   1/1       Running   0          4m
-memcached-1-6iuxu    1/1       Running   0          4m
-postgresql-1-2kxc3   1/1       Running   0          4m
+cloudforms-0         1/1       Running   0          4m
+httpd-1-w486v        1/1       Running   0          4m
+memcached-1-4xtjc    1/1       Running   0          4m
+postgresql-1-n5tm6   1/1       Running   0          4m
 ------
 +
 .. Export the configuration of the pod: 
@@ -287,7 +349,7 @@ pods/cfme-1-s3bnp
 +
 [NOTE]
 ====
-Allow approximately five minutes once pods are in running state for {product-title} to start responding on HTTPS.  
+Allow approximately five minutes once pods are in running state for {product-title_short} to start responding on HTTPS.  
 ====
 +
 ----
@@ -321,81 +383,30 @@ deploymentconfig "postgresql" updated
 The configuration change trigger is kept enabled; to have full control of your deployments, you can alternatively turn it off. See the https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-triggering-builds[OpenShift Container Platform Developer Guide] for more information on deployment triggers.
 ====
 
+=== Logging into {product-title_short}
 
-[[scaling]]
-=== Scaling {product-title_short} Appliances
+As part of the deployment, a route to the {product-title_short} appliance is created for HTTPS access. 
+Once the pods have been successfully deployed, you can log into {product-title_short}.
 
-StatefulSets in OpenShift allow scaling of {product-title_short} appliances. 
+You can obtain the {product-title_short} host address from the project in the OpenShift user interface, or by opening a shell on the pod and getting the route information. 
 
-//See the https://docs.openshift.com/container-platform/3.5/release_notes/ocp_3_5_release_notes.html[OpenShift Container Platform 3.5 Release Notes] for information on StatefulSets.
-
-
-[IMPORTANT]
-====
-Each new replica (server) consumes a physical volume. Before scaling, ensure you have enough physical volumes available to scale. 
-====
-
-The following example shows scaling using StatefulSets:
-
-.Example: Scaling to two replicas
+. To open a shell on the pod, run:
++
 ----
-$ oc scale statefulset cloudforms --replicas=2
-statefulset "cloudforms" scaled
-$ oc get pods
-NAME                 READY     STATUS    RESTARTS   AGE
-cloudforms-0           1/1       Running   0          34m
-cloudforms-1           1/1       Running   0          5m
-memcached-1-mzeer    1/1       Running   0          1h
-postgresql-1-dufgp   1/1       Running   0          1h
-----
-
-The newly created replicas will join the existing {product-title_short} region. For a StatefulSet with `N` replicas, when pods are being deployed, they are created sequentially, in order from {0..N-1}.
-
-
-[[pod-access-and-routes]]
-=== Obtaining Pod Access and Routes
-
-To open a shell on the CloudForms pod, run:
-------
 $ oc rsh <pod_name> bash -l
-------
-To obtain host information from the route:
-------
+----
++
+. Get the route information:
++
+----
 $ oc get routes
 NAME         HOST/PORT                   PATH                SERVICE      TERMINATION   LABELS
 cloudforms   cfme.apps.e2e.example.com  cloudforms:443-tcp   passthrough                app=cloudforms
-------
-A route should have been deployed via template for HTTPS access on the CloudForms pod. Examine the output and point your web browser to the reported URL/host (in this example, `cfme.apps.e2e.example.com`).
+----
+. Navigate to the reported URL/host on a web browser (in this example, `cfme.apps.e2e.example.com`).
+.  Enter the default {product-title_short} credentials (Username: *admin* | Password: *smartvm*) for the initial login.
+.  Click *Login*.
 
-ifdef::miq[]
-[[building-images]]
-=== Building Images on OpenShift
 
-You can build the images from this repository using OpenShift:
-----
-$ oc -n <your-namespace> new-build --context-dir=images/cfme-app https://github.com/CloudForms/cloudforms-pods#master
-----
 
-Additionally, Red Hat recommends setting the following `dockerStrategy` parameters to ensure a fresh build every time:
-----
-$ oc edit bc -n <your-namespace> cloudforms-pods
 
-strategy:
-  dockerStrategy:
-    forcePull: true
-    noCache: true
-----
-To execute a new build after the first (automatically started) build, run:
-----
-$ oc start-build -n <your-namespace> cloudforms-pods
-----
-Configure the following template parameters on the newly built image:
-----
-$ oc new-app --template=cloudforms \
-  -n <your-namespace> \
-  -p APPLICATION_IMG_NAME=<your-docker-registry>:5000/<your-namespace>/cloudforms-pods \
-  -p APPLICATION_IMG_TAG=latest \
-  ...
-----
-
-endif::miq[]

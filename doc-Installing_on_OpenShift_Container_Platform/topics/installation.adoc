@@ -12,7 +12,7 @@ Running the {product-title_short} appliance in a series of pods has several adva
 There are two options for installing {product-title_short} on OpenShift:
 
 * During OpenShift Container Platform 3.7 installation:
-** When you install OpenShift Container Platform 3.7, you have the option to install {product-title_short} inside OpenShift at the time. This method leverages the Ansible installer to run and deploy the {product-title_short} template, instead of building the environment manually. See the  https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/release_notes/index#ocp-37-installation[OpenShift Container Platform 3.7 Release Notes] for details.
+** When you install OpenShift Container Platform 3.7, you have the option to install {product-title_short} inside OpenShift at the time. This method leverages the Ansible installer to run and deploy the {product-title_short} template, instead of building the environment manually. See the  link:https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/release_notes/index#ocp-37-installation[OpenShift Container Platform 3.7 Release Notes] for details.
 * Manual install on an existing OpenShift Container Platform environment:
 ** Deploy {product-title_short} pods using the {product-title_short} template (_.yaml_ file). This is the method described in this guide.
 
@@ -55,27 +55,16 @@ The following limitations exist when deploying this version of {product-title_sh
 
 
 ==== Templates and Images
+// Edit for upstream.
 
-The {product-title_short} deployment uses three files to create the appliance: `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
+The {product-title_short} deployment uses `.yaml` template files to create the appliance, including `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
 
-These template files, and others, are available in OpenShift 3.7. They can also be found in GitHub at: https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v3.7/cfme-templates
+These templates are available in RPMs from Red Hat-provided image streams. To obtain the templates:
 
-These image files create the OpenShift pods comprising the appliance, and are available from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog]:
+. Configure image streams as described in link:https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html/installation_and_configuration/install-config-imagestreams-templates#is-templates-prereqs[OpenShift Container Platform _Installation and Configuration_].
+. After loading the image streams and templates, the templates will be available on your OpenShift system in `/usr/share/ansible/openshift-ansible/roles/openshift_examples/files/examples/v3.7/cfme-templates`.
 
-// Check these.
-* {product-title_short} appliance image 
-* Memcached image
-* PostgreSQL image
-* Embedded Ansible image 
-* Httpd image
-
-To download the files to your system, navigate to each container image page, and click the *Get this image* tab. Select *Red Hat OpenShift* from the *Choose your platform:* list, then follow the instructions on that page to pull the image to your system.
-
-//Download them first? Refer to another section for instructions?
-
-/////
-OpenShift Container Platform 3.5 includes these files by default. Does 3.7?
-/////
+The {product-title_short} template points to several image files to create the OpenShift pods that comprise the appliance. These image files are obtained from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog] during deployment.
 
 
 [[preparing-for-deployment]]
@@ -130,12 +119,12 @@ Users:					system:serviceaccount:<your-project>:cfme-anyuid,system:serviceaccoun
 $ oc describe scc privileged | grep Users
 Users:					system:admin,system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:logging:aggregated-logging-fluentd,system:serviceaccount:<your-project>:cfme-privileged
 ----
-
++
 [NOTE]
 ====
 For more information on SCCs, see the https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html[OpenShift documentation].
 ====
-
++
 . Add the `view` and `edit` roles to the `cfme-orchestrator` service account:
 +
 ----
@@ -301,7 +290,7 @@ Verify the deployment was successful by running the following commands as a regu
 The first deployment can take several minutes to complete while OpenShift downloads the necessary images. 
 ====
 
-. Confirm the {product-title_short} pod is bound to the correct security context constraints. 
+. Confirm the {product-title_short} pod is bound to the correct security context constraints:
 .. List and obtain the name of the `cfme-app` pod: 
 +
 ------

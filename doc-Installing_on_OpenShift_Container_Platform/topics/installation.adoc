@@ -3,7 +3,7 @@
 
 {product-title} can be installed on OpenShift Container Platform in a few quick steps. 
 
-This procedure uses a template to deploy a multi-pod {product-title} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as basic user information and commands. 
+This procedure uses a template to deploy a multi-pod {product-title} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as regular user information and commands. 
 
 The ultimate goal of the deployment is to be able to deconstruct the {product-title} appliance into several containers running on a pod or a series of pods. 
 
@@ -19,7 +19,7 @@ To successfully deploy a {product-title} appliance on OpenShift Container Platfo
 
 * NFS or other compatible volume provider
 * A `cluster-admin` user
-* A basic user
+* A regular user (such as an application developer) 
 
 [IMPORTANT]
 ====
@@ -59,7 +59,7 @@ Each {product-title_short} application pod will consume at least 3GB of RAM on i
 
 To prepare for deploying the {product-title_short} appliance to OpenShift Container Platform, create a project, configure security contexts, and create pod volumes.
 
-. As a basic user, log in to OpenShift: 
+. As a regular user, log in to OpenShift: 
 +
 ------
 $ oc login -u <user> -p <password>
@@ -107,7 +107,7 @@ Users:                  system:serviceaccount:openshift-infra:build-controller,s
 +
 . Prepare persistent storage for the deployment. (Skip this step if you have already configured persistent storage.) 
 +
-A basic {product-title_short} deployment needs at least two persistent volumes (PVs) to store {product-title_short} data. As the admin user, create two persistent volumes: one to host the {product-title_short} PostgreSQL database, and one to host the application data. 
+A regular {product-title_short} deployment needs at least two persistent volumes (PVs) to store {product-title_short} data. As the admin user, create two persistent volumes: one to host the {product-title_short} PostgreSQL database, and one to host the application data. 
 +
 Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v1.5/cfme-templates/[GitHub]. 
 +
@@ -168,7 +168,7 @@ $ systemctl restart atomic-openshift-master
 
 To deploy the appliance on OpenShift Container Platform, create the {product-title} template and verify it is available in your project. 
 
-. As a basic user, create the {product-title} template: 
+. As a regular user, create the {product-title} template: 
 +
 ------
 $ oc create -f templates/cfme-template.yaml
@@ -216,7 +216,7 @@ The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {pro
 [[verifying-the-configuration]]
 === Verifying the Configuration
 
-Verify the deployment was successful by running the following commands as a basic user under the {product-title} project:
+Verify the deployment was successful by running the following commands as a regular user under the {product-title} project:
 
 [NOTE]
 ====

@@ -58,6 +58,29 @@ In OpenShift, the default deployment of the router generates certificates during
 .. Enter the *Hostname* (or IPv4 or IPv6 address) or alert *Route*. 
 .. Enter the *API Port* if your Prometheus provider uses a non-standard port for access. The default port is `443`.
 .. Click *Validate* to confirm that {product-title_short} can connect to the alerts service.
+. Click the *Advanced* tab to add image inspector settings for scanning container images on your provider using OpenSCAP.
++
+[NOTE]
+====
+These settings download the image inspector container image from the registry and obtain the Common Vulnerabilities and Exposures (CVE) information (for effective scanning) via a proxy.
+====
++
+.. Enter proxy information for the provider in *HTTP*, *HTTPS*, and *NO Proxy*.
+.. Enter the *Image-Inspector Repository* information.
+.. Enter the *Image-Inspector Registry* information. 
+.. Enter the *Image-Inspector Tag* value. A tag is a mark used to differentiate images in a repository, typically by the application version stored in the image.
+.. Enter the *CVE location*.
 . Click *Add*.
+
+[NOTE]
+====
+You can also set global default image-inspector settings for all OpenShift providers in the advanced settings menu by editing the values under `ems_kubernetes`, instead of setting this for each provider. 
+
+For example:
+
+:ems_kubernetes:
+    :image_inspector_registry: registry.access.redhat.com
+    :image_inspector_repository: openshift3/image-inspector
+====
 
 

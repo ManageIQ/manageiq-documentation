@@ -26,11 +26,9 @@ To successfully deploy a {product-title} appliance on OpenShift Container Platfo
 OpenShift Container Platform 3.5 is required for this installation. Red Hat has not tested this procedure with earlier versions of OpenShift Container Platform.
 ====
 
-// Edit for upstream.
-
+ifdef::cfme[]
 The {product-title_short} deployment uses `.yaml` template files to create the appliance, including `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
 
-ifdef::cfme[]
 These templates are available in RPMs from Red Hat-provided image streams. To obtain the templates:
 
 . Configure image streams as described in link:https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html/installation_and_configuration/install-config-imagestreams-templates#is-templates-prereqs[OpenShift Container Platform _Installation and Configuration_].
@@ -40,7 +38,9 @@ The {product-title_short} template points to several image files to create the O
 endif::cfme[]
 
 ifdef::miq[]
-These templates are available in GitHub. You can obtain the templates from the link:https://github.com/ManageIQ/manageiq-pods/tree/master/templates[GitHub repository], or with the following steps:
+The {product-title_short} deployment uses `.yaml` template files to create the appliance, including `miq-template.yaml`, which is the {product-title_short} template used for the deployment, and `miq-pv-example.yaml` and `miq-pv-app-example.yaml`, two pod volume files. 
+
+These templates are available in GitHub. You can obtain the templates by cloning the link:https://github.com/ManageIQ/manageiq-pods/tree/master/templates[GitHub repository], or with the following steps:
 
 . Configure image streams as described in link:https://docs.openshift.com/container-platform/3.5/install_config/imagestreams_templates.html#is-templates-prereqs[OpenShift Container Platform _Installation and Configuration_].
 . After loading the image streams and templates, the templates will be available on your OpenShift system in `/usr/share/ansible/openshift-ansible/roles/openshift_examples/files/examples/v3.5/cfme-templates`.

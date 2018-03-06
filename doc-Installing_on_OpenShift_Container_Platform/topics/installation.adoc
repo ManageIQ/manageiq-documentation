@@ -55,8 +55,8 @@ The following limitations exist when deploying this version of {product-title_sh
 
 
 ==== Templates and Images
-// Edit for upstream.
 
+ifdef::cfme[]
 The {product-title_short} deployment uses `.yaml` template files to create the appliance, including `cfme-template.yaml`, which is the {product-title_short} template used for the deployment, and `cfme-pv-example.yaml` and `cfme-pv-app-example.yaml`, two pod volume files. 
 
 These templates are available in RPMs from Red Hat-provided image streams. To obtain the templates:
@@ -65,6 +65,16 @@ These templates are available in RPMs from Red Hat-provided image streams. To ob
 . After loading the image streams and templates, the templates will be available on your OpenShift system in `/usr/share/ansible/openshift-ansible/roles/openshift_examples/files/examples/v3.7/cfme-templates`.
 
 The {product-title_short} template points to several image files to create the OpenShift pods that comprise the appliance. These image files are obtained from the https://access.redhat.com/containers/?product=Red%20Hat%20CloudForms%20#/search/cloudforms[Red Hat Container Catalog] during deployment.
+endif::cfme[]
+
+ifdef::miq[]
+The {product-title_short} deployment uses `.yaml` template files to create the appliance, including `miq-template.yaml`, which is the {product-title_short} template used for the deployment, and `miq-pv-example.yaml` and `miq-pv-app-example.yaml`, two pod volume files. 
+
+These templates are available in GitHub. You can obtain the templates by cloning the link:https://github.com/ManageIQ/manageiq-pods/tree/master/templates[GitHub repository], or with the following steps:
+
+. Configure image streams as described in link:https://docs.openshift.com/container-platform/3.7/install_config/imagestreams_templates.html#is-templates-prereqs[OpenShift Container Platform _Installation and Configuration_].
+. After loading the image streams and templates, the templates will be available on your OpenShift system in `/usr/share/ansible/openshift-ansible/roles/openshift_examples/files/examples/v3.7/cfme-templates`.
+endif::miq[]
 
 
 [[preparing-for-deployment]]
@@ -249,7 +259,7 @@ $ oc new-app --template=cloudforms
 Alternatively, to deploy {product-title_short} from a template using customized settings, add the `-p` option and the desired parameters to the command. For example: 
 +
 ------
-$ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,MEMORY_POSTGRESQL_LIMIT=4Gi,APPLICATION_DOMAIN=hostname
+$ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,POSTGRESQL_MEM_LIMIT=4Gi,APPLICATION_DOMAIN=hostname
 ------
 +
 [IMPORTANT]

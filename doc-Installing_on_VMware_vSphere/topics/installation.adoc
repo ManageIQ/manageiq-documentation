@@ -9,6 +9,18 @@ Installing {product-title} consists of the following steps:
 
 After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
 
+[[choosing-the-appliance]]
+=== Choosing the Appliance Type
+
+There are two types of {product-title_short} appliances available to install on the VMware vSphere platform, depending on your performance needs:
+
+* `cfme-vsphere-.w.x.y.z.x86_64.vsphere.ova` - This image uses the LSI Logic Parallel/SAS driver on vSphere.
+* `cfme-vsphere-paravirtual.w.x.y.z.x86_64.vsphere.ova` - This image uses the paravirtualization (PVSCSI) driver on vSphere.
+
+PVSCSI and LSI Logic Parallel/SAS are essentially the same when it comes to overall performance capability. However, the PVSCSI controller is more efficient in the number of host compute cycles required to process the same number of input/output operations per second (IOPS). 
+
+If you have a storage I/O-intensive virtual machine, use the PVSCSI controller to save as many CPU cycles as possible, which can then be used by the application or host. Most modern operating systems with high I/O capability support one of these two controllers.
+
 ifdef::miq[]
 [[obtaining-the-appliance]]
 === Obtaining the appliance

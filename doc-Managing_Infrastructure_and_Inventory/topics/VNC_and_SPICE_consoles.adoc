@@ -1,6 +1,21 @@
 [[_vnc_and_spice_consoles]]
-= VNC and SPICE Consoles
+= Remote Consoles
 
+A console is a graphical window that allows you to view the start up screen, shut down screen, and desktop of a virtual machine, and to interact with that virtual machine in a similar way to a physical machine. 
+
+{product-title} offers the following support for HTML5-based VNC and SPICE consoles:
+
+* VNC and SPICE consoles for Red Hat Virtualization Manager with websocket proxy
+* VMware's new WebMKS HTML console type
+* VNC consoles for OpenStack using OpenStack-supplied websocket proxy
+
+[NOTE]
+====
+VMware no longer supports the MKS console type. As a result, the VMware MKS and the VMRC plugin option have been disabled in {product-title_short}. However, the VMRC native desktop application is supported; see <<Configuring the VMRC Desktop Application for a Virtual Machine Console>>.
+====
+
+
+////
 [IMPORTANT]
 ====
 You must disable your browser's pop-up blocking feature for the console to launch.
@@ -26,6 +41,7 @@ Under an appliance, you will most likely use HTTPS, and, therefore, the websocke
 When configuring Red Hat Virtualization Manager for virtual machine console access, set the display type for each virtual machine to `noVNC` or `SPICE HTML5`. 
 ifdef::cfme[Support for the SPICE HTML5 console client is offered as a technology preview.]
 For more information on configuring console options, see https://access.redhat.com/documentation/en/red-hat-virtualization/4.0/single/virtual-machine-management-guide#sect-Configuring_Console_Options[Configuring Console Options] in the Red Hat Virtualization _Virtual Machine Management Guide_.
+////
 
 [[configuring-console-access-to-vmware-esxi-hosts-at-a-network-layer]]
 == Configuring Console Access to VMware ESXi Hosts At A Network Layer
@@ -87,7 +103,7 @@ Follow these steps to configure the VMware ESXi host firewall ports for HTML5 or
 . In the *Firewall Properties*, scroll down to *GDB Server* and select it.
 . Click *OK*.
 
-
+////
 [[configuring-the-browser-plug-in-for-a-virtual-machine-console]]
 == Configuring the Browser Plug-in for a Virtual Machine Console
 
@@ -108,6 +124,21 @@ remote_console_type: console
 +
 Replace `console` with the browser plug-in that you have set up. Valid values are `mks` and `vmrc`.
 . Click *Save*.
+////
+
+[[configuring-the-webmks-support]]
+== Configuring the WebMKS Support in {product-title_short}
+
+[NOTE]
+====
+This section only applies to using the VMRC native desktop application for accessing a virtual machine console. It does not apply to access through the HTML5-based console.
+====
+
+Complete the following steps to enable the WebMKS support in {product-title_short}.
+
+. Log in to the {product-title_short} appliance console as a root user.
+. Extract the link:https://www.vmware.com/support/developer/html-console/[VMware WebMKS SDK] into the `public/webmks` folder in the appliance's root directory. Note that the `public` folder already exists, therefore create the `webmks` folder manually.
+
 
 [[opening-a-console-for-a-virtual-machine]]
 == Opening a Console for a Virtual Machine
@@ -119,13 +150,5 @@ Open a web-based VNC or SPICE console for a virtual machine.
 . Click image:screen.png[] (*Access*) and select *VM Console* or *Web Console*.
 
 The virtual machine console opens in a new tab in your browser.
-
-
-
-
-
-
-
-
 
 

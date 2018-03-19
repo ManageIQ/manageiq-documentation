@@ -44,12 +44,31 @@ For more information, see the https://access.redhat.com/documentation/en-us/red_
 endif::cfme[]
 ====
 
+[[server-roles]]
 === Roles 
 
-Server roles define what a server can do. Assigning different server roles to appliances can allow them to focus on specific functions. When planning a deployment, consider which roles to assign to each appliance. Some server roles are enabled by default in {product-title_short}.
+Server roles define what a server can do. Assigning different server roles to appliances can allow them to focus on specific functions. When planning a deployment, consider which roles to assign to each appliance. Some server roles are enabled by default in {product-title_short}. Many server roles start worker processes.
 
 Some roles are also dependent on other roles. For example, because the {product-title_short} user interface relies on the API for access, the Web Services role must be enabled with the User Interface role for users to log in to the appliance. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/general_configuration/configuration#server-roles[Server Roles] in _General Configuration_
 for details on each server role and its function.
+
+[[appliance-types]]
+==== Appliance Types
+
+Depending on the needs of your environment, you may choose separate worker and database tasks between appliances. One example of this is to implement a highly available configuration so that certain appliances are running the PostgreSQL database and providing failover. For more details about configuring high availability, see the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/high_availability_guide/[_High Availability Guide_].
+
+The following provides a summary of types of appliances:
+
+.Appliance types
+[width="100%",cols="20%,20%,20%,40%",options="header",]
+|====
+|Appliance Type|Database|Workers|Description
+|VMDB appliance|Yes|Yes|Worker processes are running, and it also hosts its own database that other appliances can connect to.
+|Non-database appliance|No|Yes|Worker processes are running on the appliance, but it does not host a database. The appliance is connected to an external database.
+|Dedicated-database appliance|Yes|No|This appliance contains no worker processes, only a database for other appliances to connect to.
+|Non-{product-title_short} VM with database|Yes|No|This appliance contains no worker processes, only a database. As this is not a {product-title_short} appliance, you cannot run any {product-title_short} `rake` tasks on it. This appliance must be migrated using a non-database appliance that is pointed at it, using it as a database.
+|====
+
 
 [[central-administration]]
 === Centralized Administration

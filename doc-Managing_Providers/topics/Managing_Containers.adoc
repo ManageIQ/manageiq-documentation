@@ -37,7 +37,14 @@ image:containers-overview.png[Containers Overview]
 . Navigate to menu:Compute[Containers > Overview].
 . Click the desired containers entity, or provider, if applicable, for viewing the summary with further information.
 
+[NOTE]
+====
+To reliably associate pods and images, {product-title_short} requires information from the `docker-pullable` field, added in OpenShift 3.3.1.2. This can affect the results of the *Chargeback by Image* report for older OpenShift providers, and potentially cause image inspection (done as part of Smart State Analysis) to fail due to associating a container to the wrong image.
+Consequently, {product-title_short} may not report accurate information about pods and images in OpenShift providers before version 3.3.1.2.
+====
+
 include::Viewing_an_Object_Summary.adoc[]
+
 
 [[using-the-topology-widget]]
 == Using the Topology Widget

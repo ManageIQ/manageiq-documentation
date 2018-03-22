@@ -6,14 +6,16 @@ A console is a graphical window that allows you to view the start up screen, shu
 {product-title} offers the following support for HTML5-based VNC, SPICE, and WebMKS consoles:
 
 * VNC and SPICE consoles for Red Hat Virtualization Manager with websocket proxy.
-* VMware's WebMKS HTML5-based console type. For more information, see <<Configuring the WebMKS Support in {product-title_short}>>.
+* VMware's WebMKS HTML5-based console type. 
 * VNC consoles for OpenStack using OpenStack-supplied websocket proxy.
 
 [NOTE]
 ====
-* VMware no longer supports the MKS console type. Also, VMRC is no longer a browser plugin but a native desktop application. As a result, the VMware MKS and the VMRC plugin option have been disabled in {product-title_short}.
+* VMware no longer supports the MKS console type. Also, VMRC is no longer a browser plugin but a native desktop application. As a result, the VMware MKS and the VMRC plugin options have been disabled in {product-title_short}.
 
 * Currently, attempting to connect to the VMware WebMKS console for a virtual machine fails when the server security type is set to `2` for that virtual machine.
+
+* Due to VMware licensing restrictions Red Hat cannot ship WebMKS SDK in {product-title_short}. For information on how to configure the WebMKS support in {product-title_short}, see <<Configuring the WebMKS Support in {product-title_short}>>.
 ====
 
 All of the above make use of the websocket protocol supported by all recent versions of browsers, and can use SSL to encrypt the websocket connection.
@@ -93,9 +95,15 @@ Follow these steps to configure the VMware ESXi host firewall ports for HTML5 or
 
 Complete the following steps to enable WebMKS support in {product-title_short}.
 
-. Log in to the {product-title_short} appliance console as the root user.
-. Extract the link:https://www.vmware.com/support/developer/html-console/[VMware WebMKS SDK] into the `public/webmks` folder in the appliance's root directory. Note that the `public` folder already exists, so create the `webmks` folder manually before extracting files in it.
-. Log in to the {product-title_short} user interface as an administrative user.
+. Log in to the {product-title_short} user interface appliance console as the root user.
+. On the {product-title_short} user interface appliances, create a folder titled `webmks`in the `/var/www/miq/vmdb/public/` directory.
++
+----
+/var/www/miq/vmdb/public/webmks
+----
++
+. Download and extract the contents of link:https://www.vmware.com/support/developer/html-console/[VMware WebMKS SDK] into the `webmks` folder.
+. Log in to the {product-title_short} user interface as an administrative user. If you are already logged in, refresh the settings page in the {product-title_short} user interface for the changes to take effect.
 . From the settings menu, select *Configuration*.
 . Click on the *Settings* accordion, then click *Zones*.
 . Click the zone where the {product-title_short} server is located.

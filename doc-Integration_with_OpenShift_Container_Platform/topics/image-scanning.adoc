@@ -8,7 +8,7 @@
 . Select the *OpenSCAP profile* checkbox.
 . Click *Save*.
 
-This action will trigger a SmartState analysis, or scan, of all images referenced by the OpenShift provider. The initial scan may take several hours to complete, depending on the number and size of images. OpenShift limits the number of scanning pods. Only three images can be scanned simultaneously.
+This action will trigger a SmartState analysis, or scan, of all images referenced by the OpenShift provider. The initial scan may take several hours to complete, depending on the number and size of images. The scan occurs in the OpenShift provider, which {product-title_short} receives and records in the database. OpenShift limits the number of scanning pods; only three images can be scanned simultaneously.
 
 == Scheduling A Recurring Scan
 
@@ -55,13 +55,18 @@ If the image scan policy has been updated since the last scan, compliance condit
 
 === Generating a Report on Images
 
-You can output the results of an OpenSCAP scan of images to a report, so that you can flag only the high-security risk images for future scans, consequently saving CPU by not scanning all images.
+You can output the results of an OpenSCAP scan of images to a report for an overview of the security risk level of images. The *Images by Failed OpenSCAP Rule Results* is included with {product-title_short} and shows whether the image has passed or failed OpenSCAP policy criteria, and the security risk. 
 
-To create a report:
-// From _to_generate_a_single_report in monitoring, Alerts and reporting, but modified.
+[NOTE]
+====
+You can also create a copy of this report and edit it to contain additional information, such as the project name where the image is used, to produce more useful results. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/monitoring_alerts_and_reporting/#editing-a-report[Editing a Report] and See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/monitoring_alerts_and_reporting/#appe_reportable_fields[Reportable Fields in {product-title}] in _Monitoring, Alerts, and Reporting_ for instructions on customizing reports.
+====
+
+To create a report showing image compliance:
 
 . Navigate to menu:Cloud Intelligence[Reports].
-. Click the menu:Reports[All Reports] accordion. Navigate to menu:Configuration Management[Containers > Images by Failed OpenSCAP Rule Results] for a report showing which images have failed the OpenSCAP compliance.
+. Click the menu:Reports[All Reports] accordion. 
+. Navigate to menu:Configuration Management[Containers > Images by Failed OpenSCAP Rule Results] for a report showing which images have failed the OpenSCAP compliance.
 . Click image:play_arrow.png[] *Queue*.
 . The report generation is placed in the queue and its status shows in the reports page.
 +
@@ -70,10 +75,12 @@ image:failedimagescan.png[]
 
 . Click  image:reload.png[] *(Reload current display)* to update the status.
 . Navigate to the *Saved Reports* accordion, and click the report when it is completed.
-. Click *Download as CSV* (or text?), and sort the images in the report by *Severity*.
-
-NEEDINFO:
-* Create a scan of only high-security or failed images.
+. Click on the report download buttons for the type of export you want.
++
+* Click  image:textImage.png[] *(Download this report in text format)* to download as text.
+* Click  image:textImage.png[] *(Download this report in csv format)* to download as a comma-separated file.
+* Click  image:2134.png[] *(Download this report in PDF format)* to download as PDF.
+* The report is automatically named with the type of report and date.
 
 == OpenSCAP Policy Profile
 

@@ -3057,14 +3057,24 @@ To run database garbage collection:
 
 
 [[changing-database-password]]
-==== Changing Database Password
+==== Changing the Database Password
+
+Use the following procedures to change the password on appliances containing an internal database, and on worker appliances.
+
+To change the password for an external database, use the procedure in xref:changing-the-password-on-the-worker-appliances[].
+
+[NOTE]
+====
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/deployment_planning_guide/#appliance-types[Appliance Types] in the _Deployment Planning Guide_ for a summary of different types of appliances.
+====
+
 
 [[changing-the-password-on-the-database-appliance]]
 ===== Changing the Password on the Database Appliance
 
 {product-title} provides a default database password for the internal PostgreSQL database.
 
-To change the password, you need to stop the {product-title} Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `evmserverd` uses to access the server, and restart the {product-title} appliance.
+To change the password, you need to stop the {product-title} service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `evmserverd` uses to access the server, and restart the {product-title} appliance.
 
 . Stop the {product-title} service:
 .. SSH into the appliance.
@@ -3086,7 +3096,7 @@ psql -U root -d vmdb_production
 ALTER USER root WITH PASSWORD 'newpassword';
 ------
 +
-.. To exit psql, type:
+.. To exit `psql`, type:
 +
 ------
 \q
@@ -3133,9 +3143,9 @@ service evmserverd start
 
 [IMPORTANT]
 ====
-*Requisites for Replication*
+In a high availability environment, if using the same PostgreSQL user for replication, you must also change the password in the `/var/lib/pgsql/.pgpass` file on every database node.
 
-If you change the password on the remote database, you will need to change the password in the subscription.
+Additionally, if the password for the user being used for region-to-region replication is changing, users must also change the password in the replication subscription screen. See xref:configuring-the-global-copy[].
 ====
 
 [[adding-a-new-appliance-to-an-existing-region]]

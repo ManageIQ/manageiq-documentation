@@ -28,7 +28,7 @@ The *Hostname* must use a unique fully qualified domain name.
 +
 [NOTE]
 ====
-To obtain a token for your provider, run the `oc get secret` command on your provider; see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6-beta/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token[Obtaining an OpenShift Container Platform Management Token].
+To obtain a token for your provider, run the `oc get secret` command on your provider; see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token[Obtaining an OpenShift Container Platform Management Token].
 
 For example:
 
@@ -62,12 +62,17 @@ In OpenShift, the default deployment of the router generates certificates during
 +
 [NOTE]
 ====
-These settings download the image inspector container image from the registry and obtain the Common Vulnerabilities and Exposures (CVE) information (for effective scanning) via a proxy.
+These settings control downloading the image inspector container image from the registry and obtaining the Common Vulnerabilities and Exposures (CVE) information (for effective scanning) via a proxy. Enter the following two URLs in the proxy information field that {product-title_short} requires to be open for OpenSCAP scanning.
+
+* https://www.redhat.com/security/data/metrics/ds/
+* https://cve.mitre.org/cgi-bin/cvename.cgi?name=
+
+The information about the list of URLs is based on the source code of OpenSCAP.
 ====
 +
 .. Enter proxy information for the provider in *HTTP*, *HTTPS*, and *NO Proxy*.
-.. Enter the *Image-Inspector Repository* information.
-.. Enter the *Image-Inspector Registry* information. 
+.. Enter the *Image-Inspector Repository* information. For example, `openshift3/image-inspector`.
+.. Enter the *Image-Inspector Registry* information. For example, `registry.access.redhat.com`.
 .. Enter the *Image-Inspector Tag* value. A tag is a mark used to differentiate images in a repository, typically by the application version stored in the image.
 .. Enter the *CVE location*.
 . Click *Add*.

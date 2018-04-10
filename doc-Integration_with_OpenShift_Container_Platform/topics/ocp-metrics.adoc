@@ -1,14 +1,14 @@
 // https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#install-config-cluster-metrics
 // NOTE: This whole section may need updating as OCP 3.3 + are much different: https://access.redhat.com/documentation/en-us/openshift_container_platform/3.3/html-single/installation_and_configuration/#install-config-cluster-metrics
 
-In order for {product-title_short} to collect OpenShift Container Platform node, pod, and container, you must first enable _cluster metrics_ for your OpenShift cluster. This involves running the OpenShift Metrics services inside your cluster. If cluster metrics are already enabled on OpenShift, skip this section and proceed to xref:Obtaining_OpenShift_Enterprise_Management_Token[].
+In order for {product-title_short} to collect OpenShift Container Platform node, pod, and container, you must first enable _cluster metrics_ for your OpenShift cluster. This involves running the OpenShift Metrics services inside your cluster. If cluster metrics are already enabled on OpenShift, skip this section and proceed to xref:Obtaining_OpenShift_Management_Token[].
 
 [NOTE]
 ===================
-This section is an abridged version of a more detailed chapter, namely https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#install-config-cluster-metrics[Enabling Cluster Metrics] from the https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/[OpenShift Enterprise Installation and Configuration documentation]. Refer to that chapter for more information.
+This section is an abridged version of a more detailed chapter, namely https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#install-config-cluster-metrics[Enabling Cluster Metrics] from the https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/[OpenShift Installation and Configuration documentation]. Refer to that chapter for more information.
 ===================
 
-[[ose-metrics-prep]]
+[[ocp-metrics-prep]]
 == Configuring the Required Service Accounts
 
 Cluster metrics requires the following service accounts:
@@ -18,7 +18,7 @@ Cluster metrics requires the following service accounts:
 
 [IMPORTANT]
 ===============
-If you deployed OpenShift using `openshift-ansible-3.0.20`, then the service account and roles required for enabling metrics will already be installed. You can skip this section and go to xref:ose-metrics-storage[].
+If you deployed OpenShift using `openshift-ansible-3.0.20`, then the service account and roles required for enabling metrics will already be installed. You can skip this section and go to xref:ocp-metrics-storage[].
 ===============
 
 To create these accounts:
@@ -44,14 +44,14 @@ $ oc create -f - <<API
   - name: metrics-deployer
   API
 --------------------------
-. As described in xref:ose-metrics-storage[], the Metrics Deployer uses the *metrics-deployer* service account. Configure the *metrics-deployer* account to have *edit* permissions in the *openshift-infra* project:
+. As described in xref:ocp-metrics-storage[], the Metrics Deployer uses the *metrics-deployer* service account. Configure the *metrics-deployer* account to have *edit* permissions in the *openshift-infra* project:
 +
 [literal,subs="+quotes"]
 --------------------------
 $ oadm policy add-role-to-user \
     edit system:serviceaccount:openshift-infra:metrics-deployer
 --------------------------
-. The *heapster* account will be automatically created in xref:ose-metrics-deploy[]. However, pre-emptively grant it *cluster-reader* permission to the *openshift-infra* project:
+. The *heapster* account will be automatically created in xref:ocp-metrics-deploy[]. However, pre-emptively grant it *cluster-reader* permission to the *openshift-infra* project:
 +
 [literal,subs="+quotes"]
 --------------------------
@@ -59,7 +59,7 @@ $ oadm policy add-cluster-role-to-user \
     cluster-reader system:serviceaccount:openshift-infra:heapster
 --------------------------
 
-[[ose-metrics-storage]]
+[[ocp-metrics-storage]]
 == Configuring Metrics Components
 
 The Metrics Deployer installs and configures the components required for OpenShift Container Platform metrics. By default, the Metrics Deployer uses _self-signed certificates_ to secure communication between components. This document assumes that you will use this default. For information on alternative secure communication configurations, see https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#metrics-deployer-using-secrets[Using Secrets] in the OpenShift Container Platform _Installation and Configuration_ documentation.
@@ -69,7 +69,7 @@ The Metrics Deployer installs and configures the components required for OpenShi
 This section is an abridged version of a more detailed chapter, namely https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/installation-and-configuration/#metrics-data-storage[Metrics Data Storage] in the OpenShift Container Platform _Installation and Configuration_ documentation. Refer to that chapter for more information on how to deploy the metrics plug-in using persistent and non-persistent storage.
 ===================
 
-[[ose-metrics-deploy]]
+[[ocp-metrics-deploy]]
 === Deploying the Metrics Components
 
 OpenShift Container Platform uses _Hawkular Metrics_ as its metrics engine. The Metrics Deployer will install the Hawkular Metrics service; however, you need to provide the external hostname so that {product-title_short} can reach the Hawkular Metrics service. The base configuration of the Metrics Deployer is defined in the `/usr/share/openshift/examples/infrastructure-templates/enterprise/metrics-deployer.yaml` file.
@@ -80,7 +80,7 @@ Deploying with persistent storage::
 
 With _persistent storage_, OpenShift metrics will be stored on a persistent volume. This offers metrics data protection by allowing it to survive a pod recreation or restart. OpenShift metrics requires a specifically configured persistent volume; see https://access.redhat.com/documentation/en/openshift-enterprise/version-3.2/architecture/#architecture-additional-concepts-storage[Persistent Volumes] in the OpenShift Container Platform _Architecture_ documentation. 
 +
-//When preparing the persistent volume, note its _size_, as this will be used later in xref:ose-metrics-deploy[].
+//When preparing the persistent volume, note its _size_, as this will be used later in xref:ocp-metrics-deploy[].
 +
 [literal,subs="+quotes"]
 --------------------------
@@ -124,12 +124,12 @@ For either command, replace _HAWKULARHOST_ with the external hostname that {prod
 
 Either storage method deploys the required metrics components and creates the necessary service accounts. In particular, the metrics components will be configured to also use the specified _HAWKULARHOST_ as its public endpoint.
 
-[[ose-metrics-finish]]
+[[ocp-metrics-finish]]
 === Applying the Hawkular Metrics Settings to OpenShift Container Platform 
 
 After deploying the metrics components, configure OpenShift Container Platform to use them:
 
-. Open the OpenShift Master Configuration file at `/etc/origin/master/master-config.yaml`. Add the *metricsPublicURL* parameter to the *assetConfig* section, specifying the _HAWKULARHOST_ you specified in xref:ose-metrics-deploy[]:
+. Open the OpenShift Master Configuration file at `/etc/origin/master/master-config.yaml`. Add the *metricsPublicURL* parameter to the *assetConfig* section, specifying the _HAWKULARHOST_ you specified in xref:ocp-metrics-deploy[]:
 +
 [literal,subs="+quotes"]
 --------------------------

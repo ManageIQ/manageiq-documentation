@@ -679,7 +679,6 @@ image:OutgoingSMTP.png[]
 * Select the appropriate *SSL Verify Mode*.
 * Use the *Authentication* drop down to specify if you want to use `login`, `plain`, or no authentication.
 * Use *User Name* to specify the user name required for login authentication.
-* Use *Password* to specify the password for login authentication.
 * Use *From E-mail Address* to set the address you want to send the email from.
 * Use *Test E-mail Address* if you want to test your email settings. Click *Verify* to send a test email.
 
@@ -3000,24 +2999,34 @@ To run database garbage collection:
 
 
 [[changing-database-password]]
-==== Changing Database Password
+==== Changing the Database Password
+
+Use the following procedures to change the password on appliances containing an internal database, and on worker appliances.
+
+To change the password for an external database, use the procedure in xref:changing-the-password-on-the-worker-appliances[].
+
+[NOTE]
+====
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#appliance-types[Appliance Types] in the _Deployment Planning Guide_ for a summary of different types of appliances.
+====
+
 
 [[changing-the-password-on-the-database-appliance]]
 ===== Changing the Password on the Database Appliance
 
 {product-title} provides a default database password for the internal PostgreSQL database.
 
-To change the password, you need to stop the {product-title} Service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `evmserverd` uses to access the server, and restart the {product-title} appliance.
+To change the password, you need to stop the {product-title_short} service, change the password for the PostgreSQL database, run a command to change the password in the configuration file that `evmserverd` uses to access the server, and restart the {product-title_short} appliance.
 
-. Stop the {product-title} service:
+. Stop the {product-title_short} service:
 .. SSH into the appliance.
-.. To stop the {product-title} service, run the following command:
+.. To stop the {product-title_short} service, run the following command:
 +
 ------
 service evmserverd stop
 ------
 +
-. Use `pgadmin` to change the password for your {product-title} database (default is `vmdb_production`). If you do not have `pgadmin`, you can change the password by running:
+. Use `pgadmin` to change the password for your {product-title_short} database (default is `vmdb_production`). If you do not have `pgadmin`, you can change the password by running:
 +
 ------
 psql -U root -d vmdb_production
@@ -3029,7 +3038,7 @@ psql -U root -d vmdb_production
 ALTER USER root WITH PASSWORD 'newpassword';
 ------
 +
-.. To exit psql, type:
+.. To exit `psql`, type:
 +
 ------
 \q
@@ -3041,21 +3050,21 @@ ALTER USER root WITH PASSWORD 'newpassword';
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
 ------
 +
-. Restart the {product-title} service:
+. Restart the {product-title_short} service:
 +
 ------
 service evmserverd start
 ------
 +
-. Verify that you can log in to the {product-title} console.
+. Verify that you can log in to the {product-title_short} console.
 
 
 [[changing-the-password-on-the-worker-appliances]]
 ===== Changing the Password on the Worker Appliances
 
-. Stop the {product-title} service:
+. Stop the {product-title_short} service:
 .. SSH into the appliance.
-.. To stop the {product-title} service, run the following command:
+.. To stop the {product-title_short} service, run the following command:
 +
 ------
 service evmserverd stop
@@ -3067,7 +3076,7 @@ service evmserverd stop
 /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
 ------
 +
-. Restart the {product-title} service:
+. Restart the {product-title_short} service:
 +
 ------
 service evmserverd start
@@ -3076,9 +3085,9 @@ service evmserverd start
 
 [IMPORTANT]
 ====
-*Requisites for Replication*
+In a high availability environment, if using the same PostgreSQL user for replication, you must also change the password in the `/var/lib/pgsql/.pgpass` file on every database node.
 
-If you change the password on the remote database, you will need to change the password in the subscription.
+Additionally, if the password for the user being used for region-to-region replication is changing, users must also change the password in the replication subscription screen. See xref:configuring-the-global-copy[].
 ====
 
 [[adding-a-new-appliance-to-an-existing-region]]

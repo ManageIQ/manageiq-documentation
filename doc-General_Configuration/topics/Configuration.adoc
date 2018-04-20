@@ -743,15 +743,13 @@ To configure {product-title_short} to use LDAP for authentication, complete the 
 . Configure your *LDAP Settings* (the following example configures a Red Hat Identity Management LDAP server):
 * Use *LDAP Host Names* to specify the fully qualified domain names of your LDAP servers. {product-title_short} will search each host name in order until it finds one that authenticates the user. Note, {product-title_short} supports using a maximum of 3 possible *LDAP Host Names*.
 * Use *LDAP Port* to specify the port for your LDAP server. The default is 389 for LDAP and 636 for LDAPS.
-* From the *User Type* list, select *User Principal Name* to type the user name in the format of user@domainname. Select *Email Address* to login with the users email address.
-Select *Distinguished Name* (CN=<user>) or *Distinguished Name* (UID=<user>) to use just the user name, but be sure to enter the proper *User Suffix* for either one. Choose the correct *Distinguished Name* option for your directory service implementation.
-* Specify the *User Suffix*, such as acme.com for *User Principal Name* or cn=users,dc=acme,dc=com for *Distinguished Name*, in *Base DN*.
 * From the *User Type* list, select one of the following and configure the values for your LDAP server:
 ** *User Principal Name*: Type the user name in the format of user@domainname, for example, `dbright@acme.com`. (In this case, the user would log on as `dbright`.)
 ** *Email Address*: Logs in with the user's email address.
 ** *Distinguished Name* (CN=<user>): Uses the common name for the user. Be sure to enter the correct *User Suffix* and *Distinguished Name* option for your directory service implementation: for example, `cn=dan bright,ou=users,dc=acme,dc=com`. (The user logs on as `dan bright`.)
 ** *Distinguished Name* (UID=<user>): Uses the user ID (UID). Be sure to enter the correct *User Suffix* and *Distinguished Name* option for your directory service implementation: for example, `uid=dan bright,ou=users,dc=acme,dc=com`. (The user logs on as `dan bright`.)
-** *SAM Account Name*: User logon for Active Directory clients and servers using legacy Windows versions.
+** *SAM Account Name*: User logon for Active Directory clients and servers using legacy Windows versions. You must also configure the *Domain Prefix* in the next field when selecting this option.
+* Specify the *Domain Prefix* if you are configuring an Active Directory LDAP host, and selected *SAM Account Name* as the *User Type*. This field represents the prefix name in the Active Directory domain. Together with the SAM account name, this constructs the fully qualified user name in the format `<domain_prefix>\<user>`.
 * Specify the *User Suffix*, such as `acme.com` for *User Principal Name* or `cn=users,dc=acme,dc=com` for *Distinguished Name*, in *Base DN*.
 +
 [NOTE]

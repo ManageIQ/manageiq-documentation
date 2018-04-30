@@ -52,18 +52,24 @@ GET /api/pictures?expand=resources
   "resources": [
     {
       "href": "http://localhost:3000/api/pictures/1",
-      "id": 1
+      "id": "1",
+      "image_href" : "http://localhost:3000/pictures/1.jpg",
+      "extension" : "jpg"
     },
     ...
     {
       "href": "http://localhost:3000/api/pictures/4",
-      "id": 4,
-      "resource_id": 1,
+      "id": "4",
+      "image_href" : "http://localhost:3000/pictures/4.png",
+      "extension" : "png",
+      "resource_id": "1",
       "resource_type": "ServiceTemplate"
     },
     {
       "href": "http://localhost:3000/api/pictures/5",
-      "id": 5
+      "id": "5",
+      "image_href" : "http://localhost:3000/pictures/5.jpg",
+      "extension" : "jpg"
     }
   ],
   "actions": [
@@ -76,59 +82,22 @@ GET /api/pictures?expand=resources
 }
 ----
 
-This query does not return the pictures themselves, but primary resources for them.
+This query does not return the pictures themselves, simply metadata about the pictures.
 
-Additional information can be obtained regarding the image binary via the _binary_blob_ attribute:
+Actually fetching the particular picture is done by getting the image by its image_href.
 
 [source,data]
 ----
-GET /api/pictures/4?attributes=binary_blob
+GET /api/pictures/4
 ----
 
 [source,json]
 ----
 {
   "href": "http://localhost:3000/api/pictures/4",
-  "id": 4,
-  "resource_id": 1,
+  "id": "4",
+  "resource_id": "1",
   "resource_type": "ServiceTemplate",
-  "binary_blob": {
-    "id": 4,
-    "resource_type": "Picture",
-    "resource_id": 4,
-    "md5": "0a38d1998325099141d4c68552440b1d",
-    "size": 68314,
-    "part_size": 1048576,
-    "data_type": "jpg"
-  }
-}
-----
-
-Actually fetching the particular picture is by getting the image by its href.
-
-The image_href of a picture can be queried as follows:
-
-[source,data]
-----
-GET /api/pictures/4?attributes=binary_blob,image_href
-----
-
-[source,json]
-----
-{
-  "href": "http://localhost:3000/api/pictures/4",
-  "id": 4,
-  "resource_id": 1,
-  "resource_type": "ServiceTemplate",
-  "binary_blob": {
-    "id": 4,
-    "resource_type": "Picture",
-    "resource_id": 4,
-    "md5": "0a38d1998325099141d4c68552440b1d",
-    "size": 68314,
-    "part_size": 1048576,
-    "data_type": "jpg"
-  },
   "image_href": "http://localhost:3000/pictures/4.jpg"
 }
 ----

@@ -66,6 +66,28 @@ Or expanding the Cloud Networks in addition to the provider as follows:
 GET /api/providers/:id?expand=cloud_networks
 ----
 
+[[cloud-subnets]]
+==== Cloud Subnets
+
+The Cloud Subnets of a provider can be queried by asking for the _cloud_subnets_ subcollection as follows:
+
+[source,data]
+----
+GET /api/providers/:id/cloud_subnets
+----
+
+[source,data]
+----
+GET /api/providers/:id/cloud_subnets/:cloud_subnet_id
+----
+
+Or expanding the Cloud Subnets in addition to the provider as follows:
+
+[source,data]
+----
+GET /api/providers/:id?expand=cloud_subnets
+----
+
 [[load-balancers]]
 ==== Load Balancers
 
@@ -90,6 +112,39 @@ Or expanding the Load Balancers for the specific provider as follows:
 [source,data]
 ----
 GET /api/providers/:id?expand=load_balancers
+----
+
+[[vms]]
+==== Virtual Machines
+
+Virtual Machines of providers can be queried via the vms subcollection as follows:
+
+Query all VMs of a provider:
+
+[source,data]
+----
+GET /api/providers/:id/vms
+----
+
+Query a specific VM of a provider:
+
+[source,data]
+----
+GET /api/providers/:id/vms/:vm_id
+----
+
+Or expanding the VMs for the specific provider as follows:
+
+[source,data]
+----
+GET /api/providers/:id?expand=vms
+----
+
+Query specific VMs of a provider and get their name and vendor attributes:
+
+[source,data]
+----
+GET /api/providers/:id/vms?filter[]=name='test*'&attributes=name,vendor&expand=resources
 ----
 
 [[creating-providers]]

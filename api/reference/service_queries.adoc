@@ -98,7 +98,13 @@ Service dialogs can be queried directly from the primary collection:
 ----
 GET /api/service_dialogs
 GET /api/service_dialogs/:id
+GET /api/service_dialogs/:id?resource_action_id=:ra_id
+                            &target_id=:target_id
+                            &target_type=:target_type
 ----
+
+NOTE: Above :target_type would be a valid resource type containing the service
+dialog like _service_template_ or _service_.
 
 Or from the Service Template where they are defined and from the related ordered services
 as follows:
@@ -150,7 +156,9 @@ GET /api/services/:id?expand=vms&attributes=vms.num_cpu
 Accessing decorators for VM resources is also made available here as follows:
 
 ----
-GET /api/services/:id?expand=vms&attributes=vms.num_cpu&decorators=vms.supports_console?
+GET /api/services/:id?expand=vms
+                     &attributes=vms.num_cpu
+                     &decorators=vms.supports_console?,vms.supports_cockpit?,vms.supports_vnc_console?
 ----
 
 [[querying-orchestration-stacks]]

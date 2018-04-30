@@ -10,8 +10,10 @@ Provisioning requests are made available via the following entrypoint.
 ----
 
 * link:#creating-requests[Creating Requests]
+* link:#editing-requests[Editing Requests]
 * link:#approving-denying-requests[Approving or Denying Requests]
 * link:#monitoring-requests[Monitoring Requests]
+* link:#editing-request-tasks[Editing Request Tasks]
 
 
 [[creating-requests]]
@@ -80,6 +82,81 @@ Example: Store a request_id from an external system so the system can be notifie
 | miq_custom_attributes | hash | Custom attributes applied to the virtual machine and stored in the database as part of provisioning
 |=====================
 
+[[editing-requests]]
+=== Editing Requests
+
+Updating provision requests can be performed by posting an _edit_ action as follows:
+
+[source,data]
+----
+POST /api/provision_requests/11
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "custom_var1" : "custom value1"
+    }
+  }
+}
+----
+
+==== Response:
+
+[source,json]
+----
+{
+  "href": "http://localhost:3000/api/provision_requests/11",
+  "id": "11",
+  "description": "Provision from [template1] to [###]",
+  "approval_state": "pending_approval",
+  "type": "MiqProvisionRequest",
+  "created_on": "2015-04-14T17:36:30Z",
+  "updated_on": "2015-04-14T18:32:30Z",
+  "requester_id": "88913",
+  "requester_name": "API User",
+  "request_type": "template",
+  "request_state": "pending",
+  "message": "VM Provisioning - Request Created",
+  "status": "Ok"
+  "options": {
+    "use_pre_dialog": false,
+    "request_type": "template",
+    "miq_request_dialog_name": "miq_provision_dialogs",
+    "src_vm_id": [
+      109996,
+      "template1"
+    ],
+    "src_vm_nics": [],
+    "src_vm_lans": [],
+    "src_ems_id": [
+      59136,
+      "ems_0000000000002"
+    ],
+    "placement_auto": [
+      true,
+      1
+    ],
+    "vm_tags": [],
+    "ws_values": {
+    },
+    "ws_ems_custom_attributes": {
+    },
+    "ws_miq_custom_attributes": {
+    },
+    "tags": {
+    }
+    "userid": "admin",
+    "source_id": "109996",
+    "source_type": "VmOrTemplate",
+    "custom_var1" : "custom value1"
+  }
+}
+----
+
 [[approving-denying-requests]]
 === Approving or Denying Requests
 
@@ -132,13 +209,13 @@ provision request itself, i.e. */api/provision_requests/:id*
 {
   "results": [
     {
-      "id": 3068,
+      "id": "3068",
       "description": "Provision from [template1] to [###]",
       "approval_state": "pending_approval",
       "type": "MiqProvisionRequest",
       "created_on": "2015-04-14T17:36:30Z",
       "updated_on": "2015-04-14T17:36:30Z",
-      "requester_id": 88913,
+      "requester_id": "88913",
       "requester_name": "API User",
       "request_type": "template",
       "request_state": "pending",
@@ -173,7 +250,7 @@ provision request itself, i.e. */api/provision_requests/:id*
         }
       },
       "userid": "admin",
-      "source_id": 109996,
+      "source_id": "109996",
       "source_type": "VmOrTemplate"
     }
   ]
@@ -194,11 +271,34 @@ expanding the request_tasks subcollection as follows:
 GET /api/provision_requests/:id?expand=request_tasks
 ----
 
-An alias *tasks* is also defined for the above subcollection:
+or by fetching them directly as follows:
 
 ----
-GET /api/provision_requests/:id?expand=tasks
+GET /api/provision_requests/:id/request_tasks?expand=resources
 ----
+
+[[editing-request-tasks]]
+=== Editing Request Tasks
+
+Request tasks for Provision Requests can be updated as follows:
+
+----
+POST /api/provision_requests/:id/request_tasks/:request_task_id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "request_param_a" : "value_a",
+      "request_param_b" : "value_b"
+    }
+  }
+}
+----
+
 
 For a list of attributes available for the provision request attribute groups
 please refer to the link:../appendices/provision_attributes.html[Provision Request Supported Attributes]

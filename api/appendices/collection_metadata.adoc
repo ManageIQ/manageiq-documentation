@@ -20,6 +20,8 @@ What gets returned is the following structure:
   ],
   "relationships": [
   ],
+  "subcollections": [
+  ],
   "data": {
   }
 }
@@ -31,6 +33,7 @@ What gets returned is the following structure:
 | attributes | Physical attributes of the collection
 | virtual_attributes | Virtual attributes of the collection
 | relationships | Physical or Virtual associations to other resources
+| subcollections | Subcollections that can be queried
 | data | Optional meta-data for the collection
 |===================================================================
 
@@ -66,6 +69,7 @@ OPTIONS /api/groups
     "custom_7",
     "custom_8",
     "custom_9",
+    "href_slug",
     "miq_user_role_name",
     "provisioned_storage",
     "read_only",
@@ -75,7 +79,11 @@ OPTIONS /api/groups
   ],
   "relationships": [
     "active_vms",
+    "custom_action_buttons",
+    "custom_actions",
     "custom_attributes",
+    "custom_button_sets",
+    "custom_buttons",
     "entitlement",
     "miq_custom_attributes",
     "miq_report_results",
@@ -90,9 +98,13 @@ OPTIONS /api/groups
     "users",
     "vms"
   ],
+  "subcollections": [
+    "tags"
+  ],
   "data": {
   }
 }
+
 ----
 
 [[optional-metadata]]
@@ -107,79 +119,94 @@ Currently, optional metadata is made available for the following collections:
 [cols="1",options="header",width="30%"]
 |=====================
 | Collection
-| /api/arbitration_rules
+| /api/authentications
+| /api/clusters
 | /api/container_deployments
+| /api/custom_buttons
+| /api/generic_object_definitions
+| /api/hosts
+| /api/providers
 |=====================
 
 There is no enforced structure for the _data_ element as each collection may need to provide
-different types of metadata. The following are partial meta-data examples:
+different types of metadata. The following is a partial meta-data example:
 
 [source,data]
 ----
-OPTIONS /api/arbitration_rules
+OPTIONS /api/generic_object_definitions
 ----
 
 [source,json]
 ----
 {
-  "attributes" : [
-    ...
+  "attributes": [
+    "created_at",
+    "description",
+    "id",
+    "name",
+    "properties",
+    "updated_at"
   ],
-  "virtual_attributes" : [
-    ...
+  "virtual_attributes": [
+    "generic_objects_count",
+    "href_slug",
+    "region_description",
+    "region_number"
   ],
-  "relationships" : [
-    ...
+  "relationships": [
+    "custom_action_buttons",
+    "custom_actions",
+    "custom_button_sets",
+    "custom_buttons",
+    "generic_objects",
+    "picture"
   ],
-  "data" : {
-    "field_values": [
-      "User-id",
-      "User-name",
-      "User-email",
-      "User-userid",
-      "User-first_name",
-      "User-last_name",
+  "subcollections": [
+    "generic_objects"
+  ],
+  "data": {
+    "allowed_association_types": [
+      [
+        "Availability Zone",
+        "AvailabilityZone"
+      ],
       ...
+      [
+        "VM and Instance",
+        "Vm"
+      ],
+      [
+        "Zone",
+        "Zone"
+      ]
+    ],
+    "allowed_types": [
+      [
+        "Boolean",
+        "boolean"
+      ],
+      [
+        "Date/Time",
+        "datetime"
+      ],
+      [
+        "Float",
+        "float"
+      ],
+      [
+        "Integer",
+        "integer"
+      ],
+      [
+        "String",
+        "string"
+      ],
+      [
+        "Time",
+        "time"
+      ]
     ]
   }
 }
 ----
 
-[source,data]
-----
-OPTIONS /api/container_deployments
-----
-
-[source,json]
-----
-{
-  "attributes" : [
-    ...
-  ],
-  "virtual_attributes" : [
-    ...
-  ],
-  "relationships" : [
-    ...
-  ],
-  "data" : {
-    "deployment_types" : [
-      "origin",
-      "openshift-enterprise"
-    ],
-    "provision" : [
-      {
-        "provider" : {
-          ...
-        },
-        "templates" : [
-          ...
-        ]
-      }
-    ],
-    "providers" : [
-      ...
-    ]
-  }
-}
-----

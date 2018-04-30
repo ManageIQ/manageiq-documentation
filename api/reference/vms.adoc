@@ -15,6 +15,7 @@ Management of Virtual Machines adds support of the following actions:
 | reboot_guest | Reboots guest in VM
 | shutdown_guest | Shuts down guest in VM
 | scan | Scans a VM (Perform SmartState Analysis)
+| set_miq_server | Sets the server of a VM
 | set_owner | Sets the owner of a VM
 | add_event | Adding an Event to a VM
 | add_lifecycle_event | Add a Lifecycle Event to a VM
@@ -32,6 +33,7 @@ Management of Virtual Machines adds support of the following actions:
 * link:#reboot-guest-vm[Reboots guest in VM]
 * link:#shutdown-guest-vm[Shuts down guest in VM]
 * link:#scan-vm[Scanning a VM]
+* link:#set-miq-server-vm[Setting Server of a VM]
 * link:#set-owner-vm[Setting Owner of a VM]
 * link:#add-event-vm[Adding an Event to a VM]
 * link:#add-lifecycle-event-vm[Adding a Lifecycle Event to a VM]
@@ -189,6 +191,42 @@ GET /api/vms/:id?expand=accounts,software
   "action" : "scan"
 }
 ----
+
+[[set-miq-server-vm]]
+=== Setting Server of a VM
+
+[source,json]
+----
+{
+  "action" : "set_miq_server",
+  "resource" : {
+    "miq_server" : { "href" : "http://localhost:3000/api/servers/5" }
+  }
+}
+----
+
+[source,json]
+----
+{
+  "action" : "set_miq_server",
+  "resource" : {
+    "miq_server" : { "id" : "6" }
+  }
+}
+----
+
+To remove the Server from the VM, pass in an empty reference as follows:
+
+[source,json]
+----
+{
+  "action" : "set_miq_server",
+  "resource" : {
+    "miq_server" : {}
+  }
+}
+----
+
 
 [[set-owner-vm]]
 === Setting Owner of a VM

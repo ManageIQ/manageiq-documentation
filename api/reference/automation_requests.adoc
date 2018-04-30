@@ -2,7 +2,7 @@
 [[automation-requests]]
 == Automation Requests
 
-Automation requests are made available via the following entrypoint.
+Automation requests are made available via the following entrypoint:
 
 [source,data]
 ----
@@ -10,8 +10,10 @@ Automation requests are made available via the following entrypoint.
 ----
 
 * link:#creating-requests[Creating Requests]
+* link:#editing-requests[Editing Requests]
 * link:#approving-denying-requests[Approving or Denying Requests]
 * link:#monitoring-requests[Monitoring Requests]
+* link:#editing-request-tasks[Editing Request Tasks]
 
 [[creating-requests]]
 === Creating Requests
@@ -41,6 +43,68 @@ As an example:
 }
 ----
 
+[[editing-requests]]
+=== Editing Requests
+
+Updating requests can be performed by posting an _edit_ action as follows:
+
+[source,data]
+----
+POST /api/automation_requests/11
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "attrs" : {
+        "var1" : "updated value1",
+        "var2" : "updated value2",
+        "minimum_memory" : 4096
+      }
+    }
+  }
+}
+----
+
+Response:
+
+[source,json]
+----
+{
+  "href": "http://localhost:3000/api/automation_requests/11",
+  "id": "11",
+  "options": {
+    "message": "create",
+    "namespace": "System",
+    "class_name": "Request",
+    "instance_name": "InspectME",
+    "user_id": "1",
+    "attrs": {
+      "var1" : "updated value1",
+      "var2" : "updated value2",
+      "minimum_memory" : 4096
+    }
+  },
+  "tenant_id": "1",
+  "approval_state": "approved",
+  "status": "Ok",
+  "request_type": "automation",
+  "description": "Automation Task",
+  "type": "AutomationRequest",
+  "created_on": "2018-01-08T13:48:00Z",
+  "updated_on": "2018-01-08T13:56:15Z",
+  "requester_id": "1",
+  "requester_name": "Administrator",
+  "request_state": "pending",
+  "message": "Automation Request - Request Created",
+  "userid": "admin",
+  "process": true
+}
+
+----
 [[approving-denying-requests]]
 === Approving or Denying Requests
 
@@ -93,13 +157,13 @@ automation request itself, i.e. */api/automation_request/:id*
 {
   "results": [
     {
-      "id": 10,
+      "id": "10",
       "description": "Automation Task",
       "approval_state": "approved",
       "type": "AutomationRequest",
       "created_on": "2015-04-14T18:12:12Z",
       "updated_on": "2015-04-14T18:12:12Z",
-      "requester_id": 1,
+      "requester_id": "1",
       "requester_name": "Administrator",
       "request_type": "automation",
       "request_state": "pending",
@@ -109,7 +173,7 @@ automation request itself, i.e. */api/automation_request/:id*
         "namespace": "System",
         "class_name": "Request",
         "instance_name": "InspectME",
-        "user_id": 1,
+        "user_id": "1",
         "attrs": {
           "var1": "value 1",
           "var2": "value 2",
@@ -133,9 +197,31 @@ expanding the request_tasks subcollection as follows:
 GET /api/automation_requests/:id?expand=request_tasks
 ----
 
-An alias *tasks* is also defined for the above subcollection:
+or by fetching them directly as follows:
 
 ----
-GET /api/automation_requests/:id?expand=tasks
+GET /api/automation_requests/:id/request_tasks?expand=resources
+----
+
+[[editing-request-tasks]]
+=== Editing Request Tasks
+
+Request tasks for Automation Requests can be updated as follows:
+
+----
+POST /api/automation_requests/:id/request_tasks/:request_task_id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "request_param_a" : "value_a",
+      "request_param_b" : "value_b"
+    }
+  }
+}
 ----
 

@@ -288,11 +288,11 @@ Service Templates can be created via a POST to the /api/service_templates collec
     "src_ems_id"              : [5, "test_provider"],
     "provision"               : {
       "fqname"    : "/Sample/System/ProvisionEndpoint",
-      "dialog_id" : 21
+      "dialog_id" : "21"
     },
     "retirement"              : {
       "fqname"    : "/Sample/System/RetirementEndpoint",
-      "dialog_id" : 22
+      "dialog_id" : "22"
     }
   }
 }
@@ -423,9 +423,10 @@ Once services are ordered from a catalog, they can be:
 * link:#service-suspended[Suspended]
 * link:#service-deleting[Deleted]
 
-Resources can also be added or removed from services as shown here:
+Additional Service actions include:
 
 * link:#service-add-remove-resources[Adding and Removing Resources from Services]
+* link:#service-add-provider-vms[Adding Provider VMs to Services]
 
 Other than service creates and edits, service actions return the action response as
 in the following example:
@@ -450,7 +451,7 @@ Response:
 {
   "success": true,
   "message": "Service id:12 name:'SampleService' starting",
-  "task_id": 62,
+  "task_id": "62",
   "task_href": "http://localhost:3000/api/tasks/62",
   "href": "http://localhost:3000/api/services/12"
 }
@@ -614,6 +615,34 @@ POST /api/services
 }  
 ----
 
+[[service-add-provider-vms]]
+==== Adding Provider VMs to Services
+
+For cases where VMs are created externally, i.e. via Ansible Playbooks, this
+action allows the system to identify the VMs created and link those VMs
+back to the service.
+
+[source,data]
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "add_provider_vms",
+  "resource" : {
+    "provider" : { "href" : "http://localhot:3000/api/providers/11" }
+    "uid_ems" : [
+      "provider_vm_id1",
+      "provider_vm_id2",
+      ...
+    ]
+  }
+}
+----
+
+
 [[service-retiring-now]]
 ==== Service Retiring (now)
 
@@ -743,6 +772,7 @@ POST /api/services
 * link:#approving-denying-service-requests[Approving or Denying Service Requests]
 * link:#adding-approvers-service-requests[Adding Approvers to Service Requests]
 * link:#removing-approvers-service-requests[Removing Approvers to Service Requests]
+* link:#editing-request-tasks[Editing Request Tasks]
 
 [[querying-service-requests]]
 ==== Querying Service Requests
@@ -754,16 +784,17 @@ monitored as follows:
 GET /api/service_requests/:id
 ----
 
-Additionally, tasks of the specific requests can be queried:
+NOTE: The request tasks of service requests can be queried by
+expanding the request_tasks as follows:
 
 ----
 GET /api/service_requests/:id?expand=request_tasks
 ----
 
-or optionally via the tasks alias:
+or by fetching them directly as follows:
 
 ----
-GET /api/service_requests/:id?expand=tasks
+GET /api/service_requests/:id/request_tasks?expand=resources
 ----
 
 [[approving-denying-service-requests]]
@@ -863,7 +894,7 @@ POST /api/service_requests
   "resources" : [
     {
       "href" : "http://localhost:3000/api/service_requests/101",
-      "user_id" : 11
+      "user_id" : "11"
     },
     {
       "href" : "http://localhost:3000/api/service_requests/102",
@@ -894,7 +925,7 @@ POST /api/service_requests/:id
 {
   "action" : "remove_approver",
   "resource" : {
-    "user_id" : 11 
+    "user_id" : "11"
   }
 }
 ----
@@ -914,17 +945,39 @@ POST /api/service_requests
   "resources" : [
     {
       "href" : "http://localhost:3000/api/service_requests/101",
-      "user_id" : 11
+      "user_id" : "11"
     },
     {
       "href" : "http://localhost:3000/api/service_requests/102",
-      "user" : { "id" : 11 }
+      "user" : { "id" : "11" }
     },
     {
       "href" : "http://localhost:3000/api/service_requests/103",
       "user" : { "href" : "http://localhost:3000/api/users/11" }
     }
   ]
+}
+----
+
+[[editing-request-tasks]]
+=== Editing Request Tasks
+
+Request tasks of Service Requests can be updated as follows:
+
+----
+POST /api/service_requests/:id/request_tasks/:request_task_id
+----
+
+[source,json]
+----
+{
+  "action" : "edit",
+  "resource" : {
+    "options" : {
+      "request_param_a" : "value_a",
+      "request_param_b" : "value_b"
+    }
+  }
 }
 ----
 

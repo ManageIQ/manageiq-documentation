@@ -53,6 +53,28 @@ SmartState analysis scanning may be initiated manually for images. From an image
 
 If the image scan policy has been updated since the last scan, compliance conditions may be re-evaluated. From an image summary page, select menu:Policy[Check Compliance of Last Known Configuration]. Refreshing the image page will reflect the latest compliance history.
 
+=== Generating a Report on Images
+
+You can output the results of an OpenSCAP scan of images to a report, so that you can flag only the high-security risk images for future scans, consequently saving CPU by not scanning all images.
+
+To create a report:
+// From _to_generate_a_single_report in monitoring, Alerts and reporting, but modified.
+
+. Navigate to menu:Cloud Intelligence[Reports].
+. Click the menu:Reports[All Reports] accordion. Navigate to menu:Configuration Management[Containers > Images by Failed OpenSCAP Rule Results] for a report showing which images have failed the OpenSCAP compliance.
+. Click image:play_arrow.png[] *Queue*.
+. The report generation is placed in the queue and its status shows in the reports page.
++
+
+image:failedimagescan.png[]
+
+. Click  image:reload.png[] *(Reload current display)* to update the status.
+. Navigate to the *Saved Reports* accordion, and click the report when it is completed.
+. Click *Download as CSV* (or text?), and sort the images in the report by *Severity*.
+
+NEEDINFO:
+* Create a scan of only high-security or failed images.
+
 == OpenSCAP Policy Profile
 
 {product-title} is pre-configured with a default scanning policy profile. This includes conditions to scan and identify compliance, as well as annotate compliance failure. SmartState analysis is performed when new images are added to OpenShift.

@@ -38,31 +38,34 @@ Uploading the {product-title} appliance file onto Amazon EC2 has the following r
 * 44 GB of space on the chosen datastore.
 * 12 GB RAM.
 * 4 vCPUs.
-* An Amazon S3 bucket to store disk images.
-* A VM import service role (IAM role) named `vmimport`. 
 * Depending on your infrastructure, allow time for the upload.
+* Prerequisites on Amazon EC2: 
+** An Amazon S3 bucket to store disk images.
+** A VM import service role (IAM role) named `vmimport`. 
+** See xref:prerequisite-steps-on-amazon-ec2[].
 
-To upload the image:
+.Uploading the appliance image:
 
-. Upload to the Amazon S3 Bucket the {product-title} appliance VHD image from your local file system using your choice of tool.
+. Upload to the Amazon S3 Bucket the {product-title} appliance VHD image obtained in xref:obtaining-the-appliance[] from your local file system using your choice of tool.
 
-[[Prerequisites-on-amazon-ec2]]
-=== Prerequisite Steps on Amazon EC2
 
-[NOTE]
+[[prerequisite-steps-on-amazon-ec2]]
+==== Prerequisite Steps on Amazon EC2
+
+[IMPORTANT]
 ====
-These are the prerequisites and procedural steps as of the time of writing. For more information on creating an Amazon S3 Bucket and VM Import Service Role, consult the Amazon EC2 documentation.
+These are the prerequisites and procedural steps as of the time of writing. For more information on creating an Amazon S3 Bucket and VM Import Service Role, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
 ====
 
 Complete the following prerequisite steps on AWS:
 
-. Install the AWS client on your local computer or whichever computer you want to interact with the AWS API from.
+. Install the AWS client on the computer you want to interact with the AWS API from.
 +
 ----
 $ pip install awscli
 ----
 +
-. Configure and download your AWS secret/access key via link:https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html[Managing Access Keys for Your AWS Account - Amazon Web Services].
+. Configure and download your AWS secret/access key by following the steps in the link:https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html[Managing Access Keys for Your AWS Account] documentation.
 . Configure the AWS client with your access/secret key.
 +
 ----
@@ -97,7 +100,7 @@ Example:
 }
 ----
 +
-. Create the *vmimport* role via the `trust-policy.json` file that we just created.
+. Create the *vmimport* role using the `trust-policy.json` file that we just created.
 +
 ----
 $ aws iam create-role --role-name vmimport --assume-role-policy-document file://trust-policy.json
@@ -162,8 +165,11 @@ $ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-d
 
 
 
+
+
 [[importing-the-appliance-on-amazon-ec2]]
 === Importing the Appliance to Amazon Elastic Compute Cloud (Amazon EC2)
+
 To import the appliance:
 
 . Create a containers.json file: 

@@ -214,18 +214,21 @@ Providers can be added at any level of tenancy. Once added, a provider is visibl
 
 Deploying multiple user interface worker appliances and placing them behind a third-party load balancer allows for redundancy and improved performance. This requires extra configuration in both the load balancer and in the {product-title_short} user interface worker appliances.
 
-.Load balancer configuration
+==== Configuring the Load Balancer
 
 * Configure the load balancer to use sticky sessions. This ensures that when a session is started, all requests for that session are sent to the same worker appliance.
 * Configure the load balancer to test for connectivity using the {product-title_short} ping response page: `https://appliance_name/ping`. The expected reply from the appliance is the text string _pong_. Using this URL is preferable to the appliance login URL as it does not establish a connection to the database. 
 
-.Appliance configuration
-
-By default, {product-title_short} user interface worker appliances store session data in the local appliance’s memcache. When operating behind a load balancer, it is better to store the user session data in the shared database (VMDB) rather than in memcache, which is not shared. 
+==== Configuring Worker Appliances for Load Balancing
 
 When using a load balancer, configure appliances that have the *User Interface* role enabled to store session data in the database. As a result, the user does not need to re-login if the load balancer redirects them to an alternative server in case the original user interface worker is unresponsive. 
 
-Configure this using the `session_store` parameter within the advanced settings page in the {product-title_short} user interface:
+[IMPORTANT]
+====
+This configuration can cause login issues for the Self Service User Interface. If your environment uses a load balancer and access via the Self Service User Interface, do not follow the steps in this section. Instead, configure the appliances to store session data in `memcached` on one appliance, as described in xref:load-balancer-ssui-addl-config[].
+====
+
+On each appliance, configure the session data storage location using the `session_store` parameter within the advanced settings page in the {product-title_short} user interface:
 
 . From the settings menu, select *Configuration*.
 . Click the *Advanced* tab.
@@ -239,21 +242,25 @@ Configure this using the `session_store` parameter within the advanced settings 
 +
 . Click *Save*. 
 
+[IMPORTANT]
+====
 Configure the `session_store` parameter to point to `sql` on each user interface appliance behind the load balancer.
+====
+
 
 ifdef::cfme[]
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#servers[Advanced Settings] in _General Configuration_ for more information on editing configuration files from the appliance user interface.
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#servers[Advanced Settings] in _General Configuration_ for more information on editing configuration files from the appliance user interface. 
 
 Also see https://access.redhat.com/documentation/en-us/reference_architectures/2017/html-single/deploying_cloudforms_at_scale/#load_balancers[Load Balancers] in the _Deploying CloudForms at Scale_ reference architecture for further information. 
 
-For information on configuring database failover in VMDB appliances, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/high_availability_guide/[the _High Availability Guide_].
+For information on configuring database failover in VMDB appliances, see the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/high_availability_guide/[_High Availability Guide_].
 endif::cfme[]
 
 
 [[load-balancer-ssui-addl-config]]
-==== Additional Configuration for Load Balancers and the Self Service User Interface
+==== Configuring Appliances using a Load Balancer and the Self Service User Interface
 
-Running several appliances behind a load balancer can cause login issues from the Self Service user interface because `memcached`, the service storing the session in memory, is not shared between the appliances. To prevent this, configure your environment using the steps below to run the `memcached` service on one appliance and have it shared with the other appliances.
+Running several user interface worker appliances behind a load balancer can cause login issues from the Self Service user interface because `memcached`, the service storing the session in memory, is not shared between the appliances. To prevent this, configure your environment to run the `memcached` service on one appliance and have it shared with the other appliances.
 
 [IMPORTANT]
 ====
@@ -269,7 +276,7 @@ The following example shows configuration on two appliances, `appliance1` and `a
 # firewall-cmd --reload
 ----
 +
-. On `appliance1`, configure the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
+. From the user interface on `appliance1`, configure the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
 +
 ----
 :session:
@@ -277,7 +284,7 @@ The following example shows configuration on two appliances, `appliance1` and `a
   :memcache_server_opts: "-l 0.0.0.0 -I 1M"
 ----
 +
-This configures `memcached` to run on `appliance1`, but listen to all servers (-l 0.0.0.0). The `memcache_server` line, which specifies where it connects to, remains set as itself (127.0.0.1).
+This configures `memcached` to run on `appliance1`, but listen to all servers (`-l 0.0.0.0`). The `memcache_server` line, which specifies where it connects to, remains set as itself (127.0.0.1).
 +
 . Click *Save*.
 . Restart `appliance1`:
@@ -286,7 +293,7 @@ This configures `memcached` to run on `appliance1`, but listen to all servers (-
 # systemctl restart evmserverd
 ----
 
-. Configure `appliance2` to point to `appliance1` by specifying the IP address for `appliance1` in the `memcache_server` line. Configure this in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
+. Configure `appliance2` to point to `appliance1` by specifying the IP address for `appliance1` in the `memcache_server` line. Configure this in the server's advanced settings from the appliance user interface, by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
 +
 ----
 :session:

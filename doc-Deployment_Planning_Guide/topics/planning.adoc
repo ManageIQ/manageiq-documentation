@@ -210,47 +210,59 @@ Providers can be added at any level of tenancy. Once added, a provider is visibl
 [[load-balancer]]
 === Using a Load Balancer
 
-Deploying multiple user interface worker appliances and placing them behind a third-party load balancer allows for redundancy and improved performance. This requires extra configuration in both the load balancer and in the {product-title_short} user interface worker appliances.
+Deploying several {product-title_short} appliances with a load balancer can be useful for performance.
 
-==== Configuring the Load Balancer
-
-* Configure the load balancer to use sticky sessions. This ensures that when a session is started, all requests for that session are sent to the same worker appliance.
-* Configure the load balancer to test for connectivity using the {product-title_short} ping response page: `https://appliance_name/ping`. The expected reply from the appliance is the text string _pong_. Using this URL is preferable to the appliance login URL as it does not establish a connection to the database. 
-
-==== Configuring Worker Appliances for Load Balancing
-
-When using a load balancer, configure appliances that have the *User Interface* role enabled to store session data in the database. As a result, the user does not need to re-login if the load balancer redirects them to an alternative server in the case the original user interface worker is unresponsive. 
-
-On each appliance, configure the session data storage location using the `session_store` parameter within the advanced settings page in the {product-title_short} user interface:
-
-. From the settings menu, select *Configuration*.
-. Click the *Advanced* tab.
-. Change the `session_store` parameter to `sql` in the following line (the default parameter is `cache`):
-+
-----
-:server:
-...
- :session_store: sql
-----
-+
-. Click *Save*. 
+However, running several appliances behind a load balancer can cause login issues from the Self Service user interface because `memcached`, the service storing the session in memory, is not shared between the appliances. To prevent this, configure your environment using the steps below to run the `memcached` service on one appliance and have it shared with the other appliances.
 
 [IMPORTANT]
 ====
-Configure the `session_store` parameter to point to `sql` on each user interface appliance behind the load balancer.
+When using this configuration, always start the appliance that owns `memcached` first, and ensure that `memcached` is running before starting the additional appliances. Starting another appliance before the `memcached` appliance may result in starting or login issues.
 ====
 
+The following example shows configuration on two appliances, `appliance1` and `appliance2`:
 
-ifdef::cfme[]
-See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#servers[Advanced Settings] in _General Configuration_ for more information on editing configuration files from the appliance user interface. 
+. On `appliance1`, open the 11211 port in the firewall:
++
+----
+# firewall-cmd --add-port=11211/tcp --permanent
+# firewall-cmd --reload
+----
++
+. On `appliance1`, configure the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
++
+----
+:session:
+  :memcache_server: 127.0.0.1:11211
+  :memcache_server_opts: "-l 0.0.0.0 -I 1M"
+----
++
+This configures `memcached` to run on `appliance1`, but listen to all servers (-l 0.0.0.0). The `memcache_server` line, which specifies where it connects to, remains set as itself (127.0.0.1).
++
+. Click *Save*.
+. Restart `appliance1`:
++
+----
+# systemctl restart evmserverd
+----
 
-Also see https://access.redhat.com/documentation/en-us/reference_architectures/2017/html-single/deploying_cloudforms_at_scale/#load_balancers[Load Balancers] in the _Deploying CloudForms at Scale_ reference architecture for further information. 
+. Configure `appliance2` to point to `appliance1` by specifying the IP address for `appliance1` in the `memcache_server` line. Configure this in the server's advanced settings by navigating to the settings menu, selecting *Configuration*, then the *Advanced* tab:
++
+----
+:session:
+  :memcache_server: <appliance1>:11211        
+  :memcache_server_opts: "-l 127.0.0.1 -I 1M"   
+----
++
+. Click *Save*.
+. Restart `appliance2`:
++
+----
+# systemctl restart evmserverd
+----
 
-For information on configuring database failover in VMDB appliances, see the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/high_availability_guide/[_High Availability Guide_].
-endif::cfme[]
+You can then get an API token from `appliance1`, and use it to access the API from `appliance2`. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/red_hat_cloudforms_rest_api/#using-authentication-tokens[Using Authentication Tokens] in the _REST API_ guide for instructions.
 
-
-
+The shared `memcached` service now runs only on `appliance1`, and any other appliance accesses `memcached` from that appliance. Configure additional appliances with the steps for `appliance2`.
 
 
 

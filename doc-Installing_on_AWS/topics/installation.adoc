@@ -30,28 +30,140 @@ ifdef::cfme[]
 . From the list of installers and images, click the *Download Now* link for *CFME EC2 Virtual Appliance*.
 endif::cfme[]
 
-[[uploading-the-appliance-on-amazon-ec2]]
-=== Uploading the Appliance to an Amazon S3 Bucket
+[[requirements]]
+=== Requirements
 
-Uploading the {product-title} appliance file onto Amazon EC2 has the following requirements:
+Below are the two sets of requirements for installing {product-title} on Amazon EC2.
+
+==== {product-title_short} Requirements
 
 * 44 GB of space on the chosen datastore.
 * 12 GB RAM.
-* 4 VCPUs.
+* 4 vCPUs.
+
+==== Amazon EC2 Requirements
+
 * An Amazon S3 bucket to store disk images.
 * A VM import service role (IAM role) named `vmimport`. 
-* Depending on your infrastructure, allow time for the upload.
 
-To upload the image:
+For information on creating an Amazon S3 bucket and a VM Import Service Role, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
 
-. Upload to the Amazon S3 Bucket the {product-title} appliance VHD image from your local file system using your choice of tool.
+[[uploading-the-appliance-on-amazon-ec2]]
+=== Uploading the Appliance to an Amazon S3 Bucket
 
+From your local file system, you can now upload the {product-title_short} appliance VHD image obtained in xref:obtaining-the-appliance[] to the Amazon S3 bucket, using your choice of tool.
+
+
+[[configure-ec2-import-appliance]]
+=== Configuring Amazon EC2 to Import the Appliance
+
+[IMPORTANT]
+====
+These are the procedural steps as of the time of writing. For the latest information on importing a virtual machine as an image, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
+====
+
+. Install the AWS client on the computer you want to interact with the AWS API from.
++
+----
+$ pip install awscli
+----
++
+. Configure and download your AWS secret/access key by following the steps in the link:https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html[Managing Access Keys for Your AWS Account] documentation.
+. Configure the AWS client with your access/secret key. For example:
++
+----
+
+$ aws configure
+AWS Access Key ID [******]: ACCESS_KEY
+AWS Secret Access Key [******]: SECRET_KEY
+Default region name [None]:
+Default output format [None]:
+----
++
+. Create the `trust-policy.json` file for the *vmimport* role. For example:
++
+----
+
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Effect": "Allow",
+         "Principal": { "Service": "vmie.amazonaws.com" },
+         "Action": "sts:AssumeRole",
+         "Condition": {
+            "StringEquals":{
+               "sts:Externalid": "vmimport"
+            }
+         }
+      }
+   ]
+}
+----
++
+. Create the *vmimport* role using the `trust-policy.json` file that you just created.
++
+----
+$ aws iam create-role --role-name vmimport --assume-role-policy-document file://trust-policy.json
+----
++
 [NOTE]
 ====
-These are the prerequisites and procedural steps as of the time of writing. For more information on creating an Amazon S3 Bucket and VM Import Service Role, consult the Amazon EC2 documentation.
+This user must have permissions to create and modify IAM roles.
 ====
+. Create the `role-policy.json` file. Be sure to use the exact image name that you uploaded to the S3 bucket. For example:
++
+----
+
+{
+   "Version": "2012-10-17",
+   "Statement": [
+      {
+         "Effect": "Allow",
+         "Action": [
+            "s3:ListBucket",
+            "s3:GetBucketLocation",
+            "s3:FullAccess"
+         ],
+         "Resource": [
+            "arn:aws:s3:::NAME_OF_IMAGE_IN_S3_BUCKET"
+         ]
+      },
+      {
+         "Effect": "Allow",
+         "Action": [
+            "s3:GetObject"
+         ],
+         "Resource": [
+            "arn:aws:s3:::NAME_OF_IMAGE_IN_S3_BUCKET/*"
+         ]
+      },
+      {
+         "Effect": "Allow",
+         "Action":[
+            "ec2:ModifySnapshotAttribute",
+            "ec2:CopySnapshot",
+            "ec2:RegisterImage",
+            "ec2:Describe*",
+            "ec2:FullAccess"
+         ],
+         "Resource": "*"
+      }
+   ]
+}
+----
++
+. Apply the *vmimport* role to the {product-title_short} appliance image you uploaded to the S3 bucket.
++
+----
+$ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://role-policy.json
+----
++
+
+
 [[importing-the-appliance-on-amazon-ec2]]
 === Importing the Appliance to Amazon Elastic Compute Cloud (Amazon EC2)
+
 To import the appliance:
 
 . Create a containers.json file: 

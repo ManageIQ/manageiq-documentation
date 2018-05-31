@@ -10,26 +10,26 @@ Run the following steps on your IPA server:
 +
 [subs="verbatim,attributes"]
 ------
-[root@ipa ~]# ipa group-add {productname_short_l}_users --desc="{productname_short_l} Users"
-[root@ipa ~]# ipa group-add-member {productname_short_l}_users --users=testuser1,testuser2
+[root@ipa ~]# ipa group-add {product-title_short_l}_users --desc="{product-title_short_l} Users"
+[root@ipa ~]# ipa group-add-member {product-title_short_l}_users --users=testuser1,testuser2
 ------
 
 . Create a host group and restrict access to your appliance hosts:
 +
 [subs="verbatim,attributes"]
 ------
-[root@ipa ~]# ipa hostgroup-add {productname_short_l}_hosts --desc "{product-title} hosts"
-[root@ipa ~]# ipa hostgroup-add-member {productname_short_l}_hosts --hosts=appliance1.example.com,appliance2.example.com
+[root@ipa ~]# ipa hostgroup-add {product-title_short_l}_hosts --desc "{product-title} hosts"
+[root@ipa ~]# ipa hostgroup-add-member {product-title_short_l}_hosts --hosts=appliance1.example.com,appliance2.example.com
 ------
 
 . Add rules to allow the host group and user group access to the {product-title} HTTP service:
 +
 [subs="verbatim,attributes"]
 ------
-[root@ipa ~]# ipa hbacrule-add {productname_short_l}_access --srchostcat=all
-[root@ipa ~]# ipa hbacrule-add-service {productname_short_l}_access --hbacsvcs httpd-auth
-[root@ipa ~]# ipa hbacrule-add-user {productname_short_l}_access --groups {productname_short_l}_users
-[root@ipa ~]# ipa hbacrule-add-host {productname_short_l}_access --hostgroups {productname_short_l}_hosts
+[root@ipa ~]# ipa hbacrule-add {product-title_short_l}_access --srchostcat=all
+[root@ipa ~]# ipa hbacrule-add-service {product-title_short_l}_access --hbacsvcs httpd-auth
+[root@ipa ~]# ipa hbacrule-add-user {product-title_short_l}_access --groups {product-title_short_l}_users
+[root@ipa ~]# ipa hbacrule-add-host {product-title_short_l}_access --hostgroups {product-title_short_l}_hosts
 ------
 
 . Remove the default rule on your IPA server to allow access to all:
@@ -39,7 +39,7 @@ Run the following steps on your IPA server:
 ------
 
 
-This ensures only users in the `{productname_short_l}_users` group can access the authentication service (`http-auth`) on the appliances in the `{productname_short_l}_hosts` host group.
+This ensures only users in the `{product-title_short_l}_users` group can access the authentication service (`http-auth`) on the appliances in the `{product-title_short_l}_hosts` host group.
 
 
 

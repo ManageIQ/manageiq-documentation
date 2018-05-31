@@ -3,8 +3,13 @@
 = Permissions for Amazon EC2 Providers
 
 Red Hat recommends using Amazon EC2's _Power User_ Identity and Access Management (IAM) policy when adding Amazon EC2 as a cloud provider in {product-title_short}.
-This policy allows those in the _Admin_ group full access to AWS services except for user administration, meaning a {product-title_short} API user can access all of the API functionality, but cannot access or change user
+This policy allows those in the _Power User_ group full access to AWS services except for user administration, meaning a {product-title_short} API user can access all of the API functionality, but cannot access or change user
 permissions.
+ 
+[NOTE]
+====
+When utilizing a {product-title_short} SmartState Analysis instance in EC2, Red Hat recommends adding {product-title_short} to the _Admin_ group.  For installations in which assigning the _Admin_ group is unacceptable, manually create an Amazon EC2 policy role using specific permissions. See xref:amazon-ec2-manual-role-creation[] for more information.
+====
 
 Further limiting API access limitations can limit Automate capabilities, as Automate
 scripts directly access the AWS SDK to create brand new
@@ -18,6 +23,12 @@ The AWS services primarily accessed by the {product-title_short} API include:
 * Elastic Load Balancing
 * Simple Notification Service (SNS)
 * Simple Queue Service (SQS)
+
+[[amazon-ec2-manual-role-creation]]
+== Manually Creating an Amazon EC2 Role For SmartState Analysis Instances
+
+include::Amazon_EC2_Manual_Role_Creation.adoc[]
+
 
 
 

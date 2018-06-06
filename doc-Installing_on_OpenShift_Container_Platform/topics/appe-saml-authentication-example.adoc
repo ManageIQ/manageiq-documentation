@@ -1,0 +1,42 @@
+[[appe-saml-authentication-example]]
+
+Excluding the content of the files, a SAML auth-config map data section may look like:
+
+```bash
+apiVersion: v1
+data:
+auth-type: saml
+auth-kerberos-realms: example.com
+auth-configuration.conf: |
+#
+# Configuration for SAML authentication
+#
+file = manageiq-remote-user.conf        /etc/httpd /conf.d/manageiq-remote-user.conf        644
+file = manageiq-external-auth-saml.conf /etc/httpd/conf.d/manageiq-external-auth-saml.conf 644
+file = idp-metadata.xml                 /etc/httpd/saml2/idp-metadata.xml                  644
+file = sp-key.key                       /etc/httpd/saml2/sp-key.key                        600:root:root
+file = sp-cert.cert                     /etc/httpd/saml2/sp-cert.cert                      644
+file = sp-metadata.xml                  /etc/httpd/saml2/sp-metadata.xml                   644
+manageiq-remote-user.conf: |
+RequestHeader unset X_REMOTE_USER
+...
+manageiq-external-auth-saml.conf: |
+LoadModule auth_mellon_module modules/mod_auth_mellon.so
+...
+idp-metadata.xml: |
+<EntitiesDescriptor ...
+...
+</EntitiesDescriptor>
+sp-key.key: |
+-----BEGIN PRIVATE KEY-----
+...
+-----END PRIVATE KEY-----
+sp-cert.cert: |
+-----BEGIN CERTIFICATE-----
+...
+-----END CERTIFICATE-----
+sp-metadata.xml: |
+<EntityDescriptor ...
+...
+</EntityDescriptor>
+```

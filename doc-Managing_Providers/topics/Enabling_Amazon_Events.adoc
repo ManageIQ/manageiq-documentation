@@ -1,0 +1,54 @@
+[[amazon-provider-aws-events]]
+= Enabling Amazon EC2 Events
+
+After adding an Amazon EC2 provider and configuring notifications in xref:amazon-provider-aws-config-notifications[], create a CloudTrail, then configure a CloudWatch rule on your EC2 provider to automatically get events in {product-title} to monitor the provider.
+
+[NOTE]
+====
+The following procedures are accurate at time of publishing. See the Amazon AWS documentation for further details: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/
+====
+
+In the CloudTrail area of the AWS Management Console, create a trail and an S3 bucket:
+
+. Create a *Trail* with a custom name.
+. Apply the trail to all regions by selecting *Yes*.
+. For *Management Events*, select *Read/Write events: All*.
+. Create a new S3 bucket.
+
+In the CloudWatch area of the AWS Management Console, create a rule:
+
+. Navigate to menu:Events[Rules].
+. Create a rule containing the following *Event Pattern*:
++
+----
+{
+  "source": [
+    "aws.ec2"
+  ],
+  "detail-type": [
+    "AWS API Call via CloudTrail"
+  ],
+  "detail": {
+    "eventSource": [
+      "ec2.amazonaws.com"
+    ]
+  }
+}
+----
++
+. Add a *Target* with the following attributes:
+* *Type*: `SNS Topic`
+* *Topic*: `AWSConfig_topic`
+* *Input*: `Matched event`
+. Click *Configure Details* to save these details.
+. Configure rule details on the next screen, providing a name and description (if desired). Ensure the *Enabled* checkbox is selected for *State*.
+. Click *Create Rule*.
+
+EC2 can now automatically refresh events in {product-title_short}.
+
+
+[IMPORTANT]
+====
+When an SNS topic is deleted and recreated (manually or by {product-title_short}), CloudWatch rules must be recreated as well, even though the SNS target topic for CloudWatch rules appears to be assigned to these rules.
+The CloudWatch rule does not send events to this recreated topic until it is recreated too.
+====

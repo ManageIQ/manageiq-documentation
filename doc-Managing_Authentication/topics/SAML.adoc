@@ -20,7 +20,7 @@ The current SAML implementation only secures the {product-title_short} appliance
 
 The following is required in order to enable SAML authentication to the appliance:
 
-* A CloudForms 4.6 appliance
+* A CloudForms 4.7-Beta appliance
 * A SAML identity provider (e.g. Red Hat Single Sign-On (RH-SSO) 7.0 or later)
 
 [[configure-apache-SAML]]
@@ -102,7 +102,7 @@ To add a client in the Red Hat SSO {product-title_short} realm:
   http://<redhatSSO-server>:8080/auth/realms/<miq-realm>/protocol/saml/descriptor
 ----
 +
-. In CloudForms 4.6, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
+. In CloudForms 4.7-Beta, the following change is necessary to the `idp-metadata.xml` file for SAML logout to work between `mod_auth_mellon` and Red Hat SSO:
 +
 ----
 # vi idp-metadata.xml
@@ -146,8 +146,8 @@ Ensure the user’s groups are created on the appliance and appropriate roles ar
 For example, to configure user groups from your SAML identity provider to work with {product-title_short}:
 
   . In your SAML identity provider, specify your existing user groups in similar format to the following: `REMOTE_USER_GROUPS=Administrators;CloudAdministrators;Users`
-  . On your {product-title_short} appliance, create the equivalent groups. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#creating-a-user-group[Creating a User Group] in _General Configuration_.
-  . On your {product-title_short} appliance, assign EVM roles to the groups. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#creating-a-role[Creating a Role] in _General Configuration_.
+  . On your {product-title_short} appliance, create the equivalent groups. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/general_configuration/#creating-a-user-group[Creating a User Group] in _General Configuration_.
+  . On your {product-title_short} appliance, assign EVM roles to the groups. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/general_configuration/#creating-a-role[Creating a Role] in _General Configuration_.
 ====
 
 Complete the above steps on each appliance in the settings menu, then navigate to menu:Configuration[Access Control].
@@ -218,3 +218,4 @@ Alternatively, log into the appliance as root using SSH, and run the following c
 ----
 # appliance_console_cli --extauth-opts local_login_disabled=false
 ----
+

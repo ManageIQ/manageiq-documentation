@@ -3,26 +3,39 @@
 
 After installing {product-title_short}, you can configure external authentication using the `httpd` pod.
 
-Configuring the `httpd` pod for external authentication is done by updating the `httpd-auth-configs` configuration map to include all necessary configuration files and certificates. 
-
 Upon startup, the `httpd` pod overlays its files with the ones specified in the `auth-configuration.conf` file in the configuration map. This is done by the `initialize-httpd-auth` service that runs before `httpd`.
 
-You can configure this manually using the steps in xref:defining-configmap[], or automatically using the steps in xref:automatic-defining-configmap[].
+Configuring the `httpd` pod for external authentication is done by updating the `httpd-auth-configs` configuration map to include all necessary configuration files and certificates. 
 
-[[configmap-settings]]
+You can configure the configuration map manually using the steps in   <<manually-defining-configmap>>, or automatically using the steps in <<automatic-defining-configmap>>. 
+
+=== Supported Authentication Types
+
+.Supported Authentication Types
+[width="100%",cols="20%,40%,40%",options="header",]
+|====
+|auth-type|Identity Provider/Environment|for usage
+| active-directory | Active Directory domain realm join               | [README-active-directory](README-active-directory.md) 
+| ipa              | IPA, IPA 2-factor authentication, IPA/AD Trust   | [README-ipa](README-ipa.md)                           
+| ldap             | LDAP directories                                 | [README-ldap](README-ldap.md)                         
+| saml             | Keycloak, etc.                                   | [README-saml](README-saml.md)  
+|====
+
 === Configuration Map Settings
 
-The configuration map includes the following:
+See <<appe-saml-authentication-example>> for an example configuration map file.
+
+The configuration map includes the following parameters:
 
 * `auth-type` - The authentication type.
 +
-This parameter drives which configuration files `httpd` will load upon start-up. Supported values are:
+This parameter controls which configuration files `httpd` will load upon startup. The default is `internal`. Supported values are:
 +
 .`auth-type` values
 [width="100%",cols="30%,70%",options="header",]
 |====
 | Value    | External-Authentication Configuration 
-| `internal` | Application Based Authentication (_default_) - Database, LDAP/LDAPS, Amazon. This is the default.
+| `internal` | Application Based Authentication - Database, LDAP/LDAPS, Amazon. This is the default.
 | `external` | IPA, IPA 2-factor authentication, IPA/AD Trust, LDAP (OpenLDAP, RHDS, Active Directory, etc.)
 | `active-directory` | Active Directory domain realm join
 | `saml` | SAML based authentication (Keycloak, ADFS, etc.)
@@ -30,9 +43,9 @@ This parameter drives which configuration files `httpd` will load upon start-up.
 +
 * `auth-kerberos-realms` - The Kerberos realms to join.
 +
-When configuring external authentication against IPA, Active Directory or LDAP, this parameter defines the kerberos realm `httpd`  is configured against, i.e. `example.com`. When specifying multiple Kerberos realms, they must be separated by spaces. The default is `undefined`.
+When configuring external authentication against IPA, Active Directory or LDAP, this parameter defines the Kerberos realm `httpd`  is configured against, such as _example.com_. When specifying multiple Kerberos realms, they must be separated by spaces. The default is `undefined`.
 +
-* `auth-configuration.conf` - The external authentication configuration file  which declares the list of files to overlay upon start-up if `auth-type` is other than `internal`.
+* `auth-configuration.conf` - The external authentication configuration file  which declares the list of files to overlay upon startup if `auth-type` is other than `internal`.
 +
 Syntax for the file is as follows:
 +
@@ -61,14 +74,15 @@ For example:
 
 Binary files can be specified in the configuration map in their base64 encoded format with a basename having a `.base64` extension. Such files are then converted back to binary as they are copied to their target path.
 
-When an /etc/sssd/sssd.conf file is included in the configuration map, the `httpd`  pod automatically enables the sssd service upon startup.
+When an `/etc/sssd/sssd.conf` file is included in the configuration map, the `httpd`  pod automatically enables the SSSD service upon startup.
 
 [NOTE]
 ====
 See xref:appe-saml-authentication-example[] for an example SAML configuration file.
 ====
 
-[[defining-configmap]]
+
+[[manually-defining-configmap]]
 === Defining the Configuration Map Manually
 
 The authentication configuration map can be defined and customized in the `httpd` pod as follows:
@@ -76,17 +90,18 @@ The authentication configuration map can be defined and customized in the `httpd
 ----
 $ oc edit configmaps httpd-auth-configs
 ----
-Or simply replaced if generated and edited externally as follows:
+
+Alternatively, you can replace the `httpd-auth-configs` file with an externally generated and edited configuration file as follows:
 
 ----
 $ oc replace configmaps httpd-auth-configs --filename external-auth-configmap.yaml
 ----
 
-Then redeploy the `httpd` pod for the new authentication configuration to take effect.
+After editing the configuration map, redeploy the `httpd` pod for the new authentication configuration to take effect.
 
 
 [[automatic-defining-configmap]]
-=== Configuring External Authentication Automatically with httpd_configmap_generator
+=== Configuring External Authentication Automatically (httpd_configmap_generator)
 
 You can automatically generate authentication configuration maps for the `httpd` pod with the `httpd_configmap_generator` pod, available as a Ruby gem.
 
@@ -122,19 +137,6 @@ To show the usage for each authentication type or sub-command, run:
 $ httpd_configmap_generator <command_or_authentication_type> --help
 ----
 ====
-
-
-==== Supported Authentication Types
-
-.Supported Authentication Types
-[width="100%",cols="20%,40%,40%",options="header",]
-|====
-|auth-type|Identity Provider/Environment|for usage
-| active-directory | Active Directory domain realm join               | [README-active-directory](README-active-directory.md) 
-| ipa              | IPA, IPA 2-factor authentication, IPA/AD Trust   | [README-ipa](README-ipa.md)                           
-| ldap             | LDAP directories                                 | [README-ldap](README-ldap.md)                         
-| saml             | Keycloak, etc.                                   | [README-saml](README-saml.md)  
-|====
 
 ==== Updating an auth configuration map
 

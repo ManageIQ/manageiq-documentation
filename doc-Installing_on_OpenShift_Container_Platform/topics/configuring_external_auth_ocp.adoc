@@ -3,11 +3,13 @@
 
 After installing {product-title_short}, you can configure external authentication using the `httpd` pod.
 
-Upon startup, the `httpd` pod overlays its files with the ones specified in the `auth-configuration.conf` file in the configuration map. This is done by the `initialize-httpd-auth` service that runs before `httpd`.
+Upon startup, the `httpd` pod overlays its files with the ones specified in the `auth-configuration.conf` file in the `authconfig` configuration map. This is done by the `initialize-httpd-auth` service that runs before `httpd`.
 
 Configuring the `httpd` pod for external authentication is done by updating the `httpd-auth-configs` configuration map to include all necessary configuration files and certificates. 
 
-You can configure the configuration map manually using the steps in   <<manually-defining-configmap>>, or automatically using the steps in <<automatic-defining-configmap>>. 
+You can configure the configuration map manually using the steps in <<manually-defining-configmap>>, or automatically using the steps in <<automatic-defining-configmap>>. 
+
+See <<configmap-settings>> for configuration map parameters.
 
 === Supported Authentication Types
 
@@ -21,93 +23,17 @@ You can configure the configuration map manually using the steps in   <<manually
 | saml             | Keycloak, etc.                                   | [README-saml](README-saml.md)  
 |====
 
-=== Configuration Map Settings
-
-See <<appe-saml-authentication-example>> for an example configuration map file.
-
-The configuration map includes the following parameters:
-
-* `auth-type` - The authentication type.
-+
-This parameter controls which configuration files `httpd` will load upon startup. The default is `internal`. Supported values are:
-+
-.`auth-type` values
-[width="100%",cols="30%,70%",options="header",]
-|====
-| Value    | External-Authentication Configuration 
-| `internal` | Application Based Authentication - Database, LDAP/LDAPS, Amazon. This is the default.
-| `external` | IPA, IPA 2-factor authentication, IPA/AD Trust, LDAP (OpenLDAP, RHDS, Active Directory, etc.)
-| `active-directory` | Active Directory domain realm join
-| `saml` | SAML based authentication (Keycloak, ADFS, etc.)
-|====
-+
-* `auth-kerberos-realms` - The Kerberos realms to join.
-+
-When configuring external authentication against IPA, Active Directory or LDAP, this parameter defines the Kerberos realm `httpd`  is configured against, such as _example.com_. When specifying multiple Kerberos realms, they must be separated by spaces. The default is `undefined`.
-+
-* `auth-configuration.conf` - The external authentication configuration file  which declares the list of files to overlay upon startup if `auth-type` is other than `internal`.
-+
-Syntax for the file is as follows:
-+
-----
-# for comments
-file = basename1 target_path1 permission1
-file = basename2 target_path2 permission2
-----
-+
-For the files to overlay on the `httpd` pod, one `file` directive is needed per file.
-+
-* `basename` - The name of the source file in the configuration map.
-* `target_path` - The path of the file on the pod to overwrite, i.e. `/etc/sssd/sssd.conf`
-* `permission` (optional) - By default, files are copied using the pod's default umask, owner and group, so files are created as mode 644 owner root, group root.
-+
-`permission` can be specified as follows, reflecting the mode and ownership to set the copied files to:
-+
-** mode
-** mode:owner
-** mode:owner:group
-+
-For example:
-** 755
-** 640:root
-** 644:root:apache
-
-Binary files can be specified in the configuration map in their base64 encoded format with a basename having a `.base64` extension. Such files are then converted back to binary as they are copied to their target path.
-
-When an `/etc/sssd/sssd.conf` file is included in the configuration map, the `httpd`  pod automatically enables the SSSD service upon startup.
-
-[NOTE]
-====
-See xref:appe-saml-authentication-example[] for an example SAML configuration file.
-====
-
-
-[[manually-defining-configmap]]
-=== Defining the Configuration Map Manually
-
-The authentication configuration map can be defined and customized in the `httpd` pod as follows:
-
-----
-$ oc edit configmaps httpd-auth-configs
-----
-
-Alternatively, you can replace the `httpd-auth-configs` file with an externally generated and edited configuration file as follows:
-
-----
-$ oc replace configmaps httpd-auth-configs --filename external-auth-configmap.yaml
-----
-
-After editing the configuration map, redeploy the `httpd` pod for the new authentication configuration to take effect.
-
 
 [[automatic-defining-configmap]]
-=== Configuring External Authentication Automatically (httpd_configmap_generator)
+=== Configuring External Authentication Automatically
 
-You can automatically generate authentication configuration maps for the `httpd` pod with the `httpd_configmap_generator` pod, available as a Ruby gem.
+You can automatically generate `authconfig` maps for the `httpd` pod with the `httpd_configmap_generator` pod, available as a Ruby gem.
 
-This gem provides a command-line interface to automate the generation of `auth-config` maps, which can be used with the `httpd auth` pod for enabling external authentication.
+This gem provides a command-line interface to automate the generation of `authconfig` maps, which can be used with the `httpd auth` pod to enable external authentication.
 
-To automatically generate and `auth-config` map:
+==== Creating an `authconfig` Configuration Map
+
+To automatically generate an `authconfig` map:
 
 . Install the `httpd_configmap_generator` tool:
 +
@@ -115,36 +41,26 @@ To automatically generate and `auth-config` map:
 # gem install httpd_configmap_generator
 ----
 +
-. Run the `httpd_configmap_generator` tool:
+. Run the `httpd_configmap_generator` tool with your desired parameters:
 +
 ----
-$ httpd_configmap_generator --help
-httpd_configmap_generator 0.1.1 - External Authentication Configuration script
-
-Usage: httpd_configmap_generator auth_type | update | export [--help | options]
-
-supported auth_type: active-directory, ipa, ldap, saml
-
-httpd_configmap_generator options are:
--V, --version    Version of the httpd_configmap_generator command
--h, --help       Show this message
+$ httpd_configmap_generator <command_or_authentication_type>
 ----
 
 [NOTE]
 ====
-To show the usage for each authentication type or sub-command, run:
-----
-$ httpd_configmap_generator <command_or_authentication_type> --help
-----
+Run `$ httpd_configmap_generator --help` to show available parameters. To show the usage for each authentication type or sub-command, run
+`$ httpd_configmap_generator <command_or_authentication_type> --help`. See See <<configmap-settings>> also for configuration map parameters.
 ====
 
-==== Updating an auth configuration map
+==== Updating an `authconfig` Map
 
 With the `update` subcommand, you can add file(s) to the configuration
-map. The `--add-file` option can be specified multiple times, one per file to add
-to a configuration map.
+map to specify file ownership and permissions. The `--add-file` option can be specified multiple times, one per file to add to a configuration map.
 
-Supported file specification for the `--add-file` option are:
+//what does adding files do?
+
+Supported file specifications for the `--add-file` option are:
 
 ----
 --add-file=file-path
@@ -153,12 +69,12 @@ Supported file specification for the `--add-file` option are:
 --add-file=file-url,target-file-path,file-permission
 ----
 
-When entering file specifications, `file-url` is an HTTP URL and `file-permission` can be specified as: `mode:owner:group`.
+When entering file specifications, `file-url` is an HTTP URL and `file-permission` can be specified as `mode:owner:group`.
 
 
-Examples:
+.Examples
 
-.Adding files by specifying paths:
+.Adding files by specifying paths
 
 The file ownership and permissions will be based on the files specified.
 
@@ -170,7 +86,7 @@ $ httpd_configmap_generator update \
 --output=/tmp/updated-auth-configmap.yaml
 ----
 
-.Adding target files from different source directories:
+.Adding target files from different source directories
 
 ----
 $ httpd_configmap_generator update \
@@ -180,11 +96,11 @@ $ httpd_configmap_generator update \
 --output=/tmp/updated-auth-configmap.yaml
 ----
 
-The file ownership and permissions will be based on the source files specified,
+The file ownership and permissions will be based on the source files specified;
 in this case the ownership and permissions of the `/tmp/uploaded-cert1`
 and `/tmp/uploaded-cert2` files will be used.
 
-.Adding a target file with user-specified ownership and mode:
+.Adding a target file with user-specified ownership and mode
 
 ----
 $ httpd_configmap_generator update \
@@ -193,7 +109,7 @@ $ httpd_configmap_generator update \
 --output=/tmp/updated-auth-configmap.yaml
 ----
 
-.Adding files by URL:
+.Adding files by URL
 
 ----
 $ httpd_configmap_generator update \
@@ -205,10 +121,10 @@ $ httpd_configmap_generator update \
 When downloading a file by URL, a target file path and file ownership/mode must be specified.
 
 
-==== Exporting a file from an auth configuration map
+==== Exporting a File from an `auth-config` Map
 
 With the `export` subcommand, you can export a file from the configuration
-map. For example, to extract the sssd.conf file out of the auth configuration map:
+map. For example, to extract the `sssd.conf` file out of the `authconfig` map:
 
 ----
 $ httpd_configmap_generator export \
@@ -217,109 +133,45 @@ $ httpd_configmap_generator export \
 --output=/tmp/sssd.conf
 ----
 
-==== Building the Httpd Configmap Generator in a Container
+==== Building the `httpd_configmap_generator` in a Container
 
-Container for configuring external authentication for the `httpd` auth pod.
-It is based on the auth `httpd` container and generates the `httpd` auth-config map
+The `httpd_configmap_generator` is the container for configuring external authentication for the `httpd` auth pod.
+It is based on the auth `httpd` container and generates the `httpd` `authconfig` map
 needed to enable external authentication.
 
-To install, run:
+
+===== Preparing to Deploy the `httpd-configmap-generator` Application
+
+The `cfme-httpd-configmap-generator` image is obtained from the Red Hat Container Catalog at
+https://access.redhat.com/containers/?tab=images&platform=openshift#/registry.access.redhat.com/cloudforms46/cfme-httpd-configmap-generator.
+
+To obtain the latest container image, run:
 
 ----
-$ git clone https://github.com/ManageIQ/httpd_configmap_generator.git
+oc import-image my-cloudforms46/cfme-httpd-configmap-generator --from=registry.access.redhat.com/cloudforms46/cfme-httpd-configmap-generator --confirm
 ----
 
-___
+The `httpd-configmap-generator` service account must be added to the `httpd-scc-sysadmin` SCC before the `httpd-configmap-generator` can run.
 
-===== Running with Docker
-
-. Build the container image:
+. Log in to OpenShift as an admin user: 
 +
 ----
-$ cd httpd_configmap_generator
-$ docker build . -t manageiq/httpd_configmap_generator:latest
+$ oc login -u <user> -p <password>
 ----
 +
-. Run the `httpd_configmap_generator` container:
-+
-----
-$ docker run --privileged manageiq/httpd_configmap_generator:latest &
-----
-+
-. Get the httpd_configmap_generator container id:
-+
-----
-$ CONFIGMAP_GENERATOR_ID="`docker ps -l -q`"
-----
-+
-. Generate a configmap for external authentication against IPA:
-+
-While the httpd_configmap_generator tool can be run in the container by first getting into a bash shell:
-+
-----
-$ docker exec -it $CONFIGMAP_GENERATOR_ID /bin/bash -i
-----
-+
-The tool can also be executed directly as follows:
-+
-For example, to generate a configuration map for IPA:
-+
-----
-$ docker exec $CONFIGMAP_GENERATOR_ID httpd_configmap_generator ipa \
---host=appliance.example.com        \
---ipa-server=ipaserver.example.com  \
---ipa-domain=example.com            \
---ipa-realm=EXAMPLE.COM             \
---ipa-principal=admin               \
---ipa-password=smartvm1             \
--o /tmp/external-ipa.yaml
-----
-+
-`--host` above must be the DNS of the application exposing the httpd auth pod, i.e. ${APPLICATION_DOMAIN}
-. Copy the new auth configmap back locally:
-+
-----
-$ docker cp $CONFIGMAP_GENERATOR_ID:/tmp/external-ipa.yaml ./external-ipa.yaml
-----
-+
-. The new configmap can then be applied to the auth httpd pod and then redeployed to take effect:
-+
-----
-$ oc replace configmaps httpd-auth-configs --filename ./external-ipa.yaml
-----
-
-====== Stopping the `httpd-configmap-generator` container
-
-When completed with `httpd-configmap-generator`, the container can simply be stopped and/or removed:
-
-----
-$ docker stop $CONFIGMAP_GENERATOR_ID
-----
-
-----
-$ docker rmi --force manageiq/httpd_configmap_generator:latest
-----
-
-
-===== Running with OpenShift
-
-.Pre-deployment tasks
-
-The httpd-configmap-generator service account must be added to the httpd-scc-sysadmin SCC before the Httpd Configmap Generator can run.
-
-. As the admin user, create the httpd-scc-sysadmin SCC:
+. As the admin user, create the `httpd-scc-sysadmin` SCC:
 +
 ----
 $ oc create -f templates/httpd-scc-sysadmin.yaml
 ----
 +
-. Include the httpd-configmap-generator service account with the new SCC:
+. Add the `httpd-configmap-generator` service account to the `httpd-scc-sysadmin` SCC:
 +
 ----
 $ oc adm policy add-scc-to-user httpd-scc-sysadmin system:serviceaccount:<your-namespace>:httpd-configmap-generator
 ----
 +
-. Verify that the httpd-configmap-generator service account is now included in the httpd-scc-sysadmin SCC:
+. Verify that the `httpd-configmap-generator` service account is now included in the `httpd-scc-sysadmin` SCC:
 +
 ----
 $ oc describe scc httpd-scc-sysadmin | grep Users
@@ -327,25 +179,29 @@ Users:        system:serviceaccount:<your-namespace>:httpd-configmap-generator
 ----
 
 
-.Deploying the Httpd Configmap Generator Application
+===== Deploying the `httpd-configmap-generator` Application
 
 . As a regular user, run:
 +
 ----
-$ oc create -f templates/httpd-configmap-generator-template.yaml
-
+$ oc create -f httpd-configmap-generator-template.yaml
+----
++
+. Verify the template is available with your project:
++
+----
 $ oc get templates
 NAME                        DESCRIPTION                                 PARAMETERS     OBJECTS
 httpd-configmap-generator   Httpd Configmap Generator                   6 (all set)    3
 ----
 +
-. Deploy the Httpd Configmap Generator:
+. Deploy the `httpd-configmap-generator`:
 +
 ----
 $ oc new-app --template=httpd-configmap-generator
 ----
 +
-. Check the readiness of the Httpd Configmap Generator:
+. Check the readiness of the `httpd-configmap-generator`:
 +
 ----
 $ oc get pods
@@ -353,21 +209,21 @@ NAME                                READY     STATUS    RESTARTS   AGE
 httpd-configmap-generator-1-txc34   1/1       Running   0          1h
 ----
 
-.Getting the pod name
+===== Getting the Pod Name
 
-For working with the `httpd-configmap-generator` script in the `httpd-configmap-generator` pod, it is necessary to
-get the pod name reference below:
+To work with the `httpd-configmap-generator` script in the `httpd-configmap-generator` pod, it is necessary to
+get the pod name as below:
 
 ----
 $ CONFIGMAP_GENERATOR_POD=`oc get pods | grep "httpd-configmap-generator" | cut -f1 -d" "`
 ----
 
 
-.Generating a configmap for external authentication against IPA
+===== Generating an `authconfig` Map for External Authentication Against IPA
 
 The following example shows how to generate a configmap for external authentication against IPA.
 
-. To generate a configmap for external authentication against IPA, run
+. To generate an `authconfig` map for external authentication against IPA, run
 +
 ----
 $ oc rsh $CONFIGMAP_GENERATOR_POD httpd_configmap_generator ipa \
@@ -385,29 +241,31 @@ $ oc rsh $CONFIGMAP_GENERATOR_POD httpd_configmap_generator ipa \
 `--host` above must be the DNS of the application exposing the httpd auth pod, i.e. ${APPLICATION_DOMAIN}.
 ====
 +
-. Copy the new auth configmap back locally:
+. Copy the new `authconfig` map back locally:
 +
 ----
 $ oc cp $CONFIGMAP_GENERATOR_POD:/tmp/external-ipa.yaml ./external-ipa.yaml
 ----
 +
-. The new configmap can then be applied to the auth httpd pod and then redeployed to take effect:
+. Apply the new configuration map to the auth httpd pod, and then redeploy it to take effect:
 +
 ----
 $ oc replace configmaps httpd-auth-configs --filename ./external-ipa.yaml
 ----
-+
-. To generate a new auth configuration map, redeploy the `httpd-configmap-generator` pod first to get a clean environment before running the `httpd-configmap-generator` tool.
 
-.Cleaning up
 
-When done generating an auth-configmap, the `httpd-configmap-generator` pod can simply be scaled down:
+To generate a new auth configuration map, redeploy the `httpd-configmap-generator` pod first to get a clean environment before running the `httpd-configmap-generator` tool.
 
+===== Cleaning up
+
+After generating an `authconfig` map, the `httpd-configmap-generator` pod can be scaled down, or deleted if no longer needed.
+
+To scale down the pod, run:
 ----
 $ oc scale dc httpd-configmap-generator --replicas=0
 ----
 
-or deleted if no longer needed:
+To delete the pod, run:
 
 ----
 $ oc delete all  -l app=httpd-configmap-generator
@@ -415,4 +273,20 @@ $ oc delete pods -l app=httpd-configmap-generator
 ----
 
 
+[[manually-defining-configmap]]
+=== Defining the Configuration Map Manually
+
+The `authconfig` map can be defined and customized in the `httpd` pod as follows:
+
+----
+$ oc edit configmaps httpd-auth-configs
+----
+
+Alternatively, you can replace the `httpd-auth-configs` file with an externally generated and edited configuration file as follows:
+
+----
+$ oc replace configmaps httpd-auth-configs --filename external-auth-configmap.yaml
+----
+
+After editing the configuration map, redeploy the `httpd` pod for the new authentication configuration to take effect.
 

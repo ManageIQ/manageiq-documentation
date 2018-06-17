@@ -1,0 +1,78 @@
+[[Installing_RHVH]]
+=== Installing Red Hat Virtualization Host
+
+You must install at least one host to function as a conversion host during the migration.
+
+*(%AP: I included RHVH, but if you think we should include RHEL hosts, let me know.)*
+Red Hat Virtualization Host (RHVH) is a minimal operating system, based on Red Hat Enterprise Linux, that is designed to provide a simple method for setting up a physical machine to act as a hypervisor in a Red Hat Virtualization environment. The minimal operating system contains only the packages required for the machine to act as a hypervisor, and features a Cockpit user interface for monitoring the host and performing administrative tasks.
+
+RHVH supports NIST 800-53 partitioning requirements to improve security. RHVH uses a NIST 800-53 partition layout by default.
+
+Installing RHVH on a physical machine involves three key steps:
+
+* Download the RHVH ISO image from the Customer Portal.
+* Write the RHVH ISO image to a USB, CD, or DVD.
+* Install the RHVH minimal operating system.
+
+*Prerequisites*
+
+Your host machine must meet the following minimum requirements to install RHVH:
+
+* CPU *(%AP: Do we need to include the list of AMD and Intel CPU chips?)*:
+** Must support Intel® 64 or AMD64 CPU extensions, with AMD-V™ or Intel VT® hardware virtualization extensions enabled.
+** Must support the No eXecute flag (NX).
+* BIOS: Virtualization must be enabled.
+* Memory: Minimum: 2 GB. Maximum: 2 TB. The amount of RAM required depends on guest operating system requirements, guest application requirements, and guest memory activity and usage. KVM can also overcommit physical RAM for virtualized guests, allowing you to provision guests with RAM requirements greater than what is physically present, on the assumption that the guests are not all working concurrently at peak load. KVM does this by only allocating RAM for guests as required and shifting underutilized guests into swap.
+* Storage: Minimum: 45 GB. Hosts require local storage to store configuration, logs, kernel dumps, and for use as swap space.
+* Network Interface Card (NIC) - Minimum: At least 1 NIC, with at least 1 Gbps. Red Hat recommends that each host have two network interfaces, with one dedicated to supporting network-intensive activities, such as virtual machine migration. The performance of such operations is limited by the bandwidth available.
+
+*Installing Red Hat Virtualization Host*
+
+. Download the RHVH ISO image from the Customer Portal:
+.. Log in to the Customer Portal at link:https://access.redhat.com[].
+.. Click *Downloads* in the menu bar.
+.. Click *Red Hat Virtualization*, scroll up, and click *Download Latest* to access the product download page.
+.. Choose the appropriate hypervisor image and click *Download Now*.
+.. Create a bootable media device. See https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-making-media.html[Making Media] in the _Red Hat Enterprise Linux Installation Guide_ for more information.
+. Start the machine on which to install RHVH using the prepared installation media.
+. From the boot menu, select the *Install* option, and press `Enter`.
++
+[NOTE]
+====
+You can also press the `Tab` key to edit the kernel parameters. Kernel parameters must be separated by a space, and you can boot the system using the specified kernel parameters by pressing the `Enter` key. Press the `Esc` key to clear any changes to the kernel parameters and return to the boot menu.
+====
++
+. Select a language, and click *Continue*.
+. Select a time zone from the *Date &amp; Time* screen and click *Done*.
+. Select a keyboard layout from the *Keyboard* screen and click *Done*.
+. Select the device on which to install RHVH from the *Installation Destination* screen. Optionally, enable encryption. Click *Done*.
++
+. Select a network from the *Network &amp; Host Name* screen and click *Configure...* to configure the connection details. Enter a host name in the *Host name* field, and click *Done*.
+. Optionally configure *Language Support*, *Security Policy*, and *Kdump*. See link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Installation_Guide/chap-installing-using-anaconda-x86.html[Installing Using Anaconda] in the _Red Hat Enterprise Linux 7 Installation Guide_ for more information on each of the sections in the *Installation Summary* screen.
+. Click *Begin Installation*.
+. Set a root password and, optionally, create an additional user while RHVH installs.
++
+[WARNING]
+====
+Red Hat strongly recommends not creating untrusted users on RHVH, as this can lead to exploitation of local security vulnerabilities.
+====
++
+. Click *Reboot* to complete the installation.
++
+[NOTE]
+====
+When RHVH restarts, `nodectl check` performs a health check on the host and displays the result when you log in on the command line. The message `node status: OK` or `node status: DEGRADED` indicates the health status. Run `nodectl check` to get more information. The service is enabled by default.
+====
++
+. Once the installation is complete, log in to the Cockpit user interface at `https://_HostFQDNorIP_:9090` to register the host with the Content Delivery Network. Navigate to *Subscriptions*, click *Register System*, and enter your Customer Portal user name and password. The *Red Hat Virtualization Host* subscription is automatically attached to the system.
+. Click *Terminal*, and enable the `Red Hat Virtualization Host 7` repository to allow later updates to the Red Hat Virtualization Host:
+[options="nowrap" subs="+quotes,verbatim"]
++
+----
+# subscription-manager repos --enable=rhel-7-server-rhvh-4-rpms
+----
+
+You can now add the host to your Red Hat Virtualization environment. 
+////
+See xref:Adding_a_Hypervisor[].
+////

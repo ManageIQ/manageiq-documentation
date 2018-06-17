@@ -1,0 +1,362 @@
+[[Installing_Red_Hat_Virtualization_Manager]]
+=== Installing Red Hat Virtualization Manager
+:refdir: ../reference
+:procdir: ../procedure
+
+*Prerequisites*
+
+Your system must meet the following minimum requirements to install the Red Hat Virtualization Manager:
+
+* Hardware:
+** CPU - Minimum: dual core. Recommended: quad core or multiple dual core CPUs.
+** System RAM - Minimum: 4 GB. Recommended: 16 GB.
+** Hard disk (locally accessible and writable) - Minimum: 25 GB. Recommended: 50 GB.
+** Network Interface Card (NIC) - Minimum and recommended: Bandwidth of at least 1 Gbps.
+
+* Browser: Latest version of Internet Explorer, Firefox, or Chrome.
+* Operating system: Red Hat Enterprise Linux 7, updated to the latest minor release.
++
+Do not install any additional packages after the base installation, as they may cause dependency issues when attempting to install the packages required by the Manager.
++
+Do not enable additional repositories. The required repositories are specified in xref:Enabling_the_Manager_Repositories[].
+
+[[Enabling_the_Manager_Repositories]]
+==== Enabling the Manager Repositories
+
+To install the Red Hat Virtualization packages, you must register the system with Red Hat Subscription Manager, attach the `Red Hat Enterprise Linux Server` and `Red Hat Virtualization` subscriptions, and enable the Manager repositories:
+
+. Register your system with the Content Delivery Network, entering your Customer Portal user name and password when prompted: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# subscription-manager register
+----
+
+. Find the `Red Hat Enterprise Linux Server` and `Red Hat Virtualization` subscription pools and note down the pool IDs: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# subscription-manager list --available
+----
+
+. Use the pool IDs to attach the subscriptions to the system: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# subscription-manager attach --pool=_pool_id_
+----
++
+[NOTE]
+====
+To find out which subscriptions are currently attached, run:
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# subscription-manager list --consumed
+----
+To list all enabled repositories, run:
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum repolist
+----
+====
+
+. Disable all existing repositories: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# subscription-manager repos --disable=*
+----
+
+. Enable the required repositories:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# subscription-manager repos --enable=rhel-7-server-rpms
+# subscription-manager repos --enable=rhel-7-server-supplementary-rpms
+# subscription-manager repos --enable=rhel-7-server-rhv-4.2-manager-rpms
+# subscription-manager repos --enable=rhel-7-server-rhv-4-manager-tools-rpms
+# subscription-manager repos --enable=rhel-7-server-ansible-2-rpms
+# subscription-manager repos --enable=jb-eap-7-for-rhel-7-server-rpms
+----
+
+==== Installing the Manager Packages
+
+. Update all packages on the machine where you are installing the Red Hat Virtualization Manager: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum update
+----
++
+[NOTE]
+====
+Reboot the machine if any kernel related packages have been updated.
+====
++
+. Install the `rhvm` package and dependencies:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum install rhvm
+----
+
+==== Configuring the Manager
+
+(in progress)
+
+After you have installed the `rhvm` package and dependencies, you must configure the Manager using the `engine-setup` command. This command asks you a series of questions and, after you provide the required values for all questions, applies that configuration and starts the `ovirt-engine` service. `engine-setup` also creates and configures the Manager database locally on the Manager machine.
+
+[IMPORTANT]
+====
+Suggested configuration defaults are provided in square brackets; if the suggested value is acceptable for a given step, press `Enter` to accept that value.
+====
+
+. Run the `engine-setup` command to begin configuration: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# engine-setup
+----
+
+. Press `Enter` to configure the Manager: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Configure Engine on this host (Yes, No) [Yes]:
+----
+
+. Configure the Image I/O Proxy (`ovirt-imageio-proxy`) to allow the Manager to upload images to storage domains: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Configure Image I/O Proxy on this host? (Yes, No) [Yes]:
+----
+
+. Configure a websocket proxy server to allow users to connect to virtual machines via the noVNC or HTML 5 consoles: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Configure WebSocket Proxy on this machine? (Yes, No) [Yes]:
+----
+
+. Configure the Data Warehouse on the Manager machine *(%AP: Is there any reason for them not to have local DWH host? Do we need to provide remote host options?)*:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Please note: Data Warehouse is required for the engine. If you choose to not configure it on this host, you have to configure it on a remote host, and then configure the engine on this host so that it can access the database of the remote Data Warehouse host. 
+Configure Data Warehouse on this host (Yes, No) [Yes]:
+----
+
+. Allow access to a virtual machines's serial console from the command line:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Configure VM Console Proxy on this host (Yes, No) [Yes]:
+----
+Additional configuration is required on the client machine to use this feature. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/virtual_machine_management_guide/#Opening_a_Serial_Console_to_a_Virtual_Machine[Opening a Serial Console to a Virtual Machine] in the _Virtual Machine Management Guide_. *(%AP: Do we need to include this?)*
+
+. Install Open Virtual Network (OVN) as an external network provider:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Configure ovirt-provider-ovn (Yes, No) [Yes]:
+----
++
+The default cluster uses OVN as its default network provider. Hosts added to the default cluster are automatically configured to communicate with OVN.
+
+. Accept the automatically detected host name or enter an alternative host name and press `Enter`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Host fully qualified DNS name of this server [_autodetected host name_]: 
+----
++
+If you are using virtual hosts, the automatically detected host name may be incorrect.
+
+. The `engine-setup` command checks your firewall configuration and offers to modify that configuration to open the ports used by the Manager for external communication such as TCP ports 80 and 443. If you do not allow `engine-setup` to modify your firewall configuration, you must manually open the ports used by the Manager. Firewalld is configured as the firewall manager because iptables have been deprecated.
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Setup can automatically configure the firewall on this system.
+Note: automatic configuration of the firewall may overwrite current settings.
+NOTICE: iptables is deprecated and will be removed in future releases
+Do you want Setup to configure the firewall? (Yes, No) [Yes]:
+----
+If you choose to automatically configure the firewall, and no firewall managers are active, you are prompted to select your chosen firewall manager from a list of supported options. Type the name of the firewall manager and press `Enter`. This applies even in cases where only one option is listed. *(%AP: Do we need to give choice of firewalls or is it OK to have user select default?)*
+
+. Select a local PostgreSQL database for the Data Warehouse:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Where is the DWH database located? (Local, Remote) [Local]:
+----
+*(%AP: Is it OK to only give default values for local DB? Or do we need to explain options for remote DB?)*
+** If you select `Local`, the `engine-setup` command can configure your database automatically (including adding a user and a database), or it can connect to a preconfigured local database:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Setup can configure the local postgresql server automatically for the DWH to run. This may conflict with existing applications.
+Would you like Setup to automatically configure postgresql and create DWH database, or prefer to perform that manually? (Automatic, Manual) [Automatic]:
+----
++
+*** If you select `Automatic` by pressing `Enter`, no further action is required here.
+*** If you select `Manual`, input the following values for the manually-configured local database:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+DWH database secured connection (Yes, No) [No]:
+DWH database name [ovirt_engine_history]:
+DWH database user [ovirt_engine_history]:
+DWH database password:
+----
+
++
+[NOTE]
+====
+`engine-setup` requests these values after the Manager database is configured in the next step. 
+====
+
+** If you select `Remote`, input the following values for the preconfigured remote database host:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+DWH database host [localhost]:
+DWH database port [5432]:
+DWH database secured connection (Yes, No) [No]:
+DWH database name [ovirt_engine_history]:
+DWH database user [ovirt_engine_history]:
+DWH database password:
+----
+
++
+[NOTE]
+====
+`engine-setup` requests these values after the Manager database is configured in the next step. 
+====
+
+. Choose to use either a local or remote PostgreSQL database as the Manager database: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Where is the Engine database located? (Local, Remote) [Local]:
+----
+
+** If you select `Local`, the `engine-setup` command can configure your database automatically (including adding a user and a database), or it can connect to a preconfigured local database:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Setup can configure the local postgresql server automatically for the engine to run. This may conflict with existing applications.
+Would you like Setup to automatically configure postgresql and create Engine database, or prefer to perform that manually? (Automatic, Manual) [Automatic]:
+----
+
+***  If you select `Automatic` by pressing `Enter`, no further action is required here.
+*** If you select `Manual`, input the following values for the manually-configured local database:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Engine database secured connection (Yes, No) [No]:
+Engine database name [engine]:
+Engine database user [engine]:
+Engine database password:
+----
+
+** If you select `Remote`, input the following values for the preconfigured remote database host:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Engine database host [localhost]:
+Engine database port [5432]:
+Engine database secured connection (Yes, No) [No]:
+Engine database name [engine]:
+Engine database user [engine]:
+Engine database password:
+----
+
+. Set a password for the automatically created administrative user of the Red Hat Virtualization Manager:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Engine admin password:
+Confirm engine admin password:
+----
+
+. Select *Both*: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Application mode (Both, Virt, Gluster) [Both]:
+----
+
+. If you installed the OVN provider, you can choose to use the default credentials, or specify an alternative.
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Use default credentials (admin@internal) for ovirt-provider-ovn (Yes, No) [Yes]:
+oVirt OVN provider user[admin@internal]: 
+oVirt OVN provider password: 
+----
+
+. Set the default value for the `wipe_after_delete` flag, which wipes the blocks of a virtual disk when the disk is deleted. 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Default SAN wipe after delete (Yes, No) [No]:
+----
+
+. The Manager uses certificates to communicate securely with its hosts. This certificate can also optionally be used to secure HTTPS communications with the Manager. Provide the organization name for the certificate:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Organization name for certificate [_autodetected domain-based name_]:
+----
+
+. Optionally allow `engine-setup` to make the landing page of the Manager the default page presented by the Apache web server:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Setup can configure the default page of the web server to present the application home page. This may conflict with existing applications.
+Do you wish to set the application as the default web page of the server? (Yes, No) [Yes]:
+----
+
+. By default, external SSL (HTTPS) communication with the Manager is secured with the self-signed certificate created earlier in the configuration to securely communicate with hosts. Alternatively, choose another certificate for external HTTPS connections; this does not affect how the Manager communicates with hosts:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Setup can configure apache to use SSL using a certificate issued from the internal CA.
+Do you wish Setup to configure that, or prefer to perform that manually? (Automatic, Manual) [Automatic]:
+----
+
+. Choose *1*:
++
+[NOTE]
+====
+This step is skipped if you chose not to configure Data Warehouse on the Manager machine.
+====
+
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Please choose Data Warehouse sampling scale:
+(1) Basic
+(2) Full
+(1, 2)[1]:
+----
+`Basic` reduces the values of `DWH_TABLES_KEEP_HOURLY` to `720` and `DWH_TABLES_KEEP_DAILY` to `0`, easing the load on the Manager machine (recommended when the Manager and Data Warehouse are installed on the same machine).
+
+. Review the installation settings, and press `Enter` to accept the values and proceed with the installation: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Please confirm installation settings (OK, Cancel) [OK]:
+----
+
++
+When your environment has been configured, `engine-setup` displays details about how to access your environment. If you chose to manually configure the firewall, `engine-setup` provides a custom list of ports that need to be opened, based on the options selected during setup. The `engine-setup` command also saves your answers to a file that can be used to reconfigure the Manager using the same values, and outputs the location of the log file for the Red Hat Virtualization Manager configuration process.
+
+. If you intend to link your Red Hat Virtualization environment with a directory server, configure the date and time to synchronize with the system clock used by the directory server to avoid unexpected account expiry issues. See link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/System_Administrators_Guide/chap-Configuring_the_Date_and_Time.html#sect-Configuring_the_Date_and_Time-timedatectl-NTP[Synchronizing the System Clock with a Remote Server] in the _Red Hat Enterprise Linux System Administrator's Guide_ for more information. *(%AP: Can we omit this? If they're migrating a VMware system, they probably already have NTP installed and configured.)*
+
+. Install the certificate authority according to the instructions provided by your browser. You can get the certificate authority's certificate by navigating to`http://_your-manager-fqdn_/ovirt-engine/services/pki-resource?resource=ca-certificate&amp;format=X509-PEM-CA`, replacing _your-manager-fqdn_ with the fully qualified domain name (FQDN) that you provided during the installation.
+
+Proceed to the next section to connect to the Administration Portal as the *admin@internal* user. Then, proceed with setting up hosts, and attaching storage.
+
+

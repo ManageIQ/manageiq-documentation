@@ -1,0 +1,97 @@
+[[Installing_CloudForms]]
+=== Installing CloudForms
+
+Installing CloudForms on your Red Hat Virtualization system comprises three steps:
+
+* Downloading the CloudForms appliance
+* Creating a virtual machine based on the appliance
+* Configuring CloudForms
+
+==== Downloading the CloudForms Appliance
+
+You must download the CloudForms appliance from the Red Hat Customer Portal:
+
+. Go to link:https://access.redhat.com/[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Click *Downloads* in the menu bar.
+. Click *A-Z* to sort the product downloads alphabetically.
+. Click *Red Hat CloudForms* to access the product download page.
+. From the list of installers and images, click the *Download Now* link for the CFME Red Hat Virtual Appliance (qcow).
+
+You are ready to upload the CloudForms appliance to your Red Hat Virtualization environment and to create a virtual machine.
+
+==== Creating a Virtual Machine Based on the CloudForms Appliance
+
+You must upload the QCOW2 image to the data storage domain, using the Administration Portal:
+
+. Click menu:Storage[Disks].
+. Select *Start* from the *Upload* menu. 
+. Click *Choose File* and select the image to upload.
+. Fill in the *Disk Options* fields. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Explanation_of_Settings_in_the_New_Virtual_Disk_Window[Explanation of Settings in the New Virtual Disk Window] in the _Red Hat Virtualization Administration Guide_ for descriptions of the relevant fields.
+. Click *OK*.
++
+A progress bar indicates the status of the upload. You can pause, cancel, or resume uploads from the *Upload* menu.
+
+*Increasing the Upload Timeout Value*
+
+. If the upload times out and you see the message, *Reason: timeout due to transfer inactivity*, increase the timeout value:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# engine-config -s TransferImageClientInactivityTimeoutInSeconds=6000
+----
+. Restart the `ovirt-engine` service:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# systemctl restart ovirt-engine
+----
+
+After you have uploaded the CloudForms appliance to your data storage domain, you import the appliance image as a template and create a virtual machine based on this template:
+
+*(%AP: This needs to be clarified because no template import tab for data domain. Question sent to Dave Johnson. First version is from VMM, second is from CF install guide.)*
+
+. Click menu:Storage[Domains] and select the data storage domain.
+. Click the domain name to go to the details view.
+. Click the *Template Import* tab and select the image you uploaded.
+. Click menu:More Actions[Import].
+. Select the templates to import.
+. Use the drop-down lists to select the *Destination Cluster* and *Storage* domain.
+. Click btn:[OK] to import templates and open a notification window. Click *Close* to close the notification window.
+
+The template is imported into the destination data center. This can take up to an hour, depending on your storage hardware. You can view the import progress in the *Events* tab.
+
+
+. Import the appliance image from the data storage domain as a template in a Red Hat Virtualization data storage domain: 
+.. Click the *Storage* tab, and select the export storage domain you uploaded the image to.
+.. From the details pane, click the *Template Import* tab, and select the image (`newimagename`) you uploaded.
+.. Click *Import*, and specify the *Cluster* and *CPU Profile* as desired.
+.. Click *OK*.
+. Check whether the template has a network interface (NIC). If the template does not include one, create a NIC for it:
+.. From the *Templates* tab, select the template you imported to view its details.
+.. From the details pane, click the *Network Interfaces* tab to check if a NIC is listed. If there is an existing NIC, continue to the next step. If no existing NIC is shown:
+... Create a NIC by clicking *New* in the *Network Interfaces* tab.  
+... In the *New Network Interface* dialog, specify any values as desired or leave the defaults. 
+... Click *OK*.
++
+The new NIC shows in the *Network Interfaces* tab.
++
+. Create a new virtual machine using the CloudForms appliance template as a basis:
+.. From the *Templates* tab, select the CloudForms template.
+.. Click *New VM* to open the *New Virtual Machine* dialog. 
+.. Specify a name for the virtual machine, and any other details as desired. 
+.. Click *OK*.
++
+The virtual machine is created. To view the virtual machine, select the data center, then the *Virtual Machines* tab to view a list of all virtual machines.
+. Add a database disk if you are hosting the database on the same machine as the appliance:
+//From BZ1411114 - “how big?  Thin or thick provisioned?  (Anything else to consider?)
+.. To add a disk, select your virtual machine from the *Virtual Machines* tab.
+.. From the details pane, click the *Disks* tab. 
+.. Click *New* to open the *New Virtual Disk* dialog.
+ifdef::cfme[.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.]
+ifdef::miq[.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See "Database Requirements" in the _Deployment Planning Guide_ for size considerations.]
+.. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
+.. Specify any other values as desired.
+.. Click *OK* to create the disk.
+. To start the CloudForms appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
+
+Your Red Hat Virtualization environment now contains a running CloudForms appliance.

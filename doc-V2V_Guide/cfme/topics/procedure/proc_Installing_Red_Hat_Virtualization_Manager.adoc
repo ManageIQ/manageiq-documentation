@@ -3,7 +3,16 @@
 :refdir: ../reference
 :procdir: ../procedure
 
-*Prerequisites*
+The procedure for installing Red Hat Virtualization Manager has 5 key stages:
+
+* Ensuring that your system meets the prerequisites
+* Enabling the Manager repositories
+* Installing the Manager packages
+* Configuring the Manager
+* Connecting to the Administration Portal
+
+[discrete]
+==== Prerequisites
 
 Your system must meet the following minimum requirements to install the Red Hat Virtualization Manager:
 
@@ -21,6 +30,7 @@ Do not install any additional packages after the base installation, as they may 
 Do not enable additional repositories. The required repositories are specified in xref:Enabling_the_Manager_Repositories[].
 
 [[Enabling_the_Manager_Repositories]]
+[discrete]
 ==== Enabling the Manager Repositories
 
 To install the Red Hat Virtualization packages, you must register the system with Red Hat Subscription Manager, attach the `Red Hat Enterprise Linux Server` and `Red Hat Virtualization` subscriptions, and enable the Manager repositories:
@@ -79,6 +89,7 @@ To list all enabled repositories, run:
 # subscription-manager repos --enable=jb-eap-7-for-rhel-7-server-rpms
 ----
 
+[discrete]
 ==== Installing the Manager Packages
 
 . Update all packages on the machine where you are installing the Red Hat Virtualization Manager: 
@@ -90,7 +101,7 @@ To list all enabled repositories, run:
 +
 [NOTE]
 ====
-Reboot the machine if any kernel related packages have been updated.
+Reboot the machine if any kernel-related packages have been updated.
 ====
 +
 . Install the `rhvm` package and dependencies:
@@ -100,6 +111,7 @@ Reboot the machine if any kernel related packages have been updated.
 # yum install rhvm
 ----
 
+[discrete]
 ==== Configuring the Manager
 
 (in progress)
@@ -326,7 +338,7 @@ Setup can configure apache to use SSL using a certificate issued from the intern
 Do you wish Setup to configure that, or prefer to perform that manually? (Automatic, Manual) [Automatic]:
 ----
 
-. Choose *1*:
+. Select *Basic*:
 +
 [NOTE]
 ====
@@ -357,6 +369,4 @@ When your environment has been configured, `engine-setup` displays details about
 
 . Install the certificate authority according to the instructions provided by your browser. You can get the certificate authority's certificate by navigating to`http://_your-manager-fqdn_/ovirt-engine/services/pki-resource?resource=ca-certificate&amp;format=X509-PEM-CA`, replacing _your-manager-fqdn_ with the fully qualified domain name (FQDN) that you provided during the installation.
 
-Proceed to the next section to connect to the Administration Portal as the *admin@internal* user. Then, proceed with setting up hosts, and attaching storage.
-
-
+Proceed to the next section to connect to the Administration Portal as the *admin@internal* user.

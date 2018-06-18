@@ -1,15 +1,16 @@
 [[Installing_CloudForms]]
 === Installing CloudForms
 
-Installing CloudForms on your Red Hat Virtualization system comprises three steps:
+The procedure for installing CloudForms on your Red Hat Virtualization system has 3 key stages:
 
 * Downloading the CloudForms appliance
 * Creating a virtual machine based on the appliance
 * Configuring CloudForms
 
+[discrete]
 ==== Downloading the CloudForms Appliance
 
-You must download the CloudForms appliance from the Red Hat Customer Portal:
+Download the CloudForms appliance from the Red Hat Customer Portal:
 
 . Go to link:https://access.redhat.com/[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
 . Click *Downloads* in the menu bar.
@@ -19,13 +20,14 @@ You must download the CloudForms appliance from the Red Hat Customer Portal:
 
 You are ready to upload the CloudForms appliance to your Red Hat Virtualization environment and to create a virtual machine.
 
-==== Creating a Virtual Machine Based on the CloudForms Appliance
+[discrete]
+==== Uploading the CloudForms Appliance
 
-You must upload the QCOW2 image to the data storage domain, using the Administration Portal:
+Upload the QCOW2 CloudForms appliance to the data storage domain, using the Administration Portal:
 
 . Click menu:Storage[Disks].
 . Select *Start* from the *Upload* menu. 
-. Click *Choose File* and select the image to upload.
+. Click *Choose File* and select the appliance to upload.
 . Fill in the *Disk Options* fields. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Explanation_of_Settings_in_the_New_Virtual_Disk_Window[Explanation of Settings in the New Virtual Disk Window] in the _Red Hat Virtualization Administration Guide_ for descriptions of the relevant fields.
 . Click *OK*.
 +
@@ -46,6 +48,9 @@ A progress bar indicates the status of the upload. You can pause, cancel, or res
 # systemctl restart ovirt-engine
 ----
 
+[discrete]
+==== Creating a Template Based on the CloudForms Appliance
+
 After you have uploaded the CloudForms appliance to your data storage domain, you import the appliance image as a template and create a virtual machine based on this template:
 
 *(%AP: This needs to be clarified because no template import tab for data domain. Question sent to Dave Johnson. First version is from VMM, second is from CF install guide.)*
@@ -60,7 +65,6 @@ After you have uploaded the CloudForms appliance to your data storage domain, yo
 
 The template is imported into the destination data center. This can take up to an hour, depending on your storage hardware. You can view the import progress in the *Events* tab.
 
-
 . Import the appliance image from the data storage domain as a template in a Red Hat Virtualization data storage domain: 
 .. Click the *Storage* tab, and select the export storage domain you uploaded the image to.
 .. From the details pane, click the *Template Import* tab, and select the image (`newimagename`) you uploaded.
@@ -74,7 +78,10 @@ The template is imported into the destination data center. This can take up to a
 ... Click *OK*.
 +
 The new NIC shows in the *Network Interfaces* tab.
-+
+
+[discrete]
+==== Creating a Virtual Machine Based on the CloudForms Template
+
 . Create a new virtual machine using the CloudForms appliance template as a basis:
 .. From the *Templates* tab, select the CloudForms template.
 .. Click *New VM* to open the *New Virtual Machine* dialog. 

@@ -1,9 +1,9 @@
 [[Installing_RHVH]]
 === Installing Red Hat Virtualization Host
 
-You must install at least one host to function as a conversion host during the migration.
+You must install at least one host to function as a conversion host during the migration. *(%AP: How many hosts should they install? 1 for conversion, 1 for CF? More?)*
 
-*(%AP: I included RHVH, but if you think we should include RHEL hosts, let me know.)*
+*(%AP: I only gave instructions for installing RHVH, but if you think we should include RHEL hosts, let me know.)*
 Red Hat Virtualization Host (RHVH) is a minimal operating system, based on Red Hat Enterprise Linux, that is designed to provide a simple method for setting up a physical machine to act as a hypervisor in a Red Hat Virtualization environment. The minimal operating system contains only the packages required for the machine to act as a hypervisor, and features a Cockpit user interface for monitoring the host and performing administrative tasks.
 
 RHVH supports NIST 800-53 partitioning requirements to improve security. RHVH uses a NIST 800-53 partition layout by default.
@@ -14,7 +14,8 @@ Installing RHVH on a physical machine comprises three steps:
 * Writing the RHVH ISO image to a USB, CD, or DVD.
 * Installing the RHVH minimal operating system.
 
-*Prerequisites*
+[discrete]
+==== Prerequisites
 
 Your host machine must meet the following minimum requirements to install RHVH:
 
@@ -26,7 +27,8 @@ Your host machine must meet the following minimum requirements to install RHVH:
 * Storage: Minimum: 45 GB. Hosts require local storage to store configuration, logs, kernel dumps, and for use as swap space.
 * Network Interface Card (NIC) - Minimum: At least 1 NIC, with at least 1 Gbps. Red Hat recommends that each host have two network interfaces, with one dedicated to supporting network-intensive activities, such as virtual machine migration. The performance of such operations is limited by the bandwidth available.
 
-*Installing Red Hat Virtualization Host*
+[discrete]
+==== Installing Red Hat Virtualization Host
 
 . Download the RHVH ISO image from the Customer Portal:
 .. Log in to the Customer Portal at link:https://access.redhat.com[].
@@ -72,7 +74,4 @@ When RHVH restarts, `nodectl check` performs a health check on the host and disp
 # subscription-manager repos --enable=rhel-7-server-rhvh-4-rpms
 ----
 
-You can now add the host to your Red Hat Virtualization environment. 
-////
-See xref:Adding_a_Hypervisor[].
-////
+You can now add the host to your Red Hat Virtualization environment. See xref:Adding_a_host_to_the_Manager[].

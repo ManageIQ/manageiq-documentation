@@ -94,8 +94,16 @@ The virtual machine is created. To view the virtual machine, select the data cen
 .. To add a disk, select your virtual machine from the *Virtual Machines* tab.
 .. From the details pane, click the *Disks* tab. 
 .. Click *New* to open the *New Virtual Disk* dialog.
-ifdef::cfme[.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_ for size considerations.]
-ifdef::miq[.. Specify a *Size* in GB for the disk that allows sufficient space for your database. See "Database Requirements" in the _Deployment Planning Guide_ for size considerations.]
++
+Specify a *Size* in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
+
+* Virtual Machine Count: the most important factor in the calculation of virtual machine database (VMDB) size over time.
+* Host Count: the number of hosts associated with the provider.
+* Storage Count: the number of individual storage elements as seen from the perspective of the provider or host. It is not the total number of virtual disks for all virtual machines.
++
+Use the following table as a guideline to calculate minimum requirements for your database:
++
+image:5780.png[]
 .. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
 .. Specify any other values as desired.
 .. Click *OK* to create the disk.

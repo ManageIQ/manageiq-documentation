@@ -1,41 +1,15 @@
 [[Creating_a_Migration_Plan]]
 === Creating and Running a Migration Plan
 
-You are ready to create and run a migration plan.
+Create and run a migration plan:
 
-[discrete]
-==== Prerequisite
-
-Create a CSV file with the names of the virtual machines that you want to migrate, the name of the migration plan, and the virtual machine ID, in the following format:
-
-[source]
-----
-lb, migration-plan, 6
-app0, migration-plan, 8
-app1, migration-plan, 7
-db, migration-plan, 11
-----
-
-You can obtain the virtual machine IDs using either a browser or the command line:
-
-* In a browser, open the CloudForms URL (remember to change the _GUID_) in a browser: `https://cf-_GUID_.rhpds.opentlc.com/api/vms?expand=resources`.
-* From the command line, run:
-+
-[source]
-----
-# cd /var/www/miq/vmdb
-# bundle exec rails c
-irb> Vm.find_by(:name => "<VM_NAME>").id
-----
-
-[discrete]
-==== Procedure
-
-. In menu:Compute[Migration > Overview], click *Create Migration Plan*.
+. Go to menu:Compute[Migration] and click *Create Migration Plan*.
 . Select the infrastructure mapping from the drop-down list.
-. Enter the name of your migration plan and click *Next*. The description is optional.
-. To import a CSV file, click *Browse*, browse to the CSV file, and click *Open*. The list of virtual machines is displayed.
-. Click *Create*. When the "In Progress" message appears, click *Close*. The migration plan may take some time to complete. The "Migrations in Progress" message, the migration status, and the elapsed time are displayed.
+. Enter the name of your migration plan and click *Next*.
+. Select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*.
+. Select the virtual machines to migrate and click *Next*.
+. Select *Start Migration Immediately* and click *Create*.
+. Click *Close*. The migration plan may take some time to complete. The "Migrations in Progress" message, the migration status, and the elapsed time are displayed.
 +
 You can view the status of the individual virtual machines in menu:Compute[Infrastructure > Hosts].
 . Optional. You can view the progress of the migration in the CloudForms log:
@@ -53,6 +27,6 @@ You can also view the progress of each virtual machine in the conversion host lo
 # ssh _conversion_host_
 # tail -f /var/log/vdsm/import/*
 ----
-
++
 When the migration is complete, a "Completed Migrations" message appears, with the number of successfully migrated virtual machines.
 

@@ -1,0 +1,57 @@
+[[Adding_NFS_Storage]]
+==== Adding NFS Storage
+
+NFS versions 3 and 4 are supported by Red Hat Virtualization 4. Production workloads require an enterprise-grade NFS server. When enterprise NFS is deployed over 10 GbE, segregated with VLANs, and individual services are configured to use specific ports, it is both fast and secure.
+
+As NFS exports are grown to accommodate more storage needs, Red Hat Virtualization recognizes the larger data store immediately. No additional configuration is necessary on the hosts or from within Red Hat Virtualization. This provides NFS a slight edge over block storage from a scale and operational perspective.
+
+[discrete]
+===== Preparing NFS Storage
+
+NFS shares serve as a data domain on a Red Hat Enterprise Linux server. A data domain holds the virtual hard disks and OVF files of all the virtual machines and templates in a data center. In addition, snapshots of the virtual machines are stored in the data domain. The data domain cannot be shared across data centers. Data domains of multiple types (iSCSI, NFS, FC, POSIX, and Gluster) can be added to the same data center, provided they are all shared, rather than local, domains.
+
+Create the system user accounts and groups required by the Manager:
+
+. Create the group `kvm`: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# groupadd kvm -g 36
+----
++
+. Create the user `vdsm` in the group `kvm`: 
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# useradd vdsm -u 36 -g 36
+----
++
+. Set the ownership of your exported *(%AP: We don't mention exporting or mounting NFS before this step. Should we add it?)* directories to 36:36, which gives vdsm:kvm ownership:
++			
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# chown -R 36:36 _/exports/data_
+----
++
+. Change the mode of the directories so that read and write access is granted to the owner, and so that read and execute access is granted to the group and other users:
++			
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# chmod 0755 _/exports/data_
+----
+
+[discrete]
+===== Attaching NFS Storage
+
+Attach the NFS storage domain to the data center in your Red Hat Virtualization environment. This storage domain provides storage for virtual disks and and ISO boot media. This procedure assumes that you have already exported shares.
+
+. In the Administration Portal, click menu:Storage[Domains].
+. Click *New Domain*.
+. Enter a *Name* for the storage domain.
+. Accept the default values for the *Data Center*, *Domain Function*, *Storage Type*, *Format*, and *Use Host* lists.
+. Enter the *Export Path* to be used for the storage domain. The export path should be in the format of _192.168.0.10:/data_ or _domain.example.com:/data_.
+. Click *OK*.
+
+The new NFS data domain has a status of `Locked` until the disk is prepared. The data domain is then automatically attached to the data center.
+
+include::ref_Storage_to_CF_link.adoc[]

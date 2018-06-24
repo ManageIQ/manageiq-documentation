@@ -3,13 +3,13 @@
 
 The procedure for installing CloudForms on your Red Hat Virtualization system has 3 key stages:
 
-* Downloading the CloudForms appliance
-* Creating a virtual machine based on the appliance
-* Configuring CloudForms
+* Download the CloudForms appliance
+* Create a virtual machine based on the appliance
+* Configure CloudForms
 
 [NOTE]
 ====
-These procedures describe how to install and configure a basic CloudForms environment. For more options, see the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/[CloudForms documentation].
+These procedures describe how to install and configure a basic CloudForms environment with a local VMDB database. For more options, see the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/[CloudForms documentation].
 ====
 
 [discrete]
@@ -17,7 +17,7 @@ These procedures describe how to install and configure a basic CloudForms enviro
 
 Download the CloudForms appliance from the Red Hat Customer Portal:
 
-. Go to link:https://access.redhat.com/[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
+. Log in to the Customer Portal at link:https://access.redhat.com[].
 . Click *Downloads* in the menu bar.
 . Click *A-Z* to sort the product downloads alphabetically.
 . Click *Red Hat CloudForms* to access the product download page.
@@ -28,12 +28,12 @@ You are ready to upload the CloudForms appliance to your Red Hat Virtualization 
 [discrete]
 ==== Uploading the CloudForms Appliance
 
-Upload the QCOW2 CloudForms appliance to the data storage domain, using the Administration Portal:
+Upload the QCOW2 CloudForms appliance to the data storage domain of your Manager machine:
 
+. Log into the Administration Portal.
 . Click menu:Storage[Disks].
 . Select *Start* from the *Upload* menu. 
 . Click *Choose File* and select the appliance to upload.
-. Fill in the *Disk Options* fields. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Explanation_of_Settings_in_the_New_Virtual_Disk_Window[Explanation of Settings in the New Virtual Disk Window] in the _Red Hat Virtualization Administration Guide_ for descriptions of the relevant fields.
 . Click *OK*.
 +
 A progress bar indicates the status of the upload. You can pause, cancel, or resume uploads from the *Upload* menu.
@@ -60,9 +60,11 @@ After you have uploaded the CloudForms appliance to your data storage domain, yo
 
 *(%AP: This needs to be clarified because no template import tab for data domain. Question sent to Dave Johnson. First version is from VMM, second is from CF install guide.)*
 
+*VMM version*
+
 . Click menu:Storage[Domains] and select the data storage domain.
 . Click the domain name to go to the details view.
-. Click the *Template Import* tab and select the image you uploaded.
+. Click the *Template Import* tab and select the image you uploaded. *(%AP: I don't see a Template Import tab in 4.2 for the data storage domain. Export domain has been deprecated. ISO domain will be deprecated, so it's not clear how the template is to be imported after the image is uploaded.)*
 . Click menu:More Actions[Import].
 . Select the templates to import.
 . Use the drop-down lists to select the *Destination Cluster* and *Storage* domain.
@@ -70,8 +72,10 @@ After you have uploaded the CloudForms appliance to your data storage domain, yo
 
 The template is imported into the destination data center. This can take up to an hour, depending on your storage hardware. You can view the import progress in the *Events* tab.
 
+*CF Installation Guide version*
+
 . Import the appliance image from the data storage domain as a template in a Red Hat Virtualization data storage domain: 
-.. Click the *Storage* tab, and select the export storage domain you uploaded the image to.
+.. Click the *Storage* tab *(%AP: This is for 4.1 UI.)*, and select the export storage domain *(%AP: Export domain is deprecated.)* you uploaded the image to. 
 .. From the details pane, click the *Template Import* tab, and select the image (`newimagename`) you uploaded.
 .. Click *Import*, and specify the *Cluster* and *CPU Profile* as desired.
 .. Click *OK*.
@@ -88,7 +92,7 @@ The new NIC shows in the *Network Interfaces* tab.
 ==== Creating a Virtual Machine Based on the CloudForms Template
 
 . Create a new virtual machine using the CloudForms appliance template as a basis:
-.. From the *Templates* tab, select the CloudForms template.
+.. In the *Templates* tab, select the CloudForms template.
 .. Click *New VM* to open the *New Virtual Machine* dialog. 
 .. Specify a name for the virtual machine, and any other details as desired. 
 .. Click *OK*.
@@ -97,7 +101,7 @@ The virtual machine is created. To view the virtual machine, select the data cen
 . Add a database disk if you are hosting the database on the same machine as the appliance:
 //From BZ1411114 - “how big?  Thin or thick provisioned?  (Anything else to consider?)
 .. To add a disk, select your virtual machine from the *Virtual Machines* tab.
-.. From the details pane, click the *Disks* tab. 
+.. From the details pane, click the *Disks* tab. *(%AP: I think we can also create disk when creating VM. Might be easier to put the disk creation in that step.)*
 .. Click *New* to open the *New Virtual Disk* dialog.
 +
 Specify a *Size* in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
@@ -115,9 +119,3 @@ image:5780.png[]
 . To start the CloudForms appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
 
 Your Red Hat Virtualization environment now contains a running CloudForms appliance.
-
-[discrete]
-==== Enabling Git Repositories
-
-*(%AP: Do Git repositories need to be enabled? See https://docs.google.com/document/d/19345CNVTvDWgTz2hjavbyPn2yk26cM0fTKJnijfBsyY/edit#heading=h.bm32a1ypyozf. Also, do they need to add v2v Automation Domain?)*
-

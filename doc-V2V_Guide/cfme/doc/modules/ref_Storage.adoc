@@ -8,9 +8,9 @@ You must attach at least one storage domain to each data center. Setting up stor
 Red Hat Virtualization currently does not support storage with a block size of 4K. You must configure block storage in legacy (512b block) mode. 
 ====
 
-The following storage types are supported:
+This document describes how to add NFS storage. For other storage types, click the link for documentation:
 
-* xref:nfs[NFS]
+* xref:Adding_NFS_Storage[NFS]
 * xref:iSCSI[iSCSI]
 * xref:fc[Fibre Channel]
 * xref:FCoE[Fibre Channel over Ethernet]
@@ -19,29 +19,15 @@ The following storage types are supported:
 * xref:POSIX[POSIX-Compliant FS]
 * xref:local[Local Storage]
 
-Go to the relevant section to attach your storage.
-
-For background information, see:
+For more information about storage, see:
 
 * link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/chap-storage[Storage] in the _Administration Guide_.
 
 * link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Storage_Administration_Guide/index.html[_Red Hat Enterprise Linux Storage Administration Guide_].
 
-[[nfs]]
-[discrete]
-==== NFS
+include::proc_Adding_NFS_Storage.adoc[]
 
-NFS versions 3 and 4 are supported by Red Hat Virtualization 4. Production workloads require an enterprise-grade NFS server, unless NFS is only being used as an ISO storage domain. When enterprise NFS is deployed over 10 GbE, segregated with VLANs, and individual services are configured to use specific ports, it is both fast and secure.
-
-As NFS exports are grown to accommodate more storage needs, Red Hat Virtualization recognizes the larger data store immediately. No additional configuration is necessary on the hosts or from within Red Hat Virtualization. This provides NFS a slight edge over block storage from a scale and operational perspective.
-
-See:
-
-* link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-preparing_and_adding_nfs_storage[Preparing and Adding NFS Storage] in the _Administration Guide_.
-
-* link:https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html-single/Storage_Administration_Guide/index.html#ch-nfs[Network File System (NFS)] in the _Red Hat Enterprise Linux Storage Administration Guide_ for general information.
-
-include::ref_Storage_to_CF_link.adoc[]
+==== Adding Other Storage
 
 [[iSCSI]]
 [discrete]

@@ -1,64 +1,15 @@
 [[Configuring-cloudforms]]
-=== Configuring CloudForms
+=== Configuring the CloudForms Database
 
-After installing CloudForms and running it for the first time, you must perform some basic configuration. To configure CloudForms, you must at a minimum:
-
-. Add a disk to the infrastructure hosting your appliance.
-. Configure the database. 
-
-Configure the CloudForms appliance using the internal appliance console.
-
-[[accessing-appliance-console]]
-[discrete]
-==== Accessing the Appliance Console
+After installing CloudForms and running it for the first time, configure the internal database in which CloudForms stores information about the environment:
 
 . Start the appliance and open a terminal console.
-ifdef::login[]
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-endif::login[]
-ifdef::ssh[]
-. Log in to the appliance using the SSH key.
-endif::ssh[]
+. Log in as `root`, with the default password of `smartvm`.
 . Enter the `appliance_console` command. The CloudForms appliance summary screen is displayed.
-. Press `Enter` to manually configure settings.
-. Press the number for the item you want to change, and press `Enter`. The options for your selection are displayed.
-. Follow the prompts to make the changes.
-. Press `Enter` to accept a setting where applicable.
-
-[NOTE]
-====
-The CloudForms appliance console automatically logs out after five minutes of inactivity.
-====
-
-[[configuring-an-internal-database]]
-[discrete]
-==== Configuring an Internal Database
-
-CloudForms uses a database to store information about the environment.
-
-[discrete]
-===== Procedure
-
-. Start the appliance and open a terminal console.
-ifdef::login[]
-. After starting the appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the `root` user.
-endif::login[]
-ifdef::ssh[] 
-. Log in to the appliance using the SSH key.
-endif::ssh[] 
-. Enter the `appliance_console` command. The CloudForms appliance summary screen displays.
 . Press *Enter* to manually configure settings.
 . Select *5) Configure Database* from the menu.
-. You are prompted to create or fetch an encryption key.
-* If this is the first CloudForms appliance, choose *1) Create key*.
-* If this is not the first CloudForms appliance, choose *2) Fetch key from remote machine* to fetch the key from the first appliance. For worker and multi-region setups, use this option to copy key from another appliance. 
-+
-[NOTE]
-====
-All CloudForms appliances in a multi-region deployment must use the same key.
-====
-+
-. Choose *1) Create Internal Database* for the database location.
+. Select *1) Create key*.
+. Select *1) Create Internal Database* for the database location.
 . Choose a disk for the database. This can be either a disk you attached previously, or a partition on the current disk.
 +
 [IMPORTANT]
@@ -74,17 +25,8 @@ If there is an unpartitioned disk attached to the virtual machine, the dialog wi
 ----
 +
 * Enter *1* to choose `/dev/vdb` for the database location. This option creates a logical volume using this device and mounts the volume to the appliance in a location appropriate for storing the database. The default location is `/var/opt/rh/rh-postgresql95/lib/pgsql`, which can be found in the environment variable `$APPLIANCE_PG_MOUNT_POINT`.
-* Enter *2* to continue without partitioning the disk. A second prompt will confirm this choice. Selecting this option results in using the root filesystem for the data directory (not advised in most cases). 
-. Enter *Y* or *N* for *Should this appliance run as a standalone database server?*
-* Select *Y* to configure the appliance as a database-only appliance. As a result, the appliance is configured as a basic PostgreSQL server, without a user interface. 
-* Select *N* to configure the appliance with the full administrative user interface.
-. When prompted, enter a unique number to create a new region.
-+
-[IMPORTANT]
-====
-Creating a new region destroys any existing data on the chosen database.
-====
-+
+. Enter *Y* for *Should this appliance run as a standalone database server?*
 . Create and confirm a password for the database.
-
++
 CloudForms configures the internal database.
+

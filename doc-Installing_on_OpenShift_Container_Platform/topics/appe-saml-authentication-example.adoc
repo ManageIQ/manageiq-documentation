@@ -12,14 +12,17 @@ This parameter controls which configuration files `httpd` will load upon startup
 .`auth-type` values
 [width="100%",cols="30%,70%",options="header",]
 |====
-| Value    | External-Authentication Configuration 
+| Value    | External Authentication Configuration 
 | `internal` | Application Based Authentication - Database, LDAP/LDAPS, Amazon. This is the default.
 | `external` | IPA, IPA 2-factor authentication, IPA/AD Trust, LDAP (OpenLDAP, RHDS, Active Directory, etc.)
 | `active-directory` | Active Directory domain realm join
 | `saml` | SAML based authentication (Keycloak, ADFS, etc.)
 |====
 +
-Enable external authentication in the user interface; see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_authentication_for_cloudforms/external_auth for details.
+[IMPORTANT]
+====
+Enabling external authentication must be done from the {product-title_short} user interface; see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_authentication_for_cloudforms/external_auth[Configuring External Authentication] in _Managing Authentication_ for details.
+====
 +
 * `auth-kerberos-realms` - The Kerberos realms to join.
 +
@@ -60,10 +63,7 @@ When an `/etc/sssd/sssd.conf` file is included in the configuration map, the `ht
 [[appe-saml-authentication-example]]
 === Sample External Authentication Configuration
 
-
-
-
-Excluding the content of the files, a SAML auth-config map data section may look like:
+The following is an example of the data section of a SAML auth-config map data section (excluding the content of the files):
 
 ```bash
 apiVersion: v1

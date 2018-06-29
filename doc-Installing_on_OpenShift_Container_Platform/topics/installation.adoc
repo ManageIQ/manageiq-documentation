@@ -135,6 +135,12 @@ Users:					system:admin,system:serviceaccount:openshift-infra:build-controller,s
 For more information on SCCs, see the https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html[OpenShift documentation].
 ====
 +
+. As the admin user, add the httpd-configmap-generator service account to the httpd-scc-sysadmin SCC before the Httpd Configmap Generator can run.
++
+----
+Users:        system:serviceaccount:<your-namespace>:httpd-configmap-generator
+----
++
 . Add the `view` and `edit` roles to the `cfme-orchestrator` service account:
 +
 ----
@@ -157,7 +163,7 @@ Red Hat recommends setting permissions for the pv-app (privileged pod volume) as
 +
 .. Configure your NFS server host details within these files, and edit any other settings needed to match your environment.
 +
-.. Run the following commands to create the two persistent volumes: 
+.. Create the two persistent volumes: 
 +
 ------
 $ oc create -f cfme-pv-db-example.yaml
@@ -168,10 +174,18 @@ $ oc create -f cfme-pv-server-example.yaml
 + 
 ----
 $ oc process cfme-pv-db-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
-
-$ oc process cfme-pv-server-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
 ----
 +
+[NOTE]
+====
+Alternatively, you can create the two persistent volumes and process the templates in a single command:
+
+----
+$ oc process cfme-pv-server-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
+----
+
+====
+
 [NOTE]
 ====
 There are three parameters required to process the template. Only NFS_HOST is required, PV_SIZE and BASE_PATH contain defaults that do not need editing unless desired:

@@ -1,5 +1,7 @@
 [[Installing_CloudForms]]
-=== Installing CloudForms
+= Installing CloudForms
+
+*(%AP: This section will be replaced by the Ansible installation instructions.)*
 
 The procedure for installing CloudForms on your Red Hat Virtualization system has 3 key stages:
 
@@ -13,7 +15,7 @@ These procedures describe how to install and configure a basic CloudForms enviro
 ====
 
 [discrete]
-==== Downloading the CloudForms Appliance
+== Downloading the CloudForms Appliance
 
 Download the CloudForms appliance from the Red Hat Customer Portal:
 
@@ -26,7 +28,7 @@ Download the CloudForms appliance from the Red Hat Customer Portal:
 You are ready to upload the CloudForms appliance to your Red Hat Virtualization environment and to create a virtual machine.
 
 [discrete]
-==== Uploading the CloudForms Appliance
+== Uploading the CloudForms Appliance
 
 Upload the QCOW2 CloudForms appliance to the data storage domain of your Manager machine:
 
@@ -54,59 +56,17 @@ A progress bar indicates the status of the upload. You can pause, cancel, or res
 ----
 
 [discrete]
-==== Creating a Template Based on the CloudForms Appliance
+== Creating a CloudForms Virtual Machine
 
-After you have uploaded the CloudForms appliance to your data storage domain, you import the appliance image as a template and create a virtual machine based on this template:
+Create a CloudForms virtual machine:
 
-*(%AP: This needs to be clarified because no template import tab for data domain. Question sent to Dave Johnson. First version is from VMM, second is from CF install guide.)*
-*(%AP: Update: After uploading CF image to storage domain, it's possible to create a new VM and attach CF image as disk. Console shows that VM starts up RHEL7.5 and appliance_console message is displayed. Is this an acceptable workaround?)*
-
-*VMM version*
-
-. Click menu:Storage[Domains] and select the data storage domain.
-. Click the domain name to go to the details view.
-. Click the *Template Import* tab and select the image you uploaded. *(%AP: I don't see a Template Import tab in 4.2 for the data storage domain. Export domain has been deprecated. ISO domain will be deprecated, so it's not clear how the template is to be imported after the image is uploaded.)*
-. Click menu:More Actions[Import].
-. Select the templates to import.
-. Use the drop-down lists to select the *Destination Cluster* and *Storage* domain.
-. Click btn:[OK] to import templates and open a notification window. Click *Close* to close the notification window.
-
-The template is imported into the destination data center. This can take up to an hour, depending on your storage hardware. You can view the import progress in the *Events* tab.
-
-*CF Installation Guide version*
-
-. Import the appliance image from the data storage domain as a template in a Red Hat Virtualization data storage domain: 
-.. Click the *Storage* tab *(%AP: This is for 4.1 UI.)*, and select the export storage domain *(%AP: Export domain is deprecated.)* you uploaded the image to. 
-.. From the details pane, click the *Template Import* tab, and select the image (`newimagename`) you uploaded.
-.. Click *Import*, and specify the *Cluster* and *CPU Profile* as desired.
-.. Click *OK*.
-. Check whether the template has a network interface (NIC). If the template does not include one, create a NIC for it:
-.. From the *Templates* tab, select the template you imported to view its details.
-.. From the details pane, click the *Network Interfaces* tab to check if a NIC is listed. If there is an existing NIC, continue to the next step. If no existing NIC is shown:
-... Create a NIC by clicking *New* in the *Network Interfaces* tab.  
-... In the *New Network Interface* dialog, specify any values as desired or leave the defaults. 
-... Click *OK*.
+. In menu:Compute[Virtual Machines], click *New VM* to open the *New Virtual Machine* dialog.
+. Specify a name for the virtual machine and any other details.
+. Click *Attach*.
+. Select the CloudForms appliance in the list of images and click *OK*.
+. Click *+* and *Create* to create a disk for the VMDB.
+. Specify a *Size* in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
 +
-The new NIC shows in the *Network Interfaces* tab.
-
-[discrete]
-==== Creating a Virtual Machine Based on the CloudForms Template
-
-. Create a new virtual machine using the CloudForms appliance template as a basis:
-.. In the *Templates* tab, select the CloudForms template.
-.. Click *New VM* to open the *New Virtual Machine* dialog. 
-.. Specify a name for the virtual machine, and any other details as desired. 
-.. Click *OK*.
-+
-The virtual machine is created. To view the virtual machine, select the data center, then the *Virtual Machines* tab to view a list of all virtual machines.
-. Add a database disk if you are hosting the database on the same machine as the appliance:
-//From BZ1411114 - “how big?  Thin or thick provisioned?  (Anything else to consider?)
-.. To add a disk, select your virtual machine from the *Virtual Machines* tab.
-.. From the details pane, click the *Disks* tab. *(%AP: I think we can also create disk when creating VM. Might be easier to put the disk creation in that step.)*
-.. Click *New* to open the *New Virtual Disk* dialog.
-+
-Specify a *Size* in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
-
 * Virtual Machine Count: the most important factor in the calculation of virtual machine database (VMDB) size over time.
 * Host Count: the number of hosts associated with the provider.
 * Storage Count: the number of individual storage elements as seen from the perspective of the provider or host. It is not the total number of virtual disks for all virtual machines.
@@ -114,10 +74,10 @@ Specify a *Size* in GB for the disk that allows sufficient space for your databa
 Use the following table as a guideline to calculate minimum requirements for your database:
 +
 image:5780.png[]
-.. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
-.. Specify any other values as desired.
-.. Click *OK* to create the disk.
+. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
+. Specify any other values as desired.
+. Click *OK* to create the disk.
 . To start the CloudForms appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
 
-Your Red Hat Virtualization environment now contains a running CloudForms appliance.
+Your Red Hat Virtualization environment now contains a running CloudForms virtual machine.
 

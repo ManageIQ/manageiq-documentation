@@ -5,7 +5,7 @@ See <<appe-saml-authentication-example>> for an example configuration map file.
 
 The configuration map includes the following parameters:
 
-* `auth-type` - The authentication type.
+auth-type:: The authentication type.
 +
 This parameter controls which configuration files `httpd` will load upon startup. The default is `internal`. Supported values are:
 +
@@ -23,12 +23,12 @@ This parameter controls which configuration files `httpd` will load upon startup
 ====
 Enabling external authentication must be done from the {product-title_short} user interface; see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_authentication_for_cloudforms/external_auth[Configuring External Authentication] in _Managing Authentication_ for details.
 ====
-+
-* `auth-kerberos-realms` - The Kerberos realms to join.
+
+auth-kerberos-realms:: The Kerberos realms to join.
 +
 When configuring external authentication against IPA, Active Directory or LDAP, this parameter defines the Kerberos realm `httpd`  is configured against, such as _example.com_. When specifying multiple Kerberos realms, they must be separated by spaces. The default is `undefined`.
-+
-* `auth-configuration.conf` - The external authentication configuration file which declares the list of files to overlay upon startup if `auth-type` is other than `internal`.
+
+auth-configuration.conf:: The external authentication configuration file which declares the list of files to overlay upon startup if `auth-type` is other than `internal`.
 +
 Syntax for the file is as follows:
 +
@@ -39,10 +39,10 @@ file = basename2 target_path2 permission2
 ----
 +
 For the files to overlay on the `httpd` pod, one `file` directive is needed per file.
-+
-* `basename` - The name of the source file in the configuration map.
-* `target_path` - The path of the file on the pod to overwrite, i.e. `/etc/sssd/sssd.conf`
-* `permission` (optional) - By default, files are copied using the pod's default umask, owner and group, so files are created as mode 644 owner root, group root.
+
+basename:: The name of the source file in the configuration map.
+
+permission:: (optional) By default, files are copied using the pod's default umask, owner and group, so files are created as mode 644 owner root, group root.
 +
 `permission` can be specified as follows, reflecting the mode and ownership to set the copied files to:
 +
@@ -54,10 +54,13 @@ For example:
 ** 755
 ** 640:root
 ** 644:root:apache
-
++
 Binary files can be specified in the configuration map in their base64 encoded format with a basename having a `.base64` extension. Such files are then converted back to binary as they are copied to their target path.
-
++
 When an `/etc/sssd/sssd.conf` file is included in the configuration map, the `httpd`  pod automatically enables the SSSD service upon startup.
+
+target_path:: The path of the file on the pod to overwrite, i.e. `/etc/sssd/sssd.conf`.
+
 
 
 [[appe-saml-authentication-example]]

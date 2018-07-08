@@ -1,29 +1,59 @@
-[id="proc_Installing_cloudforms_automatically_{context}"]
-= Installing CloudForms Automatically
+[id="proc_Installing_cloudforms_automatically"]
+= NEW: Installing CloudForms Automatically
 
-The CloudForms installation is automated with an oVirt Ansible role, `oVirt.manageiq`.
+*(%AP: This section needs to be reviewed.)*
 
-[discrete]
-== Prerequisites
+You can install CloudForms automatically with the oVirt Ansible role, `oVirt.manageiq`. 
 
-* A bulleted list of conditions that must be satisfied before the user starts following this assembly.
-* You can also link to other modules or assemblies the user must follow before starting this assembly.
-* Delete the section title and bullets if the assembly has no prerequisites.
+Ansible roles are located in +/usr/share/doc/ovirt-ansible-roles-_version_/examples+.
 
 [discrete]
 == Procedure
 
-. Go to the ??? directory.
+. Create a working directory, for example, `/my_ansible`.
 
-. Run the playbook:
+. In your working directory, create a `passwords.yml` file containing the engine password:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+engine_password: _password_
+----
 
+. Encrypt `passwords.yml` with Ansible vault:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-vault encrypt passwords.yml
+----
++
+You will be asked for a vault password.
 
-. Use an unnumbered bullet (*) if the procedure includes only one step.
+. Copy `manageiq.yml` to your working directory:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/manageiq.yml .
+----
+
+. Replace +_engine_fqdn_+ in `manageiq.yml`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+  vars:
+    engine_fqdn: _ovirt.example.com_
+    engine_user: admin@internal
+    engine_cafile: /etc/pki/ovirt-engine/ca.pem
+----
+
+. Run the playbook, providing the vault password when prompted:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook --ask-vault-pass manageiq.yml
+----
 
 [discrete]
 == Additional resources
 
-* A bulleted list of links to other material closely related to the contents of the procedure module.
-* For more details on writing procedure modules, see the link:https://github.com/redhat-documentation/modular-docs#modular-documentation-reference-guide[Modular Documentation Reference Guide].
-* Use a consistent system for file names, IDs, and titles. For tips, see _Anchor Names and File Names_ in link:https://github.com/redhat-documentation/modular-docs#modular-documentation-reference-guide[Modular Documentation Reference Guide].
+* For more details, see link:https://github.com/oVirt/ovirt-ansible-manageiq/blob/master/README.md[Deploy ManageIQ in oVirt].
 

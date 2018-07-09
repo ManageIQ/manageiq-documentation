@@ -16,7 +16,7 @@ The procedure for installing RHVH on a physical machine has 3 key stages:
 [discrete]
 == Prerequisites
 
-Your host machine must meet the following minimum requirements to install RHVH:
+Your conversion host machine must meet the following minimum requirements to support migration:
 
 * CPU:
 ** Must support Intel® 64 or AMD64 CPU extensions, with AMD-V™ or Intel VT® hardware virtualization extensions enabled.
@@ -24,7 +24,7 @@ Your host machine must meet the following minimum requirements to install RHVH:
 * BIOS: Virtualization must be enabled.
 * Memory: Minimum: 2 GB. Maximum: 2 TB. The amount of RAM required depends on guest operating system requirements, guest application requirements, and guest memory activity and usage. KVM can also overcommit physical RAM for virtualized guests, allowing you to provision guests with RAM requirements greater than what is physically present, on the assumption that the guests are not all working concurrently at peak load. KVM does this by only allocating RAM for guests as required and shifting underutilized guests into swap.
 * Storage: Minimum: 45 GB. Hosts require local storage to store configuration, logs, kernel dumps, and for use as swap space.
-* Network Interface Card (NIC) - Minimum: At least 1 NIC, with at least 1 Gbps. Red Hat recommends that each host have two network interfaces, with one dedicated to supporting network-intensive activities such as virtual machine migration. The performance of such operations is limited by the bandwidth available.
+* Network Interface Card (NIC) - Minimum: At least 2 x 10 GbE or FC8/FC16 connections to the storage. In addition, the conversion host should have a 10 GbE interface to copy the image from the VMware system.
 
 [discrete]
 == Installing Red Hat Virtualization Host
@@ -62,4 +62,3 @@ When RHVH restarts, `nodectl check` performs a health check on the host and disp
 ----
 
 You can now add the host to your Red Hat Virtualization environment. See xref:Adding_a_host_to_the_Manager[].
-

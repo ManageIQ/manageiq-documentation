@@ -1,30 +1,21 @@
 [[Creating_a_Migration_Plan]]
 = Creating and Running a Migration Plan
 
-TBD: Diagram from https://github.com/RedHatDemos/RHS-Optimize_IT-Infrastructure_Migration/blob/master/docs/00-redhat_solutions-insfrastructure_migration_v2-deployment.adoc#vm-migration-workflow to be inserted here.
-
 Create and run a migration plan:
 
 . Go to menu:Compute[Migration] and click *Create Migration Plan*.
 . Select the infrastructure mapping from the drop-down list.
 . Enter the name of your migration plan and click *Next*.
-. Select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*.
+. Select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*.  *(%AP: Should CSV file method be documented instead? Or in addition to discovered VMs? If so, should it be here or in an appendix?)*
 . Select the virtual machines to migrate and click *Next*.
 . Select *Start Migration Immediately* and click *Create*.
 . Click *Close*. The migration plan may take some time to complete. "In Progress Plans", status of the datastores and VMs, and elapsed time are displayed.
-. Optional. You can view the progress of the migration in the CloudForms log:
-+
-----
-# ssh _CloudForms_host_
-# tail -f /var/www/miq/vmdb/log/automation.log
-----
-+
-You can also view the progress of each virtual machine in the conversion host log *(%AP: When I checked the conversion host, there was no /import directory in the vdsm directory)*:
-+
-----
-# ssh _conversion_host_
-# tail -f /var/log/vdsm/import/*
-----
 +
 When the migration is complete, a "Completed Migrations" message appears, with the number of successfully migrated virtual machines.
+
+If a migration plan does not complete successfully, check the log: 
+
+. Select *Completed Plans* from the migration plan drop-down list. 
+. Click the unsuccessful plan to open the details view. 
+. Click *Download Log* to download the migration log.
 

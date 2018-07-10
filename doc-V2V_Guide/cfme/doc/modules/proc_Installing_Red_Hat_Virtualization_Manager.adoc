@@ -11,7 +11,7 @@ The procedure for installing Red Hat Virtualization Manager has 5 key stages:
 
 [NOTE]
 ====
-These procedures describe how to set up a basic Red Hat Virtualization environment with a local Manager database and Data Warehouse. For more options, see the link:https://access.redhat.com/documentation/en/red-hat-virtualization/[Red Hat Virtualization Documentation].
+These procedures describe how to set up a basic Red Hat Virtualization environment with a local Manager database and Data Warehouse. For more options, see the link:https://access.redhat.com/documentation/en/red-hat-virtualization/[Red Hat Virtualization documentation].
 ====
 
 [discrete]
@@ -38,21 +38,21 @@ Do not enable additional repositories. The required repositories are specified i
 
 To install the Red Hat Virtualization packages, you must register the system with Red Hat Subscription Manager, attach the `Red Hat Enterprise Linux Server` and `Red Hat Virtualization` subscriptions, and enable the Manager repositories:
 
-. Register your system with the Content Delivery Network, entering your Customer Portal user name and password when prompted: 
+. Register your system with the Content Delivery Network, entering your Customer Portal user name and password when prompted:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # subscription-manager register
 ----
 
-. Find the `Red Hat Enterprise Linux Server` and `Red Hat Virtualization` subscription pools and note down the pool IDs: 
+. Find the `Red Hat Enterprise Linux Server` and `Red Hat Virtualization` subscription pools and note down the pool IDs:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # subscription-manager list --available
 ----
 
-. Use the pool IDs to attach the subscriptions to the system: 
+. Use the pool IDs to attach the subscriptions to the system:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -73,7 +73,7 @@ To list all enabled repositories, run:
 ----
 ====
 
-. Disable all existing repositories: 
+. Disable all existing repositories:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -95,7 +95,7 @@ To list all enabled repositories, run:
 [discrete]
 == Installing the Manager Packages
 
-. Update all packages on the machine where you are installing the Red Hat Virtualization Manager: 
+. Update all packages on the machine where you are installing the Red Hat Virtualization Manager:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -116,28 +116,28 @@ To list all enabled repositories, run:
 
 The `engine-setup` command asks you a series of configuration questions, applies that configuration, and starts the `ovirt-engine` service. `engine-setup` also creates and configures the Engine and Data Warehouse databases.
 
-. Run the `engine-setup` command to begin configuration: 
+. Run the `engine-setup` command to begin configuration:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # engine-setup
 ----
 
-. Press `Enter` to configure the Manager on your local host: 
+. Press `Enter` to configure the Manager on your local host:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Configure Engine on this host (Yes, No) [Yes]:
 ----
 
-. Press `Enter` to configure the Image I/O Proxy (`ovirt-imageio-proxy`), which enables the Manager to upload images to storage domains: 
+. Press `Enter` to configure the Image I/O Proxy (`ovirt-imageio-proxy`), which enables the Manager to upload images to storage domains:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Configure Image I/O Proxy on this host? (Yes, No) [Yes]:
 ----
 
-. Press `Enter` to configure a websocket proxy server, which enables users to connect to virtual machines via the noVNC or HTML 5 consoles: 
+. Press `Enter` to configure a websocket proxy server, which enables users to connect to virtual machines via the noVNC or HTML 5 consoles:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -148,7 +148,7 @@ Configure WebSocket Proxy on this machine? (Yes, No) [Yes]:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-Please note: Data Warehouse is required for the engine. If you choose to not configure it on this host, you have to configure it on a remote host, and then configure the engine on this host so that it can access the database of the remote Data Warehouse host. 
+Please note: Data Warehouse is required for the engine. If you choose to not configure it on this host, you have to configure it on a remote host, and then configure the engine on this host so that it can access the database of the remote Data Warehouse host.
 Configure Data Warehouse on this host (Yes, No) [Yes]:
 ----
 
@@ -172,7 +172,7 @@ The default cluster uses OVN as its default network provider. Hosts added to the
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-Host fully qualified DNS name of this server [_autodetected host name_]: 
+Host fully qualified DNS name of this server [_autodetected host name_]:
 ----
 +
 If you are using virtual hosts, the automatically detected host name may be incorrect.
@@ -201,7 +201,7 @@ Setup can configure the local postgresql server automatically for the DWH to run
 Would you like Setup to automatically configure postgresql and create DWH database, or prefer to perform that manually? (Automatic, Manual) [Automatic]:
 ----
 
-. Press `Enter` to create a local Engine database: 
+. Press `Enter` to create a local Engine database:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -224,7 +224,7 @@ Engine admin password:
 Confirm engine admin password:
 ----
 
-. Press `Enter` to select both Virt and Gluster modes: 
+. Press `Enter` to select both Virt and Gluster modes:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -236,11 +236,11 @@ Application mode (Both, Virt, Gluster) [Both]:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Use default credentials (admin@internal) for ovirt-provider-ovn (Yes, No) [Yes]:
-oVirt OVN provider user[admin@internal]: 
-oVirt OVN provider password: 
+oVirt OVN provider user[admin@internal]:
+oVirt OVN provider password:
 ----
 
-. Press `Enter` to set the default value for the `wipe_after_delete` flag, which wipes the blocks of a virtual disk when the disk is deleted, to `No`: 
+. Press `Enter` to set the default value for the `wipe_after_delete` flag, which wipes the blocks of a virtual disk when the disk is deleted, to `No`:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -282,7 +282,7 @@ Please choose Data Warehouse sampling scale:
 ----
 `Basic` reduces the values of `DWH_TABLES_KEEP_HOURLY` to `720` and `DWH_TABLES_KEEP_DAILY` to `0`, easing the load on the Manager machine. This is recommended when the Manager and Data Warehouse are installed on the same machine.
 
-. Review the installation settings and press `Enter` to accept the values and proceed with the installation: 
+. Review the installation settings and press `Enter` to accept the values and proceed with the installation:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -302,4 +302,3 @@ You must have an NTP service, such as chrony, installed and running.
 . Install the certificate authority according to the instructions provided by your browser. You can obtain the certificate authority's certificate by going to `http://_your-manager-fqdn_/ovirt-engine/services/pki-resource?resource=ca-certificate&amp;format=X509-PEM-CA`, replacing _your-manager-fqdn_ with the fully qualified domain name (FQDN) that you provided during the installation.
 
 Proceed to the next section to connect to the Administration Portal as the *admin@internal* user.
-

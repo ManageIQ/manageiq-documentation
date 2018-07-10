@@ -1,16 +1,16 @@
 [id="proc_Installing_cloudforms_automatically"]
-= NEW: Installing CloudForms Automatically
+= Installing CloudForms Automatically
 
 *(%AP: This section needs to be reviewed. Moran Goldboim says the user needs to sign into the Customer Portal. When does this step occur?)*
 
-You can install CloudForms automatically with the oVirt Ansible role, `oVirt.manageiq`.
+CloudForms is installed automatically using the oVirt Ansible role, `oVirt.manageiq`. The conversion host is created with the `conversion_host_enable` playbook.
 
 Ansible roles are located in +/usr/share/doc/ovirt-ansible-roles-_version_/examples+.
 
 [discrete]
 == Procedure
 
-. Create a working directory, for example, `/my_ansible`.
+. Create a working directory on the Red Hat Virtualization Manager machine, for example, `/my_ansible`.
 
 . In your working directory, create a `passwords.yml` file containing the engine password:
 +
@@ -28,14 +28,15 @@ engine_password: _password_
 +
 You will be asked for a vault password.
 
-. Copy `manageiq.yml` to your working directory:
+. Copy `manageiq.yml` and `conversion_host_enable.yml` to your working directory:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/manageiq.yml .
+# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/{manageiq.yml,conversion_host_enable.yml} .
+
 ----
 
-. Replace +_engine_fqdn_+ in `manageiq.yml`:
+. Replace +_ovirt.example.com_+ in `manageiq.yml` with the FQDN of the Manager machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -45,12 +46,26 @@ You will be asked for a vault password.
     engine_cafile: /etc/pki/ovirt-engine/ca.pem
 ----
 
-. Run the playbook, providing the vault password when prompted:
+. Run the `manageiq` playbook, providing the vault password when prompted:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-playbook --ask-vault-pass manageiq.yml
 ----
+
+. Download the VMware VDDK package from link:https://www.vmware.com/support/developer/vddk/[https://www.vmware.com/support/developer/vddk/]. *(%AP: do we need to specify a version?)*
+
+. Use SCP to copy the VMware VDDK package to the Manager machine.
+
+. Run the `conversion_host_enable` playbook:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook -i _conversion_host_ or _ansible_host_file_, conversion_host_enable.yml -e 'v2v_vddk_package_name=_vddk_package_name_.tar.gz' -e 'v2v_vddk_package_url=http://_hostname_to_package_location_/vddk/VMware-vix-disklib-stable.tar.gz'
+----
+*(%AP: What is the vddk package url supposed to be? Package path on Manager? Or conversion host? Is there a comma after `-i _conversion_host_ or _ansible_host_file_`? What is the 'conversion_host' file? For 'ansible_host_file', can we use /etc/ansible/hosts?)*
+
+. Verify that the conversion host role is enabled: *(%AP: How?)*
 
 [discrete]
 == Additional resources

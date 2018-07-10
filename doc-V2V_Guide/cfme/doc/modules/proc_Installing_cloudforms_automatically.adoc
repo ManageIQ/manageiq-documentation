@@ -28,11 +28,11 @@ engine_password: _password_
 +
 You will be asked for a vault password.
 
-. Copy `manageiq.yml` and `conversion_host_enable.yml` to your working directory:
+. Copy `manageiq.yml`, `conversion_host_enable.yml`, and `conversion_host_check.yml` to your current directory:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/{manageiq.yml,conversion_host_enable.yml} .
+# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/{manageiq.yml,conversion_host_enable.yml,conversion_host_check.yml} .
 
 ----
 
@@ -53,7 +53,9 @@ You will be asked for a vault password.
 # ansible-playbook --ask-vault-pass manageiq.yml
 ----
 
-. Download the VMware VDDK package from link:https://www.vmware.com/support/developer/vddk/[https://www.vmware.com/support/developer/vddk/]. *(%AP: do we need to specify a version?)*
+. Add your host names or IP addresses to `/etc/ansible/hosts`.
+
+. Download the latest VMware VDDK package from link:https://www.vmware.com/support/developer/vddk/[https://www.vmware.com/support/developer/vddk/]. *(%AP: do we need to specify a version or is 'latest' OK?)*
 
 . Use SCP to copy the VMware VDDK package to the Manager machine.
 
@@ -65,7 +67,12 @@ You will be asked for a vault password.
 ----
 *(%AP: What is the vddk package url supposed to be? Package path on Manager? Or conversion host? Is there a comma after `-i _conversion_host_ or _ansible_host_file_`? What is the 'conversion_host' file? For 'ansible_host_file', can we use /etc/ansible/hosts?)*
 
-. Verify that the conversion host role is enabled: *(%AP: How?)*
+. Run the `conversion_host_check` playbook to verify that the conversion host is enabled:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook conversion_host_check.yml
+----
 
 [discrete]
 == Additional resources

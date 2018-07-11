@@ -13,13 +13,13 @@ As NFS exports are grown to accommodate more storage needs, Red Hat Virtualizati
 * The following services installed and enabled:
 
 ** *nfs*: `systemctl start nfs` starts the NFS server and the appropriate RPC processes to service requests for shared NFS file systems.
-** *nfs-lock*: `systemctl start nfs-lock` activates a mandatory service that starts the appropriate RPC processes allowing NFS clients to lock files on the server. 
+** *nfs-lock*: `systemctl start nfs-lock` activates a mandatory service that starts the appropriate RPC processes allowing NFS clients to lock files on the server.
 ** *rpcbind*: `rpcbind` accepts port reservations from local RPC services. These ports are then made available (or advertised) so the corresponding remote RPC services can access them. `rpcbind` responds to requests for RPC services and sets up connections to the requested RPC service. This is not used with NFSv4.
 
 [discrete]
 == Preparing NFS Storage
 
-NFS shares serve as a data domain on a Red Hat Enterprise Linux server. A data domain holds the virtual hard disks and OVF files of all the virtual machines and templates in a data center. In addition, snapshots of the virtual machines are stored in the data domain. The data domain cannot be shared across data centers. Data domains of multiple types (iSCSI, NFS, FC, POSIX, and Gluster) can be added to the same data center, provided they are all shared, rather than local, domains. *(%AP: In progress. Not quite sure about this because it doesn't mention mounting the NFS storage on mount point on host machine.)*
+NFS shares serve as a data domain on a Red Hat Enterprise Linux server. A data domain holds the virtual hard disks and OVF files of all the virtual machines and templates in a data center. In addition, snapshots of the virtual machines are stored in the data domain. The data domain cannot be shared across data centers. Data domains of multiple types (iSCSI, NFS, FC, POSIX, and Gluster) can be added to the same data center, provided they are all shared, rather than local, domains.
 
 . Create the data directory:
 +
@@ -28,14 +28,14 @@ NFS shares serve as a data domain on a Red Hat Enterprise Linux server. A data d
 # mkdir -p _/exports/data_
 ----
 
-. Add the newly created directories to the /etc/exports file:
+. Add the newly created directory to the `/etc/exports` file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 _/exports/data_ *(rw)
 ----
 
-. Export the storage domains:
+. Export the storage domain:
 +
 ----
 # exportfs -r
@@ -44,29 +44,29 @@ _/exports/data_ *(rw)
 . Reload the NFS service:
 +
 ----
-# exportfs -r
+# systemctl reload nfs
 ----
 
-. Create the group `kvm`: 
+. Create the group `kvm`:
 +
 ----
 # groupadd kvm -g 36
 ----
 
-. Create the user `vdsm` in the group `kvm`: 
+. Create the user `vdsm` in the group `kvm`:
 +
 ----
 # useradd vdsm -u 36 -g 36
 ----
 
-. Set the ownership of your exported directories to 36:36, which gives vdsm:kvm ownership:
+. Set the ownership of your exported directory to 36:36, which gives vdsm:kvm ownership:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # chown -R 36:36 _/exports/data_
 ----
 
-. Change the mode of the directories so that read and write access is granted to the owner, and so that read and execute access is granted to the group and other users:
+. Change the mode of the directory so that read and write access is granted to the owner, and so that read and execute access is granted to the group and other users:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -88,4 +88,3 @@ Attach the NFS storage domain to the data center in your Red Hat Virtualization 
 The new NFS data domain has a status of `Locked` until the disk is prepared. The data domain is then automatically attached to the data center.
 
 include::ref_Storage_to_CF_link.adoc[]
-

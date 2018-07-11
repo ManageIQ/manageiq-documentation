@@ -58,20 +58,6 @@ To install the Red Hat Virtualization packages, you must register the system wit
 ----
 # subscription-manager attach --pool=_pool_id_
 ----
-+
-[NOTE]
-====
-To find out which subscriptions are currently attached, run:
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# subscription-manager list --consumed
-----
-To list all enabled repositories, run:
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# yum repolist
-----
-====
 
 . Disable all existing repositories:
 +
@@ -114,7 +100,7 @@ To list all enabled repositories, run:
 [discrete]
 == Configuring the Manager
 
-The `engine-setup` command asks you a series of configuration questions, applies that configuration, and starts the `ovirt-engine` service. `engine-setup` also creates and configures the Engine and Data Warehouse databases.
+The `engine-setup` script asks you a series of configuration questions, applies that configuration, and starts the `ovirt-engine` service. `engine-setup` also creates and configures the Manager and Data Warehouse databases.
 
 . Run the `engine-setup` command to begin configuration:
 +
@@ -130,21 +116,21 @@ The `engine-setup` command asks you a series of configuration questions, applies
 Configure Engine on this host (Yes, No) [Yes]:
 ----
 
-. Press `Enter` to configure the Image I/O Proxy (`ovirt-imageio-proxy`), which enables the Manager to upload images to storage domains:
+. Press `Enter` to configure the Image I/O Proxy (`ovirt-imageio-proxy`), which allows the Manager to upload images to storage domains:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Configure Image I/O Proxy on this host? (Yes, No) [Yes]:
 ----
 
-. Press `Enter` to configure a websocket proxy server, which enables users to connect to virtual machines via the noVNC or HTML 5 consoles:
+. Press `Enter` to configure a websocket proxy server, which allows users to connect to virtual machines using the noVNC or HTML 5 consoles:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Configure WebSocket Proxy on this machine? (Yes, No) [Yes]:
 ----
 
-. Press `Enter` to configure the Data Warehouse on the Manager machine:
+. Press `Enter` to configure Data Warehouse on the Manager machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -152,7 +138,7 @@ Please note: Data Warehouse is required for the engine. If you choose to not con
 Configure Data Warehouse on this host (Yes, No) [Yes]:
 ----
 
-. Press `Enter` to enable access to a virtual machines's serial console from the command line:
+. Press `Enter` to allow access to a virtual machines's serial console from the command line:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -177,7 +163,7 @@ Host fully qualified DNS name of this server [_autodetected host name_]:
 +
 If you are using virtual hosts, the automatically detected host name may be incorrect.
 
-. Press `Enter` to configure Firewalld as the default firewall:
+. Press `Enter` to configure `firewalld` as the default firewall:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -201,14 +187,14 @@ Setup can configure the local postgresql server automatically for the DWH to run
 Would you like Setup to automatically configure postgresql and create DWH database, or prefer to perform that manually? (Automatic, Manual) [Automatic]:
 ----
 
-. Press `Enter` to create a local Engine database:
+. Press `Enter` to create a local Manager database:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Where is the Engine database located? (Local, Remote) [Local]:
 ----
 
-. Press `Enter` to create and configure the Engine database automatically:
+. Press `Enter` to create and configure the Manager database automatically:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -299,6 +285,6 @@ When your environment has been configured, `engine-setup` displays details about
 ----
 You must have an NTP service, such as chrony, installed and running.
 
-. Install the certificate authority according to the instructions provided by your browser. You can obtain the certificate authority's certificate by going to `http://_your-manager-fqdn_/ovirt-engine/services/pki-resource?resource=ca-certificate&amp;format=X509-PEM-CA`, replacing _your-manager-fqdn_ with the fully qualified domain name (FQDN) that you provided during the installation.
+. Install the certificate authority according to the instructions provided by your browser. You can obtain the certificate authority's certificate by going to +http://_your-manager-fqdn_/ovirt-engine/services/pki-resource?resource=ca-certificate&amp;format=X509-PEM-CA+, replacing +_your-manager-fqdn_+ with the fully qualified domain name (FQDN) that you provided during the installation.
 
 Proceed to the next section to connect to the Administration Portal as the *admin@internal* user.

@@ -3,9 +3,12 @@
 
 After installing CloudForms and running it for the first time, configure the internal database in which CloudForms stores information about the environment:
 
-. Start the appliance and open a terminal console.
-. Log in as `root`, with the default password, `smartvm`.
-. Enter the `appliance_console` command. The CloudForms appliance summary screen is displayed.
+. Connect using SSH to the CloudForms machine and start the appliance console to display the console settings menu:
++
+----
+# appliance_console
+----
+
 . Press *Enter* to manually configure settings.
 . Select `5) Configure Database` from the menu.
 . Select `1) Create key`.
@@ -21,12 +24,14 @@ If there is an unpartitioned disk attached to the virtual machine, the dialog wi
 +
 ----
 1) /dev/vdb: 20480
-2) Don't partition the disk 
+2) Don't partition the disk
 ----
+
+. Select `1` to choose `/dev/vdb` for the database location.
 +
-* Enter `1` to choose `/dev/vdb` for the database location. This option creates a logical volume using this device and mounts the volume to the appliance in a location appropriate for storing the database. The default location is `/var/opt/rh/rh-postgresql95/lib/pgsql`, which can be found in the environment variable `$APPLIANCE_PG_MOUNT_POINT`.
+This option creates a logical volume using this device and mounts the volume to the appliance in a location appropriate for storing the database. The default location is `/var/opt/rh/rh-postgresql95/lib/pgsql`, which can be found in the environment variable `$APPLIANCE_PG_MOUNT_POINT`.
+
 . Enter `Y` for *Should this appliance run as a standalone database server?*
 . Create and confirm a password for the database.
-+
-CloudForms configures the internal database.
 
+CloudForms configures its internal database.

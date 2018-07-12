@@ -1,0 +1,64 @@
+[id="proc_Configuring_rhv_conversion_hosts"]
+= Configuring RHV Conversion Hosts
+
+[discrete]
+== Prerequisites
+
+. Log into the link:https://www.vmware.com/support/developer/vddk/[VMware VDDK Documentation] site and download the latest VDDK package.
+
+. Using SCP, copy the VDDK package to the Manager machine.
+
+[discrete]
+== Procedure
+
+. Copy `conversion_host_enable.yml`, and `conversion_host_check.yml` to your current directory:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# cp /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/{conversion_host_enable.yml,conversion_host_check.yml} .
+----
+
+. Create the `conversion_hosts` inventory file in the working directory and add the _v2v_vddk_package_name_, _v2v_vddk_package_url_, and conversion hosts:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+all:
+  vars:
+    v2v_repo_rpms_name: "v2v-nbdkit-rpms"
+    v2v_repo_rpms_url: "http://_content.example.com_/v2v-nbdkit-rpms"
+    v2v_repo_srpms_name: "v2v-nbdkit-src-rpms"
+    v2v_repo_srpms_url: "http://_content.example.com_/v2v-nbdkit-src-rpms"
+    v2v_vddk_package_name: "_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_"
+    v2v_vddk_package_url: "http://_content.example.com_/VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz"
+  hosts:
+    _conversion_host1.com_:
+    _conversion_host2.com_:
+----
+
+. Copy the `/etc/ansible/ansible.cfg` file to the working directory, uncomment the `inventory` line, and replace `/etc/ansible/hosts` with `conversion_hosts`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+inventory      = conversion_hosts
+----
+
+. Run the `conversion_host_enable` playbook:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook -i conversion_hosts conversion_host_enable.yml
+----
+
+. Run the `conversion_host_check` playbook to verify that the conversion host is enabled:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook conversion_host_check.yml
+----
+
+After configuring the RHV conversion hosts, you will log into CloudForms, change the default password, and configure the CloudForms VMDB.
+
+[discrete]
+== Additional resources
+
+* For more information, see link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[V2V - Conversion Host - Ansible]

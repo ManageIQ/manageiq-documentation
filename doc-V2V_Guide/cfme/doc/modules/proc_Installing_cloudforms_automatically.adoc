@@ -1,11 +1,7 @@
 [id="proc_Installing_cloudforms_automatically"]
-= Installing CloudForms and Configuring RHV Conversion Hosts
+= Installing CloudForms
 
-*(%AP: Moran Goldboim says the user needs to sign into the Customer Portal. When does this step occur?)*
-
-CloudForms is installed automatically using the oVirt Ansible role, `oVirt.manageiq`. The conversion host is created with the `conversion_host_enable` playbook.
-
-Ansible roles are located in +/usr/share/doc/ovirt-ansible-roles-_version_/examples+.
+CloudForms is installed with Ansible. The Ansible roles are located in +/usr/share/doc/ovirt-ansible-roles-_version_/examples+.
 
 [discrete]
 == Procedure
@@ -28,15 +24,14 @@ engine_password: _password_
 +
 You will be asked for a vault password.
 
-. Copy `manageiq.yml`, `conversion_host_enable.yml`, and `conversion_host_check.yml` to your current directory:
+. Copy `manageiq.yml` to your current directory:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/{manageiq.yml,conversion_host_enable.yml,conversion_host_check.yml} .
-
+# cp /usr/share/doc/ovirt-ansible-roles-_version_/examples/manageiq.yml .
 ----
 
-. Replace +_ovirt.example.com_+ in `manageiq.yml` with the FQDN of the Manager machine:
+. Replace +_ovirt.example.com_+, +_miq_vm_name_+, and +_miq_vm_cluster_+ with the correct values in `manageiq.yml`:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -44,7 +39,13 @@ You will be asked for a vault password.
     engine_fqdn: _ovirt.example.com_
     engine_user: admin@internal
     engine_cafile: /etc/pki/ovirt-engine/ca.pem
+
+    miq_qcow_url: https://access.cdn.redhat.com//content/origin/files/sha256/eb/eb8af0fba78baac85eabd5b9ff30ba3191e6e00014528d55c36b673f5e6c762d/cfme-rhevm-5.9.2.4-1.x86_64.qcow2?_auth_=1531378089_ef400f29642f72d85f7784654124a611
+    miq_vm_name: _manageiq_g2_
+    miq_vm_cluster: _mycluster_
 ----
+
+. Log into the link:https://access.redhat.com[Red Hat Customer Portal] so that the `manageiq` playbook can download the CloudForms image.
 
 . Run the `manageiq` playbook, providing the vault password when prompted:
 +
@@ -53,28 +54,9 @@ You will be asked for a vault password.
 # ansible-playbook --ask-vault-pass manageiq.yml
 ----
 
-. Add your host names or IP addresses to `/etc/ansible/hosts`.
-
-. Download the latest VMware VDDK package from link:https://www.vmware.com/support/developer/vddk/[https://www.vmware.com/support/developer/vddk/]. *(%AP: do we need to specify a version or is 'latest' OK?)*
-
-. Secure copy the VMware VDDK package to the Manager machine.
-
-. Run the `conversion_host_enable` playbook:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook -i _conversion_host_ or _ansible_host_file_ conversion_host_enable.yml -e 'v2v_vddk_package_name=_vddk_package_name_.tar.gz' -e 'v2v_vddk_package_url=http://_hostname_to_package_location_/vddk/VMware-vix-disklib-stable.tar.gz'
-----
-*(%AP: What is the vddk package url supposed to be? Package path on Manager? Or conversion host? What is the 'conversion_host' file? For 'ansible_host_file', can we use /etc/ansible/hosts?)*
-
-. Run the `conversion_host_check` playbook to verify that the conversion host is enabled:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook conversion_host_check.yml
-----
+After installing CloudForms, you will configure the RHV conversion hosts.
 
 [discrete]
 == Additional resources
 
-* For more details, see link:https://github.com/oVirt/ovirt-ansible-manageiq/blob/master/README.md[Deploy ManageIQ in oVirt].
+* For more information, see link:https://github.com/oVirt/ovirt-ansible-manageiq/blob/master/README.md[Deploy ManageIQ in oVirt].

@@ -69,9 +69,11 @@ To upload the appliance:
 . Click menu:Storage[Disks].
 . Select menu:Upload[Start].
 . Click *Choose File*, and select the appliance image to upload.
+. Enter a name for the disk in the *Alias* field and edit other fields as desired.
 . Click *OK*.
 
 A progress bar indicates the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* menu.
+When the status is *OK*, you can create a {product-title_short} virtual machine from the disk.
 
 [NOTE]
 ====
@@ -101,9 +103,9 @@ After uploading the appliance to the data domain, create a virtual machine conta
 . In menu:Compute[Virtual Machines], click *New* to open the *New Virtual Machine* dialog.
 . From the *General* tab, specify a name for the virtual machine and any other details.
 . Click *Attach*.
-. Select the {product-title_short} appliance in the list of images and click *OK*.
-. Click *+* and *Create* to create a disk for the VMDB.
-. Specify a Size in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
+. Select the {product-title_short} appliance image you uploaded from the list of images and click *OK*.
+. Next to *Instance Images*, click *+* and *Create* to create a separate disk for the VMDB.
+.. Specify a Size in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
 +
 * Virtual Machine Count: the most important factor in the calculation of virtual machine database (VMDB) size over time.
 * Host Count: the number of hosts associated with the provider.
@@ -122,10 +124,16 @@ See "Database Requirements" in the _Deployment Planning Guide_ for size consider
 ====
 endif::miq[]
 +
-. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
-. Specify any other values as desired.
-. Click *OK* to create the disk.
-. To start the {product-title_short} appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
+.. Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
+.. Specify any other values as desired.
+.. Click *OK* to create the disk.
+. Click *OK* to create the virtual machine.
++
+[NOTE]
+====
+Wait a few minutes for the virtual machine and database disk to be created. The virtual machine is ready to run when the disk status in menu:Storage[Disks] no longer displays *Locked*.
+====
+. When the virtual machine and database disk is created, start the {product-title_short} appliance. Select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
 
 Your Red Hat Virtualization environment now contains a running {product-title_short} appliance.
 

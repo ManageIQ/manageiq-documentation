@@ -2,6 +2,9 @@
 = Configuring Authentication with Active Directory
 //source content https://access.redhat.com/solutions/2751431
 
+[[connecting_to_AD_domain]]
+== Connecting {product-title_short} to an Active Directory Domain
+
 This procedure outlines how to configure {product-title_short} to authenticate against an existing Active Directory (AD) configuration using external HTTP authentication. This provides Active Directory users access to the {product-title_short} appliance user interface, as well as the REST API.
 
 
@@ -13,8 +16,7 @@ This procedure outlines how to configure {product-title_short} to authenticate a
 . Run `realm discover` to determine what Active Directory realms are available:
 +
 ----
-# realm discover
-example.com
+# realm discover example.com
   type: kerberos
   realm-name: EXAMPLE.COM
   domain-name: example.com
@@ -135,7 +137,9 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # systemctl enable httpd
 ----
 
-Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled. Follow these steps from the {product-title_short} user interface:
+Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled. 
+
+From the {product-title_short} user interface:
 
 . Log in to the user interface as an administrative user.
 . Navigate to the settings menu, then menu:Configuration[Authentication].
@@ -148,10 +152,40 @@ Complete authentication setup by configuring the following on each appliance wit
 
 [IMPORTANT]
 ====
-Make sure the user's Active Directory group for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
+Make sure the user's Active Directory groups for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
 ====
 
 {product-title_short} is now configured to use authentication from your Active Directory domain.
 
+[[mapping_to_AD]]
+== Mapping Active Directory Users to {product-title_short} User Roles
 
+This section provides instructions for mapping your existing Active Directory (AD) groups to user account roles in {product-title_short}. 
 
+This is done by assigning a {product-title_short} role to an AD group, then when an AD user who is a part of that AD group attempts to log in to {product-title_short} gets the role assigned automatically and inherits the permissions from that role.
+As a result, all users in that AD group will then be assigned the {product-title_short} roles associated with that group.
+
+After configuring {product-title_short} to connect to an Active Directory domain in xref:connecting_to_AD_domain[], complete the following steps:
+
+. From the settings menu, select *Configuration*.
+. Click the *Access Control* accordion, then click *Groups*.
+. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
+. In *Group Information*, select *Look Up External Authentication Groups* to find a list of groups assigned to a specific user in Active Directory.
+. In *User to Look Up*, enter the user name for a user in your AD group.
++
+image:AD-userlookup.png[]
++
+. Click *Retrieve* to look up details for the user in Active Directory and pull group information for the user. As a result, the AD groups will appear in the *LDAP Groups for User* dropdown list.
+. From the list in *LDAP Groups for User*, select the group you want to associate a {product-title_short} role with, for example, the `cloudforms` group.
+. Select a *Role* to map to the group.
+. Select a *Project/Tenant* to map to the group.
++
+image:Assign_AD-Roles.png[]
++
+. Click *Add*.
+
+Any user who is part of `cloudforms` AD group can now log in to {product-title_short} with their AD username and password, and they will automatically inherit the permissions for the role you assigned earlier.
+
+If you have another user that you want to be able to login to the {product-title_short} server, add that user to the `cloudforms` AD group. 
+
+//Frank: (only in AD? Or can you also add the user via CF?)

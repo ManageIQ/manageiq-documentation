@@ -6,16 +6,30 @@
 
 *(%AP: What do they do?)*
 
+If network communication between the source and target providers is disrupted during migration, the migration will fail. If the VM migration has begun import into the export domain in RHV, the failed migration must be cleaned up before attempting re-migration. *(%AP: How? by deleting the RHV VMs?)*
+
 [discrete]
 == Log Files
 
-If a migration plan does not complete successfully, check the log:
+If a migration plan does not complete successfully, check the logs for errors:
 
-. Select *Completed Plans* from the migration plan drop-down list.
-. Click the unsuccessful plan to open the details view.
-. Click *Download Log* to download the migration log.
+* CloudForms migration log: `/var/www/miq/vmdb/log/automation.log`
+* Conversion host logs: `/tmp`
 
 [discrete]
 == Common Issues and Mistakes
+
+* Incorrect infrastructure mapping.
++
+Check the CloudForms migration log to identify the errors and create a new infrastructure mapping.
+
+* RHV host credentials are not set in CloudForms.
++
+Authorize the xref:Authenticating_RHV_Manager_and_Hosts[RHV hosts].
+
+* Incorrect attributes in the virtual machine CSV import file.
++
+Check the CloudForms migration log to identify the errors. Create a new migration plan, import the correct CSV file, and run the migration plan.
+
 
 https://github.com/RedHatDemos/RHS-Optimize_IT-Infrastructure_Migration/blob/master/docs/01-redhat_solutions-insfrastructure_migration_v2-troubleshooting.adoc

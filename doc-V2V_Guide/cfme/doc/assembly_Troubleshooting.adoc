@@ -2,11 +2,19 @@
 = Troubleshooting
 
 [discrete]
-== Failed Migrations
+== Re-migrating Virtual Machines
 
-*(%AP: What do they do?)*
+If a migration fails for any reason (for example, network communication between the source and target providers is disrupted during the migation process), you can re-migrate the virtual machines:
 
-If network communication between the source and target providers is disrupted during migration, the migration will fail. If the VM migration has begun import into the export domain in RHV, the failed migration must be cleaned up before attempting re-migration. *(%AP: How? by deleting the RHV VMs?)*
+. Delete the target virtual machines that were created during the failed migration. Not doing so will cause the migration to fail because a target machine with the same name already exists.
+. Create a xref:CSV_import[CSV file] with the names and, optionally, providers, of the source virtual machines.
++
+[NOTE]
+====
+The virtual machines cannot be discovered by the migration plan because they are marked in the CloudForms VMDB as `migrated`.
+====
+
+. Create and run a migration plan, using the CSV file to import the virtual machines.
 
 [discrete]
 == Log Files
@@ -27,9 +35,14 @@ Check the CloudForms migration log to identify the errors and create a new infra
 +
 Authorize the xref:Authenticating_RHV_Manager_and_Hosts[RHV hosts].
 
+* RHV conversion host tags not set correctly.*(%AP: Can this happen if the user is configuring the conversion host with conversion_host.yml?)*
++
+Set the appropriate tags for the RHV conversion hosts.
+Ensure RHV hosts are configured as conversion hosts.
+Run the Conversion_host_check.yml playbook to verify.
+
 * Incorrect attributes in the virtual machine CSV import file.
 +
 Check the CloudForms migration log to identify the errors. Create a new migration plan, import the correct CSV file, and run the migration plan.
-
 
 https://github.com/RedHatDemos/RHS-Optimize_IT-Infrastructure_Migration/blob/master/docs/01-redhat_solutions-insfrastructure_migration_v2-troubleshooting.adoc

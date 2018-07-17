@@ -8,7 +8,7 @@ Create one or more RHV conversion hosts.
 
 . Log into the link:https://www.vmware.com/support/developer/vddk/[VMware VDDK Documentation] site and download the latest VDDK package.
 
-. Using SCP, copy the VDDK package to the Manager machine.
+. Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine.
 
 . Generate an SSH key for the Manager machine and copy it to each conversion host.
 
@@ -19,7 +19,7 @@ Create one or more RHV conversion hosts.
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# cp /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/{conversion_host_enable.yml,conversion_host_check.yml} .
+# cp /usr/share/doc/ovirt-ansible-v2v-conversion-host-_version_/examples/{conversion_host_enable.yml,conversion_host_check.yml} .
 ----
 
 . Create the `conversion_hosts` inventory file in the working directory and add the _v2v_vddk_package_name_, _v2v_vddk_package_url_, and conversion hosts:
@@ -50,7 +50,7 @@ inventory      = conversion_hosts
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i conversion_hosts conversion_host_enable.yml
+# ansible-playbook conversion_host_enable.yml
 ----
 
 . Run the `conversion_host_check` playbook to verify that the conversion host is enabled:

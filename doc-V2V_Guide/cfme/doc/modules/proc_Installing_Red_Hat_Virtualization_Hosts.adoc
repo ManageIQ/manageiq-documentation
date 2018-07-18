@@ -1,5 +1,5 @@
 [[Installing_RHVH]]
-= Installing Red Hat Virtualization Host
+= Installing Red Hat Virtualization Hosts
 
 You must install at least one host to function as a conversion host during the migration. Ensure that your hosts are sufficient to cover the memory and CPU requirements of the virtual machines that you are migrating.
 
@@ -16,7 +16,7 @@ The procedure for installing RHVH on a physical machine has 3 key stages:
 [discrete]
 == Prerequisites
 
-Your conversion host machine must meet the following minimum requirements to support migration:
+Your conversion host machines must meet the following minimum requirements to support migration:
 
 * CPU:
 ** Must support Intel® 64 or AMD64 CPU extensions, with AMD-V™ or Intel VT® hardware virtualization extensions enabled.
@@ -27,13 +27,15 @@ Your conversion host machine must meet the following minimum requirements to sup
 * Network Interface Card (NIC) - Minimum: At least 2 x 10 GbE or FC8/FC16 connections to the storage. In addition, the conversion host should have a 10 GbE interface to copy the image from the VMware system.
 
 [discrete]
-== Installing Red Hat Virtualization Host
+== Procedure
 
 . Download the RHVH ISO image from the Customer Portal:
-.. Log in to the Customer Portal at link:https://access.redhat.com[].
+
+.. Log into the Customer Portal at link:https://access.redhat.com[].
 .. Click *Downloads* in the menu bar.
 .. Click *Red Hat Virtualization*, scroll up, and click *Download Latest* to access the product download page.
 .. Choose the appropriate hypervisor image and click *Download Now*.
+
 . Copy the hypervisor image to a bootable media device. A DVD is recommended, due to the large size of the image.
 . Start the machine on which to install RHVH, using the prepared installation media device.
 . From the boot menu, select the *Install* option, and press `Enter`.
@@ -52,7 +54,7 @@ Your conversion host machine must meet the following minimum requirements to sup
 When RHVH restarts, `nodectl check` performs a health check on the host and displays the result when you log in on the command line. The message `node status: OK` or `node status: DEGRADED` indicates the health status. Run `nodectl check` to get more information. The service is enabled by default.
 ====
 +
-. Once the installation is complete, log in to the Cockpit user interface at +https://_HostFQDNorIP_:9090+ to register the host with the Content Delivery Network.
+. Once the installation is complete, log into the Cockpit user interface at +https://_HostFQDNorIP_:9090+ to register the host with the Content Delivery Network.
 . Click *Subscriptions*, click *Register System*, and enter your Customer Portal user name and password. The *Red Hat Virtualization Host* subscription is automatically attached to the system.
 . Click *Terminal*, and enable the `Red Hat Virtualization Host 7` repository to allow later updates to the Red Hat Virtualization Host:
 [options="nowrap" subs="+quotes,verbatim"]
@@ -61,4 +63,4 @@ When RHVH restarts, `nodectl check` performs a health check on the host and disp
 # subscription-manager repos --enable=rhel-7-server-rhvh-4-rpms
 ----
 
-You can now add the host to your Red Hat Virtualization environment.
+You can now add hosts to your Red Hat Virtualization environment.

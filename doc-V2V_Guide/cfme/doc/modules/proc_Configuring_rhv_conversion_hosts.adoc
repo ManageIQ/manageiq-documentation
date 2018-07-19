@@ -10,12 +10,10 @@ Create one or more Red Hat Virtualization conversion hosts.
 
 . Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine.
 
-. Generate an SSH key for the Manager machine and copy it to each RHV conversion host.
-
 [discrete]
 == Procedure
 
-. Copy the conversion host playbooks to your current directory:
+. Copy the conversion host playbooks to your current directory on the Manager machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -27,10 +25,6 @@ Create one or more Red Hat Virtualization conversion hosts.
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 all:
-  vars:
-    v2v_repo_rpms_name: "v2v-nbdkit-rpms"
-    v2v_repo_srpms_name: "v2v-nbdkit-src-rpms"
-    v2v_vddk_package_name: "_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_"
   hosts:
     _conversion_host1.com_:
     _conversion_host2.com_:
@@ -40,7 +34,7 @@ all:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i conversion_hosts conversion_host_enable.yml
+# ansible-playbook -i conversion_hosts conversion_host_enable.yml -e v2v_vddk_package_name=_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_ -e v2v_vddk_package_url=http://_Manager_FQDN_/_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_
 ----
 
 . Verify that the conversion hosts are enabled:
@@ -51,6 +45,11 @@ all:
 ----
 
 After configuring the conversion hosts, you can configure CloudForms.
+
+[NOTE]
+====
+If you upgrade your RHV environment, you must run the `conversion_host_enable` playbook again to update the IMS packages.
+====
 
 [discrete]
 == Additional resources

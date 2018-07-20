@@ -40,7 +40,7 @@ To obtain a copy of the appliance from the Customer Portal:
 . Click *Downloads* in the menu bar.
 . Click *A-Z* to sort the product downloads alphabetically.
 . Click *Red Hat CloudForms* to access the product download page.
-. From the list of installers and images, click the *Download Now* link for *CFME Red Hat Virtual Appliance (qcow)*.
+. From the list of installers and images, click the *Download Now* link for the latest version of the *CFME Red Hat Virtual Appliance (qcow)*.
 endif::cfme[]
 
 After the image completes downloading, you are ready to upload the CloudForms appliance to your Red Hat Virtualization environment and create a virtual machine. 
@@ -69,9 +69,13 @@ To upload the appliance:
 . Click menu:Storage[Disks].
 . Select menu:Upload[Start].
 . Click *Choose File*, and select the appliance image to upload.
+. Under *Disk Options*, enter an *Alias* for the image.
+. (Optional) Edit other fields in *Disk Options* if desired.
 . Click *OK*.
 
-A progress bar indicates the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* menu.
+A progress bar in the *Status* column indicates the status of the upload. You can also pause, cancel, or resume uploads from the *Upload* menu.
+
+The status shows *OK* when the image has completed uploading.
 
 [NOTE]
 ====
@@ -101,8 +105,8 @@ After uploading the appliance to the data domain, create a virtual machine conta
 . In menu:Compute[Virtual Machines], click *New* to open the *New Virtual Machine* dialog.
 . From the *General* tab, specify a name for the virtual machine and any other details.
 . Click *Attach*.
-. Select the {product-title_short} appliance in the list of images and click *OK*.
-. Click *+* and *Create* to create a disk for the VMDB.
+. Select the {product-title_short} appliance you just uploaded from the list of images and click *OK*.
+. Click *+* and *Create* to create a disk for the database (VMDB).
 . Specify a Size in GB for the disk that allows sufficient space for your database. Red Hat recommends allocating the virtual machine disk fully at the time of creation. Three main factors affect the size of your database over time:
 +
 * Virtual Machine Count: the most important factor in the calculation of virtual machine database (VMDB) size over time.
@@ -124,8 +128,10 @@ endif::miq[]
 +
 . Set the *Allocation Policy* to `Preallocated` (thick provisioning) for best performance.
 . Specify any other values as desired.
-. Click *OK* to create the disk.
-. To start the {product-title_short} appliance, select the virtual machine from the *Virtual Machines* tab and click image:greentriangle.png[] (*Run*). 
+. Click *OK* to create the disk and return to the *New Virtual Machine* window.
+. Add a network interface to the virtual machine by selecting a vNIC profile from the *nic1* list.
+. Click *OK* to create the virtual machine.
+. To start the {product-title_short} appliance, select the virtual machine from the *Virtual Machines* tab and click *Run*. 
 
 Your Red Hat Virtualization environment now contains a running {product-title_short} appliance.
 

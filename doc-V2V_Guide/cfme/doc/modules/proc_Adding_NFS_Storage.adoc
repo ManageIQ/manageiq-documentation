@@ -19,7 +19,11 @@ As NFS exports are grown to accommodate more storage needs, Red Hat Virtualizati
 [discrete]
 == Preparing NFS Storage
 
-NFS shares serve as a data domain on a Red Hat Enterprise Linux server. A data domain holds the virtual hard disks and OVF files of all the virtual machines and templates in a data center. In addition, snapshots of the virtual machines are stored in the data domain. The data domain cannot be shared across data centers. Data domains of multiple types (iSCSI, NFS, FC, POSIX, and Gluster) can be added to the same data center, provided they are all shared, rather than local, domains.
+NFS shares serve as data and ISO domains on a Red Hat Enterprise Linux server.
+
+* Data Domain: Data domains hold the virtual hard disks and OVF files of all the virtual machines and templates in a data center. In addition, snapshots of the virtual machines are stored in the data domains. Data domains cannot be shared across data centers. Data domains of multiple types (iSCSI, NFS, FC, POSIX, and Gluster) can be added to the same data center, provided they are all shared, rather than local, domains.
+
+* ISO Domain: ISO domains store ISO files (or logical CDs) used to install and boot operating systems and applications for the virtual machines. An ISO domain removes the data center’s need for physical media. An ISO domain can be shared across different data centers. ISO domains can only be NFS-based. Only one ISO domain can be added to a data center.
 
 . Create the data directory:
 +
@@ -87,4 +91,4 @@ Attach the NFS storage domain to the data center in your Red Hat Virtualization 
 
 The new NFS data domain has a status of `Locked` until the disk is prepared. The data domain is then automatically attached to the data center.
 
-include::ref_Storage_to_CF_link.adoc[]
+include::ref_Storage_link.adoc[]

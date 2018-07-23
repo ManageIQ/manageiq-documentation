@@ -1,57 +1,17 @@
-[id="proc_Configuring_rhv_conversion_hosts"]
+
+[id="Configuring_rhv_conversion_hosts"]
 = Configuring Red Hat Virtualization Conversion Hosts
 
-Create one or more Red Hat Virtualization conversion hosts.
+Configure the Red Hat Virtualization conversion hosts:
 
-[discrete]
-== Prerequisites
+. In CloudForms, go to menu:Compute[Infrastructure > Hosts].
+. Select a Red Hat Virtualization Host.
+. Click the `Policy` drop-down button and select `Edit Tags`.
+. Select `V2V - Transformation Host` from the tag drop-down list and `t` as the assigned value.
+. Select `V2V - Transformation Method` from the tag drop-down list and `VDDK` as the assigned value.
+. Click `Save`.
+. Select the same host, click the `Configuration` drop-down button, and select `Edit this item`.
+. In the `Default` tab of the Endpoints section, enter the Username `root` and the password.
+. Click `Validate`. If a success message is displayed, click `Save`.
 
-. Log into the link:https://www.vmware.com/support/developer/vddk/[VMware VDDK Documentation] site and download the latest VDDK package (for example, `VMware-vix-disklib-6.5.3-8315684.x86_64.tar.gz`).
-
-. Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine.
-
-[discrete]
-== Procedure
-
-. Copy the conversion host playbooks to your current directory on the Manager machine:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# cp /usr/share/doc/ovirt-ansible-v2v-conversion-host-_version_/examples/{conversion_host_enable.yml,conversion_host_check.yml} .
-----
-
-. Create a `conversion_hosts` inventory file:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-all:
-  hosts:
-    _conversion_host1.com_:
-    _conversion_host2.com_:
-----
-
-. Enable the conversion hosts:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook -i conversion_hosts conversion_host_enable.yml -e v2v_vddk_package_name=_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_ -e v2v_vddk_package_url=http://_Manager_FQDN_/_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_
-----
-
-. Verify that the conversion hosts are enabled:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook conversion_host_check.yml
-----
-
-After configuring the conversion hosts, you can configure CloudForms.
-
-[NOTE]
-====
-If you upgrade your RHV environment, you must run the `conversion_host_enable` playbook again to update the IMS packages.
-====
-
-[discrete]
-== Additional resources
-
-* For more information, see link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[V2V - Conversion Host - Ansible]
+After configuring the RHV conversion hosts, you can log into CloudForms.

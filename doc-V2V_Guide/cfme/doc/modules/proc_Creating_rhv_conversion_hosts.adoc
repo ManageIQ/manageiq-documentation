@@ -1,17 +1,18 @@
 [id="proc_Creating_rhv_conversion_hosts"]
-= Creating Red Hat Virtualization Conversion Hosts
+[discrete]
+= Creating RHV Conversion Hosts
 
-Create one or more Red Hat Virtualization conversion hosts:
+Create one or more RHV conversion hosts:
 
 . Log into the link:https://www.vmware.com/support/developer/vddk/[VMware VDDK Documentation] site and download the latest VDDK package (for example, `VMware-vix-disklib-6.5.3-8315684.x86_64.tar.gz`) to your local machine.
 
 . Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine.
 
-. Copy the conversion host playbooks to your current directory on the Manager machine:
+. Go to the conversion hosts directory on the Manager machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# cp /usr/share/doc/ovirt-ansible-v2v-conversion-host-_version_/examples/{conversion_host_enable.yml,conversion_host_check.yml} .
+# cd /usr/share/doc/ovirt-ansible-v2v-conversion-host-_version_/examples/
 ----
 
 . Create a `conversion_hosts` inventory file:
@@ -37,8 +38,6 @@ all:
 ----
 # ansible-playbook conversion_host_check.yml
 ----
-
-After creating the RHV conversion hosts, you can configure CloudForms.
 
 [NOTE]
 ====

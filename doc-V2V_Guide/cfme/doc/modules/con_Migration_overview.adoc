@@ -1,0 +1,21 @@
+[id="Migration_overview"]
+= Migration overview
+
+The following diagram (draft) provides a high-level view of the migration process.
+
+image:IMS_migration.png[]
+
+. The Infrastructure Admin creates an infrastructure mapping and a virtual machine migration plan in CloudForms and runs the migration plan.
+. CloudForms locates the virtual machines to be migrated based on the infrastructure mapping.
+. The ESXi host fingerprint is captured for authentication during the conversion process virtual machine conversion if the VDDK transport method is used. If SSH is used, a shared SSH key is used to connect to the ESX host where the virtual machine resides.
+. Using the RHV attributes for the target environment, CloudForms initiates communication with the RHV conversion host.
+. The RHV conversion host connects to the source datastore, using the `virt-v2v-wrapper.py`, and streams the disk to be converted to the target RHV data domain chosen in the infrastructure mapping using virt-v2v.
+. After the disk is converted, the target virtual machine is created in RHV. During creation, the target virtual machine uses the source virtual machine’s metadata to maintain the virtual machine’s attributes after migration.
+. After the virtual machine is created, the disk(s) is/are attached to the target virtual machine.
+
+The virtual machine migration is complete and its status is displayed in CloudForms.
+
+[NOTE]
+====
+Depending on the source virtual machine’s power state before migration, the virtual machine is either left powered off after migration or is powered on.
+====

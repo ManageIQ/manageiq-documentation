@@ -4,7 +4,7 @@
 After installing {product-title_short} and running it for the first time, you must perform some basic configuration. To configure {product-title_short}, you must at a minimum:
 
 . Add a disk to the infrastructure hosting your appliance.
-. Configure the database. 
+. Configure the database.
 
 Configure the {product-title_short} appliance using the internal appliance console.
 
@@ -30,13 +30,12 @@ The {product-title_short} appliance console automatically logs out after five mi
 ====
 
 
-ifdef::cfme[]
 [[configuring_a_database]]
 === Configuring a Database
 
 {product-title_short} uses a database to store information about the environment. Before using {product-title_short}, configure the database options for it; {product-title_short} provides the following two options for database configuration:
 
-* Install an internal PostgreSQL database to the appliance 
+* Install an internal PostgreSQL database to the appliance
 * Configure the appliance to use an external PostgreSQL database
 
 [[configuring-an-internal-database]]
@@ -47,7 +46,7 @@ include::configuration-db.adoc[]
 [[configuring-an-external-database]]
 ==== Configuring an External Database
 
-Based on your setup, you will choose to configure the appliance to use an external PostgreSQL database. For example, we can only have one database in a single region. However, a region can be segmented into multiple zones, such as database zone, user interface zone, and reporting zone, where each zone provides a specific function. The appliances in these zones must be configured to use an external database. 
+Based on your setup, you will choose to configure the appliance to use an external PostgreSQL database. For example, we can only have one database in a single region. However, a region can be segmented into multiple zones, such as database zone, user interface zone, and reporting zone, where each zone provides a specific function. The appliances in these zones must be configured to use an external database.
 
 The `postgresql.conf` file used with {product-title} databases requires specific settings for correct operation. For example, it must correctly reclaim table space, control session timeouts, and format the PostgreSQL server log for improved system support. Due to these requirements, Red Hat recommends that external {product-title} databases use a `postgresql.conf` file based on the standard file used by the {product-title} appliance.
 
@@ -72,7 +71,7 @@ endif::ssh[]
 . Select *5) Configure Database* from the menu.
 . You are prompted to create or fetch a security key.
 * If this is the first {product-title} appliance, choose *1) Create key*.
-* If this is not the first {product-title} appliance, choose *2) Fetch key from remote machine* to fetch the key from the first appliance. 
+* If this is not the first {product-title} appliance, choose *2) Fetch key from remote machine* to fetch the key from the first appliance.
 +
 [NOTE]
 ====
@@ -87,12 +86,11 @@ All {product-title_short} appliances in a multi-region deployment must use the s
 . Confirm the configuration if prompted.
 
 {product-title} will then configure the external database.
-endif::cfme[]
 
 [[configuring-a-worker-appliance]]
 === Configuring a Worker Appliance
 
-You can use multiple appliances to facilitate horizontal scaling, as well as for dividing up work by roles. Accordingly, configure an appliance to handle work for one or many roles, with workers within the appliance carrying out the duties for which they are configured. You can configure a worker appliance through the terminal. The following steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database. 
+You can use multiple appliances to facilitate horizontal scaling, as well as for dividing up work by roles. Accordingly, configure an appliance to handle work for one or many roles, with workers within the appliance carrying out the duties for which they are configured. You can configure a worker appliance through the terminal. The following steps demonstrate how to join a worker appliance to an appliance that already has a region configured with a database.
 
 . Start the appliance and open a terminal console.
 ifdef::login[]
@@ -104,7 +102,7 @@ endif::ssh[]
 . Enter the `appliance_console` command. The {product-title} appliance summary screen displays.
 . Press *Enter* to manually configure settings.
 . Select *5) Configure Database* from the menu.
-. You are prompted to create or fetch a security key. Since this is not the first {product-title} appliance, choose *2) Fetch key from remote machine*. For worker and multi-region setups, use this option to copy key from another appliance. 
+. You are prompted to create or fetch a security key. Since this is not the first {product-title} appliance, choose *2) Fetch key from remote machine*. For worker and multi-region setups, use this option to copy key from another appliance.
 +
 [NOTE]
 ====

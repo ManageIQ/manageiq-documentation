@@ -111,9 +111,9 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
   AuthName           "Kerberos Login"
   KrbMethodNegotiate On
   KrbMethodK5Passwd  Off
-  KrbAuthRealms      example.com     
-  Krb5KeyTab         /etc/krb5.keytab 
-  KrbServiceName     Any                   
+  KrbAuthRealms      example.com
+  Krb5KeyTab         /etc/krb5.keytab
+  KrbServiceName     Any
   Require            pam-account httpd-auth
 
   ErrorDocument 401  /proxy_pages/invalid_sso_credentials.js
@@ -134,7 +134,7 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # systemctl enable httpd
 ----
 
-Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled. 
+Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled.
 
 From the {product-title_short} user interface:
 
@@ -156,7 +156,7 @@ Make sure the user's Active Directory groups for the appliance are created and a
 [[mapping_to_AD]]
 == Mapping Active Directory Users to {product-title_short} User Roles
 
-This section provides instructions for mapping your existing Active Directory (AD) groups to user account roles in {product-title_short}. 
+This section provides instructions for mapping your existing Active Directory (AD) groups to user account roles in {product-title_short}.
 
 This is done by assigning a {product-title_short} role to an AD group. When an AD user who is a part of that AD group attempts to log in to {product-title_short}, they get that role assigned automatically and inherit the permissions from that role.
 As a result, all users in that AD group will then be assigned the {product-title_short} role(s) associated with that group.
@@ -184,6 +184,4 @@ Any user who is part of `cloudforms` AD group can now log in to {product-title_s
 
 To confirm this is configured correctly, log in to the {product-title_short} user interface with a user in the `cloudforms` AD group.
 
-To grant an additional user access to the {product-title_short} server, add that user to the `cloudforms` AD group. 
-
-//Frank: (only in AD? Or can you also add the user via CF?)
+To grant an additional user access to the {product-title_short} server, create the user in Active Directory, then add that user to the `cloudforms` AD group When that user attempts to log in to {product-title_short}, they will automatically inherit the correct permissions for the group. 

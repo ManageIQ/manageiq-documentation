@@ -56,11 +56,11 @@ After creating the new user, add the user's credentials to the settings for the 
 . Restart the Capacity and Utilization Data Collector.
 
 [[data_collection_for_rhev_33_34]]
-=== Data Collection for Red Hat Enterprise Virtualization
+=== Data Collection for Red Hat Virtualization
 
 [NOTE]
 ====
-The procedure applies to version numbers Red Hat Enterprise Virtualization 3.x and Red Hat Virtualization 4.x. 
+The procedure applies to Red Hat Virtualization 4.x versions. Red Hat Enterprise Virtualization 3.x versions are no longer supported 
 ====
 
 To collect capacity and utilization data for Red Hat Enterprise
@@ -88,7 +88,7 @@ $ ssh root@example.postgres.server
 # psql ovirt_engine_history
 ------
 +
-. Create a new user for the {product-title} and grant read-only access to tables and views:
+. Create a new user for {product-title_short} and grant read-only access to tables and views:
 +
 ------
 ovirt_engine_history=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
@@ -104,44 +104,29 @@ ovirt_engine_history=# \q
 ------
 +
 . Update the server's firewall to accept TCP communication on port 5432.
-* For Red Hat Enterprise Virtualization 3.x:
-+
-------
-# iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
-# service iptables save
-------
-+
-* For Red Hat Virtualization 4.x:
 +
 ------
 # firewall-cmd --add-port=5432/tcp --permanent
 ------
 +
 . Enable external md5 authentication by appending the following line to
-  `/var/lib/pgsql/data/pg_hba.conf`:
+  `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
 +
 ------
 host    all      all    0.0.0.0/0     md5
 ------
 +
 . Enable PostgreSQL to listen for remote connections by updating the
-  `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
+  `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
 +
 ------
 listen_addresses  =  '*'
 ------
 +
 . Reload the PostgreSQL configuration.
-* For Red Hat Enterprise Virtualization 3.x:
 +
 ------
-# service postgresql reload
-------
-+
-* For Red Hat Virtualization 4.x:
-+
-------
-# systemctl reload postgresql
+# systemctl reload rh-postgresql95-postgresql
 ------
 +
 

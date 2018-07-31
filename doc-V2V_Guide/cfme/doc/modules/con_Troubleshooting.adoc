@@ -8,7 +8,7 @@ If a migration fails for any reason (for example, network communication between 
 
 . Delete any target virtual machines that were created during the failed migration. Otherwise, the re-migration will fail because a target machine with the same name already exists.
 . Delete disks that were created in the target datastore during the failed migration to free up space.
-. Create a xref:CSV_import[CSV file] with the names and, optionally, providers, of the source virtual machines.
+. Create a xref:CSV_file[CSV file] with the names and, optionally, providers, of the source virtual machines.
 +
 [NOTE]
 ====
@@ -28,18 +28,11 @@ If a migration plan does not complete successfully, check the logs for errors:
 [discrete]
 == Common Issues and Mistakes
 
-* Incorrect infrastructure mapping.
-+
-If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping will not work. This is because the object IDs of the providers and their objects have changed. Solution: Delete the infrastructure mapping and re-create it.
+Incorrect infrastructure mapping::
+If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping will not work because the object IDs of the providers and their objects have changed. You must delete the infrastructure mapping and re-create it.
 
-* RHV host credentials are not set in CloudForms.
-+
-If the RHV host credentials are not set, CloudForms is unable to communicate with the hosts. Solution: Authenticate the RHV hosts with CloudForms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[Authenticating Red Hat Virtualization Hosts] in  _Managing Providers_.
+RHV host credentials not set in CloudForms::
+If the RHV host credentials are not set, CloudForms is unable to communicate with the hosts. To authenticate the RHV hosts with CloudForms, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[Authenticating Red Hat Virtualization Hosts] in _CloudForms: Managing Providers_.
 
-* RHV conversion host tags not set correctly.
-+
-If the conversion host tags are not set, the migration will fail. Solution: Set the appropriate tags for the RHV conversion hosts and run the `conversion_host_check` playbook to verify that the RHV hosts are configured correctly. See xref:Configuring_rhv_conversion_hosts[Creating RHV Conversion Hosts].
-
-* Incorrect attributes in the virtual machine CSV import file.
-+
-Solution: Create a new migration plan, import the correct CSV file, and run the migration plan.
+Incorrect attributes in the virtual machine CSV import file::
+Create a new migration plan, import the correct CSV file, and run the migration plan.

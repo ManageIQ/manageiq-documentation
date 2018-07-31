@@ -31,13 +31,17 @@ all:
   hosts:
     _conversion_host1.com_:
     _conversion_host2.com_:
+  vars:
+    ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
+    v2v_vddk_package_name=VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz
+    v2v_vddk_package_url=http://Manager_FQDN/VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz
 ----
 
 . Enable the conversion hosts:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i conversion_hosts conversion_host_enable.yml -e v2v_vddk_package_name=_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_ -e v2v_vddk_package_url=http://_Manager_FQDN_/_VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz_
+# ansible-playbook -i conversion_hosts conversion_host_enable.yml
 ----
 
 . Verify that the conversion hosts are enabled:

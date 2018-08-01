@@ -55,13 +55,8 @@ After creating the new user, add the user's credentials to the settings for the 
 . Click *Save*.
 . Restart the Capacity and Utilization Data Collector.
 
-[[data_collection_for_rhev_33_34]]
+[[data_collection_for_rhev_4.x]]
 === Data Collection for Red Hat Virtualization
-
-[NOTE]
-====
-The procedure applies to Red Hat Virtualization 4.x versions. Red Hat Enterprise Virtualization 3.x versions are no longer supported 
-====
 
 To collect capacity and utilization data for Red Hat Enterprise
 Virtualization, you must add {product-title} as
@@ -109,7 +104,7 @@ ovirt_engine_history=# \q
 # firewall-cmd --add-port=5432/tcp --permanent
 ------
 +
-. Enable external md5 authentication by appending the following line to
+. Enable external md5 authentication by appending the following line to `/var/lib/pgsql/data/pg_hba.conf`, or optionally to
   `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
 +
 ------
@@ -117,15 +112,20 @@ host    all      all    0.0.0.0/0     md5
 ------
 +
 . Enable PostgreSQL to listen for remote connections by updating the
-  `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
+  `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`, or optionally in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
 +
 ------
 listen_addresses  =  '*'
 ------
 +
-. Reload the PostgreSQL configuration.
+. Reload the PostgreSQL configuration using the following command options:
+
 +
 ------
+# systemctl reload postgresql
+
+or
+
 # systemctl reload rh-postgresql95-postgresql
 ------
 +

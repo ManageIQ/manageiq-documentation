@@ -4,17 +4,16 @@
 
 This procedure outlines how to configure {product-title_short} to authenticate against an existing Active Directory (AD) configuration using external HTTP authentication. This provides Active Directory users access to the {product-title_short} appliance user interface, as well as the REST API.
 
+[[connecting_to_AD_domain]]
+== Connecting {product-title_short} to an Active Directory Domain
 
-// EDIT A SUMMARY FOR THIS To enable external authentication using Active Directory complete the following steps to configure your HTTP server, then your {product-title_short} appliance.
-
-// Do we need Network Manager step from MIQ docs still?)
+To use a Active Directory domain to authenticate users to {product-title_short}, configure the following on {product-title_short}:
 
 . Connect to the {product-title_short} appliance using SSH.
 . Run `realm discover` to determine what Active Directory realms are available:
 +
 ----
-# realm discover
-example.com
+# realm discover example.com
   type: kerberos
   realm-name: EXAMPLE.COM
   domain-name: example.com
@@ -112,9 +111,9 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
   AuthName           "Kerberos Login"
   KrbMethodNegotiate On
   KrbMethodK5Passwd  Off
-  KrbAuthRealms      example.com     
-  Krb5KeyTab         /etc/krb5.keytab 
-  KrbServiceName     Any                   
+  KrbAuthRealms      example.com
+  Krb5KeyTab         /etc/krb5.keytab
+  KrbServiceName     Any
   Require            pam-account httpd-auth
 
   ErrorDocument 401  /proxy_pages/invalid_sso_credentials.js
@@ -135,7 +134,9 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # systemctl enable httpd
 ----
 
-Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled. Follow these steps from the {product-title_short} user interface:
+Complete authentication setup by configuring the following on each appliance with the `user_interface` or `web_services` server roles enabled.
+
+From the {product-title_short} user interface:
 
 . Log in to the user interface as an administrative user.
 . Navigate to the settings menu, then menu:Configuration[Authentication].
@@ -144,13 +145,43 @@ Complete authentication setup by configuring the following on each appliance wit
 . Select *Enable Single Sign-On* to allow single sign-on using Kerberos tickets from client machines that authenticate to the same Active Directory domain as the appliance.
 . In the *Role Settings* area, select *Get User Groups from External Authentication (httpd)*.
 . Click *Save*.
-//add screenshot from article.
 
 [IMPORTANT]
 ====
-Make sure the user's Active Directory group for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
+Make sure the user's Active Directory groups for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
 ====
 
 {product-title_short} is now configured to use authentication from your Active Directory domain.
 
+[[mapping_to_AD]]
+== Mapping Active Directory Users to {product-title_short} User Roles
 
+This section provides instructions for mapping your existing Active Directory (AD) groups to user account roles in {product-title_short}.
+
+This is done by assigning a {product-title_short} role to an AD group. When an AD user who is a part of that AD group attempts to log in to {product-title_short}, they get that role assigned automatically and inherit the permissions from that role.
+As a result, all users in that AD group will then be assigned the {product-title_short} role(s) associated with that group.
+
+After configuring {product-title_short} to connect to an Active Directory domain in xref:connecting_to_AD_domain[], complete the following steps:
+
+. From the settings menu, select *Configuration*.
+. Click the *Access Control* accordion, then click *Groups*.
+. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Group*) to create a group.
+. In *Group Information*, select *Look Up External Authentication Groups* to find a list of groups assigned to a specific user in Active Directory.
+. In *User to Look Up*, enter the user name for a user in your AD group.
++
+image:AD-userlookup.png[]
++
+. Click *Retrieve* to look up details for the user in Active Directory and pull group information for the user. As a result, the AD groups will appear in the *LDAP Groups for User* drop-down list.
+. From the list in *LDAP Groups for User*, select the group you want to associate a {product-title_short} role with; for example, the `cloudforms` group.
++
+image:Assign_AD-Roles.png[]
++
+. Select a *Role* to map to the group.
+. Select a *Project/Tenant* to map to the group.
+. Click *Add*.
+
+Any user who is part of `cloudforms` AD group can now log in to {product-title_short} with their AD username and password, and they will automatically inherit the permissions for the role you assigned earlier.
+
+To confirm this is configured correctly, log in to the {product-title_short} user interface with a user in the `cloudforms` AD group.
+
+To grant an additional user access to the {product-title_short} server, create the user in Active Directory, then add that user to the `cloudforms` AD group When that user attempts to log in to {product-title_short}, they will automatically inherit the correct permissions for the group.

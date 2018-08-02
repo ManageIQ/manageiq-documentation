@@ -4,7 +4,7 @@
 [discrete]
 == Prerequisites
 
-* If you are migrating a large number of virtual machines or you are re-migrating virtual machines after a failed migration, create a CSV file [[CSV_file]]containing a list of virtual machines to import.
+* If you are migrating a large number of virtual machines or you are re-migrating virtual machines after a failed migration, create a CSV file [[CSV_file]]containing a list of source virtual machines to migrate.
 +
 The CSV file specifies the virtual machine names (mandatory) and providers (optional, for differentiating virtual machines with identical names), in the following format:
 +
@@ -17,7 +17,9 @@ _vm03_, _vSphere3_
 ...
 ----
 
-* Check the target datastore to ensure that there are no virtual machines with the same name as a virtual machine that is being migrated. A name conflict will cause the migration to fail.
+* Check the target datastore to ensure that there are no virtual machines with the same name as a source virtual machine. A name conflict will cause the migration to fail.
+
+* Unmount any ISO images that are mounted on source virtual machines. A virtual machine with an attached ISO image will cause the migration to fail.
 
 If you are migrating a small number of virtual machines, you can use the migration plan to discover the virtual machines. The migration plan displays a list, from which you manually select the virtual machines to migrate.
 

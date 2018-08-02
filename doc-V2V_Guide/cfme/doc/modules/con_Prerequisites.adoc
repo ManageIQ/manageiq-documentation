@@ -3,35 +3,43 @@
 
 Before migrating your VMware system, your environment must have the following:
 
-VMware network extended to the RHV environment.::
+VMware network extended to the RHV environment::
 [IMPORTANT]
 ====
 The network configuration must not be changed in any way during the migration. IP addresses, VLANs, and other network configurations must be the same, before and after migration.
 ====
 
-Appropriate target datastore.::
+Ports enabled::
+* 22 - SSH
+* 443 - UIs and VDDK
+* 902 - CloudForms to VMware
+* 5480 - `virt-v2v` to vCenter
+
+For more information, see link:https://access.redhat.com/articles/417343[Ports used by Red Hat CloudForms Management Engine 5.1 and above].
+
+Appropriate target datastore::
 The target datastore must have sufficient space for the virtual machines that will be migrated.
 
-Red Hat Virtualization Manager 4.2.4 or later installed.::
+Red Hat Virtualization Manager 4.2.4 or later installed::
 See the link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/planning_and_prerequisites_guide/[Red Hat Virtualization Planning and Prerequisites Guide] and link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_.
 
-Red Hat Virtualization Hosts 4.2.4 or later installed.::
+Red Hat Virtualization Hosts 4.2.4 or later installed::
 See  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] in the _Red Hat Virtualization Installation Guide_.
 
-Data and ISO storage domains attached to RHV datacenter.::
+Data and ISO storage domains attached to RHV datacenter::
 See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#sect-Preparing_and_Adding_NFS_Storage[Preparing and Adding NFS Storage] and  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Attaching_an_iso_domain[Attaching an Existing ISO domain to a Data Center] in the _Red Hat Virtualization Administration Guide_.
 
-VirtIO and Guest Tool images uploaded to the ISO storage domain.::
+VirtIO and Guest Tool images uploaded to the ISO storage domain::
 See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_.
 
-Red Hat CloudForms 4.6.4 or later installed.::
+Red Hat CloudForms 4.6.4 or later installed::
 See  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] for installation instructions.
 
-VMware and RHV environments added to CloudForms.::
+VMware and RHV environments added to CloudForms::
 See   link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#vmware_vcenter_providers[VMware vCenter Providers] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#red_hat_virtualization_providers[Red Hat Virtualization Providers] in _Managing Providers_.
 
-RHV hosts authenticated.::
+RHV hosts authenticated::
 See  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[Authenticating Red Hat Virtualization Hosts] in _Managing Providers_.
 
-RHV conversion hosts created and configured.::
+RHV conversion hosts created and configured::
 See xref:proc_Creating_rhv_conversion_hosts[Creating RHV Conversion Hosts] and xref:Configuring_rhv_conversion_hosts[Configuring RHV Conversion Hosts] below.

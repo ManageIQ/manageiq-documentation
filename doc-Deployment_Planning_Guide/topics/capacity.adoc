@@ -58,75 +58,113 @@ After creating the new user, add the user's credentials to the settings for the 
 [[data_collection_for_rhev_4.x]]
 === Data Collection for Red Hat Virtualization
 
-To collect capacity and utilization data for Red Hat Virtualization, you must add {product-title} as
-a user to the RHEV-M database.
+To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add {product-title} as
+a user to the RHV-M database.
 
 Perform this procedure on the PostgreSQL server where the history
-database is located. Usually, this is the RHEV-M server.
+database (ovirt_engine_history) is located. Usually, this is the RHV-M server.
 
-. Using SSH, access the RHEV-M database server as the root user:
+. Using SSH, access the RHV-M database server as the root user:
 +
-------
+----
 $ ssh root@example.postgres.server
-------
+----
 +
 . Switch to the postgres user:
 +
-------
+----
 # su - postgres
-------
+----
 +
-. Access the database prompt:
+[NOTE]
+====
+For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, in the following steps, to run psql commands you will need to prefix each command with: *_scl enable rh-postgresql95 --_* <psql command>
+====
 +
-------
-# psql ovirt_engine_history
-------
+. Create the user for {product-title_short} to be granted read-only access to the history database:
 +
-. Create a new user for {product-title_short} and grant read-only access to tables and views:
+----
+$ psql -U postgres -c "CREATE ROLE cfme WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
+----
+. Grant the newly created user permission to connect to the history database:
 +
-------
-ovirt_engine_history=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
-
-ovirt_engine_history=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
-------
+----
+$ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO cfme;"
+----
 +
-. Exit to the RHEV-M database server prompt:
+. Grant the newly created user usage of the public schema:
 +
-------
-ovirt_engine_history=# \q
-# exit
-------
+----
+$ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO cfme;" ovirt_engine_history
+----
 +
-. Update the server's firewall to accept TCP communication on port 5432.
+. Generate the rest of the permissions that will be granted to the newly created user and save them to a file:
 +
-------
+----
+$ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
+----
++
+. Use the file you created in the previous step to grant permissions to the newly created user:
++
+----
+$ psql -U postgres -f grant.sql ovirt_engine_history
+----
++
+. Remove the file you used to grant permissions to the newly created user:
++
+----
+$ rm grant.sql
+----
++
+. Exit to the RHV-M database server prompt:
++
+----
+$ exit
+----
++
+. Update the server's firewall to accept TCP communication on port 5432:
++
+----
 # firewall-cmd --add-port=5432/tcp --permanent
-------
+----
 +
-. Enable external md5 authentication by appending the following line to `/var/lib/pgsql/data/pg_hba.conf`, or optionally to
-  `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
+. Enable external md5 authentication.
+.. For RHV 4.0 and RHV 4.1, change the authentication method from `ident` to `md5` in the following line in `/var/lib/pgsql/data/pg_hba.conf`:
 +
-------
+----
 host    all      all    0.0.0.0/0     md5
-------
+----
 +
-. Enable PostgreSQL to listen for remote connections by updating the
-  `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`, or optionally in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
+.. For RHV 4.2, change the authentication method from `ident` to `md5` in the following line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
 +
-------
+----
+host    all      all    0.0.0.0/0     md5
+----
++
+. Enable PostgreSQL to listen for remote connections.
+.. For RHV 4.0 and RHV 4.1, update the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
++
+----
 listen_addresses  =  '*'
-------
+----
 +
-. Reload the PostgreSQL configuration:
-
+.. For RHV 4.2, update the `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
 +
-------
+----
+listen_addresses  =  '*'
+----
++
+. Reload the PostgreSQL configuration.
+.. For RHV 4.0 and RHV 4.1:
++
+----
 # systemctl reload postgresql
-
-or
-
+----
+.. For RHV 4.2:
++
+----
 # systemctl reload rh-postgresql95-postgresql
-------
+----
 +
 
 

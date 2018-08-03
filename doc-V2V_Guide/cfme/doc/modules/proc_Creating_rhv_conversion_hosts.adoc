@@ -12,7 +12,7 @@ The number of virtual machines that you can migrate at the same time depends on 
 
 Create one or more RHV conversion hosts:
 
-. Log into the link:https://www.vmware.com/support/developer/vddk/[VMware VDDK Documentation] site and download the latest VDDK package (for example, `VMware-vix-disklib-6.5.3-8315684.x86_64.tar.gz`) to your local machine.
+. Log in to the link:https://www.vmware.com/support/developer/vddk/[VMware VDDK Documentation] site and download the latest VDDK package (for example, `VMware-vix-disklib-6.5.3-8315684.x86_64.tar.gz`) to your local machine.
 
 . Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine.
 
@@ -20,10 +20,10 @@ Create one or more RHV conversion hosts:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# cd /usr/share/doc/ovirt-ansible-v2v-conversion-host-_version_/playbooks/
+# cd /usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/
 ----
 
-. Create a `conversion_hosts` inventory file:
+. Create a `conversion_hosts_inventory.yml` inventory file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -33,22 +33,22 @@ all:
     _conversion_host2.com_:
   vars:
     ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
-    v2v_vddk_package_name=VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz
-    v2v_vddk_package_url=http://Manager_FQDN/VMware-vix-disklib-6.5.2-6195444.x86_64.tar.gz
+    v2v_vddk_package_name=VMware-vix-disklib-_version_.x86_64.tar.gz
+    v2v_vddk_package_url=http://_Manager_FQDN_/VMware-vix-disklib-_version_.x86_64.tar.gz
 ----
 
 . Enable the conversion hosts:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i conversion_hosts conversion_host_enable.yml
+# ansible-playbook -i conversion_hosts_inventory.yml conversion_host_enable.yml
 ----
 
 . Verify that the conversion hosts are enabled:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook conversion_host_check.yml
+# ansible-playbook -i conversion_hosts_inventory.yml conversion_host_check.yml
 ----
 
 [NOTE]

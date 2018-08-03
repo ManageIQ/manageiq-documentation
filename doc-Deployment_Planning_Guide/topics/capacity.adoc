@@ -58,11 +58,9 @@ After creating the new user, add the user's credentials to the settings for the 
 [[data_collection_for_rhev_4.x]]
 === Data Collection for Red Hat Virtualization
 
-To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add {product-title} as
-a user to the RHV-M database.
+To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add a user to the RHV-M history database for {product-title} to use.
 
-Perform this procedure on the PostgreSQL server where the history
-database (ovirt_engine_history) is located. Usually, this is the RHV-M server.
+Perform this procedure on the PostgreSQL server where the history database (ovirt_engine_history) is located. Usually, this is the RHV-M server.
 
 . Using SSH, access the RHV-M database server as the root user:
 +
@@ -78,7 +76,9 @@ $ ssh root@example.postgres.server
 +
 [NOTE]
 ====
-For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, in the following steps, to run psql commands you will need to prefix each command with: *_scl enable rh-postgresql95 --_* <psql command>
+For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you will need to enable the _rh-postgresql95_ collection and load into the current shell prompt using the source command: 
+
+$ source /opt/rh/rh-postgresql95/enable
 ====
 +
 . Create the user for {product-title_short} to be granted read-only access to the history database:

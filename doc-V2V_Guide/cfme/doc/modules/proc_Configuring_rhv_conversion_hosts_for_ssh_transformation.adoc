@@ -1,0 +1,42 @@
+[id="Configuring_rhv_conversion_hosts_for_ssh_transformation"]
+= Configuring RHV Conversion Hosts for SSH Transformation
+
+Configure the RHV conversion hosts to communicate with the VMware hypervisors using the public key authentication mechanism:
+
+. Enable SSH on all the VMware hypervisors. See link:https://pubs.vmware.com/vsphere-6-5/index.jsp?topic=%2Fcom.vmware.vcli.getstart.doc%2FGUID-C3A44A30-EEA5-4359-A248-D13927A94CCE.html[Enable SSH from the vSphere Web Client] for details.
+
+. Create key pairs on each conversion host for the vdsm user:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# install -o vdsm -g kvm -m 0700 -d /var/lib/vdsm/.ssh
+# ssh-keygen -t rsa -N '' -C "vdsm@_hostname_" -f /var/lib/vdsm/.ssh/id_rsa
+# chown vdsm:kvm /var/lib/vdsm/.ssh/id_rsa
+----
++
+[NOTE]
+====
+This step is performed by the `ovirt-ansible-v2v-conversion-host` role described in xref:proc_Creating_rhv_conversion_hosts[].
+====
+
+. Copy the SSH keys to the VMware hypervisors:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ssh-copy-id -i /var/lib/vdsm/.ssh/id_rsa root@_host1.example.com_
+----
+
+. Validate the configuration by connecting to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u vdsm ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=65905; export SSH_AGENT_PID;
+echo Agent pid 65905;
+
+# sudo -u vdsm \
+    SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh root@_host1.example.com_
+----
++
+If the connection is successful, the RHV conversion host is correctly configured for SSH transformation. Go to xref:Discovery_and_Assessment[].

@@ -55,95 +55,88 @@ After creating the new user, add the user's credentials to the settings for the 
 . Click *Save*.
 . Restart the Capacity and Utilization Data Collector.
 
-[[data_collection_for_rhev_33_34]]
-=== Data Collection for Red Hat Enterprise Virtualization
 
-[NOTE]
-====
-The procedure applies to version numbers Red Hat Enterprise Virtualization 3.x and Red Hat Virtualization 4.x. 
-====
+[[data_collection_for_rhev_4.x]]
+=== Data Collection for Red Hat Virtualization
 
-To collect capacity and utilization data for Red Hat Enterprise
-Virtualization, you must add {product-title} as
-a user to the RHEV-M database.
+To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add a user to the RHV-M history database for {product-title} to use.
 
-Perform this procedure on the PostgreSQL server where the history
-database is located. Usually, this is the RHEV-M server.
+Perform this procedure on the PostgreSQL server where the history database (ovirt_engine_history) is located. Usually, this is the RHV-M server.
 
-. Using SSH, access the RHEV-M database server as the root user:
+. Using SSH, access the RHV-M database server as the root user:
 +
-------
+----
 $ ssh root@example.postgres.server
-------
+----
 +
 . Switch to the postgres user:
 +
-------
+----
 # su - postgres
-------
+----
+. Create the user for {product-title_short} to be granted read-only access to the history database:
 +
-. Access the database prompt:
+----
+$ psql -U postgres -c "CREATE ROLE cfme WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
+----
+. Grant the newly created user permission to connect to the history database:
 +
-------
-# psql ovirt_engine_history
-------
+----
+$ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO cfme;"
+----
 +
-. Create a new user for the {product-title} and grant read-only access to tables and views:
+. Grant the newly created user usage of the public schema:
 +
-------
-ovirt_engine_history=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
-
-ovirt_engine_history=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
-------
+----
+$ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO cfme;" ovirt_engine_history
+----
 +
-. Exit to the RHEV-M database server prompt:
+. Generate the rest of the permissions that will be granted to the newly created user and save them to a file:
 +
-------
-ovirt_engine_history=# \q
-# exit
-------
+----
+$ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
+----
 +
-. Update the server's firewall to accept TCP communication on port 5432.
-* For Red Hat Enterprise Virtualization 3.x:
+. Use the file you created in the previous step to grant permissions to the newly created user:
 +
-------
-# iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
-# service iptables save
-------
+----
+$ psql -U postgres -f grant.sql ovirt_engine_history
+----
 +
-* For Red Hat Virtualization 4.x:
+. Remove the file you used to grant permissions to the newly created user:
 +
-------
+----
+$ rm grant.sql
+----
++
+. Exit to the RHV-M database server prompt:
++
+----
+$ exit
+----
++
+. Update the server's firewall to accept TCP communication on port 5432:
++
+----
 # firewall-cmd --add-port=5432/tcp --permanent
-------
+----
 +
-. Enable external md5 authentication by appending the following line to
-  `/var/lib/pgsql/data/pg_hba.conf`:
+. Enable external md5 authentication. Change the authentication method from `ident` to `md5` in the following line in `/var/lib/pgsql/data/pg_hba.conf`:
 +
-------
+----
 host    all      all    0.0.0.0/0     md5
-------
+----
 +
-. Enable PostgreSQL to listen for remote connections by updating the
-  `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
+. Enable PostgreSQL to listen for remote connections. Update the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
 +
-------
+----
 listen_addresses  =  '*'
-------
+----
+. Reload the PostgreSQL configuration:
 +
-. Reload the PostgreSQL configuration.
-* For Red Hat Enterprise Virtualization 3.x:
-+
-------
-# service postgresql reload
-------
-+
-* For Red Hat Virtualization 4.x:
-+
-------
+----
 # systemctl reload postgresql
-------
-+
+----
 
 
 [[data_collection_for_osp]]

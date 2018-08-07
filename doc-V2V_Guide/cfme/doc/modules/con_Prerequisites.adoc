@@ -1,23 +1,9 @@
 [id="Prerequisites"]
 = Prerequisites
 
-Before migrating your VMware system, your environment must have the following:
+Before migration, your environment must have the following prerequisites:
 
-VMware network extended to the RHV environment::
-[IMPORTANT]
-====
-The network configuration must not be changed in any way during the migration. IP addresses, VLANs, and other network configurations must be the same, before and after migration.
-====
-
-Ports enabled::
-* 22 - SSH
-* 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
-* 902 - CloudForms to VMware
-* 5480 - `virt-v2v` to vCenter
-
-For more information, see link:https://access.redhat.com/articles/417343[Ports used by Red Hat CloudForms Management Engine 5.1 and above].
-
-Appropriate target datastore::
+Target datastore size::
 The target datastore must have sufficient space for the virtual machines that will be migrated.
 
 Red Hat Virtualization Manager 4.2.4 or later installed::
@@ -25,6 +11,25 @@ See the link:https://access.redhat.com/documentation/en-us/red_hat_virtualizatio
 
 Red Hat Virtualization Hosts 4.2.4 or later installed::
 See  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] in the _Red Hat Virtualization Installation Guide_.
+
+Network::
+The VMware network must be extended to the RHV environment.
+[IMPORTANT]
+====
+The network configuration must not be changed in any way during the migration. IP addresses, VLANs, and other network configurations must be the same, before and after migration.
+====
+
+Ports::
+The following ports must be enabled:
+* 22 - SSH
+* 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
+* 902 - CloudForms to VMware
+* 5480 - `virt-v2v` to vCenter
+
+For more information, see link:https://access.redhat.com/articles/417343[Ports used by Red Hat CloudForms Management Engine 5.1 and above].
+
+MAC address pools::
+The MAC address pools defined for the target RHV cluster must include the MAC addresses of the source virtual machines. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#sect-MAC_Address_Pools[MAC Address Pools] in the _Red Hat Virtualization Administration Guide_.
 
 Data and ISO storage domains attached to the RHV data center::
 See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#sect-Preparing_and_Adding_NFS_Storage[Preparing and Adding NFS Storage] and  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Attaching_an_iso_domain[Attaching an Existing ISO domain to a Data Center] in the _Red Hat Virtualization Administration Guide_.

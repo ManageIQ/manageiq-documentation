@@ -21,14 +21,14 @@ Through the use of catalogs, {product-title} provides support for multi-tier ser
 [[dynamic-resource-objects]]
 ==== Dynamic Resource Objects
 
-Dynamic resource objects are object-like entities, defined at runtime, that have unique names and user-defined attributes and relationships. Residing in the Automate Engine datastore, dynamic resource objects are designed to manage objects other than those related to private infrastructure, and public or private cloud providers. 
+Dynamic resource objects are object-like entities, defined at runtime, that have unique names and user-defined attributes and relationships. Residing in the Automate Engine datastore, dynamic resource objects are designed to manage objects other than those related to private infrastructure, and public or private cloud providers.
 
 Using automate requests, services and catalog items, dynamic resource objects can be directly accessed or passed, during any step, as a parameter to a service state machine. As a result, dynamic resource objects can be used to quickly add the capability to provision and collect data on resources not supported by {product-title}.
 
 [[view-dynamic-resource-objects]]
 ===== View Dynamic Resource Objects Classes
 
-View a list of dynamic resource objects and click through to see detailed summary information for each object. 
+View a list of dynamic resource objects and click through to see detailed summary information for each object.
 
 . Navigate to menu:Automate[Dynamic Resource Objects].
 . Click on a dynamic resource object class in the table to view its summary information.
@@ -54,7 +54,10 @@ When provisioning a service, input will be needed from the requester. Service di
 ===== Adding a Service Dialog
 [IMPORTANT]
 ====
-When creating a service dialog for use with Ansible playbook catalog items, variable elements must use the prefix *param_* when assigning the value. For example, a new variable labeled *key1* should have its value set as *param_key1*.
+* When creating a service dialog for use with Ansible playbook catalog items, variable elements must use the prefix *param_* when assigning the value. For example, a new variable labeled *key1* should have its value set as *param_key1*.
+* Using Ansible playbooks to populate dynamic dialog fields is not recommended due to delay times caused by the overhead of interaction between systems.
+* If you add the playbook automate method to a service dialog, only users with admin privileges can run the dialog.
+
 ====
 include::common/service-dialog-creation.adoc[]
 
@@ -69,7 +72,7 @@ include::common/service-dialog-creation-using-dialog-editor.adoc[]
 
 Complete the following procedure to create a Service Dialog from a Container Template.
 
-. Navigate to menu:Compute[Containers > Container Templates] and select the template for provisioning. 
+. Navigate to menu:Compute[Containers > Container Templates] and select the template for provisioning.
 . Click image:1847.png[](*Configuration*), then image:1862.png[](*Create Service Dialog from Container Template*).
 . Enter a name for the dialog in *Service Dialog Name*.
 . Click *Save*.
@@ -349,7 +352,7 @@ include::common/create-playbook-service-catalog-item.adoc[]
 [[create-tower-catalog-item]]
 ==== Creating an Ansible Tower Service Catalog Item
 
-Create a service catalog item from an Ansible Tower template you can use to execute an Ansible Tower playbook in {product-title}. 
+Create a service catalog item from an Ansible Tower template you can use to execute an Ansible Tower playbook in {product-title}.
 
 include::common/create-tower-catalog-item.adoc[]
 
@@ -404,7 +407,7 @@ When importing a template into {product-title_short}, the selected elements are 
 ====
 
 ifdef::cfme[]
-See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/service_provisioning_in_cloudforms_using_an_orchestration_template[Service Provisioning in CloudForms Using an Orchestration Template] for an example about creating a service in CloudForms for provisioning virtual machine instances using an AWS CloudFormation orchestration template. 
+See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/service_provisioning_in_cloudforms_using_an_orchestration_template[Service Provisioning in CloudForms Using an Orchestration Template] for an example about creating a service in CloudForms for provisioning virtual machine instances using an AWS CloudFormation orchestration template.
 endif::cfme[]
 
 [[adding-orchestration-template]]
@@ -467,5 +470,3 @@ Complete the following procedure to delete orchestration templates.
 ====
 Read-only templates cannot be deleted.
 ====
-
-

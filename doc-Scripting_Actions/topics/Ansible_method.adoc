@@ -2,11 +2,13 @@
 
 ==== Creating a Playbook Automate Method
 
-{product-title} can choose an Ansible playbook from a repository and execute it as a method. Each playbook method can take additional input parameters specified by the user. 
+{product-title} can choose an Ansible playbook from a repository and execute it as a method. Each playbook method can take additional input parameters specified by the user.
 
-[NOTE]
+[IMPORTANT]
 ====
-You must first sync your playbook repositories before using them to create a method. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html/managing_providers/automation_management_providers#adding-a-playbook-repository[Adding a Playbook Repository] in _Managing Providers_ for information on initial playbook repository set-up. 
+* You must first sync your playbook repositories before using them to create a method. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html/managing_providers/automation_management_providers#adding-a-playbook-repository[Adding a Playbook Repository] in _Managing Providers_ for information on initial playbook repository set-up.
+* Using Ansible playbooks to populate dynamic dialog fields is not recommended due to delay times caused by the overhead of interaction between systems.
+* Only users with administrator privileges can run a service dialog based on a playbook automate method.
 ====
 
 To create a playbook automate method:
@@ -18,23 +20,21 @@ To create a playbook automate method:
 image:../images/1862.png[image] (*Add a New Method*).
 . In the *Main Info* area, select *playbook* from the drop-down menu.
 . Provide a *Name* and *Display Name*.
-. Select a playbook *Repository* from the list. 
+. Select a playbook *Repository* from the list.
 .. Choose a *Playbook* to use.
-.. Select the *Machine Credential* the playbook will use when it runs. 
-.. From the *Cloud Type* list, select a cloud provider. 
-.. Choose the *Cloud Credential* that corresponds to the selected cloud type. 
-. Specify the *Hosts* on which the playbook will run. Choose *Localhost* or provide unique values in the *Specify host values* field. 
-. Set the *Max TTL* in minutes. The Time To Live (TTL) field allows you to set the maximum execution time for the playbook to run. 
-. Select when to receive *Logging Output* from the options in the drop-down menu. 
-. Use the *Escalate Privilege* toggle switch to enable user privilege escalation if credentials are called for during the playbook run. 
+.. Select the *Machine Credential* the playbook will use when it runs.
+.. From the *Cloud Type* list, select a cloud provider.
+.. Choose the *Cloud Credential* that corresponds to the selected cloud type.
+. Specify the *Hosts* on which the playbook will run. Choose *Localhost* or provide unique values in the *Specify host values* field.
+. Set the *Max TTL* in minutes. The Time To Live (TTL) field allows you to set the maximum execution time for the playbook to run.
+. Select when to receive *Logging Output* from the options in the drop-down menu.
+. Use the *Escalate Privilege* toggle switch to enable user privilege escalation if credentials are called for during the playbook run.
 . Choose a *Verbosity* value to set the debug level for playbook execution.
 . Add required *Input Parameters* using the fields and values available. Click the image:add_parameter.png[] to add additional input parameters.
 +
 [NOTE]
 ====
-Input parameters become extra vars, with substition enabled. This overcomes the lack of a dialog which would normally allow for the input of additional information. For more information on extra vars, see the Ansible documentation. 
+Input parameters become extra vars, with substitution enabled. This overcomes the lack of a dialog which would normally allow for the input of additional information. For more information on extra vars, see the Ansible documentation.
 ====
 +
-. Click *Add* when finished. 
-
-
+. Click *Add* when finished.

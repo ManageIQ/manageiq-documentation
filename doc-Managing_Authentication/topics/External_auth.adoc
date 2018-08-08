@@ -2,19 +2,21 @@
 = Configuring Identity Management (External Authentication) with {product-title_short}
 
 
-You can configure {product-title_short} to use federation authentication with system authentication methods such as Red Hat Identity Management (IdM) or IPA, Red Hat Single Sign-On (SSO), or Active Directory (AD). 
+You can configure {product-title_short} to use system authentication methods such as Red Hat Identity Management (IdM) or IPA, Red Hat Single Sign-On (SSO), or Active Directory (AD). 
 
 This method uses `apache` (`httpd`) modules with web browsers to control authentication to {product-title_short}. It is the recommended authentication method to connect {product-title_short} with most identity management services.
 
 [[external_ipa_auth]]
-== Configuring Federated Authentication with IPA 
+== Configuring Authentication with IPA 
 
-You can configure {product-title_short} to use IPA for federated authentication using the *External Authentication (httpd)* option in {product-title_short}.
+You can configure {product-title_short} to use IPA with the *External Authentication (httpd)* option in {product-title_short}.
 
 When external authentication is enabled, users can log in to the {product-title_short} appliance using their IPA server credentials. The appliance creates user accounts automatically and imports relevant information from the IPA server.
 
-The appliance contains ipa client software for connecting to IPA servers, but it is not configured by default. External authentication is enabled by first configuring it in the web interface, then in the console.
-Disabling external authentication and returning to internal database authentication also requires steps in both the web interface and the console.
+The appliance contains IPA client software for connecting to IPA servers, but it is not configured by default. External authentication is enabled by configuring it with the
+appliance console and enabling it the web interface.
+
+Disabling external authentication and returning to internal database authentication also requires steps in both the appliance console and the web user interface.
 
 === External Authentication Requirements
 
@@ -24,22 +26,9 @@ Disabling external authentication and returning to internal database authenticat
 
 === Configuring the Appliance for External Authentication
 
-To configure the appliance for external authentication, first set up authentication using the web interface, then using the appliance console.
+To configure the appliance for external authentication, set up authentication using the appliance console, then select the *External Authentication* option in the web user interface.
 
-Using the web interface:
-
-. Log in to the web interface as an administrative user.
-. Navigate to the settings menu, then menu:Configuration[Settings > Zone > Server > NTP Servers] or use the hosting provider of the virtual machine to synchronize the appliance's time with an NTP server.
-. From the settings menu, select *Configuration*. 
-. Select your server in the *Settings* accordion.
-. Select the *Authentication* tab.
-. Select a *Session Timeout* if required.
-. Select *External (httpd)* in the *Mode list*.
-. Select *Enable Single Sign-On* to allow single sign-on using Kerberos tickets from client machines that authenticate to the same IPA server as the appliance.
-. In the *Role Settings* area, select *Get User Groups* from *External Authentication (https)*.
-. Click *Save*.
-
-Using the console:
+Using the appliance console:
 
 . Log in to the appliance console using the user name `admin`.
 . The summary screen displays:
@@ -50,7 +39,7 @@ External Auth:  not configured
 +
 . Press Enter.
 . Select *Configure External Authentication (httpd)*.
-. Enter the fully qualified hostname of the IPA server, for example _ipaserver.test.company.com_.
+. Enter the fully qualified host name of the IPA server, for example _ipaserver.test.company.com_.
 . Enter the IPA server domain, for example _test.company.com_.
 . Enter the IPA server realm, for example _TEST.COMPANY.COM_.
 . Enter the IPA server principal, for example _admin_.
@@ -67,6 +56,8 @@ If any of the following conditions are true, configuration fails:
 * The IPA server admin password is entered incorrectly
 ====
 
+Alternatively, you can configure external authentication using the `appliance_console_cli` command instead of using the appliance console menu:
+
 .Configuring External Authentication
 ====
 ----
@@ -79,12 +70,26 @@ $ ssh root@appliance.test.company.com
 ----
 ====
 
+Finish configuring external authentication using the web user interface:
+
+. Log in to the web user interface as an administrative user.
+. Navigate to the settings menu, then menu:Configuration[Settings > Zone > Server > NTP Servers] or use the hosting provider of the virtual machine to synchronize the appliance's time with an NTP server.
+. From the settings menu, select *Configuration*. 
+. Select your server in the *Settings* accordion.
+. Select the *Authentication* tab.
+. Select a *Session Timeout* if required.
+. Select *External (httpd)* in the *Mode list*.
+. Select *Enable Single Sign-On* to allow single sign-on using Kerberos tickets from client machines that authenticate to the same IPA server as the appliance.
+. In the *Role Settings* area, select *Get User Groups* from *External Authentication (https)*.
+. Click *Save*.
+
+
 
 === Reverting to Internal Database Authentication
 
-To revert to internal database authentication, first configure authentication using the web interface, then using the console.
+To revert to internal database authentication, first configure authentication using the web user interface, then using the appliance console.
 
-Using the web interface:
+Using the web user interface:
 
 . From the settings menu, select *Configuration*. 
 . Select your server in the *Settings* accordion.
@@ -92,7 +97,7 @@ Using the web interface:
 . Select *Database* in the *Mode* list.
 . Click *Save*.
 
-Using the console:
+Using the appliance console:
 
 . Log in to the appliance console using the user name `admin`.
 . The summary screen displays:
@@ -102,7 +107,7 @@ External Auth:  Id.server.FQDN
 ----
 +
 . Press `Enter`.
-. Select *Configure External Authentication (httpd)*. The currently configured IPA server hostname and domain are displayed.
+. Select *Configure External Authentication (httpd)*. The currently configured IPA server host name and domain are displayed.
 . Enter `y` to remove configuration details for the IPA client.
 
 
@@ -131,7 +136,7 @@ Appliance console CLI command and relevant options include:
 
 
 --host::
-Updates the hostname of the appliance. If you performed this step using the console and made the necessary updates made to `/etc/hosts` if DNS is not properly configured, you can omit the `--host` option.
+Updates the host name of the appliance. If you performed this step using the console and made the necessary updates made to `/etc/hosts` if DNS is not properly configured, you can omit the `--host` option.
 
 --iparealm::
 If omitted, the `iparealm` is based on the domain name of the `ipaserver`.

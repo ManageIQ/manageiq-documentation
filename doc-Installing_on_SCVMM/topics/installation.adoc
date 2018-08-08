@@ -4,11 +4,11 @@
 Installing {product-title} consists of the following steps:
 
 . Downloading the VHD image to your SCVMM Library.
-. Creating a blank VHD to be used for the DB disk.
-. Running a Powershell script to create a deployable template for the {product-title_short} appliance.
+. Creating a blank VHD to be used for the database disk.
+. Running a PowerShell script to create a deployable template for the {product-title_short} appliance.
 . Configuring the {product-title_short} appliance.
 
-After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
+After you have completed all the procedures in this guide, you will have a working environment on which you can perform additional customizations and configurations.
 
 ifdef::miq[]
 [[obtaining-the-appliance]]
@@ -55,12 +55,12 @@ endif::cfme[]
 
 Create a blank VHD to be used for the database disk and add it to your SCVMM Library, create a template for the {product-title_short} appliance, then deploy a virtual machine to run the appliance.
 
-. Create a blank VHD to be used for the DB disk and add it to your SCVMM Library. Run this command on a node containing Hyper-V.
+. Create a blank VHD to be used for the database disk and add it to your SCVMM Library. Run this command on a node containing Hyper-V.
 +
-For example, on a node with Hyper-V installed you can create a 20GB blank VHD with the following Powershell command:
+For example, on a node with Hyper-V installed you can create a 20GB blank VHD with the following PowerShell command:
 +
 ----
-$ New-VHD -Path 'C:\path\to\my\newvdisk.vhdx' -SizeBytes 20gb -Dynamic
+PS C:\Users\Administrator.MS01> New-VHD -Path 'C:\path\to\my\newvdisk.vhdx' -SizeBytes 20gb -Dynamic
 ----
 +
 . Copy the blank VHD disk to the SCVMM Library.
@@ -110,16 +110,6 @@ Remove-HardwareProfile -HardwareProfile $templateName
 +
 . Deploy a virtual machine to a host group from the created template by running a script using PowerShell.
 +
-[NOTE]
-======
-Substitute these values in your PowerShell script:
-
-* $hostGroup = "NAME_OF_HOST_GROUP_TO_DEPLOY_TO"
-* $scvmmServer = "NAME_OF_YOUR_SCVMM_SERVER"
-* $templateName = "NAME_OF_CFME_TEMPLATE"
-* $vmName = "NAME_OF_YOUR_NEW_VM"
-======
-+
 Run the following script using PowerShell, substituting values for your environment:
 +
 ----
@@ -129,5 +119,15 @@ $vmc = New-SCVMConfiguration -VMTemplate $tpl -Name $vmName -VMHostGroup $vm_hg
 Update-SCVMConfiguration -VMConfiguration $vmc
 New-SCVirtualMachine -Name $vmName -VMConfiguration $vmc
 ----
++
+[NOTE]
+======
+Substitute these values in your PowerShell script:
+
+* $hostGroup = "NAME_OF_HOST_GROUP_TO_DEPLOY_TO"
+* $scvmmServer = "NAME_OF_YOUR_SCVMM_SERVER"
+* $templateName = "NAME_OF_CFME_TEMPLATE"
+* $vmName = "NAME_OF_YOUR_NEW_VM"
+======
 
 Your SCVMM environment now contains a running {product-title_short} appliance which you can configure.

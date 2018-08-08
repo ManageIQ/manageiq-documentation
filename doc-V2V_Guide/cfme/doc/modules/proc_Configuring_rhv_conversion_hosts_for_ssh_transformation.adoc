@@ -23,7 +23,7 @@ This step is performed by the `ovirt-ansible-v2v-conversion-host` role described
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-copy-id -i /var/lib/vdsm/.ssh/id_rsa root@_host1.example.com_
+# scp /var/lib/vdsm/.ssh/id_rsa root@_esx1.example.com_:/etc/ssh/key-root/authorized_keys/
 ----
 
 . Validate the configuration by connecting to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor:
@@ -37,7 +37,7 @@ echo Agent pid 65905;
 
 # sudo -u vdsm SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh-add
 # sudo -u vdsm \
-    SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh root@_host1.example.com_
+    SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh root@_esx1.example.com_
 ----
 +
 If the connection is successful, the RHV conversion host is correctly configured for SSH transformation. Go to xref:Discovery_and_Assessment[].

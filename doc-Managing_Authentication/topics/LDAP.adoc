@@ -7,7 +7,7 @@ If you choose LDAP or LDAPS as your authentication mode, the required parameters
 
 [IMPORTANT]
 ====
-This procedure requires a pre-configured authentication system such as Red Hat Identity Management (IdM) or Active Directory (AD) with user groups configured.
+This procedure requires a preconfigured authentication system such as Red Hat Identity Management (IdM) or Active Directory (AD) with user groups configured.
 ====
 
 
@@ -54,20 +54,20 @@ In both LDAP and LDAPS, you can use groups from your directory service to set th
 * For LDAP users not belonging to a group:
 ** Select a {product-title_short} group from the *Default Group for Users* list. This default group can be used for all LDAP users who use LDAP for authentication only. Do not select *Get User Groups from LDAP*, which will hide the *Default Group for Users* option.
 * For LDAP users belonging to a group:
-** Check *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This looks up all groups in the directory server for the user attempting to log in. This group list is matched against the available groups configured in {product-title_short}. Once a match is found, the role associated with the matching group identifies the authority the user will have on {product-title_short}. This requires group names on the directory server to match {product-title_short} group names. Checking this box enables user records to be automatically created in {product-title_short} when a user logs in.
+** Select *Get User Groups from LDAP* to retrieve the user's group membership from LDAP. This looks up all groups in the directory server for the user attempting to log in. This group list is matched against the available groups configured in {product-title_short}. Once a match is found, the role associated with the matching group identifies the authority the user will have on {product-title_short}. This requires group names on the directory server to match {product-title_short} group names. Selecting this box enables user records to be automatically created in {product-title_short} when a user logs in.
 +
 [IMPORTANT]
 ====
-If you do not check *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
+If you do not select *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 ====
-** Check *Get Groups from Home Forest* to use the LDAP groups from the LDAP user's home forest. This will allow you to discover groups on your directory server and create {product-title_short} groups based on your directory server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is checked.
+** Select *Get Groups from Home Forest* to use the LDAP groups from the LDAP user's home forest. This will allow you to discover groups on your directory server and create {product-title_short} groups based on your directory server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is selected.
 +
 [NOTE]
 ====
-In most environments, it is recommended to check both the *Get User Groups from LDAP* and *Get Groups from Home Forest* options.
+In most environments, it is recommended to select both the *Get User Groups from LDAP* and *Get Groups from Home Forest* options.
 ====
 +
-** Check *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
+** Select *Follow Referrals* to look up and bind a user that exists in a domain other than the one configured in the LDAP authentication settings.
 ** Specify the user name to bind to the directory server in *Bind DN*. This user must have read access to all users and groups that will be used for {product-title_short} authentication and role assignment, for example, a service account user with access to all LDAP users (named _svc-ldap_ in this example).
 ** Enter the password for the Bind DN user in *Bind Password*.
 +
@@ -93,7 +93,7 @@ To add another trusted forest:
 . From the settings menu, select *Configuration*. 
 . Select your server in the *Settings* accordion.
 . Select the *Authentication* tab.
-. Check *Get User Groups from LDAP*, and enter all items in the *Role Settings* area.
+. Select *Get User Groups from LDAP*, and enter all items in the *Role Settings* area.
 . In the *Trusted Forest Settings* area, click image:green-plus.png[](*Click to add a new forest*).
 . Enter the *LDAP Host Name*, select a *Mode*, and enter an *LDAP Port*, *Base DN*, *Bind DN*, and *Bind Password*.
 . Click *Save*.

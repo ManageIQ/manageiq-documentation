@@ -1,9 +1,9 @@
 [id="proc_Creating_rhv_conversion_hosts"]
 = Creating RHV Conversion Hosts
 
-All the virtual machines that are specified in a migration plan are migrated at the same time. Therefore, the number of RHV conversion hosts that you require depends on the number of virtual machines you intend to migrate.
+All the virtual machines that are specified in a migration plan are migrated at the same time. Therefore, the number of RHV conversion hosts that you create depends on the number of virtual machines you intend to migrate.
 
-Each conversion host is limited to 10 concurrent migrations. If you want to migrate more than 10 virtual machines simultaneously, you should configure additional conversion hosts to support the load. Multiple conversion hosts are recommended, even when performing fewer than 10 concurrent migrations, for load-balancing purposes.
+Each conversion host is limited to 10 concurrent migrations, unless you change the default value (see xref:Configuring_the_maximum_number_of_concurrent_migrations[] below). Multiple conversion hosts are recommended, even for smaller migrations, for load-balancing purposes.
 
 [NOTE]
 ====
@@ -23,14 +23,14 @@ Create one or more RHV conversion hosts:
 # cd /usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/
 ----
 
-. Create a `conversion_hosts_inventory.yml` inventory file:
+. Create a `conversion_hosts_inventory.yml` inventory file with the following variables:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 all:
   hosts:
-    _host1_: _host1.example.com_
-    _host2_: _host2.example.com_
+    _esx1.example.com_:
+    _esx2.example.com_:
   vars:
     ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
     v2v_vddk_package_name=VMware-vix-disklib-_version_.x86_64.tar.gz
@@ -50,6 +50,8 @@ all:
 ----
 # ansible-playbook -i conversion_hosts_inventory.yml conversion_host_check.yml
 ----
+
+After creating the RHV conversion hosts, you must configure them in CloudForms.
 
 [NOTE]
 ====

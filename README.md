@@ -12,6 +12,12 @@ This repo contains the documentation for
 
 The documentation in this repository is built and deployed using [AsciiBinder](http://asciibinder.org).  If you're new to AsciiBinder, head over there and read up on how to contribute documentation.
 
+Documentation follows a modular-based content model, providing a structure for writing and presenting user-story-based documentation. User-story-based documentation attempts to address the reader's needs more than focusing on feature-based documentation. This is accomplished using a set of templates for writing about concepts, reference, and procedures. Each content type is then collected as an assembly. Learn more about the modular documentation model [here](https://github.com/redhat-documentation/modular-docs). 
+
+Templates for creating documentation can be found [here](https://github.com/redhat-documentation/modular-docs/tree/master/modular-docs-manual/files). 
+
+
+
 ### Quick setup
 
 * Be sure to have a Ruby installed with the bundler gem (if you don't have bundler, just run `gem install bundler`)

@@ -20,7 +20,7 @@ Templates can be found [here](https://github.com/redhat-documentation/modular-do
 
 ### Quick setup
 
-* Be sure to have a Ruby installed with the bundler gem (if you don't have bundler, just run `gem install bundler`)
+* Be sure to have Ruby installed with the bundler gem (if you don't have bundler, just run `gem install bundler`)
 * Clone the manageiq_docs repo.
 * `cd` into the new manageiq_docs repo directory.
 * `bundle install`

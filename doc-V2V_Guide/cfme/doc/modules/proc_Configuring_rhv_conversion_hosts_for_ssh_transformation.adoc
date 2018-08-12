@@ -5,7 +5,7 @@ If you are using the SSH transformation mode, configure the RHV conversion hosts
 
 . Enable SSH on all the VMware hypervisors. See link:https://pubs.vmware.com/vsphere-6-5/index.jsp?topic=%2Fcom.vmware.vcli.getstart.doc%2FGUID-C3A44A30-EEA5-4359-A248-D13927A94CCE.html[Enable SSH from the vSphere Web Client] for details.
 
-. Create key pairs on each conversion host for the vdsm user:
+. If you created the conversion hosts without using the `ovirt-ansible-v2v-conversion-host` role, you must create the key pairs on each conversion host for the vdsm user:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -13,17 +13,12 @@ If you are using the SSH transformation mode, configure the RHV conversion hosts
 # ssh-keygen -t rsa -N '' -C "vdsm@_hostname_" -f /var/lib/vdsm/.ssh/id_rsa
 # chown vdsm:kvm /var/lib/vdsm/.ssh/id_rsa
 ----
-+
-[NOTE]
-====
-This step is performed by the `ovirt-ansible-v2v-conversion-host` role described in xref:proc_Creating_rhv_conversion_hosts[].
-====
 
 . Copy the SSH keys to the VMware hypervisors:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# scp /var/lib/vdsm/.ssh/id_rsa root@_esx1.example.com_:/etc/ssh/key-root/authorized_keys/
+# ssh root@_esx1.example.com_ sh -c \'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
 ----
 
 . Validate the configuration by connecting to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor:

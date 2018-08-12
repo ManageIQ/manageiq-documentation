@@ -64,11 +64,13 @@ During migration, the counter displaying the migration plan progress (in menu:Co
 [discrete]
 == Advanced Migration Option: Automating Pre- and Post-Migration Tasks with Ansible
 
-Certain tasks may need to be performed before or after a virtual machine is migrated, for example, removing web server virtual machines from a load-balancing pool before migration and adding them back to the pool after migration.
+Certain tasks may need to be performed before or after a virtual machine is migrated, for example, removing web server virtual machines from a load-balancing pool before migration and adding them back to the pool after migration. When you create a migration plan, you can specify an Ansible service catalog item to be run before or after each virtual machine within the plan is migrated.
 
-When you create a migration plan, you can specify an Ansible service catalog item to be run before or after each virtual machine within the plan is migrated.
+You must create the Ansible service catalog item before you create the migration plan. At least one repository, one playbook, and one credential must exist in the CloudForms inventory.
 
-[NOTE]
-====
-You must create the Ansible service catalog items before you create a migration plan. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Creating an Ansible Playbook Service Catalog Item] for details.
-====
+To create an Ansible service catalog item:
+
+. Configure the Ansible repository and credentials (see
+link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_providers/automation_management_providers#ansible-inside[Ansible] in _CloudForms: Managing Providers_).
+. Create a catalog bundle (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#creating-a-catalog-bundle[Creating a Catalog Bundle] in _CloudForms: Provisioning Virtual Machines and Hosts_).
+. Create the Ansible service catalog item (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Creating an Ansible Playbook Service Catalog Item] in _CloudForms: Provisioning Virtual Machines and Hosts_).

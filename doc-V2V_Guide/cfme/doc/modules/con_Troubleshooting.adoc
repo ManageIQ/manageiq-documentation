@@ -7,7 +7,7 @@
 
 You can remigrate previously migrated virtual machines:
 
-. Delete the target virtual machines corresponding to the source virtual machines that you are re-migrating. Otherwise, the remigration will fail because a target machine with the same name already exists.
+. Delete the target virtual machines corresponding to the source virtual machines that you are remigrating. Otherwise, the remigration will fail because a target machine with the same name already exists.
 . Delete the disks belonging to these virtual machines, which were created in the target datastore during the earlier migration, to free up space.
 . Create a xref:CSV_file[CSV file] with the names and, optionally, providers, of the source virtual machines.
 +
@@ -34,8 +34,10 @@ If one or more virtual machines in a migration plan fails to migrate, the plan's
 If a migration plan does not complete successfully, you can check the logs for errors:
 
 * CloudForms migration log: `/var/www/miq/vmdb/log/automation.log`
-* Conversion host logs: `/tmp`
-* Virtual machine migration log: Click the migration plan to go to the details page and click `Download Log`.
+* Conversion host logs: `/var/log/vdsm/import/`
+* Virtual machine migration log: Go to menu:Compute[Migrate], click the migration plan to go to the details page, and click `Download Log`.
++
+image:Migrated_VM_details.png[]
 
 [discrete]
 == Common Issues and Mistakes
@@ -48,3 +50,12 @@ If the RHV host credentials are not set, CloudForms cannot communicate with the 
 
 Incorrect attributes in the virtual machine CSV import file::
 Create a new migration plan, import the correct CSV file, and run the migration plan.
+
+Migration fails immediately::
+If a migration fails immediately, before the progress bar is displayed, this is normally caused by a configuration error in the environment. Check the *automation.log* file on the CloudForms appliance.
+
+Migration fails at virtual machine conversion::
+If a migration fails when the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page and download the conversion log for the the virtual machine(s) that failed to migrate.
+
+SSH transformation fails::
+If you are using SSSD with single-sign-on for RHV, SSH fails for the vdsm account. See  link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[] for details.

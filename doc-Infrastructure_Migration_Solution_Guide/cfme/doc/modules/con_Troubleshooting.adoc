@@ -59,4 +59,14 @@ Migration fails at virtual machine conversion::
 If a migration fails when the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page and download the conversion log for the the virtual machine(s) that failed to migrate.
 
 SSH transformation fails::
-If you are using SSSD with single sign-on for RHV, SSH fails for the `vdsm` account. See  link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[] for details.
+If you are using SSSD with single sign-on for RHV, SSH fails for the `vdsm` account.
++
+Reinstall the `ipa-client` without configuring the OpenSSH client:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ipa-client-install --uninstall
+# ipa-client-install --no-ssh
+----
++
+Changing the configuration file is not recommended because it is restored during upgrades. See link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[] for details.

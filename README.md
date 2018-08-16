@@ -12,9 +12,15 @@ This repo contains the documentation for
 
 The documentation in this repository is built and deployed using [AsciiBinder](http://asciibinder.org).  If you're new to AsciiBinder, head over there and read up on how to contribute documentation.
 
+Documentation follows a [modular-based content model](https://github.com/redhat-documentation/modular-docs), providing a structure for writing and presenting user-story-based documentation. User-story-based documentation attempts to address the reader's needs more than focusing on feature-based documentation. This is accomplished using a set of templates for concepts, references, procedures and assemblies. 
+
+Templates can be found [here](https://github.com/redhat-documentation/modular-docs/tree/master/modular-docs-manual/files). 
+
+
+
 ### Quick setup
 
-* Be sure to have a Ruby installed with the bundler gem (if you don't have bundler, just run `gem install bundler`)
+* Be sure to have Ruby installed with the bundler gem (if you don't have bundler, just run `gem install bundler`)
 * Clone the manageiq_docs repo.
 * `cd` into the new manageiq_docs repo directory.
 * `bundle install`

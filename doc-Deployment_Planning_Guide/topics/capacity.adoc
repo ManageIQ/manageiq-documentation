@@ -74,7 +74,7 @@ $ ssh root@example.postgres.server
 # su - postgres
 ----
 +
-[NOTE]
+[IMPORTANT]
 ====
 For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you will need to enable the _rh-postgresql95_ collection and load into the current shell prompt using the source command: 
 
@@ -129,26 +129,26 @@ $ exit
 ----
 +
 . Enable external md5 authentication.
-.. For RHV 4.0 and RHV 4.1, change the authentication method from `ident` to `md5` in the following line in `/var/lib/pgsql/data/pg_hba.conf`:
+.. For RHV 4.0 and RHV 4.1, update the following line in `/var/lib/pgsql/data/pg_hba.conf` as shown below:
 +
 ----
 host    all      all    0.0.0.0/0     md5
 ----
 +
-.. For RHV 4.2, change the authentication method from `ident` to `md5` in the following line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
+.. For RHV 4.2, update the following line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf` as shown below:
 +
 ----
 host    all      all    0.0.0.0/0     md5
 ----
 +
 . Enable PostgreSQL to listen for remote connections.
-.. For RHV 4.0 and RHV 4.1, update the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
+.. For RHV 4.0 and RHV 4.1, ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` is as shown below:
 +
 ----
 listen_addresses  =  '*'
 ----
 +
-.. For RHV 4.2, update the `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
+.. For RHV 4.2, ensure the `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` is as shown below:
 +
 ----
 listen_addresses  =  '*'

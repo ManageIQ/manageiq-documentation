@@ -3,7 +3,9 @@
 
 All the virtual machines that are specified in a migration plan are migrated at the same time. Therefore, the number of RHV conversion hosts that you create depends on the number of virtual machines you intend to migrate. Red Hat recommends configuring the RHV conversion hosts on physical machines, not nested virtual machines.
 
-Each conversion host is limited to 10 concurrent migrations, unless you change the default value (see xref:Configuring_the_maximum_number_of_concurrent_migrations[] below). Changing the default value is only supported for SSH transformation, not for VDDK. VDDK transformation is limited to 10 concurrent migrations.
+Each conversion host supports up to 10 concurrent virtual machine migrations, unless you change the default value (see xref:Configuring_the_maximum_number_of_concurrent_migrations[] below). Increasing the number of concurrent migrations is only possible for SSH transformation.
+
+VDDK transformation is limited to 10 concurrent migrations because the vSphere transfer buffer for all NFC connections to an ESXi host cannot exceed 32 MB. See link:https://pubs.vmware.com/vsphere-6-5/index.jsp?topic=%2Fcom.vmware.vddk.pg.doc%2FvddkDataStruct.5.5.html&resultof=%22%4e%46%43%22%20%22%6e%66%63%22%20%22%53%65%73%73%69%6f%6e%22%20%22%73%65%73%73%69%6f%6e%22%20%22%4c%69%6d%69%74%73%22%20%22%6c%69%6d%69%74%22%20[vSphere 6.5 Virtual Disk Transport Methods] for details.
 
 Multiple conversion hosts are recommended, even for small migrations, for load-balancing purposes.
 

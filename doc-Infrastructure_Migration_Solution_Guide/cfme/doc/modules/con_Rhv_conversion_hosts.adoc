@@ -3,12 +3,14 @@
 
 All the virtual machines that are specified in a migration plan are migrated at the same time. Therefore, the number of RHV conversion hosts that you create depends on the number of virtual machines you intend to migrate. Red Hat recommends configuring the RHV conversion hosts on physical machines, not nested virtual machines.
 
-Each conversion host is limited to 10 concurrent migrations, unless you change the default value (see xref:Configuring_the_maximum_number_of_concurrent_migrations[] below). Multiple conversion hosts are recommended, even for smaller migrations, for load-balancing purposes.
+Each conversion host is limited to `10` concurrent migrations, unless you change the default value (see xref:Configuring_the_maximum_number_of_concurrent_migrations[] below).
 
-[NOTE]
+[IMPORTANT]
 ====
-The number of virtual machines that you can migrate at the same time depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process. You should test your environment to understand how many migrations can occur simultaneously without negative effects.
+The maximum number of concurrent virtual machine migrations per conversion host is `10`, for VDDK transformation, and `20`, for SSH transformation. The SSH transformation limitation applies only to Red Hat Virtualization 4.2.5, not to later versions.
 ====
+
+Multiple conversion hosts are recommended, even for smaller migrations, for load-balancing purposes. The number of virtual machines that you can migrate at the same time depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process. You should test your environment to understand how many migrations can occur simultaneously without negative effects.
 
 [[datapath_transformation_options_vddk_ssh]]
 *Datapath Transformation Options: VDDK or SSH*

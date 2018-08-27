@@ -55,94 +55,116 @@ After creating the new user, add the user's credentials to the settings for the 
 . Click *Save*.
 . Restart the Capacity and Utilization Data Collector.
 
-[[data_collection_for_rhev_33_34]]
-=== Data Collection for Red Hat Enterprise Virtualization
+[[data_collection_for_rhev_4.x]]
+=== Data Collection for Red Hat Virtualization
 
-[NOTE]
-====
-The procedure applies to version numbers Red Hat Enterprise Virtualization 3.x and Red Hat Virtualization 4.x. 
-====
+To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add a user to the RHV-M history database for {product-title} to use.
 
-To collect capacity and utilization data for Red Hat Enterprise
-Virtualization, you must add {product-title} as
-a user to the RHEV-M database.
+Perform this procedure on the PostgreSQL server where the history database (ovirt_engine_history) is located. Usually, this is the RHV-M server.
 
-Perform this procedure on the PostgreSQL server where the history
-database is located. Usually, this is the RHEV-M server.
-
-. Using SSH, access the RHEV-M database server as the root user:
+. Using SSH, access the RHV-M database server as the root user:
 +
-------
+----
 $ ssh root@example.postgres.server
-------
+----
 +
 . Switch to the postgres user:
 +
-------
+----
 # su - postgres
-------
+----
 +
-. Access the database prompt:
-+
-------
-# psql ovirt_engine_history
-------
-+
-. Create a new user for the {product-title} and grant read-only access to tables and views:
-+
-------
-ovirt_engine_history=# CREATE ROLE cfme with LOGIN ENCRYPTED PASSWORD 'password';
+[IMPORTANT]
+====
+For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you will need to enable the _rh-postgresql95_ collection and load into the current shell prompt using the source command: 
 
-ovirt_engine_history=# SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');
-------
+$ source /opt/rh/rh-postgresql95/enable
+====
 +
-. Exit to the RHEV-M database server prompt:
+. Create the user for {product-title_short} to be granted read-only access to the history database:
 +
-------
-ovirt_engine_history=# \q
-# exit
-------
+----
+$ psql -U postgres -c "CREATE ROLE cfme WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
+----
+. Grant the newly created user permission to connect to the history database:
 +
-. Update the server's firewall to accept TCP communication on port 5432.
-* For Red Hat Enterprise Virtualization 3.x:
+----
+$ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO cfme;"
+----
 +
-------
-# iptables -I INPUT -p tcp -m tcp --dport 5432 -j ACCEPT
-# service iptables save
-------
+. Grant the newly created user usage of the public schema:
 +
-* For Red Hat Virtualization 4.x:
+----
+$ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO cfme;" ovirt_engine_history
+----
 +
-------
+. Generate the rest of the permissions that will be granted to the newly created user and save them to a file:
++
+----
+$ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
+----
++
+. Use the file you created in the previous step to grant permissions to the newly created user:
++
+----
+$ psql -U postgres -f grant.sql ovirt_engine_history
+----
++
+. Remove the file you used to grant permissions to the newly created user:
++
+----
+$ rm grant.sql
+----
++
+. Exit to the RHV-M database server prompt:
++
+----
+$ exit
+----
++
+. Update the server's firewall to accept TCP communication on port 5432:
++
+----
 # firewall-cmd --add-port=5432/tcp --permanent
-------
+----
 +
-. Enable external md5 authentication by appending the following line to
-  `/var/lib/pgsql/data/pg_hba.conf`:
+. Enable external md5 authentication.
+.. For RHV 4.0 and RHV 4.1, update the following line in `/var/lib/pgsql/data/pg_hba.conf` as shown below:
 +
-------
+----
 host    all      all    0.0.0.0/0     md5
-------
+----
 +
-. Enable PostgreSQL to listen for remote connections by updating the
-  `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf`:
+.. For RHV 4.2, update the following line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf` as shown below:
 +
-------
+----
+host    all      all    0.0.0.0/0     md5
+----
++
+. Enable PostgreSQL to listen for remote connections.
+.. For RHV 4.0 and RHV 4.1, ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` is as shown below:
++
+----
 listen_addresses  =  '*'
-------
+----
++
+.. For RHV 4.2, ensure the `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` is as shown below:
++
+----
+listen_addresses  =  '*'
+----
 +
 . Reload the PostgreSQL configuration.
-* For Red Hat Enterprise Virtualization 3.x:
+.. For RHV 4.0 and RHV 4.1:
 +
-------
-# service postgresql reload
-------
-+
-* For Red Hat Virtualization 4.x:
-+
-------
+----
 # systemctl reload postgresql
-------
+----
+.. For RHV 4.2:
++
+----
+# systemctl reload rh-postgresql95-postgresql
+----
 +
 
 

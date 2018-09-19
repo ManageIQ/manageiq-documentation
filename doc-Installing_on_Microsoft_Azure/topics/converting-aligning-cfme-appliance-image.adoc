@@ -11,14 +11,14 @@ $ qemu-img convert -f vpc -O raw <image-name.vhd> <image-name.raw>
 
 Example:
 
-$ qemu-img convert -f vpc -O raw cfme-azure-5.6.4.2-1.x86_64.vhd cfme-azure-5.6.4.2-1.x86_64.raw
+$ qemu-img convert -f vpc -O raw example.vhd rexample.raw
 ----
 +
 . Copy and paste the script below into a new bash shell script file, for example, `aligned-size.sh`. Change _rawdisk="image-name"_ to the image name for your file. This script will calculate the rounded file size to the nearest 1 MB boundary.
 +
 ----
 #!/bin/bash
-rawdisk="cfme-azure-5.6.4.2-1.x86_64.raw"
+rawdisk="example.raw"
 MB=$((1024 * 1024))
 size=$(qemu-img info -f raw --output json "$rawdisk" | gawk 'match($0, /"virtual-size": ([0-9]+),/, val) {print val[1]}')
 rounded_size=$((($size/$MB + 1) * $MB))
@@ -41,7 +41,7 @@ $ qemu-img resize -f raw <image-name.raw> <rounded_size>
 
 Example:
 
-$ qemu-img resize -f raw cfme-azure-5.6.4.2-1.x86_64.raw 34361835520
+$ qemu-img resize -f raw example.raw 34361835520
 
 Image resized.
 ----
@@ -53,7 +53,7 @@ $ qemu-img convert -f raw -o subformat=fixed -O vpc <image-name.raw> <image-name
 
 Example:
 
-qemu-img convert -f raw -o subformat=fixed -O vpc cfme-azure-5.6.4.2-1.x86_64.raw cfme-azure-5.6.4.2-1.x86_64.vhd
+qemu-img convert -f raw -o subformat=fixed -O vpc example.raw example.vhd
 ----
 +
 . Get the virtual size for the VHD file.
@@ -63,11 +63,11 @@ $ qemu-img info --output=json -f vpc <path-to-image>
 
 Example:
 
-$ qemu-img info --output=json -f vpc cfme-azure-5.6.4.2-1.x86_64.vhd
+$ qemu-img info --output=json -f vpc example.vhd
 
 {
   "virtual-size": 34361835520,
-  "filename": "cfme-azure-5.6.4.2-1.x86_64.vhd",
+  "filename": "example.vhd",
   "cluster-size": 2097152,
   "format": "vpc",
   "actual-size": 2133401600,

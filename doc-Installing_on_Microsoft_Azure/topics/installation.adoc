@@ -449,7 +449,7 @@ To upload the {product-title} appliance file in Microsoft Azure, ensure the foll
 ifdef::cfme[]
 [IMPORTANT]
 ====
-Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure PowerShell script and Azure CLI do not automatically convert a dynamic VHD file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.3-1.x86_64.vhd` and newer) are available for download in a fixed format and therefore can be uploaded and provisioned in an Azure environment without requiring any additional manipulations with the image.   
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure PowerShell script and Azure CLI do not automatically convert a dynamic VHD file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.3-1.x86_64.vhd.vhd` and newer) are available for download in a fixed format and therefore can be uploaded and provisioned in an Azure environment without requiring any additional manipulations with the image.   
 ====
 endif::cfme[]
 
@@ -493,7 +493,7 @@ $SubscriptionName = "my subscription"
 $ResourceGroupName = "test"
 $StorageAccountName = "test"
 
-$BlobNameSource = "cfme-test.vhd"
+$BlobNameSource = "example.vhd"
 $BlobSourceContainer = "templates"
 $LocalImagePath = "C:\tmp\$BlobNameSource"
 
@@ -511,9 +511,9 @@ Example Script:
 
 ## Customize for Your Environment
 
-$BlobNameDest = "cfme-test.vhd"
+$BlobNameDest = "example.vhd"
 $BlobDestinationContainer = "vhds"
-$VMName = "cfme-test"
+$VMName = "example"
 $DeploySize= "Standard_A3"
 $vmUserName = "user1"
 
@@ -808,7 +808,7 @@ $ az storage blob upload --account-name <storage-account-name> --container-name 
 
 Example:
 
-$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.2.3-1.x86_64.vhd --name cfme-azure-5.8.2.3-1.x86_64.vhd
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file example.vhd --name example.vhd
  
 Finished[#############################################################]  100.0000%
 ----
@@ -820,31 +820,33 @@ $ az storage blob url -c <container-name> -n <image-name>.vhd
 
 Example:
 
-$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.2.3-1.x86_64.vhd 
+$ az storage blob url -c azrhelclistcont -n example.vhd 
 
-"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd"
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/example.vhd"
 ----
 +
 . Create a reusable image from a blob and then use a managed disk.
 +
+[options="nowrap" subs="attributes,verbatim"]
 ----
 Example:
 
-$ az image create -n <image-name> -g <cfme-appliance-group> --os-type <linux> --source <https://cfmestorageaccount.blob.core.windows.net/cfmestoragecontainer/cfme-azure-5.8.2.3-1.x86_64.vhd>
+$ az image create -n <image-name> -g <{product-title_abbr}-appliance-group> --os-type <linux> --source <https://{product-title_abbr}storageaccount.blob.core.windows.net/{product-title_abbr}storagecontainer/example.vhd>
 ----
 +
 . Create the virtual machine. Note that the following command uses `--generate-ssh-keys`. In this example, the private/public key pair `/home/clouduser/.ssh/id_rsa` and `/home/clouduser/.ssh/id_rsa.pub` are created.
 +
+[options="nowrap" subs="attributes,verbatim"]
 ----
 $ az vm create --resource-group <resource-group> --location <azure-region> --use-unmanaged-disk --name <vm-name> --storage-account <storage-account-name> --os-type linux --admin-username <administrator-name> --generate-ssh-keys --image <URL>
 
 Example:
 
-az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd
+az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name {product-title_abbr}-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/example.vhd
 
 {
   "fqdns": "",
-  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/cfme-appliance-1",
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/{product-title_abbr}-appliance-1",
   "location": "southcentralus",
   "macAddress": "00-0X-XX-XX-XX-XX",
   "powerState": "VM running",

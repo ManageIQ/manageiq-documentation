@@ -1,0 +1,39 @@
+[id="Creating_an_ansible_service_catalog_item"]
+= Creating an Ansible service catalog item
+
+.Prerequisites
+
+* The Ansible service catalog item must be created before the migration plan.
+* The CloudForms Inventory must contain at least one repository, one playbook, and one credential.
+
+.Procedure
+
+. Configure the Ansible repository and credentials (see
+link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_providers/automation_management_providers#ansible-inside[Ansible] in _CloudForms: Managing Providers_).
+. Create a catalog bundle (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#creating-a-catalog-bundle[Creating a Catalog Bundle] in _CloudForms: Provisioning Virtual Machines and Hosts_).
+. Create the Ansible service catalog item (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Creating an Ansible Playbook Service Catalog Item] in _CloudForms: Provisioning Virtual Machines and Hosts_).
+
+.Playbook Example: ims.rhel_pre_migration
+
+The `ims.rhel_pre_migration` role configures the Red Hat Enterprise Linux virtual machine for migration by performing the following tasks:
+
+* Adding `udev` rules to enforce network interface naming conventions
+* Installing the guest agent for Red Hat Virtualization
+
+The following example registers the virtual machine against a Satellite 6 server and enables the `rhel-7-server-rpms` repository. If no information is provided in `extra_vars`, the playbook assumes that the repositories are already configured and installs the agent.
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+---
+- hosts: _to_be_migrated_
+  vars:
+    rhsm_config:
+      server_hostname: "_satellite.example.com_"
+      server_username: "_admin_"
+      server_password: "_password_"
+      org_id: "_organization_"
+    rhsm_repositories:
+      - "rhel-7-server-rpms"
+  roles:
+    - role: ims.rhel_pre_migration
+----

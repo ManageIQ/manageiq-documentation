@@ -53,7 +53,7 @@ The following limitations exist when deploying this version of {product-title_sh
 * OpenShift cannot independently scale workers 
 * A highly available database is not supported in PostgreSQL pods
 
-
+[[templates-images]]
 ==== Templates and Images
 
 ifdef::cfme[]
@@ -135,6 +135,12 @@ Users:					system:admin,system:serviceaccount:openshift-infra:build-controller,s
 For more information on SCCs, see the https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html[OpenShift documentation].
 ====
 +
+. As the admin user, add the `httpd-configmap-generator` service account to the `httpd-scc-sysadmin` SCC so the Httpd Configmap Generator can run.
++
+----
+Users:        system:serviceaccount:<your-namespace>:httpd-configmap-generator
+----
++
 . Add the `view` and `edit` roles to the `cfme-orchestrator` service account:
 +
 ----
@@ -146,7 +152,7 @@ $ oc policy add-role-to-user edit system:serviceaccount:<your-project>:cfme-orch
 +
 A basic {product-title_short} deployment needs at least two persistent volumes (PVs) to store {product-title_short} data. As the admin user, create two persistent volumes: one to host the {product-title_short} PostgreSQL database, and one to host the application data. 
 +
-Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from https://github.com/openshift/openshift-ansible/tree/master/roles/openshift_examples/files/examples/v1.7/cfme-templates/[GitHub]. 
+Example NFS-backed volume templates are provided by `cfme-pv-db-example.yaml` and `cfme-pv-server-example.yaml`, available from the image stream or repository configured in xref:templates-images[]. 
 +
 [NOTE]
 ====
@@ -157,7 +163,7 @@ Red Hat recommends setting permissions for the pv-app (privileged pod volume) as
 +
 .. Configure your NFS server host details within these files, and edit any other settings needed to match your environment.
 +
-.. Run the following commands to create the two persistent volumes: 
+.. Create the two persistent volumes: 
 +
 ------
 $ oc create -f cfme-pv-db-example.yaml
@@ -168,7 +174,11 @@ $ oc create -f cfme-pv-server-example.yaml
 + 
 ----
 $ oc process cfme-pv-db-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
-
+----
++
+Alternatively, you can create the two persistent volumes and process the templates in a single command:
++
+----
 $ oc process cfme-pv-server-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
 ----
 +
@@ -215,7 +225,7 @@ imagePolicyConfig:
 ----
 $ systemctl restart atomic-openshift-master
 ----
-. On each OpenShift node, persistently enable the `container_manage_cgroup` SELinux boolean to allow container processes to make changes to _cgroup_ configuration:
+. On each OpenShift node, persistently enable the `container_manage_cgroup` SELinux boolean to allow container processes to make changes to the _cgroup_ configuration:
 +
 ----
 # setsebool -P container_manage_cgroup on

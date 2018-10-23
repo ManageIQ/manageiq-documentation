@@ -1,0 +1,25 @@
+[id="Ims_rhel_pre-migration_ansible_playbook_example"]
+= IMS RHEL Pre-migration Ansible Playbook Example
+
+The `ims.rhel_pre_migration` role configures a target Red Hat Enterprise Linux virtual machine for migration by performing the following tasks:
+
+* Preserving the static IP address configuration
+* Installing the Red Hat Virtualization guest agent
+
+This example registers a virtual machine with a Satellite 6 server and enables the `rhel-7-server-rpms` repository. If no variables are provided, the link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[playbook] assumes that the repositories are already configured and installs the guest agent while maintaining the static IP address.
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+---
+- hosts: _all_
+  vars:
+    rhsm_config:
+      server_hostname: "_satellite.example.com_"
+      server_username: "_admin_"
+      server_password: "_password_"
+      org_id: "_organization_"
+    rhsm_repositories:
+      - "rhel-7-server-rpms"
+  roles:
+    - role: ims.rhel_pre_migration
+----

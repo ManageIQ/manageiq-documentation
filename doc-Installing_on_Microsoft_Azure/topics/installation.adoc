@@ -46,12 +46,21 @@ To upload the {product-title} appliance file in Microsoft Azure, ensure the foll
 * Administrator access to the Azure portal.
 * Depending on your infrastructure, allow time for the upload.
 
-
+ifdef::cfme[]
 [IMPORTANT]
 ====
-Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure PowerShell script and Azure CLI do not automatically convert a dynamic .vhd file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.3-1.x86_64.vhd` and newer) are available for download in a fixed format and therefore can be uploaded and provisioned in an Azure environment without requiring any additional manipulations with the image.   
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The Azure PowerShell script and Azure CLI do not automatically convert a dynamic VHD file to fixed during upload. For {product-title_short} 4.5.2 and newer, the virtual appliance image files (`cfme-azure-5.8.2.3-1.x86_64.vhd.vhd` and newer) are available for download in a fixed format and therefore can be uploaded and provisioned in an Azure environment without requiring any additional manipulations with the image.   
+====
+endif::cfme[]
+
+ifdef::miq[]
+[IMPORTANT]
+====
+Azure requires that the uploaded Virtual Hard Disk (VHD) files are in a fixed format. The {product-title_short} virtual appliance image VHD file is dynamic by default. Currently, the Azure Powershell script and Azure CLI do not automatically convert the dynamic VHD file to fixed during upload. To upload using either method, the {product-title_short} virtual appliance image VHD file must be first converted from dynamic to fixed, and properly aligned to the nearest 1 MB boundary. Once converted and properly aligned, you can then upload the appliance virtual image VHD file using either the Azure PowerShell or Azure CLI method.
 ====
 
+include::converting-aligning-cfme-appliance-image.adoc[]
+endif::miq[]
 
 [[uploading-the-appliance-using-azure-powershell-script]]
 ==== Using the Azure PowerShell Script
@@ -73,7 +82,7 @@ Select-AzureRmSubscription -SubscriptionName $SubscriptionName
 +  
 When prompted, enter your user name and password for the Azure Portal.
 
-. Upload the .vhd file to a storage account. As shown in the example script below, you will first create a *Resource Group* through the Portal UI or PowerShell. Additionally, create the storage container defined in "BlobDestinationContainer" in advance.
+. Upload the VHD file to a storage account. As shown in the example script below, you will first create a *Resource Group* through the Portal UI or PowerShell. Additionally, create the storage container defined in "BlobDestinationContainer" in advance.
 +
 ------
 Example Script:
@@ -84,7 +93,7 @@ $SubscriptionName = "my subscription"
 $ResourceGroupName = "test"
 $StorageAccountName = "test"
 
-$BlobNameSource = "cfme-test.vhd"
+$BlobNameSource = "example.vhd"
 $BlobSourceContainer = "templates"
 $LocalImagePath = "C:\tmp\$BlobNameSource"
 
@@ -102,9 +111,9 @@ Example Script:
 
 ## Customize for Your Environment
 
-$BlobNameDest = "cfme-test.vhd"
+$BlobNameDest = "example.vhd"
 $BlobDestinationContainer = "vhds"
-$VMName = "cfme-test"
+$VMName = "example"
 $DeploySize= "Standard_A3"
 $vmUserName = "user1"
 
@@ -399,43 +408,45 @@ $ az storage blob upload --account-name <storage-account-name> --container-name 
 
 Example:
 
-$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file cfme-azure-5.8.2.3-1.x86_64.vhd --name cfme-azure-5.8.2.3-1.x86_64.vhd
+$ az storage blob upload --account-name azrhelclistact --container-name azrhelclistcont --type page --file example.vhd --name example.vhd
  
 Finished[#############################################################]  100.0000%
 ----
 +
-. Get the URL for the uploaded .vhd file using the following command. You will need to use this URL in the next step.
+. Get the URL for the uploaded VHD file using the following command. You will need to use this URL in the next step.
 +
 ----
 $ az storage blob url -c <container-name> -n <image-name>.vhd
 
 Example:
 
-$ az storage blob url -c azrhelclistcont -n cfme-azure-5.8.2.3-1.x86_64.vhd 
+$ az storage blob url -c azrhelclistcont -n example.vhd 
 
-"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd"
+"https://azrhelclistact.blob.core.windows.net/azrhelclistcont/example.vhd"
 ----
 +
 . Create a reusable image from a blob and then use a managed disk.
 +
+[options="nowrap" subs="attributes,verbatim"]
 ----
 Example:
 
-$ az image create -n <image-name> -g <cfme-appliance-group> --os-type <linux> --source <https://cfmestorageaccount.blob.core.windows.net/cfmestoragecontainer/cfme-azure-5.8.2.3-1.x86_64.vhd>
+$ az image create -n <image-name> -g <{product-title_abbr}-appliance-group> --os-type <linux> --source <https://{product-title_abbr}storageaccount.blob.core.windows.net/{product-title_abbr}storagecontainer/example.vhd>
 ----
 +
 . Create the virtual machine. Note that the following command uses `--generate-ssh-keys`. In this example, the private/public key pair `/home/clouduser/.ssh/id_rsa` and `/home/clouduser/.ssh/id_rsa.pub` are created.
 +
+[options="nowrap" subs="attributes,verbatim"]
 ----
 $ az vm create --resource-group <resource-group> --location <azure-region> --use-unmanaged-disk --name <vm-name> --storage-account <storage-account-name> --os-type linux --admin-username <administrator-name> --generate-ssh-keys --image <URL>
 
 Example:
 
-az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name cfme-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/cfme-azure-5.8.2.3-1.x86_64.vhd
+az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name {product-title_abbr}-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/example.vhd
 
 {
   "fqdns": "",
-  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/cfme-appliance-1",
+  "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/{product-title_abbr}-appliance-1",
   "location": "southcentralus",
   "macAddress": "00-0X-XX-XX-XX-XX",
   "powerState": "VM running",
@@ -506,10 +517,12 @@ $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;Endpoin
 
 * For information about Azure ports used by {product-title_short}, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/appliance_hardening_guide/#chap_red_hat_cloudforms_security_guide_firewall[].
 
-
+ifdef::cfme[]
 [IMPORTANT]
 ====
 After uploading the {product-title} appliance, you must configure the database for {product-title_short}; see xref:configuring_a_database[Configuring a Database for {product-title}].
 ====
+endif::cfme[]
+
 
 

@@ -1,9 +1,12 @@
 [[scan-containers]]
 ==== Scanning Containers
 
+Scan containers using SmartState.
+
 [NOTE]
 ====
-Scanning containers requires enabling the SmartProxy server role. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#servers[Servers] in the _General Configuration Guide_ for information on server roles. 
+* Scanning containers requires enabling the SmartProxy server role. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#servers[Servers] in the _General Configuration Guide_ for information on server roles. 
+* Attached OpenSCAP policies do not affect responses. 
 ====
 
 ===== Request:
@@ -18,13 +21,13 @@ GET /api/container_images/441
 [source,json]
 ------
 {
- "href": "https://hosturl/api/container_images/441",
+ "href": "https://hostname/api/container_images/441",
  "id": "441",
  "tag": "latest",
  "name": "cloudforms47/cfme-openshift-app-ui",
- "image_ref": "docker-pullable://brew-pulp-docker01.web.prod.ext.phx2.redhat.com:8888/cloudforms47/cfme-openshift-app-ui",
- "container_image_registry_id": "5",
- "ems_id": "3",
+ "image_ref": "docker-pullable://hostname/cloudforms47/cfme-openshift-app-ui",
+ "container_image_registry_id": "13",
+ "ems_id": "9",
  "last_sync_on": "2018-11-01T14:59:26Z",
  "last_scan_attempt_on": "2018-11-01T14:59:25Z",
  "digest": "sha256:",
@@ -45,7 +48,7 @@ GET /api/container_images/441
         {
         "name": "scan",
         "method": "post",
-        "href": "https://host_id/api/container_images/441"
+        "href": "https://hostname/api/container_images/441"
         }
       ]
 }

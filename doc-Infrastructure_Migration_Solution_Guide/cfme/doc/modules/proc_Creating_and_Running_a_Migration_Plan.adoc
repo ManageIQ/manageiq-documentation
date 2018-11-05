@@ -1,10 +1,9 @@
-[[Creating_a_Migration_Plan]]
+[id='Creating_and_running_a_migration_plan']
 = Creating and Running a Migration Plan
 
-[discrete]
-== Prerequisites
+.Prerequisites
 
-* If you are migrating a large number of virtual machines or you are re-migrating virtual machines after a failed migration, create a CSV file [[CSV_file]]containing a list of source virtual machines to migrate.
+* If you are migrating a large number of virtual machines or you are re-migrating virtual machines after a failed migration, you must create a CSV file [[CSV_file]]containing a list of source virtual machines to migrate.
 +
 The CSV file specifies the virtual machine names (mandatory) and providers (optional, for differentiating virtual machines with identical names), in the following format:
 +
@@ -23,10 +22,9 @@ _vm03_, _vSphere3_
 
 If you are migrating a small number of virtual machines, you can use the migration plan to discover the virtual machines. The migration plan displays a list, from which you manually select the virtual machines to migrate.
 
-[discrete]
-== Procedure
+.Procedure
 
-. Go to menu:Compute[Migration] and click *Create Migration Plan*.
+. Click menu:Compute[Migration] and click *Create Migration Plan*.
 
 . Select the infrastructure mapping from the drop-down list.
 
@@ -57,18 +55,17 @@ You can select Ansible playbook services to run on the virtual machines in the m
 
 . Select *Start Migration Immediately* and click *Create*.
 
-. Click *Close*. The migration plan may take some time to complete. *In Progress Plans*, the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time are displayed. To view the migration progress of individual virtual machines, click the migration plan to go to the migration plan details.
+. Click *Close*. The migration plan may take some time to complete. *In Progress Plans*, the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time are displayed. To view the migration progress of individual virtual machines, click the migration plan to display the migration plan details.
 +
-When the migration is complete, the migration plan is displayed under *Completed Migrations*, with the number of successfully migrated virtual machines. A *Retry* option enables you to re-migrate any virtual machines in this plan that failed to migrate. See xref:Retrying_a_Migration_Plan[Retrying a Migration Plan].
-
 [NOTE]
 ====
 During migration, the counter displaying the migration plan progress (in menu:Compute[Migration]) may be a few seconds ahead of the counter that appears in the migration plan details (menu:Compute[Migration>__Migration Plan__]). This is because the migration plan counter displays the total time to run the migration plan, while the migration plan details counter displays the time to migrate the virtual machines.
 ====
 
+. Verify that migration was successful by checking the status of the migration plan under *Completed Migrations*. The completed migration plan displays successfully migrated virtual machines. A xref:Retrying_a_Migration_Plan[*Retry*] option enables you to re-migrate any virtual machines in this plan that failed to migrate. See xref:Troubleshooting[] for more information.
+
 [[Option_Pre_and_Post_Migration_Tasks_with_Ansible]]
-[discrete]
-== Advanced Migration Option: Automating Pre- and Post-Migration Tasks with Ansible
+.Advanced Migration Option: Automating Pre- and Post-Migration Tasks with Ansible
 
 Certain tasks may need to be performed before or after a virtual machine is migrated, for example, removing web server virtual machines from a load-balancing pool before migration and adding them back to the pool after migration. When you create a migration plan, you can specify an Ansible service catalog item to be run before or after each virtual machine within the plan is migrated.
 

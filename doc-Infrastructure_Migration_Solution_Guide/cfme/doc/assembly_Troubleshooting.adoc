@@ -2,10 +2,9 @@
 = Troubleshooting
 
 [[Remigrating_Virtual_Machines]]
-[discrete]
 == Remigrating Virtual Machines
 
-You can remigrate previously migrated virtual machines:
+If a migration fails or if your migration goals change, you can remigrate previously migrated virtual machines:
 
 . Delete the target virtual machines corresponding to the source virtual machines that you are remigrating. Otherwise, the remigration will fail because a target machine with the same name already exists.
 . Delete the disks belonging to these virtual machines, which were created in the target datastore during the earlier migration, to free up space.
@@ -19,16 +18,14 @@ The virtual machines cannot be discovered automatically by the migration plan be
 . Create and run a new migration plan, using the CSV file to import the virtual machines.
 
 [[Retrying_a_Migration_Plan]]
-[discrete]
 == Retrying a Migration Plan
 
 If one or more virtual machines in a migration plan fails to migrate, the plan's migration status is `Failed`. You can retry a migration plan to migrate the virtual machines that failed to migrate:
 
 . Click the migration plan to go to the details page to identify the virtual machines that failed to migrate.
 . Delete the target virtual machines corresponding to the source virtual machines that failed to migrate. Otherwise, the retry will fail because a target machine with the same name already exists.
-. Go to menu:Compute[Migration], select `Failed Migrations`, select the failed migration plan, and click `Retry`.
+. Click menu:Compute[Migration], select `Failed Migrations`, select the failed migration plan, and click `Retry`.
 
-[discrete]
 == Log Files
 
 If a migration plan does not complete successfully, you can check the logs for errors:
@@ -40,23 +37,24 @@ If a migration plan does not complete successfully, you can check the logs for e
 .Migrated Virtual Machine Logs
 image:Migrated_VM_details.png[]
 
-[discrete]
 == Common Issues and Mistakes
 
-Incorrect infrastructure mapping::
-If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping will not work because the object IDs of the providers and their objects have changed. You must delete the infrastructure mapping and re-create it.
+Infrastructure mapping is missing datastores or clusters::
+If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping displays *Datastores missing* or *Clusters missing* error messages because the object IDs of the providers and their objects have changed. You must delete the infrastructure mapping and re-create it.
 
-RHV host credentials not set in CloudForms::
-If the RHV host credentials are not set, CloudForms cannot communicate with the hosts. To authenticate the RHV hosts with CloudForms, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[Authenticating Red Hat Virtualization Hosts] in _CloudForms: Managing Providers_.
+Infrastructure mapping is missing networks::
+If the infrastructure mapping displays a *Networks missing* error message, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts] and create a new infrastructure mapping.
++
+image:Mapping_missing_network.png[]
 
 Incorrect attributes in the virtual machine CSV import file::
 Create a new migration plan, import the correct CSV file, and run the migration plan.
 
 Migration fails immediately::
-If a migration fails immediately, before the progress bar is displayed, this is normally caused by a configuration error in the environment. Check the *automation.log* file on the CloudForms appliance.
+If a migration fails immediately, before the progress bar is displayed, this is often caused by a configuration error in the environment. Check the *automation.log* file on the CloudForms appliance.
 
 Migration fails at virtual machine conversion::
-If a migration fails when the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page and download the conversion log for the the virtual machine(s) that failed to migrate.
+If a migration fails when the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page, and download the conversion log for the the virtual machine(s) that failed to migrate.
 
 [[SSH_transformation_fails]]
 SSH transformation fails::
@@ -70,4 +68,4 @@ Reinstall `ipa-client` without configuring the OpenSSH client:
 # ipa-client-install --no-ssh
 ----
 +
-Changing the configuration file is not recommended because it is restored during upgrades. See link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[] for details.
+Changing the configuration file is not recommended because it is restored during upgrades. See link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[BZ#1544379] for details.

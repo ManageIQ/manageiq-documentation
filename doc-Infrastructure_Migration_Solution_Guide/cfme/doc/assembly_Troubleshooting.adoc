@@ -1,47 +1,57 @@
 [id='Troubleshooting']
 = Troubleshooting
 
+If errors occur for reasons unrelated to the infrastructure mapping or migration plan, you can xref:Retrying_a_Migration_Plan[retry the migration plan] or xref:Remigrating_Virtual_Machines[remigrate virtual machines].
+
+If the causes are not clear, see xref:Logs[] and xref:Common_issues_and_mistakes[].
+
+[[Retrying_a_Migration_Plan]]
+== Retrying a Migration Plan
+
+*%%% NOTE from Avital. Not clear to me what the difference is between retrying a migration plan and remigrating VMs. Seems to me that retrying migration plan would require CSV file to import VMs if target VMs were created (see step 2, where they need to be deleted). Need to ask Brett and Marco whether this is really the same use case or what the difference is. %%%*
+
+If one or more virtual machines in a migration plan fail to migrate, the migration plan's status is `Failed`. You can retry a migration plan:
+
+. Click the migration plan to go to the details page to identify the virtual machines that failed to migrate.
+. Delete the target virtual machines corresponding to the source virtual machines that failed to migrate. Otherwise, the retry will fail because a target machine with the same name already exists.
+. Click menu:Compute[Migration], select `Failed Migrations`, select the failed migration plan, and click `Retry`.
+
 [[Remigrating_Virtual_Machines]]
 == Remigrating Virtual Machines
 
-If a migration fails or if your migration goals change, you can remigrate previously migrated virtual machines:
+If the migration fails or if your migration goals change, you can remigrate previously migrated virtual machines:
 
-. Delete the target virtual machines corresponding to the source virtual machines that you are remigrating. Otherwise, the remigration will fail because a target machine with the same name already exists.
+. Delete the target virtual machines corresponding to the source virtual machines that you are remigrating.
 . Delete the disks belonging to these virtual machines, which were created in the target datastore during the earlier migration, to free up space.
-. Create a xref:CSV_file[CSV file] with the names and, optionally, the providers, of the source virtual machines.
+. Create a xref:CSV_file[CSV file] to import the source virtual machines.
 +
 [NOTE]
 ====
 The virtual machines cannot be discovered automatically by the migration plan because they are marked in the CloudForms VMDB as `migrated`.
 ====
 
-. Create and run a new migration plan, using the CSV file to import the virtual machines.
+[[Logs]]
+== Logs
 
-[[Retrying_a_Migration_Plan]]
-== Retrying a Migration Plan
-
-If one or more virtual machines in a migration plan fails to migrate, the plan's migration status is `Failed`. You can retry a migration plan to migrate the virtual machines that failed to migrate:
-
-. Click the migration plan to go to the details page to identify the virtual machines that failed to migrate.
-. Delete the target virtual machines corresponding to the source virtual machines that failed to migrate. Otherwise, the retry will fail because a target machine with the same name already exists.
-. Click menu:Compute[Migration], select `Failed Migrations`, select the failed migration plan, and click `Retry`.
-
-== Log Files
-
-If a migration plan does not complete successfully, you can check the logs for errors:
+If a migration plan fails and you are not sure of the cause, check the following logs:
 
 * CloudForms migration log: `/var/www/miq/vmdb/log/automation.log`
 * Conversion host logs: `/var/log/vdsm/import/`
-* Virtual machine migration log: Go to menu:Compute[Migrate], click the migration plan to go to the details page, and click `Download Log`.
+* Virtual machine migration log: Click menu:Compute[Migrate], click the migration plan name, and click `Download Log`.
 +
 .Migrated Virtual Machine Logs
 image:Migrated_VM_details.png[]
 
+. Create and run a new migration plan, using a xref:CSV_file[CSV file] to import the virtual machines.
+
+[[Common_issues_and_mistakes]]
 == Common Issues and Mistakes
 
+[[Infrastructure_mapping_missing_resources]]
 Infrastructure mapping is missing datastores or clusters::
 If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping displays *Datastores missing* or *Clusters missing* error messages because the object IDs of the providers and their objects have changed. You must delete the infrastructure mapping and re-create it.
 
+[[Infrastructure_mapping_missing_networks]]
 Infrastructure mapping is missing networks::
 If the infrastructure mapping displays a *Networks missing* error message, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts] and create a new infrastructure mapping.
 +
@@ -53,7 +63,7 @@ Create a new migration plan, import the correct CSV file, and run the migration 
 Migration fails immediately::
 If a migration fails immediately, before the progress bar is displayed, this is often caused by a configuration error in the environment. Check the *automation.log* file on the CloudForms appliance.
 
-Migration fails at virtual machine conversion::
+Migration fails during virtual machine conversion::
 If a migration fails when the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page, and download the conversion log for the the virtual machine(s) that failed to migrate.
 
 [[SSH_transformation_fails]]

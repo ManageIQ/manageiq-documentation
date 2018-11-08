@@ -213,6 +213,33 @@ If you experience difficulty with a procedure described in this documentation, v
 
 Red Hat also hosts a large number of electronic mailing lists for discussion of Red Hat software and technology.
 You can find a list of publicly available mailing lists at https://www.redhat.com/mailman/listinfo. Click on the name of any mailing list to subscribe to that list or to access the list archives.
+
+==== Creating a Database Dump
+
+Creating a database dump from the appliance console can be used to provide additional information when raising a support case. Options exist to generate a database dump excluding customer specified tables and to split the database dump into multiple parts, decreasing the database dump size.  
+
+To create a database dump:
+
+. SSH into the appliance console as `root`.
+. Press any key to continue.
+. Type `appliance_console` and press `Enter`.
+. From the Advanced Settings, select option 5, `Create a Database Dump`.
+. Select a `Dump Output File Name` from the list. 
+. (Optional) Select tables to exclude from the dump:
+.. Enter `Y` to exclude tables.
+.. Enter the table names in a space-separated list:
++
+-----
+metrics_* vim_performance_states event_streams
+----- 
++
+. (Optional) Split the database dump output into multiple parts:
+.. Enter `Y` to split the database dump output.
+.. Enter the byte size to split by.
+
+The database dump is created and located in the specified file.
+
+
 endif::cfme[]
 
 

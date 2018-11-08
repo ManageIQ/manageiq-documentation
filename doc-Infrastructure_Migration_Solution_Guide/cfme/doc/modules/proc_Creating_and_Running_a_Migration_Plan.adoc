@@ -73,3 +73,18 @@ During migration, the counter displaying the migration plan progress (in menu:Co
 ====
 
 . When the migration plan has finished, check the status of the migration plan under *Completed Migrations*. The completed migration plan shows successfully migrated virtual machines. If error messages appear, see xref:Troubleshooting[].
+
+[[Remigrating_Virtual_Machines]]
+.Remigrating Virtual Machines
+
+To migrate previously migrated virtual machines:
+
+. Delete the target virtual machines corresponding to the source virtual machines that you are remigrating.
+. Delete the disks that were created in the target datastore during the earlier migration to free up space.
+. Create a xref:CSV_file[CSV file] to import the source virtual machines.
+. Create and run a new migration plan.
++
+[NOTE]
+====
+The virtual machines cannot be discovered automatically by the migration plan because they are marked in the CloudForms VMDB as `migrated`.
+====

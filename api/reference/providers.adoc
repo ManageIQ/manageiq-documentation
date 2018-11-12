@@ -19,6 +19,7 @@ is available via the REST API. Management of providers is through:
 * link:#refresh-providers[Refresh Providers]
 * link:#import-vm-providers[Import Vm to Provider]
 * link:#foreman-support[Foreman Support]
+* link:#provider-examples[Provider Examples]
 
 [[querying-providers]]
 === Querying Providers
@@ -239,8 +240,7 @@ page for a mapping from the old to the new types.
 === Specifying Credentials
 
 When creating or updating providers, the credentials can be specified as a
-a single default set, or a compound set where additional credentials are necessary
-for let's say AMPQ for OpenStack or Metrics for RHEVM.
+a single default set, or a compound set where additional credentials are necessary, for example AMPQ for OpenStack or Metrics for RHEVM.
 
 Single default credentials set:
 
@@ -282,7 +282,7 @@ Compound credentials set:
 [[specifying-connection-configurations]]
 === Specifying Connection Configurations
 When creating or updating providers, connection configurations can be set. Connection configurations can be used
-to specify resources such as an amqp event provider for Openstack or for adding Hawkular metrics.
+to specify resources such as an `amqp` event provider for OpenStack, adding Hawkular metrics, or an authentication token.
 
 Hawkular metrics:
 
@@ -530,3 +530,247 @@ NOTE: When managing providers of _provider_ provider_class, Tagging and Policy m
 does not currently apply. So requests including the tags, policies and policy_profiles 
 subcollections will be rejected.
 
+[[provider-examples]]
+=== Provider Examples
+
+Below you will find example requests for creating various providers.
+
+Ansible Tower Automation Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::AnsibleTower::AutomationManager",
+  "name": "API test",
+  "api_version": "3.1.2",
+  "provider_id": 10000000000012,
+  "credentials": {
+    "userid": "userid",
+    "password": "password"
+  }
+}
+----
+
+AWS:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Amazon::CloudManager",
+  "provider_region": "us-east-1",
+  "name": "Amazon Example",
+  "credentials": {
+    "userid": "<access key id>",
+    "password": "<secret access key>"
+  }
+}
+----
+
+Azure:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Azure::CloudManager",
+  "name": "Azure Example",
+  "provider_region": "eastus",
+  "uid_ems": "<tenant_id>",
+  "subscription": "<subscription_id>",
+  "credentials": {
+    "userid": "<client id>",
+    "password": "<client key>"
+  }
+}
+----
+
+Google Compute Engine:
+[source,json]
+----
+{
+   "name":"GCE Example",
+   "type":"ManageIQ::Providers::Google::CloudManager",
+   "provider_region":"us-central1",
+   "project":"GCE Project Name",
+   "connection_configurations":[
+      {
+         "endpoint":{
+            "role":"default"
+         },
+         "authentication":{
+            "authtype":"default",
+            "type":"AuthToken",
+            "auth_key":"<auth_key_here>"
+         }
+      }
+   ]
+}
+----
+
+Kubernetes Container Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Kubernetes::ContainerManager",
+  "name": "Kubernetes Test",
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "hostname": "00.0.00.00",
+        "port": "6443",
+        "security_protocol": "ssl"
+      },
+      "authentication": {
+        "authtype": "bearer",
+        "auth_key": "<token_here>"
+      }
+    }
+  ]
+}
+----
+
+Microsoft System Center VMM (SCVMM):
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Microsoft::InfraManager",
+  "name": "SCVMM API example",
+  "api_version": "2.1.0",
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "hostname": "00.0.00.00",
+        "port": "443",
+        "security_protocol": "ssl"
+      },
+      "authentication": {
+        "username": "username",
+        "password": "password"
+      }
+    }
+  ]
+}
+----
+
+OpenShift Container Manager:
+[source,json]
+----
+{
+   "name":"ocp-example",
+   "port":8443,
+   "type":"ManageIQ::Providers::Openshift::ContainerManager",
+   "hostname":"ocp.example.com",
+   "connection_configurations":[
+      {
+         "endpoint":{
+            "role":"default",
+            "security_protocol":"ssl-without-validation",
+            "verify_ssl":0
+         },
+         "authentication":{
+            "authtype":"bearer",
+            "type":"AuthToken",
+            "auth_key":"<auth key>"
+         }
+      }
+   ]
+}
+----
+
+OpenStack Cloud Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Openstack::CloudManager",
+  "name": "API Example",
+  "api_version": "v2",
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "role": "default",
+        "hostname": "00.0.00.001",
+        "port": "5000",
+        "security_protocol": "non-ssl"
+      },
+      "authentication": {
+        "type": "ManageIQ::Providers::Openstack::CloudManager::AuthKeyPair",
+        "fingerprint": "fingerprint"
+      }
+    }
+  ]
+}
+----
+
+OpenStack Infra Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Openstack::InfraManager",
+  "name": "OSP API example",
+  "api_version": "v2",
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "hostname": "00.0.00.00",
+        "port": "5000",
+        "security_protocol": "non-ssl"
+      },
+      "authentications": {
+        "username": "username",
+        "password": "password"
+      }
+    }
+  ]
+}
+----
+
+Red Hat Virtualization Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Redhat::InfraManager",
+  "name": "Sample Rhevm",
+  "port": 5000,
+  "hostname": "sample_rhevm.provider.com",
+  "ipaddress": "100.200.300.4",
+  "security_protocol": "kerberos",
+  "certificate_authority": "----BEGIN CERTIFICATE----...",
+  "credentials": {
+    "userid": "uname",
+    "password": "password"
+  }
+}
+----
+
+VMware Infra Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Vmware::InfraManager",
+  "name": "Sample VMWare provider",
+  "hostname": "sample_vmware.provider.com",
+  "ipaddress": "100.200.300.1",
+  "credentials": {
+    "userid": "uname",
+    "password": "pword"
+  }
+}
+----
+
+VMware Cloud Manager:
+[source,json]
+----
+{
+  "type": "ManageIQ::Providers::Vmware::CloudManager",
+  "api_version": "9.0",
+  "name": "Api Test",
+  "connection_configurations": [
+    {
+      "endpoint": {
+        "port": "443",
+        "hostname": "00.0.00.000"
+      },
+      "authentication": {
+        "username": "username",
+        "password": "pword"
+      }
+    }
+  ]
+}
+----

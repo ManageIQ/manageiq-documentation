@@ -32,19 +32,16 @@ The link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansib
 # ansible-playbook -i conversion_hosts_inventory.yml conversion_host_check.yml
 ----
 
-. link:https://pubs.vmware.com/vsphere-6-5/index.jsp?topic=%2Fcom.vmware.vcli.getstart.doc%2FGUID-C3A44A30-EEA5-4359-A248-D13927A94CCE.html[Enable SSH] on all VMware hypervisors.
-+
-[NOTE]
-====
-If you created the RHV conversion hosts manually, without using the `ovirt-ansible-v2v-conversion-host` role, you must create the key pairs on each conversion host for the `vdsm` user:
+. Enable SSH on your VMware hypervisors. (For details, see link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
 
+. (Optional) If you created the RHV conversion hosts manually, without using the `ovirt-ansible-v2v-conversion-host` role, create the key pairs on each conversion host for the `vdsm` user:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # install -o vdsm -g kvm -m 0700 -d /var/lib/vdsm/.ssh
 # ssh-keygen -t rsa -N '' -C "vdsm@_hostname_" -f /var/lib/vdsm/.ssh/id_rsa
 # chown vdsm:kvm /var/lib/vdsm/.ssh/id_rsa
 ----
-====
 
 . Copy the SSH keys to all VMware hypervisors:
 +

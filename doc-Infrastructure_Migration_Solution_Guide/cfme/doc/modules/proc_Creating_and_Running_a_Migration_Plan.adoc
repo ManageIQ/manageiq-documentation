@@ -1,11 +1,11 @@
-[[Creating_a_Migration_Plan]]
+[id='Creating_and_running_a_migration_plan']
 = Creating and Running a Migration Plan
 
 .Prerequisites
 
-* If you are migrating a large number of virtual machines or you are re-migrating virtual machines after a failed migration, create a CSV file [[CSV_file]]containing a list of source virtual machines to migrate.
+* [[CSV_file]]Create a CSV file listing the source virtual machines if you are migrating a large number of virtual machines or if you are xref:Remigrating_Virtual_Machines[remigrating previously migrated virtual machines].
 +
-The CSV file specifies the virtual machine names (mandatory) and providers (optional, for differentiating virtual machines with identical names), in the following format:
+The CSV file contains the virtual machine names (mandatory) and providers (optional, to differentiate virtual machines with identical names) in the following format:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -16,18 +16,25 @@ _vm03_, _vSphere3_
 ...
 ----
 +
-If you are migrating a small number of virtual machines, you can use the migration plan to discover the virtual machines. The migration plan displays a list, from which you manually select the virtual machines to migrate.
+[NOTE]
+====
+If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.
+====
 
-* Check the target datastore to ensure that there are no virtual machines with the same name as a source virtual machine. A name conflict will cause the migration to fail.
+* Check the target datastore to ensure that no virtual machine has the same name as a source virtual machine.
 
-* Unmount any ISO images that are mounted on source virtual machines. A virtual machine with an attached ISO image will cause the migration to fail.
+* Unmount ISO images from source virtual machines.
 
-* Check that the source virtual machine disks are unencrypted. The current IMS version does not support the migration of encrypted disks.
-// IMS 1.0
+[NOTE]
+====
+A virtual machine will be in the same power state (`on` or `off`) after migration as it was before migration.
+====
 
 .Procedure
 
-. Click menu:Compute[Migration] and click *Create Migration Plan*.
+. Click menu:Compute[Migration].
+
+. Click *Create Migration Plan*.
 
 . Select the infrastructure mapping from the drop-down list.
 
@@ -51,18 +58,38 @@ image:Discover_VMs.png[]
 
 . Select the virtual machines to migrate and click *Next* to go to *Advanced Options*.
 +
+[[Advanced_options_screen]]
 .Advanced Options
 image:Advanced_Options.png[]
 +
-Select an Ansible playbook service catalog item if you are automating pre- or post-migration tasks.
+(Optional) You can select xref:Automating_pre_and_post_migration_tasks_with_ansible[Ansible playbook services] to run on the virtual machines in the migration plan before or after the migration. For example, the xref:Ims_rhel_pre-migration_ansible_playbook_example[RHEL pre-migration playbook] performs several tasks to configure a target RHEL virtual machine. You must create the xref:Creating_an_Ansible_service_catalog_item[Ansible environment and service catalog item] before the migration plan.
 
-. Select *Start Migration Immediately* and click *Create*.
+. Click *Next* to go to *Schedule*.
 
-. Click *Close*. The migration plan may take some time to complete. *In Progress Plans*, the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time are displayed. To view the migration progress of individual virtual machines, click the migration plan to go to the migration plan details.
+. If you do not wish to schedule the migration to run at a certain time in the future, select *Start Migration Immediately* and click *Create*.
+
+. Click *Close*. The migration plan may take some time to complete. The migration plan window displays *In Progress Plans*, the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time.
 +
-When the migration is complete, the migration plan is displayed under *Completed Migrations*, with the number of successfully migrated virtual machines. A *Retry* option enables you to re-migrate any virtual machines in this plan that failed to migrate. See xref:Retrying_a_Migration_Plan[Retrying a Migration Plan]. For other errors, see xref:Common_issues_and_mistakes[Common Issues and Mistakes].
-
+To view the migration progress of individual virtual machines, click the migration plan name to display the migration plan details.
++
 [NOTE]
 ====
 During migration, the counter displaying the migration plan progress (in menu:Compute[Migration]) may be a few seconds ahead of the counter that appears in the migration plan details (menu:Compute[Migration>__Migration Plan__]). This is because the migration plan counter displays the total time to run the migration plan, while the migration plan details counter displays the time to migrate the virtual machines.
+====
+
+. When the migration plan has finished, check the status of the migration plan under *Completed Migrations*. The completed migration plan shows successfully migrated virtual machines. If error messages appear, see xref:Troubleshooting[].
+
+[[Remigrating_Virtual_Machines]]
+.Remigrating Virtual Machines
+
+To migrate previously migrated virtual machines:
+
+. Delete the target virtual machines corresponding to the source virtual machines that you are remigrating.
+. Delete the disks that were created in the target datastore during the earlier migration to free up space.
+. Create a xref:CSV_file[CSV file] to import the source virtual machines.
+. Create and run a new migration plan.
++
+[NOTE]
+====
+The virtual machines cannot be discovered automatically by the migration plan because they are marked in the CloudForms VMDB as `migrated`.
 ====

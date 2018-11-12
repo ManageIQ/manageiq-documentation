@@ -1,0 +1,70 @@
+[id='Troubleshooting']
+= Troubleshooting
+
+If errors occur for reasons unrelated to the infrastructure mapping or migration plan, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
+
+If the cause of the failed migration is not clear, see xref:Logs[] and xref:Common_issues_and_mistakes[].
+
+[[Retrying_a_Migration_Plan]]
+== Retrying a Migration Plan
+
+If one or more virtual machines in a migration plan fails to migrate, the migration plan's status is `Failed`. After resolving the issue that caused the migration failure, you can retry the migration plan:
+
+. Click the migration plan to go to the details page to identify the virtual machines that failed to migrate.
+. If the migration failed while virtual machines were being converted:
+.. Delete newly created target virtual machines to avoid name conflicts with source virtual machines.
+.. Delete newly created disks in the target datastore to free up space.
+. Click menu:Compute[Migration], select `Failed Migrations`, select the failed migration plan, and click `Retry`.
+
+[[Logs]]
+== Logs
+
+If a migration plan fails and you are not sure of the cause, check the following logs:
+
+* CloudForms migration log: `/var/www/miq/vmdb/log/automation.log`
+* Conversion host logs: `/var/log/vdsm/import/`
+* Virtual machine migration log: Click menu:Compute[Migrate], click the migration plan name, and click `Download Log`.
++
+.Migrated Virtual Machine Logs
+image:Migrated_VM_details.png[]
+
+. Create and run a new migration plan, using a xref:CSV_file[CSV file] to import the virtual machines.
+
+[[Common_issues_and_mistakes]]
+== Common Issues and Mistakes
+
+[[Infrastructure_mapping_missing_resources]]
+Infrastructure mapping is missing datastores or clusters::
+If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping displays *Datastores missing* or *Clusters missing* error messages because the object IDs of the providers and their objects have changed. You must delete the infrastructure mapping and re-create it.
+
+[[Infrastructure_mapping_missing_networks]]
+Infrastructure mapping is missing networks::
+If the infrastructure mapping displays a *Networks missing* error message, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts] and create a new infrastructure mapping.
++
+image:Mapping_missing_network.png[]
+
+Migration plan does not discover virtual machines::
+If you are migrating previously migrated virtual machines, the migration plan cannot discover them because they are marked in the CloudForms VMDB as `migrated`. You must xref:Remigrating_Virtual_Machines[remigrate the virtual machines].
+
+Incorrect attributes in the virtual machine CSV import file::
+After you correct the xref:CSV_file[CSV file], create a new migration plan, import the updated CSV file, and run the migration plan.
+
+Migration fails immediately::
+If a migration fails immediately, before the progress bar is displayed, this is often caused by a configuration error in the environment. Check the *automation.log* file on the CloudForms appliance to determine the cause. When the cause has been resolved, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
+
+Migration fails during virtual machine conversion::
+If a migration fails while the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page, and download the conversion log for the virtual machine(s) that failed to migrate. When the cause of the failed migration has been resolved, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
+
+[[SSH_transformation_fails]]
+SSH transformation fails::
+If you are using SSSD with single sign-on for RHV, SSH fails for the `vdsm` account.
++
+Reinstall `ipa-client` without configuring the OpenSSH client:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ipa-client-install --uninstall
+# ipa-client-install --no-ssh
+----
++
+Changing the configuration file is not recommended because it is restored during upgrades. See link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[BZ#1544379] for details.

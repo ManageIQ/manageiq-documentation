@@ -1,0 +1,28 @@
+[id="Workflow_vmware_to_osp"]
+= VMware to OpenStack
+
+This workflow occurs when you migrate your infrastructure from VMware to OpenStack.
+
+Image TBD
+//image:TBD.png[]
+
+. After creating an infrastructure mapping and a migration plan, you run the migration plan.
+
+. CloudForms locates the virtual machines to be migrated based on the infrastructure mapping.
+
+. The ESXi host fingerprint is captured for authentication during the virtual machine conversion process.
+
+. Using the OpenStack migration attributes defined for the target environment, CloudForms initiates communication with the OpenStack conversion appliances for each project, which must have `virt-v2v`, `virt-v2v-wrapper`, and `nbdkit` installed.
+
+. The OpenStack conversion appliance connects to the source datastore, using `virt-v2v-wrapper.py`, and streams the disk(s) to be converted to the target block storage backed by Ceph using `virt-v2v`. Volumes are created in the target block storage, attached to the conversion appliance, and the source disk(s) are converted.
+
+. After the disk(s) are converted, the volumes are detached from the conversion appliance. CloudForms instructs the `virt-v2v` wrapper to create the target instance in OpenStack with `virt-v2v`. The target instance uses the source virtual machine’s metadata to map to a best fit or chosen flavor, predefined security group, and defined network(s), based on the infrastructure mapping and migration plan settings.
+
+. During instance creation, the disk(s) mapped in block storage are attached and the instance is powered on.
+
+The virtual machine migration is complete and its status is displayed in CloudForms.
+
+[NOTE]
+====
+Depending on the source virtual machine’s power state before migration, the virtual machine is either left powered off after migration or is powered on.
+====

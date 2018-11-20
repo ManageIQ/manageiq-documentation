@@ -1,0 +1,41 @@
+[id="Preparing_the_rhv_target_environment"]
+= Preparing the Red Hat Virtualization Environment
+
+Prepare the Red Hat Virtualization environment for migration:
+
+. Ensure that the datastore has sufficient space for the virtual machines you are migrating.
+
+. Set the BIOS settings of the physical hosts for optimal performance, rather than power-saving, according to the vendor's recommendations and disable the C1E halt state, if applicable.
+
+. Install  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Red Hat Virtualization Manager] 4.2.4 or later.
+
+. Install   link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Red Hat Virtualization Hosts] 4.2.4 or later or  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Red Hat Enterprise Linux hosts] 7.5 or later.
+
+. Enable the following https://access.redhat.com/articles/417343[ports] in the RHV conversion host's network:
+* 22 - SSH
+* 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
+* 902 - CloudForms to VMware
+* 5480 - `virt-v2v` to vCenter
+
+. Attach  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[data and ISO storage domains] to the data center.
++
+[NOTE]
+====
+IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
+====
+
+. Upload the link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[VirtIO and Guest Tool images] to the ISO storage domain. The VirtIO image file name must include the version number: `virtio-win-_version_.iso`.
+
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/installing_red_hat_cloudforms_on_red_hat_virtualization/[Red Hat CloudForms] 4.6.4 or later.
+
+. Add the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#vmware_vcenter_providers[VMware] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#red_hat_virtualization_providers[Red Hat Virtualization] environments to CloudForms.
+
+. Validate the source virtual machine names. Virtual machine names may contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`). Special characters and spaces are not permitted.
+
+. Check that no source virtual machine has the same name as a virtual machine in the target environment. A name conflict will cause the migration to fail.
+
+. Unmount ISO images from source virtual machines. A virtual machine with an attached ISO image will cause the migration to fail.
+
+. Authenticate the  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[RHV hosts].
+
+. Create and configure the xref:Preparing_the_rhv_conversion_hosts[RHV conversion hosts].

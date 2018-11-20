@@ -1,0 +1,29 @@
+[id="Vmware_to_osp_workflow"]
+= VMware to Red Hat OpenStack Platform Workflow
+
+This workflow occurs when you migrate your infrastructure from VMware to Red Hat OpenStack Platform.
+
+*This image is a placeholder.*
+
+image:vmware_to_osp_migration_workflow.png[]
+
+. After creating an infrastructure mapping and a migration plan, you run the migration plan.
+
+. CloudForms locates the virtual machines to be migrated based on the infrastructure mapping.
+
+. The ESXi host fingerprint is captured for authentication during the virtual machine conversion process.
+
+. Using the OpenStack Platform migration attributes defined for the target environment, CloudForms initiates communication with one or more OpenStack Platform conversion appliances. A conversion appliance is an OpenStack Platform instance with `virt-v2v`, `virt-v2v-wrapper`, and `nbdkit` installed.
+
+. The OpenStack Platform conversion appliance connects to the source datastore, with `virt-v2v-wrapper`, and streams the disk(s) to be converted to the target block storage, with `virt-v2v`. Volumes are created in the block storage, attached to the conversion appliance, and the source disk(s) are converted.
+
+. After the disk(s) are converted, the volumes are detached from the conversion appliance. CloudForms instructs `virt-v2v-wrapper` to create a target instance in OpenStack Platform with `virt-v2v`. The target instance uses the source virtual machine’s metadata to map to a flavor, a predefined security group, and defined network(s), based on the infrastructure mapping and migration plan settings.
+
+. During instance creation, the disk(s) mapped in block storage are attached to the instance, and the instance is powered on.
+
+The virtual machine migration is complete and its status is displayed in CloudForms.
+
+[NOTE]
+====
+Virtual machines must be powered on in order to migrate to OpenStack Platform.
+====

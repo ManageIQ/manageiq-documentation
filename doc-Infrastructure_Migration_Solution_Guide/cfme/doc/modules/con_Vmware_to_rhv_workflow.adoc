@@ -1,0 +1,27 @@
+[id="Vmware_to_rhv_workflow"]
+= VMware to Red Hat Virtualization Workflow
+
+This workflow occurs when you migrate your infrastructure from VMware to Red Hat Virtualization.
+
+image:vmware_to_rhv_migration_workflow.png[]
+
+. After creating an infrastructure mapping and a migration plan, you run the migration plan.
+
+. CloudForms locates the virtual machines to be migrated based on the infrastructure mapping.
+
+. The ESXi host fingerprint is captured for authentication during the virtual machine conversion process (VDDK transformation only).
+
+. Using the Red Hat Virtualization attributes defined for the target environment, CloudForms initiates communication with the RHV conversion host.
+
+. The RHV conversion host connects to the source datastore through the ESXi host, using `virt-v2v-wrapper`, and streams the disk(s) to be converted to the target data domain, using `virt-v2v`.
+
+. After the disk(s) are converted, the target virtual machine is created in Red Hat Virtualization. The target virtual machine uses the source virtual machine’s metadata to maintain the virtual machine’s attributes (tags, power state, MAC address, CPU count, memory, disks, and virtual machine name) after migration.
+
+. After the virtual machine is created, the disk(s) are attached to the target virtual machine.
+
+The virtual machine migration is complete and its status is displayed in CloudForms.
+
+[NOTE]
+====
+Depending on the source virtual machine’s power state before migration, the virtual machine is either left powered off or is powered on after migration to Red Hat Virtualization.
+====

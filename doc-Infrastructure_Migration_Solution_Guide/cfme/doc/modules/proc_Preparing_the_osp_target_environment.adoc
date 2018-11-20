@@ -1,0 +1,36 @@
+[id="Preparing_the_osp_target_environment"]
+= Preparing Red Hat OpenStack Platform Environment
+
+Prepare the OpenStack Platform environment for migration:
+
+. Ensure that the datastore has sufficient space for the virtual machines you are migrating.
+
+. Set the BIOS settings of the physical hosts for optimal performance, rather than power-saving, according to the vendor's recommendations and disable the C1E halt state, if applicable.
+
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/[Red Hat OpenStack Platform] 10 or later.
+
+// To do - sec group for conversionapp or CF?
+. Create a security group for the OpenStack Platform conversion appliance and enable the following https://access.redhat.com/articles/417343[ports]:
+* 22 - SSH
+* 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
+* 902 - CloudForms to VMware
+* 5480 - `virt-v2v` to vCenter
+
+. Create link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-create-volume[block storage volumes].
++
+[NOTE]
+====
+IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
+====
+
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/installing_red_hat_cloudforms_on_red_hat_virtualization/[Red Hat CloudForms] 4.6.4 or later on a Red Hat Virtualization virtual machine or .
+// To do
+
+. Add the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#vmware_vcenter_providers[VMware] and  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[OpenStack Platform] environments to CloudForms.
+
+. Check that no source virtual machine has the same name as a virtual machine in the target environment. A name conflict will cause the migration to fail.
+
+. Unmount ISO images from source virtual machines. A virtual machine with an attached ISO image will cause the migration to fail.
+
+. Create and configure the OpenStack Platform conversion appliances.
+// To do - add xref

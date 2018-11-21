@@ -1,0 +1,22 @@
+[id="Creating_and_configuring_osp_conversion_appliances"]
+= Creating and configuring OpenStack Platform conversion appliances
+
+appliance shipped with OSP 14
+
+Has to be manually configured for VDDK. Not sure about SSH
+Download VDDK
+
+Add conversion appliance size requirements to section on creating the conversion appliance:
+
+ So I think we should multiply the numbers in the resource requirements
+> page by the number of parallel conversions.  But there's no need to
+> exceed these limits: vCPUs <= 4, RAM <= 8 GB.  And make sure /tmp and
+> /var/tmp exist and have at least 1 GB per conversion.
+
+Plus several GB for the logs. Logs for single VM conversion can easily
+have 10 MB and we store the logs for 30 days. Depending on number of
+VMs this can easily go pretty high. But let's not exaggerate and I'd say
+about 5 GB should be enough.
+
+Enabled as conversion appliance in UI.  Compute > Providers > Instances
+Enable/disable, VDDK or SSH. If VDDK, paste in URL for VDDK kit.

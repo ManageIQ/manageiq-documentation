@@ -45,13 +45,17 @@ Migration plan does not discover virtual machines::
 If you are migrating previously migrated virtual machines, the migration plan cannot discover them because they are marked in the CloudForms VMDB as `migrated`. You must xref:Remigrating_Virtual_Machines[remigrate the virtual machines].
 
 Incorrect attributes in the virtual machine CSV import file::
-After you correct the xref:CSV_file[CSV file], create a new migration plan, import the updated CSV file, and run the migration plan.
+Correct the xref:CSV_file[CSV file], create a new migration plan, import the updated CSV file, and run the migration plan.
 
 Migration fails immediately::
-If a migration fails immediately, before the progress bar is displayed, this is often caused by a configuration error in the environment. Check the *automation.log* file on the CloudForms appliance to determine the cause. When the cause has been resolved, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
+If a migration fails immediately, before the progress bar is displayed, this indicates a configuration error in the environment. Check that conversion hosts or appliances have been created and that the RHV conversion host credentials have been added to CloudForms. When the cause has been resolved, xref:Retrying_a_Migration_Plan[retry the migration plan].
 
 Migration fails during virtual machine conversion::
-If a migration fails while the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page, and download the conversion log for the virtual machine(s) that failed to migrate. When the cause of the failed migration has been resolved, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
+If a migration fails while the virtual machines are being converted (the progress bar updates), click the migration plan to go to the details page, and download the conversion log for the virtual machine(s) that failed to migrate. Check that the source virtual machines do not have mounted disks and that source virtual machine names do not conflict with existing virtual machine names in the target environment. When the cause of the failed migration has been resolved, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
++
+Red Hat Virtualization only: Check that the source virtual machine names do not contain spaces or special characters.
++
+OpenStack Platform only: Check that the source virtual machines are powered on and that VMware Tools has been installed.
 
 [[SSH_transformation_fails]]
 SSH transformation fails::

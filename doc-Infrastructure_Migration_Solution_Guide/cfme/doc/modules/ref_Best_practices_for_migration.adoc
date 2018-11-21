@@ -1,0 +1,36 @@
+[id="Best_practices_for_migration"]
+= Best Practices for Migration
+
+* Run the xref:Ims_rhel_pre-migration_ansible_playbook_example[IMS RHEL pre-migration Ansible playbook] to preserve static IP address configuration and to install the RHV guest agent. See xref:Automating_pre_and_post_migration_tasks_with_ansible[] for more information.
+
+* Create migration groups, so that you are not migrating all of your virtual machines at the same time. The following questions provide guidelines:
+
+** How are the virtual machines grouped now?
+** Which virtual machines should be migrated together?
+** What workloads should be migrated together?
+** What applications must remain available?
+
+* Consider which parts of the workload to migrate first:
+
+** Databases
+** Applications
+** Web servers
+** Load balancers
+
+* Keep linked applications together, so that they migrate at the same time.
+
+* Reboot or delete snapshots before the migration, to reduce the risk of failure.
+
+* Schedule your migration carefully, to minimize the impact on your users.
+
+* Stagger the migration schedules.
+
+* Move critical applications during maintenance windows.
+
+* Plan for redundancy.
+
+* Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.
+
+* Minimize the impact on your environment by creating multiple migration plans to control and throttle the migration process.
+
+* Prepare your users for downtime.

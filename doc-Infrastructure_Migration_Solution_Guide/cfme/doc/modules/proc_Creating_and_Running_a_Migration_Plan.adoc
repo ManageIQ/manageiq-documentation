@@ -42,17 +42,15 @@ A virtual machine will be in the same power state (`on` or `off`) after migratio
 
 . Discover the virtual machines:
 
-* If you are using the migration plan to discover the virtual machines automatically:
 
-.. Select *Choose from a list of VMs discovered in the selected infrastructure mapping*.
-.. Click *Next*.
-+
+* If you are migrating a small number of virtual machines, select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*.
+
 .Discovered Virtual Machines
 image:Discover_VMs.png[]
 
 * If you are importing a CSV file:
 
-.. (Optional) To validate your infrastructure mapping, select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*. If your virtual machines appear in the list, the infrastructure mapping is correct. Click *Back*.
+.. (Optional) You can validate your infrastructure mapping. Select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*. If your virtual machines appear in the list, the infrastructure mapping is correct. Click *Back*.
 .. Select *Import a CSV file with a list of VMs to be migrated* and click *Next*.
 .. Click *Import*, browse to the CSV file, and click *Open*.
 
@@ -66,11 +64,24 @@ image:Advanced_Options.png[]
 
 . Click *Next* to go to *Schedule*.
 
-. If you do not wish to schedule the migration to run at a certain time in the future, select *Start Migration Immediately* and click *Create*.
-
-. Click *Close*. The migration plan may take some time to complete. The migration plan window displays *In Progress Plans*, the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time.
+. Select *Save migration plan to run later* or *Start Migration Immediately* and click *Create*.
 +
-To view the migration progress of individual virtual machines, click the migration plan name to display the migration plan details.
+* If you selected *Save migration plan to run later*, the migration plan is saved in *Migration Plans Not Started*.
++
+To schedule the migration plan, click the *Schedule* button, select a date and time, and click *Schedule*. The plan's status is *Migration Scheduled* with the date and time.
++
+[NOTE]
+====
+If you wish to run a scheduled plan immediately, click *Migrate*.
+
+To edit or delete a schedule or plan, click the *More Actions* icon.
+====
+
+* If you selected *Start Migration Immediately*, the migration plan runs immediately.
++
+The migration plan may take some time to complete. The migration plan displays progress bars showing the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time.
++
+To view the migration progress of individual virtual machines, click menu:Migration Plans in Progress[_Migration Plan_] to display the migration plan details.
 +
 [NOTE]
 ====
@@ -82,14 +93,15 @@ During migration, the counter displaying the migration plan progress (in menu:Co
 [[Remigrating_Virtual_Machines]]
 .Remigrating Virtual Machines
 
-To migrate previously migrated virtual machines:
+If your migration goals change, you can remigrate previously migrated virtual machines:
 
 . Delete the target virtual machines corresponding to the source virtual machines that you are remigrating.
 . Delete the disks that were created in the target datastore during the earlier migration to free up space.
 . Create a xref:CSV_file[CSV file] to import the source virtual machines.
-. Create and run a new migration plan.
 +
 [NOTE]
 ====
-The virtual machines cannot be discovered automatically by the migration plan because they are marked in the CloudForms VMDB as `migrated`.
+The source virtual machines cannot be discovered automatically by the migration plan because they are marked in the CloudForms VMDB as `migrated`.
 ====
+
+. Create and run a new migration plan.

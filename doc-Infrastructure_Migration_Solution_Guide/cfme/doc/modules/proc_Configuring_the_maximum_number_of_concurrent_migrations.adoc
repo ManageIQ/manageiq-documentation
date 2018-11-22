@@ -1,18 +1,24 @@
 [id="Configuring_the_maximum_number_of_concurrent_migrations"]
 = Changing the maximum number of concurrent migrations
 
-The default limit for concurrent migrations is `10` for a conversion host or appliance and `10` for a provider.
+The default limit for concurrent migrations is `10` for a conversion host and `10` for a provider.
 
-To change the default limit for the conversion host or appliance, click menu:Compute[Migration > Migration Settings] and select the new limit for concurrent migrations.
-
-// To do: What about provider?
-
-You can change this value by setting the `Max Transformation Runners` attribute for the conversion host or for the provider, or both. The limit that is set for the provider has priority over the limit set for the conversion host. For example, if you set the number of concurrent migrations to `20` at the provider level, while having `3` conversion hosts, the number of concurrent migrations is limited to `20` because the provider's setting overrides the conversion hosts' setting.
+To change the default limit for the conversion host, click menu:Compute[Migration > Migration Settings] and select the new limit for concurrent migrations.
 
 [IMPORTANT]
 ====
 The maximum number of concurrent virtual machine migrations per conversion host is `20` for both VDDK and SSH. The SSH limitation applies only to RHV 4.2.5, not to later versions of RHV.
 ====
+
+Questions - Does SSH with a later RHV version have another limit?
+
+Is the user no longer able to set maximum number of current migrations for a provider? Or do we provide the rails console command?
+
+// To do: What about provider?
+////
+You can change this value by setting the `Max Transformation Runners` attribute for the conversion host or for the provider, or both. The limit that is set for the provider has priority over the limit set for the conversion host. For example, if you set the number of concurrent migrations to `20` at the provider level, while having `3` conversion hosts, the number of concurrent migrations is limited to `20` because the provider's setting overrides the conversion hosts' setting.
+
+
 
 The following examples show how to set `Max Transformation Runners` using the Rails console on the CloudForms appliance.
 
@@ -57,3 +63,4 @@ To get the configuration of `Max Transformation Runners` for provider _My RHV_:
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_My RHV_").custom_get("Max Transformation Runners")
 ----
+////

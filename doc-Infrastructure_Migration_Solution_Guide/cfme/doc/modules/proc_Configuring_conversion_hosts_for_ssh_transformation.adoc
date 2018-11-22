@@ -1,7 +1,7 @@
-[id="Creating_and_configuring_rhv_conversion_hosts_for_ssh_transformation"]
-= Creating and configuring RHV conversion hosts for SSH transformation
+[id="Configuring_conversion_hosts_for_ssh_transformation"]
+= Configuring conversion hosts for SSH transformation
 
-. On the Manager machine, create `/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml`  with the following variables:
+. On the Manager machine, create `/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml` with the following variables:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -22,7 +22,7 @@ all:
 +
 [NOTE]
 ====
-The link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansible-v2v-conversion-host`] role checks for the presence of the RHV guest tools ISO image in the ISO storage domain. This image is used to migrate Windows virtual machines.
+Red Hat Virtualization only: The link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansible-v2v-conversion-host`] role checks for the presence of the RHV guest tools ISO image in the ISO storage domain. This image is used to migrate Windows virtual machines.
 ====
 
 . Verify that the conversion hosts are enabled:
@@ -34,7 +34,7 @@ The link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansib
 
 . Enable SSH on your VMware hypervisors. (For details, see link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
 
-. (Optional) If you created the RHV conversion hosts manually, without using the `ovirt-ansible-v2v-conversion-host` role, create the key pairs on each conversion host for the `vdsm` user:
+. (Optional) If you created the conversion hosts manually, without using the `ovirt-ansible-v2v-conversion-host` role, create the key pairs on each conversion host for the `vdsm` user:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -69,11 +69,11 @@ echo Agent pid 65905;
     SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh root@_esx1.example.com_
 ----
 +
-If the connection is successful, the RHV conversion host is correctly configured for SSH transformation.
+If the connection is successful, the conversion host is correctly configured for SSH transformation.
 
 [NOTE]
 ====
 If you are using SSSD with single sign-on, see xref:SSH_transformation_fails[Troubleshooting] for additional information.
 ====
 
-After creating the RHV conversion hosts, you can xref:Configuring_rhv_conversion_hosts_in_cloudforms[configure them] in CloudForms.
+After creating the conversion hosts, you can xref:Enabling_conversion_hosts_in_cloudforms[enable them] in CloudForms.

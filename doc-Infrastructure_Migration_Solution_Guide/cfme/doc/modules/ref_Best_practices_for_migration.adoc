@@ -1,8 +1,6 @@
 [id="Best_practices_for_migration"]
 = Best practices for migration
 
-* If you are migrating to Red Hat Virtualization, run the xref:Ims_rhel_pre-migration_ansible_playbook_example[IMS RHEL pre-migration Ansible playbook] to preserve static IP address configuration and to install the RHV guest agent. See xref:Automating_pre_and_post_migration_tasks_with_ansible[] for more information.
-
 * Create migration groups, so that you are not migrating all of your virtual machines at the same time. The following questions provide guidelines:
 
 ** How are the virtual machines grouped now?
@@ -34,3 +32,11 @@
 * Minimize the impact on your environment by creating multiple migration plans to control and throttle the migration process.
 
 * Prepare your users for downtime.
+
+* For Red Hat Virtualization:
+
+** Run the xref:Ims_rhel_pre-migration_ansible_playbook_example[IMS RHEL pre-migration Ansible playbook] to preserve static IP address configuration and to install the RHV guest agent. See xref:Automating_pre_and_post_migration_tasks_with_ansible[] for more information.
+
+** Configure the conversion hosts on physical machines, not nested virtual machines.
+
+* For OpenStack Platform, deploy the conversion hosts on a compute node with nested virtualization enabled for best performance.

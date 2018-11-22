@@ -1,10 +1,10 @@
 [id="Preparing_the_rhv_conversion_hosts"]
-= Preparing the RHV Conversion Hosts
+= Preparing the RHV conversion hosts
 
 Before you create the RHV conversion hosts, you must decide xref:Number_of_conversion_hosts[how many conversion hosts] you need and which datapath transformation option, xref:datapath_transformation_options_vddk_ssh[VDDK or SSH], to use.
 
 [[Number_of_conversion_hosts]]
-.Number of RHV Conversion Hosts
+.Number of RHV conversion hosts
 
 Because all the virtual machines are migrated at the same time, the number of RHV conversion hosts you require depends on the number of virtual machines you are migrating. Multiple conversion hosts are recommended, even for smaller migrations, for load-balancing purposes.
 
@@ -16,20 +16,19 @@ Each conversion host is limited to `10` concurrent migrations, unless you  xref:
 
 [IMPORTANT]
 ====
-The maximum number of concurrent virtual machine migrations per conversion host is `10`, for VDDK transformation, and `20`, for SSH transformation. The SSH transformation limitation, however, applies only to RHV 4.2.5, not to later versions of RHV.
+The maximum number of concurrent virtual machine migrations per conversion host is `20` for both VDDK and SSH. The SSH limitation, however, applies only to RHV 4.2.5, not to later versions of RHV.
 ====
 
 [[datapath_transformation_options_vddk_ssh]]
-.Datapath Transformation Options: VDDK or SSH
+.Transformation options: VDDK or SSH
 
-You must choose the datapath transformation option, VDDK or SSH, that is appropriate for your migration size and setup:
+You must choose the transformation option, VDDK or SSH, that is appropriate for your migration size and setup:
 
 VDDK::
 * Recommended because it is approximately twice as fast as SSH
 * Compiled with `nbdkit` to provide direct connectivity to the virtual machine disks
 * Requires VDDK package download
 * Conversion host configuration requires a location
-* Each conversion host supports only 10 concurrent migrations
 
 SSH::
 * Does not require additional downloads, packages, tools, or compilation
@@ -38,7 +37,7 @@ SSH::
 * Slower than VDDK
 * Better suited for large-scale migrations than VDDK
 
-include::proc_Creating_and_configuring_rhv_conversion_hosts_for_vddk_transformation.adoc[leveloffset=+1]
-include::proc_Creating_and_configuring_rhv_conversion_hosts_for_ssh_transformation.adoc[leveloffset=+1]
-include::proc_Configuring_rhv_conversion_hosts_in_cloudforms.adoc[leveloffset=+1]
-include::proc_Configuring_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+1]
+include::modules/proc_Creating_and_configuring_rhv_conversion_hosts_for_vddk_transformation.adoc[leveloffset=+1]
+include::modules/proc_Creating_and_configuring_rhv_conversion_hosts_for_ssh_transformation.adoc[leveloffset=+1]
+include::modules/proc_Configuring_rhv_conversion_hosts_in_cloudforms.adoc[leveloffset=+1]
+include::modules/proc_Configuring_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+1]

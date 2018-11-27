@@ -1,19 +1,26 @@
 [[renaming-ha]]
-== Renaming {product-title_short} Appliances
+== Renaming Database-Only Appliances
 
-Renaming database-only appliances in a high availability setup must be performed in a specific order.
-//WHY?
+Renaming database-only appliances in a high availability setup must be performed in a specific order to maintain database replication.
 
-. Confirm which appliance is the active database and which is the standby database appliance:
+//Are all steps in the appliance console menu?
+
+. Confirm and note the hostnames of the active database (primary) appliance and the standby database appliance in the appliance console. 
++
+You can verify this from the appliance summary screen of a database-only appliance, where the status for *Local Database Server* shows _primary_ or _standby_, for example:
+//Is there an easier way than logging into the appliance console of one appliance and verifying if "Local Database Server" says "running (primary)" or "running (standby)"?
 +
 ----
-# COMMAND
+...
+Local Database Server:   running (primary)
+...
 ----
 +
 . Stop the failover monitor on the non-database {product-title_short} appliances:
 .. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
 .. Select *Stop Database Failover Monitor*.
 . Reset the standby by deleting the database:
+//Configure Database Replication > Configure Server as Standby? Then ??
 +
 ----
 # COMMAND
@@ -25,11 +32,10 @@ Renaming database-only appliances in a high availability setup must be performed
 # systemctl stop evmserverd
 ----
 +
-. Rename the database-only appliance and restart the appliance:
-+
-----
-# COMMAND
-----
+. Rename the database-only appliance and restart that appliance:
+.. In the appliance console, configure the new hostname or IP address from the *Configure Network* option.
+.. Restart the renamed appliance.
+//Rename, then restart the standby if desired now?
 +
 . On all appliances, change the database to the right hostname in vmdb/config/database.yml:
 +
@@ -38,7 +44,7 @@ Renaming database-only appliances in a high availability setup must be performed
 ----
 +
 . Restart the appliances:
-//Does order matter?
+//Does order of restarting matter? Which appliances?
 +
 ----
 # COMMAND
@@ -46,13 +52,14 @@ Renaming database-only appliances in a high availability setup must be performed
 +
 [IMPORTANT]
 ====
-If you use non-dedicated database appliances, also stop `evmserverd` there before renaming it and reconfigure the `database.yml` before restarting.
+If you are using non-dedicated database appliances, also stop `evmserverd` on those appliances before renaming it and reconfigure the `database.yml` before restarting.
 ====
 
-At this point, you should have all appliances able to connect to the database. 
+At this point, all appliances should be able to connect to the database. 
 
-After that you will have to set up again HA from https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/high_availability_guide/installation#configuring_primary_db (part 2.3).
-xref: [configuring_primary_db]
+//Add a step for the user to test this.
 
+After that you will have to reconfigure high availability from xref:configuring_primary_db[] 
+//(part 2.3 in Installation - All steps from 2.3 to 2.6?).
 
 

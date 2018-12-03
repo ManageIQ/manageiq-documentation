@@ -1,7 +1,10 @@
 [[renaming-ha]]
 == Renaming Database-Only Appliances
 
-Renaming database-only appliances in a high availability setup must be performed in a specific order to maintain database replication.
+Renaming database-only appliances in a high availability setup must be performed in a specific order to maintain database replication. After changing the hostnames of the database-only appliances, you will need to re-configure high availability on the primary and standby database-only appliances.
+
+
+=== Updating Hostnames on Database-Only Appliances
 
 . Confirm and note the hostnames of the active database (primary) appliance and the standby database appliance in the appliance console. 
 +
@@ -47,7 +50,81 @@ If you are using non-dedicated database appliances, also stop `evmserverd` on th
 
 After `evmserverd` has started successfully, all appliances will be able connect to the database. 
 
-After that you will have to reconfigure high availability from xref:configuring_primary_db[] 
+After that you will have to re-configure high availability on the primary and standby database-only appliances.
+
+//After that you will have to reconfigure high availability from xref:configuring_primary_db[] 
 //(part 2.3 in Installation - All steps from 2.3 to 2.6?).
+
+=== Re-configuring High Availability on Database-Only Appliances
+
+==== Configuring the Primary Database-Only Appliance
+
+On the primary database-only appliance, initialize the nodes in the database cluster to configure the database replication:
+
+. In the appliance console menu, select *Configure Database Replication*. 
+. Select *Configure Server as Primary*.
+. Set a unique identifier number for the server and enter the database name and credentials:
+.. Select a number to uniquely identify the node in the replication cluster.
+.. Enter the cluster database name.
+.. Enter the cluster database username.
+.. Enter the cluster database password and confirm the password.
+.. Enter the primary database-only appliance hostname or IP address.
++
+[NOTE]
+====
+The hostname must be visible to all appliances that communicate with this database, including the {product-title_short} appliances and any global region databases.
+====
++
+.. Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
+
+
+==== Installing the Standby Database-Only Appliance
+
+The standby database-only appliance is a copy of the primary database-only appliance and takes over the role of primary database in case of failure.
+
+. Deploy a {product-title_short} appliance with an extra partition for the database that is the same size as the primary database-only appliance, as it will contain the same data. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
+. Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.
+. SSH into the {product-title_short} appliance to enter the appliance console. 
+. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Re-synchronize time information across the appliances:
++
+------
+# systemctl enable chronyd.service
+# systemctl start chronyd.service
+------
++
+. In the appliance console, configure the hostname by selecting *Set Hostname*.
+
+
+==== Configuring the Standby Database-Only Appliance
+
+The steps to configure the standby database-only appliance are similar to that of the primary database-only appliance, in that they prepare the appliance to be database-only, but as the standby.
+
+On the standby database-only appliance, configure the following:
+
+. In the appliance console menu, select *Configure Database Replication*. 
+. Select *Configure Server as Standby*.
+. Select the database disk. {product-title_short} then activates the configuration.
+. Set a unique identifier number for the standby server and enter the database name and credentials:
+.. Select a number to uniquely identify the node in the replication cluster.
+.. Enter the cluster database name.
+.. Enter the cluster database username.
+.. Enter the cluster database password.
+.. Enter the primary database-only appliance hostname or IP address.
+.. Enter the standby database-only appliance hostname or IP address.
++
+[NOTE]
+====
+The hostname must be visible to all appliances that communicate with this database, including the engine appliances and any global region databases.
+====
++
+.. Select `y` to configure the replication manager for automatic failover.
+.. Confirm that the replication standby server configuration details are correct, and select `y` to apply the configuration. The standby server will then run an initial synchronization with the primary database, and start locally in standby mode.
+. Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`. 
+. Restart the failover monitor on the non-database {product-title_short} appliances (appliances running _evmserverd_): 
+.. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
+.. Select *Start Database Failover Monitor*.
+
+Your {product-title_short} environment is now re-configured for high availability.
 
 

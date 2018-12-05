@@ -13,11 +13,14 @@ Prepare the OpenStack Platform environment for migration:
 
 . Create a link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/networking_guide/#create_a_network[provider network] for the target instances, to ensure that the IP addresses of the source virtual machines are preserved.
 
-. Create a custom security group for the conversion appliances and the CloudForms instance, enabling the following https://access.redhat.com/articles/417343[ports]:
-* 22 - SSH
-* 443 - CloudForms, OpenStack Platform, and VDDK
-* 902 - CloudForms to VMware
-* 5480 - `virt-v2v` to vCenter
+. Configure the security groups:
+* A security group for the conversion hosts and CloudForms must have port 22 (SSH) enabled.
+* A security group for CloudForms must have port 443 (HTTPS) enabled.
++
+[NOTE]
+====
+Outbound traffic is enabled by default. If you have changed this setting, you must enable ports 902 (CloudForms to VMware) and 5480 (`virt-v2v` to vCenter).
+====
 
 . Create flavors suitable for the virtual machines that you are migrating. If you do not create custom flavors, CloudForms will try to map the source virtual machine to an existing flavor.
 

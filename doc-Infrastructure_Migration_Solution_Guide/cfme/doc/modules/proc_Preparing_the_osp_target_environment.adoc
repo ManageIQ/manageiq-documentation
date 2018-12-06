@@ -1,7 +1,7 @@
 [id="Preparing_the_osp_target_environment"]
-= Preparing Red Hat OpenStack platform environment
+= Preparing the Red Hat OpenStack Platform environment
 
-Prepare the OpenStack Platform environment for migration:
+To prepare the OpenStack Platform environment for migration:
 
 . Ensure that the storage backends have sufficient space for the virtual machines you are migrating.
 
@@ -9,17 +9,17 @@ Prepare the OpenStack Platform environment for migration:
 
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/[Red Hat OpenStack Platform] 10 or later.
 
-. Create a link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/networking_guide/#create_a_network[provider network] for the target instances, to ensure that the IP addresses of the source virtual machines are preserved.
+. Create a link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/networking_guide/#create_a_network[provider network] for the target instances to ensure that the IP addresses of the source virtual machines are preserved.
 
-//. Create projects for the conversion host and a migration destination.
-// To do: Needs clarification from Nenad
-. Configure the security groups:
+. Create a project for the conversion hosts and as many projects as you need for migration destinations.
+
+. Configure security groups:
 * A security group for the conversion hosts and CloudForms must have port 22 (SSH) enabled.
 * A security group for CloudForms must have port 443 (HTTPS) enabled.
 +
 [NOTE]
 ====
-Outbound traffic is enabled by default. If you have changed this setting, you must enable ports 902 (CloudForms to VMware) and 5480 (`virt-v2v` to vCenter).
+Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (`virt-v2v` to vCenter).
 ====
 
 . Create flavors suitable for the virtual machines that you are migrating. If you do not create custom flavors, CloudForms will try to map the source virtual machine to an existing flavor.
@@ -27,7 +27,5 @@ Outbound traffic is enabled by default. If you have changed this setting, you mu
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Red Hat CloudForms] 4.7.0 or later.
 
 . Add the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#vmware_vcenter_providers[VMware] and  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[OpenStack Platform] environments to CloudForms.
-
-. Unmount ISO images from source virtual machines. A virtual machine with an attached ISO image will cause the migration to fail.
 
 . Create and configure the xref:Preparing_the_conversion_hosts[conversion hosts].

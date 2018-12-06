@@ -7,7 +7,7 @@ This procedure outlines how to configure {product-title_short} to authenticate a
 [[connecting_to_AD_domain]]
 == Connecting {product-title_short} to an Active Directory Domain
 
-To use a Active Directory domain to authenticate users to {product-title_short}, configure the following on {product-title_short}:
+To use an Active Directory domain to authenticate users to {product-title_short}, configure the following on {product-title_short}:
 
 . Connect to the {product-title_short} appliance using SSH.
 . Run `realm discover` to determine what Active Directory realms are available:
@@ -43,7 +43,6 @@ Password for user: ******
 ----
 +
 . Edit the `/etc/sssd/sssd.conf` file with your Active Directory domain details. Refer to the following example for formatting:
-//certain lines have arrows upstream. highlight these for replacing values?
 +
 ----
 [domain/example.com]
@@ -85,7 +84,6 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # systemctl enable sssd
 ----
 +
-//Do we need the upstream step for chgrp apache? Added just in case
 . Make sure the Kerberos keytab created by `realm join` above is readable by Apache:
 +
 ----
@@ -102,8 +100,7 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth.conf.erb /etc/httpd/conf.d/manageiq-external-auth.conf
 ----
 +
-. Edit the `/etc/httpd/conf.d/manageiq-external-auth.conf` file to point to your Kerberos domain hosted by your Active Directory domain by adding the lines for `KrbAuthRealms`, `Krb5KeyTab` and `KrbServiceName` for your environment:
-// do we edit only the lines that say "add line?"
+. Edit the `/etc/httpd/conf.d/manageiq-external-auth.conf` file to point to the Kerberos domain hosted by your Active Directory domain by adding the lines for `KrbAuthRealms`, `Krb5KeyTab` and `KrbServiceName` for your environment:
 +
 ----
 <Location /dashboard/kerberos_authenticate>
@@ -120,7 +117,7 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 </Location>
 ----
 +
-. Set the appropriate SELinux booleans:
+. Set the following SELinux booleans:
 +
 ----
 # setsebool -P allow_httpd_mod_auth_pam on
@@ -184,4 +181,4 @@ Any user who is part of `cloudforms` AD group can now log in to {product-title_s
 
 To confirm this is configured correctly, log in to the {product-title_short} user interface with a user in the `cloudforms` AD group.
 
-To grant an additional user access to the {product-title_short} server, create the user in Active Directory, then add that user to the `cloudforms` AD group When that user attempts to log in to {product-title_short}, they will automatically inherit the correct permissions for the group. 
+To grant an additional user access to the {product-title_short} server, create the user in Active Directory, then add that user to the `cloudforms` AD group. When that user attempts to log in to {product-title_short}, they will automatically inherit the correct permissions for the group. 

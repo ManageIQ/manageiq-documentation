@@ -1,7 +1,9 @@
 [id="Configuring_the_maximum_number_of_concurrent_migrations"]
 = Changing the maximum number of concurrent migrations
 
-The default limit for concurrent migrations is `10` for a conversion host and `10`.
+The default limit for concurrent migrations is `10` for a conversion host and `10` for a provider.
+
+.Changing the conversion host limit
 
 To change the default limit for the conversion host, click menu:Compute[Migration > Migration Settings] and select the new limit for concurrent migrations.
 
@@ -12,53 +14,28 @@ This setting can be adjusted to throttle the migration process. If the maximum n
 The maximum number of concurrent virtual machine migrations per conversion host is `20` for both VDDK and SSH. The SSH limitation applies only to RHV 4.2.5, not to later versions of RHV.
 ====
 
-// To do: What about provider?
-////
-You can change this value by setting the `Max Transformation Runners` attribute for the conversion host or for the provider, or both. The limit that is set for the provider has priority over the limit set for the conversion host. For example, if you set the number of concurrent migrations to `20` at the provider level, while having `3` conversion hosts, the number of concurrent migrations is limited to `20` because the provider's setting overrides the conversion hosts' setting.
+.Changing the provider limit
 
+The limit that is set for the provider has priority over the limit set for the conversion host. For example, if you set the number of concurrent migrations to `20` at the provider level, while having `3` conversion hosts, the number of concurrent migrations is limited to `20` because the provider's setting overrides the conversion hosts' setting.
 
+You can set and get `Max Transformation Runners` using the Rails console on the command line of the CloudForms machine:
 
-The following examples show how to set `Max Transformation Runners` using the Rails console on the CloudForms appliance.
-
-To set `Max Transformation Runners` for the conversion host _host1.example.com_ to `20`:
-
+* To set `Max Transformation Runners` for the provider to `30`:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb
 # rails console
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_provider_").custom_set("Max Transformation Runners", _30_)
 ----
 
-To set `Max Transformation Runners` for the provider _My RHV_ to `30`:
-
+* To get the configuration of `Max Transformation Runners` for the provider:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb
 # rails console
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_My RHV_").custom_set("Max Transformation Runners", _30_)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_provider_").custom_get("Max Transformation Runners")
 ----
-
-The following examples show how to get the current configuration of `Max Transformation Runners` using the `custom_get` method. This method returns either the current configuration value or `nil`, if the value has not been set.
-
-To get the configuration of `Max Transformation Runners` for conversion host _host1.example.com_:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# vmdb
-# rails console
-irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_get("Max Transformation Runners")
-----
-
-To get the configuration of `Max Transformation Runners` for provider _My RHV_:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# vmdb
-# rails console
-irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_My RHV_").custom_get("Max Transformation Runners")
-----
-////

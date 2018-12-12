@@ -48,20 +48,20 @@ image:Mapping_missing_network.png[]
 === Migration plan errors
 
 Virtual machines cannot be discovered::
-If a migration plan cannot discover the source virtual machines, remigrate the virtual machines. See xref:Remigrating_Virtual_Machines[]. If the source virtual machines were already migrated, the migration plan cannot discover them because they are marked in the CloudForms VMDB as `migrated`.
+If a migration plan cannot discover the source virtual machines, xref:Remigrating_Virtual_Machines[remigrate] the virtual machines. If the source virtual machines were migrated in the past, they cannot be discovered with the migration plan because they are marked as `migrated` in the CloudForms VMDB.
 
 Virtual machines cannot be imported::
-If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan with the updated CSV file.
+If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
 
 === Migration errors
 
-`Denied State`::
-If a migration fails immediately and a *Denied State* error message appears in *Migration Plans Complete*, xref:Creating_conversion_hosts[configure the conversion hosts], cancel the migration plan, and xref:Retrying_a_Migration_Plan[retry] the plan. (Red Hat Virtualization only:  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the conversion hosts] after configuring them).
+`Denied State` migration error::
+If a migration plan fails immediately and the migration plan has a *Denied State* error message in *Migration Plans Complete*, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: after creating the conversion hosts, you must   link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate them] in CloudForms). Cancel the migration plan and xref:Retrying_a_Migration_Plan[retry it].
 
-Virtual machine fails to migrate::
-Check the xref:Logs[conversion log] of each virtual machine that failed to migrate to determine the cause and retry the migration plan (see xref:Retrying_a_Migration_Plan[]).
+Virtual machine failed to migrate::
+Check the xref:Logs[conversion log] of each virtual machine that failed to migrate.
 
-Check the following possible causes of failed virtual machine migration:
+The following scenarios can cause a failed migration:
 
 .All platforms
 
@@ -73,7 +73,7 @@ Check the following possible causes of failed virtual machine migration:
 * Virtual machine name is the same as an existing target virtual machine name (name conflict)
 
 [[SSH_transformation_fails]]
-* SSH transformation only: If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
+* SSH transformation: If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -90,7 +90,7 @@ You cannot resolve this issue by changing the configuration file because the fil
 
 * Virtual machine was powered off at the time of migration.
 * Virtual machine does not have VMware Tools installed. VMware Tools preserves the IP address for migration.
-* Virtual machine has an interface configuration file that is not mapped to an interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not). Delete the unnecessary interface configuration file.
+* Virtual machine has an interface configuration file that is not mapped to an interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
 +
 [options="" subs="+quotes,verbatim"]
 ----

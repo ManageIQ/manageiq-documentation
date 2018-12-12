@@ -1,68 +1,79 @@
 [id='Troubleshooting']
 = Troubleshooting
 
-If errors occur for reasons unrelated to the infrastructure mapping or migration plan, you can xref:Retrying_a_Migration_Plan[retry the migration plan].
+If errors occur for reasons unrelated to the infrastructure mapping or migration plan (for example, network outage), you can retry the migration plan. See xref:Retrying_a_Migration_Plan[].
 
-If the cause of the failed migration is not clear, see xref:Logs[] and xref:Common_issues_and_mistakes[].
+If the cause of the failed migration is not clear, check the xref:Logs[] and xref:Common_issues_and_mistakes[].
 
 [[Retrying_a_Migration_Plan]]
-== Retrying a migration plan
+== Retrying a failed migration plan
 
-If one or more virtual machines in a migration plan fails to migrate, the migration plan's status is `Failed`. After resolving the issue that caused the migration failure, you can retry the migration plan:
+If a virtual machine in a migration plan fails to migrate, the migration plan's status is `Failed`.
 
-. Click the migration plan to go to the details page to identify the virtual machines that failed to migrate.
-. If the migration failed while virtual machines were being converted:
-.. Delete newly created target virtual machines to avoid name conflicts with source virtual machines.
-.. Delete newly created disks in the target datastore to free up space.
-. Click menu:Compute[Migration], select `Failed Migrations`, select the failed migration plan, and click `Retry`.
+To retry a migration plan:
+
+. Delete newly created target virtual machines or instances to avoid name conflicts with source virtual machines.
+. Delete newly created disks in the target datastore to free up space.
+. Click menu:Compute[Migration > Migration Plans] and click `Failed Migrations`.
+. Click the failed migration plan and click `Retry`.
 
 [[Logs]]
 == Logs
 
-If a migration plan fails and you are not sure of the cause, check the following logs:
+To investigate the cause of a failed migration, check the following logs:
 
 * CloudForms migration logs: `/var/www/miq/vmdb/log/`
 * RHV conversion host logs: `/var/log/vdsm/import/`
 * OpenStack conversion appliance logs: `/var/log/virt-v2v/`
 * Virtual machine migration log: Click menu:Compute[Migrate], click the migration plan name, and click `Download Log`.
 +
-.Migrated virtual machine logs
+.Migrated virtual machine log
 image:Migrated_VM_details.png[]
 
 [[Common_issues_and_mistakes]]
 == Common issues and mistakes
 
+=== Infrastructure mapping errors
+
 [[Infrastructure_mapping_missing_resources]]
-Infrastructure mapping is missing datastores or clusters::
-If you create an infrastructure mapping and subsequently add or remove providers or provider objects, the infrastructure mapping displays *Datastores missing* or *Clusters missing* error messages because the object IDs of the providers and their objects have changed. You must delete the infrastructure mapping and re-create it.
+Missing datastores or clusters::
+If the infrastructure mapping displays a *Datastores missing* or *Clusters missing* error message, delete the mapping and create a new one. If you create a mapping and subsequently add or remove providers or provider objects, their object IDs will change.
 
 [[Infrastructure_mapping_missing_networks]]
-Infrastructure mapping is missing networks::
-If the infrastructure mapping displays a *Networks missing* error message, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts] and create a new infrastructure mapping.
-+
+Missing networks::
+Red Hat Virtualization: If the infrastructure mapping displays a *Networks missing* error message, delete the mapping,  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts], and create a new mapping.
+
 image:Mapping_missing_network.png[]
 
-Migration plan does not discover virtual machines::
-If you are migrating previously migrated virtual machines, the migration plan cannot discover them because they are marked in the CloudForms VMDB as `migrated`. You must xref:Remigrating_Virtual_Machines[remigrate the virtual machines].
+=== Migration plan errors
 
-Incorrect attributes in the virtual machine CSV import file::
-Correct the xref:CSV_file[CSV file], create a new migration plan, import the updated CSV file, and run the migration plan.
+Virtual machines cannot be discovered::
+If a migration plan cannot discover the source virtual machines, remigrate the virtual machines. See xref:Remigrating_Virtual_Machines[]. If the source virtual machines were already migrated, the migration plan cannot discover them because they are marked in the CloudForms VMDB as `migrated`.
 
-Migration fails immediately (`Denied State`)::
-If a migration fails immediately and a *Denied State* error message appears in *Migration Plans Complete*, this indicates that a conversion host was not configured. Check that xref:Creating_conversion_hosts[conversion hosts are configured] and that the RHV conversion host link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[credentials] have been added to CloudForms. When the cause has been resolved, cancel the migration plan and xref:Retrying_a_Migration_Plan[retry] it.
+Virtual machines cannot be imported::
+If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan with the updated CSV file.
 
-Migration fails during virtual machine conversion::
-Check the xref:Logs[conversion logs] for the virtual machines that failed to migrate. When the cause of the failed migration has been resolved, you can xref:Retrying_a_Migration_Plan[retry the migration plan]. Check that the source virtual machines do not have mounted disks.
-+
-Red Hat Virtualization: Check that the source virtual machine names do not contain spaces or special characters or duplicate existing virtual machine names in the target environment.
-+
-OpenStack Platform: Check that the source virtual machines are powered on and that VMware Tools has been installed.
+=== Migration errors
+
+`Denied State`::
+If a migration fails immediately and a *Denied State* error message appears in *Migration Plans Complete*, xref:Creating_conversion_hosts[configure the conversion hosts], cancel the migration plan, and xref:Retrying_a_Migration_Plan[retry] the plan. (Red Hat Virtualization only:  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the conversion hosts] after configuring them).
+
+Virtual machine fails to migrate::
+Check the xref:Logs[conversion log] of each virtual machine that failed to migrate to determine the cause and retry the migration plan (see xref:Retrying_a_Migration_Plan[]).
+
+Check the following possible causes of failed virtual machine migration:
+
+.All platforms
+
+* Mounted disks. A virtual machines with mounted disk(s) cannot be migrated.
+
+.Red Hat Virtualization only
+
+* Virtual machine name contains spaces or special characters, which are not supported in the target environment
+* Virtual machine name is the same as an existing target virtual machine name (name conflict)
 
 [[SSH_transformation_fails]]
-SSH transformation fails::
-If you are using SSSD with single sign-on for RHV, SSH fails for the `vdsm` account.
-+
-Reinstall `ipa-client` without configuring the OpenSSH client:
+* SSH transformation only: If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -70,4 +81,27 @@ Reinstall `ipa-client` without configuring the OpenSSH client:
 # ipa-client-install --no-ssh
 ----
 +
-Changing the configuration file is not recommended because it is restored during upgrades. See link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[BZ#1544379] for details.
+[NOTE]
+====
+You cannot resolve this issue by changing the configuration file because the file is restored during upgrades.
+====
+
+.OpenStack Platform only
+
+* Virtual machine was powered off at the time of migration.
+* Virtual machine does not have VMware Tools installed. VMware Tools preserves the IP address for migration.
+* Virtual machine has an interface configuration file that is not mapped to an interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not). Delete the unnecessary interface configuration file.
++
+[options="" subs="+quotes,verbatim"]
+----
+CalledProcessError: Command \'['openstack', u'--os-username=admin', u'--os-identity-api-version=3', u'--os-user-domain-name=default', u'--os-auth-url=http://_osp.example.com_:5000/v3', u'--os-project-name=admin', u'--os-password=\*\*******', u'--os-project-id=0123456789abcdef0123456789abcdef', \'port', \'create', \'--format', \'json', \'--network', u'01234567-89ab-cdef-0123-456789abcdef', \'--mac-address', u'00:50:56:01:23:45', \'--enable', u'port_0', \'--fixed-ip', \'*ip-address=None*']' returned non-zero exit status 1
+_date_ _time_:ERROR: Command output:
+BadRequestException: Unknown error
+----
+
+* OpenStack Platform provider user configured in CloudForms does not have `admin` role privileges within the target project.
++
+[options="" subs="+quotes,verbatim"]
+----
+RESP BODY: {"NeutronError": {"message": "((rule:create_port and rule:create_port:fixed_ips) and rule:create_port:mac_address) is disallowed by policy", "type": "*PolicyNotAuthorized*", "detail": ""}}
+----

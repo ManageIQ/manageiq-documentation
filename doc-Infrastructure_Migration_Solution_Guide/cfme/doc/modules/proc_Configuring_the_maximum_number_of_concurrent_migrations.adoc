@@ -1,29 +1,35 @@
 [id="Configuring_the_maximum_number_of_concurrent_migrations"]
 = Changing the maximum number of concurrent migrations
 
-The default limit for concurrent migrations is `10` for conversion hosts and `10` for a provider. You can change these defaults in order to control the impact of the migration process on your infrastructure.
+The default maximum number of concurrent migrations is `10` for conversion hosts and `10` for a provider. You can change these limits to control the impact of the migration process on your infrastructure.
 
-The provider's limit has priority over the conversion hosts' limit. For example, if you set the provider's limit to `20` and the conversion hosts' limit to `3`, the maximum number of concurrent migrations allowed will be `20`.
+The provider's limit has priority over the conversion hosts' limits. For example, if a provider's limit is set to `20` and 5 conversion hosts' limits are set to `3`, the maximum number of concurrent migrations is `20`, not `15`.
 
-.Changing the conversion hosts' limits
+.Changing the maximum number of concurrent migrations for conversion hosts
 
-[IMPORTANT]
-====
-The maximum number of concurrent virtual machine migrations per conversion host is `20` for both VDDK and SSH transformation. The SSH limitation, however, applies only to RHV 4.2.5, not to later versions of RHV.
-====
+The maximum supported number of concurrent migrations for conversion hosts is `20` for VDDK and `20` for SSH transformation (RHV migrations only: this limitation only applies to RHV 4.2.5 and earlier).
 
-To change the default limit for the conversion hosts, click menu:Compute[Migration > Migration Settings] and select the new limit for concurrent migrations.
+An increased limit takes effect immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 
-If the maximum number of concurrent migrations is increased, the virtual machines that are queued to migrate will migrate in greater numbers.
+A decreased limit affects future migration plans. Migration plans that are in progress use the limit that was set when the plan was created.
 
-If the maximum number is decreased, migration plans in progress will complete at the current rate and future migration plans will reflect the lower number of concurrent migrations.
+You can change the limits of some or all conversion hosts:
 
-.Changing the provider's limit
+* To change the limits of all conversion hosts, click menu:Compute[Migration > Migration Settings] and select the new maximum number of concurrent migrations.
 
-You can set and get `Max Transformation Runners` using the Rails console on the command line of the CloudForms machine:
-
-* To set `Max Transformation Runners` for the provider to `30`:
+* To change the limit of a specific conversion host to `20`, enter the following command on the CloudForms machine:
 +
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# vmdb
+# rails console
+irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_)
+----
+
+.Changing the maximum number of concurrent migrations for a provider
+
+To set a provider's limit to `30`, enter the following command on the CloudForms machine:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb
@@ -32,8 +38,7 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_provider_").custom_set("Max Transformation Runners", _30_)
 ----
 
-* To get the configuration of `Max Transformation Runners` for the provider:
-+
+To get a provider's limit, enter the following command on the CloudForms machine:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb

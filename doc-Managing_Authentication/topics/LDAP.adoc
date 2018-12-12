@@ -60,6 +60,12 @@ In both LDAP and LDAPS, you can use groups from your directory service to set th
 ====
 If you do not select *Get User Groups from LDAP*, the user must be defined in the VMDB using the console where the User ID is the same as the user's name in your directory service typed in lowercase.
 ====
++
+[NOTE]
+====
+If your LDAP directory uses the `groupMembership` attribute to contain a user's group membership, you can use a multi-value attribute to look up a user's groups in {product-title_short}. This is not the default {product-title_short} behaviour, and must be enabled manually in the advanced settings. After configuring your LDAP settings, update the default {product-title_short} LDAP configuration to support `groupMembership` in menu:Configuration[Settings > Advanced] by changing `group_attribute: memberof` to `:group_attribute: groupmembership`.
+====
++
 ** Select *Get Groups from Home Forest* to use the LDAP groups from the LDAP user's home forest. This will allow you to discover groups on your directory server and create {product-title_short} groups based on your directory server's group names. Any user logging in will be assigned to that group. This option is only displayed when *Get User Groups from LDAP* is selected.
 +
 [NOTE]
@@ -75,6 +81,9 @@ In most environments, it is recommended to select both the *Get User Groups from
 . Click *Save*.
 
 LDAP authentication is now configured in your CloudForms environment.
+
+To use a multi-value attribute to look up LDAP group membership, update the `group_attribute` field in the {product-title_short} advanced settings. In menu:Configuration[Settings > Advanced], change `group_attribute: memberof` to `:group_attribute: groupmembership`.
+
 
 To assign account roles using LDAP groups, see xref:assigning_account_roles_using_ldap_groups[].
 

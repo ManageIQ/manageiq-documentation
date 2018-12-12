@@ -1959,7 +1959,7 @@ The host is shown because it may have connected virtual machines in the future w
 * *Datastore Analysis*: Displays *Datastore Selection* where you can choose to analyze *All Datastores*, *All Datastores for Host*, *All Datastores for Provider*, *A single Datastore*, or *Global Filters*.
 * *VM Compliance Check*: Displays *VM Selection* where you can choose to analyze *All VMs*, *All VMs for Provider*, *All VMs for Cluster*, *All VMs for Host*, *A single VM*, or *Global Filters*.
 * *Host Compliance Check*: Displays *Host Selection* where you can choose to analyze *All Hosts*, *All Hosts for Provider*, *All Hosts for Cluster*, *A single Host*, or *Global Filters*.
-* *Database Backup*: Under *Type*, displays *Network File System* and *Samba*. See xref:database_backup[] for details on scheduling a database backup.
+* *Database Backup*: Under *Type*, displays *Network File System*, *Samba*, *Amazon AWS S3* and *OpenStack Swift*.. See xref:database_backup[] for details on scheduling a database backup.
 . By applying *Global Filters* within any of the above items, you can designate which virtual machines or hosts to analyze.
 . In *Run*, set the frequency of the analysis to run. There are further options based on which *Run* option you choose.
 * Click *Once* to have the analysis run only one time.
@@ -2896,16 +2896,26 @@ image:2110.png[]
 [[running-a-single-database-backup]]
 ===== Running a Single Database Backup
 
+{product-title} supports database backups to *Network File System (NFS)*, *Samba*, *Amazon Web Service(AWS) S3* and *OpenStack Swift* storage. 
+
+[NOTE]
+====
+Database backups to *AWS S3* require valid AWS credentials to perform this operation.
+====
+
 To run a single database backup:
 
 . From the settings menu, select *Configuration*.
 . Click the *Diagnostics* accordion and click the *Region* name.
 . Click the *Database* tab.
 . If you have created a backup schedule and want to use the same depot settings, select the schedule in the *Backup Schedules* box.
-. If you do not want to use the settings from a backup schedule, select a type of server for storing the backups from the Type drop-down list in the *Database Backup Settings* box. You can use *Network File System* (NFS) or *Samba*.
-* If you select *Samba*, enter the *URI*, *User ID*, and a valid *Password*. Click *Validate* to check the settings.
+. If you do not want to use the settings from a backup schedule, select a type of server for storing the backups from the Type drop-down list in the *Database Backup Settings* box. You can use *Network File System* (NFS), *Samba* or *AWS S3*.
+* If you select *Samba*, enter the *Depot Name*, *URI*, *Username*, and a valid *Password*. Click *Validate* to check the settings.
+* If you select *AWS S3*, enter the *Depot Name*, *URI*, and select the *AWS Region* from the drop-down list. Enter the *Username*, and a valid *Password*. Click *Validate* to check the settings.
+* If you select *OpenStack Swift*, enter the *Depot Name*, *URI*, *Security Protocol* and *API Port*. Enter the *Username*, and a valid *Password*. Click *Validate* to check the settings.
 * If you select *Network File System*, enter the *URI*.
 . Click *Submit* to run the database backup.
+
 
 [[restoring-a-database-from-a-backup]]
 ===== Restoring a Database from a Backup
@@ -3040,6 +3050,8 @@ Restore your PostgreSQL binary backup using the following steps. This process wi
 # systemctl start $APPLIANCE_PG_SERVICE
 # systemctl start evmserverd
 -----
+
+
 
 [[running-database-garbage-collection]]
 ==== Running Database Garbage Collection
@@ -3199,4 +3211,5 @@ To reset your database maintenance settings, enter *Configure Database Maintenan
 
 To configure a new database maintenance schedule, enter the *Configure Database Maintenance* menu item once again and configure the values using the dialog.
 
-
+==== Creating a Database Dump
+include::common/database-dumps.adoc[]

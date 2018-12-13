@@ -7,17 +7,17 @@ The provider's limit has priority over the conversion hosts' limits. For example
 
 .Changing the maximum number of concurrent migrations for conversion hosts
 
-The maximum supported number of concurrent migrations for conversion hosts is `20` for VDDK and `20` for SSH transformation (RHV migrations only: this limitation only applies to RHV 4.2.5 and earlier).
+The maximum supported number of concurrent migrations for conversion hosts is `20` for VDDK and `20` for SSH transformation (for Red Hat Virtualization, the SSH limitation only applies to RHV 4.2.5 and earlier).
 
-An increased limit takes effect immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
+A limit increase affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 
-A decreased limit affects future migration plans. Migration plans that are in progress use the limit that was set when the plan was created.
+A limit decrease affects future migration plans. Migration plans that are in progress will continue to use the limit that was set when the plan was created.
 
 You can change the limits of some or all conversion hosts:
 
-* To change the limits of all conversion hosts, click menu:Compute[Migration > Migration Settings] and select the new maximum number of concurrent migrations.
+* To change the limits of all conversion hosts, click menu:Compute[Migration > Migration Settings] and select the maximum number of concurrent migrations per conversion host.
 
-* To change the limit of a specific conversion host to `20`, enter the following command on the CloudForms machine:
+* To change the limit of a specific conversion host to `20`, enter this command on the CloudForms machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -29,7 +29,7 @@ irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom
 
 .Changing the maximum number of concurrent migrations for a provider
 
-To set a provider's limit to `30`, enter the following command on the CloudForms machine:
+To set a provider's limit to `30`, enter this command on the CloudForms machine:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb
@@ -38,7 +38,7 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_provider_").custom_set("Max Transformation Runners", _30_)
 ----
 
-To get a provider's limit, enter the following command on the CloudForms machine:
+To get a provider's limit, enter this command on the CloudForms machine:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb

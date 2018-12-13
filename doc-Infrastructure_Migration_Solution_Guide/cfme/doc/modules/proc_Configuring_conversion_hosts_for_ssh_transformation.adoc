@@ -1,9 +1,13 @@
 [id="Configuring_conversion_hosts_for_ssh_transformation"]
 = Configuring conversion hosts for SSH transformation
 
-.Red Hat Virtualization
+If you are migrating to Red Hat Virtualization, perform this procedure on the Manager machine.
 
-. On the Manager machine, create +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+ with the following variables:
+If you are migrating to OpenStack Platform, perform this procedure on each conversion host.
+
+.Procedure
+
+. Create an inventory file, +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+, with the following variables:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -15,7 +19,7 @@ all:
     ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
 ----
 
-. Enable the conversion hosts:
+. Run the `conversion host enable` playbook:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -24,7 +28,7 @@ all:
 +
 [NOTE]
 ====
-The link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansible-v2v-conversion-host`] role checks for the presence of the RHV guest tools ISO image in the ISO storage domain. This image is used to migrate Windows virtual machines.
+For Red Hat Virtualization, the link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansible-v2v-conversion-host`] role checks for the presence of the RHV guest tools ISO image in the ISO storage domain. This image is used to migrate Windows virtual machines.
 ====
 
 . Verify that the conversion hosts are enabled:
@@ -45,17 +49,12 @@ The link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansib
 # chown vdsm:kvm /var/lib/vdsm/.ssh/id_rsa
 ----
 
-. Copy the SSH keys to all VMware hypervisors:
+. Copy the SSH keys to all VMware hypervisors to ensure that each conversion host has the SSH key of the ESXihost in its `known_hosts` file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ssh root@_esx1.example.com_ sh -c \'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
 ----
-+
-[NOTE]
-====
-This step ensures that each conversion host has the SSH key of the ESXi host in its `known_hosts` file.
-====
 
 . Validate the configuration by connecting to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor:
 +
@@ -75,11 +74,7 @@ If the connection is successful, the conversion host is correctly configured for
 
 [NOTE]
 ====
-If you are using SSSD with single sign-on, see xref:SSH_transformation_fails[Troubleshooting] for additional information.
+Red Hat Virtualization only: If you are using SSSD with single sign-on, you must reinstall `ipa-client` without configuring the OpenSSH client. See xref:SSH_transformation_fails[Troubleshooting].
 ====
 
 After creating the conversion hosts, you can xref:Enabling_conversion_hosts_in_cloudforms[enable them] in CloudForms.
-
-.OpenStack Platform
-
-*TBD*

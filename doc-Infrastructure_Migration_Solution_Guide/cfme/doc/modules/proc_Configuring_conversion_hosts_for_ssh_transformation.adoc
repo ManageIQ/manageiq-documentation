@@ -1,11 +1,9 @@
 [id="Configuring_conversion_hosts_for_ssh_transformation"]
 = Configuring conversion hosts for SSH transformation
 
-If you are migrating to Red Hat Virtualization, perform this procedure on the Manager machine.
+You can configure the conversion hosts for SSH transformation by running a playbook to configure the conversion hosts, enabling SSH on the VMware hypervisors, and sharing the conversion hosts' SSH keys with the hypervisors.
 
-If you are migrating to OpenStack Platform, perform this procedure on each conversion host.
-
-.Procedure
+Perform the following procedure on the Manager machine, for Red Hat Virtualization, or on each conversion host, for OpenStack Platform:
 
 . Create an inventory file, +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+, with the following variables:
 +
@@ -25,11 +23,6 @@ all:
 ----
 # ansible-playbook -i conversion_hosts_inventory.yml conversion_host_enable.yml
 ----
-+
-[NOTE]
-====
-For Red Hat Virtualization, the link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansible-v2v-conversion-host`] role checks for the presence of the RHV guest tools ISO image in the ISO storage domain. This image is used to migrate Windows virtual machines.
-====
 
 . Verify that the conversion hosts are enabled:
 +
@@ -39,15 +32,6 @@ For Red Hat Virtualization, the link:https://github.com/oVirt/ovirt-ansible-v2v-
 ----
 
 . Enable SSH on your VMware hypervisors. (For details, see link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
-
-. (Optional) If you created the conversion hosts manually, without using the `ovirt-ansible-v2v-conversion-host` role, create the key pairs on each conversion host for the `vdsm` user:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# install -o vdsm -g kvm -m 0700 -d /var/lib/vdsm/.ssh
-# ssh-keygen -t rsa -N '' -C "vdsm@_hostname_" -f /var/lib/vdsm/.ssh/id_rsa
-# chown vdsm:kvm /var/lib/vdsm/.ssh/id_rsa
-----
 
 . Copy the SSH keys to all VMware hypervisors to ensure that each conversion host has the SSH key of the ESXihost in its `known_hosts` file:
 +

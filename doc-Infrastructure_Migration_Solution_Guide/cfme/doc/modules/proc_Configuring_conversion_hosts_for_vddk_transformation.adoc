@@ -1,28 +1,48 @@
 [id="Configuring_conversion_hosts_for_vddk_transformation"]
 = Configuring conversion hosts for VDDK transformation
 
+You can configure the conversion hosts for VDDK transformation by downloading the VDDK package and running a playbook to configure the conversion hosts.
+
+To download the VDDK package:
+
 . Go to link:https://www.vmware.com/support/pubs/[VMware Documentation], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
 
 . Click `Latest Releases` and select the latest VDDK release.
 
 . Download the SDK package (for example, `VMware-vix-disklib-6.5.3-8315684.x86_64.tar.gz`) to your local machine.
 
-.Red Hat Virtualization
+To configure the conversion hosts, perform the following steps on the Manager machine, for Red Hat Virtualization, or on each conversion host, for OpenStack Platform:
 
-. Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine.
+. Using SCP, copy the VDDK package to `/var/www/html`.
 
-. On the Manager machine, create  +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+ with the following variables:
+. Create  +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+ according to the following link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host/blob/master/docs/Ansible.md[example]:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 all:
   hosts:
-    _host1.example.com_:
-    _host2.example.com_:
+    host1.example.com:
+      manageiq_provider_name: "RHV"
+#     manageiq_provider_name: "OpenStack"
+      v2v_host_type: _rhv_
+#     v2v_host_type: _openstack_
+      v2v_transport_methods:
+        - vddk
+    host2.example.com:
   vars:
-    ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
-    v2v_vddk_package_name: VMware-vix-disklib-_version_.x86_64.tar.gz
-    v2v_vddk_package_url: http://_Manager_FQDN_/VMware-vix-disklib-_version_.x86_64.tar.gz
+      ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
+      v2v_vddk_package_name: VMware-vix-disklib-_version_.x86_64.tar.gz
+      v2v_vddk_package_url: http://_FQDN_/VMware-vix-disklib-_version_.x86_64.tar.gz
+      manageiq_url: "https://_CloudForms_FQDN_"
+      manageiq_username: admin
+      manageiq_password: _password_
+      manageiq_zone_id: _4200000001_
+      manageiq_providers:
+        - name: "_provider_"
+        connection_configuration:
+          - endpoint:
+              role: default
+              verify_ssl: false
 ----
 
 . Enable the conversion hosts:
@@ -31,11 +51,6 @@ all:
 ----
 # ansible-playbook -i conversion_hosts_inventory.yml conversion_host_enable.yml
 ----
-+
-[NOTE]
-====
-For Red Hat Virtualization, the link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host[`ovirt-ansible-v2v-conversion-host`] role checks for the presence of the RHV guest tools ISO image in the ISO storage domain. This image is used to migrate Windows virtual machines.
-====
 
 . Verify that the conversion hosts are enabled:
 +
@@ -43,16 +58,5 @@ For Red Hat Virtualization, the link:https://github.com/oVirt/ovirt-ansible-v2v-
 ----
 # ansible-playbook -i conversion_hosts_inventory.yml conversion_host_check.yml
 ----
-
-[NOTE]
-====
-If you upgrade your target environment, you must run the `conversion_host_enable` playbook again, with the option `-e v2v_vddk_override=true`, to update the IMS packages.
-====
-
-After configuring the conversion hosts, you can xref:Enabling_conversion_hosts_in_cloudforms[enable them] in CloudForms.
-
-.OpenStack Platform
-
-TBD
 
 After configuring the conversion hosts, you can xref:Enabling_conversion_hosts_in_cloudforms[enable them] in CloudForms.

@@ -33,11 +33,12 @@ all:
 
 . Enable SSH on your VMware hypervisors. (For details, see link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
 
-. Copy the SSH keys to all VMware hypervisors to ensure that each conversion host has the SSH key of the ESXihost in its `known_hosts` file:
+. Copy the SSH keys to all VMware hypervisors to ensure that each conversion host has the SSH key of the ESXi host in its `known_hosts` file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh root@_esx1.example.com_ sh -c \'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
+# ssh root@_esx1.example.com_ sh -c \
+    'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
 ----
 
 . Validate the configuration by connecting to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor:

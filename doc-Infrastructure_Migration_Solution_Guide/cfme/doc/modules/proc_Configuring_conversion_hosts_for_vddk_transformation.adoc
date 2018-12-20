@@ -15,7 +15,7 @@ To configure the conversion hosts, perform the following steps on the Manager ma
 
 . Using SCP, copy the VDDK package to `/var/www/html`.
 
-. Create  +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+ according to the following link:https://github.com/oVirt/ovirt-ansible-v2v-conversion-host/blob/master/docs/Ansible.md[example]:
+. Create +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+ according to the following example (for more options, see xref:Ansible_conversion_hosts_inventory_file_example[]):
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -24,21 +24,21 @@ all:
     host1.example.com:
       manageiq_provider_name: "RHV"
 #     manageiq_provider_name: "OpenStack"
-      v2v_host_type: _rhv_
-#     v2v_host_type: _openstack_
+      v2v_host_type: rhv
+#     v2v_host_type: openstack
       v2v_transport_methods:
         - vddk
     host2.example.com:
   vars:
       ansible_ssh_private_key_file: /etc/pki/ovirt-engine/keys/engine_id_rsa
-      v2v_vddk_package_name: VMware-vix-disklib-_version_.x86_64.tar.gz
-      v2v_vddk_package_url: http://_FQDN_/VMware-vix-disklib-_version_.x86_64.tar.gz
-      manageiq_url: "https://_CloudForms_FQDN_"
+      v2v_vddk_package_name: VMware-vix-disklib-version.x86_64.tar.gz
+      v2v_vddk_package_url: http://FQDN/VMware-vix-disklib-version.x86_64.tar.gz
+      manageiq_url: "https://CloudForms_FQDN"
       manageiq_username: admin
-      manageiq_password: _password_
-      manageiq_zone_id: _4200000001_
+      manageiq_password: password
+      manageiq_zone_id: 4200000001
       manageiq_providers:
-        - name: "_provider_"
+        - name: "provider"
         connection_configuration:
           - endpoint:
               role: default

@@ -36,51 +36,48 @@ image:Migrated_VM_details.png[]
 === Infrastructure mapping errors
 
 [[Infrastructure_mapping_missing_resources]]
-Missing datastores or clusters::
-If the infrastructure mapping displays a *Datastores missing* or *Clusters missing* error message, delete the mapping and create a new one. If you create a mapping and subsequently add or remove providers or provider objects, their object IDs will change.
-
-[[Infrastructure_mapping_missing_networks]]
-Missing networks::
-Red Hat Virtualization: If the infrastructure mapping displays a *Networks missing* error message, delete the mapping,  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts], and create a new mapping.
-
-image:Mapping_missing_network.png[]
-
-=== Migration plan errors
-
-Virtual machines cannot be discovered::
-If a migration plan cannot discover the source virtual machines, xref:Remigrating_Virtual_Machines[remigrate] the virtual machines. If the source virtual machines were migrated in the past, they cannot be discovered with the migration plan because they are marked as `migrated` in the CloudForms VMDB.
-
-Virtual machines cannot be imported::
-If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
-
-=== Migration errors
-
-`Denied State` migration error::
-If a migration plan fails immediately and the migration plan has a *Denied State* error message in *Migration Plans Complete*, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: after creating the conversion hosts, you must   link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate them] in CloudForms). Cancel the migration plan and xref:Retrying_a_Migration_Plan[retry it].
-
-Virtual machine failed to migrate::
-Check the xref:Logs[conversion log] of each virtual machine that failed to migrate.
-
-The following scenarios can cause a failed migration:
-
-.All platforms
-
-* Mounted disks. A virtual machines with mounted disk(s) cannot be migrated.
+*Missing datastores or clusters.* If the infrastructure mapping displays a *Datastores missing* or *Clusters missing* error message, delete the mapping and create a new one. This error is caused by creating a mapping and subsequently adding or removing providers or provider objects, which changes their object IDs.
 
 .Red Hat Virtualization only
 
-* Virtual machine name contains spaces or special characters, which are not supported in the target environment
-* Virtual machine name is the same as an existing target virtual machine name (name conflict)
+*Missing Networks.* [[Infrastructure_mapping_missing_networks]]If the infrastructure mapping displays a *Networks missing* error message, delete the mapping,  link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate the RHV conversion hosts], and create a new mapping.
 
-[[SSH_transformation_fails]]
-* SSH transformation: If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
-+
+.OpenStack Platform only
+
+*Storage not detected.* If the target block storage does not appear while you are creating an infrastructure mapping, set the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volume-retype[`volume type`] of the storage.
+
+=== Migration plan errors
+
+*Virtual machines cannot be discovered.* If a migration plan cannot discover the source virtual machines, xref:Remigrating_Virtual_Machines[remigrate] the virtual machines. If the source virtual machines were migrated in the past, they cannot be discovered with the migration plan because they are marked as `migrated` in the CloudForms VMDB.
+
+*Virtual machines cannot be imported.* If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
+
+*`Denied State`.* If a migration plan fails immediately and the migration plan displays a *Denied State* error message in *Migration Plans Complete*, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: after creating the conversion hosts, you must   link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate them] in CloudForms). Cancel the migration plan and xref:Retrying_a_Migration_Plan[retry it].
+
+=== Virtual machine migration failure
+
+If a virtual machine fails to migrate, check its xref:Logs[conversion log].
+
+.Possible causes of virtual machine migration failure
+
+The following scenarios can cause a failed migration:
+
+*Mounted disks.* A virtual machine with mounted disk(s) cannot be migrated.
+
+.Red Hat Virtualization only
+
+*Invalid name.* Check that the virtual machine name does not contain spaces or special characters, which are not supported in the target environment
+
+*Name conflict.* Check that the virtual machine name is not the same as an existing target virtual machine name.
+
+*SSH transformation failure.* [[SSH_transformation_fails]]If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ipa-client-install --uninstall
 # ipa-client-install --no-ssh
 ----
-+
+
 [NOTE]
 ====
 You cannot resolve this issue by changing the configuration file because the file is restored during upgrades.
@@ -88,9 +85,13 @@ You cannot resolve this issue by changing the configuration file because the fil
 
 .OpenStack Platform only
 
-* Virtual machine was powered off at the time of migration.
-* Virtual machine does not have VMware Tools installed. VMware Tools preserves the IP address for migration.
-* Virtual machine has an interface configuration file that is not mapped to an interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
+*Virtual machine powered off.* The virtual machine must be powered on at the time of migration.
+
+*No IP address:*
+
+* Check that the virtual machine has VMware Tools installed. VMware Tools preserves the IP address for migration.
+
+* Check that the virtual machine does not have an interface configuration file that is mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
 +
 [options="" subs="+quotes,verbatim"]
 ----
@@ -99,8 +100,8 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
-* OpenStack Platform provider user configured in CloudForms does not have `admin` role privileges within the target project.
-+
+*Not Authorized.* Check that the OpenStack Platform provider user configured in CloudForms has `admin` role privileges within the target project.
+
 [options="" subs="+quotes,verbatim"]
 ----
 RESP BODY: {"NeutronError": {"message": "((rule:create_port and rule:create_port:fixed_ips) and rule:create_port:mac_address) is disallowed by policy", "type": "*PolicyNotAuthorized*", "detail": ""}}

@@ -1,0 +1,27 @@
+[[Retrying_and_remigrating]]
+= Retrying and remigrating
+
+When virtual machines fail to migrate, the migration plan's status is `Failed`. If the source virtual machines have never been migrated, you can retry the failed migration plan. If the virtual machines have been migrated previously, you must remigrate the virtual machines using a CSV file.
+
+.Procedure
+
+. If the migration failed during the virtual machine conversion phase:
+
+.. Delete newly created target virtual machines or instances to avoid name conflicts with source virtual machines.
+.. Delete newly created disks in the target datastore to free up space.
+
+. Retry the failed migration plan if the virtual machines were not migrated:
+
+.. Click menu:Compute[Migration > Migration Plans].
+.. Click `Migration Plans Complete`.
+.. Click the `Retry` button beside the failed migration plan.
+
+. Remigrate the virtual machines if they have been migrated in the past:
+
+.. Create a xref:CSV_file[CSV file] with the names of the source virtual machines.
+.. Create a new migration plan using the CSV file to import the virtual machines.
++
+[NOTE]
+====
+The source virtual machines cannot be discovered by the migration plan because they are marked in the CloudForms database as `migrated`.
+====

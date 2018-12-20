@@ -1,0 +1,84 @@
+[id="Configuring_conversion_hosts_for_transformation"]
+= Configuring conversion hosts for transformation
+
+You can configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts for transformation involves the following key steps:
+
+. VDDK only: Downloading and copying the VDDK package
+. Creating an Ansible inventory file
+. Configuring the conversion hosts for transformation
+. Validating the transformation configuration
+. SSH only: Configuring and validating the SSH connection
+
+.VDDK only: Downloading and copying the VDDK package
+
+. Go to link:https://www.vmware.com/support/pubs/[VMware Documentation], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
+
+. Click `Latest Releases` and select the latest VDDK release.
+
+. Download the SDK package (for example, `VMware-vix-disklib-6.5.3-8315684.x86_64.tar.gz`) to your local machine.
+
+. Using SCP, copy the VDDK package to `/var/www/html` on the Manager machine (for Red Hat Virtualization) or to each conversion host (for OpenStack Platform)
+
+You are ready to configure the conversion hosts.
+
+.VDDK and SSH: Configuring the conversion hosts for transformation
+
+Perform the following steps on the Manager machine (for Red Hat Virtualization) or on each conversion host (for OpenStack Platform):
+
+. Create an Ansible inventory file, +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks/conversion_hosts_inventory.yml+, according to the following example:
++
+include::ref_Ansible_conversion_hosts_inventory_file_example.adoc[]
+
+. Run the `conversion_host_enable` Ansible playbook to configure the conversion hosts:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook -i conversion_hosts_inventory.yml conversion_host_enable.yml
+----
+
+. Run the `conversion_host_check` Ansible playbook to verify that the conversion hosts are configured correctly:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook -i conversion_hosts_inventory.yml conversion_host_check.yml
+----
+
+If you are configuring the conversion hosts for VDDK transformation, you are ready to xref:Enabling_conversion_hosts_in_cloudforms[enable them] in CloudForms.
+
+If you are configuring the conversion hosts for SSH transformation, you must configure the SSH connection.
+
+[[Configuring_SSH_connection]]
+.SSH only: Configuring and validating the SSH connection
+
+. Enable SSH on the VMware hypervisors. (For details, see link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
+
+. Copy the SSH keys to all VMware hypervisors to ensure that each conversion host has the SSH key of the ESXi host in its `known_hosts` file:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ssh root@_esx1.example.com_ sh -c \
+    'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
+----
+
+. Connect to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor, to validate the SSH connection:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u vdsm ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=65905; export SSH_AGENT_PID;
+echo Agent pid 65905;
+
+# sudo -u vdsm SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh-add
+# sudo -u vdsm \
+    SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh root@_esx1.example.com_
+----
++
+If the connection is successful, the conversion host is correctly configured for SSH transformation.
+
+[NOTE]
+====
+Red Hat Virtualization only: If you are using SSSD with single sign-on, you must reinstall `ipa-client` without configuring the OpenSSH client. See xref:SSH_transformation_fails[SSH transformation failure] for details.
+====
+
+You are ready to xref:Enabling_conversion_hosts_in_cloudforms[enable the conversion hosts] in CloudForms.

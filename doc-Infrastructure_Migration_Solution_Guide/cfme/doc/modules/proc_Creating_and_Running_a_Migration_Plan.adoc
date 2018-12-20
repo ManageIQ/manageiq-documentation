@@ -1,20 +1,31 @@
 [id='Creating_and_running_a_migration_plan']
 = Creating and running a migration plan
 
-Creating and running a migration plan involves the following key tasks:
+The infrastructure migration involves the following key tasks:
 
-. Selecting an infrastructure mapping
-. Importing the source virtual machines as a CSV file or selecting them manually from a list of virtual machines discovered by the migration plan
-. (OpenStack Platform only) Selecting a network and flavor for each virtual machine
-. (Optional) Creating pre- and post-migration Ansible playbooks to run on each virtual machine
-. Running the migration plan
+. Performing xref:Optional_premigration_tasks[optional pre-migration tasks], if required:
 
-.Prerequisites
+* Creating a xref:CSV_file[CSV file] to import virtual machines for large migrations or for remigrating
+* Setting up an xref:Automating_tasks_with_Ansible[Ansible environment] to automate pre- and post-migration tasks
 
-* [[CSV_file]]Create a CSV file listing the source virtual machines if you are migrating a large number of virtual machines or if you are xref:Remigrating_Virtual_Machines[remigrating previously migrated virtual machines].
-+
+. xref:Creating_migration_plan[Creating the migration plan]
+
+. xref:Running_migration_plan[Running the migration plan] immediately or in the future
+
+[discrete]
+== Optional pre-migration tasks[[Optional_premigration_tasks]]
+[[CSV_file]]
+.Creating a CSV file to import virtual machines
+
+If you are migrating a large number of virtual machines or are xref:Retrying_and_remigrating[remigrating] virtual machines, you must create a CSV file to import the source virtual machines into the migration plan.
+
+[NOTE]
+====
+If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.
+====
+
 The CSV file contains the virtual machine names (mandatory) and providers (optional, to differentiate virtual machines with identical names) in the following format:
-+
+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Name, Provider
@@ -23,15 +34,20 @@ _vm02_, _vSphere3_
 _vm03_, _vSphere3_
 ...
 ----
-+
-[NOTE]
-====
-If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.
-====
 
-* Set up the xref:Creating_an_Ansible_service_catalog_item[Ansible environment and create service catalog items] if you wish to run automated pre- and post-migration tasks.
+[[Automating_tasks_with_Ansible]]
+.Setting up an Ansible environment for automated tasks
 
-.Procedure
+If you want to run automated pre- and post-migration tasks, such as removing web servers from a load-balancing pool before migration and returning them to the pool after migration, you must first set up the Ansible environment:
+
+. Configure an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_providers/automation_management_providers#ansible-inside[Ansible repository and credentials].
+
+. Create a link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#creating-a-catalog-bundle[catalog bundle].
+
+. Create an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Ansible service catalog item].
+
+[discrete]
+== Procedure[[Creating_migration_plan]]
 
 . Click menu:Compute[Migration > Migration Plans].
 +
@@ -39,11 +55,9 @@ image:Migration_overview_screen.png[]
 
 . Click *Create Migration Plan*.
 
-. Select the infrastructure mapping from the drop-down list.
-+
-If you select an OpenStack Platform infrastructure mapping, the *Migration Plan Wizard* displays an additional step, *Instance Properties*.
+. In the *General* screen, select the infrastructure mapping from the drop-down list. If you select an OpenStack Platform infrastructure mapping, the *Migration Plan Wizard* displays an additional screen, *Instance Properties*, after the *VM* screen.
 
-. Enter the name of your migration plan.
+. Enter the name of your migration plan and (optional) description.
 
 . Discover the virtual machines:
 
@@ -58,37 +72,41 @@ image:Discover_VMs.png[]
 .. Select *Import a CSV file with a list of VMs to be migrated* and click *Next*.
 .. Click *Import*, browse to the CSV file, and click *Open*.
 
-. Select the virtual machines to migrate and click *Next*.
-+
-OpenStack Platform only:
-+
-.. In *Instance Properties*, click the pencil icon to edit the network or flavor of each selected virtual machine. If a flavor is too small for the source virtual machine, it is marked with an asterisk (`*`).
-.. Click *Next*.
+* If you cannot import or discover the virtual machines, see xref:Migration_plan_errors[Migration plan errors].
 
-. The *Advanced Options* screen is displayed.
+. In the *VM* screen, select the virtual machines to migrate and click *Next*.
+
+. OpenStack Platform only: In the *Instance Properties* screen, click the pencil icon to edit the network or flavor of each selected virtual machine.
++
+[NOTE]
+====
+If a flavor is too small for the source virtual machine, it is marked with an asterisk (`*`).
+====
++
+When you have finished editing the virtual machines, click *Next*.
+
+. [[Automating_pre_and_post_migration_tasks_with_ansible]]In the *Advanced Options* screen, you can select pre- and post-migration playbook services and the virtual machines on which they should run. See xref:Automating_tasks_with_Ansible[Automating tasks with Ansible] for details.
 +
 [[Advanced_options_screen]]
 .Advanced options
 image:Advanced_Options.png[]
 +
-(Optional) Select xref:Automating_pre_and_post_migration_tasks_with_ansible[Ansible playbook services] to run on the virtual machines in the migration plan before or after the migration. For example, the xref:Ims_rhel_pre-migration_ansible_playbook_example[RHEL pre-migration playbook] performs several tasks to configure a target RHEL virtual machine.
-+
 Click *Next*.
 
-. Select *Save migration plan to run later* or *Start Migration Immediately* and click *Create*.
+. In the *Schedule* screen, select *Save migration plan to run later* or *Start Migration Immediately* and click *Create*. The status of the migration plan is displayed in the *Results* screen:
 +
-* If you selected *Save migration plan to run later*, the migration plan is saved in *Migration Plans Not Started*.
+* If you select *Save migration plan to run later*, the migration plan is saved in *Migration Plans Not Started*.[[Running_migration_plan]]
 +
 To schedule the migration plan, click the *Schedule* button, select a date and time, and click *Schedule*. The plan's status is *Migration Scheduled* with the date and time.
 +
 [NOTE]
 ====
-If you wish to run a scheduled plan immediately, click *Migrate*.
+To run a scheduled plan immediately, click *Migrate*.
 
 To edit or delete a schedule or plan, click the *More Actions* icon.
 ====
 
-* If you selected *Start Migration Immediately*, the migration plan runs immediately.
+* If you select *Start Migration Immediately*, the migration plan runs immediately.
 +
 The migration plan may take some time to complete. The migration plan displays progress bars showing the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time.
 +
@@ -99,20 +117,8 @@ To view the migration progress of individual virtual machines, click *Migration 
 The counter displaying the migration plan progress in menu:Compute[Migration > Migration Plans] may be a few seconds ahead of the counter that appears in the migration plan details. This is because the migration plans counter displays the total time for running a migration plan, while the migration plan details counter displays the time for migrating the virtual machines.
 ====
 
-. When the migration plan has finished, click *Migration Plans Complete* to view the status of the migration plan. The completed migration plan shows successfully migrated virtual machines. If error messages appear, see xref:Troubleshooting[].
-
-[[Remigrating_Virtual_Machines]]
-.Remigrating virtual machines
-
-If your migration goals change, you can remigrate previously migrated virtual machines:
-
-. Delete the target virtual machines corresponding to the source virtual machines that you are remigrating.
-. Delete the disks that were created in the target datastore during the earlier migration to free up space.
-. Create a xref:CSV_file[CSV file] to import the source virtual machines.
+. When the migration plan has finished, click *Migration Plans Complete* to view the status of the migration plan. The completed migration plan shows successfully migrated virtual machines.
 +
-[NOTE]
-====
-The source virtual machines cannot be discovered automatically by the migration plan because they are marked in the CloudForms database as `migrated`.
-====
-
-. Create and run a new migration plan.
+A `Denied State` error indicates a problem with the conversion hosts (see xref:Denied_state_error[Denied state error] for more information).
++
+If a virtual machine fails to migrate, see xref:Virtual_machine_migration_failure[Virtual machine migration failure].

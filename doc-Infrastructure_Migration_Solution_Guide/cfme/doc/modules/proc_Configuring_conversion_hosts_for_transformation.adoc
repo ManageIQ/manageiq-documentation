@@ -25,16 +25,31 @@ You are ready to configure the conversion hosts for transformation.
 
 . Go to +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks+ on the Manager machine (for Red Hat Virtualization) or on each conversion host (for OpenStack Platform).
 
-. Create an Ansible inventory file, `conversion_hosts_inventory.yml`, according to the following example:
-+
-include::ref_Ansible_conversion_hosts_inventory_file_example.adoc[]
-
-. Encrypt the inventory file with Ansible-vault:
+. Create an encrypted password file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-vault encrypt conversion_hosts_inventory.yml
+# ansible-vault create password.txt
+New Vault password:
+Confirm New Vault password:
 ----
+
+. Add the following lines to `password.txt`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# You can add other sensitive information to this file
+#
+# CloudForms admin user:
+manageiq_username: "_username_"
+
+# CloudForms password:
+manageiq_password: "_password_"
+----
+
+. Create an Ansible inventory file, `conversion_hosts_inventory.yml`, according to the following example:
++
+include::ref_Ansible_conversion_hosts_inventory_file_example.adoc[]
 
 . Run the `conversion_host_enable` Ansible playbook to configure the conversion hosts:
 +

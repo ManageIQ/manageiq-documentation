@@ -6,7 +6,7 @@ The infrastructure migration involves the following key tasks:
 . Performing xref:Optional_premigration_tasks[optional pre-migration tasks], if required:
 
 * Creating a xref:CSV_file[CSV file] to import virtual machines for large migrations or for remigrating
-* Setting up an xref:Automating_tasks_with_Ansible[Ansible environment] to automate pre- and post-migration tasks
+* Setting up an xref:Setting_up_an_ansible_environment[Ansible environment] to automate pre- and post-migration tasks
 
 . xref:Creating_migration_plan[Creating the migration plan]
 
@@ -35,7 +35,7 @@ _vm03_, _vSphere3_
 ...
 ----
 
-[[Automating_tasks_with_Ansible]]
+[[Setting_up_an_ansible_environment]]
 .Setting up an Ansible environment for automated tasks
 
 If you want to run automated pre- and post-migration tasks, such as removing web servers from a load-balancing pool before migration and returning them to the pool after migration, you must first set up the Ansible environment:
@@ -57,9 +57,9 @@ image:Migration_overview_screen.png[]
 
 . In the *General* screen, select the infrastructure mapping from the drop-down list. If you select an OpenStack Platform infrastructure mapping, the *Migration Plan Wizard* displays an additional screen, *Instance Properties*, after the *VM* screen.
 
-. Enter the name of your migration plan and (optional) description.
+. Enter the name of your migration plan and a description (optional).
 
-. Discover the virtual machines:
+. Discover the source virtual machines:
 
 * If you are migrating a small number of virtual machines, select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*.
 +
@@ -72,7 +72,7 @@ image:Discover_VMs.png[]
 .. Select *Import a CSV file with a list of VMs to be migrated* and click *Next*.
 .. Click *Import*, browse to the CSV file, and click *Open*.
 
-* If you cannot import or discover the virtual machines, see xref:Migration_plan_errors[Migration plan errors].
+* If you cannot import or discover the source virtual machines, see xref:Migration_plan_errors[Migration plan errors].
 
 . In the *VM* screen, select the virtual machines to migrate and click *Next*.
 
@@ -85,7 +85,7 @@ If a flavor is too small for the source virtual machine, it is marked with an as
 +
 When you have finished editing the virtual machines, click *Next*.
 
-. [[Automating_pre_and_post_migration_tasks_with_ansible]]In the *Advanced Options* screen, you can select pre- and post-migration playbook services and the virtual machines on which they should run. See xref:Automating_tasks_with_Ansible[Automating tasks with Ansible] for details.
+. [[Automating_pre_and_post_migration_tasks_with_ansible]]In the *Advanced Options* screen, you can select pre- and post-migration playbook services, which you have already created, and the virtual machines on which they should run. See xref:Setting_up_an_ansible_environment[Setting up an Ansible environment for automated tasks].
 +
 [[Advanced_options_screen]]
 .Advanced options

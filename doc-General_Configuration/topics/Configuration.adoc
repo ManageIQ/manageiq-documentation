@@ -1979,6 +1979,40 @@ If you change the *Time Zone*, you will need to reset the stating date and time.
 [[database_backup]]
 ===== Scheduling a Database Backup
 
+[NOTE]
+====
+Set `wal_keep_segments` parameter to a value that ensures {product-title_short} scheduled backups finish. Create a test backup using a value based on the calculation: 
+
+*(<pg-volume-free-space>MB/4)/16MB*. 
+
+Measure free space in MB and ensure the denominator matches in units. 
+
+Setting `wal_keep_segments` to this value will cause the transaction log to occupy, at a minimum, one quarter of the current free space. Adjust your calculation accordingly upon successful testing.
+====
+
+To set the `wal_keep_segments` value:
+
+. SSH to the database appliance
+. Access the database
++
+-----
+# psql DBNAME USERNAME 
+-----
++
+. Set the `wal_keep_segments` value
++
+-----
+postgres=# ALTER SYSTEM SET wal_keep_segments = <value>;
+-----
++
+. Reload `wal_keep_segments`
++
+-----
+postgres=# SELECT pg_reload_conf();
+-----
+
+On successful backup, revise the value for `wal_keep_segments` to save space based on transaction log size. 
+
 To schedule a database backup:
 
 . From the settings menu, select *Configuration*.

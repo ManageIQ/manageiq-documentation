@@ -4,8 +4,7 @@
 You can configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts for transformation involves the following key steps:
 
 . VDDK only: Downloading and copying the VDDK package
-. Creating an Ansible inventory file
-. Configuring the conversion hosts for transformation
+. Running the conversion hosts for transformation
 . Validating the transformation configuration
 . SSH only: Configuring and validating the SSH connection
 
@@ -25,19 +24,75 @@ You are ready to configure the conversion hosts for transformation.
 
 . Go to +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks+ on the Manager machine (for Red Hat Virtualization) or on each conversion host (for OpenStack Platform).
 
-. Create an encrypted password file:
+. Create `extra_vars.yml` according to the following examples:
+
+* Red Hat Virtualization conversion host using VDDK
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-vault create password.txt
+---
+v2v_host_type: rhv
+v2v_transport_methods:
+  - vddk
+v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz"
+v2v_vddk_package_url: "http://_path/to/downloaded_vddk_package_/{{ v2v_vddk_package_name }}"
+manageiq_provider_name: RHV
+manageiq_url: "https://_CloudForms_FQDN_"
+manageiq_validate_certs: false
+manageiq_zone_id: "42000000000001"
+manageiq_providers:
+  - name: "_RHV_"
+    connection_configurations:
+      - endpoint:
+          role: "default"
+          verify_ssl: true
+          certificate_authority: |
+            -----BEGIN CERTIFICATE-----
+            MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ....
+            -----END CERTIFICATE-----
+----
+
+* OpenStack Platform conversion host using SSH:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+---
+v2v_host_type: openstack
+v2v_transport_methods:
+  - ssh
+manageiq_provider_name: OpenStack
+manageiq_url: "https://CloudForms_FQDN"
+manageiq_validate_certs: false
+manageiq_zone_id: "42000000000001"
+manageiq_providers:
+  - name: "_OpenStack_"
+    connection_configurations:
+      - endpoint:
+          role: "default"
+          security_protocol: "ssl"
+          certificate_authority: |
+            -----BEGIN TRUSTED CERTIFICATE-----
+            MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV....
+            -----END TRUSTED CERTIFICATE-----
+            -----BEGIN TRUSTED CERTIFICATE-----
+            MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG....
+            -----END TRUSTED CERTIFICATE-----
+----
+
+. Create an encrypted `secure_vars.yml` file for your passwords and keys:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-vault create secure_vars.yml
 New Vault password:
 Confirm New Vault password:
 ----
 
-. Add the following lines to `password.txt`:
+. Add the following lines to `secure_vars.yml`:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
+---
 # You can add other sensitive information to this file
 #
 # CloudForms admin user:
@@ -45,32 +100,25 @@ manageiq_username: "_username_"
 
 # CloudForms password:
 manageiq_password: "_password_"
+
+# SSH private key
+v2v_ssh_private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....
+  -----END RSA PRIVATE KEY-----
 ----
 
-. VDDK only:
-
-.. Create an Ansible inventory file, `conversion_hosts_inventory.yml`, according to the following example:
-+
-include::ref_Ansible_conversion_hosts_inventory_file_example.adoc[]
-
-.. Run the `conversion_host_enable` Ansible playbook to configure the conversion hosts:
+. Run the `conversion_host_enable` playbook to configure the conversion hosts for transformation:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook --ask-vault-pass -i conversion_hosts_inventory.yml conversion_host_enable.yml
+# ansible-playbook -i `hostname`, -c local -b \
+    -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
+    /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
+
 ----
 
-. SSH only:
-
-.. Create ssh_key.yml
-[options="nowrap" subs="+quotes,verbatim"]
-----
----
-
-----:
-+
-
-. Run the `conversion_host_check` Ansible playbook to verify that the conversion hosts are configured correctly:
+. Run the `conversion_host_check` playbook to verify that the conversion hosts are configured correctly:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----

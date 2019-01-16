@@ -145,6 +145,41 @@ $ oc create -f cfme-restore-job.yaml
 
 After the restore job is complete, you can scale the pods back up.
 
+
+
+[[updating-pods]]
+=== Updating {product-title_short} Pods
+
+To apply package updates to a {product-title_short} appliance running on OpenShift Container Platform, deploy the new {product-title_short} container image with the following steps:
+
+. Scale both StatefulSets to 0 replicas:
++
+----
+$ oc scale statefulset cloudforms --replicas=0
+$ oc scale statefulset cloudforms-backend --replicas=0
+----
++
+. Patch in the new version:
++
+----
+$ oc patch statefulset cloudforms -p '{"spec": {"template": {"spec": {"containers": [{"name": "cloudforms", "image": "registry.redhat.io/cloudforms46/cfme-openshift-app-ui:<new-version-tag>"}]}}}}'
+$ oc patch statefulset cloudforms-backend -p '{"spec": {"template": {"spec": {"containers": [{"name": "cloudforms", "image": "registry.redhat.io/cloudforms46/cfme-openshift-app:<new-version-tag>"}]}}}}'
+----
++
+. Scale the StatefulSets back to your previous values:
++
+----
+$ oc scale statefulset cloudforms --replicas=<old-value>
+$ oc scale statefulset cloudforms-backend --replicas=<old-value>
+----
+
+Your {product-title_short} pods are now updated.
+
+[NOTE]
+====
+See the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/release_notes/index#technical_notes[Technical Notes] in the _Release Notes_ for a list of updated {product-title_short} container images and errata.
+====
+
 [[uninstalling]]
 === Uninstalling {product-title} from a Project
 

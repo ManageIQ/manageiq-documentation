@@ -149,37 +149,129 @@ After the restore job is complete, you can scale the pods back up.
 
 
 [[updating-pods]]
-=== Updating {product-title_short} Pods
+=== Updating {product-title_short}
 
-To apply package updates to a {product-title_short} appliance running on OpenShift Container Platform, deploy the new {product-title_short} container image with the following steps:
+To apply package updates to a {product-title_short} appliance running on OpenShift Container Platform, delete the pods and redeploy them using updated {product-title_short} container images. If you have modified the template, this requires additional steps in xref:modified-template-update[].
 
-. Scale both StatefulSets to 0 replicas:
+ifdef::cfme[]
+
+See the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/release_notes/index#technical_notes[Technical Notes] in the _Release Notes_ for a list of updated {product-title_short} container images and errata.
+
+[IMPORTANT]
+====
+If you are updating a {product-title} 4.6.0 environment to version 4.6.1, follow the steps in xref:modified-template-update[]. When updating between these versions, the template must also be updated to reflect the updated ConfigMap mount path for `postgresql`. 
+====
+endif::cfme[]
+
+ifdef::miq[]
+[IMPORTANT]
+====
+If you are updating a {product-title} 5.9.0 environment to version 5.9.1, follow the steps in xref:modified-template-update[]. When updating between these versions, the template must also be updated to reflect the updated ConfigMap mount path for `postgresql`.
+====
+endif::miq[]
+
+
+[[image-update]]
+==== Updating the {product-title_short} Container Images
+
+To deploy new container images for {product-title_short}, delete the pods, update the images, then rebuild the updated pods:
+
+. Scale the application StatefulSets to 0 replicas:
 +
 ----
 $ oc scale statefulset cloudforms --replicas=0
 $ oc scale statefulset cloudforms-backend --replicas=0
 ----
 +
-. Patch in the new version:
+. Patch in the new version of the images:
 +
 ----
 $ oc patch statefulset cloudforms -p '{"spec": {"template": {"spec": {"containers": [{"name": "cloudforms", "image": "registry.redhat.io/cloudforms46/cfme-openshift-app-ui:<new-version-tag>"}]}}}}'
 $ oc patch statefulset cloudforms-backend -p '{"spec": {"template": {"spec": {"containers": [{"name": "cloudforms", "image": "registry.redhat.io/cloudforms46/cfme-openshift-app:<new-version-tag>"}]}}}}'
 ----
 +
-. Scale the StatefulSets back to your previous values:
+. Scale the StatefulSets back to your previous values to redeploy the pods:
 +
 ----
 $ oc scale statefulset cloudforms --replicas=<old-value>
 $ oc scale statefulset cloudforms-backend --replicas=<old-value>
 ----
 
-Your {product-title_short} pods are now updated.
+Your {product-title_short} environment now updated.
 
-[NOTE]
+
+[[modified-template-update]]
+==== Updating the {product-title_short} Container Images and Template
+
+To update a {product-title_short} deployment with a modified template, update the container images and the template using the following steps:
+
+. Back up secrets, such as database encryption keys and credentials:
++
+[IMPORTANT]
 ====
-See the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/release_notes/index#technical_notes[Technical Notes] in the _Release Notes_ for a list of updated {product-title_short} container images and errata.
+Be careful to back up secrets in a secure location.
 ====
++
+----
+$ oc export secret cloudforms-secrets > my_secrets.yml
+----
++
+. Scale the application StatefulSets to 0 replicas:
++
+----
+$ oc scale statefulset cloudforms --replicas=0
+$ oc scale statefulset cloudforms-backend --replicas=0
+----
++
+. Patch in the new version of the images:
++
+----
+$ oc patch statefulset cloudforms -p '{"spec": {"template": {"spec": {"containers": [{"name": "cloudforms", "image": "registry.redhat.io/cloudforms46/cfme-openshift-app-ui:<new-version-tag>"}]}}}}'
+$ oc patch statefulset cloudforms-backend -p '{"spec": {"template": {"spec": {"containers": [{"name": "cloudforms", "image": "registry.redhat.io/cloudforms46/cfme-openshift-app:<new-version-tag>"}]}}}}'
+----
++
+. Apply the changes to the project:
++
+[IMPORTANT]
+====
+* If you customized any parameters when originally deploying the application (parameters used with the `oc new-app` command in xref:deploying-the-appliance[]), you must set the same values in the `oc process` command here.
+
+ifdef::cfme[]
+* If you are updating a {product-title} 4.6.0 environment to version 4.6.1, update the `postgresql` ConfigMap mount path from `postgresql-config` to `postgresql-cfg`.
+endif::cfme[]
+
+ifdef::miq[]
+* If you are updating a {product-title} 5.9.0 environment to version 5.9.1, update the `postgresql` ConfigMap mount path from `postgresql-config` to `postgresql-cfg`.
+endif::miq[]
+====
++
+----
+$ oc process -p APPLICATION_REPLICA_COUNT=0 -l app=cloudforms,template=cloudforms -f cfme-template.yaml | oc replace -f -
+----
++
+. Replace the secret with the `my_secrets.yml` file you created earlier:
++
+----
+$ oc replace -f my_secrets.yml
+----
++
+. Redeploy the `postgresql` pod to ensure the password from the old secret is used:
++
+----
+$ oc rollout latest postgresql
+----
++
+. Scale the StatefulSets back to your previous values to redeploy the pods:
++
+----
+$ oc scale statefulset cloudforms --replicas=<old-value>
+$ oc scale statefulset cloudforms-backend --replicas=<old-value>
+----
+
+Your {product-title_short} environment is now updated.
+
+
+
 
 [[uninstalling]]
 === Uninstalling {product-title} from a Project

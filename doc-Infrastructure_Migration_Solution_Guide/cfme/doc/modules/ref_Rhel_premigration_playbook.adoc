@@ -1,0 +1,36 @@
+[id="Rhel_premigration_playbook"]
+= Configuring the RHEL pre-migration playbook
+
+If you are migrating source virtual machines with Red Hat Enterprise Linux operating systems, you must xref:Setting_up_an_ansible_environment[set up an Ansible environment] and configure the `RHEL pre-migration` playbook to run as a xref:Automating_pre_and_post_migration_tasks_with_ansible[pre-migration task].
+
+This playbook performs the following tasks on source RHEL virtual machines:
+
+* Preserves the static IP address configuration
+* Installs the Red Hat Virtualization guest agent
+
+This example registers a virtual machine with a Satellite 6 server and enables the `rhel-7-server-rpms` repository. If no variables are provided, the playbook assumes that the repositories are already configured and proceeds to install the guest agent and preserve the static IP address.
+
+[NOTE]
+====
+The Satellite `username` and `password` should be encrypted with Ansible vault in a separate file.
+====
+
+.RHEL pre-migration playbook
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+---
+- hosts: _all_
+  vars:
+    rhsm_config:
+      server_hostname: "_satellite.example.com_"
+      server_username: "_admin_"
+      server_password: "_password_"
+      org_id: "_organization_"
+    rhsm_repositories:
+      - "rhel-7-server-rpms"
+  roles:
+    - role: ims.rhel_pre_migration
+----
+
+For more information, see the RHEL pre-migration playbook link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[documentation].

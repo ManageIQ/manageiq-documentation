@@ -3,51 +3,24 @@
 
 The infrastructure migration involves the following key tasks:
 
-. Performing xref:Optional_premigration_tasks[optional pre-migration tasks], if required:
+. xref:Pre_migration_tasks[Pre-migration tasks]:
 
-* Creating a xref:CSV_file[CSV file] to import virtual machines for large migrations or for remigrating
-* Setting up an xref:Setting_up_an_ansible_environment[Ansible environment] to automate pre- and post-migration tasks
+* If you are migrating a large number of virtual machines or remigrating virtual machines, you must create a xref:CSV_file[CSV file] to import the virtual machines into the migration plan.
+
+* If you are using Ansible to automate pre- and post-migration tasks, you must set up the xref:Setting_up_an_ansible_environment[Ansible environment].
+
+* If you are migrating RHEL virtual machines, you must set up the xref:Setting_up_an_ansible_environment[Ansible environment] and configure the xref:Rhel_premigration_playbook[RHEL pre-migration playbook].
 
 . xref:Creating_migration_plan[Creating the migration plan]
 
-. xref:Running_migration_plan[Running the migration plan] immediately or in the future
+. xref:Running_migration_plan[Running the migration plan] immediately or scheduling it to run in the future
 
-[discrete]
-== Optional pre-migration tasks[[Optional_premigration_tasks]]
-[[CSV_file]]
-.Creating a CSV file to import virtual machines
+You can xref:Canceling_a_migration_plan[cancel] a migration plan.
 
-If you are migrating a large number of virtual machines or are xref:Retrying_and_remigrating[remigrating] virtual machines, you must create a CSV file to import the source virtual machines into the migration plan.
+include::proc_Premigration_tasks.adoc[leveloffset=+1]
 
-[NOTE]
-====
-If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.
-====
-
-The CSV file contains the virtual machine names (mandatory) and providers (optional, to differentiate virtual machines with identical names) in the following format:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-Name, Provider
-_vm01_, _vSphere3_
-_vm02_, _vSphere3_
-_vm03_, _vSphere3_
-...
-----
-
-[[Setting_up_an_ansible_environment]]
-.Setting up an Ansible environment for automated tasks
-
-If you want to run automated pre- and post-migration tasks, such as removing web servers from a load-balancing pool before migration and returning them to the pool after migration, you must first set up the Ansible environment:
-
-. Configure an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_providers/automation_management_providers#ansible-inside[Ansible repository and credentials].
-
-. Create a link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#creating-a-catalog-bundle[catalog bundle].
-
-. Create an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Ansible service catalog item].
-
-[discrete]
-== Procedure[[Creating_migration_plan]]
+[[Creating_migration_plan]]
+== Creating a migration plan
 
 . Click menu:Compute[Migration > Migration Plans].
 +
@@ -122,3 +95,5 @@ The counter displaying the migration plan progress in menu:Compute[Migration > M
 A `Denied State` error indicates a problem with the conversion hosts (see xref:Denied_state_error[Denied state error] for more information).
 +
 If a virtual machine fails to migrate, see xref:Virtual_machine_migration_failure[Virtual machine migration failure].
+
+include::proc_Canceling_a_migration_plan.adoc[leveloffset=+1]

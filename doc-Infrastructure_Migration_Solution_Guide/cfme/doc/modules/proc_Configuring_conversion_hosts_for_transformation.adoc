@@ -3,12 +3,13 @@
 
 You can configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts for transformation involves the following key steps:
 
-. VDDK only: Downloading and copying the VDDK package
-. Running the conversion hosts for transformation
-. Validating the transformation configuration
-. SSH only: Configuring and validating the SSH connection
+. VDDK only: xref:VDDK_only_Downloading_and_copying_VDDK[Downloading and copying the VDDK package]
+. VDDK and SSH: xref:VDDK_and_SSH_Configuring_the_conversion_hosts[Configuring the conversion hosts]
+. VDDK and SSH: xref:VDDK_and_SSH_Validating_the_transformation_configuration[Validating the transformation configuration]
+. SSH only: xref:SSH_only_Configuring_and_validating_the_SSH_connection[Configuring and validating the SSH connection]
 
-.VDDK only: Downloading and copying VDDK
+[id='VDDK_only_Downloading_and_copying_VDDK']
+== VDDK only: Downloading and copying VDDK
 
 . Go to link:https://www.vmware.com/support/pubs/[VMware Documentation], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
 
@@ -18,15 +19,16 @@ You can configure your conversion hosts for VDDK or SSH transformation. Configur
 
 . Copy the VDDK package to a location that is accessible over `HTTP`, for example, `/var/www/html` on the Red Hat Virtualization Manager machine.
 
-You are ready to configure the conversion hosts for transformation.
+You are ready to configure the conversion hosts.
 
-.VDDK and SSH: Configuring the conversion hosts for transformation
+[id='VDDK_and_SSH_Configuring_the_conversion_hosts']
+== VDDK and SSH: Configuring the conversion hosts
 
 . Go to +/usr/share/ovirt-ansible-v2v-conversion-host-_version_/playbooks+ on the Manager machine (for Red Hat Virtualization) or on each conversion host (for OpenStack Platform).
 
 . Create `extra_vars.yml` according to the following examples:
 
-* Red Hat Virtualization conversion host using VDDK
+* Red Hat Virtualization conversion host using VDDK:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -34,6 +36,7 @@ You are ready to configure the conversion hosts for transformation.
 v2v_host_type: rhv
 v2v_transport_methods:
   - vddk
+v2v_max_concurrent_conversions: _20_
 v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz"
 v2v_vddk_package_url: "http://_path/to/downloaded_vddk_package_/{{ v2v_vddk_package_name }}"
 manageiq_provider_name: RHV
@@ -60,6 +63,7 @@ manageiq_providers:
 v2v_host_type: openstack
 v2v_transport_methods:
   - ssh
+v2v_max_concurrent_conversions: _20_
 manageiq_provider_name: OpenStack
 manageiq_url: "https://CloudForms_FQDN"
 manageiq_validate_certs: false
@@ -84,8 +88,6 @@ manageiq_providers:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-vault create secure_vars.yml
-New Vault password:
-Confirm New Vault password:
 ----
 
 . Add the following lines to `secure_vars.yml`:
@@ -118,8 +120,11 @@ v2v_ssh_private_key: |
 
 ----
 
+[id="VDDK_and_SSH_Validating_the_transformation_configuration"]
+== VDDK and SSH: Validating the transformation configuration
+
 . Run the `conversion_host_check` playbook to verify that the conversion hosts are configured correctly:
-+
+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-playbook --ask-vault-pass -i conversion_hosts_inventory.yml conversion_host_check.yml
@@ -129,8 +134,8 @@ If you are configuring the conversion hosts for VDDK transformation, you are rea
 
 If you are configuring the conversion hosts for SSH transformation, you must configure the SSH connection.
 
-[[Configuring_SSH_connection]]
-.SSH only: Configuring and validating the SSH connection
+[id="SSH_only_Configuring_and_validating_the_SSH_connection"]
+== SSH only: Configuring and validating the SSH connection
 
 . Enable SSH on the VMware hypervisors. (For details, see link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
 

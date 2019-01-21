@@ -6,49 +6,54 @@ The infrastructure mapping maps your source resources to target resources.
 .Infrastructure Mappings screen
 image:Infrastructure_mappings_screen.png[]
 
-[NOTE]
-====
-Red Hat Virtualization only: Before creating an infrastructure mapping, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/managing_providers/#authenticating_rhv_hosts[authenticate] the RHV conversion hosts. If the hosts are not authenticated, the mapping displays a xref:Infrastructure_mapping_missing_networks[missing networks error].
-====
+.Prerequisite
+
+*Red Hat Virtualization only:* Before creating an infrastructure mapping, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#authenticating_rhv_hosts[authenticate] the RHV conversion hosts. If the hosts are not authenticated, the mapping displays a xref:Infrastructure_mapping_missing_networks[missing networks error].
+
+.Procedure
 
 . Click menu:Compute[Migration > Infrastructure Mapping].
 . Click *Create Infrastructure Mapping*.
-. Enter the name of your mapping, an optional description, select a *Target Provider*, and click *Next*.
+. Fill in the fields of the infrastructure mapping wizard:
 
-. Map the clusters:
+[cols="1,3", options="header"]
+|===
+^|Screen ^|Procedure
 
-.. Select a source cluster and a target cluster.
+|*General*
+<a|. Enter an infrastructure mapping name and (optional) description.
+. Select the target provider from the drop-down list.
+. Click *Next*.
+
+|*Map Compute*
+.<a|. Select a source cluster and a target cluster.
 +
-[NOTE]
-====
-If a target cluster does not contain a conversion host, a warning icon (&#65279;image:warning.png[height=15px]&#65279;) is displayed. The icon appears after a few seconds' delay, caused by polling the clusters and refreshing the UI.
-====
+*Red Hat Virtualization only:* A target cluster that does not contain a conversion host displays a warning icon (&#65279;image:warning.png[height=15px]&#65279;). The icon appears after a few seconds' delay for polling the clusters and refreshing the UI.
+. Click *Add Mapping*. You can map additional clusters.
+. Click *Next*.
 
-.. Click *Add Mapping*. You can map additional source clusters.
-.. When you have finished mapping the clusters, click *Next*.
-
-. Map the datastores:
-
-.. Select a source cluster from the drop-down list.
-.. Select one or more source datastores and a target datastore. (OpenStack Platform only: If the target datastore is missing, see xref:OpenStack_storage_not_detected[Storage not detected].)
-.. Click *Add Mapping*. You can map additional source clusters and datastores.
-.. When you have finished mapping the datastores, click *Next*.
-
-. Map the networks:
-
-.. Select a source cluster from the drop-down list.
-.. Select one or more source networks and a target network.
-.. Click *Add Mapping*. You can map the networks of additional source clusters.
-
-. When you have finished mapping your resources, click *Create*.
-
-. If a successful mapping message is displayed, click *Close*. If error messages appear, see xref:Infrastructure_mapping_errors[Infrastructure mapping errors].
+|*Map Storage*
+.<a|. Select a source cluster from the drop-down list.
+. Select a source datastore and a target datastore.
 +
-Your infrastructure mapping is displayed in menu:Compute[Migration > Infrastructure Mappings].
+*OpenStack Platform only:* If the target datastore is missing, see xref:OpenStack_storage_not_detected[Storage not detected].)
+. Click *Add Mapping*. You can map additional datastores.
+. Click *Next*.
 
-[NOTE]
+|*Map Networks*
+.<a|. Select a source cluster from the drop-down list.
+. Select one or more source networks and a target network.
+. Click *Add Mapping*. You can map the networks of additional source clusters.
+. Click *Create*.
+|===
+
+If you see a successful mapping message, click *Close*. Your infrastructure mapping appears in menu:Compute[Migration > Infrastructure Mappings].
+
+If error messages appear, see xref:Infrastructure_mapping_errors[Infrastructure mapping errors].
+
+[IMPORTANT]
 ====
-If you add or remove providers or provider objects from an infrastructure mapping, the mapping will display xref:Infrastructure_mapping_missing_resources[missing resource errors].
+If you add or remove providers or provider objects from an infrastructure mapping, the mapping will display xref:Infrastructure_mapping_missing_resources[missing resource errors]. You must re-create the infrastructure mapping.
 ====
 
 After you have created a successful infrastructure mapping, you are ready to create and run a  xref:Creating_and_running_a_migration_plan[migration plan].

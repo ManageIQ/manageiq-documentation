@@ -36,7 +36,7 @@ You are ready to configure the conversion hosts.
 v2v_host_type: rhv
 v2v_transport_methods:
   - vddk
-v2v_max_concurrent_conversions: _20_
+v2v_max_concurrent_conversions: _10_
 v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz"
 v2v_vddk_package_url: "http://_path/to/downloaded_vddk_package_/{{ v2v_vddk_package_name }}"
 manageiq_provider_name: RHV
@@ -63,7 +63,7 @@ manageiq_providers:
 v2v_host_type: openstack
 v2v_transport_methods:
   - ssh
-v2v_max_concurrent_conversions: _20_
+v2v_max_concurrent_conversions: _10_
 manageiq_provider_name: OpenStack
 manageiq_url: "https://CloudForms_FQDN"
 manageiq_validate_certs: false
@@ -82,6 +82,8 @@ manageiq_providers:
             MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG....
             -----END TRUSTED CERTIFICATE-----
 ----
++
+The certificates in this example are the chain formed by the undercloud CA and overcloud CA and are used by the OpenStack API. If you deploy your own link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/#appe-SSLTLS_Certificate_Configuration[certificate authority], use the chain that signed the API certificates. 
 
 . Create an encrypted `secure_vars.yml` file for your passwords and keys:
 +

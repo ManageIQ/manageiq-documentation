@@ -150,7 +150,7 @@ After the restore job is complete, you can scale the pods back up.
 [[updating-pods]]
 === Updating {product-title_short}
 
-To apply package updates to a {product-title_short} appliance running on OpenShift Container Platform, delete the pods and redeploy them using updated {product-title_short} container images. To update your environment with a new template, follow the steps in xref:modified-template-update[].
+Apply package updates to your {product-title_short} appliance from OpenShift Container Platform by deleting the pods and redeploying them using updated {product-title_short} container images. To update your environment with a new template, follow the steps in xref:modified-template-update[].
 
 ifdef::cfme[]
 See the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/release_notes/index#technical_notes[Technical Notes] in the _Release Notes_ for a list of updated {product-title_short} container images and errata.
@@ -162,7 +162,7 @@ endif::cfme[]
 
 To deploy new container images for {product-title_short}, delete the pods, update the images, then redeploy the updated pods:
 
-. Scale the application StatefulSets to 0 replicas:
+. Delete the pods by scaling the application StatefulSets to 0 replicas:
 +
 ----
 $ oc scale statefulset cloudforms --replicas=0
@@ -202,7 +202,7 @@ Be careful to back up secrets in a secure location.
 $ oc export secret cloudforms-secrets > my_secrets.yml
 ----
 +
-. Scale the application StatefulSets to 0 replicas:
+. Delete the pods by scaling the application StatefulSets to 0 replicas:
 +
 ----
 $ oc scale statefulset cloudforms --replicas=0
@@ -216,13 +216,13 @@ $ oc scale statefulset cloudforms-backend --replicas=0
 If you customized any parameters when originally deploying the application (parameters used with the `oc new-app` command in xref:deploying-the-appliance[]), you must set the same values in the `oc process` command here.
 ====
 +
-Use the following command to apply changes to the project if your environment uses a database stored in a pod within the cluster (the default configuration):
+* For environments using a database stored on a pod within the cluster (the default configuration), specify the {product-title_short} template:
 +
 ----
 $ oc process -p APPLICATION_REPLICA_COUNT=0 -l app=cloudforms,template=cloudforms -f cfme-template.yaml | oc replace -f -
 ----
 +
-If you are using a database external to the OpenShift cluster, specify the external database template:
+* For environments using a database external to the OpenShift cluster, specify the {product-title_short} external database template:
 +
 ----
 $ oc process -p APPLICATION_REPLICA_COUNT=0 -l app=cloudforms,template=cloudforms-ext-db -f cfme-template-ext-db.yaml | oc replace -f -

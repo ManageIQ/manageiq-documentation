@@ -3,23 +3,22 @@
 [[CSV_file]]
 == Creating a CSV file to import virtual machines
 
-If you are migrating a large number of virtual machines or xref:Retrying_and_remigrating[remigrating] virtual machines, you must create a CSV file to import the source virtual machines into the migration plan.
+If you are migrating a large number of virtual machines or xref:Retrying_and_remigrating[remigrating] virtual machines, you must create a CSV file to import the source virtual machines into the migration plan. (If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.)
 
-[NOTE]
-====
-If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.
-====
+The virtual machine `Name` is mandatory. `Provider`, `Host`, and `Cluster` are optional, to differentiate identical virtual machine names in different environments.
 
-The CSV file contains the virtual machine names (mandatory) and providers (optional, to differentiate virtual machines with identical names) in the following format:
+.Sample CSV file with `Name` (mandatory) and `Provider` (optional)
 
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-Name, Provider
-_vm01_, _vSphere3_
-_vm02_, _vSphere3_
-_vm03_, _vSphere3_
+Name,Provider
+vm01,vSphere3
+vm02,vSphere3
+vm03,vSphere3
 ...
 ----
+
+Duplicate virtual machines with no optional fields to differentiate them, or with duplicate optional fields, are marked with a red `x` and are not imported into the migration plan.
 
 [[Setting_up_an_ansible_environment]]
 == Setting up an Ansible environment for automating tasks

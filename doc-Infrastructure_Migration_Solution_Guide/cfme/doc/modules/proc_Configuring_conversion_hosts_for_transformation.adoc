@@ -182,9 +182,9 @@ If you are configuring conversion hosts for SSH transformation, you must configu
 [id="SSH_only_Configuring_and_validating_the_SSH_connection"]
 == SSH only: Configuring and validating the SSH connection
 
-. Enable SSH on the VMware hypervisors. (For instructions, go to link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
+. Enable SSH on all VMware hypervisors. (For instructions, go to link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the left pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].)
 
-. Copy your public SSH key to all VMware hypervisors to ensure that each conversion host has the SSH key of the ESXi host in its `known_hosts` file:
+. On the Red Hat Virtualization Manager machine or on each OpenStack Platform conversion host, create an SSH key pair and copy the public key to each VMware hypervisor, to ensure that each conversion host has the SSH key of the VMware hypervisor in its `known_hosts` file:
 +
 [options="nowrap" subs="verbatim"]
 ----
@@ -193,6 +193,8 @@ If you are configuring conversion hosts for SSH transformation, you must configu
 ----
 
 . Connect to the VMware hypervisor using `ssh-agent`, the program that `virt-v2v` uses to connect to the hypervisor, to validate the SSH connection:
++
+* For Red Hat Virtualization:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -206,6 +208,13 @@ echo Agent pid 65905;
     SSH_AUTH_SOCK=/tmp/ssh-_Gi2oSn44DHNL_/agent.65904 ssh root@_esx1.example.com_
 ----
 +
+* For OpenStack Platform:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# TBD
+----
+
 If the connection is successful, the conversion host is correctly configured for SSH transformation.
 
 [NOTE]

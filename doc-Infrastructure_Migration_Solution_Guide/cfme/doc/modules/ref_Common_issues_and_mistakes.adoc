@@ -18,7 +18,7 @@
 
 * Virtual machines are not discovered. If a migration plan does not discover the source virtual machines and if the virtual machines have never been migrated in the past, check that the datastores and networks of the source virtual machines have been added to the Infrastructure Mapping.
 +
-If a migration plan does not discover source virtual machines that have been migrated in the past, xref:Retrying_and_remigrating[remigrate] the virtual machines. Previously migrated virtual machines cannot be discovered because they are marked as `migrated` in the CloudForms VMDB.
+If a migration plan does not discover source virtual machines that have been migrated in the past, xref:Retrying_and_remigrating[re-migrate] the virtual machines. Previously migrated virtual machines cannot be discovered because they are marked as `migrated` in the CloudForms VMDB.
 
 * Virtual machines cannot be imported. If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
 
@@ -70,9 +70,9 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
-* Not Authorized. OpenStack Platform provider user configured in CloudForms does not have `admin` role privileges within the target project.
+* Not Authorized. The OpenStack Platform provider user configured in CloudForms does not have `admin` role privileges within the target project. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
 +
-[options="" subs="+quotes,verbatim"]
+[options="" subs="verbatim"]
 ----
-RESP BODY: {"NeutronError": {"message": "((rule:create_port and rule:create_port:fixed_ips) and rule:create_port:mac_address) is disallowed by policy", "type": "*PolicyNotAuthorized*", "detail": ""}}
+ERROR: Command exited with non-zero return code 1, output: HttpException: 403: Client Error for url: https://123.123.123.123:13696/v2.0/ports, {"NeutronError": {"message": "((rule:create_port and rule:create_port:mac_address) and rule:create_port:fixed_ips) is disallowed by policy", "type": "PolicyNotAuthorized", "detail": ""}}
 ----

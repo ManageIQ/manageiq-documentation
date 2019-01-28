@@ -1,27 +1,31 @@
 [[Retrying_and_remigrating]]
 = Retrying and re-migrating
 
-When virtual machines fail to migrate, the migration plan's status is `Failed`. If the source virtual machines have never been migrated, you can retry the failed migration plan. If the virtual machines have been migrated previously, you must re-migrate the virtual machines using a CSV file.
+When virtual machines fail to migrate, the migration plan's status is `Failed`. You must clean up the target environment if the migration failed during the conversion phase retrying a failed migration plan or remigrating virtual machines.
 
-.Procedure
+.Cleaning up a failed migration
 
-. If the migration failed during the virtual machine conversion phase:
+. Delete newly created target virtual machines or instances to avoid name conflicts with source virtual machines.
+. Delete newly created disks in the target datastore to free up space.
 
-.. Delete newly created target virtual machines or instances to avoid name conflicts with source virtual machines.
-.. Delete newly created disks in the target datastore to free up space.
+[[Retrying_a_failed_migration_plan]]
+.Retrying a failed migration plan
 
-. Retry the failed migration plan if the virtual machines were not migrated:
+If the source virtual machines have never been migrated, you can retry the failed migration plan:
 
-.. Click menu:Compute[Migration > Migration Plans].
-.. Click `Migration Plans Complete`.
-.. Click the `Retry` button beside the failed migration plan.
+. Click menu:Compute[Migration > Migration Plans].
+. Click `Migration Plans Complete`.
+. Click the `Retry` button beside the failed migration plan.
 
-. Re-migrate the virtual machines if they have been migrated in the past:
+[[Remigrating_virtual_machines]]
+.Remigrating virtual machines
 
-.. Create a xref:CSV_file[CSV file] with the names of the source virtual machines.
-.. Create a new migration plan using the CSV file to import the virtual machines.
-+
+If the virtual machines have been migrated previously, you must re-migrate the virtual machines using a CSV file:
+
+. Create a xref:Creating_a_csv_file_to_import_virtual_machines[CSV file] with the names of the source virtual machines.
+. Create a new migration plan using the CSV file to import the virtual machines.
+
 [NOTE]
 ====
-The source virtual machines cannot be discovered by the migration plan because they are marked in the CloudForms database as `migrated`.
+The source virtual machines cannot be re-discovered by the migration plan because they are marked in the CloudForms database as `migrated`.
 ====

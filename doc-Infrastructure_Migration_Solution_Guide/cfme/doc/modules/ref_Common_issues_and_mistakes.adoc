@@ -20,11 +20,13 @@
 
 * Virtual machines are not discovered. If a migration plan does not discover the source virtual machines and if the virtual machines have never been migrated in the past, check that the datastores and networks of the source virtual machines have been added to the Infrastructure Mapping.
 +
-If a migration plan does not discover source virtual machines that have been migrated in the past, xref:Retrying_and_remigrating[re-migrate] the virtual machines. Previously migrated virtual machines cannot be discovered because they are marked as `migrated` in the CloudForms VMDB.
+If a migration plan does not discover source virtual machines that have been migrated in the past, xref:Remigrating_virtual_machines[re-migrate] the virtual machines. Previously migrated virtual machines cannot be discovered because they are marked as `migrated` in the CloudForms VMDB.
 
-* Virtual machines cannot be imported. If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:CSV_file[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
+* Virtual machines cannot be imported. If you cannot import the source virtual machines with a CSV file while creating a migration plan, check the xref:Creating_a_csv_file_to_import_virtual_machines[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
 
-* `Denied State`. [[Denied_state_error]]If a migration plan fails immediately and the migration plan displays a *Denied State* error message in *Migration Plans Complete*, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: ensure that you have xref:Enabling_rhv_conversion_hosts_in_cloudforms[authenticated the conversion hosts]). Cancel the migration plan and xref:Retrying_and_remigrating[retry it].
+* `Denied State`. [[Denied_state_error]]If a migration plan fails immediately and the migration plan displays a *Denied State* error message in *Migration Plans Complete*, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: ensure that you have xref:Enabling_rhv_conversion_hosts_in_cloudforms[authenticated the conversion hosts]). Cancel the migration plan and xref:Retrying_a_failed_migration_plan[retry it].
+
+* IP address of RHEL or other Linux virtual machine not accessible after migration. If the IP address of a RHEL or other Linux virtual machine is not accessible after an apparently successful migration, xref:Remigrating_virtual_machines[re-migrate] the virtual machine with the xref:Configuring_the_rhel_premigration_playbook[`RHEL pre-migration` playbook].
 
 == Virtual machine migration failure[[Virtual_machine_migration_failure]]
 

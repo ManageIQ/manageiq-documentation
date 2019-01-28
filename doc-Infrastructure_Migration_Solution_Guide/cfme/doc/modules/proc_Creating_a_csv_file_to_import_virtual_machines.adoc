@@ -1,0 +1,19 @@
+[id="Creating_a_csv_file_to_import_virtual_machines"]
+= Creating a CSV file to import virtual machines
+
+If you are migrating a large number of virtual machines or xref:Remigrating_virtual_machines[re-migrating] virtual machines, you must create a CSV file to import the source virtual machines into the migration plan. (If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.)
+
+The virtual machine `Name` is mandatory. `Provider`, `Host`, and `Cluster` are optional, to differentiate identical virtual machine names in different environments.
+
+.Sample CSV file with `Name` (mandatory) and `Provider` (optional)
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Name,Provider
+vm01,vSphere3
+vm02,vSphere3
+vm03,vSphere3
+...
+----
+
+Duplicate virtual machines with no optional fields to differentiate them, or with duplicate optional fields, are marked with a red `x` and are not imported into the migration plan.

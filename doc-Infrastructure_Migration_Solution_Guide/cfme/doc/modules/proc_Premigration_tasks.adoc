@@ -1,34 +1,7 @@
 = Pre-migration tasks[[Pre_migration_tasks]]
 
-[[CSV_file]]
-== Creating a CSV file to import virtual machines
+include::proc_Creating_a_csv_file_to_import_virtual_machines.adoc[leveloffset=+1]
 
-If you are migrating a large number of virtual machines or xref:Retrying_and_remigrating[re-migrating] virtual machines, you must create a CSV file to import the source virtual machines into the migration plan. (If you are migrating a small number of virtual machines, you do not need to create a CSV file. The migration plan can discover and display a list from which you manually select the virtual machines to migrate.)
+include::proc_Setting_up_an_ansible_environment.adoc[leveloffset=+1]
 
-The virtual machine `Name` is mandatory. `Provider`, `Host`, and `Cluster` are optional, to differentiate identical virtual machine names in different environments.
-
-.Sample CSV file with `Name` (mandatory) and `Provider` (optional)
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-Name,Provider
-vm01,vSphere3
-vm02,vSphere3
-vm03,vSphere3
-...
-----
-
-Duplicate virtual machines with no optional fields to differentiate them, or with duplicate optional fields, are marked with a red `x` and are not imported into the migration plan.
-
-[[Setting_up_an_ansible_environment]]
-== Setting up an Ansible environment for automating tasks
-
-If you are using Ansible to automate pre- and post-migration tasks, such as removing web servers from a load-balancing pool before migration and returning them to the pool after migration, you must first set up an Ansible environment:
-
-. Configure an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/managing_providers/automation_management_providers#ansible-inside[Ansible repository and credentials].
-
-. Create a link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/#creating-a-catalog-bundle[catalog bundle].
-
-. Create an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Ansible service catalog item].
-
-include::ref_Rhel_premigration_playbook.adoc[leveloffset=+1]
+include::proc_Configuring_the_rhel_premigration_playbook.adoc[leveloffset=+1]

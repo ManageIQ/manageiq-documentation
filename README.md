@@ -24,13 +24,13 @@ Templates can be found [here](https://github.com/redhat-documentation/modular-do
 * Clone the manageiq_docs repo.
 * `cd` into the new manageiq_docs repo directory.
 * `bundle install`
-* `bundle exec ascii_binder` - This will build the documentation into the _preview directory
+* `bundle exec asciibinder` - This will build the documentation into the _preview directory
 * `open _preview/manageiq/master/welcome/index.html`
 
 Alternately, if you want to "live edit" the docs, replace the last two steps with:
 
 * Install the LiveReload browser extension: http://livereload.com/extensions/
-* `bundle exec ascii_binder watch`
+* `bundle exec asciibinder watch`
 * `open _preview/manageiq/master/welcome/index.html`
 * Go to the open page in the browser and enable the LiveReload extension for that page.
 * Edit the docs.  When you save, it will auto-build and then the webpage will reload automatically showing your changes.

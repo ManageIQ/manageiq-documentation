@@ -100,7 +100,7 @@ user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth.conf.erb /etc/httpd/conf.d/manageiq-external-auth.conf
 ----
 +
-. Edit the `/etc/httpd/conf.d/manageiq-external-auth.conf` file to point to the Kerberos domain hosted by your Active Directory domain by adding the lines for `KrbAuthRealms`, `Krb5KeyTab` and `KrbServiceName` for your environment:
+. Edit the `/etc/httpd/conf.d/manageiq-external-auth.conf` file to point to the Kerberos domain hosted by your Active Directory domain by adding or editing the lines for `KrbAuthRealms`, `Krb5KeyTab` and `KrbServiceName` for your environment:
 +
 ----
 <Location /dashboard/kerberos_authenticate>
@@ -145,7 +145,7 @@ From the {product-title_short} user interface:
 
 [IMPORTANT]
 ====
-Make sure the user's Active Directory groups for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7-Beta/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
+Make sure the user's Active Directory groups for the appliance are created and appropriate roles assigned to those groups. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#roles[Roles] in _General Configuration_ for more information.
 ====
 
 {product-title_short} is now configured to use authentication from your Active Directory domain.
@@ -182,3 +182,4 @@ Any user who is part of `cloudforms` AD group can now log in to {product-title_s
 To confirm this is configured correctly, log in to the {product-title_short} user interface with a user in the `cloudforms` AD group.
 
 To grant an additional user access to the {product-title_short} server, create the user in Active Directory, then add that user to the `cloudforms` AD group. When that user attempts to log in to {product-title_short}, they will automatically inherit the correct permissions for the group. 
+

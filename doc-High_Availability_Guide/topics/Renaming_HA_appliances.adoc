@@ -1,13 +1,9 @@
 [[renaming-ha]]
-== Renaming Database-Only Appliances
+== Updating Hostnames on Database-Only Appliances
 
-Renaming database-only appliances in a high availability cluster requires re-configuring high availability on the primary and standby database-only appliances.
+When updating the hostnames of database-only appliances in a cluster, you must also re-configure high availability on the primary and standby database-only appliances.
 
-
-=== Updating Hostnames on Database-Only Appliances
-
-
-==== Preparing to Update Appliance Hostnames
+=== Preparing to Update Appliance Hostnames
 
 Before updating the hostnames of your appliances, note which appliances in the cluster are primary and standby appliances, and stop the failover monitor, database, and `evmserverd` services:
 
@@ -37,7 +33,7 @@ Local Database Server:   running (primary)
 ----
 
 
-==== Updating the Primary Database-Only Appliance Hostname
+=== Updating the Primary Database-Only Appliance Hostname
 
 Run the following steps on your primary database-only appliance:
 
@@ -46,7 +42,7 @@ Run the following steps on your primary database-only appliance:
 . Update the `host` key to the primary database appliance's new hostname in `/var/www/miq/vmdb/config/database.yml`.
 
 
-==== Updating the Standby Database-Only Appliance Hostname
+=== Updating the Standby Database-Only Appliance Hostname
 
 Run the following steps on your standby database-only appliances:
 
@@ -122,7 +118,7 @@ The hostname or IP address must be visible to all appliances that communicate wi
 
 [IMPORTANT]
 ====
-If you are using non-dedicated database appliances, also stop `evmserverd` on those appliances before renaming it and reconfigure the `database.yml` before restarting.
+If you are using non-dedicated database appliances, also stop `evmserverd` on those appliances before changing their hostnames, and reconfigure `database.yml` before restarting.
 ====
 
 
@@ -144,7 +140,7 @@ After `evmserverd` has started successfully, all appliances will be able connect
 
 [NOTE]
 ====
-You can view a summary of the renamed appliances by running `repmgr cluster show` on one of the database appliances.
+You can view a summary of the updated appliances by running `repmgr cluster show` on one of the database appliances.
 ====
 
 Your {product-title_short} environment is now re-configured for high availability.

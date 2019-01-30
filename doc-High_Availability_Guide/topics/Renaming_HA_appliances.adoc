@@ -5,7 +5,7 @@ When updating the hostnames of database-only appliances in a cluster, you must a
 
 === Preparing to Update Appliance Hostnames
 
-Before updating the hostnames of your appliances, note which appliances in the cluster are primary and standby appliances, and stop the failover monitor, database, and `evmserverd` services:
+Before updating the hostnames of your appliances, complete the following:
 
 . Note the hostnames of the active database (primary) appliance and the standby database appliances in the appliance console. 
 +
@@ -20,7 +20,7 @@ Local Database Server:   running (primary)
 . On the {product-title_short} (non-database) appliances, stop the failover monitor: 
 .. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
 .. Select *Stop Database Failover Monitor*.
-. On the primary and standby database-only appliances, stop the `postgresql` database service:
+. On the _standby_ database-only appliances, stop the `postgresql` database service:
 +
 ----
 # systemctl stop rh-postgresql95-postgresql
@@ -38,7 +38,7 @@ Local Database Server:   running (primary)
 Run the following steps on your primary database-only appliance:
 
 . In the appliance console, configure the new hostname or IP address from the *Configure Network* option.
-. Restart the renamed appliance.
+. Restart the appliance.
 . Update the `host` key to the primary database appliance's new hostname in `/var/www/miq/vmdb/config/database.yml`.
 
 
@@ -47,7 +47,7 @@ Run the following steps on your primary database-only appliance:
 Run the following steps on your standby database-only appliances:
 
 . In the appliance console, configure the new hostname or IP address from the *Configure Network* option.
-. Restart the renamed appliance.
+. Restart the appliance.
 . Update the `host` key to the standby database appliance's new hostname in `/var/www/miq/vmdb/config/database.yml`.
 
 Repeat these steps on any additional standby database-only appliances.
@@ -65,7 +65,7 @@ Re-configure replication on the database-only appliances, and restart services o
 
 ==== Configuring the Primary Database-Only Appliance
 
-On the primary database-only appliance, initialize the nodes in the database cluster to configure the database replication:
+On the primary database-only appliance, initialize the nodes in the database cluster to re-configure the database replication:
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Primary*.
@@ -87,9 +87,9 @@ The hostname or IP address must be visible to all appliances that communicate wi
 
 ==== Configuring the Standby Database-Only Appliance
 
-The steps to configure the standby database-only appliance are similar to that of the primary database-only appliance, in that they prepare the appliance to be database-only, but as the standby.
+The steps to re-configure the standby database-only appliances are similar to that of the primary database-only appliance, in that they prepare the appliance to be database-only, but as the standby.
 
-On the standby database-only appliance, configure the following:
+On the standby database-only appliances, configure the following:
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Standby*.
@@ -110,17 +110,13 @@ The hostname or IP address must be visible to all appliances that communicate wi
 .. Select `y` to configure the replication manager for automatic failover.
 .. Confirm that the replication standby server configuration details are correct, and select `y` to apply the configuration. The standby server will then run an initial synchronization with the primary database, and start locally in standby mode.
 . Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`. 
-. Start the database service (on both appliances?):
-+
-----
-# systemctl start rh-postgresql95-postgresql
-----
+
+Repeat these steps on any additional standby database-only appliances. 
 
 [IMPORTANT]
 ====
 If you are using non-dedicated database appliances, also stop `evmserverd` on those appliances before changing their hostnames, and reconfigure `database.yml` before restarting.
 ====
-
 
 
 ==== Restarting Services

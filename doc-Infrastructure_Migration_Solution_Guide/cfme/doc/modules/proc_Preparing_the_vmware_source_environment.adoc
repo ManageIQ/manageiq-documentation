@@ -10,16 +10,16 @@ Prepare the VMware source environment for migration:
 The network configuration must not be changed in any way during the migration. IP addresses, VLANs, and other network configurations must be the same, before and after migration, because the conversion process preserves the source virtual machine MAC addresses.
 ====
 
-. Unmount ISO images from the source virtual machines.
+. Unmount ISO/CDROM disks from the source virtual machines.
 
 . Check that the source virtual machines do not have encrypted disks.
 
 . Check that each NIC on each virtual machine has no more than 1 IPv4 and/or 1 IPv6 address.
 
+. Install link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[VMware Tools] on all source virtual machines to capture the IP addresses.
+
 . Check that source virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`). Special characters and spaces are not permitted.
 
-. If you are migrating to Red Hat Virtualization, check that source virtual machine names do not duplicate virtual machine names in the target environment.
-
-. If you are migrating to OpenStack Platform, install link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[VMware Tools] on the source virtual machines to capture IP addresses so that they can be associated with port groups.
+. Red Hat Virtualization only: Check that the names of source virtual machines do not duplicate virtual machine names in the target environment.
 
 You are ready to prepare the target environment, xref:Preparing_the_rhv_target_environment[Red Hat Virtualization] or xref:Preparing_the_osp_target_environment[OpenStack Platform].

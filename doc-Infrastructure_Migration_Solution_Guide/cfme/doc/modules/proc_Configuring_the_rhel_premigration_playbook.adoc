@@ -1,36 +1,33 @@
 [id="Configuring_the_rhel_premigration_playbook"]
-= Configuring the RHEL pre-migration playbook
+= Creating a `RHEL pre-migration` playbook for migrating RHEL virtual machines
 
-If you are migrating source virtual machines with RHEL or other Linux operating systems, you must xref:Setting_up_an_ansible_environment[set up an Ansible environment] and configure the `RHEL pre-migration` playbook to run as a xref:Advanced_options_screen[pre-migration task]. If you do not run this playbook, the migration will appear to be successful but you will not be able to access the IP addresses of the migrated virtual machines.
+If you are migrating virtual machines with RHEL or other Linux operating systems, you must create a `RHEL pre-migration` playbook that calls the Ansible link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[`ims.rhel_pre_migration` role]. You will select this playbook to run as a xref:Advanced_options_screen[pre-migration task] when you create the migration plan.
 
-This playbook performs the following tasks on source RHEL virtual machines:
-
-* Preserves the static IP address configuration
-* Installs the Red Hat Virtualization guest agent
-
-This example registers a virtual machine with a Satellite 6 server and enables the `rhel-7-server-rpms` repository. If no variables are provided, the playbook assumes that the repositories are already configured and proceeds to install the guest agent and preserve the static IP address.
-
-[NOTE]
+[IMPORTANT]
 ====
-Encrypt the Satellite `username` and `password` with Ansible vault in a separate file.
+This role is required for both Red Hat Virtualization and OpenStack Platform migrations. Otherwise, the migration will appear to be successful but you will not be able to access the IP addresses of the target virtual machines.
 ====
 
-.RHEL pre-migration playbook
+The `RHEL pre-migration` role performs the following tasks on a source virtual machine:
 
+* Preserves the static IP address configuration by creating udev rules to associate the source virtual machine's MAC address with its new interface name (Red Hat Virtualization and OpenStack Platform)
+* Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment (Red Hat Virtualization only)
+
+To create a `RHEL pre-migration` playbook:
+
+. Set up an xref:Setting_up_an_ansible_environment[Ansible environment].
+
+. Create a `RHEL pre-migration` playbook that calls the `ims.rhel_pre_migration` role:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 ---
-- hosts: _all_
-  vars:
-    rhsm_config:
-      server_hostname: "_Satellite_FQDN_"
-      server_username: "_admin_"
-      server_password: "_password_"
-      org_id: "_organization_"
-    rhsm_repositories:
-      - "rhel-7-server-rpms"
+- hosts: all
   roles:
-    - role: ims.rhel_pre_migration
+     - role: ims.rhel_pre_migration
 ----
-
-For more information, see the link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[RHEL pre-migration role documentation].
++
+[NOTE]
+====
+The `RHEL pre-migration` role assumes that the `rhel-6-server-rpms` or `rhel-7-server-rpms` repository is enabled in the source virtual machine when it installs `qemu-guest-agent`. If you have disabled the repository, you must enable it in the playbook.
+====

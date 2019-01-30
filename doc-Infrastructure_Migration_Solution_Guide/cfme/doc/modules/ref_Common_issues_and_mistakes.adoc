@@ -28,6 +28,8 @@ If a migration plan cannot discover source virtual machines that have been migra
 
 * IP address of RHEL or other Linux virtual machine not accessible after migration. If you cannot access the IP address of a RHEL or other Linux virtual machine after an apparently successful migration, xref:Remigrating_virtual_machines[re-migrate] the virtual machine while running the xref:Configuring_the_rhel_premigration_playbook[`RHEL pre-migration` playbook].
 
+* No IP address. VMware Tools not installed on source virtual machine. VMware Tools preserves the IP address for migration.
+
 == Virtual machine migration failure[[Virtual_machine_migration_failure]]
 
 If a virtual machine fails to migrate, check its xref:Logs[conversion log] and review the possible causes below.
@@ -61,11 +63,7 @@ You cannot resolve this issue by changing the configuration file because the fil
 
 * Virtual machine powered off. The virtual machine must be powered on at the time of migration.
 
-* No IP address:
-
-** VMware Tools not installed on source virtual machine. VMware Tools preserves the IP address for migration.
-
-** Source virtual machine has an interface configuration file that is mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
+* No IP address. Source virtual machine has an interface configuration file that is mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
 +
 [options="" subs="+quotes,verbatim"]
 ----
@@ -74,7 +72,7 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
-* Not Authorized. The OpenStack Platform provider user, `admin`, configured in CloudForms does not have `admin` role privileges within the target project.  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
+* Not Authorized. The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project.  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
 +
 [options="" subs="verbatim"]
 ----

@@ -1,82 +1,30 @@
-[[Creating_a_Migration_Plan]]
-= Creating and Running a Migration Plan
+[id='Creating_and_running_a_migration_plan']
+= Creating and running a migration plan
 
-[discrete]
-== Prerequisites
+The infrastructure migration involves the following key tasks:
 
-* If you are migrating a large number of virtual machines or you are re-migrating virtual machines after a failed migration, create a CSV file [[CSV_file]]containing a list of source virtual machines to migrate.
+. xref:Pre_migration_tasks[Pre-migration tasks]:
+
+* *CSV file:* If you are migrating a large number of virtual machines, you can create a xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file] to add the virtual machines to the migration plan.
 +
-The CSV file specifies the virtual machine names (mandatory) and providers (optional, for differentiating virtual machines with identical names), in the following format:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-Name, Provider
-_vm01_, _vSphere3_
-_vm02_, _vSphere3_
-_vm03_, _vSphere3_
-...
-----
+If you are xref:Remigrating_virtual_machines[re-migrating virtual machines], you must use a CSV file to add the virtual machines because the migration plan cannot re-discover them.
 
-* Check the target datastore to ensure that there are no virtual machines with the same name as a source virtual machine. A name conflict will cause the migration to fail.
+* *Ansible environment:* If you are using Ansible to automate pre- and post-migration tasks, you must set up an xref:Setting_up_an_ansible_environment[Ansible environment].
 
-* Unmount any ISO images that are mounted on source virtual machines. A virtual machine with an attached ISO image will cause the migration to fail.
+* *RHEL pre-migration playbook:* If you are migrating RHEL or other Linux virtual machines, you must set up an xref:Setting_up_an_ansible_environment[Ansible environment] and create a xref:Configuring_the_rhel_premigration_playbook[RHEL pre-migration playbook].
 
-If you are migrating a small number of virtual machines, you can use the migration plan to discover the virtual machines. The migration plan displays a list, from which you manually select the virtual machines to migrate.
+. xref:Creating_a_migration_plan[Creating the migration plan]
 
-[discrete]
-== Procedure
+. xref:Running_a_migration_plan[Running the migration plan] immediately or scheduling it to run in the future
 
-. Go to menu:Compute[Migration] and click *Create Migration Plan*.
+You can xref:Canceling_a_migration_plan[cancel] a migration plan in progress.
 
-. Select the infrastructure mapping from the drop-down list.
+include::proc_Premigration_tasks.adoc[leveloffset=+1]
 
-. Enter the name of your migration plan.
+include::proc_Creating_a_migration_plan.adoc[leveloffset=+1]
 
-. Discover the virtual machines:
+include::proc_Running_a_migration_plan.adoc[leveloffset=+1]
 
-* If you are using the migration plan to discover the virtual machines automatically:
+include::proc_Validating_a_migration_plan.adoc[leveloffset=+1]
 
-.. Select *Choose from a list of VMs discovered in the selected infrastructure mapping*.
-.. Click *Next*.
-+
-.Discovered Virtual Machines
-image:Discover_VMs.png[]
-
-* If you are importing a CSV file:
-
-.. (Optional) To validate your infrastructure mapping, select *Choose from a list of VMs discovered in the selected infrastructure mapping* and click *Next*. If your virtual machines appear in the list, the infrastructure mapping is correct. Click *Back*.
-.. Select *Import a CSV file with a list of VMs to be migrated* and click *Next*.
-.. Click *Import*, browse to the CSV file, and click *Open*.
-
-. Select the virtual machines to migrate and click *Next* to go to *Advanced Options*.
-+
-.Advanced Options
-image:Advanced_Options.png[]
-+
-You can select Ansible playbook services to run on the virtual machines in the migration plan before or after the migration. See xref:Option_Pre_and_Post_Migration_Tasks_with_Ansible[Advanced Migration Option: Automating Pre- and Post-Migration Tasks with Ansible] below.
-
-. Select *Start Migration Immediately* and click *Create*.
-
-. Click *Close*. The migration plan may take some time to complete. *In Progress Plans*, the amount of data being transferred, the number of virtual machines being migrated, and the elapsed time are displayed. To view the migration progress of individual virtual machines, click the migration plan to go to the migration plan details.
-+
-When the migration is complete, the migration plan is displayed under *Completed Migrations*, with the number of successfully migrated virtual machines. A *Retry* option enables you to re-migrate any virtual machines in this plan that failed to migrate. See xref:Retrying_a_Migration_Plan[Retrying a Migration Plan].
-
-[NOTE]
-====
-During migration, the counter displaying the migration plan progress (in menu:Compute[Migration]) may be a few seconds ahead of the counter that appears in the migration plan details (menu:Compute[Migration>__Migration Plan__]). This is because the migration plan counter displays the total time to run the migration plan, while the migration plan details counter displays the time to migrate the virtual machines.
-====
-
-[[Option_Pre_and_Post_Migration_Tasks_with_Ansible]]
-[discrete]
-== Advanced Migration Option: Automating Pre- and Post-Migration Tasks with Ansible
-
-Certain tasks may need to be performed before or after a virtual machine is migrated, for example, removing web server virtual machines from a load-balancing pool before migration and adding them back to the pool after migration. When you create a migration plan, you can specify an Ansible service catalog item to be run before or after each virtual machine within the plan is migrated.
-
-You must create the Ansible service catalog item before you create the migration plan. At least one repository, one playbook, and one credential must exist in the CloudForms inventory.
-
-To create an Ansible service catalog item:
-
-. Configure the Ansible repository and credentials (see
-link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/managing_providers/automation_management_providers#ansible-inside[Ansible] in _CloudForms: Managing Providers_).
-. Create a catalog bundle (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#creating-a-catalog-bundle[Creating a Catalog Bundle] in _CloudForms: Provisioning Virtual Machines and Hosts_).
-. Create the Ansible service catalog item (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/provisioning_virtual_machines_and_hosts/#create-playbook-service-catalog-item[Creating an Ansible Playbook Service Catalog Item] in _CloudForms: Provisioning Virtual Machines and Hosts_).
+include::proc_Canceling_a_migration_plan.adoc[leveloffset=+1]

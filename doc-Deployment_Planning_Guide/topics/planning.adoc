@@ -73,17 +73,27 @@ The following provides a summary of types of appliances:
 [[central-administration]]
 === Centralized Administration
 
-{product-title} includes centralized administration capabilities, where operations can be initiated from the global region and processed and executed on the remote region. This includes the following life cycle management operations:
+{product-title} includes centralized administration capabilities, where certain operations can be initiated from the global region and processed and executed on remote regions. 
+
+The following life cycle management operations can be initiated from the global region using centralized administration:
 
 * Virtual machine provisioning
-* Service provisioning
 * Virtual machine power operations
 * Virtual machine retirement
 * Virtual machine reconfiguration
+* Service provisioning
+* Service retirement
 
-image:centralized_admin.png[Centralized Administration Diagram]
+From the global region, you can also access the user interfaces of virtual machines residing in remote regions.
+
+[NOTE]
+====
+{product-title_short} life cycle operations other than those listed above are not supported. Centralized administration capabilities are not supported from the Self Service user interface.
+====
 
 With centralized administration, the remote_queue_put leverages a new system-to-system REST API request to forward the original request to the remote region. This request is put in the local queue in the remote region, which is then delivered by a worker in the remote region as if it was queued there all along. As a result, a {product-title_short} operator in the global region can be seen as provisioning on behalf of a remote region. 
+
+image:centralized_admin.png[Centralized Administration Diagram]
 
 [NOTE]
 ====
@@ -91,7 +101,7 @@ The operations initiated from the global region are subject to the role-based ac
 ====
 
 ifdef::cfme[]
-In CloudForms 4.5 and above, configuring database replication automatically enables centralized administration, eliminating the need for further configuration. See the section on _Configuring Database Replication and Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#configuring_database_replication[General Configuration] guide.
+In CloudForms 4.5 and above, configuring database replication automatically enables centralized administration, eliminating the need for further configuration. To configure database replication, see _Configuring Database Replication and Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#configuring_database_replication[General Configuration] guide.
 endif::cfme[]
 
 ifdef::miq[]

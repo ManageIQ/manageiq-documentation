@@ -8,19 +8,15 @@ This chapter outlines the steps for installing and configuring the {product-titl
 
 The primary database-only appliance functions as an external database to the {product-title_short} appliances. This procedure creates the database.
 
-<<<<<<< HEAD
-. Deploy a {product-title_short} appliance with an extra partition for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
-=======
-. Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
+. Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
 +
 ifdef::cfme[]
 [NOTE]
 ====
-See the installation guide for your host platform (such as https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[_Installing Red Hat CloudForms on Red Hat Virtualization_]) for detailed steps on deploying an appliance with an extra disk.
+See the installation guide for your host platform (such as https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[_Installing Red Hat CloudForms on Red Hat Virtualization_]) for detailed steps on deploying an appliance with an extra disk.
 ====
 endif::cfme[]
 +
->>>>>>> 02dc81d3... edits throughout installation and config procedures from testing with consulting
 . Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.
 . SSH into the {product-title_short} appliance to enter the appliance console. 
 . Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
@@ -80,18 +76,6 @@ Region metadata is required to configure the primary database-only appliance as 
 # systemctl start chronyd.service
 ------
 +
-<<<<<<< HEAD
-. In the appliance console, configure the hostname by selecting *Set Hostname*.
-. Select *Configure Database*.
-. Configure this appliance to use the encryption key from the primary database-only appliance:
-.. For *Encryption Key*, select *Fetch key from remote machine*.
-.. Enter the hostname for the primary database-only appliance you previously configured containing the encryption key.
-.. Enter the primary database-only appliance's username.
-.. Enter the primary database-only appliance's password.
-.. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
-. Configure the database:
-.. Select *Create Region in External Database*, since the database is external to the appliances.
-=======
 . In the appliance console, configure the following:
 .. Configure the hostname by selecting *Set Hostname*.
 .. Select *Configure Database*.
@@ -109,22 +93,12 @@ All appliances in the same region must use the same v2 key.
 +
 .. Configure the database:
 ... Select *Create Region in External Database*, since the database is external to the appliances.
->>>>>>> 02dc81d3... edits throughout installation and config procedures from testing with consulting
 +
 [IMPORTANT]
 ====
 Creating a database region will destroy any existing data and cannot be undone.
 ====
 +
-<<<<<<< HEAD
-.. Assign a unique database region number. Note that creating a database region will destroy any existing data and cannot be undone.
-.. For *Are you sure you want to continue?* Select `y`.
-. Enter the primary database-only appliance's name and access details:
-.. Enter the hostname for the primary database-only appliance.
-.. Enter a name to identify the database.
-.. Enter the primary database-only appliance's username.
-.. Enter a password for the database and confirm the password.
-=======
 ... Assign a unique database region number. 
 ... Enter the port number.
 ... For *Are you sure you want to continue?* Select `y`.
@@ -143,11 +117,7 @@ You can check the configuration on the appliance console details screen. When co
 [[configuring_primary_db]]
 === Configuring the Primary Database-Only Appliance
 
-<<<<<<< HEAD
-On the primary database-only appliance, initialize the nodes in the database cluster to configure the database replication:
-=======
 On the primary database-only appliance you created in xref:installation_primary_db[], initialize the nodes in the database cluster to configure the database replication. Run these steps from the appliance console:
->>>>>>> 02dc81d3... edits throughout installation and config procedures from testing with consulting
 
 . In the appliance console menu, select *Configure Database Replication*. 
 . Select *Configure Server as Primary*.
@@ -236,22 +206,6 @@ Install a second virtual machine with a {product-title_short} appliance and any 
 # systemctl start chronyd.service
 ------
 +
-<<<<<<< HEAD
-. In the appliance console, configure the hostname by selecting *Set Hostname*.
-. Select *Configure Database*.
-. Configure this appliance to use the encryption key from the primary database-only appliance:
-.. For *Encryption Key*, select *Fetch key from remote machine*.
-.. Enter the hostname for the primary database-only appliance you previously configured containing the encryption key.
-.. Enter the primary database-only appliance's username.
-.. Enter the primary database-only appliance's password.
-.. Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
-.. Select *Join Region in External Database* from the appliance console menu.
-. Enter the primary database-only appliance's name and access details:
-.. Enter the hostname for the primary database-only appliance.
-.. Enter a name to identify the database.
-.. Enter the primary database-only appliance's username.
-.. Enter a password for the database and confirm the password.
-=======
 . In the appliance console, configure the following:
 .. Configure the hostname by selecting *Set Hostname*.
 .. Select *Configure Database*.
@@ -270,7 +224,6 @@ Install a second virtual machine with a {product-title_short} appliance and any 
 ... Enter a password for the database and confirm the password.
 
 This configuration takes a few minutes to process.
->>>>>>> 02dc81d3... edits throughout installation and config procedures from testing with consulting
 
 You can check the configuration on the appliance console details screen. When configured successfully, *{product-title_abbr_uc} Server* will show as `running`, and *{product-title_abbr_uc} Database* will show the hostname of the primary database-only appliance.
 

@@ -1,5 +1,5 @@
 [id="Vmware_to_osp_workflow"]
-= VMware to Red Hat OpenStack Platform workflow
+= VMware to Red Hat OpenStack Platform migration workflow
 
 This workflow describes the process of migrating from VMware to Red Hat OpenStack Platform.
 
@@ -20,7 +20,7 @@ Source virtual machines must be powered on for migration.
 
 . The conversion host connects to the source datastore through the ESXi host with `virt-v2v-wrapper` and streams the disks to be converted to the target block storage with `virt-v2v`. The conversion host creates volumes in the block storage, attaches them to itself, and converts the source disks.
 
-. Once the disks are converted, `virt-v2v` detaches the volumes from the conversion host. `virt-v2v-wrapper` creates the target instance in the OpenStack Platform environment with the converted disks, using the flavor and security group defined in the migration plan and the network(s) defined in the infrastructure mapping.
+. After the disks are converted, `virt-v2v` detaches the volumes from the conversion host. `virt-v2v-wrapper` creates the target instance in the OpenStack Platform environment with the converted disks, using the flavor and security group defined in the migration plan and the network(s) defined in the infrastructure mapping.
 
 . The disks mapped in the block storage are attached to the instance and the instance is powered on.
 +

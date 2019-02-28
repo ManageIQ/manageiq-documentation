@@ -1,9 +1,52 @@
 [id="Creating_conversion_hosts"]
 = Creating conversion hosts
 
+.Prerequisites
+
+The following prerequisites apply:
+
+* Deciding how many conversion hosts to create. See xref:Number_of_conversion_hosts[How many conversion hosts to create]
+* Choosing VDDK or SSH transformation for the migration. See xref:datapath_transformation_options_vddk_ssh[Transformation options: VDDK or SSH]
+
+[[Number_of_conversion_hosts]]
+How many conversion hosts to create::
+All the virtual machines in the migration plan are migrated at the same time. Therefore, the number of conversion hosts you create depends on the size of your migration. Multiple conversion hosts are recommended for load-balancing purposes, even for smaller migrations.
++
+The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process. You should thoroughly test your environment before the migration to determine how many migrations it can support without negative effects.
++
+Each conversion host is limited to `10` concurrent migrations, unless you  xref:Configuring_the_maximum_number_of_concurrent_migrations[change the default value].
++
+[IMPORTANT]
+====
+The maximum number of concurrent virtual machine migrations per conversion host is `20` for both VDDK and SSH transformation. The SSH limitation, however, applies only to RHV 4.2.5, not to later versions of RHV.
+====
+
+[[datapath_transformation_options_vddk_ssh]]
+Transformation options: VDDK or SSH::
+Choose the transformation option, VDDK or SSH, that is appropriate for your environment:
++
+* *VDDK*
+
+** Recommended because it is approximately twice as fast as SSH
+** Compiled with `nbdkit` to provide direct connectivity to the virtual machine disks
+** Requires VDDK package download
+** Requires the location of the VDDK library for conversion host configuration
+
+* *SSH*
+
+** Slower than VDDK
+** Better suited for large-scale migrations than VDDK
+** Does not require additional downloads, packages, tools, or compilation
+** SSH access must be enabled on the source hypervisors
+** Source and target environments must share SSH keys
+
+.Creating conversion hosts for Red Hat Virtualization
+
 If you are migrating to Red Hat Virtualization, select one or more existing hosts (on physical machines, not virtual machines) to use as conversion hosts.
 
-If you are migrating to OpenStack Platform:
+You can configure the conversion hosts for SSH or VDDK transformation. See xref:Configuring_conversion_hosts_for_transformation[].
+
+.Creating conversion hosts for OpenStack Platform
 
 . Download the OpenStack Platform conversion appliance:
 
@@ -36,4 +79,4 @@ The conversion appliance for OpenStack Platform 14 may be used with OpenStack Pl
 .. Enter the *Username*, `cloud-user`.
 .. Click *Choose File*, browse to the SSH key file that you use to create OpenStack Platform instances, and click *Save*.
 
-You are ready to configure the conversion hosts for xref:Configuring_conversion_hosts_for_transformation[transformation].
+You can configure the conversion hosts for SSH or VDDK transformation. See xref:Configuring_conversion_hosts_for_transformation[].

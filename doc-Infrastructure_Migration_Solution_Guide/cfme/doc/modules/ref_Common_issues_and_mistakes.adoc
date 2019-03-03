@@ -8,33 +8,34 @@
 
 .Red Hat Virtualization only
 
-* Missing networks. [[Infrastructure_mapping_missing_networks]]This error occurs if you do not add the conversion host credentials in CloudForms. Delete the mapping, xref:Enabling_rhv_conversion_hosts_in_cloudforms[enable the conversion hosts in CloudForms], and create a new mapping.
+[[RHV_infrastructure_mapping_missing_networks]]
+* Missing networks. This error occurs if you do not add the conversion host credentials in CloudForms. Delete the mapping, xref:Enabling_rhv_conversion_hosts_in_cloudforms[enable the conversion hosts in CloudForms], and create a new mapping.
 
+[[RHV_infrastructure_mapping_missing_networks_datastore]]
 * Missing networks and datastore. This error occurs when you create a mapping and subsequently refresh the hosts, which changes the object IDs. Delete the mapping and create a new one.
 
 .OpenStack Platform only
 
-* Storage not detected. [[OpenStack_storage_not_detected]]If the target block storage does not appear while you are creating an infrastructure mapping, check that you have   link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[set at least one `volume type`] for the storage.
+* Storage not detected. [[OpenStack_storage_not_detected]]If the target block storage does not appear while you are creating an infrastructure mapping, check that you have link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[set at least one `volume type`] for the storage.
 
 == Migration plan errors[[Migration_plan_errors]]
 
+[[Virtual_machines_cannot_be_discovered]]
 * Virtual machines cannot be discovered. If a migration plan cannot discover source virtual machines that have never been migrated in the past, check that the datastores and networks of the source virtual machines have been added to the Infrastructure Mapping.
 +
 If a migration plan cannot discover source virtual machines that have been migrated in the past, xref:Remigrating_virtual_machines[re-migrate] the virtual machines. Previously migrated virtual machines cannot be discovered because they are marked as `migrated` in the CloudForms VMDB.
 
+[[Virtual_machines_cannot_be_added_with_CSV_file]]
 * Virtual machines cannot be added to the migration plan with a CSV file. If you cannot add the source virtual machines into a migration plan with a CSV file, check the xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
 
 * `Denied State`. [[Denied_state_error]]If a migration plan fails immediately and the migration plan displays a *Denied State* error message, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: ensure that you have xref:Enabling_rhv_conversion_hosts_in_cloudforms[authenticated the conversion hosts]). Cancel the migration plan and xref:Retrying_a_failed_migration_plan[retry it].
 
-* IP address of RHEL or other Linux virtual machine not accessible after migration. If you cannot access the IP address of a RHEL or other Linux virtual machine after an apparently successful migration, xref:Remigrating_virtual_machines[re-migrate] the virtual machine while running the xref:Configuring_the_rhel_premigration_playbook[`RHEL pre-migration` playbook].
-
-* No IP address. VMware Tools not installed on source virtual machine. VMware Tools preserves the IP address for migration.
-
 == Virtual machine migration failure[[Virtual_machine_migration_failure]]
 
-If a virtual machine fails to migrate, check its xref:Logs[conversion log] and review the possible causes below.
+If a virtual machine fails to migrate, you can check its xref:Logs[conversion log] and review the possible causes below.
 
-The following scenarios can cause a failed migration:
+[[VM_migration_failure_source_environment]]
+The following scenarios in the source environment can cause a failed migration:
 
 * Mounted ISO/CDROM disk(s)
 
@@ -42,11 +43,20 @@ The following scenarios can cause a failed migration:
 
 * Invalid name. The source virtual machine name must not contain spaces or special characters.
 
+[[Migrated_VM_missing_IP]]
+* Migrated virtual machine does not have IP address. Check that VMware Tools is installed on the source virtual machine. VMware Tools preserves the IP address for migration.
+
+[[Migrated_RHEL_IP_address_not_accessible]]
+* IP address of RHEL or other Linux virtual machine not accessible after migration. If you cannot access the IP address of a RHEL or other Linux virtual machine after an apparently successful migration, xref:Remigrating_virtual_machines[re-migrate] the virtual machine while running the xref:Configuring_the_rhel_premigration_playbook[`RHEL pre-migration` playbook].
+
+[[RHV_VM_migration_failure]]
 .Red Hat Virtualization only
 
+[[RHV_name_conflict]]
 * Virtual machine name duplicates an existing target virtual machine name.
 
-* SSH transformation failure. [[SSH_transformation_fails]]If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
+[[SSH_transformation_fails]]
+* SSH transformation failure. If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -61,8 +71,10 @@ You cannot resolve this issue by changing the configuration file because the fil
 
 .OpenStack Platform only
 
+[[OSP_VM_powered_off]]
 * Virtual machine powered off. The virtual machine must be powered on at the time of migration.
 
+[[OSP_missing_IP]]
 * No IP address. Source virtual machine has an interface configuration file that is mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
 +
 [options="" subs="+quotes,verbatim"]
@@ -72,6 +84,7 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
+[[OSP_not_authorized]]
 * Not Authorized. The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project.  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
 +
 [options="" subs="verbatim"]

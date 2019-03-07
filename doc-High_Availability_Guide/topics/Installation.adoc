@@ -1,12 +1,12 @@
 [[installation]]
 == Installing the Appliances
 
-This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two (at minimum) {product-title_short} appliances.
+This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two (at minimum) non-database {product-title_short} appliances.
 
 [[installation_primary_db]]
 === Installing the Primary Database-Only Appliance
 
-The primary database-only appliance functions as an external database to the {product-title_short} appliances. This procedure creates the database.
+The primary database-only appliance functions as an external database to the non-database {product-title_short} appliances.
 
 . Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
 +
@@ -132,7 +132,7 @@ On the primary database-only appliance you created in xref:installation_primary_
 +
 [NOTE]
 ====
-The hostname must be visible to all appliances that communicate with this database, including the {product-title_short} appliances and any global region databases.
+The hostname must be visible to all appliances that communicate with this database, including the non-database {product-title_short} appliances and any global region databases.
 ====
 +
 .. Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
@@ -144,6 +144,8 @@ This configures database replication in the cluster.
 === Installing the Standby Database-Only Appliance
 
 The standby database-only appliance is a copy of the primary database-only appliance and takes over the role of primary database in case of failure.
+
+Follow these steps to create a new standby appliance, or to add another standby appliance to the cluster.
 
 . Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database that is the same size as the primary database-only appliance, as it will contain the same data. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
 . Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.

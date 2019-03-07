@@ -43,9 +43,9 @@ If any appliance shows it is not registered or is missing a subscription to any 
 
 .Updating the Appliances
 
-Follow this procedure to update appliances in your environment without migrating the database to the next major version of {product-title_short}. Note the appliance to perform each step on: some steps are to be performed only on the database-only appliances, and other steps only on the {product-title_short} appliances, while some steps apply to all appliances.
+Follow this procedure to update appliances in your environment without migrating the database to the next major version of {product-title_short}. Note the appliance to perform each step on: some steps are to be performed only on the database-only appliances, and other steps only on the non-database {product-title_short} appliances, while some steps apply to all appliances.
 
-. Power off the {product-title_short} appliances.
+. Power off the non-database {product-title_short} appliances.
 . Power off the database-only appliances.
 . Back up each appliance:
 .. Back up the database of your appliance. Take a snapshot if possible.
@@ -54,7 +54,7 @@ Follow this procedure to update appliances in your environment without migrating
   * `/var/www/miq/vmdb/REGION`
 .. Note the hostnames and IP addresses of each appliance. This information is available on the summary screen of the appliance console.
 . Start each database-only appliance.
-. Start each {product-title_short} appliance again, and stop `evmserverd` on each just after boot:
+. Start each non-database {product-title_short} appliance again, and stop `evmserverd` on each just after boot:
 +
 ------
 # systemctl stop evmserverd
@@ -66,7 +66,7 @@ Follow this procedure to update appliances in your environment without migrating
 # yum update
 ------
 +
-. On one of the {product-title_short} (non-database) appliances, apply any database schema updates included in the errata, and reset the Red Hat and ManageIQ automation domains: 
+. On one of the non-database {product-title_short} appliances, apply any database schema updates included in the errata, and reset the Red Hat and ManageIQ automation domains: 
 +
 ------
 # vmdb
@@ -74,9 +74,9 @@ Follow this procedure to update appliances in your environment without migrating
 # rake evm:automate:reset
 ------
 +
-. Power off the {product-title_short} appliances. 
+. Power off the non-database {product-title_short} appliances. 
 . Reboot the database-only appliances.
-. Wait five minutes, then start the {product-title_short} appliances again.
+. Wait five minutes, then start the non-database {product-title_short} appliances again.
 
 The appliances in your high availability environment are now up to date.
 

@@ -1,58 +1,21 @@
-[id="Virtual_machine_migration_failure"]
+[[Virtual_machine_migration_failure]]
 = Virtual machine migration failure
 
-If a specific virtual machine fails to migrate, check its xref:VM_migration_log[conversion log] and review the possible causes:
+If a specific virtual machine fails to migrate, check its xref:VM_migration_log[conversion log] and review the following issues:
 
-* xref:General_VM_migration_failure[General causes]
-* xref:RHV_VM_migration_failure[Red Hat Virtualization only]
-* xref:OSP_VM_migration_failure[OpenStack Platform only]
+* xref:IP_address_errors[IP address errors]
+* xref:VMware_environment_errors[VMware environment]
+* xref:RHV_VM_migration_failure[Red Hat Virtualization]
+* xref:OSP_VM_migration_failure[OpenStack Platform]
 
-[id="General_VM_migration_failure"]
-.General causes
+[[IP_address_errors]]
+== IP address errors
 
-* Mounted ISO/CDROM disk
-
-* Encrypted disk
-
-* Invalid source name (containing spaces or special characters)
-
-[id="Migrated_VM_missing_IP"]
-* The migrated virtual machine does not have an IP address. Check that VMware Tools is installed on all source virtual machines. VMware Tools preserves the IP address for migration.
-
-[id="Migrated_RHEL_IP_address_not_accessible"]
-* The IP address of a migrated RHEL (or other Linux operating system) virtual machine is not accessible. Add the `RHEL premigration` playbook to your migration plan by performing the following steps:
-
-. Set up the xref:Setting_up_an_ansible_environment[Ansible environment].
-. Configure the xref:Configuring_the_rhel_premigration_playbook[`RHEL premigration` playbook].
-. Add the playbook to the xref:Advanced_options_screen[migration plan].
-. xref:Remigrating_virtual_machines[Re-migrate] the virtual machine.
-
-.Red Hat Virtualization only[[RHV_VM_migration_failure]]
-
-[id="RHV_name_conflict"]
-* Virtual machine name duplicates an existing target virtual machine name.
-
-[id="SSH_transformation_fails"]
-* SSH transformation failure. If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ipa-client-install --uninstall
-# ipa-client-install --no-ssh
-----
-
-[NOTE]
-====
-You cannot resolve this issue by changing the configuration file because the file is restored during upgrades.
-====
-
-.OpenStack Platform only[[OSP_VM_migration_failure]]
-
-[id="OSP_VM_powered_off"]
-* Virtual machine powered off. The virtual machine must be powered on at the time of migration.
-
-[id="OSP_missing_IP"]
-* No IP address. Source virtual machine has an interface configuration file that is mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
+* Migrated virtual machine does not have an IP address:
+[[Migrated_VM_missing_IP]]
+** All platforms: Check that VMware Tools is installed on all the source virtual machines. VMware Tools preserves the IP address for migration.
+[[OSP_missing_IP]]
+** OpenStack Platform: Check the source virtual machine for an interface configuration file that is mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not).
 +
 [options="" subs="+quotes,verbatim"]
 ----
@@ -61,7 +24,54 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
-[id="OSP_not_authorized"]
+[[Migrated_RHEL_IP_address_not_accessible]]
+* IP address of a migrated RHEL (or other Linux operating system) virtual machine is not accessible. Perform the following steps:
+
+. Set up the xref:Setting_up_an_ansible_environment[Ansible environment].
+. Configure the xref:Configuring_the_rhel_premigration_playbook[`RHEL premigration` playbook].
+. Add the playbook to the xref:Advanced_options_screen[migration plan].
+. xref:Remigrating_virtual_machines[Re-migrate] the virtual machine.
+
+[[VMware_environment_errors]]
+== VMware environment
+
+A VMware virtual machine cannot migrate if it has any of the following conditions:
+
+* Mounted ISO/CDROM disk
+* Encrypted disk
+* Invalid name (contains spaces or special characters)
+
+[[RHV_VM_migration_failure]]
+== Red Hat Virtualization
+
+The following errors are specific to Red Hat Virtualization:
+
+[[RHV_name_conflict]]
+* Virtual machine name duplicates an existing target virtual machine name.
+
+[[SSH_transformation_fails]]
+* SSH transformation failure. If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ipa-client-install --uninstall
+# ipa-client-install --no-ssh
+----
++
+[NOTE]
+====
+You cannot resolve this issue by changing the configuration file because the file is restored during upgrades.
+====
+
+[[OSP_VM_migration_failure]]
+== OpenStack Platform
+
+The following errors are specific to OpenStack Platform:
+
+[[OSP_VM_powered_off]]
+* Virtual machine powered off. The virtual machine must be powered on at the time of migration.
+
+[[OSP_not_authorized]]
 * Not Authorized. The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project.  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
 +
 [options="" subs="verbatim"]

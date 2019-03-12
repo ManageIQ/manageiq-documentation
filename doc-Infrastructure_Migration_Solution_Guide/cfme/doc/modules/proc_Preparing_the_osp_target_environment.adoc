@@ -13,16 +13,22 @@ include::ref_Software_compatibility_requirements.adoc[]
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/[Red Hat OpenStack Platform] 13 or later.
 
 . Create link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/networking_guide/#create_a_network[provider networks] for the OpenStack Platform instances to ensure that the VMware IP addresses are preserved.
++
+[NOTE]
+====
+IMS supports both provider and tenant networks.
+====
 
-. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#create_a_project[Create a project] for the conversion hosts and whatever destination projects you require for the OpenStack Platform instances.
+. Create a link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#create_a_project[project] for the conversion hosts and whatever destination projects you require for the OpenStack Platform instances.
 
-. Ensure that the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[`admin` user has `member` and `admin` roles] in the conversion and destination projects.
+. Ensure that the `admin` user has link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[`member` and `admin` roles] in the conversion and destination projects.
 
-. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[Set at least one `volume type`] for the OpenStack Platform block storage. Otherwise, CloudForms will not detect the storage during infrastructure mapping.
+. Set at least one link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[`volume type`] for the OpenStack Platform block storage. Otherwise, CloudForms will not detect the storage during infrastructure mapping.
 
 . Ensure that the user configured in CloudForms for the OpenStack Platform provider has `admin` privileges on the target projects.
 
 . Configure security groups:
+
 * A security group for the conversion hosts and CloudForms must have port 22 (SSH) enabled.
 * A security group for CloudForms must have port 443 (HTTPS) enabled.
 +

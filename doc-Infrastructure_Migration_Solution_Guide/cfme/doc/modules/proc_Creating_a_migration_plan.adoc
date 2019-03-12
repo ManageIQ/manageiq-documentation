@@ -1,7 +1,18 @@
 // Module included in the following assemblies:
 // assembly_Creating_and_running_a_migration_plan.adoc
 [id="Creating_a_migration_plan"]
-== Creating a migration plan
+= Creating a migration plan
+
+Create a migration plan with an infrastructure mapping, adding the source virtual machines. You can choose to run the migration plan immediately or in the future.
+
+[NOTE]
+====
+For large migrations, it is faster to add the virtual machines with a xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file] than to select them individually.
+
+If your source virtual machines that have been migrated previously, a xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file] is mandatory.
+====
+
+.Procedure
 
 . Click menu:Compute[Migration > Migration Plans].
 
@@ -38,22 +49,19 @@ If you selected *Import a CSV file with a list of VMs to be migrated*:
 
 If you cannot discover or import the source virtual machines, see xref:Migration_plan_errors[Migration plan errors].
 
-[id="Remigrating_virtual_machines"]
-If you are migrating virtual machines that have been migrated previously, you must add the virtual machines with a xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file]. The source virtual machines cannot be re-discovered by the migration plan because they are marked in the CloudForms database as `migrated`.
-
 .<a|*Instance Properties*
 
 (OpenStack Platform only)
 .<a|. Click the pencil icon to edit the network or flavor of each selected virtual machine.
 +
-If a flavor is too small for the source virtual machine, it is marked with an asterisk (`*`).
+If a flavor is too small for the source virtual machine, it is marked with an asterisk (`*`). If you have not created flavors for the migration, CloudForms chooses from the available flavors.
 . Click *Next*.
 
 .<a|*Advanced Options*
 [id="Advanced_options_screen"]
 (Optional)
 .<a|. Select a premigration playbook service.
-. Select a post-migration playbook service.
+. Select a postmigration playbook service.
 . Select the virtual machines on which to run the playbook services.
 . Click *Next*.
 

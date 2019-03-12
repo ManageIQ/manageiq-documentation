@@ -1,19 +1,24 @@
 // Module included in the following assemblies:
-// proc_Performing_premigration_tasks.adoc
-[id="Configuring_the_rhel_premigration_playbook"]
+// con_Migration_plan_prerequisites.adoc
+[id="Creating_a_rhel_premigration_playbook"]
 = Creating a `RHEL premigration` playbook for migrating RHEL virtual machines
 
 If you are migrating virtual machines with RHEL or other Linux operating systems, create a `RHEL premigration` playbook that calls the Ansible link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[`ims.rhel_premigration` role].
 
+[IMPORTANT]
+====
+This role is required for both Red Hat Virtualization and OpenStack Platform. Otherwise, the migration will appear to be successful but you will not be able to access the IP addresses of the migrated virtual machines.
+====
+
 The `RHEL premigration` role performs the following tasks on a VMware virtual machine:
 
 * Preserves the static IP address configuration by creating udev rules to associate the VMware virtual machine's MAC address with its existing interface name (Red Hat Virtualization and OpenStack Platform)
+
 * Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment (Red Hat Virtualization only)
 
-[IMPORTANT]
-====
-This role is required for both Red Hat Virtualization and OpenStack Platform. Otherwise, the migration will appear to be successful but you will not be able to access the IP addresses of the target virtual machines.
-====
+.Prerequisite
+
+* Ansible environment that can be accessed by CloudForms. See xref:Setting_up_an_ansible_environment[].
 
 .Procedure
 

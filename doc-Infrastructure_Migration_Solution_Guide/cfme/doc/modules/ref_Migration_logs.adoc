@@ -3,7 +3,22 @@
 [id="Migration_logs"]
 = Migration logs
 
-Check the following logs to troubleshoot a failed migration.
+Check the logs to troubleshoot a failed migration.
+
+.Downloading logs in CloudForms
+
+. In menu:Compute[Migration Plans > Migration Plans Complete], click a migration plan name to go to the details view.
+. Click *Download Log* of a virtual machine and select a log from the dropdown list:
+
+* *Premigration log:* This option only appears if a premigration playbook is used.
+* *Migration log:* Debug log of `virt-v2v`. It tracks the core of the virtual machine process, including `libguestfs` traces and disk migration details.
+* *Virt-v2v-wrapper log:* Log of the daemonizing wrapper for `virt-v2v`. It traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting.
+* *Postmigration log:* This option only appears if a postmigration playbook is used.
+
+[IMPORTANT]
+====
+Both the Migration log (`virt-v2v`) and the Virt-v2v-wrapper log are required for bug analysis. If you open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], you should provide both logs.
+====
 
 [id="CloudForms_log"]
 .CloudForms log
@@ -11,29 +26,3 @@ Check the following logs to troubleshoot a failed migration.
 This log traces the orchestration of the virtual machine migration in CloudForms.
 
 Location: `/var/www/miq/vmdb/log/automation.log`
-
-[id="Conversion_host_logs"]
-.Conversion host logs
-
-When disk migration starts, two logs are created in the conversion host:
-
-* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting.
-* `virt-v2v`: Debug output from `virt-v2v` itself. This log tracks the core of the virtual machine process, including `libguestfs` traces and disk migration details.
-+
-[IMPORTANT]
-====
-Both logs are required for bug analysis. If you open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], you should provide both logs.
-====
-
-Location:
-
-* Red Hat Virtualization: `/var/log/vdsm/import/v2v-import-_timestamp_-_log_number_.log` and `v2v-import-_timestamp_-_log_number_-wrapper.log`
-* OpenStack Platform: `/var/log/virt-v2v/v2v-import-_timestamp_-_log_number_.log` and `v2v-import-_timestamp_-_log_number_-wrapper.log`
-
-[id="VM_migration_log"]
-.Virtual machine migration log
-
-Location:
-
-. In menu:Compute[Migration Plans > Migration Plans Complete], click a migration plan name to go to the details view.
-. Click menu:Download Log[Migration log] of a virtual machine.

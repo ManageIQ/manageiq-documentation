@@ -1,0 +1,95 @@
+// Module included in the following assemblies:
+// assembly_Creating_and_configuring_the_conversion_hosts.adoc
+[id="Configuring_conversion_hosts_in_CloudForms"]
+= Configuring the conversion hosts in CloudForms
+
+TBD - How are RHV hosts authenticated?
+
+[id='VDDK_only_Downloading_and_copying_VDDK']
+.Prerequisite
+
+If you are using VDDK, download and copy the VDDK package:
+
+. Go to the link:https://www.vmware.com/support/pubs/[VMware Documentation site], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
+
+. Click `Latest Releases` and select the latest VDDK release.
+
+. Download the VDDK package, +VMware-vix-disklib-_version_.x86_64.tar.gz+.
+
+. Copy the VDDK package to a location that is accessible over `HTTP`, for example, `/var/www/html` on the Red Hat Virtualization Manager machine.
+
+You are ready to configure the conversion hosts in CloudForms.
+
+.Procedure
+
+. In menu:Compute[Migration > Migration Settings], click *Configure Conversion Host*.
+
+. Select the *Provider type* and the *Provider* from the dropdown lists and click *Next*.
+
+...
+
+
+[id="VDDK_and_SSH_Validating_the_transformation_configuration"]
+== VDDK and SSH: Validating the transformation configuration
+
+Run the `conversion_host_check` playbook to verify that the conversion hosts are configured correctly for VDDK or SSH transformation:
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook --ask-vault-pass -i conversion_hosts_inventory.yml conversion_host_check.yml
+----
+
+If the conversion hosts are configured correctly, proceed to the next step:
+
+* VDDK:
+** OpenStack Platform: Create an xref:Creating_an_Infrastructure_Mapping[infrastructure mapping].
+
+* SSH
+** All environments: xref:SSH_only_Configuring_and_validating_the_SSH_connection[Configure and validate the SSH connection].
+
+[id="SSH_only_Configuring_and_validating_the_SSH_connection"]
+== SSH only: Configuring and validating the SSH connection
+
+Conversion wizard?
+
+// . Enable SSH on all VMware hypervisors.
+// +
+// For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation site]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
+//
+// . Copy the public key you created in xref:VDDK_and_SSH_Configuring_the_conversion_hosts[] to each VMware hypervisor to ensure that the Manager or the OpenStack Platform conversion host has the SSH key of the VMware hypervisor in its `known_hosts` file:
+// +
+// [options="nowrap" subs="verbatim"]
+// ----
+// # ssh root@_esx1.example.com_ sh -c \
+//     'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
+// #   'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
+// ----
+
+.Red Hat Virtualization
+
+Connect to the VMware hypervisor using `ssh-agent` to validate the SSH connection:
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u vdsm ssh-agent
+SSH_AUTH_SOCK=/tmp/ssh-11111AAAAA/agent.12345; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=12345; export SSH_AGENT_PID;
+echo Agent pid 12345;
+
+# sudo -u vdsm SSH_AUTH_SOCK=/tmp/ssh-11111AAAAA/agent.12345 ssh-add
+# sudo -u vdsm \
+    SSH_AUTH_SOCK=/tmp/ssh-123456ABCDE/agent.12345 ssh root@_esx1.example.com_
+----
+
+[IMPORTANT]
+====
+If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client. See xref:SSH_transformation_fails[SSH transformation failure] for details.
+====
+
+.OpenStack Platform
+
+Connect to the VM hypervisor as `cloud-user` to validate the SSH connection.
+
+If the connection is successful, the conversion host is correctly configured for SSH transformation.
+
+You are ready to xref:Verifying_conversion_hosts[verify the conversion hosts].

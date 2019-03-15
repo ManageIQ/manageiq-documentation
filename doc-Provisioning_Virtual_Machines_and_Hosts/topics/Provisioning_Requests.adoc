@@ -301,11 +301,12 @@ The default dialogs show all possible parameters for provisioning. To limit the 
 [[provisioning-virtual-machines]]
 === Provisioning Virtual Machines
 
-There are three types of provisioning requests available in {product-title}:
+There are four types of provisioning requests available in {product-title}:
 
 . Provision a new virtual machine from a template
 . Clone a virtual machine
 . Publish a virtual machine to a template
+. Provision a virtual machine using cloud-init via REST API.
 
 [[provisioning-a-virtual-machine-from-a-template]]
 ==== Provisioning a Virtual Machine from a Template
@@ -426,6 +427,140 @@ Virtual machines can be cloned in other providers as well.
 . Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
 . Schedule the request on the *Schedule* tab.
 . Click *Submit*.
+
+=======
+[[renaming-a-provisioned-virtual-machine]]
+==== Renaming a Provisioned Virtual Machine (VMware Virtual Machines Only)
+
+{product-title} allows you to rename a VMware virtual machine without having to reprovision it. 
+
+To rename a VMware virtual machine:
+
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], and select the VMware virtual machine you want to rename.
+. Click image:1847.png[](*Configuration*), image:1851.png[](*Rename selected item*).
+. In the *Basic Information* screen, provide a new *name*.
+. Click *Save*.
+
+The renamed virtual machine will appear in the inventory view. 
+
+
+[[provisioning-a-virtual-machine-using-cloud-init-REST-API]]
+==== Provisioning a Virtual Machine using cloud-init via REST API
+
+To provision a virtual machine using cloud-init, the template that the virtual machine is provisioned from should have the `cloud-init` package installed. Also, the template should have the `use cloud-init/sysprep` checkbox selected.
+
+See example below of a virtual machine provision request using cloud-init.
+
+----
+# curl -d@request_body -X POST -H "Accept: application/json" --user admin:smartvm --insecure  https://<CFME FQDN or IP address>:443/
+api/provision_requests
+
+request_body:
+{"version"=>"1.1",
+ "template_fields"=>
+  {"guid"=>"1dbfed74-1c8b-4535-9f1e-c654a5456805",
+   "name"=>"template_name",
+   "request_type"=>"template"},
+ "vm_fields"=>
+  {"customization_template_id"=>10000000000000,
+   "addr_mode"=>"static",
+   "sysprep_enabled"=>"fields",
+   "placement_auto"=>true,
+   "number_of_vms"=>1,
+   "provision_type"=>"native_clone",
+   "vm_name"=>"name_of_vm_to_provision",
+   "vm_auto_start"=>true,
+   "retirement"=>0,
+   "retirement_warn"=>604800,
+   "vlan"=>"9af50e0c-b277-422a-a5c3-11e158d21fa8",
+   "disk_format"=>"default",
+   "number_of_sockets"=>1,
+   "cores_per_socket"=>1,
+   "vm_memory"=>"2048",
+   "memory_reserve"=>341,
+   "memory_limit"=>8192,
+   "network_adapters"=>1},
+ "requester"=>{"owner_email"=>"test@testing.com"},
+ "tags"=>{},
+ "additional_values"=>nil,
+ "ems_custom_attributes"=>nil,
+ "miq_custom_attributes"=>nil}
+----
+
+For a virtual provision request via REST API, if the below two fields in the request’s body are not set correctly, the cloud-init may not work:
+
+* vlan 
+* sysprep_enabled 
+
+The value of *vlan* in the API request can be one of the following options:
+
+////
+. <empty>  (should be written with the <..>) No vNIC profile
+. <Template> (should be written with the <..>) Use template's default vNIC profile
+. profile_name (network_name) Set the specified vnic profile. Note that it is important to put one space between profile_name (network_name), otherwise it will fail. For example, ovirtmgmt (ovirtmgmt).  
+. vnic profile id Set the specified vnic profile, such as "3a8dce01-dd59-4a46-8a6f-823acccda79f" 
+////
+
+[width="100%",cols="20%,40%,40%",options="header",]
+|====
+|vlan value|Description|vNIC profile
+|<empty>|should be written with the <..>|No vNIC profile
+|<Template>|should be written with the <..>|Use template's default vNIC profile
+|profile_name (network_name)|It is important to put one space between profile_name (network_name), otherwise it will fail. For example, *ovirtmgmt (ovirtmgmt)*|Set the specified vNIC profile.
+|vNIC profile ID||Set the specified vNIC profile, such as `3a8dce01-dd59-4a46-8a6f-823acccda79f`.
+|====
+
+////
+
+Draft text:
+
+Here are some possible cases, where VLAN field is not picked correctly, and this may lead to this validation failure:  
+"Provision failed for the following reasons:\n'Network/Virtual NIC Profile ID or 
+ Profile Name (Network Name)' is required"
+
+When providing vnic profile ID:
+vnic_profile_id not belongs to the expected cluster (should match the vnic profile id of the network taken from RHV based on template’s cluster assigned network)
+Non-exist vnic profile id (should be available under RHV, i.e.: https:/<RHV FQDN>/ovirt-engine/api/vnicprofiles)
+When providing: “profile name (network name)”
+Non-exist network name
+Wrong format (missing space before the first bracket): “profile_name(network_name)” 
+Use Network name (that was used in V3) instead of:  “profile_name(network_name)” 
+
+
+Examples for wrong usage:
+"vlan": "1dbfed74-1c8b-4535-9f1e-c654a5456805", // failed, no such id
+"vlan": "aaa (aaa)", // failed, no such vnic profile/network
+"vlan": "ovirtmgmt(ovirtmgmt)", // failed, invalid format
+"vlan": "0000000a-000a-000a-000a-000000000398", // falied, vnic profile id of other cluster
+"vlan": "ovirtmgmt", // failed, not supported by v4
+
+Examples for correct usage:
+"vlan": "654281a3-db89-4718-ae43-9466b81eb001", // passed, a valid vnic profile id
+"vlan": "ovirtmgmt (ovirtmgmt)", // passed, supported format 
+
+
+2. "sysprep_enabled"
+Here are all possible values for this. 
+It is written by this order:
+Value - It’s meaning - how it appears in CFME UI VM provision dialog, “Customize” tab, “Customize” section.
+
+
+For windows source template:
+"sysprep_enabled": "fields" - Sysprep Specification - “Sysprep Specification”
+"sysprep_enabled": “file” - Sysprep answer file - “Sysprep answer file”
+
+
+For Linux template:
+"sysprep_enabled": “fields” - Customized template and any Customized parameters will be used - “Specification”
+
+To have cloud-init work (have the provisioned VM marked with “Use cloud-init”, and that the customized template will be used, as well as Customized parameters, if any) it is a must that  "sysprep_enabled" will be set to “fields”.
+Otherwise, the customized template will be ignored, and the provision VM will not be marked with “use cloud-init” even though the template from which the VM is provisioned, has it marked.
+And common for both:
+"sysprep_enabled": “disabled” -  Do not customize - “<None>”
+The customized template will be ignored, and the provision VM will not be marked with “use cloud-init” even though the template from which the VM is provisioned, has it marked.
+The default value is 'disabled'. 
+////
+
 
 [[provisioning-instances]]
 === Provisioning Instances

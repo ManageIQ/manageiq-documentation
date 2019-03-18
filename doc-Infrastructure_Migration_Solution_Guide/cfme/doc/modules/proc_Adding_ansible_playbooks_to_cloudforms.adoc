@@ -3,14 +3,15 @@
 [id="Adding_ansible_playbooks_to_cloudforms"]
 = Adding Ansible playbooks to CloudForms
 
-You can add Ansible playbooks to CloudForms to perform automated tasks, for example, removing web servers from a load-balancing pool before migration and adding them back to the pool after migration.
-
-[IMPORTANT]
-====
-If you are migrating virtual machines running RHEL or other Linux-based operating system, create a `RHEL premigration` playbook  to ensure that the IP addresses of these virtual machines are accessible after migration.
-====
+You can add Ansible playbooks to CloudForms to perform automated premigration and postmigration tasks, for example, removing web servers from a load-balancing pool before migration and adding them back to the pool after migration.
 
 CloudForms requires a minimum of one Ansible playbook repository, one playbook, and one set of credentials.
+
+.Mandatory playbook for RHEL/Linux virtual machines
+[IMPORTANT]
+====
+If you are migrating virtual machines running RHEL or other Linux-based operating system, create a premigration playbook to call the `ims.rhel_premigration` role. See xref:Rhel_premigration_playbook[`RHEL premigration` playbook] below.
+====
 
 [id="Creating_an_Ansible_service_catalog_item"]
 .Procedure
@@ -23,15 +24,12 @@ CloudForms requires a minimum of one Ansible playbook repository, one playbook, 
 
 . Add a playbook as an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_instances/#create-playbook-service-catalog-item[Ansible service catalog item].
 
+. If you are migrating virtual machines running RHEL or other Linux-based operating system, procede to the next section, creating a xref:Rhel_premigration_playbook[`RHEL premigration` playbook].
+
 [id="Rhel_premigration_playbook"]
-.`RHEL premigration` playbook
+.Creating a `RHEL premigration` playbook
 
 If you are migrating virtual machines running RHEL or other Linux-based operating system, create a `RHEL premigration` playbook that calls the Ansible link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[`ims.rhel_premigration` role].
-
-[IMPORTANT]
-====
-This role is required for both Red Hat Virtualization and OpenStack Platform. Otherwise, you cannot access the IP addresses of the migrated virtual machines.
-====
 
 The `ims.rhel_premigration` role performs the following tasks on the source virtual machine:
 
@@ -41,12 +39,11 @@ The `ims.rhel_premigration` role performs the following tasks on the source virt
 
 [NOTE]
 ====
-The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or `rhel-7-server-rpms` repository is enabled in the VMware virtual machine when it installs `qemu-guest-agent`. If you have disabled the repository, re-enable it in the RHEL premigration playbook.
+The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or the `rhel-7-server-rpms` repository is enabled in the VMware virtual machine when it installs `qemu-guest-agent`. If you have disabled the repository, re-enable it in the RHEL premigration playbook.
 ====
 
-The following is an example of a `RHEL premigration` playbook that calls the `ims.rhel_pre_migration` role:
-
-[source,yml]
+.`RHEL premigration` playbook example
+[options="nowrap" subs="+quotes,verbatim"]
 ----
 ---
 - hosts: all
@@ -54,4 +51,4 @@ The following is an example of a `RHEL premigration` playbook that calls the `im
     - role: ims.rhel_pre_migration
 ----
 
-You will select this playbook as a xref:Advanced_options_screen[premigration playbook service] when you create the migration plan.
+You select this playbook as a xref:Advanced_options_screen[premigration playbook service] when you create the migration plan.

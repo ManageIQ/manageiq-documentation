@@ -24,24 +24,24 @@ include::proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloff
 [id="Choosing_vddk_or_ssh_transformation"]
 == Choosing VDDK or SSH transformation
 
-You can use either the VMware Virtual Disk Development kit (VDDK) or SSH for the datapath transformation. The choice is determined by your migration size and infrastructure capabilities, based on the following considerations:
+You can use either the VMware Virtual Disk Development kit (VDDK) or SSH for the datapath transformation. The choice is determined by your migration size and infrastructure capabilities, based on the following comparison.
 
 [cols="1,2,2", options="header"]
-.VDDK vs. SSH
+.VDDK and SSH comparison
 |===
-| |Pros |Cons
-|*VDDK* .^a|* Recommended because it is approximately twice as fast as SSH
-* Compiled with `nbdkit` to provide direct connectivity to the virtual machine disks
+| ^|Pros ^|Cons
+|*VDDK* .<a|* Recommended because it is approximately twice as fast as SSH
+* Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
 .<a|* Requires VDDK package download
 * Requires VDDK library location for configuring the conversion hosts
 |*SSH* .<a|* Better suited for large-scale migrations than VDDK
 * Does not require additional downloads, packages, tools, or compilation
 .<a|* Slower than VDDK
-* Requires SSH access enabled on the VMware hypervisors
-* Requires shared SSH keys for VMware and the target environment
+* Requires the VMware hypervisors to have SSH access enabled
+* Requires shared SSH keys for the source and target environments
 |===
 
-After you have decided how many conversion hosts to create and which transformation method to use, proceed to the next step:
+After you decide how many conversion hosts to create and which transformation method to use, proceed to the next step:
 
 * Red Hat Virtualization: xref:Configuring_conversion_hosts_in_CloudForms[].
 * OpenStack Platform: xref:Creating_OSP_conversion_hosts[].

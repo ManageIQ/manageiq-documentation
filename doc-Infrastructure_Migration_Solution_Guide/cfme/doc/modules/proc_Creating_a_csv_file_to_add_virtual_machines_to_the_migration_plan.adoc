@@ -3,21 +3,36 @@
 [id="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan"]
 = Creating a CSV file to add virtual machines to the migration plan
 
-A CSV file is required if you are migrating virtual machines that were migrated in the past.
+A CSV file is mandatory if you are migrating virtual machines that were migrated in the past, because the migration plan cannot discover them.
 
-If you are migrating a large number of virtual machines, you have the option of creating a CSV file to add the source virtual machines to the migration plan.
+.CSV file for large migrations (optional)
+[NOTE]
+====
+If you are migrating a large number of virtual machines, adding the virtual machines with a CSV file is faster than selecting them from a list of discovered virtual machines or setting the security group and flavor of each virtual machine manually (OpenStack Platform).
+====
 
-The virtual machine `Name` is mandatory. `Provider`, `Host`, and `Cluster` are optional, to differentiate identical virtual machine names in different environments.
+.CSV file fields
+[cols="1,3", options="header"]
+|===
+|Field |Comments
+|`Name` |Virtual machine name.
 
-.Sample CSV file with `Name` (mandatory) and `Provider` (optional)
+The `Name` field is mandatory. All other fields are optional.
+|`Host` |To distinguish virtual machines with identical `Name` fields
+|`Provider` |To distinguish virtual machines with identical `Name` fields
+|`Security Group` |OpenStack Platform only
 
+The default is `Default`.
+|`Flavor` |OpenStack Platform only
+
+If you do not create flavors for the migration, CloudForms will try to map the source virtual machines with existing flavors.
+|===
+
+.CSV file example
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-Name,Provider
-vm01,vSphere3
-vm02,vSphere3
-vm03,vSphere3
-...
+Name,Host,Provider,Security Group,Flavor
+vm01,host1,vSphere3,webservers,x1.medium
+vm02,host1,vSphere3,webservers,x1.medium
+vm03,host1,vSphere3,webservers,x1.medium
 ----
-
-Duplicate virtual machines with no optional fields to differentiate them, or with duplicate optional fields, are marked with a red `x` and cannot be added to the migration plan.

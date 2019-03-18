@@ -3,67 +3,61 @@
 [id="Configuring_conversion_hosts_in_CloudForms"]
 = Configuring the conversion hosts in CloudForms
 
-TBD - How are RHV hosts authenticated?
-
 [id='VDDK_only_Downloading_and_copying_VDDK']
 .Prerequisite
 
-If you are using VDDK, download and copy the VDDK package:
-
+* VMware Virtual Disk Development Kit for VDDK transformation
++
+To download the VMware Virtual Disk Development Kit:
++
 . Go to the link:https://www.vmware.com/support/pubs/[VMware Documentation site], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
 
 . Click `Latest Releases` and select the latest VDDK release.
 
 . Download the VDDK package, +VMware-vix-disklib-_version_.x86_64.tar.gz+.
 
-. Copy the VDDK package to a location that is accessible over `HTTP`, for example, `/var/www/html` on the Red Hat Virtualization Manager machine.
-
 You are ready to configure the conversion hosts in CloudForms.
 
 .Procedure
 
-. In menu:Compute[Migration > Migration Settings], click *Configure Conversion Host*.
+. Click menu:Compute[Migration > Migration Settings].
+. Click *Configure Conversion Host*.
+. Perform the following procedures in the *Configure Conversion Host* wizard:
 
-. Select the *Provider type* and the *Provider* from the dropdown lists and click *Next*.
+[cols="1,3", options="header"]
+|===
+^|Screen ^|Procedure
+|*Location*
+.<a|. Select a *Provider Type*.
+. Select a *Provider*.
+. *Red Hat Virtualization:* Select a *Cluster*.
++
+*OpenStack Platform:* Select a *Project*.
 
-...
+. Click *Next*.
+|*Hosts*
+.<a|. Select one or more hosts from the dropdown list.
+. Click *Next*.
+|*Authentication*
+.<a|. Click *Browse* to browse to the conversion host SSH key or paste it in the *Conversion host SSH key* field.
++
+[NOTE]
+====
+*Red Hat Virtualization:* The Manager deploys this SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 
+*OpenStack Platform:* `cloud-user` uses this SSH key to connect to the conversion hosts.
+====
+. Select a *Transformation method*.
 
-[id="VDDK_and_SSH_Validating_the_transformation_configuration"]
-== VDDK and SSH: Validating the transformation configuration
+. If you select *SSH*, click *Browse* to browse to the VMware hypervisors SSH key or paste it in the *VMware hypervisors SSH key* field.
++
+If you select *VDDK*, paste the path of the xref:VDDK_only_Downloading_and_copying_VDDK[VDDK package] in the *VDDK library path* field and click *Validate*.
 
-Run the `conversion_host_check` playbook to verify that the conversion hosts are configured correctly for VDDK or SSH transformation:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook --ask-vault-pass -i conversion_hosts_inventory.yml conversion_host_check.yml
-----
-
-If the conversion hosts are configured correctly, proceed to the next step:
-
-* VDDK:
-** OpenStack Platform: Create an xref:Creating_an_Infrastructure_Mapping[infrastructure mapping].
-
-* SSH
-** All environments: xref:SSH_only_Configuring_and_validating_the_SSH_connection[Configure and validate the SSH connection].
-
-[id="SSH_only_Configuring_and_validating_the_SSH_connection"]
-== SSH only: Configuring and validating the SSH connection
-
-Conversion wizard?
-
-// . Enable SSH on all VMware hypervisors.
-// +
-// For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation site]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
-//
-// . Copy the public key you created in xref:VDDK_and_SSH_Configuring_the_conversion_hosts[] to each VMware hypervisor to ensure that the Manager or the OpenStack Platform conversion host has the SSH key of the VMware hypervisor in its `known_hosts` file:
-// +
-// [options="nowrap" subs="verbatim"]
-// ----
-// # ssh root@_esx1.example.com_ sh -c \
-//     'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
-// #   'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
-// ----
+. Click *Next*.
+|*Results*
+.<a|. Wait for the conversion host configuration to finish.
+. Click *Close*.
+|===
 
 .Red Hat Virtualization
 

@@ -3,15 +3,20 @@
 [id="Recommendations_for_migration"]
 = Recommendations for planning a migration
 
-The following recommendations can facilitate the migration planning.
+These recommendations can help you plan the migration to minimize the impact on your environment.
 
-.Dividing the migration
+.Checking resources
 
-* Create migration groups, so that you are not migrating all of your virtual machines at the same time. The following questions provide guidelines:
+* Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.
+* Plan for redundancy.
+
+.Spreading the load
+
+* Create migration groups, so that you are not migrating all of your virtual machines at the same time, keeping in mind the following considerations:
 
 ** How are the virtual machines grouped now?
 ** Which virtual machines should be migrated together?
-** What workloads should be migrated together?
+** Which workloads or linked applications should be migrated together?
 ** What applications must remain available?
 
 * Consider which parts of the workload to migrate first:
@@ -21,7 +26,9 @@ The following recommendations can facilitate the migration planning.
 ** Web servers
 ** Load balancers
 
-* Keep linked applications together, so that they migrate at the same time.
+* Create xref:Deciding_how_many_conversion_hosts_to_create[multiple conversion hosts] for load-balancing and better performance.
+* Create multiple migration plans to control and throttle the migration process.
+* Perform test migrations with different xref:Changing_the_maximum_number_of_concurrent_migrations[maximum numbers of concurrent migrations per conversion host] to assess the capabilities of your environment's infrastructure.
 
 .Scheduling the migration
 
@@ -29,10 +36,3 @@ The following recommendations can facilitate the migration planning.
 * Prepare your users for downtime.
 * Stagger the migration schedules.
 * Move critical applications during maintenance windows.
-* Plan for redundancy.
-
-.Checking resources
-
-* Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.
-* Minimize the impact on your environment by creating multiple migration plans to control and throttle the migration process.
-* Perform test migrations with different xref:Changing_the_maximum_number_of_concurrent_migrations[maximum numbers of concurrent migrations per conversion host] to assess the capabilities of your environment's infrastructure.

@@ -5,45 +5,43 @@
 
 The following prerequisites apply to all target environments:
 
-* xref:Deciding_how_many_conversion_hosts_to_create[Decide how many conversion hosts to create]
-* xref:Choosing_vddk_or_ssh_transformation[Choose VDDK or SSH transformation for the migration]
+* xref:Deciding_how_many_conversion_hosts_to_create[Deciding how many conversion hosts to create]
+* xref:Choosing_vddk_or_ssh_transformation[Choosing VDDK or SSH transformation for the migration]
 
 [id="Deciding_how_many_conversion_hosts_to_create"]
 == Deciding how many conversion hosts to create
 
-All the virtual machines in the migration plan are migrated at the same time. Therefore, the number of conversion hosts you create depends on the size of your migration. Multiple conversion hosts are recommended for load-balancing purposes, even for smaller migrations.
+All the virtual machines in the migration plan are migrated at the same time, in parallel. Therefore, the number of conversion hosts you create depends on the size of your migration.
 
-The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process. You should thoroughly test your environment before the migration to determine how many migrations it can support without negative effects.
+The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process. Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects.
 
-Each conversion host is limited to `10` concurrent migrations, unless you xref:Changing_the_maximum_number_of_concurrent_migrations[change the maximum number of concurrent migrations].
+Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
+
+Each conversion host is limited to `10` concurrent migrations, unless you xref:Changing_the_maximum_number_of_concurrent_migrations[change the default maximum number of concurrent migrations].
 
 include::proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+1]
 
 [id="Choosing_vddk_or_ssh_transformation"]
 == Choosing VDDK or SSH transformation
 
-Choose a datapath transformation option, VDDK (VMware Virtual Disk Development kit) or SSH, that is appropriate for your migration and environment.
+You can use either the VMware Virtual Disk Development kit (VDDK) or SSH for the datapath transformation. The choice is determined by your migration size and infrastructure capabilities, based on the following considerations:
 
-*VDDK*
+[cols="1,2,2", options="header"]
+.VDDK vs. SSH
+|===
+| |Pros |Cons
+|*VDDK* .^a|* Recommended because it is approximately twice as fast as SSH
+* Compiled with `nbdkit` to provide direct connectivity to the virtual machine disks
+.<a|* Requires VDDK package download
+* Requires VDDK library location for configuring the conversion hosts
+|*SSH* .<a|* Better suited for large-scale migrations than VDDK
+* Does not require additional downloads, packages, tools, or compilation
+.<a|* Slower than VDDK
+* Requires SSH access enabled on the VMware hypervisors
+* Requires shared SSH keys for VMware and the target environment
+|===
 
-* Pros:
-** Recommended because it is approximately twice as fast as SSH
-** Compiled with `nbdkit` to provide direct connectivity to the virtual machine disks
-* Cons:
-** Requires VDDK package download
-** Requires VDDK library location for configuring the conversion hosts
-
-*SSH*
-
-* Pros:
-** Better suited for large-scale migrations than VDDK
-** Does not require additional downloads, packages, tools, or compilation
-* Cons:
-** Slower than VDDK
-** Requires SSH access enabling on the VMware hypervisors
-** Requires shared SSH keys for VMware and the target environment
-
-After you have decided how many conversion hosts to create and which transformation method to use, you can proceed to the next step:
+After you have decided how many conversion hosts to create and which transformation method to use, proceed to the next step:
 
 * Red Hat Virtualization: xref:Configuring_conversion_hosts_in_CloudForms[].
 * OpenStack Platform: xref:Creating_OSP_conversion_hosts[].

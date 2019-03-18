@@ -1,49 +1,49 @@
 // Module included in the following assemblies:
 // con_Conversion_host_prerequisites.adoc
 [id="Changing_the_maximum_number_of_concurrent_migrations"]
-.(Optional) Changing the maximum number of concurrent migrations
+.(Optional) Changing the default maximum number of concurrent migrations
 
-The default number of concurrent migrations is `10` for conversion hosts and `10` for a provider. You can change these limits to control the impact of the migration process on your infrastructure.
+The default maximum number of concurrent migrations is `10` for conversion hosts and `10` for a provider. You can change these limits to control the impact of the migration process on your infrastructure.
 
-[IMPORTANT]
-====
-The maximum number of concurrent virtual machine migrations per conversion host is `20` for VDDK and `?` for SSH.
+A provider limit has priority over a conversion host limit. For example, if a provider's limit is set to `20` and five conversion hosts' limits are set to `3`, the maximum number of concurrent migrations is `20`, not `15`.
 
-PLACEHOLDER: Confirm maximum numbers for VDDK and SSH.
-====
-
-// ​Fabien: We should ask QE and Rich Jones what the limits are for both VDDK and SSH. I thought we worked around these limits by using direct connection to ESXi...
-
-The provider's limit has priority over the conversion hosts' limits. For example, if a provider's limit is set to `20` and five conversion hosts' limits are set to `3`, the maximum number of concurrent migrations is `20`, not `15`.
-
-*Changing the limit for conversion hosts*
+.Changing the limit for conversion hosts
 
 An increase affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 
 A decrease affects future migration plans. Migration plans that are in progress will continue to use the limit that was set when the plan was created.
 
-To change the limit for all conversion hosts, click menu:Compute[Migration > Migration Settings] in CloudForms and select the new limit.
+[IMPORTANT]
+====
+The maximum number of concurrent migrations for a conversion host is `20`, for VDDK, and `40`, for SSH.
+====
 
-To change the limit for a specific conversion host, enter the following command on the CloudForms machine:
+* To change the limit for all conversion hosts, click menu:Compute[Migration > Migration Settings] in CloudForms and select the new limit.
 
+* To change the limit for a specific conversion host:
+
+. Log in to the CloudForms machine using SSH.
+
+. Change the limit of `host ?` to `?`:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 API PLACEHOLDER
 ----
 
-// To do: Fill in API calls
+.Changing the limit for a provider
 
-*Changing the limit for a provider*
+. Log in to the CloudForms machine using SSH.
 
-To set a provider's limit to `30`, enter the following command on the CloudForms machine:
-
+. Change the limit to `30`:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 API PLACEHOLDER
 ----
-
-To get a provider's limit, enter the following command on the CloudForms machine:
-
++
+To get a provider's limit:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 API PLACEHOLDER

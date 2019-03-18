@@ -2,30 +2,23 @@
 [id="Preparing_the_osp_target_environment"]
 = Preparing the Red Hat OpenStack Platform environment
 
-include::ref_Software_compatibility_requirements.adoc[]
-
 .Procedure
 
-. Ensure that the OpenStack Platform storage backends have sufficient space for the virtual machines you are migrating.
+include::ref_Software_compatibility_requirements.adoc[]
 
 . Set the BIOS settings of the physical hosts for optimal performance (rather than power-saving), according to the vendor's recommendations, and disable the C1E halt state, if applicable.
 
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/[Red Hat OpenStack Platform] 13 or later.
 
-. Create link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/networking_guide/#create_a_network[provider networks] for the OpenStack Platform instances to ensure that the VMware IP addresses are preserved.
-+
-[NOTE]
-====
-IMS supports both provider and tenant networks.
-====
+. Create link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/networking_guide/#create_a_network[provider networks] for the OpenStack Platform instances to ensure that the source IP addresses are preserved.
 
 . Create a link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#create_a_project[project] for the conversion hosts and whatever destination projects you require for the OpenStack Platform instances.
 
 . Ensure that the `admin` user has link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[`member` and `admin` roles] in the conversion and destination projects.
 
-. Set at least one link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[`volume type`] for the OpenStack Platform block storage. Otherwise, CloudForms will not detect the storage during infrastructure mapping.
+. Set at least one link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[`volume type`] for the OpenStack Platform block storage. Otherwise, CloudForms cannot detect the storage when you create the infrastructure mapping.
 
-. Ensure that the user configured in CloudForms for the OpenStack Platform provider has `admin` privileges on the target projects.
+. Ensure that the OpenStack Platform storage backends have sufficient space for the migrated virtual machines.
 
 . Configure security groups:
 
@@ -37,7 +30,7 @@ IMS supports both provider and tenant networks.
 Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (`virt-v2v` to vCenter).
 ====
 
-. Create flavors suitable for the virtual machines that you are migrating. If you do not create custom flavors, CloudForms will try to map each VMware virtual machine to an existing flavor.
+. Create flavors suitable for the virtual machines that you are migrating. If you do not create custom flavors, CloudForms tries to map each source virtual machine to an existing flavor.
 
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Red Hat CloudForms] 4.7 or later.
 
@@ -45,7 +38,9 @@ Outbound traffic is enabled by default. If you have changed this setting, enable
 +
 [NOTE]
 ====
-Do not remove or change a provider before, during, or after migration because it will have negative effects on the CloudForms migration objects.
+Do not remove or change a provider before, during, or after migration because it has negative effects on the CloudForms migration objects.
 ====
+
+. Ensure that the user configured in CloudForms for the OpenStack Platform provider has `admin` privileges for the target projects.
 
 You are ready to xref:Creating_and_configuring_the_conversion_hosts[create and configure the conversion hosts].

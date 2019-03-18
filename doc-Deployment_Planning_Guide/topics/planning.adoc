@@ -250,6 +250,46 @@ For information on configuring database failover in VMDB appliances, see the htt
 endif::cfme[]
 
 
+[[database-configuration]]
+
+=== Database Configuration
+
+This section describes the {product-title} PostgreSQL database configuration. The below table provides information on each file: its location, primary function, and notes regarding behavior or recommendations. 
+
+.Database files
+[width="100%",cols="20%,20%,30%,30%",options="header",]
+|===
+|File|Location|Description|Note
+|`postgresql.conf` |Data Directory |Default server configuration |Adds directive to include `/etc/manageiq/postgresql.conf.d` directory
+|`postgresql.auto.conf` |Data Directory |Contains configuration set by the `ALTER SYSTEM` command |*Do not edit manually*
+|`01_miq_overrides.conf` |`/etc/manageiq/postgresql.conf.d`|Contains {product-title_short} default overrides |Overwritten on upgrades
+|<other files>|`/etc/manageiq/postgresql.conf.d`|Contains user overrides |Takes precedence if alphabetically after `01_miq_overrides.conf`
+|===
+
+==== User Overrides
+
+Store custom configurations, or user overrides, in `/etc/manageiq/postgresql.conf.d`. Name the user override file so that it follows `01_miq_overrides.conf` alphabetically. This ensures custom configurations are not overwritten on {product-title_short} upgrades.
+
+The following file name example follows `01_miq_overrides.conf` alphabetically in the `/etc/manageiq/postgresql.conf.d` directory:
+
+.Example
+-----
+test_miq_overrides.conf
+-----
+
+==== Reading Configuration Settings
+
+Query the {product-title_short} PostgreSQL database directly to read configuration settings. See the link:https://www.postgresql.org/docs/9.5/index.html[PostgreSQL Documentation] for more information. 
+
+The following example queries the {product-title_short} for current value set for `max_wal_senders`:
+
+.Example
+-----
+`psql -d vmdb_production -c 'show max_wal_senders'
+-----
+
+
+
 
 
 

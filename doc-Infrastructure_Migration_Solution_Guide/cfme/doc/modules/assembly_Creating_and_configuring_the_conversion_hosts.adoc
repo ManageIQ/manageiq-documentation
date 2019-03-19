@@ -5,18 +5,18 @@
 
 A _conversion host_ is a Red Hat Virtualization host or an OpenStack Platform instance, created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed. (`virt-v2v` and `virt-v2v-wrapper` perform the migration. See xref:Vmware_to_rhv_migration_workflow[] and xref:Vmware_to_osp_migration_workflow[] for details.)
 
-Creating and configuring the conversion hosts involves the following key steps:
+Creating and configuring the conversion hosts involve the following key steps:
 
-. OpenStack Platform only: xref:Creating_OSP_conversion_hosts[Creating the OpenStack Platform conversion hosts]
-. xref:Configuring_conversion_hosts_in_CloudForms[Configuring the conversion hosts in CloudForms]
-
-[NOTE]
-====
-.Upgrading conversion hosts
-
-* Red Hat Virtualization
+. OpenStack Platform: xref:Creating_OSP_conversion_hosts[]
+. Red Hat Virtualization and OpenStack Platform: xref:Configuring_conversion_hosts_in_CloudForms[]
 +
-Enter the following commands on the Manager machine:
+Optionally, you can change the maximum number of concurrent migrations for conversion hosts or a provider. See xref:Changing_the_maximum_number_of_concurrent_migrations[].
+
+PLACEHOLDER: MIGRATION THROTTLING 
+
+.Upgrading the conversion hosts
+
+* *Red Hat Virtualization:* Log in to the Manager machine using SSH and enter the following commands:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -24,10 +24,7 @@ Enter the following commands on the Manager machine:
 # cp /usr/share/ansible/roles/oVirt.v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
 ----
 
-* OpenStack Platform
-+
-Download the latest conversion appliance and create new conversion hosts.
-====
+* *OpenStack Platform:* Download the latest conversion appliance and create new conversion hosts.
 
 include::proc_Creating_osp_conversion_hosts.adoc[leveloffset=+1]
 include::proc_Configuring_conversion_hosts_in_CloudForms.adoc[leveloffset=+1]

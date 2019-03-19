@@ -3,27 +3,25 @@
 [id="Configuring_conversion_hosts_in_CloudForms"]
 = Configuring the conversion hosts in CloudForms
 
-BASED ON MOCKUPS. MAY CHANGE.
+Select, authenticate, and configure your conversion hosts in CloudForms.
 
 [id='VDDK_only_Downloading_and_copying_VDDK']
 .Prerequisite
 
-* VMware Virtual Disk Development Kit for VDDK transformation
-+
-To download the VMware Virtual Disk Development Kit:
-+
+If you are using VDDK transformation, download the VMware Virtual Disk Development Kit:
+
 . Go to the link:https://www.vmware.com/support/pubs/[VMware Documentation site], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
 
 . Click `Latest Releases` and select the latest VDDK release.
 
-. Download the VDDK package, +VMware-vix-disklib-_version_.x86_64.tar.gz+.
+. Download and save the VDDK package, +VMware-vix-disklib-_version_.x86_64.tar.gz+.
 
 You are ready to configure the conversion hosts in CloudForms.
 
 .Procedure
 
 . Click menu:Compute[Migration > Migration Settings].
-. Click *Configure Conversion Host*.
+. In the *Conversion Hosts* tab, click *Configure Conversion Host*.
 . Perform the following procedures in the *Configure Conversion Host* wizard:
 
 [cols="1,3", options="header"]
@@ -32,6 +30,7 @@ You are ready to configure the conversion hosts in CloudForms.
 |*Location*
 .<a|. Select a *Provider Type*.
 . Select a *Provider*.
+
 . *Red Hat Virtualization:* Select a *Cluster*.
 +
 *OpenStack Platform:* Select a *Project*.
@@ -45,47 +44,22 @@ You are ready to configure the conversion hosts in CloudForms.
 +
 [NOTE]
 ====
-*Red Hat Virtualization:* The Manager deploys this SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
+* The RHV Manager deploys this private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 
-*OpenStack Platform:* `cloud-user` uses this SSH key to connect to the conversion hosts.
+* The OpenStack Platform user uses this private SSH key to connect to the conversion hosts.
 ====
 . Select a *Transformation method*.
 
-. If you select *SSH*, click *Browse* to browse to the VMware hypervisors SSH key or paste it in the *VMware hypervisors SSH key* field.
+. *SSH:* Click *Browse* to browse to the VMware hypervisors SSH key or paste it in the *VMware hypervisors SSH key* field.
 +
-If you select *VDDK*, paste the path of the xref:VDDK_only_Downloading_and_copying_VDDK[VDDK package] in the *VDDK library path* field and click *Validate*.
+*VDDK:* Paste the path of the xref:VDDK_only_Downloading_and_copying_VDDK[VDDK package] in the *VDDK library path* field and click *Validate*.
 
-. Click *Next*.
+. Click *Configure*.
 |*Results*
 .<a|. Wait for the conversion host configuration to finish.
 . Click *Close*.
 |===
 
-.Red Hat Virtualization
+The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
 
-Connect to the VMware hypervisor using `ssh-agent` to validate the SSH connection:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# sudo -u vdsm ssh-agent
-SSH_AUTH_SOCK=/tmp/ssh-11111AAAAA/agent.12345; export SSH_AUTH_SOCK;
-SSH_AGENT_PID=12345; export SSH_AGENT_PID;
-echo Agent pid 12345;
-
-# sudo -u vdsm SSH_AUTH_SOCK=/tmp/ssh-11111AAAAA/agent.12345 ssh-add
-# sudo -u vdsm \
-    SSH_AUTH_SOCK=/tmp/ssh-123456ABCDE/agent.12345 ssh root@_esx1.example.com_
-----
-
-[IMPORTANT]
-====
-If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client. See xref:SSH_transformation_fails[SSH transformation failure] for details.
-====
-
-.OpenStack Platform
-
-Connect to the VM hypervisor as `cloud-user` to validate the SSH connection.
-
-If the connection is successful, the conversion host is correctly configured for SSH transformation.
-
-You are ready to xref:Verifying_conversion_hosts[verify the conversion hosts].
+You can click *Remove* to remove a conversion host.

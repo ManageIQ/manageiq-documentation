@@ -3,18 +3,20 @@
 [id="Creating_and_configuring_the_conversion_hosts"]
 = Creating and configuring the conversion hosts
 
-A _conversion host_ is a Red Hat Virtualization host or an OpenStack Platform instance, created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed. `virt-v2v` and `virt-v2v-wrapper` perform the migration tasks. See xref:Vmware_to_rhv_migration_workflow[] and xref:Vmware_to_osp_migration_workflow[] for details.
+A _conversion host_ is a Red Hat Virtualization host or an OpenStack Platform instance, created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed. (`virt-v2v` and `virt-v2v-wrapper` perform the migration. See xref:Vmware_to_rhv_migration_workflow[] and xref:Vmware_to_osp_migration_workflow[] for details.)
 
 Creating and configuring the conversion hosts involves the following key steps:
 
 . OpenStack Platform only: xref:Creating_OSP_conversion_hosts[Creating the OpenStack Platform conversion hosts]
 . xref:Configuring_conversion_hosts_in_CloudForms[Configuring the conversion hosts in CloudForms]
 
-.Upgrading the conversion hosts
+[NOTE]
+====
+.Upgrading conversion hosts
 
-To upgrade the conversion hosts:
-
-* Red Hat Virtualization: Enter the following commands on the Manager machine:
+* Red Hat Virtualization
++
+Enter the following commands on the Manager machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -22,8 +24,11 @@ To upgrade the conversion hosts:
 # cp /usr/share/ansible/roles/oVirt.v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
 ----
 
-* OpenStack Platform: Download the latest conversion appliance and create new conversion hosts.
+* OpenStack Platform
++
+Download the latest conversion appliance and create new conversion hosts.
+====
 
-include::con_Conversion_host_prerequisites.adoc[leveloffset=+1]
 include::proc_Creating_osp_conversion_hosts.adoc[leveloffset=+1]
 include::proc_Configuring_conversion_hosts_in_CloudForms.adoc[leveloffset=+1]
+include::proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+1]

@@ -1,29 +1,54 @@
 // Module included in the following assemblies:
 // assembly_Creating_and_configuring_the_conversion_hosts.adoc
 [id="Configuring_conversion_hosts_in_CloudForms"]
-= Configuring the conversion hosts in CloudForms
 
-Select, authenticate, and configure your conversion hosts in CloudForms.
-
+= Prerequisites
 [id='VDDK_only_Downloading_and_copying_VDDK']
-.Prerequisite for VDDK
-
-If you are using VDDK transformation, download the VMware Virtual Disk Development Kit:
-
+* VMware Virtual Disk Development Kit, if you are using VDDK transformation:
++
 . Go to the link:https://www.vmware.com/support/pubs/[VMware Documentation site], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
 
 . Click `Latest Releases` and select the latest VDDK release.
 
 . Download and save the VDDK package, +VMware-vix-disklib-_version_.x86_64.tar.gz+.
 
-You are ready to configure the conversion hosts in CloudForms.
+* Conversion host instances, if you are migrating to OpenStack Platform
++
+[NOTE]
+====
+Always download the latest version of the OpenStack Platform conversion appliance because it contains patches and fixes.
 
-.Procedure
+The OpenStack Platform 14 conversion appliance may be used with OpenStack Platform 13.
+====
++
+To create OpenStack Platform conversion host instances:
++
+. Navigate to the link:https://access.redhat.com/downloads/[Red Hat Customer Portal Product Downloads] site.
+. In the *A-Z* tab, click *Red Hat OpenStack Platform*.
+. Click the green *Download Latest* button to go to the OpenStack Platform download page.
+. Click the *Product Software* tab and download the `RHOSP V2V Image for Red Hat OpenStack Director (x86_64)`.
+. Upload the appliance to Glance storage.
+. Deploy the appliance as a conversion host instance, with the following resources:
++
+** 4 vCPUs
+** 8 GB RAM
+** `/tmp` (1 GB for each conversion)
+** `/var/tmp` (1 GB for each conversion)
+** `/var/logs` (5 GB)
++
+====
+.For optimal performance
+
+* Deploy the conversion hosts on more than one hypervisor.
+* Deploy the conversion hosts on a compute node with link:http://docs.openstack.org/developer/devstack/guides/devstack-with-nested-kvm.html[nested virtualization] enabled. Nested virtualization is a technology preview. IS THIS STILL RELEVANT?
+====
+
+= Configuring the conversion hosts in CloudForms
 
 . Click menu:Compute[Migration > Migration Settings].
 . In the *Conversion Hosts* tab, click *Configure Conversion Host*.
 . Perform the following procedures in the *Configure Conversion Host* wizard:
-
++
 [cols="1,3", options="header"]
 |===
 |Screen |Procedure

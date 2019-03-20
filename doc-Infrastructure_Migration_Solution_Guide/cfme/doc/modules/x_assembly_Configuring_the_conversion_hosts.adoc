@@ -1,0 +1,27 @@
+// Module included in the following assemblies:
+// assembly_Preparing_the_environment_for_migration.adoc
+[id="Configuring_the_conversion_hosts"]
+= Configuring the conversion hosts
+
+A _conversion host_ is a Red Hat Virtualization host or an OpenStack Platform instance, with `virt-v2v` and `virt-v2v-wrapper` installed. (See xref:Vmware_to_rhv_migration_workflow[] and xref:Vmware_to_osp_migration_workflow[] for information about `virt-v2v` and `virt-v2v-wrapper`.)
+
+Select, authenticate, and configure your conversion hosts in CloudForms. These procedures assume that you have decided xref:Deciding_how_many_conversion_hosts_to_create[how many conversion hosts to configure] and chosen a datapath transformation option (xref:Choosing_vddk_or_ssh_transformation[VDDK or SSH]).
+
+Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations[change the maximum number of concurrent migrations for conversion hosts or providers] for improved performance.
+
+include::proc_Configuring_conversion_hosts_in_CloudForms.adoc[leveloffset=+1]
+
+
+PLACEHOLDER: MIGRATION THROTTLING
+
+.Upgrading the conversion hosts
+
+* *Red Hat Virtualization:* Log in to the Manager machine using SSH and enter the following commands:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum update
+# cp /usr/share/ansible/roles/oVirt.v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
+----
+
+* *OpenStack Platform:* Download the latest conversion appliance and create new conversion hosts.

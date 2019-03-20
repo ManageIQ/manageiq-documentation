@@ -1,0 +1,26 @@
+[id="Creating_a_rhel_premigration_playbook"]
+= Creating a `RHEL premigration` playbook
+
+If you are migrating virtual machines running RHEL or other Linux-based operating system, create a `RHEL premigration` playbook that calls the Ansible link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[`ims.rhel_premigration` role].
+
+The `ims.rhel_premigration` role performs the following tasks on the source virtual machine:
+
+* Preserves the static IP address configuration by creating udev rules to associate the VMware virtual machine's MAC address with its existing interface name (Red Hat Virtualization and OpenStack Platform)
+
+* Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment (Red Hat Virtualization only)
+
+[NOTE]
+====
+The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or the `rhel-7-server-rpms` repository is enabled in the VMware virtual machine when it installs `qemu-guest-agent`. If you have disabled the repository, re-enable it in the RHEL premigration playbook.
+====
+
+.`RHEL premigration` playbook example
+[options="nowrap" subs="+quotes,verbatim"]
+----
+---
+- hosts: all
+  roles:
+    - role: ims.rhel_pre_migration
+----
+
+You will select this playbook as a xref:Advanced_options_screen[premigration playbook service] when you create the migration plan.

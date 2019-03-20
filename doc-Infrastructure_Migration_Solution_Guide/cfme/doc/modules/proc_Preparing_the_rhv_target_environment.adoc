@@ -1,4 +1,4 @@
-// Used in module: assembly_Preparing_the_target_environment.adoc
+// Used in module: assembly_Preparing_the_environment_for_migration.adoc
 [id="Preparing_the_rhv_target_environment"]
 = Preparing the Red Hat Virtualization environment
 
@@ -11,6 +11,8 @@ include::ref_Software_compatibility_requirements.adoc[]
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Red Hat Virtualization Manager] on the Manager machine.
 
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Red Hat Virtualization Hosts] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Red Hat Enterprise Linux] 7.6 on the host machines.
++
+Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure. See xref:Deciding_how_many_conversion_hosts_to_create[].
 
 . Enable the following https://access.redhat.com/articles/417343[ports] in the conversion host network:
 * 22 - SSH
@@ -25,7 +27,7 @@ include::ref_Software_compatibility_requirements.adoc[]
 IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
 ====
 
-. Upload the link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[VirtIO and Guest Tool] image files to the ISO storage domain. The VirtIO file name must include the version number: `virtio-win-_version_.iso`. The Guest Tool is required in order to migrate Windows virtual machines.
+. Upload the link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[VirtIO and Guest Tool] image files to the ISO storage domain. The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
 
 . Install Red Hat CloudForms link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[4.6] (with RHV 4.2.7) or link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization/[4.7] (with RHV 4.2.8) on the Manager machine.
 
@@ -33,7 +35,7 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 +
 [NOTE]
 ====
-Do not remove or change a provider before, during, or after migration because it has negative effects on the CloudForms migration objects.
+Do not remove or change a provider (including refreshing hosts) before, during, or after migration because these actions cause errors in infrastructure mappings and migration plans.
 ====
 
-You are ready to xref:Configuring_conversion_hosts_in_CloudForms[configure the conversion hosts in CloudForms].
+You are ready to xref:Configuring_the_conversion_hosts[configure the conversion hosts].

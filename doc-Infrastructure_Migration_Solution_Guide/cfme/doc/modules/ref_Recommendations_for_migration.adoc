@@ -3,7 +3,7 @@
 [id="Recommendations_for_migration"]
 = Recommendations for planning a migration
 
-These recommendations can help you plan the migration to minimize the impact on your environment.
+The following recommendations will minimize the impact of the migration on your environment.
 
 .Checking your resources
 
@@ -35,8 +35,8 @@ These recommendations can help you plan the migration to minimize the impact on 
 
 .Deploying conversion hosts
 
-* Create multiple conversion hosts for load-balancing and improved performance. See xref:Deciding_how_many_conversion_hosts_to_create[].
-* Choose an appropriate datapath transformation option for the conversion hosts. See xref:Choosing_vddk_or_ssh_transformation[].
+* Create an appropriate number of conversion hosts. See xref:Deciding_how_many_conversion_hosts_to_create[].
+* Choose the best datapath transformation option for your environment. See xref:Choosing_vddk_or_ssh_transformation[].
 * Deploy OpenStack Platform conversion hosts on multiple hypervisors.
 
 .Controlling the migration process
@@ -47,16 +47,18 @@ These recommendations can help you plan the migration to minimize the impact on 
 [id="Deciding_how_many_conversion_hosts_to_create"]
 == Deciding how many conversion hosts to create
 
-The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process. Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects.
+The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
 
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
 
-Each conversion host is limited to ten concurrent migrations, unless you xref:Changing_the_maximum_number_of_concurrent_migrations[change the default maximum number of concurrent migrations].
+Conversion hosts and providers are limited to ten concurrent migrations, unless you xref:Changing_the_maximum_number_of_concurrent_migrations[change the default maximum number of concurrent migrations].
+
+Test your environment thoroughly before the migration to determine how many migrations it can support, with `x` number of conversion hosts and `y` maximum number of concurrent migrations per host, without negative effects.
 
 [id="Choosing_vddk_or_ssh_transformation"]
 == Choosing a datapath transformation option: VDDK or SSH
 
-You can choose either VMware Virtual Disk Development kit (VDDK) or SSH for your migration. This choice is determined by the number of virtual machines you intend to migrate and the capabilities of your infrastructure. The following table compares these options.
+You can use either VMware Virtual Disk Development kit (VDDK) or SSH for your migration. The choice is determined by the number of virtual machines you intend to migrate and the capabilities of your infrastructure. The following table compares these options.
 
 [cols="1,2,2", options="header"]
 .VDDK and SSH comparison

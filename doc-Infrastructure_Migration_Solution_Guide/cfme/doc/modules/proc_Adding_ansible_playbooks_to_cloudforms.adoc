@@ -3,15 +3,9 @@
 [id="Adding_ansible_playbooks_to_cloudforms"]
 = Adding Ansible playbooks to CloudForms
 
-You can add Ansible playbooks to CloudForms to perform automated premigration and postmigration tasks, for example, removing web servers from a load-balancing pool before migration and adding them back to the pool after migration.
+You can add Ansible playbooks to CloudForms to perform automated premigration and postmigration tasks on specific virtual machines, for example, removing web servers from a load-balancing pool before migration and adding them back to the pool after migration.
 
 CloudForms requires a minimum of one Ansible playbook repository, one playbook, and one set of credentials.
-
-.Mandatory playbook for RHEL/Linux virtual machines
-[IMPORTANT]
-====
-If you are migrating virtual machines running RHEL or other Linux-based operating system, create a premigration playbook to call the `ims.rhel_premigration` role. See xref:Rhel_premigration_playbook[`RHEL premigration` playbook] below.
-====
 
 [id="Creating_an_Ansible_service_catalog_item"]
 .Procedure
@@ -24,31 +18,4 @@ If you are migrating virtual machines running RHEL or other Linux-based operatin
 
 . Add a playbook as an link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_instances/#create-playbook-service-catalog-item[Ansible service catalog item].
 
-. If you are migrating virtual machines running RHEL or other Linux-based operating system, procede to the next section, creating a xref:Rhel_premigration_playbook[`RHEL premigration` playbook].
-
-[id="Rhel_premigration_playbook"]
-.Creating a `RHEL premigration` playbook
-
-If you are migrating virtual machines running RHEL or other Linux-based operating system, create a `RHEL premigration` playbook that calls the Ansible link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[`ims.rhel_premigration` role].
-
-The `ims.rhel_premigration` role performs the following tasks on the source virtual machine:
-
-* Preserves the static IP address configuration by creating udev rules to associate the VMware virtual machine's MAC address with its existing interface name (Red Hat Virtualization and OpenStack Platform)
-
-* Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment (Red Hat Virtualization only)
-
-[NOTE]
-====
-The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or the `rhel-7-server-rpms` repository is enabled in the VMware virtual machine when it installs `qemu-guest-agent`. If you have disabled the repository, re-enable it in the RHEL premigration playbook.
-====
-
-.`RHEL premigration` playbook example
-[options="nowrap" subs="+quotes,verbatim"]
-----
----
-- hosts: all
-  roles:
-    - role: ims.rhel_pre_migration
-----
-
-You select this playbook as a xref:Advanced_options_screen[premigration playbook service] when you create the migration plan.
+You will xref:Advanced_options_screen[select the playbooks and the virtual machines on which they run] when you create the migration plan.

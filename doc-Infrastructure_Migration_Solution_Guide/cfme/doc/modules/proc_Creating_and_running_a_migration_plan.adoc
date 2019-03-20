@@ -1,0 +1,136 @@
+// Module included in the following assemblies:
+// assembly_Migrating_the_infrastructure.adoc
+[id="Creating_and_running_a_migration_plan"]
+= Creating and running a migration plan
+
+You create a migration plan using the *Create Migration Plan* wizard.
+
+You run a migration plan by selecting a *Schedule* option in the wizard:
+
+* *Save migration plan to run later* (see xref:Running_migration_plan_future[Running a migration plan in the future] for details)
+* *Start migration immediately* (see xref:Running_migration_plan_immediately[Running a migration plan immediately] for details)
++
+To cancel a migration plan that has started, see xref:Canceling_a_migration_plan[(Optional) Canceling a migration plan in progress].
+
+[NOTE]
+====
+Source virtual machines migrating to OpenStack Platform must be powered on at the time of migration.
+====
+
+.Procedure
+
+. Click menu:Compute[Migration > Migration Plans].
+
+. Click *Create Migration Plan*.
+
+. Perform the following procedures in the Create Migration Plan wizard:
+
+[cols="1,3", options="header"]
+|===
+|Screen
+|Procedure
+
+|*General*
+.<a|. Select the infrastructure mapping from the drop-down list.
++
+If you select an OpenStack Platform mapping, an *Instance Properties* screen appears after the *VMs* screen.
+
+. Enter the migration plan name and (optional) description.
+. Select a virtual machine discovery method:
+
+* *Choose from a list of VMs discovered in the selected infrastructure mapping*
+* *Import a CSV file with a list of VMs to be migrated*
+. Click *Next*.
+
+|*VMs*
+.<a|. If you selected *Choose from a list of VMs discovered in the selected infrastructure mapping*, select the virtual machines to be migrated.
++
+If you selected *Import a CSV file with a list of VMs to be migrated*:
+
+.. Click *Import*.
+.. Browse to the CSV file and click *Open*.
++
+.CSV file errors
+[NOTE]
+====
+Virtual machines with a duplicate `Name` field and no optional field to distinguish them, or with duplicate optional fields, are marked with a red `x` and cannot be added to the migration plan.
+====
+
+. Click *Next*.
+
+If you cannot discover or import the source virtual machines, see xref:Migration_plan_errors[Migration plan errors].
+
+.<a|*Instance Properties*
+
+(OpenStack Platform only)
+.<a|. Click the pencil icon to edit the network or flavor of each selected virtual machine.
++
+If a flavor is too small for the source virtual machine, it is marked with an asterisk (`*`). If you have not created flavors for the migration, CloudForms chooses from the available flavors.
+. Click *Next*.
+
+.<a|*Advanced Options*
+
+.<a|[id="Advanced_options_screen"]
+. Select a premigration and/or postmigration playbook service from the dropdown lists.
+. Select the virtual machines on which to run the playbook services.
+. Click *Next*.
+
+|*Schedule*
+.<a|. Select a schedule option:
+
+* *Save migration plan to run later* (see xref:Running_migration_plan_immediately[Running a migration plan in the future])
+* *Start migration immediately* (see xref:Running_migration_plan_immediately[Running a migration plan immediately])
+
+. Click *Create*.
+
+|*Results*
+.<a|Click *Close*.
+|===
+
+[id="Running_migration_plan_immediately"]
+.Running a migration plan immediately
+
+The migration plan may take some time to complete. Progress bars indicate the amount of transferred data, the number of migrated virtual machines, and the elapsed time.
+
+To view the migration progress of individual virtual machines:
+
+. Click *Migration Plans in Progress*.
+. Click the migration plan name to display the migration plan details.
++
+[NOTE]
+====
+The counter that displays the migration plan progress in menu:Compute[Migration > Migration Plans] may be a few seconds ahead of the counter in the migration plan details. This is because the Migration Plans counter displays the total time for running the migration plan, while the details counter displays the time for migrating the virtual machines.
+====
+
+:context: immediately
+include::proc_Validating_a_migration_plan.adoc[]
+
+[id="Running_migration_plan_future"]
+.Running a migration plan in the future
+
+The migration plan is saved in *Migration Plans Not Started* and will not run until you schedule or run it.
+
+To schedule a migration plan:
+
+. Click the *Schedule* button.
+. In the *Schedule Migration Plan* window, select a date and time and click *Schedule*. The plan's status is *Migration Scheduled* with the date and time.
++
+You can click *Migrate* to run a scheduled migration plan immediately.
+
+To edit or delete a migration plan, click the *More Actions* icon.
+
+:context: in_the_future
+include::proc_Validating_a_migration_plan.adoc[]
+
+[id="Canceling_a_migration_plan"]
+.(Optional) Canceling a migration plan in progress
+
+To cancel a migration plan that has started:
+
+. In menu:Compute[Migration > Migration Plans], click *Migration Plans in Progress*.
+. Select a migration plan and click *Cancel Migration*.
+. Click *Cancel Migrations* to confirm the cancellation. The canceled migration appears in *Migration Plans Complete* with a red `x` indicating that the plan did not complete successfully.
+
+You can click *Retry* to run the migration plan immediately or *Schedule* to run the migration plan in the future.
+
+Click the *More Actions* button to archive, edit, or delete the migration plan.

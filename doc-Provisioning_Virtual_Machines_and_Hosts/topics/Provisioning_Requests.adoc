@@ -440,9 +440,14 @@ The renamed virtual machine will appear in the inventory view.
 
 
 [[provisioning-a-virtual-machine-using-cloud-init-REST-API]]
-==== Provisioning a Virtual Machine using Cloud-init via REST API
+==== Provisioning a Virtual Machine using Cloud-Init via REST API
 
-Cloud-init is a tool for automating the initial setup of virtual machines. In {product-title_short}, you can use cloud-init via REST API to provision a virtual machine that was created based on a template. To use this tool, you must first install the cloud-init package and select the *Use Cloud-Init/Sysprep* option on the virtual machine.
+Cloud-init is a tool for automating the initial setup of virtual machines. In {product-title_short}, you can use cloud-init via REST API to provision a virtual machine that was created based on a template. 
+
+[NOTE]
+====
+To use cloud-init, you must first install the cloud-init package and select the *Use Cloud-Init/Sysprep* option on the virtual machine.
+====
 
 See the example below of a virtual machine provision request using cloud-init.
 
@@ -494,10 +499,10 @@ The value of *VLAN* in the API request can be one of the following options:
 
 [width="100%",cols="20%,40%,40%",options="header",]
 |====
-|VLAN value|Description|vNIC profile
-|<empty>|Should be written with the <..>|No vNIC profile
-|<Template>|Should be written with the <..>|Use the template's default vNIC profile
-|profile_name (network_name)|It is important to put a space between profile_name (network_name), otherwise it will fail. For example, *ovirtmgmt (ovirtmgmt)*|Set the specified vNIC profile.
+|VLAN value|Note|vNIC profile
+|<empty>|Must be written within the <..>|No vNIC profile
+|<Template>|Must be written within the <..>|Use the template's default vNIC profile
+|profile_name (network_name)|Must include a space between profile_name (network_name), otherwise it will fail. For example, *ovirtmgmt (ovirtmgmt)*|Set the specified vNIC profile.
 |vNIC profile ID||Set the specified vNIC profile, such as `3a8dce01-dd59-4a46-8a6f-823acccda79f`.
 |====
 
@@ -540,22 +545,26 @@ The value of sysprep_enabled in the API request can be the following.
 Sysprep_enabled is written in the order: _[value] - [it’s meaning] - [how it appears in the {product-title_short} user interface virtual machine provision dialog's *Customize* tab]
 ====
 
-.For Windows source template:
+.For Windows template only:
 
-sysprep_enabled: _fields_ - sysprep specification - _sysprep specification_
-sysprep_enabled: _file_ - sysprep answer file - _sysprep answer file_
+"sysprep_enabled": "fields" - Sysprep Specification - "Sysprep Specification"
+"sysprep_enabled": "file" - Sysprep answer file - "Sysprep answer file"
 
 
-.For Linux template:
+.For Linux template only:
 
-sysprep_enabled: fields - Customized template and any Customized parameters will be used - “Specification”
+"sysprep_enabled": "fields" - Customized template and any Customized parameters will be used - “Specification”
 
 [NOTE]
 ====
 For cloud-init to work (have the provisioned virtual machine marked with “Use cloud-init”, and that the customized template will be used, as well as Customized parameters, if any) it is a must that  "sysprep_enabled" will be set to “fields”. Otherwise, the customized template will be ignored, and the provisioned virtual machine will not be marked with “use cloud-init” even though the template from which the virtual machine is provisioned, has it marked.
-And common for both:
+====
+
+.For both Windows and Linux template:
+
 "sysprep_enabled": “disabled” -  Do not customize - “<None>”
-The customized template will be ignored, and the provisioned virtual machine will not be marked with “use cloud-init” even though the template from which the virtual machine is provisioned, has it marked.
+
+The customized template will be ignored, and the provisioned virtual machine will not be marked with *Use cloud-init*, even though the template from which the virtual machine was provisioned, has it marked.
 The default value is 'disabled'. 
 
 

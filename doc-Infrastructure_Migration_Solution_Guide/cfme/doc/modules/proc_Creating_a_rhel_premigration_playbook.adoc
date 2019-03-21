@@ -1,11 +1,13 @@
+// Module included in the following assemblies:
+// con_Migration_plan_options.adoc
 [id="Creating_a_rhel_premigration_playbook"]
 = Creating a `RHEL premigration` playbook
 
-If you are migrating virtual machines running RHEL or other Linux-based operating system, create a `RHEL premigration` playbook that calls the Ansible `ims.rhel_premigration` role (see link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[] for documentation).
+If you are migrating virtual machines running RHEL or other Linux-based operating system, you should create and run a `RHEL premigration` playbook. Otherwise the IP addresses of the migrated virtual machines will not be accessible.
 
-The `ims.rhel_premigration` role performs the following tasks on the source virtual machine:
+The `RHEL premigration` playbook calls the Ansible `ims.rhel_premigration` role (see link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[] for documentation), which performs the following tasks on the source virtual machines:
 
-* Preserves the static IP address configuration by creating udev rules to associate the VMware virtual machine's MAC address with its existing interface name (Red Hat Virtualization and OpenStack Platform)
+* Preserves the static IP address configuration by creating udev rules to associate the virtual machine's MAC address with its interface name
 
 * Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment (Red Hat Virtualization only)
 
@@ -15,7 +17,7 @@ The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or
 ====
 
 .`RHEL premigration` playbook example
-[options="nowrap" subs="+quotes,verbatim"]
+[source,yml]
 ----
 ---
 - hosts: all

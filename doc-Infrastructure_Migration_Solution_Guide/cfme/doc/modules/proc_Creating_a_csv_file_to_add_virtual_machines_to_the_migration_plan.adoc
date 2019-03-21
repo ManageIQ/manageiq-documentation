@@ -1,31 +1,27 @@
 // Module included in the following assemblies:
-// con_Migration_plan_prerequisites.adoc
+// con_Migration_plan_options.adoc
 [id="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan"]
-= Creating a CSV file to add virtual machines to the migration plan
+= Creating a CSV file to add previously migrated virtual machines to the migration plan
 
-A CSV file is mandatory if you are migrating virtual machines that were migrated in the past, because the migration plan cannot discover them.
+If you are migrating virtual machines that were migrated in the past, you should create a CSV file to add the virtual machines to the migration plan, because the migration plan cannot discover them automatically.
 
-.CSV file for large migrations (optional)
+.Using a CSV file for large migrations (recommended)
 [NOTE]
 ====
-If you are migrating a large number of virtual machines, adding the virtual machines with a CSV file is faster than selecting them from a list of discovered virtual machines or setting the security group and flavor of each virtual machine manually (OpenStack Platform).
+If you are migrating a large number of virtual machines, using a CSV file to add the virtual machines is faster than selecting them from a list of discovered virtual machines.
+
+For large OpenStack Platform migrations, you can use a CSV file to set the security groups and flavors, instead of setting them manually for each virtual machine in CloudForms.
 ====
 
 .CSV file fields
 [cols="1,3", options="header"]
 |===
 |Field |Comments
-|`Name` |Virtual machine name.
-
-The `Name` field is mandatory. All other fields are optional.
-|`Host` |To distinguish virtual machines with identical `Name` fields
-|`Provider` |To distinguish virtual machines with identical `Name` fields
-|`Security Group` |OpenStack Platform only
-
-The default is `Default`.
-|`Flavor` |OpenStack Platform only
-
-If you do not create flavors for the migration, CloudForms will try to map the source virtual machines with existing flavors.
+|`Name` |Virtual machine name. Required
+|`Host` |Optional. Only required if virtual machines have identical `Name` fields.
+|`Provider` |Optional. Only required if virtual machines with identical `Name` and `Host` fields.
+|`Security Group` |Optional, for OpenStack Platform only. The default is `Default`.
+|`Flavor` |Optional, for OpenStack Platform only. If you do not create flavors for the migration or if you leave this field blank, CloudForms tries to map the source virtual machines with existing flavors.
 |===
 
 .CSV file example

@@ -543,29 +543,29 @@ Examples for correct usage:
 
 .sysprep_enabled
 
-The value of sysprep_enabled in the API request can be the following.
+The value of sysprep_enabled in the API request must be in the following format.
 
 [NOTE]
 ====
-Sysprep_enabled is written in the order: _[value] - [it’s meaning] - [how it appears in the {product-title_short} user interface virtual machine provision dialog's *Customize* tab]
+Sysprep_enabled is written in the order: [value] - [it’s meaning] - [how it appears in the {product-title_short} user interface virtual machine provisioning dialog's *Customize* tab]
 ====
 
-.For Windows template only:
+*For Windows template*:
 
 "sysprep_enabled": "fields" - Sysprep Specification - "Sysprep Specification"
 "sysprep_enabled": "file" - Sysprep answer file - "Sysprep answer file"
 
 
-.For Linux template only:
+*For Linux template*:
 
 "sysprep_enabled": "fields" - Customized template and any Customized parameters will be used - “Specification”
 
 [NOTE]
 ====
-For cloud-init to work (have the provisioned virtual machine marked with “Use cloud-init”, and that the customized template will be used, as well as Customized parameters, if any) it is a must that  "sysprep_enabled" will be set to “fields”. Otherwise, the customized template will be ignored, and the provisioned virtual machine will not be marked with “use cloud-init” even though the template from which the virtual machine is provisioned, has it marked.
+For cloud-init to work _(that is, to have the provisioned virtual machine marked with *Use cloud-init*, and that the customized template as well as customized parameters, if any, will be used)_ "sysprep_enabled" must be set to “fields”. If you miss that step, the customized template will be ignored and the provisioned virtual machine will not be marked with *Use cloud-init*, although the template from which the virtual machine is provisioned has it marked.
 ====
 
-.For both Windows and Linux template:
+*For both Windows and Linux template*:
 
 "sysprep_enabled": “disabled” -  Do not customize - “<None>”
 

@@ -5,18 +5,20 @@
 
 You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.
 
+[IMPORTANT]
+====
+For VDDK, the value of *Maximum concurrent migrations per conversion host* should not be greater than `20`. Otherwise, network overload will cause the migration to fail.
+====
+
 The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations for a provider is `20` and for five conversion hosts, `3`, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x` `3` concurrent migrations).
 
 An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 
 A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.
 
-[IMPORTANT]
-====
-If you are using VDDK, the value of *Maximum concurrent migrations per conversion host* should not exceed `20`. Otherwise, network overload will cause the migration to fail.
-====
+.Procedure
 
-* To change the maximum number of concurrent migrations for all conversion hosts and providers:
+* To change the maximum number of concurrent migrations for all conversion hosts or providers:
 +
 . Click menu:Compute[Migration > Migration Settings] in CloudForms and select a value for *Maximum concurrent migrations per conversion host* or *Maximum concurrent migrations per provider*. (The value of *Maximum concurrent migrations per conversion host* is constrained so that it cannot be greater than *Maximum concurrent migrations per provider*.)
 
@@ -25,7 +27,7 @@ If you are using VDDK, the value of *Maximum concurrent migrations per conversio
 * To change the maximum number of concurrent migrations for a specific conversion host:
 +
 . Log in to the CloudForms machine using SSH.
-. Change the limit of `host x` to `x`:
+. Change the limit of `conversion host x` to `y`:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----

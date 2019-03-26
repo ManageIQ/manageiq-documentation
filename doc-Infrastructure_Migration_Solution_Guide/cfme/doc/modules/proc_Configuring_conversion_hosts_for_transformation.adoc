@@ -138,8 +138,8 @@ manageiq_username: "_username_"
 # CloudForms `admin` password:
 manageiq_password: "_password_"
 
-# SSH private key to connect to VMware hypervisors.
-# You will later copy this key to the VMware hypervisors if you use SSH transformation.
+# SSH private key to connect to VMware hypervisors
+# Required for both VDDK and SSH transformation
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
   b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....
@@ -172,7 +172,7 @@ Run the `conversion_host_check` playbook to verify that the conversion hosts are
 
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook --ask-vault-pass -i conversion_hosts_inventory.yml conversion_host_check.yml
+# ansible-playbook --ask-vault-pass -i `hostname`, conversion_host_check.yml
 ----
 
 *VDDK only:*
@@ -190,9 +190,9 @@ Run the `conversion_host_check` playbook to verify that the conversion hosts are
 +
 For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation site]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
 
-. Copy the public key you created in `extra_vars.yml` (see xref:VDDK_and_SSH_Configuring_the_conversion_hosts[]) to each VMware hypervisor to ensure that the Manager or the OpenStack Platform conversion host has the SSH key of the VMware hypervisor in its `known_hosts` file:
+. Copy the public SSH key corresponding to `v2v_ssh_private_key` in `secure_vars.yml` (see xref:VDDK_and_SSH_Configuring_the_conversion_hosts[]) to each VMware hypervisor:
 
-* Red Hat Virtualization:
+* RHV Manager:
 +
 [options="nowrap" subs="verbatim"]
 ----
@@ -200,7 +200,7 @@ For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index
     'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
 ----
 
-* OpenStack Platform:
+* OpenStack Platform conversion host:
 +
 [options="nowrap" subs="verbatim"]
 ----
@@ -208,9 +208,9 @@ For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index
     'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
 ----
 
-. Connect to the VMware hypervisor to validate the SSH connection:
+. Validate the SSH connection:
 
-* Red Hat Virtualization:
+* RHV Manager:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -224,7 +224,7 @@ echo Agent pid 12345;
     SSH_AUTH_SOCK=/tmp/ssh-123456ABCDE/agent.12345 ssh root@_esx1.example.com_
 ----
 
-* OpenStack Platform: Connect to the VM hypervisor as `root`.
+* OpenStack Platform conversion host: Connect over SSH to the VM hypervisor as `root`.
 +
 If the connection is successful, the conversion host is correctly configured for SSH transformation.
 

@@ -1,40 +1,44 @@
 [id="Preparing_the_rhv_target_environment"]
 = Preparing the Red Hat Virtualization environment
 
-Check the xref:Software_compatibility_matrix[software compatibility matrix] before you install the software.
+.Procedure
 
-To prepare the Red Hat Virtualization environment for migration:
-
-. Ensure that the datastore has sufficient space for the virtual machines you are migrating.
+include::ref_Software_compatibility_matrix.adoc[]
 
 . Set the BIOS settings of the physical hosts for optimal performance (rather than power-saving), according to the vendor's recommendations, and disable the C1E halt state, if applicable.
 
-. Install  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Red Hat Virtualization Manager] on the Manager machine.
+. Install Red Hat Virtualization Manager on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_).
 
-. Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Red Hat Virtualization Hosts] or  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Red Hat Enterprise Linux hosts] 7.6 on the host machines.
+. Install Red Hat Virtualization Host or Red Hat Enterprise Linux 7.6 on physical machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Installing Red Hat Enterprise Linux Hosts] in the _Red Hat Virtualization Installation Guide_).
++
+Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities. See xref:Number_of_conversion_hosts[] for details.
 
-. Enable the following https://access.redhat.com/articles/417343[ports] in the conversion hosts' network:
+. Enable the following ports in the conversion host network (see https://access.redhat.com/articles/417343[]):
 * 22 - SSH
 * 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
 * 902 - CloudForms to VMware
 * 5480 - `virt-v2v` to vCenter
 
-. Attach  link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[data and ISO storage domains] to the data center.
+. Create and attach data and ISO storage domains to the data center, ensuring that the data domain has sufficient space for the migrated virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_).
 +
 [NOTE]
 ====
-IMS only supports shared storage such as NFS, iSCSI, or FCP. Local storage is not supported.
+IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
 ====
 
-. Upload the link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[VirtIO and Guest Tool images] to the ISO storage domain. The VirtIO image file name must include the version number: `virtio-win-_version_.iso`. The Guest Tool image is used to migrate Windows virtual machines.
+. Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
 
-. Install Red Hat CloudForms link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[4.6] (with RHV 4.2.7) or link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization/[4.7] (with RHV 4.2.8) on the Manager machine.
+. Install Red Hat CloudForms on the Manager machine:
 
-. Add the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[VMware] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#red_hat_virtualization_providers[Red Hat Virtualization] environments as providers in CloudForms.
+* For RHV 4.2.7, install CloudForms 4.6 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] 4.6)
+
+* For RHV 4.2.8, install CloudForms 4.7 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] 4.7)
+
+. Add VMware and Red Hat Virtualization as providers in CloudForms (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms: Managing Providers_).
 +
 [NOTE]
 ====
-Do not remove or change a provider before, during, or after migration because it will have negative effects on CloudForms.
+Do not remove or change a provider (including refreshing RHV hosts) before, during, or after migration because these actions cause errors in the infrastructure mappings and migration plans.
 ====
 
-. Configure the xref:Conversion_hosts[conversion hosts] on physical machines, not nested virtual machines.
+You are ready to xref:Configuring_conversion_hosts_for_transformation[configure the conversion hosts].

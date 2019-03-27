@@ -1,25 +1,31 @@
 [id="Preparing_the_vmware_source_environment"]
-= Preparing the VMware environment
+= Preparing the source environment
 
-Prepare the VMware source environment for migration:
+Prepare the source environment's network and virtual machines for migration.
 
-. Extend the VMware network to the target environment.
-+
+.Preparing the source network
+
+* Extend the VMware network to the target environment.
+
 [IMPORTANT]
 ====
-The network configuration must not be changed in any way during the migration. IP addresses, VLANs, and other network configurations must be the same, before and after migration, because the conversion process preserves the source virtual machine MAC addresses.
+The network configuration must not be changed in any way during the migration.
+
+Ensure that IP addresses, VLANs, and other network configurations are not changed before or after migration, because the conversion process preserves the source virtual machine MAC addresses.
 ====
 
-. Unmount ISO/CDROM disks from the source virtual machines.
+.Preparing the source virtual machines
 
-. Check that the source virtual machines do not have encrypted disks.
+. Unmount mounted ISO/CDROM disks.
 
-. Check that each NIC on each virtual machine has no more than 1 IPv4 and/or 1 IPv6 address.
+. Check that attached disks are not encrypted.
 
-. Install link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[VMware Tools] on all source virtual machines to capture the IP addresses.
+. Check that each NIC has no more than one IPv4 and/or one IPv6 address.
 
-. Check that source virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`). Special characters and spaces are not permitted.
+. Install VMware Tools to capture IP addresses (see link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[Installing VMware Tools] in the VMware documentation for instructions).
 
-. Red Hat Virtualization only: Check that the names of source virtual machines do not duplicate virtual machine names in the target environment.
+. Check that source virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`). *Special characters and spaces are not permitted.*
+
+. Red Hat Virtualization only: Check that source virtual machine names do not duplicate the names of existing RHV virtual machines.
 
 You are ready to prepare the target environment, xref:Preparing_the_rhv_target_environment[Red Hat Virtualization] or xref:Preparing_the_osp_target_environment[OpenStack Platform].

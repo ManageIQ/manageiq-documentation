@@ -408,42 +408,6 @@ After submission, the appliance assigns each provision request a *Request ID*. I
 Request 99 in region 123 results in Request ID 123000000000099.
 
 
-[[cloning-a-virtual-machine]]
-==== Cloning a Virtual Machine
-
-Virtual machines can be cloned in other providers as well.
-
-. Navigate to menu:Compute[Infrastructure > Virtual Machines], and check the virtual machine you want to clone.
-. Click image:2007.png[](*Lifecycle*), and then image:2339.png[](*Clone selected item*).
-. Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
-. Schedule the request on the *Schedule* tab.
-. Click *Submit*.
-
-[[publishing-a-virtual-machine-to-a-template-vmware]]
-==== Publishing a Virtual Machine to a Template (VMware Virtual Machines Only)
-
-. Navigate to menu:Compute[Infrastructure > Virtual Machines], and check the virtual machine you want to publish as a template.
-. Click image:2007.png[](*Lifecycle*), and then image:2340.png[](*Publish selected VM to a Template*).
-. Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
-. Schedule the request on the *Schedule* tab.
-. Click *Submit*.
-
-=======
-[[renaming-a-provisioned-virtual-machine]]
-==== Renaming a Provisioned Virtual Machine (VMware Virtual Machines Only)
-
-{product-title} allows you to rename a VMware virtual machine without having to reprovision it. 
-
-To rename a VMware virtual machine:
-
-. Navigate to menu:Compute[Infrastructure > Virtual Machines], and select the VMware virtual machine you want to rename.
-. Click image:1847.png[](*Configuration*), image:1851.png[](*Rename selected item*).
-. In the *Basic Information* screen, provide a new *name*.
-. Click *Save*.
-
-The renamed virtual machine will appear in the inventory view. 
-
-
 [[provisioning-a-virtual-machine-using-cloud-init-REST-API]]
 ==== Provisioning a Virtual Machine using Cloud-Init via REST API
 
@@ -511,35 +475,6 @@ The value of *VLAN* in the API request can be one of the following options:
 |vNIC profile ID||Set the specified vNIC profile, such as `3a8dce01-dd59-4a46-8a6f-823acccda79f`.
 |====
 
-////
-
-Draft text:
-
-Here are some possible cases, where VLAN field is not picked correctly, and this may lead to this validation failure:  
-"Provision failed for the following reasons:\n'Network/Virtual NIC Profile ID or 
- Profile Name (Network Name)' is required"
-
-When providing vnic profile ID:
-vnic_profile_id not belongs to the expected cluster (should match the vnic profile id of the network taken from RHV based on template’s cluster assigned network)
-Non-exist vnic profile id (should be available under RHV, i.e.: https:/<RHV FQDN>/ovirt-engine/api/vnicprofiles)
-When providing: “profile name (network name)”
-Non-exist network name
-Wrong format (missing space before the first bracket): “profile_name(network_name)” 
-Use Network name (that was used in V3) instead of:  “profile_name(network_name)” 
-
-
-Examples for wrong usage:
-"vlan": "1dbfed74-1c8b-4535-9f1e-c654a5456805", // failed, no such id
-"vlan": "aaa (aaa)", // failed, no such vnic profile/network
-"vlan": "ovirtmgmt(ovirtmgmt)", // failed, invalid format
-"vlan": "0000000a-000a-000a-000a-000000000398", // falied, vnic profile id of other cluster
-"vlan": "ovirtmgmt", // failed, not supported by v4
-
-Examples for correct usage:
-"vlan": "654281a3-db89-4718-ae43-9466b81eb001", // passed, a valid vnic profile id
-"vlan": "ovirtmgmt (ovirtmgmt)", // passed, supported format 
-
-////
 
 .sysprep_enabled
 
@@ -562,7 +497,7 @@ Sysprep_enabled is written in the order: [value] - [it’s meaning] - [how it ap
 
 [NOTE]
 ====
-For cloud-init to work _(that is, to have the provisioned virtual machine marked with *Use cloud-init*, and that the customized template as well as customized parameters, if any, will be used)_ "sysprep_enabled" must be set to “fields”. If you miss that step, the customized template will be ignored and the provisioned virtual machine will not be marked with *Use cloud-init*, although the template from which the virtual machine is provisioned has it marked.
+For cloud-init to work _(that is, to have the provisioned virtual machine marked with *Use cloud-init* and the customized template as well as customized parameters, if any, will be used)_ "sysprep_enabled" must be set to “fields”. If you do not set it correctly, the customized template will be ignored and the provisioned virtual machine will not be marked with *Use cloud-init*, although the template from which the virtual machine is provisioned has it marked.
 ====
 
 *For both Windows and Linux template*:
@@ -570,7 +505,41 @@ For cloud-init to work _(that is, to have the provisioned virtual machine marked
 "sysprep_enabled": “disabled” -  Do not customize - “<None>”
 
 The customized template will be ignored, and the provisioned virtual machine will not be marked with *Use cloud-init*, even though the template from which the virtual machine was provisioned, has it marked.
-The default value is 'disabled'. 
+The default value is 'disabled'.
+
+[[cloning-a-virtual-machine]]
+==== Cloning a Virtual Machine
+
+Virtual machines can be cloned in other providers as well.
+
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], and select the virtual machine you want to clone.
+. Click image:2007.png[](*Lifecycle*), and then image:2339.png[](*Clone selected item*).
+. Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
+. Schedule the request on the *Schedule* tab.
+. Click *Submit*.
+
+[[publishing-a-virtual-machine-to-a-template-vmware]]
+==== Publishing a Virtual Machine to a Template (VMware Virtual Machines Only)
+
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], and select the virtual machine you want to publish as a template.
+. Click image:2007.png[](*Lifecycle*), and then image:2340.png[](*Publish selected VM to a Template*).
+. Enter the requested information in the dialogs. Be sure to check the *Catalog* tab.
+. Schedule the request on the *Schedule* tab.
+. Click *Submit*.
+
+[[renaming-a-provisioned-virtual-machine]]
+==== Renaming a Provisioned Virtual Machine (VMware Virtual Machines Only)
+
+{product-title} allows you to rename a VMware virtual machine without having to reprovision it. 
+
+To rename a VMware virtual machine:
+
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], and select the VMware virtual machine you want to rename.
+. Click image:1847.png[](*Configuration*), image:1851.png[](*Rename selected item*).
+. In the *Basic Information* screen, provide a new *name*.
+. Click *Save*.
+
+The renamed virtual machine will appear in the inventory view. 
 
 
 

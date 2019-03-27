@@ -1,27 +1,23 @@
 [id="Vmware_to_osp_workflow"]
-= VMware to Red Hat OpenStack Platform workflow
+= OpenStack Platform migration workflow
 
-This workflow describes the process of migrating from VMware to Red Hat OpenStack Platform.
+This diagram describes the workflow of a migration to OpenStack Platform.
 
+.VMware to OpenStack Platform migration workflow
 image:vmware_to_osp_migration_workflow.png[]
 
-. After creating an infrastructure mapping and a migration plan, you run the migration plan.
+image:1.png[height=25] You run a xref:Running_a_migration_plan[migration plan] in CloudForms.
 
-. CloudForms uses the migration plan to locate the virtual machines to be migrated.
-+
-[NOTE]
-====
-Source virtual machines must be powered on for migration.
-====
+image:2.png[height=25] CloudForms uses the migration plan to locate the source virtual machines.
 
-. If VDDK transformation is used, the ESXi host fingerprint is captured for authentication during the virtual machine conversion process.
+image:3.png[height=25] If you are using the VMware Virtual Disk Development Kit (VDDK) xref:datapath_transformation_options_vddk_ssh[transformation option], CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.
 
-. Using the OpenStack Platform attributes defined for the target environment, CloudForms initiates communication with the conversion hosts.
+image:4.png[height=25] Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts. (A conversion host is an OpenStack Platform instance created from a conversion host appliance, running `virt-v2v` and `virt-v2v-wrapper`.)
 
-. The conversion host connects to the source datastore through the ESXi host with `virt-v2v-wrapper` and streams the disks to be converted to the target block storage with `virt-v2v`. The conversion host creates volumes in the block storage, attaches them to itself, and converts the source disks.
+image:5.png[height=25] `virt-v2v-wrapper` connects to the source datastore through the ESXi host. virt-v2v streams the source disks to the target block storage, creates volumes in the block storage, attaches the volumes to the conversion host, and converts the source disks.
 
-. Once the disks are converted, `virt-v2v` detaches the volumes from the conversion host. `virt-v2v-wrapper` creates the target instance in the OpenStack Platform environment with the converted disks, using the flavor and security group defined in the migration plan and the network(s) defined in the infrastructure mapping.
+image:6.png[height=25] After the source disks are converted, `virt-v2v` detaches the volumes from the conversion host, migrates the volumes to the destination project, and creates the network ports defined in the infrastructure mapping.
 
-. The disks mapped in the block storage are attached to the instance and the instance is powered on.
-+
+image:7.png[height=25] `virt-v2v-wrapper` creates the target OpenStack Platform instance with the flavor and security group defined in the migration plan. `virt-v2v` attaches the newly created network ports and the disks mapped in the block storage to the instance and the instance is powered on.
+
 The migration process is complete and the migration plan's status is displayed in CloudForms.

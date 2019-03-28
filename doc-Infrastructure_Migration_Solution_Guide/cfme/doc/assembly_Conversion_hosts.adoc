@@ -1,21 +1,32 @@
 [id="Configuring_conversion_hosts_for_transformation"]
-= Configuring the conversion hosts
+= Configuring the conversion hosts for VDDK or SSH
 
-You can configure your conversion hosts for VDDK or SSH transformation:
+You can configure your conversion hosts for VDDK or SSH:
 
 * xref:Configuring_rhv_hosts[]
 * xref:Configuring_osp_hosts[]
 
-[NOTE]
-====
-These procedures assume that you have answered the following questions:
+Configuring a conversion host involves the following key steps:
 
-* xref:Number_of_conversion_hosts[]
-* xref:datapath_transformation_options_vddk_ssh[]
-====
+. VDDK prerequisite: Downloading the VMware Virtual Disk Development Kit
+. Creating the `extra_vars.yml` and `secure_vars.yml` files
+. Running the `conversion_host_enable` playbook to configure the host
+. Running the `conversion_host_check` playbook to verify the configuration
+
+* Red Hat Virtualization only:
+
+** Authenticating the conversion host in CloudForms
+** xref:Reinstalling_ipa_client[(Optional) Reinstalling `ipa-client`] if using SSSD with single-sign-on
+
+. SSH: Configuring the SSH connection to the VMware hypervisors
 
 [[Configuring_rhv_hosts]]
-== Configuring the Red Hat Virtualization conversion hosts
+== Configuring Red Hat Virtualization conversion hosts
+
+[IMPORTANT]
+====
+If you are using SSSD with single sign-on, SSH will fail for the vdsm user unless you reinstall `ipa-client` without the OpenSSH client. See xref:Reinstalling_ipa_client[(Optional) Reinstalling `ipa-client`]
+====
 
 :context: rhv
 :rhv:
@@ -23,7 +34,7 @@ include::modules/proc_Configuring_conversion_hosts_for_transformation.adoc[level
 :rhv!:
 
 [[Configuring_osp_hosts]]
-== Configuring the OpenStack Platform conversion hosts
+== Configuring OpenStack Platform conversion hosts
 
 :context: osp
 :osp:

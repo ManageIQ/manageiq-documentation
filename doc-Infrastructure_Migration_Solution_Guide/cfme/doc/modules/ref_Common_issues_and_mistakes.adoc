@@ -8,13 +8,13 @@
 
 .Red Hat Virtualization only
 
-* Missing networks. [[Infrastructure_mapping_missing_networks]]This error occurs if you do not add the conversion host credentials in CloudForms. Delete the mapping, xref:Enabling_rhv_conversion_hosts_in_cloudforms[enable the conversion hosts in CloudForms], and create a new mapping.
+* Missing networks. [[Infrastructure_mapping_missing_networks]]This error occurs if you do not add the conversion host credentials in CloudForms. Delete the mapping, xref:Enabling_conversion_hosts_in_cloudforms[enable the conversion hosts in CloudForms], and create a new mapping.
 
 * Missing networks and datastore. This error occurs when you create a mapping and subsequently refresh the hosts, which changes the object IDs. Delete the mapping and create a new one.
 
 .OpenStack Platform only
 
-* Storage not detected. [[OpenStack_storage_not_detected]]If the target block storage does not appear while you are creating an infrastructure mapping, check that you have   link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/storage_guide/#section-volumes-advanced-vol-type[set at least one `volume type`] for the storage.
+* Storage not detected. [[OpenStack_storage_not_detected]]If the target block storage does not appear while you are creating an infrastructure mapping, check that you have  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volumes-advanced-vol-type[set at least one `volume type`] for the storage.
 
 == Migration plan errors[[Migration_plan_errors]]
 
@@ -24,7 +24,7 @@ If a migration plan cannot discover source virtual machines that have been migra
 
 * Virtual machines cannot be added to the migration plan with a CSV file. If you cannot add the source virtual machines into a migration plan with a CSV file, check the xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file's format and fields]. Create a new migration plan using the updated CSV file.
 
-* `Denied State`. [[Denied_state_error]]If a migration plan fails immediately and the migration plan displays a *Denied State* error message, check that you have xref:Creating_conversion_hosts[created the conversion hosts]. (Red Hat Virtualization only: ensure that you have xref:Enabling_rhv_conversion_hosts_in_cloudforms[authenticated the conversion hosts]). Cancel the migration plan and xref:Retrying_a_failed_migration_plan[retry it].
+* `Denied State`. [[Denied_state_error]]If a migration plan fails immediately and the migration plan displays a *Denied State* error message, check that you have xref:Configuring_conversion_hosts_for_transformation[configured the conversion hosts]. (Red Hat Virtualization only: ensure that you have xref:Enabling_conversion_hosts_in_cloudforms[authenticated the conversion hosts]). Cancel the migration plan and xref:Retrying_a_failed_migration_plan[retry it].
 
 * IP address of RHEL or other Linux virtual machine not accessible after migration. If you cannot access the IP address of a RHEL or other Linux virtual machine after an apparently successful migration, xref:Remigrating_virtual_machines[re-migrate] the virtual machine while running the xref:Configuring_the_rhel_premigration_playbook[`RHEL pre-migration` playbook].
 
@@ -46,18 +46,7 @@ The following scenarios can cause a failed migration:
 
 * Virtual machine name duplicates an existing target virtual machine name.
 
-* SSH transformation failure. [[SSH_transformation_fails]]If you are using SSSD with single sign-on, SSH fails for the `vdsm` account. Reinstall `ipa-client` without configuring the OpenSSH client:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ipa-client-install --uninstall
-# ipa-client-install --no-ssh
-----
-
-[NOTE]
-====
-You cannot resolve this issue by changing the configuration file because the file is restored during upgrades.
-====
+* SSH transformation failure. [[SSH_transformation_fails]]If you are using SSSD with single sign-on, SSH fails for the vdsm user unless you xref:Reinstalling_ipa_client[reinstall `ipa-client` without enabling the OpenSSH client]. This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
 
 .OpenStack Platform only
 
@@ -72,7 +61,7 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
-* Not Authorized. The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project.  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
+* Not Authorized. The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project.  link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user] as `member` and `admin` to your target project.
 +
 [options="" subs="verbatim"]
 ----

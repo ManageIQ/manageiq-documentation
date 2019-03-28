@@ -15,7 +15,7 @@ include::ref_Software_compatibility_matrix.adoc[]
 
 . Ensure that the `admin` user has `member` and `admin` roles in the conversion and destination projects (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Edit a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_).
 
-. Set at least one `volume type` for the target block storage (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_). Otherwise, CloudForms cannot detect the storage when you create the infrastructure mapping.
+. Set at least one volume type for the target block storage (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_). Otherwise, CloudForms cannot detect the storage when you create the infrastructure mapping.
 
 . Ensure that the storage backends have sufficient space for the migrated virtual machines.
 
@@ -40,7 +40,15 @@ Outbound traffic is enabled by default. If you have changed this setting, enable
 Do not remove or change a provider before, during, or after migration because these actions cause errors in the infrastructure mappings and migration plans.
 ====
 
-. Ensure that the OpenStack Platform user (default is `cloud-user`) in CloudForms has `admin` privileges for the target projects.
+. Add the SSH key for the OpenStack Platform user (default is `cloud-user`) in CloudForms:
+
+.. Click menu:Compute[Clouds > Providers] and select the OpenStack Platform provider.
+.. From the *Configuration* dropdown menu, select *Edit Selected Cloud Provider*.
+.. Click the *RSA key pair* tab in the *Endpoints* section.
+.. Enter the *Username*, `cloud-user`.
+.. Click *Choose File*, browse to the SSH key file that you use to create OpenStack Platform instances, and click *Save*.
+
+. Ensure that `cloud-user` has `admin` privileges for the target projects.
 
 . Deploy the conversion host instances using the conversion host appliance. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Number_of_conversion_hosts[] for details.
 
@@ -73,4 +81,4 @@ For optimal performance:
 * Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
 ====
 
-. Configure the xref:Configuring_conversion_hosts_for_transformation[conversion hosts].
+You are ready to xref:Configuring_osp_hosts[configure the conversion hosts].

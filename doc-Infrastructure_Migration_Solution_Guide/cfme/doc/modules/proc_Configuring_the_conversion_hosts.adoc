@@ -7,22 +7,22 @@ You can select, authenticate, and configure your conversion hosts in CloudForms.
 
 .Prerequisites
 
-* These procedures assume that you have decided the following:
-
-** xref:Deciding_how_many_conversion_hosts_to_create[]
-** xref:Choosing_vddk_or_ssh_transformation[]
-
-* VDDK requires the latest Virtual Disk Development Kit release:
-
+* VDDK prerequisite:
++
+.Downloading the VMware Virtual Disk Development Kit
+====
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
 . Click *VMware Virtual Disk Development Kit (VDDK)*.
 . Click *Latest Releases* and select the latest VDDK release.
-. Download the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+) and record its path for the conversion host configuration procedure.
+. Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+).
+====
+*  VDDK and SSH: SSH key pair, to connect to the VMware hypervisors
 
-FROM MOCKUPS, NOT REAL UI
+
 .Procedure
 
+THIS PROCEDURE IS FROM MOCKUPS, NOT REAL UI
 . In CloudForms, click menu:Compute[Migration > Migration Settings].
 . In the *Conversion Hosts* tab, click *Configure Conversion Host*.
 . Perform the following procedures in the *Configure Conversion Host* wizard:
@@ -44,12 +44,9 @@ PLACEHOLDER: CONVERSION HOST UI SCREENSHOT
 . Click *Next*.
 |*Authentication*
 .<a|. Click *Browse* to browse to the SSH key or paste it in the *Conversion host SSH key* field.
-+
-====
-* Red Hat Virtualization Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 
-* The OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
-====
+* Red Hat Virtualization Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
+* OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
 
 . Select a *Transformation method*.
 
@@ -67,7 +64,7 @@ The configured conversion hosts and status information, including error messages
 
 You can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
 
-.Upgrading the conversion hosts
+= Upgrading the conversion hosts
 
 * Red Hat Virtualization:
 +
@@ -77,5 +74,3 @@ You can click *Remove* to unconfigure a conversion host or *Retry* to retry a co
 ----
 
 * OpenStack Platform: xref:Deploying_osp_conversion_hosts[Download the latest conversion host appliance and re-deploy the conversion hosts]
-
-// include::proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+1]

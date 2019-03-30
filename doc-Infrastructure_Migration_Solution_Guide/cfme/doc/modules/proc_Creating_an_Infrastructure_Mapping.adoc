@@ -3,18 +3,20 @@
 
 The infrastructure mapping maps your source resources to target resources.
 
-.Infrastructure Mappings screen
-image:Infrastructure_mappings_screen.png[]
+[IMPORTANT]
+====
+If you add or remove providers or provider objects from an infrastructure mapping, the mapping will have missing resource errors. You must delete the infrastructure mapping and create a new one.
+====
 
 .Prerequisite
 
-*Red Hat Virtualization only:* Before creating an infrastructure mapping, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#authenticating_rhv_hosts[authenticate] the RHV conversion hosts. If the hosts are not authenticated, the mapping displays a xref:Infrastructure_mapping_missing_networks[missing networks error].
+* Red Hat Virtualization only: xref:Enabling_conversion_hosts_in_cloudforms[Authenticate the RHV conversion hosts in CloudForms] to ensure that the network appears in the infrastructure mapping.
 
 .Procedure
 
 . Click menu:Compute[Migration > Infrastructure Mappings].
 . Click *Create Infrastructure Mapping*.
-. Perform the following procedures in each infrastructure mapping screen:
+. Perform the following procedures in the *Create Infrastructure Mapping* wizard:
 
 [cols="1,3", options="header"]
 |===
@@ -28,7 +30,7 @@ image:Infrastructure_mappings_screen.png[]
 |*Map Compute*
 .<a|. Select a source cluster and a target Red Hat Virtualization cluster or OpenStack Platform project.
 +
-*Red Hat Virtualization only:* A target cluster that does not contain a conversion host displays a warning icon (&#65279;image:warning.png[height=15px]&#65279;). The icon appears after a few seconds' delay for polling the clusters and refreshing the UI.
+*Red Hat Virtualization only:* A target cluster that does not contain a conversion host displays a warning icon (&#65279;image:warning.png[height=15px]&#65279;).
 . Click *Add Mapping*. You can map additional clusters.
 . Click *Next*.
 
@@ -58,4 +60,3 @@ If you add or remove providers or provider objects from an infrastructure mappin
 ====
 
 After you have created a successful infrastructure mapping, you can create a  xref:Creating_and_running_a_migration_plan[migration plan].
-

@@ -1,32 +1,22 @@
 [id="Configuring_conversion_hosts_for_transformation"]
 = Configuring the conversion hosts for VDDK or SSH
 
-You can configure your conversion hosts for VDDK or SSH:
+Configuring a conversion host for VDDK or SSH transformation involves the following key steps:
+
+. VDDK: Downloading the VMware Virtual Disk Development Kit
+. Creating the `extra_vars.yml` and `secure_vars.yml` files
+. Running the `conversion_host_enable` playbook to configure the host
+. Running the `conversion_host_check` playbook to verify the configuration
+. (Red Hat Virtualization only) Authenticating the conversion host in CloudForms
+. SSH: Configuring the SSH connection to the VMware hypervisors
+
+Configure the conversion hosts for your environment:
 
 * xref:Configuring_rhv_hosts[]
 * xref:Configuring_osp_hosts[]
 
-Configuring a conversion host involves the following key steps:
-
-. VDDK prerequisite: Downloading the VMware Virtual Disk Development Kit
-. Creating the `extra_vars.yml` and `secure_vars.yml` files
-. Running the `conversion_host_enable` playbook to configure the host
-. Running the `conversion_host_check` playbook to verify the configuration
-
-* Red Hat Virtualization only:
-
-** Authenticating the conversion host in CloudForms
-** xref:Reinstalling_ipa_client[(Optional) Reinstalling `ipa-client`] if using SSSD with single-sign-on
-
-. SSH: Configuring the SSH connection to the VMware hypervisors
-
 [[Configuring_rhv_hosts]]
 == Configuring Red Hat Virtualization conversion hosts
-
-[IMPORTANT]
-====
-If you are using SSSD with single sign-on, SSH will fail for the vdsm user unless you reinstall `ipa-client` without the OpenSSH client. See xref:Reinstalling_ipa_client[(Optional) Reinstalling `ipa-client`]
-====
 
 :context: rhv
 :rhv:

@@ -28,11 +28,21 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 
 . Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
 
+. If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client:[[Reinstalling_ipa_client]]
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ipa-client-install --uninstall
+# ipa-client-install --no-ssh
+----
++
+Otherwise, SSH will fail for the vdsm user. This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+
 . Install Red Hat CloudForms on the Manager machine:
 
-* For RHV 4.2.7, install CloudForms 4.6 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] 4.6)
+* For RHV 4.2.7, install CloudForms 4.6 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] 4.6).
 
-* For RHV 4.2.8, install CloudForms 4.7 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] 4.7)
+* For RHV 4.2.8, install CloudForms 4.7 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[Installing Red Hat CloudForms on Red Hat Virtualization] 4.7).
 
 . Add VMware and Red Hat Virtualization as providers in CloudForms (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms: Managing Providers_).
 +

@@ -2,19 +2,15 @@
 
 .Prerequisites
 
-* VDDK prerequisite:
+* For VDDK, download the VMware Virtual Disk Development Kit:
 +
-====
-.Downloading the VMware Virtual Disk Development Kit
-
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
 . Click *VMware Virtual Disk Development Kit (VDDK)*.
 . Click *Latest Releases* and select the latest VDDK release.
-. Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+) where it can be accessed using HTTP.
-====
+. Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+), recording its URL.
 
-* VDDK and SSH: SSH key pair, to connect to the VMware hypervisors
+* Generate an SSH key pair to connect to the VMware hypervisors (required for both VDDK and SSH).
 
 .Procedure
 
@@ -22,7 +18,6 @@ ifdef::rhv[]
 . Connect to the Manager machine using SSH.
 . Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
 endif::rhv[]
-
 ifdef::osp[]
 . Connect to a conversion host using SSH.
 . Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
@@ -36,7 +31,7 @@ ifdef::rhv[]
 ---
 v2v_host_type: rhv
 
-# Transport methods to configure on the conversion host. Valid values: 'vddk', 'ssh'
+# Transport methods to configure on the conversion host. Valid values: `vddk`, `ssh`
 v2v_transport_methods:
   - _vddk_
 
@@ -58,7 +53,7 @@ manageiq_url: "https://_CloudForms_FQDN_"
 manageiq_validate_certs: _false_
 manageiq_zone_id: "42000000000001"
 
-# List of cloud or infrastructure providers
+# List of infrastructure providers
 # Each provider is a dictionary with 3 attributes: `name`, `hostname`, and `connection_configurations`
 manageiq_providers:
   - name: "_RHV_"
@@ -67,13 +62,14 @@ manageiq_providers:
       - endpoint:
           role: "default"
           verify_ssl: true <2>
-          certificate_authority: |
+          certificate_authority: | <3>
             -----BEGIN CERTIFICATE-----
             _MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ...._
             -----END CERTIFICATE-----
 ----
 <1> `connection_configurations` has a single endpoint, whose role is `default`.
-<2> You can choose whether to verify the SSL certificate. If `true`, add the `certificate_authority`. The default certificate authority is `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
+<2> If you choose to verify the SSL certificate (`verify_ssl: true`), add the `certificate_authority`.
+<3> The default `certificate_authority` is `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
 endif::rhv[]
 ifdef::osp[]
 +
@@ -82,7 +78,7 @@ ifdef::osp[]
 ---
 v2v_host_type: openstack
 
-# Transport methods to configure on the conversion host. Valid values: 'vddk', 'ssh'
+# Transport methods to configure on the conversion host. Valid values: `vddk`, `ssh`
 v2v_transport_methods:
   - _vddk_
 
@@ -104,7 +100,7 @@ manageiq_url: "https://_CloudForms_FQDN_"
 manageiq_validate_certs: _false_
 manageiq_zone_id: "42000000000001"
 
-# List of cloud or infrastructure providers
+# List of cloud providers
 # Each provider is a dictionary with 3 attributes: `name`, `hostname`, and `connection_configurations`
 manageiq_providers:
   - name: "_OpenStack_"
@@ -113,7 +109,7 @@ manageiq_providers:
       - endpoint:
           role: "default"
           security_protocol: "ssl" <2>
-          certificate_authority: |
+          certificate_authority: | <3>
             -----BEGIN TRUSTED CERTIFICATE-----
             _MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV...._
             -----END TRUSTED CERTIFICATE-----
@@ -122,14 +118,13 @@ manageiq_providers:
             -----END TRUSTED CERTIFICATE-----
 ----
 <1> `connection_configurations` has a single endpoint, whose role is `default`.
-<2> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`.
+<2> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`)
+<3> The CA chain (`certificate_authority`) is a concatenation of two CA files:
 +
-If you choose `ssl`, add the CA chain (`certificate_authority`), which is a concatenation of the following CA files:
-
 * `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server
 * `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers
 +
-If you deploy your own certificate authority, use the chain that signs the OpenStack Platform API certificates (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[SSL/TLS Certificate Configuration] in _Red Hat OpenStack Platform Director Installation and Usage_).
+If you deploy your own CA chain, use the chain that signs the OpenStack Platform API certificates (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[SSL/TLS Certificate Configuration] in _Red Hat OpenStack Platform Director Installation and Usage_).
 endif::osp[]
 
 . Create an encrypted `secure_vars.yml` file in the current directory:
@@ -178,9 +173,9 @@ endif::osp[]
 +
 [IMPORTANT]
 ====
-Running the `conversion_host_enable` playbook more than once on the same host creates multiple entries in the CloudForms database for the same host.
+Running the `conversion_host_enable` playbook more than once on the same host creates multiple entries in the CloudForms database for that host.
 
-If you need to run the `conversion_host_enable` playbook again, remove the existing database entry by running the `conversion_host_disable` playbook on the host:
+If you need to run the `conversion_host_enable` playbook again, you should remove the existing database entry by running the `conversion_host_disable` playbook on the host:
 
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -202,23 +197,20 @@ ifdef::osp[]
 ----
 # ansible-playbook --ask-vault-pass -i _controller_node_FQDN_or_IP_, conversion_host_check.yml
 ----
-
-If you are configuring your OpenStack Platform conversion host for VDDK, you are ready to xref:Migrating_the_infrastructure[migrate the infrastructure].
-
-If you are configuring your OpenStack Platform conversion host for SSH, you are ready to xref:Configuring_ssh_connection_osp[configure the SSH connection to the VMware hypervisors].
++
+* If you are configuring your OpenStack Platform conversion host for VDDK, you can xref:Migrating_the_infrastructure[migrate the infrastructure].
+* If you are configuring your OpenStack Platform conversion host for SSH, you can xref:Configuring_ssh_connection_osp[configure the SSH connection to the VMware hypervisors].
 
 :context: osp
 :osp:
 include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
+
 :osp!:
 endif::osp[]
 ifdef::rhv[]
-If you are configuring your RHV conversion host for SSH:
-
-. xref:Configuring_ssh_connection_rhv[Configure the SSH connection to the VMware hypervisors]
-. xref:Enabling_conversion_hosts_in_cloudforms[Authenticate the conversion hosts in CloudForms]
-
-If you are configuring your RHV conversion host for VDDK, you can xref:Enabling_conversion_hosts_in_cloudforms[authenticate the conversion hosts in CloudForms].
++
+* If you are configuring your RHV conversion host for VDDK, you can xref:Enabling_conversion_hosts_in_cloudforms[authenticate the conversion hosts in CloudForms].
+* If you are configuring your RHV conversion host for SSH, you can xref:Configuring_ssh_connection_rhv[configure the SSH connection to the VMware hypervisors].
 
 :context: rhv
 :rhv:
@@ -229,20 +221,9 @@ include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
 
 . Click menu:Compute[Infrastructure > Hosts] and select a Red Hat Virtualization conversion host.
 . Click the *Configuration* drop-down button, and select *Edit Selected items*.
-. In the *Default* tab of the Endpoints section, enter the *Username* `root` and the root password.
+. In the *Default* tab of the Endpoints section, enter the *Username* (root)  and the *Password*.
 . Click *Validate* and wait for validation to complete.
 . Click *Save*.
-
-[[Reinstalling_ipa_client]]
-.(Optional) Reinstalling `ipa-client`
-
-If you are using SSSD with single sign-on, SSH will fail for the vdsm user unless you reinstall `ipa-client` without configuring the OpenSSH client:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ipa-client-install --uninstall
-# ipa-client-install --no-ssh
-----
-
-This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
++
+You can xref:Migrating_the_infrastructure[migrate the infrastructure].
 endif::rhv[]

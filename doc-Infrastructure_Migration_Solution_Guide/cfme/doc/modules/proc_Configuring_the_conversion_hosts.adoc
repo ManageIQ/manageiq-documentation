@@ -1,24 +1,26 @@
 // Module included in the following assemblies:
 // assembly_Preparing_the_environment_for_migration.adoc
 [id="Configuring_the_conversion_hosts"]
-= Configuring the conversion hosts
+= Configuring the conversion hosts in CloudForms
 
 You can select, authenticate, and configure your conversion hosts in CloudForms.
 
+[NOTE]
+====
+If you upgrade the target environment, you should xref:Upgrading_the_conversion_hosts[upgrade the conversion hosts] to ensure that you have the latest software and patches.
+====
+
 .Prerequisites
 
-* VDDK prerequisite:
+* For VDDK, download the VMware Virtual Disk Development Kit:
 +
-.Downloading the VMware Virtual Disk Development Kit
-====
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
 . Click *VMware Virtual Disk Development Kit (VDDK)*.
 . Click *Latest Releases* and select the latest VDDK release.
 . Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+).
-====
-*  VDDK and SSH: SSH key pair, to connect to the VMware hypervisors
 
+* Generate an SSH key pair to connect to the VMware hypervisors. Required for both VDDK and SSH.
 
 .Procedure
 
@@ -65,13 +67,17 @@ The configured conversion hosts and status information, including error messages
 
 You can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
 
-= Upgrading the conversion hosts
+[id="Upgrading_the_conversion_hosts"]
+.Upgrading the conversion hosts
+
+If you upgrade your target environment, you should upgrade the conversion hosts:
 
 * Red Hat Virtualization:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # yum update
+# cp /usr/share/ansible/roles/oVirt.ovirt-ansible-v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
 ----
 
-* OpenStack Platform: xref:Deploying_osp_conversion_hosts[Download the latest conversion host appliance and re-deploy the conversion hosts]
+* OpenStack Platform: Download the latest conversion host appliance and xref:Deploying_osp_conversion_hosts[re-deploy the conversion hosts]

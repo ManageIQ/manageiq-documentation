@@ -1,30 +1,30 @@
-[id='Creating_and_running_a_migration_plan']
+// Module included in the following assemblies:
+// assembly_Migration.adoc
+[id="Creating_and_running_a_migration_plan"]
 = Creating and running a migration plan
 
-The infrastructure migration involves the following key tasks:
+Creating and running a migration plan involves the following key steps:
 
-. xref:Pre_migration_tasks[Pre-migration tasks]:
+. Checking whether the following xref:Migration_plan_prerequisites_and_options[migration plan prerequisites and options] apply:
 
-* *CSV file:* If you are migrating a large number of virtual machines, you can create a xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file] to add the virtual machines to the migration plan.
+* You are migrating previously migrated virtual machines
+* You are migrating virtual machines running RHEL or other Linux operating system
+* You are using Ansible playbooks for premigration/postmigration tasks
+
+. xref:Creating_a_migration_plan[Creating a migration plan] with the *Create Migration Plan* wizard in CloudForms
+
+. Running the migration plan, the last step of the *Create Migration Plan* wizard, with one of the following options:
+
+* Saving the migration plan and xref:Scheduling_a_saved_migration_plan[scheduling it] to run in the future
+
+* Running the migration plan immediately
 +
-If you are xref:Remigrating_virtual_machines[re-migrating virtual machines], you must use a CSV file to add the virtual machines because the migration plan cannot re-discover them.
+You can xref:Viewing_migration_plan_progress[view a migration plan's progress] and xref:Canceling_a_migration_plan[cancel a migration plan].
 
-* *Ansible environment:* If you are using Ansible to automate pre- and post-migration tasks, you must set up an xref:Setting_up_an_ansible_environment[Ansible environment].
+[NOTE]
+====
+If external factors (for example, network disruption) cause migration errors, you can xref:Retrying_a_failed_migration_plan[retry the migration plan]. For other migration errors, see xref:Troubleshooting[].
+====
 
-* *RHEL pre-migration playbook:* If you are migrating RHEL or other Linux virtual machines, you must set up an xref:Setting_up_an_ansible_environment[Ansible environment] and create a xref:Configuring_the_rhel_premigration_playbook[RHEL pre-migration playbook].
-
-. xref:Creating_a_migration_plan[Creating the migration plan]
-
-. xref:Running_a_migration_plan[Running the migration plan] immediately or scheduling it to run in the future
-
-You can xref:Canceling_a_migration_plan[cancel] a migration plan in progress.
-
-include::proc_Premigration_tasks.adoc[leveloffset=+1]
-
+include::con_Migration_plan_options.adoc[leveloffset=+1]
 include::proc_Creating_a_migration_plan.adoc[leveloffset=+1]
-
-include::proc_Running_a_migration_plan.adoc[leveloffset=+1]
-
-include::proc_Validating_a_migration_plan.adoc[leveloffset=+1]
-
-include::proc_Canceling_a_migration_plan.adoc[leveloffset=+1]

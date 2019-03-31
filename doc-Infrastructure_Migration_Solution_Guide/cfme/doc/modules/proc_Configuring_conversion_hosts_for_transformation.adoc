@@ -1,5 +1,6 @@
+// Module included in the following assemblies:
+// assembly_Conversion_hosts.adoc
 [id="Configuring_the_{context}_conversion_hosts"]
-
 .Prerequisites
 
 * For VDDK, download the VMware Virtual Disk Development Kit:
@@ -199,10 +200,11 @@ ifdef::osp[]
 ----
 +
 * If you are configuring your OpenStack Platform conversion host for VDDK, you can xref:Migrating_the_infrastructure[migrate the infrastructure].
-* If you are configuring your OpenStack Platform conversion host for SSH, you can xref:Configuring_ssh_connection_osp[configure the SSH connection to the VMware hypervisors].
+* If you are configuring your OpenStack Platform conversion host for SSH, you can xref:Configuring_ssh_connection_for_osp[configure the SSH connection to the VMware hypervisors].
 
 :context: osp
 :osp:
+
 include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
 
 :osp!:
@@ -210,11 +212,13 @@ endif::osp[]
 ifdef::rhv[]
 +
 * If you are configuring your RHV conversion host for VDDK, you can xref:Enabling_conversion_hosts_in_cloudforms[authenticate the conversion hosts in CloudForms].
-* If you are configuring your RHV conversion host for SSH, you can xref:Configuring_ssh_connection_rhv[configure the SSH connection to the VMware hypervisors].
+* If you are configuring your RHV conversion host for SSH, you can xref:Configuring_ssh_connection_for_rhv[configure the SSH connection to the VMware hypervisors].
 
 :context: rhv
 :rhv:
+
 include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
+
 :rhv!:
 
 .Authenticating the RHV conversion host in CloudForms[[Enabling_conversion_hosts_in_cloudforms]]
@@ -226,4 +230,20 @@ include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
 . Click *Save*.
 +
 You can xref:Migrating_the_infrastructure[migrate the infrastructure].
+
+[[Upgrading_the_conversion_hosts]]
+.Upgrading the conversion hosts
+
+ifdef::rhv[]
+. Log in to the Manager machine using SSH.
+. Enter the following commands:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum update
+# cp /usr/share/ansible/roles/oVirt.ovirt-ansible-v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
+----
 endif::rhv[]
+ifdef::osp[]
+Download the latest conversion host appliance and re-deploying the conversion hosts (see xref:Deploying_osp_conversion_hosts[Deploying OpenStack Platform conversion hosts]).
+endif::osp[]

@@ -4,12 +4,10 @@
 The following recommendations will minimize the impact of the migration on your environment.
 
 Checking your resources::
-
 * Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.
 * Plan for redundancy.
 
 Scheduling the migration::
-
 * Schedule your migration carefully, to minimize the impact on your users.
 * Prepare your users for downtime.
 +
@@ -22,7 +20,6 @@ Currently, IMS supports only cold migration. Virtual machines are powered off gr
 * Move critical applications during maintenance windows.
 
 Distributing the migration workload::
-
 * Create migration groups, so that you are not migrating all of your virtual machines at the same time, keeping in mind the following considerations:
 
 ** How are the virtual machines grouped now?
@@ -37,17 +34,16 @@ Distributing the migration workload::
 ** Web servers
 ** Load balancers
 
-Deploying conversion hosts::
-
+Deploying the conversion hosts::
 * Create an appropriate number of conversion hosts. See xref:Number_of_conversion_hosts[]
 * Choose the best datapath transformation option for your environment. See xref:datapath_transformation_options_vddk_ssh[]
-* Deploy OpenStack Platform conversion hosts on multiple hypervisors.
-* Deploy OpenStack Platform conversion hosts on a compute node with nested virtualization enabled (see link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]). Nested virtualization is a technology preview.
+* For OpenStack Platform:
+** Deploy the conversion hosts on multiple hypervisors.
+** Deploy the conversion hosts on a compute node with nested virtualization enabled (see link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]). Nested virtualization is a technology preview.
 
 Controlling the migration process::
-
 * Create multiple migration plans for finer control.
-* Perform test migrations with different xref:Configuring_the_maximum_number_of_concurrent_migrations[maximum numbers of concurrent migrations]  per conversion host to assess the capabilities of your environment's infrastructure.
+* Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure. See xref:Configuring_the_maximum_number_of_concurrent_migrations[].
 
 [[Number_of_conversion_hosts]]
 == How many conversion hosts do I need?
@@ -56,14 +52,16 @@ The number of conversion hosts you create depends on the size of your migration.
 
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
 
-Conversion hosts and providers are limited to ten concurrent migrations, unless you xref:Configuring_the_maximum_number_of_concurrent_migrations[change the default maximum number of concurrent migrations].
+Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations (see xref:Configuring_the_maximum_number_of_concurrent_migrations[]).
 
 Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
 [[datapath_transformation_options_vddk_ssh]]
 == Which datapath transformation option, VDDK or SSH?
 
-You configure your conversion hosts to use either the VMware Virtual Disk Development kit (VDDK) or SSH as the datapath for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure. The following table compares the options.
+You configure your conversion hosts to use either VDDK (VMware Virtual Disk Development Kit) or SSH as the datapath for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
+
+The following table compares these options:
 
 [cols="1,2,2", options="header"]
 .VDDK and SSH comparison

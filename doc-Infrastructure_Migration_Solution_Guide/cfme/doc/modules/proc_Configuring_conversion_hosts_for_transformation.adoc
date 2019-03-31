@@ -204,10 +204,12 @@ ifdef::osp[]
 
 :context: osp
 :osp:
-
 include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
-
 :osp!:
+
+.Upgrading the conversion hosts[[Upgrading_the_osp_conversion_hosts]]
+
+Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[Deploying OpenStack Platform conversion hosts]).
 endif::osp[]
 ifdef::rhv[]
 +
@@ -217,9 +219,7 @@ ifdef::rhv[]
 
 :context: rhv
 :rhv:
-
 include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
-
 :rhv!:
 
 .Authenticating the RHV conversion host in CloudForms[[Enabling_conversion_hosts_in_cloudforms]]
@@ -232,12 +232,8 @@ include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
 +
 You can migrate the infrastructure.
 
-[[Upgrading_the_conversion_hosts]]
-.Upgrading the conversion hosts
+.Upgrading the conversion hosts[[Upgrading_the_rhv_conversion_hosts]]
 
-:context: rhv
-:rhv:
-ifdef::rhv[]
 . Log in to the Manager machine using SSH.
 . Enter the following commands:
 +
@@ -247,8 +243,3 @@ ifdef::rhv[]
 # cp /usr/share/ansible/roles/oVirt.ovirt-ansible-v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
 ----
 endif::rhv[]
-:rhv!:
-
-ifdef::osp[]
-Download the latest conversion host appliance and re-deploying the conversion hosts (see xref:Deploying_osp_conversion_hosts[Deploying OpenStack Platform conversion hosts]).
-endif::osp[]

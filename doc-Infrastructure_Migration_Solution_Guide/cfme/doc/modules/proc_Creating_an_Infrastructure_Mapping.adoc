@@ -1,10 +1,12 @@
 [[Creating_an_Infrastructure_Mapping]]
 = Creating an infrastructure mapping
 
-The infrastructure mapping maps your source resources to target resources.
+Create an infrastructure mapping to map your source resources to your target environment. The infrastructure mapping is the basis for a migration plan and can be used by multiple migration plans.
 
 [IMPORTANT]
 ====
+You should ensure that your environments are in a stable state when you create a mapping.
+
 If you add or remove providers or provider objects from an infrastructure mapping, the mapping will have missing resource errors. You must delete the infrastructure mapping and create a new one.
 ====
 
@@ -25,27 +27,37 @@ image:Creating_infrastructure_mapping.png[]
 ^|Screen ^|Procedure
 
 |*General*
-.<a|. Enter the infrastructure mapping *Name* and (optional) *Description*.
-. Select the *Target Provider* from the drop-down list.
+.<a|. Enter the *Name* and (optional) *Description*.
+. Select a *Target Provider*.
 . Click *Next*.
 
 |*Map Compute*
-.<a|. Select a *Source Provider \ Datacenter \ Cluster* source cluster and a (RHV) *Target Provider \ Datacenter \ Cluster* or (OpenStack{nbsp}Platform) *Target Provider \ Project*.
+.<a|. Select a *Source Provider \ Datacenter \ Cluster*.
+. Select a target:
+* Red Hat Virtualization: *Target Provider \ Datacenter \ Cluster*
+* OpenStack Platform: *Target Provider \ Project*.
 +
-*Red Hat Virtualization only:* A target cluster that does not contain a conversion host displays a warning icon (&#65279;image:warning.png[height=15px]&#65279;).
-. Click *Add Mapping*. You can map additional clusters.
+A target environment that does not contain a conversion host displays a warning icon (&#65279;image:warning.png[height=15px]&#65279;).
+. Click *Add Mapping*. You can map additional clusters or projects.
 . Click *Next*.
 
 |*Map Storage*
 .<a|. Select a source cluster whose datastores you want to map.
-. Select a *Source Provider \ Datacenter \ Datastore* and (RHV) *Target Datastores* or
-(OpenStack{nbsp}Platform) *Target Provider \ Volume Type*. (If the OpenStack Platform volume type is missing, check that the `volume type` has been set. See xref:Infrastructure_mapping_errors[].)
+. Select a *Source Provider \ Datacenter \ Datastore*.
+. Select a target storage:
+* Red Hat Virtualization: *Target Datastores*
+* OpenStack Platform: *Target Provider \ Volume Type*.
++
+If the OpenStack Platform volume type does not appear, check that the volume type has been set. See xref:Infrastructure_mapping_errors[].
 . Click *Add Mapping*. You can map additional datastores.
 . Click *Next*.
 
 |*Map Networks*
 .<a|. Select a source cluster from the drop-down list.
-. Select one or more from *Source Provider \ Datacenter \ Network* and a *Target Project \ Network*. (IMS supports both provider and tenant networks in OpenStack Platform.)
+. Select one or more networks from *Source Provider \ Datacenter \ Network*.
+. Select a *Target Project \ Network*.
++
+OpenStack Platform: IMS supports both provider and tenant networks.
 
 . Click *Add Mapping*. You can map the networks of additional source clusters.
 . Click *Create*.

@@ -5,14 +5,14 @@
 
 You can select, authenticate, and configure your conversion hosts in CloudForms.
 
-[NOTE]
+[IMPORTANT]
 ====
-If you upgrade the target environment, you should xref:Upgrading_the_conversion_hosts[upgrade the conversion hosts] to ensure that you have the latest software and patches.
+If you upgrade the target environment, you should xref:Upgrading_the_conversion_hosts[update the conversion hosts] to ensure that you have the latest software and patches.
 ====
 
 .Prerequisites
 
-* For VDDK, download the VMware Virtual Disk Development Kit:
+* (VDDK only) download the VMware Virtual Disk Development Kit:
 +
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
@@ -20,7 +20,7 @@ If you upgrade the target environment, you should xref:Upgrading_the_conversion_
 . Click *Latest Releases* and select the latest VDDK release.
 . Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+).
 
-* Generate an SSH key pair to connect to the VMware hypervisors. Required for both VDDK and SSH.
+* (VDDK and SSH) Generate an SSH key pair to connect to the VMware hypervisors.
 
 .Procedure
 
@@ -51,11 +51,11 @@ PLACEHOLDER: CONVERSION HOST UI SCREENSHOT
 * Red Hat Virtualization Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 * OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
 
-. Select a *Transformation method*.
+. Select *SSH* or *VDDK* as a *Transformation method*.
 
-. *SSH:* Click *Browse* to browse to the SSH key or paste it in the *VMware hypervisors SSH key* field.
+. If you selected SSH, lick *Browse* to browse to the SSH key or paste it in the *VMware hypervisors SSH key* field.
 +
-*VDDK:* Paste the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
+If you selected VDDK, enter the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
 
 . Click *Configure*.
 |*Results*
@@ -70,7 +70,7 @@ You can click *Remove* to unconfigure a conversion host or *Retry* to retry a co
 [id="Upgrading_the_conversion_hosts"]
 .Upgrading the conversion hosts
 
-If you upgrade your target environment, you should upgrade the conversion hosts:
+If you upgrade your target environment, you should update the conversion hosts:
 
 * Red Hat Virtualization:
 +

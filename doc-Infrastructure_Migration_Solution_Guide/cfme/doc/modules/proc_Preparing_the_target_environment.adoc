@@ -3,22 +3,14 @@
 [id="Preparing_the_{context}_target_environment"]
 ifdef::rhv[]
 = Preparing the Red Hat Virtualization environment
-
-[NOTE]
-====
-If you upgrade the target environment, you should also xref:Upgrading_the_rhv_conversion_hosts[upgrade the conversion hosts] to ensure that you have the latest software and patches.
-====
 endif::rhv[]
 ifdef::osp[]
-= Preparing the Red Hat OpenStack Platform environment
-
-[NOTE]
-====
-If you upgrade the target environment, you should also xref:Upgrading_the_osp_conversion_hosts[upgrade the conversion hosts] to ensure that you have the latest software and patches.
-====
+= Preparing the OpenStack Platform environment
 endif::osp[]
 
 .Prerequisites
+
+The following prerequisites apply:
 
 include::ref_Software_compatibility_matrix.adoc[]
 * BIOS settings of physical hosts adjusted for optimal performance (rather than power-saving), according to the vendor's recommendations
@@ -31,7 +23,10 @@ ifdef::rhv[]
 
 . Install Red Hat Virtualization Host 4.2 or Red Hat Enterprise Linux 7.6 on physical machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Installing Red Hat Enterprise Linux Hosts] in the _Red Hat Virtualization Installation Guide_).
 +
+[NOTE]
+====
 Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities. See xref:Number_of_conversion_hosts[] for details.
+====
 
 . Enable the following ports in the conversion host network (see https://access.redhat.com/articles/417343[]):
 * 22 - SSH
@@ -46,10 +41,11 @@ Some of these hosts will be deployed as conversion hosts. The number of conversi
 IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
 ====
 
-. Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
+. Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_).
++
+The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
 
-[[Reinstalling_ipa_client]]
-. If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client:
+. If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client:[[Reinstalling_ipa_client]]
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -92,19 +88,19 @@ endif::osp[]
 ifdef::rhv[]
 . Install Red Hat CloudForms 4.7 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
 
-. Add VMware (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] in _Red Hat CloudForms Managing Providers_) and Red Hat Virtualization (see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms Managing Providers_) as providers.
+. Add VMware and Red Hat Virtualization as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms Managing Providers_) .
 +
 [NOTE]
 ====
 Removing or changing a provider, including refreshing hosts, before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.
 ====
 +
-You are ready to xref:Configuring_the_rhv_conversion_hosts[configure the conversion hosts].
+You are ready to xref:Configuring_the_rhv_conversion_hosts[configure the conversion hosts for VDDK or SSH].
 endif::rhv[]
 ifdef::osp[]
 . Install Red Hat CloudForms 4.7 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
 
-. Add VMware (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] in _Red Hat CloudForms Managing Providers_) and OpenStack Platform (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Adding an OpenStack Infrastructure Provider] in _Red Hat CloudForms Managing Providers_) as providers.
+. Add VMware and OpenStack Platform as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Adding an OpenStack Infrastructure Provider] in _Red Hat CloudForms Managing Providers_).
 +
 [NOTE]
 ====
@@ -113,6 +109,7 @@ Removing or changing a provider before, during, or after the migration will caus
 
 [id="Deploying_osp_conversion_hosts"]
 == Deploying OpenStack Platform conversion hosts
+
 You download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Number_of_conversion_hosts[] for details.
 
 . Navigate to link:https://access.redhat.com/downloads/[].
@@ -142,5 +139,5 @@ For optimal performance:
 * Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
 ====
 +
-You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts].
+You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts for VDDK or SSH].
 endif::osp[]

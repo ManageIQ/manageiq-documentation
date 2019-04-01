@@ -1,9 +1,10 @@
 // Module included in the following assemblies:
-// assembly_Conversion_hosts.adoc
+// assembly_Configuring_conversion_hosts_for_transformation.adoc
 [id="Configuring_the_{context}_conversion_hosts"]
+
 .Prerequisites
 
-* For VDDK, download the VMware Virtual Disk Development Kit:
+* (VDDK only) Download the VMware Virtual Disk Development Kit:
 +
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
@@ -11,7 +12,7 @@
 . Click *Latest Releases* and select the latest VDDK release.
 . Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+), recording its URL.
 
-* Generate an SSH key pair to connect to the VMware hypervisors (required for both VDDK and SSH).
+* (VDDK and SSH) Generate an SSH key pair to connect to the VMware hypervisors.
 
 .Procedure
 
@@ -199,7 +200,7 @@ ifdef::osp[]
 # ansible-playbook --ask-vault-pass -i _controller_node_FQDN_or_IP_, conversion_host_check.yml
 ----
 +
-* If you are configuring your OpenStack Platform conversion host for VDDK, you can migrate the infrastructure.
+* If you are configuring your OpenStack Platform conversion host for VDDK, you can xref:Migrating_the_infrastructure[migrate the infrastructure].
 * If you are configuring your OpenStack Platform conversion host for SSH, you can xref:Configuring_ssh_connection_for_osp[configure the SSH connection to the VMware hypervisors].
 
 :context: osp
@@ -207,9 +208,9 @@ ifdef::osp[]
 include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
 :osp!:
 
-.Upgrading the conversion hosts[[Upgrading_the_osp_conversion_hosts]]
+.Updating OpenStack Platform conversion hosts[[Updating_osp_conversion_hosts]]
 
-Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[Deploying OpenStack Platform conversion hosts]).
+To ensure that you have the latest software and critical updates, download the latest conversion host appliance and redeploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts]).
 endif::osp[]
 ifdef::rhv[]
 +
@@ -230,13 +231,15 @@ include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
 . Click *Validate* and wait for validation to complete.
 . Click *Save*.
 +
-You can migrate the infrastructure.
+You can xref:Migrating_the_infrastructure[migrate the infrastructure].
 
-.Upgrading the conversion hosts[[Upgrading_the_rhv_conversion_hosts]]
+.Updating the conversion hosts[[Updating_rhv_conversion_hosts]]
+
+To ensure that you have the latest software and critical updates:
 
 . Log in to the Manager machine using SSH.
-. Enter the following commands:
-+
+. Update the packages and re-deploy `virt-v2v-wrapper`:
+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # yum update

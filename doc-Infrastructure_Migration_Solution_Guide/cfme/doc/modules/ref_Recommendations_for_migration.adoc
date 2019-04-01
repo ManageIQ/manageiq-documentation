@@ -42,13 +42,14 @@ Currently, IMS supports only cold migration. Virtual machines are powered off gr
 
 * Create an appropriate number of conversion hosts. See xref:Deciding_how_many_conversion_hosts_to_create[]
 * Choose the best datapath transformation option for your environment. See xref:Choosing_vddk_or_ssh_transformation[]
-* Deploy OpenStack Platform conversion hosts on multiple hypervisors.
-* Deploy OpenStack Platform conversion hosts on a compute node with nested virtualization enabled (see link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]). Nested virtualization is a technology preview.
+* OpenStack Platform:
+** Deploy conversion hosts on multiple hypervisors.
+** Deploy conversion hosts on a compute node with nested virtualization enabled (see link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]). Nested virtualization is a technology preview.
 
 .Controlling the migration process
 
 * Create multiple xref:Creating_and_running_a_migration_plan[migration plans] for finer control.
-* Perform test migrations with different xref:Changing_the_maximum_number_of_concurrent_migrations[maximum numbers of concurrent migrations] to assess the capabilities of your environment's infrastructure.
+* Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
 
 [id="Deciding_how_many_conversion_hosts_to_create"]
 == How many conversion hosts do I need?
@@ -57,14 +58,16 @@ The number of conversion hosts you create depends on the size of your migration.
 
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
 
-Conversion hosts and providers are limited to ten concurrent migrations, unless you xref:Changing_the_maximum_number_of_concurrent_migrations[change the default maximum number of concurrent migrations].
+Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
 
 Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
 [id="Choosing_vddk_or_ssh_transformation"]
 == Which transformation method, VDDK or SSH?
 
-You will configure the conversion hosts to use either the VMware Virtual Disk Development kit (VDDK) or SSH as the transformation method for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure. The following table compares the options.
+You will configure the conversion hosts to use either the VMware Virtual Disk Development kit (VDDK) or SSH as the transformation method for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
+
+The following table compares the options.
 
 [cols="1,2,2", options="header"]
 .VDDK and SSH comparison

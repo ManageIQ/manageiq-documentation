@@ -53,7 +53,7 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 # ipa-client-install --no-ssh
 ----
 +
-Otherwise, SSH will fail for the vdsm user. This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
 endif::rhv[]
 ifdef::osp[]
 == Installing and configuring OpenStack Platform
@@ -108,8 +108,8 @@ Removing or changing a provider before, during, or after migration will cause er
 .. In the right pane, in the *Server* tab, set *SmartState Analysis* to *On* and click *Save*.
 
 ifdef::osp[]
-[id="Deploying_osp_conversion_hosts"]
-== Deploying the OpenStack Platform conversion hosts
+== Deploying the OpenStack Platform conversion hosts[[Deploying_osp_conversion_hosts]]
+
 You download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
 
 . Navigate to link:https://access.redhat.com/downloads/[].
@@ -121,6 +121,7 @@ You download the conversion host appliance and use it to deploy the conversion h
 ====
 Always download the latest version of the OpenStack Platform conversion appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.
 ====
+
 . Upload the appliance to Glance storage.
 . Deploy the appliance as a conversion host instance, with the following resources:
 +

@@ -9,27 +9,34 @@ You can check the conversion host migration logs and the CloudForms log for erro
 
 When disk migration starts, two logs are created in the conversion host:
 
-* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting.
 * `virt-v2v`: Debug output from `virt-v2v` itself. This log tracks the core of the virtual machine process, including `libguestfs` traces and disk migration details.
+* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting.
 
-To access the conversion host migration logs:
-
-. Log in to the RHV Manager or an OpenStack Platform conversion host using SSH.
-. Go to `/var/log/vdsm/import/`.
-+
-The `virt-v2v` logs are +v2v-import-_date_-_number_.log+ and the `virt-v2v-wrapper` logs are +v2v-import-_date_-_number_-wrapper.log+.
-+
 [IMPORTANT]
 ====
-Both logs, `virt-v2v` and `virt-v2v-wrapper`, are required for bug analysis if you open a Red Hat Support call at link:https://access.redhat.com/support/cases/#/case/new[].
+Both the `virt-v2v` and `virt-v2v-wrapper` logs are required for bug analysis if you need to open a Red Hat Support call at link:https://access.redhat.com/support/cases/#/case/new[].
 ====
+
+To download the `virt-v2v` log in CloudForms::
+
+. Click menu:Compute[*Migration* > Migration Plans].
+. Click a completed migration plan to view its details.
+. Click menu:Download Log[Migration Log].
+
+To access the `virt-v2v` and `virt-v2v-wrapper` logs on the conversion host::
+
+. Log in to the conversion host using SSH.
+. Go to `/var/log/vdsm/import/` to view the logs for each migration:
++
+* `virt-v2v` log: +v2v-import-_date_-_log_number_.log+
+* `virt-v2v-wrapper` log: +v2v-import-_date_-_log_number_-wrapper.log+
 
 [id="CloudForms_log"]
 .CloudForms log
 
 This log traces the orchestration of the virtual machine migration in CloudForms.
 
-To view the CloudForms log:
+To access the CloudForms migration log::
 
 . Log into the CloudForms machine using SSH.
-. Copy and save the `/var/www/miq/vmdb/log/automation.log` file.
+. The CloudForms migration log is `/var/www/miq/vmdb/log/automation.log`.

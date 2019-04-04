@@ -36,14 +36,16 @@ It may be possible to migrate your applications in phases, without downtime at t
 
 * Check whether users will lose access to critical applications.
 
-How long will the migration take?::
-* There are no specific rules to determine how long the actual migration will take. This is determined on a case-by-case basis.
-+
+[id="How_long_will_the_migration_take"]
+== How long will the migration take?
+
+There are no specific rules to determine how long the actual migration will take. This is determined on a case-by-case basis.
+
 The following migration examples are provided as a guide.
-+
+
 [id="Rhv_migration_example"]
 .Red Hat Virtualization migration
-+
+
 ====
 * Duration of migration: 1:15:53 (_hh:mm:ss_)
 * 10 virtual machines
@@ -54,10 +56,10 @@ The following migration examples are provided as a guide.
 ** Fibre Channel 8 interface for host-to-storage connection
 ** 10 GbE network interface cards for all other connections
 ====
-+
+
 [id="osp_migration_example"]
 .OpenStack Platform migration
-+
+
 ====
 * Duration of migration: 2:13:00 (_hh:mm:ss_)
 * 20 virtual machines
@@ -65,3 +67,36 @@ The following migration examples are provided as a guide.
 * Total data migrated, using VDDK: 1000 GB
 * Hardware: Same as above
 ====
+
+[id="Deciding_how_many_conversion_hosts_to_create"]
+== How many conversion hosts do I need?
+
+The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
+
+Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
+
+Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
+
+Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
+
+[id="Choosing_vddk_or_ssh_transformation"]
+== Which transformation method, VDDK or SSH?
+
+You will configure the conversion hosts to use either the VMware Virtual Disk Development kit (VDDK) or SSH as the transformation method for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
+
+The following table compares the options.
+
+[cols="1,2,2", options="header"]
+.VDDK and SSH comparison
+|===
+| ^|Pros ^|Cons
+|*VDDK* .<a|* Recommended because it is approximately twice as fast as SSH
+* Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
+.<a|* Requires VDDK package download
+* Requires VDDK library location for configuring the conversion hosts
+|*SSH* .<a|* Better suited for large-scale migrations than VDDK
+* Does not require additional downloads, packages, tools, or compilation
+.<a|* Slower than VDDK
+* Requires the VMware hypervisors to have SSH access enabled
+* Requires shared SSH keys for the source and target environments
+|===

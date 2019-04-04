@@ -46,36 +46,3 @@ Deploying the conversion hosts::
 Controlling the migration process::
 * Create multiple migration plans for finer control.
 * Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure. See xref:Changing_the_maximum_number_of_concurrent_migrations[].
-
-[[How_many_conversion_hosts]]
-== How many conversion hosts do I need?
-
-The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
-
-Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
-
-Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
-
-Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
-
-[[Choosing_vddk_or_ssh_transformation]]
-== Which datapath transformation option, VDDK or SSH?
-
-You configure your conversion hosts to use either VDDK (VMware Virtual Disk Development Kit) or SSH as the datapath for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
-
-The following table compares these options.
-
-[cols="1,2,2", options="header"]
-.VDDK and SSH comparison
-|===
-| ^|Pros ^|Cons
-|*VDDK* .<a|* Recommended because it is approximately twice as fast as SSH
-* Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
-.<a|* Requires VDDK package download
-* Requires VDDK library location for configuring the conversion hosts
-|*SSH* .<a|* Better suited for large-scale migrations than VDDK
-* Does not require additional downloads, packages, tools, or compilation
-.<a|* Slower than VDDK
-* Requires the VMware hypervisors to have SSH access enabled
-* Requires shared SSH keys for the source and target environments
-|===

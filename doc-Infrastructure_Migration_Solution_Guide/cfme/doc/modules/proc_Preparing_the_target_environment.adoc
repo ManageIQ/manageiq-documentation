@@ -69,6 +69,12 @@ ifdef::osp[]
 . Set at least one volume type for the target block storage (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_). Otherwise, CloudForms cannot detect the storage when you create the infrastructure mapping.
 
 . Ensure that the storage backends have sufficient space for the migrated virtual machines.
++
+[NOTE]
+====
+
+====
+
 
 . Configure security groups with the following ports enabled:
 
@@ -126,11 +132,18 @@ Always download the latest version of the OpenStack Platform conversion applianc
 . Deploy the appliance as a conversion host instance, with the following resources:
 +
 ** 4 vCPUs
-** 8 GB RAM
-** `/tmp` (1 GB for each conversion)
-** `/var/tmp` (1 GB for each conversion)
+** 1 GB RAM for each concurrent migration, starting at 10 GB RAM (the xref:Changing_the_maximum_number_of_concurrent_migrations[default maximum number of concurrent migrations] per conversion host is `10`). If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.
+** `/tmp` (1 GB for each concurrent migration)
+** `/var/tmp` (1 GB for each concurrent migration)
 ** `/var/logs` (5 GB)
+
+. Increase the disk storage space of the instance. The instance is created from an image, but the disk storage defined in the image is not large enough to accommodate the instance's file system. You can either extend the partition (extend the PV in the VG) to include all the required space or you can create a new partition and add it as a PV to the VG, and then increase the root LV and the filesystem:
 +
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# TBD
+----
+
 [NOTE]
 ====
 For optimal performance:
@@ -138,6 +151,6 @@ For optimal performance:
 * Deploy the conversion hosts on more than one hypervisor.
 * Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
 ====
-+
+
 You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts for VDDK or SSH].
 endif::osp[]

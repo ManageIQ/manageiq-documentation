@@ -1,7 +1,7 @@
 // Module included in the following assemblies:
 // assembly_Preparing_the_environment_for_migration.adoc
 [id="Configuring_the_conversion_hosts"]
-= Configuring the conversion hosts in CloudForms
+= Configuring the conversion hosts
 
 You can select, authenticate, and configure your conversion hosts in CloudForms.
 
@@ -65,12 +65,45 @@ If you selected VDDK, enter the path of the VDDK package in the *VDDK library pa
 
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
 
-You can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
+You are ready to xref:Configuring_the_ssh_connection_to_the_vmware_hypervisors[configure the SSH connection to the VMware hypervisors].
+
+Optionally, you can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
+
+[id="Configuring_the_ssh_connection_to_the_vmware_hypervisors"]
+== Configuring the SSH connection to the VMware hypervisors
+
+.Red Hat Virtualization
+
+. Log in to each Red Hat Virtualization conversion host.
+
+. Copy the public SSH key to each VMware hypervisor:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ssh root@_esx1.example.com_ sh -c \
+    "cat >> /etc/ssh/keys-root/authorized_keys" < /var/lib/vdsm/.ssh/id_rsa.pub
+----
+
+. Connect to each VMware hypervisor as `root` using SSH.
+
+.OpenStack Platform
+
+. Log in to each OpenStack Platform conversion host.
+
+. Copy the public SSH key to each VMware hypervisor:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ssh root@_esx1.example.com_ sh -c \
+    "cat >> /etc/ssh/keys-root/authorized_keys" < /root/.ssh/id_rsa.pub
+----
+
+. Connect to each VMware hypervisor as `cloud-user` using SSH.
 
 [id="Upgrading_the_conversion_hosts"]
-.Upgrading the conversion hosts
+== Upgrading the conversion hosts
 
-If you upgrade your target environment, you should update the conversion hosts:
+If you upgrade your target environment, you should update the conversion hosts to ensure that you have the latest software and critical updates:
 
 * Red Hat Virtualization:
 +

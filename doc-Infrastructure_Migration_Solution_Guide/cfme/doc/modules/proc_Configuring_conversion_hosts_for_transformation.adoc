@@ -7,9 +7,9 @@ Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transfor
 
 . Fulfilling the prerequisites
 . Creating the `extra_vars.yml` and `secure_vars.yml` files
-. Configuring the conversion hosts with the `conversion_host_enable` playbook
-. Verifying the conversion host configuration with the `conversion_host_check` playbook
-. (SSH only) xref:Configuring_ssh_connection_for_rhv[Configuring the SSH connection to the VMware hypervisors]
+. Configuring the conversion host with the `conversion_host_enable` playbook
+. Verifying the configuration with the `conversion_host_check` playbook
+. SSH only: xref:Configuring_ssh_connection_for_rhv[Configuring the SSH connection to the VMware hypervisors]
 . xref:Enabling_conversion_hosts_in_cloudforms[Authenticating the conversion hosts in CloudForms]
 . (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts in a browser]
 endif::rhv[]
@@ -18,15 +18,16 @@ Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformati
 
 . Fulfilling the prerequisites
 . Creating the `extra_vars.yml` and `secure_vars.yml` files
-. Configuring the conversion hosts with the `conversion_host_enable` playbook
-. Verifying the conversion host configuration with the `conversion_host_check` playbook
+. Configuring the conversion host with the `conversion_host_enable` playbook
+. Verifying the configuration with the `conversion_host_check` playbook
 . (SSH only) xref:Configuring_ssh_connection_for_osp[Configuring the SSH connection to the VMware hypervisors]
 . (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts in a browser]
 endif::osp[]
 
 .Prerequisites
 
-* (VDDK only) Download the VMware Virtual Disk Development Kit:
+VDDK only::
+Download the VMware Virtual Disk Development Kit:
 +
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
@@ -34,21 +35,32 @@ endif::osp[]
 . Click *Latest Releases* and select the latest VDDK release.
 . Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+), recording its URL.
 
-* (VDDK and SSH) Generate an SSH key pair to connect to the VMware hypervisors.
+VDDK and SSH::
+Generate an SSH key pair to connect to the VMware hypervisors.
 
 .Procedure
 
+Perform the following procedure on each conversion host:
+
+. Log in to a conversion host.
 ifdef::rhv[]
-. Connect to the Manager machine using SSH.
+. Install the `ovirt-ansible-v2v-conversion-host` package:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum install ovirt-ansible-v2v-conversion-host
+----
++
+[WARNING]
+====
+This command only works with RHEL hosts because the `ovirt-ansible-v2v-conversion-host` package is part of the `rhel-7-server-rpms` repository.
+
+For RHVH hosts, you should copy the Manager's SSH key to each conversion host and run this procedure from the Manager machine.
+====
+
 . Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
-endif::rhv[]
-ifdef::osp[]
-. Connect to a conversion host using SSH.
-. Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
-endif::osp[]
 
 . Create an `extra_vars.yml` file in this directory and update its parameters:
-ifdef::rhv[]
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -97,6 +109,9 @@ manageiq_providers:
 <3> The default `certificate_authority` is `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
 endif::rhv[]
 ifdef::osp[]
+. Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
+
+. Create an `extra_vars.yml` file in this directory and update its parameters:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -183,7 +198,16 @@ v2v_ssh_private_key: |
 ifdef::rhv[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i _Manager_FQDN_or_IP_, -c local -b \
+# ansible-playbook -i _conversion_host_FQDN_or_IP_, -c local -b \
+    -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
+    /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
+----
++
+If you are running the playbook from the Manager to configure a RHVH host:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook -i _Manager_FQDN_or_IP_ -b \
     -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
     /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
 ----
@@ -191,7 +215,7 @@ endif::rhv[]
 ifdef::osp[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i _controller_node_FQDN_or_IP_, -c local -b \
+# ansible-playbook -i _conversion_host_FQDN_or_IP_, -c local -b \
     -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
     /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
 ----
@@ -210,19 +234,12 @@ If you need to run the `conversion_host_enable` playbook again, you should remov
 ====
 
 . Run the `conversion_host_check` playbook to verify the conversion host configuration:
-ifdef::rhv[]
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook --ask-vault-pass -i _Manager_FQDN_or_IP_, conversion_host_check.yml
+# ansible-playbook --ask-vault-pass -i _conversion_host_FQDN_or_IP_, conversion_host_check.yml
 ----
-endif::rhv[]
 ifdef::osp[]
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook --ask-vault-pass -i _controller_node_FQDN_or_IP_, conversion_host_check.yml
-----
 +
 * If you are configuring your OpenStack Platform conversion host for VDDK, you can xref:Creating_an_infrastructure_mapping[create an infrastructure mapping]. Optionally, you can xref:Verifying_conversion_hosts[verify the conversion hosts] in a browser.
 * If you are configuring your OpenStack Platform conversion host for SSH, you can xref:Configuring_ssh_connection_for_osp[configure the SSH connection to the VMware hypervisors].

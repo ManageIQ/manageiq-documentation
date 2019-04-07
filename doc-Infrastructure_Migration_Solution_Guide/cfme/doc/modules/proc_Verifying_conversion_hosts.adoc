@@ -1,14 +1,20 @@
+// Module included in the following assemblies:
+// assembly_Preparing_the_environment_for_migration.adoc
 [id='Verifying_conversion_hosts']
-= Verifying conversion hosts
+= (Optional) Verifying the conversion hosts in a browser
 
-. To verify your conversion hosts, enter the following URL in your browser:
+This procedure displays the names and number of your conversion hosts. It does not check SSH or VDDK transformation, which is done by the `conversion_host_check` playbook.
+
+To verify your conversion hosts:
+
+. Enter the following URL in your browser:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 https://_CloudForms_FQDN_/api/conversion_hosts
 ----
 
-. Enter the *Username* and *Password* and click *Sign in*.
+. In the *Sign in* window, enter the *Username* and *Password* and click *Sign in*.
 +
 The conversion hosts are displayed in JSON format:
 +
@@ -16,3 +22,25 @@ The conversion hosts are displayed in JSON format:
 ----
 {"name":"conversion_hosts","count":3,"subcount":3,"pages":1,"resources":[{"href":"https://_CloudForms_FQDN_/api/conversion_hosts/10000000000001"},{"href":"https://_CloudForms_FQDN_/api/conversion_hosts/10000000000002"},{"href":"https://_CloudForms_FQDN_/api/conversion_hosts/10000000000003"}],"actions":[{"name":"create","method":"post","href":"https://_CloudForms_FQDN_/api/conversion_hosts"},{"name":"edit","method":"post","href":"https://_CloudForms_FQDN_/api/conversion_hosts"},{"name":"delete","method":"post","href":"https://_CloudForms_FQDN_/api/conversion_hosts"}],"links":{"self":"https://_CloudForms_FQDN_/api/conversion_hosts?offset=0","first":"https://_CloudForms_FQDN_/api/conversion_hosts?offset=0","last":"https://_CloudForms_FQDN_/api/conversion_hosts?offset=0"}}
 ----
+
+= Updating the conversion hosts[[Updating_conversion_hosts]]
+
+If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates.
+
+[[Updating_rhv_conversion_hosts]]
+* To update Red Hat Virtualization conversion hosts:
++
+. Log in to the Manager machine using SSH.
+. Update the packages and re-deploy `virt-v2v-wrapper`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum update
+# cp /usr/share/ansible/roles/oVirt.ovirt-ansible-v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
+----
+
+[[Updating_osp_conversion_hosts]]
+* To update OpenStack Platform conversion hosts:
+
+. xref:Deploying_osp_conversion_hosts[Download the latest conversion host appliance].
+. Redeploy the conversion hosts with the updated appliance.

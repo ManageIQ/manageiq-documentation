@@ -1,14 +1,20 @@
 // Module included in the following assemblies:
 // proc_Configuring_conversion_hosts_for_transformation.adoc
 [id="Configuring_ssh_connection_for_{context}"]
-.Configuring the SSH connection to the VMware hypervisors
+
+ifdef::rhv[]
+= Configuring the SSH connection to the VMware hypervisors for Red Hat Virtualization
+endif::rhv[]
+ifdef::osp[]
+= Configuring the SSH connection to the VMware hypervisors for OpenStack Platform
+endif::osp[]
 
 . Enable SSH access on all VMware hypervisors.
 +
 For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/index.html[]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
 
-. Copy the public SSH key corresponding to the private SSH key in the `secure_vars.yml` file to each VMware hypervisor:
 ifdef::rhv[]
+. On the Manager machine, copy the public SSH key corresponding to the private SSH key in the `secure_vars.yml` file to each VMware hypervisor:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -16,7 +22,7 @@ ifdef::rhv[]
     'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
 ----
 
-. Connect to each VMware hypervisor using `ssh-agent` to validate the SSH connection:
+. On each conversion host, connect to each VMware hypervisor using `ssh-agent` to validate the SSH connection:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -30,12 +36,15 @@ echo Agent pid 12345;
     SSH_AUTH_SOCK=/tmp/ssh-123456ABCDE/agent.12345 ssh root@_esx1.example.com_
 ----
 +
-If the connection is successful, the RHV conversion host is correctly configured for SSH transformation.
+If the connection is successful, each RHV conversion host is correctly configured for SSH transformation.
 +
-You can authenticate the RHV conversion host in CloudForms.
+You are ready to authenticate the conversion hosts in CloudForms.
 
 endif::rhv[]
 ifdef::osp[]
+. Perform the following steps on each OpenStack Platform conversion host:
+
+.. Copy the public SSH key corresponding to the private SSH key in the `secure_vars.yml` file to each VMware hypervisor:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -43,10 +52,9 @@ ifdef::osp[]
     'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
 ----
 
-. Connect to the VMware hypervisor as `cloud-user` to validate the SSH connection.
+.. Connect to the VMware hypervisor as `cloud-user` to validate the SSH connection.
 +
-If the connection is successful, the OpenStack Platform conversion host is correctly configured for SSH transformation.
+If the connection is successful, each OpenStack Platform conversion host is correctly configured for SSH transformation.
 +
-You can migrate the infrastructure.
-
+You are ready to xref:Creating_an_infrastructure_mapping[create an infrastructure mapping]. Optionally, you can xref:Verifying_conversion_hosts[verify the conversion hosts] in a browser.
 endif::osp[]

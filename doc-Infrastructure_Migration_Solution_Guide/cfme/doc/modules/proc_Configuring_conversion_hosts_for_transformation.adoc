@@ -2,6 +2,28 @@
 // assembly_Configuring_conversion_hosts_for_transformation.adoc
 [id="Configuring_the_{context}_conversion_hosts"]
 
+ifdef::rhv[]
+Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transformation involves the following steps:
+
+. Fulfilling the prerequisites
+. Creating the `extra_vars.yml` and `secure_vars.yml` files
+. Configuring the conversion hosts with the `conversion_host_enable` playbook
+. Verifying the conversion host configuration with the `conversion_host_check` playbook
+. (SSH only) xref:Configuring_ssh_connection_for_rhv[Configuring the SSH connection to the VMware hypervisors]
+. xref:Enabling_conversion_hosts_in_cloudforms[Authenticating the conversion hosts in CloudForms]
+. (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts in a browser]
+endif::rhv[]
+ifdef::osp[]
+Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformation involves the following steps:
+
+. Fulfilling the prerequisites
+. Creating the `extra_vars.yml` and `secure_vars.yml` files
+. Configuring the conversion hosts with the `conversion_host_enable` playbook
+. Verifying the conversion host configuration with the `conversion_host_check` playbook
+. (SSH only) xref:Configuring_ssh_connection_for_rhv[Configuring the SSH connection to the VMware hypervisors]
+. (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts in a browser]
+endif::osp[]
+
 .Prerequisites
 
 * (VDDK only) Download the VMware Virtual Disk Development Kit:
@@ -202,49 +224,35 @@ ifdef::osp[]
 # ansible-playbook --ask-vault-pass -i _controller_node_FQDN_or_IP_, conversion_host_check.yml
 ----
 +
-* If you are configuring your OpenStack Platform conversion host for VDDK, you can xref:Migrating_the_infrastructure[migrate the infrastructure].
+* If you are configuring your OpenStack Platform conversion host for VDDK, you can xref:Creating_an_infrastructure_mapping[create an infrastructure mapping]. Optionally, you can xref:Verifying_conversion_hosts[verify the conversion hosts] in a browser.
 * If you are configuring your OpenStack Platform conversion host for SSH, you can xref:Configuring_ssh_connection_for_osp[configure the SSH connection to the VMware hypervisors].
 
 :context: osp
 :osp:
-include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
+include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[leveloffset=+1]
 :osp!:
 
-.Updating OpenStack Platform conversion hosts[[Updating_osp_conversion_hosts]]
-
-To ensure that you have the latest software and critical updates, download the latest conversion host appliance and redeploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts]).
 endif::osp[]
 ifdef::rhv[]
 +
-* If you are configuring your RHV conversion host for VDDK, you can xref:Enabling_conversion_hosts_in_cloudforms[authenticate the conversion hosts in CloudForms].
+* If you are configuring your RHV conversion host for VDDK, you can xref:Enabling_conversion_hosts_in_cloudforms[authenticate the conversion hosts] in CloudForms.
 
 * If you are configuring your RHV conversion host for SSH, you can xref:Configuring_ssh_connection_for_rhv[configure the SSH connection to the VMware hypervisors].
 
 :context: rhv
 :rhv:
-include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[]
+include::proc_Configuring_the_ssh_connection_to_vmware_hypervisors.adoc[leveloffset=+1]
 :rhv!:
 
-.Authenticating the RHV conversion host in CloudForms[[Enabling_conversion_hosts_in_cloudforms]]
+== Authenticating the Red Hat Virtualization conversion hosts[[Enabling_conversion_hosts_in_cloudforms]]
+
+In CloudForms, perform the following procedure for each Red Hat Virtualization conversion host:
 
 . Click menu:Compute[Infrastructure > Hosts] and select a Red Hat Virtualization conversion host.
-. Click the *Configuration* drop-down button, and select *Edit Selected items*.
-. In the *Default* tab of the Endpoints section, enter the *Username* (root)  and the *Password*.
+. Click the *Configuration* drop-down button and select *Edit Selected items*.
+. In the *Default* tab of the Endpoints section, enter `root` as the *Username* and the *Password*.
 . Click *Validate* and wait for validation to complete.
 . Click *Save*.
 +
-You can xref:Migrating_the_infrastructure[migrate the infrastructure].
-
-.Updating the conversion hosts[[Updating_rhv_conversion_hosts]]
-
-To ensure that you have the latest software and critical updates:
-
-. Log in to the Manager machine using SSH.
-. Update the packages and re-deploy `virt-v2v-wrapper`:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# yum update
-# cp /usr/share/ansible/roles/oVirt.ovirt-ansible-v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
-----
+You are ready to xref:Creating_an_infrastructure_mapping[create an infrastructure mapping]. Optionally, you can xref:Verifying_conversion_hosts[verify the conversion hosts] in a browser.
 endif::rhv[]

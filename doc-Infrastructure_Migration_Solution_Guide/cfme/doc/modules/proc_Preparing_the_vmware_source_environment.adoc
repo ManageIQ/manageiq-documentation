@@ -3,20 +3,24 @@
 [id="Preparing_the_vmware_source_environment"]
 = Preparing the source environment
 
-Prepare the source environment for migration:
+To prepare the source environment:
 
 . Extend the VMware network to the target environment.
 +
 [IMPORTANT]
 ====
-The network configuration must not be changed in any way during the migration.
-
-IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
+* The network configuration must not be changed in any way during the migration.
+* IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
 ====
 
-. Prepare the VMware virtual machines:
+. xref:Preparing_the_source_virtual_machines[Prepare the source virtual machines].
+. If you are using SSH transformation, xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[configure the VMware hypervisors].
 
-* Install VMware Tools to capture IP addresses. To download and install VMware Tools, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[].
+== Preparing the source virtual machines[[Preparing_the_source_virtual_machines]]
+
+Prepare each source virtual machine for migration:
+
+* Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[].
 * Unmount mounted ISO/CDROM disks.
 * Ensure that attached disks are not encrypted.
 * Ensure that each NIC has no more than one IPv4 and/or one IPv6 address.
@@ -26,7 +30,24 @@ IP addresses, VLANs, and other network configurations should not be changed befo
 ====
 Special characters and spaces are not permitted.
 ====
+* *Red Hat Virtualization only:* Ensure that source virtual machine names do not duplicate the names of existing RHV virtual machines.
 
-* Red Hat Virtualization only: Ensure that source virtual machine names do not duplicate the names of existing RHV virtual machines.
+== Configuring the VMware hypervisors for SSH transformation[[Configuring_the_vmware_hypervisors_for_ssh_transformation]]
+
+SSH transformation requires passwordless access to the VMware hypervisors. To configure this, you enable SSH access on the VMware hypervisors, generate an SSH key pair, and copy the public key to the VMware hypervisors. You will use the private key of the SSH key pair in xref:Configuring_the_conversion_hosts[].
+
+Using a single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and simplifies conversion host management. If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs and copy all the public keys to all the VMware hypervisors.
+
+To configure the VMware hypervisors for SSH transformation:
+
+. Enable SSH access on each VMware hypervisor. For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/index.html[]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
 +
+[NOTE]
+====
+If your security processes allow you to collect the VMware hypervisors' public keys, save them for xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
+====
+
+. Generate an SSH key pair.
+. Copy the public key to all the VMware hypervisors in `/etc/ssh/keys-root/authorized_keys`.
+
 You are ready to prepare the xref:Preparing_the_target_environment[target environment].

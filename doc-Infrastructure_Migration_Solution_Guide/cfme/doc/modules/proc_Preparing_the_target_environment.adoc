@@ -69,6 +69,15 @@ ifdef::osp[]
 . Set at least one volume type for the target block storage (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_). Otherwise, CloudForms cannot detect the storage when you create the infrastructure mapping.
 
 . Ensure that the storage backends have sufficient space for the migrated virtual machines.
++
+[IMPORTANT]
+====
+If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies (see link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_).
+
+The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.
+
+You can use the `ftrim` command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.
+====
 
 . Configure security groups with the following ports enabled:
 
@@ -110,7 +119,9 @@ Removing or changing a provider before, during, or after migration will cause er
 ifdef::osp[]
 == Deploying the OpenStack Platform conversion hosts[[Deploying_osp_conversion_hosts]]
 
-You download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+
+To download the conversion host appliance:
 
 . Navigate to link:https://access.redhat.com/downloads/[].
 . In the *A-Z* tab, click *Red Hat OpenStack Platform*.
@@ -119,24 +130,35 @@ You download the conversion host appliance and use it to deploy the conversion h
 +
 [IMPORTANT]
 ====
-Always download the latest version of the OpenStack Platform conversion appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.
+You should always download the latest version of the appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.
 ====
 
-. Upload the appliance to Glance storage.
-. Deploy the appliance as a conversion host instance, with the following resources:
-+
-** 4 vCPUs
-** 8 GB RAM
-** `/tmp` (1 GB for each conversion)
-** `/var/tmp` (1 GB for each conversion)
-** `/var/logs` (5 GB)
+To deploy the conversion host instance:
 
+. Upload the appliance to Glance storage.
+. Deploy the appliance as an instance with the following resources:
+
+* 4 vCPUs
+* 1 GB RAM for each concurrent migration, starting at 10 GB RAM (the default maximum number of concurrent migrations per conversion host is `10`). If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.
+* `/tmp` (1 GB for each concurrent migration)
+* `/var/tmp` (1 GB for each concurrent migration)
+* `/var/logs` (5 GB)
++
 [NOTE]
 ====
 For optimal performance:
 
 * Deploy the conversion hosts on more than one hypervisor.
 * Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
+====
+
+. Increase the disk space of the instance to accommodate its file system.
++
+The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the PV in the VG, to the required size, or you can create a new partition and add it as a PV to the VG.
++
+[NOTE]
+====
+You must resize `lv_root` to use all available disk space because the image will not use it by default.
 ====
 endif::osp[]
 

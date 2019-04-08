@@ -65,52 +65,57 @@ If you selected VDDK, enter the path of the VDDK package in the *VDDK library pa
 
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
 
-You are ready to xref:Configuring_the_ssh_connection_to_the_vmware_hypervisors[configure the SSH connection to the VMware hypervisors].
+[IMPORTANT]
+====
+If you are using SSH transformation, there is an additional step. See xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
+====
 
 Optionally, you can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
 
-[id="Configuring_the_ssh_connection_to_the_vmware_hypervisors"]
-== Configuring the SSH connection to the VMware hypervisors
+[id="Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts"]
+== Copying the VMware keys to the conversion hosts for SSH transformation
 
+To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware SSH public keys by default for SSH transformation. Instead, the `known_hosts` file of each conversion host must be populated with the public keys of the VMware hypervisors.
+
+Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators if they collected the keys when they xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[enabled SSH access on the hypervisors] or you can use `ssh-keyscan`.
+
+[WARNING]
+====
+You must run `ssh-keyscan` multiple times, once for each VMware hypervisor, repeating the procedure on each conversion host. Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.
+====
+
+.Gathering VMware keys with `ssh-keyscan`
+
+. On a conversion host, run `ssh-keyscan`, as in the following examples:
++
 .Red Hat Virtualization
-
-. Log in to each Red Hat Virtualization conversion host.
-
-. Copy the public SSH key to each VMware hypervisor:
-+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh root@_esx1.example.com_ sh -c \
-    "cat >> /etc/ssh/keys-root/authorized_keys" < /var/lib/vdsm/.ssh/id_rsa.pub
+# ssh-keyscan _esx1.example.com_ > /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx2.example.com_ > /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx3.example.com_ > /var/lib/vdsm/.ssh/known_hosts
 ----
-
-. Connect to each VMware hypervisor as `root` using SSH.
-
++
+Change the ownership of the `known_hosts` file to user `vdsm` and group `kvm`:
++
+----
+# chown 36:36 /var/lib/vdsm/.ssh/known_hosts
+----
++
 .OpenStack Platform
-
-. Log in to each OpenStack Platform conversion host.
-
-. Copy the public SSH key to each VMware hypervisor:
-+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh root@_esx1.example.com_ sh -c \
-    "cat >> /etc/ssh/keys-root/authorized_keys" < /root/.ssh/id_rsa.pub
+# ssh-keyscan _esx1.example.com_ > /root/.ssh/known_hosts
+# ssh-keyscan _esx2.example.com_ > /root/.ssh/known_hosts
+# ssh-keyscan _esx3.example.com_ > /root/.ssh/known_hosts
 ----
 
-. Connect to each VMware hypervisor as `cloud-user` using SSH.
+. Repeat for each conversion host, to ensure that all your conversion hosts have all the VMware keys.
 
 [id="Upgrading_the_conversion_hosts"]
 == Upgrading the conversion hosts
 
 If you upgrade your target environment, you should update the conversion hosts to ensure that you have the latest software and critical updates:
 
-* Red Hat Virtualization:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# yum update
-# cp /usr/share/ansible/roles/oVirt.ovirt-ansible-v2v-conversion-host/files/virt-v2v-wrapper.py /usr/bin/
-----
-
-* OpenStack Platform: Download the latest conversion host appliance and xref:Deploying_osp_conversion_hosts[re-deploy the conversion hosts]
+* Red Hat Virtualization: Run `yum update` on the conversion hosts.
+* OpenStack Platform: Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[]).

@@ -70,9 +70,13 @@ ifdef::osp[]
 
 . Ensure that the storage backends have sufficient space for the migrated virtual machines.
 +
-[NOTE]
+[IMPORTANT]
 ====
+If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies (see link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_).
 
+The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.
+
+You can use the `ftrim` command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.
 ====
 
 . Configure security groups with the following ports enabled:
@@ -135,14 +139,7 @@ Always download the latest version of the OpenStack Platform conversion applianc
 ** `/tmp` (1 GB for each concurrent migration)
 ** `/var/tmp` (1 GB for each concurrent migration)
 ** `/var/logs` (5 GB)
-
-. Increase the disk storage space of the instance. The instance is created from an image, but the disk storage defined in the image is not large enough to accommodate the instance's file system. You can either extend the partition (extend the PV in the VG) to include all the required space or you can create a new partition and add it as a PV to the VG, and then increase the root LV and the filesystem:
 +
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# TBD
-----
-
 [NOTE]
 ====
 For optimal performance:
@@ -151,5 +148,14 @@ For optimal performance:
 * Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
 ====
 
-You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts for VDDK or SSH].
+. Increase the disk space of the instance to accommodate its file system.
++
+The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the PV in the VG, to the required size, or you can create a new partition and add it as a PV to the VG.
++
+[NOTE]
+====
+You must resize `lv_root` to use all available disk space because the image will not use it by default.
+====
 endif::osp[]
+
+You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts for VDDK or SSH].

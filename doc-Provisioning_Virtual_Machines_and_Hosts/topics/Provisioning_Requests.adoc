@@ -411,46 +411,8 @@ Cloud-init is a tool for automating the initial setup of virtual machines. In {p
 
 [NOTE]
 ====
-To use cloud-init, you must first install the cloud-init package and select the *Use Cloud-Init/Sysprep* option on the virtual machine.
+To use cloud-init, the template from which the virtual machine is provisioned must have cloud-init package installed, and have the *Use Cloud-Init/Sysprep* option selected.
 ====
-
-See the example below of a virtual machine provision request using cloud-init.
-
-----
-# curl -d@request_body -X POST -H "Accept: application/json" --user admin:smartvm --insecure  https://<CFME FQDN or IP address>:443/
-api/provision_requests
-
-request_body:
-{"version"=>"1.1",
- "template_fields"=>
-  {"guid"=>"1dbfed74-1c8b-4535-9f1e-c654a5456805",
-   "name"=>"template_name",
-   "request_type"=>"template"},
- "vm_fields"=>
-  {"customization_template_id"=>10000000000000,
-   "addr_mode"=>"static",
-   "sysprep_enabled"=>"fields",
-   "placement_auto"=>true,
-   "number_of_vms"=>1,
-   "provision_type"=>"native_clone",
-   "vm_name"=>"name_of_vm_to_provision",
-   "vm_auto_start"=>true,
-   "retirement"=>0,
-   "retirement_warn"=>604800,
-   "vlan"=>"9af50e0c-b277-422a-a5c3-11e158d21fa8",
-   "disk_format"=>"default",
-   "number_of_sockets"=>1,
-   "cores_per_socket"=>1,
-   "vm_memory"=>"2048",
-   "memory_reserve"=>341,
-   "memory_limit"=>8192,
-   "network_adapters"=>1},
- "requester"=>{"owner_email"=>"test@testing.com"},
- "tags"=>{},
- "additional_values"=>nil,
- "ems_custom_attributes"=>nil,
- "miq_custom_attributes"=>nil}
-----
 
 For a virtual machine provision request via REST API, ensure the following two fields in the request’s body are set correctly, otherwise cloud-init may not work.
 

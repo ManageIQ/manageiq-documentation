@@ -7,7 +7,10 @@ You can select, authenticate, and configure your conversion hosts in CloudForms.
 
 [IMPORTANT]
 ====
-If you upgrade the target environment, you should xref:Upgrading_the_conversion_hosts[update the conversion hosts] to ensure that you have the latest software and patches.
+If you upgrade your target environment, you should update the conversion hosts to ensure that you have the latest software and critical updates:
+
+* Red Hat Virtualization: Run `yum update` on the conversion hosts.
+* OpenStack Platform: Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[]).
 ====
 
 .Prerequisites
@@ -19,8 +22,6 @@ If you upgrade the target environment, you should xref:Upgrading_the_conversion_
 . Click *VMware Virtual Disk Development Kit (VDDK)*.
 . Click *Latest Releases* and select the latest VDDK release.
 . Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+).
-
-* (VDDK and SSH) Generate an SSH key pair to connect to the VMware hypervisors.
 
 .Procedure
 
@@ -111,11 +112,3 @@ Change the ownership of the `known_hosts` file to user `vdsm` and group `kvm`:
 ----
 
 . Repeat for each conversion host, to ensure that all your conversion hosts have all the VMware keys.
-
-[id="Upgrading_the_conversion_hosts"]
-== Upgrading the conversion hosts
-
-If you upgrade your target environment, you should update the conversion hosts to ensure that you have the latest software and critical updates:
-
-* Red Hat Virtualization: Run `yum update` on the conversion hosts.
-* OpenStack Platform: Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[]).

@@ -3,14 +3,19 @@
 [id="Configuring_conversion_hosts_for_transformation"]
 = Configuring the conversion hosts for VDDK or SSH
 
-Configure the conversion hosts for your environment:
+Configure the conversion hosts for VDDK or SSH transformation:
 
 * xref:Configuring_rhv_hosts_for_vddk_or_ssh[]
 * xref:Configuring_osp_hosts_for_vddk_or_ssh[]
++
+Optionally, you can verify the name and number of the conversion hosts using an API call in a browser. See xref:Verifying_conversion_hosts[]. (This does not verify the VDDK or SSH configuration. That task is performed by the `conversion_host_check` playbook.)
 
 [IMPORTANT]
 ====
-If you upgrade your target environment, you should xref:Updating_conversion_hosts[update the conversion hosts] to ensure that you have the latest software and patches.
+If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates:
+
+* Red Hat Virtualization: Log in to the Manager machine using SSH and run `yum update`.
+* OpenStack Platform: Download the latest conversion host appliance and redeploy the conversion hosts. See xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts].
 ====
 
 [[Configuring_rhv_hosts_for_vddk_or_ssh]]
@@ -28,3 +33,5 @@ include::proc_Configuring_conversion_hosts_for_transformation.adoc[leveloffset=+
 :osp:
 include::proc_Configuring_conversion_hosts_for_transformation.adoc[leveloffset=+1]
 :osp!:
+
+include::proc_Verifying_conversion_hosts.adoc[leveloffset=+1]

@@ -1,9 +1,7 @@
 // Module included in the following assemblies:
-// assembly_Preparing_the_environment_for_migration.adoc
+// proc_Migrating_the_infrastructure.adoc
 [id="Changing_the_maximum_number_of_concurrent_migrations"]
-= (Optional) Changing the maximum number of concurrent migrations
-
-_This section may be moved_
+= Changing the maximum number of concurrent migrations
 
 You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.
 
@@ -27,7 +25,7 @@ In CloudForms, click menu:Compute[Migration > Migration Settings] and select the
 The following commands are performed on the command line of the CloudForms machine.
 ====
 
-Changing the maximum number of concurrent migrations for a single conversion host (`host1.example.com`) to `20`::
+Changing the maximum number of concurrent migrations for a single conversion host::
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -37,7 +35,7 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_)
 ----
 
-Changing the maximum number of concurrent migrations for a provider (`RHV`) to `30`::
+Changing the maximum number of concurrent migrations for a provider::
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -47,7 +45,7 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_RHV_").custom_set("Max Transformation Runners", _30_)
 ----
 
-Getting the maximum number of concurrent migrations for a provider (`OpenStack`)::
+Getting the maximum number of concurrent migrations for a provider::
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----

@@ -4,8 +4,7 @@
 ===== Request:
 
 ----
-# curl -d@request_body -X POST -H "Accept: application/json" --user admin:smartvm --insecure  https://<CFME FQDN or IP address>:443/
-api/provision_requests
+POST api/provision_requests/
 ----
 
 [source,json]
@@ -41,24 +40,11 @@ api/provision_requests
  "miq_custom_attributes"=>nil}
 ----
 
-Some possible cases below where VLAN field is not set correctly, which can lead to the following validation failure: 
- 
-----
-Provision failed for the following reasons:\n'Network/Virtual NIC Profile ID or Profile Name (Network Name)' is required"
-----
+Following are some possible cases where the VLAN field is not set correctly, which can lead to a validation failure:
 
-////
-
-[width="100%",cols="40%,60%",options="header"]
-|====
-Validation Error| Description
-When providing: “profile name (network name)"|	
-vnic_profile_id does not belong to the expected cluster| should match the VNIC profile ID of the network taken from RHV based on template’s cluster assigned network
-VNIC profile ID does not exist| should be available under RHV, i.e.: https:/<RHV FQDN>/ovirt-engine/api/vnicprofiles
-Network name does not exist (”)| Wrong format (missing space before the first bracket): “profile_name(network_name)” 
-Use Network name (that was used in V3) instead of:  “profile_name(network_name)” 
-|====
-////
+----
+Provision failed for the following reasons:\n'Network/Virtual NIC Profile ID or Profile Name (Network Name)' is required.
+----
 
 . When providing VNIC profile ID:
 .. vnic_profile_id does not belong to the expected cluster (_should match the VNIC profile ID of the network taken from RHV based on template’s cluster assigned network_)
@@ -71,15 +57,15 @@ Use Network name (that was used in V3) instead of:  “profile_name(network_name
 
 .Examples of incorrect usage:
 
-"vlan": "1dbfed74-1c8b-4535-9f1e-c654a5456805", // failed, no such ID
-"vlan": "aaa (aaa)", // failed, no such VNIC profile/network
-"vlan": "ovirtmgmt(ovirtmgmt)", // failed, invalid format
-"vlan": "0000000a-000a-000a-000a-000000000398", // falied, VNIC profile ID of other cluster
-"vlan": "ovirtmgmt", // failed, not supported by v4
+* "vlan": "1dbfed74-1c8b-4535-9f1e-c654a5456805", // failed, no such ID
+* "vlan": "aaa (aaa)", // failed, no such VNIC profile/network
+* "vlan": "ovirtmgmt(ovirtmgmt)", // failed, invalid format
+* "vlan": "0000000a-000a-000a-000a-000000000398", // falied, VNIC profile ID of other cluster
+* "vlan": "ovirtmgmt", // failed, not supported by v4
 
 .Examples of correct usage:
 
-"vlan": "654281a3-db89-4718-ae43-9466b81eb001", // passed, a valid VNIC profile ID
-"vlan": "ovirtmgmt (ovirtmgmt)", // passed, supported format
+* "vlan": "654281a3-db89-4718-ae43-9466b81eb001", // passed, a valid VNIC profile ID
+* "vlan": "ovirtmgmt (ovirtmgmt)", // passed, supported format
 
 

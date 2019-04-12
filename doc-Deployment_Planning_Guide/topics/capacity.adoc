@@ -74,6 +74,14 @@ $ ssh root@example.postgres.server
 ----
 # su - postgres
 ----
++
+[IMPORTANT]
+====
+For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you will need to enable the _rh-postgresql95_ collection and load into the current shell prompt using the source command: 
+
+$ source /opt/rh/rh-postgresql95/enable
+====
++
 . Create the user for {product-title_short} to be granted read-only access to the history database:
 +
 ----
@@ -121,22 +129,44 @@ $ exit
 # firewall-cmd --add-port=5432/tcp --permanent
 ----
 +
-. Enable external md5 authentication. Modify the following line in `/var/lib/pgsql/data/pg_hba.conf` as shown below:
+. Enable external md5 authentication.
+.. For RHV 4.0 and RHV 4.1, update the following line in `/var/lib/pgsql/data/pg_hba.conf` as shown below:
 +
 ----
 host    all      all    0.0.0.0/0     md5
 ----
 +
-. Enable PostgreSQL to listen for remote connections. Ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` is as shown below:
+.. For RHV 4.2, update the following line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf` as shown below:
++
+----
+host    all      all    0.0.0.0/0     md5
+----
++
+. Enable PostgreSQL to listen for remote connections.
+.. For RHV 4.0 and RHV 4.1, ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` is as shown below:
 +
 ----
 listen_addresses  =  '*'
 ----
-. Reload the PostgreSQL configuration:
++
+.. For RHV 4.2, ensure the `listen_addresses` line in `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` is as shown below:
++
+----
+listen_addresses  =  '*'
+----
++
+. Reload the PostgreSQL configuration.
+.. For RHV 4.0 and RHV 4.1:
 +
 ----
 # systemctl reload postgresql
 ----
+.. For RHV 4.2:
++
+----
+# systemctl reload rh-postgresql95-postgresql
+----
++
 
 
 [[data_collection_for_osp]]

@@ -3,15 +3,18 @@
 [id="Virtual_machine_migration_errors"]
 = Virtual machine migration errors
 
-.Postmigration virtual machine IP address errors[[IP_address_errors]]
+[id="IP_address_errors"]
+== Postmigration virtual machine IP address errors
 
-* If the IP address of a migrated RHEL (or other Linux-based operating system) virtual machine is not accessible. Create a xref:Creating_a_rhel_premigration_playbook[`RHEL premigration` playbook] and add it to the xref:Advanced_options_screen[migration plan].[[Migrated_RHEL_IP_address_not_accessible]]
+[id="Migrated_RHEL_IP_address_not_accessible"]
+* If the IP address of a migrated RHEL (or other Linux-based operating system) virtual machine is not accessible, create a xref:Creating_a_rhel_premigration_playbook[`RHEL premigration` playbook] and add it to the xref:Advanced_options_screen[migration plan].
 
-* If the migrated virtual machine does not have an IP address:[[Migrated_VM_missing_IP]]
+[id="Migrated_VM_missing_IP"]
+* If a migrated virtual machine does not have an IP address:
 
 ** Check that VMware Tools is installed on the source virtual machine.
-
-** OpenStack Platform: Check the source virtual machine for an interface configuration file mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not). Log example:[[OSP_missing_IP]]
+[id="OSP_missing_IP"]
+** OpenStack Platform: Check the source virtual machine for an interface configuration file mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not). Log example:
 +
 [options="" subs="+quotes,verbatim"]
 ----
@@ -20,8 +23,8 @@ _date_ _time_:ERROR: Command output:
 BadRequestException: Unknown error
 ----
 
-
-.Source environment errors[[VMware_environment_errors]]
+[id="VMware_environment_errors"]
+== VMware environment errors
 
 A source virtual machine cannot migrate if it has any of the following conditions:
 
@@ -29,21 +32,32 @@ A source virtual machine cannot migrate if it has any of the following condition
 * Encrypted disk
 * Invalid name (containing spaces or special characters)
 
-.Target environment errors
+If you are using SSH transformation, see xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
-*Red Hat Virtualization*[[RHV_VM_migration_failure]]
+[id="Target_environment_errors"]
+== Target environment errors
 
-* Virtual machine name duplicates an existing target virtual machine name.[[RHV_name_conflict]]
+[id="RHV_VM_migration_failure"]
+*Red Hat Virtualization*
+[id="RHV_name_conflict"]
+* Virtual machine name duplicates an existing target virtual machine name.
 
-* SSH transformation failure: If you are using SSSD with single sign-on, xref:Reinstalling_ipa_client[reinstall `ipa-client`] without the OpenSSH client. Otherwise, SSH fails for the vdsm user.
+* SSH transformation failure:
 
-*OpenStack Platform*[[OSP_VM_migration_failure]]
+** If you are using SSSD with single sign-on, xref:Reinstalling_ipa_client[reinstall `ipa-client`] without the OpenSSH client.
+** Check that SSH transformation was correctly configured. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[] and xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
 
-* Virtual machine powered off: The virtual machine must be powered on at the time of migration.[[OSP_VM_powered_off]]
+[id="OSP_VM_migration_failure"]
+*OpenStack Platform*
+[id="OSP_VM_powered_off"]
+* Virtual machine powered off: The virtual machine must be powered on at the time of migration.
 
-* `disallowed by policy` error: The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project. Add the `admin` user as `member` and `admin` to your target project (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Edit a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_). Log example:[[OSP_not_authorized]]
+* SSH transformation failure: Check that SSH transformation was correctly configured. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[] and xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
+
+[id="OSP_not_authorized"]
+* `disallowed by policy` error: The OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project. Add the `admin` user as `member` and `admin` to your target project (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Edit a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_). Log example:
 +
-[options="" subs="verbatim"]
+[options="" subs="+quotes,verbatim"]
 ----
-ERROR: Command exited with non-zero return code 1, output: HttpException: 403: Client Error for url: https://123.123.123.123:13696/v2.0/ports, {"NeutronError": {"message": "((rule:create_port and rule:create_port:mac_address) and rule:create_port:fixed_ips) is disallowed by policy", "type": "PolicyNotAuthorized", "detail": ""}}
+ERROR: Command exited with non-zero return code 1, output: HttpException: 403: Client Error for url: https://_FQDN_:13696/v2.0/ports, {"NeutronError": {"message": "((rule:create_port and rule:create_port:mac_address) and rule:create_port:fixed_ips) is disallowed by policy", "type": "PolicyNotAuthorized", "detail": ""}}
 ----

@@ -25,13 +25,9 @@ If you upgrade your target environment, you should update the conversion hosts t
 
 .Procedure
 
-(THIS PROCEDURE IS FROM MOCKUPS, NOT REAL UI)
-
 . In CloudForms, click menu:Compute[Migration > Migration Settings].
 . In the *Conversion Hosts* tab, click *Configure Conversion Host*.
 . Perform the following procedures in the *Configure Conversion Host* wizard:
-
-(PLACEHOLDER: CONVERSION HOST UI SCREENSHOT)
 
 [cols="1,3", options="header"]
 |===
@@ -56,6 +52,11 @@ If you upgrade your target environment, you should update the conversion hosts t
 
 . If you selected SSH, lick *Browse* to browse to the SSH key or paste it in the *VMware hypervisors SSH key* field.
 +
+[IMPORTANT]
+====
+If you are using SSH transformation, you must also copy the VMware keys to the conversion hosts. The VMware keys are not used automatically, in order to prevent man-in-the-middle attacks. See xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
+====
++
 If you selected VDDK, enter the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
 
 . Click *Configure*.
@@ -66,12 +67,11 @@ If you selected VDDK, enter the path of the VDDK package in the *VDDK library pa
 
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
 
-[IMPORTANT]
-====
-If you are using SSH transformation, you must copy the VMware keys to the conversion hosts. See xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
-====
-
 Optionally, you can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
+
+If you are using VDDK transformation, you can start the infrastructure migration. See xref:Migrating_the_infrastructure[].
+
+If you are using SSH transformation, you can copy the VMware keys to the conversion hosts. See xref:Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts[].
 
 [id="Ssh_only_copying_the_vmware_hypervisor_keys_to_the_conversion_hosts"]
 == Copying the VMware keys to the conversion hosts for SSH transformation

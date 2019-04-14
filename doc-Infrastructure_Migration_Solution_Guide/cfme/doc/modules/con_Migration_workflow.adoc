@@ -21,17 +21,17 @@ This diagram describes the workflow of a migration to OpenStack Platform.
 image::vmware_to_osp_migration_workflow.png[]
 endif::osp[]
 
-image:circle_step_numbers/1.png[25,25] You run a migration plan in CloudForms.
+image:circle_step_numbers/1.png[25,25] You create and run a migration plan in CloudForms.
 
 image:circle_step_numbers/2.png[25,25] CloudForms uses the migration plan to locate the source virtual machines.
 
-image:circle_step_numbers/3.png[25,25] If you are using the VDDK (VMware Virtual Disk Development Kit) xref:Choosing_vddk_or_ssh_transformation[transformation option], CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.
+image:circle_step_numbers/3.png[25,25] If you are using xref:Choosing_vddk_or_ssh_transformation[VDDK transformation], CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.
 
 ifdef::rhv[]
-image:circle_step_numbers/4.png[25,25] Using the attributes defined for the Red Hat Virtualization environment, CloudForms initiates communication with the conversion hosts. (A xref:Configuring_the_conversion_hosts[conversion host] is a host with `virt-v2v` and `virt-v2v-wrapper` installed.)
+image:circle_step_numbers/4.png[25,25] Using the attributes defined for the Red Hat Virtualization environment, CloudForms initiates communication with the conversion hosts (xref:Configuring_the_conversion_hosts[RHV host] with `virt-v2v` and `virt-v2v-wrapper` installed)
 endif::rhv[]
 ifdef::osp[]
-image:circle_step_numbers/4.png[25,25] Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts. (A xref:Configuring_the_conversion_hosts[conversion host] is an OpenStack Platform instance created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed.)
+image:circle_step_numbers/4.png[25,25] Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts (xref:Deploying_osp_conversion_hosts[OpenStack Platform instance] created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed)
 endif::osp[]
 
 image:circle_step_numbers/5.png[25,25] `virt-v2v-wrapper` connects to the source datastore through the ESXi host. `virt-v2v` streams the source disks to the target data domain and converts the source disks.

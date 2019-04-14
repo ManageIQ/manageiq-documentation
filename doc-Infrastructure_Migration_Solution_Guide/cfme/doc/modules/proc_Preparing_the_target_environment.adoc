@@ -3,9 +3,23 @@
 [id="Preparing_the_{context}_target_environment"]
 ifdef::rhv[]
 = Preparing the Red Hat Virtualization environment
+
+The Red Hat Virtualization environment requires the following preparation:
+
+. xref:Installing_and_configuring_red_hat_virtualization[Installing and configuring Red Hat Virtualization]
+. xref:Cloudforms_for_rhv[Installing and configuring CloudForms]
+. xref:Reinstalling_ipa_client[Reinstalling `ipa-client`]
+
 endif::rhv[]
 ifdef::osp[]
 = Preparing the Red Hat OpenStack Platform environment
+
+The OpenStack Platform environment requires the following preparation:
+
+. xref:Installing_and_configuring_open_stack_platform[Installing and configuring OpenStack Platform]
+. xref:Cloudforms_for_osp[Installing and configuring CloudForms]
+. xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts]
+
 endif::osp[]
 
 .Prerequisites
@@ -17,11 +31,12 @@ include::ref_Software_compatibility_requirements.adoc[]
 * C1E halt state disabled, if applicable
 
 ifdef::rhv[]
+[id="Installing_and_configuring_red_hat_virtualization"]
 == Installing and configuring Red Hat Virtualization
 
-. Install Red Hat Virtualization Manager 4.3 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_).
+. Install Red Hat Virtualization Manager 4.3.4 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_).
 
-. Install Red Hat Virtualization Host 4.3 or Red Hat Enterprise Linux 7.6  on the host machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Installing Red Hat Enterprise Linux Hosts] in the _Red Hat Virtualization Installation Guide_).
+. Install Red Hat Virtualization Host 4.3.4 or Red Hat Enterprise Linux 7.6 on the host machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Installing Red Hat Enterprise Linux Hosts] in the _Red Hat Virtualization Installation Guide_).
 +
 [NOTE]
 ====
@@ -46,17 +61,21 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 . Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number (+virtio-win-_version_.iso+). The Guest Tool is required for migrating Windows virtual machines.
 
 [id="Reinstalling_ipa_client"]
-. If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client:
-+
+.Reinstalling `ipa-client`
+
+If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+
+On the Manager machine, run the following commands:
+
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ipa-client-install --uninstall
 # ipa-client-install --no-ssh
 ----
-+
-Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+
 endif::rhv[]
 ifdef::osp[]
+[id="Installing_and_configuring_open_stack_platform"]
 == Installing and configuring OpenStack Platform
 
 . Install Red Hat OpenStack Platform 13 or 14 (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/[Red Hat OpenStack Platform Director Installation and Usage]).
@@ -96,12 +115,14 @@ endif::osp[]
 == Installing and configuring Cloudforms
 
 ifdef::rhv[]
-. Install Red Hat CloudForms 4.7 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
+[[Cloudforms_for_rhv]]
+. Install Red Hat CloudForms 4.7.3 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
 
 . Add VMware  and Red Hat Virtualization as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms: Managing Providers_).
 endif::rhv[]
 ifdef::osp[]
-. Install Red Hat CloudForms 4.7 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
+[[Cloudforms_for_osp]]
+. Install Red Hat CloudForms 4.7.3 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
 
 . Add VMware and OpenStack Platform as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Adding an OpenStack Infrastructure Provider] in _Red Hat CloudForms: Managing Providers_).
 endif::osp[]
@@ -123,7 +144,8 @@ ifdef::osp[]
 
 Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
 
-To download the conversion host appliance:
+[id="Downloading_the_conversion_host_appliance"]
+.Downloading the conversion host appliance
 
 . Navigate to link:https://access.redhat.com/downloads/[].
 . In the *A-Z* tab, click *Red Hat OpenStack Platform*.
@@ -135,7 +157,8 @@ To download the conversion host appliance:
 You should always download the latest version of the appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.
 ====
 
-To deploy the conversion host instance:
+[id="Deploying_the_conversion_host_instance"]
+.Deploying the conversion host instance
 
 . Upload the appliance to Glance storage.
 . Deploy the appliance as an instance with the following resources:
@@ -148,15 +171,13 @@ To deploy the conversion host instance:
 +
 [NOTE]
 ====
-For optimal performance:
+For optimal performance, the conversion host instances should be deployed:
 
-* Deploy the conversion hosts on more than one hypervisor.
-* Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
+* On more than one hypervisor
+* On a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
 ====
 
-. Increase the disk space of the instance to accommodate its file system.
-+
-The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the PV in the VG, to the required size, or you can create a new partition and add it as a PV to the VG.
+. Increase the disk space of the instance to accommodate its file system. The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the PV in the VG, to the required size, or you can create a new partition and add it as a PV to the VG.
 +
 [NOTE]
 ====

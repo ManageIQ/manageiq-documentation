@@ -1,0 +1,62 @@
+// Module included in the following assemblies:
+// assembly_Migrating_the_infrastructure.adoc
+[id="Creating_an_infrastructure_mapping"]
+= Creating an infrastructure mapping
+
+The infrastructure mapping maps your source infrastructure to your target environment.
+
+[IMPORTANT]
+====
+If you add or remove providers or provider objects from an infrastructure mapping, the mapping will have missing resource errors (see xref:Infrastructure_mapping_errors[]). You must delete the infrastructure mapping and create a new one.
+====
+
+.Procedure
+
+. Click menu:Compute[Migration > Infrastructure Mappings].
+. Click *Create Infrastructure Mapping*.
+. Perform the following procedures in the *Create Infrastructure Mapping* wizard:
+
+image:Creating_infrastructure_mapping.png[]
+
+[cols="1,3", options="header"]
+|===
+^|Screen ^|Procedure
+
+|*General*
+.<a|. Enter the infrastructure mapping *Name* and (optional) *Description*.
+. Select the *Target Provider*.
+. Click *Next*.
+
+|*Map Compute*
+.<a|. Select a *Source Provider \ Datacenter \ Cluster* source cluster and a (RHV) *Target Provider \ Datacenter \ Cluster* or (OpenStack{nbsp}Platform) *Target Provider \ Project*.
++
+If the target cluster or project does not contain a conversion host, a warning icon (image:warning.png[height=15px]) appears. You can create and save an infrastructure mapping, but you must xref:Configuring_the_conversion_hosts[configure conversion hosts] before you can run a migration plan.
+
+. Click *Add Mapping*. You can map additional clusters.
+. Click *Next*.
+
+|*Map Storage*
+.<a|. Select a source cluster whose datastores you want to map.
+. Select a *Source Provider \ Datacenter \ Datastore* and (RHV) *Target Datastores* or
+(OpenStack{nbsp}Platform) *Target Provider \ Volume Type*. (If the OpenStack Platform volume type is missing, check that the `volume type` has been set. See xref:Infrastructure_mapping_errors[].)
+
+. Click *Add Mapping*. You can map additional datastores.
+. Click *Next*.
+
+|*Map Networks*
+.<a|. Select a source cluster from the drop-down list.
+. Select one or more from *Source Provider \ Datacenter \ Network* and a *Target Project \ Network*. (IMS supports both provider and tenant networks in OpenStack Platform.)
+
+. Click *Add Mapping*. You can map the networks of additional source clusters.
+. Click *Create*.
+
+|*Results*
+.<a|Click *Close*. Your infrastructure mapping is saved in menu:Compute[Migration > Infrastructure Mappings].
+|===
+
+You can click an infrastructure mapping element to view its details:
+
+.Infrastructure Mappings list
+image:Infra_mappings_list.png[]
+
+After you have created an infrastructure mapping, you can xref:Creating_and_running_a_migration_plan[create and run a migration plan].

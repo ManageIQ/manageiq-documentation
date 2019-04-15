@@ -1,0 +1,188 @@
+// Module included in the following assemblies:
+// assembly_Preparing_the_target_environment.adoc
+[id="Preparing_the_{context}_target_environment"]
+ifdef::rhv[]
+= Preparing the Red Hat Virtualization environment
+
+The Red Hat Virtualization environment requires the following preparation:
+
+. xref:Installing_and_configuring_red_hat_virtualization[Installing and configuring Red Hat Virtualization]
+. xref:Cloudforms_for_rhv[Installing and configuring CloudForms]
+. xref:Reinstalling_ipa_client[Reinstalling `ipa-client`]
+
+endif::rhv[]
+ifdef::osp[]
+= Preparing the Red Hat OpenStack Platform environment
+
+The OpenStack Platform environment requires the following preparation:
+
+. xref:Installing_and_configuring_open_stack_platform[Installing and configuring OpenStack Platform]
+. xref:Cloudforms_for_osp[Installing and configuring CloudForms]
+. xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts]
+
+endif::osp[]
+
+.Prerequisites
+
+The following prerequisites apply:
+
+include::ref_Software_compatibility_requirements.adoc[]
+* BIOS settings of physical hosts adjusted for optimal performance (rather than power-saving), according to the vendor's recommendations
+* C1E halt state disabled, if applicable
+
+ifdef::rhv[]
+[id="Installing_and_configuring_red_hat_virtualization"]
+== Installing and configuring Red Hat Virtualization
+
+. Install Red Hat Virtualization Manager 4.3.4 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_).
+
+. Install Red Hat Virtualization Host 4.3.4 or Red Hat Enterprise Linux 7.6 on the host machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Installing Red Hat Enterprise Linux Hosts] in the _Red Hat Virtualization Installation Guide_).
++
+[NOTE]
+====
+Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+====
+
+. Enable the following ports in the conversion host network:
+* 22 - SSH
+* 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
+* 902 - CloudForms to VMware
+* 5480 - `virt-v2v` to vCenter
++
+For details, see https://access.redhat.com/articles/417343[].
+
+. Create and attach data and ISO storage domains to the data center, ensuring that the data domain has sufficient space for the migrated virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_).
++
+[NOTE]
+====
+IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
+====
+
+. Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number (+virtio-win-_version_.iso+). The Guest Tool is required for migrating Windows virtual machines.
+
+[id="Reinstalling_ipa_client"]
+.Reinstalling `ipa-client`
+
+If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+
+On the Manager machine, run the following commands:
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ipa-client-install --uninstall
+# ipa-client-install --no-ssh
+----
+
+endif::rhv[]
+ifdef::osp[]
+[id="Installing_and_configuring_open_stack_platform"]
+== Installing and configuring OpenStack Platform
+
+. Install Red Hat OpenStack Platform 13 or 14 (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/[Red Hat OpenStack Platform Director Installation and Usage]).
+
+. Create provider networks for the target instances to preserve the IP addresses of the source virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/networking_guide/#create_a_network[Create a network] in the _Red Hat OpenStack Platform Networking Guide_).
+
+. Create a project for the conversion hosts and whatever destination projects you require for the target instances (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#create_a_project[Create a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_).
+
+. Ensure that the `admin` user has `member` and `admin` roles in the conversion and destination projects (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Edit a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_).
+
+. Set at least one volume type for the target block storage (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_). Otherwise, CloudForms cannot detect the storage when you create the infrastructure mapping.
+
+. Ensure that the storage backends have sufficient space for the migrated virtual machines.
++
+[IMPORTANT]
+====
+If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies (see link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_).
+
+The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.
+
+You can use the `ftrim` command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.
+====
+
+. Configure security groups with the following ports enabled:
+
+* For the conversion hosts and CloudForms: port 22 (SSH)
+* For CloudForms: port 443 (HTTPS)
++
+[NOTE]
+====
+Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (`virt-v2v` to vCenter).
+====
+
+. Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.
+endif::osp[]
+
+== Installing and configuring Cloudforms
+
+ifdef::rhv[]
+[[Cloudforms_for_rhv]]
+. Install Red Hat CloudForms 4.7.3 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
+
+. Add VMware  and Red Hat Virtualization as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms: Managing Providers_).
+endif::rhv[]
+ifdef::osp[]
+[[Cloudforms_for_osp]]
+. Install Red Hat CloudForms 4.7.3 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
+
+. Add VMware and OpenStack Platform as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Adding an OpenStack Infrastructure Provider] in _Red Hat CloudForms: Managing Providers_).
+endif::osp[]
++
+[IMPORTANT]
+====
+Removing or changing a provider before, during, or after migration will cause errors in the infrastructure mappings and migration plans.
+====
+
+. Enable SmartState Analysis:
+
+.. In the header bar, click menu:Administrator[Configuration].
+.. In the left pane, in *Settings*, click menu:CFME Regions[Zones > Server].
+.. In the right pane, in the *Server* tab, set *SmartState Analysis* to *On* and click *Save*.
+
+ifdef::osp[]
+[id="Deploying_osp_conversion_hosts"]
+== Deploying the OpenStack Platform conversion hosts
+
+Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+
+[id="Downloading_the_conversion_host_appliance"]
+.Downloading the conversion host appliance
+
+. Navigate to link:https://access.redhat.com/downloads/[].
+. In the *A-Z* tab, click *Red Hat OpenStack Platform*.
+. Click the green *Download Latest* button to go to the OpenStack Platform download page.
+. Click the *Product Software* tab and download the `RHOSP V2V Image for Red Hat OpenStack Director (x86_64)`.
++
+[IMPORTANT]
+====
+You should always download the latest version of the appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.
+====
+
+[id="Deploying_the_conversion_host_instance"]
+.Deploying the conversion host instance
+
+. Upload the appliance to Glance storage.
+. Deploy the appliance as an instance with the following resources:
+
+* 4 vCPUs
+* 1 GB RAM for each concurrent migration, starting at 10 GB RAM (the default maximum number of concurrent migrations per conversion host is `10`). If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.
+* `/tmp` (1 GB for each concurrent migration)
+* `/var/tmp` (1 GB for each concurrent migration)
+* `/var/logs` (5 GB)
++
+[NOTE]
+====
+For optimal performance, the conversion host instances should be deployed:
+
+* On more than one hypervisor
+* On a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
+====
+
+. Increase the disk space of the instance to accommodate its file system. The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the PV in the VG, to the required size, or you can create a new partition and add it as a PV to the VG.
++
+[NOTE]
+====
+You must resize `lv_root` to use all available disk space because the image will not use it by default.
+====
+endif::osp[]
+
+You are ready to xref:Configuring_the_conversion_hosts[configure the conversion hosts].

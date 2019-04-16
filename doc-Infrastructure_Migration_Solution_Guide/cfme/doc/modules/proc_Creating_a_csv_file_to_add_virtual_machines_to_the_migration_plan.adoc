@@ -1,19 +1,34 @@
+// Module included in the following assemblies:
+// con_Migration_plan_options.adoc
 [id="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan"]
 = Creating a CSV file to add virtual machines to the migration plan
 
-If you are migrating a large number of virtual machines, you can create a CSV file to add the source virtual machines to the migration plan. If you are xref:Remigrating_virtual_machines[re-migrating virtual machines], you must use a CSV file.
+If you are migrating virtual machines that were migrated in the past, you should create a CSV file to add the virtual machines to the migration plan because the migration plan cannot discover them automatically.
 
-The virtual machine `Name` is mandatory. `Provider`, `Host`, and `Cluster` are optional, to differentiate identical virtual machine names in different environments.
+.Using a CSV file for large migrations (recommended)
+[NOTE]
+====
+If you are migrating a large number of virtual machines, using a CSV file to add the virtual machines is faster than selecting them individually from a list of discovered virtual machines.
+====
 
-.Sample CSV file with `Name` (mandatory) and `Provider` (optional)
+The CSV file format supports the following fields:
 
+.CSV file fields
+[cols="1,3", options="header"]
+|===
+|Field |Comments
+|`Name` |Virtual machine name. Required
+|`Host` |Optional. Only required if virtual machines have identical `Name` fields.
+|`Provider` |Optional. Only required if virtual machines have identical `Name` and `Host` fields.
+|===
+
+Create a CSV file according to the following example:
+
+.CSV file example
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-Name,Provider
-vm01,vSphere3
-vm02,vSphere3
-vm03,vSphere3
-...
+Name,Host,Provider
+vm01,host1,vSphere3
+vm02,host1,vSphere3
+vm03,host1,vSphere3
 ----
-
-Duplicate virtual machines with no optional fields to differentiate them, or with duplicate optional fields, are marked with a red `x` and cannot be added to the migration plan.

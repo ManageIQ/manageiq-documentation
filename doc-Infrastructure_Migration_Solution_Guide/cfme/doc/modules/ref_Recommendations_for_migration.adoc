@@ -1,0 +1,48 @@
+// Module included in the following assemblies:
+// assembly_Planning_the_migration.adoc
+[id="Recommendations_for_migration"]
+= Recommendations for migration
+
+The following recommendations will minimize the impact of the migration on your environment.
+
+Checking your resources::
+* Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.
+* Plan for redundancy.
+
+Scheduling the migration::
+* Schedule your migration carefully, to minimize the impact on your users.
+* Prepare your users for downtime.
++
+[IMPORTANT]
+====
+Currently, IMS supports only cold migration. Virtual machines are powered off gracefully as part of the migration process.
+====
+
+* Stagger the migration schedules.
+* Move critical applications during maintenance windows.
+
+Distributing the migration workload::
+* Create migration groups, so that you are not migrating all of your virtual machines at the same time, keeping in mind the following considerations:
+
+** How are the virtual machines grouped now?
+** Which virtual machines should be migrated together?
+** Which workloads or linked applications should be migrated together?
+** What applications must remain available?
+
+* Consider which parts of the workload to migrate first:
+
+** Databases
+** Applications
+** Web servers
+** Load balancers
+
+Deploying the conversion hosts::
+* Create an appropriate number of conversion hosts. See xref:Deciding_how_many_conversion_hosts_to_create[]
+* Choose the best datapath transformation option for your environment. See xref:Choosing_vddk_or_ssh_transformation[]
+* OpenStack Platform:
+** Deploy the conversion hosts on multiple hypervisors.
+** Deploy the conversion hosts on a compute node with nested virtualization enabled (see link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]). Nested virtualization is a technology preview.
+
+Controlling the migration process::
+* Create multiple migration plans for finer control.
+* Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure. See xref:Changing_the_maximum_number_of_concurrent_migrations[].

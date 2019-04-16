@@ -1,25 +1,50 @@
+// Module included in the following assemblies:
+// assembly_Preparing_the_environment_for_migration.adoc
 [id="Preparing_the_vmware_source_environment"]
-= Preparing the VMware environment
+= Preparing the source environment for migration
 
-Prepare the VMware source environment for migration:
+To prepare the source environment:
 
 . Extend the VMware network to the target environment.
 +
 [IMPORTANT]
 ====
-The network configuration must not be changed in any way during the migration. IP addresses, VLANs, and other network configurations must be the same, before and after migration, because the conversion process preserves the source virtual machine MAC addresses.
+* The network configuration must not be changed in any way during the migration.
+* IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
 ====
 
-. Unmount ISO/CDROM disks from the source virtual machines.
+. xref:Preparing_the_source_virtual_machines[Prepare the source virtual machines].
+. If you are using SSH transformation, xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[configure the VMware hypervisors].
 
-. Check that the source virtual machines do not have encrypted disks.
+[id="Preparing_the_source_virtual_machines"]
+== Preparing the source virtual machines
 
-. Check that each NIC on each virtual machine has no more than 1 IPv4 and/or 1 IPv6 address.
+Prepare each source virtual machine for migration:
 
-. Install link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[VMware Tools] on all source virtual machines to capture the IP addresses.
+* Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[].
+* Unmount mounted ISO/CDROM disks.
+* Ensure that attached disks are not encrypted.
+* Ensure that each NIC has no more than one IPv4 and/or one IPv6 address.
+* Ensure that the virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`).
++
+[NOTE]
+====
+Special characters and spaces are not permitted.
+====
+* *Red Hat Virtualization only:* Ensure that source virtual machine names do not duplicate the names of existing RHV virtual machines.
 
-. Check that source virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`). Special characters and spaces are not permitted.
+[id="Configuring_the_vmware_hypervisors_for_ssh_transformation"]
+== Configuring the VMware hypervisors for SSH transformation
 
-. Red Hat Virtualization only: Check that the names of source virtual machines do not duplicate virtual machine names in the target environment.
+SSH transformation requires passwordless access to the VMware hypervisors. To configure this, you enable SSH access on the VMware hypervisors, generate an SSH key pair, and copy tConfiguring_the_vmware_hypervisors_for_ssh_transformationhe public key to the VMware hypervisors. You will use the private key of the SSH key pair when you configure the conversion hosts.
 
-You are ready to prepare the target environment, xref:Preparing_the_rhv_target_environment[Red Hat Virtualization] or xref:Preparing_the_osp_target_environment[OpenStack Platform].
+Using a single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and simplifies conversion host management. If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs and copy all the public keys to all the VMware hypervisors.
+
+To configure the VMware hypervisors for SSH transformation:
+
+. Enable SSH access on each VMware hypervisor. For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/index.html[]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
+
+. Generate an SSH key pair.
+. Copy the public key to all the VMware hypervisors in `/etc/ssh/keys-root/authorized_keys`.
+
+You are ready to prepare the xref:Preparing_the_target_environment[target environment].

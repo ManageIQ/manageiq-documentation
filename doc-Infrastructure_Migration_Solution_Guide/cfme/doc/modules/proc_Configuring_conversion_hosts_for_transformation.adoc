@@ -1,47 +1,127 @@
-[id="Configuring_conversion_hosts_for_transformation"]
-= Configuring conversion hosts for transformation
+// Module included in the following assemblies:
+// assembly_Configuring_conversion_hosts_for_transformation.adoc
+[id="Configuring_the_{context}_conversion_hosts"]
 
-You can configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts for transformation involves the following key steps:
+ifdef::rhv[]
+Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transformation involves the following steps:
 
-. VDDK only: xref:VDDK_only_Downloading_and_copying_VDDK[Downloading and copying the VDDK package]
-. VDDK and SSH: xref:VDDK_and_SSH_Configuring_the_conversion_hosts[Configuring the conversion hosts]
-. VDDK and SSH: xref:VDDK_and_SSH_Validating_the_transformation_configuration[Validating the transformation configuration]
-. SSH only: xref:SSH_only_Configuring_and_validating_the_SSH_connection[Configuring and validating the SSH connection]
+. VDDK only: xref:rhv_vddk_download[Downloading the VMware Virtual Disk Development kit]
+. xref:Configuring_conversion_host_procedure_rhv[Configuring the conversion hosts]:
+.. Installing the `ovirt-ansible-v2v-conversion-host` package
+.. Creating the `extra_vars.yml` and `secure_vars.yml` files
+.. Configuring the conversion host with the `conversion_host_enable` playbook
+.. Verifying the configuration with the `conversion_host_check` playbook
+.. SSH only: xref:Copying_VMware_keys_to_conversion_hosts_rhv[Copying the VMware keys to the conversion hosts]
+.. SSH only: xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation[Configuring secure remote login to the VMware hypervisors]
+. xref:Authenticating_the_red_hat_virtualization_conversion_hosts[Authenticating the conversion hosts in CloudForms]
+. (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts] in a browser
+endif::rhv[]
+ifdef::osp[]
+Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformation involves the following steps:
 
-[id='VDDK_only_Downloading_and_copying_VDDK']
-== VDDK only: Downloading and copying the VDDK package
+. VDDK only: xref:osp_vddk_download[Downloading the VMware Virtual Disk Development kit]
+. xref:Configuring_conversion_host_procedure_osp[Configuring the conversion hosts]:
+.. Creating the `extra_vars.yml` and `secure_vars.yml` files
+.. Configuring the conversion host with the `conversion_host_enable` playbook
+.. Verifying the configuration with the `conversion_host_check` playbook
+.. SSH only: xref:Copying_VMware_keys_to_conversion_hosts_osp[Copying the VMware keys to the conversion hosts]
+. (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts] in a browser
+endif::osp[]
 
-. Go to the link:https://www.vmware.com/support/pubs/[VMware Documentation site], click `VMware SDK & API Product Documentation` to expand, and click `VMware Virtual Disk Development Kit (VDDK)`.
+.Prerequisite
+ifdef::rhv[]
+[id="rhv_vddk_download"]
+endif::rhv[]
+ifdef::osp[]
+[id="osp_vddk_download"]
+endif::osp[]
+* VDDK only: Download the VMware Virtual Disk Development kit:
++
+. Navigate to link:https://www.vmware.com/support/pubs/[].
+. Click *VMware SDK & API Product Documentation* to expand.
+. Click *VMware Virtual Disk Development Kit (VDDK)*.
+. Click *Latest Releases* and select the latest VDDK release.
+. Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+), recording its URL.
 
-. Click `Latest Releases` and select the latest VDDK release.
+.Procedure
 
-. Download the VDDK package, `VMware-vix-disklib-_version_.x86_64.tar.gz`.
+ifdef::rhv[]
+[[Configuring_conversion_host_procedure_rhv]]
+Perform the following procedure on the Manager machine:
 
-. Copy the VDDK package to a location that is accessible over `HTTP`, for example, `/var/www/html` on the Red Hat Virtualization Manager machine.
+. Install the `ovirt-ansible-v2v-conversion-host` package:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum install ovirt-ansible-v2v-conversion-host
+----
 
-You are ready to configure the conversion hosts.
-
-[id='VDDK_and_SSH_Configuring_the_conversion_hosts']
-== VDDK and SSH: Configuring the conversion hosts
-
-. Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks` on the Manager machine (for Red Hat Virtualization) or on each conversion host (for OpenStack Platform).
-
-. Generate an SSH key pair to connect to the VMware hypervisors over SSH. You must create the keys regardless of the chosen transformation method.
-
-. Create `extra_vars.yml` according to the following examples:
-
-* Red Hat Virtualization conversion host using VDDK:
+. Create an `extra_vars.yml` file and update its parameters:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 ---
-v2v_host_type: rhv
+v2v_host_type: rhevm
 
-# Transport methods to configure on the conversion host. Valid values: 'vddk', 'ssh' (on separate lines)
+# Transport methods to configure on the conversion host. Valid values: `vddk`, `ssh`
 v2v_transport_methods:
-  - vddk
+  - _vddk_
 
-# Maximum number of concurrent conversions per host. Default is '10'.
+# Maximum number of concurrent conversions per host. Default is `10`.
+v2v_max_concurrent_conversions: _10_
+
+# File name of VDDK package
+v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz"
+
+# URL of VDDK package
+v2v_vddk_package_url: "http://_path_to_vddk_package_/{{ v2v_vddk_package_name }}"
+
+# Name of the CloudForms provider to which the conversion host belongs
+manageiq_provider_name: RHV
+
+# Base URL of CloudForms machine
+manageiq_url: "https://_CloudForms_FQDN_"
+
+# Whether to validate certificate of CloudForms server. Default is `true`.
+manageiq_validate_certs: _false_
+
+# To obtain the CloudForms zone ID, run this API call on the CloudForms machine:
+# curl -sk -u admin http://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone
+manageiq_zone_id: "42000000000001"
+
+# List of infrastructure providers
+# Each provider is a dictionary with 3 attributes: `name`, `hostname`, and `connection_configurations`
+manageiq_providers:
+  - name: "_RHV_"
+    hostname: _Manager_FQDN_or_IP_address_
+    connection_configurations: <1>
+      - endpoint:
+          role: "default"
+          certificate_authority: | <2>
+            -----BEGIN CERTIFICATE-----
+            _MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ...._
+            -----END CERTIFICATE-----
+----
+<1> `connection_configurations` has a single endpoint, whose role is `default`.
+<2> The CA certificate is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
+endif::rhv[]
+ifdef::osp[]
+[[Configuring_conversion_host_procedure_osp]]
+Perform the following procedure on each conversion host:
+
+. Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
+. Create an `extra_vars.yml` file and update its parameters:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+---
+v2v_host_type: openstack
+
+# Transport methods to configure on the conversion host. Valid values: `vddk`, `ssh`
+v2v_transport_methods:
+  - _vddk_
+
+# Maximum number of concurrent conversions per host. Default is `10`.
 v2v_max_concurrent_conversions: _10_
 
 # File name of VDDK package
@@ -50,115 +130,93 @@ v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz"
 # URL of VDDK package
 v2v_vddk_package_url: "http://_path/to/downloaded_vddk_package_/{{ v2v_vddk_package_name }}"
 
-manageiq_provider_name: RHV
+manageiq_provider_name: OpenStack
 
 # Base URL of CloudForms machine
 manageiq_url: "https://_CloudForms_FQDN_"
 
-# Whether to validate certificate of CloudForms server. Default is 'true'
+# Whether to validate certificate of CloudForms server. Default is `true`.
 manageiq_validate_certs: _false_
 manageiq_zone_id: "42000000000001"
 
-# List of cloud or infrastructure providers
+# List of cloud providers
 # Each provider is a dictionary with 3 attributes: `name`, `hostname`, and `connection_configurations`
 manageiq_providers:
-  - name: "_RHV_"
-    hostname: _FQDN_or_IP_ <1>
-    connection_configurations: <2>
-      - endpoint:
-          role: "default"
-          verify_ssl: true
-          certificate_authority: |
-            -----BEGIN CERTIFICATE-----
-            MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ....
-            -----END CERTIFICATE-----
-----
-<1> `hostname` is the _FQDN_or_IP_ of the RHV Manager.
-<2> RHV `connection_configurations` has a single endpoint, whose role is `default`. You can choose to verify the SSL certificate (`verify_ssl: true`) and provide the CA chain (`certificate_authority`), found in `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
-
-* OpenStack Platform conversion host using SSH:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
----
-v2v_host_type: openstack
-v2v_transport_methods:
-  - ssh
-v2v_max_concurrent_conversions: _10_
-manageiq_provider_name: OpenStack
-manageiq_url: "https://_CloudForms_FQDN_"
-manageiq_validate_certs: false
-manageiq_zone_id: "42000000000001"
-manageiq_providers:
   - name: "_OpenStack_"
-    hostname: _FQDN_or_IP_ <1>
-    connection_configurations: <2>
+    hostname: _controller_node_FQDN_or_IP_address_
+    connection_configurations: <1>
       - endpoint:
           role: "default"
-# Valid values: `non-ssl`, `ssl-without-validation`, `ssl`. `ssl` requires `certificate_authority`.
-          security_protocol: "ssl"
-          certificate_authority: |
+          security_protocol: "ssl" <2>
+          certificate_authority: | <3>
             -----BEGIN TRUSTED CERTIFICATE-----
-            MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV....
+            _MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV...._
             -----END TRUSTED CERTIFICATE-----
             -----BEGIN TRUSTED CERTIFICATE-----
-            MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG....
+            _MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG...._
             -----END TRUSTED CERTIFICATE-----
 ----
+<1> `connection_configurations` has a single endpoint, whose role is `default`.
+<2> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`)
+<3> The CA chain (`certificate_authority`) is a concatenation of two CA files:
 +
-====
-<1> `hostname` is the _FQDN_or_IP_ of the OpenStack Platform controller.
-<2> OpenStack Platform `connection_configurations` has a single endpoint, whose role is `default`. You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`.
-+
-For `ssl`, you must provide a CA chain (certificate_authority), which is a concatenation of the following CA files:
-
 * `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server
 * `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers
 +
-If you deploy your own link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/#appe-SSLTLS_Certificate_Configuration[certificate authority], use the chain that signs the OpenStack Platform API certificates.
-====
+If you deploy your own CA chain, use the chain that signs the OpenStack Platform API certificates (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[SSL/TLS Certificate Configuration] in _Red Hat OpenStack Platform Director Installation and Usage_).
+endif::osp[]
 
-. Create an encrypted `secure_vars.yml` file for your passwords and keys:
+. Create an encrypted `secure_vars.yml` file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-vault create secure_vars.yml
 ----
 
-. Add the following lines to `secure_vars.yml`:
+. Add the following variables to `secure_vars.yml` and save the file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 ---
-# Use this file for sensitive information
 # CloudForms `admin` user, for connecting to CloudForms
 manageiq_username: "_username_"
 
 # CloudForms `admin` password:
 manageiq_password: "_password_"
 
-# SSH private key to connect to VMware hypervisors.
-# This key is required for both SSH and VDDK transformation
-
+# SSH private key to connect to VMware hypervisors. Required for both VDDK and SSH. <1>
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
-  b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....
+  _b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn...._
   -----END RSA PRIVATE KEY-----
 ----
+<1> This is the private key of the SSH key pair that you created in xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
-. Run the `conversion_host_enable` playbook to configure the conversion hosts for transformation:
+. Run the `conversion_host_enable` playbook:
 +
+ifdef::rhv[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i _hostname_, -c local -b \ <1>
+# ansible-playbook -i _conversion_host_FQDN_or_IP_, -b \
+    -e "ansible_ssh_private_key_file=/etc/pki/ovirt-engine/keys/engine_id_rsa" \
     -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
     /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
 ----
-<1> `hostname` is the _FQDN_ or IP address of the CloudForms provider endpoint. For Red Hat Virtualization, the CloudForms provider endpoint is the RHV Manager. For OpenStack Platform, it is the controller.
+endif::rhv[]
+ifdef::osp[]
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ansible-playbook -i _conversion_host_FQDN_or_IP_, -c local -b \
+    -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
+    /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
+----
+endif::osp[]
 +
-[IMPORTANT]
+[WARNING]
 ====
-Running the `conversion_host_enable` playbook more than once on the same host creates multiple entries in the CloudForms database for the same host. If you need to run the `conversion_host_enable` playbook again, first remove the existing database entry by running the `conversion_host_disable` playbook on the same host:
+Running the `conversion_host_enable` playbook more than once on the same host creates multiple entries in the CloudForms database for that host.
+
+If you need to run the `conversion_host_enable` playbook again, you should remove the existing database entry by running the `conversion_host_disable` playbook on the host:
 
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -166,72 +224,148 @@ Running the `conversion_host_enable` playbook more than once on the same host cr
 ----
 ====
 
-[id="VDDK_and_SSH_Validating_the_transformation_configuration"]
-== VDDK and SSH: Validating the transformation configuration
-
-Run the `conversion_host_check` playbook to verify that the conversion hosts are configured correctly:
-
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook --ask-vault-pass -i `hostname`, conversion_host_check.yml
-----
-
-*VDDK only:*
-
-* If you are configuring Red Hat Virtualization conversion hosts for VDDK transformation, you must  xref:Enabling_conversion_hosts_in_cloudforms[enable them] in CloudForms.
-
-* If you are configuring OpenStack Platform conversion hosts for VDDK transformation, you can create an xref:Creating_an_Infrastructure_Mapping[infrastructure mapping].
-
-*SSH only:* If you are configuring conversion hosts for SSH transformation, you must configure and validate the SSH connection.
-
-[id="SSH_only_Configuring_and_validating_the_SSH_connection"]
-== SSH only: Configuring and validating the SSH connection
-
-. Enable SSH on all VMware hypervisors.
-+
-For instructions, go to the link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation site]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
-
-. Copy the public SSH key corresponding to `v2v_ssh_private_key` in `secure_vars.yml` (see xref:VDDK_and_SSH_Configuring_the_conversion_hosts[]) to each VMware hypervisor:
-
-* RHV Manager:
+. Run the `conversion_host_check` playbook to verify the conversion host configuration:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh root@_esx1.example.com_ sh -c \
-    'cat >> /etc/ssh/keys-root/authorized_keys' < /var/lib/vdsm/.ssh/id_rsa.pub
+# ansible-playbook --ask-vault-pass -i _conversion_host_FQDN_or_IP_, conversion_host_check.yml
 ----
-
-* OpenStack Platform conversion host:
+ifdef::rhv[]
 +
-[options="nowrap" subs="verbatim"]
+* If you are using VDDK, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
+* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_VMware_keys_to_conversion_hosts_rhv[].
+endif::rhv[]
+ifdef::osp[]
++
+* If you are using VDDK, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
+* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_VMware_keys_to_conversion_hosts_osp[].
+endif::osp[]
+
+== Copying the VMware keys to the conversion hosts for SSH transformation
+ifdef::rhv[]
+[[Copying_VMware_keys_to_conversion_hosts_rhv]]
+endif::rhv[]
+ifdef::osp[]
+[[Copying_VMware_keys_to_conversion_hosts_osp]]
+endif::osp[]
+
+To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the `known_hosts` file of each conversion host must be populated with the public keys of the VMware hypervisors.
+
+Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[enabled SSH access on the hypervisors], or you can use `ssh-keyscan`.
+
+[WARNING]
+====
+You must run `ssh-keyscan` multiple times, once for each VMware hypervisor, and repeat the procedure on each conversion host. Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.
+====
+
+.Gathering VMware keys with `ssh-keyscan` and copying them to conversion hosts
+
+ifdef::rhv[]
+Perform the following procedure on a conversion host:
+
+. Run `ssh-keyscan` for each VMware hypervisor and output the public key to `known_hosts`, as in the following example:
++
+[options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh root@_esx1.example.com_ sh -c \
-    'cat >> /etc/ssh/keys-root/authorized_keys' < /OpenStack_Platform/conversion_host_key/id_rsa.pub
+# ssh-keyscan _esx1.example.com_ > /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx2.example.com_ >> /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx3.example.com_ >> /var/lib/vdsm/.ssh/known_hosts
 ----
 
-. Validate the SSH connection:
+. Change the ownership of the `known_hosts` file to user `vdsm` and group `kvm`:
++
+----
+# chown 36:36 /var/lib/vdsm/.ssh/known_hosts
+----
 
-* RHV Manager:
+. Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.
+endif::rhv[]
+ifdef::osp[]
+Perform the following procedure on a conversion host:
+
+. Run `ssh-keyscan` for each VMware hypervisor and output the public key to `known_hosts`, as in the following example:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ssh-keyscan _esx1.example.com_ > /root/.ssh/known_hosts
+# ssh-keyscan _esx2.example.com_ >> /root/.ssh/known_hosts
+# ssh-keyscan _esx3.example.com_ >> /root/.ssh/known_hosts
+----
+
+. Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.
+. Connect to each VMware hypervisor from each conversion host as `cloud-user` to verify the SSH connection.
++
+[IMPORTANT]
+====
+If the SSH connection to a VMware hypervisor fails, check the following procedures:
+
+* xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[]
+* xref:Copying_VMware_keys_to_conversion_hosts_osp[]
+====
++
+If the connection is successful, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
++
+Optionally, you can verify the conversion hosts in a browser. See xref:Verifying_conversion_hosts[].
+endif::osp[]
+ifdef::rhv[]
+You are ready to configure secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation[].
+
+[id="Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation"]
+== Configuring secure remote login to the VMware hypervisors for SSH transformation
+
+Perform the following procedure on the Manager machine:
+
+. Enter the following command:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # sudo -u vdsm ssh-agent
-SSH_AUTH_SOCK=/tmp/ssh-11111AAAAA/agent.12345; export SSH_AUTH_SOCK;
-SSH_AGENT_PID=12345; export SSH_AGENT_PID;
-echo Agent pid 12345;
-
-# sudo -u vdsm SSH_AUTH_SOCK=/tmp/ssh-11111AAAAA/agent.12345 ssh-add
-# sudo -u vdsm \
-    SSH_AUTH_SOCK=/tmp/ssh-123456ABCDE/agent.12345 ssh root@_esx1.example.com_
 ----
-
-* OpenStack Platform conversion host: Connect over SSH to the VM hypervisor as `root`.
 +
-If the connection is successful, the conversion host is correctly configured for SSH transformation.
+The command returns this output:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+SSH_AUTH_SOCK=_socket_domain_; export SSH_AUTH_SOCK; <1>
+SSH_AGENT_PID=139150; export SSH_AGENT_PID;
+echo Agent pid 139150;
+----
+<1> The `socket_domain` format is +/tmp/ssh-_socket_number_/agent._pid_+.
 
+. Enter the following commands, copying the _socket_domain_ from the output, to validate the SSH configuration for each VMware hypervisor:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u vdsm SSH_AUTH_SOCK=_socket_domain_ ssh-add
+# sudo -u vdsm \
+    SSH_AUTH_SOCK=_socket_domain_ ssh root@_esx1.example.com_
+----
++
 [IMPORTANT]
 ====
-*Red Hat Virtualization only:* If you are using SSSD with single sign-on, you must reinstall `ipa-client` without configuring the OpenSSH client. See xref:SSH_transformation_fails[SSH transformation failure] for details.
-====
+These commands must be run for each VMware hypervisor.
 
-You are ready to xref:Enabling_conversion_hosts_in_cloudforms[enable the conversion hosts] in CloudForms.
+If the last command fails, all migrations from this VMware hypervisor using SSH transformation will fail. Check the following procedures:
+
+* xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[]
+* xref:Copying_VMware_keys_to_conversion_hosts_rhv[]
+* xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation[]
+====
++
+If the SSH connection is successful, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
+
+[id="Authenticating_the_red_hat_virtualization_conversion_hosts"]
+== Authenticating the Red Hat Virtualization conversion hosts in CloudForms
+
+Perform the following procedure for each Red Hat Virtualization conversion host:
+
+. Click menu:Compute[Infrastructure > Hosts] and select a Red Hat Virtualization conversion host.
+. Click the *Configuration* drop-down button and select *Edit Selected items*.
+. In the *Default* tab of the Endpoints section, enter the *Username* and the *Password* for `root`.
+. Click *Validate* and wait for validation to complete.
+. Click *Save*.
+
+You can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
+
+Optionally, you can verify the conversion hosts in a browser. See xref:Verifying_conversion_hosts[].
+endif::rhv[]

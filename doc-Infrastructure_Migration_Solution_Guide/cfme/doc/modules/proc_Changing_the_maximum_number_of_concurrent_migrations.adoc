@@ -1,0 +1,56 @@
+// Module included in the following assemblies:
+// proc_Migrating_the_infrastructure.adoc
+[id="Changing_the_maximum_number_of_concurrent_migrations"]
+= Changing the maximum number of concurrent migrations
+
+You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.
+
+[WARNING]
+====
+For VDDK, the maximum concurrent migrations per conversion host should not be greater than `20`. Otherwise, network overload will cause the migration to fail.
+====
+
+The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations for a provider is `20` and for five conversion hosts, `3`, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x` `3` concurrent migrations).
+
+An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
+
+A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.
+
+Changing the maximum number of concurrent migrations for all conversion hosts::
+
+In CloudForms, click menu:Compute[Migration > Migration Settings] and select the new limit.
+
+[NOTE]
+====
+The following commands are performed on the command line of the CloudForms machine.
+====
+
+Changing the maximum number of concurrent migrations for a single conversion host::
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# vmdb
+# rails console
+irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_)
+----
+
+Changing the maximum number of concurrent migrations for a provider::
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# vmdb
+# rails console
+irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_RHV_").custom_set("Max Transformation Runners", _30_)
+----
+
+Getting the maximum number of concurrent migrations for a provider::
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# vmdb
+# rails console
+irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_OpenStack_").custom_get("Max Transformation Runners")
+----

@@ -1,28 +1,25 @@
+// Module included in the following assemblies:
+// assembly_Troubleshooting.adoc
 [id="Known_issues"]
 = Known Issues
 
-After installing IMS, you must obtain critical updates for Red Hat Virtualization and the OpenStack Platform conversion appliance by doing the following:
+[NOTE]
+====
+* Red Hat Virtualization: Log in to the Manager machine using SSH and run `yum update`.
+* OpenStack Platform: Download the latest conversion host appliance and redeploy the conversion hosts. See xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts].
+====
 
-** Red Hat Virtualization: Run `yum update`.
+The following issues will be addressed in a future release:
 
-** OpenStack Platform: Contact link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support] for a newer version of the appliance build.
+* Canceling a migration does not stop the creation of volumes, instances, and network ports (OpenStack Platform), or virtual machines (Red Hat Virtualization). link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[]
 
-These items will be addressed in a future release.
+* Virtual machines whose names contain international characters or spaces fail to migrate using SSH transformation. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669240[]
 
-.All platforms
+* Virtual machines whose names contain international characters or spaces fail to migrate using VDDK transformation. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669286[]
 
-* Canceling a migration does not stop the creation of volumes, instances, and network ports (OpenStack Platform), or virtual machines (Red Hat Virtualization).  link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[BZ#1666799]
+* Red Hat Virtualization: Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[]
 
-* Virtual machines whose names contain international characters or spaces fail to migrate using SSH transformation. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669240[BZ#1669240]
+* OpenStack Platform:
 
-* Virtual machines whose names contain international characters or spaces fail to migrate using VDDK transformation. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669286[BZ#1669286]
-
-.Red Hat Virtualization
-
-* Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[BZ#1669176]
-
-.OpenStack Platform
-
-* Instance is not created after disk conversion. link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[BZ#1668049]
-
-* Names of virtual machines that were migrated using SSH transformation change during migration. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669133[BZ#1669133]
+** Instance is not created after disk conversion. link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[]
+** Names of virtual machines that were migrated using SSH transformation change during migration. link:https://bugzilla.redhat.com/show_bug.cgi?id=1669133[]

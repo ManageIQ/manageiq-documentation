@@ -1,0 +1,102 @@
+// Module included in the following assemblies:
+// assembly_Planning_the_migration.adoc
+[id="Questions_to_ask_before_migration"]
+= Questions to ask before migration
+
+Plan sufficient resources for your migration based on your responses to the following questions:
+
+What am I migrating?::
+* Identify the hosts and virtual machines to be migrated.
+
+What is the maximum number of disks, virtual machines, or NICs that I can migrate?::
+* There is no maximum number of disks or virtual machines that you can migrate. However, you may not want to migrate all your virtual machines at the same time, in order to minimize the impact on your users.
+* You can migrate a maximum of four NICs with each virtual machine.
++
+[IMPORTANT]
+====
+If you exceed the capabilities of your environment, the migrations will fail. This situation could affect existing applications running on virtual machines attached to the network and storage.
+====
+
+What operating systems can I migrate?::
+* For a list of supported guest operating systems, see link:https://access.redhat.com/articles/1351473[].
+* For a list of certified guest operating systems, see link:https://access.redhat.com/articles/973163[].
++
+Although it is possible to migrate guest operating systems that are not certified for Red Hat Virtualization or OpenStack Platform, these guests are not officially supported.
+
+What resources does my target environment require?::
+* Your target environment must be large enough to run the migrated virtual machines in addition to the source virtual machines. The source virtual machines are not affected by the migration process.
+
+What am I missing?::
+* Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window.
+
+What impact will the migration have on my users?::
+* Assess the effect the migration may have on a production environment.
++
+It may be possible to migrate your applications in phases, without downtime at the application layer, if the applications are distributed in a high-availability architecture.
+
+* Check whether users will lose access to critical applications.
+
+[id="How_long_will_the_migration_take"]
+== How long will the migration take?
+
+There are no specific rules to determine how long the actual migration will take. This is determined on a case-by-case basis.
+
+The following migration examples are provided as a guide.
+
+[id="Rhv_migration_example"]
+.Red Hat Virtualization migration
+
+====
+* Duration of migration: 1:15:53 (_hh:mm:ss_)
+* 10 virtual machines
+* Total data migrated, using VDDK: 1000 GB
+* Hardware:
+** Strong host (40 cores, 500 GB RAM)
+** Fast SSD XtremIO storage
+** Fibre Channel 8 interface for host-to-storage connection
+** 10 GbE network interface cards for all other connections
+====
+
+[id="osp_migration_example"]
+.OpenStack Platform migration
+
+====
+* Duration of migration: 2:13:00 (_hh:mm:ss_)
+* 20 virtual machines
+* 2 conversion hosts, maximum of 10 concurrent conversions
+* Total data migrated, using VDDK: 1000 GB
+* Hardware: See xref:Rhv_migration_example[]
+====
+
+[[Deciding_how_many_conversion_hosts_to_create]]
+== How many conversion hosts do I need?
+
+The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
+
+Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
+
+Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
+
+Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
+
+[[Choosing_vddk_or_ssh_transformation]]
+== Which datapath transformation option, VDDK or SSH?
+
+You configure your conversion hosts to use either VDDK (VMware Virtual Disk Development Kit) or SSH as the datapath for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
+
+The following table compares these options.
+
+[cols="1,2,2", options="header"]
+.VDDK and SSH comparison
+|===
+| ^|Pros ^|Cons
+|*VDDK* .<a|* Recommended because it is approximately twice as fast as SSH
+* Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
+.<a|* Requires VDDK package download
+* Requires VDDK library location for configuring the conversion hosts
+|*SSH* .<a|* Better suited for large-scale migrations than VDDK
+* Does not require additional downloads, packages, tools, or compilation
+.<a|* Slower than VDDK
+* Requires the VMware hypervisors to have SSH access enabled
+* Requires shared SSH keys for the source and target environments
+|===

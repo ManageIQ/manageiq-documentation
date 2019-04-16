@@ -21,30 +21,30 @@ This diagram describes the workflow of a migration to OpenStack Platform.
 image::vmware_to_osp_migration_workflow.png[]
 endif::osp[]
 
-image:circle_step_numbers/1.png[25,25] You start running a migration plan in CloudForms.
+image:1.png[25,25] You start running a migration plan in CloudForms.
 
-image:circle_step_numbers/2.png[25,25] CloudForms uses the migration plan to locate the source virtual machines.
+image:2.png[25,25] CloudForms uses the migration plan to locate the source virtual machines.
 
-image:circle_step_numbers/3.png[25,25] If you are using the xref:Choosing_vddk_or_ssh_transformation[VDDK transformation option], CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.
+image:3.png[25,25] If you are using the xref:Choosing_vddk_or_ssh_transformation[VDDK transformation option], CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.
 
 ifdef::rhv[]
-image:circle_step_numbers/4.png[25,25] Using the attributes defined for the Red Hat Virtualization environment, CloudForms initiates communication with the conversion hosts (xref:Configuring_conversion_hosts_for_transformation[host] with `virt-v2v` and `virt-v2v-wrapper` installed).
+image:4.png[25,25] Using the attributes defined for the Red Hat Virtualization environment, CloudForms initiates communication with the conversion hosts (xref:Configuring_conversion_hosts_for_transformation[host] with `virt-v2v` and `virt-v2v-wrapper` installed).
 endif::rhv[]
 ifdef::osp[]
-image:circle_step_numbers/4.png[25,25] Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts (xref:Configuring_conversion_hosts_for_transformation[OpenStack Platform instance] created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed).
+image:4.png[25,25] Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts (xref:Configuring_conversion_hosts_for_transformation[OpenStack Platform instance] created from a conversion host appliance, with `virt-v2v` and `virt-v2v-wrapper` installed).
 endif::osp[]
 
-image:circle_step_numbers/5.png[25,25] `virt-v2v-wrapper` connects to the source datastore through the ESXi host. `virt-v2v` streams the source disks to the target data domain and converts the source disks.
+image:5.png[25,25] `virt-v2v-wrapper` connects to the source datastore through the ESXi host. `virt-v2v` streams the source disks to the target data domain and converts the source disks.
 
 ifdef::rhv[]
-image:circle_step_numbers/6.png[25,25] `virt-v2v-wrapper` creates a target RHV virtual machine using the source virtual machine’s metadata in order to maintain the virtual machine attributes (tags, power state, MAC address, CPU count, memory, disks, and virtual machine name) after migration.
+image:6.png[25,25] `virt-v2v-wrapper` creates a target RHV virtual machine using the source virtual machine’s metadata in order to maintain the virtual machine attributes (tags, power state, MAC address, CPU count, memory, disks, and virtual machine name) after migration.
 
-image:circle_step_numbers/7.png[25,25] `virt-v2v` attaches the converted disks to the RHV virtual machine. (The RHV virtual machine's power state is identical to the source virtual machine's premigration state.)
+image:7.png[25,25] `virt-v2v` attaches the converted disks to the RHV virtual machine. (The RHV virtual machine's power state is identical to the source virtual machine's premigration state.)
 endif::rhv[]
 ifdef::osp[]
-image:circle_step_numbers/6.png[25,25] After the source disks are converted, `virt-v2v` detaches the volumes from the conversion host, migrates the volumes to the destination project, and creates the network ports defined in the infrastructure mapping.
+image:6.png[25,25] After the source disks are converted, `virt-v2v` detaches the volumes from the conversion host, migrates the volumes to the destination project, and creates the network ports defined in the infrastructure mapping.
 
-image:circle_step_numbers/7.png[25,25] `virt-v2v-wrapper` creates the target OpenStack Platform instance with the flavor and security group defined in the migration plan. `virt-v2v` attaches the newly created network ports and the disks mapped in the block storage to the instance and the instance is powered on.
+image:7.png[25,25] `virt-v2v-wrapper` creates the target OpenStack Platform instance with the flavor and security group defined in the migration plan. `virt-v2v` attaches the newly created network ports and the disks mapped in the block storage to the instance and the instance is powered on.
 endif::osp[]
 
 The migration process is complete and the migration plan’s status is displayed in CloudForms.

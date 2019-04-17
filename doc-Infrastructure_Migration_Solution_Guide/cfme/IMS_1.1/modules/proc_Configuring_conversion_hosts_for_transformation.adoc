@@ -1,30 +1,33 @@
 // Module included in the following assemblies:
 // assembly_Configuring_conversion_hosts_for_transformation.adoc
 [id="Configuring_the_{context}_conversion_hosts"]
-
 ifdef::rhv[]
+= Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH
+
 Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transformation involves the following steps:
 
 . VDDK only: xref:rhv_vddk_download[Downloading the VMware Virtual Disk Development kit]
-. xref:Configuring_conversion_host_procedure_rhv[Configuring the conversion hosts]:
+. xref:Configuring_the_conversion_hosts[Configuring the conversion hosts]:
 .. Installing the `ovirt-ansible-v2v-conversion-host` package
 .. Creating the `extra_vars.yml` and `secure_vars.yml` files
 .. Configuring the conversion host with the `conversion_host_enable` playbook
 .. Verifying the configuration with the `conversion_host_check` playbook
-.. SSH only: xref:Copying_VMware_keys_to_conversion_hosts_rhv[Copying the VMware keys to the conversion hosts]
+.. SSH only: xref:Copying_the_vmware_keys_for_SSH_for_rhv[Copying the VMware keys to the conversion hosts]
 .. SSH only: xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation[Configuring secure remote login to the VMware hypervisors]
 . xref:Authenticating_the_red_hat_virtualization_conversion_hosts[Authenticating the conversion hosts in CloudForms]
 . (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts] in a browser
 endif::rhv[]
 ifdef::osp[]
+= Configuring the OpenStack Platform conversion hosts for VDDK or SSH
+
 Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformation involves the following steps:
 
 . VDDK only: xref:osp_vddk_download[Downloading the VMware Virtual Disk Development kit]
-. xref:Configuring_conversion_host_procedure_osp[Configuring the conversion hosts]:
+. xref:Configuring_the_conversion_hosts[Configuring the conversion hosts]:
 .. Creating the `extra_vars.yml` and `secure_vars.yml` files
 .. Configuring the conversion host with the `conversion_host_enable` playbook
 .. Verifying the configuration with the `conversion_host_check` playbook
-.. SSH only: xref:Copying_VMware_keys_to_conversion_hosts_osp[Copying the VMware keys to the conversion hosts]
+.. SSH only: xref:Copying_the_vmware_keys_for_SSH_for_osp[Copying the VMware keys to the conversion hosts]
 . (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts] in a browser
 endif::osp[]
 
@@ -46,7 +49,6 @@ endif::osp[]
 .Procedure
 
 ifdef::rhv[]
-[[Configuring_conversion_host_procedure_rhv]]
 Perform the following procedure on the Manager machine:
 
 . Install the `ovirt-ansible-v2v-conversion-host` package:
@@ -106,7 +108,6 @@ manageiq_providers:
 <2> The CA certificate is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
 endif::rhv[]
 ifdef::osp[]
-[[Configuring_conversion_host_procedure_osp]]
 Perform the following procedure on each conversion host:
 
 . Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
@@ -233,139 +234,10 @@ If you need to run the `conversion_host_enable` playbook again, you should remov
 ifdef::rhv[]
 +
 * If you are using VDDK, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
-* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_VMware_keys_to_conversion_hosts_rhv[].
+* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_the_vmware_keys_for_SSH_for_rhv[].
 endif::rhv[]
 ifdef::osp[]
 +
 * If you are using VDDK, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
-* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_VMware_keys_to_conversion_hosts_osp[].
+* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_the_vmware_keys_for_SSH_for_osp[].
 endif::osp[]
-
-== Copying the VMware keys to the conversion hosts for SSH transformation
-ifdef::rhv[]
-[[Copying_VMware_keys_to_conversion_hosts_rhv]]
-endif::rhv[]
-ifdef::osp[]
-[[Copying_VMware_keys_to_conversion_hosts_osp]]
-endif::osp[]
-
-To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the `known_hosts` file of each conversion host must be populated with the public keys of the VMware hypervisors.
-
-Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[enabled SSH access on the hypervisors], or you can use `ssh-keyscan`.
-
-[WARNING]
-====
-You must run `ssh-keyscan` multiple times, once for each VMware hypervisor, and repeat the procedure on each conversion host. Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.
-====
-
-.Gathering VMware keys with `ssh-keyscan` and copying them to conversion hosts
-
-ifdef::rhv[]
-Perform the following procedure on a conversion host:
-
-. Run `ssh-keyscan` for each VMware hypervisor and output the public key to `known_hosts`, as in the following example:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ssh-keyscan _esx1.example.com_ > /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan _esx2.example.com_ >> /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan _esx3.example.com_ >> /var/lib/vdsm/.ssh/known_hosts
-----
-
-. Change the ownership of the `known_hosts` file to user `vdsm` and group `kvm`:
-+
-----
-# chown 36:36 /var/lib/vdsm/.ssh/known_hosts
-----
-
-. Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.
-endif::rhv[]
-ifdef::osp[]
-Perform the following procedure on a conversion host:
-
-. Run `ssh-keyscan` for each VMware hypervisor and output the public key to `known_hosts`, as in the following example:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ssh-keyscan _esx1.example.com_ > /root/.ssh/known_hosts
-# ssh-keyscan _esx2.example.com_ >> /root/.ssh/known_hosts
-# ssh-keyscan _esx3.example.com_ >> /root/.ssh/known_hosts
-----
-
-. Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.
-. Connect to each VMware hypervisor from each conversion host as `cloud-user` to verify the SSH connection.
-+
-[IMPORTANT]
-====
-If the SSH connection to a VMware hypervisor fails, check the following procedures:
-
-* xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[]
-* xref:Copying_VMware_keys_to_conversion_hosts_osp[]
-====
-+
-If the connection is successful, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
-+
-Optionally, you can verify the conversion hosts in a browser. See xref:Verifying_conversion_hosts[].
-endif::osp[]
-ifdef::rhv[]
-You are ready to configure secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation[].
-
-[id="Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation"]
-== Configuring secure remote login to the VMware hypervisors for SSH transformation
-
-Perform the following procedure on the Manager machine:
-
-. Enter the following command:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# sudo -u vdsm ssh-agent
-----
-+
-The command returns this output:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-SSH_AUTH_SOCK=_socket_domain_; export SSH_AUTH_SOCK; <1>
-SSH_AGENT_PID=139150; export SSH_AGENT_PID;
-echo Agent pid 139150;
-----
-<1> The `socket_domain` format is +/tmp/ssh-_socket_number_/agent._pid_+.
-
-. Enter the following commands, copying the _socket_domain_ from the output, to validate the SSH configuration for each VMware hypervisor:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# sudo -u vdsm SSH_AUTH_SOCK=_socket_domain_ ssh-add
-# sudo -u vdsm \
-    SSH_AUTH_SOCK=_socket_domain_ ssh root@_esx1.example.com_
-----
-+
-[IMPORTANT]
-====
-These commands must be run for each VMware hypervisor.
-
-If the last command fails, all migrations from this VMware hypervisor using SSH transformation will fail. Check the following procedures:
-
-* xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[]
-* xref:Copying_VMware_keys_to_conversion_hosts_rhv[]
-* xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_for_ssh_transformation[]
-====
-+
-If the SSH connection is successful, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
-
-[id="Authenticating_the_red_hat_virtualization_conversion_hosts"]
-== Authenticating the Red Hat Virtualization conversion hosts in CloudForms
-
-Perform the following procedure for each Red Hat Virtualization conversion host:
-
-. Click menu:Compute[Infrastructure > Hosts] and select a Red Hat Virtualization conversion host.
-. Click the *Configuration* drop-down button and select *Edit Selected items*.
-. In the *Default* tab of the Endpoints section, enter the *Username* and the *Password* for `root`.
-. Click *Validate* and wait for validation to complete.
-. Click *Save*.
-
-You can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
-
-Optionally, you can verify the conversion hosts in a browser. See xref:Verifying_conversion_hosts[].
-endif::rhv[]

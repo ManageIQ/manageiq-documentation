@@ -1,0 +1,57 @@
+[id='Infrastructure_migration_solution_overview']
+= Infrastructure Migration Solution overview
+
+The Red Hat Infrastructure Migration Solution (IMS) enables you to migrate virtual machines from VMware{nbsp}5.5 (and later) to the following target environments:
+
+* Red Hat Virtualization 4.3.4
++
+Red Hat Virtualization (RHV) is a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. (For more information, see the link:https://access.redhat.com/documentation/en-us/red_hat_virtualization[Red Hat Virtualization documentation].)
+
+* Red Hat OpenStack Platform 13 and 14
++
+OpenStack Platform enables you to create a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. (For more information, see the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform[Red Hat OpenStack Platform documentation].)
++
+[NOTE]
+====
+PLACEHOLDER: CNV migration and link to CNV doc.
+====
+
+The migration process is performed with CloudForms, a user interface for managing the infrastructure. (For more information, see the link:https://access.redhat.com/documentation/en-us/red-hat-cloudforms[Red Hat CloudForms documentation].)
+
+The infrastructure migration has the following key steps:
+
+. xref:Planning_the_migration[Planning the migration]
++
+* xref:Questions_to_ask_before_migration[Questions to ask before migration]:
+
+** xref:How_long_will_the_migration_take["How long will the migration take?"]
+** xref:Deciding_how_many_conversion_hosts_to_create["How many conversion hosts do I need?"]
+** xref:Choosing_vddk_or_ssh_transformation["Which datapath transformation option, VDDK or SSH?"]
+
+* xref:Recommendations_for_migration[Recommendations to minimize the impact on your users]:
+** xref:Distributing_the_migration_workload[]
+** xref:Controlling_the_migration_process[]
+
+. xref:Preparing_the_environment_for_migration[Preparing the environment for migration]:
++
+* xref:Preparing_the_vmware_source_environment[Preparing the source environment]
+* xref:Preparing_the_target_environment[Preparing the target environment] (configuring storage and networks and installing and configuring software packages)
+* xref:Configuring_the_conversion_hosts[Configuring the conversion hosts in CloudForms] (conversion hosts are RHV hosts or OpenStack Platform instances running `virt-v2v` and `virt-v2v-wrapper`, which perform the migration)
+
+. xref:Migrating_the_infrastructure[Migrating the infrastructure in CloudForms]
++
+* xref:Creating_an_infrastructure_mapping[Mapping the source and target infrastructures]
+* xref:Creating_and_running_a_migration_plan[Creating and running a migration plan] For details, see the migration workflows:
+
+** xref:Vmware_to_rhv_migration_workflow[]
+** xref:Vmware_to_osp_migration_workflow[]
+
+:context: rhv
+:rhv:
+include::ims_common/con_Migration_workflow.adoc[leveloffset=+1]
+:rhv!:
+
+:context: osp
+:osp:
+include::ims_common/con_Migration_workflow.adoc[leveloffset=+1]
+:osp!:

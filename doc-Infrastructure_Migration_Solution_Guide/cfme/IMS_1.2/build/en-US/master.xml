@@ -616,9 +616,10 @@
 <simpara>If you are using SSH transformation, <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">configure the VMware hypervisors</link>.</simpara>
 </listitem>
 </orderedlist>
-<section xml:id="Preparing_the_source_virtual_machines">
+<formalpara xml:id="Preparing_the_source_virtual_machines">
 <title>Preparing the source virtual machines</title>
-<simpara>Prepare each source virtual machine for migration:</simpara>
+<para>Prepare each source virtual machine for migration:</para>
+</formalpara>
 <itemizedlist>
 <listitem>
 <simpara>Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to <link xlink:href="https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html">https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html</link>.</simpara>
@@ -635,20 +636,20 @@
 <listitem>
 <simpara>Ensure that the virtual machine names contain only upper- or lower-case letters, numbers, underscores (<literal>_</literal>), hyphens (<literal>-</literal>), or periods (<literal>.</literal>).</simpara>
 <note>
-<simpara>Special characters and spaces are not permitted.</simpara>
+<simpara>International characters and spaces are not permitted.</simpara>
 </note>
 </listitem>
 <listitem>
 <simpara><emphasis role="strong">Red Hat Virtualization only:</emphasis> Ensure that source virtual machine names do not duplicate the names of existing RHV virtual machines.</simpara>
 </listitem>
 </itemizedlist>
-</section>
-<section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation">
+<formalpara xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation">
 <title>Configuring the VMware hypervisors for SSH transformation</title>
-<simpara>SSH transformation requires passwordless access to the VMware hypervisors. Passwordless access involves enabling SSH access on the VMware hypervisors, generating an SSH key pair, and copying the public key to the VMware hypervisors. You will use the private key of the SSH key pair in <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
+<para>SSH transformation requires passwordless access to the VMware hypervisors. Passwordless access involves enabling SSH access on the VMware hypervisors, generating an SSH key pair, and copying the public key to the VMware hypervisors. You will use the private key of the SSH key pair in <xref linkend="Configuring_the_conversion_hosts"/>.</para>
+</formalpara>
 <simpara>Using a single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and simplifies conversion host management. If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs and copy all the public keys to all the VMware hypervisors.</simpara>
+<simpara>Configure the VMware hypervisors:</simpara>
 <orderedlist numeration="arabic">
-<title>Procedure</title>
 <listitem>
 <simpara>Enable SSH access on each VMware hypervisor. For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">https://docs.vmware.com/en/VMware-vSphere/index.html</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
 <note>
@@ -663,7 +664,6 @@
 </listitem>
 </orderedlist>
 <simpara>You are ready to prepare the <link linkend="Preparing_the_target_environment">target environment</link>.</simpara>
-</section>
 </section>
 <section xml:id="Preparing_the_target_environment">
 <title>Preparing the target environment</title>
@@ -753,9 +753,8 @@
 <simpara>C1E halt state disabled, if applicable</simpara>
 </listitem>
 </itemizedlist>
-<section xml:id="Installing_and_configuring_red_hat_virtualization">
+<orderedlist xml:id="Installing_and_configuring_red_hat_virtualization" numeration="arabic">
 <title>Installing and configuring Red Hat Virtualization</title>
-<orderedlist numeration="arabic">
 <listitem>
 <simpara>Install Red Hat Virtualization Manager 4.3.4 on the Manager machine (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager">Installing the Red Hat Virtualization Manager</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>).</simpara>
 </listitem>
@@ -800,10 +799,8 @@
 <simpara>On the Manager machine, run the following commands:</simpara>
 <screen># ipa-client-install --uninstall
 # ipa-client-install --no-ssh</screen>
-</section>
-<section xml:id="installing_and_configuring_cloudforms" remap="_installing_and_configuring_cloudforms">
-<title>Installing and configuring Cloudforms</title>
 <orderedlist xml:id="Cloudforms_for_rhv" numeration="arabic">
+<title>Installing and configuring Cloudforms</title>
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.3 on the Manager machine (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>).</simpara>
 </listitem>
@@ -829,7 +826,6 @@
 </listitem>
 </orderedlist>
 <simpara>You are ready to <link linkend="Configuring_the_conversion_hosts">configure the conversion hosts</link>.</simpara>
-</section>
 </section>
 <section xml:id="Preparing_the_osp_target_environment">
 <title>Preparing the Red Hat OpenStack Platform environment</title>
@@ -903,9 +899,8 @@
 <simpara>C1E halt state disabled, if applicable</simpara>
 </listitem>
 </itemizedlist>
-<section xml:id="Installing_and_configuring_open_stack_platform">
+<orderedlist xml:id="Installing_and_configuring_open_stack_platform" numeration="arabic">
 <title>Installing and configuring OpenStack Platform</title>
-<orderedlist numeration="arabic">
 <listitem>
 <simpara>Install Red Hat OpenStack Platform 13 or 14 (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/">Red Hat OpenStack Platform Director Installation and Usage</link>).</simpara>
 </listitem>
@@ -947,10 +942,8 @@
 <simpara>Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.</simpara>
 </listitem>
 </orderedlist>
-</section>
-<section xml:id="installing_and_configuring_cloudforms_2" remap="_installing_and_configuring_cloudforms_2">
-<title>Installing and configuring Cloudforms</title>
 <orderedlist xml:id="Cloudforms_for_osp" numeration="arabic">
+<title>Installing and configuring Cloudforms</title>
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.3 (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>).</simpara>
 </listitem>
@@ -975,12 +968,12 @@
 </orderedlist>
 </listitem>
 </orderedlist>
-</section>
-<section xml:id="Deploying_osp_conversion_hosts">
+<formalpara xml:id="Deploying_osp_conversion_hosts">
 <title>Deploying the OpenStack Platform conversion hosts</title>
-<simpara>Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See <xref linkend="Deciding_how_many_conversion_hosts_to_create"/> for details.</simpara>
-<orderedlist xml:id="Downloading_the_conversion_host_appliance" numeration="arabic">
-<title>Downloading the conversion host appliance</title>
+<para>Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See <xref linkend="Deciding_how_many_conversion_hosts_to_create"/> for details.</para>
+</formalpara>
+<simpara xml:id="Downloading_the_conversion_host_appliance">To download the conversion host appliance:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Navigate to <link xlink:href="https://access.redhat.com/downloads/">https://access.redhat.com/downloads/</link>.</simpara>
 </listitem>
@@ -997,8 +990,8 @@
 </important>
 </listitem>
 </orderedlist>
-<orderedlist xml:id="Deploying_the_conversion_host_instance" numeration="arabic">
-<title>Deploying the conversion host instance</title>
+<simpara xml:id="Deploying_the_conversion_host_instance">To deploy the conversion host instance:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Upload the appliance to Glance storage.</simpara>
 </listitem>
@@ -1041,7 +1034,6 @@
 </listitem>
 </orderedlist>
 <simpara>You are ready to <link linkend="Configuring_the_conversion_hosts">configure the conversion hosts</link>.</simpara>
-</section>
 </section>
 </section>
 <section xml:id="Configuring_the_conversion_hosts">
@@ -1631,7 +1623,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </listitem>
 <listitem>
 <simpara>Browse to the CSV file and click <emphasis role="strong">Open</emphasis>.</simpara>
-<simpara>Virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields, are marked with a red <literal>x</literal>. Correct the CSV file and create a new migration plan.</simpara>
+<simpara>If you try to import an invalid CVS file (for example, virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields), the <emphasis role="strong">Create Migration Plan</emphasis> wizard will freeze. This is a <link linkend="Known_issues">known issue</link> and will be addressed in a future release.</simpara>
 </listitem>
 </orderedlist>
 </listitem>
@@ -1704,9 +1696,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </imageobject>
 <textobject><phrase>7</phrase></textobject>
 </inlinemediaobject>) to archive, edit, or delete a migration plan.</simpara>
-<section xml:id="Scheduling_a_saved_migration_plan">
+<orderedlist xml:id="Scheduling_a_saved_migration_plan" numeration="arabic">
 <title>Scheduling a saved migration plan</title>
-<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans Not Started</emphasis>.</simpara>
 </listitem>
@@ -1717,10 +1708,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>In the <emphasis role="strong">Schedule Migration Plan</emphasis> window, select a date and time and click <emphasis role="strong">Schedule</emphasis>. The plan’s status is <emphasis role="strong">Migration Scheduled</emphasis> with the date and time.</simpara>
 </listitem>
 </orderedlist>
-</section>
-<section xml:id="Viewing_migration_plan_progress">
+<orderedlist xml:id="Viewing_migration_plan_progress" numeration="arabic">
 <title>Viewing a migration plan in progress</title>
-<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans in Progress</emphasis>.</simpara>
 </listitem>
@@ -1731,10 +1720,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <note>
 <simpara>The counter in <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice> may be a few seconds ahead of the counter in the migration plan details view. This is because the <emphasis role="strong">Migration Plans</emphasis> counter displays the total time for running the migration plan, while the details counter displays the time for migrating the virtual machines.</simpara>
 </note>
-</section>
-<section xml:id="Canceling_a_migration_plan">
+<orderedlist xml:id="Canceling_a_migration_plan" numeration="arabic">
 <title>Canceling a migration plan in progress</title>
-<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans in Progress</emphasis>.</simpara>
 </listitem>
@@ -1745,10 +1732,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click <emphasis role="strong">Cancel Migrations</emphasis> to confirm the cancellation. The canceled migration appears in <emphasis role="strong">Migration Plans Complete</emphasis> with a red <literal>x</literal> indicating that the plan did not complete successfully.</simpara>
 </listitem>
 </orderedlist>
-</section>
-<section xml:id="Retrying_a_failed_migration_plan">
+<orderedlist xml:id="Retrying_a_failed_migration_plan" numeration="arabic">
 <title>Retrying a migration plan</title>
-<orderedlist numeration="arabic">
 <listitem>
 <simpara>Delete newly created target virtual machines or instances, if any, to avoid name conflicts with the migrating VMware virtual machines.</simpara>
 </listitem>
@@ -1768,7 +1753,6 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click the <emphasis role="strong">Retry</emphasis> button beside the failed migration plan.</simpara>
 </listitem>
 </orderedlist>
-</section>
 </section>
 </section>
 <section xml:id="Changing_the_maximum_number_of_concurrent_migrations">
@@ -1808,8 +1792,8 @@ Select a value for <emphasis role="strong">Maximum concurrent migrations per con
 </chapter>
 <chapter xml:id="Troubleshooting">
 <title>Troubleshooting</title>
-<simpara>To troubleshoot errors, you can check the migration logs (<xref linkend="Migration_logs"/>).</simpara>
-<simpara>These common issues and mistakes can cause a failed migration:</simpara>
+<simpara>To identify errors, check the migration logs (<xref linkend="Migration_logs"/>).</simpara>
+<simpara>You can check these common issues and mistakes:</simpara>
 <itemizedlist>
 <listitem>
 <simpara><link linkend="Infrastructure_mapping_errors">Infrastructure mapping errors</link></simpara>
@@ -1895,6 +1879,7 @@ Select a value for <emphasis role="strong">Maximum concurrent migrations per con
 <simpara>You can view the migration log, <literal>/var/www/miq/vmdb/log/automation.log</literal>.</simpara>
 </listitem>
 </orderedlist>
+</section>
 <section xml:id="Infrastructure_mapping_errors">
 <title>Infrastructure mapping errors</title>
 <itemizedlist xml:id="Infrastructure_mapping_missing_resources">
@@ -1923,7 +1908,13 @@ Select a value for <emphasis role="strong">Maximum concurrent migrations per con
 <simpara>If the virtual machines cannot be added to the migration plan with a CSV file, check the   <link linkend="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan">CSV file format and fields</link>. Create a new migration plan with the updated CSV file.</simpara>
 </listitem>
 <listitem>
-<simpara>If you have not configured conversion hosts, the following error appears after running the migration plan: <literal>Unable to migrate VMs because no conversion host was configured at the time of the attempted migration. See the product documentation for information on configuring conversion hosts.</literal> You can create and save a migration plan whose infrastructure mapping does not contain conversion hosts, but you cannot run the migration plan without conversion hosts.</simpara>
+<simpara><emphasis role="strong">Create Migration Plan</emphasis> wizard freezes while importing CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields). This is a <xref linkend="Known_issues"/>[known issue] and will be addressed in a future release.</simpara>
+</listitem>
+<listitem>
+<simpara><literal>Denied State</literal> error (IMS 1.1). If a migration plan fails immediately and the migration plan displays a <literal>Denied State</literal> error message, check that you have created and configured the conversion hosts correctly. <link linkend="Canceling_a_migration_plan">Cancel the migration plan</link> and <link linkend="Retrying_a_failed_migration_plan">retry it</link>.</simpara>
+</listitem>
+<listitem>
+<simpara>If you have not configured conversion hosts, the following error appears after running the migration plan (IMS 1.2): <literal>Unable to migrate VMs because no conversion host was configured at the time of the attempted migration. See the product documentation for information on configuring conversion hosts.</literal> You can create and save a migration plan whose infrastructure mapping does not contain conversion hosts, but you cannot run the migration plan without conversion hosts.</simpara>
 </listitem>
 </itemizedlist>
 </section>
@@ -2005,7 +1996,6 @@ BadRequestException: Unknown error</screen>
 </itemizedlist>
 </section>
 </section>
-</section>
 <section xml:id="Known_issues">
 <title>Known Issues</title>
 <note>
@@ -2025,10 +2015,13 @@ BadRequestException: Unknown error</screen>
 <simpara>Canceling a migration does not stop the creation of volumes, instances, and network ports (OpenStack Platform), or virtual machines (Red Hat Virtualization). <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">https://bugzilla.redhat.com/show_bug.cgi?id=1666799</link></simpara>
 </listitem>
 <listitem>
-<simpara>Virtual machines whose names contain international characters or spaces fail to migrate using SSH transformation. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669240">https://bugzilla.redhat.com/show_bug.cgi?id=1669240</link></simpara>
+<simpara>Migrating over SSH and VDDK transformation method with names containing international chars or spaces fails to migrate. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1678385">https://bugzilla.redhat.com/show_bug.cgi?id=1678385</link></simpara>
 </listitem>
 <listitem>
-<simpara>Virtual machines whose names contain international characters or spaces fail to migrate using VDDK transformation. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669286">https://bugzilla.redhat.com/show_bug.cgi?id=1669286</link></simpara>
+<simpara>"Maximum concurrent migrations per conversion host" in UI not working. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1698761">https://bugzilla.redhat.com/show_bug.cgi?id=1698761</link></simpara>
+</listitem>
+<listitem>
+<simpara>Migration plan CSV import validation not working if file contains empty/archived/orphan/invalid VM name. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1699343">https://bugzilla.redhat.com/show_bug.cgi?id=1699343</link></simpara>
 </listitem>
 <listitem>
 <simpara>Red Hat Virtualization:</simpara>

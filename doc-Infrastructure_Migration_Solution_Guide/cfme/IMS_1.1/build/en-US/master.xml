@@ -964,19 +964,8 @@
 <simpara>Optionally, you can verify the name and number of the conversion hosts using an API call in a browser. See <xref linkend="Verifying_conversion_hosts"/>. (This does not verify the VDDK or SSH configuration. That task is performed by the <literal>conversion_host_check</literal> playbook.)</simpara>
 </listitem>
 </itemizedlist>
-<important>
-<simpara>If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Red Hat Virtualization: Log in to the Manager machine using SSH and run <literal>yum update</literal>.</simpara>
-</listitem>
-<listitem>
-<simpara>OpenStack Platform: Download the latest conversion host appliance and redeploy the conversion hosts. See <link linkend="Deploying_osp_conversion_hosts">Deploying the OpenStack Platform conversion hosts</link>.</simpara>
-</listitem>
-</itemizedlist>
-</important>
 <section xml:id="Configuring_the_rhv_conversion_hosts">
-<title>Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH</title>
+<title>Configuring the Red Hat Virtualization conversion hosts</title>
 <simpara>Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transformation involves the following steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
@@ -1012,6 +1001,18 @@
 <simpara>(Optional) <link linkend="Verifying_conversion_hosts">Verifying the name and number of conversion hosts</link> in a browser</simpara>
 </listitem>
 </orderedlist>
+<important>
+<simpara>If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the Manager machine using SSH.</simpara>
+</listitem>
+<listitem>
+<simpara>Run the following command:</simpara>
+<screen># yum update</screen>
+</listitem>
+</orderedlist>
+</important>
 <itemizedlist xml:id="rhv_vddk_download">
 <title>Prerequisite</title>
 <listitem>
@@ -1146,7 +1147,7 @@ v2v_ssh_private_key: |
 </listitem>
 </orderedlist>
 <formalpara xml:id="Copying_the_vmware_keys_for_SSH_for_rhv">
-<title>Copying the VMware keys for SSH transformation for Red Hat Virtualization</title>
+<title>Copying the VMware keys for Red Hat Virtualization</title>
 <para>To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the <literal>known_hosts</literal> file of each conversion host must be populated with the public keys of the VMware hypervisors.</para>
 </formalpara>
 <simpara>Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled SSH access on the hypervisors</link>, or you can use <literal>ssh-keyscan</literal>.</simpara>
@@ -1229,7 +1230,7 @@ echo Agent pid 139150;</screen>
 <simpara>Optionally, you can verify the conversion hosts in a browser. See <xref linkend="Verifying_conversion_hosts"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_osp_conversion_hosts">
-<title>Configuring the OpenStack Platform conversion hosts for VDDK or SSH</title>
+<title>Configuring the OpenStack Platform conversion hosts</title>
 <simpara>Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformation involves the following steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
@@ -1256,6 +1257,17 @@ echo Agent pid 139150;</screen>
 <simpara>(Optional) <link linkend="Verifying_conversion_hosts">Verifying the name and number of conversion hosts</link> in a browser</simpara>
 </listitem>
 </orderedlist>
+<important>
+<simpara>If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Download the latest conversion host appliance.</simpara>
+</listitem>
+<listitem>
+<simpara>Redeploy the conversion hosts. See <link linkend="Deploying_osp_conversion_hosts">Deploying the OpenStack Platform conversion hosts</link>.</simpara>
+</listitem>
+</orderedlist>
+</important>
 <itemizedlist xml:id="osp_vddk_download">
 <title>Prerequisite</title>
 <listitem>
@@ -1400,7 +1412,7 @@ v2v_ssh_private_key: |
 </listitem>
 </orderedlist>
 <formalpara xml:id="Copying_the_vmware_keys_for_SSH_for_osp">
-<title>Copying the VMware keys for SSH transformation for OpenStack Platform</title>
+<title>Copying the VMware keys for OpenStack Platform</title>
 <para>To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the <literal>known_hosts</literal> file of each conversion host must be populated with the public keys of the VMware hypervisors.</para>
 </formalpara>
 <simpara>Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled SSH access on the hypervisors</link>, or you can use <literal>ssh-keyscan</literal>.</simpara>
@@ -2171,7 +2183,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "<emph
 <simpara>If the virtual machines cannot be added to the migration plan with a CSV file, check the   <link linkend="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan">CSV file format and fields</link>. Create a new migration plan with the updated CSV file.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Create Migration Plan</emphasis> wizard freezes while importing CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields). This is a <xref linkend="Known_issues"/>[known issue] and will be addressed in a future release.</simpara>
+<simpara><emphasis role="strong">Create Migration Plan</emphasis> wizard hang while importing CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields). You must reload the web page. This is a <link linkend="Known_issues">known issue</link> and will be addressed in a future release.</simpara>
 </listitem>
 <listitem>
 <simpara><literal>Denied State</literal> error (IMS 1.1). If a migration plan fails immediately and the migration plan displays a <literal>Denied State</literal> error message, check that you have created and configured the conversion hosts correctly. <link linkend="Canceling_a_migration_plan">Cancel the migration plan</link> and <link linkend="Retrying_a_failed_migration_plan">retry it</link>.</simpara>

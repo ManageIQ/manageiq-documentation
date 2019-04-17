@@ -2,7 +2,7 @@
 // assembly_Configuring_conversion_hosts_for_transformation.adoc
 [id="Configuring_the_{context}_conversion_hosts"]
 ifdef::rhv[]
-= Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH
+= Configuring the Red Hat Virtualization conversion hosts
 
 Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transformation involves the following steps:
 
@@ -18,7 +18,7 @@ Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transfor
 . (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts] in a browser
 endif::rhv[]
 ifdef::osp[]
-= Configuring the OpenStack Platform conversion hosts for VDDK or SSH
+= Configuring the OpenStack Platform conversion hosts
 
 Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformation involves the following steps:
 
@@ -29,6 +29,30 @@ Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformati
 .. Verifying the configuration with the `conversion_host_check` playbook
 .. SSH only: xref:Copying_the_vmware_keys_for_SSH_for_osp[Copying the VMware keys to the conversion hosts]
 . (Optional) xref:Verifying_conversion_hosts[Verifying the name and number of conversion hosts] in a browser
+endif::osp[]
+
+ifdef::rhv[]
+[IMPORTANT]
+====
+If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates:
+
+. Log in to the Manager machine using SSH.
+. Run the following command:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# yum update
+----
+====
+endif::rhv[]
+ifdef::osp[]
+[IMPORTANT]
+====
+If you upgrade the target environment, you should upgrade the conversion hosts so that you have the latest software and critical updates:
+
+. Download the latest conversion host appliance.
+. Redeploy the conversion hosts. See xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts].
+====
 endif::osp[]
 
 .Prerequisite

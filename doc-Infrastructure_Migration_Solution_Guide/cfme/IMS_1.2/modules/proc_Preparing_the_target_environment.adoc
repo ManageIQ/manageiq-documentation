@@ -47,11 +47,11 @@ Some of these hosts will be deployed as conversion hosts. The number of conversi
 * 22 - SSH
 * 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
 * 902 - CloudForms to VMware
-* 5480 - `virt-v2v` to vCenter
+* 5480 - Conversion hosts to vCenter
 +
 For details, see https://access.redhat.com/articles/417343[].
 
-. Create and attach data and ISO storage domains to the data center, ensuring that the data domain has sufficient space for the migrated virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_).
+. Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_).
 +
 [NOTE]
 ====
@@ -63,7 +63,7 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 [id="Reinstalling_ipa_client"]
 .Reinstalling `ipa-client`
 
-If you are using SSSD with single sign-on, reinstall `ipa-client` without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+If you have configured SSSD with single sign-on on the conversion hosts, reinstall `ipa-client` without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
 
 On the Manager machine, run the following commands:
 
@@ -96,7 +96,7 @@ If you are using Ceph storage, you will require three times the space of the sou
 
 The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.
 
-You can use the `ftrim` command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.
+You can use the `fstrim` command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.
 ====
 
 . Configure security groups with the following ports enabled:
@@ -106,7 +106,7 @@ You can use the `ftrim` command on the migrated virtual machines to reduce the s
 +
 [NOTE]
 ====
-Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (`virt-v2v` to vCenter).
+Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (conversion hosts to vCenter).
 ====
 
 . Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.
@@ -116,13 +116,13 @@ endif::osp[]
 
 ifdef::rhv[]
 [[Cloudforms_for_rhv]]
-. Install Red Hat CloudForms 4.7.3 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
+. Install Red Hat CloudForms 4.7.4 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
 
 . Add VMware  and Red Hat Virtualization as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms: Managing Providers_).
 endif::rhv[]
 ifdef::osp[]
 [[Cloudforms_for_osp]]
-. Install Red Hat CloudForms 4.7.3 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
+. Install Red Hat CloudForms 4.7.4 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
 
 . Add VMware and OpenStack Platform as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Adding an OpenStack Infrastructure Provider] in _Red Hat CloudForms: Managing Providers_).
 endif::osp[]

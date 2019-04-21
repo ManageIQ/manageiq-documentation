@@ -10,7 +10,7 @@
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
 <date>2019-04-17</date>
-<productname>Red Hat IMS</productname>
+<productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.1</productnumber>
 <abstract>
     <para>This guide describes how to plan, perform, and troubleshoot an infrastructure migration from VMware to Red Hat Virtualization or Red Hat OpenStack Platform. The migration is performed with Red Hat CloudForms.</para>
@@ -258,7 +258,7 @@
 <listitem>
 <itemizedlist>
 <listitem>
-<simpara>Identify the hosts and virtual machines to be migrated.</simpara>
+<simpara>Identify the virtual machines to be migrated.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -269,9 +269,6 @@
 <itemizedlist>
 <listitem>
 <simpara>There is no maximum number of disks or virtual machines that you can migrate. However, you may not want to migrate all your virtual machines at the same time, in order to minimize the impact on your users.</simpara>
-</listitem>
-<listitem>
-<simpara>You can migrate a maximum of four NICs with each virtual machine.</simpara>
 <important>
 <simpara>If you exceed the capabilities of your environment, the migrations will fail. This situation could affect existing applications running on virtual machines attached to the network and storage.</simpara>
 </important>
@@ -393,7 +390,7 @@
 </section>
 <section xml:id="Choosing_vddk_or_ssh_transformation">
 <title>Which transformation method, VDDK or SSH?</title>
-<simpara>You will configure the conversion hosts to use either the VMware Virtual Disk Development kit (VDDK) or SSH as the transformation method for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.</simpara>
+<simpara>You will configure the conversion hosts to use either the VMware Virtual Disk Development Kit (VDDK) or SSH as the transformation method for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.</simpara>
 <simpara>The following table compares the options.</simpara>
 <table frame="all" rowsep="1" colsep="1">
 <title>VDDK and SSH comparison</title>
@@ -458,15 +455,6 @@
 <section xml:id="Recommendations_for_migration">
 <title>Recommendations for migration</title>
 <simpara>The following recommendations will minimize the impact of the migration on your environment.</simpara>
-<itemizedlist>
-<title>Checking your resources</title>
-<listitem>
-<simpara>Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.</simpara>
-</listitem>
-<listitem>
-<simpara>Plan for redundancy.</simpara>
-</listitem>
-</itemizedlist>
 <itemizedlist>
 <title>Scheduling the migration</title>
 <listitem>
@@ -534,7 +522,7 @@
 <simpara>OpenStack Platform:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Deploy conversion hosts on multiple hypervisors.</simpara>
+<simpara>Deploy conversion hosts on multiple compute nodes.</simpara>
 </listitem>
 <listitem>
 <simpara>Deploy conversion hosts on a compute node with nested virtualization enabled (see <link xlink:href="https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html">https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html</link>). Nested virtualization is a technology preview.</simpara>
@@ -624,7 +612,15 @@
 </note>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Red Hat Virtualization only:</emphasis> Ensure that source virtual machine names do not duplicate the names of existing RHV virtual machines.</simpara>
+<simpara>Ensure that source virtual machine names do not duplicate target machine names for the appropriate scope:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Red Hat Virtualization: Within the entire environment</simpara>
+</listitem>
+<listitem>
+<simpara>OpenStack Platform: Within a single tenant</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 </itemizedlist>
 <formalpara xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation">
@@ -743,12 +739,12 @@
 <simpara>902 - CloudForms to VMware</simpara>
 </listitem>
 <listitem>
-<simpara>5480 - <literal>virt-v2v</literal> to vCenter</simpara>
+<simpara>5480 - Conversion hosts to vCenter</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>Create and attach data and ISO storage domains to the data center, ensuring that the data domain has sufficient space for the migrated virtual machines (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage">Storage</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>).</simpara>
+<simpara>Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage">Storage</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>).</simpara>
 <note>
 <simpara>IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.</simpara>
 </note>
@@ -757,13 +753,14 @@
 <simpara>Upload the VirtIO and Guest Tool image files to the ISO storage domain (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>).</simpara>
 <simpara>The VirtIO file name must include the version number: <literal>virtio-win-<emphasis>version</emphasis>.iso</literal>. The Guest Tool is required for migrating Windows virtual machines.</simpara>
 </listitem>
-<listitem>
-<simpara>If you are using SSSD with single sign-on, reinstall <literal>ipa-client</literal> without configuring the OpenSSH client:<anchor xml:id="Reinstalling_ipa_client" xreflabel="[Reinstalling_ipa_client]"/></simpara>
+</orderedlist>
+<formalpara xml:id="Reinstalling_ipa_client">
+<title>Reinstalling <literal>ipa-client</literal></title>
+<para>If you have configured SSSD with single sign-on on the conversion hosts, reinstall <literal>ipa-client</literal> without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">https://bugzilla.redhat.com/show_bug.cgi?id=1544379</link>). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</para>
+</formalpara>
+<simpara>On the Manager machine, run the following commands:</simpara>
 <screen># ipa-client-install --uninstall
 # ipa-client-install --no-ssh</screen>
-<simpara>Otherwise, SSH will fail for the vdsm user (see <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">https://bugzilla.redhat.com/show_bug.cgi?id=1544379</link>). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</simpara>
-</listitem>
-</orderedlist>
 <orderedlist numeration="arabic">
 <title>Installing and configuring CloudForms</title>
 <listitem>
@@ -854,7 +851,7 @@
 <important>
 <simpara>If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas">Get the Number of Object Replicas</link> in the <emphasis>Red Hat Ceph Storage: Storage Strategies Guide</emphasis>).</simpara>
 <simpara>The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.</simpara>
-<simpara>You can use the <literal>ftrim</literal> command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.</simpara>
+<simpara>You can use the <literal>fstrim</literal> command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.</simpara>
 </important>
 </listitem>
 <listitem>
@@ -866,7 +863,7 @@
 <listitem>
 <simpara>For CloudForms: port 443 (HTTPS)</simpara>
 <note>
-<simpara>Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (<literal>virt-v2v</literal> to vCenter).</simpara>
+<simpara>Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (conversion hosts to vCenter).</simpara>
 </note>
 </listitem>
 </itemizedlist>
@@ -969,7 +966,7 @@
 <simpara>Configuring the Red Hat Virtualization conversion hosts for VDDK or SSH transformation involves the following steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>VDDK only: <link linkend="rhv_vddk_download">Downloading the VMware Virtual Disk Development kit</link></simpara>
+<simpara>VDDK only: <link linkend="rhv_vddk_download">Downloading the VMware Virtual Disk Development Kit</link></simpara>
 </listitem>
 <listitem>
 <simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts</link>:</simpara>
@@ -1016,7 +1013,7 @@
 <itemizedlist xml:id="rhv_vddk_download">
 <title>Prerequisite</title>
 <listitem>
-<simpara>VDDK only: Download the VMware Virtual Disk Development kit:</simpara>
+<simpara>VDDK only: Download the VMware Virtual Disk Development Kit:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">https://www.vmware.com/support/pubs/</link>.</simpara>
@@ -1234,7 +1231,7 @@ echo Agent pid 139150;</screen>
 <simpara>Configuring the OpenStack Platform conversion hosts for VDDK or SSH transformation involves the following steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>VDDK only: <link linkend="osp_vddk_download">Downloading the VMware Virtual Disk Development kit</link></simpara>
+<simpara>VDDK only: <link linkend="osp_vddk_download">Downloading the VMware Virtual Disk Development Kit</link></simpara>
 </listitem>
 <listitem>
 <simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts</link>:</simpara>
@@ -1271,7 +1268,7 @@ echo Agent pid 139150;</screen>
 <itemizedlist xml:id="osp_vddk_download">
 <title>Prerequisite</title>
 <listitem>
-<simpara>VDDK only: Download the VMware Virtual Disk Development kit:</simpara>
+<simpara>VDDK only: Download the VMware Virtual Disk Development Kit:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">https://www.vmware.com/support/pubs/</link>.</simpara>
@@ -1755,7 +1752,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Removing webservers from a load-balancing pool before migration and returning them to the pool after migration</simpara>
 </listitem>
 <listitem>
-<simpara>Running postmigration cleanup tasks, such as <literal>ftrim</literal>, to reduce the space required by virtual machines migrating to OpenStack Platform with Ceph storage (see <xref linkend="Installing_and_configuring_open_stack_platform"/>)</simpara>
+<simpara>Running postmigration cleanup tasks, such as <literal>fstrim</literal>, to reduce the space required by virtual machines migrating to OpenStack Platform with Ceph storage (see <xref linkend="Installing_and_configuring_open_stack_platform"/>)</simpara>
 </listitem>
 </itemizedlist>
 <simpara>CloudForms requires a minimum of one Ansible playbook repository, one playbook, and one set of credentials.</simpara>

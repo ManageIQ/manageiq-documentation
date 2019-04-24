@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-04-17</date>
+<date>2019-04-23</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
@@ -576,7 +576,7 @@
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts in CloudForms</link></simpara>
+<simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts</link></simpara>
 </listitem>
 </orderedlist>
 <simpara>Optionally, you can <link linkend="Changing_the_maximum_number_of_concurrent_migrations">change the maximum number of concurrent migrations</link> of conversion hosts or providers, for better performance and control of the migration process.</simpara>
@@ -661,7 +661,8 @@
 </orderedlist>
 <simpara>You are ready to prepare the <link linkend="Preparing_the_target_environment">target environment</link>.</simpara>
 </section>
-<section xml:id="Preparing_the_target_environment">
+</chapter>
+<chapter xml:id="Preparing_the_target_environment">
 <title>Preparing the target environment</title>
 <simpara>Prepare your target environment for migration:</simpara>
 <itemizedlist>
@@ -691,11 +692,11 @@
 <simpara><link linkend="Reinstalling_ipa_client">Reinstalling <literal>ipa-client</literal></link></simpara>
 </listitem>
 </orderedlist>
-<formalpara>
+<formalpara xml:id="Target_prerequisites_rhv">
 <title>Prerequisites</title>
 <para>The following prerequisites apply:</para>
 </formalpara>
-<itemizedlist>
+<itemizedlist xml:id="ref_Software_compatibility_matrix_rhv">
 <listitem>
 <simpara>Compatible software versions:</simpara>
 <table frame="all" rowsep="1" colsep="1">
@@ -787,6 +788,9 @@
 <listitem>
 <simpara>Upload the VirtIO and Guest Tool image files to the ISO storage domain (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>). The VirtIO file name must include the version number (<literal>virtio-win-<emphasis>version</emphasis>.iso</literal>). The Guest Tool is required for migrating Windows virtual machines.</simpara>
 </listitem>
+<listitem>
+<simpara>Create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools">Creating MAC Address Pools</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>).</simpara>
+</listitem>
 </orderedlist>
 <formalpara xml:id="Reinstalling_ipa_client">
 <title>Reinstalling <literal>ipa-client</literal></title>
@@ -837,11 +841,11 @@
 <simpara><link linkend="Deploying_osp_conversion_hosts">Deploying the OpenStack Platform conversion hosts</link></simpara>
 </listitem>
 </orderedlist>
-<formalpara>
+<formalpara xml:id="Target_prerequisites_osp">
 <title>Prerequisites</title>
 <para>The following prerequisites apply:</para>
 </formalpara>
-<itemizedlist>
+<itemizedlist xml:id="ref_Software_compatibility_matrix_osp">
 <listitem>
 <simpara>Compatible software versions:</simpara>
 <table frame="all" rowsep="1" colsep="1">
@@ -1030,7 +1034,6 @@
 </listitem>
 </orderedlist>
 <simpara>You are ready to <link linkend="Configuring_the_conversion_hosts">configure the conversion hosts</link>.</simpara>
-</section>
 </section>
 <section xml:id="Configuring_the_conversion_hosts">
 <title>Configuring the conversion hosts</title>
@@ -1961,6 +1964,9 @@ BadRequestException: Unknown error</screen>
 <itemizedlist xml:id="RHV_name_conflict">
 <listitem>
 <simpara>Virtual machine name duplicates an existing target virtual machine name.</simpara>
+</listitem>
+<listitem>
+<simpara>MAC address pool does not contain the MAC address of the source virtual machine.</simpara>
 </listitem>
 <listitem>
 <simpara>SSH transformation failure:</simpara>

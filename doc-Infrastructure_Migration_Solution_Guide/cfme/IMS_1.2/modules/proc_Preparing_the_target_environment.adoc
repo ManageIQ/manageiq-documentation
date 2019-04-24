@@ -1,34 +1,6 @@
 // Module included in the following assemblies:
 // assembly_Preparing_the_target_environment.adoc
-[id="Preparing_the_{context}_target_environment"]
-ifdef::rhv[]
-= Preparing the Red Hat Virtualization environment
-
-The Red Hat Virtualization environment requires the following preparation:
-
-. xref:Installing_and_configuring_red_hat_virtualization[Installing and configuring Red Hat Virtualization]
-. xref:Cloudforms_for_rhv[Installing and configuring CloudForms]
-. xref:Reinstalling_ipa_client[Reinstalling `ipa-client`]
-
-endif::rhv[]
-ifdef::osp[]
-= Preparing the Red Hat OpenStack Platform environment
-
-The OpenStack Platform environment requires the following preparation:
-
-. xref:Installing_and_configuring_open_stack_platform[Installing and configuring OpenStack Platform]
-. xref:Cloudforms_for_osp[Installing and configuring CloudForms]
-. xref:Deploying_osp_conversion_hosts[Deploying the OpenStack Platform conversion hosts]
-
-endif::osp[]
-
-.Prerequisites
-
-The following prerequisites apply:
-
-include::ref_Software_compatibility_requirements.adoc[]
-* BIOS settings of physical hosts adjusted for optimal performance (rather than power-saving), according to the vendor's recommendations
-* C1E halt state disabled, if applicable
+[id="Installing_{context}"]
 
 ifdef::rhv[]
 [id="Installing_and_configuring_red_hat_virtualization"]
@@ -59,6 +31,8 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 ====
 
 . Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number (+virtio-win-_version_.iso+). The Guest Tool is required for migrating Windows virtual machines.
+
+. Create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[Creating MAC Address Pools] in the _Red Hat Virtualization Administration Guide_).
 
 [id="Reinstalling_ipa_client"]
 .Reinstalling `ipa-client`

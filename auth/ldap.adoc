@@ -238,27 +238,6 @@ Create the Apache configuration files
                     /etc/httpd/conf.d/manageiq-external-auth.conf
 ----
 
-Update the Apache configuration file */etc/httpd/conf.d/manageiq-external-auth.conf* as follows
-to specify the correct realm:
-
-----
-...
-
-    <Location /dashboard/kerberos_authenticate>
-      AuthType           Kerberos
-      AuthName           "Kerberos Login"
-      KrbMethodNegotiate On
-      KrbMethodK5Passwd  Off
-=>    KrbAuthRealms      example.com
-      Krb5KeyTab         /etc/http.keytab
-      Require            pam-account httpd-auth
-
-      ErrorDocument 401  /proxy_pages/invalid_sso_credentials.js
-    </Location>
-
-...
-----
-
 [[configure-selinux]]
 == Configure SELinux
 

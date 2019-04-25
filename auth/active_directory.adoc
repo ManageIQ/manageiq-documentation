@@ -135,22 +135,18 @@ Create the Apache configuration files
 ----
 
 Update the Apache configuration file */etc/httpd/conf.d/manageiq-external-auth.conf* as follows
-to specify the correct AD domain, and reference the Kerberos keytab appropriately.
+to reference the Kerberos keytab appropriately.
 
 ----
 ...
-
     <Location /dashboard/kerberos_authenticate>
-      AuthType           Kerberos
-      AuthName           "Kerberos Login"
-      KrbMethodNegotiate On
-      KrbMethodK5Passwd  Off
-=>    KrbAuthRealms      example.com
-=>    Krb5KeyTab         /etc/krb5.keytab
-=>    KrbServiceName     Any
+      AuthType           GSSAPI
+      AuthName           "GSSAPI Single Sign On Login"
+=>    GssapiCredStore    keytab:/etc/krb5.keytab
+      GssapiLocalName    on
       Require            pam-account httpd-auth
 
-      ErrorDocument 401  /proxy_pages/invalid_sso_credentials.js
+      ErrorDocument 401 /proxy_pages/invalid_sso_credentials.js
     </Location>
 
 ...

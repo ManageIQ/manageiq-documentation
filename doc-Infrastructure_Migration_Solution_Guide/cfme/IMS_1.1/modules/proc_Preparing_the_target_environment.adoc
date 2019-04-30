@@ -30,7 +30,14 @@ IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is n
 
 . Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
 
-. Create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[Creating MAC Address Pools] in the _Red Hat Virtualization Administration Guide_).
+. Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[Creating MAC Address Pools] in the _Red Hat Virtualization Administration Guide_).
++
+[IMPORTANT]
+====
+If the RHV MAC address pool range overlaps the VMware MAC address range, you must ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines. Otherwise, the migration will fail.
+
+If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in RHV.
+====
 
 [id="Reinstalling_ipa_client"]
 .Reinstalling `ipa-client`

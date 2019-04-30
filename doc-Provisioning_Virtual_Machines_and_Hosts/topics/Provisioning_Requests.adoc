@@ -297,11 +297,12 @@ The default dialogs show all possible parameters for provisioning. To limit the 
 [[provisioning-virtual-machines]]
 === Provisioning Virtual Machines
 
-There are three types of provisioning requests available in {product-title}:
+There are four types of provisioning requests available in {product-title}:
 
 . Provision a new virtual machine from a template
 . Clone a virtual machine
 . Publish a virtual machine to a template
+. Provision a virtual machine using cloud-init via REST API.
 
 [[provisioning-a-virtual-machine-from-a-template]]
 ==== Provisioning a Virtual Machine from a Template
@@ -403,6 +404,73 @@ After submission, the appliance assigns each provision request a *Request ID*. I
 Request 99 in region 123 results in Request ID 123000000000099.
 
 
+[[provisioning-a-virtual-machine-using-cloud-init-REST-API]]
+==== Provisioning a Virtual Machine using Cloud-Init via REST API
+
+Cloud-init is a tool for automating the initial setup of virtual machines. In {product-title_short}, you can use cloud-init via REST API to provision a virtual machine that was created based on a template. 
+
+[NOTE]
+====
+To use cloud-init, the template from which the virtual machine is provisioned must have cloud-init package installed, and have the *Use Cloud-Init/Sysprep* option selected.
+====
+
+For a virtual machine provision request via REST API, ensure the following two fields in the request’s body are set correctly, otherwise cloud-init may not work.
+
+* VLAN
+* sysprep_enabled 
+
+
+.VLAN
+
+The value of *VLAN* in the API request can be one of the following options:
+
+[width="100%",cols="20%,40%,40%",options="header",]
+|====
+|VLAN value|Note|vNIC profile
+|<empty>|Must be written within the <..>|No vNIC profile
+|<Template>|Must be written within the <..>|Use the template's default vNIC profile
+|profile_name (network_name)|Must include a space between profile_name (network_name), otherwise it will fail. For example, *ovirtmgmt (ovirtmgmt)*|Set the specified vNIC profile.
+|vNIC profile ID||Set the specified vNIC profile, such as `3a8dce01-dd59-4a46-8a6f-823acccda79f`.
+|====
+
+
+.sysprep_enabled
+
+The value of sysprep_enabled in the API request must be in the following format.
+
+[NOTE]
+====
+Sysprep_enabled is written in the order: [value] - [it’s meaning] - [how it appears in the {product-title_short} user interface virtual machine provisioning dialog's *Customize* tab]
+====
+
+*For Windows template*:
+
+"sysprep_enabled": "fields" - Sysprep Specification - "Sysprep Specification"
+"sysprep_enabled": "file" - Sysprep answer file - "Sysprep answer file"
+
+
+*For Linux template*:
+
+"sysprep_enabled": "fields" - Customized template and any Customized parameters will be used - “Specification”
+
+[NOTE]
+====
+For cloud-init to work _(that is, to have the provisioned virtual machine marked with *Use cloud-init* and the customized template as well as customized parameters, if any, will be used)_ "sysprep_enabled" must be set to “fields”. If you do not set it correctly, the customized template will be ignored and the provisioned virtual machine will not be marked with *Use cloud-init*, although the template from which the virtual machine is provisioned has it marked.
+====
+
+*For both Windows and Linux template*:
+
+"sysprep_enabled": “disabled” -  Do not customize - “<None>”
+
+The customized template will be ignored, and the provisioned virtual machine will not be marked with *Use cloud-init*, even though the template from which the virtual machine was provisioned, has it marked.
+The default value is 'disabled'.
+
+[NOTE]
+====
+For an example of virtual machine provisioning request using cloud-init via REST API, see _Provisioning a Virtual Machine Using Cloud-init_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/red_hat_cloudforms_rest_api/index[{product-title} REST API] guide.
+====
+
+
 [[cloning-a-virtual-machine]]
 ==== Cloning a Virtual Machine
 
@@ -436,7 +504,6 @@ To rename a VMware virtual machine:
 . Click *Save*.
 
 The renamed virtual machine will appear in the inventory view. 
-
 
 
 [[provisioning-instances]]
@@ -649,9 +716,6 @@ To set the scope for a datastore:
 ==== Managing Key Pairs
 
 include::common/provisioning-requests-keypairs.adoc[]
-
-
-
 
 
 

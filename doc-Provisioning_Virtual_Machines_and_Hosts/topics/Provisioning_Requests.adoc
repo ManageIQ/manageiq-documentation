@@ -264,14 +264,14 @@ mount /dev/fd0 /tmp/floppy
 network --device=eth0 --bootproto=dhcp
 <% end %>
 |Kickstart|Encrypts the root password from the *Customize* tab in the *Provisioning Dialog*.|
-rootpw --iscrypted <%= MiqPassword.md5crypt(evm[:root_password]) %>
+rootpw --iscrypted <%= ManageIQ::Password.md5crypt(evm[:root_password]) %>
 |Kickstart|Sends status of the provision back to {product-title} Server for display in the {product-title} Console.|
 # Callback to CFME during post-install
 wget --no-check-certificate <%= evm[:post_install_callback_url] %>
 |Sysprep|Encrypts the root password from the *Customize* tab in the *Provisioning Dialog*. The value for the *AdministratorPassword* line must be inserted to use the password from the *Provision Dialog* and encrypt it.|
 <UserAccounts>
   <AdministratorPassword>
-    <Value><%= MiqPassword.sysprep_crypt(evm[:root_password]) %></Value>
+    <Value><%= ManageIQ::Password.sysprep_crypt(evm[:root_password]) %></Value>
     <PlainText>false</PlainText>
   </AdministratorPassword>
 </UserAccounts>

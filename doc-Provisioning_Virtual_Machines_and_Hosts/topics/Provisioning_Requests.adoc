@@ -424,7 +424,7 @@ For a virtual machine provision request via REST API, ensure the following two f
 
 The value of *VLAN* in the API request can be one of the following options:
 
-[width="100%",cols="20%,40%,40%",options="header",]
+[width="100%",cols="40%,30%,30%",options="header",]
 |====
 |VLAN value|Note|vNIC profile
 |<empty>|Must be written within the <..>|No vNIC profile
@@ -440,29 +440,31 @@ The value of sysprep_enabled in the API request must be in the following format.
 
 [NOTE]
 ====
-Sysprep_enabled is written in the order: [value] - [it’s meaning] - [how it appears in the {product-title_short} user interface virtual machine provisioning dialog's *Customize* tab]
+Sysprep_enabled is written in the order: [value] - [it’s meaning] - [how it appears in the {product-title_short} user interface virtual machine provision dialog's *Customize* tab]
 ====
 
 *For Windows template*:
 
-"sysprep_enabled": "fields" - Sysprep Specification - "Sysprep Specification"
-"sysprep_enabled": "file" - Sysprep answer file - "Sysprep answer file"
+*"fields"* - Sysprep Specification::
+In the {product-title_short} user interface, when you navigate to the virtual machine provision dialog (menu:Compute[Infrastructure > Virtual Machine]), this option located under the *Customize* tab's *Customize* drop-down list is called *Sysprep Specification*.
 
+*"file"* - Sysprep answer file::
+In the {product-title_short} user interface, when you navigate to the virtual machine provision dialog (menu:Compute[Infrastructure > Virtual Machine]), this option located under the *Customize* tab's *Customize* drop-down list is called *Sysprep answer file*.
 
 *For Linux template*:
 
-"sysprep_enabled": "fields" - Customized template and any Customized parameters will be used - “Specification”
+*“fields”* - Customized template and any Customized parameters will be used::
+In the {product-title_short} user interface, when you navigate to the virtual machine provision dialog (menu:Compute[Infrastructure > Virtual Machine]), this option located under the *Customize* tab's *Customize* drop-down list is called *Specification*.
 
 [NOTE]
 ====
-For cloud-init to work _(that is, to have the provisioned virtual machine marked with *Use cloud-init* and the customized template as well as customized parameters, if any, will be used)_ "sysprep_enabled" must be set to “fields”. If you do not set it correctly, the customized template will be ignored and the provisioned virtual machine will not be marked with *Use cloud-init*, although the template from which the virtual machine is provisioned has it marked.
+For cloud-init to work _(that is, to have the provisioned virtual machine marked with *Use cloud-init* and the customized template as well as customized parameters, if any, will be used)_ "sysprep_enabled" must be set to “fields”. If you do not set it correctly, the customized template will be ignored and the provisioned virtual machine will not be marked with *Use cloud-init*; although, the template from which the virtual machine is provisioned has it marked.
 ====
 
 *For both Windows and Linux template*:
 
-"sysprep_enabled": “disabled” -  Do not customize - “<None>”
-
-The customized template will be ignored, and the provisioned virtual machine will not be marked with *Use cloud-init*, even though the template from which the virtual machine was provisioned, has it marked.
+*“disabled”* -  Do not customize::
+In the {product-title_short} user interface, when you navigate to the virtual machine provision dialog (menu:Compute[Infrastructure > Virtual Machine]), this option located under the *Customize* tab's *Customize* drop-down list is called *<None>*. The customized template will be ignored, and the provisioned virtual machine will not be marked with *Use cloud-init*, even though the template from which the virtual machine was provisioned, has it marked.
 The default value is 'disabled'.
 
 [NOTE]

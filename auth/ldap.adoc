@@ -99,8 +99,8 @@ Configure SSSD based authentication with authselect against LDAP via SSL:
 
 Seed the sssd.conf configuration file
 
-*authselect* does not automatically generate the _/etc/sssd/sssd.conf_ file, however a template
-_sssd.conf.erb_ is now delivered with ManageIQ which can be used to seed the _/etc/sssd/sssd.conf_.
+*authselect* does not automatically generate the _/etc/sssd/sssd.conf_ file, however the template,
+_sssd.conf.erb_, is now delivered with ManageIQ which can be used to seed the _/etc/sssd/sssd.conf_.
 
 ----
 # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
@@ -109,15 +109,15 @@ _sssd.conf.erb_ is now delivered with ManageIQ which can be used to seed the _/e
 # chmod 600 /etc/sssd/sssd.conf
 ----
 
-Update the SSSD configuration file /etc/sssd/sssd.conf to specify the correct _ldapbasedn_ and _ldapserver_:
+Update the SSSD configuration file /etc/sssd/sssd.conf to specify the correct _ldap_search_base_ and _ldap_uri_:
 
 ----
 ...
-ldap_search_base = ldaps://ldap-example.com:10636
+ldap_search_base = dc=example,dc=com
 id_provider = ldap
 auth_provider = ldap
 chpass_provider = ldap
-ldap_uri = dc=example,dc=com
+ldap_uri = ldaps://ldap-example.com:10636
 ldap_id_use_start_tls = False
 cache_credentials = True
 ...
@@ -125,10 +125,8 @@ cache_credentials = True
 
 ==== Configure sssd.conf with authconfig (CentOS 7 and older)
 
-Configure the Operating System for SSSD based authentication against an LDAP server if *authselct*
-is not available.
-
-Configure SSSD based authentication with authconfig against LDAP via SSL:
+Configure the Operating System for SSSD based authentication with *authconfig* against
+an LDAP server when *authselect* is not available.
 
 ----
   # authconfig \

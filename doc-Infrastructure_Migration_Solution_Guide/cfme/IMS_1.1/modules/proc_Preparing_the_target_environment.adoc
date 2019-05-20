@@ -4,7 +4,7 @@
 
 ifdef::rhv[]
 [id="Installing_and_configuring_red_hat_virtualization"]
-.Installing and configuring Red Hat Virtualization
+= Installing and configuring Red Hat Virtualization
 
 . Install Red Hat Virtualization Manager 4.2 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_).
 
@@ -40,9 +40,9 @@ If you do not create a MAC address pool, the migrated virtual machines will not 
 ====
 
 [id="Reinstalling_ipa_client"]
-.Reinstalling `ipa-client`
+= Reinstalling `ipa-client`
 
-If you have configured SSSD with single sign-on on the conversion hosts, reinstall `ipa-client` without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see https://bugzilla.redhat.com/show_bug.cgi?id=1544379). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+If you are configuring the conversion hosts to use SSSD with single sign-on, you should reinstall `ipa-client` without the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[]). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
 
 On the Manager machine, run the following commands:
 
@@ -54,7 +54,7 @@ On the Manager machine, run the following commands:
 endif::rhv[]
 ifdef::osp[]
 [id="Installing_and_configuring_open_stack_platform"]
-.Installing and configuring OpenStack Platform
+= Installing and configuring OpenStack Platform
 
 . Install Red Hat OpenStack Platform 13 or 14 (see link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/[Red Hat OpenStack Platform Director Installation and Usage]).
 
@@ -90,11 +90,16 @@ Outbound traffic is enabled by default. If you have changed this setting, enable
 . Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.
 endif::osp[]
 
-.Installing and configuring CloudForms
+= Installing and configuring CloudForms
 
 ifdef::rhv[]
 [[Cloudforms_for_rhv]]
 . Install Red Hat CloudForms 4.7 on the Manager machine (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Installing Red Hat CloudForms on Red Hat Virtualization]).
++
+[NOTE]
+====
+CFME 5.10.4 does not support migration. See the xref:ref_Software_compatibility_matrix_rhv[software compatibility matrix] for details.
+====
 
 . Add VMware and Red Hat Virtualization as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Adding a Red Hat Virtualization Provider] in _Red Hat CloudForms: Managing Providers_) .
 +
@@ -108,6 +113,11 @@ endif::rhv[]
 ifdef::osp[]
 [[Cloudforms_for_osp]]
 . Install Red Hat CloudForms 4.7 (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Installing Red Hat CloudForms on Red Hat OpenStack Platform]).
++
+[NOTE]
+====
+CFME 5.10.4 does not support migration. See the xref:ref_Software_compatibility_matrix_osp[software compatibility matrix] for details.
+====
 
 . Add VMware and OpenStack Platform as providers (see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Adding a VMware vCenter Provider] and link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Adding an OpenStack Infrastructure Provider] in _Red Hat CloudForms: Managing Providers_).
 +
@@ -117,7 +127,7 @@ Removing or changing a provider before, during, or after the migration will caus
 ====
 
 [id="Deploying_osp_conversion_hosts"]
-.Deploying OpenStack Platform conversion hosts
+= Deploying OpenStack Platform conversion hosts
 
 You download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
 

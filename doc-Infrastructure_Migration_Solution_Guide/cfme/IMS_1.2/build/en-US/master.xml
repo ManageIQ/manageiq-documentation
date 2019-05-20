@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-04-23</date>
+<date>2019-05-20</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
@@ -693,7 +693,7 @@
 <simpara><link linkend="Cloudforms_for_rhv">Installing and configuring CloudForms</link></simpara>
 </listitem>
 <listitem>
-<simpara><link linkend="Reinstalling_ipa_client">Reinstalling <literal>ipa-client</literal></link></simpara>
+<simpara><link linkend="Reinstalling_ipa_client">Reinstalling <literal>ipa-client</literal></link>, if you are configuring the conversion hosts to use SSSD with single sign-on</simpara>
 </listitem>
 </orderedlist>
 <formalpara xml:id="Target_prerequisites_rhv">
@@ -732,7 +732,8 @@
 <entry align="left" valign="top"><simpara>4.3.4</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top"><simpara>CloudForms</simpara></entry>
+<entry align="left" valign="top"><simpara>CloudForms</simpara>
+<simpara>(See CFME version note below)</simpara></entry>
 <entry align="left" valign="top"><simpara>4.6</simpara></entry>
 <entry align="left" valign="top"><simpara>4.7</simpara></entry>
 <entry align="left" valign="top"><simpara>4.7.4</simpara></entry>
@@ -746,6 +747,11 @@
 </tbody>
 </tgroup>
 </table>
+<important>
+<simpara><emphasis role="strong">CFME 5.10.4</emphasis> does not support migration.</simpara>
+<simpara>You can use CFME 5.10.4 to manage the Red Hat Virtualization 4.3 environment. Only the migration functionality is affected.</simpara>
+<simpara>Download and install CFME 5.10.5 for migration.</simpara>
+</important>
 </listitem>
 <listitem>
 <simpara>BIOS settings of physical hosts adjusted for optimal performance (rather than power-saving), according to the vendor’s recommendations</simpara>
@@ -754,8 +760,9 @@
 <simpara>C1E halt state disabled, if applicable</simpara>
 </listitem>
 </itemizedlist>
-<orderedlist xml:id="Installing_and_configuring_red_hat_virtualization" numeration="arabic">
+<section xml:id="Installing_and_configuring_red_hat_virtualization">
 <title>Installing and configuring Red Hat Virtualization</title>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Install Red Hat Virtualization Manager 4.3.4 on the Manager machine (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager">Installing the Red Hat Virtualization Manager</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>).</simpara>
 </listitem>
@@ -800,17 +807,22 @@
 </important>
 </listitem>
 </orderedlist>
-<formalpara xml:id="Reinstalling_ipa_client">
+</section>
+<section xml:id="Reinstalling_ipa_client">
 <title>Reinstalling <literal>ipa-client</literal></title>
-<para>If you have configured SSSD with single sign-on on the conversion hosts, reinstall <literal>ipa-client</literal> without configuring the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">https://bugzilla.redhat.com/show_bug.cgi?id=1544379</link>). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</para>
-</formalpara>
+<simpara>If you are configuring the conversion hosts to use SSSD with single sign-on, you should reinstall <literal>ipa-client</literal> without the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">https://bugzilla.redhat.com/show_bug.cgi?id=1544379</link>). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</simpara>
 <simpara>On the Manager machine, run the following commands:</simpara>
 <screen># ipa-client-install --uninstall
 # ipa-client-install --no-ssh</screen>
-<orderedlist xml:id="Cloudforms_for_rhv" numeration="arabic">
+</section>
+<section xml:id="installing_and_configuring_cloudforms" remap="_installing_and_configuring_cloudforms">
 <title>Installing and configuring Cloudforms</title>
+<orderedlist xml:id="Cloudforms_for_rhv" numeration="arabic">
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.4 on the Manager machine (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>).</simpara>
+<note>
+<simpara>CFME 5.10.4 does not support migration. See the <link linkend="ref_Software_compatibility_matrix_rhv">software compatibility matrix</link> for details.</simpara>
+</note>
 </listitem>
 <listitem>
 <simpara>Add VMware  and Red Hat Virtualization as providers (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> and <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>).</simpara>
@@ -834,6 +846,7 @@
 </listitem>
 </orderedlist>
 <simpara>You are ready to <link linkend="Configuring_the_conversion_hosts">configure the conversion hosts</link>.</simpara>
+</section>
 </section>
 <section xml:id="Preparing_the_osp_target_environment">
 <title>Preparing the Red Hat OpenStack Platform environment</title>
@@ -885,7 +898,8 @@
 <entry align="left" valign="top"><simpara>4.3.4</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top"><simpara>CloudForms</simpara></entry>
+<entry align="left" valign="top"><simpara>CloudForms</simpara>
+<simpara>(See CFME version note below)</simpara></entry>
 <entry align="left" valign="top"><simpara>4.6</simpara></entry>
 <entry align="left" valign="top"><simpara>4.7</simpara></entry>
 <entry align="left" valign="top"><simpara>4.7.4</simpara></entry>
@@ -899,6 +913,10 @@
 </tbody>
 </tgroup>
 </table>
+<important>
+<simpara><emphasis role="strong">CFME 5.10.4</emphasis> does not support migration.</simpara>
+<simpara>Download and install CFME 5.10.3 for migration.</simpara>
+</important>
 </listitem>
 <listitem>
 <simpara>BIOS settings of physical hosts adjusted for optimal performance (rather than power-saving), according to the vendor’s recommendations</simpara>
@@ -907,8 +925,9 @@
 <simpara>C1E halt state disabled, if applicable</simpara>
 </listitem>
 </itemizedlist>
-<orderedlist xml:id="Installing_and_configuring_open_stack_platform" numeration="arabic">
+<section xml:id="Installing_and_configuring_open_stack_platform">
 <title>Installing and configuring OpenStack Platform</title>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Install Red Hat OpenStack Platform 13 or 14 (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/">Red Hat OpenStack Platform Director Installation and Usage</link>).</simpara>
 </listitem>
@@ -950,10 +969,15 @@
 <simpara>Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.</simpara>
 </listitem>
 </orderedlist>
-<orderedlist xml:id="Cloudforms_for_osp" numeration="arabic">
+</section>
+<section xml:id="installing_and_configuring_cloudforms_2" remap="_installing_and_configuring_cloudforms_2">
 <title>Installing and configuring Cloudforms</title>
+<orderedlist xml:id="Cloudforms_for_osp" numeration="arabic">
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.4 (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>).</simpara>
+<note>
+<simpara>CFME 5.10.4 does not support migration. See the <link linkend="ref_Software_compatibility_matrix_osp">software compatibility matrix</link> for details.</simpara>
+</note>
 </listitem>
 <listitem>
 <simpara>Add VMware and OpenStack Platform as providers (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> and <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>).</simpara>
@@ -976,10 +1000,10 @@
 </orderedlist>
 </listitem>
 </orderedlist>
-<formalpara xml:id="Deploying_osp_conversion_hosts">
+</section>
+<section xml:id="Deploying_osp_conversion_hosts">
 <title>Deploying the OpenStack Platform conversion hosts</title>
-<para>Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See <xref linkend="Deciding_how_many_conversion_hosts_to_create"/> for details.</para>
-</formalpara>
+<simpara>Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See <xref linkend="Deciding_how_many_conversion_hosts_to_create"/> for details.</simpara>
 <simpara xml:id="Downloading_the_conversion_host_appliance">To download the conversion host appliance:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
@@ -994,7 +1018,7 @@
 <listitem>
 <simpara>Click the <emphasis role="strong">Product Software</emphasis> tab and download the <literal>RHOSP V2V Image for Red Hat OpenStack Director (x86_64)</literal>.</simpara>
 <important>
-<simpara>You should always download the latest version of the appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.</simpara>
+<simpara>Ensure that you download the latest version of the appliance because it contains patches and fixes. The OpenStack Platform 14 conversion appliance can be used with both OpenStack Platform 13 and 14.</simpara>
 </important>
 </listitem>
 </orderedlist>
@@ -1042,6 +1066,7 @@
 </listitem>
 </orderedlist>
 <simpara>You are ready to <link linkend="Configuring_the_conversion_hosts">configure the conversion hosts</link>.</simpara>
+</section>
 </section>
 <section xml:id="Configuring_the_conversion_hosts">
 <title>Configuring the conversion hosts</title>
@@ -2027,27 +2052,39 @@ BadRequestException: Unknown error</screen>
 <simpara>Migrating over SSH and VDDK transformation method with names containing international chars or spaces fails to migrate. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1678385">https://bugzilla.redhat.com/show_bug.cgi?id=1678385</link></simpara>
 </listitem>
 <listitem>
-<simpara>"Maximum concurrent migrations per conversion host" in UI not working. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1698761">https://bugzilla.redhat.com/show_bug.cgi?id=1698761</link></simpara>
-</listitem>
-<listitem>
 <simpara>Migration plan CSV import validation not working if file contains empty/archived/orphan/invalid VM name. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1699343">https://bugzilla.redhat.com/show_bug.cgi?id=1699343</link></simpara>
 </listitem>
 <listitem>
-<simpara>Red Hat Virtualization:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669176">https://bugzilla.redhat.com/show_bug.cgi?id=1669176</link></simpara>
-</listitem>
-</itemizedlist>
+<simpara><emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1698761">https://bugzilla.redhat.com/show_bug.cgi?id=1698761</link></simpara>
 </listitem>
 <listitem>
-<simpara>OpenStack Platform:</simpara>
+<simpara><emphasis role="strong">Red Hat Virtualization</emphasis>: Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669176">https://bugzilla.redhat.com/show_bug.cgi?id=1669176</link></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">OpenStack Platform</emphasis>:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Instance is not created after disk conversion. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1668049">https://bugzilla.redhat.com/show_bug.cgi?id=1668049</link></simpara>
 </listitem>
 <listitem>
 <simpara>Names of virtual machines that were migrated using SSH transformation change during migration. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669133">https://bugzilla.redhat.com/show_bug.cgi?id=1669133</link></simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">CloudForms</emphasis>: CFME 5.10.4 does not support migration. Use the following versions:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>OpenStack Platform (all versions): CFME 5.10.3</simpara>
+</listitem>
+<listitem>
+<simpara>Red Hat Virtualization 4.2: CFME 5.10.3</simpara>
+</listitem>
+<listitem>
+<simpara>Red Hat Virtualization 4.3: CFME 5.10.5</simpara>
+<note>
+<simpara>You can use CFME 5.10.4 to manage your Red Hat Virtualization 4.3 environment. Only the migration functionality is affected.</simpara>
+</note>
 </listitem>
 </itemizedlist>
 </listitem>

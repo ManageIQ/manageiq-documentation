@@ -216,6 +216,13 @@ v2v_ssh_private_key: |
   -----END RSA PRIVATE KEY-----
 ----
 <1> This is the private key of the SSH key pair that you created in xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
+ifdef::rhv[]
++
+[IMPORTANT]
+====
+If the RHV conversion host has an existing SSH private key, the `v2v_ssh_private_key` value does not overwrite it. You must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before running the `conversion_host_enable` playbook.
+====
+endif::rhv[]
 
 . Run the `conversion_host_enable` playbook:
 +

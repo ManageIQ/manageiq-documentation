@@ -653,7 +653,8 @@
 </note>
 </listitem>
 <listitem>
-<simpara>Generate an SSH key pair.</simpara>
+<simpara>Generate an SSH key pair without a passphrase:</simpara>
+<screen># ssh-keygen -N ''</screen>
 </listitem>
 <listitem>
 <simpara>Copy the public key to all the VMware hypervisors in <literal>/etc/ssh/keys-root/authorized_keys</literal>.</simpara>
@@ -1163,6 +1164,9 @@ v2v_ssh_private_key: |
 <para>This is the private key of the SSH key pair that you created in <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</para>
 </callout>
 </calloutlist>
+<important>
+<simpara>If the RHV conversion host has an existing SSH private key, the <literal>v2v_ssh_private_key</literal> value does not overwrite it. You must delete the old key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before running the <literal>conversion_host_enable</literal> playbook.</simpara>
+</important>
 </listitem>
 <listitem>
 <simpara>Run the <literal>conversion_host_enable</literal> playbook:</simpara>
@@ -2292,10 +2296,13 @@ BadRequestException: Unknown error</screen>
 <simpara>SSH transformation failure:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>If you are using SSSD with single sign-on, <link linkend="Reinstalling_ipa_client">reinstall <literal>ipa-client</literal></link> without the OpenSSH client.</simpara>
+<simpara>If you are using SSSD with single sign-on, <link linkend="Reinstalling_ipa_client">reinstall <literal>ipa-client</literal></link> without the OpenSSH client on the Manager machine.</simpara>
 </listitem>
 <listitem>
 <simpara>Check that SSH transformation was correctly configured. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> and <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Check that the conversion host does not have an existing private SSH key in <literal>/var/lib/vdsm/.ssh/id_rsa</literal>. Conversion host configuration does not overwrite SSH keys. They must be deleted manually.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>

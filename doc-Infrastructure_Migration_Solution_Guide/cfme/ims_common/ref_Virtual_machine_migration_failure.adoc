@@ -45,8 +45,9 @@ If you are using SSH transformation, see xref:Configuring_the_vmware_hypervisors
 
 * SSH transformation failure:
 
-** If you are using SSSD with single sign-on, xref:Reinstalling_ipa_client[reinstall `ipa-client`] without the OpenSSH client.
+** If you are using SSSD with single sign-on, xref:Reinstalling_ipa_client[reinstall `ipa-client`] without the OpenSSH client on the Manager machine.
 ** Check that SSH transformation was correctly configured. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[] and xref:Configuring_the_conversion_hosts[].
+** Check that the conversion host does not have an existing private SSH key in `/var/lib/vdsm/.ssh/id_rsa`. Conversion host configuration does not overwrite SSH keys. They must be deleted manually.
 
 [id="OSP_VM_migration_failure"]
 *OpenStack Platform*

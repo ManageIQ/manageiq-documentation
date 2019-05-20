@@ -1147,13 +1147,17 @@
 </listitem>
 <listitem>
 <simpara>Select <emphasis role="strong">SSH</emphasis> or <emphasis role="strong">VDDK</emphasis> as a <emphasis role="strong">Transformation method</emphasis>.</simpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">SSH</emphasis>: Click <emphasis role="strong">Browse</emphasis> to browse to the SSH key or paste it in the <emphasis role="strong">VMware hypervisors SSH key</emphasis> field. The VMware keys are copied to the conversion hosts in a separate step and are not deployed automatically, in order to prevent man-in-the-middle attacks.</simpara>
+<important>
+<simpara><emphasis role="strong">Red Hat Virtualization</emphasis>: If a RHV host has an existing SSH private key, you must delete the old key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring the conversion host.</simpara>
+</important>
 </listitem>
 <listitem>
-<simpara>If you selected SSH, lick <emphasis role="strong">Browse</emphasis> to browse to the SSH key or paste it in the <emphasis role="strong">VMware hypervisors SSH key</emphasis> field.</simpara>
-<important>
-<simpara>If you are using SSH transformation, you must also copy the VMware keys to the conversion hosts. The VMware keys are not used automatically, in order to prevent man-in-the-middle attacks.</simpara>
-</important>
-<simpara>If you selected VDDK, enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
+<simpara><emphasis role="strong">VDDK</emphasis>: Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
@@ -1162,14 +1166,7 @@
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">Results</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
-<listitem>
-<simpara>Wait for the conversion host configuration to finish.</simpara>
-</listitem>
-<listitem>
-<simpara>Click <emphasis role="strong">Close</emphasis>.</simpara>
-</listitem>
-</orderedlist></entry>
+<entry align="left" valign="top"><simpara>Wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara></entry>
 </row>
 </tbody>
 </tgroup>
@@ -1177,7 +1174,7 @@
 <simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
 <simpara>Optionally, you can click <emphasis role="strong">Remove</emphasis> to unconfigure a conversion host or <emphasis role="strong">Retry</emphasis> to retry a conversion host configuration.</simpara>
 <simpara>If you are using VDDK transformation, you can start the infrastructure migration. See <xref linkend="Migrating_the_infrastructure"/>.</simpara>
-<simpara>If you are using SSH transformation, you can copy the VMware keys to the conversion hosts:</simpara>
+<simpara>If you are using SSH transformation, you are ready to copy the VMware keys to the conversion hosts:</simpara>
 <itemizedlist>
 <listitem>
 <simpara><xref linkend="Copying_the_vmware_keys_for_SSH_for_rhv"/></simpara>
@@ -1980,10 +1977,13 @@ BadRequestException: Unknown error</screen>
 <simpara>SSH transformation failure:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>If you are using SSSD with single sign-on, <link linkend="Reinstalling_ipa_client">reinstall <literal>ipa-client</literal></link> without the OpenSSH client.</simpara>
+<simpara>If you are using SSSD with single sign-on, <link linkend="Reinstalling_ipa_client">reinstall <literal>ipa-client</literal></link> without the OpenSSH client on the Manager machine.</simpara>
 </listitem>
 <listitem>
 <simpara>Check that SSH transformation was correctly configured. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> and <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Check that the conversion host does not have an existing private SSH key in <literal>/var/lib/vdsm/.ssh/id_rsa</literal>. Conversion host configuration does not overwrite SSH keys. They must be deleted manually.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>

@@ -50,19 +50,18 @@ If you upgrade your target environment, you should update the conversion hosts t
 
 . Select *SSH* or *VDDK* as a *Transformation method*.
 
-. If you selected SSH, click *Browse* to browse to the SSH key or paste it in the *VMware hypervisors SSH key* field.
+* *SSH*: Click *Browse* to browse to the SSH key or paste it in the *VMware hypervisors SSH key* field. The VMware keys are copied to the conversion hosts in a separate step and are not deployed automatically, in order to prevent man-in-the-middle attacks.
 +
 [IMPORTANT]
 ====
-If you are using SSH transformation, you must also copy the VMware keys to the conversion hosts. The VMware keys are not used automatically, in order to prevent man-in-the-middle attacks.
+*Red Hat Virtualization*: If a RHV host has an existing SSH private key, you must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before configuring the conversion host.
 ====
-+
-If you selected VDDK, enter the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
+
+* *VDDK*: Enter the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
 
 . Click *Configure*.
 |*Results*
-.<a|. Wait for the conversion host configuration to finish.
-. Click *Close*.
+|Wait for the conversion host configuration to finish and click *Close*.
 |===
 
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
@@ -71,7 +70,7 @@ Optionally, you can click *Remove* to unconfigure a conversion host or *Retry* t
 
 If you are using VDDK transformation, you can start the infrastructure migration. See xref:Migrating_the_infrastructure[].
 
-If you are using SSH transformation, you can copy the VMware keys to the conversion hosts:
+If you are using SSH transformation, you are ready to copy the VMware keys to the conversion hosts:
 
 * xref:Copying_the_vmware_keys_for_SSH_for_rhv[]
 * xref:Copying_the_vmware_keys_for_SSH_for_osp[]

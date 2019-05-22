@@ -1,30 +1,10 @@
 // Module included in the following assemblies:
 // assembly_Common_issues_and_mistakes.adoc
 [id="Virtual_machine_migration_errors"]
-= Virtual machine migration errors
-
-[id="IP_address_errors"]
-== Postmigration virtual machine IP address errors
-
-[id="Migrated_RHEL_IP_address_not_accessible"]
-* If the IP address of a migrated RHEL (or other Linux-based operating system) virtual machine is not accessible, create a xref:Creating_a_rhel_premigration_playbook[`RHEL premigration` playbook] and add it to the xref:Advanced_options_screen[migration plan].
-
-[id="Migrated_VM_missing_IP"]
-* If a migrated virtual machine does not have an IP address:
-
-** Check that VMware Tools is installed on the source virtual machine.
-[id="OSP_missing_IP"]
-** OpenStack Platform: Check the source virtual machine for an interface configuration file mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not). Log example:
-+
-[options="" subs="+quotes,verbatim"]
-----
-CalledProcessError: Command \'['openstack', u'--os-username=admin', u'--os-identity-api-version=3', u'--os-user-domain-name=default', u'--os-auth-url=http://_osp.example.com_:5000/v3', u'--os-project-name=admin', u'--os-password=\*\*******', u'--os-project-id=0123456789abcdef0123456789abcdef', \'port', \'create', \'--format', \'json', \'--network', u'01234567-89ab-cdef-0123-456789abcdef', \'--mac-address', u'00:50:56:01:23:45', \'--enable', u'port_0', \'--fixed-ip', \'*ip-address=None*'"]' returned non-zero exit status 1
-_date_ _time_:ERROR: Command output:
-BadRequestException: Unknown error
-----
+= Environment configuration errors
 
 [id="VMware_environment_errors"]
-== VMware environment errors
+== VMware
 
 A source virtual machine cannot migrate if it has any of the following conditions:
 
@@ -35,10 +15,8 @@ A source virtual machine cannot migrate if it has any of the following condition
 If you are using SSH transformation, see xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
 [id="Target_environment_errors"]
-== Target environment errors
-
 [id="RHV_VM_migration_failure"]
-*Red Hat Virtualization*
+== Red Hat Virtualization
 [id="RHV_name_conflict"]
 * Name conflict: VMware virtual machine has the same name as a RHV virtual machine.
 * MAC address conflict: VMware virtual machine has the same MAC address as a RHV virtual machine in a MAC address pool.
@@ -50,7 +28,8 @@ If you are using SSH transformation, see xref:Configuring_the_vmware_hypervisors
 ** Check that the conversion host does not have an existing private SSH key in `/var/lib/vdsm/.ssh/id_rsa`. Conversion host configuration does not overwrite SSH keys. They must be deleted manually.
 
 [id="OSP_VM_migration_failure"]
-*OpenStack Platform*
+== OpenStack Platform
+
 [id="OSP_VM_powered_off"]
 * Virtual machine powered off: The virtual machine must be powered on at the time of migration.
 

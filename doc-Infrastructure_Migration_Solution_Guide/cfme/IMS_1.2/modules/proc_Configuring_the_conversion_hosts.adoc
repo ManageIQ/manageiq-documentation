@@ -3,23 +3,37 @@
 [id="Configuring_the_conversion_hosts"]
 = Configuring the conversion hosts
 
-You can select, authenticate, and configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts involes the following tasks:
+You can select, authenticate, and configure your conversion hosts for VDDK or SSH transformation:
 
-. VDDK only: xref:Downloading_vddk[Downloading VDDK]
-. VDDK and SSH: xref:Configuring_conversion_hosts_in_cloudforms[Configuring the conversion hosts in CloudForms]
-. SSH only: xref:Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts[Copying the VMware keys to the conversion hosts]
-. (Optional) xref:Verifying_conversion_hosts[Verifying the conversion hosts] using an API call in a browser. This procedure verifies the names and number of conversion hosts. It does not check their configuration.
+* VDDK:
+
+. xref:Downloading_vddk[]
+. xref:Configuring_conversion_hosts_in_cloudforms[]
+
+* SSH:
+
+. xref:Configuring_conversion_hosts_in_cloudforms[]
+. xref:Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts[]
+
+After configuring the conversion hosts, you can xref:Verifying_conversion_hosts[verify the conversion hosts] using an API call in a browser. This command returns the conversion host names and number. It does not check configuration.
 
 [IMPORTANT]
 ====
-If you upgrade your target environment, you should update the conversion hosts to ensure that you have the latest software and critical updates:
+If you upgrade your target environment, update the conversion hosts to ensure that you have the latest software and critical updates:
 
-* Red Hat Virtualization: Run `yum update` on the conversion hosts.
-* OpenStack Platform: Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[]).
+* Red Hat Virtualization
++
+Run `yum update` on the conversion hosts.
+
+* OpenStack Platform
++
+Download the latest conversion host appliance and re-deploy the conversion hosts as described in xref:Deploying_osp_conversion_hosts[].
 ====
 
 [id="Downloading_vddk"]
-== VDDK only: Downloading VDDK
+== Downloading VDDK
+
+Download and save the VMware Virtual Disk Development Kit:
 
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
@@ -79,12 +93,12 @@ You can verify the names and number of conversion hosts using an API call in a b
 |===
 
 * If you are using VDDK transformation, you can start the infrastructure migration. See xref:Migrating_the_infrastructure[].
-* If you are using SSH transformation, there is an additional step, copying the VMware keys to the conversion hosts.
+* If you are using SSH transformation, copy the VMware SSH keys to the conversion hosts.
 
 [id="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts"]
-== SSH only: Copying the VMware keys to the conversion hosts
+== Copying the VMware SSH keys to the conversion hosts
 
-Copy the VMware keys to the conversion hosts:
+Copy the VMware SSH keys to the conversion hosts for your environment:
 
 * xref:Copying_the_vmware_keys_for_SSH_for_rhv[Red Hat Virtualization]
 * xref:Copying_the_vmware_keys_for_SSH_for_osp[OpenStack Platform]

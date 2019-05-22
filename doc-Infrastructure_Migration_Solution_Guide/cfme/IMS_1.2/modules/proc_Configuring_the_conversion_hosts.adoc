@@ -3,7 +3,12 @@
 [id="Configuring_the_conversion_hosts"]
 = Configuring the conversion hosts
 
-You can select, authenticate, and configure your conversion hosts in CloudForms.
+You can select, authenticate, and configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts involes the following tasks:
+
+. VDDK only: xref:Downloading_vddk[Downloading VDDK]
+. VDDK and SSH: xref:Configuring_conversion_hosts_in_cloudforms[Configuring the conversion hosts in CloudForms]
+. SSH only: xref:Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts[Copying the VMware keys to the conversion hosts]
+. (Optional) xref:Verifying_conversion_hosts[Verifying the conversion hosts] using an API call in a browser. This procedure verifies the names and number of conversion hosts. It does not check their configuration.
 
 [IMPORTANT]
 ====
@@ -13,17 +18,20 @@ If you upgrade your target environment, you should update the conversion hosts t
 * OpenStack Platform: Download the latest conversion host appliance and re-deploy the conversion hosts (see xref:Deploying_osp_conversion_hosts[]).
 ====
 
-.Prerequisites
+[id="Downloading_vddk"]
+== VDDK only: Downloading VDDK
 
-* (VDDK only) download the VMware Virtual Disk Development Kit:
-+
 . Navigate to link:https://www.vmware.com/support/pubs/[].
 . Click *VMware SDK & API Product Documentation* to expand.
 . Click *VMware Virtual Disk Development Kit (VDDK)*.
 . Click *Latest Releases* and select the latest VDDK release.
-. Download and save the VDDK package (+VMware-vix-disklib-_version_.x86_64.tar.gz+).
+. Click *Download SDKs* to download the VDDK archive file.
+. Save the VDDK archive file and record its path.
 
-.Procedure
+You can configure the conversion hosts in CloudForms.
+
+[id="Configuring_conversion_hosts_in_cloudforms"]
+== Configuring the conversion hosts in CloudForms
 
 . In CloudForms, click menu:Compute[Migration > Migration Settings].
 . In the *Conversion Hosts* tab, click *Configure Conversion Host*.
@@ -54,26 +62,32 @@ If you upgrade your target environment, you should update the conversion hosts t
 +
 [IMPORTANT]
 ====
-*Red Hat Virtualization*: If a RHV host has an existing SSH private key, you must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before configuring the conversion host.
+*Red Hat Virtualization*: If a RHV host has an existing SSH private key, you must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before configuring the conversion host. Conversion host configuration does not overwrite existing keys.
 ====
 
 * *VDDK*: Enter the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
 
 . Click *Configure*.
 |*Results*
-|Wait for the conversion host configuration to finish and click *Close*.
-|===
+.<a|Wait for the conversion host configuration to finish and click *Close*.
 
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
 
-Optionally, you can click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
+Click *Remove* to unconfigure a conversion host or *Retry* to retry a conversion host configuration.
 
-If you are using VDDK transformation, you can start the infrastructure migration. See xref:Migrating_the_infrastructure[].
+You can verify the names and number of conversion hosts using an API call in a browser. See xref:Verifying_conversion_hosts[].
+|===
 
-If you are using SSH transformation, you are ready to copy the VMware keys to the conversion hosts:
+* If you are using VDDK transformation, you can start the infrastructure migration. See xref:Migrating_the_infrastructure[].
+* If you are using SSH transformation, there is an additional step, copying the VMware keys to the conversion hosts.
 
-* xref:Copying_the_vmware_keys_for_SSH_for_rhv[]
-* xref:Copying_the_vmware_keys_for_SSH_for_osp[]
+[id="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts"]
+== SSH only: Copying the VMware keys to the conversion hosts
+
+Copy the VMware keys to the conversion hosts:
+
+* xref:Copying_the_vmware_keys_for_SSH_for_rhv[Red Hat Virtualization]
+* xref:Copying_the_vmware_keys_for_SSH_for_osp[OpenStack Platform]
 
 :context: rhv
 :rhv:
@@ -83,3 +97,5 @@ include::../ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc
 :osp:
 include::../ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
 :osp!:
+
+include::../ims_common/proc_Verifying_conversion_hosts.adoc[leveloffset=+1]

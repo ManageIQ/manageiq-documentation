@@ -1071,7 +1071,21 @@
 </section>
 <section xml:id="Configuring_the_conversion_hosts">
 <title>Configuring the conversion hosts</title>
-<simpara>You can select, authenticate, and configure your conversion hosts in CloudForms.</simpara>
+<simpara>You can select, authenticate, and configure your conversion hosts for VDDK or SSH transformation. Configuring the conversion hosts involes the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>VDDK only: <link linkend="Downloading_vddk">Downloading VDDK</link></simpara>
+</listitem>
+<listitem>
+<simpara>VDDK and SSH: <link linkend="Configuring_conversion_hosts_in_cloudforms">Configuring the conversion hosts in CloudForms</link></simpara>
+</listitem>
+<listitem>
+<simpara>SSH only: <link linkend="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts">Copying the VMware keys to the conversion hosts</link></simpara>
+</listitem>
+<listitem>
+<simpara>(Optional) <link linkend="Verifying_conversion_hosts">Verifying the conversion hosts</link> using an API call in a browser. This procedure verifies the names and number of conversion hosts. It does not check their configuration.</simpara>
+</listitem>
+</orderedlist>
 <important>
 <simpara>If you upgrade your target environment, you should update the conversion hosts to ensure that you have the latest software and critical updates:</simpara>
 <itemizedlist>
@@ -1083,10 +1097,8 @@
 </listitem>
 </itemizedlist>
 </important>
-<itemizedlist>
-<title>Prerequisites</title>
-<listitem>
-<simpara>(VDDK only) download the VMware Virtual Disk Development Kit:</simpara>
+<section xml:id="Downloading_vddk">
+<title>VDDK only: Downloading VDDK</title>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">https://www.vmware.com/support/pubs/</link>.</simpara>
@@ -1101,13 +1113,17 @@
 <simpara>Click <emphasis role="strong">Latest Releases</emphasis> and select the latest VDDK release.</simpara>
 </listitem>
 <listitem>
-<simpara>Download and save the VDDK package (<literal>VMware-vix-disklib-<emphasis>version</emphasis>.x86_64.tar.gz</literal>).</simpara>
+<simpara>Click <emphasis role="strong">Download SDKs</emphasis> to download the VDDK archive file.</simpara>
+</listitem>
+<listitem>
+<simpara>Save the VDDK archive file and record its path.</simpara>
 </listitem>
 </orderedlist>
-</listitem>
-</itemizedlist>
+<simpara>You can configure the conversion hosts in CloudForms.</simpara>
+</section>
+<section xml:id="Configuring_conversion_hosts_in_cloudforms">
+<title>Configuring the conversion hosts in CloudForms</title>
 <orderedlist numeration="arabic">
-<title>Procedure</title>
 <listitem>
 <simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
@@ -1177,7 +1193,7 @@
 <listitem>
 <simpara><emphasis role="strong">SSH</emphasis>: Click <emphasis role="strong">Browse</emphasis> to browse to the SSH key or paste it in the <emphasis role="strong">VMware hypervisors SSH key</emphasis> field. The VMware keys are copied to the conversion hosts in a separate step and are not deployed automatically, in order to prevent man-in-the-middle attacks.</simpara>
 <important>
-<simpara><emphasis role="strong">Red Hat Virtualization</emphasis>: If a RHV host has an existing SSH private key, you must delete the old key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring the conversion host.</simpara>
+<simpara><emphasis role="strong">Red Hat Virtualization</emphasis>: If a RHV host has an existing SSH private key, you must delete the old key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring the conversion host. Conversion host configuration does not overwrite existing keys.</simpara>
 </important>
 </listitem>
 <listitem>
@@ -1192,21 +1208,32 @@
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">Results</emphasis></simpara></entry>
-<entry align="left" valign="top"><simpara>Wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara></entry>
+<entry align="left" valign="top"><simpara>Wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+<simpara>Click <emphasis role="strong">Remove</emphasis> to unconfigure a conversion host or <emphasis role="strong">Retry</emphasis> to retry a conversion host configuration.</simpara>
+<simpara>You can verify the names and number of conversion hosts using an API call in a browser. See <xref linkend="Verifying_conversion_hosts"/>.</simpara></entry>
 </row>
 </tbody>
 </tgroup>
 </informaltable>
-<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
-<simpara>Optionally, you can click <emphasis role="strong">Remove</emphasis> to unconfigure a conversion host or <emphasis role="strong">Retry</emphasis> to retry a conversion host configuration.</simpara>
-<simpara>If you are using VDDK transformation, you can start the infrastructure migration. See <xref linkend="Migrating_the_infrastructure"/>.</simpara>
-<simpara>If you are using SSH transformation, you are ready to copy the VMware keys to the conversion hosts:</simpara>
 <itemizedlist>
 <listitem>
-<simpara><xref linkend="Copying_the_vmware_keys_for_SSH_for_rhv"/></simpara>
+<simpara>If you are using VDDK transformation, you can start the infrastructure migration. See <xref linkend="Migrating_the_infrastructure"/>.</simpara>
 </listitem>
 <listitem>
-<simpara><xref linkend="Copying_the_vmware_keys_for_SSH_for_osp"/></simpara>
+<simpara>If you are using SSH transformation, there is an additional step, copying the VMware keys to the conversion hosts.</simpara>
+</listitem>
+</itemizedlist>
+</section>
+<section xml:id="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts">
+<title>SSH only: Copying the VMware keys to the conversion hosts</title>
+<simpara>Copy the VMware keys to the conversion hosts:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><link linkend="Copying_the_vmware_keys_for_SSH_for_rhv">Red Hat Virtualization</link></simpara>
+</listitem>
+<listitem>
+<simpara><link linkend="Copying_the_vmware_keys_for_SSH_for_osp">OpenStack Platform</link></simpara>
 </listitem>
 </itemizedlist>
 <formalpara xml:id="Copying_the_vmware_keys_for_SSH_for_rhv">
@@ -1257,6 +1284,23 @@
 <simpara>If the connection is successful, you can create an infrastructure mapping. See <xref linkend="Creating_an_infrastructure_mapping"/>.</simpara>
 </listitem>
 </orderedlist>
+</section>
+<section xml:id="Verifying_conversion_hosts">
+<title>(Optional) Verifying the conversion hosts in a browser</title>
+<simpara>This procedure displays the names and number of your conversion hosts.</simpara>
+<simpara>To verify your conversion hosts:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Enter the following URL in your browser:</simpara>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts</screen>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Sign in</emphasis> window, enter the <emphasis role="strong">Username</emphasis> and <emphasis role="strong">Password</emphasis> and click <emphasis role="strong">Sign in</emphasis>.</simpara>
+<simpara>The conversion hosts are displayed in JSON format:</simpara>
+<screen>{"name":"conversion_hosts","count":3,"subcount":3,"pages":1,"resources":[{"href":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/10000000000001"},{"href":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/10000000000002"},{"href":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/10000000000003"}],"actions":[{"name":"create","method":"post","href":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts"},{"name":"edit","method":"post","href":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts"},{"name":"delete","method":"post","href":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts"}],"links":{"self":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts?offset=0","first":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts?offset=0","last":"https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts?offset=0"}}</screen>
+</listitem>
+</orderedlist>
+</section>
 </section>
 </chapter>
 <chapter xml:id="Migrating_the_infrastructure">
@@ -1787,21 +1831,19 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </section>
 <section xml:id="Changing_the_maximum_number_of_concurrent_migrations">
 <title>Changing the maximum number of concurrent migrations</title>
-<simpara>You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.</simpara>
+<simpara>You can change the maximum number of concurrent migrations for conversion hosts to control the impact of the migration process on your infrastructure.</simpara>
 <warning>
 <simpara>For VDDK, the number of maximum concurrent migrations per conversion host should not be greater than <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
 </warning>
-<simpara>The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations for a provider is <literal>20</literal> and for five conversion hosts, <literal>3</literal>, the maximum number of concurrent migrations is <literal>20</literal>, not <literal>15</literal> (<literal>5</literal> conversion hosts <literal>x</literal> <literal>3</literal> concurrent migrations).</simpara>
 <simpara>An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.</simpara>
 <simpara>A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.</simpara>
 <orderedlist numeration="arabic">
-<title>Changing the maximum number of concurrent migrations for all conversion hosts or providers</title>
+<title>Changing the maximum number of concurrent migrations for all conversion hosts</title>
 <listitem>
-<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.
-Select a value for <emphasis role="strong">Maximum concurrent migrations per provider</emphasis>.</simpara>
-<note>
-<simpara>Currently, <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> does not work. See <xref linkend="Known_issues"/>.</simpara>
-</note>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a value for <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis>.</simpara>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Apply</emphasis>.</simpara>
@@ -1814,7 +1856,8 @@ Select a value for <emphasis role="strong">Maximum concurrent migrations per pro
 </listitem>
 <listitem>
 <simpara>Enter the following command:</simpara>
-<screen># TBD</screen>
+<screen># curl -sk -u <emphasis>username:password</emphasis> https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>2</emphasis>}}</emphasis></screen>
+<simpara>To obtain the <literal>conversion_host_id</literal>, see <xref linkend="Verifying_conversion_hosts"/>.</simpara>
 </listitem>
 </orderedlist>
 </section>

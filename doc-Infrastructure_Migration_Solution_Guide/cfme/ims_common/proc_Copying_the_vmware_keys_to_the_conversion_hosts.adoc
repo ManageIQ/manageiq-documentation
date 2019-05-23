@@ -20,13 +20,13 @@ You must run `ssh-keyscan` multiple times, once for each VMware hypervisor. Othe
 ifdef::rhv[]
 Perform the following procedure on the Manager machine:
 
-. Run `ssh-keyscan` for each VMware hypervisor and output the public key to `known_hosts`, as in the following example:
+. Run `ssh-keyscan` for each VMware hypervisor, using its IP address, and output the public key to `known_hosts`, as in the following example:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-keyscan _esx1.example.com_ > /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan _esx2.example.com_ >> /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan _esx3.example.com_ >> /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _10.19.2.12_ > /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _10.19.2.13_ >> /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _10.19.2.14_ >> /var/lib/vdsm/.ssh/known_hosts
 ----
 
 . Change the ownership of the `known_hosts` file to user `vdsm` and group `kvm`:
@@ -38,13 +38,13 @@ endif::rhv[]
 ifdef::osp[]
 Perform the following procedure on a conversion host:
 
-. Run `ssh-keyscan` for each VMware hypervisor and output the public key to `known_hosts`, as in the following example:
+. Run `ssh-keyscan` for each VMware hypervisor, using its IP address, and output the public key to `known_hosts`, as in the following example:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-keyscan _esx1.example.com_ > /root/.ssh/known_hosts
-# ssh-keyscan _esx2.example.com_ >> /root/.ssh/known_hosts
-# ssh-keyscan _esx3.example.com_ >> /root/.ssh/known_hosts
+# ssh-keyscan _10.19.2.12_ > /root/.ssh/known_hosts
+# ssh-keyscan _10.19.2.13_ >> /root/.ssh/known_hosts
+# ssh-keyscan _10.19.2.14_ >> /root/.ssh/known_hosts
 ----
 
 . Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.

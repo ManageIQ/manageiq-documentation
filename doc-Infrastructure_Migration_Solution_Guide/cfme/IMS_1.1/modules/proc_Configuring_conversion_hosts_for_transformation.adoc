@@ -90,9 +90,9 @@ Download and save the VMware Virtual Disk Development Kit:
 . Click *Download SDKs* to download the VDDK archive file.
 . Save the VDDK archive file in an HTML-accessible location and record its URL.
 
-You are ready to configure the conversion hosts.
+You are ready to configure the conversion hosts with the `conversion_host_enable` playbook.
 
-== Configuring the conversion hosts
+== Configuring the conversion hosts with the `conversion_host_enable` playbook
 
 ifdef::rhv[]
 [id="Configuring_the_rhv_conversion_hosts_procedure"]
@@ -112,11 +112,11 @@ Perform the following procedure on the Manager machine:
 ---
 v2v_host_type: rhevm
 
-# Transport methods to configure on the conversion host. Valid values: `vddk`, `ssh`
+# Transport methods to configure on the conversion host. Valid values: "vddk", "ssh"
 v2v_transport_methods:
   - _vddk_
 
-# Maximum number of concurrent conversions per host. Default is `10`.
+# Maximum number of concurrent conversions per host. Default is "10".
 v2v_max_concurrent_conversions: _10_
 
 # File name of VDDK package
@@ -131,15 +131,15 @@ manageiq_provider_name: RHV
 # Base URL of CloudForms machine
 manageiq_url: "https://_CloudForms_FQDN_"
 
-# Whether to validate certificate of CloudForms server. Default is `true`.
+# Whether to validate certificate of CloudForms server. Default is "true".
 manageiq_validate_certs: _false_
 
 # To obtain the CloudForms zone ID, run this API call on the CloudForms machine:
-# curl -sk -u admin 'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone
+# curl -sk -u admin \'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone
 manageiq_zone_id: "42000000000001"'
 
 # List of infrastructure providers
-# Each provider is a dictionary with 3 attributes: `name`, `hostname`, and `connection_configurations`
+# Each provider is a dictionary with 3 attributes: "name", "hostname", and "connection_configurations"
 manageiq_providers:
   - name: "_RHV_"
     hostname: _Manager_FQDN_or_IP_address_
@@ -166,11 +166,11 @@ Perform the following procedure on each conversion host:
 ---
 v2v_host_type: openstack
 
-# Transport methods to configure on the conversion host. Valid values: `vddk`, `ssh`
+# Transport methods to configure on the conversion host. Valid values: "vddk", "ssh"
 v2v_transport_methods:
   - _vddk_
 
-# Maximum number of concurrent conversions per host. Default is `10`.
+# Maximum number of concurrent conversions per host. Default is "10".
 v2v_max_concurrent_conversions: _10_
 
 # File name of VDDK package
@@ -184,12 +184,12 @@ manageiq_provider_name: OpenStack
 # Base URL of CloudForms machine
 manageiq_url: "https://_CloudForms_FQDN_"
 
-# Whether to validate certificate of CloudForms server. Default is `true`.
+# Whether to validate certificate of CloudForms server. Default is "true".
 manageiq_validate_certs: _false_
 manageiq_zone_id: "42000000000001"
 
 # List of cloud providers
-# Each provider is a dictionary with 3 attributes: `name`, `hostname`, and `connection_configurations`
+# Each provider is a dictionary with 3 attributes: "name", "hostname", and "connection_configurations"
 manageiq_providers:
   - name: "_OpenStack_"
     hostname: _controller_node_FQDN_or_IP_address_
@@ -227,10 +227,10 @@ endif::osp[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 ---
-# CloudForms `admin` user, for connecting to CloudForms
+# CloudForms "admin" user, for connecting to CloudForms
 manageiq_username: "_username_"
 
-# CloudForms `admin` password:
+# CloudForms "admin" password:
 manageiq_password: "_password_"
 
 # SSH private key to connect to VMware hypervisors. Required for both VDDK and SSH. <1>
@@ -287,12 +287,14 @@ If you need to run the `conversion_host_enable` playbook again, you should remov
 # ansible-playbook --ask-vault-pass -i _conversion_host_FQDN_or_IP_, conversion_host_check.yml
 ----
 ifdef::rhv[]
-+
-* If you are using VDDK, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
-* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_the_vmware_keys_for_SSH_for_rhv[].
+
+If you are using VDDK, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
+
+If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_the_vmware_keys_for_SSH_for_rhv[].
 endif::rhv[]
 ifdef::osp[]
-+
-* If you are using VDDK, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
-* If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_the_vmware_keys_for_SSH_for_osp[].
+
+If you are using VDDK, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
+
+If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_the_vmware_keys_for_SSH_for_osp[].
 endif::osp[]

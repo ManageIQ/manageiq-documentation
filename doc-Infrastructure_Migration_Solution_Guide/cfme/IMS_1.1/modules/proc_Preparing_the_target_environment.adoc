@@ -15,11 +15,13 @@ ifdef::rhv[]
 Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
 ====
 
-. Enable the following ports in the conversion host network (see https://access.redhat.com/articles/417343[]):
+. Enable the following ports in the conversion host network:
 * 22 - SSH
 * 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
 * 902 - CloudForms to VMware
 * 5480 - Conversion hosts to vCenter
++
+For details, see https://access.redhat.com/articles/417343[].
 
 . Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_).
 +
@@ -28,7 +30,9 @@ Some of these hosts will be deployed as conversion hosts. The number of conversi
 IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
 ====
 
-. Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_). The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
+. Upload the VirtIO and Guest Tool image files to the ISO storage domain (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_).
++
+The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The Guest Tool is required for migrating Windows virtual machines.
 
 . Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[Creating MAC Address Pools] in the _Red Hat Virtualization Administration Guide_).
 +
@@ -70,7 +74,7 @@ ifdef::osp[]
 +
 [IMPORTANT]
 ====
-If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies (see link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_).
+If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies. See link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_.
 
 The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.
 
@@ -108,7 +112,7 @@ CFME 5.10.4 does not support migration. See the xref:ref_Software_compatibility_
 Removing or changing a provider, including refreshing hosts, before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.
 ====
 +
-You are ready to xref:Configuring_the_rhv_conversion_hosts[configure the conversion hosts for VDDK or SSH].
+You are ready to xref:Configuring_the_rhv_conversion_hosts[configure the conversion hosts].
 endif::rhv[]
 ifdef::osp[]
 [[Cloudforms_for_osp]]
@@ -129,7 +133,7 @@ Removing or changing a provider before, during, or after the migration will caus
 [id="Deploying_osp_conversion_hosts"]
 = Deploying OpenStack Platform conversion hosts
 
-You download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+You can download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
 
 . Navigate to link:https://access.redhat.com/downloads/[].
 . In the *A-Z* tab, click *Red Hat OpenStack Platform*.
@@ -167,5 +171,5 @@ The instance is created from an image, but the disk space defined in the image w
 You must resize `lv_root` to use all available disk space because the image will not use it by default.
 ====
 
-You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts for VDDK or SSH].
+You are ready to xref:Configuring_the_osp_conversion_hosts[configure the conversion hosts].
 endif::osp[]

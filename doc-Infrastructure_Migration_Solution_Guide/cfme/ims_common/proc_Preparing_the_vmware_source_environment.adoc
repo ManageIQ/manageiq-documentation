@@ -1,9 +1,9 @@
 // Module included in the following assemblies:
 // assembly_Preparing_the_environment_for_migration.adoc
 [id="Preparing_the_vmware_source_environment"]
-= Preparing the source environment
+= Preparing the VMware source environment
 
-To prepare the source environment:
+Prepare the VMware source environment for migration:
 
 . Extend the VMware network to the target environment.
 +
@@ -13,40 +13,42 @@ To prepare the source environment:
 * IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
 ====
 
-. Prepare the source virtual machines (xref:Preparing_the_source_virtual_machines[]).
-. If you are using SSH transformation, configure the VMware hypervisors (xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[]).
+. Prepare the VMware virtual machines. See xref:Preparing_the_source_virtual_machines[].
+. Configure the VMware hypervisors for SSH transformation, if necessary. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
 [id="Preparing_the_source_virtual_machines"]
-== Preparing the source virtual machines
+== Preparing the VMware virtual machines
 
-Prepare each source virtual machine for migration:
+Perform the following steps on each VMware virtual machine that you are migrating:
 
-* Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[].
-* Unmount mounted ISO/CDROM disks.
-* Ensure that attached disks are not encrypted.
-* Ensure that each NIC has no more than one IPv4 and/or one IPv6 address.
-* Ensure that the virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`).
+. Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[].
+. Unmount mounted ISO/CDROM disks.
+. Ensure that attached disks are not encrypted.
+. Ensure that each NIC has no more than one IPv4 and/or one IPv6 address.
+. Ensure that the virtual machine names contain only upper- or lower-case letters, numbers, underscores (`_`), hyphens (`-`), or periods (`.`).
 +
 [NOTE]
 ====
 International characters and spaces are not permitted.
 ====
 
-* Ensure that source virtual machine names do not duplicate target machine names for the appropriate scope:
+. Ensure that source virtual machine names do not duplicate target machine names for the appropriate scope:
 
-** Red Hat Virtualization: Within the entire environment
-** OpenStack Platform: Within a single tenant
+* Red Hat Virtualization: Within the entire environment
+* OpenStack Platform: Within a single tenant
+
+If you are using VDDK transformation, you are ready to prepare the target environment. See xref:Preparing_the_target_environment[].
+
+If you are using SSH transformation, you should prepare the VMware hypervisors. See  xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
 [id="Configuring_the_vmware_hypervisors_for_ssh_transformation"]
-== Configuring the VMware hypervisors for SSH transformation
+== Preparing the VMware hypervisors for SSH transformation
 
-SSH transformation requires passwordless access to the VMware hypervisors. Passwordless access involves enabling SSH access on the VMware hypervisors, generating an SSH key pair, and copying the public key to the VMware hypervisors. You will use the private key of the SSH key pair in xref:Configuring_the_conversion_hosts[].
+SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:
 
-Using a single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and simplifies conversion host management. If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs and copy all the public keys to all the VMware hypervisors.
-
-Configure the VMware hypervisors:
-
-. Enable SSH access on each VMware hypervisor. For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/index.html[]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
+. Enable SSH access on each VMware hypervisor:
++
+For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/index.html[]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
 +
 [NOTE]
 ====
@@ -60,6 +62,13 @@ If your security processes allow you to collect the VMware hypervisors' public k
 # ssh-keygen -N ''
 ----
 
-. Copy the public key to all the VMware hypervisors in `/etc/ssh/keys-root/authorized_keys`.
+. Copy the public SSH key to `/etc/ssh/keys-root/authorized_keys` on *each* VMware hypervisor. (The private key is used in xref:Configuring_the_conversion_hosts[].)
 
-You are ready to prepare the xref:Preparing_the_target_environment[target environment].
+[IMPORTANT]
+====
+A single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.
+
+If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.
+====
+
+You are ready to prepare your xref:Preparing_the_target_environment[target environment].

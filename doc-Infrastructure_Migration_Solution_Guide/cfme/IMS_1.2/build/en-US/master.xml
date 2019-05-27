@@ -49,34 +49,26 @@
 <simpara><link linkend="Deciding_how_many_conversion_hosts_to_create">"How many conversion hosts do I need?"</link></simpara>
 </listitem>
 <listitem>
-<simpara><link linkend="Choosing_vddk_or_ssh_transformation">"Which datapath transformation option, VDDK or SSH?"</link></simpara>
+<simpara><link linkend="Choosing_vddk_or_ssh_transformation">"Which datapath transformation option should I use, VDDK or SSH?"</link></simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara><link linkend="Recommendations_for_migration">Recommendations to minimize the impact on your users</link>:</simpara>
+<simpara><link linkend="Recommendations_for_migration">Recommendations to minimize the impact on your users</link></simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara><link linkend="Preparing_the_environment_for_migration">Preparing for migration</link>:</simpara>
 <itemizedlist>
 <listitem>
-<simpara><xref linkend="Distributing_the_migration_workload"/></simpara>
+<simpara><link linkend="Preparing_the_vmware_source_environment">Preparing the VMware virtual machines for migration</link></simpara>
 </listitem>
 <listitem>
-<simpara><xref linkend="Controlling_the_migration_process"/></simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-</itemizedlist>
+<simpara><link linkend="Preparing_the_target_environment">Preparing the Red Hat Virtualization or OpenStack Platform environment</link></simpara>
 </listitem>
 <listitem>
-<simpara><link linkend="Preparing_the_environment_for_migration">Preparing the environment for migration</link>:</simpara>
-<itemizedlist>
-<listitem>
-<simpara><link linkend="Preparing_the_vmware_source_environment">Preparing the VMware source environment</link></simpara>
-</listitem>
-<listitem>
-<simpara><link linkend="Preparing_the_target_environment">Preparing the target environment</link> (configuring storage and networks and installing and configuring software packages)</simpara>
-</listitem>
-<listitem>
-<simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts in CloudForms</link> (conversion hosts are RHV hosts or OpenStack Platform instances running <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal>, which perform the migration)</simpara>
+<simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts in CloudForms</link>. Conversion hosts are RHV hosts or OpenStack Platform instances running <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal>, which perform the migration.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -87,7 +79,7 @@
 <simpara><link linkend="Creating_an_infrastructure_mapping">Mapping the source and target environments</link></simpara>
 </listitem>
 <listitem>
-<simpara><link linkend="Creating_and_running_a_migration_plan">Creating and running a migration plan</link> For details, see the migration workflows:</simpara>
+<simpara><link linkend="Creating_and_running_a_migration_plan">Creating and running a migration plan</link>. For a detailed description of the migration process, see the migration workflows:</simpara>
 <itemizedlist>
 <listitem>
 <simpara><xref linkend="Vmware_to_rhv_migration_workflow"/></simpara>
@@ -102,7 +94,7 @@
 </orderedlist>
 <section xml:id="Vmware_to_rhv_migration_workflow">
 <title>Red Hat Virtualization migration workflow</title>
-<simpara>This diagram describes the workflow of a migration to Red Hat Virtualization.</simpara>
+<simpara>This diagram describes the workflow of a migration from VMware to Red Hat Virtualization.</simpara>
 <figure>
 <title>VMware to Red Hat Virtualization migration workflow</title>
 <mediaobject>
@@ -135,7 +127,7 @@
 <imagedata fileref="images/circle_step_numbers/4.png" contentwidth="25"/>
 </imageobject>
 <textobject><phrase>25</phrase></textobject>
-</inlinemediaobject> Using the attributes defined for the Red Hat Virtualization environment, CloudForms initiates communication with the conversion hosts (RHV host with <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal> installed).</simpara>
+</inlinemediaobject> Using the attributes defined for the Red Hat Virtualization environment, CloudForms initiates communication with the conversion hosts (RHV hosts with <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal> installed).</simpara>
 <simpara><inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/circle_step_numbers/5.png" contentwidth="25"/>
@@ -158,7 +150,7 @@
 </section>
 <section xml:id="Vmware_to_osp_migration_workflow">
 <title>Red Hat OpenStack Platform migration workflow</title>
-<simpara>This diagram describes the workflow of a migration to OpenStack Platform.</simpara>
+<simpara>This diagram describes the workflow of a migration from VMware to OpenStack Platform.</simpara>
 <figure>
 <title>VMware to OpenStack Platform migration workflow</title>
 <mediaobject>
@@ -191,7 +183,7 @@
 <imagedata fileref="images/circle_step_numbers/4.png" contentwidth="25"/>
 </imageobject>
 <textobject><phrase>25</phrase></textobject>
-</inlinemediaobject> Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts (OpenStack Platform instance created from a conversion host appliance, with <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal> installed).</simpara>
+</inlinemediaobject> Using the attributes defined for the OpenStack Platform environment, CloudForms initiates communication with the conversion hosts (OpenStack Platform instances created from a conversion host appliance, with <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal> installed).</simpara>
 <simpara><inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/circle_step_numbers/5.png" contentwidth="25"/>
@@ -549,11 +541,11 @@
 </chapter>
 <chapter xml:id="Preparing_the_environment_for_migration">
 <title>Preparing the environment for migration</title>
-<simpara>Preparing the environment for migration involves the following key steps:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara><link linkend="Preparing_the_vmware_source_environment">Preparing the source environment</link>:</simpara>
+<simpara>Preparing your environment for migration involves the following key steps:</simpara>
 <itemizedlist>
+<listitem>
+<simpara><link linkend="Preparing_the_vmware_source_environment">Preparing the VMware source environment</link>:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Extending the VMware network to the target environment</simpara>
 </listitem>
@@ -561,9 +553,9 @@
 <simpara><xref linkend="Preparing_the_source_virtual_machines"/></simpara>
 </listitem>
 <listitem>
-<simpara><xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/></simpara>
+<simpara><xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>, if necessary</simpara>
 </listitem>
-</itemizedlist>
+</orderedlist>
 </listitem>
 <listitem>
 <simpara><link linkend="Preparing_the_target_environment">Preparing the target environment</link>:</simpara>
@@ -573,18 +565,16 @@
 </listitem>
 <listitem>
 <simpara><xref linkend="Preparing_the_osp_target_environment"/></simpara>
-<simpara><xref linkend="Deploying_osp_conversion_hosts"/></simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 <listitem>
 <simpara><link linkend="Configuring_the_conversion_hosts">Configuring the conversion hosts</link></simpara>
 </listitem>
-</orderedlist>
-<simpara>Optionally, you can <link linkend="Changing_the_maximum_number_of_concurrent_migrations">change the maximum number of concurrent migrations</link> of conversion hosts or providers for better performance and control of the migration process.</simpara>
+</itemizedlist>
 <section xml:id="Preparing_the_vmware_source_environment">
-<title>Preparing the source environment</title>
-<simpara>To prepare the source environment:</simpara>
+<title>Preparing the VMware source environment</title>
+<simpara>Prepare the VMware source environment for migration:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Extend the VMware network to the target environment.</simpara>
@@ -600,16 +590,16 @@
 </important>
 </listitem>
 <listitem>
-<simpara>Prepare the source virtual machines (<xref linkend="Preparing_the_source_virtual_machines"/>).</simpara>
+<simpara>Prepare the VMware virtual machines. See <xref linkend="Preparing_the_source_virtual_machines"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>If you are using SSH transformation, configure the VMware hypervisors (<xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>).</simpara>
+<simpara>Configure the VMware hypervisors for SSH transformation, if necessary. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_source_virtual_machines">
-<title>Preparing the source virtual machines</title>
-<simpara>Prepare each source virtual machine for migration:</simpara>
-<itemizedlist>
+<title>Preparing the VMware virtual machines</title>
+<simpara>Perform the following steps on each VMware virtual machine that you are migrating:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to <link xlink:href="https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html">https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html</link>.</simpara>
 </listitem>
@@ -639,16 +629,17 @@
 </listitem>
 </itemizedlist>
 </listitem>
-</itemizedlist>
+</orderedlist>
+<simpara>If you are using VDDK transformation, you are ready to prepare the target environment. See <xref linkend="Preparing_the_target_environment"/>.</simpara>
+<simpara>If you are using SSH transformation, you should prepare the VMware hypervisors. See  <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation">
-<title>Configuring the VMware hypervisors for SSH transformation</title>
-<simpara>SSH transformation requires passwordless access to the VMware hypervisors. Passwordless access involves enabling SSH access on the VMware hypervisors, generating an SSH key pair, and copying the public key to the VMware hypervisors. You will use the private key of the SSH key pair in <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
-<simpara>Using a single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and simplifies conversion host management. If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs and copy all the public keys to all the VMware hypervisors.</simpara>
-<simpara>Configure the VMware hypervisors:</simpara>
+<title>Preparing the VMware hypervisors for SSH transformation</title>
+<simpara>SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Enable SSH access on each VMware hypervisor. For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">https://docs.vmware.com/en/VMware-vSphere/index.html</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
+<simpara>Enable SSH access on each VMware hypervisor:</simpara>
+<simpara>For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">https://docs.vmware.com/en/VMware-vSphere/index.html</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
 <note>
 <simpara>If your security processes allow you to collect the VMware hypervisors' public keys, save them for <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
 </note>
@@ -658,10 +649,14 @@
 <screen># ssh-keygen -N ''</screen>
 </listitem>
 <listitem>
-<simpara>Copy the public key to all the VMware hypervisors in <literal>/etc/ssh/keys-root/authorized_keys</literal>.</simpara>
+<simpara>Copy the public SSH key to <literal>/etc/ssh/keys-root/authorized_keys</literal> on <emphasis role="strong">each</emphasis> VMware hypervisor. (The private key is used in <xref linkend="Configuring_the_conversion_hosts"/>.)</simpara>
 </listitem>
 </orderedlist>
-<simpara>You are ready to prepare the <link linkend="Preparing_the_target_environment">target environment</link>.</simpara>
+<important>
+<simpara>A single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.</simpara>
+<simpara>If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.</simpara>
+</important>
+<simpara>You are ready to prepare your <link linkend="Preparing_the_target_environment">target environment</link>.</simpara>
 </section>
 </section>
 </chapter>
@@ -674,16 +669,11 @@
 </listitem>
 <listitem>
 <simpara><xref linkend="Preparing_the_osp_target_environment"/></simpara>
-<itemizedlist>
-<listitem>
-<simpara><xref linkend="Deploying_osp_conversion_hosts"/></simpara>
-</listitem>
-</itemizedlist>
 </listitem>
 </itemizedlist>
 <section xml:id="Preparing_the_rhv_target_environment">
 <title>Preparing the Red Hat Virtualization environment</title>
-<simpara>The Red Hat Virtualization environment requires the following preparation:</simpara>
+<simpara>Preparing the Red Hat Virtualization environment involves the following key steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara><link linkend="Installing_and_configuring_red_hat_virtualization">Installing and configuring Red Hat Virtualization</link></simpara>
@@ -796,7 +786,8 @@
 </note>
 </listitem>
 <listitem>
-<simpara>Upload the VirtIO and Guest Tool image files to the ISO storage domain (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>). The VirtIO file name must include the version number (<literal>virtio-win-<emphasis>version</emphasis>.iso</literal>). The Guest Tool is required for migrating Windows virtual machines.</simpara>
+<simpara>Upload the VirtIO and Guest Tool image files to the ISO storage domain (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>).</simpara>
+<simpara>The VirtIO file name must include the version number (<literal>virtio-win-<emphasis>version</emphasis>.iso</literal>). The Guest Tool is required for migrating Windows virtual machines.</simpara>
 </listitem>
 <listitem>
 <simpara>Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools">Creating MAC Address Pools</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>).</simpara>
@@ -849,7 +840,7 @@
 </section>
 <section xml:id="Preparing_the_osp_target_environment">
 <title>Preparing the Red Hat OpenStack Platform environment</title>
-<simpara>The OpenStack Platform environment requires the following preparation:</simpara>
+<simpara>Preparing the OpenStack Platform environment involves the following key steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara><link linkend="Installing_and_configuring_open_stack_platform">Installing and configuring OpenStack Platform</link></simpara>
@@ -945,7 +936,7 @@
 <listitem>
 <simpara>Ensure that the storage backends have sufficient space for the migrated virtual machines.</simpara>
 <important>
-<simpara>If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies (see <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas">Get the Number of Object Replicas</link> in the <emphasis>Red Hat Ceph Storage: Storage Strategies Guide</emphasis>).</simpara>
+<simpara>If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas">Get the Number of Object Replicas</link> in the <emphasis>Red Hat Ceph Storage: Storage Strategies Guide</emphasis>.</simpara>
 <simpara>The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.</simpara>
 <simpara>You can use the <literal>fstrim</literal> command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.</simpara>
 </important>
@@ -1003,7 +994,7 @@
 </section>
 <section xml:id="Deploying_osp_conversion_hosts">
 <title>Deploying the OpenStack Platform conversion hosts</title>
-<simpara>Download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See <xref linkend="Deciding_how_many_conversion_hosts_to_create"/> for details.</simpara>
+<simpara>You can download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See <xref linkend="Deciding_how_many_conversion_hosts_to_create"/> for details.</simpara>
 <simpara xml:id="Downloading_the_conversion_host_appliance">To download the conversion host appliance:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
@@ -1070,11 +1061,9 @@
 </section>
 <section xml:id="Configuring_the_conversion_hosts">
 <title>Configuring the conversion hosts</title>
-<simpara>You can select, authenticate, and configure your conversion hosts for VDDK or SSH transformation:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>VDDK:</simpara>
+<simpara>Configure your conversion hosts for VDDK or SSH transformation.</simpara>
 <orderedlist numeration="arabic">
+<title>VDDK</title>
 <listitem>
 <simpara><xref linkend="Downloading_vddk"/></simpara>
 </listitem>
@@ -1082,10 +1071,8 @@
 <simpara><xref linkend="Configuring_conversion_hosts_in_cloudforms"/></simpara>
 </listitem>
 </orderedlist>
-</listitem>
-<listitem>
-<simpara>SSH:</simpara>
 <orderedlist numeration="arabic">
+<title>SSH</title>
 <listitem>
 <simpara><xref linkend="Configuring_conversion_hosts_in_cloudforms"/></simpara>
 </listitem>
@@ -1093,21 +1080,28 @@
 <simpara><xref linkend="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts"/></simpara>
 </listitem>
 </orderedlist>
-</listitem>
-</itemizedlist>
-<simpara>After configuring the conversion hosts, you can <link linkend="Verifying_conversion_hosts">verify the conversion hosts</link> using an API call in a browser. This command returns the conversion host names and number. It does not check configuration.</simpara>
+<simpara>Optionally, you can verify the name and number of the conversion hosts using an API call in a browser. See <xref linkend="Verifying_conversion_hosts"/>.</simpara>
 <important>
-<simpara>If you upgrade your target environment, update the conversion hosts to ensure that you have the latest software and critical updates:</simpara>
-<itemizedlist>
+<simpara>If you upgrade your target environment, update the conversion hosts to ensure that you have the latest software and critical updates.</simpara>
+<orderedlist numeration="arabic">
+<title>Red Hat Virtualization</title>
 <listitem>
-<simpara>Red Hat Virtualization</simpara>
-<simpara>Run <literal>yum update</literal> on the conversion hosts.</simpara>
+<simpara>Log in to each the conversion host using SSH.</simpara>
 </listitem>
 <listitem>
-<simpara>OpenStack Platform</simpara>
-<simpara>Download the latest conversion host appliance and re-deploy the conversion hosts as described in <xref linkend="Deploying_osp_conversion_hosts"/>.</simpara>
+<simpara>Enter the following command:</simpara>
+<screen># yum update</screen>
 </listitem>
-</itemizedlist>
+</orderedlist>
+<orderedlist numeration="arabic">
+<title>OpenStack Platform</title>
+<listitem>
+<simpara><link linkend="Downloading_the_conversion_host_appliance">Download the latest conversion host appliance</link>.</simpara>
+</listitem>
+<listitem>
+<simpara><link linkend="Deploying_osp_conversion_hosts">Re-deploy the conversion hosts</link>.</simpara>
+</listitem>
+</orderedlist>
 </important>
 <section xml:id="Downloading_vddk">
 <title>Downloading VDDK</title>
@@ -1254,7 +1248,8 @@
 <simpara>To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the <literal>known_hosts</literal> file of each conversion host must be populated with the public keys of the VMware hypervisors.</simpara>
 <simpara>Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled SSH access on the hypervisors</link>, or you can use <literal>ssh-keyscan</literal>.</simpara>
 <warning>
-<simpara>You must run <literal>ssh-keyscan</literal> multiple times, once for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.</simpara>
+<simpara>You must run <literal>ssh-keyscan</literal> multiple times, once for each VMware hypervisor.</simpara>
+<simpara>Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.</simpara>
 </warning>
 <simpara>Perform the following procedure on the Manager machine:</simpara>
 <orderedlist numeration="arabic">
@@ -1275,7 +1270,8 @@
 <simpara>To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the <literal>known_hosts</literal> file of each conversion host must be populated with the public keys of the VMware hypervisors.</simpara>
 <simpara>Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled SSH access on the hypervisors</link>, or you can use <literal>ssh-keyscan</literal>.</simpara>
 <warning>
-<simpara>You must run <literal>ssh-keyscan</literal> multiple times, once for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.</simpara>
+<simpara>You must run <literal>ssh-keyscan</literal> multiple times, once for each VMware hypervisor.</simpara>
+<simpara>Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.</simpara>
 </warning>
 <simpara>Perform the following procedure on a conversion host:</simpara>
 <orderedlist numeration="arabic">
@@ -1300,7 +1296,7 @@
 </section>
 <section xml:id="Verifying_conversion_hosts">
 <title>(Optional) Verifying the conversion hosts in a browser</title>
-<simpara>To view the conversion hosts:</simpara>
+<simpara>You can use an API call to verify the IDs of your conversion hosts:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
@@ -1970,7 +1966,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>If the virtual machines cannot be added to the migration plan with a CSV file, check the   <link linkend="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan">CSV file format and fields</link>. Create a new migration plan with the updated CSV file.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Create Migration Plan</emphasis> wizard hang while importing CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields). You must reload the web page. This is a <link linkend="Known_issues">known issue</link> and will be addressed in a future release.</simpara>
+<simpara><emphasis role="strong">Create Migration Plan</emphasis> wizard hangs while importing CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate <literal>Name</literal> field and no <literal>Host</literal>/<literal>Provider</literal> field to distinguish them, or with a duplicate <literal>Name</literal> field and duplicate <literal>Host</literal>/<literal>Provider</literal> fields). You must reload the web page. This is a <link linkend="Known_issues">known issue</link> and will be addressed in a future release.</simpara>
 </listitem>
 <listitem>
 <simpara><literal>Denied State</literal> error (IMS 1.1). If a migration plan fails immediately and the migration plan displays a <literal>Denied State</literal> error message, check that you have created and configured the conversion hosts correctly. <link linkend="Canceling_a_migration_plan">Cancel the migration plan</link> and <link linkend="Retrying_a_failed_migration_plan">retry it</link>.</simpara>
@@ -1992,10 +1988,10 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>If a migrated virtual machine does not have an IP address:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Check that VMware Tools is installed on the source virtual machine.</simpara>
+<simpara>Check that VMware Tools is installed on the VMware virtual machine before migration.</simpara>
 </listitem>
 <listitem>
-<simpara>OpenStack Platform: Check the source virtual machine for an interface configuration file mapped to a non-existent interface (for example, <literal>/etc/sysconfig/network-scripts/ifcfg-eth1</literal> exists, but <literal>eth1</literal> interface does not). Log example:</simpara>
+<simpara><emphasis role="strong">OpenStack Platform</emphasis>: Check the source virtual machine for an interface configuration file mapped to a non-existent interface (for example, <literal>/etc/sysconfig/network-scripts/ifcfg-eth1</literal> exists, but <literal>eth1</literal> interface does not). Log example:</simpara>
 <screen>CalledProcessError: Command '['openstack', u'--os-username=admin', u'--os-identity-api-version=3', u'--os-user-domain-name=default', u'--os-auth-url=http://<emphasis>osp.example.com</emphasis>:5000/v3', u'--os-project-name=admin', u'--os-password=****<emphasis role="strong">*</emphasis>*<emphasis>, u</emphasis>--os-project-id=0123456789abcdef0123456789abcdef', 'port', 'create', '--format', 'json', '--network', u'01234567-89ab-cdef-0123-456789abcdef', '--mac-address', u'00:50:56:01:23:45', '--enable', u'port_0', '--fixed-ip', '<emphasis role="strong">ip-address=None</emphasis>'"]' returned non-zero exit status 1
 <emphasis>date</emphasis> <emphasis>time</emphasis>:ERROR: Command output:
 BadRequestException: Unknown error</screen>
@@ -2020,11 +2016,12 @@ BadRequestException: Unknown error</screen>
 <simpara>Invalid name (containing spaces or special characters)</simpara>
 </listitem>
 </itemizedlist>
-<simpara>If you are using SSH transformation, see <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
+<simpara>If you are using SSH transformation, check the configuration of the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
 </section>
 <section xml:id="RHV_VM_migration_failure">
 <title>Red Hat Virtualization</title>
-<itemizedlist xml:id="RHV_name_conflict">
+<simpara xml:id="RHV_name_conflict">The following conditions can cause a migration error for Red Hat Virtualization:</simpara>
+<itemizedlist>
 <listitem>
 <simpara>Name conflict: VMware virtual machine has the same name as a RHV virtual machine.</simpara>
 </listitem>
@@ -2032,16 +2029,16 @@ BadRequestException: Unknown error</screen>
 <simpara>MAC address conflict: VMware virtual machine has the same MAC address as a RHV virtual machine in a MAC address pool.</simpara>
 </listitem>
 <listitem>
-<simpara>SSH transformation failure:</simpara>
+<simpara>SSH transformation only:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>If you are using SSSD with single sign-on, <link linkend="Reinstalling_ipa_client">reinstall <literal>ipa-client</literal></link> without the OpenSSH client on the Manager machine.</simpara>
+<simpara>If you are using SSSD with single sign-on, <link linkend="Reinstalling_ipa_client">reinstall <literal>ipa-client</literal></link> without OpenSSH.</simpara>
 </listitem>
 <listitem>
 <simpara>Check that SSH transformation was correctly configured. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> and <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Check that the conversion host does not have an existing private SSH key in <literal>/var/lib/vdsm/.ssh/id_rsa</literal>. Conversion host configuration does not overwrite SSH keys. They must be deleted manually.</simpara>
+<simpara>Check that the conversion host does not have an existing private SSH key in <literal>/var/lib/vdsm/.ssh/id_rsa</literal>. Conversion host configuration does not overwrite old SSH keys. They must be deleted manually.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -2049,12 +2046,13 @@ BadRequestException: Unknown error</screen>
 </section>
 <section xml:id="OSP_VM_migration_failure">
 <title>OpenStack Platform</title>
+<simpara>The following conditions can cause a migration error for OpenStack Platform:</simpara>
 <itemizedlist xml:id="OSP_VM_powered_off">
 <listitem>
-<simpara>Virtual machine powered off: The virtual machine must be powered on at the time of migration.</simpara>
+<simpara>VMware virtual machine powered off: The virtual machine must be powered on at the time of migration.</simpara>
 </listitem>
 <listitem>
-<simpara>SSH transformation failure: Check that SSH transformation was correctly configured. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> and <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
+<simpara>SSH transformation only: Check that SSH transformation was correctly configured. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> and <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist xml:id="OSP_not_authorized">
@@ -2081,13 +2079,13 @@ BadRequestException: Unknown error</screen>
 <simpara>The following issues will be addressed in a future release:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Canceling a migration does not stop the creation of volumes, instances, and network ports (OpenStack Platform), or virtual machines (Red Hat Virtualization). <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">https://bugzilla.redhat.com/show_bug.cgi?id=1666799</link></simpara>
+<simpara>Canceling a migration does not stop the creation of volumes, instances, and network ports in OpenStack Platform or virtual machines in Red Hat Virtualization. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">https://bugzilla.redhat.com/show_bug.cgi?id=1666799</link></simpara>
 </listitem>
 <listitem>
-<simpara>Migrating over SSH and VDDK transformation method with names containing international chars or spaces fails to migrate. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1678385">https://bugzilla.redhat.com/show_bug.cgi?id=1678385</link></simpara>
+<simpara>Virtual machines with names containing international chars or spaces fail to migrate. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1678385">https://bugzilla.redhat.com/show_bug.cgi?id=1678385</link></simpara>
 </listitem>
 <listitem>
-<simpara>Migration plan CSV import validation not working if file contains empty/archived/orphan/invalid VM name. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1699343">https://bugzilla.redhat.com/show_bug.cgi?id=1699343</link></simpara>
+<simpara>Migration plan’s CSV import validation does not work. Migration plan hangs if the CSV file contains an empty, archived, orphan, or invalid VM name. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1699343">https://bugzilla.redhat.com/show_bug.cgi?id=1699343</link></simpara>
 </listitem>
 <listitem>
 <simpara><emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1698761">https://bugzilla.redhat.com/show_bug.cgi?id=1698761</link></simpara>
@@ -2107,7 +2105,7 @@ BadRequestException: Unknown error</screen>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">CloudForms</emphasis>: CFME 5.10.4 does not support migration. Use the following versions:</simpara>
+<simpara><emphasis role="strong">CloudForms</emphasis>: CFME 5.10.4 does not support migration. The following versions support migration:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>OpenStack Platform (all versions): CFME 5.10.3</simpara>

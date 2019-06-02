@@ -21,7 +21,7 @@ Some of these hosts will be deployed as conversion hosts. The number of conversi
 * 902 - CloudForms to VMware
 * 5480 - Conversion hosts to vCenter
 +
-For details, see https://access.redhat.com/articles/417343[].
+For details, see https://access.redhat.com/articles/417343[Ports used by Red Hat CloudForms Management Engine 5.1 and above].
 
 . Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines (see link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_).
 +
@@ -38,15 +38,15 @@ The VirtIO file name must include the version number: +virtio-win-_version_.iso+
 +
 [IMPORTANT]
 ====
-If the RHV MAC address pool range overlaps the VMware MAC address range, you must ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines. Otherwise, the migration will fail.
+If the Red Hat Virtualization MAC address pool range overlaps the VMware MAC address range, you must ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines. Otherwise, the migration will fail.
 
-If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in RHV.
+If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in Red Hat Virtualization.
 ====
 
 [id="Reinstalling_ipa_client"]
 = Reinstalling `ipa-client`
 
-If you are configuring the conversion hosts to use SSSD with single sign-on, you should reinstall `ipa-client` without the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[]). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
+If you are configuring the conversion hosts to use SSSD with single sign-on, you should reinstall `ipa-client` without the OpenSSH client. Otherwise, SSH will fail for the vdsm user (see link:https://bugzilla.redhat.com/show_bug.cgi?id=1544379[ipa-client-install changes system-wide SSH configuration]). This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.
 
 On the Manager machine, run the following commands:
 
@@ -74,11 +74,9 @@ ifdef::osp[]
 +
 [IMPORTANT]
 ====
-If you are using Ceph storage, you will require three times the space of the source virtual machines for the migrated virtual machines. Ceph, by default, creates two replicas of an object, for a total of three copies. See link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_.
+If you are using Red Hat Ceph Storage, you will require three times the space of the source virtual machines for the migrated virtual machines because it creates two replicas of an object, for a total of three copies. See link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas[Get the Number of Object Replicas] in the _Red Hat Ceph Storage: Storage Strategies Guide_.
 
-The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of Ceph storage, regardless of how much data is on the disk.
-
-You can use the `fstrim` command on the migrated virtual machines to reduce the space required, as a postmigration task or playbook.
+The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of storage, regardless of how much data the disk contains. To reduce the space required, you can use the `fstrim` command on the migrated virtual machines as a postmigration task or playbook.
 ====
 
 . Configure security groups with the following ports enabled:
@@ -133,16 +131,16 @@ Removing or changing a provider before, during, or after the migration will caus
 [id="Deploying_osp_conversion_hosts"]
 = Deploying Red Hat OpenStack Platform conversion hosts
 
-You can download the conversion host appliance and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+You can download the conversion appliance (`RHOSP V2V Image for Red Hat OpenStack Director`) and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
 
-. Navigate to link:https://access.redhat.com/downloads/[].
+. Navigate to link:https://access.redhat.com/downloads/[Red Hat Product Downloads].
 . In the *A-Z* tab, click *Red Hat OpenStack Platform*.
-. Click the green *Download Latest* button to go to the Red Hat OpenStack Platform download page.
-. Click the *Product Software* tab and download the `RHOSP V2V Image for Red Hat OpenStack Director (x86_64)`.
+. Click the green *Download Latest* button to go to the *Download Red Hat OpenStack Platform* page.
+. In the *Product Software* tab, locate the latest version of the `RHOSP V2V Image for Red Hat OpenStack Director (x86_64)`, click the *Download Now* button, and save the image.
 +
 [IMPORTANT]
 ====
-Always download the latest version of the Red Hat OpenStack Platform conversion appliance because it contains patches and fixes. The Red Hat OpenStack Platform 14 conversion appliance can be used with both Red Hat OpenStack Platform 13 and 14.
+Always download the latest version to ensure that you have important patches and fixes. The `RHOSP V2V Image for Red Hat OpenStack Director (x86_64)` for Red Hat OpenStack Platform 14 can be used with both Red Hat OpenStack Platform 13 and 14.
 ====
 
 . Upload the appliance to Glance storage.
@@ -159,7 +157,7 @@ Always download the latest version of the Red Hat OpenStack Platform conversion 
 For optimal performance:
 
 * Deploy the conversion hosts on more than one hypervisor.
-* Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]. Nested virtualization is a technology preview.
+* Deploy the conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[Configure DevStack with KVM-based Nested Virtualization]. Nested virtualization is a technology preview.
 ====
 
 . Increase the disk space of the instance to accommodate its file system.

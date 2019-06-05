@@ -420,7 +420,7 @@
 <simpara>Requires VDDK library location for configuring the conversion hosts</simpara>
 </listitem>
 <listitem>
-<simpara>Limited to 20 concurrent migrations per conversion host due to ESXi memory limitation. See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.)</simpara>
+<simpara>Limited to 20 concurrent migrations per conversion host due to ESXi memory limitation. See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.</simpara>
 </listitem>
 </itemizedlist></entry>
 </row>
@@ -938,8 +938,8 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <listitem>
 <simpara>Ensure that the storage backends have sufficient space for the migrated virtual machines.</simpara>
 <important>
-<simpara>If you are using Red Hat Ceph Storage, you will require three times the space of the source virtual machines for the migrated virtual machines because it creates two replicas of an object, for a total of three copies. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/storage_strategies_guide/index#get_the_number_of_object_replicas">Get the Number of Object Replicas</link> in the <emphasis>Red Hat Ceph Storage: Storage Strategies Guide</emphasis>.</simpara>
-<simpara>The migrated virtual machines use all of the space because it is preallocated. For example, if you migrate a virtual machine with a 100 GB disk, you will require 300 GB of storage, regardless of how much data the disk contains. To reduce the space required, you can use the <literal>fstrim</literal> command on the migrated virtual machines as a postmigration task or playbook.</simpara>
+<simpara>If you are using Red Hat Ceph Storage, you will require three times the space of the source virtual machines for the migrated virtual machines. A Ceph storage cluster, by default, creates two copies of an object in a replicated storage pool, for a total of three copies. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/architecture_guide/index#concept-arch-data-copies-arch">Data Copies</link> in the <emphasis>Red Hat Ceph Storage Architecture Guide</emphasis>.</simpara>
+<simpara>The migrated disks use all of the space because it is preallocated. For example, a source virtual machine with a 100 GB disk requires 300 GB of storage, regardless of how much data the disk actually contains. To save storage space, you can use the <literal>fstrim</literal> command on the migrated virtual machines as a postmigration task or playbook.</simpara>
 </important>
 </listitem>
 <listitem>
@@ -1050,7 +1050,8 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>Increase the disk space of the instance to accommodate its file system. The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the PV in the VG, to the required size, or you can create a new partition and add it as a PV to the VG.</simpara>
+<simpara>Increase the disk space of the instance to accommodate its file system.</simpara>
+<simpara>The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition, and subsequently extend the physical volume in the volume group, to the required size, or you can create a new partition and add it as a physical volume to the volume group.</simpara>
 <note>
 <simpara>You must resize <literal>lv_root</literal> to use all available disk space because the image will not use it by default.</simpara>
 </note>

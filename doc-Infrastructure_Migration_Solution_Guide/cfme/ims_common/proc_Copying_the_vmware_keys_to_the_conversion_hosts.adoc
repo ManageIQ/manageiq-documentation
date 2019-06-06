@@ -1,61 +1,90 @@
 // Module included in the following assemblies:
-// proc_Configuring_the_conversion_hosts_for_transformation.adoc
+// IMS_1.2/mocules/proc_Configuring_the_conversion_hosts_for_transformation.adoc
 [id="Copying_the_vmware_keys_for_SSH_for_{context}"]
+
 ifdef::rhv[]
-= Copying the VMware keys for Red Hat Virtualization
+= Copying VMware keys to Red Hat Virtualization conversion hosts
 endif::rhv[]
 ifdef::osp[]
-= Copying the VMware keys for Red Hat OpenStack Platform
+= Copying VMware keys to Red Hat OpenStack Platform conversion hosts
 endif::osp[]
 
-To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the `known_hosts` file of each conversion host must be populated with the public keys of the VMware hypervisors.
+If you collected the keys when you xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[enabled the VMware hypervisors for SSH transformation], you can copy the keys to `known-hosts` and verify the SSH connection. See xref:Copying_collected_vmware_keys[]
 
-Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[enabled SSH access on the hypervisors], or you can use `ssh-keyscan`.
+If you did not collect the VMware keys at that stage, you can use `ssh-keyscan`. See
+
+[id="Copying_collected_vmware_keys"]
+.Deploying collected VMware keys
+
+ifdef::rhv[]
+. Copy the VMware keys to `/var/lib/vdsm/.ssh/known_hosts` on the Manager machine.
+include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
+endif::rhv[]
+ifdef::osp[]
+. Copy the VMware keys to `/root/.ssh/known_hosts` on each conversion host.
+include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
+endif::osp[]
+
+
+.Collecting VMware keys with `ssh-keyscan`
+
+You can collect the VMware keys with `ssh-keyscan` and copy them to the conversion hosts.
 
 [CAUTION]
 ====
-You must run `ssh-keyscan` multiple times, once for each VMware hypervisor.
-
-Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.
+You must run `ssh-keyscan` for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.
 ====
 
 ifdef::rhv[]
 Perform the following procedure on the Manager machine:
 
-. Run `ssh-keyscan` for each VMware hypervisor, using its IP address, and output the public key to `known_hosts`, as in the following example:
+. Run `ssh-keyscan` for each VMware hypervisor IP address and output its public key to `known_hosts`, as in the following example:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-keyscan _10.19.2.12_ > /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan _10.19.2.13_ >> /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan _10.19.2.14_ >> /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx1_IP_ > /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx2_IP_ >> /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx3_IP_ >> /var/lib/vdsm/.ssh/known_hosts
 ----
 
-. Change the ownership of the `known_hosts` file to user `vdsm` and group `kvm`:
+. Change the ownership of the `known_hosts` file to `vdsm` user and `kvm` group:
 +
 ----
 # chown 36:36 /var/lib/vdsm/.ssh/known_hosts
 ----
 endif::rhv[]
 ifdef::osp[]
-Perform the following procedure on a conversion host:
+Perform the following procedure on *all* conversion hosts:
 
-. Run `ssh-keyscan` for each VMware hypervisor, using its IP address, and output the public key to `known_hosts`, as in the following example:
+Run `ssh-keyscan` for each VMware hypervisor IP address and output the public key to `known_hosts`, as in the following example:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-keyscan _10.19.2.12_ > /root/.ssh/known_hosts
-# ssh-keyscan _10.19.2.13_ >> /root/.ssh/known_hosts
-# ssh-keyscan _10.19.2.14_ >> /root/.ssh/known_hosts
+# ssh-keyscan _esx1_IP_ > /root/.ssh/known_hosts
+# ssh-keyscan _esx2_IP_ >> /root/.ssh/known_hosts
+# ssh-keyscan _esx3_IP_ >> /root/.ssh/known_hosts
 ----
-
-. Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.
-. Connect to each VMware hypervisor from each conversion host as `cloud-user` to verify the SSH connection.
-+
-[IMPORTANT]
-====
-If the SSH connection to a VMware hypervisor fails, check xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
-====
-+
-If the connection is successful, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].
 endif::osp[]
+
+//[id="Verifying_the_SSH_connection_for_{context}_conversion_hosts"]
+.Verifying the SSH connection
+
+ifdef::rhv[]
+Connect to each VMware hypervisor as `vdsm` to verify the SSH connection:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u vdsm ssh root@_esx1.example.com_
+----
+endif::rhv[]
+ifdef::osp[]
+. Connect to each VMware hypervisor as `cloud-user` to verify the SSH connection:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u cloud-user ssh root@_esx1.example.com_
+----
+endif::osp[]
+
+
+If the connection is successful, you can create an infrastructure mapping. See xref:Creating_an_infrastructure_mapping[].

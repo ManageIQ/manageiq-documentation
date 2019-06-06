@@ -643,7 +643,7 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <simpara>Enable SSH access on each VMware hypervisor:</simpara>
 <simpara>For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
 <note>
-<simpara>If your security processes allow you to collect the VMware hypervisors' public keys, save them for <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
+<simpara>If your security policies allow you to collect the VMware hypervisors' public keys at this stage, save them for <xref linkend="Configuring_the_conversion_hosts"/>.</simpara>
 </note>
 </listitem>
 <listitem>
@@ -1084,25 +1084,16 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <simpara>Optionally, you can verify the name and number of the conversion hosts using an API call in a browser. See <xref linkend="Verifying_conversion_hosts"/>.</simpara>
 <important>
 <simpara>If you upgrade your target environment, update the conversion hosts to ensure that you have the latest software and critical updates.</simpara>
-<orderedlist numeration="arabic">
+<formalpara>
 <title>Red Hat Virtualization</title>
-<listitem>
-<simpara>Log in to each the conversion host using SSH.</simpara>
-</listitem>
-<listitem>
-<simpara>Enter the following command:</simpara>
+<para>Enter the following command on each conversion host:</para>
+</formalpara>
+<simpara>+</simpara>
 <screen># yum update</screen>
-</listitem>
-</orderedlist>
-<orderedlist numeration="arabic">
+<formalpara>
 <title>Red Hat OpenStack Platform</title>
-<listitem>
-<simpara>Download the latest conversion host appliance. See <xref linkend="Deploying_osp_conversion_hosts"/>.</simpara>
-</listitem>
-<listitem>
-<simpara>Re-deploy the conversion hosts.</simpara>
-</listitem>
-</orderedlist>
+<para>Download the latest conversion host appliance and redeploy the conversion hosts. See <xref linkend="Deploying_osp_conversion_hosts"/>.</para>
+</formalpara>
 </important>
 <section xml:id="Downloading_vddk">
 <title>Downloading VDDK</title>
@@ -1142,6 +1133,12 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <simpara>Perform the following procedures in the <emphasis role="strong">Configure Conversion Host</emphasis> wizard:</simpara>
 </listitem>
 </orderedlist>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
 <informaltable frame="all" rowsep="1" colsep="1">
 <tgroup cols="2">
 <colspec colname="col_1" colwidth="25*"/>
@@ -1158,12 +1155,13 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <entry align="left" valign="top"><orderedlist numeration="arabic">
 <listitem>
 <simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+<simpara>The <emphasis role="strong">Provider</emphasis> and Red Hat Virtualization <emphasis role="strong">Cluster</emphasis> / Red Hat OpenStack Platform <emphasis role="strong">Project</emphasis> dropdown lists are displayed.</simpara>
 </listitem>
 <listitem>
 <simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara>Select a Red Hat Virtualization <emphasis role="strong">Cluster</emphasis> / Red Hat OpenStack Platform <emphasis role="strong">Project</emphasis>.</simpara>
+<simpara>Select a <emphasis role="strong">Cluster</emphasis> / <emphasis role="strong">Project</emphasis>.</simpara>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
@@ -1185,7 +1183,7 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <entry align="left" valign="top"><simpara><emphasis role="strong">Authentication</emphasis></simpara></entry>
 <entry align="left" valign="top"><orderedlist numeration="arabic">
 <listitem>
-<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH key or paste it in the <emphasis role="strong">Conversion host SSH key</emphasis> field.</simpara>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Red Hat Virtualization Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is <literal>/etc/pki/ovirt-engine/keys/engine_id_rsa</literal> on the Manager machine.</simpara>
@@ -1199,27 +1197,44 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <simpara>Select <emphasis role="strong">SSH</emphasis> or <emphasis role="strong">VDDK</emphasis> as a <emphasis role="strong">Transformation method</emphasis>.</simpara>
 <itemizedlist>
 <listitem>
-<simpara><emphasis role="strong">SSH</emphasis>: Click <emphasis role="strong">Browse</emphasis> to browse to the SSH key or paste it in the <emphasis role="strong">VMware hypervisors SSH key</emphasis> field. The VMware keys are copied to the conversion hosts in a separate step and are not deployed automatically, in order to prevent man-in-the-middle attacks.</simpara>
-<important>
-<simpara><emphasis role="strong">Red Hat Virtualization</emphasis>: If a Red Hat Virtualization host has an existing SSH private key, you must delete the old key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring the conversion host. Conversion host configuration does not overwrite existing keys.</simpara>
-</important>
-</listitem>
-<listitem>
-<simpara><emphasis role="strong">VDDK</emphasis>: Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
+<simpara><emphasis role="strong">SSH</emphasis>: Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created in <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
+</orderedlist>
+<informalexample>
+<simpara><emphasis role="strong">Red Hat Virtualization</emphasis> only: If a host already has an SSH private key, you must delete the key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring it as a conversion host. Conversion host configuration does not overwrite existing keys.</simpara>
+</informalexample>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">VDDK</emphasis>: Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
 </listitem>
-</orderedlist></entry>
+</orderedlist>
+</listitem>
+</itemizedlist></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">Results</emphasis></simpara></entry>
 <entry align="left" valign="top"><simpara>Wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
 <simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
-<simpara>Click <emphasis role="strong">Remove</emphasis> to unconfigure a conversion host or <emphasis role="strong">Retry</emphasis> to retry a conversion host configuration.</simpara>
-<simpara>You can verify the names and number of conversion hosts using an API call in a browser. See <xref linkend="Verifying_conversion_hosts"/>.</simpara></entry>
+<simpara>If an error occurs, you can download a conversion host’s configuration log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>. You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>Optional:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Click <emphasis role="strong">Remove</emphasis> to unconfigure a configured conversion host.</simpara>
+</listitem>
+<listitem>
+<simpara>Verify the names and number of conversion hosts using an API call in a browser. See <xref linkend="Verifying_conversion_hosts"/>.</simpara>
+</listitem>
+</itemizedlist></entry>
 </row>
 </tbody>
 </tgroup>
@@ -1229,70 +1244,86 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <simpara>If you are using VDDK transformation, you can start the infrastructure migration. See <xref linkend="Migrating_the_infrastructure"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>If you are using SSH transformation, copy the VMware SSH keys to the conversion hosts.</simpara>
+<simpara>If you are using SSH transformation, you are ready to copy the SSH public keys of the VMware hypervisors to the conversion hosts. See <xref linkend="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts"/>.</simpara>
 </listitem>
 </itemizedlist>
 </section>
 <section xml:id="Ssh_only_copying_the_vmware_keys_to_the_conversion_hosts">
-<title>Copying the VMware SSH keys to the conversion hosts</title>
-<simpara>Copy the VMware SSH keys to the conversion hosts for your environment:</simpara>
-<itemizedlist>
-<listitem>
-<simpara><link linkend="Copying_the_vmware_keys_for_SSH_for_rhv">Red Hat Virtualization</link></simpara>
-</listitem>
-<listitem>
-<simpara><link linkend="Copying_the_vmware_keys_for_SSH_for_osp">Red Hat OpenStack Platform</link></simpara>
-</listitem>
-</itemizedlist>
+<title>Copying the VMware keys to the conversion hosts</title>
+<simpara>To prevent man-in-the-middle attacks, the conversion hosts do not accept the SSH public keys of the VMware hypervisors automatically. Instead, the <literal>known_hosts</literal> file of each conversion host is manually populated with the keys.</simpara>
 <section xml:id="Copying_the_vmware_keys_for_SSH_for_rhv">
-<title>Copying the VMware keys for Red Hat Virtualization</title>
-<simpara>To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the <literal>known_hosts</literal> file of each conversion host must be populated with the public keys of the VMware hypervisors.</simpara>
-<simpara>Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled SSH access on the hypervisors</link>, or you can use <literal>ssh-keyscan</literal>.</simpara>
+<title>Copying VMware keys to Red Hat Virtualization conversion hosts</title>
+<simpara>If you collected the keys when you enabled the <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled the VMware hypervisors for SSH transformation</link>, perform the following steps to copy the keys to the conversion hosts:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Copy the VMware keys to <literal>/var/lib/vdsm/.ssh/known_hosts</literal> on the Manager machine.</simpara>
+</listitem>
+<listitem>
+<simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal> user:</simpara>
+<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<important>
+<simpara>If the SSH connection to a VMware hypervisor fails, see <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> to check the configuration.</simpara>
+</important>
+</listitem>
+</orderedlist>
+<simpara>You can collect the VMware keys with <literal>ssh-keyscan</literal> and copy them to the conversion hosts.</simpara>
 <caution>
-<simpara>You must run <literal>ssh-keyscan</literal> multiple times, once for each VMware hypervisor.</simpara>
-<simpara>Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.</simpara>
+<simpara>You must run <literal>ssh-keyscan</literal> for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.</simpara>
 </caution>
 <simpara>Perform the following procedure on the Manager machine:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor, using its IP address, and output the public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>10.19.2.12</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan <emphasis>10.19.2.13</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts
-# ssh-keyscan <emphasis>10.19.2.14</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts</screen>
+<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor IP address and output its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts</screen>
 </listitem>
 <listitem>
-<simpara>Change the ownership of the <literal>known_hosts</literal> file to user <literal>vdsm</literal> and group <literal>kvm</literal>:</simpara>
+<simpara>Change the ownership of the <literal>known_hosts</literal> file to <literal>vdsm</literal> user and <literal>kvm</literal> group:</simpara>
 <screen># chown 36:36 /var/lib/vdsm/.ssh/known_hosts</screen>
 </listitem>
 </orderedlist>
+<formalpara>
+<title>Verifying the SSH connection</title>
+<para>Connect to each VMware hypervisor as <literal>vdsm</literal> to verify the SSH connection:</para>
+</formalpara>
+<simpara>+</simpara>
+<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<simpara>If the connection is successful, you can create an infrastructure mapping. See <xref linkend="Creating_an_infrastructure_mapping"/>.</simpara>
 </section>
 <section xml:id="Copying_the_vmware_keys_for_SSH_for_osp">
-<title>Copying the VMware keys for Red Hat OpenStack Platform</title>
-<simpara>To prevent man-in-the-middle attacks, the conversion hosts do not accept the VMware keys by default for SSH transformation. Instead, the <literal>known_hosts</literal> file of each conversion host must be populated with the public keys of the VMware hypervisors.</simpara>
-<simpara>Depending on the security processes of your VMware environment, you can either obtain a list of public keys from the VMware system administrators, if they collected the keys when they <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled SSH access on the hypervisors</link>, or you can use <literal>ssh-keyscan</literal>.</simpara>
-<caution>
-<simpara>You must run <literal>ssh-keyscan</literal> multiple times, once for each VMware hypervisor.</simpara>
-<simpara>Otherwise your conversion hosts will not have all the VMware keys and the migration will fail.</simpara>
-</caution>
-<simpara>Perform the following procedure on a conversion host:</simpara>
+<title>Copying VMware keys to Red Hat OpenStack Platform conversion hosts</title>
+<simpara>If you collected the keys when you enabled the <link linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation">enabled the VMware hypervisors for SSH transformation</link>, perform the following steps to copy the keys to the conversion hosts:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor, using its IP address, and output the public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>10.19.2.12</emphasis> &gt; /root/.ssh/known_hosts
-# ssh-keyscan <emphasis>10.19.2.13</emphasis> &gt;&gt; /root/.ssh/known_hosts
-# ssh-keyscan <emphasis>10.19.2.14</emphasis> &gt;&gt; /root/.ssh/known_hosts</screen>
+<simpara>Copy the VMware keys to <literal>/root/.ssh/known_hosts</literal> on each conversion host.</simpara>
 </listitem>
 <listitem>
-<simpara>Repeat the procedure on each conversion host, to ensure that all the conversion hosts have all the VMware keys.</simpara>
-</listitem>
-<listitem>
-<simpara>Connect to each VMware hypervisor from each conversion host as <literal>cloud-user</literal> to verify the SSH connection.</simpara>
+<simpara>On each conversion host, connect to each VMware hypervisor as <literal>cloud-user</literal> user:</simpara>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
 <important>
-<simpara>If the SSH connection to a VMware hypervisor fails, check <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
+<simpara>If the SSH connection to a VMware hypervisor fails, see <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/> to check the configuration.</simpara>
 </important>
-<simpara>If the connection is successful, you can create an infrastructure mapping. See <xref linkend="Creating_an_infrastructure_mapping"/>.</simpara>
 </listitem>
 </orderedlist>
+<simpara>You can collect the VMware keys with <literal>ssh-keyscan</literal> and copy them to the conversion hosts.</simpara>
+<caution>
+<simpara>You must run <literal>ssh-keyscan</literal> for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.</simpara>
+</caution>
+<simpara>Perform the following procedure on <emphasis role="strong">all</emphasis> conversion hosts:</simpara>
+<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor IP address and output the public key to <literal>known_hosts</literal>, as in the following example:</simpara>
+<simpara>+</simpara>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts
+# ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts
+# ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts</screen>
+<orderedlist numeration="arabic">
+<title>Verifying the SSH connection</title>
+<listitem>
+<simpara>Connect to each VMware hypervisor as <literal>cloud-user</literal> to verify the SSH connection:</simpara>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
+</listitem>
+</orderedlist>
+<simpara>If the connection is successful, you can create an infrastructure mapping. See <xref linkend="Creating_an_infrastructure_mapping"/>.</simpara>
 </section>
 </section>
 <section xml:id="Verifying_conversion_hosts">
@@ -1833,9 +1864,10 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>In the <emphasis role="strong">Migration Throttling</emphasis> tab, select a value for <emphasis role="strong">Maximum concurrent migrations per provider</emphasis> and click <emphasis role="strong">Apply</emphasis>.</simpara>
+<simpara>In the <emphasis role="strong">Migration Throttling</emphasis> tab, select a value for <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> or <emphasis role="strong">Maximum concurrent migrations per provider</emphasis> and click <emphasis role="strong">Apply</emphasis>.</simpara>
+<simpara>The value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is constrained so that it cannot be greater than <emphasis role="strong">Maximum concurrent migrations per provider</emphasis>.</simpara>
 <note>
-<simpara>Currently, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. See <xref linkend="Known_issues"/>.</simpara>
+<simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. See <xref linkend="Known_issues"/>.</simpara>
 </note>
 </listitem>
 </orderedlist>

@@ -4,42 +4,44 @@
 [id="Configuring_secure_remote_login_to_the_vmware_hypervisors"]
 = Configuring secure remote login to the VMware hypervisors
 
+You can configure secure remote login to the VMware hypervisors with `ssh-agent` and `ssh-add`.
+
 Perform the following procedure on the Manager machine:
 
-. Enter the following command:
+. Create an `ssh-agent` session for the vdsm user:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # sudo -u vdsm ssh-agent
-----
-+
-The command returns this output:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-SSH_AUTH_SOCK=_socket_domain_; export SSH_AUTH_SOCK; <1>
+
+SSH_AUTH_SOCK=/tmp/ssh-_socket_number_/agent._pid_; export SSH_AUTH_SOCK;
 SSH_AGENT_PID=139150; export SSH_AGENT_PID;
 echo Agent pid 139150;
 ----
-<1> The `socket_domain` format is +/tmp/ssh-_socket_number_/agent._pid_+.
 
-. Enter the following commands, copying the _socket_domain_ from the output, to validate the SSH configuration for each VMware hypervisor:
+. Run `ssh-add`, with the correct `SSH_AUTH_SOCK` value, to authorize the vdsm user's private key for the `ssh-agent` session:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u vdsm SSH_AUTH_SOCK=_socket_domain_ ssh-add
+# sudo -u vdsm SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh-add
+----
+
+. Connect to each VMware hypervisor, using the `ssh-agent` session and `ssh`, to verify the secure remote login:
+
+[options="nowrap" subs="+quotes,verbatim"]
+----
 # sudo -u vdsm \
-    SSH_AUTH_SOCK=_socket_domain_ ssh root@_esx1.example.com_
+    SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh root@_esx1.example.com_
 ----
 +
 [IMPORTANT]
 ====
-These commands must be run for each VMware hypervisor.
+Ensure that you check the secure remote login for all VMware hypervisors.
 
-If the last command fails, all migrations from this VMware hypervisor using SSH transformation will fail. Check the following procedures:
+If the connection fails, all migrations from this VMware hypervisor using SSH transformation will fail. You can review the procedures for configuring SSH transformation:
 
 * xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[]
 * xref:Copying_the_vmware_keys_for_SSH_for_rhv[]
 ====
 +
-If the SSH connection is successful, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].
+If the connection is successful, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_the_red_hat_virtualization_conversion_hosts[].

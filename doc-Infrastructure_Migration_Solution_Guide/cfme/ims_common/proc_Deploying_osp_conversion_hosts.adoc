@@ -1,0 +1,45 @@
+// Module included in the following assemblies:
+// assembly_Preparing_the_1_1_environment_for_migration.adoc
+// assembly_Preparing_the_1_2_environment_for_migration.adoc
+[id="Deploying_osp_conversion_hosts"]
+= Deploying Red Hat OpenStack Platform conversion hosts
+
+You can download the conversion appliance (`RHOSP V2V Image for Red Hat OpenStack Director`) and use it to deploy the conversion host instances. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities. See xref:Deciding_how_many_conversion_hosts_to_create[] for details.
+
+. Navigate to link:https://access.redhat.com/downloads/[Red Hat Product Downloads].
+. In the *A-Z* tab, click *Red Hat OpenStack Platform*.
+. Click the green *Download Latest* button to go to the *Download Red Hat OpenStack Platform* page.
+. In the *Product Software* tab, locate `RHOSP V2V Image for Red Hat OpenStack Director 14.0.2 (x86_64)`, click the *Download Now* button, and save the image.
++
+[IMPORTANT]
+====
+Versions 14.0.3 or later cannot be used with IMS 1.1.
+====
+
+. Upload the image to Glance storage.
+. Deploy the image as a conversion host instance, with the following resources:
++
+** 4 vCPUs
+** 1 GB RAM for each concurrent migration, starting at 10 GB RAM (the xref:Changing_the_maximum_number_of_concurrent_migrations[default maximum number of concurrent migrations] per conversion host is `10`. If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.
+** `/tmp` (1 GB for each concurrent migration)
+** `/var/tmp` (1 GB for each concurrent migration)
+** `/var/logs` (5 GB)
++
+[NOTE]
+====
+For optimal performance:
+
+* Deploy conversion hosts on more than one hypervisor.
+* Deploy conversion hosts on a compute node with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[Configure DevStack with KVM-based Nested Virtualization]. Nested virtualization is a technology preview.
+====
+
+. Increase the disk space of the instance to accommodate its file system.
++
+The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size, or you can create a new partition and add it as a physical volume to the volume group.
++
+[NOTE]
+====
+You must resize `lv_root` to use all available disk space because the image will not use it by default.
+====
+
+You are ready to configure the conversion hosts.

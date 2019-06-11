@@ -7,7 +7,9 @@ Preparing the VMware source environment involves the following tasks:
 
 . Preparing the VMware network. See xref:Preparing_the_vmware_network[].
 . Preparing the VMware virtual machines. See xref:Preparing_the_source_virtual_machines[].
-. Configuring the VMware hypervisors for SSH transformation, if necessary. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
+. (SSH only) Configuring the VMware hypervisors. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
+
+(VDDK only, optional) If you intend to run more than 10 concurrent migrations per conversion host using VDDK transformation, you can increase each VMware hypervisor's memory. See xref:Increasing_esxi_memory_for_vddk_transformation[].
 
 [id="Preparing_the_vmware_network"]
 == Preparing the VMware network
@@ -25,7 +27,9 @@ Extend the VMware network to the target environment.
 
 Perform the following steps on each VMware virtual machine that you are migrating:
 
-. Install VMware Tools to capture IP addresses. For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[
+. Install VMware Tools to capture IP addresses.
++
+For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[
 VMware Workstation 5.0 Installing VMware Tools].
 . Unmount mounted ISO/CDROM disks.
 . Ensure that attached disks are not encrypted.
@@ -42,12 +46,12 @@ International characters and spaces are not permitted.
 * Red Hat Virtualization: Within the entire environment
 * Red Hat OpenStack Platform: Within a single tenant
 
-If you are using VDDK transformation, you are ready to prepare the target environment. See xref:Preparing_the_rhv_target_environment[] or Preparing_the_osp_target_environment.
+If you are using VDDK transformation, you are ready to prepare the target environment.
 
-If you are using SSH transformation, you should prepare the VMware hypervisors. See  xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
+If you are using SSH transformation, you must configure the VMware hypervisors.
 
 [id="Configuring_the_vmware_hypervisors_for_ssh_transformation"]
-== Preparing the VMware hypervisors for SSH transformation
+== (SSH only) Configuring the VMware hypervisors for SSH transformation
 
 SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:
 
@@ -57,7 +61,7 @@ For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/ind
 +
 [NOTE]
 ====
-If your security policies allow you to collect the VMware hypervisors' public keys at this stage, save them for xref:Configuring_the_conversion_hosts[].
+If your security policies allow you to collect the SSH public keys of the VMware hypervisors at this stage, save them for copying to the conversion hosts.
 ====
 
 . Generate an SSH key pair without a passphrase:
@@ -67,7 +71,7 @@ If your security policies allow you to collect the VMware hypervisors' public ke
 # ssh-keygen -N ''
 ----
 
-. Copy the public SSH key to `/etc/ssh/keys-root/authorized_keys` on *each* VMware hypervisor. (The private key is used in xref:Configuring_the_conversion_hosts[].)
+. Copy the public SSH key to `/etc/ssh/keys-root/authorized_keys` on *each* VMware hypervisor.
 
 [IMPORTANT]
 ====
@@ -76,4 +80,31 @@ A single SSH key pair for all conversion hosts is recommended because the key pa
 If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.
 ====
 
-You are ready to prepare the target environment.
+[id="Increasing_esxi_memory_for_vddk_transformation"]
+== (VDDK only, optional) Increasing the memory of VMware hypervisors for VDDK transformation
+
+If you intend to run more than 10 concurrent migrations per conversion host using VDDK transformation, you must increase the memory of each VMware hypervisor. Otherwise the migration will fail, due to an ESXi memory limitation. (See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.)
+
+.Procedure
+
+. Log in to a VMware hypervisor.
+. Change the value of `maxMemory` to `1000000000` in `/etc/vmware/hostd/config.xml`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+      <nfcsvc>
+         <path>libnfcsvc.so</path>
+         <enabled>true</enabled>
+         <maxMemory>1000000000</maxMemory>
+         <maxStreamMemory>10485760</maxStreamMemory>
+      </nfcsvc>
+----
+
+. Restart `hostd`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# /etc/init.d/hostd restart
+----
++
+You do not need to reboot the VMware hypervisor.

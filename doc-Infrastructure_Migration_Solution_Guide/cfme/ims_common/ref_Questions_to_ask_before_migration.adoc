@@ -17,10 +17,7 @@ If you exceed the capabilities of your environment, the migrations will fail. Th
 ====
 
 What operating systems can I migrate?::
-* For a list of supported guest operating systems, see link:https://access.redhat.com/articles/1351473[Converting Virtual Machines from Other Hypervisors to KVM with virt-v2v in RHEL 7 ].
-* For a list of certified guest operating systems, see link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
-+
-Although it is possible to migrate guest operating systems that are not certified for Red Hat Virtualization or Red Hat OpenStack Platform, these guests are not officially supported.
+* For a list of operating systems that you can migrate, see link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
 
 What resources does my target environment require?::
 * Your target environment must be large enough to run the migrated virtual machines in addition to the source virtual machines. The source virtual machines are not affected by the migration process.
@@ -36,10 +33,9 @@ It may be possible to migrate your applications in phases, without downtime at t
 * Check whether users will lose access to critical applications.
 
 [id="How_long_will_the_migration_take"]
-== How long will the migration take?
-
+How long will the migration take?::
 There are no specific rules to determine how long the actual migration will take. This is determined on a case-by-case basis.
-
++
 The following migration examples are provided as a guide.
 
 [id="Rhv_migration_example"]
@@ -64,25 +60,27 @@ The following migration examples are provided as a guide.
 * 20 virtual machines
 * 2 conversion hosts, maximum of 10 concurrent conversions
 * Total data migrated, using VDDK: 1000 GB
-* Hardware: See xref:Rhv_migration_example[]
+* Hardware:
+** Strong host (40 cores, 500 GB RAM)
+** Fast SSD XtremIO storage
+** Fibre Channel 8 interface for host-to-storage connection
+** 10 GbE network interface cards for all other connections
 ====
 
 [id="Deciding_how_many_conversion_hosts_to_create"]
-== How many conversion hosts do I need?
-
+How many conversion hosts do I need?::
 The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
-
++
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
-
-Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
-
++
+Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations.
++
 Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
 [id="Choosing_vddk_or_ssh_transformation"]
-== Which transformation method, VDDK or SSH?
-
-You will configure the conversion hosts to use either the VMware Virtual Disk Development Kit (VDDK) or SSH as the transformation method for converting the virtual machines. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
-
+Should I migrate my virtual machines with VDDK or SSH?::
+You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
++
 The following table compares the options.
 
 [cols="1,2,2", options="header"]
@@ -93,7 +91,7 @@ The following table compares the options.
 * Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
 .<a|* Requires VDDK package download
 * Requires VDDK library location for configuring the conversion hosts
-* Limited to 20 concurrent migrations per conversion host due to ESXi memory limitation. See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
+* Limited to 10 concurrent migrations per conversion host due to ESXi memory limitation, unless you increase the ESXi memory. See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
 
 |*SSH* .<a|* Better suited for large-scale migrations than VDDK (not affected by ESXi memory limitation)
 * Does not require additional downloads, packages, tools, or compilation

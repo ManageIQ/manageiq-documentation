@@ -1,7 +1,4 @@
-// Module included in the following assemblies:
-// assembly_Preparing_the_environment_for_migration.adoc
-// For 1.1
-[id="Preparing_the_environment_for_migration"]
+[id="Preparing_the_1_1_environment_for_migration"]
 = Preparing the environment for migration
 
 Preparing your environment for migration involves the following key steps:
@@ -10,7 +7,6 @@ Preparing your environment for migration involves the following key steps:
 * Preparing the target environment:
 ** xref:Preparing_the_rhv_target_environment[]
 ** xref:Preparing_the_osp_target_environment[]
-* Configuring the conversion hosts. See xref:Configuring_the_conversion_hosts[]
 
 include::ims_common/proc_Preparing_the_vmware_source_environment.adoc[leveloffset=+1]
 
@@ -19,35 +15,102 @@ include::ims_common/proc_Preparing_the_vmware_source_environment.adoc[leveloffse
 
 Preparing the Red Hat Virtualization environment involves the following key steps:
 
-. Installing and configuring Red Hat Virtualization 4.2
-. Installing and configuring CloudForms 4.7.3
-. Reinstalling `ipa-client`, if you are configuring the conversion hosts to use SSSD with single sign-on
+. Installing and configuring Red Hat Virtualization 4.2. See xref:Installing_rhv_4_2[].
+. Installing and configuring CloudForms 4.7.3. See xref:Installing_cf_4_7_3_with_rhv[].
+. Reinstalling `ipa-client`, if you are configuring the conversion hosts to use SSSD with single sign-on. See xref:Reinstalling_ipa_client[].
+. Configuring the conversion hosts. See xref:Configuring_the_rhv_conversion_hosts[].
 
 :context: rhv
 :rhv:
-include::ims_common/ref_Target_prerequisites.adoc[]
+include::ims_common/ref_Target_prerequisites.adoc[leveloffset=+1]
+include::modules/proc_Installing_rhv_4_2.adoc[leveloffset=+2]
+include::modules/proc_Installing_cf_4_7_3.adoc[leveloffset=+2]
+include::modules/proc_Reinstalling_ipa_client.adoc[leveloffset=+2]
 :rhv!:
 
-include::modules/proc_Installing_rhv_4_2.adoc[leveloffset=+2]
-include::modules/proc_Reinstalling_ipa_client.adoc[leveloffset=+2]
-include::modules/proc_Installing_cf_4_7_3.adoc[leveloffset=+2]
+[id="Configuring_the_rhv_conversion_hosts"]
+=== Configuring the Red Hat Virtualization conversion hosts
+
+Configuring Red Hat Virtualization conversion hosts for VDDK transformation involves the following steps:
+
+. Downloading the VMware Virtual Disk Development Kit. See xref:Downloading_vddk_for_rhv[]
+. Configuring the conversion hosts. See xref:Configuring_the_rhv_conversion_hosts_with_Ansible_playbooks[].
+. Authenticating the conversion hosts in CloudForms. See xref:Authenticating_rhv_conversion_hosts_in_cloudforms[].
+
+Configuring Red Hat Virtualization conversion hosts for SSH transformation involves the following steps:
+
+. Configuring the conversion hosts. See xref:Configuring_the_rhv_conversion_hosts_with_Ansible_playbooks[].
+. Copying the VMware SSH keys to the conversion hosts. See xref:Copying_vmware_keys_to_rhv_conversion_hosts[].
+. Configuring secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[].
+. Authenticating the conversion hosts in CloudForms. See xref:Authenticating_rhv_conversion_hosts_in_cloudforms[].
+
+:context: rhv
+:rhv:
+include::ims_common/proc_Downloading_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+3]
+
+If you are using VDDK, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_rhv_conversion_hosts_in_cloudforms[].
+
+If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_rhv_conversion_hosts[].
+
+include::ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+3]
+
+You are ready to configure secure remote login to the VMware hypervisors.
+
+include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+3]
+
+If the connection is successful, you can authenticate the conversion hosts in CloudForms. See xref:Authenticating_rhv_conversion_hosts_in_cloudforms[].
+
+include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+3]
+
+You are ready to create an infrastructure mapping. See xref:Migrating_the_virtual_machines[].
+
+(Optionally) You can verify the conversion hosts in a browser. See xref:Verifying_rhv_conversion_hosts_in_browser[].
+
+include::ims_common/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
+:rhv!:
+
 
 [id="Preparing_the_osp_target_environment"]
 == Preparing the Red Hat OpenStack Platform environment
 
 Preparing the Red Hat OpenStack Platform environment involves the following key steps:
 
-. Installing and configuring Red Hat OpenStack Platform 13 or 14
-. Installing and configuring CloudForms 4.7.3
-. Deploying the Red Hat OpenStack Platform conversion hosts
+. Installing and configuring Red Hat OpenStack Platform 13 or 14. See xref:Installing_osp_13_14[].
+. Installing and configuring CloudForms 4.7.3. See xref:Installing_cf_4_7_3_with_osp[].
+. Creating the Red Hat OpenStack Platform conversion hosts. See xref:Creating_osp_conversion_hosts[].
+. Configuring the Red Hat OpenStack Platform conversion hosts. See xref:Configuring_the_osp_conversion_hosts[].
 
 :context: osp
 :osp:
-include::ims_common/ref_Target_prerequisites.adoc[]
-:osp!:
-
+include::ims_common/ref_Target_prerequisites.adoc[leveloffset=+1]
 include::ims_common/proc_Installing_osp_13_14.adoc[leveloffset=+2]
 include::modules/proc_Installing_cf_4_7_3.adoc[leveloffset=+2]
-include::ims_common/proc_Deploying_osp_conversion_hosts[leveloffset=+2]
+include::ims_common/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+2]
+:osp!:
 
-include::modules/proc_Configuring_the_conversion_hosts.adoc[leveloffset=+1]
+[id="Configuring_the_osp_conversion_hosts"]
+=== Configuring the Red Hat OpenStack Platform conversion hosts
+
+Configuring Red Hat OpenStack Platform conversion hosts for VDDK transformation involves the following steps:
+
+. Downloading the VMware Virtual Disk Development Kit. See xref:Downloading_vddk_for_osp[]
+. Configuring the conversion hosts with Ansible. See xref:Configuring_the_osp_conversion_hosts_with_Ansible_playbooks[].
+
+Configuring Red Hat OpenStack Platform conversion hosts for SSH transformation involves the following steps:
+
+. Configuring the conversion hosts with Ansible. See xref:Configuring_the_osp_conversion_hosts_with_Ansible_playbooks[].
+. Copying the VMware SSH keys to the conversion hosts. See xref:Copying_vmware_keys_to_osp_conversion_hosts[].
+
+:context: osp
+:osp:
+include::ims_common/proc_Downloading_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+3]
+
+If you are using VDDK, you can create an infrastructure mapping. See xref:Migrating_the_virtual_machines[].
+
+If you are using SSH, you are ready to copy the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_osp_conversion_hosts[].
+
+include::ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+3]
+include::ims_common/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
+:osp!:

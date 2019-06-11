@@ -7,10 +7,10 @@ You can change the maximum number of concurrent migrations for conversion hosts 
 
 [CAUTION]
 ====
-For VDDK, the maximum number of concurrent migrations per conversion host must not be greater than `20` because of an ESXi memory limitation. See xref:Choosing_vddk_or_ssh_transformation[].
+For VDDK, an ESXi memory limitation allows a maximum of `10` concurrent migrations per conversion host, unless you increase the ESXi memory.
 ====
 
-The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations for a provider is `20` and for five conversion hosts, `3`, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x` `3` concurrent migrations).
+The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is `20` for a provider and `3` for five conversion hosts, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x` `3` concurrent migrations).
 
 An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 
@@ -18,7 +18,7 @@ A decrease maximum number of concurrent migrations affects only future migration
 
 [NOTE]
 ====
-OpenStack Platform only: If you change the maximum number of concurrent migrations, ensure that your conversion hosts have sufficient RAM. See the resource requirements in xref:Deploying_osp_conversion_hosts[].
+OpenStack Platform only: If you change the maximum number of concurrent migrations, you must ensure that your conversion hosts have sufficient RAM.
 ====
 
 Changing the maximum number of concurrent migrations for all conversion hosts::

@@ -6,13 +6,13 @@
 [id="Virtual_machines_cannot_be_discovered"]
 * If the virtual machines are being migrated for the first time and are not discovered by the migration plan, check the source datastores and networks in the infrastructure mapping.
 
-* If the virtual machines have been migrated in the past, they cannot be discovered by the migration plan. Use a xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file] to add the virtual machines to the migration plan.
+* If the virtual machines have been migrated in the past, they cannot be discovered by the migration plan. Use a CSV file to add the virtual machines to the migration plan.
 
 [id="Virtual_machines_cannot_be_added_with_CSV_file"]
-* If the virtual machines cannot be added to the migration plan with a CSV file, check the   xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file format and fields]. Create a new migration plan with the updated CSV file.
+* If the virtual machines cannot be added to the migration plan with a CSV file, check the CSV file format and fields. Create a new migration plan with the updated CSV file.
 
-* *Create Migration Plan* wizard hangs while importing CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate `Name` field and no `Host`/`Provider` field to distinguish them, or with a duplicate `Name` field and duplicate `Host`/`Provider` fields). You must reload the web page. This is a xref:Known_issues[known issue] and will be addressed in a future release.
+* *Create Migration Plan* wizard hangs while importing a CSV file. This error is caused by an invalid CVS file (for example, virtual machines with a duplicate `Name` field and no `Host`/`Provider` field to distinguish them, or with a duplicate `Name` field and duplicate `Host`/`Provider` fields). Refresh the web page.
 
-* `Denied State` error (IMS 1.1). If a migration plan fails immediately and the migration plan displays a `Denied State` error message, check that you have created and configured the conversion hosts correctly. xref:Canceling_a_migration_plan[Cancel the migration plan] and xref:Retrying_a_failed_migration_plan[retry it].
+* `Denied State` error (IMS 1.1). If a migration plan fails immediately and the migration plan displays a `Denied State` error message, check that you have created and configured the conversion hosts correctly. Cancel the migration plan and run it again.
 
-* If you have not configured conversion hosts, the following error appears after running the migration plan (IMS 1.2): `Unable to migrate VMs because no conversion host was configured at the time of the attempted migration. See the product documentation for information on configuring conversion hosts.` You can create and save a migration plan whose infrastructure mapping does not contain conversion hosts, but you cannot run the migration plan without conversion hosts.
+* `Unable to migrate VMs because no conversion host was configured at the time of the attempted migration. See the product documentation for information on configuring conversion hosts.` (IMS 1.2) You can create and save a migration plan whose infrastructure mapping does not contain conversion hosts, but you cannot run the migration plan without conversion hosts. Cancel the migration plan, create the conversion hosts, and run the migration plan again.

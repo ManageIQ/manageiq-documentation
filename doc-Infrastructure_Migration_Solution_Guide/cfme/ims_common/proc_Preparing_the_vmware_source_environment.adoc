@@ -8,8 +8,8 @@ Preparing the VMware source environment involves the following tasks:
 . Preparing the VMware network. See xref:Preparing_the_vmware_network[].
 . Preparing the VMware virtual machines. See xref:Preparing_the_source_virtual_machines[].
 . (SSH only) Configuring the VMware hypervisors. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
-
-(VDDK only, optional) If you intend to run more than 10 concurrent migrations per conversion host using VDDK transformation, you can increase each VMware hypervisor's memory. See xref:Increasing_esxi_memory_for_vddk_transformation[].
++
+(VDDK only) If you intend to run more than ten concurrent migrations per conversion host using VDDK transformation, you must increase each VMware hypervisor's memory. See xref:Increasing_esxi_memory_for_vddk_transformation[].
 
 [id="Preparing_the_vmware_network"]
 == Preparing the VMware network
@@ -19,7 +19,7 @@ Extend the VMware network to the target environment.
 [IMPORTANT]
 ====
 * The network configuration must not be changed in any way during the migration.
-* IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
+* IP addresses, VLANs, and other network configuration must not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
 ====
 
 [id="Preparing_the_source_virtual_machines"]
@@ -29,8 +29,8 @@ Perform the following steps on each VMware virtual machine that you are migratin
 
 . Install VMware Tools to capture IP addresses.
 +
-For download and installation instructions, navigate to link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[
-VMware Workstation 5.0 Installing VMware Tools].
+To download and install VMware Tools, see link:https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html[VMware Workstation 5.0: Installing VMware Tools].
+
 . Unmount mounted ISO/CDROM disks.
 . Ensure that attached disks are not encrypted.
 . Ensure that each NIC has no more than one IPv4 and/or one IPv6 address.
@@ -46,12 +46,12 @@ International characters and spaces are not permitted.
 * Red Hat Virtualization: Within the entire environment
 * Red Hat OpenStack Platform: Within a single tenant
 
-If you are using VDDK transformation, you are ready to prepare the target environment.
+If you are using VDDK transformation and you set the maximum number of concurrent migrations per conversion host to a value greater than `10`, you must increase the VMware hypervisor memory. See xref:Increasing_esxi_memory_for_vddk_transformation[]. If you are not increasing this value, no further configuration is necessary.
 
-If you are using SSH transformation, you must configure the VMware hypervisors.
+If you are using SSH transformation, you must configure the VMware hypervisors for passwordless access. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
 [id="Configuring_the_vmware_hypervisors_for_ssh_transformation"]
-== (SSH only) Configuring the VMware hypervisors for SSH transformation
+== (SSH only) Configuring the VMware hypervisors for passwordless access
 
 SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:
 
@@ -81,9 +81,11 @@ If you wish to use a dedicated SSH key pair for each conversion host, you can cr
 ====
 
 [id="Increasing_esxi_memory_for_vddk_transformation"]
-== (VDDK only, optional) Increasing the memory of VMware hypervisors for VDDK transformation
+== (VDDK only) Configuring the VMware hypervisors for more than ten concurrent migrations per conversion host
 
-If you are using VDDK transformation and you plan to run more than 10 concurrent migrations per conversion host, you must increase the VMware hypervisor's memory. Otherwise the migration will fail, due to an ESXi service memory limitation. (See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.)
+If you set the maximum number of concurrent migrations per conversion host to a value greater than ten, while using VDDK transformation, you must increase the memory of the VMware hypervisors. Otherwise the migration will fail, due to an ESXi service memory limitation.
+
+See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
 
 .Procedure
 
@@ -106,5 +108,5 @@ If you are using VDDK transformation and you plan to run more than 10 concurrent
 ----
 # /etc/init.d/hostd restart
 ----
-+
+
 You do not need to reboot the VMware hypervisor.

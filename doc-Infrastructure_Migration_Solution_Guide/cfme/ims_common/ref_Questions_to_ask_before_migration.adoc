@@ -6,7 +6,7 @@
 The following questions can help you to estimate the resources and time required for migration.
 
 What am I migrating?::
-* Identify the virtual machines to be migrated.
+* Identify the VMware virtual machines that you will be migrating.
 
 What is the maximum number of disks or virtual machines that I can migrate?::
 * There is no maximum number of disks or virtual machines that you can migrate. However, you may not want to migrate all your virtual machines at the same time, in order to minimize the impact on your users.
@@ -17,10 +17,10 @@ If you exceed the capabilities of your environment, the migrations will fail. Th
 ====
 
 What operating systems can I migrate?::
-* For a list of operating systems that you can migrate, see link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
+* See link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
 
 What am I missing?::
-* Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window.
+* Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window, before you begin the migration.
 
 What impact will the migration have on my users?::
 * Assess the effects the migration may have on a production environment.
@@ -30,16 +30,17 @@ It may be possible to migrate your applications in phases, without downtime at t
 * Check whether users will lose access to critical applications.
 
 [id="How_long_will_the_migration_take"]
-How long will the migration take?::
-There are no specific rules to determine how long the actual migration will take. This is determined on a case-by-case basis.
-+
-The following migration examples are provided as a guide.
+== How long will the migration take?
+
+There is no formula to estimate how long the actual migration will take. This is determined on a case-by-case basis.
+
+The following migration examples are provided as a guide:
 
 [id="Rhv_migration_example"]
 .Red Hat Virtualization migration
 
 ====
-* Duration of migration: 1:15:53 (_hh:mm:ss_)
+* Duration of migration: 1:15:53 (hh:mm:ss)
 * 10 virtual machines
 * Total data migrated, using VDDK: 1000 GB
 * Hardware:
@@ -53,7 +54,7 @@ The following migration examples are provided as a guide.
 .Red Hat OpenStack Platform migration
 
 ====
-* Duration of migration: 2:13:00 (_hh:mm:ss_)
+* Duration of migration: 2:13:00 (hh:mm:ss)
 * 20 virtual machines
 * 2 conversion hosts, maximum of 10 concurrent conversions
 * Total data migrated, using VDDK: 1000 GB
@@ -65,19 +66,21 @@ The following migration examples are provided as a guide.
 ====
 
 [id="Deciding_how_many_conversion_hosts_to_create"]
-How many conversion hosts do I need?::
-The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
-+
+== How many conversion hosts do I need?
+
+The number of conversion hosts you create depends on the size of your migration. All the virtual machines in a migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
+
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
-+
-Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations.
-+
-Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
+
+Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values. If you are using VDDK transformation and you want to increase the number of maximum concurrent migrations, you must also increase the VMware hypervisor memory.
+
+You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
 [id="Choosing_vddk_or_ssh_transformation"]
-Should I migrate my virtual machines with VDDK or SSH?::
+== Should I migrate my virtual machines with VDDK or SSH?
+
 You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
-+
+
 The following table compares the options.
 
 [cols="1,2,2", options="header"]
@@ -88,11 +91,11 @@ The following table compares the options.
 * Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
 .<a|* Requires you to download the VDDK package
 * Requires VDDK library location for configuring the conversion hosts
-* Limited to 10 concurrent migrations per VMware hypervisor because of an ESXi memory limitation, unless you increase the VMware hypervisor's memory. See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
+* Limited to ten concurrent migrations per conversion host because of an ESXi memory limitation, unless you increase the VMware hypervisor memory. See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
 
 |*SSH* .<a|* Better suited for large-scale migrations than VDDK (not affected by ESXi memory limitation)
 * Does not require additional downloads, packages, tools, or compilation
 .<a|* Slower than VDDK
-* Requires you to enable SSH access for the VMware hypervisors
-* Requires you to share SSH keys between the VMware hypervisors and the conversion hosts
+* Requires VMware hypervisors to have SSH access enabled
+* Requires VMware hypervisors and conversion hosts to have shared SSH keys
 |===

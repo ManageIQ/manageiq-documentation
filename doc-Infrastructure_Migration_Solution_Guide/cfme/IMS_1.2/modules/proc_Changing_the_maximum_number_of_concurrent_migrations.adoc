@@ -1,16 +1,11 @@
 // Module included in the following assemblies:
 //
-// assembly_Migrating_the_infrastructure.adoc
-// 1.2
+// ims_common/assembly_Migrating_the_virtual_machines.adoc
+// For 1.2
 [id="Changing_the_maximum_number_of_concurrent_migrations"]
 = (Optional) Changing the maximum number of concurrent migrations
 
 You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.
-
-[CAUTION]
-====
-For VDDK transformation, the maximum concurrent migrations per conversion host should not be greater than `10`. Otherwise, network overload will cause the migration to fail.
-====
 
 The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is `20` for a provider and `3` for five conversion hosts, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x 3` concurrent migrations per host).
 
@@ -18,14 +13,18 @@ An increase in the maximum number of concurrent migrations affects all migration
 
 A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.
 
-[NOTE]
+Changing the maximum number of concurrent migrations for all conversion hosts or providers::
+[CAUTION]
 ====
-OpenStack Platform only: If you change the maximum number of concurrent migrations, you must ensure that your conversion hosts have sufficient RAM.
+The default value of *Maximum concurrent migrations per conversion host* is `10`.
+
+If you increase this value, you must make the following changes:
+
+* Red Hat OpenStack Platform: Ensure that your conversion hosts have sufficient RAM.
+
+* VDDK transformation: Increase the VMware hypervisors' memory. Otherwise, an ESXi memory limitation will cause the migration to fail.
 ====
-
-.Changing the maximum number of concurrent migrations for all conversion hosts or providers
-
-. In CloudForms, click menu:Compute[Migration > Migration Settings].
+. Click menu:Compute[Migration > Migration Settings].
 . In the *Migration Throttling* tab, select a value for *Maximum concurrent migrations per conversion host* or *Maximum concurrent migrations per provider* and click *Apply*.
 +
 The value of *Maximum concurrent migrations per conversion host* is constrained so that it cannot be greater than *Maximum concurrent migrations per provider*.
@@ -35,8 +34,7 @@ The value of *Maximum concurrent migrations per conversion host* is constrained 
 In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.
 ====
 
-.Changing the maximum number of concurrent migrations for a specific conversion host
-
+Changing the maximum number of concurrent migrations for a specific conversion host::
 . Log in to the CloudForms machine using SSH.
 . Enter the following command:
 +

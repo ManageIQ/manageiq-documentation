@@ -7,86 +7,40 @@
 ]>
 <?asciidoc-toc maxdepth="3"?><book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
 <info>
-<title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
+<title>Red Hat Infrastructure Migration Solution</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-06-11</date>
+<date>2019-06-13</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.1</productnumber>
 <abstract>
-    <para>This guide describes how to plan, perform, and troubleshoot an infrastructure migration from VMware to Red Hat Virtualization or Red Hat OpenStack Platform. The migration is performed with Red Hat CloudForms.</para>
+    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.2 or Red Hat OpenStack Platform 13/14, using Red Hat CloudForms 4.7.3.</para>
 </abstract>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml"/>
 </info>
-<chapter xml:id="IMS_1_1_overview">
-<title>Infrastructure Migration Solution overview</title>
-<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware 5.5 (and later) to the following environments:</simpara>
+<preface>
+<title>Preface</title>
+<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware 5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms.</simpara>
 <variablelist>
 <varlistentry>
 <term>Red Hat Virtualization 4.2</term>
 <listitem>
-<simpara>Red Hat Virtualization is a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. For more information, see the <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/">Red Hat Virtualization documentation</link>.</simpara>
+<simpara>Red Hat Virtualization is a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/">Red Hat Virtualization 4.2</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Red Hat OpenStack Platform 13 or 14</term>
+<term>Red Hat OpenStack Platform 13 and 14</term>
 <listitem>
-<simpara>Red Hat OpenStack Platform enables you to create a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. For more information, see the <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/">Red Hat OpenStack Platform documentation</link>.</simpara>
+<simpara>Red Hat OpenStack Platform enables you to create a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13">Red Hat OpenStack Platform 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 14</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term>Red Hat CloudForms 4.7.3</term>
 <listitem>
-<simpara>The environment in which the migration is performed is Red Hat CloudForms, a user interface for managing the infrastructure. For more information, see the <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/">Red Hat CloudForms documentation</link>.</simpara>
+<simpara>Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/">Red Hat CloudForms 4.7</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 </variablelist>
-<simpara>The migration process has the following key steps:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Planning the migration:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Questions to ask before migration to estimate time and resource requirements, including the following:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>"How long will the migration take?"</simpara>
-</listitem>
-<listitem>
-<simpara>"How many conversion hosts do I need?"</simpara>
-</listitem>
-<listitem>
-<simpara>"Which datapath transformation option should I use, VDDK or SSH?"</simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-<listitem>
-<simpara>Recommendations to minimize the impact on your users</simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-<listitem>
-<simpara>Preparing the environment for migration:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Preparing the VMware environment</simpara>
-</listitem>
-<listitem>
-<simpara>Preparing the Red Hat Virtualization or Red Hat OpenStack Platform environment</simpara>
-</listitem>
-<listitem>
-<simpara>Configuring the conversion hosts.  Conversion hosts are Red Hat Virtualization hosts or Red Hat OpenStack Platform instances running <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal>, which perform the migration.</simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-<listitem>
-<simpara>Migrating the virtual machines:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Mapping the source and target environments</simpara>
-</listitem>
-<listitem>
-<simpara>Creating and running a migration plan</simpara>
-<simpara>For a detailed description of the migration process, see the migration workflows:</simpara>
+<simpara>The following workflows describe the migration process in detail:</simpara>
 <itemizedlist>
 <listitem>
 <simpara><xref linkend="Vmware_to_rhv_migration_workflow"/></simpara>
@@ -95,13 +49,10 @@
 <simpara><xref linkend="Vmware_to_osp_migration_workflow"/></simpara>
 </listitem>
 </itemizedlist>
-</listitem>
-</itemizedlist>
-</listitem>
-</orderedlist>
-<section xml:id="Vmware_to_rhv_migration_workflow">
+<formalpara xml:id="Vmware_to_rhv_migration_workflow">
 <title>Red Hat Virtualization migration workflow</title>
-<simpara>This diagram describes the workflow of a migration from VMware to Red Hat Virtualization.</simpara>
+<para>This diagram describes the workflow of a migration from VMware to Red Hat Virtualization.</para>
+</formalpara>
 <figure>
 <title>VMware to Red Hat Virtualization migration workflow</title>
 <mediaobject>
@@ -154,10 +105,10 @@
 <textobject><phrase>25</phrase></textobject>
 </inlinemediaobject> <literal>virt-v2v</literal> attaches the converted disks to the Red Hat Virtualization virtual machine. (The virtual machine’s power state is the same as the source virtual machine’s power state.)</simpara>
 <simpara>The migration process is complete and the migration plan’s status is displayed in CloudForms.</simpara>
-</section>
-<section xml:id="Vmware_to_osp_migration_workflow">
+<formalpara xml:id="Vmware_to_osp_migration_workflow">
 <title>Red Hat OpenStack Platform migration workflow</title>
-<simpara>This diagram describes the workflow of a migration from VMware to Red Hat OpenStack Platform.</simpara>
+<para>This diagram describes the workflow of a migration from VMware to Red Hat OpenStack Platform.</para>
+</formalpara>
 <figure>
 <title>VMware to Red Hat OpenStack Platform migration workflow</title>
 <mediaobject>
@@ -210,8 +161,7 @@
 <textobject><phrase>25</phrase></textobject>
 </inlinemediaobject> <literal>virt-v2v-wrapper</literal> creates the target Red Hat OpenStack Platform instance with the flavor and security group defined in the migration plan. <literal>virt-v2v</literal> attaches the newly created network ports and the disks mapped in the block storage to the instance and the instance is powered on.</simpara>
 <simpara>The migration process is complete and the migration plan’s status is displayed in CloudForms.</simpara>
-</section>
-</chapter>
+</preface>
 <chapter xml:id="Planning_the_migration">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
@@ -258,7 +208,7 @@
 <listitem>
 <itemizedlist>
 <listitem>
-<simpara>Identify the virtual machines to be migrated.</simpara>
+<simpara>Identify the VMware virtual machines that you will be migrating.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -281,17 +231,7 @@
 <listitem>
 <itemizedlist>
 <listitem>
-<simpara>For a list of operating systems that you can migrate, see <link xlink:href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization</link>.</simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term>What resources does my target environment require?</term>
-<listitem>
-<itemizedlist>
-<listitem>
-<simpara>Your target environment must be large enough to run the migrated virtual machines in addition to the source virtual machines. The source virtual machines are not affected by the migration process.</simpara>
+<simpara>See <link xlink:href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization</link>.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -301,7 +241,7 @@
 <listitem>
 <itemizedlist>
 <listitem>
-<simpara>Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window.</simpara>
+<simpara>Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window, before you begin the migration.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -321,20 +261,15 @@
 </listitem>
 </varlistentry>
 </variablelist>
-<variablelist xml:id="How_long_will_the_migration_take">
-<varlistentry>
-<term>How long will the migration take?</term>
-<listitem>
-<simpara>There are no specific rules to determine how long the actual migration will take. This is determined on a case-by-case basis.</simpara>
-<simpara>The following migration examples are provided as a guide.</simpara>
-</listitem>
-</varlistentry>
-</variablelist>
+<section xml:id="How_long_will_the_migration_take">
+<title>How long will the migration take?</title>
+<simpara>There is no formula to estimate how long the actual migration will take. This is determined on a case-by-case basis.</simpara>
+<simpara>The following migration examples are provided as a guide:</simpara>
 <example xml:id="Rhv_migration_example">
 <title>Red Hat Virtualization migration</title>
 <itemizedlist>
 <listitem>
-<simpara>Duration of migration: 1:15:53 (<emphasis>hh:mm:ss</emphasis>)</simpara>
+<simpara>Duration of migration: 1:15:53 (hh:mm:ss)</simpara>
 </listitem>
 <listitem>
 <simpara>10 virtual machines</simpara>
@@ -365,7 +300,7 @@
 <title>Red Hat OpenStack Platform migration</title>
 <itemizedlist>
 <listitem>
-<simpara>Duration of migration: 2:13:00 (<emphasis>hh:mm:ss</emphasis>)</simpara>
+<simpara>Duration of migration: 2:13:00 (hh:mm:ss)</simpara>
 </listitem>
 <listitem>
 <simpara>20 virtual machines</simpara>
@@ -395,26 +330,18 @@
 </listitem>
 </itemizedlist>
 </example>
-<variablelist xml:id="Deciding_how_many_conversion_hosts_to_create">
-<varlistentry>
-<term>How many conversion hosts do I need?</term>
-<listitem>
-<simpara>The number of conversion hosts you create depends on the size of your migration. All the virtual machines in the migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.</simpara>
+</section>
+<section xml:id="Deciding_how_many_conversion_hosts_to_create">
+<title>How many conversion hosts do I need?</title>
+<simpara>The number of conversion hosts you create depends on the size of your migration. All the virtual machines in a migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.</simpara>
 <simpara>Multiple conversion hosts provide load-balancing and better performance, even for small migrations.</simpara>
-<simpara>Conversion hosts and providers are limited to ten concurrent migrations, unless you change the default maximum number of concurrent migrations.</simpara>
-<simpara>Test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.</simpara>
-</listitem>
-</varlistentry>
-</variablelist>
-<variablelist xml:id="Choosing_vddk_or_ssh_transformation">
-<varlistentry>
-<term>Should I migrate my virtual machines with VDDK or SSH?</term>
-<listitem>
+<simpara>Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values. If you are using VDDK transformation and you want to increase the number of maximum concurrent migrations, you must also increase the VMware hypervisor memory.</simpara>
+<simpara>You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.</simpara>
+</section>
+<section xml:id="Choosing_vddk_or_ssh_transformation">
+<title>Should I migrate my virtual machines with VDDK or SSH?</title>
 <simpara>You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.</simpara>
 <simpara>The following table compares the options.</simpara>
-</listitem>
-</varlistentry>
-</variablelist>
 <table frame="all" rowsep="1" colsep="1">
 <title>VDDK and SSH comparison</title>
 <tgroup cols="3">
@@ -441,13 +368,13 @@
 </itemizedlist></entry>
 <entry align="left" valign="top"><itemizedlist>
 <listitem>
-<simpara>Requires VDDK package download</simpara>
+<simpara>Requires you to download the VDDK package</simpara>
 </listitem>
 <listitem>
 <simpara>Requires VDDK library location for configuring the conversion hosts</simpara>
 </listitem>
 <listitem>
-<simpara>Limited to 10 concurrent migrations per conversion host due to ESXi memory limitation, unless you increase the ESXi memory. See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.</simpara>
+<simpara>Limited to ten concurrent migrations per conversion host because of an ESXi memory limitation, unless you increase the VMware hypervisor memory. See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.</simpara>
 </listitem>
 </itemizedlist></entry>
 </row>
@@ -466,10 +393,10 @@
 <simpara>Slower than VDDK</simpara>
 </listitem>
 <listitem>
-<simpara>Requires the VMware hypervisors to have SSH access enabled</simpara>
+<simpara>Requires VMware hypervisors to have SSH access enabled</simpara>
 </listitem>
 <listitem>
-<simpara>Requires shared SSH keys for the source and target environments</simpara>
+<simpara>Requires VMware hypervisors and conversion hosts to have shared SSH keys</simpara>
 </listitem>
 </itemizedlist></entry>
 </row>
@@ -477,11 +404,13 @@
 </tgroup>
 </table>
 </section>
+</section>
 <section xml:id="Recommendations_for_migration">
 <title>Recommendations for migration</title>
-<simpara>The following recommendations will minimize the impact of the migration on your environment.</simpara>
-<itemizedlist>
+<simpara>The following recommendations will help to minimize the impact of the migration on your environment.</simpara>
+<section xml:id="scheduling_the_migration" remap="_scheduling_the_migration">
 <title>Scheduling the migration</title>
+<itemizedlist>
 <listitem>
 <simpara>Schedule your migration carefully, to minimize the impact on your users.</simpara>
 </listitem>
@@ -498,8 +427,10 @@
 <simpara>Move critical applications during maintenance windows.</simpara>
 </listitem>
 </itemizedlist>
-<itemizedlist xml:id="Distributing_the_migration_workload">
+</section>
+<section xml:id="distributing_the_migration_workload" remap="_distributing_the_migration_workload">
 <title>Distributing the migration workload</title>
+<itemizedlist>
 <listitem>
 <simpara>Create migration groups, so that you are not migrating all of your virtual machines at the same time, keeping in mind the following considerations:</simpara>
 <itemizedlist>
@@ -535,16 +466,18 @@
 </itemizedlist>
 </listitem>
 </itemizedlist>
-<itemizedlist xml:id="Deploying_conversion_hosts">
+</section>
+<section xml:id="deploying_conversion_hosts" remap="_deploying_conversion_hosts">
 <title>Deploying conversion hosts</title>
+<itemizedlist>
 <listitem>
 <simpara>Create a sufficient number of conversion hosts for your migration, with sufficient resources.</simpara>
 </listitem>
 <listitem>
-<simpara>Choose the best datapath transformation option (SSH or VDDK) for your environment.</simpara>
+<simpara>Choose the best transformation option (SSH or VDDK) for your environment.</simpara>
 </listitem>
 <listitem>
-<simpara>Red Hat OpenStack Platform:</simpara>
+<simpara>Red Hat OpenStack Platform only:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Create conversion hosts on multiple compute nodes.</simpara>
@@ -555,8 +488,10 @@
 </itemizedlist>
 </listitem>
 </itemizedlist>
-<itemizedlist xml:id="Controlling_the_migration_process">
+</section>
+<section xml:id="controlling_the_migration_process" remap="_controlling_the_migration_process">
 <title>Controlling the migration process</title>
+<itemizedlist>
 <listitem>
 <simpara>Create multiple migration plans for finer control.</simpara>
 </listitem>
@@ -564,6 +499,7 @@
 <simpara>Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment’s infrastructure.</simpara>
 </listitem>
 </itemizedlist>
+</section>
 </section>
 </chapter>
 <chapter xml:id="Preparing_the_1_1_environment_for_migration">
@@ -597,9 +533,9 @@
 </listitem>
 <listitem>
 <simpara>(SSH only) Configuring the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
+<simpara>(VDDK only) If you intend to run more than ten concurrent migrations per conversion host using VDDK transformation, you must increase each VMware hypervisor’s memory. See <xref linkend="Increasing_esxi_memory_for_vddk_transformation"/>.</simpara>
 </listitem>
 </orderedlist>
-<simpara>(VDDK only, optional) If you intend to run more than 10 concurrent migrations per conversion host using VDDK transformation, you can increase each VMware hypervisor’s memory. See <xref linkend="Increasing_esxi_memory_for_vddk_transformation"/>.</simpara>
 <section xml:id="Preparing_the_vmware_network">
 <title>Preparing the VMware network</title>
 <simpara>Extend the VMware network to the target environment.</simpara>
@@ -609,7 +545,7 @@
 <simpara>The network configuration must not be changed in any way during the migration.</simpara>
 </listitem>
 <listitem>
-<simpara>IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.</simpara>
+<simpara>IP addresses, VLANs, and other network configuration must not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.</simpara>
 </listitem>
 </itemizedlist>
 </important>
@@ -620,8 +556,7 @@
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Install VMware Tools to capture IP addresses.</simpara>
-<simpara>For download and installation instructions, navigate to <link xlink:href="https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html">
-VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
+<simpara>To download and install VMware Tools, see <link xlink:href="https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html">VMware Workstation 5.0: Installing VMware Tools</link>.</simpara>
 </listitem>
 <listitem>
 <simpara>Unmount mounted ISO/CDROM disks.</simpara>
@@ -650,11 +585,11 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 </itemizedlist>
 </listitem>
 </orderedlist>
-<simpara>If you are using VDDK transformation, you are ready to prepare the target environment.</simpara>
-<simpara>If you are using SSH transformation, you must configure the VMware hypervisors.</simpara>
+<simpara>If you are using VDDK transformation and you set the maximum number of concurrent migrations per conversion host to a value greater than <literal>10</literal>, you must increase the VMware hypervisor memory. See <xref linkend="Increasing_esxi_memory_for_vddk_transformation"/>. If you are not increasing this value, no further configuration is necessary.</simpara>
+<simpara>If you are using SSH transformation, you must configure the VMware hypervisors for passwordless access. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation">
-<title>(SSH only) Configuring the VMware hypervisors for SSH transformation</title>
+<title>(SSH only) Configuring the VMware hypervisors for passwordless access</title>
 <simpara>SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
@@ -678,8 +613,9 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 </important>
 </section>
 <section xml:id="Increasing_esxi_memory_for_vddk_transformation">
-<title>(VDDK only, optional) Increasing the memory of VMware hypervisors for VDDK transformation</title>
-<simpara>If you intend to run more than 10 concurrent migrations per conversion host using VDDK transformation, you must increase the memory of each VMware hypervisor. Otherwise the migration will fail, due to an ESXi memory limitation. (See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.)</simpara>
+<title>(VDDK only) Configuring the VMware hypervisors for more than ten concurrent migrations per conversion host</title>
+<simpara>If you set the maximum number of concurrent migrations per conversion host to a value greater than ten, while using VDDK transformation, you must increase the memory of the VMware hypervisors. Otherwise the migration will fail, due to an ESXi service memory limitation.</simpara>
+<simpara>See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.</simpara>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
@@ -697,9 +633,9 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <listitem>
 <simpara>Restart <literal>hostd</literal>:</simpara>
 <screen># /etc/init.d/hostd restart</screen>
-<simpara>You do not need to reboot the VMware hypervisor.</simpara>
 </listitem>
 </orderedlist>
+<simpara>You do not need to reboot the VMware hypervisor.</simpara>
 </section>
 </section>
 <section xml:id="Preparing_the_rhv_target_environment">
@@ -1656,6 +1592,9 @@ v2v_ssh_private_key: |
 <listitem>
 <simpara>Creating and running a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms"/>.</simpara>
 </listitem>
+<listitem>
+<simpara>(Optional) You can change the maximum number of concurrent migrations per conversion host or provider for finer control of the migration process. See <xref linkend="Changing_the_maximum_number_of_concurrent_migrations"/>.</simpara>
+</listitem>
 </orderedlist>
 <section xml:id="Creating_an_infrastructure_mapping">
 <title>Creating an infrastructure mapping</title>
@@ -2270,55 +2209,83 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <section xml:id="Changing_the_maximum_number_of_concurrent_migrations">
 <title>(Optional) Changing the maximum number of concurrent migrations</title>
 <simpara>You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.</simpara>
-<caution>
-<simpara>For VDDK, an ESXi memory limitation allows a maximum of <literal>10</literal> concurrent migrations per conversion host, unless you increase the ESXi memory.</simpara>
-</caution>
-<simpara>The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is <literal>20</literal> for a provider and <literal>3</literal> for five conversion hosts, the maximum number of concurrent migrations is <literal>20</literal>, not <literal>15</literal> (<literal>5</literal> conversion hosts <literal>x</literal> <literal>3</literal> concurrent migrations).</simpara>
+<simpara>The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is <literal>20</literal> for a provider and <literal>3</literal> for five conversion hosts, the maximum number of concurrent migrations is <literal>20</literal>, not <literal>15</literal> (<literal>5</literal> conversion hosts <literal>x 3</literal> concurrent migrations per host).</simpara>
 <simpara>An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.</simpara>
 <simpara>A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.</simpara>
-<note>
-<simpara>OpenStack Platform only: If you change the maximum number of concurrent migrations, you must ensure that your conversion hosts have sufficient RAM.</simpara>
-</note>
+<caution>
+<simpara>The default value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is <literal>10</literal>.</simpara>
+<simpara>If you increase this value, you must make the following changes:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Red Hat OpenStack Platform: Ensure that your conversion hosts have sufficient RAM.</simpara>
+</listitem>
+<listitem>
+<simpara>VDDK transformation: Increase the VMware hypervisors' memory. Otherwise, an ESXi memory limitation will cause the migration to fail.</simpara>
+</listitem>
+</itemizedlist>
+</caution>
 <variablelist>
 <varlistentry>
 <term>Changing the maximum number of concurrent migrations for all conversion hosts</term>
 <listitem>
-<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice> and select the new limit.</simpara>
+<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice> and select a new <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis>.</simpara>
 </listitem>
 </varlistentry>
-</variablelist>
-<note>
-<simpara>The following commands are performed on the command line of the CloudForms machine.</simpara>
-</note>
-<variablelist>
 <varlistentry>
 <term>Changing the maximum number of concurrent migrations for a single conversion host</term>
 <listitem>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the CloudForms machine using SSH.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the following command:</simpara>
 <screen># vmdb
 # rails console
 irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
 irb(main):002:0&gt; $evm.vmdb(:host).find_by(:name =&gt; "<emphasis>host1.example.com</emphasis>").custom_set("Max Transformation Runners", <emphasis>20</emphasis>)</screen>
 </listitem>
+</orderedlist>
+</listitem>
 </varlistentry>
 <varlistentry>
 <term>Changing the maximum number of concurrent migrations for a provider</term>
 <listitem>
+</listitem>
+</varlistentry>
+</variablelist>
+<note>
+<simpara>The default maximum number of concurrent migrations for a provider is <literal>20</literal>.</simpara>
+</note>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the CloudForms machine using SSH.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the following command:</simpara>
 <screen># vmdb
 # rails console
 irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
 irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "<emphasis>RHV</emphasis>").custom_set("Max Transformation Runners", <emphasis>30</emphasis>)</screen>
-</listitem>
-</varlistentry>
+<variablelist>
 <varlistentry>
 <term>Getting the maximum number of concurrent migrations for a provider</term>
 <listitem>
+</listitem>
+</varlistentry>
+</variablelist>
+</listitem>
+<listitem>
+<simpara>Log in to the CloudForms machine using SSH.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the following command:</simpara>
 <screen># vmdb
 # rails console
 irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
 irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "<emphasis>OpenStack</emphasis>").custom_get("Max Transformation Runners")</screen>
 </listitem>
-</varlistentry>
-</variablelist>
+</orderedlist>
 </section>
 </chapter>
 <chapter xml:id="Troubleshooting">
@@ -2483,6 +2450,8 @@ BadRequestException: Unknown error</screen>
 <title>Environment configuration errors</title>
 <section xml:id="VMware_environment_errors">
 <title>VMware</title>
+<itemizedlist>
+<listitem>
 <simpara>A source virtual machine cannot migrate if it has any of the following conditions:</simpara>
 <itemizedlist>
 <listitem>
@@ -2493,6 +2462,11 @@ BadRequestException: Unknown error</screen>
 </listitem>
 <listitem>
 <simpara>Invalid name, containing spaces or special characters</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>VDDK transformation only:</simpara>
 </listitem>
 </itemizedlist>
 </section>

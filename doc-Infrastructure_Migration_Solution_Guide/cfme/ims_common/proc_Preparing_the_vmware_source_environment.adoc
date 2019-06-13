@@ -7,9 +7,9 @@ Preparing the VMware source environment involves the following tasks:
 
 . Preparing the VMware network. See xref:Preparing_the_vmware_network[].
 . Preparing the VMware virtual machines. See xref:Preparing_the_source_virtual_machines[].
-. (SSH only) Configuring the VMware hypervisors. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
+. (SSH only) Configuring all VMware hypervisors for passwordless access. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 +
-(VDDK only) If you intend to run more than ten concurrent migrations per conversion host using VDDK transformation, you must increase each VMware hypervisor's memory. See xref:Increasing_esxi_memory_for_vddk_transformation[].
+(VDDK only) Configuring a VMware hypervisor if it must support more than ten concurrent migrations. See xref:Increasing_esxi_memory_for_vddk_transformation[].
 
 [id="Preparing_the_vmware_network"]
 == Preparing the VMware network
@@ -46,7 +46,7 @@ International characters and spaces are not permitted.
 * Red Hat Virtualization: Within the entire environment
 * Red Hat OpenStack Platform: Within a single tenant
 
-If you are using VDDK transformation and you set the maximum number of concurrent migrations per conversion host to a value greater than `10`, you must increase the VMware hypervisor memory. See xref:Increasing_esxi_memory_for_vddk_transformation[]. If you are not increasing this value, no further configuration is necessary.
+If you are performing more than ten concurrent migrations from a VMware hypervisor, you must increase the its NFC service memory. See xref:Increasing_esxi_memory_for_vddk_transformation[].
 
 If you are using SSH transformation, you must configure the VMware hypervisors for passwordless access. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation[].
 
@@ -81,11 +81,11 @@ If you wish to use a dedicated SSH key pair for each conversion host, you can cr
 ====
 
 [id="Increasing_esxi_memory_for_vddk_transformation"]
-== (VDDK only) Configuring the VMware hypervisors for more than ten concurrent migrations per conversion host
+== (VDDK only) Configuring a VMware hypervisor for more than ten concurrent migrations
 
-If you set the maximum number of concurrent migrations per conversion host to a value greater than ten, while using VDDK transformation, you must increase the memory of the VMware hypervisors. Otherwise the migration will fail, due to an ESXi service memory limitation.
+If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor cannot handle more than ten parallel connections. See link:https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227[VMware vSphere 6.5 NFC session connection limits] and link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[Virt-v2v. VDDK: ESXi NFC service memory limits] for details.
 
-See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
+You must increase the hypervisor's maximum NFC service memory to enable additional connections for migrations.
 
 .Procedure
 
@@ -108,5 +108,5 @@ See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-lim
 ----
 # /etc/init.d/hostd restart
 ----
-
++
 You do not need to reboot the VMware hypervisor.

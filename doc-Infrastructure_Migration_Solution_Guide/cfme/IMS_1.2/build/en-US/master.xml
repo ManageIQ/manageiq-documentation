@@ -368,13 +368,13 @@
 </itemizedlist></entry>
 <entry align="left" valign="top"><itemizedlist>
 <listitem>
-<simpara>Requires you to download the VDDK package</simpara>
+<simpara>Requires VDDK package download</simpara>
 </listitem>
 <listitem>
-<simpara>Requires VDDK library location for configuring the conversion hosts</simpara>
+<simpara>Requires VDDK package location for conversion host configuration</simpara>
 </listitem>
 <listitem>
-<simpara>Limited to ten concurrent migrations per conversion host because of an ESXi memory limitation, unless you increase the VMware hypervisor memory. See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.</simpara>
+<simpara>Limited to 20 concurrent migrations per conversion host</simpara>
 </listitem>
 </itemizedlist></entry>
 </row>
@@ -532,8 +532,8 @@
 <simpara>Preparing the VMware virtual machines. See <xref linkend="Preparing_the_source_virtual_machines"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>(SSH only) Configuring the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
-<simpara>(VDDK only) If you intend to run more than ten concurrent migrations per conversion host using VDDK transformation, you must increase each VMware hypervisor’s memory. See <xref linkend="Increasing_esxi_memory_for_vddk_transformation"/>.</simpara>
+<simpara>(SSH only) Configuring all VMware hypervisors for passwordless access. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
+<simpara>(VDDK only) Configuring a VMware hypervisor if it must support more than ten concurrent migrations. See <xref linkend="Increasing_esxi_memory_for_vddk_transformation"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network">
@@ -545,7 +545,7 @@
 <simpara>The network configuration must not be changed in any way during the migration.</simpara>
 </listitem>
 <listitem>
-<simpara>IP addresses, VLANs, and other network configurations should not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.</simpara>
+<simpara>IP addresses, VLANs, and other network configuration must not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.</simpara>
 </listitem>
 </itemizedlist>
 </important>
@@ -556,8 +556,7 @@
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Install VMware Tools to capture IP addresses.</simpara>
-<simpara>For download and installation instructions, navigate to <link xlink:href="https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html">
-VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
+<simpara>To download and install VMware Tools, see <link xlink:href="https://www.vmware.com/support/ws5/doc/new_guest_tools_ws.html">VMware Workstation 5.0: Installing VMware Tools</link>.</simpara>
 </listitem>
 <listitem>
 <simpara>Unmount mounted ISO/CDROM disks.</simpara>
@@ -586,8 +585,8 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 </itemizedlist>
 </listitem>
 </orderedlist>
-<simpara>If you are using VDDK transformation, you are ready to prepare the target environment.</simpara>
-<simpara>If you are using SSH transformation, you must configure the VMware hypervisors.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor, you must increase the its NFC service memory. See <xref linkend="Increasing_esxi_memory_for_vddk_transformation"/>.</simpara>
+<simpara>If you are using SSH transformation, you must configure the VMware hypervisors for passwordless access. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation">
 <title>(SSH only) Configuring the VMware hypervisors for passwordless access</title>
@@ -614,9 +613,9 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 </important>
 </section>
 <section xml:id="Increasing_esxi_memory_for_vddk_transformation">
-<title>(VDDK only) Configuring the VMware hypervisors for more than ten concurrent migrations per conversion host</title>
-<simpara>If you set the maximum number of concurrent migrations per conversion host to a value greater than ten, while using VDDK transformation, you must increase the memory of the VMware hypervisors. Otherwise the migration will fail, due to an ESXi service memory limitation.</simpara>
-<simpara>See <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">VDDK: ESXi NFC SERVICE MEMORY LIMITS</link> in <link xlink:href="http://libguestfs.org/virt-v2v.1.html">virt-v2v - Convert a guest to use KVM</link> for details.</simpara>
+<title>(VDDK only) Configuring a VMware hypervisor for more than ten concurrent migrations</title>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor cannot handle more than ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
+<simpara>You must increase the hypervisor’s maximum NFC service memory to enable additional connections for migrations.</simpara>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
@@ -634,9 +633,9 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <listitem>
 <simpara>Restart <literal>hostd</literal>:</simpara>
 <screen># /etc/init.d/hostd restart</screen>
+<simpara>You do not need to reboot the VMware hypervisor.</simpara>
 </listitem>
 </orderedlist>
-<simpara>You do not need to reboot the VMware hypervisor.</simpara>
 </section>
 </section>
 <section xml:id="Preparing_the_rhv_target_environment">
@@ -1109,7 +1108,7 @@ VMware Workstation 5.0 Installing VMware Tools</link>.</simpara>
 <title>Installing and configuring Red Hat OpenStack Platform 13 or 14</title>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Install Red Hat OpenStack Platform 13 or 14. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/">Red Hat OpenStack Platform Director Installation and Usage</link>.</simpara>
+<simpara>Install Red Hat OpenStack Platform 13 or 14. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13/html-single/director_installation_and_usage/">Red Hat OpenStack Platform Director Installation and Usage 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/">Red Hat OpenStack Platform Director Installation and Usage 14</link>.</simpara>
 </listitem>
 <listitem>
 <simpara>Create provider networks for the target instances to preserve the IP addresses of the source virtual machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/networking_guide/#create_a_network">Create a network</link> in the <emphasis>Red Hat OpenStack Platform Networking Guide</emphasis>.</simpara>
@@ -2100,15 +2099,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </variablelist>
 <caution>
 <simpara>The default value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is <literal>10</literal>.</simpara>
-<simpara>If you increase this value, you must make the following changes:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Red Hat OpenStack Platform: Ensure that your conversion hosts have sufficient RAM.</simpara>
-</listitem>
-<listitem>
-<simpara>VDDK transformation: Increase the VMware hypervisors' memory. Otherwise, an ESXi memory limitation will cause the migration to fail.</simpara>
-</listitem>
-</itemizedlist>
+<simpara>Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above <literal>10</literal>.</simpara>
+<simpara>For VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <listitem>

@@ -17,11 +17,9 @@ A decrease maximum number of concurrent migrations affects only future migration
 ====
 The default value of *Maximum concurrent migrations per conversion host* is `10`.
 
-If you increase this value, you must make the following changes:
+Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above `10`.
 
-* Red Hat OpenStack Platform: Ensure that your conversion hosts have sufficient RAM.
-
-* VDDK transformation: Increase the VMware hypervisors' memory. Otherwise, an ESXi memory limitation will cause the migration to fail.
+For VDDK transformation, the number of concurrent migrations must not exceed `20`. Otherwise, network overload will cause the migration to fail.
 ====
 
 Changing the maximum number of concurrent migrations for all conversion hosts::

@@ -1,0 +1,42 @@
+// Module included in the following assemblies:
+//
+// assembly_Preparing_the_1_2_environment_for_migration.adoc
+[id="Installing_rhv_4_3"]
+= Installing and configuring Red Hat Virtualization 4.3
+
+. Install Red Hat Virtualization Manager 4.3.4 on the Manager machine. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Installing the Red Hat Virtualization Manager] in the _Red Hat Virtualization Installation Guide_.
+
+. Install Red Hat Virtualization Host 4.3.4 or Red Hat Enterprise Linux 7.6 on the host machines. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Installing Red Hat Virtualization Host] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Installing Red Hat Enterprise Linux Hosts] in the _Red Hat Virtualization Installation Guide_.
++
+[NOTE]
+====
+Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities.
+====
+
+. Enable the following ports in the conversion host network:
+* 22 - SSH
+* 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
+* 902 - CloudForms to VMware
+* 5480 - Conversion hosts to vCenter
++
+For details, see https://access.redhat.com/articles/417343[Ports used by Red Hat CloudForms Management Engine 5.1 and above].
+
+. Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#chap-Storage[Storage] in the _Red Hat Virtualization Administration Guide_.
++
+[NOTE]
+====
+IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.
+====
+
+. Upload the VirtIO and Guest Tool image files to the ISO storage domain. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain] in the _Red Hat Virtualization Administration Guide_.
++
+The VirtIO file name must include the version number (+virtio-win-_version_.iso+). The Guest Tool is required for migrating Windows virtual machines.
+
+. Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[Creating MAC Address Pools] in the _Red Hat Virtualization Administration Guide_.
++
+[IMPORTANT]
+====
+If the Red Hat Virtualization MAC address pool range overlaps the VMware MAC address range, you must ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines. Otherwise, the migration will fail.
+
+If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in Red Hat Virtualization.
+====

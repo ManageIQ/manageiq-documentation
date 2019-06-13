@@ -1,5 +1,7 @@
 // Module included in the following assemblies:
+//
 // proc_Migrating_the_infrastructure.adoc
+// 1.1
 [id="Changing_the_maximum_number_of_concurrent_migrations"]
 = (Optional) Changing the maximum number of concurrent migrations
 
@@ -7,10 +9,10 @@ You can change the maximum number of concurrent migrations for conversion hosts 
 
 [CAUTION]
 ====
-For VDDK, an ESXi memory limitation allows a maximum of `10` concurrent migrations per conversion host, unless you increase the ESXi memory.
+For VDDK transformation, the maximum concurrent migrations per conversion host should not be greater than `10`. Otherwise, network overload will cause the migration to fail.
 ====
 
-The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is `20` for a provider and `3` for five conversion hosts, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x` `3` concurrent migrations).
+The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is `20` for a provider and `3` for five conversion hosts, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x 3` concurrent migrations per host).
 
 An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 

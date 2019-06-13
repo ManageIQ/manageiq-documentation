@@ -1,5 +1,7 @@
 // Module included in the following assemblies:
+//
 // assembly_Migrating_the_infrastructure.adoc
+// 1.2
 [id="Changing_the_maximum_number_of_concurrent_migrations"]
 = (Optional) Changing the maximum number of concurrent migrations
 
@@ -7,10 +9,10 @@ You can change the maximum number of concurrent migrations for conversion hosts 
 
 [CAUTION]
 ====
-For VDDK, the maximum number of concurrent migrations per conversion host must not be greater than `20` because of an ESXi memory limitation. See xref:Choosing_vddk_or_ssh_transformation[].
+For VDDK transformation, the maximum concurrent migrations per conversion host should not be greater than `10`. Otherwise, network overload will cause the migration to fail.
 ====
 
-The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is `20` for a provider and `3` for five conversion hosts, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x` `3` concurrent migrations).
+The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is `20` for a provider and `3` for five conversion hosts, the maximum number of concurrent migrations is `20`, not `15` (`5` conversion hosts `x 3` concurrent migrations per host).
 
 An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.
 
@@ -18,7 +20,7 @@ A decrease maximum number of concurrent migrations affects only future migration
 
 [NOTE]
 ====
-OpenStack Platform only: If you change the maximum number of concurrent migrations, ensure that your conversion hosts have sufficient RAM. See the resource requirements in xref:Deploying_osp_conversion_hosts[].
+OpenStack Platform only: If you change the maximum number of concurrent migrations, you must ensure that your conversion hosts have sufficient RAM.
 ====
 
 .Changing the maximum number of concurrent migrations for all conversion hosts or providers
@@ -30,7 +32,7 @@ The value of *Maximum concurrent migrations per conversion host* is constrained 
 +
 [NOTE]
 ====
-In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work. See xref:Known_issues[].
+In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.
 ====
 
 .Changing the maximum number of concurrent migrations for a specific conversion host
@@ -40,7 +42,19 @@ In the current release, the *Maximum concurrent migrations per conversion host* 
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# curl -sk -u _username:password_ https://_CloudForms_FQDN_/api/conversion_hosts/_conversion_host_id_ -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _2_}}'
+# curl -sk -u _username:password_  https://_CloudForms_FQDN_/api/conversion_hosts/_conversion_host_id_ -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _2_}}' <1> <2> <3> <4>
+----
+
+<1> `username:password` are the CloudForms user and password.
+<2> `CloudForms_FQDN` is the FQDN of the CloudForms machine.
+<3> To obtain a `conversion_host_id`:
++
+. Enter the following API call in the address bar of a browser:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+https://_CloudForms_FQDN_/api/conversion_hosts
 ----
 +
-You can obtain the `_conversion_host_id_` using the API call for verifying conversion hosts in a browser.
+. Enter your *Username* and *Password* and click *Sign in*. The conversion hosts and their IDs are displayed in JSON format.
+<4> `max_concurrent_tasks` is the maximum number of concurrent migrations.

@@ -4,27 +4,30 @@
 Migrating the virtual machines involves the following key tasks:
 
 . Mapping the resources of your VMware and target environments. See xref:Creating_an_infrastructure_mapping[].
-. Checking for migration conditions that have prerequisites. See xref:Migration_plan_prerequisites[].
-. Creating and running a migration plan. See xref:Creating_and_running_a_migration_plan[].
+. Checking for migration conditions with prerequisites. See xref:Migration_plan_prerequisites[].
+. Creating and running a migration plan. See xref:Creating_a_migration_plan_in_cloudforms[].
 
+[id="Creating_an_infrastructure_mapping"]
+== Creating an infrastructure mapping
 
-include::proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+1]
+Create an infrastructure mapping for your target environment:
 
-[id="Creating_and_running_a_migration_plan"]
-== Creating and running a migration plan
+* Red Hat Virtualization. See xref:Creating_an_infrastructure_mapping_for_rhv[].
+* Red Hat OpenStack Platform. See xref:Creating_an_infrastructure_mapping_for_osp[].
+
+:context: rhv
+:rhv:
+include::proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
+:rhv!:
+:context: osp
+:osp:
+include::proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
+:osp!:
 
 [IMPORTANT]
 ====
 Certain prerequisites may apply to your migration. See xref:Migration_plan_prerequisites[] for specific conditions.
 ====
-
-You xref:Creating_a_migration_plan_in_cloudforms[create and run a migration plan in CloudForms] with the following options:
-
-* Running a migration plan immediately
-* xref:Scheduling_a_saved_migration_plan[Scheduling a migration plan to run in the future]
-* xref:Viewing_migration_plan_progress[Viewing a migration plan in progress]
-* xref:Canceling_a_migration_plan[Canceling a migration plan in progress]
-* xref:Retrying_a_failed_migration_plan[Retrying a migration plan]
 
 [id="Migration_plan_prerequisites"]
 == Checking for migration prerequisites
@@ -43,14 +46,11 @@ RHEL/Linux virtual machines require additional configuration to preserve their I
 +
 Create an Ansible repository and add the credentials and playbooks to CloudForms. See xref:Adding_ansible_playbooks_to_cloudforms[].
 
-If these conditions do not apply, you can create a migration plan. See xref:Creating_a_migration_plan_in_cloudforms[].
+If these conditions do not apply, you are ready to create a migration plan. See xref:Creating_a_migration_plan_in_cloudforms[].
 
 include::proc_Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan.adoc[leveloffset=+2]
 include::proc_Creating_a_rhel_premigration_playbook.adoc[leveloffset=+2]
 include::proc_Adding_ansible_playbooks_to_cloudforms.adoc[leveloffset=+2]
 
-Before you perform a large migration, you should perform test migrations with different maximum numbers of concurrent migrations. This will enable you to assess the capabilities of your environment’s infrastructure. To change maximum numbers for conversion hosts and providers, see xref:Changing_the_maximum_number_of_concurrent_migrations[].
-
 include::proc_Creating_a_migration_plan_in_cloudforms.adoc[leveloffset=+1]
-
 include::../modules/proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+1]

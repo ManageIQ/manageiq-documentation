@@ -7,6 +7,11 @@
 
 You can configure secure remote login to the VMware hypervisors with `ssh-agent` and `ssh-add`.
 
+[IMPORTANT]
+====
+You must configure and verify secure remote login for each VMware hypervisor.
+====
+
 Perform the following procedure on the Manager machine:
 
 . Create an `ssh-agent` session for the vdsm user:
@@ -15,12 +20,13 @@ Perform the following procedure on the Manager machine:
 ----
 # sudo -u vdsm ssh-agent
 
-SSH_AUTH_SOCK=/tmp/ssh-_socket_number_/agent._pid_; export SSH_AUTH_SOCK;
+SSH_AUTH_SOCK=/tmp/ssh-_socket_number_/agent._pid_; export SSH_AUTH_SOCK; <1>
 SSH_AGENT_PID=139150; export SSH_AGENT_PID;
 echo Agent pid 139150;
 ----
+<1> Copy the `SSH_AUTH_SOCK` value from the output of the `ssh-agent` command. You will use it for `ssh-add` and connecting over SSH to the VMware hypervisors.
 
-. Run `ssh-add`, with the correct `SSH_AUTH_SOCK` value, to authorize the vdsm user's private key for the `ssh-agent` session:
+. Run `ssh-add` to authorize the vdsm user's private key for the `ssh-agent` session:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -37,7 +43,5 @@ echo Agent pid 139150;
 +
 [IMPORTANT]
 ====
-Ensure that you check the secure remote login for all VMware hypervisors.
-
-If the connection fails, all migrations from this VMware hypervisor using SSH transformation will fail. Check that you have enabled SSH access on the VMware hypervisors and copied the VMware keys to your conversion hosts.
+If the connection fails, all migrations from this VMware hypervisor using SSH transformation will fail.
 ====

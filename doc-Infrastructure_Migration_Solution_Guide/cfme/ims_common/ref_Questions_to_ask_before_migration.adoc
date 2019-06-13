@@ -19,9 +19,6 @@ If you exceed the capabilities of your environment, the migrations will fail. Th
 What operating systems can I migrate?::
 * For a list of operating systems that you can migrate, see link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
 
-What resources does my target environment require?::
-* Your target environment must be large enough to run the migrated virtual machines in addition to the source virtual machines. The source virtual machines are not affected by the migration process.
-
 What am I missing?::
 * Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window.
 
@@ -89,13 +86,13 @@ The following table compares the options.
 | ^|Pros ^|Cons
 |*VDDK* .<a|* Recommended because it is approximately twice as fast as SSH
 * Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
-.<a|* Requires VDDK package download
+.<a|* Requires you to download the VDDK package
 * Requires VDDK library location for configuring the conversion hosts
-* Limited to 10 concurrent migrations per conversion host due to ESXi memory limitation, unless you increase the ESXi memory. See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
+* Limited to 10 concurrent migrations per VMware hypervisor because of an ESXi memory limitation, unless you increase the VMware hypervisor's memory. See link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[VDDK: ESXi NFC SERVICE MEMORY LIMITS] in link:http://libguestfs.org/virt-v2v.1.html[virt-v2v - Convert a guest to use KVM] for details.
 
 |*SSH* .<a|* Better suited for large-scale migrations than VDDK (not affected by ESXi memory limitation)
 * Does not require additional downloads, packages, tools, or compilation
 .<a|* Slower than VDDK
-* Requires the VMware hypervisors to have SSH access enabled
-* Requires shared SSH keys for the source and target environments
+* Requires you to enable SSH access for the VMware hypervisors
+* Requires you to share SSH keys between the VMware hypervisors and the conversion hosts
 |===

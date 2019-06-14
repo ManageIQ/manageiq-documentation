@@ -16,7 +16,7 @@ You can create and run a migration plan in CloudForms with the following options
 
 [NOTE]
 ====
-A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting virtual machines or setting a Red Hat OpenStack Platform security group and flavor for each virtual machine. See xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[].
+A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting virtual machines or setting a Red Hat OpenStack Platform security group and flavor for each virtual machine.
 ====
 
 . Click menu:Compute[Migration > Migration Plans].
@@ -39,9 +39,12 @@ If you select a Red Hat OpenStack Platform mapping, an *Instance Properties* scr
 . Select a virtual machine discovery method:
 
 * *Choose from a list of VMs discovered in the selected infrastructure mapping*
++
+If the virtual machines cannot be discovered, check the source datastores and networks in the infrastructure mapping.
+
 * *Import a CSV file with a list of VMs to be migrated*.
 +
-A xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan[CSV file] is required for previously migrated source virtual machines and highly recommended for large migrations.
+A CSV file is required for previously migrated source virtual machines and highly recommended for large migrations.
 
 . Click *Next*.
 
@@ -53,11 +56,9 @@ If you selected *Import a CSV file with a list of VMs to be migrated*:
 .. Click *Import*.
 .. Browse to the CSV file and click *Open*.
 +
-If you try to import an invalid CVS file (for example, virtual machines with a duplicate `Name` field and no `Host`/`Provider` field to distinguish them, or with a duplicate `Name` field and duplicate `Host`/`Provider` fields), the *Create Migration Plan* wizard will freeze. This is a xref:Known_issues[known issue] and will be addressed in a future release.
+If the virtual machines cannot be added to the migration plan, check the CSV file format and fields for errors. If the *Create Migration Plan* wizard freezes, refresh the web page, check the CSV file for errors (for example, virtual machines with duplicate `Name` fields and no other fields to distinguish them), and create a new migration plan.
 
 . Click *Next*.
-
-If the *Create Migration Plan* wizard cannot discover or import the source virtual machines, see xref:Migration_plan_errors[] for possible causes.
 
 .<a|*Instance Properties*
 
@@ -71,7 +72,7 @@ Flavors that are too small for the virtual machine are marked with an asterisk (
 .<a|*Advanced Options*
 
 .<a|[id="Advanced_options_screen"]
-. Select a premigration and/or postmigration playbook service from the dropdown lists. See xref:Adding_ansible_playbooks_to_cloudforms[] for details.
+. Select a premigration and/or postmigration playbook service from the dropdown lists.
 . Select the virtual machines on which to run the playbook services.
 . Click *Next*.
 

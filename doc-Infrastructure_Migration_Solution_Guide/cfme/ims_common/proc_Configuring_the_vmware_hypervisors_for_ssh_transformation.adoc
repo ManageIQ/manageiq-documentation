@@ -1,0 +1,32 @@
+// Module included in the following assemblies:
+//
+// assembly_Preparing_the_1_1_environment_for_migration.adoc
+[id="Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}"]
+= (SSH only) Configuring the VMware hypervisors for passwordless access
+
+SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:
+
+. Enable SSH access on each VMware hypervisor:
++
+For instructions, navigate to link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation]. In the navigation pane, click menu:vSphere _version_[ESXi and vCenter Server > VMware ESXi Installation and Setup > Installing and Setting Up ESXi > Setting Up ESXi > Enable ESXi Shell and SSH Access with the Direct Console User Interface].
++
+[NOTE]
+====
+If your security policies allow you to collect the SSH public keys of the VMware hypervisors at this stage, save them for copying to the conversion hosts.
+====
+
+. Generate an SSH key pair without a passphrase:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# ssh-keygen -N ''
+----
+
+. Copy the public SSH key to `/etc/ssh/keys-root/authorized_keys` on *each* VMware hypervisor.
+
+[IMPORTANT]
+====
+A single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.
+
+If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.
+====

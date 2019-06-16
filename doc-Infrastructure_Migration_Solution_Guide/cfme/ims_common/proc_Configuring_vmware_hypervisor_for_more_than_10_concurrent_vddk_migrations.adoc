@@ -1,0 +1,33 @@
+// Module included in the following assemblies:
+//
+// assembly_Preparing_the_1_1_environment_for_migration.adoc
+[id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_{context}"]
+= (VDDK only) Configuring a VMware hypervisor for more than ten concurrent migrations
+
+If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor cannot handle more than ten parallel connections. See link:https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227[VMware vSphere 6.5 NFC session connection limits] and link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[Virt-v2v. VDDK: ESXi NFC service memory limits] for details.
+
+You must increase the hypervisor's maximum NFC service memory to enable additional connections for migrations.
+
+.Procedure
+
+. Log in to a VMware hypervisor.
+. Change the value of `maxMemory` to `1000000000` in `/etc/vmware/hostd/config.xml`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+      <nfcsvc>
+         <path>libnfcsvc.so</path>
+         <enabled>true</enabled>
+         <maxMemory>1000000000</maxMemory>
+         <maxStreamMemory>10485760</maxStreamMemory>
+      </nfcsvc>
+----
+
+. Restart `hostd`:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# /etc/init.d/hostd restart
+----
++
+You do not need to reboot the VMware hypervisor.

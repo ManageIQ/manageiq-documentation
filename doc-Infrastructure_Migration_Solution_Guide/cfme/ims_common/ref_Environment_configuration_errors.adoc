@@ -1,10 +1,11 @@
 // Module included in the following assemblies:
-// assembly_Common_issues_and_mistakes.adoc
-[id="Virtual_machine_migration_errors"]
+//
+// assembly_Troubleshooting.adoc
+[id="Environment_configuration_errors_{context}"]
 = Environment configuration errors
 
-[id="VMware_environment_errors"]
-== VMware
+[id="VMware_environment_errors_{context}"]
+.VMware
 
 * A source virtual machine cannot migrate if it has any of the following conditions:
 
@@ -12,12 +13,11 @@
 ** Encrypted disk
 ** Invalid name, containing spaces or special characters
 
-* VDDK transformation only: 
+* VDDK transformation only:
 
-[id="Target_environment_errors"]
-[id="RHV_VM_migration_failure"]
-== Red Hat Virtualization
-[id="RHV_name_conflict"]
+ifdef::rhv[]
+[id="rhv_environment_errors"]
+.Red Hat Virtualization
 
 The following conditions can cause a migration error for Red Hat Virtualization:
 
@@ -29,21 +29,21 @@ The following conditions can cause a migration error for Red Hat Virtualization:
 ** If you are using SSSD with single sign-on, you must reinstall `ipa-client` without OpenSSH.
 ** Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.
 ** Check that the conversion host does not have an existing private SSH key in `/var/lib/vdsm/.ssh/id_rsa`. Conversion host configuration does not overwrite old SSH keys. They must be deleted manually.
-
-[id="OSP_VM_migration_failure"]
-== Red Hat OpenStack Platform
+endif::rhv[]
+ifdef::osp[]
+[id="osp_environment_errors"]
+.Red Hat OpenStack Platform
 
 The following conditions can cause a migration error for Red Hat OpenStack Platform:
 
-[id="OSP_VM_powered_off"]
 * VMware virtual machine powered off: The virtual machine must be powered on at the time of migration.
 
 * SSH transformation only: Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.
 
-[id="OSP_not_authorized"]
 * `disallowed by policy` error: The Red Hat OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project. Add the `admin` user as `member` and `admin` to your target project. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Edit a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_.
 +
 [options="" subs="+quotes,verbatim"]
 ----
 ERROR: Command exited with non-zero return code 1, output: HttpException: 403: Client Error for url: https://_FQDN_:13696/v2.0/ports, {"NeutronError": {"message": "((rule:create_port and rule:create_port:mac_address) and rule:create_port:fixed_ips) is disallowed by policy", "type": "PolicyNotAuthorized", "detail": ""}}
 ----
+endif::osp[]

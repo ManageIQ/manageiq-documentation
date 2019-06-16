@@ -1,9 +1,17 @@
 // Module included in the following assemblies:
 //
-// ims_common/assembly_Migrating_the_virtual_machines.adoc
-// For 1.1
-[id="Changing_the_maximum_number_of_concurrent_migrations"]
+// IMS_1.1/master.adoc
+[id="Changing_the_maximum_number_of_concurrent_migrations_{context}"]
 = (Optional) Changing the maximum number of concurrent migrations
+
+ifdef::rhv[]
+[CAUTION]
+====
+Currently, concurrent migrations cannot be balanced among the conversion hosts. See BZ#716283: link:https://bugzilla.redhat.com/show_bug.cgi?id=1716283[Migrating virtual machines are not distributed among the conversion hosts].
+
+All virtual machines are migrated on a single conversion host.
+====
+endif::rhv[]
 
 You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.
 
@@ -15,11 +23,13 @@ A decrease maximum number of concurrent migrations affects only future migration
 
 [CAUTION]
 ====
+ifdef::osp[]
 The default value of *Maximum concurrent migrations per conversion host* is `10`.
 
 Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above `10`.
+endif::osp[]
 
-For VDDK transformation, the number of concurrent migrations must not exceed `20`. Otherwise, network overload will cause the migration to fail.
+If you are using VDDK transformation, the number of concurrent migrations must not exceed `20`. Otherwise, network overload will cause the migration to fail.
 ====
 
 Changing the maximum number of concurrent migrations for all conversion hosts::
@@ -38,10 +48,8 @@ irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom
 ----
 
 Changing the maximum number of concurrent migrations for a provider::
-[NOTE]
-====
 The default maximum number of concurrent migrations for a provider is `20`.
-====
++
 . Log in to the CloudForms machine using SSH.
 . Enter the following command:
 +

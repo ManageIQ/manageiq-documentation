@@ -1,36 +1,34 @@
 // Module included in the following assemblies:
+//
 // assembly_Troubleshooting.adoc
-[id="Known_issues"]
+[id="Known_issues_{context}"]
 = Known Issues
-
-[NOTE]
-====
-To obtain critical updates for the conversion hosts:
-
-* Red Hat Virtualization: Run `yum update` on the conversion hosts.
-* Red Hat OpenStack Platform: Download the latest conversion host appliance and create new conversion hosts.
-====
 
 The following issues will be addressed in a future release:
 
-* link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling migration does not stop creating volume, instance, and network port on OpenStack Platform or VMs on Red Hat Virtualization]
+* BZ#1666799: link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling migration does not stop creating volume, instance, and network port on OpenStack Platform or VMs on Red Hat Virtualization]
 
-* link:https://bugzilla.redhat.com/show_bug.cgi?id=1678385[Virtual machine with name containing spaces ('rhel 7') fails to migrate using SSH and VDDK transformation]
+* BZ#1678385: link:https://bugzilla.redhat.com/show_bug.cgi?id=1678385[Virtual machine with name containing spaces ('rhel 7') fails to migrate using SSH and VDDK transformation]
 
-* link:https://bugzilla.redhat.com/show_bug.cgi?id=1699343[Migration plan CSV import validation does not work if file contains empty/archived/orphan/invalid VM name]
+* BZ#1699343: link:https://bugzilla.redhat.com/show_bug.cgi?id=1699343[Migration plan CSV import validation does not work if file contains empty/archived/orphan/invalid VM name]
 
-* link:https://bugzilla.redhat.com/show_bug.cgi?id=1698761["Maximum concurrent migrations per conversion host" interface control does not work]
+* BZ#1698761: link:https://bugzilla.redhat.com/show_bug.cgi?id=1698761["Maximum concurrent migrations per conversion host" interface control does not work]
 
-* *Red Hat Virtualization*: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings]
+* BZ#666799: link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling migration does not stop creating volume, instance, and network port on OSP or VMs on RHV].
++
+ifdef::rhv[]
+If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.
+endif::rhv[]
+ifdef::osp[]
+If you cancel a migration, you must delete migrated instances and network ports.
+endif::osp[]
 
-* *Red Hat OpenStack Platform*:
+ifdef::rhv[]
+* BZ#716283: link:https://bugzilla.redhat.com/show_bug.cgi?id=1716283[Migrating virtual machines are not distributed among the conversion hosts]
 
-** link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[Instance is not created after disk conversion]
-** link:https://bugzilla.redhat.com/show_bug.cgi?id=1669133[Names of virtual machines migrated using SSH transformation are changed]
-
-* *CloudForms*: CFME 5.10.4 does not support migration. The following versions support migration:
-
-** Red Hat OpenStack Platform (all versions): CFME 5.10.3
+* BZ#1669176: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings]
+*
+* *CloudForms*: CFME 5.10.4 does not support migration. Use the following versions for migration:
 ** Red Hat Virtualization 4.2: CFME 5.10.3
 ** Red Hat Virtualization 4.3: CFME 5.10.5
 +
@@ -38,3 +36,10 @@ The following issues will be addressed in a future release:
 ====
 You can use CFME 5.10.4 to manage your Red Hat Virtualization 4.3 environment. Only the migration functionality is affected.
 ====
+endif::rhv[]
+
+ifdef::osp[]
+* BZ#1668049: link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[Instance is not created after disk conversion]
+* BZ#1669133: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669133[Names of virtual machines migrated using SSH transformation are changed]
+* *CloudForms*: CFME 5.10.4 does not support migration. Use CFME 5.10.3.
+endif::osp[]

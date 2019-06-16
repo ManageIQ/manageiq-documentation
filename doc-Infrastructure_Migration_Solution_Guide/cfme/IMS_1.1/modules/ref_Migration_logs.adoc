@@ -6,25 +6,25 @@
 
 Check the following logs to identify errors:
 
-* Conversion host logs. See xref:Conversion_host_logs_{context}[].
-* CloudForms migration log. See xref:CloudForms_log_{context}[].
+* Conversion host logs. See xref:Conversion_host_logs_{context}[Conversion host logs].
+* CloudForms migration log. See xref:CloudForms_log_{context}[CloudForms migration log].
 
 The conversion host logs and the CloudForms migration log can help with troubleshooting.
 
 [id="Conversion_host_logs_{context}"]
-== Conversion host logs
+.Conversion host logs
 
 When disk migration starts, two logs are created in the conversion host:
 
-* `virt-v2v`: Debug output from `virt-v2v` itself. This log tracks the core of the virtual machine migration process, including `libguestfs` traces and disk migration details.
-* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting.
+* `virt-v2v`: Debug output from `virt-v2v` itself. This log tracks the core of the virtual machine migration process, including `libguestfs` traces and disk migration details. You can download access this log on the conversion host or download it in CloudForms.
+* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting. You can access this log on the conversion host.
 
 [IMPORTANT]
 ====
 If you need to open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], you must submit both the migration (`virt-v2v`) log and `virt-v2v-wrapper` log for analysis.
 ====
 
-.Accessing the `virt-v2v` and `virt-v2v-wrapper` logs on the conversion host
+*Accessing the `virt-v2v` and `virt-v2v-wrapper` logs on the conversion host*
 
 . Log in to the conversion host using SSH. If you have multiple conversion hosts, you can view the name of a virtual machine's conversion host by clicking the information icon (image:Info_icon.png[20]) of the virtual machine in the migration plan's details view.
 
@@ -33,18 +33,18 @@ If you need to open a link:https://access.redhat.com/support/cases/#/case/new[Re
 * `virt-v2v` log: +v2v-import-_date_-_log_number_.log+
 * `virt-v2v-wrapper` log: +v2v-import-_date_-_log_number_-wrapper.log+
 
-.Downloading the `virt-v2v` log in CloudForms
+*Downloading the `virt-v2v` log in CloudForms*
 
 . Click menu:Compute[*Migration* > Migration Plans].
 . Click a completed migration plan to view its details.
 . Click menu:Download Log[Migration Log].
 
 [id="CloudForms_log_{context}"]
-== CloudForms migration log
+.CloudForms migration log
 
 This log traces the orchestration of the virtual machine migration in CloudForms.
 
-.Accessing the CloudForms migration log
+*Accessing the CloudForms migration log*
 
 . Log in to the CloudForms machine using SSH.
-. View the migration log, `/var/www/miq/vmdb/log/automation.log`.
+. The migration log is `/var/www/miq/vmdb/log/automation.log`.

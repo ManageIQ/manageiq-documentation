@@ -1,6 +1,6 @@
 // Module included in the following assemblies:
 // assembly_Planning_the_migration.adoc
-[id="Questions_to_ask_before_migration"]
+[id="Questions_to_ask_before_migration_{context}"]
 = Questions to ask before migration
 
 The following questions can help you to estimate the resources and time required for migration.
@@ -29,16 +29,14 @@ It may be possible to migrate your applications in phases, without downtime at t
 
 * Check whether users will lose access to critical applications.
 
-[id="How_long_will_the_migration_take"]
-== How long will the migration take?
-
+How long will the migration take?::
 There is no formula to estimate how long the actual migration will take. This is determined on a case-by-case basis.
-
-The following migration examples are provided as a guide:
-
-[id="Rhv_migration_example"]
++
+The following example is provided as a guide:
++
+ifdef::rhv[]
 .Red Hat Virtualization migration
-
++
 ====
 * Duration of migration: 1:15:53 (hh:mm:ss)
 * 10 virtual machines
@@ -49,10 +47,10 @@ The following migration examples are provided as a guide:
 ** Fibre Channel 8 interface for host-to-storage connection
 ** 10 GbE network interface cards for all other connections
 ====
-
-[id="osp_migration_example"]
+endif::rhv[]
+ifdef::osp[]
 .Red Hat OpenStack Platform migration
-
++
 ====
 * Duration of migration: 2:13:00 (hh:mm:ss)
 * 20 virtual machines
@@ -64,25 +62,22 @@ The following migration examples are provided as a guide:
 ** Fibre Channel 8 interface for host-to-storage connection
 ** 10 GbE network interface cards for all other connections
 ====
+endif::osp[]
 
-[id="Deciding_how_many_conversion_hosts_to_create"]
-== How many conversion hosts do I need?
-
+How many conversion hosts do I need?::
 The number of conversion hosts you create depends on the size of your migration. All the virtual machines in a migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
-
++
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
-
-Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values. If you are using VDDK transformation and you want to increase the number of maximum concurrent migrations, you must also increase the VMware hypervisor memory.
-
++
+Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values.
++
 You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
-[id="Choosing_vddk_or_ssh_transformation"]
-== Should I migrate my virtual machines with VDDK or SSH?
-
+Should I migrate my virtual machines with VDDK or SSH?::
 You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
-
++
 The following table compares the options.
-
++
 [cols="1,2,2", options="header"]
 .VDDK and SSH comparison
 |===

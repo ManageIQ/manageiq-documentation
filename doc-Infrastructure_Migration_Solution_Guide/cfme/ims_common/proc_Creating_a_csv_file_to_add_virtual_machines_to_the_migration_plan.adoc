@@ -5,13 +5,18 @@
 
 If you are migrating virtual machines that were migrated in the past, you should create a CSV file to add the virtual machines to the migration plan, because the migration plan cannot discover them automatically.
 
-.Using a CSV file for large migrations (recommended)
+ifdef::rhv[]
 [NOTE]
 ====
-If you are migrating a large number of virtual machines, using a CSV file to add the virtual machines is faster than selecting them manually.
-
-For large Red Hat OpenStack Platform migrations, you can use a CSV file to set the security groups and flavors, instead of setting them individually in CloudForms.
+A CSV file is recommended for large migrations because it is faster than manually selecting each virtual machine.
 ====
+endif::rhv[]
+ifdef::osp[]
+[NOTE]
+====
+A CSV file is recommended for large migrations because it is faster than manually selecting the security group and flavor for each virtual machine.
+====
+endif::osp[]
 
 .CSV file fields
 [cols="1,3", options="header"]
@@ -20,8 +25,10 @@ For large Red Hat OpenStack Platform migrations, you can use a CSV file to set t
 |`Name` |Virtual machine name. *Required*
 |`Host` |*Optional*. Only required if virtual machines have identical `Name` fields.
 |`Provider` |*Optional*. Only required if virtual machines have identical `Name` and `Host` fields.
-|`Security Group` |*Optional, for Red Hat OpenStack Platform only.* The default is `Default`.
-|`Flavor` |*Optional, for Red Hat OpenStack Platform only.* If you do not create flavors for the migration or if you leave this field blank, CloudForms tries to map the source virtual machines to existing flavors.
+ifdef::osp[]
+|`Security Group` |*Optional.* The default is `Default`.
+|`Flavor` |*Optional* If you do not create flavors for the migration or if you leave this field blank, CloudForms tries to map the source virtual machines to existing flavors.
+endif::osp[]
 |===
 
 .CSV file example

@@ -1,23 +1,11 @@
 // Module included in the following assemblies:
 //
-// assembly_Preparing_the_1_1_environment_for_migration.adoc
-// IMS_1.2/modules/proc_Configuring_the_conversion_hosts_for_transformation.adoc
+// assembly_Configuring_the_1_1_conversion_hosts.adoc
+// assembly_Configuring_the_1_2_conversion_hosts.adoc
 [id="Copying_vmware_keys_to_{context}_conversion_hosts"]
+= Copying the VMware SSH keys to the conversion hosts
 
-ifdef::rhv[]
-= (SSH only) Copying VMware keys to Red Hat Virtualization conversion hosts
-endif::rhv[]
-ifdef::osp[]
-= (SSH only) Copying VMware keys to Red Hat OpenStack Platform conversion hosts
-endif::osp[]
-
-The VMware SSH public keys are copied to your conversion hosts.
-
-You can use the keys collected when you enabled SSH access in the VMware hypervisors or you can collect them with `ssh-keyscan`.
-
-.Copying collected VMware keys
-
-If you collected the SSH public keys in when you enabled SSH access in the VMware hypervisors, perform the following procedure:
+If you collected the VMware SSH public keys when you enabled SSH access in the VMware hypervisors, perform the following procedure to copy the keys to your conversion hosts:
 
 ifdef::rhv[]
 . Copy the VMware keys to `/var/lib/vdsm/.ssh/known_hosts` on each conversion host.
@@ -28,16 +16,12 @@ ifdef::osp[]
 include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::osp[]
 
-.Copying VMware keys collected with `ssh-keyscan`
-
-If you are collecting the SSH public keys with `keyscan`, perform the following procedure:
+If you did not collect the VMware keys when you configured the VMware hypervisors, perform the following procedure to collect the keys with `ssh-keyscan` and copy them to your conversion hosts:
 
 [CAUTION]
 ====
 You must run `ssh-keyscan` for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.
 ====
-
-Perform the following procedure on each conversion host:
 
 . Run `ssh-keyscan` for each VMware hypervisor IP address and copy its public key to `known_hosts`, as in the following example:
 ifdef::rhv[]

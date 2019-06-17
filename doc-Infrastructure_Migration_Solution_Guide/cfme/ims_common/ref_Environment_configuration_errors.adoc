@@ -7,13 +7,16 @@
 [id="VMware_environment_errors_{context}"]
 .VMware
 
-* A source virtual machine cannot migrate if it has any of the following conditions:
+* A VMware virtual machine cannot be migrated if it has any of the following conditions:
 
 ** Mounted ISO/CDROM disk
 ** Encrypted disk
 ** Invalid name, containing spaces or special characters
+ifdef::osp[]
+** Powered off during migration
+endif::osp[]
 
-* VDDK transformation only:
+* VDDK transformation only: To perform more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor's NFC service memory.
 
 ifdef::rhv[]
 [id="rhv_environment_errors"]
@@ -25,14 +28,12 @@ ifdef::rhv[]
 * SSH transformation only:
 
 ** If you are using SSSD with single sign-on, you must reinstall `ipa-client` without OpenSSH.
-** Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.
 ** Check that the conversion host does not have an existing private SSH key in `/var/lib/vdsm/.ssh/id_rsa`. Conversion host configuration does not overwrite old SSH keys. They must be deleted manually.
+** Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.
 endif::rhv[]
 ifdef::osp[]
 [id="osp_environment_errors"]
 .Red Hat OpenStack Platform
-
-* VMware virtual machine powered off: The virtual machine must be powered on at the time of migration.
 
 * SSH transformation only: Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.
 

@@ -28,7 +28,7 @@ Changing the maximum number of concurrent migrations for all conversion hosts::
 +
 [NOTE]
 ====
-In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.
+In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work.
 ====
 
 // Commenting out because of https://bugzilla.redhat.com/show_bug.cgi?id=1716283
@@ -52,25 +52,44 @@ Changing the maximum number of concurrent migrations for a provider::
 . Log in to the CloudForms machine using SSH.
 . Enter the following command:
 +
+ifdef::rhv[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # vmdb
 # rails console
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_RHV_").custom_set("Max Transformation Runners", _30_) <1> <2>
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "RHV").custom_set("Max Transformation Runners", _30_) <1>
 ----
-<1> Valid provider `name` values are `RHV` and `OpenStack`.
-<2> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `20` for a provider.
+endif::rhv[]
+ifdef::osp[]
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# vmdb
+# rails console
+irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "OpenStack").custom_set("Max Transformation Runners", _30_) <1>
+----
+endif::osp[]
+<1> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `20` for a provider.
 
 Getting the maximum number of concurrent migrations for a provider::
 . Log in to the CloudForms machine using SSH.
 . Enter the following command:
 +
-[options="nowrap" subs="+quotes,verbatim"]
+ifdef::rhv[]
 ----
 # vmdb
 # rails console
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_OpenStack_").custom_get("Max Transformation Runners") <1>
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "RHV").custom_get("Max Transformation Runners")
 ----
-<1> Valid provider `name` values are `RHV` and `OpenStack`.
+endif::rhv[]
+ifdef::osp[]
+----
+# vmdb
+# rails console
+irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "OpenStack").custom_get("Max Transformation Runners")
+----
+endif::osp[]
+[options="nowrap" subs="+quotes,verbatim"]

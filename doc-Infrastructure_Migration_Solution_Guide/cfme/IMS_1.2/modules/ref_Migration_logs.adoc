@@ -4,7 +4,16 @@
 [id="Migration_logs_{context}"]
 = Migration logs
 
-You can check the conversion host logs, playbook logs (if you are running premigration or postmigration playbooks), and the CloudForms log to identify the cause of a migration error.
+You can check the following logs to identify the cause of a migration error:
+
+* Conversion host logs. See xref:conversion_host_playbook_logs_{context}[].
+* Playbook logs, if you are using premigration or postmigration Ansible playbooks. See xref:conversion_host_playbook_logs_{context}[].
+* CloudForms migration log. See xref:Cloudforms_migration_log_{context}[].
+
+[id="conversion_host_playbook_logs_{context}"]
+== Downloading the conversion host and playbook logs
+
+You can download the conversion host and playbooks logs in CloudForms.
 
 When disk migration starts, two logs are created in the conversion host:
 
@@ -13,21 +22,22 @@ When disk migration starts, two logs are created in the conversion host:
 
 [IMPORTANT]
 ====
-If you need to open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], both the `virt-v2v` log and `virt-v2v-wrapper` log are required for analysis and troubleshooting.
+If you open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], you will need to submit both the `virt-v2v` log and `virt-v2v-wrapper` log for analysis and troubleshooting.
 ====
 
-*Downloading conversion host and playbook logs in CloudForms*
+To access the conversion host logs and the playbook logs:
 
 . Click menu:Compute[*Migration* > Migration Plans].
 . Click a completed migration plan to view its details.
 . Click *Download Log* of a virtual machine and select a log from the dropdown list:
 
-* *Premigration log:* This option only appears if a premigration playbook is used.
-* *Migration log:* This is the `virt-v2v` log.
-* *Virt-v2v-wrapper log:*
-* *Postmigration log:* This option only appears if a postmigration playbook is used.
+* *Premigration log* This option only appears if a premigration playbook is used.
+* *Migration log* The *Migration log* is the `virt-v2v` log.
+* *Virt-v2v-wrapper log*
+* *Postmigration log* This option only appears if a postmigration playbook is used.
 
-*Accessing the CloudForms migration log*
+[id="Cloudforms_migration_log_{context}"]
+== Accessing the CloudForms migration log
 
 . Log into the CloudForms machine using SSH.
 . The migration log is `/var/www/miq/vmdb/log/automation.log`.

@@ -408,7 +408,7 @@
 <simpara>Configuring the VMware hypervisors if you are using SSH transformation. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Configuring a VMware hypervisor to support additional connections if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
+<simpara>Configuring a VMware hypervisor if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_rhv">
@@ -567,17 +567,8 @@
 <entry align="left" valign="top"><simpara>4.7.4, with CFME 5.10.5</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top" namest="col_1" nameend="col_2"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis></simpara><simpara>You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only the migration functionality is affected.</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara>Red Hat OpenStack Platform</simpara></entry>
-<entry align="left" valign="top"><simpara>13 or 14</simpara></entry>
-<entry align="left" valign="top"><simpara>13 or 14</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara>RHOSP V2V Image for Red Hat OpenStack Director</simpara></entry>
-<entry align="left" valign="top"><simpara>14.0.2</simpara></entry>
-<entry align="left" valign="top"><simpara>14.0.3</simpara></entry>
+<entry align="left" valign="top" namest="col_1" nameend="col_2"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis>
+You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only the migration functionality is affected.</simpara></entry>
 </row>
 </tbody>
 </tgroup>
@@ -1436,7 +1427,7 @@ vm03,host1,vSphere3</screen>
 <simpara>In the <emphasis role="strong">Migration Throttling</emphasis> tab, select a value for <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> or <emphasis role="strong">Maximum concurrent migrations per provider</emphasis> and click <emphasis role="strong">Apply</emphasis>.</simpara>
 <simpara>The value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is constrained so that it cannot be greater than <emphasis role="strong">Maximum concurrent migrations per provider</emphasis>.</simpara>
 <note>
-<simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.</simpara>
+<simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work.</simpara>
 </note>
 </listitem>
 </orderedlist>
@@ -1464,7 +1455,21 @@ vm03,host1,vSphere3</screen>
 <simpara><xref linkend="Known_issues_rhv"/> provides information about issues that will be addressed in a future release.</simpara>
 <section xml:id="Migration_logs_rhv">
 <title>Migration logs</title>
-<simpara>You can check the conversion host logs, playbook logs (if you are running premigration or postmigration playbooks), and the CloudForms log to identify the cause of a migration error.</simpara>
+<simpara>You can check the following logs to identify the cause of a migration error:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Conversion host logs. See <xref linkend="conversion_host_playbook_logs_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Playbook logs, if you are using premigration or postmigration Ansible playbooks. See <xref linkend="conversion_host_playbook_logs_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>CloudForms migration log. See <xref linkend="Cloudforms_migration_log_rhv"/>.</simpara>
+</listitem>
+</itemizedlist>
+<section xml:id="conversion_host_playbook_logs_rhv">
+<title>Downloading the conversion host and playbook logs</title>
+<simpara>You can download the conversion host and playbooks logs in CloudForms.</simpara>
 <simpara>When disk migration starts, two logs are created in the conversion host:</simpara>
 <itemizedlist>
 <listitem>
@@ -1475,9 +1480,9 @@ vm03,host1,vSphere3</screen>
 </listitem>
 </itemizedlist>
 <important>
-<simpara>If you need to open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, both the <literal>virt-v2v</literal> log and <literal>virt-v2v-wrapper</literal> log are required for analysis and troubleshooting.</simpara>
+<simpara>If you open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, you will need to submit both the <literal>virt-v2v</literal> log and <literal>virt-v2v-wrapper</literal> log for analysis and troubleshooting.</simpara>
 </important>
-<simpara><emphasis role="strong">Downloading conversion host and playbook logs in CloudForms</emphasis></simpara>
+<simpara>To access the conversion host logs and the playbook logs:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu><emphasis role="strong">Migration</emphasis></guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
@@ -1489,21 +1494,23 @@ vm03,host1,vSphere3</screen>
 <simpara>Click <emphasis role="strong">Download Log</emphasis> of a virtual machine and select a log from the dropdown list:</simpara>
 <itemizedlist>
 <listitem>
-<simpara><emphasis role="strong">Premigration log:</emphasis> This option only appears if a premigration playbook is used.</simpara>
+<simpara><emphasis role="strong">Premigration log</emphasis> This option only appears if a premigration playbook is used.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Migration log:</emphasis> This is the <literal>virt-v2v</literal> log.</simpara>
+<simpara><emphasis role="strong">Migration log</emphasis> The <emphasis role="strong">Migration log</emphasis> is the <literal>virt-v2v</literal> log.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Virt-v2v-wrapper log:</emphasis></simpara>
+<simpara><emphasis role="strong">Virt-v2v-wrapper log</emphasis></simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Postmigration log:</emphasis> This option only appears if a postmigration playbook is used.</simpara>
+<simpara><emphasis role="strong">Postmigration log</emphasis> This option only appears if a postmigration playbook is used.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 </orderedlist>
-<simpara><emphasis role="strong">Accessing the CloudForms migration log</emphasis></simpara>
+</section>
+<section xml:id="Cloudforms_migration_log_rhv">
+<title>Accessing the CloudForms migration log</title>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Log into the CloudForms machine using SSH.</simpara>
@@ -1512,6 +1519,7 @@ vm03,host1,vSphere3</screen>
 <simpara>The migration log is <literal>/var/www/miq/vmdb/log/automation.log</literal>.</simpara>
 </listitem>
 </orderedlist>
+</section>
 </section>
 <section xml:id="Infrastructure_mapping_errors_rhv">
 <title>Infrastructure mapping errors</title>
@@ -1565,7 +1573,7 @@ vm03,host1,vSphere3</screen>
 <itemizedlist xml:id="VMware_environment_errors_rhv">
 <title>VMware</title>
 <listitem>
-<simpara>A source virtual machine cannot migrate if it has any of the following conditions:</simpara>
+<simpara>A VMware virtual machine cannot be migrated if it has any of the following conditions:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Mounted ISO/CDROM disk</simpara>
@@ -1579,7 +1587,7 @@ vm03,host1,vSphere3</screen>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>VDDK transformation only:</simpara>
+<simpara>VDDK transformation only: To perform more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor’s NFC service memory.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist xml:id="rhv_environment_errors">
@@ -1597,10 +1605,10 @@ vm03,host1,vSphere3</screen>
 <simpara>If you are using SSSD with single sign-on, you must reinstall <literal>ipa-client</literal> without OpenSSH.</simpara>
 </listitem>
 <listitem>
-<simpara>Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.</simpara>
+<simpara>Check that the conversion host does not have an existing private SSH key in <literal>/var/lib/vdsm/.ssh/id_rsa</literal>. Conversion host configuration does not overwrite old SSH keys. They must be deleted manually.</simpara>
 </listitem>
 <listitem>
-<simpara>Check that the conversion host does not have an existing private SSH key in <literal>/var/lib/vdsm/.ssh/id_rsa</literal>. Conversion host configuration does not overwrite old SSH keys. They must be deleted manually.</simpara>
+<simpara>Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -2019,7 +2027,7 @@ vm03,host1,vSphere3</screen>
 <simpara>Configuring the VMware hypervisors if you are using SSH transformation. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Configuring a VMware hypervisor to support additional connections if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
+<simpara>Configuring a VMware hypervisor if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_osp">
@@ -2129,7 +2137,7 @@ vm03,host1,vSphere3</screen>
 <simpara>Installing and configuring CloudForms 4.7.4. See <xref linkend="Installing_cf_4_7_4_with_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Creating the Red Hat OpenStack Platform conversion hosts. See <xref linkend="Creating_osp_conversion_hosts"/>.</simpara>
+<simpara>Creating the conversion hosts. See <xref linkend="Creating_osp_conversion_hosts"/>.</simpara>
 </listitem>
 </orderedlist>
 <formalpara xml:id="Target_prerequisites_osp">
@@ -2165,11 +2173,6 @@ vm03,host1,vSphere3</screen>
 <entry align="left" valign="top"><simpara>VMware</simpara></entry>
 <entry align="left" valign="top"><simpara>5.5 or later</simpara></entry>
 <entry align="left" valign="top"><simpara>5.5 or later</simpara></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara>Red Hat Virtualization</simpara></entry>
-<entry align="left" valign="top"><simpara>4.2.8</simpara></entry>
-<entry align="left" valign="top"><simpara>4.3.4 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top" morerows="1"><simpara>CloudForms</simpara></entry>
@@ -3114,7 +3117,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>In the <emphasis role="strong">Migration Throttling</emphasis> tab, select a value for <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> or <emphasis role="strong">Maximum concurrent migrations per provider</emphasis> and click <emphasis role="strong">Apply</emphasis>.</simpara>
 <simpara>The value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is constrained so that it cannot be greater than <emphasis role="strong">Maximum concurrent migrations per provider</emphasis>.</simpara>
 <note>
-<simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.</simpara>
+<simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work.</simpara>
 </note>
 </listitem>
 </orderedlist>
@@ -3142,7 +3145,21 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara><xref linkend="Known_issues_osp"/> provides information about issues that will be addressed in a future release.</simpara>
 <section xml:id="Migration_logs_osp">
 <title>Migration logs</title>
-<simpara>You can check the conversion host logs, playbook logs (if you are running premigration or postmigration playbooks), and the CloudForms log to identify the cause of a migration error.</simpara>
+<simpara>You can check the following logs to identify the cause of a migration error:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Conversion host logs. See <xref linkend="conversion_host_playbook_logs_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Playbook logs, if you are using premigration or postmigration Ansible playbooks. See <xref linkend="conversion_host_playbook_logs_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>CloudForms migration log. See <xref linkend="Cloudforms_migration_log_osp"/>.</simpara>
+</listitem>
+</itemizedlist>
+<section xml:id="conversion_host_playbook_logs_osp">
+<title>Downloading the conversion host and playbook logs</title>
+<simpara>You can download the conversion host and playbooks logs in CloudForms.</simpara>
 <simpara>When disk migration starts, two logs are created in the conversion host:</simpara>
 <itemizedlist>
 <listitem>
@@ -3153,9 +3170,9 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </listitem>
 </itemizedlist>
 <important>
-<simpara>If you need to open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, both the <literal>virt-v2v</literal> log and <literal>virt-v2v-wrapper</literal> log are required for analysis and troubleshooting.</simpara>
+<simpara>If you open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, you will need to submit both the <literal>virt-v2v</literal> log and <literal>virt-v2v-wrapper</literal> log for analysis and troubleshooting.</simpara>
 </important>
-<simpara><emphasis role="strong">Downloading conversion host and playbook logs in CloudForms</emphasis></simpara>
+<simpara>To access the conversion host logs and the playbook logs:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu><emphasis role="strong">Migration</emphasis></guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
@@ -3167,21 +3184,23 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click <emphasis role="strong">Download Log</emphasis> of a virtual machine and select a log from the dropdown list:</simpara>
 <itemizedlist>
 <listitem>
-<simpara><emphasis role="strong">Premigration log:</emphasis> This option only appears if a premigration playbook is used.</simpara>
+<simpara><emphasis role="strong">Premigration log</emphasis> This option only appears if a premigration playbook is used.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Migration log:</emphasis> This is the <literal>virt-v2v</literal> log.</simpara>
+<simpara><emphasis role="strong">Migration log</emphasis> The <emphasis role="strong">Migration log</emphasis> is the <literal>virt-v2v</literal> log.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Virt-v2v-wrapper log:</emphasis></simpara>
+<simpara><emphasis role="strong">Virt-v2v-wrapper log</emphasis></simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">Postmigration log:</emphasis> This option only appears if a postmigration playbook is used.</simpara>
+<simpara><emphasis role="strong">Postmigration log</emphasis> This option only appears if a postmigration playbook is used.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 </orderedlist>
-<simpara><emphasis role="strong">Accessing the CloudForms migration log</emphasis></simpara>
+</section>
+<section xml:id="Cloudforms_migration_log_osp">
+<title>Accessing the CloudForms migration log</title>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Log into the CloudForms machine using SSH.</simpara>
@@ -3190,6 +3209,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>The migration log is <literal>/var/www/miq/vmdb/log/automation.log</literal>.</simpara>
 </listitem>
 </orderedlist>
+</section>
 </section>
 <section xml:id="Infrastructure_mapping_errors_osp">
 <title>Infrastructure mapping errors</title>
@@ -3252,7 +3272,7 @@ BadRequestException: Unknown errors</screen>
 <itemizedlist xml:id="VMware_environment_errors_osp">
 <title>VMware</title>
 <listitem>
-<simpara>A source virtual machine cannot migrate if it has any of the following conditions:</simpara>
+<simpara>A VMware virtual machine cannot be migrated if it has any of the following conditions:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Mounted ISO/CDROM disk</simpara>
@@ -3263,17 +3283,17 @@ BadRequestException: Unknown errors</screen>
 <listitem>
 <simpara>Invalid name, containing spaces or special characters</simpara>
 </listitem>
+<listitem>
+<simpara>Powered off during migration</simpara>
+</listitem>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>VDDK transformation only:</simpara>
+<simpara>VDDK transformation only: To perform more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor’s NFC service memory.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist xml:id="osp_environment_errors">
 <title>Red Hat OpenStack Platform</title>
-<listitem>
-<simpara>VMware virtual machine powered off: The virtual machine must be powered on at the time of migration.</simpara>
-</listitem>
 <listitem>
 <simpara>SSH transformation only: Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.</simpara>
 </listitem>

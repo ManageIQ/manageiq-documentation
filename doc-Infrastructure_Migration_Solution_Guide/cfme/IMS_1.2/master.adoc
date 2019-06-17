@@ -1,4 +1,4 @@
-= Infrastructure Migration Solution Guide
+= Red Hat Infrastructure Migration Solution
 :imagesdir: ../images
 :vernum: 1.2
 :toc: left
@@ -7,12 +7,55 @@
 :compat-mode:
 :experimental:
 
-
 :ims:
 :numbered:
+:sectnums:
+:partnums:
 
-include::assembly_IMS_overview.adoc[leveloffset=+1]
+Red Hat Infrastructure Migration Solution (IMS) 1.2 enables you to migrate virtual machines from VMware{nbsp}5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms:
+
+Red Hat Virtualization 4.3::
+Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/[Red Hat Virtualization 4.3] documentation for more information.
+
+Red Hat OpenStack Platform 13 and 14::
+Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14[Red Hat OpenStack Platform 13] or link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14[Red Hat OpenStack Platform 14] documentation for more information.
+
+Red Hat CloudForms 4.7.4::
+Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[Red Hat CloudForms 4.7] documentation for more information.
+
+// [NOTE]
+// ====
+// You can migrate a single virtual machine to Red Hat Container-native Virtualization (technical preview). See link:https://access.redhat.com/documentation/en-us/openshift_container_platform/4.1/html/container-native_virtualization_users_guide/index#cnv-importing-vm-wizard-web[Importing a virtual machine] in the _Red Hat Container-native Virtualization User's Guide_.
+// ====
+
+:context: rhv
+:rhv:
+= Migrating from VMware to Red Hat Virtualization
+
 include::ims_common/assembly_Planning_the_migration.adoc[leveloffset=+1]
-include::assembly_Preparing_the_environment_for_migration.adoc[leveloffset=+1]
-include::ims_common/assembly_Migrating_the_infrastructure.adoc[leveloffset=+1]
+
+== Preparing the environment for migration
+
+include::ims_common/assembly_Preparing_the_vmware_environment.adoc[leveloffset=+2]
+include::assembly_Preparing_the_1_2_target_environment.adoc[leveloffset=+2]
+include::assembly_Configuring_the_1_2_conversion_hosts.adoc[leveloffset=+2]
+
+include::ims_common/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
 include::ims_common/assembly_Troubleshooting.adoc[leveloffset=+1]
+:rhv!:
+
+:context: osp
+:osp:
+= Migrating from VMware to Red Hat OpenStack Platform
+
+include::ims_common/assembly_Planning_the_migration.adoc[leveloffset=+1]
+
+== Preparing the environment for migration
+
+include::ims_common/assembly_Preparing_the_vmware_environment.adoc[leveloffset=+2]
+include::assembly_Preparing_the_1_2_target_environment.adoc[leveloffset=+2]
+include::assembly_Configuring_the_1_2_conversion_hosts.adoc[leveloffset=+3]
+
+include::ims_common/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
+include::ims_common/assembly_Troubleshooting.adoc[leveloffset=+1]
+:osp!:

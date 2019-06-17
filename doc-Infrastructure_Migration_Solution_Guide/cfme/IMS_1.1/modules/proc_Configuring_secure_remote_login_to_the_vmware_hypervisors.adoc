@@ -1,11 +1,11 @@
 // Module included in the following assemblies:
 //
-// assembly_Preparing_the_1_1_environment_for_migration.adoc
+// assembly_Configuring_the_1_1_conversion_hosts.adoc
 // RHV only
 [id="Configuring_secure_remote_login_to_the_vmware_hypervisors"]
 = Configuring secure remote login to the VMware hypervisors
 
-You can configure secure remote login to the VMware hypervisors with `ssh-agent` and `ssh-add`.
+You can configure secure remote login to the VMware hypervisors by using `ssh-agent` and `ssh-add`.
 
 [IMPORTANT]
 ====
@@ -19,29 +19,40 @@ Perform the following procedure on the Manager machine:
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # sudo -u vdsm ssh-agent
-
-SSH_AUTH_SOCK=/tmp/ssh-_socket_number_/agent._pid_; export SSH_AUTH_SOCK; <1>
-SSH_AGENT_PID=139150; export SSH_AGENT_PID;
-echo Agent pid 139150;
 ----
-<1> Copy the `SSH_AUTH_SOCK` value from the output of the `ssh-agent` command. You will use it for `ssh-add` and connecting over SSH to the VMware hypervisors.
-
-. Run `ssh-add` to authorize the vdsm user's private key for the `ssh-agent` session:
++
+`ssh-agent` creates the `SSH_AUTH_SOCK` and `SSH_AGENT_PID` environment variables:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u vdsm SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh-add
+SSH_AUTH_SOCK=/tmp/ssh-_socket_number_/agent._pid_; export SSH_AUTH_SOCK;
+SSH_AGENT_PID=139150; export SSH_AGENT_PID;
+echo Agent pid 139150;
 ----
 
-. Connect to each VMware hypervisor as `vdsm`, using the `ssh-agent` session and `ssh`, to verify the secure remote login:
+. Copy the `SSH_AUTH_SOCK` variable from the output.
+
+. Run `ssh-add` to authorize the `vdsm` user's private key for the `ssh-agent` session:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# sudo -u vdsm SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh-add <1>
+----
+<1> `SSH_AUTH_SOCK_value` is the `SSH_AUTH_SOCK` environment variable.
+
+. Connect to a VMware hypervisor to verify the secure remote login:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # sudo -u vdsm \
-    SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh root@_esx1.example.com_
+    SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh root@_esx1.example.com_ <1> <2>
 ----
+<1> `SSH_AUTH_SOCK_value` is the `SSH_AUTH_SOCK` variable.
+<2> `esx1.example.com` is the host name of a VMware hypervisor.
 +
 [IMPORTANT]
 ====
-If the connection fails, all migrations from this VMware hypervisor using SSH transformation will fail.
+You must test the SSH connection to *all* VMware hypervisors.
+
+If a connection is unsuccessful, all migrations from this VMware hypervisor using SSH transformation will fail.
 ====

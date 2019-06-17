@@ -4,9 +4,14 @@
 [id="Configuring_the_{context}_conversion_hosts_with_Ansible_playbooks"]
 = Configuring the conversion hosts with Ansible playbooks
 
-You can configure your conversion hosts for VDDK or SSH transformation with Ansible playbooks.
+You can configure your conversion hosts for VDDK or SSH transformation with Ansible playbooks:
 
-.Installing `ovirt-ansible-v2v-conversion-host`
+. Create the `extra_vars.yml` file for the conversion host parameters. See xref:extra_vars_{context}[].
+. Create the `secure_vars.yml` file for secure variables. See xref:secure_vars_{context}[].
+. Configure and verify the conversion hosts by running the Ansible playbooks. See xref:Configuring_host_with_playbooks_{context}[].
+
+[id="extra_vars_{context}"]
+== Creating the `extra_vars.yml` file
 
 ifdef::rhv[]
 . Log in to the Manager machine using SSH.
@@ -17,10 +22,8 @@ ifdef::rhv[]
 # yum install ovirt-ansible-v2v-conversion-host
 ----
 
-.Creating `extra_vars.yml`
-
-Create `extra_vars.yml`:
-
+. Create the `extra_vars.yml` file with the following parameters:
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 ---
@@ -68,12 +71,13 @@ manageiq_providers:
 ----
 
 <1> Select a transformation method, `VDDK` or `SSH`.
-<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default is 10. If you are using VDDK transformation, do not set this number higher than `10` unless you have increased the memory of the VMware hypervisors.
+<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default value is `10`. If you are using VDDK transformation, do not set this value higher than `20`.
 <3> Update the `v2v_vddk_package_name` with the correct version.
 <4> `v2v_vddk_package_url` is the path to the VDDK archive file that you downloaded.
 <5> `manageiq_url` is the FQDN of the CloudForms machine.
-<6> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. Default is `true`.
-<7> You can obtain the `manageiq_zone_id` by entering this command on the CloudForms machine:
+<6> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. The default value is `true`.
+
+<7> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -81,14 +85,11 @@ manageiq_providers:
 ----
 
 <8> The `certificate_authority` is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
+
 endif::rhv[]
-
 ifdef::osp[]
-.Creating `extra_vars.yml`
-
 . Log in to a conversion host.
-. Go to `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`.
-. Create `extra_vars.yml` file and update its parameters:
+. In `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`, create an `extra_vars.yml` file with the following parameters:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -140,19 +141,18 @@ manageiq_providers:
 ----
 
 <1> Select a transformation method, `VDDK` or `SSH`.
-<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default is `10`. If you are using VDDK transformation, do not set this number higher than `10` unless you have increased the memory of the VMware hypervisors.
+<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default is `10`. If you are using VDDK transformation, do not set this number higher than `20`.
 <3> Update the `v2v_vddk_package_name` with the correct version.
 <4> `v2v_vddk_package_url` is the path to the VDDK archive file that you downloaded.
 <5> `manageiq_url` is the FQDN of the CloudForms machine.
-<6> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. Its default value is `true`.
-<7> You can obtain the `manageiq_zone_id` by entering this command on the CloudForms machine:
+<6> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. The default value is `true`.
+<7> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # curl -sk -u admin \'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone
 ----
-
-<8> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`)
+<8> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`).
 <9> The CA chain (`certificate_authority`) is a concatenation of two CA files:
 +
 * `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server
@@ -161,7 +161,8 @@ manageiq_providers:
 If you deploy your own CA chain, use the chain that signs the Red Hat OpenStack Platform API certificates. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[SSL/TLS Certificate Configuration] in _Red Hat OpenStack Platform Director Installation and Usage_.
 endif::osp[]
 
-.Creating `secure_vars.yml`
+[id="secure_vars_{context}"]
+== Creating the `secure_vars.yml` file
 
 . Create an encrypted `secure_vars.yml` file:
 +
@@ -170,7 +171,7 @@ endif::osp[]
 # ansible-vault create secure_vars.yml
 ----
 
-. Add the following variables to `secure_vars.yml` and save the file:
+. Add the following parameters and save the file:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -187,6 +188,7 @@ v2v_ssh_private_key: |
   _b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn...._
   -----END RSA PRIVATE KEY-----
 ----
+
 <1> This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.
 ifdef::rhv[]
 +
@@ -196,11 +198,12 @@ If the Red Hat Virtualization conversion host has an existing SSH private key, t
 ====
 endif::rhv[]
 
-.Configuring and verifying the conversion hosts
+[id="Configuring_host_with_playbooks_{context}"]
+== Configuring and verifying the conversion hosts
 
-. Run the `conversion_host_enable.yml` playbook for each conversion host:
-+
+. Run the `conversion_host_enable.yml` playbook to configure each conversion host:
 ifdef::rhv[]
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-playbook -i _conversion_host_, -b \ <1>
@@ -211,6 +214,7 @@ ifdef::rhv[]
 <1> `conversion_host` is the FQDN or IP address of the conversion host.
 endif::rhv[]
 ifdef::osp[]
++
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-playbook -i _conversion_host_, -c local -b \ <1>
@@ -224,17 +228,17 @@ endif::osp[]
 ====
 Running the `conversion_host_enable.yml` playbook more than once on the same host creates multiple entries in the CloudForms database for that host.
 
-If you need to run the `conversion_host_enable.yml` playbook again, you should remove the existing database entry by running the `conversion_host_disable.yml` playbook on the host:
+If you need to run the `conversion_host_enable.yml` playbook again, remove the host's existing database entry by running `conversion_host_disable.yml` on the host:
 
 ----
 # ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml
 ----
 ====
 
-. Run the `conversion_host_check.yml` playbook to verify the conversion host configuration:
+. Run the `conversion_host_check.yml` playbook to verify the configuration:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # ansible-playbook --ask-vault-pass -i _conversion_host_, conversion_host_check.yml <1>
 ----
-<1> Update `conversion_host` with the FQDN or IP address of the conversion host.
+<1> `conversion_host` is the FQDN or IP address of the conversion host.

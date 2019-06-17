@@ -5,7 +5,12 @@
 [id="Copying_vmware_keys_to_{context}_conversion_hosts"]
 = Copying the VMware SSH keys to the conversion hosts
 
-If you collected the VMware SSH public keys when you enabled SSH access in the VMware hypervisors, perform the following procedure to copy the keys to your conversion hosts:
+You can copy the VMware SSH public keys to the conversion hosts.
+
+The VMware keys can be collected either when you configure the VMware hypervisors for SSH transformation (see xref:Copying_collected_ssh_keys_{context}[]) or by using `ssh-keyscan` (see xref:Copying_keys_ssh_keyscan_{context}[]).
+
+[id="Copying_collected_ssh_keys_{context}"]
+== Copying keys collected during VMware hypervisor configuration
 
 ifdef::rhv[]
 . Copy the VMware keys to `/var/lib/vdsm/.ssh/known_hosts` on each conversion host.
@@ -16,22 +21,24 @@ ifdef::osp[]
 include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::osp[]
 
-If you did not collect the VMware keys when you configured the VMware hypervisors, perform the following procedure to collect the keys with `ssh-keyscan` and copy them to your conversion hosts:
+[id="Copying_keys_ssh_keyscan_{context}"]
+== Copying keys collected with `ssh-keyscan`
 
 [CAUTION]
 ====
 You must run `ssh-keyscan` for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.
 ====
 
-. Run `ssh-keyscan` for each VMware hypervisor IP address and copy its public key to `known_hosts`, as in the following example:
+. Run `ssh-keyscan` for each VMware hypervisor and copy its public key to `known_hosts`, as in the following example:
 ifdef::rhv[]
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-keyscan _esx1_IP_ > /var/lib/vdsm/.ssh/known_hosts
+# ssh-keyscan _esx1_IP_ > /var/lib/vdsm/.ssh/known_hosts <1>
 # ssh-keyscan _esx2_IP_ >> /var/lib/vdsm/.ssh/known_hosts
 # ssh-keyscan _esx3_IP_ >> /var/lib/vdsm/.ssh/known_hosts
 ----
+<1> You must use the IP address, not the host name, of the VMware hypervisor.
 
 . Change the ownership of the `known_hosts` file to `vdsm` user and `kvm` group:
 +
@@ -44,9 +51,10 @@ ifdef::osp[]
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ssh-keyscan _esx1_IP_ > /root/.ssh/known_hosts
+# ssh-keyscan _esx1_IP_ > /root/.ssh/known_hosts <1>
 # ssh-keyscan _esx2_IP_ >> /root/.ssh/known_hosts
 # ssh-keyscan _esx3_IP_ >> /root/.ssh/known_hosts
 ----
+<1> You must use the IP address, not the host name, of the VMware hypervisor.
 include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::osp[]

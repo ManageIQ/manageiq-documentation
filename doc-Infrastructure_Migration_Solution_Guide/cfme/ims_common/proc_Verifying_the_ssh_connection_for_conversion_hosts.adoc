@@ -1,5 +1,6 @@
 // Module included in the following assemblies:
-// ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc
+//
+// assembly_Configuring_the_1_1_conversion_hosts.adoc
 [id="Verifying_the_ssh_connection_for_{context}_conversion_hosts"]
 ifdef::rhv[]
 . Verify the SSH connection by connecting to each VMware hypervisor as `vdsm`:
@@ -7,19 +8,21 @@ ifdef::rhv[]
 [options="nowrap" subs="+quotes,verbatim"]
 +
 ----
-# sudo -u vdsm ssh root@_esx1.example.com_
+# sudo -u vdsm ssh root@_esx1.example.com_ <1>
 ----
+<1> `esx1.example.com` is the host name of the VMware hypervisor.
 endif::rhv[]
 ifdef::osp[]
-. On each conversion host, verify the SSH connection by connect to each VMware hypervisor as `cloud-user`:
+. On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as `cloud-user`:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u cloud-user ssh root@_esx1.example.com_
+# sudo -u cloud-user ssh root@_esx1.example.com_ <1>
 ----
+<1> `esx1.example.com` is the host name of the VMware hypervisor.
 endif::osp[]
 +
 [IMPORTANT]
 ====
-If the SSH connection to a VMware hypervisor fails, check that passwordless access has been enabled and the correct keys shared between the hypervisor and the conversion host.
+If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.
 ====

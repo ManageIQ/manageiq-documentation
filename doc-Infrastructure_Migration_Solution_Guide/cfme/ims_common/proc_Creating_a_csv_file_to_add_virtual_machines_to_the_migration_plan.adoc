@@ -8,13 +8,13 @@ If you are migrating virtual machines that were migrated in the past, you should
 ifdef::rhv[]
 [NOTE]
 ====
-A CSV file is recommended for large migrations because it is faster than manually selecting each virtual machine.
+A CSV file is recommended for large migrations because it is faster than manually selecting individual virtual machines.
 ====
 endif::rhv[]
 ifdef::osp[]
 [NOTE]
 ====
-A CSV file is recommended for large migrations because it is faster than manually selecting the security group and flavor for each virtual machine.
+A CSV file is recommended for large migrations because it is faster than manually selecting the security group and flavor of each virtual machine.
 ====
 endif::osp[]
 
@@ -32,6 +32,16 @@ endif::osp[]
 |===
 
 .CSV file example
+ifdef::rhv[]
+[options="nowrap" subs="+quotes,verbatim"]
+----
+Name,Host,Provider
+vm01,host1,vSphere3
+vm02,host1,vSphere3
+vm03,host1,vSphere3
+----
+endif::rhv[]
+ifdef::osp[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Name,Host,Provider,Security Group,Flavor
@@ -39,3 +49,4 @@ vm01,host1,vSphere3,webservers,x1.medium
 vm02,host1,vSphere3,webservers,x1.medium
 vm03,host1,vSphere3,webservers,x1.medium
 ----
+endif::osp[]

@@ -9,11 +9,11 @@
 <info>
 <title>Red Hat Infrastructure Migration Solution</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-06-16</date>
+<date>2019-06-17</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
-    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.3 or Red Hat OpenStack Platform 13/14, using Red Hat CloudForms 4.7.4.</para>
+    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.3 or Red Hat OpenStack Platform 13 or 14, using Red Hat CloudForms 4.7.4.</para>
 </abstract>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml"/>
 </info>
@@ -24,13 +24,13 @@
 <varlistentry>
 <term>Red Hat Virtualization 4.3</term>
 <listitem>
-<simpara>Red Hat Virtualization is a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/">Red Hat Virtualization 4.3</link> documentation for more information.</simpara>
+<simpara>Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/">Red Hat Virtualization 4.3</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term>Red Hat OpenStack Platform 13 and 14</term>
 <listitem>
-<simpara>Red Hat OpenStack Platform enables you to create a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 14</link> documentation for more information.</simpara>
+<simpara>Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 14</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -46,33 +46,33 @@
 <chapter xml:id="Planning_the_migration_rhv">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
-<simpara>The following information can help you plan your migration:</simpara>
+<simpara>Review the following information to plan your migration:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>See <xref linkend="Questions_to_ask_before_migration_rhv"/> for questions to consider, including the following:</simpara>
+<simpara><xref linkend="Questions_to_ask_before_migration_rhv"/> includes the following:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>"How long will the migration take?"</simpara>
+<simpara>Supported operating systems</simpara>
 </listitem>
 <listitem>
-<simpara>"How many conversion hosts do I need?"</simpara>
+<simpara>Number of conversion hosts required</simpara>
 </listitem>
 <listitem>
-<simpara>"Should I migrate my virtual machines using VDDK or SSH transformation?"</simpara>
+<simpara>Comparison of VDDK and SSH for disk transformation</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>See <xref linkend="Recommendations_for_migration_rhv"/> for guidelines on the following topics:</simpara>
+<simpara><xref linkend="Recommendations_for_migration_rhv"/> provides guidelines on the following topics:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Scheduling the migration</simpara>
 </listitem>
 <listitem>
-<simpara>Distributing the migration workload</simpara>
+<simpara>Distributing the workload</simpara>
 </listitem>
 <listitem>
-<simpara>Deploying conversion hosts</simpara>
+<simpara>Deploying the conversion hosts</simpara>
 </listitem>
 <listitem>
 <simpara>Controlling the migration process</simpara>
@@ -80,11 +80,8 @@
 </itemizedlist>
 </listitem>
 </itemizedlist>
-<formalpara xml:id="Vmware_to_rhv_migration_workflow">
-<title>Migration workflow</title>
-<para>For details of the migration process, see the following diagram:</para>
-</formalpara>
-<figure>
+<simpara>The migration workflow describes the migration process in greater detail.</simpara>
+<figure xml:id="Vmware_to_rhv_migration_workflow">
 <title>VMware to Red Hat Virtualization migration workflow</title>
 <mediaobject>
 <imageobject>
@@ -240,7 +237,7 @@
 <listitem>
 <simpara>The number of conversion hosts you create depends on the size of your migration. All the virtual machines in a migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.</simpara>
 <simpara>Multiple conversion hosts provide load-balancing and better performance, even for small migrations.</simpara>
-<simpara>Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values.</simpara>
+<simpara>Conversion hosts are limited to a maximum of ten concurrent migrations, unless you change the default values.</simpara>
 <simpara>You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.</simpara>
 </listitem>
 </varlistentry>
@@ -283,13 +280,16 @@
 <listitem>
 <simpara>Limited to 20 concurrent migrations per conversion host</simpara>
 </listitem>
+<listitem>
+<simpara>Limited to 10 concurrent migrations per VMware hypervisor unless you increase the hypervisor’s NFC service memory</simpara>
+</listitem>
 </itemizedlist></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">SSH</emphasis></simpara></entry>
 <entry align="left" valign="top"><itemizedlist>
 <listitem>
-<simpara>Better suited for large-scale migrations than VDDK (not affected by ESXi memory limitation)</simpara>
+<simpara>Better suited for large-scale migrations than VDDK (not affected by hypervisor’s NFC service memory limitation)</simpara>
 </listitem>
 <listitem>
 <simpara>Does not require additional downloads, packages, tools, or compilation</simpara>
@@ -405,10 +405,10 @@
 <simpara>Preparing the VMware virtual machines. See <xref linkend="Preparing_the_vmware_virtual_machines_for_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>If you are using SSH transformation, you must configure the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv"/>.</simpara>
+<simpara>Configuring the VMware hypervisors if you are using SSH transformation. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>If you are using VDDK transformation and performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
+<simpara>Configuring a VMware hypervisor to support additional connections if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_rhv">
@@ -450,16 +450,21 @@
 </note>
 </listitem>
 <listitem>
-<simpara>Ensure that the VMware virtual machine names do not duplicate virtual machines names in the Red Hat Virtualization environment.</simpara>
+<simpara>Ensure that the virtual machine names do not duplicate names of virtual machines in the Red Hat Virtualization environment.</simpara>
 </listitem>
 </orderedlist>
-<simpara>If you are using SSH transformation, you must configure the VMware hypervisors. See <xref linkend="Preparing_the_vmware_virtual_machines_for_rhv"/>.</simpara>
+<simpara>If you are using SSH transformation, you can configure the VMware hypervisors. See <xref linkend="Preparing_the_vmware_virtual_machines_for_rhv"/>.</simpara>
 <simpara>If you are using VDDK transformation and performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv">
 <title>Preparing the VMware hypervisors for SSH transformation</title>
-<simpara>SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:</simpara>
+<simpara>If you are using SSH transformation, you can configure the VMware hypervisors for passwordless access by sharing a conversion host’s public SSH key with the hypervisors.</simpara>
+<important>
+<simpara>A single SSH key pair is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.</simpara>
+<simpara>If you wish to use a dedicated SSH key pair for each conversion host, you can copy the public key of each conversion host to all the VMware hypervisors.</simpara>
+</important>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Enable SSH access on each VMware hypervisor:</simpara>
 <simpara>For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
@@ -473,17 +478,14 @@
 </listitem>
 <listitem>
 <simpara>Copy the public SSH key to <literal>/etc/ssh/keys-root/authorized_keys</literal> on <emphasis role="strong">each</emphasis> VMware hypervisor.</simpara>
+<simpara>You will use the private SSH key to configure the conversion hosts.</simpara>
 </listitem>
 </orderedlist>
-<important>
-<simpara>A single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.</simpara>
-<simpara>If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.</simpara>
-</important>
 </section>
 <section xml:id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv">
 <title>Configuring a VMware hypervisor for more than ten concurrent VDDK migrations</title>
-<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor cannot handle more than ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
-<simpara>You must increase the hypervisor’s maximum NFC service memory to enable additional connections for migrations.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor’s NFC service memory buffer is limited to ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
+<simpara>You can increase the hypervisor’s NFC service memory to enable additional connections for migrations.</simpara>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
@@ -667,11 +669,21 @@
 </section>
 <section xml:id="Reinstalling_ipa_client">
 <title>Reinstalling <literal>ipa-client</literal></title>
-<simpara>If you are configuring Red Hat Virtualization conversion hosts to use SSSD with single sign-on, you must reinstall <literal>ipa-client</literal> without the OpenSSH client. Otherwise, SSH will fail for the vdsm user.</simpara>
-<simpara>See <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">ipa-client-install changes system-wide SSH configuration</link>. This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</simpara>
-<simpara>On the Manager machine, enter the following commands:</simpara>
-<screen># ipa-client-install --uninstall
-# ipa-client-install --no-ssh</screen>
+<simpara>If you are configuring your conversion hosts for SSSD with single sign-on, you must reinstall <literal>ipa-client</literal> without the OpenSSH client. Otherwise, SSH will fail for the <literal>vdsm</literal> user.</simpara>
+<simpara>See BZ#1544379: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">ipa-client-install changes system-wide SSH configuration</link>. This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Log in to the Manager machine using SSH.</simpara>
+</listitem>
+<listitem>
+<simpara>Uninstall <literal>ipa-client</literal>:</simpara>
+<screen># ipa-client-install --uninstall</screen>
+</listitem>
+<listitem>
+<simpara>Reinstall <literal>ipa-client</literal> without OpenSSH:</simpara>
+<screen># ipa-client-install --no-ssh</screen>
+</listitem>
+</orderedlist>
 </section>
 </section>
 <section xml:id="Configuring_the_1_2_rhv_conversion_hosts">
@@ -840,29 +852,44 @@
 </section>
 <section xml:id="Copying_vmware_keys_to_rhv_conversion_hosts">
 <title>Copying the VMware SSH keys to the conversion hosts</title>
-<simpara>If you collected the VMware SSH public keys when you enabled SSH access in the VMware hypervisors, perform the following procedure to copy the keys to your conversion hosts:</simpara>
+<simpara>You can copy the VMware SSH public keys to the conversion hosts.</simpara>
+<simpara>The VMware keys can be collected either when you configure the VMware hypervisors for SSH transformation (see <xref linkend="Copying_collected_ssh_keys_rhv"/>) or by using <literal>ssh-keyscan</literal> (see <xref linkend="Copying_keys_ssh_keyscan_rhv"/>).</simpara>
+<section xml:id="Copying_collected_ssh_keys_rhv">
+<title>Copying keys collected during VMware hypervisor configuration</title>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Copy the VMware keys to <literal>/var/lib/vdsm/.ssh/known_hosts</literal> on each conversion host.</simpara>
 </listitem>
 <listitem>
 <simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal>:</simpara>
-<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO1-1"/></screen>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
+</callout>
+</calloutlist>
 <important>
-<simpara>If the SSH connection to a VMware hypervisor fails, check that passwordless access has been enabled and the correct keys shared between the hypervisor and the conversion host.</simpara>
+<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
 </important>
 </listitem>
 </orderedlist>
-<simpara>If you did not collect the VMware keys when you configured the VMware hypervisors, perform the following procedure to collect the keys with <literal>ssh-keyscan</literal> and copy them to your conversion hosts:</simpara>
+</section>
+<section xml:id="Copying_keys_ssh_keyscan_rhv">
+<title>Copying keys collected with <literal>ssh-keyscan</literal></title>
 <caution>
 <simpara>You must run <literal>ssh-keyscan</literal> for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor IP address and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts
+<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts <co xml:id="CO2-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts</screen>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
+</callout>
+</calloutlist>
 </listitem>
 <listitem>
 <simpara>Change the ownership of the <literal>known_hosts</literal> file to <literal>vdsm</literal> user and <literal>kvm</literal> group:</simpara>
@@ -870,23 +897,29 @@
 </listitem>
 <listitem>
 <simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal>:</simpara>
-<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO3-1"/></screen>
+<calloutlist>
+<callout arearefs="CO3-1">
+<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
+</callout>
+</calloutlist>
 <important>
-<simpara>If the SSH connection to a VMware hypervisor fails, check that passwordless access has been enabled and the correct keys shared between the hypervisor and the conversion host.</simpara>
+<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
 </important>
 </listitem>
 </orderedlist>
 <simpara>You are ready to migrate your virtual machines. (Optionally) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
+</section>
 <section xml:id="Verifying_rhv_conversion_hosts_in_browser">
 <title>Verifying the conversion hosts in a browser</title>
-<simpara>You can use an API call to verify the IDs of your conversion hosts:</simpara>
+<simpara>You can verify your conversion hosts in a browser by using the CloudForms API:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO1-1"/></screen>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO4-1"/></screen>
 <calloutlist>
-<callout arearefs="CO1-1">
+<callout arearefs="CO4-1">
 <para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
 </calloutlist>
@@ -913,8 +946,6 @@
 </listitem>
 <listitem>
 <simpara>Creating and running a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms_rhv"/>.</simpara>
-</listitem>
-<listitem>
 <simpara>(Optional) You can change the maximum number of concurrent migrations for conversion hosts or providers to control the migration process. See <xref linkend="Changing_the_maximum_number_of_concurrent_migrations_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
@@ -1038,7 +1069,7 @@
 <textobject><phrase>Infra mappings list</phrase></textobject>
 </inlinemediaobject></para>
 </formalpara>
-<simpara>After you have created an infrastructure mapping, you can check for migration prerequisites.</simpara>
+<simpara>After you have created an infrastructure mapping, you can check for migration prerequisites. If these conditions do not apply, you can create a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms_rhv"/>.</simpara>
 </section>
 <section xml:id="Checking_for_migration_prerequisites_rhv">
 <title>Checking for migration prerequisites</title>
@@ -1066,12 +1097,11 @@
 </listitem>
 </varlistentry>
 </variablelist>
-<simpara>If these conditions do not apply, you can create a migration plan.</simpara>
 <section xml:id="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan_rhv">
 <title>Creating a CSV file to add virtual machines to the migration plan</title>
 <simpara>If you are migrating virtual machines that were migrated in the past, you should create a CSV file to add the virtual machines to the migration plan, because the migration plan cannot discover them automatically.</simpara>
 <note>
-<simpara>A CSV file is recommended for large migrations because it is faster than manually selecting each virtual machine.</simpara>
+<simpara>A CSV file is recommended for large migrations because it is faster than manually selecting individual virtual machines.</simpara>
 </note>
 <table frame="all" rowsep="1" colsep="1">
 <title>CSV file fields</title>
@@ -1103,10 +1133,10 @@
 <formalpara>
 <title>CSV file example</title>
 <para>
-<screen>Name,Host,Provider,Security Group,Flavor
-vm01,host1,vSphere3,webservers,x1.medium
-vm02,host1,vSphere3,webservers,x1.medium
-vm03,host1,vSphere3,webservers,x1.medium</screen>
+<screen>Name,Host,Provider
+vm01,host1,vSphere3
+vm02,host1,vSphere3
+vm03,host1,vSphere3</screen>
 </para>
 </formalpara>
 </section>
@@ -1140,15 +1170,15 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </section>
 <section xml:id="Creating_a_rhel_premigration_playbook_rhv">
 <title>Creating a <literal>RHEL premigration</literal> playbook for RHEL/Linux source virtual machines</title>
-<simpara>If you are migrating virtual machines running RHEL or other Linux operating system, a <literal>RHEL premigration</literal> playbook ensures that their IP addresses are accessible after migration. The <literal>RHEL premigration</literal> playbook calls the Ansible <literal>ims.rhel_premigration</literal> role.</simpara>
-<simpara>You can install the role with Ansible Galaxy. See <link xlink:href="https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration">ims_rhel_pre_migration</link>. The role is not included in the IMS installation.</simpara>
+<simpara>If you are migrating virtual machines running RHEL or other Linux operating system, you can create a <literal>RHEL premigration</literal> playbook to ensure that the IP addresses are accessible after migration. The <literal>RHEL premigration</literal> playbook calls the Ansible <literal>ims.rhel_premigration</literal> role.</simpara>
+<simpara>To install the role with Ansible Galaxy, see <link xlink:href="https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration">ims_rhel_pre_migration</link>. This role is not included in the IMS installation.</simpara>
 <simpara>The <literal>ims.rhel_premigration</literal> role performs the following tasks on the VMware virtual machines:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Preserves the static IP address configuration by creating udev rules to associate the virtual machine’s MAC address with its interface name</simpara>
 </listitem>
 <listitem>
-<simpara>(Red Hat Virtualization only) Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment</simpara>
+<simpara>Installs the Red Hat Virtualization guest agent. The guest agent reports the new virtual machine’s IP address and installed applications to the Manager.</simpara>
 </listitem>
 </itemizedlist>
 <note>
@@ -1163,11 +1193,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
     - role: ims.rhel_pre_migration</programlisting>
 </para>
 </formalpara>
-<simpara>You can create a migration plan.</simpara>
+<simpara>You can create a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms_rhv"/>.</simpara>
 </section>
 </section>
 <section xml:id="Creating_a_migration_plan_in_cloudforms_rhv">
-<title>Creating a migration plan in CloudForms</title>
+<title>Creating and running a migration plan</title>
 <simpara>Before you perform a large migration, you should perform several test migrations with different maximum numbers of concurrent migrations for your conversion hosts or providers. This will enable you to assess the capabilities of your environment’s infrastructure.</simpara>
 <simpara>You can create and run a migration plan in CloudForms with the following options:</simpara>
 <itemizedlist>
@@ -1232,11 +1262,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <itemizedlist>
 <listitem>
 <simpara><emphasis role="strong">Choose from a list of VMs discovered in the selected infrastructure mapping</emphasis></simpara>
-<simpara>If the virtual machines cannot be discovered, check the source datastores and networks in the infrastructure mapping.</simpara>
+<simpara>If the virtual machines cannot be discovered, check that the source datastores and networks in the infrastructure mapping are correct.</simpara>
 </listitem>
 <listitem>
 <simpara><emphasis role="strong">Import a CSV file with a list of VMs to be migrated</emphasis>.</simpara>
-<simpara>A CSV file is required for previously migrated source virtual machines and highly recommended for large migrations.</simpara>
+<simpara>A CSV file is required for previously migrated source virtual machines and recommended for large migrations.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -1247,24 +1277,33 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">VMs</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+<entry align="left" valign="top"><itemizedlist>
 <listitem>
-<simpara>If you selected <emphasis role="strong">Choose from a list of VMs discovered in the selected infrastructure mapping</emphasis>, select the virtual machines for migration. You can search for virtual machines by <emphasis role="strong">VM Name</emphasis>, <emphasis role="strong">Data Center</emphasis>, <emphasis role="strong">Cluster</emphasis>, and <emphasis role="strong">Folder</emphasis>.</simpara>
+<simpara>If you selected <emphasis role="strong">Choose from a list of VMs discovered in the selected infrastructure mapping</emphasis>:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Select the virtual machines for migration.</simpara>
+<simpara>You can search for virtual machines by <emphasis role="strong">VM Name</emphasis>, <emphasis role="strong">Data Center</emphasis>, <emphasis role="strong">Cluster</emphasis>, and <emphasis role="strong">Folder</emphasis>.</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
 <simpara>If you selected <emphasis role="strong">Import a CSV file with a list of VMs to be migrated</emphasis>:</simpara>
-<orderedlist numeration="loweralpha">
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Import</emphasis>.</simpara>
 </listitem>
 <listitem>
 <simpara>Browse to the CSV file and click <emphasis role="strong">Open</emphasis>.</simpara>
-<simpara>If the virtual machines cannot be added to the migration plan, check the CSV file format and fields for errors. If the <emphasis role="strong">Create Migration Plan</emphasis> wizard freezes, refresh the web page, check the CSV file for errors (for example, virtual machines with duplicate <literal>Name</literal> fields and no other fields to distinguish them), and create a new migration plan.</simpara>
-</listitem>
-</orderedlist>
+<simpara>If the virtual machines cannot be added to the migration plan, check the CSV file format and fields for errors.</simpara>
+<simpara>If the <emphasis role="strong">Create Migration Plan</emphasis> wizard freezes, refresh the web page, check the CSV file for errors (for example, virtual machines with duplicate <literal>Name</literal> fields and no other fields to distinguish them), and create a new migration plan.</simpara>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
-</orderedlist></entry>
+</orderedlist>
+</listitem>
+</itemizedlist></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">Schedule</emphasis></simpara></entry>
@@ -1302,8 +1341,10 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </imageobject>
 <textobject><phrase>7</phrase></textobject>
 </inlinemediaobject>) to archive, edit, or delete a migration plan.</simpara>
-<orderedlist xml:id="Scheduling_a_saved_migration_plan_rhv" numeration="arabic">
+<section xml:id="Scheduling_a_saved_migration_plan_rhv">
 <title>Scheduling a saved migration plan</title>
+<simpara>To schedule a saved migration plan to run in the future:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans Not Started</emphasis>.</simpara>
 </listitem>
@@ -1314,8 +1355,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>In the <emphasis role="strong">Schedule Migration Plan</emphasis> window, select a date and time and click <emphasis role="strong">Schedule</emphasis>. The plan’s status is <emphasis role="strong">Migration Scheduled</emphasis> with the date and time.</simpara>
 </listitem>
 </orderedlist>
-<orderedlist xml:id="Viewing_migration_plan_progress_rhv" numeration="arabic">
+</section>
+<section xml:id="Viewing_migration_plan_progress_rhv">
 <title>Viewing a migration plan in progress</title>
+<simpara>To view the progress of a migration plan:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans in Progress</emphasis>.</simpara>
 </listitem>
@@ -1326,8 +1370,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <note>
 <simpara>The counter in <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice> may be a few seconds ahead of the counter in the migration plan details view. This is because the <emphasis role="strong">Migration Plans</emphasis> counter displays the total time for running the migration plan, while the details counter displays the time for migrating the virtual machines.</simpara>
 </note>
-<orderedlist xml:id="Canceling_a_migration_plan_rhv" numeration="arabic">
+</section>
+<section xml:id="Canceling_a_migration_plan_rhv">
 <title>Canceling a migration plan in progress</title>
+<simpara>To cancel a migration plan in progress:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans in Progress</emphasis>.</simpara>
 </listitem>
@@ -1338,18 +1385,21 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click <emphasis role="strong">Cancel Migrations</emphasis> to confirm the cancellation. The canceled migration appears in <emphasis role="strong">Migration Plans Complete</emphasis> with a red <literal>x</literal> indicating that the plan did not complete successfully.</simpara>
 </listitem>
 </orderedlist>
-<orderedlist xml:id="Retrying_a_failed_migration_plan_rhv" numeration="arabic">
-<title>Retrying a migration plan</title>
+</section>
+<section xml:id="Retrying_a_failed_migration_plan_rhv">
+<title>Retrying a failed migration plan</title>
+<simpara>To retry a migration plan that failed because of external circumstances (for example, power outage):</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Delete all objects created by the failed migration plan:</simpara>
-<orderedlist numeration="loweralpha">
+<itemizedlist>
 <listitem>
-<simpara>Delete migrated virtual machines to avoid name conflicts with the migrating VMware virtual machines.</simpara>
+<simpara>Delete newly created virtual machines to avoid name conflicts with migrating VMware virtual machines.</simpara>
 </listitem>
 <listitem>
-<simpara>Delete migrated disks to free up space.</simpara>
+<simpara>Delete converted disks to free up space.</simpara>
 </listitem>
-</orderedlist>
+</itemizedlist>
 </listitem>
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
@@ -1361,14 +1411,9 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click the <emphasis role="strong">Retry</emphasis> button beside the failed migration plan.</simpara>
 </listitem>
 </orderedlist>
-<simpara>(Optional) you can change the maximum number of concurrent migrations. See <xref linkend="Changing_the_maximum_number_of_concurrent_migrations_rhv"/>.</simpara>
 </section>
 <section xml:id="Changing_the_maximum_number_of_concurrent_migrations_rhv">
 <title>Changing the maximum number of concurrent migrations</title>
-<caution>
-<simpara>Currently, concurrent migrations cannot be balanced among the conversion hosts. See BZ#716283: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1716283">Migrating virtual machines are not distributed among the conversion hosts</link>.</simpara>
-<simpara>All virtual machines are migrated on a single conversion host.</simpara>
-</caution>
 <simpara>You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.</simpara>
 <simpara>The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is <literal>20</literal> for a provider and <literal>3</literal> for five conversion hosts, the maximum number of concurrent migrations is <literal>20</literal>, not <literal>15</literal> (<literal>5</literal> conversion hosts <literal>x 3</literal> concurrent migrations per host).</simpara>
 <simpara>An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.</simpara>
@@ -1381,7 +1426,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </varlistentry>
 </variablelist>
 <caution>
-<simpara>For VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
+<simpara>If you are using VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <listitem>
@@ -1393,45 +1438,9 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <note>
 <simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.</simpara>
 </note>
-<variablelist>
-<varlistentry>
-<term>Changing the maximum number of concurrent migrations for a specific conversion host</term>
-<listitem>
-</listitem>
-</varlistentry>
-</variablelist>
-</listitem>
-<listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
-</listitem>
-<listitem>
-<simpara>Enter the following command:</simpara>
-<screen># curl -sk -u <emphasis>username:password</emphasis>  https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>2</emphasis>}}</emphasis> <co xml:id="CO2-1"/> <co xml:id="CO2-2"/> <co xml:id="CO2-3"/> <co xml:id="CO2-4"/></screen>
 </listitem>
 </orderedlist>
-<calloutlist>
-<callout arearefs="CO2-1">
-<para><literal>username:password</literal> are the CloudForms user and password.</para>
-</callout>
-<callout arearefs="CO2-2">
-<para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
-</callout>
-<callout arearefs="CO2-3">
-<para>To obtain a <literal>conversion_host_id</literal>:</para>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Enter the following API call in the address bar of a browser:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts</screen>
-</listitem>
-<listitem>
-<simpara>Enter your <emphasis role="strong">Username</emphasis> and <emphasis role="strong">Password</emphasis> and click <emphasis role="strong">Sign in</emphasis>. The conversion hosts and their IDs are displayed in JSON format.</simpara>
-</listitem>
-</orderedlist>
-</callout>
-<callout arearefs="CO2-4">
-<para><literal>max_concurrent_tasks</literal> is the maximum number of concurrent migrations.</para>
-</callout>
-</calloutlist>
+</section>
 </section>
 </chapter>
 <chapter xml:id="Troubleshooting_rhv">
@@ -1573,11 +1582,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>VDDK transformation only:</simpara>
 </listitem>
 </itemizedlist>
-<formalpara xml:id="rhv_environment_errors">
+<itemizedlist xml:id="rhv_environment_errors">
 <title>Red Hat Virtualization</title>
-<para>The following conditions can cause a migration error for Red Hat Virtualization:</para>
-</formalpara>
-<itemizedlist>
 <listitem>
 <simpara>Name conflict: VMware virtual machine has the same name as a Red Hat Virtualization virtual machine.</simpara>
 </listitem>
@@ -1617,18 +1623,16 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>BZ#1698761: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1698761">"Maximum concurrent migrations per conversion host" interface control does not work</link></simpara>
 </listitem>
 <listitem>
-<simpara>BZ#666799: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">Canceling migration does not stop creating volume, instance, and network port on OSP or VMs on RHV</link>.</simpara>
-<simpara>If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.</simpara>
+<simpara>BZ#716283: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1716283">Migrating virtual machines are not distributed correctly among the conversion hosts</link></simpara>
 </listitem>
 <listitem>
-<simpara>BZ#716283: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1716283">Migrating virtual machines are not distributed among the conversion hosts</link></simpara>
+<simpara>BZ#666799: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">Canceling migration does not stop creating virtual machines on RHV</link>. If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.</simpara>
 </listitem>
 <listitem>
-<simpara>BZ#1669176: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669176">Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings</link>
-*</simpara>
+<simpara>BZ#1669176: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669176">Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings</link></simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">CloudForms</emphasis>: CFME 5.10.4 does not support migration. Use the following versions for migration:</simpara>
+<simpara>CloudForms CFME 5.10.4 does not support migration. Use the following versions for migration:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Red Hat Virtualization 4.2: CFME 5.10.3</simpara>
@@ -1636,7 +1640,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <listitem>
 <simpara>Red Hat Virtualization 4.3: CFME 5.10.5</simpara>
 <note>
-<simpara>You can use CFME 5.10.4 to manage your Red Hat Virtualization 4.3 environment. Only the migration functionality is affected.</simpara>
+<simpara>You can use CFME 5.10.4 to manage Red Hat Virtualization 4.3. Only the migration functionality is affected.</simpara>
 </note>
 </listitem>
 </itemizedlist>
@@ -1650,33 +1654,33 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <chapter xml:id="Planning_the_migration_osp">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
-<simpara>The following information can help you plan your migration:</simpara>
+<simpara>Review the following information to plan your migration:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>See <xref linkend="Questions_to_ask_before_migration_osp"/> for questions to consider, including the following:</simpara>
+<simpara><xref linkend="Questions_to_ask_before_migration_osp"/> includes the following:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>"How long will the migration take?"</simpara>
+<simpara>Supported operating systems</simpara>
 </listitem>
 <listitem>
-<simpara>"How many conversion hosts do I need?"</simpara>
+<simpara>Number of conversion hosts required</simpara>
 </listitem>
 <listitem>
-<simpara>"Should I migrate my virtual machines using VDDK or SSH transformation?"</simpara>
+<simpara>Comparison of VDDK and SSH for disk transformation</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>See <xref linkend="Recommendations_for_migration_osp"/> for guidelines on the following topics:</simpara>
+<simpara><xref linkend="Recommendations_for_migration_osp"/> provides guidelines on the following topics:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Scheduling the migration</simpara>
 </listitem>
 <listitem>
-<simpara>Distributing the migration workload</simpara>
+<simpara>Distributing the workload</simpara>
 </listitem>
 <listitem>
-<simpara>Deploying conversion hosts</simpara>
+<simpara>Deploying the conversion hosts</simpara>
 </listitem>
 <listitem>
 <simpara>Controlling the migration process</simpara>
@@ -1684,11 +1688,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </itemizedlist>
 </listitem>
 </itemizedlist>
-<formalpara xml:id="Vmware_to_osp_migration_workflow">
-<title>Migration workflow</title>
-<para>For details of the migration process, see the following diagram:</para>
-</formalpara>
-<figure>
+<simpara>The migration workflow describes the migration process in greater detail.</simpara>
+<figure xml:id="Vmware_to_osp_migration_workflow">
 <title>VMware to Red Hat OpenStack Platform migration workflow</title>
 <mediaobject>
 <imageobject>
@@ -1847,7 +1848,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <listitem>
 <simpara>The number of conversion hosts you create depends on the size of your migration. All the virtual machines in a migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.</simpara>
 <simpara>Multiple conversion hosts provide load-balancing and better performance, even for small migrations.</simpara>
-<simpara>Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values.</simpara>
+<simpara>Conversion hosts are limited to a maximum of ten concurrent migrations, unless you change the default values.</simpara>
 <simpara>You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.</simpara>
 </listitem>
 </varlistentry>
@@ -1890,13 +1891,16 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <listitem>
 <simpara>Limited to 20 concurrent migrations per conversion host</simpara>
 </listitem>
+<listitem>
+<simpara>Limited to 10 concurrent migrations per VMware hypervisor unless you increase the hypervisor’s NFC service memory</simpara>
+</listitem>
 </itemizedlist></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">SSH</emphasis></simpara></entry>
 <entry align="left" valign="top"><itemizedlist>
 <listitem>
-<simpara>Better suited for large-scale migrations than VDDK (not affected by ESXi memory limitation)</simpara>
+<simpara>Better suited for large-scale migrations than VDDK (not affected by hypervisor’s NFC service memory limitation)</simpara>
 </listitem>
 <listitem>
 <simpara>Does not require additional downloads, packages, tools, or compilation</simpara>
@@ -2012,10 +2016,10 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Preparing the VMware virtual machines. See <xref linkend="Preparing_the_vmware_virtual_machines_for_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>If you are using SSH transformation, you must configure the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp"/>.</simpara>
+<simpara>Configuring the VMware hypervisors if you are using SSH transformation. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>If you are using VDDK transformation and performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
+<simpara>Configuring a VMware hypervisor to support additional connections if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_osp">
@@ -2056,16 +2060,21 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </note>
 </listitem>
 <listitem>
-<simpara>Ensure that the VMware virtual machine names do not duplicate virtual machines names within a single Red Hat OpenStack Platform tenant.</simpara>
+<simpara>Ensure that the virtual machine names do not duplicate names of virtual machines in the Red Hat OpenStack Platform tenant.</simpara>
 </listitem>
 </orderedlist>
-<simpara>If you are using SSH transformation, you must configure the VMware hypervisors. See <xref linkend="Preparing_the_vmware_virtual_machines_for_osp"/>.</simpara>
+<simpara>If you are using SSH transformation, you can configure the VMware hypervisors. See <xref linkend="Preparing_the_vmware_virtual_machines_for_osp"/>.</simpara>
 <simpara>If you are using VDDK transformation and performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp">
 <title>Preparing the VMware hypervisors for SSH transformation</title>
-<simpara>SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:</simpara>
+<simpara>If you are using SSH transformation, you can configure the VMware hypervisors for passwordless access by sharing a conversion host’s public SSH key with the hypervisors.</simpara>
+<important>
+<simpara>A single SSH key pair is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.</simpara>
+<simpara>If you wish to use a dedicated SSH key pair for each conversion host, you can copy the public key of each conversion host to all the VMware hypervisors.</simpara>
+</important>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Enable SSH access on each VMware hypervisor:</simpara>
 <simpara>For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
@@ -2079,17 +2088,14 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </listitem>
 <listitem>
 <simpara>Copy the public SSH key to <literal>/etc/ssh/keys-root/authorized_keys</literal> on <emphasis role="strong">each</emphasis> VMware hypervisor.</simpara>
+<simpara>You will use the private SSH key to configure the conversion hosts.</simpara>
 </listitem>
 </orderedlist>
-<important>
-<simpara>A single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.</simpara>
-<simpara>If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.</simpara>
-</important>
 </section>
 <section xml:id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp">
 <title>Configuring a VMware hypervisor for more than ten concurrent VDDK migrations</title>
-<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor cannot handle more than ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
-<simpara>You must increase the hypervisor’s maximum NFC service memory to enable additional connections for migrations.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor’s NFC service memory buffer is limited to ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
+<simpara>You can increase the hypervisor’s NFC service memory to enable additional connections for migrations.</simpara>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
@@ -2268,8 +2274,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </orderedlist>
 </section>
 <section xml:id="Creating_osp_conversion_hosts">
-<title>Creating Red Hat OpenStack Platform conversion hosts</title>
-<simpara>You create the Red Hat OpenStack Platform conversion hosts with the conversion appliance (<literal>RHOSP V2V Image for Red Hat OpenStack Director</literal>). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.</simpara>
+<title>Creating conversion hosts</title>
+<simpara>You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance (<literal>RHOSP V2V Image for Red Hat OpenStack Director</literal>). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.</simpara>
 <note>
 <simpara>For optimal performance:</simpara>
 <itemizedlist>
@@ -2493,49 +2499,70 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </section>
 <section xml:id="Copying_vmware_keys_to_osp_conversion_hosts">
 <title>Copying the VMware SSH keys to the conversion hosts</title>
-<simpara>If you collected the VMware SSH public keys when you enabled SSH access in the VMware hypervisors, perform the following procedure to copy the keys to your conversion hosts:</simpara>
+<simpara>You can copy the VMware SSH public keys to the conversion hosts.</simpara>
+<simpara>The VMware keys can be collected either when you configure the VMware hypervisors for SSH transformation (see <xref linkend="Copying_collected_ssh_keys_osp"/>) or by using <literal>ssh-keyscan</literal> (see <xref linkend="Copying_keys_ssh_keyscan_osp"/>).</simpara>
+<section xml:id="Copying_collected_ssh_keys_osp">
+<title>Copying keys collected during VMware hypervisor configuration</title>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Copy the VMware keys to <literal>/root/.ssh/known_hosts</literal> on each conversion host.</simpara>
 </listitem>
 <listitem>
-<simpara>On each conversion host, verify the SSH connection by connect to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
-<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO5-1"/></screen>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
+</callout>
+</calloutlist>
 <important>
-<simpara>If the SSH connection to a VMware hypervisor fails, check that passwordless access has been enabled and the correct keys shared between the hypervisor and the conversion host.</simpara>
+<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
 </important>
 </listitem>
 </orderedlist>
-<simpara>If you did not collect the VMware keys when you configured the VMware hypervisors, perform the following procedure to collect the keys with <literal>ssh-keyscan</literal> and copy them to your conversion hosts:</simpara>
+</section>
+<section xml:id="Copying_keys_ssh_keyscan_osp">
+<title>Copying keys collected with <literal>ssh-keyscan</literal></title>
 <caution>
 <simpara>You must run <literal>ssh-keyscan</literal> for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor IP address and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts
+<simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO6-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts</screen>
+<calloutlist>
+<callout arearefs="CO6-1">
+<para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
+</callout>
+</calloutlist>
 </listitem>
 <listitem>
-<simpara>On each conversion host, verify the SSH connection by connect to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
-<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO7-1"/></screen>
+<calloutlist>
+<callout arearefs="CO7-1">
+<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
+</callout>
+</calloutlist>
 <important>
-<simpara>If the SSH connection to a VMware hypervisor fails, check that passwordless access has been enabled and the correct keys shared between the hypervisor and the conversion host.</simpara>
+<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
 </important>
 </listitem>
 </orderedlist>
 <simpara>You are ready to migrate your virtual machines. (Optionally) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
+</section>
 <section xml:id="Verifying_osp_conversion_hosts_in_browser">
 <title>Verifying the conversion hosts in a browser</title>
-<simpara>You can use an API call to verify the IDs of your conversion hosts:</simpara>
+<simpara>You can verify your conversion hosts in a browser by using the CloudForms API:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO3-1"/></screen>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO8-1"/></screen>
 <calloutlist>
-<callout arearefs="CO3-1">
+<callout arearefs="CO8-1">
 <para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
 </calloutlist>
@@ -2563,8 +2590,6 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </listitem>
 <listitem>
 <simpara>Creating and running a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms_osp"/>.</simpara>
-</listitem>
-<listitem>
 <simpara>(Optional) You can change the maximum number of concurrent migrations for conversion hosts or providers to control the migration process. See <xref linkend="Changing_the_maximum_number_of_concurrent_migrations_osp"/>.</simpara>
 </listitem>
 </orderedlist>
@@ -2690,7 +2715,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <textobject><phrase>Infra mappings list</phrase></textobject>
 </inlinemediaobject></para>
 </formalpara>
-<simpara>After you have created an infrastructure mapping, you can check for migration prerequisites.</simpara>
+<simpara>After you have created an infrastructure mapping, you can check for migration prerequisites. If these conditions do not apply, you can create a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms_osp"/>.</simpara>
 </section>
 <section xml:id="Checking_for_migration_prerequisites_osp">
 <title>Checking for migration prerequisites</title>
@@ -2718,12 +2743,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </listitem>
 </varlistentry>
 </variablelist>
-<simpara>If these conditions do not apply, you can create a migration plan.</simpara>
 <section xml:id="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan_osp">
 <title>Creating a CSV file to add virtual machines to the migration plan</title>
 <simpara>If you are migrating virtual machines that were migrated in the past, you should create a CSV file to add the virtual machines to the migration plan, because the migration plan cannot discover them automatically.</simpara>
 <note>
-<simpara>A CSV file is recommended for large migrations because it is faster than manually selecting the security group and flavor for each virtual machine.</simpara>
+<simpara>A CSV file is recommended for large migrations because it is faster than manually selecting the security group and flavor of each virtual machine.</simpara>
 </note>
 <table frame="all" rowsep="1" colsep="1">
 <title>CSV file fields</title>
@@ -2800,15 +2824,12 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </section>
 <section xml:id="Creating_a_rhel_premigration_playbook_osp">
 <title>Creating a <literal>RHEL premigration</literal> playbook for RHEL/Linux source virtual machines</title>
-<simpara>If you are migrating virtual machines running RHEL or other Linux operating system, a <literal>RHEL premigration</literal> playbook ensures that their IP addresses are accessible after migration. The <literal>RHEL premigration</literal> playbook calls the Ansible <literal>ims.rhel_premigration</literal> role.</simpara>
-<simpara>You can install the role with Ansible Galaxy. See <link xlink:href="https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration">ims_rhel_pre_migration</link>. The role is not included in the IMS installation.</simpara>
+<simpara>If you are migrating virtual machines running RHEL or other Linux operating system, you can create a <literal>RHEL premigration</literal> playbook to ensure that the IP addresses are accessible after migration. The <literal>RHEL premigration</literal> playbook calls the Ansible <literal>ims.rhel_premigration</literal> role.</simpara>
+<simpara>To install the role with Ansible Galaxy, see <link xlink:href="https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration">ims_rhel_pre_migration</link>. This role is not included in the IMS installation.</simpara>
 <simpara>The <literal>ims.rhel_premigration</literal> role performs the following tasks on the VMware virtual machines:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>Preserves the static IP address configuration by creating udev rules to associate the virtual machine’s MAC address with its interface name</simpara>
-</listitem>
-<listitem>
-<simpara>(Red Hat Virtualization only) Installs the Red Hat Virtualization guest agent, which enables Red Hat Virtualization to report the IP address of the new virtual machine and to integrate it into the new environment</simpara>
 </listitem>
 </itemizedlist>
 <note>
@@ -2823,11 +2844,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
     - role: ims.rhel_pre_migration</programlisting>
 </para>
 </formalpara>
-<simpara>You can create a migration plan.</simpara>
+<simpara>You can create a migration plan. See <xref linkend="Creating_a_migration_plan_in_cloudforms_osp"/>.</simpara>
 </section>
 </section>
 <section xml:id="Creating_a_migration_plan_in_cloudforms_osp">
-<title>Creating a migration plan in CloudForms</title>
+<title>Creating and running a migration plan</title>
 <simpara>Before you perform a large migration, you should perform several test migrations with different maximum numbers of concurrent migrations for your conversion hosts or providers. This will enable you to assess the capabilities of your environment’s infrastructure.</simpara>
 <simpara>You can create and run a migration plan in CloudForms with the following options:</simpara>
 <itemizedlist>
@@ -2892,11 +2913,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <itemizedlist>
 <listitem>
 <simpara><emphasis role="strong">Choose from a list of VMs discovered in the selected infrastructure mapping</emphasis></simpara>
-<simpara>If the virtual machines cannot be discovered, check the source datastores and networks in the infrastructure mapping.</simpara>
+<simpara>If the virtual machines cannot be discovered, check that the source datastores and networks in the infrastructure mapping are correct.</simpara>
 </listitem>
 <listitem>
 <simpara><emphasis role="strong">Import a CSV file with a list of VMs to be migrated</emphasis>.</simpara>
-<simpara>A CSV file is required for previously migrated source virtual machines and highly recommended for large migrations.</simpara>
+<simpara>A CSV file is required for previously migrated source virtual machines and recommended for large migrations.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -2907,24 +2928,33 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">VMs</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+<entry align="left" valign="top"><itemizedlist>
 <listitem>
-<simpara>If you selected <emphasis role="strong">Choose from a list of VMs discovered in the selected infrastructure mapping</emphasis>, select the virtual machines for migration. You can search for virtual machines by <emphasis role="strong">VM Name</emphasis>, <emphasis role="strong">Data Center</emphasis>, <emphasis role="strong">Cluster</emphasis>, and <emphasis role="strong">Folder</emphasis>.</simpara>
+<simpara>If you selected <emphasis role="strong">Choose from a list of VMs discovered in the selected infrastructure mapping</emphasis>:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Select the virtual machines for migration.</simpara>
+<simpara>You can search for virtual machines by <emphasis role="strong">VM Name</emphasis>, <emphasis role="strong">Data Center</emphasis>, <emphasis role="strong">Cluster</emphasis>, and <emphasis role="strong">Folder</emphasis>.</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
 <simpara>If you selected <emphasis role="strong">Import a CSV file with a list of VMs to be migrated</emphasis>:</simpara>
-<orderedlist numeration="loweralpha">
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Import</emphasis>.</simpara>
 </listitem>
 <listitem>
 <simpara>Browse to the CSV file and click <emphasis role="strong">Open</emphasis>.</simpara>
-<simpara>If the virtual machines cannot be added to the migration plan, check the CSV file format and fields for errors. If the <emphasis role="strong">Create Migration Plan</emphasis> wizard freezes, refresh the web page, check the CSV file for errors (for example, virtual machines with duplicate <literal>Name</literal> fields and no other fields to distinguish them), and create a new migration plan.</simpara>
-</listitem>
-</orderedlist>
+<simpara>If the virtual machines cannot be added to the migration plan, check the CSV file format and fields for errors.</simpara>
+<simpara>If the <emphasis role="strong">Create Migration Plan</emphasis> wizard freezes, refresh the web page, check the CSV file for errors (for example, virtual machines with duplicate <literal>Name</literal> fields and no other fields to distinguish them), and create a new migration plan.</simpara>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
-</orderedlist></entry>
+</orderedlist>
+</listitem>
+</itemizedlist></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara><emphasis role="strong">Instance Properties</emphasis></simpara></entry>
@@ -2988,8 +3018,10 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </imageobject>
 <textobject><phrase>7</phrase></textobject>
 </inlinemediaobject>) to archive, edit, or delete a migration plan.</simpara>
-<orderedlist xml:id="Scheduling_a_saved_migration_plan_osp" numeration="arabic">
+<section xml:id="Scheduling_a_saved_migration_plan_osp">
 <title>Scheduling a saved migration plan</title>
+<simpara>To schedule a saved migration plan to run in the future:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans Not Started</emphasis>.</simpara>
 </listitem>
@@ -3000,8 +3032,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>In the <emphasis role="strong">Schedule Migration Plan</emphasis> window, select a date and time and click <emphasis role="strong">Schedule</emphasis>. The plan’s status is <emphasis role="strong">Migration Scheduled</emphasis> with the date and time.</simpara>
 </listitem>
 </orderedlist>
-<orderedlist xml:id="Viewing_migration_plan_progress_osp" numeration="arabic">
+</section>
+<section xml:id="Viewing_migration_plan_progress_osp">
 <title>Viewing a migration plan in progress</title>
+<simpara>To view the progress of a migration plan:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans in Progress</emphasis>.</simpara>
 </listitem>
@@ -3012,8 +3047,11 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <note>
 <simpara>The counter in <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice> may be a few seconds ahead of the counter in the migration plan details view. This is because the <emphasis role="strong">Migration Plans</emphasis> counter displays the total time for running the migration plan, while the details counter displays the time for migrating the virtual machines.</simpara>
 </note>
-<orderedlist xml:id="Canceling_a_migration_plan_osp" numeration="arabic">
+</section>
+<section xml:id="Canceling_a_migration_plan_osp">
 <title>Canceling a migration plan in progress</title>
+<simpara>To cancel a migration plan in progress:</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <emphasis role="strong">Migration Plans in Progress</emphasis>.</simpara>
 </listitem>
@@ -3024,18 +3062,21 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click <emphasis role="strong">Cancel Migrations</emphasis> to confirm the cancellation. The canceled migration appears in <emphasis role="strong">Migration Plans Complete</emphasis> with a red <literal>x</literal> indicating that the plan did not complete successfully.</simpara>
 </listitem>
 </orderedlist>
-<orderedlist xml:id="Retrying_a_failed_migration_plan_osp" numeration="arabic">
-<title>Retrying a migration plan</title>
+</section>
+<section xml:id="Retrying_a_failed_migration_plan_osp">
+<title>Retrying a failed migration plan</title>
+<simpara>To retry a migration plan that failed because of external circumstances (for example, power outage):</simpara>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Delete all objects created by the failed migration plan:</simpara>
-<orderedlist numeration="loweralpha">
+<itemizedlist>
 <listitem>
-<simpara>Delete instances to avoid name conflicts with the migrating VMware virtual machines.</simpara>
+<simpara>Delete newly created instances to avoid name conflicts with migrating VMware virtual machines.</simpara>
 </listitem>
 <listitem>
 <simpara>Delete network ports of failed instances.</simpara>
 </listitem>
-</orderedlist>
+</itemizedlist>
 </listitem>
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
@@ -3047,7 +3088,6 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>Click the <emphasis role="strong">Retry</emphasis> button beside the failed migration plan.</simpara>
 </listitem>
 </orderedlist>
-<simpara>(Optional) you can change the maximum number of concurrent migrations. See <xref linkend="Changing_the_maximum_number_of_concurrent_migrations_osp"/>.</simpara>
 </section>
 <section xml:id="Changing_the_maximum_number_of_concurrent_migrations_osp">
 <title>Changing the maximum number of concurrent migrations</title>
@@ -3063,9 +3103,8 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </varlistentry>
 </variablelist>
 <caution>
-<simpara>The default value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is <literal>10</literal>.</simpara>
 <simpara>Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above <literal>10</literal>.</simpara>
-<simpara>For VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
+<simpara>If you are using VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <listitem>
@@ -3077,45 +3116,9 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <note>
 <simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.</simpara>
 </note>
-<variablelist>
-<varlistentry>
-<term>Changing the maximum number of concurrent migrations for a specific conversion host</term>
-<listitem>
-</listitem>
-</varlistentry>
-</variablelist>
-</listitem>
-<listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
-</listitem>
-<listitem>
-<simpara>Enter the following command:</simpara>
-<screen># curl -sk -u <emphasis>username:password</emphasis>  https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>2</emphasis>}}</emphasis> <co xml:id="CO4-1"/> <co xml:id="CO4-2"/> <co xml:id="CO4-3"/> <co xml:id="CO4-4"/></screen>
 </listitem>
 </orderedlist>
-<calloutlist>
-<callout arearefs="CO4-1">
-<para><literal>username:password</literal> are the CloudForms user and password.</para>
-</callout>
-<callout arearefs="CO4-2">
-<para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
-</callout>
-<callout arearefs="CO4-3">
-<para>To obtain a <literal>conversion_host_id</literal>:</para>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Enter the following API call in the address bar of a browser:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts</screen>
-</listitem>
-<listitem>
-<simpara>Enter your <emphasis role="strong">Username</emphasis> and <emphasis role="strong">Password</emphasis> and click <emphasis role="strong">Sign in</emphasis>. The conversion hosts and their IDs are displayed in JSON format.</simpara>
-</listitem>
-</orderedlist>
-</callout>
-<callout arearefs="CO4-4">
-<para><literal>max_concurrent_tasks</literal> is the maximum number of concurrent migrations.</para>
-</callout>
-</calloutlist>
+</section>
 </section>
 </chapter>
 <chapter xml:id="Troubleshooting_osp">
@@ -3266,11 +3269,8 @@ BadRequestException: Unknown errors</screen>
 <simpara>VDDK transformation only:</simpara>
 </listitem>
 </itemizedlist>
-<formalpara xml:id="osp_environment_errors">
+<itemizedlist xml:id="osp_environment_errors">
 <title>Red Hat OpenStack Platform</title>
-<para>The following conditions can cause a migration error for Red Hat OpenStack Platform:</para>
-</formalpara>
-<itemizedlist>
 <listitem>
 <simpara>VMware virtual machine powered off: The virtual machine must be powered on at the time of migration.</simpara>
 </listitem>
@@ -3300,8 +3300,7 @@ BadRequestException: Unknown errors</screen>
 <simpara>BZ#1698761: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1698761">"Maximum concurrent migrations per conversion host" interface control does not work</link></simpara>
 </listitem>
 <listitem>
-<simpara>BZ#666799: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">Canceling migration does not stop creating volume, instance, and network port on OSP or VMs on RHV</link>.</simpara>
-<simpara>If you cancel a migration, you must delete migrated instances and network ports.</simpara>
+<simpara>BZ#716283: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1716283">Migrating virtual machines are not distributed correctly among the conversion hosts</link></simpara>
 </listitem>
 <listitem>
 <simpara>BZ#1668049: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1668049">Instance is not created after disk conversion</link></simpara>
@@ -3310,7 +3309,7 @@ BadRequestException: Unknown errors</screen>
 <simpara>BZ#1669133: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1669133">Names of virtual machines migrated using SSH transformation are changed</link></simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">CloudForms</emphasis>: CFME 5.10.4 does not support migration. Use CFME 5.10.3.</simpara>
+<simpara>CloudForms CFME 5.10.4 does not support migration. Use CFME 5.10.3.</simpara>
 </listitem>
 </itemizedlist>
 </section>

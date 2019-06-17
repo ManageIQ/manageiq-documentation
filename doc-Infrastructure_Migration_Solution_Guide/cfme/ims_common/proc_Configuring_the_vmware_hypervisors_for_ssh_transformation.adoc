@@ -4,7 +4,16 @@
 [id="Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}"]
 = Preparing the VMware hypervisors for SSH transformation
 
-SSH transformation requires the VMware hypervisors to be configured for passwordless access by the conversion hosts:
+If you are using SSH transformation, you can configure the VMware hypervisors for passwordless access by sharing a conversion host's public SSH key with the hypervisors.
+
+[IMPORTANT]
+====
+A single SSH key pair is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.
+
+If you wish to use a dedicated SSH key pair for each conversion host, you can copy the public key of each conversion host to all the VMware hypervisors.
+====
+
+.Procedure
 
 . Enable SSH access on each VMware hypervisor:
 +
@@ -23,10 +32,5 @@ If your security policies allow you to collect the SSH public keys of the VMware
 ----
 
 . Copy the public SSH key to `/etc/ssh/keys-root/authorized_keys` on *each* VMware hypervisor.
-
-[IMPORTANT]
-====
-A single SSH key pair for all conversion hosts is recommended because the key pair is used only for virtual machine conversion and it simplifies conversion host management.
-
-If you wish to use a dedicated SSH key pair for each conversion host, you can create multiple key pairs. You must copy all the public keys to each VMware hypervisor.
-====
++
+You will use the private SSH key to configure the conversion hosts.

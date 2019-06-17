@@ -69,7 +69,7 @@ The number of conversion hosts you create depends on the size of your migration.
 +
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
 +
-Conversion hosts and providers are limited to a maximum of ten concurrent migrations, unless you change the default values.
+Conversion hosts are limited to a maximum of ten concurrent migrations, unless you change the default values.
 +
 You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
@@ -87,8 +87,9 @@ The following table compares the options.
 .<a|* Requires VDDK package download
 * Requires VDDK package location for conversion host configuration
 * Limited to 20 concurrent migrations per conversion host
+* Limited to 10 concurrent migrations per VMware hypervisor unless you increase the hypervisor's NFC service memory
 
-|*SSH* .<a|* Better suited for large-scale migrations than VDDK (not affected by ESXi memory limitation)
+|*SSH* .<a|* Better suited for large-scale migrations than VDDK (not affected by hypervisor's NFC service memory limitation)
 * Does not require additional downloads, packages, tools, or compilation
 .<a|* Slower than VDDK
 * Requires VMware hypervisors to have SSH access enabled

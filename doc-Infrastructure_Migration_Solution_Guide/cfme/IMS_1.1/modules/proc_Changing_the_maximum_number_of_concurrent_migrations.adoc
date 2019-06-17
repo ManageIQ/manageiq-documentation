@@ -1,17 +1,9 @@
 // Module included in the following assemblies:
 //
-// IMS_1.1/master.adoc
+// ims_common/assembly_Migrating_the_virtual_machines.adoc
+// For 1.1
 [id="Changing_the_maximum_number_of_concurrent_migrations_{context}"]
 = Changing the maximum number of concurrent migrations
-
-ifdef::rhv[]
-[CAUTION]
-====
-Currently, concurrent migrations cannot be balanced among the conversion hosts. See BZ#716283: link:https://bugzilla.redhat.com/show_bug.cgi?id=1716283[Migrating virtual machines are not distributed among the conversion hosts].
-
-All virtual machines are migrated on a single conversion host.
-====
-endif::rhv[]
 
 You can change the maximum number of concurrent migrations for conversion hosts or providers to control the impact of the migration process on your infrastructure.
 
@@ -24,8 +16,6 @@ A decrease maximum number of concurrent migrations affects only future migration
 [CAUTION]
 ====
 ifdef::osp[]
-The default value of *Maximum concurrent migrations per conversion host* is `10`.
-
 Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above `10`.
 endif::osp[]
 
@@ -33,23 +23,32 @@ If you are using VDDK transformation, the number of concurrent migrations must n
 ====
 
 Changing the maximum number of concurrent migrations for all conversion hosts::
-Click menu:Compute[Migration > Migration Settings] and select a new *Maximum concurrent migrations per conversion host*.
-
-Changing the maximum number of concurrent migrations for a single conversion host::
-. Log in to the CloudForms machine using SSH.
-. Enter the following command:
+. In CloudForms, click menu:Compute[Migration > Migration Settings].
+. Select a new *Maximum concurrent migrations per conversion host*. The default is `10`.
 +
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# vmdb
-# rails console
-irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_)
-----
+[NOTE]
+====
+In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work. You can update the maximum migrations for specific conversion hosts on the command line.
+====
+
+// Commenting out because of https://bugzilla.redhat.com/show_bug.cgi?id=1716283
+// Setting limit via API is not working.
+//
+// Changing the maximum number of concurrent migrations for a single conversion host::
+// . Log in to the CloudForms machine using SSH.
+// . Enter the following command:
+// +
+// [options="nowrap" subs="+quotes,verbatim"]
+// ----
+// # vmdb
+// # rails console
+// irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
+// irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_) <1> <2>
+// ----
+// <1> `host1.example.co` is the name of your conversion host.
+// <2> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `10` for a conversion host.
 
 Changing the maximum number of concurrent migrations for a provider::
-The default maximum number of concurrent migrations for a provider is `20`.
-+
 . Log in to the CloudForms machine using SSH.
 . Enter the following command:
 +
@@ -58,8 +57,10 @@ The default maximum number of concurrent migrations for a provider is `20`.
 # vmdb
 # rails console
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_RHV_").custom_set("Max Transformation Runners", _30_)
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_RHV_").custom_set("Max Transformation Runners", _30_) <1> <2>
 ----
+<1> Valid provider `name` values are `RHV` and `OpenStack`.
+<2> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `20` for a provider.
 
 Getting the maximum number of concurrent migrations for a provider::
 . Log in to the CloudForms machine using SSH.
@@ -70,5 +71,6 @@ Getting the maximum number of concurrent migrations for a provider::
 # vmdb
 # rails console
 irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_OpenStack_").custom_get("Max Transformation Runners")
+irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "_OpenStack_").custom_get("Max Transformation Runners") <1>
 ----
+<1> Valid provider `name` values are `RHV` and `OpenStack`.

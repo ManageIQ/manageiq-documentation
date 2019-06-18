@@ -35,27 +35,22 @@ In the current release, the *Maximum concurrent migrations per conversion host* 
 // Commenting out because of https://bugzilla.redhat.com/show_bug.cgi?id=1716283
 // Setting limit via API is not working.
 //
-// Changing the maximum number of concurrent migrations for a specific conversion host::
-// . Log in to the CloudForms machine using SSH.
-// . Enter the following command:
-// +
-// [options="nowrap" subs="+quotes,verbatim"]
-// ----
-// # curl -sk -u _username:password_  https://_CloudForms_FQDN_/api/conversion_hosts/_conversion_host_id_ -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _2_}}' <1> <2> <3> <4>
-// ----
-//
-// <1> `username:password` is the username and password for CloudForms.
-// <2> `CloudForms_FQDN` is the FQDN of the CloudForms machine.
-// <3> To obtain a `conversion_host_id`:
-// +
-// . Enter the following API call in the address bar of a browser:
-// +
-// [options="nowrap" subs="+quotes,verbatim"]
-// ----
-// https://_CloudForms_FQDN_/api/conversion_hosts
-// ----
-// +
-// A login window is displayed.
-//
-// . Enter your *Username* and *Password* and click *Sign in*. The conversion hosts and their IDs are displayed in JSON format.
-// <4> `max_concurrent_tasks` is the maximum number of concurrent migrations. The default is `10`.
+Changing the maximum number of concurrent migrations for a specific conversion host::
+
+. Enter the following command:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# curl -sk -u _username_:_password_ 'https://_CloudForms_FQDN_/api/conversion_hosts/_conversion_host_id_' -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _15_}}' <1> <2> <3> <4>
+----
+
+<1> `username` and `password` are the username and password for CloudForms.
+<2> `CloudForms_FQDN` is the FQDN of the CloudForms machine.
+<3> To obtain a `conversion_host_id`, enter the following command:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# curl -sk -u _username:password_ 'https://_CloudForms_FQDN_/api/conversion_hosts/'
+----
+
+<4> `max_concurrent_tasks` is the maximum number of concurrent migrations. The default is `10`.

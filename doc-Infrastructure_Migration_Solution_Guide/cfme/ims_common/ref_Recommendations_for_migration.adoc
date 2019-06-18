@@ -1,14 +1,9 @@
 // Module included in the following assemblies:
 // assembly_Planning_the_migration.adoc
-[id="Recommendations_for_migration"]
-= Recommendations for migration
+[id="Recommendations_for_migration_{context}"]
+= Recommendations and best practices
 
-The following recommendations will minimize the impact of the migration on your environment.
-
-.Checking your resources
-
-* Ensure that you have sufficient space for the migration. The migration process does not delete the original virtual machines.
-* Plan for redundancy.
+The following recommendations will help to minimize the impact of the migration on your environment.
 
 .Scheduling the migration
 
@@ -19,10 +14,10 @@ The following recommendations will minimize the impact of the migration on your 
 ====
 Currently, IMS supports only cold migration. Virtual machines are powered off gracefully as part of the migration process.
 ====
+
 * Stagger the migration schedules.
 * Move critical applications during maintenance windows.
 
-[id="Distributing_the_migration_workload"]
 .Distributing the migration workload
 
 * Create migration groups, so that you are not migrating all of your virtual machines at the same time, keeping in mind the following considerations:
@@ -39,17 +34,12 @@ Currently, IMS supports only cold migration. Virtual machines are powered off gr
 ** Web servers
 ** Load balancers
 
-[id="Deploying_conversion_hosts"]
-.Deploying conversion hosts
+.Deploying the conversion hosts
 
-* Create an appropriate number of conversion hosts. See xref:Deciding_how_many_conversion_hosts_to_create[]
-* Choose the best datapath transformation option for your environment. See xref:Choosing_vddk_or_ssh_transformation[]
-* OpenStack Platform:
-** Deploy conversion hosts on multiple hypervisors.
-** Deploy conversion hosts on a compute node with nested virtualization enabled (see link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[]). Nested virtualization is a technology preview.
+* Create a sufficient number of conversion hosts for your migration, with sufficient resources.
+* Choose the best transformation option (SSH or VDDK) for your environment.
 
-[id="Controlling_the_migration_process"]
 .Controlling the migration process
 
-* Create multiple xref:Creating_and_running_a_migration_plan[migration plans] for finer control.
-* Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure (see xref:Changing_the_maximum_number_of_concurrent_migrations[]).
+* Create multiple migration plans for finer control.
+* Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure.

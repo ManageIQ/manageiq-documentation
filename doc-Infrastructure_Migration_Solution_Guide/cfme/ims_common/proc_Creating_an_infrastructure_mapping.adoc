@@ -1,13 +1,18 @@
 // Module included in the following assemblies:
 // assembly_Migrating_the_infrastructure.adoc
-[id="Creating_an_infrastructure_mapping"]
+[id="Creating_an_infrastructure_mapping_for_{context}"]
 = Creating an infrastructure mapping
 
-The infrastructure mapping maps your source infrastructure to your target environment.
+ifdef::rhv[]
+The infrastructure mapping maps the resources of your VMware and Red Hat Virtualization environments.
+endif::rhv[]
+ifdef::osp[]
+The infrastructure mapping maps the resources of your VMware and Red Hat OpenStack Platform environments.
+endif::osp[]
 
 [IMPORTANT]
 ====
-If you add or remove providers or provider objects from an infrastructure mapping, the mapping will have missing resource errors (see xref:Infrastructure_mapping_errors[]). You must delete the infrastructure mapping and create a new one.
+If you add or remove providers or provider objects from an infrastructure mapping, the mapping will have missing resource errors. You must delete the infrastructure mapping and create a new one.
 ====
 
 .Procedure
@@ -28,24 +33,44 @@ image:Creating_infrastructure_mapping.png[]
 . Click *Next*.
 
 |*Map Compute*
-.<a|. Select a *Source Provider \ Datacenter \ Cluster* source cluster and a (RHV) *Target Provider \ Datacenter \ Cluster* or (OpenStack{nbsp}Platform) *Target Provider \ Project*.
+.<a|
+ifdef::rhv[]
+. Select a *Source Provider \ Datacenter \ Cluster* and a *Target Provider \ Datacenter \ Cluster*.
 +
-If the target cluster or project does not contain a conversion host, a warning icon (image:warning.png[height=15px]) appears. You can create and save an infrastructure mapping, but you must xref:Configuring_the_conversion_hosts[configure conversion hosts] before you can run a migration plan.
+If the target cluster does not contain a conversion host, a warning icon (image:warning.png[height=15px]) appears. You can create and save an infrastructure mapping, but you must configure the conversion hosts before running a migration plan.
 
 . Click *Add Mapping*. You can map additional clusters.
+endif::rhv[]
+ifdef::osp[]
+. Select a *Source Provider \ Datacenter \ Cluster* source cluster and a *Target Provider \ Project*.
++
+If the target project does not contain a conversion host, a warning icon (image:warning.png[height=15px]) appears. You can create and save an infrastructure mapping, but you must configure the conversion hosts before running a migration plan.
+
+. Click *Add Mapping*. You can map additional projects.
+endif::osp[]
 . Click *Next*.
 
 |*Map Storage*
 .<a|. Select a source cluster whose datastores you want to map.
-. Select a *Source Provider \ Datacenter \ Datastore* and (RHV) *Target Datastores* or
-(OpenStack{nbsp}Platform) *Target Provider \ Volume Type*. (If the OpenStack Platform volume type is missing, check that the `volume type` has been set. See xref:Infrastructure_mapping_errors[].)
+ifdef::rhv[]
+. Select a *Source Provider \ Datacenter \ Datastore* and *Target Datastores*.
+endif::rhv[]
+ifdef::osp[]
+. Select a *Source Provider \ Datacenter \ Datastore* and *Target Provider \ Volume Type*.
++
+If the volume type is missing, check that the volume type has been set. Block storage requires at least one volume type. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_.
+endif::osp[]
 
 . Click *Add Mapping*. You can map additional datastores.
 . Click *Next*.
 
 |*Map Networks*
 .<a|. Select a source cluster from the drop-down list.
-. Select one or more from *Source Provider \ Datacenter \ Network* and a *Target Project \ Network*. (IMS supports both provider and tenant networks in OpenStack Platform.)
+. Select one or more networks from *Source Provider \ Datacenter \ Network* and *Target Project \ Network*.
+ifdef::osp[]
++
+IMS supports both provider and tenant networks.
+endif::osp[]
 
 . Click *Add Mapping*. You can map the networks of additional source clusters.
 . Click *Create*.
@@ -58,5 +83,3 @@ You can click an infrastructure mapping element to view its details:
 
 .Infrastructure Mappings list
 image:Infra_mappings_list.png[]
-
-After you have created an infrastructure mapping, you can xref:Creating_and_running_a_migration_plan[create and run a migration plan].

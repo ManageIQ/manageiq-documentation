@@ -45,6 +45,23 @@
 </preface>
 <part xml:id="Migrating_from_vmware_to_rhv">
 <title>Migrating from VMware to Red Hat Virtualization</title>
+<partintro>
+<simpara>The migration process involves the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Planning the migration. See <xref linkend="Planning_the_migration_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Preparing the VMware, Red Hat Virtualization, and CloudForms environments. See <xref linkend="Preparing_the_environment_for_migration_to_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Migrating the virtual machines. See <xref linkend="Migrating_the_virtual_machines_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_rhv"/>.</simpara>
+</listitem>
+</orderedlist>
+</partintro>
 <chapter xml:id="Planning_the_migration_rhv">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
@@ -852,7 +869,7 @@ manageiq_username: "<emphasis>username</emphasis>"
 # CloudForms "admin" password:
 manageiq_password: "<emphasis>password</emphasis>"
 
-# SSH private key to connect to VMware hypervisors. Required for both VDDK and SSH. <co xml:id="CO2-1"/>
+# SSH private key to connect to VMware hypervisors for SSH transformation <co xml:id="CO2-1"/>
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
   <emphasis>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....</emphasis>
@@ -890,7 +907,8 @@ v2v_ssh_private_key: |
 </listitem>
 <listitem>
 <simpara>Run the <literal>conversion_host_check.yml</literal> playbook to verify the configuration:</simpara>
-<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, conversion_host_check.yml <co xml:id="CO4-1"/></screen>
+<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, -c local \ <co xml:id="CO4-1"/>
+    -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml</screen>
 <calloutlist>
 <callout arearefs="CO4-1">
 <para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
@@ -1838,6 +1856,23 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </part>
 <part xml:id="Migrating_from_vmware_to_osp">
 <title>Migrating from VMware to Red Hat OpenStack Platform</title>
+<partintro>
+<simpara>The migration process involves the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Planning the migration. See <xref linkend="Planning_the_migration_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Preparing the VMware, Red Hat OpenStack Platform, and CloudForms environments. See <xref linkend="Preparing_the_environment_for_migration_to_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Migrating the virtual machines. See <xref linkend="Migrating_the_virtual_machines_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_osp"/>.</simpara>
+</listitem>
+</orderedlist>
+</partintro>
 <chapter xml:id="Planning_the_migration_osp">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
@@ -2426,7 +2461,6 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </listitem>
 <listitem>
 <simpara>Add Red Hat OpenStack Platform to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
-<simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab when you add Red Hat OpenStack Platform as a cloud provider. You will add the SSH private key when you configure the conversion hosts.</simpara>
 <note>
 <simpara>Removing or changing a provider before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.</simpara>
 </note>
@@ -2434,7 +2468,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </orderedlist>
 </section>
 <section xml:id="Creating_osp_conversion_hosts">
-<title>Creating conversion hosts</title>
+<title>Creating the conversion hosts</title>
 <simpara>You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance (<literal>RHOSP V2V Image for Red Hat OpenStack Director</literal>). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.</simpara>
 <note>
 <simpara>For optimal performance:</simpara>
@@ -2468,7 +2502,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <simpara>Upload the image to Glance storage.</simpara>
 </listitem>
 <listitem>
-<simpara>Deploy the image as a conversion host instance, with the following resources:</simpara>
+<simpara>Launch the image as a conversion host instance, with the following resources:</simpara>
 <itemizedlist>
 <listitem>
 <simpara>4 vCPUs</simpara>
@@ -2484,15 +2518,34 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </listitem>
 <listitem>
 <simpara><literal>/var/logs</literal> (5 GB)</simpara>
+<simpara>See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-instances">Launch an Instance</link> in the <emphasis>Red Hat OpenStack Platform Instances and Images Guide</emphasis>.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>Increase the disk space of the instance to accommodate its file system.</simpara>
+<simpara>Increase the disk space of the instance to accommodate its file system. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-resize-instance">Resize an Instance</link> in the <emphasis>Red Hat OpenStack Platform Instances and Images Guide</emphasis>.</simpara>
 <simpara>The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size, or you can create a new partition and add it as a physical volume to the volume group.</simpara>
 <note>
 <simpara>You must resize <literal>lv_root</literal> to use all available disk space because the image will not use it by default.</simpara>
 </note>
+</listitem>
+</orderedlist>
+<simpara xml:id="Adding_osp_conversion_host_key_to_cloudforms">Add the conversion host’s private SSH key to CloudForms:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu><emphasis role="strong">Clouds</emphasis></guisubmenu> <guimenuitem>Providers</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select the Red Hat OpenStack Platform provider, click <emphasis role="strong">Configuration</emphasis> and select <emphasis role="strong">Edit Selected Cloud Provider.</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara>Click the <emphasis role="strong">RSA key pair</emphasis> tab in the <emphasis role="strong">Endpoints</emphasis> section.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the <emphasis role="strong">Username</emphasis> <literal>cloud-user</literal> and the <emphasis role="strong">Private Key</emphasis> of the conversion host instance. If you deploy multiple conversion hosts, they must use the same key pair.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
 </listitem>
 </orderedlist>
 </section>
@@ -2698,7 +2751,7 @@ manageiq_username: "<emphasis>username</emphasis>"
 # CloudForms "admin" password:
 manageiq_password: "<emphasis>password</emphasis>"
 
-# SSH private key to connect to VMware hypervisors. Required for both VDDK and SSH. <co xml:id="CO13-1"/>
+# SSH private key to connect to VMware hypervisors for SSH transformation <co xml:id="CO13-1"/>
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
   <emphasis>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....</emphasis>
@@ -2732,7 +2785,8 @@ v2v_ssh_private_key: |
 </listitem>
 <listitem>
 <simpara>Run the <literal>conversion_host_check.yml</literal> playbook to verify the configuration:</simpara>
-<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, conversion_host_check.yml <co xml:id="CO15-1"/></screen>
+<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, -c local \ <co xml:id="CO15-1"/>
+    -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml</screen>
 <calloutlist>
 <callout arearefs="CO15-1">
 <para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>

@@ -182,7 +182,7 @@ manageiq_username: "_username_"
 # CloudForms "admin" password:
 manageiq_password: "_password_"
 
-# SSH private key to connect to VMware hypervisors. Required for both VDDK and SSH. <1>
+# SSH private key to connect to VMware hypervisors for SSH transformation <1>
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
   _b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn...._
@@ -239,6 +239,7 @@ If you need to run the `conversion_host_enable.yml` playbook again, remove the h
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook --ask-vault-pass -i _conversion_host_, conversion_host_check.yml <1>
+# ansible-playbook --ask-vault-pass -i _conversion_host_, -c local \ <1>
+    -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml
 ----
 <1> `conversion_host` is the FQDN or IP address of the conversion host.

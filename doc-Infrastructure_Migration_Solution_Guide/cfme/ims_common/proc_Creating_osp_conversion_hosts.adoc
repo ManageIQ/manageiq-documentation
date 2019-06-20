@@ -3,7 +3,7 @@
 // assembly_Preparing_the_1_1_target_environment
 // assembly_Preparing_the_1_2_target_environment
 [id="Creating_osp_conversion_hosts"]
-= Creating conversion hosts
+= Creating the conversion hosts
 
 You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance (`RHOSP V2V Image for Red Hat OpenStack Director`). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
 
@@ -28,15 +28,17 @@ Versions 14.0.3 or later cannot be used with IMS 1.1.
 ====
 
 . Upload the image to Glance storage.
-. Deploy the image as a conversion host instance, with the following resources:
+. Launch the image as a conversion host instance, with the following resources:
 +
 ** 4 vCPUs
 ** 1 GB RAM for each concurrent migration, starting at 10 GB RAM. The default maximum number of concurrent migrations per conversion host is `10`. If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.
 ** `/tmp` (1 GB for each concurrent migration)
 ** `/var/tmp` (1 GB for each concurrent migration)
 ** `/var/logs` (5 GB)
++
+See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-instances[Launch an Instance] in the _Red Hat OpenStack Platform Instances and Images Guide_.
 
-. Increase the disk space of the instance to accommodate its file system.
+. Increase the disk space of the instance to accommodate its file system. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-resize-instance[Resize an Instance] in the _Red Hat OpenStack Platform Instances and Images Guide_.
 +
 The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size, or you can create a new partition and add it as a physical volume to the volume group.
 +

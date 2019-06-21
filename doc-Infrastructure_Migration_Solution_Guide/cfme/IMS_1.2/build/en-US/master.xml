@@ -7,9 +7,9 @@
 ]>
 <?asciidoc-toc maxdepth="3"?><book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
 <info>
-<title>Red Hat Infrastructure Migration Solution</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
+<title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-06-17</date>
+<date>2019-06-20</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
@@ -25,12 +25,14 @@
 <term>Red Hat Virtualization 4.3</term>
 <listitem>
 <simpara>Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/">Red Hat Virtualization 4.3</link> documentation for more information.</simpara>
+<simpara>See <xref linkend="Migrating_from_vmware_to_rhv"/>.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term>Red Hat OpenStack Platform 13 and 14</term>
 <listitem>
 <simpara>Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 14</link> documentation for more information.</simpara>
+<simpara>See <xref linkend="Migrating_from_vmware_to_osp"/>.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
@@ -41,8 +43,25 @@
 </varlistentry>
 </variablelist>
 </preface>
-<part xml:id="migrating_from_vmware_to_red_hat_virtualization" remap="_migrating_from_vmware_to_red_hat_virtualization">
+<part xml:id="Migrating_from_vmware_to_rhv">
 <title>Migrating from VMware to Red Hat Virtualization</title>
+<partintro>
+<simpara>The migration process involves the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Planning the migration. See <xref linkend="Planning_the_migration_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Preparing the VMware, Red Hat Virtualization, and CloudForms environments. See <xref linkend="Preparing_the_environment_for_migration_to_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Migrating the virtual machines. See <xref linkend="Migrating_the_virtual_machines_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_rhv"/>.</simpara>
+</listitem>
+</orderedlist>
+</partintro>
 <chapter xml:id="Planning_the_migration_rhv">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
@@ -392,7 +411,7 @@
 </itemizedlist>
 </section>
 </chapter>
-<chapter xml:id="preparing_the_environment_for_migration" remap="_preparing_the_environment_for_migration">
+<chapter xml:id="Preparing_the_environment_for_migration_to_rhv">
 <title>Preparing the environment for migration</title>
 <section xml:id="Preparing_the_vmware_environment_for_rhv">
 <title>Preparing the VMware environment</title>
@@ -1431,6 +1450,34 @@ vm03,host1,vSphere3</screen>
 </note>
 </listitem>
 </orderedlist>
+<variablelist>
+<varlistentry>
+<term>Changing the maximum number of concurrent migrations for a specific conversion host</term>
+<listitem>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Enter the following command:</simpara>
+</listitem>
+</orderedlist>
+<screen># curl -sk -u <emphasis>username</emphasis>:_password_ <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis></emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>15</emphasis>}}</emphasis> <co xml:id="CO5-1"/> <co xml:id="CO5-2"/> <co xml:id="CO5-3"/> <co xml:id="CO5-4"/></screen>
+</listitem>
+</varlistentry>
+</variablelist>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para><literal>username</literal> and <literal>password</literal> are the username and password for CloudForms.</para>
+</callout>
+<callout arearefs="CO5-2">
+<para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
+</callout>
+<callout arearefs="CO5-3">
+<para>To obtain a <literal>conversion_host_id</literal>, enter the following command:</para>
+<screen># curl -sk -u <emphasis>username:password</emphasis> <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/</emphasis></screen>
+</callout>
+<callout arearefs="CO5-4">
+<para><literal>max_concurrent_tasks</literal> is the maximum number of concurrent migrations. The default is <literal>10</literal>.</para>
+</callout>
+</calloutlist>
 </section>
 </section>
 </chapter>
@@ -1657,8 +1704,25 @@ vm03,host1,vSphere3</screen>
 </section>
 </chapter>
 </part>
-<part xml:id="migrating_from_vmware_to_red_hat_openstack_platform" remap="_migrating_from_vmware_to_red_hat_openstack_platform">
+<part xml:id="Migrating_from_vmware_to_osp">
 <title>Migrating from VMware to Red Hat OpenStack Platform</title>
+<partintro>
+<simpara>The migration process involves the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Planning the migration. See <xref linkend="Planning_the_migration_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Preparing the VMware, Red Hat OpenStack Platform, and CloudForms environments. See <xref linkend="Preparing_the_environment_for_migration_to_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Migrating the virtual machines. See <xref linkend="Migrating_the_virtual_machines_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_osp"/>.</simpara>
+</listitem>
+</orderedlist>
+</partintro>
 <chapter xml:id="Planning_the_migration_osp">
 <title>Planning the migration</title>
 <simpara>During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000 virtual machines, with 200 TB of data, in less than 6 months".</simpara>
@@ -2011,7 +2075,7 @@ vm03,host1,vSphere3</screen>
 </itemizedlist>
 </section>
 </chapter>
-<chapter xml:id="preparing_the_environment_for_migration_2" remap="_preparing_the_environment_for_migration_2">
+<chapter xml:id="Preparing_the_environment_for_migration_to_osp">
 <title>Preparing the environment for migration</title>
 <section xml:id="Preparing_the_vmware_environment_for_osp">
 <title>Preparing the VMware environment</title>
@@ -2512,9 +2576,9 @@ vm03,host1,vSphere3</screen>
 </listitem>
 <listitem>
 <simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
-<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO5-1"/></screen>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO6-1"/></screen>
 <calloutlist>
-<callout arearefs="CO5-1">
+<callout arearefs="CO6-1">
 <para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
 </callout>
 </calloutlist>
@@ -2532,20 +2596,20 @@ vm03,host1,vSphere3</screen>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO6-1"/>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO7-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts</screen>
 <calloutlist>
-<callout arearefs="CO6-1">
+<callout arearefs="CO7-1">
 <para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
 </callout>
 </calloutlist>
 </listitem>
 <listitem>
 <simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
-<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO7-1"/></screen>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO8-1"/></screen>
 <calloutlist>
-<callout arearefs="CO7-1">
+<callout arearefs="CO8-1">
 <para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
 </callout>
 </calloutlist>
@@ -2563,9 +2627,9 @@ vm03,host1,vSphere3</screen>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO8-1"/></screen>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO9-1"/></screen>
 <calloutlist>
-<callout arearefs="CO8-1">
+<callout arearefs="CO9-1">
 <para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
 </calloutlist>
@@ -3121,6 +3185,34 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 </note>
 </listitem>
 </orderedlist>
+<variablelist>
+<varlistentry>
+<term>Changing the maximum number of concurrent migrations for a specific conversion host</term>
+<listitem>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Enter the following command:</simpara>
+</listitem>
+</orderedlist>
+<screen># curl -sk -u <emphasis>username</emphasis>:_password_ <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis></emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>15</emphasis>}}</emphasis> <co xml:id="CO10-1"/> <co xml:id="CO10-2"/> <co xml:id="CO10-3"/> <co xml:id="CO10-4"/></screen>
+</listitem>
+</varlistentry>
+</variablelist>
+<calloutlist>
+<callout arearefs="CO10-1">
+<para><literal>username</literal> and <literal>password</literal> are the username and password for CloudForms.</para>
+</callout>
+<callout arearefs="CO10-2">
+<para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
+</callout>
+<callout arearefs="CO10-3">
+<para>To obtain a <literal>conversion_host_id</literal>, enter the following command:</para>
+<screen># curl -sk -u <emphasis>username:password</emphasis> <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/</emphasis></screen>
+</callout>
+<callout arearefs="CO10-4">
+<para><literal>max_concurrent_tasks</literal> is the maximum number of concurrent migrations. The default is <literal>10</literal>.</para>
+</callout>
+</calloutlist>
 </section>
 </section>
 </chapter>

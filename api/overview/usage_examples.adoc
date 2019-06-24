@@ -1,58 +1,45 @@
 
 [[usage-examples]]
-= Examples
+= Usage Examples
 
-* <<a-note-about-filtering,A note about filtering>>
-* <<curl,cURL>>
-  - <<curl-example1,Example 1: A simple `GET` with cURL>>
-  - <<curl-example2,Example 2: Using `POST` to edit a group with cURL>>
-  - <<curl-example3,Example 3: A `GET` using filtering with cURL>>
-* <<ruby,Ruby>>
-  - <<ruby-example1,Example 1: A simple `GET` with Ruby>>
-  - <<ruby-example2,Example 2: Using `POST` to edit a group with Ruby>>
-  - <<ruby-example3,Example 3: A `GET` using filtering with Ruby>>
-* <<python,Python>>
-  - <<python-example1,Example 1: A simple `GET` with Python>>
-  - <<python-example2,Example 2: Using `POST` to edit a group with Python>>
-  - <<python-example3,Example 3: A `GET` using filtering with Python>>
-
-'''''
-
-These examples illustrate how to use the ManageIQ REST API with the 'Client for URLs (cURL)', Ruby and Python.
+The below examples illustrate how to use the ManageIQ REST API with the Client for URLs (cURL), Ruby and Python.
 All examples shown use the default admin credentials with insecure methods.
 
-Three basic examples will be shown, a `GET`, a `POST` with a simple payload and a 
-`GET` with filtering
+Three basic examples will be shown, a **GET**, a **POST** with a simple payload and a 
+**GET** with filtering
 
-All examples use IP Address `192.0.2.0` to represent the ManageIQ appliance, with the default HTTPS port omitted.
+All examples use IP Address **192.0.2.0** to represent the ManageIQ appliance, with the default HTTPS port omitted.
 
 '''''
 
-[[a-note-about-filtering]]
-== A note about filtering
-
-Before jumping in to the examples a note about filtering:
-
-When a collection is queried only the `attributes` of the collection are displayed `virtual_attributes` are not.
-However filters can be done on `virtual_attributes` too. The HTTP `OPTIONS` request can be used on a collection to
-display all of the collection specific metadata.
-
+* <<curl,cURL>>
+  - <<curl-example1,Example 1: A simple **GET** with cURL>>
+  - <<curl-example2,Example 2: Using **POST** to edit a group with cURL>>
+  - <<curl-example3,Example 3: A **GET** using filtering with cURL>>
+* <<ruby,Ruby>>
+  - <<ruby-example1,Example 1: A simple **GET** with Ruby>>
+  - <<ruby-example2,Example 2: Using **POST** to edit a group with Ruby>>
+  - <<ruby-example3,Example 3: A **GET** using filtering with Ruby>>
+* <<python,Python>>
+  - <<python-example1,Example 1: A simple **GET** with Python>>
+  - <<python-example2,Example 2: Using **POST** to edit a group with Python>>
+  - <<python-example3,Example 3: A **GET** using filtering with Python>>
 
 '''''
 
 [[curl]]
 == cURL
 
-The cURL command can be used from the shell. However the shell's interpretation of some characteres, for example `&`, can make it awkward to use for complex cases.
-To help alleviate this the payload can be passed to cURL using the `--data` flag, where the payload is stored in a file in the format specified 
-in the content-type, `JSON` in our example.
+The cURL command can be used from the shell. However the shell's interpretation of some characters, for example **&**, can make it awkward to use for complex cases.
+To help alleviate this the payload can be passed to cURL using the **--data** flag, where the payload is stored in a file in the format specified 
+in the content-type, **JSON** in our example.
 
-The JSON returned is formated in the examples using `python -m json.tool`
+The JSON returned is formated in the examples using **python -m json.tool**
 
 [[curl-example1]]
-==== Example 1: A simple `GET` with cURL
+==== Example 1: A simple **GET** with cURL
 
-Get the collection `groups`
+Get the collection **groups**
 
 ----
 curl --user admin:smartvm --insecure --request GET https://192.0.2.0/api/groups | python -m json.tool
@@ -60,7 +47,7 @@ curl --user admin:smartvm --insecure --request GET https://192.0.2.0/api/groups 
 
 ===== Example 1: Result
 
-Result truncated and showing only the returned `resources`.
+Result truncated and showing only the returned **resources**.
 
 ----
 {
@@ -82,11 +69,11 @@ Result truncated and showing only the returned `resources`.
 ----
 
 [[curl-example2]]
-==== Example 2: Using `POST` to edit a group with cURL
+==== Example 2: Using **POST** to edit a group with cURL
 
-Edit an instance of the collection `groups`
+Edit an instance of the collection **groups**
 
-In this example the payload `data` is read from a file.
+In this example the payload **data** is read from a file.
 
 ----
 $ cat request.json
@@ -98,10 +85,14 @@ $ cat request.json
 }
 ----
 
-Use the data in file request.json to edit an instance of the collection `groups`
+Use the data in file request.json to edit an instance of the collection **groups**
 
 ----
-curl --data @request.json --header "Content-Type: application/json" --user admin:smartvm --insecure --request POST https://192.0.2.0/api/groups/23 | python -m json.tool
+curl --data @request.json \
+     --header "Content-Type: application/json" \
+     --user admin:smartvm \
+     --insecure \
+     --request POST https://192.0.2.0/api/groups/23 | python -m json.tool
 ----
 
 ===== Example 2: Result
@@ -121,17 +112,24 @@ curl --data @request.json --header "Content-Type: application/json" --user admin
 ----
 
 [[curl-example3]]
-==== Example 3: A `GET` using filtering with cURL
+==== Example 3: A **GET** using filtering with cURL
 
-Filtering can be done by passing arguments in the URL. Arguments are preceded by the `&` character, which causes the shell fits as the shell interprets the `&` character as an instruction to: `run this command in the background`. To avoid this the arguments can instead be passed to curl using the `--get` flag combined with each argument being passed with the `--data` flags.
+Filtering can be done by passing arguments in the URL. Arguments are preceded by the **&** character, which can cause problems as the shell interprets the **&** character as an instruction to: **run this command in the background**. To avoid this the arguments can instead be passed to curl using the **--get** flag combined with each argument being passed with the **--data** flags.
 
 ----
-curl --user admin:smartvm --insecure --request GET --header "Content-Type: application/json" https://192.0.2.0/api/groups --get --data "expand=resources&attributes=description,miq_user_role_name" --data "filter[]=miq_user_role_name='*user*'" | jsonpp
+curl --user admin:smartvm \
+     --insecure \
+     --request GET \
+     --header "Content-Type: application/json" https://192.0.2.0/api/groups \
+     --get \
+     --data "expand=resources" \
+     --data "attributes=description,miq_user_role_name" \
+     --data "filter[]=miq_user_role_name='*user*'" | python -m json.tool
 ----
 
 ===== Example 3: Result
 
-Result truncated and showing only the returned `resources`.
+Result truncated and showing only the returned **resources**.
 
 ----
 ...
@@ -169,18 +167,18 @@ Result truncated and showing only the returned `resources`.
 [[ruby]]
 === Ruby
 
-The same three examples show above with cURL are illustrated here using Ruby.
+The same three examples shown above are illustrated here using Ruby.
 
-The ManageIQ hostname or IP Address is being made available through the environment variable `MIQ` :
+The ManageIQ hostname or IP Address is being made available through the environment variable **MIQ** :
 
 ----
 export MIQ="192.0.2.0"
 ----
 
 [[ruby-example1]]
-==== Example 1: A simple `GET` with Ruby
+==== Example 1: A simple **GET** with Ruby
 
-Get the collection `groups`
+Get the collection **groups**
 
 ----
 #!/usr/bin/env ruby
@@ -206,7 +204,7 @@ puts "Reply:\n " + JSON.pretty_generate(JSON.parse(response.body.strip))
 
 ===== Example 1: Result
 
-Result truncated and showing only the returned `resources`.
+Result truncated and showing only the returned **resources**.
 
 ----
 {
@@ -228,9 +226,9 @@ Result truncated and showing only the returned `resources`.
 ----
 
 [[ruby-example2]]
-==== Example 2: Using `POST` to edit a group with Ruby
+==== Example 2: Using **POST** to edit a group with Ruby
 
-Edit an instance of the collection `groups`
+Edit an instance of the collection **groups**
 
 ----
 #!/usr/bin/env ruby
@@ -277,7 +275,7 @@ puts JSON.pretty_generate(JSON.parse(response.body.strip))
 ----
 
 [[ruby-example3]]
-==== Example 3: A `GET` using filtering with Ruby
+==== Example 3: A **GET** using filtering with Ruby
 
 ----
 #!/usr/bin/env ruby
@@ -305,7 +303,7 @@ puts "Reply:\n " + JSON.pretty_generate(JSON.parse(response.body.strip))
 
 ===== Example 3: Result
 
-Result truncated and showing only the returned `resources`.
+Result truncated and showing only the returned **resources**.
 
 ----
 ...
@@ -343,18 +341,18 @@ Result truncated and showing only the returned `resources`.
 [[python]]
 === Python
 
-The same three examples show above with cURL are illustrated here using Python.
+The same three examples shown above are illustrated here using Python.
 
-The ManageIQ hostname or IP Address is being made available through the environment variable `MIQ` :
+The ManageIQ hostname or IP Address is being made available through the environment variable **MIQ** :
 
 ----
 export MIQ="192.0.2.0"
 ----
 
 [[python-example1]]
-==== Example 1: A simple `GET` with Python
+==== Example 1: A simple **GET** with Python
 
-Get the collection `groups`
+Get the collection **groups**
 
 ----
 #!/usr/bin/env python
@@ -370,7 +368,7 @@ print("Result:\n" + json.dumps(json.loads(response.text), indent=4, sort_keys=Tr
 
 ===== Example 1: Result
 
-Result truncated and showing only the returned `resources`.
+Result truncated and showing only the returned **resources**.
 
 ----
 {
@@ -392,9 +390,9 @@ Result truncated and showing only the returned `resources`.
 ----
 
 [[python-example2]]
-==== Example 2: Using `POST` to edit a group with Python
+==== Example 2: Using **POST** to edit a group with Python
 
-Edit an instance of the collection `groups`
+Edit an instance of the collection **groups**
 
 ----
 #!/usr/bin/env python
@@ -407,7 +405,7 @@ url = 'https://' + str(os.environ["MIQ"]) + '/api/groups/23'
 
 request_body = { 'action':  'edit', 'resource' : { 'description' : 'updated group description from python' } }
 headers = {'Content-type': 'application/json'}
-response = requests.post(url, data=json.dumps(request_body), headers=headers,  auth=('admin', 'smartvm'), verify=False)
+response = requests.post(url, data=json.dumps(request_body), headers=headers, auth=('admin', 'smartvm'), verify=False)
 print("Result:\n" + json.dumps(json.loads(response.text), indent=4, sort_keys=True))
 ----
 
@@ -428,7 +426,7 @@ print("Result:\n" + json.dumps(json.loads(response.text), indent=4, sort_keys=Tr
 ----
 
 [[python-example3]]
-==== Example 3: A `GET` using filtering with Python
+==== Example 3: A **GET** using filtering with Python
 
 ----
 #!/usr/bin/env python
@@ -445,7 +443,7 @@ print("Result:\n" + json.dumps(json.loads(response.text), indent=4, sort_keys=Tr
 
 ===== Example 3: Result
 
-Result truncated and showing only the returned `resources`.
+Result truncated and showing only the returned **resources**.
 
 ----
 ...

@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-06-20</date>
+<date>2019-06-26</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.1</productnumber>
 <abstract>
@@ -413,6 +413,18 @@
 </chapter>
 <chapter xml:id="Preparing_the_environment_for_migration_to_rhv">
 <title>Preparing the environment for migration</title>
+<simpara>Preparing your environment for migration involves the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Preparing the VMware environment. See <xref linkend="Preparing_the_vmware_environment_for_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_1_rhv_environment"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Configuring the conversion hosts. See <xref linkend="Configuring_the_1_1_rhv_conversion_hosts"/>.</simpara>
+</listitem>
+</orderedlist>
 <section xml:id="Preparing_the_vmware_environment_for_rhv">
 <title>Preparing the VMware environment</title>
 <simpara>Preparing the VMware environment for migration involves the following tasks:</simpara>
@@ -1361,6 +1373,7 @@ vm03,host1,vSphere3</screen>
 <simpara>A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting each virtual machine.</simpara>
 </note>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
 </listitem>
@@ -2227,6 +2240,18 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </chapter>
 <chapter xml:id="Preparing_the_environment_for_migration_to_osp">
 <title>Preparing the environment for migration</title>
+<simpara>Preparing your environment for migration involves the following tasks:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Preparing the VMware environment. See <xref linkend="Preparing_the_vmware_environment_for_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_1_osp_environment"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Configuring the conversion hosts. See <xref linkend="Configuring_the_1_1_osp_conversion_hosts"/>.</simpara>
+</listitem>
+</orderedlist>
 <section xml:id="Preparing_the_vmware_environment_for_osp">
 <title>Preparing the VMware environment</title>
 <simpara>Preparing the VMware environment for migration involves the following tasks:</simpara>
@@ -2445,6 +2470,9 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <listitem>
 <simpara>Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.</simpara>
 </listitem>
+<listitem>
+<simpara>Ensure that the event monitor workers are running. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/general_configuration/configuration#server-diagnostics">Server Diagnostics</link> in <emphasis>Red Hat CloudForms General Configuration</emphasis>.</simpara>
+</listitem>
 </orderedlist>
 </section>
 <section xml:id="Installing_cf_4_7_3_with_osp">
@@ -2499,7 +2527,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </important>
 </listitem>
 <listitem>
-<simpara>Upload the image to Glance storage.</simpara>
+<simpara>Upload the image to Red Hat OpenStack Platform.</simpara>
 </listitem>
 <listitem>
 <simpara>Launch the image as a conversion host instance, with the following resources:</simpara>
@@ -2508,13 +2536,13 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <simpara>4 vCPUs</simpara>
 </listitem>
 <listitem>
-<simpara>1 GB RAM for each concurrent migration, starting at 10 GB RAM. The default maximum number of concurrent migrations per conversion host is <literal>10</literal>. If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.</simpara>
+<simpara>10 GB RAM, if you use the default maximum number of concurrent migrations per conversion host, which is <literal>10</literal>. If you increase the number of concurrent migrations, you must add 1 GB RAM for each additional concurrent migration. If you reduce the number, you can reduce the RAM but the conversion host cannot have less than 8 GB RAM.</simpara>
 </listitem>
 <listitem>
-<simpara><literal>/tmp</literal> (1 GB for each concurrent migration)</simpara>
+<simpara><literal>/tmp</literal> (10 GB, or 1 GB for each concurrent migration)</simpara>
 </listitem>
 <listitem>
-<simpara><literal>/var/tmp</literal> (1 GB for each concurrent migration)</simpara>
+<simpara><literal>/var/tmp</literal> (10 GB, or 1 GB for each concurrent migration)</simpara>
 </listitem>
 <listitem>
 <simpara><literal>/var/logs</literal> (5 GB)</simpara>
@@ -3172,6 +3200,7 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting the security group and flavor of each virtual machine.</simpara>
 </note>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
 </listitem>

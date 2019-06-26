@@ -27,13 +27,13 @@ To create a Red Hat OpenStack Platform conversion host:
 Versions 14.0.3 or later cannot be used with IMS 1.1.
 ====
 
-. Upload the image to Glance storage.
+. Upload the image to Red Hat OpenStack Platform.
 . Launch the image as a conversion host instance, with the following resources:
 +
 ** 4 vCPUs
-** 1 GB RAM for each concurrent migration, starting at 10 GB RAM. The default maximum number of concurrent migrations per conversion host is `10`. If you raise the number of concurrent migrations, you should increase the RAM accordingly. If you lower the number of concurrent conversions, you should not go below 8 GB RAM.
-** `/tmp` (1 GB for each concurrent migration)
-** `/var/tmp` (1 GB for each concurrent migration)
+** 10 GB RAM, if you use the default maximum number of concurrent migrations per conversion host, which is `10`. If you increase the number of concurrent migrations, you must add 1 GB RAM for each additional concurrent migration. If you reduce the number, you can reduce the RAM but the conversion host cannot have less than 8 GB RAM.
+** `/tmp` (10 GB, or 1 GB for each concurrent migration)
+** `/var/tmp` (10 GB, or 1 GB for each concurrent migration)
 ** `/var/logs` (5 GB)
 +
 See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-instances[Launch an Instance] in the _Red Hat OpenStack Platform Instances and Images Guide_.

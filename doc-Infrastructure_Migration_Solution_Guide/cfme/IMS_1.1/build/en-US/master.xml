@@ -184,7 +184,7 @@
 <listitem>
 <itemizedlist>
 <listitem>
-<simpara>See <link xlink:href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization</link>.</simpara>
+<simpara>You can migrate any guest operating system that is certified and supported for use with the Red Hat Virtualization Hypervisor. See <link xlink:href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization</link>.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -629,11 +629,12 @@
 <simpara>Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage">Storage</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
 <note>
 <simpara>IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.</simpara>
+<simpara>Although the ISO storage domain has been deprecated, it is required for migration.</simpara>
 </note>
 </listitem>
 <listitem>
-<simpara>Upload the VirtIO and Guest Tool image files to the ISO storage domain. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
-<simpara>The VirtIO file name must include the version number: <literal>virtio-win-<emphasis>version</emphasis>.iso</literal>. The Guest Tool is required for migrating Windows virtual machines.</simpara>
+<simpara>Upload the VirtIO and RHV Guest Tools image files to the ISO storage domain. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
+<simpara>The VirtIO file name must include the version number: <literal>virtio-win-<emphasis>version</emphasis>.iso</literal>. The guest tools are required for migrating Windows virtual machines.</simpara>
 </listitem>
 <listitem>
 <simpara>Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools">Creating MAC Address Pools</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
@@ -1844,6 +1845,9 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <simpara>BZ#716283: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1716283">Migrating virtual machines are not distributed correctly among the conversion hosts</link></simpara>
 </listitem>
 <listitem>
+<simpara>BZ#1726939: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1726939">Run the preflight check of migration task before waiting for a conversion host</link>. Currently, the preflight check that monitors the migration is performed after a conversion host is assigned to the task. As a result, the total volume of the Datastores reported in <emphasis role="strong">Migration Plans In Progress</emphasis> reflects the total volume of the virtual machines that are currently migrating, not the total volume of the migration plan. When all the virtual machines have started to migrate, the correct value of the total volume is displayed.</simpara>
+</listitem>
+<listitem>
 <simpara>BZ#666799: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1666799">Canceling migration does not stop creating virtual machines on RHV</link>. If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.</simpara>
 </listitem>
 <listitem>
@@ -2008,7 +2012,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <listitem>
 <itemizedlist>
 <listitem>
-<simpara>See <link xlink:href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization</link>.</simpara>
+<simpara>You can migrate any guest operating system that is certified and supported for use with the Red Hat Virtualization Hypervisor. See <link xlink:href="https://access.redhat.com/articles/973163">Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization</link>.</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -2521,9 +2525,10 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <simpara>Click the green <emphasis role="strong">Download Latest</emphasis> button to go to the <emphasis role="strong">Download Red Hat OpenStack Platform</emphasis> page.</simpara>
 </listitem>
 <listitem>
-<simpara>In the <emphasis role="strong">Product Software</emphasis> tab, locate <literal>RHOSP V2V Image for Red Hat OpenStack Director 14.0.2 (x86_64)</literal>, click the <emphasis role="strong">Download Now</emphasis> button, and save the image.</simpara>
+<simpara>In the <emphasis role="strong">Product Software</emphasis> tab, locate the <literal>RHOSP V2V Image for Red Hat OpenStack Director 14.0._x_ (x86_64)</literal>, click <emphasis role="strong">Download Now</emphasis>, and save the image.</simpara>
 <important>
-<simpara>Versions 14.0.3 or later cannot be used with IMS 1.1.</simpara>
+<simpara>IMS 1.1 requires Red Hat OpenStack Director 14.0.2.</simpara>
+<simpara>IMS 1.2 requires Red Hat OpenStack Director 14.0.3 or later.</simpara>
 </important>
 </listitem>
 <listitem>
@@ -3695,6 +3700,9 @@ BadRequestException: Unknown errors</screen>
 </listitem>
 <listitem>
 <simpara>BZ#716283: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1716283">Migrating virtual machines are not distributed correctly among the conversion hosts</link></simpara>
+</listitem>
+<listitem>
+<simpara>BZ#1726939: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1726939">Run the preflight check of migration task before waiting for a conversion host</link>. Currently, the preflight check that monitors the migration is performed after a conversion host is assigned to the task. As a result, the total volume of the Datastores reported in <emphasis role="strong">Migration Plans In Progress</emphasis> reflects the total volume of the virtual machines that are currently migrating, not the total volume of the migration plan. When all the virtual machines have started to migrate, the correct value of the total volume is displayed.</simpara>
 </listitem>
 <listitem>
 <simpara>BZ#1668049: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1668049">Instance is not created after disk conversion</link></simpara>

@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-06-26</date>
+<date>2019-07-14</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
@@ -61,6 +61,9 @@
 <simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
+<note xml:id="Vddk_note_rhv">
+<simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). SSH transformation is included as an option, if VDDK cannot be used.</simpara>
+</note>
 </partintro>
 <chapter xml:id="Planning_the_migration_rhv">
 <title>Planning the migration</title>
@@ -71,13 +74,13 @@
 <simpara><xref linkend="Questions_to_ask_before_migration_rhv"/> includes the following:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Supported operating systems</simpara>
+<simpara>What operating systems are supported?</simpara>
 </listitem>
 <listitem>
-<simpara>Number of conversion hosts required</simpara>
+<simpara>How long will the migration take?</simpara>
 </listitem>
 <listitem>
-<simpara>Comparison of VDDK and SSH for disk transformation</simpara>
+<simpara>How many conversion hosts do I need?</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -126,7 +129,7 @@
 <imagedata fileref="images/circle_step_numbers/3.png" contentwidth="25"/>
 </imageobject>
 <textobject><phrase>25</phrase></textobject>
-</inlinemediaobject> If you are using VDDK transformation to migrate your virtual machines, CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.</simpara>
+</inlinemediaobject> CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.</simpara>
 <simpara><inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/circle_step_numbers/4.png" contentwidth="25"/>
@@ -228,7 +231,7 @@
 <simpara>10 virtual machines</simpara>
 </listitem>
 <listitem>
-<simpara>Total data migrated, using VDDK: 1000 GB</simpara>
+<simpara>Total data migrated: 1000 GB</simpara>
 </listitem>
 <listitem>
 <simpara>Hardware:</simpara>
@@ -258,77 +261,6 @@
 <simpara>Multiple conversion hosts provide load-balancing and better performance, even for small migrations.</simpara>
 <simpara>Conversion hosts are limited to a maximum of ten concurrent migrations, unless you change the default values.</simpara>
 <simpara>You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.</simpara>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term>Should I migrate my virtual machines with VDDK or SSH?</term>
-<listitem>
-<simpara>You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.</simpara>
-<simpara>The following table compares the options.</simpara>
-<table frame="all" rowsep="1" colsep="1">
-<title>VDDK and SSH comparison</title>
-<tgroup cols="3">
-<colspec colname="col_1" colwidth="20*"/>
-<colspec colname="col_2" colwidth="40*"/>
-<colspec colname="col_3" colwidth="40*"/>
-<thead>
-<row>
-<entry align="left" valign="top"/>
-<entry align="center" valign="top">Pros</entry>
-<entry align="center" valign="top">Cons</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">VDDK</emphasis></simpara></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Recommended because it is approximately twice as fast as SSH</simpara>
-</listitem>
-<listitem>
-<simpara>Compiled with <literal>nbdkit</literal>, which provides direct connectivity to the virtual machine disks</simpara>
-</listitem>
-</itemizedlist></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Requires VDDK package download</simpara>
-</listitem>
-<listitem>
-<simpara>Requires VDDK package location for conversion host configuration</simpara>
-</listitem>
-<listitem>
-<simpara>Limited to 20 concurrent migrations per conversion host</simpara>
-</listitem>
-<listitem>
-<simpara>Limited to 10 concurrent migrations per VMware hypervisor unless you increase the hypervisor’s NFC service memory</simpara>
-</listitem>
-</itemizedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">SSH</emphasis></simpara></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Better suited for large-scale migrations than VDDK (not affected by hypervisor’s NFC service memory limitation)</simpara>
-</listitem>
-<listitem>
-<simpara>Does not require additional downloads, packages, tools, or compilation</simpara>
-</listitem>
-</itemizedlist></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Slower than VDDK</simpara>
-</listitem>
-<listitem>
-<simpara>Requires VMware hypervisors to have SSH access enabled</simpara>
-</listitem>
-<listitem>
-<simpara>Requires VMware hypervisors and conversion hosts to have shared SSH keys</simpara>
-</listitem>
-</itemizedlist></entry>
-</row>
-</tbody>
-</tgroup>
-</table>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -394,10 +326,10 @@
 <itemizedlist>
 <title>Deploying the conversion hosts</title>
 <listitem>
-<simpara>Create a sufficient number of conversion hosts for your migration, with sufficient resources.</simpara>
+<simpara>Create enough conversion hosts for your migration, with sufficient resources.</simpara>
 </listitem>
 <listitem>
-<simpara>Choose the best transformation option (SSH or VDDK) for your environment.</simpara>
+<simpara>Configure your conversion hosts for VDDK transformation. SSH transformation, because it is slower and requires more configuration steps, is used only if VDDK cannot be used.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist>
@@ -436,10 +368,10 @@
 <simpara>Preparing the VMware virtual machines. See <xref linkend="Preparing_the_vmware_virtual_machines_for_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Configuring the VMware hypervisors if you are using SSH transformation. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv"/>.</simpara>
+<simpara>(Optional) Configuring a VMware hypervisor for more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Configuring a VMware hypervisor if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
+<simpara>(SSH only) Configuring the VMware hypervisors for SSH transformation, if you are not using VDDK. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_rhv">
@@ -484,8 +416,34 @@
 <simpara>Ensure that the virtual machine names do not duplicate names of virtual machines in the Red Hat Virtualization environment.</simpara>
 </listitem>
 </orderedlist>
-<simpara>If you are using SSH transformation, you can configure the VMware hypervisors. See <xref linkend="Preparing_the_vmware_virtual_machines_for_rhv"/>.</simpara>
-<simpara>If you are using VDDK transformation and performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv"/>.</simpara>
+</section>
+<section xml:id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv">
+<title>Configuring a VMware hypervisor for more than ten concurrent migrations</title>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor’s NFC service memory buffer is limited to ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
+<simpara>You can increase the hypervisor’s NFC service memory to enable additional connections for migrations.</simpara>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to a VMware hypervisor.</simpara>
+</listitem>
+<listitem>
+<simpara>Change the value of <literal>maxMemory</literal> to <literal>1000000000</literal> in <literal>/etc/vmware/hostd/config.xml</literal>:</simpara>
+<screen>      &lt;nfcsvc&gt;
+         &lt;path&gt;libnfcsvc.so&lt;/path&gt;
+         &lt;enabled&gt;true&lt;/enabled&gt;
+         &lt;maxMemory&gt;1000000000&lt;/maxMemory&gt;
+         &lt;maxStreamMemory&gt;10485760&lt;/maxStreamMemory&gt;
+      &lt;/nfcsvc&gt;</screen>
+</listitem>
+<listitem>
+<simpara>Restart <literal>hostd</literal>:</simpara>
+<screen># /etc/init.d/hostd restart</screen>
+<simpara>You do not need to reboot the VMware hypervisor.</simpara>
+</listitem>
+</orderedlist>
+<simpara>If you are using VDDK, you can prepare the target environment.</simpara>
+<simpara>If you are using SSH transformation instead of VDDK, you must configure the VMware hypervisors for SSH. See <xref linkend="Preparing_the_vmware_virtual_machines_for_rhv"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv">
 <title>Preparing the VMware hypervisors for SSH transformation</title>
@@ -513,31 +471,6 @@
 </listitem>
 </orderedlist>
 </section>
-<section xml:id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_rhv">
-<title>Configuring a VMware hypervisor for more than ten concurrent VDDK migrations</title>
-<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor’s NFC service memory buffer is limited to ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
-<simpara>You can increase the hypervisor’s NFC service memory to enable additional connections for migrations.</simpara>
-<orderedlist numeration="arabic">
-<title>Procedure</title>
-<listitem>
-<simpara>Log in to a VMware hypervisor.</simpara>
-</listitem>
-<listitem>
-<simpara>Change the value of <literal>maxMemory</literal> to <literal>1000000000</literal> in <literal>/etc/vmware/hostd/config.xml</literal>:</simpara>
-<screen>      &lt;nfcsvc&gt;
-         &lt;path&gt;libnfcsvc.so&lt;/path&gt;
-         &lt;enabled&gt;true&lt;/enabled&gt;
-         &lt;maxMemory&gt;1000000000&lt;/maxMemory&gt;
-         &lt;maxStreamMemory&gt;10485760&lt;/maxStreamMemory&gt;
-      &lt;/nfcsvc&gt;</screen>
-</listitem>
-<listitem>
-<simpara>Restart <literal>hostd</literal>:</simpara>
-<screen># /etc/init.d/hostd restart</screen>
-<simpara>You do not need to reboot the VMware hypervisor.</simpara>
-</listitem>
-</orderedlist>
-</section>
 </section>
 <section xml:id="Preparing_the_1_2_rhv_environment">
 <title>Preparing the Red Hat Virtualization environment</title>
@@ -550,7 +483,7 @@
 <simpara>Installing and configuring CloudForms 4.7.4. See <xref linkend="Installing_cf_4_7_4_with_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Reinstalling <literal>ipa-client</literal>, if you are configuring the conversion hosts to use SSSD with single sign-on. See <xref linkend="Reinstalling_ipa_client"/>.</simpara>
+<simpara>(SSH only) Reinstalling <literal>ipa-client</literal>, if you are configuring the conversion hosts to use SSSD with single sign-on. See <xref linkend="Reinstalling_ipa_client"/>.</simpara>
 </listitem>
 </orderedlist>
 <formalpara xml:id="Target_prerequisites_rhv">
@@ -640,7 +573,7 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 <simpara>Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#chap-Storage">Storage</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
 <note>
 <simpara>IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.</simpara>
-<simpara>Although the ISO storage domain has been deprecated, it is required for migration.</simpara>
+<simpara>Although the ISO storage domain has been deprecated in RHV 4.3, it is required for migration.</simpara>
 </note>
 </listitem>
 <listitem>
@@ -689,10 +622,12 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </orderedlist>
 </listitem>
 </orderedlist>
+<simpara>You can configure the conversion hosts.</simpara>
+<simpara>If you are using SSH and configuring the conversion hosts to use SSSD with single sign-on, you can reinstall the <literal>ipa-client</literal>.</simpara>
 </section>
 <section xml:id="Reinstalling_ipa_client">
 <title>Reinstalling <literal>ipa-client</literal></title>
-<simpara>If you are configuring your conversion hosts for SSSD with single sign-on, you must reinstall <literal>ipa-client</literal> without the OpenSSH client. Otherwise, SSH will fail for the <literal>vdsm</literal> user.</simpara>
+<simpara>If you are using SSH transformation and configuring your conversion hosts for SSSD with single sign-on, you must reinstall <literal>ipa-client</literal> without the OpenSSH client. Otherwise, SSH will fail for the <literal>vdsm</literal> user.</simpara>
 <simpara>See BZ#1544379: <link xlink:href="https://bugzilla.redhat.com/show_bug.cgi?id=1544379">ipa-client-install changes system-wide SSH configuration</link>. This issue cannot be resolved by modifying the configuration file because the file is restored during upgrades.</simpara>
 <orderedlist numeration="arabic">
 <listitem>
@@ -710,43 +645,20 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </section>
 </section>
 <section xml:id="Configuring_the_1_2_rhv_conversion_hosts">
-<title>Configuring the conversion hosts for VDDK or SSH transformation</title>
-<simpara>Perform the following steps to configure your conversion hosts for VDDK or SSH transformation:</simpara>
-<informaltable frame="all" rowsep="1" colsep="1">
-<tgroup cols="2">
-<colspec colname="col_1" colwidth="50*"/>
-<colspec colname="col_2" colwidth="50*"/>
-<thead>
-<row>
-<entry align="center" valign="top">VDDK</entry>
-<entry align="center" valign="top">SSH</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+<title>Configuring the conversion hosts with CloudForms</title>
+<simpara>Configure your conversion hosts to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
+<note>
+<simpara>If VDDK does not work for your environment, see <xref linkend="Configuring_the_1_2_rhv_conversion_hosts_for_SSH"/>.</simpara>
+</note>
+<section xml:id="Configuring_the_1_2_rhv_conversion_hosts_for_vddk">
+<title>Configuring the conversion hosts for VDDK transformation</title>
+<itemizedlist>
+<title>Prerequisite</title>
 <listitem>
-<simpara>Download the VDDK package. See <xref linkend="Downloading_vddk_for_rhv"/>.</simpara>
+<simpara>Download and save the VMware Virtual Disk Development Kit.</simpara>
 </listitem>
-<listitem>
-<simpara>Configure the conversion hosts. See <xref linkend="Configuring_the_1_2_rhv_conversion_hosts_with_cloudforms"/></simpara>
-</listitem>
-</orderedlist></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
-<listitem>
-<simpara>Configure the conversion hosts. See <xref linkend="Configuring_the_1_2_rhv_conversion_hosts_with_cloudforms"/></simpara>
-</listitem>
-<listitem>
-<simpara>Copy the VMware SSH keys to the conversion hosts. See <xref linkend="Copying_vmware_keys_to_rhv_conversion_hosts"/>.</simpara>
-</listitem>
-</orderedlist></entry>
-</row>
-</tbody>
-</tgroup>
-</informaltable>
-<section xml:id="Downloading_vddk_for_rhv">
-<title>Downloading VDDK</title>
-<simpara>Download and save the VMware Virtual Disk Development Kit:</simpara>
+</itemizedlist>
+<bridgehead xml:id="Downloading_vddk_for_rhv" renderas="sect4">Downloading the VMware Virtual Disk Development Kit</bridgehead>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">VMware Documentation</link>.</simpara>
@@ -767,119 +679,158 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 <simpara>Save the VDDK archive file in an HTTP-accessible location and record its path.</simpara>
 </listitem>
 </orderedlist>
-<simpara>You can configure the conversion hosts with CloudForms.</simpara>
-</section>
-<section xml:id="Configuring_the_1_2_rhv_conversion_hosts_with_cloudforms">
-<title>Configuring the conversion hosts with CloudForms</title>
-<simpara>You can configure your conversion hosts for VDDK or SSH transformation with CloudForms.</simpara>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>.</simpara>
-</listitem>
-<listitem>
-<simpara>Perform the following procedures in the <emphasis role="strong">Configure Conversion Host</emphasis> wizard:</simpara>
-</listitem>
-</orderedlist>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
 <simpara><inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/Conversion_host_configuration_ui.png"/>
 </imageobject>
 <textobject><phrase>Conversion host configuration ui</phrase></textobject>
 </inlinemediaobject></simpara>
-<informaltable frame="all" rowsep="1" colsep="1">
-<tgroup cols="2">
-<colspec colname="col_1" colwidth="25*"/>
-<colspec colname="col_2" colwidth="75*"/>
-<thead>
-<row>
-<entry align="left" valign="top">Screen</entry>
-<entry align="left" valign="top">Procedure</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Location</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
 <listitem>
 <simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
-<simpara>The <emphasis role="strong">Provider</emphasis> and <emphasis role="strong">Cluster</emphasis> dropdown lists are displayed.</simpara>
 </listitem>
 <listitem>
 <simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara>Select a <emphasis role="strong">Cluster</emphasis>.</simpara>
+<simpara>Select a <emphasis role="strong">Cluster</emphasis> and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+</orderedlist>
 </listitem>
 <listitem>
-<simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
-</listitem>
-</orderedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Hosts</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
-<listitem>
-<simpara>Select one or more hosts from the dropdown list.</simpara>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
-</listitem>
-</orderedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Authentication</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
 <listitem>
 <simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
 <simpara>The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is <literal>/etc/pki/ovirt-engine/keys/engine_id_rsa</literal> on the Manager machine.</simpara>
 </listitem>
 <listitem>
-<simpara>Select <emphasis role="strong">SSH</emphasis> or <emphasis role="strong">VDDK</emphasis> as a <emphasis role="strong">Transformation method</emphasis>.</simpara>
-<itemizedlist>
-<listitem>
-<simpara><emphasis role="strong">SSH</emphasis>: Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
-<important>
-<simpara>If a host already has an SSH private key, you must delete the key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring it as a conversion host. Conversion host configuration does not overwrite existing keys.</simpara>
-</important>
+<simpara>Select <emphasis role="strong">VDDK</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">VDDK</emphasis>: Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
-</listitem>
-</itemizedlist>
+<simpara>Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
 </listitem>
-</orderedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Results</emphasis></simpara></entry>
-<entry align="left" valign="top"><simpara>Wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
 <simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
 <simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/More_actions_icon.png"/>
 </imageobject>
 <textobject><phrase>7</phrase></textobject>
-</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>. You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
-<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara></entry>
-</row>
-</tbody>
-</tgroup>
-</informaltable>
-<simpara>If you are using VDDK, you can migrate your virtual machines. (Optionally) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
-<simpara>If you are using SSH, copy the VMware keys to the conversion hosts. See <xref linkend="Copying_vmware_keys_to_rhv_conversion_hosts"/>.</simpara>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
+<simpara>You can migrate your virtual machines.</simpara>
+<simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
-<section xml:id="Copying_vmware_keys_to_rhv_conversion_hosts">
-<title>Copying the VMware SSH keys to the conversion hosts</title>
-<simpara>You can copy the VMware SSH public keys to the conversion hosts.</simpara>
-<simpara>The VMware keys can be collected either when you configure the VMware hypervisors for SSH transformation (see <xref linkend="Copying_collected_ssh_keys_rhv"/>) or by using <literal>ssh-keyscan</literal> (see <xref linkend="Copying_keys_ssh_keyscan_rhv"/>).</simpara>
-<section xml:id="Copying_collected_ssh_keys_rhv">
-<title>Copying keys collected during VMware hypervisor configuration</title>
+<section xml:id="Configuring_the_1_2_rhv_conversion_hosts_for_SSH">
+<title>Configuring the conversion hosts for SSH transformation</title>
+<simpara>You can configure your conversion hosts for SSH transformation if VDDK cannot be used.</simpara>
+<itemizedlist>
+<title>Prerequisite</title>
+<listitem>
+<simpara>VMware hypervisors are configured for SSH transformation.</simpara>
+</listitem>
+</itemizedlist>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Cluster</emphasis> and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
+<simpara>The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is <literal>/etc/pki/ovirt-engine/keys/engine_id_rsa</literal> on the Manager machine.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">SSH</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
+<important>
+<simpara>If a host already has an SSH private key, you must delete the key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring it as a conversion host. Conversion host configuration does not overwrite existing keys.</simpara>
+</important>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
+<simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
+<simpara>After you have configured the conversion hosts for SSH transformation, copy the VMware keys to the conversion hosts.</simpara>
+<bridgehead xml:id="Copying_vmware_keys_to_rhv_conversion_hosts" renderas="sect3">Copying the VMware SSH keys to the conversion hosts</bridgehead>
+<simpara>You can collect SSH public keys of the VMware hypervisors either when you configure the VMware hypervisors for SSH transformation or by using <literal>ssh-keyscan</literal>:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><link linkend="Copying_collected_ssh_keys_rhv">Copying keys collected during VMware hypervisor configuration</link></simpara>
+</listitem>
+<listitem>
+<simpara><link linkend="Copying_keys_ssh_keyscan_rhv">Copying keys collected with <literal>ssh-keyscan</literal></link></simpara>
+</listitem>
+</itemizedlist>
+<orderedlist xml:id="Copying_collected_ssh_keys_rhv" numeration="arabic">
+<title>Copying keys collected during VMware hypervisor configuration</title>
 <listitem>
 <simpara>Copy the VMware keys to <literal>/var/lib/vdsm/.ssh/known_hosts</literal> on each conversion host.</simpara>
 </listitem>
@@ -896,10 +847,8 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </important>
 </listitem>
 </orderedlist>
-</section>
-<section xml:id="Copying_keys_ssh_keyscan_rhv">
+<caution xml:id="Copying_keys_ssh_keyscan_rhv">
 <title>Copying keys collected with <literal>ssh-keyscan</literal></title>
-<caution>
 <simpara>You must run <literal>ssh-keyscan</literal> for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
@@ -931,8 +880,8 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </important>
 </listitem>
 </orderedlist>
-<simpara>You are ready to migrate your virtual machines. (Optionally) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
-</section>
+<simpara>You can migrate your virtual machines.</simpara>
+<simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
 <section xml:id="Verifying_rhv_conversion_hosts_in_browser">
 <title>Verifying the conversion hosts in a browser</title>
@@ -1648,7 +1597,7 @@ vm03,host1,vSphere3</screen>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>VDDK transformation only: To perform more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor’s NFC service memory.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor’s NFC service memory.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist xml:id="rhv_environment_errors">
@@ -1739,6 +1688,9 @@ vm03,host1,vSphere3</screen>
 <simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_osp"/>.</simpara>
 </listitem>
 </orderedlist>
+<note xml:id="Vddk_note_osp">
+<simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). SSH transformation is included as an option, if VDDK cannot be used.</simpara>
+</note>
 </partintro>
 <chapter xml:id="Planning_the_migration_osp">
 <title>Planning the migration</title>
@@ -1749,13 +1701,13 @@ vm03,host1,vSphere3</screen>
 <simpara><xref linkend="Questions_to_ask_before_migration_osp"/> includes the following:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Supported operating systems</simpara>
+<simpara>What operating systems are supported?</simpara>
 </listitem>
 <listitem>
-<simpara>Number of conversion hosts required</simpara>
+<simpara>How long will the migration take?</simpara>
 </listitem>
 <listitem>
-<simpara>Comparison of VDDK and SSH for disk transformation</simpara>
+<simpara>How many conversion hosts do I need?</simpara>
 </listitem>
 </itemizedlist>
 </listitem>
@@ -1804,7 +1756,7 @@ vm03,host1,vSphere3</screen>
 <imagedata fileref="images/circle_step_numbers/3.png" contentwidth="25"/>
 </imageobject>
 <textobject><phrase>25</phrase></textobject>
-</inlinemediaobject> If you are using VDDK transformation to migrate your virtual machines, CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.</simpara>
+</inlinemediaobject> CloudForms captures the ESXi host fingerprint for authentication during the virtual machine conversion process.</simpara>
 <simpara><inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/circle_step_numbers/4.png" contentwidth="25"/>
@@ -1909,7 +1861,7 @@ vm03,host1,vSphere3</screen>
 <simpara>2 conversion hosts, maximum of 10 concurrent conversions</simpara>
 </listitem>
 <listitem>
-<simpara>Total data migrated, using VDDK: 1000 GB</simpara>
+<simpara>Total data migrated: 1000 GB</simpara>
 </listitem>
 <listitem>
 <simpara>Hardware:</simpara>
@@ -1939,77 +1891,6 @@ vm03,host1,vSphere3</screen>
 <simpara>Multiple conversion hosts provide load-balancing and better performance, even for small migrations.</simpara>
 <simpara>Conversion hosts are limited to a maximum of ten concurrent migrations, unless you change the default values.</simpara>
 <simpara>You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.</simpara>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term>Should I migrate my virtual machines with VDDK or SSH?</term>
-<listitem>
-<simpara>You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.</simpara>
-<simpara>The following table compares the options.</simpara>
-<table frame="all" rowsep="1" colsep="1">
-<title>VDDK and SSH comparison</title>
-<tgroup cols="3">
-<colspec colname="col_1" colwidth="20*"/>
-<colspec colname="col_2" colwidth="40*"/>
-<colspec colname="col_3" colwidth="40*"/>
-<thead>
-<row>
-<entry align="left" valign="top"/>
-<entry align="center" valign="top">Pros</entry>
-<entry align="center" valign="top">Cons</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">VDDK</emphasis></simpara></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Recommended because it is approximately twice as fast as SSH</simpara>
-</listitem>
-<listitem>
-<simpara>Compiled with <literal>nbdkit</literal>, which provides direct connectivity to the virtual machine disks</simpara>
-</listitem>
-</itemizedlist></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Requires VDDK package download</simpara>
-</listitem>
-<listitem>
-<simpara>Requires VDDK package location for conversion host configuration</simpara>
-</listitem>
-<listitem>
-<simpara>Limited to 20 concurrent migrations per conversion host</simpara>
-</listitem>
-<listitem>
-<simpara>Limited to 10 concurrent migrations per VMware hypervisor unless you increase the hypervisor’s NFC service memory</simpara>
-</listitem>
-</itemizedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">SSH</emphasis></simpara></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Better suited for large-scale migrations than VDDK (not affected by hypervisor’s NFC service memory limitation)</simpara>
-</listitem>
-<listitem>
-<simpara>Does not require additional downloads, packages, tools, or compilation</simpara>
-</listitem>
-</itemizedlist></entry>
-<entry align="left" valign="top"><itemizedlist>
-<listitem>
-<simpara>Slower than VDDK</simpara>
-</listitem>
-<listitem>
-<simpara>Requires VMware hypervisors to have SSH access enabled</simpara>
-</listitem>
-<listitem>
-<simpara>Requires VMware hypervisors and conversion hosts to have shared SSH keys</simpara>
-</listitem>
-</itemizedlist></entry>
-</row>
-</tbody>
-</tgroup>
-</table>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -2075,10 +1956,10 @@ vm03,host1,vSphere3</screen>
 <itemizedlist>
 <title>Deploying the conversion hosts</title>
 <listitem>
-<simpara>Create a sufficient number of conversion hosts for your migration, with sufficient resources.</simpara>
+<simpara>Create enough conversion hosts for your migration, with sufficient resources.</simpara>
 </listitem>
 <listitem>
-<simpara>Choose the best transformation option (SSH or VDDK) for your environment.</simpara>
+<simpara>Configure your conversion hosts for VDDK transformation. SSH transformation, because it is slower and requires more configuration steps, is used only if VDDK cannot be used.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist>
@@ -2117,10 +1998,10 @@ vm03,host1,vSphere3</screen>
 <simpara>Preparing the VMware virtual machines. See <xref linkend="Preparing_the_vmware_virtual_machines_for_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Configuring the VMware hypervisors if you are using SSH transformation. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp"/>.</simpara>
+<simpara>(Optional) Configuring a VMware hypervisor for more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Configuring a VMware hypervisor if you are using VDDK and performing more than ten concurrent migrations from that hypervisor. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
+<simpara>(SSH only) Configuring the VMware hypervisors for SSH transformation, if you are not using VDDK. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp"/>.</simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_osp">
@@ -2164,8 +2045,34 @@ vm03,host1,vSphere3</screen>
 <simpara>Ensure that the virtual machine names do not duplicate names of virtual machines in the Red Hat OpenStack Platform tenant.</simpara>
 </listitem>
 </orderedlist>
-<simpara>If you are using SSH transformation, you can configure the VMware hypervisors. See <xref linkend="Preparing_the_vmware_virtual_machines_for_osp"/>.</simpara>
-<simpara>If you are using VDDK transformation and performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See <xref linkend="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp"/>.</simpara>
+</section>
+<section xml:id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp">
+<title>Configuring a VMware hypervisor for more than ten concurrent migrations</title>
+<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor’s NFC service memory buffer is limited to ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
+<simpara>You can increase the hypervisor’s NFC service memory to enable additional connections for migrations.</simpara>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to a VMware hypervisor.</simpara>
+</listitem>
+<listitem>
+<simpara>Change the value of <literal>maxMemory</literal> to <literal>1000000000</literal> in <literal>/etc/vmware/hostd/config.xml</literal>:</simpara>
+<screen>      &lt;nfcsvc&gt;
+         &lt;path&gt;libnfcsvc.so&lt;/path&gt;
+         &lt;enabled&gt;true&lt;/enabled&gt;
+         &lt;maxMemory&gt;1000000000&lt;/maxMemory&gt;
+         &lt;maxStreamMemory&gt;10485760&lt;/maxStreamMemory&gt;
+      &lt;/nfcsvc&gt;</screen>
+</listitem>
+<listitem>
+<simpara>Restart <literal>hostd</literal>:</simpara>
+<screen># /etc/init.d/hostd restart</screen>
+<simpara>You do not need to reboot the VMware hypervisor.</simpara>
+</listitem>
+</orderedlist>
+<simpara>If you are using VDDK, you can prepare the target environment.</simpara>
+<simpara>If you are using SSH transformation instead of VDDK, you must configure the VMware hypervisors for SSH. See <xref linkend="Preparing_the_vmware_virtual_machines_for_osp"/>.</simpara>
 </section>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp">
 <title>Preparing the VMware hypervisors for SSH transformation</title>
@@ -2190,31 +2097,6 @@ vm03,host1,vSphere3</screen>
 <listitem>
 <simpara>Copy the public SSH key to <literal>/etc/ssh/keys-root/authorized_keys</literal> on <emphasis role="strong">each</emphasis> VMware hypervisor.</simpara>
 <simpara>You will use the private SSH key to configure the conversion hosts.</simpara>
-</listitem>
-</orderedlist>
-</section>
-<section xml:id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_osp">
-<title>Configuring a VMware hypervisor for more than ten concurrent VDDK migrations</title>
-<simpara>If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor’s NFC service memory buffer is limited to ten parallel connections. See <link xlink:href="https://pubs.vmware.com/vsphere-6-5/topic/com.vmware.vddk.pg.doc/vddkDataStruct.5.5.html#1025227">VMware vSphere 6.5 NFC session connection limits</link> and <link xlink:href="http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits">Virt-v2v. VDDK: ESXi NFC service memory limits</link> for details.</simpara>
-<simpara>You can increase the hypervisor’s NFC service memory to enable additional connections for migrations.</simpara>
-<orderedlist numeration="arabic">
-<title>Procedure</title>
-<listitem>
-<simpara>Log in to a VMware hypervisor.</simpara>
-</listitem>
-<listitem>
-<simpara>Change the value of <literal>maxMemory</literal> to <literal>1000000000</literal> in <literal>/etc/vmware/hostd/config.xml</literal>:</simpara>
-<screen>      &lt;nfcsvc&gt;
-         &lt;path&gt;libnfcsvc.so&lt;/path&gt;
-         &lt;enabled&gt;true&lt;/enabled&gt;
-         &lt;maxMemory&gt;1000000000&lt;/maxMemory&gt;
-         &lt;maxStreamMemory&gt;10485760&lt;/maxStreamMemory&gt;
-      &lt;/nfcsvc&gt;</screen>
-</listitem>
-<listitem>
-<simpara>Restart <literal>hostd</literal>:</simpara>
-<screen># /etc/init.d/hostd restart</screen>
-<simpara>You do not need to reboot the VMware hypervisor.</simpara>
 </listitem>
 </orderedlist>
 </section>
@@ -2438,43 +2320,20 @@ vm03,host1,vSphere3</screen>
 </orderedlist>
 </section>
 <section xml:id="Configuring_the_1_2_osp_conversion_hosts">
-<title>Configuring the conversion hosts for VDDK or SSH transformation</title>
-<simpara>Perform the following steps to configure your conversion hosts for VDDK or SSH transformation:</simpara>
-<informaltable frame="all" rowsep="1" colsep="1">
-<tgroup cols="2">
-<colspec colname="col_1" colwidth="50*"/>
-<colspec colname="col_2" colwidth="50*"/>
-<thead>
-<row>
-<entry align="center" valign="top">VDDK</entry>
-<entry align="center" valign="top">SSH</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+<title>Configuring the conversion hosts with CloudForms</title>
+<simpara>Configure your conversion hosts to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
+<note>
+<simpara>If VDDK does not work for your environment, see <xref linkend="Configuring_the_1_2_osp_conversion_hosts_for_SSH"/>.</simpara>
+</note>
+<section xml:id="Configuring_the_1_2_osp_conversion_hosts_for_vddk">
+<title>Configuring the conversion hosts for VDDK transformation</title>
+<itemizedlist>
+<title>Prerequisite</title>
 <listitem>
-<simpara>Download the VDDK package. See <xref linkend="Downloading_vddk_for_osp"/>.</simpara>
+<simpara>Download and save the VMware Virtual Disk Development Kit.</simpara>
 </listitem>
-<listitem>
-<simpara>Configure the conversion hosts. See <xref linkend="Configuring_the_1_2_osp_conversion_hosts_with_cloudforms"/></simpara>
-</listitem>
-</orderedlist></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
-<listitem>
-<simpara>Configure the conversion hosts. See <xref linkend="Configuring_the_1_2_osp_conversion_hosts_with_cloudforms"/></simpara>
-</listitem>
-<listitem>
-<simpara>Copy the VMware SSH keys to the conversion hosts. See <xref linkend="Copying_vmware_keys_to_osp_conversion_hosts"/>.</simpara>
-</listitem>
-</orderedlist></entry>
-</row>
-</tbody>
-</tgroup>
-</informaltable>
-<section xml:id="Downloading_vddk_for_osp">
-<title>Downloading VDDK</title>
-<simpara>Download and save the VMware Virtual Disk Development Kit:</simpara>
+</itemizedlist>
+<bridgehead xml:id="Downloading_vddk_for_osp" renderas="sect5">Downloading the VMware Virtual Disk Development Kit</bridgehead>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">VMware Documentation</link>.</simpara>
@@ -2495,116 +2354,155 @@ vm03,host1,vSphere3</screen>
 <simpara>Save the VDDK archive file in an HTTP-accessible location and record its path.</simpara>
 </listitem>
 </orderedlist>
-<simpara>You can configure the conversion hosts with CloudForms.</simpara>
-</section>
-<section xml:id="Configuring_the_1_2_osp_conversion_hosts_with_cloudforms">
-<title>Configuring the conversion hosts with CloudForms</title>
-<simpara>You can configure your conversion hosts for VDDK or SSH transformation with CloudForms.</simpara>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>.</simpara>
-</listitem>
-<listitem>
-<simpara>Perform the following procedures in the <emphasis role="strong">Configure Conversion Host</emphasis> wizard:</simpara>
-</listitem>
-</orderedlist>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
 <simpara><inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/Conversion_host_configuration_ui.png"/>
 </imageobject>
 <textobject><phrase>Conversion host configuration ui</phrase></textobject>
 </inlinemediaobject></simpara>
-<informaltable frame="all" rowsep="1" colsep="1">
-<tgroup cols="2">
-<colspec colname="col_1" colwidth="25*"/>
-<colspec colname="col_2" colwidth="75*"/>
-<thead>
-<row>
-<entry align="left" valign="top">Screen</entry>
-<entry align="left" valign="top">Procedure</entry>
-</row>
-</thead>
-<tbody>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Location</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
 <listitem>
 <simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
-<simpara>The <emphasis role="strong">Provider</emphasis> and <emphasis role="strong">Project</emphasis> dropdown lists are displayed.</simpara>
 </listitem>
 <listitem>
 <simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
 </listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Project</emphasis> and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
 </orderedlist>
-<simpara>Select a <emphasis role="strong">Project</emphasis>.</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
-</listitem>
-</orderedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Hosts</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
-<listitem>
-<simpara>Select one or more hosts from the dropdown list.</simpara>
 </listitem>
 <listitem>
-<simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
-</orderedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Authentication</emphasis></simpara></entry>
-<entry align="left" valign="top"><orderedlist numeration="arabic">
+<listitem>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
 <listitem>
 <simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
 <simpara>The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.</simpara>
 </listitem>
 <listitem>
-<simpara>Select <emphasis role="strong">SSH</emphasis> or <emphasis role="strong">VDDK</emphasis> as a <emphasis role="strong">Transformation method</emphasis>.</simpara>
-<itemizedlist>
-<listitem>
-<simpara><emphasis role="strong">SSH</emphasis>: Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
+<simpara>Select <emphasis role="strong">VDDK</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara><emphasis role="strong">VDDK</emphasis>: Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
-</listitem>
-</itemizedlist>
+<simpara>Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
 </listitem>
 <listitem>
 <simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
 </listitem>
-</orderedlist></entry>
-</row>
-<row>
-<entry align="left" valign="top"><simpara><emphasis role="strong">Results</emphasis></simpara></entry>
-<entry align="left" valign="top"><simpara>Wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
 <simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
 <simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
 <imageobject>
 <imagedata fileref="images/More_actions_icon.png"/>
 </imageobject>
 <textobject><phrase>7</phrase></textobject>
-</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>. You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
-<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara></entry>
-</row>
-</tbody>
-</tgroup>
-</informaltable>
-<simpara>If you are using VDDK, you can migrate your virtual machines. (Optionally) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_osp_conversion_hosts_in_browser"/>.</simpara>
-<simpara>If you are using SSH, copy the VMware keys to the conversion hosts. See <xref linkend="Copying_vmware_keys_to_osp_conversion_hosts"/>.</simpara>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
+<simpara>You can migrate your virtual machines.</simpara>
+<simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
-<section xml:id="Copying_vmware_keys_to_osp_conversion_hosts">
-<title>Copying the VMware SSH keys to the conversion hosts</title>
-<simpara>You can copy the VMware SSH public keys to the conversion hosts.</simpara>
-<simpara>The VMware keys can be collected either when you configure the VMware hypervisors for SSH transformation (see <xref linkend="Copying_collected_ssh_keys_osp"/>) or by using <literal>ssh-keyscan</literal> (see <xref linkend="Copying_keys_ssh_keyscan_osp"/>).</simpara>
-<section xml:id="Copying_collected_ssh_keys_osp">
-<title>Copying keys collected during VMware hypervisor configuration</title>
+<section xml:id="Configuring_the_1_2_osp_conversion_hosts_for_SSH">
+<title>Configuring the conversion hosts for SSH transformation</title>
+<simpara>You can configure your conversion hosts for SSH transformation if VDDK cannot be used.</simpara>
+<itemizedlist>
+<title>Prerequisite</title>
+<listitem>
+<simpara>VMware hypervisors are configured for SSH transformation.</simpara>
+</listitem>
+</itemizedlist>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Project</emphasis> and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
+<simpara>The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">SSH</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
+<simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
+<simpara>After you have configured the conversion hosts for SSH transformation, copy the VMware keys to the conversion hosts.</simpara>
+<bridgehead xml:id="Copying_vmware_keys_to_osp_conversion_hosts" renderas="sect4">Copying the VMware SSH keys to the conversion hosts</bridgehead>
+<simpara>You can collect SSH public keys of the VMware hypervisors either when you configure the VMware hypervisors for SSH transformation or by using <literal>ssh-keyscan</literal>:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><link linkend="Copying_collected_ssh_keys_osp">Copying keys collected during VMware hypervisor configuration</link></simpara>
+</listitem>
+<listitem>
+<simpara><link linkend="Copying_keys_ssh_keyscan_osp">Copying keys collected with <literal>ssh-keyscan</literal></link></simpara>
+</listitem>
+</itemizedlist>
+<orderedlist xml:id="Copying_collected_ssh_keys_osp" numeration="arabic">
+<title>Copying keys collected during VMware hypervisor configuration</title>
 <listitem>
 <simpara>Copy the VMware keys to <literal>/root/.ssh/known_hosts</literal> on each conversion host.</simpara>
 </listitem>
@@ -2621,10 +2519,8 @@ vm03,host1,vSphere3</screen>
 </important>
 </listitem>
 </orderedlist>
-</section>
-<section xml:id="Copying_keys_ssh_keyscan_osp">
+<caution xml:id="Copying_keys_ssh_keyscan_osp">
 <title>Copying keys collected with <literal>ssh-keyscan</literal></title>
-<caution>
 <simpara>You must run <literal>ssh-keyscan</literal> for each VMware hypervisor. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.</simpara>
 </caution>
 <orderedlist numeration="arabic">
@@ -2652,8 +2548,8 @@ vm03,host1,vSphere3</screen>
 </important>
 </listitem>
 </orderedlist>
-<simpara>You are ready to migrate your virtual machines. (Optionally) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
-</section>
+<simpara>You can migrate your virtual machines.</simpara>
+<simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
 <section xml:id="Verifying_osp_conversion_hosts_in_browser">
 <title>Verifying the conversion hosts in a browser</title>
@@ -3416,14 +3312,11 @@ BadRequestException: Unknown errors</screen>
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>VDDK transformation only: To perform more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor’s NFC service memory.</simpara>
+<simpara>If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor’s NFC service memory.</simpara>
 </listitem>
 </itemizedlist>
 <itemizedlist xml:id="osp_environment_errors">
 <title>Red Hat OpenStack Platform</title>
-<listitem>
-<simpara>SSH transformation only: Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.</simpara>
-</listitem>
 <listitem>
 <simpara><literal>disallowed by policy</literal> error: The Red Hat OpenStack Platform <literal>admin</literal> user in CloudForms does not have <literal>admin</literal> role privileges within the target project. Add the <literal>admin</literal> user as <literal>member</literal> and <literal>admin</literal> to your target project. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project">Edit a Project</link> in the <emphasis>Red Hat OpenStack Platform Users and Identity Management Guide</emphasis>.</simpara>
 <screen>ERROR: Command exited with non-zero return code 1, output: HttpException: 403: Client Error for url: https://<emphasis>FQDN</emphasis>:13696/v2.0/ports, {"NeutronError": {"message": "((rule:create_port and rule:create_port:mac_address) and rule:create_port:fixed_ips) is disallowed by policy", "type": "PolicyNotAuthorized", "detail": ""}}</screen>

@@ -1,0 +1,66 @@
+// Module included in the following assemblies:
+//
+// assembly_Preparing_the_1_2_environment_for_migration.adoc
+[id="Configuring_the_1_2_{context}_conversion_hosts_for_SSH"]
+= Configuring the conversion hosts for SSH transformation
+
+You can configure your conversion hosts for SSH transformation if VDDK cannot be used.
+
+.Prerequisite
+
+* VMware hypervisors are configured for SSH transformation.
+
+.Procedure
+
+. In CloudForms, click menu:Compute[Migration > Migration Settings].
+. In the *Conversion Hosts* tab, click *Configure Conversion Host*. The *Configure Conversion Host* wizard is displayed.
++
+image:Conversion_host_configuration_ui.png[]
+
+. In the *Location* screen:
+.. Select a *Provider Type*.
+.. Select a *Provider*.
+
+ifdef::rhv[]
+.. Select a *Cluster*.
+endif::rhv[]
+ifdef::osp[]
+.. Select a *Project*.
+endif::osp[]
+
+.. Click *Next*.
+
+. In the *Host(s)* screen:
+.. Select one or more hosts from the dropdown list.
+.. Click *Next*.
+
+. In the *Authentication* screen:
+.. Click *Browse* to browse to the SSH private key or paste it in the *Conversion host SSH private key* field.
++
+ifdef::rhv[]
+The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
+endif::rhv[]
+ifdef::osp[]
+The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
+endif::osp[]
+
+.. Select *SSH* as the *Transformation method*.
+.. Click *Browse* to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the *VMware hypervisors SSH private key* field.
+ifdef::rhv[]
++
+[IMPORTANT]
+====
+If a host already has an SSH private key, you must delete the key manually in `/var/lib/vdsm/.ssh/id_rsa` before configuring it as a conversion host. Conversion host configuration does not overwrite existing keys.
+====
+endif::rhv[]
+
+.. Click *Configure*.
+. In the *Results* screen, wait for the conversion host configuration to finish and click *Close*.
++
+The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
+
+If an error occurs, you can download a host's log by clicking the *More Actions* icon (image:More_actions_icon.png[7]) and selecting *Download Log*.
+
+You can click the *Retry* button if the conversion host configuration failed for reasons unconnected with your environment.
+
+(Optional) Click *Remove* to remove the configuration from a configured conversion host.

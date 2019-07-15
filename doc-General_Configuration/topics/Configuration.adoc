@@ -2767,26 +2767,21 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 [[configuring_database_replication]]
 ==== Configuring Database Replication and Centralized Administration
 
-To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version.
-
-[NOTE]
-====
-* Configuring database replication in this version of {product-title_short} automatically enables centralized administration, eliminating the need for further configuration. 
-* Enabling the `EvmRole-user_global_region` role will only provide access to specific operations that can be performed on a global region.
-====
-
-Centralized administration in {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy.
-
-ifdef::cfme[]
-See _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for a complete list of life cycle operations supported by centralized administration and an overview of the feature.
-endif::cfme[]
+To configure database replication, you must configure one {product-title_short} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title_short} instances that are of the same version. Configuring database replication in this version of {product-title_short} automatically enables centralized administration, eliminating the need for further configuration. Centralized administration in {product-title_short} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy.
 
 [IMPORTANT]
 ====
 * You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title_short} instance take several minutes to take effect.
 
 * The region number must be unique on each {product-title_short} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
+
+* Enabling the `EvmRole-user_global_region` role will only provide access to specific operations that can be performed on a global region.
 ====
+
+ifdef::cfme[]
+See _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for a complete list of life cycle operations supported by centralized administration and an overview of the feature.
+endif::cfme[]
+
 
 [[configuring-a-remote-copy]]
 ===== Configuring a Remote Copy
@@ -2830,7 +2825,10 @@ Once you configure a {product-title} instance to act as a global copy, and one o
 * you will see the type of region you are logging into (global or remote) on the {product-title_short} user interface login screen. 
 ====
 
-Database replication and centralized administration are now enabled on your instances. You can navigate to menu:Compute[Infrastructure > Virtual Machines], then click *VMs & Templates* and select a virtual machine in the global region. In the *Multi Region* table, click *Connect to VM in its Region* to perform required operations in the remote region. 
+Database replication and centralized administration are now enabled on your instances. To open virtual machines of a remote region from the global region and perform required operations:
+
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], then click *VMs & Templates* and select a virtual machine in the global region. 
+. In the *Multi Region* table on the summary screen, click *Connect to VM in its Region* to perform required operations in a new browser tab. 
 
 
 [[resetting-database-replication]]

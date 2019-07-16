@@ -1,10 +1,17 @@
 // Module included in the following assemblies:
 //
 // assembly_Preparing_1_1_the_environment_for_migration.doc
-[id="Configuring_the_{context}_conversion_hosts_with_Ansible_playbooks"]
-= Configuring the conversion hosts with Ansible playbooks
+[id="Configuring_the_1_1_{context}_conversion_hosts_for_vddk"]
+= Configuring the conversion hosts
 
-You can configure your conversion hosts for VDDK or SSH transformation with Ansible playbooks:
+.Prerequisite
+
+* Download and save the VMware Virtual Disk Development Kit.
+
+[discrete]
+include::../ims_common/proc_Downloading_vddk.adoc[leveloffset=+1]
+
+.Procedure
 
 . Create the `extra_vars.yml` file for the conversion host parameters. See xref:extra_vars_{context}[].
 . Create the `secure_vars.yml` file for secure variables. See xref:secure_vars_{context}[].
@@ -29,7 +36,7 @@ ifdef::rhv[]
 ---
 v2v_host_type: rhv
 
-# Transport methods to configure on the conversion host. Valid values: "vddk", "ssh"
+# Transport methods to configure on the conversion host. Default is "vddk".
 v2v_transport_methods:
   - _vddk_ <1>
 
@@ -70,8 +77,8 @@ manageiq_providers:
             -----END CERTIFICATE-----
 ----
 
-<1> Select a transformation method, `VDDK` or `SSH`.
-<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default value is `10`. If you are using VDDK transformation, do not set this value higher than `20`.
+<1> Change to `ssh` if you are using SSH transformation.
+<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default value is `10`. For VDDK transformation, do not set this value higher than `20`.
 <3> Update the `v2v_vddk_package_name` with the correct version.
 <4> `v2v_vddk_package_url` is the path to the VDDK archive file that you downloaded.
 <5> `manageiq_url` is the FQDN of the CloudForms machine.
@@ -96,7 +103,7 @@ ifdef::osp[]
 ---
 v2v_host_type: openstack
 
-# Transport methods to configure on the conversion host. Valid values: "vddk", "ssh"
+# Transport methods to configure on the conversion host. Default is "vddk".
 v2v_transport_methods:
   - _vddk_ <1>
 
@@ -140,7 +147,7 @@ manageiq_providers:
             -----END TRUSTED CERTIFICATE-----
 ----
 
-<1> Select a transformation method, `VDDK` or `SSH`.
+<1> Change to `ssh` if you are using SSH transformation.
 <2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default is `10`. If you are using VDDK transformation, do not set this number higher than `20`.
 <3> Update the `v2v_vddk_package_name` with the correct version.
 <4> `v2v_vddk_package_url` is the path to the VDDK archive file that you downloaded.
@@ -189,7 +196,7 @@ v2v_ssh_private_key: |
   -----END RSA PRIVATE KEY-----
 ----
 
-<1> This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.
+<1> (SSH transformation) This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.
 ifdef::rhv[]
 +
 [IMPORTANT]

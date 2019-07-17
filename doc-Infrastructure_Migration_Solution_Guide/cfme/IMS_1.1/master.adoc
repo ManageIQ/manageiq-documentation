@@ -39,7 +39,6 @@ The migration process involves the following tasks:
 . Migrating the virtual machines. See xref:Migrating_the_virtual_machines_{context}[].
 . Troubleshooting, if necessary. See xref:Troubleshooting_{context}[].
 
-include::ims_common/ref_Vddk_note.adoc[]
 include::ims_common/assembly_Planning_the_migration.adoc[leveloffset=+1]
 
 [id="Preparing_the_environment_for_migration_to_{context}"]
@@ -50,11 +49,18 @@ Preparing your environment for migration involves the following tasks:
 . Preparing the VMware environment. See xref:Preparing_the_vmware_environment_for_{context}[].
 . Preparing the target environment. See xref:Preparing_the_1_1_{context}_environment[].
 
+include::ims_common/ref_Vddk_note.adoc[]
+
 include::ims_common/assembly_Preparing_the_vmware_environment.adoc[leveloffset=+2]
 include::assembly_Preparing_the_1_1_target_environment.adoc[leveloffset=+2]
-
 include::ims_common/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
 include::ims_common/assembly_Troubleshooting.adoc[leveloffset=+1]
+
+:numbered!:
+
+[appendix]
+include::assembly_Configuring_the_environment_for_ssh_transformation.adoc[leveloffset=+1]
+
 :rhv!:
 
 :context: osp
@@ -69,7 +75,6 @@ The migration process involves the following tasks:
 . Migrating the virtual machines. See xref:Migrating_the_virtual_machines_{context}[].
 . Troubleshooting, if necessary. See xref:Troubleshooting_{context}[].
 
-include::ims_common/ref_Vddk_note.adoc[]
 include::ims_common/assembly_Planning_the_migration.adoc[leveloffset=+1]
 
 [id="Preparing_the_environment_for_migration_to_{context}"]
@@ -80,62 +85,13 @@ Preparing your environment for migration involves the following tasks:
 . Preparing the VMware environment. See xref:Preparing_the_vmware_environment_for_{context}[].
 . Preparing the target environment. See xref:Preparing_the_1_1_{context}_environment[].
 
+include::ims_common/ref_Vddk_note.adoc[]
 include::ims_common/assembly_Preparing_the_vmware_environment.adoc[leveloffset=+2]
 include::assembly_Preparing_the_1_1_target_environment.adoc[leveloffset=+2]
 include::ims_common/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
 include::ims_common/assembly_Troubleshooting.adoc[leveloffset=+1]
-:osp!:
 
-:numbered!:
-
-:context: rhv
-:rhv:
-[id="Configuring_the_1_1_{context}_environment_for_ssh"]
 [appendix]
-= Configuring the Red Hat Virtualization environment for SSH transformation
+include::assembly_Configuring_the_environment_for_ssh_transformation.adoc[leveloffset=+1]
 
-You can configure your environment for SSH transformation if you cannot use VDDK.
-
-include::ims_common/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
-include::ims_common/proc_Reinstalling_ipa_client.adoc[leveloffset=+2]
-
-[id="Configuring_the_1_1_{context}_conversion_hosts_for_ssh"]
-=== Configuring the Red Hat Virtualization conversion hosts
-
-. Follow the procedures in xref:Configuring_the_1_1_{context}_conversion_hosts_for_vddk[], with the following changes:
-
-.. xref:extra_vars_{context}[]: The `v2v_transport_methods` parameter in `extra_vars.yml` is `ssh` .
-.. xref:secure_vars_{context}[]: The `v2v_ssh_private_key` parameter in `secure_vars.yml` is the SSH private key for connecting to the VMware hypervisors.
-.. xref:Configuring_host_with_playbooks_{context}[]: No changes.
-
-. Copy the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_{context}_conversion_hosts[].
-. Configure secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[].
-. Authenticate the conversion hosts in CloudForms. See xref:Authenticating_rhv_conversion_hosts_in_cloudforms[].
-
-include::ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
-include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+2]
-:rhv!:
-
-:context: osp
-:osp:
-[id="Configuring_the_1_1_{context}_environment_for_ssh"]
-[appendix]
-= Configuring the Red Hat OpenStack Platform environment for SSH transformation
-
-You can configure your environment for SSH transformation if you cannot use VDDK.
-
-include::ims_common/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
-
-[id="Configuring_the_1_1_{context}_conversion_hosts_for_ssh"]
-=== Configuring the Red Hat OpenStack Platform conversion hosts
-
-. Follow the procedures in xref:Configuring_the_1_1_{context}_conversion_hosts_for_vddk[], with the following changes:
-
-.. xref:extra_vars_{context}[]: Set `v2v_transport_methods` to `ssh` in the `extra_vars.yml` file.
-.. xref:secure_vars_{context}[]: Copy the SSH private key for connecting to the VMware hypervisors for `v2v_ssh_private_key` in the `secure_vars.yml` file.
-.. xref:Configuring_host_with_playbooks_{context}[]: No changes.
-
-. Copy the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_{context}_conversion_hosts[].
-
-include::ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
 :osp!:

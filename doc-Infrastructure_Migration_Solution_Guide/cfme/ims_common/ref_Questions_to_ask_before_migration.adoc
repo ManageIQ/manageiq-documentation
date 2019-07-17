@@ -73,25 +73,9 @@ Conversion hosts are limited to a maximum of ten concurrent migrations, unless y
 +
 You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
-// Should I migrate my virtual machines with VDDK or SSH?::
-// You can configure your conversion hosts to migrate the virtual machines by using either the VMware Virtual Disk Development Kit (VDDK) or SSH. The choice is determined by the number of virtual machines you are migrating and the capabilities of your infrastructure.
-// +
-// The following table compares the options.
-// +
-// [cols="1,2,2", options="header"]
-// .VDDK and SSH comparison
-// |===
-// | ^|Pros ^|Cons
-// |*VDDK* .<a|* Recommended because it is approximately twice as fast as SSH
-// * Compiled with `nbdkit`, which provides direct connectivity to the virtual machine disks
-// .<a|* Requires VDDK package download
-// * Requires VDDK package location for conversion host configuration
-// * Limited to 20 concurrent migrations per conversion host
-// * Limited to 10 concurrent migrations per VMware hypervisor unless you increase the hypervisor's NFC service memory
-//
-// |*SSH* .<a|* Better suited for large-scale migrations than VDDK (not affected by hypervisor's NFC service memory limitation)
-// * Does not require additional downloads, packages, tools, or compilation
-// .<a|* Slower than VDDK
-// * Requires VMware hypervisors to have SSH access enabled
-// * Requires VMware hypervisors and conversion hosts to have shared SSH keys
-// |===
+Should I migrate my virtual machines with VDDK or SSH?::
+You can migrate your virtual machines with either the VMware Virtual Disk Development Kit (VDDK) or SSH. VDDK is the default because it is much faster than SSH and easier to configure.
++
+VDDK is limited to 20 concurrent migrations per conversion host, because of network limitations, and 10 concurrent migrations per VMware hypervisor, unless you increase the hypervisor's NFC service memory.
++
+If you cannot use VDDK, SSH transformation is a fallback option.

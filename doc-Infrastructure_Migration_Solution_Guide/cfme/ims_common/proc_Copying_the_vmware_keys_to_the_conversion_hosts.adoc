@@ -5,7 +5,7 @@
 [id="Copying_vmware_keys_to_{context}_conversion_hosts"]
 = Copying the VMware SSH keys to the conversion hosts
 
-You can collect SSH public keys of the VMware hypervisors either when you configure the VMware hypervisors for SSH transformation or by using `ssh-keyscan`:
+Copy the SSH public keys of the VMware hypervisors to the conversion hosts. You can collect the VMware keys either when you configure the VMware hypervisors for SSH transformation or by using `ssh-keyscan`:
 
 * xref:Copying_collected_ssh_keys_{context}[Copying keys collected during VMware hypervisor configuration]
 * xref:Copying_keys_ssh_keyscan_{context}[Copying keys collected with `ssh-keyscan`]
@@ -15,11 +15,11 @@ You can collect SSH public keys of the VMware hypervisors either when you config
 
 ifdef::rhv[]
 . Copy the VMware keys to `/var/lib/vdsm/.ssh/known_hosts` on each conversion host.
-include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
+include::proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::rhv[]
 ifdef::osp[]
 . Copy the VMware keys to `/root/.ssh/known_hosts` on each conversion host.
-include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
+include::proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::osp[]
 
 [id="Copying_keys_ssh_keyscan_{context}"]
@@ -46,7 +46,7 @@ ifdef::rhv[]
 ----
 # chown 36:36 /var/lib/vdsm/.ssh/known_hosts
 ----
-include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
+include::proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::rhv[]
 ifdef::osp[]
 +
@@ -57,5 +57,5 @@ ifdef::osp[]
 # ssh-keyscan _esx3_IP_ >> /root/.ssh/known_hosts
 ----
 <1> You must use the IP address, not the host name, of the VMware hypervisor.
-include::../ims_common/proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
+include::proc_Verifying_the_ssh_connection_for_conversion_hosts.adoc[]
 endif::osp[]

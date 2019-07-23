@@ -2767,25 +2767,21 @@ Performing this procedure destroys any existing data and cannot be undone. Back 
 [[configuring_database_replication]]
 ==== Configuring Database Replication and Centralized Administration
 
-To configure database replication, you must configure one {product-title} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title} instances that are of the same version.
+To configure database replication, you must configure one {product-title_short} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {product-title_short} instances that are of the same version. Configuring database replication in this version of {product-title_short} automatically enables centralized administration, eliminating the need for further configuration. Centralized administration in {product-title_short} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy.
 
-[NOTE]
+[IMPORTANT]
 ====
-Configuring database replication in this version of {product-title_short} automatically enables centralized administration, eliminating the need for further configuration.
-====
+* You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title_short} instance take several minutes to take effect.
 
-Centralized administration in {product-title} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy.
+* The region number must be unique on each {product-title_short} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
+
+* Enabling the `EvmRole-user_global_region` role will only provide access to specific operations that can be performed on a global region.
+====
 
 ifdef::cfme[]
 See _Centralized Administration_ in the https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#central-administration[Deployment Planning Guide] for a complete list of life cycle operations supported by centralized administration and an overview of the feature.
 endif::cfme[]
 
-[IMPORTANT]
-======
-* You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {product-title} instance take several minutes to take effect.
-
-* The region number must be unique on each {product-title} instance where replication is configured. See xref:creating_a_region[] for instructions on how to create a region.
-======
 
 [[configuring-a-remote-copy]]
 ===== Configuring a Remote Copy
@@ -2824,10 +2820,15 @@ image:add-subscription-global.png[Add Subscription]
 
 [NOTE]
 ====
-Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies, centralized administration is automatically enabled after the initial data sync is complete.
+Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies:
+* centralized administration is automatically enabled after the initial data sync is complete.
+* you will see the type of region you are logging into (global or remote) on the {product-title_short} user interface login screen. 
 ====
 
-Database replication and centralized administration are now enabled on your instances.
+Database replication and centralized administration are now enabled on your instances. To open virtual machines of a remote region from the global region and perform required operations:
+
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], then click *VMs & Templates* and select a virtual machine in the global region. 
+. In the *Multi Region* table on the summary screen, click *Connect to VM in its Region* to perform required operations in a new browser tab. 
 
 
 [[resetting-database-replication]]
@@ -2852,81 +2853,9 @@ You can reset the replication relationship between the global copy and remote co
 .. Enter the port by which the database is accessed in the *Port* field.
 . Click *Save*.
 
-//////////////////////////////////////////////
-[[running-a-single-backup]]
-===== Running a Single Backup
-
-To run a single backup:
-
-. From the settings menu, select *Configuration*.
-. Click on the *Diagnostics* accordion, then click Region name.
-. Click the *Database* tab.
-. If you have created a backup schedule, and want to use the same depot settings, select it under *Backup Schedules*.
-. If you do not want to use the settings from a backup schedule, or need to create settings, go into the *Database Backup Settings* area.
-. Select a type of server to put the backups. You can either use *Network File System* or *Samba*.
-+
-image:2099.png[]
-+
-* If selecting *Samba*, enter the *Depot Name*, *URI*, *User ID*, a *Password*, and a valid *Password*. Click *Validate* to check the settings.
-* If you choose *Network File System*, enter the *Depot Name* and *URI*.
-. Click *Submit*.
-
-The database backup is run immediately. You can see the task by navigating to menu:Settings[Tasks], then clicking on the *All Other Tasks* tab.
-
-[[restoring-a-database-from-backup]]
-===== Restoring a Database from Backup
-
-To restore a database from backup:
-
-. Copy the database backup file to `/tmp`, and name it `evm_db.backup`. The server looks specifically for this file to restore from.
-. Log in to the appliance console with a user name of `admin` and the default password. The {product-title} appliance summary screen displays.
-. Press `Enter` to manually configure settings.
-. Press the number `6` to select *Restore Database From Backup*.
-. Press `Y` to confirm.
-
-If directed by Red Hat, you can run database garbage collection to reclaim unused space in your VMDB. Generally, the database server does this automatically.
-//////////////////////////////////////////////
 
 [[backing-up-and-restoring-a-database]]
 ==== Backing Up and Restoring a Database
-
-//////////////////////////////////////////////
-[[scheduling-a-database-backup]]
-===== Scheduling a Database Backup
-
-Schedule database backups on a regular basis to preserve data.
-
-To schedule a database backup:
-
-. From the settings menu, select *Configuration*.
-. Click the *Settings* accordion and click *Schedules*.
-. Click image:1847.png[] (*Configuration*), and image:plus_green.png[] (*Add a new Schedule*).
-. Under the *Adding a new Schedule*:
-+
-image:2108.png[]
-+
-.. Enter a *Name* and *Description* for the schedule.
-.. Check *Active* to enable the backup schedule.
-.. In the *Action* drop-down list, select *Database Backup*.
-.. Select a type of server for storing the backups from the *Type* drop-down list. You can use *Network File System* (NFS) or *Samba*.
-* If you select *Samba*, enter the *Depot Name*, *URI*, *User ID*, and a valid *Password*. Click *Validate* to check the settings.
-* If you select *Network File System*, enter the *Depot Name*, and *URI*.
-+
-The *Depot Name* is a human-readable label for the NFS or Samba share.
-. Select the desired backup frequency from the *Run* list:
-+
-image:2110.png[]
-+
-* *Once*: the backup runs one time.
-* *Hourly*: select the number of hours between backups from the drop-down list.
-* *Daily*: select the number of days between backups from the drop-down list.
-* *Weekly*: select the number of weeks between backups from the drop-down list.
-* *Monthly*: select the number of months between backups from the drop-down list.
-. Select a *Time Zone* for the schedule.
-. Type or select a *Starting Date* for the schedule.
-. Select a *Starting Time* based on a 24 hour clock.
-. Click *Add*.
-//////////////////////////////////////////////
 
 [[running-a-single-database-backup]]
 ===== Running a Single Database Backup

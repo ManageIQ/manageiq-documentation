@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-07-17</date>
+<date>2019-07-24</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.1</productnumber>
 <abstract>
@@ -331,7 +331,7 @@
 <itemizedlist>
 <title>Deploying the conversion hosts</title>
 <listitem>
-<simpara>Create enough conversion hosts for your migration, with sufficient resources.</simpara>
+<simpara>Create a sufficient number of conversion hosts for your migration, with sufficient resources.</simpara>
 </listitem>
 <listitem>
 <simpara>Create multiple conversion hosts for load-balancing. The virtual machines in a migration plan are automatically distributed among the conversion hosts. This decreases the load on the conversion hosts and allows you to increase the concurrent migrations beyond the limits of a single conversion host.</simpara>
@@ -457,6 +457,9 @@
 </listitem>
 <listitem>
 <simpara>Configuring the conversion hosts with Ansible playbooks. See <xref linkend="Configuring_the_1_1_rhv_conversion_hosts_for_vddk"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Authenticating the conversion hosts in CloudForms. See <xref linkend="Authenticating_conversion_hosts_in_cloudforms_rhv"/></simpara>
 </listitem>
 </orderedlist>
 <section xml:id="Target_prerequisites_rhv">
@@ -766,7 +769,7 @@ v2v_ssh_private_key: |
 <simpara>You can authenticate the conversion hosts in CloudForms.</simpara>
 </section>
 </section>
-<section xml:id="Authenticating_rhv_conversion_hosts_in_cloudforms">
+<section xml:id="Authenticating_conversion_hosts_in_cloudforms_rhv">
 <title>Authenticating the conversion hosts in CloudForms</title>
 <simpara>Perform the following procedure for each conversion host:</simpara>
 <orderedlist numeration="arabic">
@@ -1563,7 +1566,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <title>Configuring the Red Hat Virtualization environment for SSH transformation</title>
 <simpara>You can configure your environment for SSH transformation if you cannot use VDDK.</simpara>
 <simpara>Configuring your environment involves the following additional steps:</simpara>
-<itemizedlist>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Configuring the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv"/>.</simpara>
 </listitem>
@@ -1579,7 +1582,10 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <listitem>
 <simpara>Configuring secure remote login to the VMware hypervisors. See <xref linkend="Configuring_secure_remote_login_to_the_vmware_hypervisors"/>.</simpara>
 </listitem>
-</itemizedlist>
+<listitem>
+<simpara>Authenticating the conversion hosts in CloudForms. See <xref linkend="Authenticating_conversion_hosts_in_cloudforms_app_ssh"/>.</simpara>
+</listitem>
+</orderedlist>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv">
 <title>Configuring the VMware hypervisors for SSH transformation</title>
 <simpara>For SSH transformation, you must configure the VMware hypervisors for passwordless access by sharing a conversion host’s public SSH key with the hypervisors.</simpara>
@@ -1590,11 +1596,8 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Enable SSH access on each VMware hypervisor:</simpara>
-<simpara>For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
-<note>
-<simpara>If your security policies allow you to collect the SSH public keys of the VMware hypervisors at this stage, save them for copying to the conversion hosts.</simpara>
-</note>
+<simpara>Enable SSH access on each VMware hypervisor. For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link> and enter <literal>Enable ESXi Shell and SSH Access with the Direct Console User Interface]</literal> in the <emphasis role="strong">Search</emphasis> field.</simpara>
+<simpara>You can collect the SSH public keys of the VMware hypervisors at this stage, to copy to the conversion hosts.</simpara>
 </listitem>
 <listitem>
 <simpara>Generate an SSH key pair without a passphrase:</simpara>
@@ -1656,15 +1659,10 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </listitem>
 <listitem>
 <simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal>:</simpara>
-<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO7-1"/></screen>
-<calloutlist>
-<callout arearefs="CO7-1">
-<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
-</callout>
-</calloutlist>
-<important>
-<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
-</important>
+<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<note>
+<simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
+</note>
 </listitem>
 </orderedlist>
 </section>
@@ -1676,11 +1674,11 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts <co xml:id="CO8-1"/>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts <co xml:id="CO7-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts</screen>
 <calloutlist>
-<callout arearefs="CO8-1">
+<callout arearefs="CO7-1">
 <para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
 </callout>
 </calloutlist>
@@ -1691,15 +1689,10 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </listitem>
 <listitem>
 <simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal>:</simpara>
-<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO9-1"/></screen>
-<calloutlist>
-<callout arearefs="CO9-1">
-<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
-</callout>
-</calloutlist>
-<important>
-<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
-</important>
+<screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<note>
+<simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
+</note>
 </listitem>
 </orderedlist>
 </section>
@@ -1707,13 +1700,13 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <section xml:id="Configuring_secure_remote_login_to_the_vmware_hypervisors">
 <title>Configuring secure remote login to the VMware hypervisors</title>
 <simpara>You can configure secure remote login to the VMware hypervisors by using <literal>ssh-agent</literal> and <literal>ssh-add</literal>.</simpara>
-<important>
-<simpara>You must configure and verify secure remote login for each VMware hypervisor.</simpara>
-</important>
-<simpara>Perform the following procedure on the Manager machine:</simpara>
+<caution>
+<simpara>Secure remote login must be verified for <emphasis role="strong">each</emphasis> VMware hypervisor. If secure remote login fails, all migrations from that hypervisor will fail.</simpara>
+</caution>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
-<simpara>Create an <literal>ssh-agent</literal> session for the <literal>vdsm</literal> user:</simpara>
+<simpara>On the Manager machine, create an <literal>ssh-agent</literal> session for the <literal>vdsm</literal> user:</simpara>
 <screen># sudo -u vdsm ssh-agent</screen>
 <simpara><literal>ssh-agent</literal> creates the <literal>SSH_AUTH_SOCK</literal> and <literal>SSH_AGENT_PID</literal> environment variables:</simpara>
 <screen>SSH_AUTH_SOCK=/tmp/ssh-<emphasis>socket_number</emphasis>/agent.<emphasis>pid</emphasis>; export SSH_AUTH_SOCK;
@@ -1725,34 +1718,35 @@ echo Agent pid 139150;</screen>
 </listitem>
 <listitem>
 <simpara>Run <literal>ssh-add</literal> to authorize the <literal>vdsm</literal> user’s private key for the <literal>ssh-agent</literal> session:</simpara>
-<screen># sudo -u vdsm SSH_AUTH_SOCK=<emphasis>SSH_AUTH_SOCK_value</emphasis> ssh-add <co xml:id="CO10-1"/></screen>
-<calloutlist>
-<callout arearefs="CO10-1">
-<para><literal>SSH_AUTH_SOCK_value</literal> is the <literal>SSH_AUTH_SOCK</literal> environment variable.</para>
-</callout>
-</calloutlist>
+<screen># sudo -u vdsm SSH_AUTH_SOCK=<emphasis>SSH_AUTH_SOCK</emphasis> ssh-add</screen>
 </listitem>
 <listitem>
 <simpara>Connect to a VMware hypervisor to verify the secure remote login:</simpara>
 <screen># sudo -u vdsm \
-    SSH_AUTH_SOCK=<emphasis>SSH_AUTH_SOCK_value</emphasis> ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO11-1"/> <co xml:id="CO11-2"/></screen>
-<calloutlist>
-<callout arearefs="CO11-1">
-<para><literal>SSH_AUTH_SOCK_value</literal> is the <literal>SSH_AUTH_SOCK</literal> variable.</para>
-</callout>
-<callout arearefs="CO11-2">
-<para><literal>esx1.example.com</literal> is the host name of a VMware hypervisor.</para>
-</callout>
-</calloutlist>
-<important>
-<simpara>You must test the SSH connection to <emphasis role="strong">all</emphasis> VMware hypervisors.</simpara>
-<simpara>If a connection is unsuccessful, all migrations from this VMware hypervisor using SSH transformation will fail.</simpara>
-</important>
+    SSH_AUTH_SOCK=<emphasis>SSH_AUTH_SOCK</emphasis> ssh root@<emphasis>esx1.example.com</emphasis></screen>
 </listitem>
 </orderedlist>
-<important>
-<simpara>You must authenticate the conversion hosts in CloudForms. See <xref linkend="Authenticating_rhv_conversion_hosts_in_cloudforms"/>.</simpara>
-</important>
+</section>
+<section xml:id="Authenticating_conversion_hosts_in_cloudforms_app_ssh">
+<title>Authenticating the conversion hosts in CloudForms</title>
+<simpara>Perform the following procedure for each conversion host:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Infrastructure</guisubmenu> <guimenuitem>Hosts</guimenuitem></menuchoice> and select a Red Hat Virtualization conversion host.</simpara>
+</listitem>
+<listitem>
+<simpara>Click the <emphasis role="strong">Configuration</emphasis> drop-down button and select <emphasis role="strong">Edit Selected items</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Default</emphasis> tab of the Endpoints section, enter the <emphasis role="strong">Username</emphasis> and the <emphasis role="strong">Password</emphasis> for <literal>root</literal>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Validate</emphasis> and wait for validation to complete.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
+</listitem>
+</orderedlist>
 </section>
 </appendix>
 </part>
@@ -2047,7 +2041,7 @@ echo Agent pid 139150;</screen>
 <itemizedlist>
 <title>Deploying the conversion hosts</title>
 <listitem>
-<simpara>Create enough conversion hosts for your migration, with sufficient resources.</simpara>
+<simpara>Create a sufficient number of conversion hosts for your migration, with sufficient resources.</simpara>
 </listitem>
 <listitem>
 <simpara>Create multiple conversion hosts for load-balancing. The virtual machines in a migration plan are automatically distributed among the conversion hosts. This decreases the load on the conversion hosts and allows you to increase the concurrent migrations beyond the limits of a single conversion host.</simpara>
@@ -2297,15 +2291,7 @@ echo Agent pid 139150;</screen>
 <title>Creating the conversion hosts</title>
 <simpara>You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance (<literal>RHOSP V2V Image for Red Hat OpenStack Director</literal>). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.</simpara>
 <note>
-<simpara>For optimal performance:</simpara>
-<itemizedlist>
-<listitem>
-<simpara>Deploy conversion hosts on more than one compute node.</simpara>
-</listitem>
-<listitem>
-<simpara>Deploy conversion hosts on compute nodes with nested virtualization enabled. See <link xlink:href="https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html">Configure DevStack with KVM-based Nested Virtualization</link>. Nested virtualization is a technology preview.</simpara>
-</listitem>
-</itemizedlist>
+<simpara>For optimal performance, deploy conversion hosts on compute nodes with nested virtualization enabled. See <link xlink:href="https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html">Configure DevStack with KVM-based Nested Virtualization</link>. Nested virtualization is a technology preview.</simpara>
 </note>
 <simpara>To create a Red Hat OpenStack Platform conversion host:</simpara>
 <orderedlist numeration="arabic">
@@ -2434,26 +2420,26 @@ v2v_host_type: openstack
 
 # Transport methods to configure on the conversion host. Default is "vddk".
 v2v_transport_methods:
-  - <emphasis>vddk</emphasis> <co xml:id="CO12-1"/>
+  - <emphasis>vddk</emphasis> <co xml:id="CO8-1"/>
 
 # Maximum number of concurrent conversions per host. Default is "10".
-v2v_max_concurrent_conversions: <emphasis>10</emphasis> <co xml:id="CO12-2"/>
+v2v_max_concurrent_conversions: <emphasis>10</emphasis> <co xml:id="CO8-2"/>
 
 # File name of VDDK package
-v2v_vddk_package_name: "VMware-vix-disklib-<emphasis>version</emphasis>.x86_64.tar.gz" <co xml:id="CO12-3"/>
+v2v_vddk_package_name: "VMware-vix-disklib-<emphasis>version</emphasis>.x86_64.tar.gz" <co xml:id="CO8-3"/>
 
 # URL of VDDK package
-v2v_vddk_package_url: "http://<emphasis>path/to/downloaded_vddk_package</emphasis>/{{ v2v_vddk_package_name }}" <co xml:id="CO12-4"/>
+v2v_vddk_package_url: "http://<emphasis>path/to/downloaded_vddk_package</emphasis>/{{ v2v_vddk_package_name }}" <co xml:id="CO8-4"/>
 
 manageiq_provider_name: OpenStack
 
 # Base URL of CloudForms machine
-manageiq_url: "https://<emphasis>CloudForms_FQDN</emphasis>" <co xml:id="CO12-5"/>
+manageiq_url: "https://<emphasis>CloudForms_FQDN</emphasis>" <co xml:id="CO8-5"/>
 
 # Whether to validate certificate of CloudForms server. Default is "true".
-manageiq_validate_certs: <emphasis>false</emphasis> <co xml:id="CO12-6"/>
+manageiq_validate_certs: <emphasis>false</emphasis> <co xml:id="CO8-6"/>
 
-manageiq_zone_id: "42000000000001" <co xml:id="CO12-7"/>
+manageiq_zone_id: "42000000000001" <co xml:id="CO8-7"/>
 
 # Empty vmware_hosts variable for conversion_host_disable.yml
 vmware_hosts: ""
@@ -2466,8 +2452,8 @@ manageiq_providers:
     connection_configurations:
       - endpoint:
           role: "default"
-          security_protocol: "<emphasis>ssl</emphasis>" <co xml:id="CO12-8"/>
-          certificate_authority: | <co xml:id="CO12-9"/>
+          security_protocol: "<emphasis>ssl</emphasis>" <co xml:id="CO8-8"/>
+          certificate_authority: | <co xml:id="CO8-9"/>
             -----BEGIN TRUSTED CERTIFICATE-----
             <emphasis>MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV....</emphasis>
             -----END TRUSTED CERTIFICATE-----
@@ -2477,32 +2463,32 @@ manageiq_providers:
 </listitem>
 </orderedlist>
 <calloutlist>
-<callout arearefs="CO12-1">
+<callout arearefs="CO8-1">
 <para>Change to <literal>ssh</literal> if you are using SSH transformation.</para>
 </callout>
-<callout arearefs="CO12-2">
+<callout arearefs="CO8-2">
 <para><literal>v2v_max_concurrent_conversions</literal> is the maximum number of concurrent conversions per host. The default is <literal>10</literal>. If you are using VDDK transformation, do not set this number higher than <literal>20</literal>.</para>
 </callout>
-<callout arearefs="CO12-3">
+<callout arearefs="CO8-3">
 <para>Update the <literal>v2v_vddk_package_name</literal> with the correct version.</para>
 </callout>
-<callout arearefs="CO12-4">
+<callout arearefs="CO8-4">
 <para><literal>v2v_vddk_package_url</literal> is the path to the VDDK archive file that you downloaded.</para>
 </callout>
-<callout arearefs="CO12-5">
+<callout arearefs="CO8-5">
 <para><literal>manageiq_url</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
-<callout arearefs="CO12-6">
+<callout arearefs="CO8-6">
 <para>You can set <literal>manageiq_validate_certs</literal> to <literal>false</literal> if you do not want to validate the CloudForms CA certificate. The default value is <literal>true</literal>.</para>
 </callout>
-<callout arearefs="CO12-7">
+<callout arearefs="CO8-7">
 <para>To obtain the <literal>manageiq_zone_id</literal>, enter this command on the CloudForms machine:</para>
 <screen># curl -sk -u admin \'https://<emphasis>CloudForms_FQDN</emphasis>/api/zones/?filter\[\]=name=RHV&amp;expand=resources&amp;attributes=zone</screen>
 </callout>
-<callout arearefs="CO12-8">
+<callout arearefs="CO8-8">
 <para>You can specify the connection security: <literal>non-ssl</literal>, <literal>ssl-without-validation</literal>, or <literal>ssl</literal>. If you choose <literal>ssl</literal>, add the CA chain (<literal>certificate_authority</literal>).</para>
 </callout>
-<callout arearefs="CO12-9">
+<callout arearefs="CO8-9">
 <para>The CA chain (<literal>certificate_authority</literal>) is a concatenation of two CA files:</para>
 <itemizedlist>
 <listitem>
@@ -2532,7 +2518,7 @@ manageiq_username: "<emphasis>username</emphasis>"
 # CloudForms "admin" password:
 manageiq_password: "<emphasis>password</emphasis>"
 
-# SSH private key to connect to VMware hypervisors for SSH transformation <co xml:id="CO13-1"/>
+# SSH private key to connect to VMware hypervisors for SSH transformation <co xml:id="CO9-1"/>
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
   <emphasis>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....</emphasis>
@@ -2540,7 +2526,7 @@ v2v_ssh_private_key: |
 </listitem>
 </orderedlist>
 <calloutlist>
-<callout arearefs="CO13-1">
+<callout arearefs="CO9-1">
 <para>(SSH transformation) This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.</para>
 </callout>
 </calloutlist>
@@ -2550,11 +2536,11 @@ v2v_ssh_private_key: |
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Run the <literal>conversion_host_enable.yml</literal> playbook to configure each conversion host:</simpara>
-<screen># ansible-playbook -i <emphasis>conversion_host</emphasis>, -c local -b \ <co xml:id="CO14-1"/>
+<screen># ansible-playbook -i <emphasis>conversion_host</emphasis>, -c local -b \ <co xml:id="CO10-1"/>
     -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
     /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml</screen>
 <calloutlist>
-<callout arearefs="CO14-1">
+<callout arearefs="CO10-1">
 <para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
 </callout>
 </calloutlist>
@@ -2566,10 +2552,10 @@ v2v_ssh_private_key: |
 </listitem>
 <listitem>
 <simpara>Run the <literal>conversion_host_check.yml</literal> playbook to verify the configuration:</simpara>
-<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, -c local \ <co xml:id="CO15-1"/>
+<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, -c local \ <co xml:id="CO11-1"/>
     -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml</screen>
 <calloutlist>
-<callout arearefs="CO15-1">
+<callout arearefs="CO11-1">
 <para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
 </callout>
 </calloutlist>
@@ -2585,9 +2571,9 @@ v2v_ssh_private_key: |
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO16-1"/></screen>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO12-1"/></screen>
 <calloutlist>
-<callout arearefs="CO16-1">
+<callout arearefs="CO12-1">
 <para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
 </calloutlist>
@@ -3105,9 +3091,9 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <screen># vmdb
 # rails console
 irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "OpenStack").custom_set("Max Transformation Runners", <emphasis>30</emphasis>) <co xml:id="CO17-1"/></screen>
+irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "OpenStack").custom_set("Max Transformation Runners", <emphasis>30</emphasis>) <co xml:id="CO13-1"/></screen>
 <calloutlist>
-<callout arearefs="CO17-1">
+<callout arearefs="CO13-1">
 <para><literal>Max Transformation Runners</literal> is the maximum number of concurrent migrations. The default value is <literal>20</literal> for a provider.</para>
 </callout>
 </calloutlist>
@@ -3358,7 +3344,7 @@ BadRequestException: Unknown errors</screen>
 <title>Configuring the Red Hat OpenStack Platform environment for SSH transformation</title>
 <simpara>You can configure your environment for SSH transformation if you cannot use VDDK.</simpara>
 <simpara>Configuring your environment involves the following additional steps:</simpara>
-<itemizedlist>
+<orderedlist numeration="arabic">
 <listitem>
 <simpara>Configuring the VMware hypervisors. See <xref linkend="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp"/>.</simpara>
 </listitem>
@@ -3371,7 +3357,7 @@ BadRequestException: Unknown errors</screen>
 <listitem>
 <simpara>Configuring secure remote login to the VMware hypervisors. See <xref linkend="Configuring_secure_remote_login_to_the_vmware_hypervisors"/>.</simpara>
 </listitem>
-</itemizedlist>
+</orderedlist>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp">
 <title>Configuring the VMware hypervisors for SSH transformation</title>
 <simpara>For SSH transformation, you must configure the VMware hypervisors for passwordless access by sharing a conversion host’s public SSH key with the hypervisors.</simpara>
@@ -3382,11 +3368,8 @@ BadRequestException: Unknown errors</screen>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Enable SSH access on each VMware hypervisor:</simpara>
-<simpara>For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link>. In the navigation pane, click <menuchoice><guimenu>vSphere <emphasis>version</emphasis></guimenu> <guisubmenu>ESXi and vCenter Server</guisubmenu> <guisubmenu>VMware ESXi Installation and Setup</guisubmenu> <guisubmenu>Installing and Setting Up ESXi</guisubmenu> <guisubmenu>Setting Up ESXi</guisubmenu> <guimenuitem>Enable ESXi Shell and SSH Access with the Direct Console User Interface</guimenuitem></menuchoice>.</simpara>
-<note>
-<simpara>If your security policies allow you to collect the SSH public keys of the VMware hypervisors at this stage, save them for copying to the conversion hosts.</simpara>
-</note>
+<simpara>Enable SSH access on each VMware hypervisor. For instructions, navigate to <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/index.html">VMware vSphere Documentation</link> and enter <literal>Enable ESXi Shell and SSH Access with the Direct Console User Interface]</literal> in the <emphasis role="strong">Search</emphasis> field.</simpara>
+<simpara>You can collect the SSH public keys of the VMware hypervisors at this stage, to copy to the conversion hosts.</simpara>
 </listitem>
 <listitem>
 <simpara>Generate an SSH key pair without a passphrase:</simpara>
@@ -3431,15 +3414,10 @@ BadRequestException: Unknown errors</screen>
 </listitem>
 <listitem>
 <simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
-<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO18-1"/></screen>
-<calloutlist>
-<callout arearefs="CO18-1">
-<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
-</callout>
-</calloutlist>
-<important>
-<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
-</important>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<note>
+<simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
+</note>
 </listitem>
 </orderedlist>
 </section>
@@ -3451,26 +3429,21 @@ BadRequestException: Unknown errors</screen>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO19-1"/>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO14-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts</screen>
 <calloutlist>
-<callout arearefs="CO19-1">
+<callout arearefs="CO14-1">
 <para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
 </callout>
 </calloutlist>
 </listitem>
 <listitem>
 <simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
-<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis> <co xml:id="CO20-1"/></screen>
-<calloutlist>
-<callout arearefs="CO20-1">
-<para><literal>esx1.example.com</literal> is the host name of the VMware hypervisor.</para>
-</callout>
-</calloutlist>
-<important>
-<simpara>If the connection fails, check that the VMware hypervisor is configured for SSH and that you have used the correct keys.</simpara>
-</important>
+<screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
+<note>
+<simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
+</note>
 </listitem>
 </orderedlist>
 </section>

@@ -10,15 +10,16 @@ You can configure your environment for SSH transformation if you cannot use VDDK
 
 Configuring your environment involves the following additional steps:
 
-* Configuring the VMware hypervisors. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[].
-
+. Configuring the VMware hypervisors. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[].
 ifdef::rhv[]
-* (Optional) Reinstalling `ipa-client` if you are configuring your conversion hosts for SSSD with single sign-on. See xref:Reinstalling_ipa_client[].
+. (Optional) Reinstalling `ipa-client` if you are configuring your conversion hosts for SSSD with single sign-on. See xref:Reinstalling_ipa_client[].
 endif::rhv[]
-
-* Configuring the conversion hosts. See xref:Configuring_the_{context}_conversion_hosts_for_ssh[].
-* Copying the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_{context}_conversion_hosts[].
-* Configuring secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[].
+. Configuring the conversion hosts. See xref:Configuring_the_{context}_conversion_hosts_for_ssh[].
+. Copying the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_{context}_conversion_hosts[].
+. Configuring secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[].
+ifdef::rhv[]
+. Authenticating the conversion hosts in CloudForms. See xref:Authenticating_conversion_hosts_in_cloudforms_app_ssh[].
+endif::rhv[]
 
 include::ims_common/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+1]
 
@@ -44,8 +45,9 @@ include::ims_common/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[le
 ifdef::rhv[]
 include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+1]
 
-[IMPORTANT]
-====
-You must authenticate the conversion hosts in CloudForms. See xref:Authenticating_rhv_conversion_hosts_in_cloudforms[].
-====
+:context: app_ssh
+:app_ssh:
+include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+1]
+:app_ssh!:
+
 endif::rhv[]

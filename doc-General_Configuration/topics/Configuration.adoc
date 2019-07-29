@@ -3249,3 +3249,45 @@ To configure a new database maintenance schedule, enter the *Configure Database 
 ==== Creating a Database Dump
 include::common/database-dumps.adoc[]
 
+==== Importing and Exporting Schedules
+
+{product-title_short} provides the ability to import and export schedules using the following Ruby script:
+
+----
+./tools/import_export_schedules.rb -h
+----
+
+[width="100%",cols="50,50%",options="header",]
+|====
+|Option|Description
+|-u, --user=<s>|userid (default: admin)
+|-d, --output-dir=<s>|Output directory (default: ./)
+|-s, --schedule=<s>|Schedule name or id
+|-o, --operation=<s>|Export or import (default: export)
+|-y, --import-yaml=<filename/uri>|Imported yaml
+|-h, --help|Show this message
+|====
+
+.Usage Examples:
+
+Import:
+
+----
+./tools/import_export_schedules.rb -o import -y ./filename.yaml
+----
+
+Export:
+
+----
+./tools/import_export_schedules.rb -s 158
+----
+
+Note that the script works for all types of schedules (and between replicated databases), including: 
+
+* Reports
+* Policy
+* Alerts
+* SmartState Analysis
+* Database Backup
+* Automation Task
+* Service Template

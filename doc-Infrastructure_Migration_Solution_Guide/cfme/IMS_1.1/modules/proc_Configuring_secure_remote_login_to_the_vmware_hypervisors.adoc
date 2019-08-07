@@ -7,14 +7,14 @@
 
 You can configure secure remote login to the VMware hypervisors by using `ssh-agent` and `ssh-add`.
 
-[IMPORTANT]
+[CAUTION]
 ====
-You must configure and verify secure remote login for each VMware hypervisor.
+Secure remote login must be verified for *each* VMware hypervisor. If secure remote login fails, all migrations from that hypervisor will fail.
 ====
 
-Perform the following procedure on the Manager machine:
+.Procedure
 
-. Create an `ssh-agent` session for the `vdsm` user:
+. On the Manager machine, create an `ssh-agent` session for the `vdsm` user:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
@@ -36,23 +36,13 @@ echo Agent pid 139150;
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u vdsm SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh-add <1>
+# sudo -u vdsm SSH_AUTH_SOCK=_SSH_AUTH_SOCK_ ssh-add
 ----
-<1> `SSH_AUTH_SOCK_value` is the `SSH_AUTH_SOCK` environment variable.
 
 . Connect to a VMware hypervisor to verify the secure remote login:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 # sudo -u vdsm \
-    SSH_AUTH_SOCK=_SSH_AUTH_SOCK_value_ ssh root@_esx1.example.com_ <1> <2>
+    SSH_AUTH_SOCK=_SSH_AUTH_SOCK_ ssh root@_esx1.example.com_
 ----
-<1> `SSH_AUTH_SOCK_value` is the `SSH_AUTH_SOCK` variable.
-<2> `esx1.example.com` is the host name of a VMware hypervisor.
-+
-[IMPORTANT]
-====
-You must test the SSH connection to *all* VMware hypervisors.
-
-If a connection is unsuccessful, all migrations from this VMware hypervisor using SSH transformation will fail.
-====

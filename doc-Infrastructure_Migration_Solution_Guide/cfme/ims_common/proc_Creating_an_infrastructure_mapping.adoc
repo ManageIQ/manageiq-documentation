@@ -18,66 +18,61 @@ If you add or remove providers or provider objects from an infrastructure mappin
 .Procedure
 
 . Click menu:Compute[Migration > Infrastructure Mappings].
-. Click *Create Infrastructure Mapping*.
-. Perform the following procedures in the *Create Infrastructure Mapping* wizard:
-
+. Click *Create Infrastructure Mapping*. The *Create Infrastructure Mapping* wizard is displayed.
++
 image:Creating_infrastructure_mapping.png[]
 
-[cols="1,3", options="header"]
-|===
-^|Screen ^|Procedure
+. In the *General* screen, add the infrastructure mapping details:
 
-|*General*
-.<a|. Enter the infrastructure mapping *Name* and (optional) *Description*.
-. Select the *Target Provider*.
-. Click *Next*.
+.. Enter the infrastructure mapping *Name* and (optional) *Description*.
+.. Select the *Target Provider*.
+.. Click *Next*.
 
-|*Map Compute*
-.<a|
+. In the *Map Compute* screen, map the source and target clusters:
+
 ifdef::rhv[]
-. Select a *Source Provider \ Datacenter \ Cluster* and a *Target Provider \ Datacenter \ Cluster*.
+.. Select a *Source Provider \ Datacenter \ Cluster* and a *Target Provider \ Datacenter \ Cluster*.
 +
 If the target cluster does not contain a conversion host, a warning icon (image:warning.png[height=15px]) appears. You can create and save an infrastructure mapping, but you must configure the conversion hosts before running a migration plan.
 
-. Click *Add Mapping*. You can map additional clusters.
+.. Click *Add Mapping*. You can map additional clusters.
 endif::rhv[]
 ifdef::osp[]
-. Select a *Source Provider \ Datacenter \ Cluster* source cluster and a *Target Provider \ Project*.
+.. Select a *Source Provider \ Datacenter \ Cluster* source cluster and a *Target Provider \ Project*.
 +
 If the target project does not contain a conversion host, a warning icon (image:warning.png[height=15px]) appears. You can create and save an infrastructure mapping, but you must configure the conversion hosts before running a migration plan.
 
-. Click *Add Mapping*. You can map additional projects.
+.. Click *Add Mapping*. You can map additional projects.
 endif::osp[]
-. Click *Next*.
+.. Click *Next*.
 
-|*Map Storage*
-.<a|. Select a source cluster whose datastores you want to map.
+. In the *Map Storage* screen, map the source and target storage:
+
 ifdef::rhv[]
-. Select a *Source Provider \ Datacenter \ Datastore* and *Target Datastores*.
+.. Select a *Source Provider \ Datacenter \ Datastore* and *Target Datastores*.
 endif::rhv[]
 ifdef::osp[]
-. Select a *Source Provider \ Datacenter \ Datastore* and *Target Provider \ Volume Type*.
+.. Select a *Source Provider \ Datacenter \ Datastore* and *Target Provider \ Volume Type*.
 +
 If the volume type is missing, check that the volume type has been set. Block storage requires at least one volume type. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-create-volume[Create a Volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/storage_guide/#section-volume-retype[Changing a Volume’s Type (Volume Re-typing)] in the _Red Hat OpenStack Platform Storage Guide_.
 endif::osp[]
 
-. Click *Add Mapping*. You can map additional datastores.
-. Click *Next*.
+.. Click *Add Mapping*. You can map additional datastores.
+.. Click *Next*.
 
-|*Map Networks*
-.<a|. Select a source cluster from the drop-down list.
-. Select one or more networks from *Source Provider \ Datacenter \ Network* and *Target Project \ Network*.
+. In the *Map Networks* screen, map the source and target networks:
+
+.. Select a source cluster from the drop-down list.
+.. Select one or more networks from *Source Provider \ Datacenter \ Network* and *Target Project \ Network*.
 ifdef::osp[]
 +
 IMS supports both provider and tenant networks.
 endif::osp[]
 
-. Click *Add Mapping*. You can map the networks of additional source clusters.
-. Click *Create*.
+.. Click *Add Mapping*. You can map the networks of additional source clusters.
+.. Click *Create*.
 
-|*Results*
-.<a|Click *Close*. Your infrastructure mapping is saved in menu:Compute[Migration > Infrastructure Mappings].
-|===
+. In the *Results* screen, click *Close*. The infrastructure mapping is saved in menu:Compute[Migration > Infrastructure Mappings].
 
 You can click an infrastructure mapping element to view its details:
 

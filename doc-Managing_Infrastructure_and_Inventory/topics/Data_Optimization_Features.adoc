@@ -2,23 +2,15 @@
 = Data Optimization
 
 {product-title} optimization functions allow you to view
-utilization trends, and identify and project bottlenecks in your
+utilization trends in your
 environment. In addition, you can predict where you have capacity for
 additional virtual machines, see link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#planning-where-to-put-a-new-virtual-machine[Planning Where to Put a New Virtual Machine] in the _Deployment Planning Guide_.
 
 [NOTE]
 ====
-* To access the utilization and bottleneck report features, you will first need to enable data collection in {product-title}; see the following sections in the _Deployment Planning Guide_:
+* To access the utilization report features, you will first need to enable data collection in {product-title}; see the following sections in the _Deployment Planning Guide_:
 ** link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/Capacity_Planning#assigning_the_capacity_and_utilization_server_roles[Assigning the Capacity and Utilization Server Roles]
 ** link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/capacity_planning#data_collected[Capacity and Utilization Data Collected]
-
-* For reporting of daily optimization data, incomplete days (days with less
-than 24 hourly data points from midnight to midnight) that are at the
-beginning or end of the requested interval are excluded. Days with less
-than 24 hourly data points would be inaccurate and including them would
-skew trend lines, therefore, the *Optimize* page requires at least two full
-days of daily data. All charted values are derived from trend
-calculations that requires at least two data points.
 ====
 
 [[utilization-trends]]
@@ -76,84 +68,3 @@ reports.
 . Click *Report* if it is not already selected.
 . From the *Options* area, select how far back you want to view the
   trends for and any classifications you want to use.
-
-
-[[bottlenecks]]
-== Bottlenecks
-
-{product-title} can show where bottlenecks occur in your
-virtual infrastructure. You can view them either on a timeline or as a
-report which can be downloaded for further analysis.
-
-[[prerequisites]]
-=== Prerequisites
-
-* Bottleneck reports use the same mechanism to gather data as capacity and utilization reports. To enable data collection in {product-title}, see the following sections:
-** link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/Capacity_Planning#assigning_the_capacity_and_utilization_server_roles[Assigning the Capacity and Utilization Server Roles]
-** link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/capacity_planning#data_collected[Capacity and Utilization Data Collected]
-* Additionally, configure your {product-title} for collecting capacity and utilization reports for clusters and datastores by following this procedure:
-.. From the settings menu, select *Configuration*.
-.. Select *Region* from the *Settings* tab in the left pane of the appliance.
-.. In the right pane, under the *C & U Collection* tab, check the boxes for *Collect for All Clusters* under *Clusters* and *Collect for All Datastores* under *Datastores*, or check the boxes for the clusters/datastores you desire.
-+
-[NOTE]
-====
-*Collect for All Clusters* must be checked to be able to collect capacity and utilization data from cloud providers such as Red Hat OpenStack or Amazon EC2.
-====
-+
-.. Click *Save*.
-* For bottleneck reports to work as expected, the data collection for capacity and utilization reports should also be enabled for the relevant backend provider. See the following documentation to enable data collection for Red Hat Enterprise Virtualization and Red Hat Enterprise Linux OpenStack Platform provider:
-** For Red Hat Enterprise Virtualization: link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/capacity_planning#data_collection_for_rhev_33_34[Data Collection for Red Hat Enterprise Virtualization]
-** For Red Hat Enterprise Linux OpenStack Platform: link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/capacity_planning#data_collection_for_osp[Data Collection for Red Hat Enterprise Linux OpenStack Platform]
-
-[NOTE]
-====
-For reporting of daily bottleneck data, incomplete days
-(days with less than 24 hourly data points from midnight to midnight)
-that are at the beginning or end of the requested interval are excluded.
-Days with less than 24 hourly data points would be inaccurate and
-including them would skew trend lines. Therefore, at least one full day
-of hourly data from midnight to midnight is necessary for displaying the
-bottleneck charts under the *Optimize* tab.
-====
-
-
-[[viewing-the-bottleneck-summary]]
-=== Viewing the Bottleneck Summary
-To find out more about bottleneck capacity or utilization, view a
-bottleneck summary.
-
-. Navigate to menu:Optimize[Bottlenecks].
-. Click *Summary* if it is not already selected.
-. Expand the tree on the left side, until you can see the desired
-  providers, clusters, or datastores.
-. Click on the item.
-. Use the *Options* section to change the characteristics of the data.
-  image:2257.png[]
-+
-* Use *Event Groups* to select if you want to see bottlenecks based
-  on capacity, utilization or both.
-* Select a *Time Zone*.
-+
-
-Data is processed, and a timeline appears. Click on an icon in
-the timeline to see specific information on the bottleneck.
-
-
-[[viewing-a-report-of-the-bottlenecks-trend]]
-=== Viewing a Report of the Bottlenecks Trend
-
-. Navigate to menu:Optimize[Bottlenecks].
-. Click *Report*.
-. Expand the tree on the left side, until you can see the desired
-  providers, clusters, or datastores.
-. Click on the item.
-. Use the *Options* section to change the characteristics of the data.
-  image:2258.png[]
-+
-* Use *Event Groups* to select if you want to see bottlenecks based
-  on capacity, utilization or both.
-* Select a *Time Zone*.
-+
-. Expand the tree on the left side, until you can see the enterprise,
-  provider, or datastore that you want to see the trend for.

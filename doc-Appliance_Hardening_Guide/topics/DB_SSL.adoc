@@ -26,12 +26,12 @@ It is also recommended to stop all {product-title_short} services before configu
 To configure SSL on the database appliance:
 
 . Log in as `root` to the appliance where the database resides.
-. Stop the `evmserverd` and `rh-postgresql95-postgresql` services:
+. Stop the `evmserverd` and `postgresql` services:
 +
 [subs="verbatim,attributes"]
 ----
 [root@appliance2 ~]# systemctl stop evmserverd
-[root@appliance2 ~]# systemctl stop rh-postgresql95-postgresql
+[root@appliance2 ~]# systemctl stop postgresql.service
 ----
 
 . Install the server key file in the correct location and set the ownership and permissions for it:
@@ -155,11 +155,10 @@ Complete this procedure for each external appliance.
 This enhances the security of all database transactions in your {product-title} infrastructure.
 
 ==== Hardening TLS Protocol Version
- 
+
 After configuring the database to use SSL, protocol TLS version 1.2 is used as default. The older versions of this protocol (TLS 1.0 and 1.1) are still available for clients to choose. You can disable older versions by inserting the following lines into `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
- 
+
 ----
 ssl_ciphers = 'TLSv1.2:!aNULL'
 ssl_prefer_server_ciphers=true
 ----
- 

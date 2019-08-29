@@ -561,44 +561,6 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 include::common/provisioning-requests-openstack.adoc[]
 
-[[provisioning-a-google-compute-engine-instance-from-an-image]]
-==== Provisioning a Google Compute Engine Instance from an Image
-
-From Red Hat {product-title} 4.2, a Google Compute Engine instance can be provisioned. Some functionality available in other cloud providers is currently unavailable when provisioning from Google Compute Engine.
-
-. Navigate to menu:Compute[Clouds > Instances].
-. Click image:2007.png[](*Lifecycle*), then click image:1862.png[](*Provision Instances*).
-. Select an image from the list presented.
-. Click *Continue*.
-. On the *Request* tab, enter information about this provisioning request. In *Request Information*, type in at least a first and last name and an email address. This email is used to send the requester status emails during the provisioning process for items such as auto-approval, quota, provision complete, retirement, request pending approval, and request denied. The other information is optional. If the {product-title} Server is configured to use LDAP, you can use the *Look Up* button to populate the other fields based on the email address.
-+
-[NOTE]
-====
-Parameters with a * next to the label are required to submit the provisioning request. To change the required parameters, see xref:provisioning-dialogs-customizing[].
-====
-+
-. Click the *Purpose* tab to select the appropriate tags for the provisioned instance.
-. Click the *Catalog* tab for basic instance options.
-.. To change the image to use as a basis for the instance, select it from the list of images.
-.. Select the *Number of Instances* to provision.
-.. Type a *Instance Name* and *Instance Description*. For Google Compute Engine instances, the *Instance Name* cannot use upper case letters. Use a combination of lower case letters and numbers to create the name.
-. Click the *Environment* tab to select the instance's *Availability Zone* and *Cloud Network*. If no specific availability zone is required, select the *Choose Automatically* checkbox.
-. Click the *Properties* tab to set provider options such as hardware flavor and boot disk settings.
-.. Select a flavor from the *Instance Type* list.
-.. Select a *Boot Disk Size* from the list.
-. Click the *Schedule* tab to set the provisioning and retirement date and time.
-.. In *Schedule Info*, choose whether the provisioning begins upon approval, or at a specific time. If you select *Schedule*, you will be prompted to enter a date and time.
-.. In *Lifespan*, select and whether to set a retirement date. If you select a retirement period, you will be prompted for when to receive a retirement warning.
-. Click *Submit*.
-
-The provisioning request is sent for approval. For the provisioning to begin, a user with the admin, approver, or super admin account role must approve the request. The admin and super admin roles can also edit, delete, and deny the requests. You will be able to see all provisioning requests where you are either the requester or the approver.
-
-After submission, the appliance assigns each provision request a *Request ID*. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The Request ID consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
-
-*Request ID Format*
-
-Request 99 in region 123 results in Request ID 123000000000099.
-
 
 [[provisioning-dialogs-customizing]]
 ==== Customizing Provisioning Dialogs

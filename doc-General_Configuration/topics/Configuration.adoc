@@ -2984,78 +2984,77 @@ Create a binary backup and store it as a `gzip` tar file inside the {product-tit
 
 [IMPORTANT]
 ======
-A PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure.
+PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure.
 ======
 
 . SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
 +
-. Run the `pg_basebackup` command to create the backup:
+. Run the `pg_basebackup` command to create the backup.
 +
 -----
-# pg_basebackup -X fetch -h hostname -U root -Ft -z -D filename
+# pg_basebackup -x -h hostname -U root -Ft -z -D filename
 -----
 +
-
-[NOTE]
-====
-*-h* _hostname_    
-Specifies the IP address of the database server. 
-
-*-D* _filename_    
-Specifies the name of the directory created to contain the backup.
-====
-
+> where:
+>
+> *-h* _hostname_
+>
+>     Specifies the IP address of the database server.
+>
+> *-D* _filename_
+>
+>    Specifies the name of the directory created to contain the backup.
 
 
 ===== Restoring a Database from the Backup
 Restore your PostgreSQL binary backup using the following steps. This process will require stopping both EVM and PostgreSQL services before restoring data.
 
-. Copy the existing backup to the target VM:
+. Copy the existing backup to the target VM
 +
 -----
 # scp filename/base.tar.gz root@hostname:/var/www/miq
 -----
 +
-. SSH to the target VM:
+. SSH to the target VM.no
 
 +
 -----
 # ssh root@hostname
 -----
 +
-. Stop both the EVM and PostgreSQL servers:
+. Stop both the EVM and PostgreSQL servers.
 +
 -----
 # systemctl stop evmserverd
 # systemctl stop $APPLIANCE_PG_SERVICE
 -----
 +
-. Rename the existing data directory:
+. Rename the existing data directory.
 +
 -----
 # mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
 -----
 +
-. Create a clean data directory:
+. Create a clean data directory.
 +
 -----
 # mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
 -----
 +
-. Unzip the tar file to the new directory:
+. Unzip the tar file to the new directory.
 +
 -----
 # tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data
 -----
 +
-. Correct permissions:
+. Correct permissions.
 +
 -----
 # chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data
 # chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
 -----
 +
-. Restart the PostgreSQL and EVM servers:
+. Restart the PostgreSQL and EVM servers.
 +
 -----
 # systemctl start $APPLIANCE_PG_SERVICE

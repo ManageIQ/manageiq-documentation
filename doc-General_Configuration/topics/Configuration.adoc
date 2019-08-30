@@ -2984,26 +2984,27 @@ Create a binary backup and store it as a `gzip` tar file inside the {product-tit
 
 [IMPORTANT]
 ======
-PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure.
+A PostgreSQL superuser or user with _Replication_ permissions are required to perform this procedure.
 ======
 
 . SSH into the database server as the *root* user or provide PostgreSQL superuser credentials.
 +
-. Run the `pg_basebackup` command to create the backup.
+. Run the `pg_basebackup` command to create the backup
 +
 -----
-# pg_basebackup -x -h hostname -U root -Ft -z -D filename
+# pg_basebackup -X fetch -U root -Ft -z -D filename
 -----
 +
-> where:
->
-> *-h* _hostname_
->
->     Specifies the IP address of the database server.
->
-> *-D* _filename_
->
->    Specifies the name of the directory created to contain the backup.
+
+[NOTE]
+====
+*-h* _hostname_    
+Specifies the IP address of the database server. 
+
+*-D* _filename_    
+Specifies the name of the directory created to contain the backup.
+====
+
 
 
 ===== Restoring a Database from the Backup

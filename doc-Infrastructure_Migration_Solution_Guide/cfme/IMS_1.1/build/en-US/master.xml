@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-07-24</date>
+<date>2019-09-01</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.1</productnumber>
 <abstract>
@@ -510,6 +510,7 @@
 <section xml:id="Installing_rhv_4_2">
 <title>Installing and configuring Red Hat Virtualization 4.2</title>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Install Red Hat Virtualization Manager 4.2 on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager">Installing the Red Hat Virtualization Manager</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>.</simpara>
 </listitem>
@@ -556,7 +557,11 @@
 </section>
 <section xml:id="Installing_cf_4_7_3_with_rhv">
 <title>Installing and configuring CloudForms 4.7.3</title>
+<caution>
+<simpara>Removing or changing a provider before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.</simpara>
+</caution>
 <orderedlist xml:id="Cloudforms_for_rhv" numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.3 (CFME 5.10.3) on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>.</simpara>
 <important>
@@ -568,9 +573,6 @@
 </listitem>
 <listitem>
 <simpara>Add Red Hat Virtualization to CloudForms as a provider. <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
-<note>
-<simpara>Removing or changing a provider (including refreshing Red Hat Virtualization hosts) before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.</simpara>
-</note>
 </listitem>
 </orderedlist>
 <simpara>Configure your conversion hosts with Ansible playbooks to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
@@ -1660,9 +1662,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <listitem>
 <simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal>:</simpara>
 <screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
-<note>
 <simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
-</note>
 </listitem>
 </orderedlist>
 </section>
@@ -1690,9 +1690,7 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <listitem>
 <simpara>Verify the SSH connection by connecting to each VMware hypervisor as <literal>vdsm</literal>:</simpara>
 <screen># sudo -u vdsm ssh root@<emphasis>esx1.example.com</emphasis></screen>
-<note>
 <simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
-</note>
 </listitem>
 </orderedlist>
 </section>
@@ -2269,7 +2267,11 @@ echo Agent pid 139150;</screen>
 </section>
 <section xml:id="Installing_cf_4_7_3_with_osp">
 <title>Installing and configuring CloudForms 4.7.3</title>
+<caution>
+<simpara>Removing or changing a provider before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.</simpara>
+</caution>
 <orderedlist xml:id="Cloudforms_for_osp" numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.3 (CFME 5.10.3). See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>.</simpara>
 <note>
@@ -2282,7 +2284,8 @@ echo Agent pid 139150;</screen>
 <listitem>
 <simpara>Add Red Hat OpenStack Platform to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
 <note>
-<simpara>Removing or changing a provider before, during, or after the migration will cause errors in the infrastructure mappings and migration plans.</simpara>
+<simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab when you add Red Hat OpenStack Platform as a cloud provider. You will add the SSH private key when you configure the conversion hosts.</simpara>
+<simpara>If Red Hat OpenStack Platform has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider.</simpara>
 </note>
 </listitem>
 </orderedlist>
@@ -2305,7 +2308,7 @@ echo Agent pid 139150;</screen>
 <simpara>Click the green <emphasis role="strong">Download Latest</emphasis> button to go to the <emphasis role="strong">Download Red Hat OpenStack Platform</emphasis> page.</simpara>
 </listitem>
 <listitem>
-<simpara>In the <emphasis role="strong">Product Software</emphasis> tab, locate the <literal>RHOSP V2V Image for Red Hat OpenStack Director 14.0._x_ (x86_64)</literal>, click <emphasis role="strong">Download Now</emphasis>, and save the image.</simpara>
+<simpara>In the <emphasis role="strong">Product Software</emphasis> tab, locate the <literal>RHOSP V2V Image for Red Hat OpenStack Director 14.0.__x__ (x86_64)</literal>, click <emphasis role="strong">Download Now</emphasis>, and save the image.</simpara>
 <important>
 <simpara>IMS 1.1 requires Red Hat OpenStack Director 14.0.2.</simpara>
 <simpara>IMS 1.2 requires Red Hat OpenStack Director 14.0.3 or later.</simpara>
@@ -3415,9 +3418,7 @@ BadRequestException: Unknown errors</screen>
 <listitem>
 <simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
 <screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
-<note>
 <simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
-</note>
 </listitem>
 </orderedlist>
 </section>
@@ -3441,9 +3442,7 @@ BadRequestException: Unknown errors</screen>
 <listitem>
 <simpara>On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as <literal>cloud-user</literal>:</simpara>
 <screen># sudo -u cloud-user ssh root@<emphasis>esx1.example.com</emphasis></screen>
-<note>
 <simpara>If the connection fails, check that the VMware hypervisor has SSH access enabled and that you copied the correct keys.</simpara>
-</note>
 </listitem>
 </orderedlist>
 </section>

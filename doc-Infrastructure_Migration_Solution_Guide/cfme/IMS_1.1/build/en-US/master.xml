@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-09-01</date>
+<date>2019-09-03</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.1</productnumber>
 <abstract>
@@ -19,7 +19,7 @@
 </info>
 <preface>
 <title>Preface</title>
-<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware 5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms.</simpara>
+<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware 5.5 (and later) to Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms.</simpara>
 <variablelist>
 <varlistentry>
 <term>Red Hat Virtualization 4.2</term>
@@ -2284,10 +2284,42 @@ echo Agent pid 139150;</screen>
 </listitem>
 <listitem>
 <simpara>Add Red Hat OpenStack Platform to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<important>
+<simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab. You will add the SSH private key when you configure the conversion hosts.</simpara>
+</important>
+</listitem>
+</orderedlist>
 <note>
-<simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab when you add Red Hat OpenStack Platform as a cloud provider. You will add the SSH private key when you configure the conversion hosts.</simpara>
-<simpara>If Red Hat OpenStack Platform has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider.</simpara>
+<simpara>If Red Hat OpenStack Platform has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider. Check the cloud provider timeline to verify that all events have been processed.</simpara>
 </note>
+<bridgehead xml:id="Viewing_cloud_provider_event_timeline_osp" renderas="sect4">Viewing the cloud provider timeline in CloudForms</bridgehead>
+<simpara>To view the cloud provider timeline:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Clouds</guisubmenu> <guimenuitem>Providers</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click the cloud provider to view its details.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <menuchoice><guimenu>Monitoring</guimenu> <guimenuitem>Timelines</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select the following options:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Events: <emphasis role="strong">Management Events</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara>Category: <emphasis role="strong">Select All</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara>Severity: <emphasis role="strong">Select All</emphasis></simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Apply</emphasis>.</simpara>
 </listitem>
 </orderedlist>
 </section>

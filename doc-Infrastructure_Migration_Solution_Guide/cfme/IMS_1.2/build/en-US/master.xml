@@ -9,7 +9,7 @@
 <info>
 <title>Infrastructure Migration Solution Guide</title><subtitle>Migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform</subtitle>
 
-<date>2019-07-23</date>
+<date>2019-09-01</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
@@ -518,6 +518,7 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 <section xml:id="Installing_rhv_4_3">
 <title>Installing and configuring Red Hat Virtualization 4.3</title>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Install Red Hat Virtualization Manager 4.3.4 on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager">Installing the Red Hat Virtualization Manager</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>.</simpara>
 </listitem>
@@ -567,7 +568,11 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </section>
 <section xml:id="Installing_cf_4_7_4_with_rhv">
 <title>Installing and configuring CloudForms 4.7.4</title>
+<caution>
+<simpara>Removing or changing a provider will cause errors in the infrastructure mappings and migration plans.</simpara>
+</caution>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.4 on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>.</simpara>
 <note>
@@ -579,23 +584,6 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </listitem>
 <listitem>
 <simpara>Add Red Hat Virtualization to CloudForms as a provider. <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
-<important>
-<simpara>Removing or changing a provider before, during, or after migration will cause errors in the infrastructure mappings and migration plans.</simpara>
-</important>
-</listitem>
-<listitem>
-<simpara>Enable SmartState Analysis:</simpara>
-<orderedlist numeration="loweralpha">
-<listitem>
-<simpara>In the header bar, click <menuchoice><guimenu>Administrator</guimenu> <guimenuitem>Configuration</guimenuitem></menuchoice>.</simpara>
-</listitem>
-<listitem>
-<simpara>In the left pane, in <emphasis role="strong">Settings</emphasis>, click <menuchoice><guimenu>CFME Regions</guimenu> <guisubmenu>Zones</guisubmenu> <guimenuitem>Server</guimenuitem></menuchoice>.</simpara>
-</listitem>
-<listitem>
-<simpara>In the right pane, in the <emphasis role="strong">Server</emphasis> tab, set <emphasis role="strong">SmartState Analysis</emphasis> to <emphasis role="strong">On</emphasis> and click <emphasis role="strong">Save</emphasis>.</simpara>
-</listitem>
-</orderedlist>
 </listitem>
 </orderedlist>
 <simpara>Configure your conversion hosts with CloudForms to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
@@ -613,6 +601,7 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </itemizedlist>
 <bridgehead xml:id="Downloading_vddk_for_rhv" renderas="sect4">Downloading the VMware Virtual Disk Development Kit</bridgehead>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">VMware Documentation</link>.</simpara>
 </listitem>
@@ -2164,22 +2153,16 @@ vm03,host1,vSphere3</screen>
 </section>
 <section xml:id="Installing_cf_4_7_4_with_osp">
 <title>Installing and configuring CloudForms 4.7.4</title>
+<caution>
+<simpara>Removing or changing a provider will cause errors in the infrastructure mappings and migration plans.</simpara>
+</caution>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Install Red Hat CloudForms 4.7.4. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>.</simpara>
 <note>
 <simpara>CFME 5.10.4 does not support migration.</simpara>
 </note>
-</listitem>
-<listitem>
-<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
-</listitem>
-<listitem>
-<simpara>Add Red Hat OpenStack Platform to CloudForms as a cloud provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/index#adding_openstack_cloud_providers">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
-<simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab when you add Red Hat OpenStack Platform as a cloud provider. You will add the SSH private key when you configure the conversion hosts.</simpara>
-<important>
-<simpara>Removing or changing a provider before, during, or after migration will cause errors in the infrastructure mappings and migration plans.</simpara>
-</important>
 </listitem>
 <listitem>
 <simpara>Enable SmartState Analysis:</simpara>
@@ -2194,6 +2177,48 @@ vm03,host1,vSphere3</screen>
 <simpara>In the right pane, in the <emphasis role="strong">Server</emphasis> tab, set <emphasis role="strong">SmartState Analysis</emphasis> to <emphasis role="strong">On</emphasis> and click <emphasis role="strong">Save</emphasis>.</simpara>
 </listitem>
 </orderedlist>
+</listitem>
+<listitem>
+<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Add Red Hat OpenStack Platform to CloudForms as a cloud provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/index#adding_openstack_cloud_providers">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<important>
+<simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab. You will add the SSH private key when you configure the conversion hosts.</simpara>
+</important>
+</listitem>
+</orderedlist>
+<note>
+<simpara>If Red Hat OpenStack Platform has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider. Check the cloud provider timeline to verify that all events have been processed.</simpara>
+</note>
+<bridgehead xml:id="Viewing_cloud_provider_event_timeline_osp" renderas="sect4">Viewing the cloud provider timeline in CloudForms</bridgehead>
+<simpara>To view the cloud provider timeline:</simpara>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Clouds</guisubmenu> <guimenuitem>Providers</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click the cloud provider to view its details.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <menuchoice><guimenu>Monitoring</guimenu> <guimenuitem>Timelines</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select the following options:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Events: <emphasis role="strong">Management Events</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara>Category: <emphasis role="strong">Select All</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara>Severity: <emphasis role="strong">Select All</emphasis></simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Apply</emphasis>.</simpara>
 </listitem>
 </orderedlist>
 </section>
@@ -2215,7 +2240,7 @@ vm03,host1,vSphere3</screen>
 <simpara>Click the green <emphasis role="strong">Download Latest</emphasis> button to go to the <emphasis role="strong">Download Red Hat OpenStack Platform</emphasis> page.</simpara>
 </listitem>
 <listitem>
-<simpara>In the <emphasis role="strong">Product Software</emphasis> tab, locate the <literal>RHOSP V2V Image for Red Hat OpenStack Director 14.0._x_ (x86_64)</literal>, click <emphasis role="strong">Download Now</emphasis>, and save the image.</simpara>
+<simpara>In the <emphasis role="strong">Product Software</emphasis> tab, locate the <literal>RHOSP V2V Image for Red Hat OpenStack Director 14.0.<emphasis>x</emphasis> (x86_64)</literal>, click <emphasis role="strong">Download Now</emphasis>, and save the image.</simpara>
 <important>
 <simpara>IMS 1.1 requires Red Hat OpenStack Director 14.0.2.</simpara>
 <simpara>IMS 1.2 requires Red Hat OpenStack Director 14.0.3 or later.</simpara>
@@ -2268,6 +2293,7 @@ vm03,host1,vSphere3</screen>
 </itemizedlist>
 <bridgehead xml:id="Downloading_vddk_for_osp" renderas="sect4">Downloading the VMware Virtual Disk Development Kit</bridgehead>
 <orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
 <simpara>Navigate to <link xlink:href="https://www.vmware.com/support/pubs/">VMware Documentation</link>.</simpara>
 </listitem>

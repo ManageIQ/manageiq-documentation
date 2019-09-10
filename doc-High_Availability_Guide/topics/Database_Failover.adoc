@@ -5,7 +5,7 @@ The failover monitor daemon must run on all of the non-database {product-title_s
 
 [IMPORTANT]
 ====
-This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, non-database {product-title_short} appliances will not react to the failover event and will not be reconfigured against the new primary database host. 
+This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, non-database {product-title_short} appliances will not react to the failover event and will not be reconfigured against the new primary database host.
 ====
 
 [[failover_monitor]]
@@ -13,7 +13,7 @@ This configuration is crucial for high availability to work in your environment.
 
 Configure the failover monitor only on the non-database {product-title_short} appliances  with the following steps:
 
-. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
+. In the appliance console menu, select *Configure Application Database Failover Monitor*.
 . Select *Start Database Failover Monitor*.
 
 
@@ -26,13 +26,13 @@ Test that failover is working correctly between your databases with the followin
 . Simulate a failure by stopping the database on the primary server:
 +
 ----
-# systemctl stop rh-postgresql95-postgresql
+# systemctl stop postgresql.service
 ----
-+ 
++
 . To check the status of the database, run:
 +
 ----
-# systemctl status rh-postgresql95-postgresql
+# systemctl status postgresql.service
 ----
 +
 [NOTE]
@@ -57,7 +57,7 @@ Manual steps are required to reintroduce the failed primary database node back i
 To reintroduce the failed node, reinitialize the standby database.
 On the standby database-only appliance, configure the following:
 
-. In the appliance console menu, select *Configure Database Replication*. 
+. In the appliance console menu, select *Configure Database Replication*.
 . Select *Configure Server as Standby*.
 . Select `y` to remove all previous data from the server and configure it as a new standby database.
 . Set a unique identifier number for the standby server and enter the database name and credentials:
@@ -85,7 +85,7 @@ If re-using the node's identification number, select `y` to overwrite the existi
 
 The standby server will then run an initial synchronization with the primary database, and start locally in standby mode.
 
-Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`. 
+Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`.
 
 
 

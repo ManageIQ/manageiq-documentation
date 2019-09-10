@@ -1,0 +1,134 @@
+
+[[transformation_mappings]]
+== Transformation Mappings
+
+Management of Transformation Mappings is provided via the following collection:
+
+[source,data]
+----
+/api/transformation_mappings
+----
+
+The following actions are available on transformation_mappings:
+
+* link:#querying-transformation-mappings[Querying Transformation Mappings]
+* link:#creating-transformation-mappings[Creating Transformation Mappings]
+* link:#deleting-transformation-mappings[Deleting Transformation Mappings]
+
+[[querying-transformation-mappings]]
+=== Querying Transformation Mappings
+
+Querying all transformation mappings in the system is simply:
+
+----
+GET /api/transformation_mappings
+----
+
+And getting details of a specific Transformation Mapping is as follows:
+
+----
+GET /api/transformation_mappings/:id
+----
+
+[[creating-transformation-mappings]]
+=== Creation Transformation Mapping
+
+Transformation Mappings can be created via the _create_ POST action by posting the
+request directly to */api/transformation_mappings*
+
+[source,json]
+----
+{
+  "action": "create",
+  "resource": {
+    "name": "VMware to RHV",
+    "description": "Infrastructure Mapping for migration from VMware to RHV",
+    "transformation_mapping_items": [
+      { "source": "/api/clusters/00000000000001", "destination": "/api/clusters/00000000000003" },
+      { "source": "/api/data_stores/00000000000001", "destination": "/api/data_stores/00000000000013" },
+      { "source": "/api/data_stores/00000000000002", "destination": "/api/data_stores/00000000000013" },
+      { "source": "/api/data_stores/00000000000003", "destination": "/api/data_stores/00000000000013" },
+      { "source": "/api/data_stores/00000000000004", "destination": "/api/data_stores/00000000000013" },
+      { "source": "/api/lans/00000000000007", "destination": "/api/lans/00000000000034" },
+      { "source": "/api/lans/00000000000015", "destination": "/api/lans/00000000000034" },
+      { "source": "/api/lans/00000000000009", "destination": "/api/lans/00000000000032" },
+      { "source": "/api/lans/00000000000017", "destination": "/api/lans/00000000000032" }
+    ]
+  }
+}
+----
+
+==== Conversion Host attributes
+
+[cols="1<,1<,3<",options="header",]
+|=====================
+| Attribute Group              | Type    | Description
+| name                         | string  | Name of the Transformation Mapping
+| description                  | string  | Description of the Transformation Mapping
+| transformation_mapping_items | array  a| List of Transformation Mapping Items. Each item contains:
+
+                                           * `source`: the suffix of the source resource href
+                                           * `destination`: the suffix of the destination resource href
+|=====================
+
+==== Response
+
+[source,json]
+----
+{
+  "results": [
+    {
+      "href": "http://localhost:3000/api/transformation_mappings/00000000000001",
+      "id": "00000000000001",
+      "name": "VMware to RHV",
+      "description": "Infrastructure Mapping for migration from VMware to RHV",
+      "comments": null,
+      "state": null,
+      "options": {},
+      "tenant_id": null,
+      "created_at": "2019-09-09T09:56:59Z",
+      "updated_at": "2019-09-09T09:56:59Z"
+    }
+  ]
+}
+----
+
+[[deleting-transformation-mappings]]
+=== Deleting Transformation Mappings
+
+Transformation Mappings can be deleted via either the *delete* POST action or via the DELETE HTTP method.
+
+----
+POST /api/transformation_mappings/101
+----
+
+[source,json]
+----
+{
+  "action" : "delete"
+}
+----
+
+or simply:
+
+----
+DELETE /api/transformation_mappings/101
+----
+
+Deleting multiple Transformation Mappings can be done as follows:
+
+----
+POST /api/transformation_mappings
+----
+
+[source,json]
+----
+{
+  "action" : "delete",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/transformation_mappings/101" },
+    { "href" : "http://localhost:3000/api/transformation_mappings/102" },
+    ...
+  ]
+}
+----

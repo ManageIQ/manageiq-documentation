@@ -67,7 +67,7 @@ If you are using a third-party certificate, edit this command to install your ro
 ----
 [root@appliance2 ~]# restorecon -R -v /var/www/miq/vmdb/certs
 ----
-. Open the `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` file and uncomment and edit the `ssl` option:
+. Open the `/var/lib/pgsql/data/postgresql.conf` file and uncomment and edit the `ssl` option:
 +
 ----
 
@@ -84,7 +84,7 @@ ssl_key_file  = '/var/www/miq/vmdb/certs/postgres.key'  # (change requires resta
 ssl_ca_file   = '/var/www/miq/vmdb/certs/root.crt'      # (change requires restart)
 ----
 
-. Open the `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf` file and locate the two lines that contain the following:
+. Open the `/var/lib/pgsql/data/pg_hba.conf` file and locate the two lines that contain the following:
 +
 [source]
 ----
@@ -104,11 +104,11 @@ hostssl   all      all   all           md5
 +
 This changes the incoming communication protocol to use SSL and refuse any unencrypted PostgreSQL connections.
 
-. Start the `rh-postgresql95-postgresql` and `evmserverd` services so that the changes take effect:
+. Start the `postgresql` and `evmserverd` services so that the changes take effect:
 +
 [subs="verbatim,attributes"]
 ----
-[root@{product-title_short_l}1 ~]# systemctl start rh-postgresql95-postgresql
+[root@{product-title_short_l}1 ~]# systemctl start postgresql.service
 [root@{product-title_short_l}1 ~]# systemctl start evmserverd
 ----
 
@@ -156,7 +156,7 @@ This enhances the security of all database transactions in your {product-title} 
 
 ==== Hardening TLS Protocol Version
 
-After configuring the database to use SSL, protocol TLS version 1.2 is used as default. The older versions of this protocol (TLS 1.0 and 1.1) are still available for clients to choose. You can disable older versions by inserting the following lines into `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf`:
+After configuring the database to use SSL, protocol TLS version 1.2 is used as default. The older versions of this protocol (TLS 1.0 and 1.1) are still available for clients to choose. You can disable older versions by inserting the following lines into `/var/lib/pgsql/data/postgresql.conf`:
 
 ----
 ssl_ciphers = 'TLSv1.2:!aNULL'

@@ -1637,9 +1637,9 @@ log/\*.txt
 
 config/*
 
-/var/opt/rh/rh-postgresql95/lib/pgsql/data/\*.conf
+/var/lib/pgsql/data/\*.conf
 
-/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_log/*
+/var/lib/pgsql/data/pg_log/*
 
 /var/log/syslog*
 
@@ -2938,7 +2938,7 @@ To restore a database from a backup:
 . If you are restoring a database backup on a high availability environment, stop the `regmgrd` service. This is not required in other {product-title_short} configurations.
 +
 ----
-# systemctl stop rh-postgresql95-repmgr
+# systemctl stop repmgr10.service
 ----
 +
 . Log in to the appliance as the *root* user.
@@ -2965,7 +2965,7 @@ The appliance console menu may respond slowly if connections are open and the se
 . If you are restoring a database backup on a high availability environment, start the `regmgrd` service. This is not required in other {product-title_short} configurations.
 +
 ----
-# systemctl start rh-postgresql95-repmgr
+# systemctl start repmgr10.service
 ----
 
 [[binary-backup-and-restore-database]]
@@ -3032,26 +3032,26 @@ Restore your PostgreSQL binary backup using the following steps. This process wi
 . Rename the existing data directory.
 +
 -----
-# mv /var/opt/rh/rh-postgresql95/lib/pgsql/data /var/opt/rh/rh-postgresql95/lib/pgsql/data.backup
+# mv /var/lib/pgsql/data /var/lib/pgsql/data.backup
 -----
 +
 . Create a clean data directory.
 +
 -----
-# mkdir /var/opt/rh/rh-postgresql95/lib/pgsql/data
+# mkdir /var/lib/pgsql/data
 -----
 +
 . Unzip the tar file to the new directory.
 +
 -----
-# tar -xzf /var/www/miq/base.tar.gz -C /var/opt/rh/rh-postgresql95/lib/pgsql/data
+# tar -xzf /var/www/miq/base.tar.gz -C /var/lib/pgsql/data
 -----
 +
 . Correct permissions.
 +
 -----
-# chown postgres:postgres /var/opt/rh/rh-postgresql95/lib/pgsql/data
-# chmod 700 /var/opt/rh/rh-postgresql95/lib/pgsql/data
+# chown postgres:postgres /var/lib/pgsql/data
+# chmod 700 /var/lib/pgsql/data
 -----
 +
 . Restart the PostgreSQL and EVM servers.

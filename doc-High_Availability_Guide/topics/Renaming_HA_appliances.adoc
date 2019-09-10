@@ -7,7 +7,7 @@ When updating the hostnames of database-only appliances in a cluster, you must a
 
 Before updating the hostnames of your appliances, complete the following:
 
-. Note the hostnames of the active database (primary) appliance and the standby database appliances in the appliance console. 
+. Note the hostnames of the active database (primary) appliance and the standby database appliances in the appliance console.
 +
 You can verify this from the appliance summary screen of a database-only appliance, where the status for *Local Database Server* shows _primary_ or _standby_, for example:
 +
@@ -17,13 +17,13 @@ Local Database Server:   running (primary)
 ...
 ----
 +
-. On the non-database {product-title_short} appliances, stop the failover monitor: 
-.. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
+. On the non-database {product-title_short} appliances, stop the failover monitor:
+.. In the appliance console menu, select *Configure Application Database Failover Monitor*.
 .. Select *Stop Database Failover Monitor*.
 . On the _standby_ database-only appliances, stop the `postgresql` database service:
 +
 ----
-# systemctl stop rh-postgresql95-postgresql
+# systemctl stop postgresql.service
 ----
 +
 . Stop `evmserverd` on each non-database {product-title_short} appliance:
@@ -67,7 +67,7 @@ Re-configure replication on the database-only appliances, and restart services o
 
 On the primary database-only appliance, initialize the nodes in the database cluster to re-configure the database replication:
 
-. In the appliance console menu, select *Configure Database Replication*. 
+. In the appliance console menu, select *Configure Database Replication*.
 . Select *Configure Server as Primary*.
 . Set a unique identifier number for the server and enter the database name and credentials:
 .. Select a number to uniquely identify the node in the replication cluster.
@@ -91,7 +91,7 @@ The steps to re-configure the standby database-only appliances are similar to th
 
 On the standby database-only appliances, configure the following:
 
-. In the appliance console menu, select *Configure Database Replication*. 
+. In the appliance console menu, select *Configure Database Replication*.
 . Select *Configure Server as Standby*.
 . Select the database disk. {product-title_short} then activates the configuration.
 . Set a unique identifier number for the standby server and enter the database name and credentials:
@@ -109,9 +109,9 @@ The hostname or IP address must be visible to all appliances that communicate wi
 +
 .. Select `y` to configure the replication manager for automatic failover.
 .. Confirm that the replication standby server configuration details are correct, and select `y` to apply the configuration. The standby server will then run an initial synchronization with the primary database, and start locally in standby mode.
-. Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`. 
+. Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`.
 
-Repeat these steps on any additional standby database-only appliances. 
+Repeat these steps on any additional standby database-only appliances.
 
 [IMPORTANT]
 ====
@@ -129,8 +129,8 @@ If you are using non-dedicated database appliances, also stop `evmserverd` on th
 +
 After `evmserverd` has started successfully, all appliances will be able connect to the database.
 +
-. Restart the failover monitor on the non-database {product-title_short} appliances: 
-.. In the appliance console menu, select *Configure Application Database Failover Monitor*. 
+. Restart the failover monitor on the non-database {product-title_short} appliances:
+.. In the appliance console menu, select *Configure Application Database Failover Monitor*.
 .. Select *Start Database Failover Monitor*.
 
 
@@ -140,5 +140,3 @@ You can view a summary of the updated appliances by running `repmgr cluster show
 ====
 
 Your {product-title_short} environment is now re-configured for high availability.
-
-

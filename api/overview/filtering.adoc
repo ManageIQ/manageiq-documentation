@@ -39,11 +39,12 @@ NULL or nil can also be specified instead of quoted string
 
 
 When strings, value to be quoted in single or double quotes.
+When datetimes, only strict comparison operators are supported.
 
-Example Query VMs named sample* and return name and vendor
+Example Query VMs named sample*, created_on > 2019-09-01, and return name and vendor
 
 ----
-GET /api/vms?expand=resources&attributes=name,vendor&filter[]=name='sample%'
+GET /api/vms?expand=resources&attributes=name,vendor&filter[]=created_on>2019-09-01&filter[]=name='sample%'
 ----
 
 Example Query looking for services that are retired but have an unspecified service_id

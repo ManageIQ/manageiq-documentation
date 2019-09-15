@@ -13,13 +13,13 @@
 <productname>Red Hat Infrastructure Migration Solution</productname>
 <productnumber>1.2</productnumber>
 <abstract>
-    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.3 or Red Hat OpenStack Platform 13 or 14, using Red Hat CloudForms 4.7.6 or later.</para>
+    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.3 or Red Hat OpenStack Platform 13 or 14, using Red Hat CloudForms 4.7.4.</para>
 </abstract>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml"/>
 </info>
 <preface>
 <title>Preface</title>
-<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.2 enables you to migrate virtual machines from VMware 5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms:</simpara>
+<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.3 enables you to migrate virtual machines from VMware 5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms:</simpara>
 <variablelist>
 <varlistentry>
 <term>Red Hat Virtualization 4.3</term>
@@ -36,9 +36,9 @@
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Red Hat CloudForms 4.7.6 or later</term>
+<term>Red Hat CloudForms 5.0</term>
 <listitem>
-<simpara>Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/">Red Hat CloudForms 4.7</link> documentation for more information.</simpara>
+<simpara>Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0">Red Hat CloudForms 5.0</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -356,7 +356,7 @@
 <simpara>Preparing the VMware environment. See <xref linkend="Preparing_the_vmware_environment_for_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_2_rhv_environment"/>.</simpara>
+<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_3_rhv_environment"/>.</simpara>
 </listitem>
 <listitem>
 <simpara>Configuring the conversion hosts. See <xref linkend="Configuring_the_1_2_rhv_conversion_hosts_for_vddk"/>.</simpara>
@@ -448,7 +448,7 @@
 </orderedlist>
 </section>
 </section>
-<section xml:id="Preparing_the_1_2_rhv_environment">
+<section xml:id="Preparing_the_1_3_rhv_environment">
 <title>Preparing the Red Hat Virtualization environment</title>
 <simpara>Preparing the Red Hat Virtualization environment involves the following key steps:</simpara>
 <orderedlist numeration="arabic">
@@ -456,7 +456,7 @@
 <simpara>Installing and configuring Red Hat Virtualization 4.3. See <xref linkend="Installing_rhv_4_3"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Installing and configuring CloudForms 4.7.6 or later. See <xref linkend="Installing_cf_4_7_6_with_rhv"/>.</simpara>
+<simpara>Installing and configuring CloudForms 5.0. See <xref linkend="Installing_cf_5_0_with_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
 <note>
@@ -478,34 +478,37 @@
 <simpara>Compatible software versions:</simpara>
 <table frame="all" rowsep="1" colsep="1">
 <title>Software compatibility</title>
-<tgroup cols="3">
-<colspec colname="col_1" colwidth="33*"/>
-<colspec colname="col_2" colwidth="33*"/>
-<colspec colname="col_3" colwidth="33*"/>
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="25*"/>
+<colspec colname="col_3" colwidth="25*"/>
+<colspec colname="col_4" colwidth="25*"/>
 <thead>
 <row>
 <entry align="left" valign="top">Software</entry>
 <entry align="left" valign="top">IMS 1.1</entry>
 <entry align="left" valign="top">IMS 1.2</entry>
+<entry align="left" valign="top">IMS 1.3</entry>
 </row>
 </thead>
 <tbody>
 <row>
 <entry align="left" valign="top"><simpara>VMware</simpara></entry>
-<entry align="center" valign="top" namest="col_2" nameend="col_3"><simpara>5.5 or later</simpara></entry>
+<entry align="center" valign="top" namest="col_2" nameend="col_4"><simpara>5.5 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara>Red Hat Virtualization</simpara></entry>
 <entry align="left" valign="top"><simpara>4.2.8</simpara></entry>
-<entry align="left" valign="top"><simpara>4.3.4 or later</simpara></entry>
+<entry align="center" valign="top" namest="col_3" nameend="col_4"><simpara>4.3.4 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top" morerows="1"><simpara>CloudForms</simpara></entry>
 <entry align="left" valign="top"><simpara>4.7.0, with CFME 5.10.3</simpara></entry>
-<entry align="left" valign="top"><simpara>4.7.6 or later, with CFME 5.10.5</simpara></entry>
+<entry align="left" valign="top"><simpara>4.7.6, with CFME 5.10.5</simpara></entry>
+<entry align="left" valign="top"><simpara>5.0, with CFME xxxx</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top" namest="col_1" nameend="col_2"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis>
 You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only the migration functionality is affected.</simpara></entry>
 </row>
 </tbody>
@@ -565,24 +568,24 @@ You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only t
 </listitem>
 </orderedlist>
 </section>
-<section xml:id="Installing_cf_4_7_6_with_rhv">
-<title>Installing and configuring CloudForms 4.7.6 or later</title>
+<section xml:id="Installing_cf_5_0_with_rhv">
+<title>Installing and configuring CloudForms 5.0</title>
 <caution>
 <simpara>Removing or changing a provider will cause errors in the infrastructure mappings and migration plans.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Install Red Hat CloudForms 4.7.6 or later on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>.</simpara>
+<simpara>Install Red Hat CloudForms 5.0 or later on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>.</simpara>
 <note>
 <simpara>CFME 5.10.4 does not support migration.</simpara>
 </note>
 </listitem>
 <listitem>
-<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link>.</simpara>
+<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link>.</simpara>
 </listitem>
 <listitem>
-<simpara>Add Red Hat Virtualization to CloudForms as a provider. <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>Add Red Hat Virtualization to CloudForms as a provider. <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
 </listitem>
 </orderedlist>
 <simpara>Configure your conversion hosts with CloudForms to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
@@ -1938,7 +1941,7 @@ vm03,host1,vSphere3</screen>
 <simpara>Preparing the VMware environment. See <xref linkend="Preparing_the_vmware_environment_for_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_2_osp_environment"/>.</simpara>
+<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_3_osp_environment"/>.</simpara>
 </listitem>
 <listitem>
 <simpara>Configuring the conversion hosts. See <xref linkend="Configuring_the_1_2_osp_conversion_hosts_for_vddk"/>.</simpara>
@@ -2029,7 +2032,7 @@ vm03,host1,vSphere3</screen>
 </orderedlist>
 </section>
 </section>
-<section xml:id="Preparing_the_1_2_osp_environment">
+<section xml:id="Preparing_the_1_3_osp_environment">
 <title>Preparing the Red Hat OpenStack Platform environment</title>
 <simpara>Preparing the Red Hat OpenStack Platform environment involves the following key steps:</simpara>
 <orderedlist numeration="arabic">
@@ -2037,7 +2040,7 @@ vm03,host1,vSphere3</screen>
 <simpara>Installing and configuring Red Hat OpenStack Platform 13 or 14. See <xref linkend="Installing_osp_13_14"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Installing and configuring CloudForms 4.7.6 or later. See <xref linkend="Installing_cf_4_7_6_with_osp"/>.</simpara>
+<simpara>Installing and configuring CloudForms 5_0. See <xref linkend="Installing_cf_5_0_with_osp"/>.</simpara>
 </listitem>
 <listitem>
 <simpara>Creating the conversion hosts. See <xref linkend="Creating_osp_conversion_hosts"/>.</simpara>
@@ -2062,38 +2065,41 @@ vm03,host1,vSphere3</screen>
 <simpara>Compatible software versions:</simpara>
 <table frame="all" rowsep="1" colsep="1">
 <title>Software compatibility</title>
-<tgroup cols="3">
-<colspec colname="col_1" colwidth="33*"/>
-<colspec colname="col_2" colwidth="33*"/>
-<colspec colname="col_3" colwidth="33*"/>
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="25*"/>
+<colspec colname="col_3" colwidth="25*"/>
+<colspec colname="col_4" colwidth="25*"/>
 <thead>
 <row>
 <entry align="left" valign="top">Software</entry>
 <entry align="left" valign="top">IMS 1.1</entry>
 <entry align="left" valign="top">IMS 1.2</entry>
+<entry align="left" valign="top">IMS 1.3</entry>
 </row>
 </thead>
 <tbody>
 <row>
 <entry align="left" valign="top"><simpara>VMware</simpara></entry>
-<entry align="center" valign="top" namest="col_2" nameend="col_3"><simpara>5.5 or later</simpara></entry>
+<entry align="center" valign="top" namest="col_2" nameend="col_4"><simpara>5.5 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top" morerows="1"><simpara>CloudForms</simpara></entry>
 <entry align="left" valign="top"><simpara>4.7.0, with CFME 5.10.3</simpara></entry>
-<entry align="left" valign="top"><simpara>4.7.6 or later, with CFME 5.10.3</simpara></entry>
+<entry align="left" valign="top"><simpara>4.7.6, with CFME 5.10.3</simpara></entry>
+<entry align="left" valign="top"><simpara>5.0, with CFME xxxx</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top" namest="col_1" nameend="col_2"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis></simpara></entry>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis></simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara>Red Hat OpenStack Platform</simpara></entry>
-<entry align="left" valign="top" namest="col_2" nameend="col_3"><simpara>13 or 14</simpara></entry>
+<entry align="center" valign="top" namest="col_2" nameend="col_4"><simpara>13 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara>RHOSP V2V Image for Red Hat OpenStack Director</simpara></entry>
 <entry align="left" valign="top"><simpara>14.0.2</simpara></entry>
-<entry align="left" valign="top"><simpara>14.0.3</simpara></entry>
+<entry align="center" valign="top" namest="col_3" nameend="col_4"><simpara>14.0.3</simpara></entry>
 </row>
 </tbody>
 </tgroup>
@@ -2148,15 +2154,15 @@ vm03,host1,vSphere3</screen>
 </listitem>
 </orderedlist>
 </section>
-<section xml:id="Installing_cf_4_7_6_with_osp">
-<title>Installing and configuring CloudForms 4.7.6 or later</title>
+<section xml:id="Installing_cf_5_0_with_osp">
+<title>Installing and configuring CloudForms 5.0</title>
 <caution>
 <simpara>Removing or changing a provider will cause errors in the infrastructure mappings and migration plans.</simpara>
 </caution>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Install Red Hat CloudForms 4.7.6 or later. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>.</simpara>
+<simpara>Install Red Hat CloudForms 5.0. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>.</simpara>
 <note>
 <simpara>CFME 5.10.4 does not support migration.</simpara>
 </note>
@@ -2176,10 +2182,10 @@ vm03,host1,vSphere3</screen>
 </orderedlist>
 </listitem>
 <listitem>
-<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara>Add Red Hat OpenStack Platform to CloudForms as a cloud provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/index#adding_openstack_cloud_providers">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>Add Red Hat OpenStack Platform to CloudForms as a cloud provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/index#adding_openstack_cloud_providers">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
 <important>
 <simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab. You will add the SSH private key when you configure the conversion hosts.</simpara>
 </important>

@@ -11,34 +11,34 @@
 
 <date>2019-09-16</date>
 <productname>Red Hat Infrastructure Migration Solution</productname>
-<productnumber>1.1</productnumber>
+<productnumber>1.3</productnumber>
 <abstract>
-    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.2 or Red Hat OpenStack Platform 13 or 14, using Red Hat CloudForms 4.7.0.</para>
+    <para>This guide describes how to migrate VMware virtual machines to Red Hat Virtualization 4.3 or Red Hat OpenStack Platform 13 or 14, using Red Hat CloudForms 5.0.</para>
 </abstract>
 <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml"/>
 </info>
 <preface>
 <title>Preface</title>
-<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware 5.5 (and later) to Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms.</simpara>
+<simpara>Red Hat Infrastructure Migration Solution (IMS) 1.3 enables you to migrate virtual machines from VMware 5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms:</simpara>
 <variablelist>
 <varlistentry>
-<term>Red Hat Virtualization 4.2</term>
+<term>Red Hat Virtualization 4.3</term>
 <listitem>
-<simpara>Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/">Red Hat Virtualization 4.2</link> documentation for more information.</simpara>
+<simpara>Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/">Red Hat Virtualization 4.3</link> documentation for more information.</simpara>
 <simpara>See <xref linkend="Migrating_from_vmware_to_rhv"/>.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
 <term>Red Hat OpenStack Platform 13 and 14</term>
 <listitem>
-<simpara>Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13">Red Hat OpenStack Platform 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 14</link> documentation for more information.</simpara>
+<simpara>Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 13</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14">Red Hat OpenStack Platform 14</link> documentation for more information.</simpara>
 <simpara>See <xref linkend="Migrating_from_vmware_to_osp"/>.</simpara>
 </listitem>
 </varlistentry>
 <varlistentry>
-<term>Red Hat CloudForms 4.7.0</term>
+<term>Red Hat CloudForms 5.0</term>
 <listitem>
-<simpara>Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/">Red Hat CloudForms 4.7</link> documentation for more information.</simpara>
+<simpara>Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0">Red Hat CloudForms 5.0</link> documentation for more information.</simpara>
 </listitem>
 </varlistentry>
 </variablelist>
@@ -280,9 +280,6 @@
 </listitem>
 <listitem>
 <simpara>Prepare your users for downtime.</simpara>
-<important>
-<simpara>Currently, IMS supports only cold migration. Virtual machines are powered off gracefully as part of the migration process.</simpara>
-</important>
 </listitem>
 <listitem>
 <simpara>Stagger the migration schedules.</simpara>
@@ -356,7 +353,10 @@
 <simpara>Preparing the VMware environment. See <xref linkend="Preparing_the_vmware_environment_for_rhv"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_1_rhv_environment"/>.</simpara>
+<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_3_rhv_environment"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Configuring the conversion hosts. See <xref linkend="Configuring_the_1_2_rhv_conversion_hosts_for_vddk"/>.</simpara>
 </listitem>
 </orderedlist>
 <note>
@@ -378,7 +378,15 @@
 </orderedlist>
 <section xml:id="Preparing_the_vmware_network_rhv">
 <title>Preparing the VMware network</title>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
 <simpara>Extend the VMware network to the Red Hat Virtualization environment.</simpara>
+</listitem>
+<listitem>
+<simpara>Ensure that the VMware network provides high throughput (10 GbE) and does not affect production virtual machines (for example, a backup network).</simpara>
+</listitem>
+</orderedlist>
 <important>
 <itemizedlist>
 <listitem>
@@ -445,23 +453,20 @@
 </orderedlist>
 </section>
 </section>
-<section xml:id="Preparing_the_1_1_rhv_environment">
+<section xml:id="Preparing_the_1_3_rhv_environment">
 <title>Preparing the Red Hat Virtualization environment</title>
 <simpara>Preparing the Red Hat Virtualization environment involves the following key steps:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Installing and configuring Red Hat Virtualization 4.2. See <xref linkend="Installing_rhv_4_2"/>.</simpara>
+<simpara>Installing and configuring Red Hat Virtualization 4.3. See <xref linkend="Installing_rhv_4_3"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Installing and configuring CloudForms 4.7.0. See <xref linkend="Installing_cf_4_7_0_with_rhv"/>.</simpara>
-</listitem>
-<listitem>
-<simpara>Configuring the conversion hosts with Ansible playbooks. See <xref linkend="Configuring_the_1_1_rhv_conversion_hosts_for_vddk"/>.</simpara>
-</listitem>
-<listitem>
-<simpara>Authenticating the conversion hosts in CloudForms. See <xref linkend="Authenticating_conversion_hosts_in_cloudforms_rhv"/></simpara>
+<simpara>Installing and configuring CloudForms 5.0. See <xref linkend="Installing_cf_5_0_with_rhv"/>.</simpara>
 </listitem>
 </orderedlist>
+<note>
+<simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, SSH transformation is a fallback option. See <xref linkend="Configuring_the_rhv_environment_for_ssh_transformation"/>.</simpara>
+</note>
 <section xml:id="Target_prerequisites_rhv">
 <title>Prerequisites</title>
 <simpara>The following prerequisites apply:</simpara>
@@ -478,28 +483,38 @@
 <simpara>Compatible software versions:</simpara>
 <table frame="all" rowsep="1" colsep="1">
 <title>Software compatibility</title>
-<tgroup cols="2">
-<colspec colname="col_1" colwidth="50*"/>
-<colspec colname="col_2" colwidth="50*"/>
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="25*"/>
+<colspec colname="col_3" colwidth="25*"/>
+<colspec colname="col_4" colwidth="25*"/>
 <thead>
 <row>
 <entry align="left" valign="top">Software</entry>
-<entry align="left" valign="top">Version</entry>
+<entry align="left" valign="top">IMS 1.1</entry>
+<entry align="left" valign="top">IMS 1.2</entry>
+<entry align="left" valign="top">IMS 1.3</entry>
 </row>
 </thead>
 <tbody>
 <row>
 <entry align="left" valign="top"><simpara>VMware</simpara></entry>
-<entry align="left" valign="top"><simpara>5.5 or later</simpara></entry>
+<entry align="center" valign="top" namest="col_2" nameend="col_4"><simpara>5.5 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara>Red Hat Virtualization</simpara></entry>
 <entry align="left" valign="top"><simpara>4.2.8</simpara></entry>
+<entry align="center" valign="top" namest="col_3" nameend="col_4"><simpara>4.3.4 or later</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top"><simpara>CloudForms</simpara></entry>
-<entry align="left" valign="top"><simpara>4.7.0, with the CFME 5.10.3 virtual appliance</simpara>
-<simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis></simpara></entry>
+<entry align="left" valign="top" morerows="1"><simpara>CloudForms</simpara></entry>
+<entry align="left" valign="top"><simpara>4.7.0, with CFME 5.10.3</simpara></entry>
+<entry align="left" valign="top"><simpara>4.7.6, with CFME 5.10.5</simpara></entry>
+<entry align="left" valign="top"><simpara>5.0, with CFME xxxx</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis>
+You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only the migration functionality is affected.</simpara></entry>
 </row>
 </tbody>
 </tgroup>
@@ -507,15 +522,18 @@
 </listitem>
 </itemizedlist>
 </section>
-<section xml:id="Installing_rhv_4_2">
-<title>Installing and configuring Red Hat Virtualization 4.2</title>
+<section xml:id="Installing_rhv_4_3">
+<title>Installing and configuring Red Hat Virtualization 4.3</title>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Install Red Hat Virtualization Manager 4.2 on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager">Installing the Red Hat Virtualization Manager</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>.</simpara>
+<simpara>Install Red Hat Virtualization Manager 4.3.4 on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager">Installing the Red Hat Virtualization Manager</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara>Install Red Hat Virtualization Host 4.2 or Red Hat Enterprise Linux 7.6 on physical machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH">Installing Red Hat Virtualization Host</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts">Installing Red Hat Enterprise Linux Hosts</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>.</simpara>
+<simpara>Install Red Hat Virtualization Host 4.3.4 or Red Hat Enterprise Linux 7.6 on the host machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH">Installing Red Hat Virtualization Host</link> or <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts">Installing Red Hat Enterprise Linux Hosts</link> in the <emphasis>Red Hat Virtualization Installation Guide</emphasis>.</simpara>
+<note>
+<simpara>Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities.</simpara>
+</note>
 </listitem>
 <listitem>
 <simpara>Enable the following ports in the conversion host network:</simpara>
@@ -536,18 +554,18 @@
 </itemizedlist>
 </listitem>
 <listitem>
-<simpara>Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage">Storage</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
+<simpara>Create and attach data and ISO storage domains to the data center, ensuring that the data domains have sufficient space for the migrated virtual machines. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#chap-Storage">Storage</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
 <note>
 <simpara>IMS only supports shared storage, such as NFS, iSCSI, or FCP. Local storage is not supported.</simpara>
-<simpara>Although the ISO storage domain has been deprecated, it is required for migration.</simpara>
+<simpara>Although the ISO storage domain has been deprecated in RHV 4.3, it is required for migration.</simpara>
 </note>
 </listitem>
 <listitem>
-<simpara>Upload the VirtIO and RHV Guest Tools image files to the ISO storage domain. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
-<simpara>The VirtIO file name must include the version number: <literal>virtio-win-<emphasis>version</emphasis>.iso</literal>. The guest tools are required for migrating Windows virtual machines.</simpara>
+<simpara>Upload the VirtIO and RHV Guest Tools image files to the ISO storage domain. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain">Uploading the VirtIO and Guest Tool Image Files to an ISO Storage Domain</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
+<simpara>The VirtIO file name must include the version number (<literal>virtio-win-<emphasis>version</emphasis>.iso</literal>). The guest tools are required for migrating Windows virtual machines.</simpara>
 </listitem>
 <listitem>
-<simpara>Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools">Creating MAC Address Pools</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
+<simpara>Optionally, you can create a MAC address pool that includes the MAC addresses of the VMware virtual machines to be migrated. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools">Creating MAC Address Pools</link> in the <emphasis>Red Hat Virtualization Administration Guide</emphasis>.</simpara>
 <important>
 <simpara>If the Red Hat Virtualization MAC address pool range overlaps the VMware MAC address range, you must ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines. Otherwise, the migration will fail.</simpara>
 <simpara>If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in Red Hat Virtualization.</simpara>
@@ -555,32 +573,32 @@
 </listitem>
 </orderedlist>
 </section>
-<section xml:id="Installing_cf_4_7_0_with_rhv">
-<title>Installing and configuring CloudForms 4.7.0</title>
+<section xml:id="Installing_cf_5_0_with_rhv">
+<title>Installing and configuring CloudForms 5.0</title>
 <caution>
 <simpara>Removing or changing a provider will cause errors in the infrastructure mappings and migration plans.</simpara>
 </caution>
-<orderedlist xml:id="Cloudforms_for_rhv" numeration="arabic">
+<orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Install Red Hat CloudForms 4.7.0 (with CFME 5.10.3) on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>.</simpara>
-<important>
+<simpara>Install Red Hat CloudForms 5.0 or later on the Manager machine. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/installing_red_hat_cloudforms_on_red_hat_virtualization">Installing Red Hat CloudForms on Red Hat Virtualization</link>.</simpara>
+<note>
 <simpara>CFME 5.10.4 does not support migration.</simpara>
-</important>
+</note>
 </listitem>
 <listitem>
-<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link>.</simpara>
 </listitem>
 <listitem>
-<simpara>Add Red Hat Virtualization to CloudForms as a provider. <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>Add Red Hat Virtualization to CloudForms as a provider. <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#adding_a_red_hat_virtualization_provider">Adding a Red Hat Virtualization Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
 </listitem>
 </orderedlist>
-<simpara>Configure your conversion hosts with Ansible playbooks to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
+<simpara>Configure your conversion hosts with CloudForms to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
 <note>
 <simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, SSH transformation is a fallback option. See <xref linkend="Configuring_the_rhv_environment_for_ssh_transformation"/>.</simpara>
 </note>
 </section>
-<section xml:id="Configuring_the_1_1_rhv_conversion_hosts_for_vddk">
+<section xml:id="Configuring_the_1_2_rhv_conversion_hosts_for_vddk">
 <title>Configuring the conversion hosts</title>
 <itemizedlist>
 <title>Prerequisite</title>
@@ -613,185 +631,65 @@
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Create the <literal>extra_vars.yml</literal> file for the conversion host parameters. See <xref linkend="extra_vars_rhv"/>.</simpara>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>Create the <literal>secure_vars.yml</literal> file for secure variables. See <xref linkend="secure_vars_rhv"/>.</simpara>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
 </listitem>
 <listitem>
-<simpara>Configure and verify the conversion hosts by running the Ansible playbooks. See <xref linkend="Configuring_host_with_playbooks_rhv"/>.</simpara>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen, add the provider details:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Cluster</emphasis> and click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
 </orderedlist>
-<section xml:id="extra_vars_rhv">
-<title>Creating the <literal>extra_vars.yml</literal> file</title>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Log in to the Manager machine using SSH.</simpara>
 </listitem>
 <listitem>
-<simpara>Install the <literal>ovirt-ansible-v2v-conversion-host</literal> package:</simpara>
-<screen># yum install ovirt-ansible-v2v-conversion-host</screen>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
 <listitem>
-<simpara>Create the <literal>extra_vars.yml</literal> file with the following parameters:</simpara>
-<screen>---
-v2v_host_type: rhv
-
-# Transport methods to configure on the conversion host. Default is "vddk".
-v2v_transport_methods:
-  - <emphasis>vddk</emphasis> <co xml:id="CO1-1"/>
-
-# Maximum number of concurrent conversions per host. Default is "10".
-v2v_max_concurrent_conversions: <emphasis>10</emphasis> <co xml:id="CO1-2"/>
-
-# File name of VDDK package
-v2v_vddk_package_name: "VMware-vix-disklib-<emphasis>version</emphasis>.x86_64.tar.gz" <co xml:id="CO1-3"/>
-
-# URL of VDDK package
-v2v_vddk_package_url: "http://<emphasis>path_to_vddk_package</emphasis>/{{ v2v_vddk_package_name }}" <co xml:id="CO1-4"/>
-
-# Name of the CloudForms provider to which the conversion host belongs
-manageiq_provider_name: RHV
-
-# Base URL of CloudForms machine
-manageiq_url: "https://<emphasis>CloudForms_FQDN</emphasis>" <co xml:id="CO1-5"/>
-
-# Whether to validate certificate of CloudForms server. Default is "true".
-manageiq_validate_certs: <emphasis>true</emphasis> <co xml:id="CO1-6"/>
-
-manageiq_zone_id: "42000000000001"' <co xml:id="CO1-7"/>
-
-# Empty vmware_hosts variable for conversion_host_disable.yml
-vmware_hosts: ""
-
-# List of infrastructure providers
-# Each provider is a dictionary with 3 attributes: "name", "hostname", and "connection_configurations"
-manageiq_providers:
-  - name: "<emphasis>RHV</emphasis>"
-    hostname: <emphasis>Manager_FQDN_or_IP_address</emphasis>
-    connection_configurations:
-      - endpoint:
-          role: "default"
-          certificate_authority: | <co xml:id="CO1-8"/>
-            -----BEGIN CERTIFICATE-----
-            <emphasis>MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ....</emphasis>
-            -----END CERTIFICATE-----</screen>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen, add the conversion hosts' SSH key and the transformation method:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
+<simpara>The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is <literal>/etc/pki/ovirt-engine/keys/engine_id_rsa</literal> on the Manager machine.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">VDDK</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
 </listitem>
 </orderedlist>
-<calloutlist>
-<callout arearefs="CO1-1">
-<para>Change to <literal>ssh</literal> if you are using SSH transformation.</para>
-</callout>
-<callout arearefs="CO1-2">
-<para><literal>v2v_max_concurrent_conversions</literal> is the maximum number of concurrent conversions per host. The default value is <literal>10</literal>. For VDDK transformation, do not set this value higher than <literal>20</literal>.</para>
-</callout>
-<callout arearefs="CO1-3">
-<para>Update the <literal>v2v_vddk_package_name</literal> with the correct version.</para>
-</callout>
-<callout arearefs="CO1-4">
-<para><literal>v2v_vddk_package_url</literal> is the path to the VDDK archive file that you downloaded.</para>
-</callout>
-<callout arearefs="CO1-5">
-<para><literal>manageiq_url</literal> is the FQDN of the CloudForms machine.</para>
-</callout>
-<callout arearefs="CO1-6">
-<para>You can set <literal>manageiq_validate_certs</literal> to <literal>false</literal> if you do not want to validate the CloudForms CA certificate. The default value is <literal>true</literal>.</para>
-</callout>
-<callout arearefs="CO1-7">
-<para>To obtain the <literal>manageiq_zone_id</literal>, enter this command on the CloudForms machine:</para>
-<screen># curl -sk -u admin \'https://<emphasis>CloudForms_FQDN</emphasis>/api/zones/?filter\[\]=name=RHV&amp;expand=resources&amp;attributes=zone</screen>
-</callout>
-<callout arearefs="CO1-8">
-<para>The <literal>certificate_authority</literal> is stored as <literal>/etc/pki/ovirt-engine/apache-ca.pem</literal> on the Manager machine.</para>
-</callout>
-</calloutlist>
-</section>
-<section xml:id="secure_vars_rhv">
-<title>Creating the <literal>secure_vars.yml</literal> file</title>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Create an encrypted <literal>secure_vars.yml</literal> file:</simpara>
-<screen># ansible-vault create secure_vars.yml</screen>
 </listitem>
 <listitem>
-<simpara>Add the following parameters and save the file:</simpara>
-<screen>---
-# CloudForms "admin" user, for connecting to CloudForms
-manageiq_username: "<emphasis>username</emphasis>"
-
-# CloudForms "admin" password:
-manageiq_password: "<emphasis>password</emphasis>"
-
-# SSH private key to connect to VMware hypervisors for SSH transformation <co xml:id="CO2-1"/>
-v2v_ssh_private_key: |
-  -----BEGIN RSA PRIVATE KEY-----
-  <emphasis>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....</emphasis>
-  -----END RSA PRIVATE KEY-----</screen>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
 </listitem>
 </orderedlist>
-<calloutlist>
-<callout arearefs="CO2-1">
-<para>(SSH transformation) This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.</para>
-<important>
-<simpara>If the Red Hat Virtualization conversion host has an existing SSH private key, the <literal>v2v_ssh_private_key</literal> value does not overwrite it. You must delete the old key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before running the <literal>conversion_host_enable</literal> playbook.</simpara>
-</important>
-</callout>
-</calloutlist>
-</section>
-<section xml:id="Configuring_host_with_playbooks_rhv">
-<title>Configuring and verifying the conversion hosts</title>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Run the <literal>conversion_host_enable.yml</literal> playbook to configure each conversion host:</simpara>
-<screen># ansible-playbook -i <emphasis>conversion_host</emphasis>, -b \ <co xml:id="CO3-1"/>
-    -e "ansible_ssh_private_key_file=/etc/pki/ovirt-engine/keys/engine_id_rsa" \
-    -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
-    /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml</screen>
-<calloutlist>
-<callout arearefs="CO3-1">
-<para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
-</callout>
-</calloutlist>
-<caution>
-<simpara>Running the <literal>conversion_host_enable.yml</literal> playbook more than once on the same host creates multiple entries in the CloudForms database for that host.</simpara>
-<simpara>If you need to run the <literal>conversion_host_enable.yml</literal> playbook again, remove the host’s existing database entry by running <literal>conversion_host_disable.yml</literal> on the host:</simpara>
-<screen># ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml</screen>
-</caution>
-</listitem>
-<listitem>
-<simpara>Run the <literal>conversion_host_check.yml</literal> playbook to verify the configuration:</simpara>
-<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, -c local \ <co xml:id="CO4-1"/>
-    -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml</screen>
-<calloutlist>
-<callout arearefs="CO4-1">
-<para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
-</callout>
-</calloutlist>
-</listitem>
-</orderedlist>
-<simpara>You can authenticate the conversion hosts in CloudForms.</simpara>
-</section>
-</section>
-<section xml:id="Authenticating_conversion_hosts_in_cloudforms_rhv">
-<title>Authenticating the conversion hosts in CloudForms</title>
-<simpara>Perform the following procedure for each conversion host:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Infrastructure</guisubmenu> <guimenuitem>Hosts</guimenuitem></menuchoice> and select a Red Hat Virtualization conversion host.</simpara>
-</listitem>
-<listitem>
-<simpara>Click the <emphasis role="strong">Configuration</emphasis> drop-down button and select <emphasis role="strong">Edit Selected items</emphasis>.</simpara>
-</listitem>
-<listitem>
-<simpara>In the <emphasis role="strong">Default</emphasis> tab of the Endpoints section, enter the <emphasis role="strong">Username</emphasis> and the <emphasis role="strong">Password</emphasis> for <literal>root</literal>.</simpara>
-</listitem>
-<listitem>
-<simpara>Click <emphasis role="strong">Validate</emphasis> and wait for validation to complete.</simpara>
-</listitem>
-<listitem>
-<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
-</listitem>
-</orderedlist>
+<simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
 <simpara>You can migrate your virtual machines.</simpara>
 <simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
 </section>
@@ -801,9 +699,9 @@ v2v_ssh_private_key: |
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO5-1"/></screen>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO1-1"/></screen>
 <calloutlist>
-<callout arearefs="CO5-1">
+<callout arearefs="CO1-1">
 <para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
 </calloutlist>
@@ -1268,68 +1166,56 @@ vm03,host1,vSphere3</screen>
 <simpara>The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is <literal>20</literal> for a provider and <literal>3</literal> for five conversion hosts, the maximum number of concurrent migrations is <literal>20</literal>, not <literal>15</literal> (<literal>5</literal> conversion hosts <literal>x 3</literal> concurrent migrations per host).</simpara>
 <simpara>An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.</simpara>
 <simpara>A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.</simpara>
+<variablelist>
+<varlistentry>
+<term>Changing the maximum number of concurrent migrations for all conversion hosts or providers</term>
+<listitem>
+</listitem>
+</varlistentry>
+</variablelist>
 <caution>
 <simpara>If you are using VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
 </caution>
-<variablelist>
-<varlistentry>
-<term>Changing the maximum number of concurrent migrations for all conversion hosts</term>
-<listitem>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
+<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>Select a new <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis>. The default is <literal>10</literal>.</simpara>
+<simpara>In the <emphasis role="strong">Migration Throttling</emphasis> tab, select a value for <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> or <emphasis role="strong">Maximum concurrent migrations per provider</emphasis> and click <emphasis role="strong">Apply</emphasis>.</simpara>
+<simpara>The value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is constrained so that it cannot be greater than <emphasis role="strong">Maximum concurrent migrations per provider</emphasis>.</simpara>
 <note>
 <simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work.</simpara>
 </note>
 </listitem>
 </orderedlist>
-</listitem>
-</varlistentry>
-</variablelist>
 <variablelist>
 <varlistentry>
-<term>Changing the maximum number of concurrent migrations for a provider</term>
+<term>Changing the maximum number of concurrent migrations for a specific conversion host</term>
 <listitem>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
-</listitem>
-<listitem>
 <simpara>Enter the following command:</simpara>
-<screen># vmdb
-# rails console
-irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV").custom_set("Max Transformation Runners", <emphasis>30</emphasis>) <co xml:id="CO6-1"/></screen>
-<calloutlist>
-<callout arearefs="CO6-1">
-<para><literal>Max Transformation Runners</literal> is the maximum number of concurrent migrations. The default value is <literal>20</literal> for a provider.</para>
-</callout>
-</calloutlist>
 </listitem>
 </orderedlist>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term>Getting the maximum number of concurrent migrations for a provider</term>
-<listitem>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
-</listitem>
-<listitem>
-<simpara>Enter the following command:</simpara>
-<screen># vmdb
-# rails console
-irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV").custom_get("Max Transformation Runners")</screen>
-</listitem>
-</orderedlist>
+<screen># curl -sk -u <emphasis>username</emphasis>:_password_ <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis></emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>15</emphasis>}}</emphasis> <co xml:id="CO2-1"/> <co xml:id="CO2-2"/> <co xml:id="CO2-3"/> <co xml:id="CO2-4"/></screen>
 </listitem>
 </varlistentry>
 </variablelist>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para><literal>username</literal> and <literal>password</literal> are the username and password for CloudForms.</para>
+</callout>
+<callout arearefs="CO2-2">
+<para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
+</callout>
+<callout arearefs="CO2-3">
+<para>To obtain a <literal>conversion_host_id</literal>, enter the following command:</para>
+<screen># curl -sk -u <emphasis>username:password</emphasis> <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/</emphasis></screen>
+</callout>
+<callout arearefs="CO2-4">
+<para><literal>max_concurrent_tasks</literal> is the maximum number of concurrent migrations. The default is <literal>10</literal>.</para>
+</callout>
+</calloutlist>
 </section>
 </chapter>
 <chapter xml:id="Troubleshooting_rhv">
@@ -1353,54 +1239,34 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <simpara><xref linkend="Known_issues_rhv"/> provides information about issues that will be addressed in a future release.</simpara>
 <section xml:id="Migration_logs_rhv">
 <title>Migration logs</title>
-<simpara>You can check the following logs identify the cause of a migration error:</simpara>
+<simpara>You can check the following logs to identify the cause of a migration error:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Conversion host logs. See <xref linkend="Conversion_host_logs_rhv"/>.</simpara>
+<simpara>Conversion host logs. See <xref linkend="conversion_host_playbook_logs_rhv"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Playbook logs, if you are using premigration or postmigration Ansible playbooks. See <xref linkend="conversion_host_playbook_logs_rhv"/>.</simpara>
 </listitem>
 <listitem>
 <simpara>CloudForms migration log. See <xref linkend="Cloudforms_migration_log_rhv"/>.</simpara>
 </listitem>
 </itemizedlist>
-<simpara>The conversion host logs and the CloudForms migration log can help with troubleshooting.</simpara>
-<section xml:id="Conversion_host_logs_rhv">
-<title>Accessing the conversion host logs</title>
+<section xml:id="conversion_host_playbook_logs_rhv">
+<title>Downloading the conversion host and playbook logs</title>
+<simpara>You can download the conversion host and playbooks logs in CloudForms.</simpara>
 <simpara>When disk migration starts, two logs are created in the conversion host:</simpara>
 <itemizedlist>
 <listitem>
-<simpara><literal>virt-v2v</literal>: Debug output from <literal>virt-v2v</literal> itself. This log tracks the core of the virtual machine migration process, including <literal>libguestfs</literal> traces and disk migration details. You can download access this log on the conversion host or download it in CloudForms.</simpara>
+<simpara><literal>virt-v2v</literal>: Debug output from <literal>virt-v2v</literal> itself. This log tracks the core of the virtual machine migration process, including <literal>libguestfs</literal> traces and disk migration details.</simpara>
 </listitem>
 <listitem>
-<simpara><literal>virt-v2v-wrapper</literal>: Log of the daemonizing wrapper for <literal>virt-v2v</literal>. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and <literal>virt-v2v</literal> error reporting. You can access this log on the conversion host.</simpara>
+<simpara><literal>virt-v2v-wrapper</literal>: Log of the daemonizing wrapper for <literal>virt-v2v</literal>. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and <literal>virt-v2v</literal> error reporting.</simpara>
 </listitem>
 </itemizedlist>
 <important>
-<simpara>If you need to open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, you must submit both the migration (<literal>virt-v2v</literal>) log and <literal>virt-v2v-wrapper</literal> log for analysis.</simpara>
+<simpara>If you open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, you will need to submit both the <literal>virt-v2v</literal> log and <literal>virt-v2v-wrapper</literal> log for analysis and troubleshooting.</simpara>
 </important>
-<simpara>To access the <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal> logs on the conversion host:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Log in to the conversion host using SSH.</simpara>
-<simpara>If you are not sure which conversion host to log in to, click the information icon (<inlinemediaobject>
-<imageobject>
-<imagedata fileref="images/Info_icon.png"/>
-</imageobject>
-<textobject><phrase>20</phrase></textobject>
-</inlinemediaobject>) of a virtual machine in the migration plan details view.</simpara>
-</listitem>
-<listitem>
-<simpara>Go to <literal>/var/log/vdsm/import/</literal> to access the logs for each migration:</simpara>
-<itemizedlist>
-<listitem>
-<simpara><literal>virt-v2v</literal> log: <literal>v2v-import-<emphasis>date</emphasis>-<emphasis>log_number</emphasis>.log</literal></simpara>
-</listitem>
-<listitem>
-<simpara><literal>virt-v2v-wrapper</literal> log: <literal>v2v-import-<emphasis>date</emphasis>-<emphasis>log_number</emphasis>-wrapper.log</literal></simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-</orderedlist>
-<simpara>To download the <literal>virt-v2v</literal> log in CloudForms:</simpara>
+<simpara>To access the conversion host logs and the playbook logs:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu><emphasis role="strong">Migration</emphasis></guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
@@ -1409,17 +1275,29 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <simpara>Click a completed migration plan to view its details.</simpara>
 </listitem>
 <listitem>
-<simpara>Click <menuchoice><guimenu>Download Log</guimenu> <guimenuitem>Migration Log</guimenuitem></menuchoice>.</simpara>
+<simpara>Click <emphasis role="strong">Download Log</emphasis> of a virtual machine and select a log from the dropdown list:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">Premigration log</emphasis> This option only appears if a premigration playbook is used.</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Migration log</emphasis> The <emphasis role="strong">Migration log</emphasis> is the <literal>virt-v2v</literal> log.</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Virt-v2v-wrapper log</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Postmigration log</emphasis> This option only appears if a postmigration playbook is used.</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 </orderedlist>
 </section>
 <section xml:id="Cloudforms_migration_log_rhv">
 <title>Accessing the CloudForms migration log</title>
-<simpara>This log traces the orchestration of the virtual machine migration in CloudForms.</simpara>
-<simpara>To access the CloudForms migration log:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
+<simpara>Log into the CloudForms machine using SSH.</simpara>
 </listitem>
 <listitem>
 <simpara>The migration log is <literal>/var/www/miq/vmdb/log/automation.log</literal>.</simpara>
@@ -1582,12 +1460,6 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <listitem>
 <simpara>Copying the VMware keys to the conversion hosts. See <xref linkend="Copying_vmware_keys_to_rhv_conversion_hosts"/>.</simpara>
 </listitem>
-<listitem>
-<simpara>Configuring secure remote login to the VMware hypervisors. See <xref linkend="Configuring_secure_remote_login_to_the_vmware_hypervisors"/>.</simpara>
-</listitem>
-<listitem>
-<simpara>Authenticating the conversion hosts in CloudForms. See <xref linkend="Authenticating_conversion_hosts_in_cloudforms_app_ssh"/>.</simpara>
-</listitem>
 </orderedlist>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv">
 <title>Configuring the VMware hypervisors for SSH transformation</title>
@@ -1631,17 +1503,74 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </section>
 <section xml:id="Configuring_the_rhv_conversion_hosts_for_ssh">
 <title>Configuring the conversion hosts</title>
-<simpara>Follow the procedures in <xref linkend="Configuring_the_1_1_rhv_conversion_hosts_for_vddk"/> with the following changes:</simpara>
-<itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
-<simpara><xref linkend="extra_vars_rhv"/></simpara>
-<simpara>Specify <literal>ssh</literal> for the <literal>v2v_transport_methods</literal> parameter in <literal>extra_vars.yml</literal>.</simpara>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara><xref linkend="secure_vars_rhv"/></simpara>
-<simpara>Copy the SSH private key for connecting to the VMware hypervisors for the <literal>v2v_ssh_private_key</literal> parameter in <literal>secure_vars.yml</literal>.</simpara>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
 </listitem>
-</itemizedlist>
+<listitem>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen, add the provider details:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Cluster</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen, add the conversion hosts' SSH key and the transformation method:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
+<simpara>The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is <literal>/etc/pki/ovirt-engine/keys/engine_id_rsa</literal> on the Manager machine.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">SSH</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
+<important>
+<simpara>If a host already has an SSH private key, you must delete the key manually in <literal>/var/lib/vdsm/.ssh/id_rsa</literal> before configuring it as a conversion host. Conversion host configuration does not overwrite existing keys.</simpara>
+</important>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
+<simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
 </section>
 <section xml:id="Copying_vmware_keys_to_rhv_conversion_hosts">
 <title>Copying the VMware SSH keys to the conversion hosts</title>
@@ -1675,11 +1604,11 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts <co xml:id="CO7-1"/>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /var/lib/vdsm/.ssh/known_hosts <co xml:id="CO3-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /var/lib/vdsm/.ssh/known_hosts</screen>
 <calloutlist>
-<callout arearefs="CO7-1">
+<callout arearefs="CO3-1">
 <para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
 </callout>
 </calloutlist>
@@ -1695,57 +1624,6 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "RHV")
 </listitem>
 </orderedlist>
 </section>
-</section>
-<section xml:id="Configuring_secure_remote_login_to_the_vmware_hypervisors">
-<title>Configuring secure remote login to the VMware hypervisors</title>
-<simpara>You can configure secure remote login to the VMware hypervisors by using <literal>ssh-agent</literal> and <literal>ssh-add</literal>.</simpara>
-<caution>
-<simpara>Secure remote login must be verified for <emphasis role="strong">each</emphasis> VMware hypervisor. If secure remote login fails, all migrations from that hypervisor will fail.</simpara>
-</caution>
-<orderedlist numeration="arabic">
-<title>Procedure</title>
-<listitem>
-<simpara>On the Manager machine, create an <literal>ssh-agent</literal> session for the <literal>vdsm</literal> user:</simpara>
-<screen># sudo -u vdsm ssh-agent</screen>
-<simpara><literal>ssh-agent</literal> creates the <literal>SSH_AUTH_SOCK</literal> and <literal>SSH_AGENT_PID</literal> environment variables:</simpara>
-<screen>SSH_AUTH_SOCK=/tmp/ssh-<emphasis>socket_number</emphasis>/agent.<emphasis>pid</emphasis>; export SSH_AUTH_SOCK;
-SSH_AGENT_PID=139150; export SSH_AGENT_PID;
-echo Agent pid 139150;</screen>
-</listitem>
-<listitem>
-<simpara>Copy the <literal>SSH_AUTH_SOCK</literal> variable from the output.</simpara>
-</listitem>
-<listitem>
-<simpara>Run <literal>ssh-add</literal> to authorize the <literal>vdsm</literal> user’s private key for the <literal>ssh-agent</literal> session:</simpara>
-<screen># sudo -u vdsm SSH_AUTH_SOCK=<emphasis>SSH_AUTH_SOCK</emphasis> ssh-add</screen>
-</listitem>
-<listitem>
-<simpara>Connect to a VMware hypervisor to verify the secure remote login:</simpara>
-<screen># sudo -u vdsm \
-    SSH_AUTH_SOCK=<emphasis>SSH_AUTH_SOCK</emphasis> ssh root@<emphasis>esx1.example.com</emphasis></screen>
-</listitem>
-</orderedlist>
-</section>
-<section xml:id="Authenticating_conversion_hosts_in_cloudforms_app_ssh">
-<title>Authenticating the conversion hosts in CloudForms</title>
-<simpara>Perform the following procedure for each conversion host:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Infrastructure</guisubmenu> <guimenuitem>Hosts</guimenuitem></menuchoice> and select a Red Hat Virtualization conversion host.</simpara>
-</listitem>
-<listitem>
-<simpara>Click the <emphasis role="strong">Configuration</emphasis> drop-down button and select <emphasis role="strong">Edit Selected items</emphasis>.</simpara>
-</listitem>
-<listitem>
-<simpara>In the <emphasis role="strong">Default</emphasis> tab of the Endpoints section, enter the <emphasis role="strong">Username</emphasis> and the <emphasis role="strong">Password</emphasis> for <literal>root</literal>.</simpara>
-</listitem>
-<listitem>
-<simpara>Click <emphasis role="strong">Validate</emphasis> and wait for validation to complete.</simpara>
-</listitem>
-<listitem>
-<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
-</listitem>
-</orderedlist>
 </section>
 </appendix>
 </part>
@@ -1767,6 +1645,9 @@ echo Agent pid 139150;</screen>
 <simpara>Troubleshooting, if necessary. See <xref linkend="Troubleshooting_osp"/>.</simpara>
 </listitem>
 </orderedlist>
+<note>
+<simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, SSH transformation is a fallback option. See <xref linkend="Configuring_the_osp_environment_for_ssh_transformation"/>.</simpara>
+</note>
 </partintro>
 <chapter xml:id="Planning_the_migration_osp">
 <title>Planning the migration</title>
@@ -1989,9 +1870,6 @@ echo Agent pid 139150;</screen>
 </listitem>
 <listitem>
 <simpara>Prepare your users for downtime.</simpara>
-<important>
-<simpara>Currently, IMS supports only cold migration. Virtual machines are powered off gracefully as part of the migration process.</simpara>
-</important>
 </listitem>
 <listitem>
 <simpara>Stagger the migration schedules.</simpara>
@@ -2065,7 +1943,10 @@ echo Agent pid 139150;</screen>
 <simpara>Preparing the VMware environment. See <xref linkend="Preparing_the_vmware_environment_for_osp"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_1_osp_environment"/>.</simpara>
+<simpara>Preparing the target environment. See <xref linkend="Preparing_the_1_3_osp_environment"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Configuring the conversion hosts. See <xref linkend="Configuring_the_1_2_osp_conversion_hosts_for_vddk"/>.</simpara>
 </listitem>
 </orderedlist>
 <note>
@@ -2154,7 +2035,7 @@ echo Agent pid 139150;</screen>
 </orderedlist>
 </section>
 </section>
-<section xml:id="Preparing_the_1_1_osp_environment">
+<section xml:id="Preparing_the_1_3_osp_environment">
 <title>Preparing the Red Hat OpenStack Platform environment</title>
 <simpara>Preparing the Red Hat OpenStack Platform environment involves the following key steps:</simpara>
 <orderedlist numeration="arabic">
@@ -2162,15 +2043,15 @@ echo Agent pid 139150;</screen>
 <simpara>Installing and configuring Red Hat OpenStack Platform 13 or 14. See <xref linkend="Installing_osp_13_14"/>.</simpara>
 </listitem>
 <listitem>
-<simpara>Installing and configuring CloudForms 4.7.0. See <xref linkend="Installing_cf_4_7_0_with_osp"/>.</simpara>
+<simpara>Installing and configuring CloudForms 5_0. See <xref linkend="Installing_cf_5_0_with_osp"/>.</simpara>
 </listitem>
 <listitem>
 <simpara>Creating the conversion hosts. See <xref linkend="Creating_osp_conversion_hosts"/>.</simpara>
 </listitem>
-<listitem>
-<simpara>Configuring the conversion hosts with Ansible playbooks. See xref:Configuring_the_1_1_osp_conversion_hosts_for_vddk].</simpara>
-</listitem>
 </orderedlist>
+<note>
+<simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, SSH transformation is a fallback option. See <xref linkend="Configuring_the_osp_environment_for_ssh_transformation"/>.</simpara>
+</note>
 <section xml:id="Target_prerequisites_osp">
 <title>Prerequisites</title>
 <simpara>The following prerequisites apply:</simpara>
@@ -2187,32 +2068,41 @@ echo Agent pid 139150;</screen>
 <simpara>Compatible software versions:</simpara>
 <table frame="all" rowsep="1" colsep="1">
 <title>Software compatibility</title>
-<tgroup cols="2">
-<colspec colname="col_1" colwidth="50*"/>
-<colspec colname="col_2" colwidth="50*"/>
+<tgroup cols="4">
+<colspec colname="col_1" colwidth="25*"/>
+<colspec colname="col_2" colwidth="25*"/>
+<colspec colname="col_3" colwidth="25*"/>
+<colspec colname="col_4" colwidth="25*"/>
 <thead>
 <row>
 <entry align="left" valign="top">Software</entry>
-<entry align="left" valign="top">Version</entry>
+<entry align="left" valign="top">IMS 1.1</entry>
+<entry align="left" valign="top">IMS 1.2</entry>
+<entry align="left" valign="top">IMS 1.3</entry>
 </row>
 </thead>
 <tbody>
 <row>
 <entry align="left" valign="top"><simpara>VMware</simpara></entry>
-<entry align="left" valign="top"><simpara>5.5 or later</simpara></entry>
+<entry align="center" valign="top" namest="col_2" nameend="col_4"><simpara>5.5 or later</simpara></entry>
 </row>
 <row>
-<entry align="left" valign="top"><simpara>CloudForms</simpara></entry>
-<entry align="left" valign="top"><simpara>4.7.0, with the CFME 5.10.3 virtual appliance</simpara>
-<simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis></simpara></entry>
+<entry align="left" valign="top" morerows="1"><simpara>CloudForms</simpara></entry>
+<entry align="left" valign="top"><simpara>4.7.0, with CFME 5.10.3</simpara></entry>
+<entry align="left" valign="top"><simpara>4.7.6, with CFME 5.10.3</simpara></entry>
+<entry align="left" valign="top"><simpara>5.0, with CFME xxxx</simpara></entry>
+</row>
+<row>
+<entry align="left" valign="top" namest="col_1" nameend="col_3"><simpara><emphasis role="strong">CFME 5.10.4 does not support migration.</emphasis></simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara>Red Hat OpenStack Platform</simpara></entry>
-<entry align="left" valign="top"><simpara>13 or 14</simpara></entry>
+<entry align="center" valign="top" namest="col_2" nameend="col_4"><simpara>13 or later</simpara></entry>
 </row>
 <row>
 <entry align="left" valign="top"><simpara>RHOSP V2V Image for Red Hat OpenStack Director</simpara></entry>
 <entry align="left" valign="top"><simpara>14.0.2</simpara></entry>
+<entry align="center" valign="top" namest="col_3" nameend="col_4"><simpara>14.0.3</simpara></entry>
 </row>
 </tbody>
 </tgroup>
@@ -2267,24 +2157,38 @@ echo Agent pid 139150;</screen>
 </listitem>
 </orderedlist>
 </section>
-<section xml:id="Installing_cf_4_7_0_with_osp">
-<title>Installing and configuring CloudForms 4.7.0</title>
+<section xml:id="Installing_cf_5_0_with_osp">
+<title>Installing and configuring CloudForms 5.0</title>
 <caution>
 <simpara>Removing or changing a provider will cause errors in the infrastructure mappings and migration plans.</simpara>
 </caution>
-<orderedlist xml:id="Cloudforms_for_osp" numeration="arabic">
+<orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Install Red Hat CloudForms 4.7.0 (with CFME 5.10.3 virtual appliance). See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>.</simpara>
+<simpara>Install Red Hat CloudForms 5.0. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/">Installing Red Hat CloudForms on Red Hat OpenStack Platform</link>.</simpara>
 <note>
 <simpara>CFME 5.10.4 does not support migration.</simpara>
 </note>
 </listitem>
 <listitem>
-<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>Enable SmartState Analysis:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>In the header bar, click <menuchoice><guimenu>Administrator</guimenu> <guimenuitem>Configuration</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>Add Red Hat OpenStack Platform to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+<simpara>In the left pane, in <emphasis role="strong">Settings</emphasis>, click <menuchoice><guimenu>CFME Regions</guimenu> <guisubmenu>Zones</guisubmenu> <guimenuitem>Server</guimenuitem></menuchoice>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the right pane, in the <emphasis role="strong">Server</emphasis> tab, set <emphasis role="strong">SmartState Analysis</emphasis> to <emphasis role="strong">On</emphasis> and click <emphasis role="strong">Save</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>Add VMware to CloudForms as a provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#vmware_vcenter_providers">Adding a VMware vCenter Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Add Red Hat OpenStack Platform to CloudForms as a cloud provider. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/index#adding_openstack_cloud_providers">Adding an OpenStack Infrastructure Provider</link> in <emphasis>Red Hat CloudForms: Managing Providers</emphasis>.</simpara>
 <important>
 <simpara>Do not complete the fields in the <emphasis role="strong">RSA key pair</emphasis> tab. You will add the SSH private key when you configure the conversion hosts.</simpara>
 </important>
@@ -2380,30 +2284,12 @@ echo Agent pid 139150;</screen>
 </note>
 </listitem>
 </orderedlist>
-<simpara xml:id="Adding_osp_conversion_host_key_to_cloudforms">Add the conversion host’s private SSH key to CloudForms:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu><emphasis role="strong">Clouds</emphasis></guisubmenu> <guimenuitem>Providers</guimenuitem></menuchoice>.</simpara>
-</listitem>
-<listitem>
-<simpara>Select the Red Hat OpenStack Platform provider, click <emphasis role="strong">Configuration</emphasis> and select <emphasis role="strong">Edit Selected Cloud Provider.</emphasis></simpara>
-</listitem>
-<listitem>
-<simpara>Click the <emphasis role="strong">RSA key pair</emphasis> tab in the <emphasis role="strong">Endpoints</emphasis> section.</simpara>
-</listitem>
-<listitem>
-<simpara>Enter the <emphasis role="strong">Username</emphasis> <literal>cloud-user</literal> and the <emphasis role="strong">Private Key</emphasis> of the conversion host instance. If you deploy multiple conversion hosts, they must use the same key pair.</simpara>
-</listitem>
-<listitem>
-<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
-</listitem>
-</orderedlist>
-<simpara>Configure your conversion hosts with Ansible playbooks to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
+<simpara>Configure your conversion hosts with CloudForms to use the VMware Virtual Disk Development Kit (VDDK).</simpara>
 <note>
 <simpara>The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, SSH transformation is a fallback option. See <xref linkend="Configuring_the_osp_environment_for_ssh_transformation"/>.</simpara>
 </note>
 </section>
-<section xml:id="Configuring_the_1_1_osp_conversion_hosts_for_vddk">
+<section xml:id="Configuring_the_1_2_osp_conversion_hosts_for_vddk">
 <title>Configuring the conversion hosts</title>
 <itemizedlist>
 <title>Prerequisite</title>
@@ -2436,172 +2322,67 @@ echo Agent pid 139150;</screen>
 <orderedlist numeration="arabic">
 <title>Procedure</title>
 <listitem>
-<simpara>Create the <literal>extra_vars.yml</literal> file for the conversion host parameters. See <xref linkend="extra_vars_osp"/>.</simpara>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>Create the <literal>secure_vars.yml</literal> file for secure variables. See <xref linkend="secure_vars_osp"/>.</simpara>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
 </listitem>
 <listitem>
-<simpara>Configure and verify the conversion hosts by running the Ansible playbooks. See <xref linkend="Configuring_host_with_playbooks_osp"/>.</simpara>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen, add the provider details:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Project</emphasis> and click <emphasis role="strong">Next</emphasis>.</simpara>
 </listitem>
 </orderedlist>
-<section xml:id="extra_vars_osp">
-<title>Creating the <literal>extra_vars.yml</literal> file</title>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Log in to a conversion host.</simpara>
 </listitem>
 <listitem>
-<simpara>In <literal>/usr/share/ovirt-ansible-v2v-conversion-host/playbooks</literal>, create an <literal>extra_vars.yml</literal> file with the following parameters:</simpara>
-<screen>---
-v2v_host_type: openstack
-
-# Transport methods to configure on the conversion host. Default is "vddk".
-v2v_transport_methods:
-  - <emphasis>vddk</emphasis> <co xml:id="CO8-1"/>
-
-# Maximum number of concurrent conversions per host. Default is "10".
-v2v_max_concurrent_conversions: <emphasis>10</emphasis> <co xml:id="CO8-2"/>
-
-# File name of VDDK package
-v2v_vddk_package_name: "VMware-vix-disklib-<emphasis>version</emphasis>.x86_64.tar.gz" <co xml:id="CO8-3"/>
-
-# URL of VDDK package
-v2v_vddk_package_url: "http://<emphasis>path/to/downloaded_vddk_package</emphasis>/{{ v2v_vddk_package_name }}" <co xml:id="CO8-4"/>
-
-manageiq_provider_name: OpenStack
-
-# Base URL of CloudForms machine
-manageiq_url: "https://<emphasis>CloudForms_FQDN</emphasis>" <co xml:id="CO8-5"/>
-
-# Whether to validate certificate of CloudForms server. Default is "true".
-manageiq_validate_certs: <emphasis>false</emphasis> <co xml:id="CO8-6"/>
-
-manageiq_zone_id: "42000000000001" <co xml:id="CO8-7"/>
-
-# Empty vmware_hosts variable for conversion_host_disable.yml
-vmware_hosts: ""
-
-# List of cloud providers
-# Each provider is a dictionary with 3 attributes: "name", "hostname", and "connection_configurations"
-manageiq_providers:
-  - name: "<emphasis>OpenStack</emphasis>"
-    hostname: <emphasis>controller_node_FQDN_or_IP_address</emphasis>
-    connection_configurations:
-      - endpoint:
-          role: "default"
-          security_protocol: "<emphasis>ssl</emphasis>" <co xml:id="CO8-8"/>
-          certificate_authority: | <co xml:id="CO8-9"/>
-            -----BEGIN TRUSTED CERTIFICATE-----
-            <emphasis>MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV....</emphasis>
-            -----END TRUSTED CERTIFICATE-----
-            -----BEGIN TRUSTED CERTIFICATE-----
-            <emphasis>MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG....</emphasis>
-            -----END TRUSTED CERTIFICATE-----</screen>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen, add the conversion hosts' SSH key and the transformation method:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
+<simpara>The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">VDDK</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter the path of the VDDK package in the <emphasis role="strong">VDDK library path</emphasis> field and click <emphasis role="strong">Validate</emphasis>. Wait for validation to complete.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
 </listitem>
 </orderedlist>
-<calloutlist>
-<callout arearefs="CO8-1">
-<para>Change to <literal>ssh</literal> if you are using SSH transformation.</para>
-</callout>
-<callout arearefs="CO8-2">
-<para><literal>v2v_max_concurrent_conversions</literal> is the maximum number of concurrent conversions per host. The default is <literal>10</literal>. If you are using VDDK transformation, do not set this number higher than <literal>20</literal>.</para>
-</callout>
-<callout arearefs="CO8-3">
-<para>Update the <literal>v2v_vddk_package_name</literal> with the correct version.</para>
-</callout>
-<callout arearefs="CO8-4">
-<para><literal>v2v_vddk_package_url</literal> is the path to the VDDK archive file that you downloaded.</para>
-</callout>
-<callout arearefs="CO8-5">
-<para><literal>manageiq_url</literal> is the FQDN of the CloudForms machine.</para>
-</callout>
-<callout arearefs="CO8-6">
-<para>You can set <literal>manageiq_validate_certs</literal> to <literal>false</literal> if you do not want to validate the CloudForms CA certificate. The default value is <literal>true</literal>.</para>
-</callout>
-<callout arearefs="CO8-7">
-<para>To obtain the <literal>manageiq_zone_id</literal>, enter this command on the CloudForms machine:</para>
-<screen># curl -sk -u admin \'https://<emphasis>CloudForms_FQDN</emphasis>/api/zones/?filter\[\]=name=RHV&amp;expand=resources&amp;attributes=zone</screen>
-</callout>
-<callout arearefs="CO8-8">
-<para>You can specify the connection security: <literal>non-ssl</literal>, <literal>ssl-without-validation</literal>, or <literal>ssl</literal>. If you choose <literal>ssl</literal>, add the CA chain (<literal>certificate_authority</literal>).</para>
-</callout>
-<callout arearefs="CO8-9">
-<para>The CA chain (<literal>certificate_authority</literal>) is a concatenation of two CA files:</para>
-<itemizedlist>
-<listitem>
-<simpara><literal>/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem</literal> on the undercloud server</simpara>
 </listitem>
 <listitem>
-<simpara><literal>/etc/pki/ca-trust/anchors/overcloud-cacert.pem</literal> on one of the overcloud controllers</simpara>
-<simpara>If you deploy your own CA chain, use the chain that signs the Red Hat OpenStack Platform API certificates. See <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration">SSL/TLS Certificate Configuration</link> in <emphasis>Red Hat OpenStack Platform Director Installation and Usage</emphasis>.</simpara>
-</listitem>
-</itemizedlist>
-</callout>
-</calloutlist>
-</section>
-<section xml:id="secure_vars_osp">
-<title>Creating the <literal>secure_vars.yml</literal> file</title>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Create an encrypted <literal>secure_vars.yml</literal> file:</simpara>
-<screen># ansible-vault create secure_vars.yml</screen>
-</listitem>
-<listitem>
-<simpara>Add the following parameters and save the file:</simpara>
-<screen>---
-# CloudForms "admin" user, for connecting to CloudForms
-manageiq_username: "<emphasis>username</emphasis>"
-
-# CloudForms "admin" password:
-manageiq_password: "<emphasis>password</emphasis>"
-
-# SSH private key to connect to VMware hypervisors for SSH transformation <co xml:id="CO9-1"/>
-v2v_ssh_private_key: |
-  -----BEGIN RSA PRIVATE KEY-----
-  <emphasis>b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....</emphasis>
-  -----END RSA PRIVATE KEY-----</screen>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
 </listitem>
 </orderedlist>
-<calloutlist>
-<callout arearefs="CO9-1">
-<para>(SSH transformation) This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.</para>
-</callout>
-</calloutlist>
-</section>
-<section xml:id="Configuring_host_with_playbooks_osp">
-<title>Configuring and verifying the conversion hosts</title>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Run the <literal>conversion_host_enable.yml</literal> playbook to configure each conversion host:</simpara>
-<screen># ansible-playbook -i <emphasis>conversion_host</emphasis>, -c local -b \ <co xml:id="CO10-1"/>
-    -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
-    /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml</screen>
-<calloutlist>
-<callout arearefs="CO10-1">
-<para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
-</callout>
-</calloutlist>
-<caution>
-<simpara>Running the <literal>conversion_host_enable.yml</literal> playbook more than once on the same host creates multiple entries in the CloudForms database for that host.</simpara>
-<simpara>If you need to run the <literal>conversion_host_enable.yml</literal> playbook again, remove the host’s existing database entry by running <literal>conversion_host_disable.yml</literal> on the host:</simpara>
-<screen># ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml</screen>
-</caution>
-</listitem>
-<listitem>
-<simpara>Run the <literal>conversion_host_check.yml</literal> playbook to verify the configuration:</simpara>
-<screen># ansible-playbook --ask-vault-pass -i <emphasis>conversion_host</emphasis>, -c local \ <co xml:id="CO11-1"/>
-    -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml</screen>
-<calloutlist>
-<callout arearefs="CO11-1">
-<para><literal>conversion_host</literal> is the FQDN or IP address of the conversion host.</para>
-</callout>
-</calloutlist>
-</listitem>
-</orderedlist>
+<simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
 <simpara>You can migrate your virtual machines.</simpara>
-<simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_rhv_conversion_hosts_in_browser"/>.</simpara>
-</section>
+<simpara>(Optional) You can verify the conversion hosts in a browser. See <xref linkend="Verifying_osp_conversion_hosts_in_browser"/>.</simpara>
 </section>
 <section xml:id="Verifying_osp_conversion_hosts_in_browser">
 <title>Verifying the conversion hosts in a browser</title>
@@ -2609,9 +2390,9 @@ v2v_ssh_private_key: |
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>In the address bar of a browser, enter the following:</simpara>
-<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO12-1"/></screen>
+<screen>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts <co xml:id="CO4-1"/></screen>
 <calloutlist>
-<callout arearefs="CO12-1">
+<callout arearefs="CO4-1">
 <para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
 </callout>
 </calloutlist>
@@ -3095,69 +2876,57 @@ vm03,host1,vSphere3,webservers,x1.medium</screen>
 <simpara>The provider setting has priority over the conversion host setting. For example, if the maximum number of concurrent migrations is <literal>20</literal> for a provider and <literal>3</literal> for five conversion hosts, the maximum number of concurrent migrations is <literal>20</literal>, not <literal>15</literal> (<literal>5</literal> conversion hosts <literal>x 3</literal> concurrent migrations per host).</simpara>
 <simpara>An increase in the maximum number of concurrent migrations affects all migration plans immediately. Virtual machines that are queued to migrate will migrate in greater numbers.</simpara>
 <simpara>A decrease maximum number of concurrent migrations affects only future migration plans. Migration plans that are in progress will use the limit that was set when the plan was created.</simpara>
+<variablelist>
+<varlistentry>
+<term>Changing the maximum number of concurrent migrations for all conversion hosts or providers</term>
+<listitem>
+</listitem>
+</varlistentry>
+</variablelist>
 <caution>
 <simpara>Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above <literal>10</literal>.</simpara>
 <simpara>If you are using VDDK transformation, the number of concurrent migrations must not exceed <literal>20</literal>. Otherwise, network overload will cause the migration to fail.</simpara>
 </caution>
-<variablelist>
-<varlistentry>
-<term>Changing the maximum number of concurrent migrations for all conversion hosts</term>
-<listitem>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
+<simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara>Select a new <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis>. The default is <literal>10</literal>.</simpara>
+<simpara>In the <emphasis role="strong">Migration Throttling</emphasis> tab, select a value for <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> or <emphasis role="strong">Maximum concurrent migrations per provider</emphasis> and click <emphasis role="strong">Apply</emphasis>.</simpara>
+<simpara>The value of <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> is constrained so that it cannot be greater than <emphasis role="strong">Maximum concurrent migrations per provider</emphasis>.</simpara>
 <note>
 <simpara>In the current release, the <emphasis role="strong">Maximum concurrent migrations per conversion host</emphasis> interface control does not work.</simpara>
 </note>
 </listitem>
 </orderedlist>
-</listitem>
-</varlistentry>
-</variablelist>
 <variablelist>
 <varlistentry>
-<term>Changing the maximum number of concurrent migrations for a provider</term>
+<term>Changing the maximum number of concurrent migrations for a specific conversion host</term>
 <listitem>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
-</listitem>
-<listitem>
 <simpara>Enter the following command:</simpara>
-<screen># vmdb
-# rails console
-irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "OpenStack").custom_set("Max Transformation Runners", <emphasis>30</emphasis>) <co xml:id="CO13-1"/></screen>
-<calloutlist>
-<callout arearefs="CO13-1">
-<para><literal>Max Transformation Runners</literal> is the maximum number of concurrent migrations. The default value is <literal>20</literal> for a provider.</para>
-</callout>
-</calloutlist>
 </listitem>
 </orderedlist>
-</listitem>
-</varlistentry>
-<varlistentry>
-<term>Getting the maximum number of concurrent migrations for a provider</term>
-<listitem>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
-</listitem>
-<listitem>
-<simpara>Enter the following command:</simpara>
-<screen># vmdb
-# rails console
-irb(main):001:0&gt; $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "OpenStack").custom_get("Max Transformation Runners")</screen>
-</listitem>
-</orderedlist>
+<screen># curl -sk -u <emphasis>username</emphasis>:_password_ <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/<emphasis>conversion_host_id</emphasis></emphasis> -X POST -d <emphasis>{"action": "edit", "resource": {"max_concurrent_tasks": <emphasis>15</emphasis>}}</emphasis> <co xml:id="CO5-1"/> <co xml:id="CO5-2"/> <co xml:id="CO5-3"/> <co xml:id="CO5-4"/></screen>
 </listitem>
 </varlistentry>
 </variablelist>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para><literal>username</literal> and <literal>password</literal> are the username and password for CloudForms.</para>
+</callout>
+<callout arearefs="CO5-2">
+<para><literal>CloudForms_FQDN</literal> is the FQDN of the CloudForms machine.</para>
+</callout>
+<callout arearefs="CO5-3">
+<para>To obtain a <literal>conversion_host_id</literal>, enter the following command:</para>
+<screen># curl -sk -u <emphasis>username:password</emphasis> <emphasis>https://<emphasis>CloudForms_FQDN</emphasis>/api/conversion_hosts/</emphasis></screen>
+</callout>
+<callout arearefs="CO5-4">
+<para><literal>max_concurrent_tasks</literal> is the maximum number of concurrent migrations. The default is <literal>10</literal>.</para>
+</callout>
+</calloutlist>
 </section>
 </chapter>
 <chapter xml:id="Troubleshooting_osp">
@@ -3181,54 +2950,34 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "OpenS
 <simpara><xref linkend="Known_issues_osp"/> provides information about issues that will be addressed in a future release.</simpara>
 <section xml:id="Migration_logs_osp">
 <title>Migration logs</title>
-<simpara>You can check the following logs identify the cause of a migration error:</simpara>
+<simpara>You can check the following logs to identify the cause of a migration error:</simpara>
 <itemizedlist>
 <listitem>
-<simpara>Conversion host logs. See <xref linkend="Conversion_host_logs_osp"/>.</simpara>
+<simpara>Conversion host logs. See <xref linkend="conversion_host_playbook_logs_osp"/>.</simpara>
+</listitem>
+<listitem>
+<simpara>Playbook logs, if you are using premigration or postmigration Ansible playbooks. See <xref linkend="conversion_host_playbook_logs_osp"/>.</simpara>
 </listitem>
 <listitem>
 <simpara>CloudForms migration log. See <xref linkend="Cloudforms_migration_log_osp"/>.</simpara>
 </listitem>
 </itemizedlist>
-<simpara>The conversion host logs and the CloudForms migration log can help with troubleshooting.</simpara>
-<section xml:id="Conversion_host_logs_osp">
-<title>Accessing the conversion host logs</title>
+<section xml:id="conversion_host_playbook_logs_osp">
+<title>Downloading the conversion host and playbook logs</title>
+<simpara>You can download the conversion host and playbooks logs in CloudForms.</simpara>
 <simpara>When disk migration starts, two logs are created in the conversion host:</simpara>
 <itemizedlist>
 <listitem>
-<simpara><literal>virt-v2v</literal>: Debug output from <literal>virt-v2v</literal> itself. This log tracks the core of the virtual machine migration process, including <literal>libguestfs</literal> traces and disk migration details. You can download access this log on the conversion host or download it in CloudForms.</simpara>
+<simpara><literal>virt-v2v</literal>: Debug output from <literal>virt-v2v</literal> itself. This log tracks the core of the virtual machine migration process, including <literal>libguestfs</literal> traces and disk migration details.</simpara>
 </listitem>
 <listitem>
-<simpara><literal>virt-v2v-wrapper</literal>: Log of the daemonizing wrapper for <literal>virt-v2v</literal>. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and <literal>virt-v2v</literal> error reporting. You can access this log on the conversion host.</simpara>
+<simpara><literal>virt-v2v-wrapper</literal>: Log of the daemonizing wrapper for <literal>virt-v2v</literal>. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and <literal>virt-v2v</literal> error reporting.</simpara>
 </listitem>
 </itemizedlist>
 <important>
-<simpara>If you need to open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, you must submit both the migration (<literal>virt-v2v</literal>) log and <literal>virt-v2v-wrapper</literal> log for analysis.</simpara>
+<simpara>If you open a <link xlink:href="https://access.redhat.com/support/cases/#/case/new">Red Hat Support call</link>, you will need to submit both the <literal>virt-v2v</literal> log and <literal>virt-v2v-wrapper</literal> log for analysis and troubleshooting.</simpara>
 </important>
-<simpara>To access the <literal>virt-v2v</literal> and <literal>virt-v2v-wrapper</literal> logs on the conversion host:</simpara>
-<orderedlist numeration="arabic">
-<listitem>
-<simpara>Log in to the conversion host using SSH.</simpara>
-<simpara>If you are not sure which conversion host to log in to, click the information icon (<inlinemediaobject>
-<imageobject>
-<imagedata fileref="images/Info_icon.png"/>
-</imageobject>
-<textobject><phrase>20</phrase></textobject>
-</inlinemediaobject>) of a virtual machine in the migration plan details view.</simpara>
-</listitem>
-<listitem>
-<simpara>Go to <literal>/var/log/vdsm/import/</literal> to access the logs for each migration:</simpara>
-<itemizedlist>
-<listitem>
-<simpara><literal>virt-v2v</literal> log: <literal>v2v-import-<emphasis>date</emphasis>-<emphasis>log_number</emphasis>.log</literal></simpara>
-</listitem>
-<listitem>
-<simpara><literal>virt-v2v-wrapper</literal> log: <literal>v2v-import-<emphasis>date</emphasis>-<emphasis>log_number</emphasis>-wrapper.log</literal></simpara>
-</listitem>
-</itemizedlist>
-</listitem>
-</orderedlist>
-<simpara>To download the <literal>virt-v2v</literal> log in CloudForms:</simpara>
+<simpara>To access the conversion host logs and the playbook logs:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Click <menuchoice><guimenu>Compute</guimenu> <guisubmenu><emphasis role="strong">Migration</emphasis></guisubmenu> <guimenuitem>Migration Plans</guimenuitem></menuchoice>.</simpara>
@@ -3237,17 +2986,29 @@ irb(main):002:0&gt; $evm.vmdb(:ext_management_system).find_by(:name =&gt; "OpenS
 <simpara>Click a completed migration plan to view its details.</simpara>
 </listitem>
 <listitem>
-<simpara>Click <menuchoice><guimenu>Download Log</guimenu> <guimenuitem>Migration Log</guimenuitem></menuchoice>.</simpara>
+<simpara>Click <emphasis role="strong">Download Log</emphasis> of a virtual machine and select a log from the dropdown list:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">Premigration log</emphasis> This option only appears if a premigration playbook is used.</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Migration log</emphasis> The <emphasis role="strong">Migration log</emphasis> is the <literal>virt-v2v</literal> log.</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Virt-v2v-wrapper log</emphasis></simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Postmigration log</emphasis> This option only appears if a postmigration playbook is used.</simpara>
+</listitem>
+</itemizedlist>
 </listitem>
 </orderedlist>
 </section>
 <section xml:id="Cloudforms_migration_log_osp">
 <title>Accessing the CloudForms migration log</title>
-<simpara>This log traces the orchestration of the virtual machine migration in CloudForms.</simpara>
-<simpara>To access the CloudForms migration log:</simpara>
 <orderedlist numeration="arabic">
 <listitem>
-<simpara>Log in to the CloudForms machine using SSH.</simpara>
+<simpara>Log into the CloudForms machine using SSH.</simpara>
 </listitem>
 <listitem>
 <simpara>The migration log is <literal>/var/www/miq/vmdb/log/automation.log</literal>.</simpara>
@@ -3392,9 +3153,6 @@ BadRequestException: Unknown errors</screen>
 <listitem>
 <simpara>Copying the VMware keys to the conversion hosts. See <xref linkend="Copying_vmware_keys_to_osp_conversion_hosts"/>.</simpara>
 </listitem>
-<listitem>
-<simpara>Configuring secure remote login to the VMware hypervisors. See <xref linkend="Configuring_secure_remote_login_to_the_vmware_hypervisors"/>.</simpara>
-</listitem>
 </orderedlist>
 <section xml:id="Configuring_the_vmware_hypervisors_for_ssh_transformation_osp">
 <title>Configuring the VMware hypervisors for SSH transformation</title>
@@ -3421,17 +3179,71 @@ BadRequestException: Unknown errors</screen>
 </section>
 <section xml:id="Configuring_the_osp_conversion_hosts_for_ssh">
 <title>Configuring the conversion hosts</title>
-<simpara>Follow the procedures in <xref linkend="Configuring_the_1_1_osp_conversion_hosts_for_vddk"/> with the following changes:</simpara>
-<itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
 <listitem>
-<simpara><xref linkend="extra_vars_osp"/></simpara>
-<simpara>Specify <literal>ssh</literal> for the <literal>v2v_transport_methods</literal> parameter in <literal>extra_vars.yml</literal>.</simpara>
+<simpara>In CloudForms, click <menuchoice><guimenu>Compute</guimenu> <guisubmenu>Migration</guisubmenu> <guimenuitem>Migration Settings</guimenuitem></menuchoice>.</simpara>
 </listitem>
 <listitem>
-<simpara><xref linkend="secure_vars_osp"/></simpara>
-<simpara>Copy the SSH private key for connecting to the VMware hypervisors for the <literal>v2v_ssh_private_key</literal> parameter in <literal>secure_vars.yml</literal>.</simpara>
+<simpara>In the <emphasis role="strong">Conversion Hosts</emphasis> tab, click <emphasis role="strong">Configure Conversion Host</emphasis>. The <emphasis role="strong">Configure Conversion Host</emphasis> wizard is displayed.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Conversion_host_configuration_ui.png"/>
+</imageobject>
+<textobject><phrase>Conversion host configuration ui</phrase></textobject>
+</inlinemediaobject></simpara>
 </listitem>
-</itemizedlist>
+<listitem>
+<simpara>In the <emphasis role="strong">Location</emphasis> screen, add the provider details:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider Type</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Provider</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select a <emphasis role="strong">Project</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Host(s)</emphasis> screen, select one or more hosts from the dropdown list and click <emphasis role="strong">Next</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Authentication</emphasis> screen, add the conversion hosts' SSH key and the transformation method:</simpara>
+<orderedlist numeration="loweralpha">
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key or paste it in the <emphasis role="strong">Conversion host SSH private key</emphasis> field.</simpara>
+<simpara>The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">SSH</emphasis> as the <emphasis role="strong">Transformation method</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Browse</emphasis> to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the <emphasis role="strong">VMware hypervisors SSH private key</emphasis> field.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configure</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Results</emphasis> screen, wait for the conversion host configuration to finish and click <emphasis role="strong">Close</emphasis>.</simpara>
+<simpara>The configured conversion hosts and status information, including error messages, appear in the <emphasis role="strong">Configured Conversion Hosts</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
+<simpara>If an error occurs, you can download a host’s log by clicking the <emphasis role="strong">More Actions</emphasis> icon (<inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/More_actions_icon.png"/>
+</imageobject>
+<textobject><phrase>7</phrase></textobject>
+</inlinemediaobject>) and selecting <emphasis role="strong">Download Log</emphasis>.</simpara>
+<simpara>You can click the <emphasis role="strong">Retry</emphasis> button if the conversion host configuration failed for reasons unconnected with your environment.</simpara>
+<simpara>(Optional) Click <emphasis role="strong">Remove</emphasis> to remove the configuration from a configured conversion host.</simpara>
 </section>
 <section xml:id="Copying_vmware_keys_to_osp_conversion_hosts">
 <title>Copying the VMware SSH keys to the conversion hosts</title>
@@ -3465,11 +3277,11 @@ BadRequestException: Unknown errors</screen>
 <orderedlist numeration="arabic">
 <listitem>
 <simpara>Run <literal>ssh-keyscan</literal> for each VMware hypervisor and copy its public key to <literal>known_hosts</literal>, as in the following example:</simpara>
-<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO14-1"/>
+<screen># ssh-keyscan <emphasis>esx1_IP</emphasis> &gt; /root/.ssh/known_hosts <co xml:id="CO6-1"/>
 # ssh-keyscan <emphasis>esx2_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts
 # ssh-keyscan <emphasis>esx3_IP</emphasis> &gt;&gt; /root/.ssh/known_hosts</screen>
 <calloutlist>
-<callout arearefs="CO14-1">
+<callout arearefs="CO6-1">
 <para>You must use the IP address, not the host name, of the VMware hypervisor.</para>
 </callout>
 </calloutlist>

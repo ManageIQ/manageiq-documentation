@@ -4,6 +4,13 @@
 [id="Configuring_the_{context}_conversion_hosts_for_ssh"]
 = Configuring the conversion hosts
 
+ifdef::rhv[]
+.Prerequisites
+
+* If the Red Hat Virtualization provider has been active for a while, ensure that the host subscriptions are valid.
+* If a host has an SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
+endif::rhv[]
+
 .Procedure
 
 . In CloudForms, click menu:Compute[Migration > Migration Settings].
@@ -39,14 +46,6 @@ endif::osp[]
 
 .. Select *SSH* as the *Transformation method*.
 .. Click *Browse* to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the *VMware hypervisors SSH private key* field.
-ifdef::rhv[]
-+
-[IMPORTANT]
-====
-If a host already has an SSH private key, you must delete the key manually in `/var/lib/vdsm/.ssh/id_rsa` before configuring it as a conversion host. Conversion host configuration does not overwrite existing keys.
-====
-endif::rhv[]
-
 .. Click *Configure*.
 . In the *Results* screen, wait for the conversion host configuration to finish and click *Close*.
 +

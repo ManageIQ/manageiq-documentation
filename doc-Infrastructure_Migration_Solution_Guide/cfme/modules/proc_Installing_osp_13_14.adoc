@@ -22,16 +22,6 @@ If you are using Red Hat Ceph Storage, you will require three times the space of
 The migrated disks use all of the space because it is preallocated. For example, a source virtual machine with a 100 GB disk requires 300 GB of storage, regardless of how much data the disk actually contains. To save storage space, you can use the `fstrim` command on the migrated virtual machines as a postmigration task or playbook.
 ====
 
-. Configure security groups with the following ports enabled:
-
-* For the conversion hosts and CloudForms: port 22 (SSH)
-* For CloudForms: port 443 (HTTPS)
-+
-[NOTE]
-====
-Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (conversion hosts to vCenter).
-====
-
 . Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.
 
 . Ensure that the event monitor workers are running. See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/general_configuration/configuration#server-diagnostics[Server Diagnostics] in _Red Hat CloudForms General Configuration_.

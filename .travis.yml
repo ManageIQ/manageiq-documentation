@@ -4,3 +4,9 @@ rvm:
 - 2.3.8
 sudo: false
 cache: bundler
+deploy:
+  provider: script
+  skip_cleanup: true
+  script: curl -sSL https://raw.githubusercontent.com/ManageIQ/manageiq.github.io/build/trigger.sh | bash -s
+  on:
+    branch: master

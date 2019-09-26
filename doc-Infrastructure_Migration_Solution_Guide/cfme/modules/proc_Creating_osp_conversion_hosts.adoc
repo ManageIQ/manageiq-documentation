@@ -1,0 +1,47 @@
+// Module included in the following assemblies:
+//
+// IMS_1.1/assembly_Preparing_the_1_1_target_environment.adoc
+// IMS_1.2/assembly_Preparing_the_1_2_target_environment.adoc
+[id="Creating_osp_conversion_hosts"]
+= Creating the conversion hosts
+
+You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance (`RHOSP V2V Image for Red Hat OpenStack Director`). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
+
+[NOTE]
+====
+For optimal performance, deploy conversion hosts on compute nodes with nested virtualization enabled. See link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[Configure DevStack with KVM-based Nested Virtualization]. Nested virtualization is a technology preview.
+====
+
+To create a Red Hat OpenStack Platform conversion host:
+
+. Navigate to link:https://access.redhat.com/downloads/[Red Hat Product Downloads].
+. In the *A-Z* tab, click *Red Hat OpenStack Platform*.
+. Click the green *Download Latest* button to go to the *Download Red Hat OpenStack Platform* page.
+. In the *Product Software* tab, locate the +RHOSP V2V Image for Red Hat OpenStack Director 14.0._x_ (x86_64)+, click *Download Now*, and save the image.
++
+[IMPORTANT]
+====
+IMS 1.1 requires Red Hat OpenStack Director 14.0.2.
+
+IMS 1.2 requires Red Hat OpenStack Director 14.0.3 or later.
+====
+
+. Upload the image to Red Hat OpenStack Platform.
+. Launch the image as a conversion host instance, with the following resources:
++
+** 4 vCPUs
+** 10 GB RAM, if you use the default maximum number of concurrent migrations per conversion host, which is `10`. If you increase the number of concurrent migrations, you must add 1 GB RAM for each additional concurrent migration. If you reduce the number, you can reduce the RAM but the conversion host cannot have less than 8 GB RAM.
+** `/tmp` (10 GB, or 1 GB for each concurrent migration)
+** `/var/tmp` (10 GB, or 1 GB for each concurrent migration)
+** `/var/logs` (5 GB)
++
+See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-instances[Launch an Instance] in the _Red Hat OpenStack Platform Instances and Images Guide_.
+
+. Increase the disk space of the instance to accommodate its file system. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/instances_and_images_guide/index#section-resize-instance[Resize an Instance] in the _Red Hat OpenStack Platform Instances and Images Guide_.
++
+The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size, or you can create a new partition and add it as a physical volume to the volume group.
++
+[NOTE]
+====
+You must resize `lv_root` to use all available disk space because the image will not use it by default.
+====

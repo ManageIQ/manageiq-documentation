@@ -36,6 +36,14 @@ For example:
 ====
 +
 .. Click *Validate* to confirm that {product-title} can connect to the OpenShift Container Platform provider.
+. For the *Prometheus* alerts service, add the Prometheus alerts endpoint in the *Alerts* tab:
+.. Select a *Security Protocol* method to specify how to authenticate the service:
+* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
+* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
+* *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
+.. Enter the *Hostname* (or IPv4 or IPv6 address) or alert *Route*. 
+.. Enter the *API Port* if your Prometheus provider uses a non-standard port for access. The default port is `443`.
+.. Click *Validate* to confirm that {product-title_short} can connect to the alerts service.
 . If you selected a metrics service, configure the service details in the *Metrics* tab:
 .. Select a *Security Protocol* method to specify how to authenticate the service:
 * *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
@@ -48,16 +56,8 @@ In OpenShift, the default deployment of the router generates certificates during
 +
 * *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
 .. Enter the *Hostname* (or IPv4 or IPv6 address) of the provider, or use the *Detect* button to find the hostname.
-.. Enter the *API Port* if your Hawkular provider uses a non-standard port for access. The default port is `443`.
+.. Enter the *API Port* if your Hawkular or Prometheus provider uses a non-standard port for access. The default port is `443`.
 .. Click *Validate* to confirm that {product-title} can connect to the metrics endpoint.
-. For the *Prometheus* alerts service, add the Prometheus alerts endpoint in the *Alerts* tab:
-.. Select a *Security Protocol* method to specify how to authenticate the service:
-* *SSL*: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
-* *SSL trusting custom CA*: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the *Trusted CA Certificates* box in PEM format.
-* *SSL without validation*: Authenticate the provider insecurely using SSL. (Not recommended)
-.. Enter the *Hostname* (or IPv4 or IPv6 address) or alert *Route*. 
-.. Enter the *API Port* if your Prometheus provider uses a non-standard port for access. The default port is `443`.
-.. Click *Validate* to confirm that {product-title_short} can connect to the alerts service.
 . Click the *Advanced* tab to add image inspector settings for scanning container images on your provider using OpenSCAP.
 +
 [NOTE]

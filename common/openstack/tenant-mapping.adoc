@@ -1,3 +1,11 @@
-When adding an OpenStack cloud or infrastructure provider, you can enable _tenant mapping_ in {product-title_short} to map any existing tenants from that provider. This means {product-title_short} will create new cloud tenants to match each existing OpenStack tenant; each new cloud tenant and its corresponding OpenStack tenant will have identical resources assignments (including user and role synchronization) with the exception of quotas. Tenant quotas are not synchronized between {product-title_short} and OpenStack, and are available for reporting purposes only. You can manage quotas in {product-title_short} but this will not affect the quotas created in OpenStack.
+When adding an OpenStack cloud or infrastructure provider, enable _tenant mapping_ in {product-title_short} to map any existing tenants from that provider. 
+
+This means {product-title_short} will create new cloud tenants to match each existing OpenStack tenant; each new cloud tenant and its corresponding OpenStack tenant will have identical resource assignments (including user and role synchronization) with the exception of quotas. Tenant quotas are not synchronized between {product-title_short} and OpenStack, and are available for reporting purposes only. You can manage quotas in {product-title_short} but this will not affect the quotas created in OpenStack.
 
 During a provider refresh, {product-title_short} will also check for any changes to the tenant list in OpenStack. {product-title_short} will create new cloud tenants to match any new tenants, and delete any cloud tenants whose corresponding OpenStack tenants no longer exist. {product-title_short} will also replicate any changes to OpenStack tenants to their corresponding cloud tenants.
+
+If you leave tenant mapping disabled, {product-title_short} will not create cloud tenants or tenant object hierarchy from OpenStack.
+
+ifdef::cfme[]
+See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/monitoring_alerts_and_reporting/#sect_chargeback[Chargeback] in _Managing Providers_ for information on configuring OpenStack providers. 
+endif::cfme[]

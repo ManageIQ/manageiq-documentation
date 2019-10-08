@@ -42,28 +42,5 @@ Input parameters become extra vars, with substitution enabled. This overcomes th
 
 Once created, a the domain including your playbook method can be exported to appliances in your testing or production environments or imported in appliances in multiple regions. See <<exporting-all-datastore-classes>> for information.
 
-===== Passing variables between successive playbook methods
 
-Automate designers can pass variables between successive Ansible playbook methods in a state machine using {product-title}.
-
-To pass variables between Ansible playbook methods, use the `set_stats` module in your playbooks.
-
-.Example
------
----
-# This playbook prints a simple debug message
-- name: Echo Hello, Fred and Wilma
-  hosts: localhost
-
-  tasks:
-  - name: "playbook1 - testing input vars"
-    set_stats:
-      data:
-        pb_var1a: "{{ input1a }}"
-        pb_var1b: "{{ input1b }}"
-
-  - debug: msg="Hello, {{ input1a }} and {{ input1b }}"
------
-
-For more information on the `set_stats` module, see the link:https://docs.ansible.com[Ansible] documentation.
 

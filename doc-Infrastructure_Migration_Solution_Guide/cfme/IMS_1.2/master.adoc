@@ -27,11 +27,6 @@ See xref:Migrating_from_vmware_to_osp[].
 Red Hat CloudForms 4.7.6 or later::
 Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[Red Hat CloudForms 4.7] documentation for more information.
 
-// [NOTE]
-// ====
-// You can migrate a single virtual machine to Red Hat Container-native Virtualization (technical preview). See link:https://access.redhat.com/documentation/en-us/openshift_container_platform/4.1/html/container-native_virtualization_users_guide/index#cnv-importing-vm-wizard-web[Importing a virtual machine] in the _Red Hat Container-native Virtualization User's Guide_.
-// ====
-
 :context: rhv
 :rhv:
 [id="Migrating_from_vmware_to_{context}"]
@@ -44,7 +39,8 @@ The migration process involves the following tasks:
 . Migrating the virtual machines. See xref:Migrating_the_virtual_machines_{context}[].
 . Troubleshooting, if necessary. See xref:Troubleshooting_{context}[].
 
-include::ims_common/assembly_Planning_the_migration.adoc[leveloffset=+1]
+include::modules/assembly_Planning_the_migration.adoc[leveloffset=+1]
+include::modules/ref_Recommendations_for_migration_1_2.adoc[leveloffset=+2]
 
 [id="Preparing_the_environment_for_migration_to_{context}"]
 == Preparing the environment for migration
@@ -55,13 +51,49 @@ Preparing your environment for migration involves the following tasks:
 . Preparing the target environment. See xref:Preparing_the_1_2_{context}_environment[].
 . Configuring the conversion hosts. See xref:Configuring_the_1_2_{context}_conversion_hosts_for_vddk[].
 
-include::ims_common/ref_Vddk_note.adoc[]
+include::modules/ref_Vddk_note.adoc[]
 
-include::ims_common/assembly_Preparing_the_vmware_environment.adoc[leveloffset=+2]
+[id="Preparing_the_vmware_environment_for_{context}"]
+=== Preparing the VMware environment
+
+Preparing the VMware environment for migration involves the following tasks:
+
+. Extending the VMware network. See xref:Preparing_the_vmware_network_{context}[].
+. Preparing the VMware virtual machines. See xref:Preparing_the_vmware_virtual_machines_for_{context}[].
+. (Optional) Configuring a VMware hypervisor for more than ten concurrent migrations from that hypervisor. See xref:Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_{context}[].
+
+include::modules/proc_Preparing_the_vmware_network_1_2.adoc[leveloffset=+3]
+include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
+
+If you are performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See xref:Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_{context}[].
+
+include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
+
 include::assembly_Preparing_the_1_2_target_environment.adoc[leveloffset=+2]
 
-include::ims_common/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
-include::ims_common/assembly_Troubleshooting.adoc[leveloffset=+1]
+include::modules/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
+include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations_1_2.adoc[leveloffset=+2]
+
+[id="Troubleshooting_{context}"]
+== Troubleshooting
+
+To identify errors, you can review the migration logs. See xref:Migration_logs_{context}[].
+
+You can check these common issues and mistakes:
+
+* Infrastructure mapping errors. See xref:Infrastructure_mapping_errors_{context}[].
+* Migration plan errors. See xref:Migration_plan_errors_{context}[].
+* IP address errors. See xref:IP_address_errors_{context}[].
+* Environment configuration errors. See xref:Environment_configuration_errors_{context}[].
+
+xref:Known_issues_{context}[] provides information about issues that will be addressed in a future release.
+
+include::modules/ref_Migration_logs_1_2.adoc[leveloffset=+2]
+include::modules/ref_Infrastructure_mapping_errors.adoc[leveloffset=+2]
+include::modules/ref_Migration_plan_errors.adoc[leveloffset=+2]
+include::modules/ref_Ip_address_errors.adoc[leveloffset=+2]
+include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+2]
+include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 [appendix]
 include::assembly_Configuring_the_environment_for_ssh_transformation.adoc[leveloffset=+1]
@@ -82,8 +114,9 @@ The migration process involves the following tasks:
 . Migrating the virtual machines. See xref:Migrating_the_virtual_machines_{context}[].
 . Troubleshooting, if necessary. See xref:Troubleshooting_{context}[].
 
-include::ims_common/ref_Vddk_note.adoc[]
-include::ims_common/assembly_Planning_the_migration.adoc[leveloffset=+1]
+include::modules/ref_Vddk_note.adoc[]
+include::modules/assembly_Planning_the_migration.adoc[leveloffset=+1]
+include::modules/ref_Recommendations_for_migration_1_2.adoc[leveloffset=+2]
 
 [id="Preparing_the_environment_for_migration_to_{context}"]
 == Preparing the environment for migration
@@ -94,13 +127,50 @@ Preparing your environment for migration involves the following tasks:
 . Preparing the target environment. See xref:Preparing_the_1_2_{context}_environment[].
 . Configuring the conversion hosts. See xref:Configuring_the_1_2_{context}_conversion_hosts_for_vddk[].
 
-include::ims_common/ref_Vddk_note.adoc[]
+include::modules/ref_Vddk_note.adoc[]
 
-include::ims_common/assembly_Preparing_the_vmware_environment.adoc[leveloffset=+2]
+[id="Preparing_the_vmware_environment_for_{context}"]
+=== Preparing the VMware environment
+
+Preparing the VMware environment for migration involves the following tasks:
+
+. Extending the VMware network. See xref:Preparing_the_vmware_network_{context}[].
+. Preparing the VMware virtual machines. See xref:Preparing_the_vmware_virtual_machines_for_{context}[].
+. (Optional) Configuring a VMware hypervisor for more than ten concurrent migrations from that hypervisor. See xref:Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_{context}[].
+
+include::modules/proc_Preparing_the_vmware_network_1_2.adoc[leveloffset=+3]
+include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
+
+If you are performing more than ten concurrent migrations from a VMware hypervisor, you must configure the hypervisor to support the additional connections. See xref:Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_{context}[].
+
+include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
+
 include::assembly_Preparing_the_1_2_target_environment.adoc[leveloffset=+2]
 
-include::ims_common/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
-include::ims_common/assembly_Troubleshooting.adoc[leveloffset=+1]
+include::modules/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
+
+include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations_1_2.adoc[leveloffset=+2]
+
+[id="Troubleshooting_{context}"]
+== Troubleshooting
+
+To identify errors, you can review the migration logs. See xref:Migration_logs_{context}[].
+
+You can check these common issues and mistakes:
+
+* Infrastructure mapping errors. See xref:Infrastructure_mapping_errors_{context}[].
+* Migration plan errors. See xref:Migration_plan_errors_{context}[].
+* IP address errors. See xref:IP_address_errors_{context}[].
+* Environment configuration errors. See xref:Environment_configuration_errors_{context}[].
+
+xref:Known_issues_{context}[] provides information about issues that will be addressed in a future release.
+
+include::modules/ref_Migration_logs_1_2.adoc[leveloffset=+2]
+include::modules/ref_Infrastructure_mapping_errors.adoc[leveloffset=+2]
+include::modules/ref_Migration_plan_errors.adoc[leveloffset=+2]
+include::modules/ref_Ip_address_errors.adoc[leveloffset=+2]
+include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+2]
+include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 [appendix]
 include::assembly_Configuring_the_environment_for_ssh_transformation.adoc[leveloffset=+1]

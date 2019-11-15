@@ -18,6 +18,7 @@ The current implementation only secures the Appliance's Web administrative UI wi
 2.  <<configuring-saml, Configuring SAML>>
 3.  <<configuring-admin-ui, Configuring the Administrative UI>>
 4.  <<re-enabling-local-login, Re-Enabling Local Login>>
+5.  <<configuring-saml-via-cli, Configuring SAML using the CLI>>
 
 [[requirements]]
 == Requirements
@@ -27,7 +28,7 @@ The following is needed in order to enable SAML Authentication to the Appliance:
 * A CentOS/RHEL 7.2 based Appliance
 * A SAML Identity Provider, (e.g. KeyCloak 1.8 or Later)
 
-[[configure-saml]]
+[[configuring-saml]]
 == Configure SAML 
 
 All SAML related certificates and keys are accessed from /etc/httpd/saml2/
@@ -171,7 +172,7 @@ Mappers.
 *Note:* The fullName attribute was not available in the default database as of this writing
 and must be added to each user as a user attribute.
 
-[[configure-admin-ui]]
+[[configuring-admin-ui]]
 == Configure Administrative UI 
 
 After having configured Apache for SAML, the next step is to update the Appliance Administrative UI
@@ -225,4 +226,68 @@ with enough administrative privileges to update it:
 
 * ssh to the appliance as root
 * Run _appliance_console_cli --extauth-opts_ *local_login_disabled=false*
+
+[[configuring-saml-via-cli]]
+== Configuring SAML using the CLI
+
+Another way to configure SAML on the appliance is to use the appliance
+console CLI instead of the above steps. The `--saml-config` subcommand
+of the appliance console CLI allows one to configure the appliance for
+SAML Authentication by updating both Apache configurations as well as the
+necessary Administrative UI settings. The `--saml-unconfig` subcommand
+is also provided for unconfiguring the appliance SAML Authentication
+and reverting the appliance to Database Authentication.
+
+Usage of the new Appliance Console CLI subcommands are as follows:
+
+=== Configure SAML
+To configure the appliance for SAML Authentication:
+
+```
+# appliance_console_cli --saml-config [--saml-client-host=miq_appliance.fqdn] \
+                                       --saml-idp-metadata=file|url           \
+                                      [--saml-enable-sso]
+```
+
+When --saml-client-host is not specified, the configured appliance host
+is used for creating the SP metadata. This host fqdn must be reachable from
+the SAML IDP.
+
+Configuring SAML requires the IDP metadata file, the --saml-idp-metadata option allows
+the user to specify a copy by file path that was downloaded to the appliance or by URL
+in which case the CLI downloads the copy from the IDP.
+
+Examples:
+
+```
+--saml-idp-metadata=/tmp/downloaded_idp_metadata.xml
+```
+
+```
+--saml-idp-metadata=http://<idp-host:port>/auth/realms/<miq-realm>/protocol/saml/descriptor
+```
+
+
+In both cases, the IDP metadata file is copied to `/etc/httpd/saml2/idp-metadata.xml`
+
+By default, SSO is not enabled, so from the Appliance login page, the user clicks
+on Login In to Corporate System to get redirected to the SAML login page. With this option
+enabled, the Appliance redirects the user to the SAML login page for logging in.
+
+After SAML is configured, the SP metadata file can be fetched from
+`/etc/httpd/saml2/miqsp-metadata.xml` to create the related Client on the SAML IDP.
+
+
+=== Unconfigure SAML
+To unconfigure the appliance from SAML Authentication and revert to Database authentication:
+
+```
+# appliance_console_cli --saml-unconfig
+```
+
+This will remove the Apache external authentication SAML configuration files and revert
+the appliance's authentication settings to Database mode.
+
+With both --saml-config and --saml-unconfig subcommands, the httpd service will be restarted
+if Apache is running.
 

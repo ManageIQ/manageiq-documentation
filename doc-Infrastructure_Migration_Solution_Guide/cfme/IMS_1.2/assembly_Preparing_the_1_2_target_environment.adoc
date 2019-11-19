@@ -2,10 +2,7 @@
 ifdef::rhv[]
 = Preparing the Red Hat Virtualization environment
 
-Preparing the Red Hat Virtualization environment involves the following key steps:
-
-. Installing and configuring Red Hat Virtualization 4.3. See xref:Installing_rhv_4_3[].
-. Installing and configuring CloudForms 4.7.6 or later. See xref:Installing_cf_4_7_6_with_{context}[].
+You can install and configure Red Hat Virtualization and CloudForms and deploy the conversion hosts for VDDK transformation.
 
 include::modules/ref_Vddk_note.adoc[]
 include::modules/ref_Target_prerequisites.adoc[leveloffset=+1]
@@ -16,27 +13,35 @@ include::modules/ref_Software_compatibility_matrix_1_2.adoc[leveloffset=+2]
 include::modules/proc_Installing_rhv_4_3.adoc[leveloffset=+1]
 include::modules/proc_Installing_cf_4_7_6.adoc[leveloffset=+1]
 
-Configure your conversion hosts with CloudForms to use the VMware Virtual Disk Development Kit (VDDK).
-
 include::modules/ref_Vddk_note.adoc[]
 
-include::modules/proc_Configuring_the_1_2_conversion_hosts_for_vddk.adoc[leveloffset=+1]
+[id='Deploying_rhv_conversion_hosts']
+== Deploying the Red Hat Virtualization conversion hosts
 
-You can migrate your virtual machines.
+You can download the VMware Virtual Disk Development Kit (VDDK), configure the Red Hat Virtualization conversion hosts in CloudForms, and verify the conversion host configuration in a browser.
+
+.Prerequisites
+
+* If the Red Hat Virtualization provider has been active for a while, verify that the hosts have valid subscriptions and repositories by entering the following commands:
++
+----
+# subscription-manager list --consumed
+# yum repolist
+----
+
+include::modules/proc_Downloading_vddk.adoc[leveloffset=+2]
+
+include::modules/proc_Configuring_the_1_2_conversion_hosts_for_vddk.adoc[leveloffset=+2]
 
 (Optional) You can verify the conversion hosts in a browser. See xref:Verifying_{context}_conversion_hosts_in_browser[].
 
-include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+1]
+include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+2]
 
 endif::rhv[]
 ifdef::osp[]
 = Preparing the Red Hat OpenStack Platform environment
 
-Preparing the Red Hat OpenStack Platform environment involves the following key steps:
-
-. Installing and configuring Red Hat OpenStack Platform 13 or 14. See xref:Installing_osp_13_14[].
-. Installing and configuring CloudForms 4.7.6 or later. See xref:Installing_cf_4_7_6_with_{context}[].
-. Creating the conversion hosts. See xref:Creating_osp_conversion_hosts[].
+You can install and configure Red Hat OpenStack Platform and CloudForms and deploy the conversion hosts for VDDK transformation.
 
 include::modules/ref_Vddk_note.adoc[]
 include::modules/ref_Target_prerequisites.adoc[leveloffset=+1]
@@ -55,16 +60,14 @@ If Red Hat OpenStack Platform has been active for a while, you must wait for Clo
 [discrete]
 include::modules/proc_Viewing_cloud_provider_event_timeline.adoc[leveloffset=+2]
 
-include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+1]
+[id='Deploying_osp_conversion_hosts']
+== Deploying the Red Hat OpenStack Platform conversion hosts
 
-Configure your conversion hosts with CloudForms to use the VMware Virtual Disk Development Kit (VDDK).
+You can create the Red Hat OpenStack Platform conversion hosts, download the VMware Virtual Disk Development Kit (VDDK), configure the conversion hosts in CloudForms, and verify the conversion host configuration.
 
+include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+2]
 include::modules/ref_Vddk_note.adoc[]
-include::modules/proc_Configuring_the_1_2_conversion_hosts_for_vddk.adoc[leveloffset=+1]
-
-You can migrate your virtual machines.
-
-(Optional) You can verify the conversion hosts in a browser. See xref:Verifying_{context}_conversion_hosts_in_browser[].
-
-include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+1]
+include::modules/proc_Downloading_vddk.adoc[leveloffset=+2]
+include::modules/proc_Configuring_the_1_2_conversion_hosts_for_vddk.adoc[leveloffset=+2]
+include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+2]
 endif::osp[]

@@ -1,53 +1,52 @@
 [id="Configuring_the_{context}_environment_for_ssh_transformation"]
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 = Configuring the Red Hat Virtualization environment for SSH transformation
-endif::rhv[]
-ifdef::osp[]
+endif::rhv_1-1,rhv_1-2[]
+ifdef::osp_1-1,osp_1-2[]
 = Configuring the Red Hat OpenStack Platform environment for SSH transformation
-endif::osp[]
+endif::osp_1-1,osp_1-2[]
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
 
 Configuring your environment involves the following additional steps:
 
-. Configuring the VMware hypervisors. See xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[].
-ifdef::rhv[]
-. (Optional) Reinstalling `ipa-client` if you are configuring your conversion hosts for SSSD with single sign-on. See xref:Reinstalling_ipa_client[].
-endif::rhv[]
-. Configuring the conversion hosts. See xref:Configuring_the_{context}_conversion_hosts_for_ssh[].
-. Copying the VMware keys to the conversion hosts. See xref:Copying_vmware_keys_to_{context}_conversion_hosts[].
-. Configuring secure remote login to the VMware hypervisors. See xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[].
-ifdef::rhv[]
-. Authenticating the conversion hosts in CloudForms. See xref:Authenticating_conversion_hosts_in_cloudforms_app_ssh[].
-endif::rhv[]
+. Configuring the VMware hypervisors for SSH transformation
+ifdef::rhv_1-1,rhv_1-2[]
+. (Optional) Reinstalling `ipa-client` if you are configuring your conversion hosts for SSSD with single sign-on
+endif::rhv_1-1,rhv_1-2[]
+. Configuring the conversion hosts for SSH
+. Copying the VMware keys to the conversion hosts
+. Configuring secure remote login to the VMware hypervisors
+ifdef::rhv_1-1,rhv_1-2[]
+. Authenticating the conversion hosts in CloudForms
+endif::rhv_1-1,rhv_1-2[]
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+1]
 
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 include::modules/proc_Reinstalling_ipa_client.adoc[leveloffset=+1]
-endif::rhv[]
+endif::rhv_1-1,rhv_1-2[]
 
-[id="Configuring_the_{context}_conversion_hosts_for_ssh"]
-== Configuring the conversion hosts
 
-Follow the procedures in xref:Configuring_the_1_1_{context}_conversion_hosts_for_vddk[] with the following changes:
+== Configuring the conversion hosts for SSH transformation
 
-* xref:extra_vars_{context}[]
+Follow the procedures in xref:Configuring_the_{context}_conversion_hosts_for_vddk[] with the following changes:
+
+* `extra_vars.yml` file:
 +
 Specify `ssh` for the `v2v_transport_methods` parameter in `extra_vars.yml`.
 
-* xref:secure_vars_{context}[]
+* `secure_vars.yml` file:
 +
 Copy the SSH private key for connecting to the VMware hypervisors for the `v2v_ssh_private_key` parameter in `secure_vars.yml`.
 
 include::modules/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+1]
 
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+1]
+endif::rhv_1-1,rhv_1-2[]
 
 :context: app_ssh
 :app_ssh:
 include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+1]
 :app_ssh!:
-
-endif::rhv[]

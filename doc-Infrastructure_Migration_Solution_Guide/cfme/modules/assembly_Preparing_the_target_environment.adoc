@@ -1,0 +1,130 @@
+// Module included in the following assemblies:
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
+[id="Preparing_the_{context}_target_environment"]
+ifdef::rhv_1-1,rhv_1-2[]
+= Preparing the Red Hat Virtualization environment
+
+You can install and configure Red Hat Virtualization and CloudForms and deploy the conversion hosts for VDDK transformation.
+endif::rhv_1-1,rhv_1-2[]
+
+ifdef::osp_1-1,osp_1-2[]
+= Preparing the Red Hat OpenStack Platform environment
+
+You can install and configure Red Hat OpenStack Platform and CloudForms and deploy the conversion hosts for VDDK transformation.
+endif::osp_1-1,osp_1-2[]
+
+ifdef::rhv_1-1,rhv_1-2,osp_1-1,osp_1-2[]
+include::ref_Target_prerequisites.adoc[leveloffset=+1]
+endif::rhv_1-1,rhv_1-2,osp_1-1,osp_1-2[]
+
+ifdef::rhv_1-1[]
+[discrete]
+include::ref_Software_compatibility_matrix_1_1.adoc[leveloffset=+1]
+include::proc_Installing_rhv_4_2.adoc[leveloffset=+1]
+include::proc_Installing_cf_4_7_0.adoc[leveloffset=+1]
+endif::rhv_1-1[]
+
+ifdef::rhv_1-2[]
+[discrete]
+include::ref_Software_compatibility_matrix_1_2.adoc[leveloffset=+2]
+include::proc_Installing_rhv_4_3.adoc[leveloffset=+1]
+include::proc_Installing_cf_4_7_6.adoc[leveloffset=+1]
+endif::rhv_1-2[]
+
+ifdef::osp_1-1[]
+[discrete]
+include::ref_Software_compatibility_matrix_1_1.adoc[]
+endif::osp_1-1[]
+
+ifdef::osp_1-2[]
+[discrete]
+include::ref_Software_compatibility_matrix_1_2.adoc[leveloffset=+2]
+endif::osp_1-2[]
+
+ifdef::osp_1-1,osp_1-2[]
+include::proc_Installing_osp_13_14.adoc[leveloffset=+1]
+endif::osp_1-1,osp_1-2[]
+
+ifdef::osp_1-1[]
+include::proc_Installing_cf_4_7_0.adoc[leveloffset=+1]
+endif::osp_1-1[]
+
+ifdef::osp_1-2[]
+include::proc_Installing_cf_4_7_6.adoc[leveloffset=+1]
+endif::osp_1-2[]
+
+ifdef::osp_1-1,osp_1-2[]
+
+[NOTE]
+====
+If Red Hat OpenStack Platform has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider. Check the cloud provider timeline to verify that all events have been processed.
+====
+
+include::proc_Viewing_cloud_provider_event_timeline.adoc[leveloffset=+2]
+endif::osp_1-1,osp_1-2[]
+
+ifdef::rhv_1-1,rhv_1-2[]
+[id='Deploying_conversion_hosts-{context}']
+== Deploying the Red Hat Virtualization conversion hosts
+endif::rhv_1-1,rhv_1-2[]
+
+ifdef::osp_1-1,osp_1-2[]
+[id='Deploying_conversion_hosts-{context}']
+== Deploying the Red Hat OpenStack Platform conversion hosts
+endif::osp_1-1,osp_1-2[]
+
+ifdef::rhv_1-1[]
+You can download the VMware Virtual Disk Development Kit (VDDK), configure and verify the Red Hat Virtualization conversion hosts with Ansible playbooks, authenticate the conversion hosts in CloudForms, and verify the conversion host configuration in a browser.
+endif::rhv_1-1[]
+
+ifdef::rhv_1-2[]
+You can download the VMware Virtual Disk Development Kit (VDDK), configure the Red Hat Virtualization conversion hosts in CloudForms, and verify the conversion host configuration in a browser.
+
+.Prerequisites
+
+* If the Red Hat Virtualization provider has been active for a while, verify that the hosts have valid subscriptions and repositories by entering the following commands:
++
+----
+# subscription-manager list --consumed
+# yum repolist
+----
+endif::rhv_1-2[]
+
+ifdef::osp_1-1[]
+You can create the Red Hat OpenStack Platform conversion hosts, download the VMware Virtual Disk Development Kit (VDDK), and configure and verify the conversion host with Ansible playbooks, and verify the conversion host configuration in a browser.
+endif::osp_1-1[]
+
+ifdef::osp_1-2[]
+You can create the Red Hat OpenStack Platform conversion hosts, download the VMware Virtual Disk Development Kit (VDDK), configure the conversion hosts in CloudForms, and verify the conversion host configuration in a browser.
+endif::osp_1-2[]
+
+ifdef::osp_1-1,osp_1-2[]
+include::proc_Creating_osp_conversion_hosts.adoc[leveloffset=+2]
+endif::osp_1-1,osp_1-2[]
+
+ifdef::rhv_1-1,rhv_1-2,osp_1-1,osp_1-2[]
+include::proc_Downloading_vddk.adoc[leveloffset=+2]
+endif::rhv_1-1,rhv_1-2,osp_1-1,osp_1-2[]
+
+ifdef::rhv_1-1[]
+include::proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+2]
+include::proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+2]
+endif::rhv_1-1[]
+
+ifdef::rhv_1-2[]
+include::proc_Configuring_the_1_2_conversion_hosts_for_vddk.adoc[leveloffset=+2]
+endif::rhv_1-2[]
+
+ifdef::osp_1-1[]
+include::proc_Adding_osp_conversion_host_key_to_cloudforms.adoc[leveloffset=+2]
+include::proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+2]
+endif::osp_1-1[]
+
+ifdef::osp_1-2[]
+include::proc_Configuring_the_1_2_conversion_hosts_for_vddk.adoc[leveloffset=+2]
+endif::osp_1-2[]
+
+ifdef::rhv_1-1,rhv_1-2,osp_1-1,osp_1-2[]
+include::proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+2]
+endif::rhv_1-1,rhv_1-2,osp_1-1,osp_1-2[]

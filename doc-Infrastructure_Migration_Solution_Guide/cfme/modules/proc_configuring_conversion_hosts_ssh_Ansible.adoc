@@ -1,0 +1,27 @@
+// Module included in the following assemblies:
+//
+// IMS_1.1/master.adoc
+[id='Configuring_the_conversion_hosts_for_ssh_transformation_{context}']
+= Configuring the conversion hosts for SSH transformation
+
+To configure the conversion hosts for SSH transformation, update the configuration files:
+
+* Specify `ssh` as the value for the `v2v_transport_methods` parameter in the `extra_vars.yml` file:
++
+[source,yaml]
+----
+v2v_transport_methods:
+  - ssh
+----
+
+* Add the `v2v_ssh_private_key` parameter and its value to the `secure_vars.yml` file:
++
+[source,yaml]
+----
+v2v_ssh_private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  _b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn...._
+  -----END RSA PRIVATE KEY-----
+----
++
+This key is the private key of the SSH key pair that you generated when you configured the VMware hypervisors for SSH transformation.

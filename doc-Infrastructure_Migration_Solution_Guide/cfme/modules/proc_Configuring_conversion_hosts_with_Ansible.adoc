@@ -1,247 +1,145 @@
 // Module included in the following assemblies:
 //
-// IMS_1.1/assembly_Preparing_the_1_1_target_environment.doc
-[id="Configuring_the_{context}_conversion_hosts_for_vddk"]
-= Configuring the conversion hosts with Ansible playbooks
+// IMS_1.1/master.adoc
+[id="Configuring_conversion_hosts_for_vddk_with_Ansible-{context}"]
+= Configuring the conversion hosts
 
 You can configure and verify the conversion hosts with Ansible playbooks.
 
+ifdef::rhv_1-1[]
+If the Red Hat Virtualization host has an existing SSH private key, you must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before running the `conversion_host_enable` playbook. The playbook will not overwrite the old key.
+endif::[]
+
+[NOTE]
+====
+Running the `conversion_host_enable.yml` playbook more than once on the same host creates multiple entries in the CloudForms database for that host.
+
+If you need to reconfigure a host, first remove its database entry with the `conversion_host_disable` playbook:
+
+----
+$ ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml
+----
+====
 
 .Procedure
 
 ifdef::rhv_1-1[]
-
-If the Red Hat Virtualization conversion host has an existing SSH private key, the `v2v_ssh_private_key` value does not overwrite it. You must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before running the `conversion_host_enable` playbook.
-
 . Log in to the Manager machine using SSH.
+endif::[]
+ifdef::osp_1-1[]
+. Log in to a conversion host.
+endif::[]
 . Install the `ovirt-ansible-v2v-conversion-host` package:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----
-# yum install ovirt-ansible-v2v-conversion-host
+$ yum install ovirt-ansible-v2v-conversion-host
 ----
 
 . Create the `extra_vars.yml` file with the following parameters:
 +
-[options="nowrap" subs="+quotes,verbatim"]
+[source,yaml]
 ----
 ---
+ifdef::rhv_1-1[]
 v2v_host_type: rhv
-
-# Transport methods to configure on the conversion host. Default is "vddk".
+endif::[]
+ifdef::osp_1-1[]
+v2v_host_type: openstack
+endif::[]
 v2v_transport_methods:
-  - _vddk_ <1>
-
-# Maximum number of concurrent conversions per host. Default is "10".
-v2v_max_concurrent_conversions: _10_ <2>
-
-# File name of VDDK package
-v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz" <3>
-
-# URL of VDDK package
-v2v_vddk_package_url: "http://_path_to_vddk_package_/{{ v2v_vddk_package_name }}" <4>
-
-# Name of the CloudForms provider to which the conversion host belongs
+  - vddk
+v2v_max_concurrent_conversions: 10 <1>
+v2v_vddk_package_name: "<vddk_file>" <2>
+v2v_vddk_package_url: "http://<path_to_vddk_package>/{{ v2v_vddk_package_name }}" <3>
+ifdef::rhv_1-1[]
 manageiq_provider_name: RHV
-
-# Base URL of CloudForms machine
-manageiq_url: "https://_CloudForms_FQDN_" <5>
-
-# Whether to validate certificate of CloudForms server. Default is "true".
-manageiq_validate_certs: _true_ <6>
-
-manageiq_zone_id: "42000000000001"' <7>
+endif::[]
+ifdef::osp_1-1[]
+manageiq_provider_name: OpenStack
+endif::[]
+manageiq_url: "https://<CloudForms_FQDN>" <4>
+manageiq_validate_certs: <true> <5>
+manageiq_zone_id: "<zone_id>" <6>
 
 # Empty vmware_hosts variable for conversion_host_disable.yml
+# Do not change this parameter
 vmware_hosts: ""
 
-# List of infrastructure providers
-# Each provider is a dictionary with 3 attributes: "name", "hostname", and "connection_configurations"
 manageiq_providers:
-  - name: "_RHV_"
-    hostname: _Manager_FQDN_or_IP_address_
-    connection_co
-nfigurations:
+ifdef::rhv_1-1[]
+  - name: "RHV"
+    hostname: <Manager> <7>
+    connection_configurations:
       - endpoint:
           role: "default"
           certificate_authority: | <8>
             -----BEGIN CERTIFICATE-----
-            _MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ...._
+            <MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ....>
             -----END CERTIFICATE-----
-----
-<1> Change to `ssh` if you are using SSH transformation.
-<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default value is `10`. For VDDK transformation, do not set this value higher than `20`.
-<3> Update the `v2v_vddk_package_name` with the correct version.
-<4> `v2v_vddk_package_url` is the path to the VDDK archive file that you downloaded.
-<5> `manageiq_url` is the FQDN of the CloudForms machine.
-<6> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. The default value is `true`.
-<7> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine: `# curl -sk -u admin \'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone`.
-<8> The `certificate_authority` is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
-
-. Create an encrypted `secure_vars.yml` file:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-vault create secure_vars.yml
-----
-
-. Add the following parameters and save the file:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
----
-# CloudForms "admin" user, for connecting to CloudForms
-manageiq_username: "_username_"
-
-# CloudForms "admin" password:
-manageiq_password: "_password_"
-
-# SSH private key to connect to VMware hypervisors for SSH transformation <1>
-v2v_ssh_private_key: |
-  -----BEGIN RSA PRIVATE KEY-----
-  _b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn...._
-  -----END RSA PRIVATE KEY-----
-----
-<1> (SSH transformation) This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.
-
-. Run the `conversion_host_enable.yml` playbook to configure each conversion host:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook -i _conversion_host_, -b \ <1>
-    -e "ansible_ssh_private_key_file=/etc/pki/ovirt-engine/keys/engine_id_rsa" \
-    -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
-    /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
-----
-<1> `conversion_host` is the FQDN or IP address of the conversion host.
-
-. Run the `conversion_host_check.yml` playbook to verify the configuration:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-# ansible-playbook --ask-vault-pass -i _conversion_host_, -c local \ <1>
-    -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml
-----
-<1> `conversion_host` is the FQDN or IP address of the conversion host.
-
-endif::rhv_1-1[]
+endif::[]
 ifdef::osp_1-1[]
-
-. Log in to a conversion host.
-. In `/usr/share/ovirt-ansible-v2v-conversion-host/playbooks`, create an `extra_vars.yml` file with the following parameters:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
----
-v2v_host_type: openstack
-
-# Transport methods to configure on the conversion host. Default is "vddk".
-v2v_transport_methods:
-  - _vddk_ <1>
-
-# Maximum number of concurrent conversions per host. Default is "10".
-v2v_max_concurrent_conversions: _10_ <2>
-
-# File name of VDDK package
-v2v_vddk_package_name: "VMware-vix-disklib-_version_.x86_64.tar.gz" <3>
-
-# URL of VDDK package
-v2v_vddk_package_url: "http://_path/to/downloaded_vddk_package_/{{ v2v_vddk_package_name }}" <4>
-
-manageiq_provider_name: OpenStack
-
-# Base URL of CloudForms machine
-manageiq_url: "https://_CloudForms_FQDN_" <5>
-
-# Whether to validate certificate of CloudForms server. Default is "true".
-manageiq_validate_certs: _false_ <6>
-
-manageiq_zone_id: "42000000000001" <7>
-
-# Empty vmware_hosts variable for conversion_host_disable.yml
-vmware_hosts: ""
-
-# List of cloud providers
-# Each provider is a dictionary with 3 attributes: "name", "hostname", and "connection_configurations"
-manageiq_providers:
   - name: "_OpenStack_"
     hostname: _controller_node_FQDN_or_IP_address_
     connection_configurations:
       - endpoint:
           role: "default"
-          security_protocol: "_ssl_" <8>
-          certificate_authority: | <9>
+          security_protocol: "_ssl_" <7>
+          certificate_authority: | <8>
             -----BEGIN TRUSTED CERTIFICATE-----
             _MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV...._
             -----END TRUSTED CERTIFICATE-----
             -----BEGIN TRUSTED CERTIFICATE-----
             _MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG...._
             -----END TRUSTED CERTIFICATE-----
+endif::[]
 ----
-<1> Change to `ssh` if you are using SSH transformation.
-<2> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default is `10`. If you are using VDDK transformation, do not set this number higher than `20`.
-<3> Update the `v2v_vddk_package_name` with the correct version.
-<4> `v2v_vddk_package_url` is the path to the VDDK archive file that you downloaded.
-<5> `manageiq_url` is the FQDN of the CloudForms machine.
-<6> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. The default value is `true`.
-<7> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine: `# curl -sk -u admin \'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone`.
-<8> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`).
-<9> The CA chain (`certificate_authority`) is a concatenation of two CA files, `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers. If you deploy your own CA chain, use the chain that signs the Red Hat OpenStack Platform API certificates. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[SSL/TLS Certificate Configuration] in _Red Hat OpenStack Platform Director Installation and Usage_.
+<1> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default value is `10`. Do not set this value higher than `20`.
+<2> Specify the full file name of the VDDK package that you downloaded.
+<3> Specify the path to the VDDK archive file that you downloaded.
+<4> Specify the FQDN of the CloudForms machine.
+<5> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. The default value is `true`.
+<6> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine: `$ curl -sk -u admin \'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone`.
+ifdef::rhv_1-1[]
+<7> Specify the FQDN or IP address of the Manager machine.
+<8> Specify the `certificate_authority`, which is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
+endif::[]
+ifdef::osp_1-1[]
+<7> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`).
+<8> The CA chain (`certificate_authority`) is a concatenation of two CA files, `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+endif::[]
 
 . Create an encrypted `secure_vars.yml` file:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-vault create secure_vars.yml
+$ ansible-vault create secure_vars.yml
 ----
 
 . Add the following parameters and save the file:
 +
-[options="nowrap" subs="+quotes,verbatim"]
+[source,yaml]
 ----
 ---
-# CloudForms "admin" user, for connecting to CloudForms
-manageiq_username: "_username_"
-
-# CloudForms "admin" password:
-manageiq_password: "_password_"
-
-# SSH private key to connect to VMware hypervisors for SSH transformation <1>
-v2v_ssh_private_key: |
-  -----BEGIN RSA PRIVATE KEY-----
-  _b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn...._
-  -----END RSA PRIVATE KEY-----
+manageiq_username: "<username>" <1>
+manageiq_password: "<password>" <2>
 ----
-<1> (SSH transformation) This is the private key of the SSH key pair that you created when you enabled SSH access on the VMware hypervisors.
+<1> Specify the CloudForms admin user, for connecting to CloudForms.
+<2> Specify the CloudForms admin password.
 
 . Run the `conversion_host_enable.yml` playbook to configure each conversion host:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook -i _conversion_host_, -c local -b \ <1>
+$ ansible-playbook -i <conversion_host>, -b \ <1>
+    -e "ansible_ssh_private_key_file=/etc/pki/ovirt-engine/keys/engine_id_rsa" \
     -e @extra_vars.yml -e @secure_vars.yml --ask-vault-pass \
     /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_enable.yml
 ----
-<1> `conversion_host` is the FQDN or IP address of the conversion host.
+<1> Specify the FQDN or IP address of the conversion host.
 
 . Run the `conversion_host_check.yml` playbook to verify the configuration:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# ansible-playbook --ask-vault-pass -i _conversion_host_, -c local \ <1>
+$ ansible-playbook --ask-vault-pass -i <conversion_host>, -c local \ <1>
     -e @extra_vars.yml -e @secure_vars.yml conversion_host_check.yml
 ----
-<1> `conversion_host` is the FQDN or IP address of the conversion host.
-
-endif::osp_1-1[]
-
-[IMPORTANT]
-====
-Running the `conversion_host_enable.yml` playbook more than once on the same host creates multiple entries in the CloudForms database for that host.
-
-If you need to run the `conversion_host_enable.yml` playbook again, remove the host's existing database entry by running `conversion_host_disable.yml` on the host:
-
-----
-# ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml
-----
-====
+<1> Specify the FQDN or IP address of the conversion host.

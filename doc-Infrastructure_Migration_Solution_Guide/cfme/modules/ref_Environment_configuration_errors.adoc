@@ -12,13 +12,13 @@
 ** Mounted ISO/CDROM disk
 ** Encrypted disk
 ** Invalid name, containing spaces or special characters
-ifdef::osp[]
+ifdef::osp_1-1,osp_1-2[]
 ** Powered off during migration
-endif::osp[]
+endif::[]
 
 * If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must increase the hypervisor's NFC service memory.
 
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 [id="rhv_environment_errors"]
 .Red Hat Virtualization
 
@@ -30,15 +30,17 @@ ifdef::rhv[]
 ** If you are using SSSD with single sign-on, you must reinstall `ipa-client` without OpenSSH.
 ** Check that the conversion host does not have an existing private SSH key in `/var/lib/vdsm/.ssh/id_rsa`. Conversion host configuration does not overwrite old SSH keys. They must be deleted manually.
 ** Check that you enabled SSH access on the VMware hypervisors and correctly configured your conversion hosts for SSH transformation.
-endif::rhv[]
-ifdef::osp[]
+endif::[]
+ifdef::osp_1-1,osp_1-2[]
 [id="osp_environment_errors"]
 .Red Hat OpenStack Platform
 
-* `disallowed by policy` error: The Red Hat OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges within the target project. Add the `admin` user as `member` and `admin` to your target project. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Edit a Project] in the _Red Hat OpenStack Platform Users and Identity Management Guide_.
+* `disallowed by policy` error
++
+The Red Hat OpenStack Platform `admin` user in CloudForms does not have `admin` role privileges in the target project. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/users_and_identity_management_guide/#edit_a_project[Add the `admin` user as `member` and `admin`] to your target project.
 +
 [options="" subs="+quotes,verbatim"]
 ----
 ERROR: Command exited with non-zero return code 1, output: HttpException: 403: Client Error for url: https://_FQDN_:13696/v2.0/ports, {"NeutronError": {"message": "((rule:create_port and rule:create_port:mac_address) and rule:create_port:fixed_ips) is disallowed by policy", "type": "PolicyNotAuthorized", "detail": ""}}
 ----
-endif::osp[]
+endif::[]

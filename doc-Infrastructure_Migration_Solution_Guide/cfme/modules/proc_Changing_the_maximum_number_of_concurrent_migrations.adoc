@@ -15,15 +15,18 @@ A decrease maximum number of concurrent migrations affects only future migration
 
 [CAUTION]
 ====
-ifdef::osp_1-1[]
+ifdef::osp_1-1,osp_1-2[]
 Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above `10`.
-endif::osp_1-1[]
+endif::osp_1-1,osp_1-2[]
 
 If you are using VDDK transformation, the number of concurrent migrations must not exceed `20`. Otherwise, network overload will cause the migration to fail.
 ====
 
-Changing the maximum number of concurrent migrations for all conversion hosts::
+To chabge the maximum number of concurrent migrations for all conversion hosts:
+
 . In CloudForms, click menu:Compute[Migration > Migration Settings].
+
+ifdef::rhv_1-1,osp_1-1[]
 . Select a new *Maximum concurrent migrations per conversion host*. The default is `10`.
 +
 [NOTE]
@@ -31,6 +34,19 @@ Changing the maximum number of concurrent migrations for all conversion hosts::
 In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work.
 ====
 
+endif::rhv_1-1,osp_1-1[]
+ifdef::rhv_1-2,osp_1-2[]
+. In the *Migration Throttling* tab, select a value for *Maximum concurrent migrations per conversion host* or *Maximum concurrent migrations per provider* and click *Apply*.
++
+The value of *Maximum concurrent migrations per conversion host* is constrained so that it cannot be greater than *Maximum concurrent migrations per provider*.
++
+[NOTE]
+====
+In the current release, the *Maximum concurrent migrations per conversion host* interface control does not work.
+====
+endif::rhv_1-2,osp_1-2[]
+
+// 1.1
 // Commenting out because of https://bugzilla.redhat.com/show_bug.cgi?id=1716283
 // Setting limit via API is not working.
 //
@@ -48,9 +64,32 @@ In the current release, the *Maximum concurrent migrations per conversion host* 
 // <1> `host1.example.co` is the name of your conversion host.
 // <2> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `10` for a conversion host.
 
+ifdef::rhv_1-2,osp_1-2[]
+To change the maximum number of concurrent migrations for a specific conversion host:
+
+. Enter the following command:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# curl -sk -u _username_:_password_ 'https://_CloudForms_FQDN_/api/conversion_hosts/_conversion_host_id_' -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _15_}}' <1> <2> <3> <4>
+----
+
+<1> `username` and `password` are the username and password for CloudForms.
+<2> `CloudForms_FQDN` is the FQDN of the CloudForms machine.
+<3> To obtain a `conversion_host_id`, enter the following command:
++
+[options="nowrap" subs="+quotes,verbatim"]
+----
+# curl -sk -u _username:password_ 'https://_CloudForms_FQDN_/api/conversion_hosts/'
+----
+
+<4> `max_concurrent_tasks` is the maximum number of concurrent migrations. The default is `10`.
+endif::rhv_1-2,osp_1-2[]
+
 To change the maximum number of concurrent migrations for a provider:
 
 . Log in to the CloudForms machine using SSH.
+
 ifdef::rhv_1-1[]
 . Enter the following command:
 +

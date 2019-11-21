@@ -11,6 +11,8 @@
 :numbered:
 :sectnums:
 :partnums:
+:context: rhv_1-1
+:rhv_1-1:
 
 Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware{nbsp}5.5 (and later) to Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms.
 
@@ -27,8 +29,6 @@ See xref:Migrating_from_vmware_to_osp_1-1[].
 Red Hat CloudForms 4.7.0::
 Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[Red Hat CloudForms 4.7] documentation for more information.
 
-:context: rhv_1-1
-:rhv_1-1:
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat Virtualization
 
@@ -59,36 +59,36 @@ Review the following information to plan your migration:
 
 The migration workflow describes the migration process in greater detail.
 
-include::con_Migration_workflow.adoc[leveloffset=+2]
-include::ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
+include::modules/con_Migration_workflow.adoc[leveloffset=+2]
+include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
 include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 
 [id="Preparing_the_environment_for_migration_to_{context}"]
-== Preparing the source and target environments for migration
+== Preparing the environments for migration
 
 You must prepare the VMware source environment, install and configure the Red Hat Virtualization target environment, and deploy your conversion hosts for VDDK transformation.
 
 include::modules/ref_Vddk_note.adoc[]
 
-[id="Preparing_the_vmware_environment_for_{context}"]
+[id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
 
 You must prepare the VMware network and virtual machines for migration.
 
 If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must configure the hypervisor.
 
-include::modules/proc_Preparing_the_vmware_network_1_2.adoc[leveloffset=+3]
+include::modules/proc_Preparing_the_vmware_network.adoc[leveloffset=+3]
 include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
 include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
 
+[id='Preparing_the_rhv_environment_{context}']
 === Preparing the Red Hat Virtualization environment
 
 You must install and configure Red Hat Virtualization and CloudForms and deploy the conversion hosts for VDDK transformation.
 
-include::modules/ref_Target_prerequisites.adoc[leveloffset=+2]
-include::modules/ref_Software_compatibility_matrix_1_1.adoc[leveloffset=+2]
-include::modules/proc_Installing_rhv_4_2.adoc[leveloffset=+2]
-include::modules/proc_Installing_cf_4_7_0.adoc[leveloffset=+2]
+include::modules/ref_Target_prerequisites.adoc[leveloffset=+3]
+include::modules/proc_Installing_configuring_rhv.adoc[leveloffset=+3]
+include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 
 [id='Deploying_conversion_hosts-{context}']
 === Deploying the Red Hat Virtualization conversion hosts
@@ -99,6 +99,7 @@ include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
 include::modules/proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+3]
 include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+3]
 
+[id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
 You must map the resources of your source and target environments, check for migration conditions with prerequisites, and create and run a migration plan.
@@ -106,7 +107,6 @@ You must map the resources of your source and target environments, check for mig
 Optionally, you can change the maximum number of concurrent migrations for conversion hosts or providers to control the migration process.
 
 include::modules/proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
-// include::assembly_Checking_for_migration_prerequisites.adoc[leveloffset=+2]
 
 === Checking for migration prerequisites
 
@@ -128,15 +128,14 @@ include::modules/proc_Creating_a_csv_file_to_add_virtual_machines_to_the_migrati
 include::modules/proc_Adding_ansible_playbooks_to_cloudforms.adoc[leveloffset=+3]
 include::modules/proc_Creating_a_rhel_premigration_playbook.adoc[leveloffset=+3]
 
-include::modules/proc_Creating_a_migration_plan_in_cloudforms.adoc[leveloffset=+1]
+include::modules/proc_Creating_a_migration_plan_in_cloudforms.adoc[leveloffset=+2]
 
-// include::modules/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
-include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations_1_1.adoc[leveloffset=+2]
+include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+2]
 
 [id="Troubleshooting_{context}"]
 == Troubleshooting
 
-You can review the migration logs, check common issues and mistakes, and known issues.
+You can review the migration logs, check common issues and mistakes, and known issues to troubleshoot a migration error.
 
 include::modules/ref_Migration_logs.adoc[leveloffset=+2]
 
@@ -165,10 +164,32 @@ The migration process involves the following tasks:
 This guide describes the following tasks:
 
 . Planning your migration
-. Preparing the VMware, Red Hat OpenStack Platform, and CloudForms environments
+. Preparing the VMware and Red Hat environments
 . Migrating the virtual machines
 
-include::modules/assembly_Planning_the_migration.adoc[leveloffset=+1]
+== Planning the migration
+
+During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000{nbsp}virtual machines, with 200{nbsp}TB of data, in less than 6 months".
+
+Review the following information to plan your migration:
+
+* xref:Questions_to_ask_before_migration_{context}[] includes the following:
+
+** What operating systems are supported?
+** How long will the migration take?
+** How many conversion hosts do I need?
+
+* xref:Recommendations_for_migration_{context}[] provides guidelines on the following topics:
+
+** Scheduling the migration
+** Distributing the workload
+** Deploying the conversion hosts
+** Controlling the migration process
+
+The migration workflow describes the migration process in greater detail.
+
+include::modules/con_Migration_workflow.adoc[leveloffset=+2]
+include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
 include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 
 [id="Preparing_the_environment_for_migration_to_{context}"]
@@ -185,13 +206,59 @@ You must prepare the VMware network and virtual machines for migration.
 
 If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must configure the hypervisor.
 
-include::modules/proc_Preparing_the_vmware_network_1_2.adoc[leveloffset=+3]
+include::modules/proc_Preparing_the_vmware_network.adoc[leveloffset=+3]
 include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
 include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
-include::modules/assembly_Preparing_the_target_environment.adoc[leveloffset=+2]
 
-include::modules/assembly_Migrating_the_virtual_machines.adoc[leveloffset=+1]
-include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations_1_1.adoc[leveloffset=+2]
+=== Preparing the Red Hat OpenStack Platform environment
+
+You must install and configure Red Hat OpenStack Platform and CloudForms and deploy the conversion hosts for VDDK transformation.
+
+include::modules/ref_Target_prerequisites.adoc[leveloffset=+3]
+include::modules/proc_Installing_osp_13_14.adoc[leveloffset=+3]
+include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
+
+[id='Deploying_conversion_hosts-{context}']
+=== Deploying the Red Hat OpenStack Platform conversion hosts
+
+You must create the Red Hat OpenStack Platform conversion hosts, download the VMware Virtual Disk Development Kit (VDDK), and configure and verify the Red Hat Virtualization conversion hosts with Ansible playbooks.
+
+include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+3]
+include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+3]
+
+[id='Migrating_virtual_machines_{context}']
+== Migrating the virtual machines
+
+You must map the resources of your source and target environments, check for migration conditions with prerequisites, and create and run a migration plan.
+
+Optionally, you can change the maximum number of concurrent migrations for conversion hosts or providers to control the migration process.
+
+include::modules/proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
+
+=== Checking for migration prerequisites
+
+Check your migration for the following conditions, which have prerequisites:
+
+* You are migrating previously migrated virtual machines
++
+Add previously migrated machines to the migration plan with a CSV file. A CSV file is also recommended for large migrations.
+
+* You are using Ansible playbooks for premigration/postmigration tasks
++
+Create an Ansible repository and add credentials and playbooks to CloudForms.
+
+You are migrating virtual machines running RHEL or other Linux operating system
++
+Create a RHEL premigration playbook to preserve IP addresses and select this playbook when you create a migration plan.
+
+include::modules/proc_Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan.adoc[leveloffset=+3]
+include::modules/proc_Adding_ansible_playbooks_to_cloudforms.adoc[leveloffset=+3]
+include::modules/proc_Creating_a_rhel_premigration_playbook.adoc[leveloffset=+3]
+
+include::modules/proc_Creating_a_migration_plan_in_cloudforms.adoc[leveloffset=+1]
+
+include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+2]
 
 [id="Troubleshooting_{context}"]
 == Troubleshooting

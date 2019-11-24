@@ -53,8 +53,6 @@ Review the following information to plan your migration:
 ** Deploying the conversion hosts
 ** Controlling the migration process
 
-The migration workflow describes the migration process in greater detail.
-
 include::modules/con_Migration_workflow.adoc[leveloffset=+2]
 include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
 include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
@@ -62,9 +60,9 @@ include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 [id="Preparing_the_migration_environment_{context}"]
 == Preparing the migration environment
 
-You must prepare the VMware source environment, install and configure the Red Hat Virtualization target environment, and deploy your conversion hosts for VDDK transformation.
+You must prepare the VMware source and Red Hat Virtualization target environments for migration.
 
-include::modules/ref_Vddk_note.adoc[]
+The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_{context}[SSH transformation] is a fallback option.
 
 [id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
@@ -80,7 +78,7 @@ include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_
 [id='Preparing_the_rhv_environment_{context}']
 === Preparing the Red Hat Virtualization environment
 
-You must install and configure Red Hat Virtualization and CloudForms and deploy the conversion hosts for VDDK transformation.
+You must install and configure Red Hat Virtualization and CloudForms and deploy the conversion hosts.
 
 include::modules/ref_Target_prerequisites.adoc[leveloffset=+3]
 include::modules/proc_Installing_configuring_rhv.adoc[leveloffset=+3]
@@ -89,6 +87,12 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts-{context}']
 === Deploying the Red Hat Virtualization conversion hosts
 
+Deploying the conversion hosts involves the following tasks:
+
+. Downloading the VMware Virtual Disk Development Kit (VDDK)
+. Configuring the conversion hosts in CloudForms
+. Verifying the conversion hosts in a browser
+
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
 include::modules/proc_Configuring_conversion_hosts_cloudforms_vddk.adoc[leveloffset=+3]
 include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
@@ -96,35 +100,30 @@ include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
-You must map the resources of your source and target environments, check for migration conditions with prerequisites, and create and run a migration plan.
+Migrating the virtual machines involves the following steps:
 
-Optionally, you can change the maximum number of concurrent migrations for conversion hosts or providers to control the migration process.
+. Checking for migration conditions that have prerequisites
+. Creating an infrastructure mapping to map the resources of your source and target environments
+. Creating and running a migration plan in CloudForms
 
-include::modules/proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
+Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations_{context}[change the maximum number of concurrent migrations for conversion hosts or providers] to control the migration process.
 
-=== Checking for migration prerequisites
+=== Migration prerequisites
 
 Check your migration for the following conditions, which have prerequisites:
 
-* You are migrating previously migrated virtual machines
-+
-Add previously migrated machines to the migration plan with a CSV file. A CSV file is also recommended for large migrations.
+* If you are migrating previously migrated virtual machines, you must xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan_{context}[add previously migrated machines to the migration plan with a CSV file]. A CSV file is also recommended for large migrations.
 
-* You are using Ansible playbooks for premigration/postmigration tasks
-+
-Create an Ansible repository and add credentials and playbooks to CloudForms.
+* If you are using Ansible playbooks for premigration/postmigration tasks, you must xref:Adding_ansible_playbooks_to_cloudforms_{context}[create an Ansible repository and add credentials and playbooks to CloudForms].
 
-* You are migrating virtual machines running RHEL or other Linux operating system
-+
-Create a RHEL premigration playbook to preserve IP addresses and select this playbook when you create a migration plan.
+* If you are migrating virtual machines running RHEL or other Linux operating system, you must xref:Creating_a_rhel_premigration_playbook_{context}[create a RHEL premigration playbook] to preserve IP addresses. You will select this playbook when you create a migration plan.
 
 include::modules/proc_Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan.adoc[leveloffset=+3]
 include::modules/proc_Adding_ansible_playbooks_to_cloudforms.adoc[leveloffset=+3]
 include::modules/proc_Creating_a_rhel_premigration_playbook.adoc[leveloffset=+3]
-
+include::modules/proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
 include::modules/proc_Creating_a_migration_plan_in_cloudforms.adoc[leveloffset=+2]
 include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+2]
-
 
 [id="Troubleshooting_{context}"]
 == Troubleshooting
@@ -144,7 +143,7 @@ include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+3]
 include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 [appendix]
-
+[id='Configuring_environment_for_ssh_transformation_{context}']
 == Configuring the Red Hat Virtualization environment for SSH transformation
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
@@ -154,13 +153,13 @@ This configuration involves adding the following steps to xref:Preparing_the_mig
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
+|After xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
 The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[].
-|xref:Installing_rhv-{context}[] |If the conversion hosts are using SSSD with single sign-on:  xref:Reinstalling_ipa_client[]
-|xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[].
+|After xref:Installing_rhv-{context}[] |If the conversion hosts are using SSSD with single sign-on:  xref:Reinstalling_ipa_client[]
+|Instead of xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[]
 |After xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
 |===
 
@@ -199,8 +198,6 @@ Review the following information to plan your migration:
 ** Deploying the conversion hosts
 ** Controlling the migration process
 
-The migration workflow describes the migration process in greater detail.
-
 include::modules/con_Migration_workflow.adoc[leveloffset=+2]
 include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
 include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
@@ -208,9 +205,9 @@ include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 [id="Preparing_the_migration_environment_{context}"]
 == Preparing the migration environment
 
-You must prepare the VMware source environment, install and configure the Red Hat Virtualization target environment, and deploy your conversion hosts for VDDK transformation.
+You must prepare the VMware source and Red Hat Virtualization target environments for migration.
 
-include::modules/ref_Vddk_note.adoc[]
+The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_{context}[SSH transformation] is a fallback option.
 
 [id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
@@ -225,7 +222,7 @@ include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_
 
 === Preparing the Red Hat OpenStack Platform environment
 
-You must install and configure Red Hat OpenStack Platform and CloudForms and deploy the Red Hat OpenStack Platform conversion hosts for VDDK transformation.
+You must install and configure Red Hat OpenStack Platform and CloudForms and deploy the conversion hosts.
 
 include::modules/ref_Target_prerequisites.adoc[leveloffset=+3]
 include::modules/proc_Installing_osp_13_14.adoc[leveloffset=+3]
@@ -234,11 +231,11 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts_{context}']
 === Deploying the Red Hat OpenStack Platform conversion hosts
 
-Deploying the Red Hat OpenStack Platform conversion hosts involves the following tasks:
+Deploying the conversion hosts involves the following tasks:
 
 . Creating the conversion hosts from the conversion appliance
 . Downloading the VMware Virtual Disk Development Kit (VDDK)
-. Configuring the conversion hosts in the CloudForms user interface
+. Configuring the conversion hosts in CloudForms
 . Verifying the conversion hosts in a browser
 
 include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+3]
@@ -249,32 +246,28 @@ include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
-You must map the resources of your source and target environments, check for migration conditions with prerequisites, and create and run a migration plan.
+Migrating the virtual machines involves the following tasks:
 
-Optionally, you can change the maximum number of concurrent migrations for conversion hosts or providers to control the migration process.
+. Checking for migration conditions that have prerequisites
+. Creating an infrastructure mapping to map the resources of your source and target environments
+. Creating and running a migration plan in CloudForms
 
-include::modules/proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
+Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations_{context}[change the maximum number of concurrent migrations for conversion hosts or providers] to control the migration process.
 
-=== Checking for migration prerequisites
+=== Migration prerequisites
 
 Check your migration for the following conditions, which have prerequisites:
 
-* You are migrating previously migrated virtual machines
-+
-Add previously migrated machines to the migration plan with a CSV file. A CSV file is also recommended for large migrations.
+* If you are migrating previously migrated virtual machines, you must xref:Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan_{context}[add previously migrated machines to the migration plan with a CSV file]. A CSV file is also recommended for large migrations.
 
-* You are using Ansible playbooks for premigration/postmigration tasks
-+
-Create an Ansible repository and add credentials and playbooks to CloudForms.
+* If you are using Ansible playbooks for premigration/postmigration tasks, you must xref:Adding_ansible_playbooks_to_cloudforms_{context}[create an Ansible repository and add credentials and playbooks to CloudForms].
 
-You are migrating virtual machines running RHEL or other Linux operating system
-+
-Create a RHEL premigration playbook to preserve IP addresses and select this playbook when you create a migration plan.
+* If you are migrating virtual machines running RHEL or other Linux operating system, you must xref:Creating_a_rhel_premigration_playbook_{context}[create a RHEL premigration playbook] to preserve IP addresses and select this playbook when you create a migration plan.
 
 include::modules/proc_Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan.adoc[leveloffset=+3]
 include::modules/proc_Adding_ansible_playbooks_to_cloudforms.adoc[leveloffset=+3]
 include::modules/proc_Creating_a_rhel_premigration_playbook.adoc[leveloffset=+3]
-
+include::modules/proc_Creating_an_infrastructure_mapping.adoc[leveloffset=+2]
 include::modules/proc_Creating_a_migration_plan_in_cloudforms.adoc[leveloffset=+2]
 include::modules/proc_Changing_the_maximum_number_of_concurrent_migrations.adoc[leveloffset=+2]
 
@@ -297,6 +290,7 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 [appendix]
 
+[id='Configuring_environment_for_ssh_transformation_{context}']
 == Configuring the Red Hat OpenStack Platform environment for SSH transformation
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
@@ -306,13 +300,13 @@ This configuration involves adding the following steps to xref:Preparing_the_mig
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[Configure the VMware hypervisors for SSH transformation].
+|After xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
 The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[].
-|xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[Add the required parameters and values].
-|After xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[Copy the VMware SSH keys to the conversion hosts]
+|Instead of xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[]
+|After xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]

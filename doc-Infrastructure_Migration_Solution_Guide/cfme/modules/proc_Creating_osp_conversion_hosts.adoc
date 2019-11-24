@@ -22,7 +22,6 @@ For optimal performance, deploy conversion hosts on compute nodes with link:http
 ifdef::osp_1-1[]
 . In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.2 (x86_64)`, click *Download Now*, and save the image.
 endif::[]
-
 ifdef::osp_1-2[]
 . In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.3 (x86_64)` (or later), click *Download Now*, and save the image.
 endif::[]
@@ -44,3 +43,14 @@ The instance is created from an image, but the disk space defined in the image w
 ====
 You must resize `lv_root` to use all available disk space because the image will not use it by default.
 ====
+
+ifdef::osp_1-1[]
+. Add each conversion host's private SSH key to CloudForms:
+
+.. Log in to the CloudForms user interface.
+.. Click menu:Compute[*Clouds* > Providers].
+.. Select the Red Hat OpenStack Platform provider, click *Configuration* and select *Edit Selected Cloud Provider.*
+.. Click the *RSA key pair* tab in the *Endpoints* section.
+.. Enter the *Username* `cloud-user` and the *Private Key* of the conversion host instance. If you deploy multiple conversion hosts, they must use the same key pair.
+.. Click *Save*.
+endif::[]

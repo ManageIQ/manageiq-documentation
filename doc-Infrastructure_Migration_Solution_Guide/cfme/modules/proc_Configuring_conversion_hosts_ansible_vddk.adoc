@@ -4,22 +4,15 @@
 [id="Configuring_conversion_hosts_ansible_vddk_{context}"]
 = Configuring the conversion hosts for VDDK transformation
 
-You can configure and verify the conversion hosts with Ansible playbooks.
+You must configure and verify the conversion hosts with Ansible playbooks.
 
-ifdef::rhv_1-1[]
-If the Red Hat Virtualization host has an existing SSH private key, you must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before running the `conversion_host_enable` playbook. The playbook will not overwrite the old key.
-endif::[]
+.Prerequisites
 
-[NOTE]
-====
-Running the `conversion_host_enable.yml` playbook more than once on the same host creates multiple entries in the CloudForms database for that host.
-
-If you need to reconfigure a host, first remove its database entry with the `conversion_host_disable` playbook:
-
+* If you are configuring a previously configured host, first remove its existing entry in the CloudForms database with the `conversion_host_disable` playbook, to avoid multiple entries for the same host:
++
 ----
 $ ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml
 ----
-====
 
 .Procedure
 
@@ -53,13 +46,13 @@ v2v_max_concurrent_conversions: 10 <1>
 v2v_vddk_package_name: "<vddk_file>" <2>
 v2v_vddk_package_url: "http://<path_to_vddk_package>/{{ v2v_vddk_package_name }}" <3>
 ifdef::rhv_1-1[]
-manageiq_provider_name: RHV
+manageiq_provider_name: "RHV"
 endif::[]
 ifdef::osp_1-1[]
-manageiq_provider_name: OpenStack
+manageiq_provider_name: "OpenStack"
 endif::[]
 manageiq_url: "https://<CloudForms_FQDN>" <4>
-manageiq_validate_certs: <true> <5>
+manageiq_validate_certs: true <5>
 manageiq_zone_id: "<zone_id>" <6>
 
 # Empty vmware_hosts variable for conversion_host_disable.yml
@@ -69,7 +62,7 @@ vmware_hosts: ""
 manageiq_providers:
 ifdef::rhv_1-1[]
   - name: "RHV"
-    hostname: <Manager> <7>
+    hostname: "<Manager_host>" <7>
     connection_configurations:
       - endpoint:
           role: "default"
@@ -79,13 +72,13 @@ ifdef::rhv_1-1[]
             -----END CERTIFICATE-----
 endif::[]
 ifdef::osp_1-1[]
-  - name: "_OpenStack_"
-    hostname: _controller_node_FQDN_or_IP_address_
+  - name: "OpenStack"
+    hostname: "<controller_node>" <7>
     connection_configurations:
       - endpoint:
           role: "default"
-          security_protocol: "_ssl_" <7>
-          certificate_authority: | <8>
+          security_protocol: "ssl" <8>
+          certificate_authority: | <9>
             -----BEGIN TRUSTED CERTIFICATE-----
             _MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV...._
             -----END TRUSTED CERTIFICATE-----
@@ -96,17 +89,18 @@ endif::[]
 ----
 <1> `v2v_max_concurrent_conversions` is the maximum number of concurrent conversions per host. The default value is `10`. Do not set this value higher than `20`.
 <2> Specify the full file name of the VDDK package that you downloaded.
-<3> Specify the path to the VDDK archive file that you downloaded.
+<3> Specify the path to the VDDK package that you downloaded.
 <4> Specify the FQDN of the CloudForms machine.
-<5> You can set `manageiq_validate_certs` to `false` if you do not want to validate the CloudForms CA certificate. The default value is `true`.
+<5> Specify `false` if you do not want to validate the CloudForms CA certificate.
 <6> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine: `$ curl -sk -u admin \'https://_CloudForms_FQDN_/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone`.
 ifdef::rhv_1-1[]
 <7> Specify the FQDN or IP address of the Manager machine.
 <8> Specify the `certificate_authority`, which is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
 endif::[]
 ifdef::osp_1-1[]
-<7> You can specify the connection security: `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`certificate_authority`).
-<8> The CA chain (`certificate_authority`) is a concatenation of two CA files, `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+<7> Specify the hostname or FQDN of the controller node.
+<8> Valid options are `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`<certificate_authority>`).
+<9> The CA chain (`<certificate_authority>`) is a concatenation of two CA files, `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
 endif::[]
 
 . Create an encrypted `secure_vars.yml` file:

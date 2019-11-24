@@ -1,22 +1,24 @@
 // Module included in the following assemblies:
-// con_Migration_plan_options.adoc
+//
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
 [id="Creating_a_csv_file_to_add_virtual_machines_to_the_migration_plan_{context}"]
 = Creating a CSV file to add virtual machines to the migration plan
 
 If you are migrating virtual machines that were migrated in the past, you should create a CSV file to add the virtual machines to the migration plan, because the migration plan cannot discover them automatically.
 
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 [NOTE]
 ====
 A CSV file is recommended for large migrations because it is faster than manually selecting individual virtual machines.
 ====
-endif::rhv[]
-ifdef::osp[]
+endif::[]
+ifdef::osp_1-1,osp_1-2[]
 [NOTE]
 ====
 A CSV file is recommended for large migrations because it is faster than manually selecting the security group and flavor of each virtual machine.
 ====
-endif::osp[]
+endif::[]
 
 .CSV file fields
 [cols="1,3", options="header"]
@@ -25,14 +27,14 @@ endif::osp[]
 |`Name` |Virtual machine name. *Required*
 |`Host` |*Optional*. Only required if virtual machines have identical `Name` fields.
 |`Provider` |*Optional*. Only required if virtual machines have identical `Name` and `Host` fields.
-ifdef::osp[]
+ifdef::osp_1-1,osp_1-2[]
 |`Security Group` |*Optional.* The default is `Default`.
 |`Flavor` |*Optional* If you do not create flavors for the migration or if you leave this field blank, CloudForms tries to map the source virtual machines to existing flavors.
-endif::osp[]
+endif::[]
 |===
 
 .CSV file example
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Name,Host,Provider
@@ -40,8 +42,8 @@ vm01,host1,vSphere3
 vm02,host1,vSphere3
 vm03,host1,vSphere3
 ----
-endif::rhv[]
-ifdef::osp[]
+endif::[]
+ifdef::osp_1-1,osp_1-2[]
 [options="nowrap" subs="+quotes,verbatim"]
 ----
 Name,Host,Provider,Security Group,Flavor
@@ -49,4 +51,4 @@ vm01,host1,vSphere3,webservers,x1.medium
 vm02,host1,vSphere3,webservers,x1.medium
 vm03,host1,vSphere3,webservers,x1.medium
 ----
-endif::osp[]
+endif::[]

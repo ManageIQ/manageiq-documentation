@@ -1,0 +1,33 @@
+// Module included in the following assemblies:
+//
+// IMS_1.1/master.adoc
+[id='Configuring_conversion_hosts_ansible_ssh_{context}']
+= Configuring the conversion hosts for SSH transformation
+
+ifdef::rhv_1-1[]
+[IMPORTANT]
+====
+If the Red Hat Virtualization host has an existing SSH private key, you must delete the old key manually in `/var/lib/vdsm/.ssh/id_rsa` before running the `conversion_host_enable` playbook. The playbook will not overwrite the old key.
+====
+endif::[]
+
+To configure the conversion hosts for SSH transformation, update the following files:
+
+* Specify `ssh` as the value for the `v2v_transport_methods` parameter in the `extra_vars.yml` file:
++
+[source,yaml]
+----
+v2v_transport_methods:
+  - ssh
+----
+
+* Add the `v2v_ssh_private_key` parameter and its value to the `secure_vars.yml` file:
++
+[source,yaml]
+----
+v2v_ssh_private_key: |
+  -----BEGIN RSA PRIVATE KEY-----
+  <b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....> <1>
+  -----END RSA PRIVATE KEY-----
+----
+<1> Specify the private key of the SSH key pair that you generated when you configured the VMware hypervisors for SSH transformation.

@@ -1,15 +1,16 @@
 // Module included in the following assemblies:
-// IMS_1.1/assembly_Preparing_1_1_the_environment_for_migration.adoc
-// IMS_1.2/assembly_Preparing_1_2_the_environment_for_migration.adoc
-// IMS_1.3/assembly_Preparing_1_3_the_environment_for_migration.adoc
-[id="Target_prerequisites_{context}"]
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
+// IMS_1.3/master.adoc
+[id="Target_environment_prerequisites_{context}"]
 = Prerequisites
 
-Ensure that the following prerequisites are met:
+Ensure that the following prerequisites are met in your Red Hat environment:
 
 . Set the BIOS settings of physical hosts for optimal performance (rather than power-saving), according to the vendor's recommendations.
 . Disable C1E halt state, if applicable.
-ifdef::rhv[]
+
+ifdef::rhv_1-1,rhv_1-2[]
 . Enable the following ports in the conversion host network:
 * 22 - SSH
 * 443 - CloudForms, Red Hat Virtualization Manager, and VDDK
@@ -17,8 +18,9 @@ ifdef::rhv[]
 * 5480 - Conversion hosts to vCenter
 +
 For details, see link:https://github.com/ManageIQ/manageiq_docs/blob/master/doc-Appliance_Hardening_Guide/topics/Firewall.adoc[Configuring Firewall Ports].
-endif::rhv[]
-ifdef::osp[]
+endif::[]
+
+ifdef::osp_1-1,osp_1-2[]
 . Configure security groups with the following ports enabled:
 
 * For the conversion hosts and CloudForms: port 22 (SSH)
@@ -28,5 +30,53 @@ ifdef::osp[]
 ====
 Outbound traffic is enabled by default. If you have changed this setting, enable ports 902 (CloudForms to VMware) and 5480 (conversion hosts to vCenter).
 ====
-endif::osp[]
-. Ensure that the software versions are compatible.
+endif::[]
+
+. Ensure that the software versions are compatible:
++
+[cols="1,1", options="header"]
+|===
+|Software |Version
+ifdef::rhv_1-1,osp_1-1[]
+|VMware |5.5 or later
+endif::[]
+ifdef::rhv_1-2,osp_1-2[]
+|VMware |6.0 or later
+endif::[]
+ifdef::rhv_1-1[]
+|Red Hat Virtualization |4.2.8
+endif::[]
+ifdef::rhv_1-2,rhv_1-3[]
+|Red Hat Virtualization |4.3.4 (or later)
+endif::[]
+ifdef::rhv_1-1,osp_1-1[]
+|Red Hat CloudForms .<a|4.7.0, with the CFME 5.10.3 virtual appliance
+
+endif::[]
+ifdef::rhv_1-2,osp_1-2[]
+|Red Hat CloudForms .<a|4.7.6 (or later), with the CFME 5.10.5 (or later) virtual appliance
+
+endif::[]
+ifdef::rhv_1-3[]
+|Red Hat CloudForms .<a|5.0, with the CFME TBD virtual appliance
+
+endif::[]
+*The CFME 5.10.4 virtual appliance does not support migration.*
+
+ifdef::rhv_1-1,rhv_1-2,rhv_1-3[]
+You can use CFME 5.10.4 to manage the Red Hat Virtualization environment. Only the migration functionality is affected.
+endif::[]
+ifdef::osp_1-1,osp_1-2[]
+|Red Hat OpenStack Platform |13 or 14
+endif::[]
+ifdef::osp_1-1[]
+|RHOSP V2V Image for Red Hat OpenStack Director |14.0.2
+endif::[]
+ifdef::osp_1-2[]
+|RHOSP V2V Image for Red Hat OpenStack Director |14.0.3
+endif::[]
+ifdef::osp_1-3[]
+|Red Hat OpenStack Platform |TBD
+|RHOSP V2V Image for Red Hat OpenStack Director |TBD
+endif::[]
+|===

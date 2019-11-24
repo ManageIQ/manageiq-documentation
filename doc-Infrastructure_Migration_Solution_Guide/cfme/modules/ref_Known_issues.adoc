@@ -4,40 +4,30 @@
 [id="Known_issues_{context}"]
 = Known Issues
 
-The following issues will be addressed in a future release:
+The following are known issues:
 
-* BZ#1666799: link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling migration does not stop creating volume, instance, and network port on OpenStack Platform or VMs on Red Hat Virtualization]
-
-* BZ#1678385: link:https://bugzilla.redhat.com/show_bug.cgi?id=1678385[Virtual machine with name containing spaces ('rhel 7') fails to migrate using SSH and VDDK transformation]
-
-* BZ#1699343: link:https://bugzilla.redhat.com/show_bug.cgi?id=1699343[Migration plan CSV import validation does not work if file contains empty/archived/orphan/invalid VM name]
-
+ifdef::rhv_1-1,osp_1-1[]
 * BZ#1698761: link:https://bugzilla.redhat.com/show_bug.cgi?id=1698761["Maximum concurrent migrations per conversion host" interface control does not work]
 
 * BZ#716283: link:https://bugzilla.redhat.com/show_bug.cgi?id=1716283[Migrating virtual machines are not distributed correctly among the conversion hosts]
 
-* BZ#1726939: link:https://bugzilla.redhat.com/show_bug.cgi?id=1726939[Run the preflight check of migration task before waiting for a conversion host]. Currently, the preflight check that monitors the migration is performed after a conversion host is assigned to the task. As a result, the total volume of the Datastores reported in *Migration Plans In Progress* reflects the total volume of the virtual machines that are currently migrating, not the total volume of the migration plan. When all the virtual machines have started to migrate, the correct value of the total volume is displayed.
-
-ifdef::rhv[]
-* BZ#666799: link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling migration does not stop creating virtual machines on RHV]. If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.
-
-* BZ#1669176: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings]
-
-* CloudForms CFME 5.10.4 does not support migration. Use the following versions for migration:
-
-** Red Hat Virtualization 4.2: CFME 5.10.3
-** Red Hat Virtualization 4.3: CFME 5.10.5
-+
-[NOTE]
-====
-You can use CFME 5.10.4 to manage Red Hat Virtualization 4.3. Only the migration functionality is affected.
-====
-endif::rhv[]
-
-ifdef::osp[]
-* BZ#1668049: link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[Instance is not created after disk conversion]
-
-* BZ#1669133: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669133[Names of virtual machines migrated using SSH transformation are changed]
+* BZ#1709211: link:https://bugzilla.redhat.com/show_bug.cgi?id=1709211#c2[ESXi 5.5 requires VDDK version 6.7.0]
 
 * CloudForms CFME 5.10.4 does not support migration. Use CFME 5.10.3.
-endif::osp[]
+endif::[]
+
+* BZ#1678385: link:https://bugzilla.redhat.com/show_bug.cgi?id=1678385[Virtual machine with name containing spaces ('rhel 7') fails to migrate]
+
+* BZ#1699343: link:https://bugzilla.redhat.com/show_bug.cgi?id=1699343[Migration plan CSV import validation does not work if file contains empty/archived/orphan/invalid VM name]
+
+* BZ#1726939: link:https://bugzilla.redhat.com/show_bug.cgi?id=1726939[Run the preflight check of migration task before waiting for a conversion host]. Currently, the preflight check that monitors the migration is performed after a conversion host is assigned to the task. As a result, the total volume of the Datastores reported in *Migration Plans In Progress* reflects the total volume of the virtual machines that are currently migrating, not the total volume of the migration plan. When all the virtual machines have started to migrate, the correct value of the total volume is displayed.
+
+ifdef::rhv_1-1,rhv_1-2[]
+* BZ#1666799: link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling a migration does not stop creating virtual machines on RHV]. If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.
+
+* BZ#1669176: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings]
+endif::[]
+
+ifdef::osp_1-1,osp_1-2[]
+* BZ#1668049: link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[Instance is not created after disk conversion]
+endif::[]

@@ -1,5 +1,7 @@
 // Module included in the following assemblies:
-// con_Migration_plan_options.adoc
+//
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
 [id="Creating_a_rhel_premigration_playbook_{context}"]
 = Creating a `RHEL premigration` playbook for RHEL/Linux source virtual machines
 
@@ -7,16 +9,21 @@ If you are migrating virtual machines running RHEL or other Linux operating syst
 
 To install the role with Ansible Galaxy, see link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[ims_rhel_pre_migration]. This role is not included in the IMS installation.
 
-The `ims.rhel_premigration` role performs the following tasks on the VMware virtual machines:
+ifdef::rhv_1-1,rhv_1-2[]
+The `ims.rhel_premigration` role performs the following tasks on the migrating VMware virtual machines:
 
-* Preserves the static IP address configuration by creating udev rules to associate the virtual machine's MAC address with its interface name
-ifdef::rhv[]
-* Installs the Red Hat Virtualization guest agent. The guest agent reports the new virtual machine's IP address and installed applications to the Manager.
-endif::rhv[]
+* Preserves the static IP addresses
+* Installs the Red Hat Virtualization guest agent, which reports the IP addresses and installed applications to the Manager
+endif::[]
+ifdef::osp_1-1,osp_1-2[]
+The `ims.rhel_premigration` role preserves the static IP addresses of the migrating VMware virtual machines.
+endif::[]
 
 [NOTE]
 ====
-The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or the `rhel-7-server-rpms` repository is enabled in the source virtual machine when it installs `qemu-guest-agent`. If you have disabled the repository, re-enable it in the RHEL premigration playbook.
+The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or the `rhel-7-server-rpms` repository is enabled in the source virtual machine when it installs `qemu-guest-agent`.
+
+If you have disabled the repository, you must re-enable it in the RHEL premigration playbook.
 ====
 
 .`RHEL premigration` playbook example

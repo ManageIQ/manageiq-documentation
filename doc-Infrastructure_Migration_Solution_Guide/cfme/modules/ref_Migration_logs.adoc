@@ -1,0 +1,83 @@
+// Module included in the following assemblies:
+//
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
+[id="Migration_logs_{context}"]
+= Migration logs
+
+ifdef::osp_1-1,rhv_1-1[]
+You can check the conversion host logs and the CloudForms migration log to identify the cause of a migration error.
+
+[IMPORTANT]
+====
+If you need to open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], you must submit both the migration (`virt-v2v`) log and `virt-v2v-wrapper` log for analysis.
+====
+
+[id="Conversion_host_logs_{context}"]
+== Accessing the conversion host logs
+
+When disk migration starts, two logs are created in the conversion host:
+
+* `virt-v2v`: Debug output from `virt-v2v` itself. This log tracks the core of the virtual machine migration process, including `libguestfs` traces and disk migration details. You can download access this log on the conversion host or download it in CloudForms.
+* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting. You can access this log on the conversion host.
+
+.Procedure
+
+. Log in to the conversion host using SSH.
++
+If you are not sure which conversion host to log in to, click the information icon (image:Info_icon.png[20]) of a virtual machine in the migration plan details view.
+
+. Go to `/var/log/vdsm/import/` to access the logs for each migration:
++
+* `virt-v2v` log: +v2v-import-_date_-_log_number_.log+
+* `virt-v2v-wrapper` log: +v2v-import-_date_-_log_number_-wrapper.log+
+
+You can download the `virt-v2v` log in CloudForms.
+
+.Procedure
+
+. Log in to the CloudForms user interface.
+. Click menu:Compute[*Migration* > Migration Plans].
+. Click a completed migration plan to view its details.
+. Click menu:Download Log[Migration Log].
+endif::osp_1-1,rhv_1-1[]
+ifdef::osp_1-2,rhv_1-2[]
+You can check the conversion host logs, playbook logs, and the CloudForms migration log to identify the cause of a migration error.
+
+[IMPORTANT]
+====
+If you need to open a link:https://access.redhat.com/support/cases/#/case/new[Red Hat Support call], you must submit both the migration (`virt-v2v`) log and `virt-v2v-wrapper` log for analysis.
+====
+
+[id="conversion_host_playbook_logs_{context}"]
+== Downloading the conversion host and playbook logs
+
+You can download the conversion host and playbooks logs in CloudForms.
+
+When disk migration starts, two logs are created in the conversion host:
+
+* `virt-v2v`: Debug output from `virt-v2v` itself. This log tracks the core of the virtual machine migration process, including `libguestfs` traces and disk migration details.
+* `virt-v2v-wrapper`: Log of the daemonizing wrapper for `virt-v2v`. This log traces the orchestration of the virtual machine conversion on the conversion host, including disk migration percentages and `virt-v2v` error reporting.
+
+.Procedure
+
+. Log in to the CloudForms user interface.
+. Click menu:Compute[*Migration* > Migration Plans].
+. Click a completed migration plan to view its details.
+. Click *Download Log* of a virtual machine and select a log from the dropdown list:
+
+* *Premigration log* This option only appears if a premigration playbook is used.
+* *Migration log* The *Migration log* is the `virt-v2v` log.
+* *Virt-v2v-wrapper log*
+* *Postmigration log* This option only appears if a postmigration playbook is used.
+endif::osp_1-2,rhv_1-2[]
+
+[id="Cloudforms_migration_log_{context}"]
+== Accessing the CloudForms migration log
+
+This log traces the orchestration of the virtual machine migration in CloudForms.
+
+.Procedure
+
+. Log in to the CloudForms machine using SSH.
+. The migration log is `/var/www/miq/vmdb/log/automation.log`.

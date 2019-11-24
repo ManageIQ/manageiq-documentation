@@ -1,31 +1,24 @@
 // Module included in the following assemblies:
 //
-// assembly_Migrating_the_virtual_machines.adoc
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
 [id="Creating_a_migration_plan_in_cloudforms_{context}"]
 = Creating and running a migration plan
 
-Before you perform a large migration, you should perform several test migrations with different maximum numbers of concurrent migrations for your conversion hosts or providers. This will enable you to assess the capabilities of your environment’s infrastructure.
+Before attempting a large migration, you should perform several test migrations with different maximum numbers of concurrent migrations for your conversion hosts or providers. This will enable you to assess the capabilities of your environment’s infrastructure.
 
-You can create and run a migration plan in CloudForms with the following options:
-
-* Running a migration plan immediately
-* xref:Scheduling_a_saved_migration_plan_{context}[Scheduling a migration plan to run in the future]
-* xref:Viewing_migration_plan_progress_{context}[Viewing a migration plan in progress]
-* xref:Canceling_a_migration_plan_{context}[Canceling a migration plan in progress]
-* xref:Retrying_a_failed_migration_plan_{context}[Retrying a failed migration plan]
-
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 [NOTE]
 ====
 A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting each virtual machine.
 ====
-endif::rhv[]
-ifdef::osp[]
+endif::rhv_1-1,rhv_1-2[]
+ifdef::osp_1-1,osp_1-2[]
 [NOTE]
 ====
 A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting the security group and flavor of each virtual machine.
 ====
-endif::osp[]
+endif::osp_1-1,osp_1-2[]
 
 .Procedure
 
@@ -71,7 +64,7 @@ If the *Create Migration Plan* wizard freezes, refresh the web page, check the C
 
 .. Click *Next*.
 
-ifdef::osp[]
+ifdef::osp_1-1,osp_1-2[]
 . In the *Instance Properties* screen, select the networks and/or flavors:
 
 .. Click the pencil icon to edit the network or flavor of each selected virtual machine.
@@ -79,7 +72,7 @@ ifdef::osp[]
 Flavors that are too small for the virtual machine are marked with an asterisk (`*`). If you have not created flavors for the migration, CloudForms tries to map the source virtual machines to existing flavors.
 
 .. Click *Next*.
-endif::osp[]
+endif::osp_1-1,osp_1-2[]
 
 . In the *Advanced Options* screen, select the playbook service options:
 
@@ -91,17 +84,19 @@ endif::osp[]
 
 * *Save migration plan to run later*
 +
-The migration plan is saved in *Migration Plans Not Started* and will not run unless you schedule it or click *Migrate* to run the scheduled migration plan immediately.
+The migration plan is saved in *Migration Plans Not Started* and will not run unless you xref:Scheduling_a_saved_migration_plan_{context}[schedule] it or click *Migrate* to run the scheduled migration plan immediately.
 
 * *Start migration immediately*
 +
-The migration plan may take some time to complete. Progress bars indicate the amount of transferred data, the number of migrated virtual machines, and the elapsed time. See xref:Viewing_migration_plan_progress_{context}[] for details.
+The migration plan may take some time to complete. Progress bars indicate the amount of transferred data, the number of migrated virtual machines, and the elapsed time. You can xref:Viewing_migration_plan_progress_{context}[view a migration plan's progress] or xref:Canceling_a_migration_plan_{context}[cancel a migration plan in progress].
 
 . In the *Results* screen, click *Close*.
-
++
 When the migration plan has finished, click *Migration Plans Complete* to view the status of the migration plan. The completed migration plan shows the status of the migrated virtual machines.
 
 In the migration plans list, you can click the *More Actions* icon (image:More_actions_icon.png[7]) to archive, edit, or delete a migration plan.
+
+If a migration fails because of external circumstances (for example, power outage), you can xref:Retrying_a_failed_migration_plan_{context}[retry the migration plan].
 
 [id="Scheduling_a_saved_migration_plan_{context}"]
 == Scheduling a saved migration plan
@@ -110,7 +105,9 @@ To schedule a saved migration plan to run in the future:
 
 . Click *Migration Plans Not Started*.
 . Click the *Schedule* button of a migration plan.
-. In the *Schedule Migration Plan* window, select a date and time and click *Schedule*. The plan's status is *Migration Scheduled* with the date and time.
+. In the *Schedule Migration Plan* window, select a date and time and click *Schedule*.
++
+The plan's status is *Migration Scheduled* with the date and time.
 
 [id="Viewing_migration_plan_progress_{context}"]
 == Viewing a migration plan in progress
@@ -119,7 +116,7 @@ To view the progress of a migration plan:
 
 . Click *Migration Plans in Progress*.
 . Click a migration plan name to view its details, including the status of the migrating virtual machines.
-
++
 [NOTE]
 ====
 The counter in menu:Compute[Migration > Migration Plans] may be a few seconds ahead of the counter in the migration plan details view. This is because the *Migration Plans* counter displays the total time for running the migration plan, while the details counter displays the time for migrating the virtual machines.
@@ -132,7 +129,9 @@ To cancel a migration plan in progress:
 
 . Click *Migration Plans in Progress*.
 . Select a migration plan and click *Cancel Migration*.
-. Click *Cancel Migrations* to confirm the cancellation. The canceled migration appears in *Migration Plans Complete* with a red `x` indicating that the plan did not complete successfully.
+. Click *Cancel Migrations* to confirm the cancellation.
++
+The canceled migration appears in *Migration Plans Complete* with a red `x` indicating that the plan did not complete successfully.
 
 [id="Retrying_a_failed_migration_plan_{context}"]
 == Retrying a failed migration plan
@@ -140,14 +139,14 @@ To cancel a migration plan in progress:
 To retry a migration plan that failed because of external circumstances (for example, power outage):
 
 . Delete all objects created by the failed migration plan:
-ifdef::rhv[]
+ifdef::rhv_1-1,rhv_1-2[]
 * Delete newly created virtual machines to avoid name conflicts with migrating VMware virtual machines.
 * Delete converted disks to free up space.
-endif::rhv[]
-ifdef::osp[]
+endif::rhv_1-1,rhv_1-2[]
+ifdef::osp_1-1,osp_1-2[]
 * Delete newly created instances to avoid name conflicts with migrating VMware virtual machines.
 * Delete network ports of failed instances.
-endif::osp[]
+endif::osp_1-1,osp_1-2[]
 . Click menu:Compute[Migration > Migration Plans].
 . Click *Migration Plans Complete*.
 . Click the *Retry* button beside the failed migration plan.

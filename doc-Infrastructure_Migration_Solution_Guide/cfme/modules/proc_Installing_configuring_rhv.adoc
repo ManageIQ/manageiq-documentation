@@ -10,22 +10,22 @@ You must install and configure Red Hat Virtualization.
 .Procedure
 
 ifdef::rhv_1-1[]
-. link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Install Red Hat Virtualization Manager 4.2] on the Manager machine.
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Red Hat Virtualization Manager 4.2] on the Manager machine.
 
 . Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Installing_RHVH[Red Hat Virtualization Host 4.2] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Red Hat Enterprise Linux 7.6] on physical machines.
+endif::[]
+ifdef::rhv_1-2,rhv_1-3[]
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Red Hat Virtualization Manager 4.3.4] on the Manager machine.
+
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Red Hat Virtualization Host 4.3.4] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Red Hat Enterprise Linux 7.6] on physical machines.
+endif::[]
 +
 [NOTE]
 ====
 Some of these hosts will be deployed as conversion hosts. The number of conversion hosts depends on your migration size and infrastructure capabilities.
 ====
-endif::[]
-ifdef::rhv_1-2[]
-. link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#part-Installing_the_Red_Hat_Virtualization_Manager[Install Red Hat Virtualization Manager 4.3.4] on the Manager machine.
 
-. Install link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Installing_RHVH[Red Hat Virtualization Host 4.3.4] or link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/installation_guide/#Red_Hat_Enterprise_Linux_Hosts[Red Hat Enterprise Linux 7.6] on physical machines.
-endif::[]
-
-. link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[Create and attach data and ISO storage domains] to the data center.
+. Create and attach link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/administration_guide/#chap-Storage[data and ISO storage domains] to the data center.
 +
 [NOTE]
 ====
@@ -40,20 +40,14 @@ ifdef::rhv_1-1[]
 The VirtIO file name must include the version number: +virtio-win-_version_.iso+. The guest tools are required for migrating Windows virtual machines.
 
 . Optionally, you can link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[create a MAC address pool] that includes the MAC addresses of the VMware virtual machines to be migrated.
-+
-[IMPORTANT]
-====
-If the Red Hat Virtualization MAC address pool range overlaps the VMware MAC address range, you must ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines. Otherwise, the migration will fail.
-
-If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in Red Hat Virtualization.
-====
 endif::[]
-ifdef::rhv_1-2[]
+ifdef::rhv_1-2,rhv_1-3[]
 . link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/#Uploading_the_VirtIO_and_Guest_Tool_Image_Files_to_an_ISO_Storage_Domain[Upload the VirtIO and RHV Guest Tools image files to the ISO storage domain].
 +
 The VirtIO file name must include the version number (+virtio-win-_version_.iso+). The guest tools are required for migrating Windows virtual machines.
 
 . Optionally, you can link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html/administration_guide/sect-mac_address_pools#Creating_MAC_Address_Pools[create a MAC address pool] that includes the MAC addresses of the VMware virtual machines to be migrated.
+endif::[]
 +
 [IMPORTANT]
 ====
@@ -61,4 +55,3 @@ If the Red Hat Virtualization MAC address pool range overlaps the VMware MAC add
 
 If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in Red Hat Virtualization.
 ====
-endif::[]

@@ -1,12 +1,26 @@
 // Module included in the following assemblies:
 //
-// assembly_Preparing_the_1_2_environment_for_migration.adoc
-[id="Configuring_the_{context}_conversion_hosts_for_vddk"]
-= Configuring the conversion hosts in CloudForms
+// IMS_1.2/master.adoc
+[id="Configuring_conversion_hosts_cloudforms_ssh_{context}"]
+= Configuring the conversion hosts in CloudForms for SSH transformation
+
+ifdef::rhv_1-2[]
+.Prerequisites
+
+* If the Red Hat Virtualization provider has been active for a while, verify that the hosts have valid subscriptions and repositories:
++
+----
+# subscription-manager list --consumed
+# yum repolist
+----
+
+* If a host has an SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
+endif::[]
 
 .Procedure
 
-. In CloudForms, click menu:Compute[Migration > Migration Settings].
+. Log in to the CloudForms user interface.
+. Click *Compute* -> *Migration* -> *Migration Settings*.
 . In the *Conversion Hosts* tab, click *Configure Conversion Host*. The *Configure Conversion Host* wizard is displayed.
 +
 image:Conversion_host_configuration_ui.png[]
@@ -16,28 +30,30 @@ image:Conversion_host_configuration_ui.png[]
 .. Select a *Provider*.
 
 ifdef::rhv_1-2[]
-.. Select a *Cluster* and click *Next*.
-endif::rhv_1-2[]
+.. Select a *Cluster*.
+endif::[]
 ifdef::osp_1-2[]
-.. Select a *Project* and click *Next*.
-endif::osp_1-2[]
+.. Select a *Project*.
+endif::[]
+
+.. Click *Next*.
 
 . In the *Host(s)* screen, select one or more hosts from the dropdown list and click *Next*.
+
 . In the *Authentication* screen, add the conversion hosts' SSH key and the transformation method:
 
 .. Click *Browse* to browse to the SSH private key or paste it in the *Conversion host SSH private key* field.
 +
 ifdef::rhv_1-2[]
 The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
-endif::rhv_1-2[]
+endif::[]
 ifdef::osp_1-2[]
 The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
-endif::osp_1-2[]
+endif::[]
 
-.. Select *VDDK* as the *Transformation method*.
-.. Enter the path of the VDDK package in the *VDDK library path* field and click *Validate*. Wait for validation to complete.
+.. Select *SSH* as the *Transformation method*.
+.. Click *Browse* to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the *VMware hypervisors SSH private key* field.
 .. Click *Configure*.
-
 . In the *Results* screen, wait for the conversion host configuration to finish and click *Close*.
 +
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.

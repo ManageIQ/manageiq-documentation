@@ -32,11 +32,7 @@ Red Hat CloudForms is the environment in which you perform the migration. Red Ha
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat Virtualization
 
-This guide describes the following tasks:
-
-. Planning your migration
-. Preparing the VMware and Red Hat environments
-. Migrating the virtual machines
+This guide describes how to plan your migration, to prepare the VMware source and Red Hat target environments, and to migrate the virtual machines.
 
 == Planning the migration
 
@@ -63,8 +59,8 @@ include::modules/con_Migration_workflow.adoc[leveloffset=+2]
 include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
 include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 
-[id="Preparing_the_environment_for_migration_to_{context}"]
-== Preparing the environments for migration
+[id="Preparing_the_migration_environment_{context}"]
+== Preparing the migration environment
 
 You must prepare the VMware source environment, install and configure the Red Hat Virtualization target environment, and deploy your conversion hosts for VDDK transformation.
 
@@ -96,7 +92,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 You must download the VMware Virtual Disk Development Kit (VDDK), configure and verify the Red Hat Virtualization conversion hosts with Ansible playbooks, and authenticate the conversion hosts in CloudForms.
 
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
-include::modules/proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_ansible_vddk.adoc[leveloffset=+3]
 include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+3]
 
 [id='Migrating_virtual_machines_{context}']
@@ -155,7 +151,7 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
 
-This configuration involves adding the following steps to xref:Preparing_the_environment_for_migration_to_{context}[].
+This configuration involves adding the following steps to xref:Preparing_the_migration_environment_{context}[]:
 
 [cols="1,1", options="header"]
 |===
@@ -166,15 +162,15 @@ You can collect the SSH keys from the hypervisors at this time, if your security
 
 The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_the_conversion_hosts_for_ssh_transformation_{context}[].
 |xref:Installing_rhv-{context}[] |If the conversion hosts are using SSSD with single sign-on:  xref:Reinstalling_ipa_client[]
-|xref:Configuring_conversion_hosts_for_vddk_with_Ansible-{context}[] |xref:Configuring_the_conversion_hosts_for_ssh_transformation_{context}[].
-|After xref:Configuring_conversion_hosts_for_vddk_with_Ansible-{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
-|After xref:Configuring_conversion_hosts_for_vddk_with_Ansible-{context}[] |xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[]
+|xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Configuring_the_conversion_hosts_for_ssh_transformation_{context}[].
+|After xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
+|After xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[]
 2+|After you have completed these steps, go to xref:Authenticating_conversion_hosts_in_cloudforms_{context}[].
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
 include::modules/proc_Reinstalling_ipa_client.adoc[leveloffset=+2]
-include::modules/proc_configuring_conversion_hosts_ssh_Ansible.adoc[leveloffset=+2]
+include::modules/proc_configuring_conversion_hosts_ansible_ssh.adoc[leveloffset=+2]
 include::modules/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
 include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+2]
 
@@ -185,11 +181,7 @@ include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat OpenStack Platform
 
-This guide describes the following tasks:
-
-. Planning your migration
-. Preparing the VMware and Red Hat environments
-. Migrating the virtual machines
+This guide describes how to plan your migration, to prepare the VMware source and Red Hat target environments, and to migrate the virtual machines.
 
 == Planning the migration
 
@@ -216,10 +208,10 @@ include::modules/con_Migration_workflow.adoc[leveloffset=+2]
 include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
 include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 
-[id="Preparing_the_environment_for_migration_to_{context}"]
-== Preparing the environment for migration
+[id="Preparing_the_migration_environment_{context}"]
+== Preparing the migration environment
 
-You must prepare the VMware environment, install and configure the target environment, and deploy your conversion hosts for VDDK transformation.
+You must prepare the VMware source environment, install and configure the Red Hat Virtualization target environment, and deploy your conversion hosts for VDDK transformation.
 
 include::modules/ref_Vddk_note.adoc[]
 
@@ -249,7 +241,7 @@ You must create the Red Hat OpenStack Platform conversion hosts, download the VM
 
 include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+3]
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
-include::modules/proc_Configuring_conversion_hosts_with_Ansible.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_ansible_vddk.adoc[leveloffset=+3]
 
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
@@ -307,22 +299,22 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
 
-This configuration involves adding the following steps to xref:Preparing_the_environment_for_migration_to_{context}[].
+This configuration involves adding the following steps to xref:Preparing_the_migration_environment_{context}[]:
 
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[Configure the VMware hypervisors for SSH transformation].
+|xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
 The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_the_conversion_hosts_for_ssh_transformation_{context}[].
-|xref:Configuring_conversion_hosts_for_vddk_with_Ansible-{context}[] |xref:Configuring_the_conversion_hosts_for_ssh_transformation_{context}[Add the required parameters and values].
-|After xref:Configuring_conversion_hosts_for_vddk_with_Ansible-{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[Copy the VMware SSH keys to the conversion hosts]
+|xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Configuring_conversion_hosts_ansible_ssh_{context}[].
+|After xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
-include::modules/proc_configuring_conversion_hosts_ssh_Ansible.adoc[leveloffset=+2]
+include::modules/proc_configuring_conversion_hosts_ansible_ssh.adoc[leveloffset=+2]
 include::modules/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
 
 :osp_1-1!:

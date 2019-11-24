@@ -1,30 +1,33 @@
 // Module included in the following assemblies:
 //
-// assembly_Troubleshooting.adoc
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
 [id="Migration_plan_errors_{context}"]
 = Migration plan errors
 
-* If the virtual machines are being migrated for the first time and are not discovered by the migration plan, check that the source datastores and networks appear in the infrastructure mapping.
+* Virtual machines are being migrated for the first time and are not discovered by the migration plan
++
+Check that the source datastores and networks appear in the infrastructure mapping.
 
-* If the virtual machines have been migrated in the past, they cannot be discovered by the migration plan. Use a CSV file to add the virtual machines to the migration plan.
+* Previously migrated virtual machines cannot be discovered by the migration plan
++
+Use a CSV file to add the virtual machines to the migration plan.
 
-* If the virtual machines cannot be added to the migration plan with a CSV file, check the CSV file format and fields. Create a new migration plan with the updated CSV file.
+* Virtual machines cannot be added to the migration plan with a CSV file
++
+Check the CSV file format and fields. Create a new migration plan with the updated CSV file.
 
 * *Create Migration Plan* wizard hangs while importing a CSV file
 +
-This error is caused by an invalid CVS file (for example, virtual machines with a duplicate `Name` field and no `Host`/`Provider` field to distinguish them, or with a duplicate `Name` field and duplicate `Host`/`Provider` fields). Correct the CSV file, refresh the web page, and create a new migration plan.
+Invalid CVS file (for example, virtual machines with a duplicate `Name` field and no `Host`/`Provider` field to distinguish them, or with a duplicate `Name` field and duplicate `Host`/`Provider` fields). Correct the CSV file, refresh the web page, and create a new migration plan.
 
 ifdef::rhv_1-1,osp_1-1[]
 * `Denied State` error
 +
-If a migration plan fails immediately and the migration plan displays a `Denied State` error message, check that you have created and configured the conversion hosts correctly.
-+
-Cancel the migration plan and run it again.
+Check that you have created and configured the conversion hosts correctly. Cancel the migration plan and run it again.
 endif::[]
 ifdef::rhv_1-2,osp_1-2[]
 * `Unable to migrate VMs because no conversion host was configured at the time of the attempted migration. See the product documentation for information on configuring conversion hosts.`
 +
-You can create and save a migration plan whose infrastructure mapping does not contain conversion hosts, but you cannot run the migration plan without conversion hosts.
-+
-Cancel the migration plan, create the conversion hosts, and run the migration plan again.
+You can create and save a migration plan whose infrastructure mapping does not contain conversion hosts, but you cannot run the migration plan without conversion hosts. Cancel the migration plan, create the conversion hosts, and run the migration plan again.
 endif::[]

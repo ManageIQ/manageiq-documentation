@@ -4,13 +4,20 @@
 [id="IP_address_errors_{context}"]
 = IP address errors
 
-* If the IP address of a migrated RHEL (or other Linux-based operating system) virtual machine is not accessible, you must create a `RHEL premigration` playbook and add it to the migration plan.
+* IP address of a migrated RHEL (or other Linux-based operating system) virtual machine is not accessible
++
+You must create a `RHEL premigration` playbook and add it to the migration plan.
 
-* If a migrated virtual machine does not have an IP address:
-
-** Check that you installed VMware Tools on the VMware virtual machine before migration.
-
+ifdef::rhv_1-1,rhv_1-2[]
+* Migrated virtual machine does not have an IP address
++
+You must install VMware Tools on the VMware virtual machine before migration.
+endif::[]
 ifdef::osp_1-1,osp_1-2[]
+* Migrated virtual machine does not have an IP address
+
+** You must install VMware Tools on the VMware virtual machine before migration.
+
 ** Check the VMware virtual machine for an interface configuration file mapped to a non-existent interface (for example, `/etc/sysconfig/network-scripts/ifcfg-eth1` exists, but `eth1` interface does not). Log example:
 +
 [options="" subs="+quotes,verbatim"]

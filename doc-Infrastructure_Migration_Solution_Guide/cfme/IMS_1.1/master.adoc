@@ -22,7 +22,7 @@ Red Hat Virtualization provides a virtualization platform built on Red Hat Enter
 See xref:Migrating_from_vmware_to_rhv_1-1[].
 
 Red Hat OpenStack Platform 13 and 14::
-Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13[Red Hat OpenStack Platform 13] or link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14[Red Hat OpenStack Platform 14] documentation for more information.Configuring_environment_for_ssh_transformation_{context}
+Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/13[Red Hat OpenStack Platform 13] or link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14[Red Hat OpenStack Platform 14] documentation for more information.
 +
 See xref:Migrating_from_vmware_to_osp_1-1[].
 
@@ -139,7 +139,6 @@ include::modules/ref_Infrastructure_mapping_errors.adoc[leveloffset=+3]
 include::modules/ref_Migration_plan_errors.adoc[leveloffset=+3]
 include::modules/ref_Ip_address_errors.adoc[leveloffset=+3]
 include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+3]
-
 include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 [appendix]
@@ -151,19 +150,22 @@ You can configure your environment for SSH transformation if you cannot use VDDK
 
 This configuration involves adding the following steps to xref:Preparing_the_migration_environment_{context}[]:
 
+.Additional configuration for SSH transformation
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|After xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
+|After xref:Preparing_the_vmware_environment_{context}[] |Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
 The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_ansible_ssh_{context}[].
-|After xref:Installing_rhv-{context}[] |If the conversion hosts are using SSSD with single sign-on:  xref:Reinstalling_ipa_client[]
-|During xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Configuring_conversion_hosts_ansible_ssh_{context}[].
-|After xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
-|After xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[]
-2+|After you have completed these steps, go to xref:Authenticating_conversion_hosts_in_cloudforms_{context}[].
+|After xref:Installing_rhv-{context}[] |If the conversion hosts are using SSSD with single sign-on, go to  xref:Reinstalling_ipa_client[]
+|During xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |Go to xref:Configuring_conversion_hosts_ansible_ssh_{context}[] for additional parameters
+|After configuring the conversion hosts for SSH transformation  <a|Go to:
+
+* xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
+* xref:Configuring_secure_remote_login_to_the_vmware_hypervisors[]
+* xref:Authenticating_conversion_hosts_in_cloudforms_{context}[]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
@@ -298,16 +300,17 @@ You can configure your environment for SSH transformation if you cannot use VDDK
 
 This configuration involves adding the following steps to xref:Preparing_the_migration_environment_{context}[]:
 
+.Additional configuration for SSH transformation
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|After xref:Preparing_the_vmware_environment_{context}[] |xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
+|After xref:Preparing_the_vmware_environment_{context}[]  |Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
 The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_ansible_ssh_{context}[].
-|During xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Configuring_conversion_hosts_ansible_ssh_{context}[]
-|After xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
+|During xref:Configuring_conversion_hosts_ansible_vddk_{context}[] |Go to xref:Configuring_conversion_hosts_ansible_ssh_{context}[] for additional parameters
+|After configuring the conversion hosts for SSH transformation |Go to xref:Copying_vmware_ssh_keys_to_conversion_hosts-{context}[]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]

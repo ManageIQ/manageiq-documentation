@@ -7,18 +7,18 @@
 
 Before attempting a large migration, you should perform several test migrations with different maximum numbers of concurrent migrations for your conversion hosts or providers. This will enable you to assess the capabilities of your environment’s infrastructure.
 
-ifdef::rhv_1-1,rhv_1-2[]
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk[]
 [NOTE]
 ====
 A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting each virtual machine.
 ====
-endif::rhv_1-1,rhv_1-2[]
-ifdef::osp_1-1,osp_1-2[]
+endif::rhv_1-1_vddk,rhv_1-2_vddk[]
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
 [NOTE]
 ====
 A CSV file is optional, but recommended, for large migrations because it is faster than manually selecting the security group and flavor of each virtual machine.
 ====
-endif::osp_1-1,osp_1-2[]
+endif::osp_1-1_vddk,osp_1-2_vddk[]
 
 .Procedure
 
@@ -64,7 +64,7 @@ If the *Create Migration Plan* wizard freezes, refresh the web page, check the C
 
 .. Click *Next*.
 
-ifdef::osp_1-1,osp_1-2[]
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
 . In the *Instance Properties* screen, select the networks and/or flavors:
 
 .. Click the pencil icon to edit the network or flavor of each selected virtual machine.
@@ -72,7 +72,7 @@ ifdef::osp_1-1,osp_1-2[]
 Flavors that are too small for the virtual machine are marked with an asterisk (`*`). If you have not created flavors for the migration, CloudForms tries to map the source virtual machines to existing flavors.
 
 .. Click *Next*.
-endif::osp_1-1,osp_1-2[]
+endif::osp_1-1_vddk,osp_1-2_vddk[]
 
 . In the *Advanced Options* screen, select the playbook service options:
 
@@ -139,14 +139,14 @@ The canceled migration appears in *Migration Plans Complete* with a red `x` indi
 To retry a migration plan that failed because of external circumstances (for example, power outage):
 
 . Delete all objects created by the failed migration plan:
-ifdef::rhv_1-1,rhv_1-2[]
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk[]
 * Delete newly created virtual machines to avoid name conflicts with migrating VMware virtual machines.
 * Delete converted disks to free up space.
-endif::rhv_1-1,rhv_1-2[]
-ifdef::osp_1-1,osp_1-2[]
+endif::rhv_1-1_vddk,rhv_1-2_vddk[]
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
 * Delete newly created instances to avoid name conflicts with migrating VMware virtual machines.
 * Delete network ports of failed instances.
-endif::osp_1-1,osp_1-2[]
+endif::osp_1-1_vddk,osp_1-2_vddk[]
 . Click menu:Compute[Migration > Migration Plans].
 . Click *Migration Plans Complete*.
 . Click the *Retry* button beside the failed migration plan.

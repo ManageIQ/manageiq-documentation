@@ -15,9 +15,9 @@ A decrease maximum number of concurrent migrations affects only future migration
 
 [CAUTION]
 ====
-ifdef::osp_1-1,osp_1-2[]
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
 Red Hat OpenStack Platform conversion hosts require an additional 1 GB RAM for each additional concurrent migration above `10`.
-endif::osp_1-1,osp_1-2[]
+endif::osp_1-1_vddk,osp_1-2_vddk[]
 
 For VDDK transformation, the number of concurrent migrations must not exceed `20`. Otherwise, network overload will cause the migration to fail.
 ====
@@ -27,16 +27,16 @@ For VDDK transformation, the number of concurrent migrations must not exceed `20
 . Log in to the CloudForms user interface.
 . Click menu:Compute[Migration > Migration Settings].
 
-ifdef::rhv_1-1,osp_1-1[]
+ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 . Select a new *Maximum concurrent migrations per conversion host*. The default is `10`.
 
-endif::rhv_1-1,osp_1-1[]
-ifdef::rhv_1-2,osp_1-2[]
+endif::rhv_1-1_vddk,osp_1-1_vddk[]
+ifdef::rhv_1-2_vddk,osp_1-2_vddk[]
 . In the *Migration Throttling* tab, select a value for *Maximum concurrent migrations per conversion host* or *Maximum concurrent migrations per provider* and click *Apply*.
 +
 The value of *Maximum concurrent migrations per conversion host* is constrained so that it cannot be greater than *Maximum concurrent migrations per provider*.
 
-endif::rhv_1-2,osp_1-2[]
+endif::rhv_1-2_vddk,osp_1-2_vddk[]
 
 // 1.1
 // Commenting out because of https://bugzilla.redhat.com/show_bug.cgi?id=1716283
@@ -56,7 +56,7 @@ endif::rhv_1-2,osp_1-2[]
 // <1> `host1.example.co` is the name of your conversion host.
 // <2> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `10` for a conversion host.
 
-ifdef::rhv_1-2,osp_1-2[]
+ifdef::rhv_1-2_vddk,osp_1-2_vddk[]
 .Changing the maximum number of concurrent migrations for a specific conversion host
 
 . Log in to the conversion host using SSH.
@@ -79,13 +79,13 @@ ifdef::rhv_1-2,osp_1-2[]
 <3> Specify the `conversion_host_id`.
 <4> Specify the maximum number of concurrent migrations. The default is `10`.
 
-endif::rhv_1-2,osp_1-2[]
-ifdef::rhv_1-1,osp_1-1[]
+endif::rhv_1-2_vddk,osp_1-2_vddk[]
+ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 .Changing the maximum number of concurrent migrations for a provider
 
 . Log in to the CloudForms machine using SSH.
 endif::[]
-ifdef::rhv_1-1[]
+ifdef::rhv_1-1_vddk[]
 . Enter the following command:
 +
 [options="nowrap" subs="+quotes,verbatim"]
@@ -96,8 +96,8 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "RHV").custom_set("Max Transformation Runners", _30_) <1>
 ----
 <1> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `20` for a provider.
-endif::rhv_1-1[]
-ifdef::osp_1-1[]
+endif::rhv_1-1_vddk[]
+ifdef::osp_1-1_vddk[]
 . Enter the following command:
 +
 [options="nowrap" subs="+quotes,verbatim"]
@@ -109,13 +109,13 @@ irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "OpenStack")
 ----
 <1> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `20` for a provider.
 
-endif::osp_1-1[]
-ifdef::rhv_1-1,osp_1-1[]
+endif::osp_1-1_vddk[]
+ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 .Obtaining the maximum number of concurrent migrations for a provider
 
 . Log in to the CloudForms machine using SSH.
 endif::[]
-ifdef::rhv_1-1[]
+ifdef::rhv_1-1_vddk[]
 . Enter the following command:
 +
 ----
@@ -125,8 +125,8 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "RHV").custom_get("Max Transformation Runners")
 ----
 
-endif::rhv_1-1[]
-ifdef::osp_1-1[]
+endif::rhv_1-1_vddk[]
+ifdef::osp_1-1_vddk[]
 . Enter the following command:
 +
 ----
@@ -136,4 +136,4 @@ irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeW
 irb(main):002:0> $evm.vmdb(:ext_management_system).find_by(:name => "OpenStack").custom_get("Max Transformation Runners")
 ----
 
-endif::osp_1-1[]
+endif::osp_1-1_vddk[]

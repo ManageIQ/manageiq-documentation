@@ -7,24 +7,23 @@
 :compat-mode:
 :experimental:
 
-:ims:
 :numbered:
 :sectnums:
 :partnums:
-:context: rhv_1-2
-:rhv_1-2:
+:context: rhv_1-2_vddk
+:rhv_1-2_vddk:
 
-Red Hat Infrastructure Migration Solution (IMS) 1.2 enables you to migrate virtual machines from VMware{nbsp}5.5 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms:
+Red Hat Infrastructure Migration Solution (IMS) 1.2 enables you to migrate virtual machines from VMware{nbsp}6.0 (and later) to  Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms:
 
 Red Hat Virtualization 4.3::
 Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/[Red Hat Virtualization 4.3] documentation for more information.
 +
-See xref:Migrating_from_vmware_to_rhv_1-2[].
+See xref:Migrating_from_vmware_to_rhv_1-2_vddk[].
 
 Red Hat OpenStack Platform 13 and 14::
 Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14[Red Hat OpenStack Platform 13] or link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14[Red Hat OpenStack Platform 14] documentation for more information.
 +
-See xref:Migrating_from_vmware_to_osp_1-2[].
+See xref:Migrating_from_vmware_to_osp_1-2_vddk[].
 
 Red Hat CloudForms 4.7.6 or later::
 Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[Red Hat CloudForms 4.7] documentation for more information.
@@ -62,7 +61,7 @@ include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 
 You must prepare the VMware source and Red Hat Virtualization target environments for migration.
 
-The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_{context}[SSH transformation] is a fallback option.
+The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_rhv_1-2_ssh[SSH transformation] is a fallback option.
 
 [id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
@@ -94,7 +93,7 @@ Deploying the conversion hosts involves the following tasks:
 . Verifying the conversion hosts in a browser
 
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
-include::modules/proc_Configuring_conversion_hosts_cloudforms_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_cloudforms.adoc[leveloffset=+3]
 include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
 
 [id='Migrating_virtual_machines_{context}']
@@ -139,8 +138,11 @@ include::modules/ref_Infrastructure_mapping_errors.adoc[leveloffset=+3]
 include::modules/ref_Migration_plan_errors.adoc[leveloffset=+3]
 include::modules/ref_Ip_address_errors.adoc[leveloffset=+3]
 include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+3]
-
 include::modules/ref_Known_issues.adoc[leveloffset=+2]
+:rhv_1-2_vddk!:
+
+:context: rhv_1-2_ssh
+:rhv_1-2_ssh:
 
 [appendix]
 [id='Configuring_environment_for_ssh_transformation_{context}']
@@ -148,35 +150,38 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
 
-This configuration involves adding the following steps to xref:Preparing_the_migration_environment_{context}[]:
+This configuration involves adding the following steps to xref:Preparing_the_migration_environment_rhv_1-2_vddk[]:
 
 .Additional configuration for SSH transformation
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|After xref:Preparing_the_vmware_environment_{context}[Preparing the VMware environment] |Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[Configuring the VMware hypervisors for SSH transformation]
+
+|After xref:Preparing_the_vmware_environment_rhv_1-2_vddk[Preparing the VMware environment] a|Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_rhv_1-2_ssh[Configuring the VMware hypervisors for SSH transformation]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
-The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[Configuring the conversion hosts for SSH transformation].
-|After xref:Installing_configuring_rhv_{context}[Installing and configuring Red Hat Virtualization] |If the conversion hosts are using SSSD with single sign-on, go to xref:Reinstalling_ipa_client_{context}[Reinstalling `ipa-client`]
-|Instead of xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[Configuring the conversion hosts for VDDK transformation] <a|Go to:
+The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_cloudforms_rhv_1-2_ssh[Configuring the conversion hosts for SSH transformation].
 
-* xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[Configuring the conversion hosts for SSH transformation]
+|After xref:Installing_configuring_rhv_rhv_1-2_vddk[Installing and configuring Red Hat Virtualization] |If the conversion hosts are using SSSD with single sign-on, go to xref:Reinstalling_ipa_client_{context}[Reinstalling `ipa-client`]
+
+|Instead of xref:Configuring_conversion_hosts_cloudforms_rhv_1-2_vddk[Configuring the conversion hosts for VDDK transformation] <a|Go to:
+
+* xref:Configuring_conversion_hosts_cloudforms_rhv_1-2_ssh[Configuring the conversion hosts for SSH transformation]
 * xref:Copying_vmware_ssh_keys_to_conversion_hosts_{context}[Copying the VMware SSH keys to the conversion hosts]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
 include::modules/proc_Reinstalling_ipa_client.adoc[leveloffset=+2]
-include::modules/proc_Configuring_conversion_hosts_cloudforms_ssh.adoc[leveloffset=+2]
+include::modules/proc_Configuring_conversion_hosts_cloudforms.adoc[leveloffset=+2]
 include::modules/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
 include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+2]
-:rhv_1-2!:
+:rhv_1-2_ssh!:
 
 :numbered:
 
-:context: osp_1-2
-:osp_1-2:
+:context: osp_1-2_vddk
+:osp_1-2_vddk:
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat OpenStack Platform
 
@@ -210,7 +215,7 @@ include::modules/ref_Recommendations_for_migration.adoc[leveloffset=+2]
 
 You must prepare the VMware source and Red Hat Virtualization target environments for migration.
 
-The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_{context}[SSH transformation] is a fallback option.
+The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_osp_1-2_ssh[SSH transformation] is a fallback option.
 
 [id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
@@ -243,7 +248,7 @@ Deploying the conversion hosts involves the following tasks:
 
 include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+3]
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
-include::modules/proc_Configuring_conversion_hosts_cloudforms_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_cloudforms.adoc[leveloffset=+3]
 include::modules/proc_Verifying_conversion_hosts_in_browser.adoc[leveloffset=+3]
 
 [id='Migrating_virtual_machines_{context}']
@@ -290,6 +295,9 @@ include::modules/ref_Ip_address_errors.adoc[leveloffset=+3]
 include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+3]
 
 include::modules/ref_Known_issues.adoc[leveloffset=+2]
+:osp_1-2_vddk!:
+:context: osp_1-2_ssh
+:osp_1-2_ssh:
 
 [appendix]
 
@@ -298,24 +306,25 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 
 You can configure your environment for SSH transformation if you cannot use VDDK.
 
-This configuration involves adding the following steps to xref:Preparing_the_migration_environment_{context}[]:
+This configuration involves adding the following steps to xref:Preparing_the_migration_environment_osp_1-2_vddk[]:
 
 .Additional configuration for SSH transformation
 [cols="1,1", options="header"]
 |===
 |Section |Additional configuration for SSH transformation
-|After xref:Preparing_the_vmware_environment_{context}[Preparing the VMware environment] |Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[Configuring the VMware hypervisors for SSH transformation]
+|After xref:Preparing_the_vmware_environment_osp_1-2_vddk[Preparing the VMware environment] a|Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}[Configuring the VMware hypervisors for SSH transformation]
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
-The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[Configuring the conversion hosts for SSH transformation].
-|Instead of xref:Configuring_conversion_hosts_cloudforms_vddk_{context}[Configuring the conversion hosts for VDDK transformation] <a|Go to:
+The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_cloudforms_osp_1-2_ssh[Configuring the conversion hosts for SSH transformation].
 
-* xref:Configuring_conversion_hosts_cloudforms_ssh_{context}[Configuring the conversion hosts for SSH transformation]
-* xref:Copying_vmware_ssh_keys_to_conversion_hosts_{context}[Copying the VMware SSH keys to the conversion hosts]
+|Instead of xref:Configuring_conversion_hosts_cloudforms_osp_1-2_vddk[Configuring the conversion hosts for VDDK transformation] <a|Go to:
+
+* xref:Configuring_conversion_hosts_cloudforms_osp_1-2_ssh[Configuring the conversion hosts for SSH transformation]
+* xref:Copying_vmware_ssh_keys_to_conversion_hosts_osp_1-2_ssh[Copying the VMware SSH keys to the conversion hosts]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
-include::modules/proc_Configuring_conversion_hosts_cloudforms_ssh.adoc[leveloffset=+2]
+include::modules/proc_Configuring_conversion_hosts_cloudforms.adoc[leveloffset=+2]
 include::modules/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
-:osp_1-2!:
+:osp_1-2_ssh!:

@@ -221,10 +221,10 @@ with enough administrative privileges to update it:
 == Configuring OIDC using the CLI
 
 Another way to configure OpenID-Connect on the appliance is to use the appliance
-console CLI instead of the above steps. The `--openidc-config` subcommand of
+console CLI instead of the above steps. The `--oidc-config` subcommand of
 the  appliance console CLI allows one to configure the appliance for OpenID-Connect
 Authentication by updating both Apache configurations as well as the necessary
-Administrative UI settings. The `--openidc-unconfig` subcommand is also provided
+Administrative UI settings. The `--oidc-unconfig` subcommand is also provided
 for unconfiguring the appliance OpenID-Connect Authentication and reverting
 the appliance to Database Authentication.
 
@@ -235,45 +235,45 @@ Usage of the new Appliance Console CLI subcommands are as follows:
 To configure the appliance for OpenID-Connect Authentication:
 
 ```
-# appliance_console_cli --openidc-config
-                        [--openidc-client-host]
-                        --openidc-url
-                        --openidc-client-id
-                        --openidc-client-secret
-                        [--openidc-enable-sso]
+# appliance_console_cli --oidc-config
+                        [--oidc-client-host]
+                        --oidc-url
+                        --oidc-client-id
+                        --oidc-client-secret
+                        [--oidc-enable-sso]
 ```
 
-When the `--openidc-client-host` is not specified, the configured appliance host
+When the `--oidc-client-host` is not specified, the configured appliance host
 is used for the ServerName and OpenID-Connect Redirect URI in the
-OpenID-Connect Apache configuration file. The `--openidc-client-host` is
+OpenID-Connect Apache configuration file. The `--oidc-client-host` is
 usually the externally reachable FQDN of the appliance.
 
 Configuring OpenID-Connect requires the following parameters:
 
 [options="header",cols="<2,<5"]
 |====================================================================
-|Parameter               | Description
-|--openidc-url           | This is the OpenID-Connect Provider URL
-|--openidc-client-id     | The OpenID-Connect Provider Cliend ID
-|--openidc-client-secret | The OpenID-Connect Provider Client Secret
+|Parameter            | Description
+|--oidc-url           | This is the OpenID-Connect Provider URL
+|--oidc-client-id     | The OpenID-Connect Provider Cliend ID
+|--oidc-client-secret | The OpenID-Connect Provider Client Secret
 |====================================================================
 
-The `--openidc-url` varies for different providers. An example provider
+The `--oidc-url` varies for different providers. An example provider
 URL for keycloak:
 
 ```
---openidc-url=http://keycloak-server:8080/auth/realms/miq-realm/.well-known/openid-configuration
+--oidc-url=http://keycloak-server:8080/auth/realms/miq-realm/.well-known/openid-configuration
 ```
 With *miq-realm* being the Keycloak Realm this OpenID-Connect
 appliance client is being configured for.
 
-The `--openidc-client-id` is the Client ID specified for
+The `--oidc-client-id` is the Client ID specified for
 the appliance in the OpenID-Connect provider, usually
 just `<miq-appliance-fqdn{gt}`
 
 By default, SSO is not enabled, so from the Appliance login page, the user clicks
 on Log In to Corporate System to get redirected to the OpenID-Connect
-login page. With this option enabled, the Appliance redirects the user
+login page. With the `--oidc-enable-sso` option specified, the Appliance redirects the user
 to the OpenID-Connect login page for logging in.
 
 === Unconfigure OpenID-Connect
@@ -282,7 +282,7 @@ To unconfigure the appliance from OpenID-Connect Authentication and revert to
 Database authentication:
 
 ```
-# appliance_console_cli --openidc-unconfig
+# appliance_console_cli --oidc-unconfig
 ```
 
 This will remove the Apache external authentication OpenID-Connect configuration

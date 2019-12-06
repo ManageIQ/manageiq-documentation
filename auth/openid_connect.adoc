@@ -42,8 +42,8 @@ Copy the Apache OIDC template configuration files:
 # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
 # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user-openidc.conf \
     /etc/httpd/conf.d/
-# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-openidc.conf \
-    /etc/httpd/conf.d/
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-openidc.conf.erb \
+    /etc/httpd/conf.d/manageiq-external-auth-openidc.conf
 ```
 
 [[oidc-configuration]]
@@ -62,7 +62,9 @@ The defaults in the _manageiq-external-auth-oidc.conf_ file are:
 | OIDCOAuthRemoteUserClaim | username
 |======================================================================================
 
-Installation specific values must be specified in the _manageiq-external-auth-oidc.conf_ file for these parameters:
+Installation specific values must be specified in the _manageiq-external-auth-oidc.conf_ file for the following
+parameters, where the _parameter_ including the <%= ... %> anchors
+need to be replaced with the appropriate values:
 
 [options="header",cols="<1,<1,<2"]
 |======================================================================================
@@ -73,7 +75,7 @@ and
 
 OIDCRedirectURI              | miq_appliance              | FQDN of the appliance
 | OIDCProviderMetadataURL    | oidc_provider_metadata_url | The OpenID-Connect Provider URL,
-i.e. http://<keycloak_server{gt}:8080/auth/realms/miq/.well-known/openid-configuration
+i.e. http://<keycloak_server>:8080/auth/realms/miq/.well-known/openid-configuration
 | OIDCClientID               | oidc_client_id             | The OpenID-Connect Client ID
 | OIDCClientSecret           | oidc_client_secret         | The OpenID-Connect Client Secret
 |======================================================================================
@@ -85,7 +87,7 @@ e.g. the appliance hostname.
 
 Adding a Client in the KeyCloak ManageIQ Realm:
 
-* Set Client ID as <miq-appliance{gt}
+* Set Client ID as <miq-appliance>
 * Set Client protocol as *openid-connect*.
 
 The Client definition for the appliance can then be updated with the following:
@@ -95,7 +97,7 @@ The Client definition for the appliance can then be updated with the following:
 | Client Protocol                                 | openid-connect
 | Access Type                                     | confidential
 | Valid Redirect URIs                             | https://<miq-appliance{gt}
-|                                                 | https://<miq-appliance{gt}/oidc_login/redirect_uri
+|                                                 | https://<miq-appliance>/oidc_login/redirect_uri
 | User Info Signed                                | unsigned
 | Request Object Signature Algorithm              | any
 |=========================================================================================
@@ -222,7 +224,7 @@ with enough administrative privileges to update it:
 
 Another way to configure OpenID-Connect on the appliance is to use the appliance
 console CLI instead of the above steps. The `--oidc-config` subcommand of
-the  appliance console CLI allows one to configure the appliance for OpenID-Connect
+the appliance console CLI allows one to configure the appliance for OpenID-Connect
 Authentication by updating both Apache configurations as well as the necessary
 Administrative UI settings. The `--oidc-unconfig` subcommand is also provided
 for unconfiguring the appliance OpenID-Connect Authentication and reverting
@@ -269,7 +271,7 @@ appliance client is being configured for.
 
 The `--oidc-client-id` is the Client ID specified for
 the appliance in the OpenID-Connect provider, usually
-just `<miq-appliance-fqdn{gt}`
+just `<miq-appliance-fqdn>`
 
 By default, SSO is not enabled, so from the Appliance login page, the user clicks
 on Log In to Corporate System to get redirected to the OpenID-Connect

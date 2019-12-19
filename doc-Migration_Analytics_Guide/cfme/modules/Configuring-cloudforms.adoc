@@ -1,0 +1,43 @@
+// Module included in the following assemblies:
+// doc-Migration_Analytics_Guide/cfme/master.adoc
+[id='Configuring-cloudforms_{context}']
+= Configuring CloudForms for Migration Analytics
+
+You must enable SmartProxy and the Migration Analytics menu in Red Hat CloudForms.
+
+SmartProxy is required for SmartState analysis.
+
+[NOTE]
+====
+SmartState analysis is enabled by default. Do not change this setting.
+====
+
+.Procedure
+
+. Log in to the CloudForms user interface.
+. In the header bar, click image:config-gear.png[] (*Configuration*).
+. Click the *Settings* accordion and then click *Zones*.
+. Click the zone in which the EVM server is located and select your EVM server.
+. Enable SmartProxy for your EVM server:
+.. Click the *Server* tab in the right pane and locate the *Server Control* section.
+.. Locate *Server Roles*.
+.. Set *SmartProxy* to *On* and click *Save*.
+. Enable the Migration Analytics menu for your EVM server:
+.. Click the *Advanced* tab in the right pane.
+.. In the `prototype` section, under `migration_analytics`, change the value of the `enabled` parameter to `true`:
++
+[source,yaml]
+----
+:prototype:
+  :migration_analytics:
+    :enabled: true
+----
+
+.. Click *Save*.
+. Log out of the CloudForms user interface.
+. Log in to the CloudForms machine using SSH.
+. Restart the EVM server:
++
+----
+$ sudo systemctl restart evmserverd.service
+----

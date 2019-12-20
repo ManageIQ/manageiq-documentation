@@ -3,14 +3,31 @@
 
 {product-title_short} SmartState analysis requires an analysis profile to select the files to be scanned by a compliance policy. {product-title_short} has the ability to export and import SmartState analysis profiles via the command line using rake commands. As a result, approved configurations can be easily imported into customer environments, without having to manually recreate the profile through the user interface.
 
-To export an analysis profile, run:
-
+. Change to the `vmdb` directory:
++
 ----
-bundle exec rake evm:export:scan_profiles -- --outputdirectory
+cd /var/www/miq/vmdb
 ----
-
-To import an analysis profile, run:
-
++
+. Create an export directory:
++
 ----
-bundle exec rake evm:import:scan_profiles -- --sourcefile
+$ mkdir exports
 ----
++
+. To export an analysis profile, run:
++
+----
+bundle exec rake evm:export:scan_profiles -- --directory exports
+----
++
+. To import the default analysis profile, run:
++
+----
+bundle exec rake evm:import:scan_profiles -- --source exports/host_default.yaml
+----
++
+[NOTE]
+====
+If the default profile already exists in {product-title_short}, the new profile does not overwrite the old profile. Instead, it duplicates the file items in the default profile.
+====

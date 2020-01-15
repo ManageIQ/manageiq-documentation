@@ -36,43 +36,20 @@ ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
 +
 The value of *Maximum concurrent migrations per conversion host* is constrained so that it cannot be greater than *Maximum concurrent migrations per provider*.
 
-endif::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
-
-// 1.1
-// Commenting out because of https://bugzilla.redhat.com/show_bug.cgi?id=1716283
-// Setting limit via API is not working.
-//
-// Changing the maximum number of concurrent migrations for a single conversion host::
-// . Log in to the CloudForms machine using SSH.
-// . Enter the following command:
-// +
-// [options="nowrap" subs="+quotes,verbatim"]
-// ----
-// # vmdb
-// # rails console
-// irb(main):001:0> $evm = MiqAeMethodService::MiqAeService.new(MiqAeEngine::MiqAeWorkspaceRuntime.new)
-// irb(main):002:0> $evm.vmdb(:host).find_by(:name => "_host1.example.com_").custom_set("Max Transformation Runners", _20_) <1> <2>
-// ----
-// <1> `host1.example.co` is the name of your conversion host.
-// <2> `Max Transformation Runners` is the maximum number of concurrent migrations. The default value is `10` for a conversion host.
-
-ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
 .Changing the maximum number of concurrent migrations for a specific conversion host
 
 . Log in to the conversion host using SSH.
 . Obtain the `conversion_host_id`:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# curl -sk -u _username:password_ 'https://<CloudForms_FQDN>/api/conversion_hosts/' <1>
+# curl -sk -u <username>:<password> https://<CloudForms_FQDN>/api/conversion_hosts/ <1>
 ----
 <1> Specify the CloudForms FQDN.
 
 . Enter the following command:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# curl -sk -u <username>:<password> 'https://<CloudForms_FQDN>/api/conversion_hosts/<conversion_host_id>' -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _15_}}' <1> <2> <3> <4>
+# curl -sk -u <username>:<password> https://<CloudForms_FQDN>/api/conversion_hosts/<conversion_host_id> -X POST -d '{"action": "edit", "resource": {"max_concurrent_tasks": _15_}}' <1> <2> <3> <4>
 ----
 
 <1> Specify the CloudForms admin username and password.

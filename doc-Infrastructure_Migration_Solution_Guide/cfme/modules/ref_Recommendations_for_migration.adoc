@@ -2,12 +2,68 @@
 //
 // IMS_1.1/master.adoc
 // IMS_1.2/master.adoc
+// IMS_1.3/master.adoc
 [id="Recommendations_for_migration_{context}"]
 = Recommendations and best practices
 
-The following recommendations will help to minimize the impact of the migration on your environment.
+The following recommendations will help to minimize the impact of the migration on your environment and improve performance.
 
-.Scheduling the migration
+For details about performance recommendations, see link:https://access.redhat.com/articles/4713391[Performance recommendations for migrating from VMware to Red Hat Virtualization or Red Hat OpenStack Platform with IMS].
+
+[id='Preparing-the-migration-environment_{context}']
+== Preparing the migration environment
+
+.VMware environment
+
+* Extend the VMware VM network to the Red Hat target environment.
+* Ensure that the VMware network provides high throughput.
++
+VMware and RHV hosts often have multiple network interfaces. By default, the conversion hosts use the VMware hosts' admin interface to import VMs. Configure your routing for the fastest possible connection between the Red Hat and VMware environment. You can use host routes or IP table filtering to control the traffic flow.
+
+* Ensure that the VMware network does not affect production machines, for example, by using a backup network to avoid overload.
+* Divide the VMware virtual machines equally between two VMware hosts, if possible.
+* Remove unnecessary data from the VMware disks.
+
+.Red Hat environment
+
+* Update your Red Hat target environment to the latest z-stream release and install required patches.
+* Use fast, full SDD storage.
+* Ensure that the network connection between the RHV conversion hosts and storage is at least 10 GbE.
+* Use Fibre Channel interfaces between the conversion hosts and storage.
+* Configure multipath access between the conversion hosts and storage.
+
+[id='Deploying-the-conversion-hosts_{context}']
+== Deploying the conversion hosts
+
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk[]
+* Deploy the conversion hosts on midrange or high-end multicore machines with at least 10 GB of available RAM.
++
+If you increase the maximum number of concurrent migrations beyond `10` (up to `20` concurrent migrations), you must add 1 GB RAM for each additional migration.
+
+* Enable high performance and disable power-saving in the BIOS settings of the hosts.
+endif::[]
+ifdef::rhv_1-3_vddk[]
+* Deploy the conversion hosts (virtual machines) on midrange to high-end multicore hosts (hypervisors) with at least 10 GB of available RAM.
+* Enable high performance and disable power-saving in the BIOS settings of the hosts.
+endif::[]
+
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk[]
+* Ensure that the conversion host is not hosting virtual machines with heavy read/write workloads during the migration.
+* Ensure that virtual machines on the conversion host are idle during the migration process.
++
+Their presence will not affect migration performance.
+endif::[]
+ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk,rhv_1-3_vddk[]
+* Deploy the conversion hosts on dedicated hypervisors.
+* Ensure that virtual machines on those hypervisors have low storage input/output usage.
+endif::[]
+
+* Deploy multiple conversion hosts (up to five) for load-balancing and improved performance.
++
+The virtual machines in a migration plan are automatically distributed among the conversion hosts. This decreases the load on the conversion hosts and allows you to increase the concurrent migrations beyond the limits of a single conversion host.
+
+[id='Scheduling-the-migration_{context}']
+== Scheduling the migration
 
 * Schedule your migration carefully, to minimize the impact on your users.
 * Prepare your users for downtime.
@@ -18,13 +74,23 @@ ifdef::rhv_1-1_vddk,rhv_1-2_vddk,osp_1-1_vddk,osp_1-2_vddk[]
 Currently, IMS supports only cold migration. Virtual machines are powered off gracefully as part of the migration process.
 ====
 endif::[]
-
 * Stagger the migration schedules.
 * Move critical applications during maintenance windows.
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
+* Schedule the migration during a maintenance window when the Manager and virtual machines are idle, for example, not during multiple virtual machine reboots and storage input/output operations.
+endif::[]
+* Schedule the migration during a maintenance window when storage input/output usage is low.
 
-.Distributing the migration workload
+[id='Grouping-virtual-machines-for-migration_{context}']
+== Grouping virtual machines for migration
 
-* Create migration groups, so that you are not migrating all of your virtual machines at the same time, keeping in mind the following considerations:
+* Create migration groups for your virtual machines, so that you are not migrating all of them at the same time.
+
+* Migrate a group of virtual machines in parallel, rather than individually.
++
+You can deploy up to 5 conversion hosts, with each host migrating up to 20 virtual machines in parallel. *These limits should not be exceeded.*
+
+* Consider the following questions when creating migration groups:
 
 ** How are the virtual machines grouped now?
 ** Which virtual machines should be migrated together?
@@ -38,12 +104,8 @@ endif::[]
 ** Web servers
 ** Load balancers
 
-.Deploying the conversion hosts
-
-* Create a sufficient number of conversion hosts for your migration, with sufficient resources.
-* Create multiple conversion hosts for load-balancing. The virtual machines in a migration plan are automatically distributed among the conversion hosts. This decreases the load on the conversion hosts and allows you to increase the concurrent migrations beyond the limits of a single conversion host.
-
-.Controlling the migration process
+[id='Controlling-the-migration-process_{context}']
+== Controlling the migration process
 
 * Create multiple migration plans for finer control.
 * Perform test migrations with different maximum numbers of concurrent migrations to assess the capabilities of your environment's infrastructure.

@@ -39,6 +39,8 @@ endif::[]
 
 You must run `ssh-keyscan` for *each VMware hypervisor*. Otherwise your conversion hosts will not have all the VMware hypervisor keys and the migration will fail.
 
+Perform the following procedure on each conversion host:
+
 ifdef::rhv_1-1_ssh,rhv_1-2_ssh,rhv_1-3_ssh[]
 . Run `ssh-keyscan` for each VMware hypervisor and copy its public key to `known_hosts`, as in the following example:
 +
@@ -76,7 +78,7 @@ $ ssh-keyscan _esx3_IP_ >> /root/.ssh/known_hosts
 ----
 <1> Specify the IP address, not the host name, of the VMware hypervisor.
 
-. On each conversion host, verify the SSH connection by connecting to each VMware hypervisor as `cloud-user`:
+. Verify the SSH connection by connecting to each VMware hypervisor as `cloud-user`:
 +
 [options="nowrap" subs="+quotes,verbatim"]
 ----

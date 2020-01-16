@@ -33,7 +33,6 @@ ifdef::osp_1-1_vddk,osp_1-1_ssh[]
 endif::[]
 . Install the `ovirt-ansible-v2v-conversion-host` package:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
 $ yum install ovirt-ansible-v2v-conversion-host
 ----
@@ -56,7 +55,7 @@ endif::[]
 ifdef::rhv_1-1_ssh,osp_1-1_ssh[]
   - ssh
 endif::[]
-v2v_max_concurrent_conversions: 10 <1>
+v2v_max_concurrent_conversions: "10" <1>
 ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 v2v_vddk_package_name: "<vddk_file>" <2>
 v2v_vddk_package_url: "http://<path_to_vddk_package>/{{ v2v_vddk_package_name }}" <3>
@@ -69,12 +68,12 @@ manageiq_provider_name: "OpenStack"
 endif::[]
 ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 manageiq_url: "https://<CloudForms_FQDN>" <4>
-manageiq_validate_certs: true <5>
+manageiq_validate_certs: "true" <5>
 manageiq_zone_id: "<zone_id>" <6>
 endif::[]
 ifdef::rhv_1-1_ssh,osp_1-1_ssh[]
 manageiq_url: "https://<CloudForms_FQDN>" <2>
-manageiq_validate_certs: true <3>
+manageiq_validate_certs: "true" <3>
 manageiq_zone_id: "<zone_id>" <4>
 endif::[]
 
@@ -89,9 +88,9 @@ ifdef::rhv_1-1_vddk[]
     connection_configurations:
       - endpoint:
           role: "default"
-          certificate_authority: | <8>
+          certificate_authority: |
             -----BEGIN CERTIFICATE-----
-            <MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ....>
+            <Manager_certificate_authority> <8>
             -----END CERTIFICATE-----
 endif::[]
 ifdef::rhv_1-1_ssh[]
@@ -100,9 +99,9 @@ ifdef::rhv_1-1_ssh[]
     connection_configurations:
       - endpoint:
           role: "default"
-          certificate_authority: | <6>
+          certificate_authority: |
             -----BEGIN CERTIFICATE-----
-            <MIIDoDCCAoigAwIBAgIBATANBgkqhkiG9w0BAQsFADA9MRswGQYDVQ....>
+            <Manager_certificate_authority> <6>
             -----END CERTIFICATE-----
 endif::[]
 ifdef::osp_1-1_vddk[]
@@ -114,10 +113,10 @@ ifdef::osp_1-1_vddk[]
           security_protocol: "ssl" <8>
           certificate_authority: | <9>
             -----BEGIN TRUSTED CERTIFICATE-----
-            _MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV...._
+            <Undercloud_ca_certificate> <10>
             -----END TRUSTED CERTIFICATE-----
             -----BEGIN TRUSTED CERTIFICATE-----
-            _MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG...._
+            <Overcloud_ca_certificate> <11>
             -----END TRUSTED CERTIFICATE-----
 endif::[]
 ifdef::osp_1-1_ssh[]
@@ -129,10 +128,10 @@ ifdef::osp_1-1_ssh[]
           security_protocol: "ssl" <6>
           certificate_authority: | <7>
             -----BEGIN TRUSTED CERTIFICATE-----
-            _MIIDNzCCAh8CAQEwDQYJKoZIhvcNAQELBQAwYjELMAkGA1UEBhMCVV...._
+            <Undercloud_ca_certificate> <8>
             -----END TRUSTED CERTIFICATE-----
             -----BEGIN TRUSTED CERTIFICATE-----
-            _MIIDlzCCAn+gAwIBAgIJAOP7AaT7dsLYMA0GCSqGSIb3DQEBCwUAMG...._
+            <Overcloud_ca_certificate> <9>
             -----END TRUSTED CERTIFICATE-----
 endif::[]
 ----
@@ -142,30 +141,34 @@ ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 <3> Specify the path to the VDDK package that you downloaded.
 <4> Specify the FQDN of the CloudForms machine.
 <5> Specify `false` if you do not want to validate the CloudForms CA certificate.
-<6> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine: `$ curl -sk -u admin \'https://<CloudForms_FQDN>/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone`.
+<6> To obtain the `<manageiq_zone_id>`, enter this command on the CloudForms machine: `$ curl -sk -u admin \'https://<CloudForms_FQDN>/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone'`.
 endif::[]
 ifdef::rhv_1-1_ssh,osp_1-1_ssh[]
 <2> Specify the FQDN of the CloudForms machine.
 <3> Specify `false` if you do not want to validate the CloudForms CA certificate.
-<4> To obtain the `manageiq_zone_id`, enter this command on the CloudForms machine: `$ curl -sk -u admin \'https://<CloudForms_FQDN>/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone`.
+<4> To obtain the `<manageiq_zone_id>`, enter this command on the CloudForms machine: `$ curl -sk -u admin \'https://<CloudForms_FQDN>/api/zones/?filter\[\]=name=RHV&expand=resources&attributes=zone'`.
 endif::[]
 ifdef::rhv_1-1_vddk[]
 <7> Specify the FQDN or IP address of the Manager machine.
-<8> Specify the `certificate_authority`, which is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
+<8> Specify the Manager certificate authority, which is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
 endif::[]
 ifdef::rhv_1-1_ssh[]
 <5> Specify the FQDN or IP address of the Manager machine.
-<6> Specify the `certificate_authority`, which is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
+<6> Specify the Manager certificate authority, which is stored as `/etc/pki/ovirt-engine/apache-ca.pem` on the Manager machine.
 endif::[]
 ifdef::osp_1-1_vddk[]
 <7> Specify the hostname or FQDN of the controller node.
-<8> Valid options are `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`<certificate_authority>`).
-<9> The CA chain (`<certificate_authority>`) is a concatenation of two CA files, `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+<8> Valid options are `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, you must specify the `<Undercloud_ca_certificate>` and `<Overcloud_ca_certificate>`.
+<9> The CA chain is a concatenation of `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem`. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+<10> Specify the `<Undercloud_ca_certificate>`, which is stored as `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server.
+<11> Specify the `<Overcloud_ca_certificate>`, which is stored as `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers.
 endif::[]
 ifdef::osp_1-1_ssh[]
 <5> Specify the hostname or FQDN of the controller node.
-<6> Valid options are `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, add the CA chain (`<certificate_authority>`).
-<7> The CA chain (`<certificate_authority>`) is a concatenation of two CA files, `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+<6> Valid options are `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, you must specify the `<Undercloud_ca_certificate>` and `<Overcloud_ca_certificate>`.
+<7> The CA chain is a concatenation of `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem`. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/14/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+<8> Specify the `<Undercloud_ca_certificate>`, which is stored as `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server.
+<9> Specify the `<Overcloud_ca_certificate>`, which is stored as `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers.
 endif::[]
 
 . Create an encrypted `secure_vars.yml` file:
@@ -184,7 +187,7 @@ manageiq_password: "<password>" <2>
 ifdef::rhv_1-1_ssh,osp_1-1_ssh[]
 v2v_ssh_private_key: |
   -----BEGIN RSA PRIVATE KEY-----
-  <b3BlbnNzaC1rZXktdjEAAAAABG5vbmUAAAAEbm9uZQAAAAAAAAABAAAAlwAAAAdzc2gtcn....> <3>
+  <Vmware_private_key> <3>
   -----END RSA PRIVATE KEY-----
 endif::[]
 ----

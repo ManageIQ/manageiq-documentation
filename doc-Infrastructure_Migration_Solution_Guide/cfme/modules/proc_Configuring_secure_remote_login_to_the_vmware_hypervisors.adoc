@@ -13,33 +13,27 @@ Secure remote login must be verified for *each* VMware hypervisor. If secure rem
 
 . On the Manager machine, create an `ssh-agent` session for the `vdsm` user:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u vdsm ssh-agent
-----
-+
-`ssh-agent` creates the `SSH_AUTH_SOCK` and `SSH_AGENT_PID` environment variables:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-SSH_AUTH_SOCK=/tmp/ssh-_socket_number_/agent._pid_; export SSH_AUTH_SOCK;
+$ sudo -u vdsm ssh-agent
+SSH_AUTH_SOCK=<ssh_auth_sock>; export SSH_AUTH_SOCK;
 SSH_AGENT_PID=139150; export SSH_AGENT_PID;
 echo Agent pid 139150;
 ----
 
-. Copy the `SSH_AUTH_SOCK` variable from the output.
+. Copy the `<ssh_auth_sock>` value from the output.
 
 . Run `ssh-add` to authorize the `vdsm` user's private key for the `ssh-agent` session:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u vdsm SSH_AUTH_SOCK=_SSH_AUTH_SOCK_ ssh-add
+$ sudo -u vdsm SSH_AUTH_SOCK=<ssh_auth_sock> ssh-add <1>
 ----
+<1> Specify the `<ssh_auth_sock>` value.
 
 . Connect to a VMware hypervisor to verify the secure remote login:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
-# sudo -u vdsm \
-    SSH_AUTH_SOCK=_SSH_AUTH_SOCK_ ssh root@_esx1.example.com_
+$ sudo -u vdsm \
+    SSH_AUTH_SOCK=<ssh_auth_sock> ssh root@<Vmware_host_name> <1> <2>
 ----
+<1> Specify the `<ssh_auth_sock>` value.
+<2> Specify the host name of the VMware hypervisor.

@@ -44,7 +44,7 @@ Below are the two sets of requirements for installing {product-title} on Amazon 
 ==== Amazon EC2 Requirements
 
 * An Amazon S3 bucket to store disk images.
-* A VM import service role (IAM role) named `vmimport`. 
+* A VM import service role (IAM role) named `vmimport`.
 
 For information on creating an Amazon S3 bucket and a VM Import Service Role, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
 
@@ -166,8 +166,8 @@ $ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-d
 
 To import the appliance:
 
-. Create a containers.json file: 
-+  
+. Create a containers.json file:
++
 ----
 [
   {
@@ -181,17 +181,21 @@ To import the appliance:
 ]
 ----
 +
-. Use AWS-CLI tools to import the image. Run the following command:
+. Use AWS-CLI tools to import the disk as a snapshot by following the steps in the
+link://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-import-snapshot.html[Importing a Disk as a Snapshot Using VM Import/Export] documentation.
 +
 ----
-$ aws ec2 import-image --disk-containers file://containers.json --region BUCKET_REGION
+$ aws ec2 import-snapshot
 ----
 +
-. Check the progress of your imported image by running the following command:
+. Create the AMI from the snapshot by following the steps in the
+link://docs.aws.amazon.com/AWSEC2/latest/UserGuide/creating-an-ami-ebs.html[Creating a Linux AMI from a Snapshot] documentation.
 +
 ----
  $ aws ec2 describe-import-image-tasks --region BUCKET_REGION --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
 ----
 +
-
-
+. Check the progress of your imported image by running the following command:
+----
+ $ aws ec2 describe-import-image-tasks --region BUCKET_REGION --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
+----

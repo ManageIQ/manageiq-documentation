@@ -181,24 +181,23 @@ To import the appliance:
 ]
 ----
 +
-. Use the AWS-CLI tools to import a disk as a snapshot. See the link://docs.aws.amazon.com/AWS[AWS documentation]
-on importing a disk as a snapshot using VM Import/Export.
+. Use the AWS-CLI tools to import a disk as a snapshot. See the
+link://docs.aws.amazon.com/AWS[AWS documentation] on using VM Import/Export to
+import a disk as a snapshot.
 +
 ----
 $ aws ec2 import-snapshot --disk-containers file://containers.json --region BUCKET_REGION
 ----
 +
 . Check the progress of your snapshot import by running the following command:
++
 ----
  $ aws ec2 describe-import-snapshot-tasks --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
 ----
-. Create the AMI from the snapshot. See the link://docs.aws.amazon.com/AWS[AWS documentation] on creating a Linux AMI from a Snapshot.
++
+. Create an AMI from the snapshot. See the link://docs.aws.amazon.com/AWS[AWS documentation] on
+using options with the following command to create and register a Linux AMI from a snapshot.
 +
 ----
- $ aws ec2 describe-import-image-tasks --region BUCKET_REGION --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
-----
-+
-. Check the progress of your imported image by running the following command:
-----
- $ aws ec2 describe-import-image-tasks --region BUCKET_REGION --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
+ $ aws ec2 register-image
 ----

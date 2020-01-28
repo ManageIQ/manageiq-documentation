@@ -3,7 +3,7 @@
 
 Installing {product-title} consists of the following steps:
 
-. Downloading the appliance for your environment as a virtual machine image template.
+. Downloading the appliance for your environment as a virtual machine snapshot template.
 . Setting up a virtual machine based on the appliance.
 . Configuring the {product-title_short} appliance.
 
@@ -43,7 +43,7 @@ Below are the two sets of requirements for installing {product-title} on Amazon 
 
 ==== Amazon EC2 Requirements
 
-* An Amazon S3 bucket to store disk images.
+* An Amazon S3 bucket to store the disk snapshot.
 * A VM import service role (IAM role) named `vmimport`.
 
 For information on creating an Amazon S3 bucket and a VM Import Service Role, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
@@ -51,7 +51,7 @@ For information on creating an Amazon S3 bucket and a VM Import Service Role, se
 [[uploading-the-appliance-on-amazon-ec2]]
 === Uploading the Appliance to an Amazon S3 Bucket
 
-From your local file system, you can now upload the {product-title_short} appliance VHD image obtained in xref:obtaining-the-appliance[] to the Amazon S3 bucket, using your choice of tool.
+From your local file system, you can now upload the {product-title_short} appliance VHD snapshot obtained in xref:obtaining-the-appliance[] to the Amazon S3 bucket, using your choice of tool.
 
 
 [[configure-ec2-import-appliance]]
@@ -111,49 +111,75 @@ $ aws iam create-role --role-name vmimport --assume-role-policy-document file://
 ====
 This user must have permissions to create and modify IAM roles.
 ====
-. Create the `role-policy.json` file. Be sure to use the exact image name that you uploaded to the S3 bucket. For example:
+. Create the `role-policy.json` file. Be sure to use the exact S3 bucket name. For example:
 +
 ----
-
 {
-   "Version": "2012-10-17",
-   "Statement": [
-      {
-         "Effect": "Allow",
-         "Action": [
-            "s3:ListBucket",
-            "s3:GetBucketLocation",
-            "s3:FullAccess"
-         ],
-         "Resource": [
-            "arn:aws:s3:::NAME_OF_IMAGE_IN_S3_BUCKET"
-         ]
-      },
-      {
-         "Effect": "Allow",
-         "Action": [
-            "s3:GetObject"
-         ],
-         "Resource": [
-            "arn:aws:s3:::NAME_OF_IMAGE_IN_S3_BUCKET/*"
-         ]
-      },
-      {
-         "Effect": "Allow",
-         "Action":[
-            "ec2:ModifySnapshotAttribute",
-            "ec2:CopySnapshot",
-            "ec2:RegisterImage",
-            "ec2:Describe*",
-            "ec2:FullAccess"
-         ],
-         "Resource": "*"
-      }
-   ]
+  "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:ListAllMyBuckets"
+     ],
+     "Resource": "*"
+   },
+   {
+     "Effect": "Allow",
+     "Action": [
+       "s3:CreateBucket",
+       "s3:DeleteBucket",
+       "s3:DeleteObject",
+       "s3:GetBucketLocation",
+       "s3:GetObject",
+       "s3:ListBucket",
+       "s3:PutObject"
+     ],
+     "Resource": ["arn:aws:s3:::BUCKET_TO_UPLOAD_SNAPSHOT","arn:aws:s3:::BUCKET_TO_UPLOAD_SNAPSHOT/*"]
+   },
+   {
+     "Effect": "Allow",
+     "Action": [
+       "iam:CreateRole",
+       "iam:PutRolePolicy"
+     ],
+     "Resource": "*"
+   },
+   {
+     "Effect": "Allow",
+     "Action": [
+       "ec2:CancelConversionTask",
+       "ec2:CancelExportTask",
+       "ec2:CreateImage",
+       "ec2:CreateInstanceExportTask",
+       "ec2:CreateTags",
+       "ec2:DeleteTags",
+       "ec2:DescribeConversionTasks",
+       "ec2:DescribeExportTasks",
+       "ec2:DescribeExportImageTasks",
+       "ec2:DescribeInstanceAttribute",
+       "ec2:DescribeInstanceStatus",
+       "ec2:DescribeInstances",
+       "ec2:DescribeTags",
+       "ec2:ExportImage",
+       "ec2:ImportInstance",
+       "ec2:ImportVolume",
+       "ec2:StartInstances",
+       "ec2:StopInstances",
+       "ec2:TerminateInstances",
+       "ec2:ImportImage",
+       "ec2:ImportSnapshot",
+       "ec2:DescribeImportImageTasks",
+       "ec2:DescribeImportSnapshotTasks",
+       "ec2:CancelImportTask"
+     ],
+     "Resource": "*"
+   }
+ ]
 }
 ----
 +
-. Apply the *vmimport* role to the {product-title_short} appliance image you uploaded to the S3 bucket.
+. Apply the *vmimport* role to the {product-title_short} appliance snapshot you uploaded to the S3 bucket.
 +
 ----
 $ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://role-policy.json
@@ -169,30 +195,37 @@ To import the appliance:
 . Create a containers.json file:
 +
 ----
-[
-  {
-  "Description": "NAME OF INSTANCE",
-  "Format": "vhd",
-  "UserBucket": {
-        "S3Bucket": "BUCKET WITH UPLOADED .VHD IMAGE",
-        "S3Key": "NAME OF .VHD IMAGE"
-      }
-  }
-]
+{
+    "Description": " NAME OF IMPORTED SNAPSHOT IN AWS",
+    "Format": "vhd",
+    "UserBucket": {
+        "S3Bucket": "BUCKET WITH UPLOADED .VHD SNAPSHOT",
+        "S3Key": "PATH OF .VHD SNAPSHOT"
+    }
+}
 ----
++
+See the link://docs.aws.amazon.com[AWS documentation] on VM import and export requirements,
+such as image formats, instances, volume and file system types, and using regions.
 +
 . Use the AWS-CLI tools to import a disk as a snapshot. See the
 link://docs.aws.amazon.com[AWS documentation] on using VM Import/Export to
 import a disk as a snapshot.
 +
+[NOTE]
+====
+You can either specify a region, or if not, ensure that the S3 bucket is in the same
+region where you want to import the snapshot.
+====
++
 ----
-$ aws ec2 import-snapshot --disk-containers file://containers.json
+$ aws ec2 import-snapshot --disk-container file://containers.json
 ----
 +
 . Check the progress of your snapshot import by running the following command:
 +
 ----
- $ aws ec2 describe-import-snapshot-tasks --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
+ $ aws ec2 describe-import-snapshot-tasks --import-task-ids snap-SNAPSHOT_ID_GOT_FROM_RESPONSE
 ----
 +
 . Create an AMI from the snapshot. See the link://docs.aws.amazon.com[AWS documentation] on

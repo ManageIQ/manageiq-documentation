@@ -43,7 +43,7 @@ Below are the two sets of requirements for installing {product-title} on Amazon 
 
 ==== Amazon EC2 Requirements
 
-* An Amazon S3 bucket to store the disk snapshot.
+* An Amazon S3 bucket to store the disk image that will be imported to AWS as a snapshot.
 * A VM import service role (IAM role) named `vmimport`.
 
 For information on creating an Amazon S3 bucket and a VM Import Service Role, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
@@ -51,7 +51,7 @@ For information on creating an Amazon S3 bucket and a VM Import Service Role, se
 [[uploading-the-appliance-on-amazon-ec2]]
 === Uploading the Appliance to an Amazon S3 Bucket
 
-From your local file system, you can now upload the {product-title_short} appliance VHD snapshot obtained in xref:obtaining-the-appliance[] to the Amazon S3 bucket, using your choice of tool.
+From your local file system, you can now upload the {product-title_short} appliance VHD image obtained in xref:obtaining-the-appliance[] to the Amazon S3 bucket, using your choice of tool.
 
 
 [[configure-ec2-import-appliance]]
@@ -135,7 +135,7 @@ This user must have permissions to create and modify IAM roles.
        "s3:ListBucket",
        "s3:PutObject"
      ],
-     "Resource": ["arn:aws:s3:::BUCKET_TO_UPLOAD_SNAPSHOT","arn:aws:s3:::BUCKET_TO_UPLOAD_SNAPSHOT/*"]
+     "Resource": ["arn:aws:s3:::BUCKET_TO_UPLOAD_IMAGE","arn:aws:s3:::BUCKET_TO_UPLOAD_IMAGE/*"]
    },
    {
      "Effect": "Allow",
@@ -179,7 +179,7 @@ This user must have permissions to create and modify IAM roles.
 }
 ----
 +
-. Apply the *vmimport* role to the {product-title_short} appliance snapshot you uploaded to the S3 bucket.
+. Apply the *vmimport* role to the {product-title_short} appliance image you uploaded to the S3 bucket.
 +
 ----
 $ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://role-policy.json
@@ -199,8 +199,8 @@ To import the appliance:
     "Description": " NAME OF IMPORTED SNAPSHOT IN AWS",
     "Format": "vhd",
     "UserBucket": {
-        "S3Bucket": "BUCKET WITH UPLOADED .VHD SNAPSHOT",
-        "S3Key": "PATH OF .VHD SNAPSHOT"
+        "S3Bucket": "BUCKET WITH UPLOADED .VHD IMAGE",
+        "S3Key": "PATH OF .VHD IMAGE"
     }
 }
 ----
@@ -225,7 +225,7 @@ $ aws ec2 import-snapshot --disk-container file://containers.json
 . Check the progress of your snapshot import by running the following command:
 +
 ----
- $ aws ec2 describe-import-snapshot-tasks --import-task-ids snap-SNAPSHOT_ID_GOT_FROM_RESPONSE
+ $ aws ec2 describe-import-snapshot-tasks --import-task-ids SNAPSHOT_ID_GOT_FROM_RESPONSE
 ----
 +
 . Create an AMI from the snapshot. See the link://docs.aws.amazon.com[AWS documentation] on

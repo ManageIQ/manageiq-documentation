@@ -35,50 +35,58 @@ There is no formula to estimate how long the actual migration will take. Migrati
 The following example is provided as a guide:
 
 ifdef::rhv_1-1_vddk[]
-.Red Hat Virtualization 4.2
+.Migration to Red Hat Virtualization 4.2
 
 ====
-* Migration duration: 95 minutes
-* Migration speed: 351 MBps
+Duration: 95 minutes
+
+Speed: 351 MBps
+
+Environment:
+
 * 20 virtual machines with 100 GB disks (66 GB usage)
-* Two conversion hosts, with a maximum of 10 concurrent migrations each
-* Conversion host configuration: 40 cores, 500 GB RAM
+* Two conversion hosts, with a maximum of ten concurrent migrations each
 * SSD storage
-* VMware host-to-storage interface: iSCSI
-* Conversion host-to-storage interface: Fiber Channel
+* iSCSI interface between VMware hosts and storage
+* Fiber Channel interface between Red Hat hosts and storage
 ====
 endif::[]
 ifdef::rhv_1-2_vddk[]
-.Red Hat Virtualization 4.3, with link:https://bugzilla.redhat.com/show_bug.cgi?id=1743322[Smart Zero Write]
+.Migration to Red Hat Virtualization 4.3, with link:https://bugzilla.redhat.com/show_bug.cgi?id=1743322[Smart Zero Write]
 
 ====
-* Migration duration: 55 minutes
-* Migration speed: 603 MBps
+Duration: 55 minutes
+
+Speed: 603 MBps
+
+Environment:
+
 * 20 virtual machines with 100 GB disks (66 GB usage)
-* Two conversion hosts, with a maximum of 10 concurrent migrations each
-* Conversion host configuration: 40 cores, 500 GB RAM
+* Two conversion hosts (24 CPUs each), with a maximum of ten concurrent migrations each
 * SSD storage
-* VMware host-to-storage interface: iSCSI
-* Conversion host-to-storage interface: Fiber Channel with multipath access
-* NICs: 10 GbE
+* iSCSI interface between VMware hosts and storage
+* Fiber Channel interface with multipath access between Red Hat hosts and storage
+* 10 GbE NICs
 ====
 endif::[]
 ifdef::rhv_1-3_vddk[]
 TBD
 endif::[]
 ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-.Red Hat OpenStack Platform
+.Migration to Red Hat OpenStack Platform
 
 ====
-* Duration of migration: 133 minutes
-* 20 virtual machines
-* Two conversion hosts, each running ten concurrent conversions
-* Total data migrated: 1000 GB
-* Host configuration: 40 cores, 500 GB RAM
+Duration: 133 minutes
+
+Environment:
+
+* 20 virtual machines, with 1000 GB total data
+* Two conversion hosts, with a maximum of ten concurrent migrations each
+* Bare metal host with 40 cores and 500 GB RAM
 * SSD storage
-* VMware host-to-storage interface: iSCSI
-* Conversion host-to-storage interface: Fiber Channel with multipath access
-* NICs: 10 GbE
+* iSCSI interface between VMware hosts and storage
+* Fiber Channel interface with multipath access between Red Hat hosts and storage
+* 10 GbE NICs
 ====
 endif::[]
 

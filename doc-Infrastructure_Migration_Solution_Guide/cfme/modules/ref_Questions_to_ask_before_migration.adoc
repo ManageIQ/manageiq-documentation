@@ -10,19 +10,16 @@ The following questions can help you to estimate the resources and time required
 What am I migrating?::
 * Identify the VMware virtual machines that you will be migrating.
 
+What am I missing?::
+* Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window, before you begin the migration.
+
 What is the maximum number of disks or virtual machines that I can migrate?::
 * There is no maximum number of disks or virtual machines that you can migrate. However, you may not want to migrate all your virtual machines at the same time, in order to minimize the impact on your users.
 +
 [IMPORTANT]
 ====
-If you exceed the capabilities of your environment, the migrations will fail. This situation could affect existing applications running on virtual machines attached to the network and storage.
+If you exceed the capabilities of your environment, the migration will fail. This situation could affect existing applications running on virtual machines attached to the network and storage.
 ====
-
-What operating systems can I migrate?::
-* You can migrate any guest operating system that is certified and supported for use with the Red Hat Virtualization Hypervisor. See link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
-
-What am I missing?::
-* Identify resource gaps, such as bandwidth, storage, licenses, or a suitable maintenance window, before you begin the migration.
 
 What impact will the migration have on my users?::
 * Assess the effects the migration may have on a production environment.
@@ -31,53 +28,88 @@ It may be possible to migrate your applications in phases, without downtime at t
 
 * Check whether users will lose access to critical applications.
 
-How long will the migration take?::
-There is no formula to estimate how long the actual migration will take. This is determined on a case-by-case basis.
-+
+== How long will the migration take?
+
+There is no formula to estimate how long the actual migration will take. Migration speed is determined by your hardware, network speed, and other factors.
+
 The following example is provided as a guide:
-+
-ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
-.Red Hat Virtualization migration
-+
+
+ifdef::rhv_1-1_vddk[]
+.Migration to Red Hat Virtualization 4.2
+
 ====
-* Duration of migration: 1:15:53 (hh:mm:ss)
-* 10 virtual machines
-* Total data migrated: 1000 GB
-* Hardware:
-** Strong host (40 cores, 500 GB RAM)
-** Fast SSD XtremIO storage
-** Fibre Channel 8 interface for host-to-storage connection
-** 10 GbE network interface cards for all other connections
+Duration: 95 minutes
+
+Speed: 351 MBps
+
+Environment:
+
+* 20 virtual machines with 100 GB disks (66 GB usage)
+* Two conversion hosts, with a maximum of ten concurrent migrations each
+* SSD storage
+* iSCSI interface between VMware hosts and storage
+* Fiber Channel interface between Red Hat hosts and storage
 ====
+endif::[]
+ifdef::rhv_1-2_vddk[]
+.Migration to Red Hat Virtualization 4.3, with link:https://bugzilla.redhat.com/show_bug.cgi?id=1743322[Smart Zero Write]
+
+====
+Duration: 55 minutes
+
+Speed: 603 MBps
+
+Environment:
+
+* 20 virtual machines with 100 GB disks (66 GB usage)
+* Two conversion hosts (24 CPUs each), with a maximum of ten concurrent migrations each
+* SSD storage
+* iSCSI interface between VMware hosts and storage
+* Fiber Channel interface with multipath access between Red Hat hosts and storage
+* 10 GbE NICs
+====
+endif::[]
+ifdef::rhv_1-3_vddk[]
+TBD
 endif::[]
 ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-.Red Hat OpenStack Platform migration
-+
+.Migration to Red Hat OpenStack Platform
+
 ====
-* Duration of migration: 2:13:00 (hh:mm:ss)
-* 20 virtual machines
-* 2 conversion hosts, maximum of 10 concurrent conversions
-* Total data migrated: 1000 GB
-* Hardware:
-** Strong host (40 cores, 500 GB RAM)
-** Fast SSD XtremIO storage
-** Fibre Channel 8 interface for host-to-storage connection
-** 10 GbE network interface cards for all other connections
+Duration: 133 minutes
+
+Environment:
+
+* 20 virtual machines, with 1000 GB total data
+* Two conversion hosts, with a maximum of ten concurrent migrations each
+* Bare metal host with 40 cores and 500 GB RAM
+* SSD storage
+* iSCSI interface between VMware hosts and storage
+* Fiber Channel interface with multipath access between Red Hat hosts and storage
+* 10 GbE NICs
 ====
 endif::[]
 
-How many conversion hosts do I need?::
+== What operating systems can I migrate?
+
+You can migrate any guest operating system that is certified and supported.
+
+See link:https://access.redhat.com/articles/973163[Certified Guest Operating Systems in Red Hat OpenStack Platform and Red Hat Virtualization].
+
+== How many conversion hosts do I need?
+
 The number of conversion hosts you create depends on the size of your migration. All the virtual machines in a migration plan are migrated at the same time, in parallel. The number of virtual machines that you can migrate simultaneously depends on your infrastructure capabilities. Each migration requires a certain amount of network bandwidth, I/O throughput, and processing power for the conversion process.
-+
+
 Multiple conversion hosts provide load-balancing and better performance, even for small migrations.
-+
+
 Conversion hosts are limited to a maximum of ten concurrent migrations, unless you change the default values.
-+
+
 You should test your environment thoroughly before the migration to determine how many migrations it can support without negative effects, for example, five conversion hosts, each running ten concurrent migrations.
 
-Should I migrate my virtual machines with VDDK or SSH?::
+== Should I migrate my virtual machines with VDDK or SSH?
+
 You can migrate your virtual machines with either the VMware Virtual Disk Development Kit (VDDK) or SSH. VDDK is the default because it is much faster than SSH and easier to configure.
-+
+
 VDDK is limited to 20 concurrent migrations per conversion host, because of network limitations, and 10 concurrent migrations per VMware hypervisor, unless you increase the hypervisor's NFC service memory.
-+
-If you cannot use VDDK, SSH transformation is a fallback option.
+
+If you cannot use VDDK, SSH is a fallback option.

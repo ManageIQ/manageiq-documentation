@@ -44,7 +44,7 @@ Below are the two sets of requirements for installing {product-title} on Amazon 
 ==== Amazon EC2 Requirements
 
 * An Amazon S3 bucket to store disk images.
-* A VM import service role (IAM role) named `vmimport`. 
+* A VM import service role (IAM role) named `vmimport`.
 
 For information on creating an Amazon S3 bucket and a VM Import Service Role, see the link:https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html[Amazon EC2 documentation].
 
@@ -166,8 +166,8 @@ $ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-d
 
 To import the appliance:
 
-. Create a containers.json file: 
-+  
+. Create a containers.json file:
++
 ----
 [
   {
@@ -181,17 +181,24 @@ To import the appliance:
 ]
 ----
 +
-. Use AWS-CLI tools to import the image. Run the following command:
+. Use the AWS-CLI tools to import a disk as a snapshot. See the
+link://docs.aws.amazon.com[AWS documentation] on using VM Import/Export to
+import a disk as a snapshot.
 +
 ----
-$ aws ec2 import-image --disk-containers file://containers.json --region BUCKET_REGION
+$ aws ec2 import-snapshot --disk-containers file://containers.json
 ----
 +
-. Check the progress of your imported image by running the following command:
+. Check the progress of your snapshot import by running the following command:
 +
 ----
- $ aws ec2 describe-import-image-tasks --region BUCKET_REGION --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
+ $ aws ec2 describe-import-snapshot-tasks --import-task-ids import-ami-AMI_ID_GOT_FROM_RESPONSE
 ----
 +
-
+. Create an AMI from the snapshot. See the link://docs.aws.amazon.com[AWS documentation] on
+using options with the following command to create and register a Linux AMI from a snapshot.
++
+----
+ $ aws ec2 register-image
+----
 

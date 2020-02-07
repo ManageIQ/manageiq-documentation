@@ -334,7 +334,7 @@ endif::cfme[]
 [[help-menu]]
 ===== Customizing the Help Menu
 
-{product-title} allows administrators to customize the help menu. Use this feature to define menu labels, URLs and how each window opens for users. 
+{product-title} allows administrators to customize the help menu. Use this feature to define menu labels, URLs and how each window opens for users.
 
 [NOTE]
 ====
@@ -346,8 +346,8 @@ Customize the help menu using the following steps:
 . Click image:config-gear.png[] (*Configuration*).
 . Click on the *Settings* accordion, then *Region*.
 . Click on the *Help Menu* tab.
-. Provide custom *Menu item labels* and an associated *URL* for each. Define how each window should open by selecting from the options in the *Open in* menu. 
-. Click *Submit*. 
+. Provide custom *Menu item labels* and an associated *URL* for each. Define how each window should open by selecting from the options in the *Open in* menu.
+. Click *Submit*.
 
 [[profiles]]
 ==== Profiles
@@ -1724,7 +1724,6 @@ Table: server
 |role|Specify the roles for this {product-title} Server, separated by commas without spaces. The possible values are automate, database_operations, ems_inventory, ems_metrics_collector, ems_metrics_coordinator, ems_metrics_processor, ems_operations, event, notifier, reporting, scheduler, smartproxy, smartstate, user_interface, web_services. This is the same as Server Roles in Configuration-Operations- Server- Server Control. Default: database_operations, event, reporting, scheduler, smartstate, ems_operations, ems_inventory, user_interface, web_services
 |session_store|Where to store the session information for all web requests. The possible values are sql, memory, or cache. SQL stores the session information in the database regardless of the type of database server. Memory stores all the session information in memory of the server process. Cache stores the information in a memcache server. Default: cache
 |startup_timeout|The amount of time in seconds that the server will wait and prevent logins during server startup before assuming the server has timed out starting and will redirect the user to the log page after login. Default: 300
-|timezone|Set the timezone for the {product-title} appliance. Default: UTC
 |vnc_port|If using VNC for remote console, the port used by VNC. Default: 5800
 |zone|Set the Zone for this appliance belongs. This is the same as Zone in Configuration-Operations- Server-Basic Information. Default : default
 |:worker_monitor|Starts and monitors the workers. Parameters specified here will override those set in the workers:default section.
@@ -1981,11 +1980,11 @@ If you change the *Time Zone*, you will need to reset the stating date and time.
 
 [NOTE]
 ====
-Set `wal_keep_segments` parameter to a value that ensures {product-title_short} scheduled backups finish. Create a test backup using a value based on the calculation: 
+Set `wal_keep_segments` parameter to a value that ensures {product-title_short} scheduled backups finish. Create a test backup using a value based on the calculation:
 
-*(<pg-volume-free-space>MB/4)/16MB*. 
+*(<pg-volume-free-space>MB/4)/16MB*.
 
-Measure free space in MB and ensure the denominator matches in units. 
+Measure free space in MB and ensure the denominator matches in units.
 
 Setting `wal_keep_segments` to this value will cause the transaction log to occupy, at a minimum, one quarter of the current free space. Adjust your calculation accordingly upon successful testing.
 ====
@@ -1996,7 +1995,7 @@ To set the `wal_keep_segments` value:
 . Access the database
 +
 -----
-# psql DBNAME USERNAME 
+# psql DBNAME USERNAME
 -----
 +
 . Set the `wal_keep_segments` value
@@ -2011,7 +2010,7 @@ postgres=# ALTER SYSTEM SET wal_keep_segments = <value>;
 postgres=# SELECT pg_reload_conf();
 -----
 
-On successful backup, revise the value for `wal_keep_segments` to save space based on transaction log size. 
+On successful backup, revise the value for `wal_keep_segments` to save space based on transaction log size.
 
 To schedule a database backup:
 
@@ -2087,7 +2086,7 @@ Export:
 ./var/www/miq/vmdb/tools/import_export_schedules.rb -s 158
 ----
 
-Note that the `import_export_schedules.rb` script works for all types of schedules, including: 
+Note that the `import_export_schedules.rb` script works for all types of schedules, including:
 
 * Report
 * Policy
@@ -2250,7 +2249,7 @@ To create a user group:
 . Enter a name for the group in the *Name* field. To ensure compatibility with tags, use underscores in place of spaces. For example, {product-title}-`test_group`.
 . Select a *Role* to map to this group. For a description of each {product-title_short} role, see xref:account-roles-and-descriptions[].
 . Select the *Project/Tenant* this group must belong to.
-. Limit what users in this group can view by selecting filters in the *Assign Filters* area. 
+. Limit what users in this group can view by selecting filters in the *Assign Filters* area.
 .. Click the *<My Company> Tags* tab to select the tags that users in this group can access. Resources with the selected tags attached can be accessed by this group. Select tags using one of the options in the *This user is limited to* list:
 * Select *Specific Tags*, then check the boxes for the tags that you want to limit this user to. The items that have changed will show in blue italicized font.
 * Select *Tags Based On Expression*, then create tags based on an expression using AND, OR, or NOT. This allows you to further limit the resources accessible to a user: for example, to specify a combination of tags that must exist on a resource.
@@ -2275,7 +2274,7 @@ image:CloudForms_General_Config_Roles_460469_1017_JCS.png[]
 
 [NOTE]
 ====
-If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service. 
+If you have enabled *Get Role from LDAP* under *LDAP Settings*, then the role is determined by the LDAP user's group membership in the directory service.
 ifdef::cfme[]
 See https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_authentication_for_cloudforms/#ldap_config[Configuring LDAP or LDAPS Authentication] in _Managing Authentication_.
 endif::cfme[]
@@ -2873,13 +2872,13 @@ image:add-subscription-global.png[Add Subscription]
 ====
 Once you configure a {product-title} instance to act as a global copy, and one or more other instances to act as remote copies:
 * centralized administration is automatically enabled after the initial data sync is complete.
-* you will see the type of region you are logging into (global or remote) on the {product-title_short} user interface login screen. 
+* you will see the type of region you are logging into (global or remote) on the {product-title_short} user interface login screen.
 ====
 
 Database replication and centralized administration are now enabled on your instances. To open virtual machines of a remote region from the global region and perform required operations:
 
-. Navigate to menu:Compute[Infrastructure > Virtual Machines], then click *VMs & Templates* and select a virtual machine in the global region. 
-. In the *Multi Region* table on the summary screen, click *Connect to VM in its Region* to perform required operations in a new browser tab. 
+. Navigate to menu:Compute[Infrastructure > Virtual Machines], then click *VMs & Templates* and select a virtual machine in the global region.
+. In the *Multi Region* table on the summary screen, click *Connect to VM in its Region* to perform required operations in a new browser tab.
 
 
 [[resetting-database-replication]]
@@ -2911,7 +2910,7 @@ You can reset the replication relationship between the global copy and remote co
 [[running-a-single-database-backup]]
 ===== Running a Single Database Backup
 
-{product-title} supports database backups to *Network File System (NFS)*, *Samba*, *Amazon Web Service(AWS) S3* and *OpenStack Swift* storage. 
+{product-title} supports database backups to *Network File System (NFS)*, *Samba*, *Amazon Web Service(AWS) S3* and *OpenStack Swift* storage.
 
 [NOTE]
 ====
@@ -3003,7 +3002,7 @@ A PostgreSQL superuser or user with _Replication_ permissions are required to pe
 
 [NOTE]
 ====
-*-h* _hostname_ specifies the IP address of the database server. 
+*-h* _hostname_ specifies the IP address of the database server.
 
 *-D* _filename_ specifies the name of the directory created to contain the backup.
 ====
@@ -3227,5 +3226,3 @@ To configure a new database maintenance schedule, enter the *Configure Database 
 
 ==== Creating a Database Dump
 include::common/database-dumps.adoc[]
-
-

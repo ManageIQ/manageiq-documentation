@@ -1,0 +1,27 @@
+// Module included in the following assemblies:
+//
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
+[id="Installing_osp-{context}"]
+= Installing and configuring Red Hat OpenStack Platform 13 or later
+
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/director_installation_and_usage/[Red Hat OpenStack Platform].
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/networking_guide/#create_a_network[Create provider networks] for the target instances to preserve the IP addresses of the source virtual machines.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/users_and_identity_management_guide/#create_a_project[Create a project] for the conversion hosts and any target projects you require for the target instances.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/users_and_identity_management_guide/#edit_a_project[Ensure that the `admin` user has `member` and `admin` roles] in the conversion host and target projects.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/storage_guide/#section-create-volume[Create a volume] and link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/storage_guide/#section-volume-retype[set at least one volume type] for the target block storage. Otherwise, CloudForms will not detect the storage when you create the infrastructure mapping.
+
+. Ensure that the storage backends have sufficient space for the migrated virtual machines.
++
+[IMPORTANT]
+====
+If you are using Red Hat Ceph Storage, you will require three times the space of the source virtual machines for the migrated virtual machines. A Ceph storage cluster, by default, link:https://access.redhat.com/documentation/en-us/red_hat_ceph_storage/3/html-single/architecture_guide/index#concept-arch-data-copies-arch[creates two copies of an object in a replicated storage pool], for a total of three copies.
+
+The migrated disks use all of the space because it is preallocated. For example, a source virtual machine with a 100 GB disk requires 300 GB of storage, regardless of how much data the disk actually contains. To save storage space, you can use the `fstrim` command on the migrated virtual machines as a postmigration task or playbook.
+====
+
+. Create flavors for the source virtual machines. If you do not create custom flavors, CloudForms will try to map each source virtual machine to an existing flavor.

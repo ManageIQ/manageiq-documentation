@@ -1,6 +1,6 @@
 # ManageIQ Documentation
 
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq_docs.svg?branch=master)](https://travis-ci.org/ManageIQ/manageiq_docs)
+[![Build Status](https://travis-ci.org/ManageIQ/manageiq_docs.svg?branch=jansa)](https://travis-ci.org/ManageIQ/manageiq_docs)
 [![Gitter](https://badges.gitter.im/ManageIQ/manageiq_docs.svg)](https://gitter.im/ManageIQ/manageiq_docs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 This repo contains the documentation for

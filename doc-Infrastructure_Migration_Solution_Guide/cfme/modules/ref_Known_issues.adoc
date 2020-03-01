@@ -7,27 +7,11 @@
 The following are known issues:
 
 ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
-* BZ#1698761: link:https://bugzilla.redhat.com/show_bug.cgi?id=1698761["Maximum concurrent migrations per conversion host" interface control does not work]
-
-* BZ#716283: link:https://bugzilla.redhat.com/show_bug.cgi?id=1716283[Migrating virtual machines are not distributed correctly among the conversion hosts]
-
 * BZ#1709211: link:https://bugzilla.redhat.com/show_bug.cgi?id=1709211#c2[ESXi 5.5 requires VDDK version 6.7.0]
-
-* CloudForms CFME 5.10.4 does not support migration. Use CFME 5.10.3.
 endif::[]
-
-* BZ#1678385: link:https://bugzilla.redhat.com/show_bug.cgi?id=1678385[Virtual machine with name containing spaces ('rhel 7') fails to migrate]
-
-* BZ#1699343: link:https://bugzilla.redhat.com/show_bug.cgi?id=1699343[Migration plan CSV import validation does not work if file contains empty/archived/orphan/invalid VM name]
 
 * BZ#1726939: link:https://bugzilla.redhat.com/show_bug.cgi?id=1726939[Run the preflight check of migration task before waiting for a conversion host]. Currently, the preflight check that monitors the migration is performed after a conversion host is assigned to the task. As a result, the total volume of the Datastores reported in *Migration Plans In Progress* reflects the total volume of the virtual machines that are currently migrating, not the total volume of the migration plan. When all the virtual machines have started to migrate, the correct value of the total volume is displayed.
 
-ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
-* BZ#1666799: link:https://bugzilla.redhat.com/show_bug.cgi?id=1666799[Canceling a migration does not stop creating virtual machines on RHV]. If you cancel a migration, you must delete migrated virtual machines and disks in the Administration Portal.
+* BZ#1791802: link:https://bugzilla.redhat.com/show_bug.cgi?id=1791802[virt-v2v does not install qemu-ga on EL8 guest]. Currently, when migrating a Red Hat Enterprise Linux 8 virtual machine, the Qemu guest agent is not installed. The impact is that the IP address of the virtual machine will not be reported in RHV inventory, and the post-migration playbook inventory will contain only "localhost". This may lead to unexpected behavior of the playbook. We recommend to not associate a post-migration playbook to Red Hat Enterprise Linux 8 virtual machines in a migration plan.
 
-* BZ#1669176: link:https://bugzilla.redhat.com/show_bug.cgi?id=1669176[Refreshing the hosts causes the network(s) and datastore to disappear from infrastructure mappings]
-endif::[]
-
-ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-* BZ#1668049: link:https://bugzilla.redhat.com/show_bug.cgi?id=1668049[Instance is not created after disk conversion]
-endif::[]
+ this will be solved in virt-v2v-1.40.2-21.module+el8.2.0+5851+8d6a931b.x86_64.rpm, planned to be released with RHEL AV 8.2.0, i.e. in May.

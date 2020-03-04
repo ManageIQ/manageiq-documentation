@@ -5,32 +5,35 @@
 [id="Creating_a_rhel_premigration_playbook_{context}"]
 = Creating a `RHEL premigration` playbook for RHEL/Linux source virtual machines
 
-If you are migrating virtual machines running RHEL or other Linux operating system, you can create a `RHEL premigration` playbook to ensure that the IP addresses are accessible after migration. The `RHEL premigration` playbook calls the Ansible `ims.rhel_premigration` role.
+If you are migrating virtual machines running RHEL or other Linux operating systems, you must create a `RHEL premigration` playbook to call the Ansible `ims.rhel_premigration` role.
 
-To install the role with Ansible Galaxy, see link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[ims_rhel_pre_migration]. This role is not included in the IMS installation.
+The `ims.rhel_premigration` role ensures that the virtual machine IP addresses are accessible after migration.
 
-ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
-The `ims.rhel_premigration` role performs the following tasks on the migrating VMware virtual machines:
+.Prerequisites
 
-* Preserves the static IP addresses
-* Installs the Red Hat Virtualization guest agent, which reports the IP addresses and installed applications to the Manager
-endif::[]
-ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-The `ims.rhel_premigration` role preserves the static IP addresses of the migrating VMware virtual machines.
-endif::[]
+* The `rhel-<version>-server-rpms` repository must be enabled for the source virtual machines. If you have disabled it, you can re-enable it in the RHEL premigration playbook.
 
-[NOTE]
-====
-The `ims.rhel_premigration` role assumes that either the `rhel-6-server-rpms` or the `rhel-7-server-rpms` repository is enabled in the source virtual machine when it installs `qemu-guest-agent`.
+.Procedure
 
-If you have disabled the repository, you must re-enable it in the RHEL premigration playbook.
-====
-
-.`RHEL premigration` playbook example
+. link:https://galaxy.ansible.com/fdupont_redhat/ims_rhel_pre_migration[Install the `ims.rhel_premigration` role] with Ansible Galaxy.
+. Create a `RHEL premigration` playbook according to the following example:
++
 [source,yml]
 ----
 ---
-- hosts: all
+- hosts: to_be_migrated
+  vars:
+    rhsm_config: <1>
+      server_hostname: "server.example.com"
+      server_username: "admin"
+      server_password: "secret" <2>
+      org_id: "my_organization"
+    rhsm_repositories:
+      - "rhel-<version>-server-rpms"
   roles:
     - role: ims.rhel_pre_migration
 ----
+<1> Specify the configuration parameters for your environment.
+<2> Passwords and other sensitive information should be encrypted with Ansible vault.
+
+You will add this playbook when you create your migration plan.

@@ -1,0 +1,35 @@
+// Module included in the following assemblies:
+// doc-Migration_Analytics_Guide/cfme/master.adoc
+[id='Combining-inventory-files-into-a-single-file_{context}']
+= Combining inventory files into a single file
+
+You can combine multiple inventory files, for example, from different data centers, into a single file in order to generate a single Migration Analytics report.
+
+.Prerequisites
+
+* You have downloaded several inventory files to your local machine.
+
+.Procedure
+
+. Log in to the CloudForms machine.
+. Create a common directory for the extracted inventory files:
++
+----
+# mkdir inventory_files
+----
+
+. Extract each inventory file to the common directory:
++
+----
+# tar -xvf <inventory_file_name>.tar.gz -C inventory_files/ <1>
+----
+<1> Specify the inventory file name.
+
+. Create a new archive file for the inventory files:
++
+----
+# tar -czvf <new_archive>.tar.gz inventory_files/ <1>
+----
+<1> Specify the new archive file name.
+
+You can browse to the new archive file when you create a Migration Analytics report.

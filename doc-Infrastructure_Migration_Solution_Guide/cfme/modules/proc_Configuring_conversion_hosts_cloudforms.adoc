@@ -2,29 +2,43 @@
 //
 // IMS_1.2/master.adoc
 [id="Configuring_conversion_hosts_cloudforms_{context}"]
-ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
-= Configuring the conversion hosts for VDDK transformation
+ifdef::rhv_1-2_vddk,rhv_1-3_vddk[]
+= Configuring the Red Hat Virtualization conversion hosts for VDDK transformation
+
+You can configure the Red Hat Virtualization (RHV) conversion hosts for VDDK transformation in the CloudForms user interface.
 endif::[]
-ifdef::rhv_1-2_ssh,osp_1-2_ssh,rhv_1-3_ssh,osp_1-3_ssh[]
-= Configuring the conversion hosts for SSH transformation
+ifdef::osp_1-2_vddk,osp_1-3_vddk[]
+= Configuring the Red Hat OpenStack Platform conversion hosts for VDDK transformation
+
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for VDDK transformation in the CloudForms user interface.
+endif::[]
+ifdef::rhv_1-2_ssh,rhv_1-3_ssh[]
+= Configuring the Red Hat Virtualization conversion hosts for SSH transformation
+
+You can configure the Red Hat Virtualization (RHV) conversion hosts for SSH transformation in the CloudForms user interface.
+endif::[]
+ifdef::osp_1-2_ssh,osp_1-3_ssh[]
+= Configuring the Red Hat Virtualization conversion hosts for SSH transformation
+
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for SSH transformation in the CloudForms user interface.
 endif::[]
 
 ifdef::rhv_1-2_vddk,rhv_1-2_ssh[]
 .Prerequisites
 
-* If the Red Hat Virtualization provider has been active for a while, verify that each host has valid subscriptions and repositories by logging in using SSH and running the following commands:
+* If the RHV provider has been active for a while, verify that each host has valid subscriptions and repositories by logging in using SSH and running the following commands:
 +
 ----
 # subscription-manager list --consumed
 # yum repolist
 ----
 
-* If a host has an SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
+* If a RHV host has an existing SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
 endif::[]
 
 .Procedure
 
-. In CloudForms, click menu:Compute[Migration > Migration Settings].
+. In CloudForms, click *Compute* -> *Migration* -> *Migration Settings*.
 . In the *Conversion Hosts* tab, click *Configure Conversion Host*. The *Configure Conversion Host* wizard is displayed.
 +
 image:Conversion_host_configuration_ui.png[]
@@ -49,13 +63,13 @@ ifdef::rhv_1-2_vddk[]
 The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 endif::[]
 ifdef::osp_1-2_vddk[]
-The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
+RHOSP uses a private SSH key to connect to the conversion hosts.
 endif::[]
 ifdef::rhv_1-2_ssh[]
 The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 endif::[]
 ifdef::osp_1-2_ssh[]
-The Red Hat OpenStack Platform user uses a private SSH key to connect to the conversion hosts.
+RHOSP uses a private SSH key to connect to the conversion hosts.
 endif::[]
 ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
 .. Select *VDDK* as the *Transformation method*.
@@ -71,7 +85,7 @@ endif::[]
 +
 The configured conversion hosts and status information, including error messages, appear in the *Configured Conversion Hosts* list.
 
-If an error occurs, you can download a host's log by clicking the *More Actions* icon (image:More_actions_icon.png[7]) and selecting *Download Log*.
+If an error occurs, you can download the conversion host configuration log by clicking the *More Actions* icon (image:More_actions_icon.png[7]) and selecting *Download Log*.
 
 You can click *Retry* if the conversion host configuration failed for reasons unconnected with your environment.
 

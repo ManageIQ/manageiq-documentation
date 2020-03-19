@@ -5,11 +5,11 @@
 [id="Creating_osp_conversion_hosts"]
 = Creating the Red Hat OpenStack Platform conversion hosts
 
-You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
+You can create the Red Hat OpenStack Platform (RHOSP) conversion hosts with the conversion appliance. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
 
 [NOTE]
 ====
-For optimal performance, deploy conversion hosts on compute nodes with link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization enabled]. Nested virtualization is a technology preview.
+For optimal performance, deploy the conversion hosts on compute nodes with link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization enabled]. Nested virtualization is a technology preview.
 ====
 
 .Procedure
@@ -26,7 +26,7 @@ ifdef::osp_1-2_vddk,osp_1-3_vddk[]
 . In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.3 (x86_64)` (or later), click *Download Now*, and save the image.
 endif::[]
 
-. Upload the image to Red Hat OpenStack Platform.
+. Upload the image to Glance storage.
 . link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the image] as a conversion host instance, with the following resources:
 +
 ** 4 vCPUs
@@ -45,11 +45,11 @@ You must resize `lv_root` to use all available disk space because the image will
 ====
 
 ifdef::osp_1-1_vddk[]
-. Add each conversion host's private SSH key to CloudForms:
+. Add each RHOSP conversion host's private SSH key to CloudForms:
 
 .. Log in to the CloudForms user interface.
-.. Click menu:Compute[*Clouds* > Providers].
-.. Select the Red Hat OpenStack Platform provider, click *Configuration* and select *Edit Selected Cloud Provider.*
+.. Click *Compute* -> *Clouds* -> *Providers*.
+.. Select the Red Hat OpenStack Platform provider tile, click *Configuration*, and select *Edit Selected Cloud Provider.*
 .. Click the *RSA key pair* tab in the *Endpoints* section.
 .. Enter the *Username* `cloud-user` and the *Private Key* of the conversion host instance. If you deploy multiple conversion hosts, they must use the same key pair.
 .. Click *Save*.

@@ -11,28 +11,27 @@
 :sectnums:
 :partnums:
 
-
-Red Hat Infrastructure Migration Solution (IMS) 1.1 enables you to migrate virtual machines from VMware{nbsp}5.5 (or later) to Red Hat Virtualization or Red Hat OpenStack Platform, using Red Hat CloudForms.
+Red Hat Infrastructure Migration Solution 1.1 enables you to migrate virtual machines from VMware{nbsp}5.5 (or later) to Red Hat Virtualization or Red Hat OpenStack Platform, using the Red Hat CloudForms user interface.
 
 Red Hat Virtualization 4.2::
-Red Hat Virtualization provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/[Red Hat Virtualization 4.2 documentation] for more information.
+Red Hat Virtualization (RHV) provides a virtualization platform built on Red Hat Enterprise Linux (RHEL). You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/[RHV 4.2 documentation] for more information.
 +
 See xref:Migrating_from_vmware_to_rhv_1-1_vddk[].
 
 Red Hat OpenStack Platform 13 (or later)::
-Red Hat OpenStack Platform provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform[Red Hat OpenStack Platform documentation] for more information.
+Red Hat OpenStack Platform (RHOSP) provides a scaleable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux (RHEL). See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform[RHOSP documentation] for more information.
 +
 See xref:Migrating_from_vmware_to_osp_1-1_vddk[].
 
 Red Hat CloudForms 4.7::
-Red Hat CloudForms is the environment in which you perform the migration. Red Hat CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[Red Hat CloudForms 4.7 documentation] for more information.
+Red Hat CloudForms is the environment in which you perform the migration. CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[CloudForms 4.7 documentation] for more information.
 
 :context: rhv_1-1_vddk
 :rhv_1-1_vddk:
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat Virtualization
 
-This guide describes how to plan your migration, to prepare the VMware source and Red Hat target environments, and to migrate the virtual machines.
+This guide describes how to plan your migration, to prepare the VMware and Red Hat Virtualization (RHV) environments, and to migrate your VMware virtual machines.
 
 [id='Understanding_the_migration_{context}']
 == Understanding the migration
@@ -43,8 +42,6 @@ include::modules/con_Migration_network_requirements.adoc[leveloffset=+2]
 [id='Planning_the_migration_{context}']
 == Planning the migration
 
-During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000{nbsp}virtual machines, with 200{nbsp}TB of data, in less than 6 months".
-
 This section provides guidelines for planning your migration.
 
 include::modules/ref_Questions_to_ask_before_migration.adoc[leveloffset=+2]
@@ -53,14 +50,14 @@ include::modules/ref_Optimizing_your_migration.adoc[leveloffset=+2]
 [id="Preparing_the_migration_environment_{context}"]
 == Preparing the migration environment
 
-You must prepare the VMware source and Red Hat Virtualization target environments.
+You can prepare the VMware source and RHV target environments for migration.
 
 The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_rhv_1-1_ssh[SSH transformation] is a fallback option.
 
 [id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
 
-You must prepare the VMware network and virtual machines for migration.
+You can prepare the VMware network and virtual machines for migration.
 
 If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must configure the hypervisor.
 
@@ -69,9 +66,9 @@ include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
 include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
 
 [id='Preparing_the_rhv_environment_{context}']
-=== Preparing the Red Hat Virtualization environment
+=== Preparing the Red Hat environment
 
-You must install and configure Red Hat Virtualization and CloudForms and deploy the conversion hosts.
+You can install and configure Red Hat Virtualization (RHV) and CloudForms for migration.
 
 include::modules/ref_Target_prerequisites.adoc[leveloffset=+3]
 include::modules/proc_Installing_configuring_rhv.adoc[leveloffset=+3]
@@ -80,11 +77,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts-{context}']
 === Deploying the Red Hat Virtualization conversion hosts
 
-Deploying the conversion hosts involves the following tasks:
-
-. Downloading the VMware Virtual Disk Development Kit (VDDK)
-. Configuring and verifying the conversion hosts with Ansible playbooks
-. Authenticating the conversion hosts in CloudForms
+You can download VDDK, configure the Red Hat Virtualization (RHV) conversion hosts with Ansible playbooks, and authenticate the conversion hosts in CloudForms.
 
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
 include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+3]
@@ -93,11 +86,7 @@ include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+3]
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
-Migrating the virtual machines involves the following steps:
-
-. Checking for migration conditions that have prerequisites
-. Creating an infrastructure mapping to map the resources of your source and target environments
-. Creating and running a migration plan in CloudForms
+You can create an infrastructure mapping and create and run a migration plan in the CloudForms user interface.
 
 Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations_{context}[change the maximum number of concurrent migrations for conversion hosts or providers] to control the migration process.
 
@@ -142,7 +131,7 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 [id='Configuring_environment_for_ssh_transformation_rhv_1-1_ssh']
 == Configuring the Red Hat Virtualization environment for SSH transformation
 
-You can configure your environment for SSH transformation if you cannot use VDDK.
+You can configure your Red Hat Virtualization (RHV) environment for SSH transformation if you cannot use VDDK.
 
 [NOTE]
 ====
@@ -162,18 +151,18 @@ a|Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
-The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_ansible_rhv_1-1_ssh[Configuring the conversion hosts for SSH transformation].
+The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_ansible_rhv_1-1_ssh[Configuring the RHV conversion hosts for SSH transformation].
 
 |After xref:Installing_configuring_rhv_rhv_1-1_vddk[Installing and configuring Red Hat Virtualization]
 |If the conversion hosts are using SSSD with single sign-on, go to xref:Reinstalling_ipa_client_{context}[Reinstalling `ipa-client`]
 
-|Instead of xref:Configuring_conversion_hosts_ansible_rhv_1-1_vddk[Configuring the conversion hosts for VDDK transformation]
+|Instead of xref:Configuring_conversion_hosts_ansible_rhv_1-1_vddk[Configuring the RHV conversion hosts for VDDK transformation]
 a|Go to:
 
-* xref:Configuring_conversion_hosts_ansible_rhv_1-1_ssh[Configuring the conversion hosts for SSH transformation]
+* xref:Configuring_conversion_hosts_ansible_rhv_1-1_ssh[Configuring the RHV conversion hosts for SSH transformation]
 * xref:Copying_vmware_ssh_keys_to_conversion_hosts_{context}[Copying the VMware SSH keys to the conversion hosts]
 * xref:Configuring_secure_remote_login_to_the_vmware_hypervisors_{context}[Configuring secure remote login to the VMware hypervisors]
-* xref:Authenticating_conversion_hosts_in_cloudforms_rhv_1-1_vddk[Authenticating the Red Hat Virtualization conversion hosts in CloudForms], in xref:Preparing_the_migration_environment_rhv_1-1_vddk[Preparing the migration environment]
+* xref:Authenticating_conversion_hosts_in_cloudforms_rhv_1-1_vddk[Authenticating the RHV conversion hosts in CloudForms], in xref:Preparing_the_migration_environment_rhv_1-1_vddk[Preparing the migration environment]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]
@@ -188,7 +177,7 @@ include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat OpenStack Platform
 
-This guide describes how to plan your migration, to prepare the VMware source and Red Hat target environments, and to migrate the virtual machines.
+This guide describes how to plan your migration, to prepare the VMware and Red Hat OpenStack Platform (RHOSP) environments, and to migrate the virtual machines.
 
 == Understanding the migration
 
@@ -196,8 +185,6 @@ include::modules/con_Migration_workflow.adoc[leveloffset=+2]
 include::modules/con_Migration_network_requirements.adoc[leveloffset=+2]
 
 == Planning the migration
-
-During the planning phase, you will formulate a specific migration goal, for example, "I want to migrate 2000{nbsp}virtual machines, with 200{nbsp}TB of data, in less than 6 months".
 
 This section provides guidelines for planning your migration.
 
@@ -207,14 +194,14 @@ include::modules/ref_Optimizing_your_migration.adoc[leveloffset=+2]
 [id="Preparing_the_migration_environment_{context}"]
 == Preparing the migration environment
 
-You must prepare the VMware source and Red Hat Virtualization target environments.
+You can prepare the VMware source and Red Hat OpenStack Platform (RHOSP) environments.
 
 The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_osp_1-1_ssh[SSH transformation] is a fallback option.
 
 [id="Preparing_the_vmware_environment_{context}"]
 === Preparing the VMware environment
 
-You must prepare the VMware network and virtual machines for migration.
+You can prepare the VMware network and virtual machines for migration.
 
 If you are performing more than ten concurrent migrations from a single VMware hypervisor, you must configure the hypervisor.
 
@@ -222,9 +209,9 @@ include::modules/proc_Preparing_the_vmware_network.adoc[leveloffset=+3]
 include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
 include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
 
-=== Preparing the Red Hat OpenStack Platform environment
+=== Preparing the Red Hat environment
 
-You must install and configure Red Hat OpenStack Platform and CloudForms and deploy the conversion hosts.
+You can install and configure Red Hat OpenStack Platform (RHOSP) and CloudForms.
 
 include::modules/ref_Target_prerequisites.adoc[leveloffset=+3]
 include::modules/proc_Installing_osp.adoc[leveloffset=+3]
@@ -233,11 +220,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts-{context}']
 === Deploying the Red Hat OpenStack Platform conversion hosts
 
-Deploying the conversion hosts involves the following tasks:
-
-. Creating the conversion hosts from the conversion appliance
-. Downloading the VMware Virtual Disk Development Kit (VDDK)
-. Configuring and verifying the conversion hosts with Ansible playbooks
+You can create the Red Hat OpenStack Platform (RHOSP) conversion hosts, download VDDK, and configure the conversion hosts with Ansible playbooks.
 
 include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+3]
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
@@ -246,11 +229,7 @@ include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+3]
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
-Migrating the virtual machines involves the following steps:
-
-. Checking for migration conditions that have prerequisites
-. Creating an infrastructure mapping to map the resources of your source and target environments
-. Creating and running a migration plan in CloudForms
+You can create an infrastructure mapping and create and run a migration plan in the CloudForms user interface.
 
 Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations_{context}[change the maximum number of concurrent migrations for conversion hosts or providers] to control the migration process.
 
@@ -295,7 +274,7 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 [id='Configuring_environment_for_ssh_transformation_{context}']
 == Configuring the Red Hat OpenStack Platform environment for SSH transformation
 
-You can configure your environment for SSH transformation if you cannot use VDDK.
+You can configure the Red Hat OpenStack Platform (RHOSP) environment for SSH transformation if you cannot use VDDK.
 
 [NOTE]
 ====
@@ -315,13 +294,13 @@ a|Go to xref:Configuring_the_vmware_hypervisors_for_ssh_transformation_{context}
 
 You can collect the SSH keys from the hypervisors at this time, if your security policies allow.
 
-The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_ansible_osp_1-1_ssh[Configuring the conversion hosts for SSH transformation].
+The private key of the SSH key pair that is generated in this step will be used in xref:Configuring_conversion_hosts_ansible_osp_1-1_ssh[Configuring the RHOSP conversion hosts for SSH transformation].
 
-|Instead of xref:Configuring_conversion_hosts_ansible_osp_1-1_vddk[Configuring the conversion hosts for VDDK transformation]
+|Instead of xref:Configuring_conversion_hosts_ansible_osp_1-1_vddk[Configuring the RHOSP conversion hosts for VDDK transformation]
 a|Go to:
 
-* xref:Configuring_conversion_hosts_ansible_osp_1-1_ssh[Configuring the conversion hosts for SSH transformation]
-* xref:Copying_vmware_ssh_keys_to_conversion_hosts_{context}[Copying the VMware SSH keys to the conversion hosts]
+* xref:Configuring_conversion_hosts_ansible_osp_1-1_ssh[Configuring the RHOSP conversion hosts for SSH transformation]
+* xref:Copying_vmware_ssh_keys_to_conversion_hosts_{context}[Copying the VMware SSH keys to the RHOSP conversion hosts]
 |===
 
 include::modules/proc_Configuring_the_vmware_hypervisors_for_ssh_transformation.adoc[leveloffset=+2]

@@ -3,9 +3,9 @@
 // IMS_1.1/master.adoc
 // IMS_1.2/master.adoc
 [id="Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations_{context}"]
-= Configuring a VMware hypervisor for more than ten concurrent migrations
+= Configuring a VMware hypervisor for more than 10 concurrent migrations
 
-If you are performing more than ten concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor's NFC service memory buffer is limited to ten parallel connections. See link:https://code.vmware.com/docs/1674/virtual-disk-programming-guide/doc/vddkDataStruct.5.5.html#1025227[VMware Virtual Disk Programming Guide NFC session connection limits] and link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[Virt-v2v. VDDK: ESXi NFC service memory limits] for details.
+If you are performing more than 10 concurrent migrations from a VMware hypervisor using VDDK transformation, the migration will fail because the hypervisor's NFC service memory buffer is limited to 10 parallel connections. See link:https://code.vmware.com/docs/1674/virtual-disk-programming-guide/doc/vddkDataStruct.5.5.html#1025227[VMware Virtual Disk Programming Guide NFC session connection limits] and link:http://libguestfs.org/virt-v2v.1.html#vddk:-esxi-nfc-service-memory-limits[Virt-v2v. VDDK: ESXi NFC service memory limits] for details.
 
 You can increase the hypervisor's NFC service memory to enable additional connections for migrations.
 
@@ -14,19 +14,20 @@ You can increase the hypervisor's NFC service memory to enable additional connec
 . Log in to a VMware hypervisor as root.
 . Change the value of `maxMemory` to `1000000000` in `/etc/vmware/hostd/config.xml`:
 +
-[options="nowrap" subs="+quotes,verbatim"]
+[source,xml]
 ----
+...
       <nfcsvc>
          <path>libnfcsvc.so</path>
          <enabled>true</enabled>
          <maxMemory>1000000000</maxMemory>
          <maxStreamMemory>10485760</maxStreamMemory>
       </nfcsvc>
+...
 ----
 
 . Restart `hostd`:
 +
-[options="nowrap" subs="+quotes,verbatim"]
 ----
 # /etc/init.d/hostd restart
 ----

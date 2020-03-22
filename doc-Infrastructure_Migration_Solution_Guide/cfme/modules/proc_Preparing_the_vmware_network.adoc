@@ -2,17 +2,20 @@
 //
 // IMS_1.1/master.adoc
 // IMS 1.2/master.adoc
+// IMS 1.3/master.adoc
 [id="Preparing_the_vmware_network_{context}"]
 = Preparing the VMware network
 
-Extend the VMware network to your Red Hat environment.
+You can prepare the VMware network for migration:
 
+ifdef::rhv_1-1,rhv_1-2,rhv_1-3[]
+* Extend the VMware network to your Red Hat Virtualization environment.
+endif::[]
+ifdef::osp_1-1,osp_1-2,osp_1-3[]
+* Extend the VMware network to your Red Hat OpenStack Platform environment.
+endif::[]
 ifdef::rhv_1-3_vddk[]
-Ensure that the VMware network provides high throughput (10 GbE) and does not affect production virtual machines (for example, a backup network).
+* Ensure that the VMware network provides high throughput (10 GbE) and does not affect production virtual machines (for example, a backup network).
 endif::[]
 
-[IMPORTANT]
-====
-* The network configuration must not be changed in any way during the migration.
-* IP addresses, VLANs, and other network configuration must not be changed before or after migration because the conversion process preserves the source virtual machine MAC addresses.
-====
+* Ensure that IP addresses, VLANs, and other network configuration settings are not changed before or after migration. The migration process preserves the VMware virtual machines' MAC addresses.

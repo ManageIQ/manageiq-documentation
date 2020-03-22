@@ -5,13 +5,13 @@
 [id="Creating_a_rhel_premigration_playbook_{context}"]
 = Creating a `RHEL premigration` playbook for RHEL/Linux virtual machines
 
-If you are migrating virtual machines running RHEL or other Linux operating systems, you must create and run a `RHEL premigration` playbook to call the Ansible `ims.rhel_premigration` role.
+If you are migrating a virtual machine running RHEL or other Linux operating system, you must create and run a `RHEL premigration` playbook to call the Ansible `ims.rhel_premigration` role.
 
 The `ims.rhel_premigration` role ensures that the virtual machine IP addresses are accessible after migration.
 
 .Prerequisites
 
-* The `rhel-<version>-server-rpms` repository must be enabled for the source virtual machines. If you have disabled it, you can re-enable it in the RHEL premigration playbook.
+* The `rhel-<version>-server-rpms` repository must be enabled for the VMware virtual machines. If you have disabled it, you can re-enable it in the RHEL premigration playbook.
 
 .Procedure
 
@@ -24,10 +24,11 @@ The `ims.rhel_premigration` role ensures that the virtual machine IP addresses a
 - hosts: <hosts> <1>
   vars:
     rhsm_repositories:
-      - "rhel-<version>-server-rpms"
+      - "rhel-<version>-server-rpms" <2>
   roles:
     - role: ims.rhel_pre_migration
 ----
-<1> Specify the hosts on which you are running this playbook.
+<1> Specify the VMware hosts on which you are running this playbook.
+<2> Specify the RHEL version.
 
 You will add this playbook when you create your migration plan.

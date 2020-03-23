@@ -2,25 +2,38 @@
 //
 // IMS_1.1/master.adoc
 [id="Configuring_conversion_hosts_ansible_{context}"]
-ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
-= Configuring the conversion hosts for VDDK transformation
+ifdef::rhv_1-1_vddk[]
+= Configuring the Red Hat Virtualization conversion hosts for VDDK transformation
+
+You can configure the Red Hat Virtualization (RHV) conversion hosts for VDDK transformation with Ansible playbooks.
 endif::[]
-ifdef::rhv_1-1_ssh,osp_1-1_ssh[]
-= Configuring the conversion hosts for SSH transformation
+ifdef::osp_1-1_vddk[]
+= Configuring the Red Hat OpenStack Platform conversion hosts for VDDK transformation
+
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for VDDK transformation with Ansible playbooks.
+endif::[]
+ifdef::rhv_1-1_ssh[]
+= Configuring the Red Hat Virtualization conversion hosts for SSH transformation
+
+You can configure the Red Hat Virtualization (RHV) conversion hosts for SSH transformation with Ansible playbooks.
+endif::[]
+ifdef::,osp_1-1_ssh[]
+= Configuring the Red Hat OpenStack Platform conversion hosts for SSH transformation
+
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for SSH transformation with Ansible playbooks.
 endif::[]
 
-You must configure and verify the conversion hosts with Ansible playbooks.
 
 .Prerequisites
 
-* If you are configuring a previously configured host, first remove its existing entry in the CloudForms database with the `conversion_host_disable` playbook, to avoid multiple entries for the same host:
+* If you are configuring a previously configured host, you must remove its existing entry in the CloudForms database with the `conversion_host_disable` playbook, to avoid multiple entries for the same host:
 +
 ----
 $ ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml
 ----
 
 ifdef::rhv_1-1_vddk,rhv_1-1_ssh[]
-* If a host already has an SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
+* If the RHV host has an existing SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
 endif::[]
 
 .Procedure
@@ -29,7 +42,7 @@ ifdef::rhv_1-1_vddk,rhv_1-1_ssh[]
 . Log in to the Manager machine using SSH.
 endif::[]
 ifdef::osp_1-1_vddk,osp_1-1_ssh[]
-. Log in to a conversion host.
+. Log in to a RHOSP conversion host.
 endif::[]
 . Install the `ovirt-ansible-v2v-conversion-host` package:
 +

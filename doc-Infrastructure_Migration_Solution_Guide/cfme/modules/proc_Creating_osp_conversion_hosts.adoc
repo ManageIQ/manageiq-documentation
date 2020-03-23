@@ -2,8 +2,10 @@
 //
 // IMS_1.1/master.adoc
 // IMS_1.2/master.adoc
-[id="Creating_osp_conversion_hosts"]
-= Creating the Red Hat OpenStack Platform conversion hosts
+// IMS_1.3/master.adoc
+[id="Creating_osp_conversion_hosts_{context}"]
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
+= Creating a Red Hat OpenStack Platform conversion host
 
 You can create the Red Hat OpenStack Platform (RHOSP) conversion hosts with the conversion appliance. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
 
@@ -12,19 +14,26 @@ You can create the Red Hat OpenStack Platform (RHOSP) conversion hosts with the 
 For optimal performance, deploy the conversion hosts on compute nodes with link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization enabled]. Nested virtualization is a technology preview.
 ====
 
+[NOTE]
+====
+For optimal performance, enable link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization] for the compute nodes on which the conversion hosts are deployed. Nested virtualization is a technology preview.
+====
+
 .Procedure
 
-. Navigate to link:https://access.redhat.com/downloads/[Red Hat Product Downloads].
-. In the *A-Z* tab, click *Red Hat OpenStack Platform*.
-. Click *Download Latest*.
-. Select `14.0` from the *Version* list.
+. Log in to Red Hat OpenStack Platform.
 
-ifdef::osp_1-1_vddk[]
-. In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.2 (x86_64)`, click *Download Now*, and save the image.
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-upload-image[Upload the V2V image] to the OpenStack Image Service.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the conversion host instance], specifying the following options:
+
+* *Instance Boot Source*: V2V image
 endif::[]
-ifdef::osp_1-2_vddk,osp_1-3_vddk[]
-. In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.3 (x86_64)` (or later), click *Download Now*, and save the image.
-endif::[]
+ifdef::osp_1-3_vddk[]
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-upload-image[Upload the UCI] to the OpenStack Image Service.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the instance], specifying the following options:
 
 . Upload the image to Glance storage.
 . link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the image] as a conversion host instance, with the following resources:
@@ -35,9 +44,9 @@ endif::[]
 ** `/var/tmp` (10 GB, or 1 GB for each concurrent migration)
 ** `/var/logs` (5 GB)
 
-. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-resize-instance[Resize the instance] to accommodate its file system.
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-resize-instance[Resize the conversion host instance] to accommodate its file system.
 +
-The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size, or you can create a new partition and add it as a physical volume to the volume group.
+The conversion host instance is created from an image, but the disk space defined in the image is not sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size or you can create a new partition and add it as a physical volume to the volume group.
 +
 [NOTE]
 ====

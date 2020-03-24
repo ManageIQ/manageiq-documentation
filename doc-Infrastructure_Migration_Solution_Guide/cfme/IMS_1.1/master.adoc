@@ -15,13 +15,9 @@ Red Hat Infrastructure Migration Solution 1.1 enables you to migrate virtual mac
 
 Red Hat Virtualization 4.2::
 Red Hat Virtualization (RHV) provides a virtualization platform built on Red Hat Enterprise Linux (RHEL). You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/[RHV 4.2 documentation] for more information.
-+
-See xref:Migrating_from_vmware_to_rhv_1-1_vddk[].
 
 Red Hat OpenStack Platform 13 (or later)::
 Red Hat OpenStack Platform (RHOSP) provides a scalable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux (RHEL). See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform[RHOSP documentation] for more information.
-+
-See xref:Migrating_from_vmware_to_osp_1-1_vddk[].
 
 Red Hat CloudForms 4.7::
 Red Hat CloudForms is the environment in which you perform the migration. CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/[CloudForms 4.7 documentation] for more information.
@@ -52,8 +48,6 @@ include::modules/ref_Optimizing_your_migration.adoc[leveloffset=+2]
 
 You can prepare the VMware and Red Hat environments for migration.
 
-The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_rhv_1-1_ssh[SSH transformation] is a fallback option.
-
 include::modules/ref_Software_compatibility.adoc[leveloffset=+2]
 
 [id="Preparing_the_vmware_environment_{context}"]
@@ -83,7 +77,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 
 ==== Configuring the Red Hat Virtualization conversion hosts
 
-You can configure the Red Hat Virtualization (RHV) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) with Ansible playbooks.
+You can configure the Red Hat Virtualization (RHV) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) with Ansible playbooks. VDDK converts the VMware disks.
 
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+4]
 include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+4]
@@ -137,7 +131,7 @@ include::modules/ref_Known_issues.adoc[leveloffset=+2]
 [id='Configuring_environment_for_ssh_transformation_rhv_1-1_ssh']
 == Configuring the Red Hat Virtualization environment for SSH transformation
 
-You can configure your Red Hat Virtualization (RHV) environment for SSH transformation if you cannot use VDDK.
+You can configure your Red Hat Virtualization environment for SSH transformation if you cannot use VDDK.
 
 [NOTE]
 ====
@@ -206,8 +200,6 @@ include::modules/ref_Optimizing_your_migration.adoc[leveloffset=+2]
 
 You can prepare the VMware and Red Hat environments for migration.
 
-The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_osp_1-1_ssh[SSH transformation] is a fallback option.
-
 include::modules/ref_Software_compatibility.adoc[leveloffset=+2]
 
 [id="Preparing_the_vmware_environment_{context}"]
@@ -237,7 +229,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts-{context}']
 ==== Deploying the Red Hat OpenStack Platform conversion hosts
 
-You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) with Ansible playbooks.
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) with Ansible playbooks. VDDK converts the VMware disks.
 
 include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+4]
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+4]
@@ -284,14 +276,16 @@ include::modules/ref_Ip_address_errors.adoc[leveloffset=+3]
 include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+3]
 include::modules/ref_Known_issues.adoc[leveloffset=+2]
 :osp_1-1_vddk!:
+
 :context: osp_1-1_ssh
 :osp_1-1_ssh:
+
 [appendix]
 
-[id='Configuring_environment_for_ssh_transformation_{context}']
+[id='Configuring-the-osp-environment-for-ssh-transformation']
 == Configuring the Red Hat OpenStack Platform environment for SSH transformation
 
-You can configure the Red Hat OpenStack Platform (RHOSP) environment for SSH transformation if you cannot use VDDK.
+You can configure the Red Hat OpenStack Platform environment for SSH transformation if you cannot use VDDK.
 
 [NOTE]
 ====

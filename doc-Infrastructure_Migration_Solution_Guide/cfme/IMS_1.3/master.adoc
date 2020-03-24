@@ -15,19 +15,16 @@ Red Hat Infrastructure Migration Solution (IMS) 1.3 enables you to migrate virtu
 
 Red Hat Virtualization 4.3::
 Red Hat Virtualization (RHV) provides a virtualization platform built on Red Hat Enterprise Linux. You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/[RHV 4.3] documentation for more information.
-+
-See xref:Migrating_from_vmware_to_rhv_1-3_vddk[].
 
 Red Hat OpenStack Platform 13 (or later)::
 Red Hat OpenStack Platform (RHOSP) provides a scalable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux. See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform[RHOSP] documentation for more information.
-+
-See xref:Migrating_from_vmware_to_osp_1-3_vddk[].
 
 Red Hat CloudForms 5.0::
 Red Hat CloudForms is the environment in which you perform the migration. CloudForms is a unified set of management tools for use across virtualized, private cloud, and public cloud platforms. See link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0[CloudForms 5.0] documentation for more information.
 
 :context: rhv_1-3_vddk
 :rhv_1-3_vddk:
+
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat Virtualization
 
@@ -52,8 +49,6 @@ include::modules/ref_Optimizing_your_migration.adoc[leveloffset=+2]
 == Preparing the migration environment
 
 You can prepare the VMware and Red Hat environments for migration.
-
-The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_rhv_1-3_ssh[SSH transformation] is a fallback option.
 
 include::modules/ref_Software_compatibility.adoc[leveloffset=+2]
 
@@ -85,7 +80,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts-{context}']
 ==== Deploying the Red Hat Virtualization conversion hosts
 
-You can download VDDK and then configure the Red Hat Virtualization (RHV) conversion hosts in the CloudForms user interface.
+You can configure the Red Hat Virtualization (RHV) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) in the CloudForms user interface. VDDK converts the VMware disks.
 
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+4]
 include::modules/proc_Configuring_conversion_hosts_cloudforms.adoc[leveloffset=+4]
@@ -172,13 +167,14 @@ include::modules/proc_Reinstalling_ipa_client.adoc[leveloffset=+2]
 include::modules/proc_Configuring_conversion_hosts_cloudforms.adoc[leveloffset=+2]
 include::modules/proc_Copying_the_vmware_keys_to_the_conversion_hosts.adoc[leveloffset=+2]
 include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.adoc[leveloffset=+2]
-:rhv_1-3_ssh!:
+:!rhv_1-3_ssh:
 
 :numbered:
 
 :context: osp_1-3_vddk
 :osp_1-3_vddk:
-[id="Migrating_from_vmware_to_{context}"]
+
+[id='Migrating_from_vmware_to_{context}']
 = Migrating from VMware to Red Hat OpenStack Platform
 
 This guide describes how to plan your migration, to prepare the VMware and Red Hat OpenStack Platform environments, and to migrate your VMware virtual machines.
@@ -199,8 +195,6 @@ include::modules/ref_Optimizing_your_migration.adoc[leveloffset=+2]
 == Preparing the migration environment
 
 You can prepare the VMware and Red Hat environments for migration.
-
-The virtual disks are converted with the VMware Virtual Disk Development Kit (VDDK). If you cannot use VDDK, xref:Configuring_environment_for_ssh_transformation_osp_1-3_ssh[SSH transformation] is a fallback option.
 
 include::modules/ref_Software_compatibility.adoc[leveloffset=+2]
 
@@ -231,7 +225,7 @@ include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 [id='Deploying_conversion_hosts_{context}']
 ==== Deploying the Red Hat OpenStack Platform conversion hosts
 
-You can create the Red Hat OpenStack Platform (RHOSP) conversion hosts, downhload VDDK, and configure the conversion hosts in the CloudForms user interface.
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) in the CloudForms user interface. VDDK converts the VMware disks.
 
 include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+4]
 include::modules/proc_Downloading_vddk.adoc[leveloffset=+4]
@@ -278,7 +272,9 @@ include::modules/ref_Ip_address_errors.adoc[leveloffset=+3]
 include::modules/ref_Environment_configuration_errors.adoc[leveloffset=+3]
 
 include::modules/ref_Known_issues.adoc[leveloffset=+2]
+
 :osp_1-3_vddk!:
+
 :context: osp_1-3_ssh
 :osp_1-3_ssh:
 

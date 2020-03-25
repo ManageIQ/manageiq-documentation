@@ -1,0 +1,69 @@
+// Module included in the following assemblies:
+//
+// IMS_1.2/master.adoc
+// IMS_1.3/master.adoc
+[id="Installing_configuring_cf_distributed_{context}"]
+= Installing and configuring Red Hat CloudForms in a distributed environment
+
+You can install Red Hat CloudForms in a distributed environment, with appliances on your user interface, database, and worker machines.
+
+[NOTE]
+====
+If you create an infrastructure mapping or migration plan and then remove or change a provider in CloudForms, the mapping or plan must be deleted and re-created.
+====
+
+.Procedure
+
+ifdef::rhv_1-2_vddk,rhv_1-3_vddk[]
+. Install Red Hat CloudForms on link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/installing_red_hat_cloudforms_on_red_hat_virtualization[Red Hat Virtualization (RHV)] or link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/installing_red_hat_cloudforms_on_vmware_vsphere/index[VMware].
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/index#configuring-a-worker-appliance[Configure the worker appliances], if necessary.
+endif::[]
+ifdef::osp_1-2_vddk,osp_1-3_vddk[]
+. Install Red Hat CloudForms on link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[Red Hat OpenStack Platform (RHOSP)] or link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/installing_red_hat_cloudforms_on_vmware_vsphere/index[VMware].
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/index#configuring-a-worker-appliance[Configure the worker appliances], if necessary.
+endif::[]
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/general_configuration/index#servers[Enable the required server roles] in the CloudForms user interface:
+
+* Database: No server roles required
+* User interface:
+
+**  Database Operations
+**  User Interface
+**  Web Services
+
+* Worker:
+
+** Automation Engine
+** Capacity & Utilization Coordinator
+** Capacity & Utilization Data Collector
+** Capacity & Utilization Data Processor
+** Database Operations
+** Event Monitor
+** Provider Inventory
+** Provider Operations
+** Reporting
+** Scheduler
+** SmartState Analysis
+** Web Services
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#vmware_vcenter_providers[Add VMware to CloudForms] as an infrastructure provider.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/infrastructure_providers#authenticating_vmware_hosts[Authenticate the VMware vCenter hosts].
+
+ifdef::rhv_1-2_vddk,rhv_1-3_vddk[]
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Add RHV to CloudForms] as an infrastructure provider.
+endif::[]
+ifdef::osp_1-2_vddk,osp_1-3_vddk[]
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Add RHOSP to CloudForms] as an infrastructure provider.
++
+Do not complete the fields in the *RSA key pair* tab. You will add the SSH private key when you configure the conversion hosts.
+
+. If the RHOSP provider has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider. Check the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/index#viewing_the_management_system_timeline[cloud provider timeline] to verify that all events have been processed.
+endif::[]
+
+. Click *Compute* -> *Infrastructure* -> *Providers* to verify that CloudForms can access the providers and hosts.
+
+. Configure the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/general_configuration/index#capacity-and-utilization-collection-settings[Capacity and Utilization Collection Settings] of the CloudForms worker appliances to collect data from the VMware and Red Hat providers.

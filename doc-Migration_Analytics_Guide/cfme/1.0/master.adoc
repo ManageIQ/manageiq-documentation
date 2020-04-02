@@ -1,0 +1,90 @@
+= Migration Analytics Guide
+:imagesdir: images
+:vernum: 1.0
+:toc: left
+:toclevels: 3
+:compat-mode:
+:experimental:
+
+:context: migration_analytics
+:migration_analytics:
+:numbered:
+:sectnums:
+:partnums:
+
+toc::[]
+
+Migration Analytics examines your VMware virtual machines and collects data about their operating systems and workloads, using the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms[Red Hat CloudForms] user interface. In CloudForms, you run an analysis scan on the VMware virtual machines and download the collected data as an inventory data file.
+
+You create a report with the link:https://cloud.redhat.com/beta[Migration Analytics service], which uploads the inventory data file and analyzes it. The report provides an estimate of the initial savings in migrating to Red Hat, a detailed analysis of the VMware virtual machines, and recommendations to help you plan your migration.
+
+Migration Analytics supports VMware version 6.0 or later.
+
+[NOTE]
+====
+Migration Analytics is available as a technology preview for Red Hat CloudForms 5.0. For more information on the support scope for features marked as technology previews, see link:https://access.redhat.com/support/offerings/techpreview/[Technology Preview Features Support Scope].
+====
+
+[id='Understanding-migration-analytics_{context}']
+== Understanding Migration Analytics
+
+You can scan your VMware virtual machines in CloudForms and create a report with the link:https://cloud.redhat.com/beta[Migration Analytics service].
+
+include::modules/Migration-analytics-workflow.adoc[leveloffset=+2]
+include::modules/Migration-analytics-report.adoc[leveloffset=+2]
+
+[id='Deploying-migration-analytics_{context}']
+== Deploying Migration Analytics
+
+You can deploy Migration Analytics by installing CloudForms on VMware, adding the VMware provider, and configuring CloudForms.
+
+include::modules/Installing-cloudforms.adoc[leveloffset=+2]
+include::modules/Adding-provider-to-cloudforms.adoc[leveloffset=+2]
+include::modules/Assigning_control_policy_to_provider.adoc[leveloffset=+2]
+include::modules/Configuring-cloudforms.adoc[leveloffset=+2]
+
+[id='Managing-analysis-profiles_{context}']
+== Managing analysis profiles
+
+A `default` analysis profile is used for scanning your VMware virtual machines.
+
+You can create a custom analysis profile by modifying the `custom_profile.yaml` template in xref:Custom-profile-yaml-example[].
+
+You can export existing analysis profiles for backup, troubleshooting, or updates.
+
+include::modules/Creating-a-default-analysis-profile.adoc[leveloffset=+2]
+include::modules/Creating-a-custom-analysis-profile.adoc[leveloffset=+2]
+
+[NOTE]
+====
+See xref:Custom-profile-yaml-example[] for the template.
+====
+
+include::modules/Exporting-analysis-profiles.adoc[leveloffset=+2]
+
+== Collecting data for Migration Analytics
+
+You can scan your VMware virtual machines and download the results as an inventory data file to your local machine.
+
+Optionally, you can combine multiple inventory data files into a single file in order to generate a single Migration Analytics report.
+
+include::modules/Scanning-vms-for-migration-analytics.adoc[leveloffset=+2]
+include::modules/Collecting-inventory-data.adoc[leveloffset=+2]
+include::modules/Combining-inventory-data-files.adoc[leveloffset=+2]
+
+[id='Creating-and-filtering-a-migration-analytics-report']
+== Creating and filtering a Migration Analytics report
+
+You can create a Migration Analytics report, filter the results, and export the data.
+
+include::modules/Creating-migration-analytics-report.adoc[leveloffset=+2]
+include::modules/Filtering-migration-analytics-report.adoc[leveloffset=+2]
+include::modules/Exporting-migration-analytics-report.adoc[leveloffset=+2]
+
+include::modules/Troubleshooting.adoc[leveloffset=+1]
+
+[appendix]
+
+include::modules/Custom_profile_yaml_example.adoc[leveloffset=+1]
+
+:!migration_analytics:

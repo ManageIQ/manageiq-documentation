@@ -1,0 +1,1053 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE book [
+<!ENTITY % sgml.features "IGNORE">
+<!ENTITY % xml.features "INCLUDE">
+<!ENTITY % DOCBOOK_ENTS PUBLIC "-//OASIS//ENTITIES DocBook Character Entities V4.5//EN" "http://www.oasis-open.org/docbook/xml/4.5/dbcentx.mod">
+%DOCBOOK_ENTS;
+]>
+<?asciidoc-toc maxdepth="3"?><?asciidoc-numbered?><book xmlns="http://docbook.org/ns/docbook" xmlns:xlink="http://www.w3.org/1999/xlink" version="5.0">
+<info>
+<title>Migration Analytics Guide</title><subtitle>Analyzing your VMware environment for migration to Red Hat</subtitle>
+
+<date>2020-04-02</date>
+<productname>Migration Analytics</productname>
+<productnumber>1.0-beta</productnumber>
+<abstract>
+    <para>This guide provides instructions for installing and using Migration Analytics.</para>
+    <para>If you have a suggestion for improving this guide or have found an error, please submit a Bugzilla report at <link xlink:href="https://bugzilla.redhat.com/enter_bug.cgi?product=Red%20Hat%20CloudForms%20Management%20Engine">http://bugzilla.redhat.com</link> for the <emphasis role="strong">Migration Analytics</emphasis> component. Please provide specific details, such as the section number and version, so we can easily locate the content.</para>
+</abstract>
+<xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="Author_Group.xml"/>
+</info>
+<preface>
+<title>Preface</title>
+
+<simpara>Migration Analytics examines your VMware virtual machines and collects data about their operating systems and workloads, using the <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms">Red Hat CloudForms</link> user interface. In CloudForms, you run an analysis scan on the VMware virtual machines and download the collected data as an inventory data file.</simpara>
+<simpara>You create a report with the <link xlink:href="https://cloud.redhat.com/beta">Migration Analytics service</link>, which uploads the inventory data file and analyzes it. The report provides an estimate of the initial savings in migrating to Red Hat, a detailed analysis of the VMware virtual machines, and recommendations to help you plan your migration.</simpara>
+<simpara>Migration Analytics supports VMware version 6.0 or later.</simpara>
+<note>
+<simpara>Migration Analytics is available as a technology preview for Red Hat CloudForms 5.0. For more information on the support scope for features marked as technology previews, see <link xlink:href="https://access.redhat.com/support/offerings/techpreview/">Technology Preview Features Support Scope</link>.</simpara>
+</note>
+</preface>
+<chapter xml:id="Understanding-migration-analytics_migration_analytics">
+<title>Understanding Migration Analytics</title>
+<simpara>You can scan your VMware virtual machines in CloudForms and create a report with the <link xlink:href="https://cloud.redhat.com/beta">Migration Analytics service</link>.</simpara>
+<section xml:id="Migration-analytics-workflow">
+<title>Migration Analytics workflow</title>
+<simpara>The following workflow describes how Migration Analytics works.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/Migration_Analytics.png"/>
+</imageobject>
+<textobject><phrase>Migration Analytics</phrase></textobject>
+</inlinemediaobject></simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/circle_1.png" contentwidth="20"/>
+</imageobject>
+<textobject><phrase>20</phrase></textobject>
+</inlinemediaobject> In the CloudForms user interface, you perform a SmartState analysis scan on your VMware virtual machines.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/circle_2.png" contentwidth="20"/>
+</imageobject>
+<textobject><phrase>20</phrase></textobject>
+</inlinemediaobject> Data about operating systems and workloads is collected from the VMware virtual machines.</simpara>
+<simpara>The following workloads are currently supported:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>JBoss Core Service Apache HTTP server with <literal>mod_cluster</literal> configured</simpara>
+</listitem>
+<listitem>
+<simpara>JBoss EAP</simpara>
+</listitem>
+<listitem>
+<simpara>PostgreSQL</simpara>
+</listitem>
+<listitem>
+<simpara>SAP HANA</simpara>
+</listitem>
+<listitem>
+<simpara>Apache Tomcat</simpara>
+</listitem>
+<listitem>
+<simpara>Oracle Weblogic</simpara>
+</listitem>
+<listitem>
+<simpara>IBM WebSphere</simpara>
+</listitem>
+<listitem>
+<simpara>Microsoft SQL</simpara>
+</listitem>
+</itemizedlist>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/circle_3.png" contentwidth="20"/>
+</imageobject>
+<textobject><phrase>20</phrase></textobject>
+</inlinemediaobject> The data from the VMware virtual machines is collected in an inventory data file, which you can download to your local machine to view.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/circle_4.png" contentwidth="20"/>
+</imageobject>
+<textobject><phrase>20</phrase></textobject>
+</inlinemediaobject> In a browser, you navigate to the <link xlink:href="https://cloud.redhat.com/beta">Migration Analytics service</link> and create a report. The Migration Analytics service uploads the inventory data file and analyzes it.</simpara>
+<simpara><inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/circle_5.png" contentwidth="20"/>
+</imageobject>
+<textobject><phrase>20</phrase></textobject>
+</inlinemediaobject> The Migration Analytics service generates a report describing the estimated savings, the complexity of the migration, and migration recommendations.</simpara>
+</section>
+<section xml:id="Migration-analytics-report">
+<title>Migration Analytics report</title>
+<simpara>The Migration Analytics report is generated by the Migration Analytics service at <link xlink:href="https://cloud.redhat.com/beta">https://cloud.redhat.com/beta</link> and is displayed in your browser. You can filter the results or download the report.</simpara>
+<simpara>The report contains the following sections.</simpara>
+<formalpara>
+<title>Initial savings estimation</title>
+<para>This section describes the estimated savings realized by migrating from VMware to Red Hat Virtualization over a three-year period, based on the data retrieved from the infrastructure. The savings estimates are broken down into VMware maintenance costs, Red Hat Virtualization costs, and Red Hat training and services.</para>
+</formalpara>
+<formalpara>
+<title>Workload migration summary</title>
+<para>This section describes the complexity of the migration and provides detailed workload data. A pie chart displays the complexity of migrations:</para>
+</formalpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">Easy</emphasis>: Virtual machine with no unusual configuration</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Medium</emphasis>: For example, virtual machine with more than four vNICs or a shared disk</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Hard</emphasis>: For example, a virtual machine with Raw Device Mapping</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Unsupported</emphasis>: Operating system is not supported for migration, for example, FreeBSD 12</simpara>
+</listitem>
+</itemizedlist>
+<formalpara>
+<title>Workload migration inventory</title>
+<para>This section displays a list of the virtual machines to be migrated, with detailed information about each virtual machine’s workload, operating system, estimated migration effort, and recommended migration targets.</para>
+</formalpara>
+<simpara>In this section, you can filter the list of virtual machines by fields or click <emphasis role="strong">Export as CSV</emphasis> to save the report to your local machine.</simpara>
+</section>
+</chapter>
+<chapter xml:id="Deploying-migration-analytics_migration_analytics">
+<title>Deploying Migration Analytics</title>
+<simpara>You can deploy Migration Analytics by installing CloudForms on VMware, adding the VMware provider, and configuring CloudForms.</simpara>
+<section xml:id="Installing-cloudforms_migration_analytics">
+<title>Installing CloudForms</title>
+<simpara>You can install Red Hat CloudForms on VMware vSphere.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>VMware vSphere 6.0 or later</simpara>
+</listitem>
+<listitem>
+<simpara>VMware support credentials, for downloading VDDK</simpara>
+</listitem>
+<listitem>
+<simpara>CloudForms 5.0</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara><link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_vmware_vsphere/index#installing-cloudforms">Download and install CloudForms on VMware vSphere</link>.</simpara>
+</listitem>
+<listitem>
+<simpara><link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_vmware_vsphere/index#configuring_a_database">Configure the CloudForms database</link>.</simpara>
+</listitem>
+<listitem>
+<simpara><link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_vmware_vsphere/index#additional-configuration-vmware">Download and install VDDK</link>.</simpara>
+<simpara>VDDK is required for running a SmartState analysis scan on VMware virtual machines.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Adding-a-provider-to-cloudforms_migration_analytics">
+<title>Adding a provider to CloudForms</title>
+<simpara>You can add VMware as an infrastructure provider to CloudForms.</simpara>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara><link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_vmware_vsphere/index#Initial_Login">Log in to the Cloudforms user interface</link> and change the default password.</simpara>
+</listitem>
+<listitem>
+<simpara><link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/infrastructure_providers#adding_a_vmware_vcenter_provider">Add VMware vCenter as an infrastructure provider</link> to CloudForms.</simpara>
+</listitem>
+<listitem>
+<simpara><link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/infrastructure_providers#authenticating_vmware_hosts">Add the VMware host credentials</link> to CloudForms.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Assigning_control_policy_to_provider_migration_analytics">
+<title>Assigning a control policy</title>
+<simpara>You can assign a control policy to the vSphere provider.</simpara>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>Navigate to <emphasis role="strong">Compute</emphasis> → <emphasis role="strong">Infrastructure</emphasis> → <emphasis role="strong">Providers</emphasis> and select the <emphasis role="strong">vSphere</emphasis> provider.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Policy</emphasis> → <emphasis role="strong">Manage Policies</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select the <emphasis role="strong">VM SmartState Analysis profile</emphasis> control policy to add it to the vSphere provider.</simpara>
+<simpara>A gold shield on the provider icon indicates that the control policy was successfully added.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Configuring-cloudforms_migration_analytics">
+<title>Configuring Red Hat CloudForms for Migration Analytics</title>
+<simpara>You can configure Red Hat CloudForms for Migration Analytics.</simpara>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>In the header bar, click <inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/config-gear.png"/>
+</imageobject>
+<textobject><phrase>config gear</phrase></textobject>
+</inlinemediaobject> (<emphasis role="strong">Configuration</emphasis>).</simpara>
+</listitem>
+<listitem>
+<simpara>Click the <emphasis role="strong">Settings</emphasis> accordion and then click <emphasis role="strong">Zones</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click the zone in which the EVM server is located and select your EVM server.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Server</emphasis> tab, scroll down to <emphasis role="strong">Server Roles</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Set <emphasis role="strong">SmartProxy</emphasis> to <emphasis role="strong">On</emphasis>.</simpara>
+<note>
+<simpara><emphasis role="strong">SmartState analysis</emphasis> is <emphasis role="strong">On</emphasis> by default. Do not change this setting.</simpara>
+</note>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Advanced</emphasis> tab, under <literal>:prototype::migration_analytics:</literal>, change the value of the <literal>enabled</literal> parameter to <literal>true</literal>:</simpara>
+<programlisting language="yaml" linenumbering="unnumbered">:prototype:
+  :migration_analytics:
+    :enabled: true</programlisting>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Save</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Log out of the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>Log in to the CloudForms machine as root.</simpara>
+</listitem>
+<listitem>
+<simpara>Restart the EVM server:</simpara>
+<screen># systemctl restart evmserverd.service</screen>
+</listitem>
+</orderedlist>
+</section>
+</chapter>
+<chapter xml:id="Managing-analysis-profiles_migration_analytics">
+<title>Managing analysis profiles</title>
+<simpara>A <literal>default</literal> analysis profile is used for scanning your VMware virtual machines.</simpara>
+<simpara>You can create a custom analysis profile by modifying the <literal>custom_profile.yaml</literal> template in <xref linkend="Custom-profile-yaml-example"/>.</simpara>
+<simpara>You can export existing analysis profiles for backup, troubleshooting, or updates.</simpara>
+<section xml:id="Creating-a-default-smartstate-analysis-profile_migration_analytics">
+<title>Creating a <literal>default</literal> analysis profile</title>
+<simpara>You can create a <literal>default</literal> analysis profile for Migration Analytics by copying the <literal>Sample</literal> analysis profile provided in CloudForms.</simpara>
+<note>
+<simpara>If you create an analysis profile with a name other than <literal>default</literal>, you must <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/assigning_a_custom_analysis_profile_to_a_virtual_machine/index#create-vm-control-policy">create a control policy</link> and assign it to the vSphere provider.</simpara>
+<simpara>If a <literal>default</literal> analysis profile does not exist or if you have not created a control policy to assign a different analysis profile, no profile is used for the scan.</simpara>
+</note>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>In the header bar, click <inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/config-gear.png"/>
+</imageobject>
+<textobject><phrase>config gear</phrase></textobject>
+</inlinemediaobject> (<emphasis role="strong">Configuration</emphasis>).</simpara>
+</listitem>
+<listitem>
+<simpara>Click the <emphasis role="strong">Settings</emphasis> accordion and then click <emphasis role="strong">Analysis Profiles</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select the <literal>Sample</literal> analysis profile.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configuration</emphasis> → <emphasis role="strong">Copy this selected Analysis Profile</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Enter <literal>default</literal> in the <emphasis role="strong">Name</emphasis> field and click <emphasis role="strong">Add</emphasis>.</simpara>
+<simpara>The <literal>default</literal> profile appears under <emphasis role="strong">Analysis Profiles</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Importing-a-customized-smartstate-analysis-profile_migration_analytics">
+<title>Creating a customized analysis profile</title>
+<simpara>You can create a customized analysis profile so that custom workloads and instances are detected, added to the inventory data file, and included in the Migration Analytics report.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>If there is an existing <literal>default</literal> analysis profile in CloudForms, you must delete it.</simpara>
+<simpara>Importing a new <literal>default</literal> profile does not overwrite an existing <literal>default</literal> profile. The import process concatenates the <literal>default</literal> profiles.</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms machine as root.</simpara>
+</listitem>
+<listitem>
+<simpara>Create a <literal>/root/custom_profile.yaml</literal> file, using the <literal>custom_profile.yaml</literal> file as a template.</simpara>
+</listitem>
+<listitem>
+<simpara>Edit the <literal>custom_profile.yaml</literal> file for your workloads by updating the <literal>target</literal> parameters.</simpara>
+<simpara>For example, you can modify the paths to startup scripts and configuration files for custom Oracle WebLogic instances:</simpara>
+<programlisting language="yaml" linenumbering="unnumbered">---
+name: default <co xml:id="CO1-1"/>
+definition:
+- name: default_file
+  guid:
+  item_type: file
+  definition:
+    stats:
+    - target: /u01/app/oracle/domains/base/bin/startNodeManager.sh
+    - target: /u01/app/oracle/domains/base/startWebLogic.sh
+    - target: /home/oracle/oraInventory
+    - target: /u01/app/oracle/domains/base/config/config.xml</programlisting>
+<calloutlist>
+<callout arearefs="CO1-1">
+<para>The imported analysis profile is called <literal>default</literal>. If you change the profile name, you must <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/assigning_a_custom_analysis_profile_to_a_virtual_machine/index#create-vm-control-policy">create a control policy</link> and add it to the vSphere provider.</para>
+</callout>
+</calloutlist>
+</listitem>
+<listitem>
+<simpara>Save the <literal>custom_profile.yaml</literal> file.</simpara>
+</listitem>
+<listitem>
+<simpara>Go to the vmdb directory:</simpara>
+<screen># cd /var/www/miq/vmdb</screen>
+</listitem>
+<listitem>
+<simpara>Import the <literal>custom_profile.yaml</literal> file:</simpara>
+<screen># bundle exec rake evm:import:scan_profiles -- --source /root/custom_profile.yaml</screen>
+</listitem>
+<listitem>
+<simpara>In the CloudForms user interface, verify that the <literal>default</literal> profile appears under <emphasis role="strong">Analysis Profiles</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+<note>
+<simpara>See <xref linkend="Custom-profile-yaml-example"/> for the template.</simpara>
+</note>
+</section>
+<section xml:id="Exporting-a-customized-smartstate-analysis-profile_migration_analytics">
+<title>Exporting analysis profiles</title>
+<simpara>You can export your analysis profiles for backup, troubleshooting, or updating.</simpara>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms machine as root.</simpara>
+</listitem>
+<listitem>
+<simpara>Go to the <literal>vmdb</literal> directory:</simpara>
+<screen># cd /var/www/miq/vmdb</screen>
+</listitem>
+<listitem>
+<simpara>Create an export directory:</simpara>
+<screen># mkdir exports</screen>
+</listitem>
+<listitem>
+<simpara>Export the analysis profiles:</simpara>
+<screen># bundle exec rake evm:export:scan_profiles -- --directory exports --all <co xml:id="CO2-1"/></screen>
+<calloutlist>
+<callout arearefs="CO2-1">
+<para>The <literal>--all</literal> option exports all the analysis profiles as <literal>yaml</literal> files. There is no option to export a single analysis profile.</para>
+</callout>
+</calloutlist>
+</listitem>
+</orderedlist>
+</section>
+</chapter>
+<chapter xml:id="collecting_data_for_migration_analytics" remap="_collecting_data_for_migration_analytics">
+<title>Collecting data for Migration Analytics</title>
+<simpara>You can scan your VMware virtual machines and download the results as an inventory data file to your local machine.</simpara>
+<simpara>Optionally, you can combine multiple inventory data files into a single file in order to generate a single Migration Analytics report.</simpara>
+<section xml:id="Scanning-vms-for-migration-analytics_migration_analytics">
+<title>Scanning the virtual machines</title>
+<simpara>You can scan your VMware virtual machines in Red Hat CloudForms.</simpara>
+<important>
+<simpara>Some virtual machines should not be analyzed because the snapshot process may cause data corruption. See the VMware documentation about <link xlink:href="https://docs.vmware.com/en/VMware-vSphere/6.5/com.vmware.vsphere.vm_admin.doc/GUID-53F65726-A23B-4CF0-A7D5-48E584B88613.html">snapshot limitations</link> for details.</simpara>
+<simpara>You can exclude a virtual machine from the scan by assigning to it the <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_infrastructure_and_inventory/index#to_tag_virtual_machines_and_templates"><literal>exclusions</literal> tag, with the <literal>do_not_analyze</literal> value</link>.</simpara>
+</important>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>SmartState analysis and SmartProxy must be enabled.</simpara>
+</listitem>
+<listitem>
+<simpara>You must have a valid VM analysis profile called <literal>default</literal>. If you create an analysis profile with a different name, you must <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/assigning_a_custom_analysis_profile_to_a_virtual_machine/index#create-vm-control-policy">create a control policy</link> and assign it to the vSphere provider.</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>Navigate to <emphasis role="strong">Compute</emphasis> → <emphasis role="strong">Infrastructure</emphasis> → <emphasis role="strong">Virtual Machines</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select the virtual machines that you want to scan.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configuration</emphasis> → <emphasis role="strong">Perform SmartState Analysis</emphasis>.</simpara>
+<simpara>Each virtual machine can take up to one minute to scan.</simpara>
+</listitem>
+<listitem>
+<simpara>Click your username <inlinemediaobject>
+<imageobject>
+<imagedata fileref="images/user.png"/>
+</imageobject>
+<textobject><phrase>user</phrase></textobject>
+</inlinemediaobject> → <emphasis role="strong">Tasks</emphasis>.</simpara>
+<simpara>The result of each SmartState analysis scan appears in <emphasis role="strong">My Tasks</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Creating-and-downloading-the-inventory-file_migration_analytics">
+<title>Creating and downloading inventory files</title>
+<simpara>You can create and download inventory data files for your vSphere provider.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>The <emphasis role="strong">Migration Analytics</emphasis> menu must be enabled in the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>You must first perform an analysis scan on the VMware virtual machines.</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms user interface.</simpara>
+</listitem>
+<listitem>
+<simpara>Navigate to <emphasis role="strong">Compute</emphasis> → <emphasis role="strong">Infrastructure</emphasis> → <emphasis role="strong">Providers</emphasis> and select the VMware provider.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Configuration</emphasis> → <emphasis role="strong">Refresh Relationships and Power States</emphasis> and click <emphasis role="strong">OK</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Navigate to <emphasis role="strong">Migration</emphasis> → <emphasis role="strong">Migration Analytics</emphasis> and click <emphasis role="strong">Get started</emphasis>.</simpara>
+<simpara>A summary page listing all providers is displayed.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">vSphere</emphasis> to view the provider summary.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Collect Inventory Data</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">vSphere</emphasis> from the provider list.</simpara>
+</listitem>
+<listitem>
+<simpara>Select <emphasis role="strong">Detailed Data</emphasis> and click <emphasis role="strong">Continue</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Download Inventory File</emphasis> and save the inventory file.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Combining-inventory-files-into-a-single-file_migration_analytics">
+<title>Combining multiple inventory files</title>
+<simpara>You can combine multiple inventory files, for example, from different data centers, into a single file in order to generate a single Migration Analytics report.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>You must ensure that the inventory files do not contain duplicate information.</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Log in to the CloudForms machine.</simpara>
+</listitem>
+<listitem>
+<simpara>Create a common directory for the extracted inventory files:</simpara>
+<screen># mkdir extracted_files</screen>
+</listitem>
+<listitem>
+<simpara>Extract an inventory file to the common directory:</simpara>
+<screen># tar -xvf &lt;inventory_file_name&gt;.tar.gz -C extracted_files/ <co xml:id="CO3-1"/></screen>
+<calloutlist>
+<callout arearefs="CO3-1">
+<para>Specify the inventory file name.</para>
+</callout>
+</calloutlist>
+</listitem>
+<listitem>
+<simpara>Rename the extracted JSON inventory file. Each file name must be unique.</simpara>
+</listitem>
+<listitem>
+<simpara>Create a new archive file containing the extracted inventory files:</simpara>
+<screen># tar -czvf &lt;new_archive&gt;.tar.gz extracted_files/ <co xml:id="CO4-1"/></screen>
+<calloutlist>
+<callout arearefs="CO4-1">
+<para>Specify the new archive file name.</para>
+</callout>
+</calloutlist>
+</listitem>
+</orderedlist>
+<simpara>You can browse to the new archive file when you create a Migration Analytics report.</simpara>
+</section>
+</chapter>
+<chapter xml:id="Creating-and-filtering-a-migration-analytics-report">
+<title>Creating and filtering a Migration Analytics report</title>
+<simpara>You can create a Migration Analytics report, filter the results, and export the data.</simpara>
+<section xml:id="Creating-migration-analytics-report_migration_analytics">
+<title>Creating a Migration Analytics report</title>
+<simpara>You can create a report with the <link xlink:href="https://cloud.redhat.com/beta">Migration Analytics service</link>.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>Inventory data file generated by Red Hat CloudForms or a <literal>tar.gz</literal> archive containing multiple inventory data files</simpara>
+</listitem>
+<listitem>
+<simpara>Access to <link xlink:href="https://cloud.redhat.com/beta">https://cloud.redhat.com/beta</link></simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Launch a browser and navigate to <link xlink:href="https://cloud.redhat.com/beta">https://cloud.redhat.com/beta</link>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Migration Services</emphasis> tile, click <emphasis role="strong">Open</emphasis>.</simpara>
+<simpara>The <emphasis role="strong">Reports</emphasis> window is displayed.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Create</emphasis> and fill in the following fields:</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Mandatory fields:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">Inventory data file</emphasis>: Inventory data file generated by CloudForms. Click <emphasis role="strong">Browse</emphasis> to select the <literal>tar.gz</literal> file.</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Report name</emphasis>: Name of your report, up to 250 characters</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Year-over-year growth rate for new hypervisors</emphasis>: Number of new hypervisors to be added each year</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>Optional fields:</simpara>
+<itemizedlist>
+<listitem>
+<simpara><emphasis role="strong">Report description</emphasis>: Brief description of your report</simpara>
+</listitem>
+<listitem>
+<simpara><emphasis role="strong">Percentage of new hypervisors migrated each year</emphasis>: Percentage of new hypervisors that you intend to migrate each year.</simpara>
+</listitem>
+</itemizedlist>
+</listitem>
+</itemizedlist>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Create report</emphasis>.</simpara>
+<simpara>The inventory data file is uploaded and the generated report appears in the <emphasis role="strong">Reports</emphasis> list.</simpara>
+</listitem>
+</orderedlist>
+</section>
+<section xml:id="Filtering-migration-analytics-report_migration_analytics">
+<title>Filtering a Migration Analytics report</title>
+<simpara>You can filter the results of a Migration Analytics report to display virtual machines according to provider, cluster, migration effort, and other parameters.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>Migration Analytics report</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Launch a browser and navigate to <link xlink:href="https://cloud.redhat.com/beta">https://cloud.redhat.com/beta</link>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Migration Services</emphasis> tile, click <emphasis role="strong">Open</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click a Migration Analytics report name to view the report.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Workload Migration Inventory</emphasis> to view a detailed list of the virtual machines.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Filter</emphasis> and select a filter type.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Filter by &lt;filter_type&gt;</emphasis> and select one or more options.</simpara>
+<simpara>The filtered virtual machines are displayed.</simpara>
+</listitem>
+</orderedlist>
+<example>
+<title>Filtering by workload</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Click <emphasis role="strong">Filter</emphasis> &gt; <emphasis role="strong">Workload</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Filter by Workload</emphasis> and select one or more workloads, for example, Tomcat, Oracle Database, or Microsoft SQL Server.</simpara>
+</listitem>
+</orderedlist>
+</example>
+<example>
+<title>Filtering candidates for migration to RHEL</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Click <emphasis role="strong">Filter</emphasis> &gt; <emphasis role="strong">Recommended targets</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Filter by Recommended targets</emphasis> &gt; <emphasis role="strong">RHEL</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</example>
+<example>
+<title>Filtering by flags</title>
+<orderedlist numeration="arabic">
+<listitem>
+<simpara>Click <emphasis role="strong">Filter</emphasis> &gt; <emphasis role="strong">Flags IMS</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Filter by Flags IMS</emphasis> and select one or more flags, for example, <emphasis role="strong">RDM</emphasis> (Raw Device Mapping) or <emphasis role="strong">Shared Disk</emphasis>.</simpara>
+</listitem>
+</orderedlist>
+</example>
+</section>
+<section xml:id="Exporting-migration-analytics-report_migration_analytics">
+<title>Exporting a Migration Analytics report</title>
+<simpara>You can export a Migration Analytics report in CSV format.</simpara>
+<itemizedlist>
+<title>Prerequisites</title>
+<listitem>
+<simpara>Migration Analytics report</simpara>
+</listitem>
+</itemizedlist>
+<orderedlist numeration="arabic">
+<title>Procedure</title>
+<listitem>
+<simpara>Launch a browser and navigate to <link xlink:href="https://cloud.redhat.com/beta">https://cloud.redhat.com/beta</link>.</simpara>
+</listitem>
+<listitem>
+<simpara>In the <emphasis role="strong">Migration Services</emphasis> tile, click <emphasis role="strong">Open</emphasis>.</simpara>
+</listitem>
+<listitem>
+<simpara>Click a Migration Analytics report name to view the report.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Workload Migration Inventory</emphasis> to view a detailed list of the virtual machines.</simpara>
+</listitem>
+<listitem>
+<simpara>Click <emphasis role="strong">Export as CSV</emphasis>.</simpara>
+<simpara>The entire Migration Analytics report is downloaded to your local machine as a CSV file.</simpara>
+</listitem>
+</orderedlist>
+</section>
+</chapter>
+<chapter xml:id="Troubleshooting_migration_analytics">
+<title>Troubleshooting</title>
+<simpara>You can troubleshoot errors in the Migration Analytics data collection and report generation processes.</simpara>
+<itemizedlist>
+<listitem>
+<simpara>Updating a manifest</simpara>
+<simpara>A manifest file is provided with the Red Hat CloudForms appliance to create a payload for Migration Analytics. You can <link xlink:href="https://access.redhat.com/articles/4911261">update your manifest</link> with an upstream version.</simpara>
+</listitem>
+</itemizedlist>
+</chapter>
+<appendix xml:id="Custom-profile-yaml-example">
+<title>custom_profile.yaml template</title>
+<simpara>You can modify the <literal>custom_profile.yaml</literal> template to create a customized analysis profile for scanning your workloads.</simpara>
+<formalpara>
+<title>custom_profile.yaml template</title>
+<para>
+<programlisting language="yaml" linenumbering="unnumbered">---
+name: default <co xml:id="CO5-1"/>
+description: VM Default
+set_type: ScanItemSet
+guid:
+read_only:
+set_data:
+mode: Vm
+owner_type:
+owner_id:
+userid:
+group_id:
+definition:
+- name: default_nteventlog
+  guid:
+  item_type: nteventlog
+  definition:
+    content:
+    - :name: Application
+      :filter:
+        :message:
+        :level: warn
+        :rec_count: 0
+        :source:
+        :num_days: 2
+    - :name: Security
+      :filter:
+        :message:
+        :level: warn
+        :rec_count:
+        :source:
+        :num_days: 2
+    - :name: System
+      :filter:
+        :message:
+        :level: warn
+        :rec_count: 0
+        :source:
+        :num_days: 2
+  filename:
+  file_mtime:
+  prod_default:
+  mode:
+- name: default_registry
+  guid:
+  item_type: registry
+  definition:
+    content:
+    - depth: 0
+      hive: HKLM
+      value: Enabled
+      key: SOFTWARE\INTEL\LANDesk\VirusProtect6\CurrentVersion\PatternManager\Schedule
+    - depth: 0
+      hive: HKLM
+      value: Type
+      key: SOFTWARE\INTEL\LANDesk\VirusProtect6\CurrentVersion\PatternManager\Schedule
+    - depth: 0
+      hive: HKLM
+      value: Destination
+      key: SOFTWARE\InterSect Alliance\AuditService\Network
+    - depth: 0
+      hive: HKLM
+      value: CurrentVersion
+      key: SOFTWARE\JavaSoft\Java Runtime Environment
+    - depth: 0
+      hive: HKLM
+      value: EnableDCOM
+      key: SOFTWARE\Microsoft\Ole
+    - depth: 0
+      hive: HKLM
+      value: DCOM Protocols
+      key: SOFTWARE\Microsoft\Rpc
+    - depth: 0
+      hive: HKLM
+      value: Ports
+      key: SOFTWARE\Microsoft\Rpc\Internet
+    - depth: 0
+      hive: HKLM
+      value: Version
+      key: SOFTWARE\Microsoft\Updates\Windows 2000\SP5\KB958644\Filelist\0
+    - depth: 0
+      hive: HKLM
+      value: Version
+      key: SOFTWARE\Microsoft\Updates\Windows XP\SP4\KB958644\Filelist\0
+    - depth: 0
+      hive: HKLM
+      value: DefaultUserName
+      key: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    - depth: 0
+      hive: HKLM
+      value: AutoAdminLogon
+      key: SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon
+    - depth: 0
+      hive: HKLM
+      value: SecurityTypes
+      key: SOFTWARE\RealVNC\WinVNC4
+    - depth: 0
+      hive: HKLM
+      value: PortNumber
+      key: SOFTWARE\RealVNC\WinVNC4
+    - depth: 0
+      hive: HKLM
+      value: UserPasswdVerifier
+      key: SOFTWARE\RealVNC\WinVNC4
+    - depth: 0
+      hive: HKLM
+      value: NtLogon_Config
+      key: SOFTWARE\RealVNC\WinVNC4
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\Alerter
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\Browser
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\ClipSrv
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\DFS
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\DHCP
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\DHCPServer
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\DesktopOnCallService
+    - depth: 0
+      hive: HKLM
+      value: RestrictGuestAccess
+      key: SYSTEM\CurrentControlSet\Services\Eventlog\Application
+    - depth: 0
+      hive: HKLM
+      value: RestrictGuestAccess
+      key: SYSTEM\CurrentControlSet\Services\Eventlog\Security
+    - depth: 0
+      hive: HKLM
+      value: RestrictGuestAccess
+      key: SYSTEM\CurrentControlSet\Services\Eventlog\System
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\Fax
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\LicenseService
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\LmHosts
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\MSDTC
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\Messenger
+    - depth: 0
+      hive: HKLM
+      value: DSA Database file
+      key: SYSTEM\CurrentControlSet\Services\NTDS\Parameters
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\NetLogon
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\NtmsSvc
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\PolicyAgent
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\RSVP
+    - depth: 0
+      hive: HKLM
+      value: ListenOnINternet
+      key: SYSTEM\CurrentControlSet\Services\RpcSs
+    - depth: 0
+      hive: HKLM
+      value: Bind
+      key: SYSTEM\CurrentControlSet\Services\Rpc\Linkage
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\SCardDrv
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\SNMP
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\SNMPTRAP
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\ServicesTlntSvr
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\TermService
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\TrkWks
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\UPS
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\UtilMan
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\W32Time
+    - depth: 0
+      hive: HKLM
+      value: Description
+      key: SYSTEM\CurrentControlSet\Services\W32Time
+    - depth: 0
+      hive: HKLM
+      value: DisplayName
+      key: SYSTEM\CurrentControlSet\Services\W32Time
+    - depth: 0
+      hive: HKLM
+      value: AnnounceFlags
+      key: SYSTEM\CurrentControlSet\Services\W32Time\Config
+    - depth: 0
+      hive: HKLM
+      value: MaxNegPhaseCorrection
+      key: SYSTEM\CurrentControlSet\Services\W32Time\Config
+    - depth: 0
+      hive: HKLM
+      value: SpecialPollInterval
+      key: SYSTEM\CurrentControlSet\Services\W32Time\NtpClient
+    - depth: 0
+      hive: HKLM
+      value: Enabled
+      key: SYSTEM\CurrentControlSet\Services\W32Time\NtpServer
+    - depth: 0
+      hive: HKLM
+      value: NtpServer
+      key: SYSTEM\CurrentControlSet\Services\W32Time\Parameters
+    - depth: 0
+      hive: HKLM
+      value: Type
+      key: SYSTEM\CurrentControlSet\Services\W32Time\Parameters
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\WZCSVC
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\WinMgmt
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\cisvc
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\cron
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\dmserver
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\mnmsrvc
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\sshd
+    - depth: 0
+      hive: HKLM
+      value: Start
+      key: SYSTEM\CurrentControlSet\Services\wuauserv
+  filename:
+  file_mtime:
+  prod_default:
+  mode:
+- name: default_file
+  guid:
+  item_type: file
+  definition:
+    stats: <co xml:id="CO5-2"/>
+    - target: "/etc/*.conf"
+    - target: "/etc/.ibm/registry/InstallationManager.dat"
+    - target: "/etc/group"
+      content: true <co xml:id="CO5-3"/>
+    - target: "/etc/hosts"
+    - target: "/etc/oraInst.loc"
+    - target: "/etc/redhat-access-insights/machine-id"
+    - target: "/opt/mssql/bin/mssql-conf"
+    - target: "/u01/app/oraInventory"
+    - target: "/usr/sap/hostctrl/exe/saphostctrl"
+    - target: c:/windows/system32/*.scr
+    - target: c:/windows/system32/msi*.*
+    - target: c:/windows/system32/netapi32.dll
+    - target: /etc/oraInst.loc
+      content: true <co xml:id="CO5-4"/>
+    - target: /u01/app/oraInventory
+    - target: /opt/mssql/bin/mssql-conf
+    - target: /usr/sap/hostctrl/exe/saphostctrl
+    - target: /etc/.ibm/registry/InstallationManager.dat
+    - target: /opt/IBM/WebSphere/AppServer
+    - target: /opt/IBM/WebSphere/AppServer/profiles/AppSrv01
+    - target: /opt/rh/eap7/root/usr/share/wildfly/domain/configuration/domain.xml
+    - target: /opt/rh/eap7/root/usr/share/wildfly/standalone/configuration/standalone.xml
+    - target: /opt/tomcat/bin/catalina.sh
+    - target: /opt/tomcat/conf/server.xml
+    - target: /u01/app/oracle/domains/base/bin/startNodeManager.sh
+    - target: /u01/app/oracle/domains/base/startWebLogic.sh
+    - target: /home/oracle/oraInventory
+    - target: /u01/app/oracle/domains/base/config/config.xml
+    - target: /var/lib/pgsql/data/postgresql.conf
+  filename:
+  file_mtime:
+  prod_default:
+  mode:
+- name: default_category
+  guid:
+  item_type: category
+  definition:
+    content:
+    - target: accounts
+    - target: services
+    - target: software
+    - target: system
+    - target: vmconfig
+    - target: vmevents
+  filename:
+  file_mtime:
+  prod_default:
+  mode:</programlisting>
+</para>
+</formalpara>
+<calloutlist>
+<callout arearefs="CO5-1">
+<para>If you change the profile name from <literal>default</literal>, you must <link xlink:href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/assigning_a_custom_analysis_profile_to_a_virtual_machine/index#create-vm-control-policy">create a control policy</link> and add it to the vSphere provider.</para>
+</callout>
+<callout arearefs="CO5-2">
+<para>You can add or modify targets for <literal>item_type: file</literal>.</para>
+</callout>
+<callout arearefs="CO5-3 CO5-4">
+<para>Do not change <literal>content: true</literal> for this target.</para>
+</callout>
+</calloutlist>
+</appendix>
+</book>

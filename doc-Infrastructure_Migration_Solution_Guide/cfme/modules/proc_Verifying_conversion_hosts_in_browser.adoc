@@ -3,25 +3,28 @@
 // IMS_1.2/master.adoc
 // IMS_1.3/master.adoc
 [id='Verifying_{context}_conversion_hosts_in_browser']
-= Verifying the conversion hosts in a browser
+= Verifying the conversion hosts
 
-You can verify your conversion hosts in a browser:
+You can verify your conversion hosts by using the CloudForms API.
 
-. In the address bar of a browser, enter the following:
-+
-[options="nowrap" subs="+quotes,verbatim"]
-----
-https://<CloudForms_FQDN>/api/conversion_hosts <1>
-----
-<1> Specify the FQDN of the CloudForms machine.
-+
-A log-in screen is displayed.
+.Procedure
 
-. Enter your CloudForms *Username* and *Password* and click *Sign in*.
-+
-The conversion hosts and their IDs are displayed in JSON format in the output:
-+
-[options="nowrap" subs="+quotes,verbatim"]
+. Verify the conversion hosts:
+
 ----
-{"name":"conversion_hosts","count":3,"subcount":3,"pages":1,"resources":[{"href":"https://cloudforms.example.com/api/conversion_hosts/10000000000001"},{"href":"https://cloudforms.example.com/api/conversion_hosts/10000000000002"},{"href":"https://cloudforms.example.com/api/conversion_hosts/10000000000003"}],"actions":[{"name":"create","method":"post","href":"https://cloudforms.example.com/api/conversion_hosts"},{"name":"edit","method":"post","href":"https://cloudforms.example.com/api/conversion_hosts"},{"name":"delete","method":"post","href":"https://cloudforms.example.com/api/conversion_hosts"}],"links":{"self":"https://cloudforms.example.com/api/conversion_hosts?offset=0","first":"https://cloudforms.example.com/api/conversion_hosts?offset=0","last":"https://cloudforms.example.com/api/conversion_hosts?offset=0"}}
+$ curl -s -k -u <user>:<password> 'https://<CloudForms_FQDN>/api/conversion_hosts' <1>
+----
+<1> Specify your CloudForms user name, password, and FQDN.
++
+The conversion host IDs appear at the end of the `resources` URL, after `/api/conversion_hosts/`:
++
+[source,json]
+----
+{
+  "name":"conversion_hosts",
+  ...
+  "resources": [{"href":"https://<CloudForms_FQDN>/api/conversion_hosts/10000000000001"},{"href":"https://<CloudForms_FQDN>/api/conversion_hosts/10000000000002"},{"href":"https://<CloudForms_FQDN>/api/conversion_hosts/10000000000003"}],
+  ...
+  }
+}
 ----

@@ -16,7 +16,7 @@ Red Hat Infrastructure Migration Solution 1.1 enables you to migrate virtual mac
 Red Hat Virtualization 4.2::
 Red Hat Virtualization (RHV) provides a virtualization platform built on Red Hat Enterprise Linux (RHEL). You can manage your virtual infrastructure, including hosts, virtual machines, networks, storage, and users, from a centralized graphical user interface or with a REST API. See link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/[RHV 4.2 documentation] for more information.
 
-Red Hat OpenStack Platform 13 (or later)::
+Red Hat OpenStack Platform 13 or later::
 Red Hat OpenStack Platform (RHOSP) provides a scalable, fault-tolerant, private or public cloud based on Red Hat Enterprise Linux (RHEL). See link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform[RHOSP documentation] for more information.
 
 Red Hat CloudForms 4.7::
@@ -27,7 +27,7 @@ Red Hat CloudForms is the environment in which you perform the migration. CloudF
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat Virtualization
 
-This guide describes how to plan your migration, to prepare the VMware and Red Hat Virtualization (RHV) environments, and to migrate your VMware virtual machines.
+This guide describes how to plan your migration, to prepare the VMware and Red Hat Virtualization environments, and to migrate your VMware virtual machines.
 
 [id='Understanding_the_migration_{context}']
 == Understanding the migration
@@ -68,28 +68,30 @@ include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
 include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
 
 [id='Preparing_the_rhv_environment_{context}']
-=== Preparing the Red Hat environment
+=== Installing and configuring the Red Hat environment
 
-You can install and configure Red Hat Virtualization (RHV) and CloudForms.
+You can install and configure Red Hat Virtualization and CloudForms.
 
 include::modules/proc_Installing_configuring_rhv.adoc[leveloffset=+3]
 include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 
-==== Configuring the Red Hat Virtualization conversion hosts
+=== Configuring the Red Hat Virtualization conversion hosts
 
-You can configure the Red Hat Virtualization (RHV) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) with Ansible playbooks. VDDK converts the VMware disks.
+You can configure the Red Hat Virtualization conversion hosts with Ansible playbooks to use the VMware Virtual Disk Development Kit (VDDK). VDDK converts the VMware disks.
 
-include::modules/proc_Downloading_vddk.adoc[leveloffset=+4]
-include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+4]
-include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+4]
+You then authenticate the conversion hosts in the CloudForms user interface.
+
+include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+3]
+include::modules/proc_Authenticating_rhv_conversion_hosts.adoc[leveloffset=+3]
 
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
-You can create an infrastructure mapping and create and run a migration plan in the CloudForms user interface.
+You can create an infrastructure mapping in the CloudForms user interface. You then create and run a migration plan.
 
 Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations_{context}[change the maximum number of concurrent migrations for conversion hosts or providers] to control the migration process.
-
+(RHV)
 === Migration prerequisites
 
 Check your migration for the following conditions, which have prerequisites:
@@ -181,7 +183,7 @@ include::modules/proc_Configuring_secure_remote_login_to_the_vmware_hypervisors.
 [id="Migrating_from_vmware_to_{context}"]
 = Migrating from VMware to Red Hat OpenStack Platform
 
-This guide describes how to plan your migration, to prepare the VMware and Red Hat OpenStack Platform (RHOSP) environments, and to migrate the virtual machines.
+This guide describes how to plan your migration, to prepare the VMware and Red Hat OpenStack Platform environments, and to migrate your VMware virtual machines.
 
 == Understanding the migration
 
@@ -219,26 +221,28 @@ See xref:Migration_network_requirements_{context}[] for firewall rules.
 include::modules/proc_Preparing_the_vmware_virtual_machines.adoc[leveloffset=+3]
 include::modules/proc_Configuring_vmware_hypervisor_for_more_than_10_concurrent_vddk_migrations.adoc[leveloffset=+3]
 
-=== Preparing the Red Hat environment
+=== Installing and configuring the Red Hat environment
 
-You can install and configure Red Hat OpenStack Platform (RHOSP) and CloudForms.
+You can install and configure Red Hat OpenStack Platform and CloudForms.
 
 include::modules/proc_Installing_osp.adoc[leveloffset=+3]
 include::modules/proc_Installing_configuring_cf.adoc[leveloffset=+3]
 
 [id='Deploying_conversion_hosts-{context}']
-==== Deploying the Red Hat OpenStack Platform conversion hosts
+=== Creating and configuring the Red Hat OpenStack Platform conversion hosts
 
-You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts to use the VMware Virtual Disk Development Kit (VDDK) with Ansible playbooks. VDDK converts the VMware disks.
+You can create the Red Hat OpenStack Platform conversion hosts.
 
-include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+4]
-include::modules/proc_Downloading_vddk.adoc[leveloffset=+4]
-include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+4]
+You then configure the conversion hosts with Ansible playbooks to use the VMware Virtual Disk Development Kit (VDDK). VDDK converts the VMware disks.
+
+include::modules/proc_Creating_osp_conversion_hosts.adoc[leveloffset=+3]
+include::modules/proc_Downloading_vddk.adoc[leveloffset=+3]
+include::modules/proc_Configuring_conversion_hosts_ansible.adoc[leveloffset=+3]
 
 [id='Migrating_virtual_machines_{context}']
 == Migrating the virtual machines
 
-You can create an infrastructure mapping and create and run a migration plan in the CloudForms user interface.
+You can create an infrastructure mapping in the CloudForms user interface. You then create and run a migration plan.
 
 Optionally, you can xref:Changing_the_maximum_number_of_concurrent_migrations_{context}[change the maximum number of concurrent migrations for conversion hosts or providers] to control the migration process.
 

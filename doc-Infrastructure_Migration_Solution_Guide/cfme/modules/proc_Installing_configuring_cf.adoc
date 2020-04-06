@@ -13,21 +13,27 @@ If you change or remove a provider in CloudForms, your infrastructure mappings o
 .Procedure
 
 ifdef::rhv_1-1_vddk[]
-. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[CloudForms 4.7.0] with CFME 5.10.3 on the Manager machine.
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[CloudForms 4.7] with CFME 5.10.3 on the Manager machine.
 +
 [NOTE]
 ====
 CFME 5.10.4 does not support migration.
 ====
 endif::rhv_1-1_vddk[]
-ifdef::rhv_1-2_vddk,rhv_1-3_vddk[]
-. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[CloudForms 4.7.6] (or later) on the Manager machine.
+ifdef::rhv_1-2_vddk[]
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/installing_red_hat_cloudforms_on_red_hat_virtualization[CloudForms 4.7] on the Manager machine.
+endif::[]
+ifdef::rhv_1-3_vddk[]
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/installing_red_hat_cloudforms_on_red_hat_virtualization[CloudForms 5.0] on the Manager machine.
 endif::[]
 ifdef::osp_1-1_vddk[]
-. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[CloudForms 4.7.0] with the CFME 5.10.3 virtual appliance on Red Hat OpenStack Platform (RHOSP).
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[CloudForms 4.7] with the CFME 5.10.3 virtual appliance on Red Hat OpenStack Platform (RHOSP).
 endif::osp_1-1_vddk[]
 ifdef::osp_1-2_vddk[]
-. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[CloudForms 4.7.6] (or later) on Red Hat OpenStack Platform (RHOSP).
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[CloudForms 4.7] on Red Hat OpenStack Platform (RHOSP).
+endif::[]
+ifdef::osp_1-3_vddk[]
+. Install link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/installing_red_hat_cloudforms_on_red_hat_openstack_platform/[CloudForms 5.0] on Red Hat OpenStack Platform (RHOSP).
 endif::[]
 ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 . Enable SmartState Analysis:
@@ -37,18 +43,23 @@ ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 .. In the right pane, in the *Server* tab, set *SmartState Analysis* to *On* and click *Save*.
 endif::[]
 
-. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#vmware_vcenter_providers[Add VMware to CloudForms] as an infrastructure provider.
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/infrastructure_providers#adding_a_vmware_vcenter_provider[Add VMware vCenter to CloudForms] as an infrastructure provider.
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/infrastructure_providers#authenticating_vmware_hosts[Authenticate the VMware vCenter hosts].
 
 ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
-. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_virtualization_provider[Add Red Hat Virtualization to CloudForms] as an infrastructure provider.
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/#adding_a_red_hat_virtualization_provider[Add Red Hat Virtualization to CloudForms] as an infrastructure provider.
 endif::[]
 ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_an_openstack_infrastructure_provider[Add Red Hat OpenStack Platform to CloudForms] as an infrastructure provider.
+. link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/managing_providers/#adding_an_openstack_infrastructure_provider[Add Red Hat OpenStack Platform to CloudForms] as an infrastructure provider.
 +
 Do not complete the fields in the *RSA key pair* tab. You will add the SSH private key when you configure the conversion hosts.
 
 . If the RHOSP provider has been active for a while, you must wait for CloudForms to update its event history before attempting to use the provider. You can check the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/index#viewing_the_management_system_timeline[cloud provider timeline] to verify that all events have been processed.
 endif::[]
+
+. Click *Compute* -> *Infrastructure* -> *Providers* to verify that CloudForms can access the providers and hosts.
+
 ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
-. https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/general_configuration/configuration#server-diagnostics[Ensure that the event monitor workers are running].
+. https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html/general_configuration/configuration#server-diagnostics[Check the event monitor workers] to verify that they are running.
 endif::[]

@@ -447,7 +447,80 @@ GET /api/vms/171/policy_profiles?expand=resources&attributes=miq_policies
 
 At this point, the compliance policy is properly assigned to the virtual machine. If configured via a schedule
 for the encompassing region, the compliance checks will run as scheduled. They can also be executed on
-the specific virtual machine via the user interface.
+the specific virtual machine via the API as follows:
+
+=== Requesting a compliance check on the virtual machine
+
+==== Request:
+
+----
+POST /api/vms/171
+----
+
+[source,json]
+----
+{
+  "action" : "check_compliance"
+}
+----
+
+==== Response:
+
+[source,json]
+----
+{
+  "success" : true,
+  "message": "VM id:171 name:'aab-ldap' check compliance requested",
+  "task_id": "35",
+  "task_href": "http://localhost:3000/api/tasks/41",
+  "href": "http://localhost:3000/api/vms/171"
+}
+----
+
+=== Waiting for the compliance check to complete
+
+One can find out when the compliance check completes by querying the
+task generated for it and look for the state attribute as follows:
+
+----
+GET /api/tasks/41
+----
+
+==== Response:
+
+[source,json]
+----
+{
+  "href": "http://localhost:3000/api/tasks/41",
+  "id": "41",
+  "name": "VM id:171 name:'aab-ldap' check compliance requested",
+  "state": "Finished",
+  "status": "Ok",
+  "message": "Task completed successfully",
+  "userid": "admin",
+  "created_on": "2020-04-09T21:16:07Z",
+  "updated_on": "2020-04-09T21:16:12Z",
+  "pct_complete": null,
+  "context_data": null,
+  "results": null,
+  "miq_server_id": "3",
+  "identifier": null,
+  "started_on": "2020-04-09T21:16:09Z",
+  "zone": null,
+  "actions": [
+    {
+      "name": "delete",
+      "method": "post",
+      "href": "http://localhost:3000/api/tasks/41"
+    },
+    {
+      "name": "delete",
+      "method": "delete",
+      "href": "http://localhost:3000/api/tasks/41"
+    }
+  ]
+}
+----
 
 === Querying all compliances run for the virtual machine
 
@@ -666,11 +739,6 @@ GET /api/vms/171?attributes=last_compliance,last_compliance_status
     },
     {
       "name": "reset",
-      "method": "post",
-      "href": "http://localhost:3000/api/vms/171"
-    },
-    {
-      "name": "retire",
       "method": "post",
       "href": "http://localhost:3000/api/vms/171"
     },

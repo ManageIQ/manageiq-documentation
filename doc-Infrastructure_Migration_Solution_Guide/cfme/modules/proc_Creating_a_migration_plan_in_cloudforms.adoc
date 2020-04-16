@@ -2,6 +2,7 @@
 //
 // IMS_1.1/master.adoc
 // IMS_1.2/master.adoc
+// IMS_1.3/master.adoc
 [id="Creating_a_migration_plan_in_cloudforms_{context}"]
 = Creating and running a migration plan
 
@@ -27,11 +28,9 @@ endif::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
 +
 image:Create_Migration_Plan_screen.png[]
 
-. In the *General* screen, add the details of the migration plan:
-
-.. Select an infrastructure mapping from the drop-down list.
-.. Enter the migration plan *Name* and (optional) *Description*.
-.. Select a virtual machine discovery method:
+. In the *General* screen, select an infrastructure mapping from the drop-down list.
+. Enter the migration plan *Name* and (optional) *Description*.
+. Select a virtual machine discovery method:
 
 * *Choose from a list of VMs discovered in the selected infrastructure mapping*
 +
@@ -41,7 +40,7 @@ If the virtual machines cannot be discovered, check that the source datastores a
 +
 A CSV file is required for previously migrated source virtual machines and recommended for large migrations.
 
-.. Click *Next*.
+. Click *Next*.
 
 . In the *VMs* screen, select the virtual machines for migration:
 
@@ -59,26 +58,24 @@ If the virtual machines cannot be added to the migration plan, check the CSV fil
 [NOTE]
 ====
 If the *Create Migration Plan* wizard freezes, refresh the web page, check the CSV file for errors (for example, virtual machines with duplicate `Name` fields and no other fields to distinguish them), and create a new migration plan.
-
 ====
 
-.. Click *Next*.
+. Click *Next*.
 
 ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-. In the *Instance Properties* screen, select the networks and/or flavors:
-
-.. Click the pencil icon to edit the network or flavor of each selected virtual machine.
+. In the *Instance Properties* screen, click the pencil icon to edit the network or flavor of each selected virtual machine.
 +
 Flavors that are too small for the virtual machine are marked with an asterisk (`*`). If you have not created flavors for the migration, CloudForms tries to map the source virtual machines to existing flavors.
 
-.. Click *Next*.
+. Click *Next*.
 endif::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
 
 . In the *Advanced Options* screen, select the playbook service options:
 
 .. Select a premigration and/or postmigration playbook service from the dropdown lists.
 .. Select the virtual machines on which to run the playbook services.
-.. Click *Next*.
+
+. Click *Next*.
 
 . In the *Schedule* screen, select a schedule option and click *Create*:
 
@@ -88,7 +85,17 @@ The migration plan is saved in *Migration Plans Not Started* and will not run un
 
 * *Start migration immediately*
 +
-The migration plan may take some time to complete. Progress bars indicate the amount of transferred data, the number of migrated virtual machines, and the elapsed time. You can xref:Viewing_migration_plan_progress_{context}[view a migration plan's progress] or xref:Canceling_a_migration_plan_{context}[cancel a migration plan in progress].
+The migration plan may take some time to complete. Progress bars indicate the amount of transferred data, the number of migrated virtual machines, and the elapsed time. You can xref:Canceling_a_migration_plan_{context}[cancel a migration plan in progress].
+
+.. To view the progress of a migration plan, Click *Migration Plans in Progress*.
+.. Click a migration plan name to view its details, including the status of the migrating virtual machines.
++
+[NOTE]
+====
+The counter in *Compute* -> *Migration* -> *Migration Plans* may be a few seconds ahead of the counter in the migration plan details view.
+
+The *Migration Plans* counter displays the total time for running the migration plan. The migration plan details counter displays the time for migrating the virtual machines.
+====
 
 . In the *Results* screen, click *Close*.
 +
@@ -108,21 +115,6 @@ To schedule a saved migration plan to run in the future:
 . In the *Schedule Migration Plan* window, select a date and time and click *Schedule*.
 +
 The plan's status is *Migration Scheduled* with the date and time.
-
-[id="Viewing_migration_plan_progress_{context}"]
-== Viewing a migration plan in progress
-
-To view the progress of a migration plan:
-
-. Click *Migration Plans in Progress*.
-. Click a migration plan name to view its details, including the status of the migrating virtual machines.
-+
-[NOTE]
-====
-The counter in *Compute* -> *Migration* -> *Migration Plans* may be a few seconds ahead of the counter in the migration plan details view.
-
-The *Migration Plans* counter displays the total time for running the migration plan. The migration plan details counter displays the time for migrating the virtual machines.
-====
 
 [id="Canceling_a_migration_plan_{context}"]
 == Canceling a migration plan in progress

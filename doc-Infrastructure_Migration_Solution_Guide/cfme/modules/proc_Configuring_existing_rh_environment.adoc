@@ -1,0 +1,42 @@
+// Module included in the following assemblies:
+// IMS_1.1/master.adoc
+// IMS_1.2/master.adoc
+// IMS_1.3/master.adoc
+[id='Configuring_existing_environment_{context}']
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
+= Configuring an existing Red Hat Virtualization environment
+
+If you are migrating to an existing Red Hat Virtualization (RHV) environment, the following guidelines may apply:
+endif::[]
+
+ifdef::rhv_1-1_vddk,rhv_1-2_vddk[]
+* Upgrade RHV to the latest release.
+* Check each conversion host for valid subscriptions and repositories:
++
+----
+# subscription-manager list --consumed
+# yum repolist
+----
+
+* Check each conversion host for existing SSH private keys in `/var/lib/vdsm/.ssh/id_rsa`.
++
+Delete the keys manually before configuring the host. Conversion host configuration does not overwrite existing keys.
+
+* If the MAC address pool range overlaps the VMware MAC address range, ensure that the MAC addresses of the migrating virtual machines do not duplicate those of existing virtual machines.
++
+If you do not create a MAC address pool, the migrated virtual machines will not have MAC addresses in the same range as virtual machines created in Red Hat Virtualization.
+endif::[]
+
+ifdef::rhv_1-3_vddk[]
+* Upgrade RHV to the latest release.
+endif::[]
+
+ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
+= Configuring an existing Red Hat OpenStack Platform environment
+
+If you are migrating to an existing Red Hat OpenStack Platform (RHOSP) environment, the following guidelines may apply:
+
+* When you add the RHOSP provider to CloudForms, wait for CloudForms to update its event history before attempting to use the provider.
++
+You can check the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_providers/index#viewing_the_management_system_timeline[cloud provider timeline] to verify that all events have been processed.
+endif::[]

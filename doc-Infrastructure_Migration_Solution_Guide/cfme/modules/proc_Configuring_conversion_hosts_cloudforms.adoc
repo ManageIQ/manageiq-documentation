@@ -23,7 +23,7 @@ ifdef::osp_1-2_ssh,osp_1-3_ssh[]
 
 You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for SSH transformation in the CloudForms user interface.
 endif::[]
-ifdef::rhv_1-2_ssh,rhv_1-3_ssh[]
+ifdef::rhv_1-2_ssh,rhv_1-2_vddk[]
 .Prerequisites
 
 * If the RHV provider has been active for a while, verify that each host has valid subscriptions and repositories by logging in using SSH and running the following commands:
@@ -55,16 +55,16 @@ endif::[]
 
 . In the *Host(s)* screen, select one or more hosts from the dropdown list and click *Next*.
 
-ifdef::rhv_1-2_vddk,rhv_1-2_ssh,rhv_1-3_vddk,rhv_1-3_ssh,osp_1-2_vddk,osp_1-2_ssh,osp_1-3_vddk,osp_1-3_ssh[]
+ifdef::rhv_1-2_vddk,rhv_1-2_ssh[]
 . In the *Authentication* screen, click *Browse* to browse to the Manager's SSH private key or paste it in the *Conversion host SSH private key* field.
-endif::[]
-ifdef::rhv_1-2_vddk[]
 +
 The Manager deploys a private SSH key on the conversion hosts in order to send commands and run playbooks. The default key file is `/etc/pki/ovirt-engine/keys/engine_id_rsa` on the Manager machine.
 endif::[]
-ifdef::osp_1-2_vddk,osp_1-3_vddk,osp_1-2_ssh,osp_1-3_ssh[]
+ifdef::rhv_1-3_vddk,rhv_1-3_ssh,osp_1-2_vddk,osp_1-2_ssh,osp_1-3_vddk,osp_1-3_ssh[]
+. In the *Authentication* screen, click *Browse* to browse to the SSH private
+key of the SSH key pair that you used when you created the conversion host or paste the key in the *Conversion host SSH private key* field.
 +
-RHOSP uses a private SSH key to connect to the conversion hosts.
+CloudForms uses this private SSH key to connect to the conversion host.
 endif::[]
 
 ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
@@ -74,6 +74,7 @@ endif::[]
 ifdef::rhv_1-3_vddk,osp_1-3_vddk[]
 . Set *Verify TLS Certificates* to *Yes* and click *Browse* to upload your CA certificates file.
 endif::[]
+
 ifdef::rhv_1-2_ssh,osp_1-2_ssh,rhv_1-3_ssh,osp_1-3_ssh[]
 . Select *SSH* as the *Transformation method*.
 . Click *Browse* to browse to the SSH private key you created for enabling SSH access on the VMware hypervisors or paste it in the *VMware hypervisors SSH private key field*.
@@ -89,4 +90,5 @@ If an error occurs, you can download the conversion host configuration log by cl
 
 You can click *Retry* if the conversion host configuration failed for reasons unconnected with your environment.
 
-You can click *Remove* to remove the configuration from a configured conversion host.
+// You can click *Remove* to remove the configuration from a configured conversion host.
+// Commented out pending bug fix: https://bugzilla.redhat.com/show_bug.cgi?id=1718740#c5

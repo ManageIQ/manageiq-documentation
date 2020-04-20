@@ -1,0 +1,47 @@
+// Module included in the following assemblies:
+// doc-Migration_Analytics_Guide/cfme/MA_1.0/master.adoc
+[id="Installing-vddk_{context}"]
+= Installing the VMware Virtual Disk Development Kit
+
+You can download and install the VMware Virtual Disk Development Kit (VDDK) SDK. VDDK is required for SmartState analysis of the VMware virtual machines.
+
+.Procedure
+
+. Download VDDK:
+.. In a browser, navigate to link:https://code.vmware.com/sdks[VMware {code} SDKs].
+.. Click *Virtual Disk Development Kit (VDDK)*.
+.. Select the VDDK release specified for your VMware version.
+.. Click *Download* and log in with your VMware account credentials.
+.. Save and copy the VDDK archive file to the CloudForms appliance.
+
+. Log in to the CloudForms appliance as root user.
+. Extract the VDDK archive file:
++
+----
+# tar -xvf VMware-vix-disklib-[version].x86_64.tar.gz
+----
+
+. Copy the VDDK library to `/usr/lib/vmware-vix-disklib/`:
++
+----
+# cp vmware-vix-disklib-distrib/ -rf /usr/lib/vmware-vix-disklib/
+----
+
+. Create links for the VDDK library:
++
+----
+# ln -s /usr/lib/vmware-vix-disklib/lib64/libvixDiskLib.so /usr/lib/libvixDiskLib.so
+# ln -s /usr/lib/vmware-vix-disklib/lib64/libvixDiskLib.so.6 /usr/lib/libvixDiskLib.so.6
+----
+
+. Run `ldconfig` so that CloudForms can find the VDDK library:
++
+----
+# ldconfig -p | grep vix
+----
+
+. Restart the appliance:
++
+----
+# systemctl restart evmserverd
+----

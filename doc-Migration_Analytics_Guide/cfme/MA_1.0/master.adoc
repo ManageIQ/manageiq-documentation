@@ -14,9 +14,9 @@
 
 toc::[]
 
-Migration Analytics examines your VMware virtual machines and collects data about their operating systems and workloads, using the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms[Red Hat CloudForms] user interface. In CloudForms, you run an analysis scan on the VMware virtual machines and download the collected data as an inventory data file.
+Migration Analytics examines your VMware virtual machines and collects data about their operating systems and workloads using link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms[Red Hat CloudForms]. In the CloudForms user interface, you can run an analysis scan on the VMware virtual machines and download the collected data as an inventory data file.
 
-You create a report with the link:https://cloud.redhat.com/beta[Migration Analytics service], which uploads the inventory data file and analyzes it. The report provides an estimate of the initial savings in migrating to Red Hat, a detailed analysis of the VMware virtual machines, and recommendations to help you plan your migration.
+You create a report with the link:https://cloud.redhat.com/beta[Migration Analytics service], which uploads and analyzes the data. The report provides an estimate of the initial savings in migrating to Red Hat, a detailed analysis of the VMware virtual machines, and recommendations to help you plan your migration.
 
 Migration Analytics supports VMware version 6.0 or later.
 
@@ -27,18 +27,23 @@ Migration Analytics is available as a technology preview for Red Hat CloudForms 
 
 include::modules/Migration-analytics-workflow.adoc[leveloffset=+1]
 
-== Migration Analytics requirements
+=== Migration Analytics requirements
 
-include::modules/Supported-browsers.adoc[leveloffset=+2]
-include::modules/Supported-platforms.adoc[leveloffset=+2]
-include::modules/SSA-support.adoc[leveloffset=+2]
+include::modules/Supported-browsers.adoc[leveloffset=+3]
+include::modules/Supported-platforms.adoc[leveloffset=+3]
+include::modules/SSA-support.adoc[leveloffset=+3]
 
-[id='Deploying-migration-analytics_{context}']
-== Deploying Migration Analytics
+== Installing Red Hat CloudForms and the VMware Virtual Disk Development Kit
 
-You can deploy Migration Analytics by installing CloudForms on VMware, adding the VMware provider, and configuring CloudForms.
+You can install the Red Hat CloudForms appliance on VMware vSphere. You then download and install the VMware Virtual Disk Development Kit (VDDK) SDK. VDDK is required for SmartState analysis of the VMware virtual machines.
 
 include::modules/Installing-cloudforms.adoc[leveloffset=+2]
+include::modules/Installing-vddk.adoc[leveloffset=+2]
+
+== Configuring Red Hat CloudForms for Migration Analytics
+
+In the CloudForms user interface, you can add VMware vCenter as an infrastructure provider and assign a control policy to apply a SmartState analysis profile. You then configure CloudForms for Migration Analytics.
+
 include::modules/Adding-provider-to-cloudforms.adoc[leveloffset=+2]
 include::modules/Assigning_control_policy_to_provider.adoc[leveloffset=+2]
 include::modules/Configuring-cloudforms.adoc[leveloffset=+2]
@@ -46,9 +51,9 @@ include::modules/Configuring-cloudforms.adoc[leveloffset=+2]
 [id='Managing-analysis-profiles_{context}']
 == Managing analysis profiles
 
-A `default` analysis profile is used for scanning your VMware virtual machines.
+A `default` SmartState analysis profile is used to scan your VMware virtual machines.
 
-You can create a custom analysis profile by modifying the `custom_profile.yaml` template in xref:Custom-profile-yaml-example[].
+You can create a custom analysis profile by modifying the xref:Custom-profile-yaml-example[`custom_profile.yaml` template].
 
 You can export existing analysis profiles for backup, troubleshooting, or updates.
 

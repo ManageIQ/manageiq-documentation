@@ -1,9 +1,9 @@
 // Module included in the following assemblies:
 // doc-Migration_Analytics_Guide/cfme/master.adoc
 [id='Configuring-cloudforms_{context}']
-= Configuring Red Hat CloudForms for Migration Analytics
+= Enabling Migration Analytics in Red Hat CloudForms
 
-You can configure Red Hat CloudForms for Migration Analytics.
+You can enable Migration Analytics in Red Hat CloudForms.
 
 .Procedure
 
@@ -11,28 +11,25 @@ You can configure Red Hat CloudForms for Migration Analytics.
 . In the header bar, click image:config-gear.png[] (*Configuration*).
 . Click the *Settings* accordion and then click *Zones*.
 . Click the zone in which the EVM server is located and select your EVM server.
-. In the *Server* tab, scroll down to *Server Roles*.
-. Set *SmartProxy* to *On*.
-+
-[NOTE]
-====
-*SmartState analysis* is *On* by default. Do not change this setting.
-====
-
-. In the *Advanced* tab, under `:prototype::migration_analytics:`, change the value of the `enabled` parameter to `true`:
+. In the *Advanced* tab, update the values of `migration_analytics` and `scan_via_host`:
 +
 [source,yaml]
 ----
 :prototype:
   :migration_analytics:
-    :enabled: true
+    :enabled: true <1>
+...
+:coresident_miqproxy:
+  :scan_via_host: false <2>
 ----
+<1> Changing the value to `true` enables the Migration Analytics menu.
+<2> Changing the value to `false` enables the VM]987654WE/.,e environment to be scanned without adding each VMware host's credentials to  CloudForms.
 
 . Click *Save*.
 . Log out of the CloudForms user interface.
 . Log in to the CloudForms appliance as root user.
-. Restart the EVM server:
+. Restart the CloudForms server:
 +
 ----
-# systemctl restart evmserverd.service
+# systemctl restart evmserverd
 ----

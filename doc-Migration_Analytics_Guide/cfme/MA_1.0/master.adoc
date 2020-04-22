@@ -35,23 +35,47 @@ include::modules/SSA-support.adoc[leveloffset=+3]
 
 == Installing Red Hat CloudForms and the VMware Virtual Disk Development Kit
 
-You can install the Red Hat CloudForms appliance on VMware vSphere. You then download and install the VMware Virtual Disk Development Kit (VDDK) SDK. VDDK is required for SmartState analysis of the VMware virtual machines.
+You can install the Red Hat CloudForms appliance on VMware vSphere and configure the CloudForms internal database.
+
+You then download and install the VMware Virtual Disk Development Kit (VDDK) SDK. VDDK is required for SmartState analysis of the VMware virtual machines.
+
+.Optional: Automated VDDK installation and CloudForms configuration
+
+You can install VDDK, assign a control policy to the VMware vCenter provider, and configure CloudForms with a link:https://access.redhat.com/articles/5001061[configuration script].
+
+You must perform the following steps before running the script:
+
+* xref:Installing-cloudforms_{context}[]
+* xref:Configuring-cf-internal-database_{context}[]
+* xref:Downloading_vddk_{context}[]
+* xref:Adding-a-provider-to-cloudforms_{context}[]
+
+After running the script, you can skip the following steps:
+
+* xref:Installing-vddk_{context}[]
+* xref:Assigning_control_policy_to_provider_{context}[]
+* xref:Configuring-cloudforms_{context}[]
+* xref:Creating-a-default-smartstate-analysis-profile_{context}[]
+
+You are ready to xref:Scanning-vms-for-migration-analytics_{context}[scan your VMware virtual machines].
 
 include::modules/Installing-cloudforms.adoc[leveloffset=+2]
+include::modules/Configuring-cf-internal-db.adoc[leveloffset=+2]
+include::modules/Downloading-vddk.adoc[leveloffset=+2]
 include::modules/Installing-vddk.adoc[leveloffset=+2]
 
 == Configuring Red Hat CloudForms for Migration Analytics
 
-In the CloudForms user interface, you can add VMware vCenter as an infrastructure provider and assign a control policy to apply a SmartState analysis profile. You then configure CloudForms for Migration Analytics.
+You can add VMware vCenter to Red Hat CloudForms and assign a control policy. You then configure CloudForms for Migration Analytics.
 
 include::modules/Adding-provider-to-cloudforms.adoc[leveloffset=+2]
 include::modules/Assigning_control_policy_to_provider.adoc[leveloffset=+2]
 include::modules/Configuring-cloudforms.adoc[leveloffset=+2]
 
 [id='Managing-analysis-profiles_{context}']
-== Managing analysis profiles
+== Managing SmartState analysis profiles
 
-A `default` SmartState analysis profile is used to scan your VMware virtual machines.
+You can create a `default` SmartState analysis profile to scan your VMware virtual machines.
 
 You can create a custom analysis profile by modifying the xref:Custom-profile-yaml-example[`custom_profile.yaml` template].
 

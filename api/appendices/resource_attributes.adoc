@@ -314,8 +314,70 @@ POST /api/groups
 [cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
-| filters | hash | Hash that contains the *belongsto* and *managed* arrays of filters to assign to the group.
+| filters | hash | Hash that contains the *belongsto* and *managed* arrays of filters to assign to the group
+| filter_expression | hash | Hash representing the expression used for filtering by Tag
 |=====================
+
+===== Filters hash:
+
+The `filters` hash can include the following keys:
+
+- *belongsto*
+  * Array of tags representing the following types of objects:
+    ** VMs & Templates
+    ** Clusters, Datastores, Hosts, Managers & Providers
+
+- *managed*
+  * Array of tag arrays representing:
+    ** My Company Tags
+
+Example:
+
+```
+"filters" : {
+  "managed" : [
+    ["/managed/location/ny"],
+    ["/managed/environment/prod"]
+  ],
+  "belongsto" : [
+    "/belongsto/ExtManagementSystem|dev-vc60/EmsFolder|Datacenters/EmsFolder|dev-vc60-DC/EmsFolder|vm/EmsFolder|Alberto-Dev,
+    "/belongsto/ExtManagementSystem|dev-vc60/EmsFolder|Datacenters/EmsFolder|dev-vc60-DC/EmsFolder|host/EmsCluster|dev-vc60-cluster"
+  ]
+}
+```
+
+Alternatively, company tags can be represented with an expression via the _filter_expression_ instead of the _managed_
+tag array in the _filters_ element as follows:
+
+Example with Tags based on expression:
+
+```
+"filters" : {
+  "managed" : null,
+  "belongsto" : [
+    "/belongsto/ExtManagementSystem|dev-vc60/EmsFolder|Datacenters/EmsFolder|dev-vc60-DC/EmsFolder|vm/EmsFolder|Alberto-Dev,
+    "/belongsto/ExtManagementSystem|dev-vc60/EmsFolder|Datacenters/EmsFolder|dev-vc60-DC/EmsFolder|host/EmsCluster|dev-vc60-cluster"
+  ]
+},
+"filter_expression" : {
+  "exp": {
+    "and": [
+      {
+        "CONTAINS": {
+          "tag": "managed-location",
+          "value": "ny"
+        }
+      },
+      {
+        "CONTAINS": {
+          "tag": "managed-environment",
+          "value": "prod"
+        }
+      }
+    ]
+  }
+}
+```
 
 ___
 

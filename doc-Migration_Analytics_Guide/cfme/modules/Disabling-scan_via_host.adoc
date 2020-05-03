@@ -1,9 +1,9 @@
 // Module included in the following assemblies:
 // doc-Migration_Analytics_Guide/cfme/master.adoc
-[id='Configuring-cloudforms_{context}']
-= Enabling Migration Analytics in Red Hat CloudForms
+[id='Disabling-scan_via_host_{context}']
+= Disabling `scan_via_host`
 
-You can enable Migration Analytics in Red Hat CloudForms.
+You can disable `scan_via_host` so that you do not have to authenticate each VMware host manually in CloudForms.
 
 .Procedure
 
@@ -11,19 +11,13 @@ You can enable Migration Analytics in Red Hat CloudForms.
 . In the header bar, click image:config-gear.png[] (*Configuration*).
 . Click the *Settings* accordion and then click *Zones*.
 . Click the zone in which the EVM server is located and select your EVM server.
-. In the *Advanced* tab, update the values of `migration_analytics` and `scan_via_host`:
+. In the *Advanced* tab, change the value of `scan_via_host` to `false`:
 +
 [source,yaml]
 ----
-:prototype:
-  :migration_analytics:
-    :enabled: true <1>
-...
 :coresident_miqproxy:
-  :scan_via_host: false <2>
+  :scan_via_host: false
 ----
-<1> Changing the value to `true` enables the Migration Analytics menu.
-<2> Changing the value to `false` enables the VMware environment to be scanned without adding each VMware host's credentials to  CloudForms.
 
 . Click *Save*.
 . Log out of the CloudForms user interface.

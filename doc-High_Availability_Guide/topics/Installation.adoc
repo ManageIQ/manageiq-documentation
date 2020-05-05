@@ -1,74 +1,77 @@
 [[installation]]
 == Installing the Appliances
 
-This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two (at minimum) {product-title_short} appliances.
+This chapter outlines the steps for installing and configuring the {product-title} components needed for high availability: a database cluster comprised of primary and standby database-only appliances, and two (at minimum) non-database {product-title_short} appliances.
 
 [[installation_primary_db]]
 === Installing the Primary Database-Only Appliance
 
-The primary database-only appliance functions as an external database to the {product-title_short} appliances. This procedure creates the database.
+The primary database-only appliance functions as an external database to the non-database {product-title_short} appliances.
 
-. Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
+. Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database at a size appropriate for your deployment. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
 +
 ifdef::cfme[]
 [NOTE]
 ====
-See the installation guide for your host platform (such as https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[_Installing Red Hat CloudForms on Red Hat Virtualization_]) for detailed steps on deploying an appliance with an extra disk.
+See the installation guide for your host platform (such as https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/installing_red_hat_cloudforms_on_red_hat_virtualization/[_Installing Red Hat CloudForms on Red Hat Virtualization_]) for detailed steps on deploying an appliance with an extra disk.
 ====
 endif::cfme[]
 +
-. Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.
-. SSH into the {product-title_short} appliance to enter the appliance console. 
-. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
-. Re-synchronize time information across the appliances:
+. Configure time synchronization on the appliance by editing `/etc/chrony.conf` with valid NTP server information.
+. From your host environment, open the appliance and configure the network:
+.. Log in to the appliance and run the `appliance_console` command to access the appliance console menu.
+.. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Resynchronize time information across the appliances:
 +
 ------
 # systemctl enable chronyd.service
 # systemctl start chronyd.service
 ------
 +
-. In the appliance console, configure the hostname by selecting *Set Hostname*.
-. Select *Configure Database*.
-. Select *Create key* to create the encryption key. You can create a new key, or use an existing key on your system by selecting *Fetch key from remote machine* and following the prompts.
-. Select *Create Internal Database*.
-. Select the database disk. {product-title_short} then activates the configuration.
-. For *Should this appliance run as a standalone database server?*, select `y`. Selecting this option configures this appliance as a database-only appliance, and therefore the {product-title_abbr_uc} application and `evmserverd` processes will not run. This is required in highly available database deployments.
+. In the appliance console, configure the following:
+.. Configure the hostname by selecting *Set Hostname*.
+.. Select *Configure Database*.
+.. Select *Create key* to create the encryption key. You can create a new key, or use an existing key on your system by selecting *Fetch key from remote machine* and following the prompts.
+.. Select *Create Internal Database*.
+.. Select the database disk. {product-title_short} then activates the configuration.
+.. For *Should this appliance run as a standalone database server?*, select `y`. Selecting this option configures this appliance as a database-only appliance, and therefore the {product-title_abbr_uc} application and `evmserverd` processes will not run. This is required in highly available database deployments.
 +
 [WARNING]
 ====
 This configuration is not reversible.
 ====
 +
-. Create the database password.
+.. Create the database password.
 
 [NOTE]
 ====
 Do not create a region at this stage in the procedure.
 ====
 
-You have now created the empty database. 
+You have now created the empty database.
 
-You can check the configuration on the appliance console details screen. If configured successfully, *Local Database Server* shows as `running (primary)`. 
+You can check the configuration on the appliance console details screen. If configured successfully, *Local Database Server* shows as `running (primary)`.
 
-Running the `psql` command also provides information about the database.
+Running the `psql vmdb_production` command also provides information about the database.
 
 
 [[installation_appliance]]
 === Installing the First {product-title_short} Appliance
 
-Install and configure a {product-title_short} appliance to point to the primary database server. You can then create a database region and configure the primary database. This appliance does not serve as a database server. 
+Install and configure a {product-title_short} appliance to point to the primary database server. You can then create a database region and configure the primary database. This appliance does not serve as a database server.
 
-After installing and configuring an empty database-only appliance in xref:installation_primary_db[], the steps in this section create the database schema used by {product-title_short} on the primary database-only appliance, and populate the database with the initial data.  
+After installing and configuring an empty database-only appliance in xref:installation_primary_db[], the steps in this section create the database schema used by {product-title_short} on the primary database-only appliance, and populate the database with the initial data.
 
 [IMPORTANT]
 ====
 Region metadata is required to configure the primary database-only appliance as a primary node in the replication cluster. This must be configured from the {product-title_short} appliance before the primary and secondary database-only appliances can be configured.
 ====
 
-. Deploy a {product-title_short} appliance. There is no requirement for an extra partition on this appliance.
-. Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.
-. SSH into the {product-title_short} appliance to enter the appliance console. 
-. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Deploy a {product-title_short} appliance. There is no requirement for an extra disk on this appliance.
+. Configure time synchronization on the appliance by editing `/etc/chrony.conf` with valid NTP server information.
+. From your host environment, open the appliance and configure the network:
+.. Log in to the appliance and run the `appliance_console` command to access the appliance console menu.
+.. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
 . Re-synchronize time information across the appliances:
 +
 ------
@@ -99,7 +102,7 @@ All appliances in the same region must use the same v2 key.
 Creating a database region will destroy any existing data and cannot be undone.
 ====
 +
-... Assign a unique database region number. 
+... Assign a unique database region number.
 ... Enter the port number.
 ... For *Are you sure you want to continue?* Select `y`.
 .. Enter the primary database-only appliance's name and access details:
@@ -107,7 +110,6 @@ Creating a database region will destroy any existing data and cannot be undone.
 ... Enter a name to identify the database.
 ... Enter the primary database-only appliance's username.
 ... Enter a password for the database and confirm the password.
->>>>>>> 02dc81d3... edits throughout installation and config procedures from testing with consulting
 
 This initializes the database, which takes a few minutes.
 
@@ -119,7 +121,7 @@ You can check the configuration on the appliance console details screen. When co
 
 On the primary database-only appliance you created in xref:installation_primary_db[], initialize the nodes in the database cluster to configure the database replication. Run these steps from the appliance console:
 
-. In the appliance console menu, select *Configure Database Replication*. 
+. In the appliance console menu, select *Configure Database Replication*.
 . Select *Configure Server as Primary*.
 . Set a unique identifier number for the server and enter the database name and credentials:
 .. Select a number to uniquely identify the node in the replication cluster.
@@ -130,7 +132,7 @@ On the primary database-only appliance you created in xref:installation_primary_
 +
 [NOTE]
 ====
-The hostname must be visible to all appliances that communicate with this database, including the {product-title_short} appliances and any global region databases.
+The hostname must be visible to all appliances that communicate with this database, including the non-database {product-title_short} appliances and any global region databases.
 ====
 +
 .. Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
@@ -143,10 +145,13 @@ This configures database replication in the cluster.
 
 The standby database-only appliance is a copy of the primary database-only appliance and takes over the role of primary database in case of failure.
 
-. Deploy a {product-title_short} appliance with an extra partition for the database that is the same size as the primary database-only appliance, as it will contain the same data. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
-. Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.
-. SSH into the {product-title_short} appliance to enter the appliance console. 
-. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+Follow these steps to create a new standby appliance, or to add another standby appliance to the cluster.
+
+. Deploy a {product-title_short} appliance with an extra (and unpartitioned) disk for the database that is the same size as the primary database-only appliance, as it will contain the same data. For recommendations on disk space, see https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements[Database Requirements] in the _Deployment Planning Guide_.
+. Configure time synchronization on the appliance by editing `/etc/chrony.conf` with valid NTP server information.
+. From your host environment, open the appliance and configure the network:
+.. Log in to the appliance and run the `appliance_console` command to access the appliance console menu.
+.. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
 . Re-synchronize time information across the appliances:
 +
 ------
@@ -164,9 +169,9 @@ You can now configure this appliance as a standby database-only appliance in the
 
 The steps to configure the standby database-only appliance are similar to that of the primary database-only appliance, in that they prepare the appliance to be database-only, but as the standby.
 
-On the standby database-only appliance, configure the following:
+On the standby database-only appliance, configure the following from the appliance console:
 
-. In the appliance console menu, select *Configure Database Replication*. 
+. In the appliance console menu, select *Configure Database Replication*.
 . Select *Configure Server as Standby*.
 . Select the database disk. {product-title_short} then activates the configuration.
 . Set a unique identifier number for the standby server and enter the database name and credentials:
@@ -187,7 +192,7 @@ The hostname must be visible to all appliances that communicate with this databa
 
 The standby server will then run an initial synchronization with the primary database, and start locally in standby mode. This takes a few minutes.
 
-Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`. 
+Verify the configuration on the appliance console details screen for the standby server. When configured successfully, *Local Database Server* shows as `running (standby)`.
 
 
 [[installation_appliances_addl]]
@@ -195,10 +200,11 @@ Verify the configuration on the appliance console details screen for the standby
 
 Install a second virtual machine with a {product-title_short} appliance and any additional appliances in the region using the following steps:
 
-. Deploy a {product-title_short} appliance. There is no requirement for an extra partition on this appliance.
-. Configure time synchronization on the appliance by editing `/etc/chronyd.conf` with valid NTP server information.
-. SSH into the {product-title_short} appliance to enter the appliance console. 
-. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
+. Deploy a {product-title_short} appliance. There is no requirement for an extra disk on this appliance.
+. Configure time synchronization on the appliance by editing `/etc/chrony.conf` with valid NTP server information.
+. From your host environment, open the appliance and configure the network:
+.. Log in to the appliance and run the `appliance_console` command to access the appliance console menu.
+.. Configure networking as desired by selecting the *Set DHCP Network Configuration* or *Set Static Network Configuration* option.
 . Re-synchronize time information across the appliances:
 +
 ------
@@ -212,7 +218,7 @@ Install a second virtual machine with a {product-title_short} appliance and any 
 .. Configure this appliance to use the encryption key from the primary database-only appliance:
 ... For *Encryption Key*, select *Fetch key from remote machine*.
 ... Enter the hostname for the primary database-only appliance you previously configured containing the encryption key.
-... Enter the port number. 
+... Enter the port number.
 ... Enter the primary database-only appliance's username.
 ... Enter the primary database-only appliance's password.
 ... Enter the path of the remote encryption key. (For example, `/var/www/miq/vmdb/certs/v2_key`.)
@@ -226,4 +232,3 @@ Install a second virtual machine with a {product-title_short} appliance and any 
 This configuration takes a few minutes to process.
 
 You can check the configuration on the appliance console details screen. When configured successfully, *{product-title_abbr_uc} Server* will show as `running`, and *{product-title_abbr_uc} Database* will show the hostname of the primary database-only appliance.
-

@@ -1,3 +1,9 @@
 source "https://rubygems.org"
 
-gem "ascii_binder", "~> 0.1.3"
+gem "jekyll"
+# gem "minima"
+# group :jekyll_plugins do
+#   gem "jekyll-feed", "~> 0.12"
+# end
+
+gem "rake"

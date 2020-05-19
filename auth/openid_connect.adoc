@@ -14,15 +14,16 @@ module and should work with other OIDC Identity Providers.
 
 The current implementation only secures the Appliance's Web administrative UI with OIDC.
 
-*Note:* The REST API and Self-Service UI do not currently support OIDC.
+*Note:* The Self-Service UI does not currently support OIDC.
 
-1.  <<requirements, Requirements>>
-2. <<apache-configuration, Apache Configuration>>
-3. <<oidc-configuration, OIDC Configuration>>
-4. <<oidc-assertions, OIDC Assertions>>
-5.  <<configuring-the-administrative-ui, Configuring the Administrative UI>>
-6.  <<re-enabling-local-login, Re-Enabling Local Login>>
-7. <<oidc-configuration-cli, Configuring OIDC using the CLI>>
+1. <<requirements, Requirements>>
+2. <<configuring-keycloak, Configuring Keycloak>>
+3. <<oidc-assertions, OIDC Assertions>>
+4. <<apache-configuration, Apache Configuration>>
+5. <<oidc-configuration, OIDC Configuration>>
+6.  <<configuring-the-administrative-ui, Configuring the Administrative UI>>
+7.  <<re-enabling-local-login, Re-Enabling Local Login>>
+8. <<oidc-configuration-cli, Configuring OIDC using the CLI>>
 
 
 [[requirements]]
@@ -33,53 +34,8 @@ The following is needed in order to enable OIDC Authentication to the Appliance:
 * A CentOS/RHEL 7.5 based Appliance
 * A OIDC Identity Provider, (e.g. KeyCloak 3.2.1 or Later)
 
-[[apache-configuration]]
-=== Apache Configuration
-
-Copy the Apache OIDC template configuration files:
-
-```
-# TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
-# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user-openidc.conf \
-    /etc/httpd/conf.d/
-# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-openidc.conf.erb \
-    /etc/httpd/conf.d/manageiq-external-auth-openidc.conf
-```
-
-[[oidc-configuration]]
-=== OIDC Configuration
-
-The Apache _/etc/httpd/conf.d/manageiq-external-auth-openidc.conf_ configuration files must be updated
-with installation specific values:
-
-The defaults in the _manageiq-external-auth-oidc.conf_ file are:
-
-[options="header"]
-|======================================================================================
-| Name                     | Value
-| LogLevel                 | warn
-| OIDCCryptoPassphrase     | sp-cookie
-| OIDCOAuthRemoteUserClaim | username
-|======================================================================================
-
-Installation specific values must be specified in the _manageiq-external-auth-oidc.conf_ file for the following
-parameters, where the _parameter_ including the <%= ... %> anchors
-need to be replaced with the appropriate values:
-
-[options="header",cols="<1,<1,<2"]
-|======================================================================================
-| Name                       | Parameter                  | Value
-| ServerName
-
-and
-
-OIDCRedirectURI              | miq_appliance              | FQDN of the appliance
-| OIDCProviderMetadataURL    | oidc_provider_metadata_url | The OpenID-Connect Provider URL,
-i.e. http://<keycloak_server>:8080/auth/realms/miq/.well-known/openid-configuration
-| OIDCClientID               | oidc_client_id             | The OpenID-Connect Client ID
-| OIDCClientSecret           | oidc_client_secret         | The OpenID-Connect Client Secret
-|======================================================================================
-
+[[configuring-keycloak]]
+== Configuring Keycloak
 
 For KeyCloak, a Realm can be created for one or more Appliances with individual Clients
 defined one per Appliance where the Client ID identifies the individual appliance, 
@@ -106,12 +62,6 @@ The value used for OIDCClientSecret (_oidc_client_secret_) in the _manageiq-exte
 from the Keycloak Client's _Credentials / Secret_ value. To generate a new client secret,
 First set the _Credentials / Client Authenticator_ to _Client Id and Secret_
 . Then _Regenerate Secret_ button.
-
-Finally, restart Apache on the appliance as follows:
-
-```
-# systemctl restart httpd
-```
 
 [[oidc-assertions]]
 ==== OIDC Assertions
@@ -162,6 +112,80 @@ The following _User Session Note_ mappers must be manually created:
 | Client ID            |   OFF            | User Session Note | clientId          | clientId         | String          | ON              | ON
 | Client IP Address    |   OFF            | User Session Note | clientAddress     | clientAddress    | String          | ON              | ON
 |============================================================================================================
+
+[[apache-configuration]]
+=== Apache Configuration
+
+Copy the Apache OIDC template configuration files:
+
+```
+# TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user-openidc.conf \
+    /etc/httpd/conf.d/
+# cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-openidc.conf.erb \
+    /etc/httpd/conf.d/manageiq-external-auth-openidc.conf
+```
+
+[[oidc-configuration]]
+=== OIDC Configuration
+
+The Apache _/etc/httpd/conf.d/manageiq-external-auth-openidc.conf_ configuration files must be updated
+with installation specific values:
+
+The defaults in the _manageiq-external-auth-oidc.conf_ file are:
+
+[options="header"]
+|======================================================================================
+| Name                     | Value
+| LogLevel                 | warn
+| OIDCCryptoPassphrase     | sp-cookie
+| OIDCOAuthRemoteUserClaim | username
+|======================================================================================
+
+Installation specific values must be specified in the _manageiq-external-auth-oidc.conf_ file for the following
+parameters, where the _parameter_ including the <%= ... %> anchors
+need to be replaced with the appropriate values:
+
+[options="header",cols="<1,<1,<2"]
+|======================================================================================
+| Name                       | Parameter                  | Value
+| ServerName
+
+and
+
+OIDCRedirectURI                  | miq_appliance               | FQDN of the appliance
+| OIDCProviderMetadataURL        | oidc_provider_metadata_url  | The OpenID-Connect Provider URL,
+i.e. http://<keycloak_server>:8080/auth/realms/miq/.well-known/openid-configuration
+| OIDCClientID
+
+and
+
+OIDCOAuthClientID                | oidc_client_id              | The OpenID-Connect Client ID
+| OIDCClientSecret
+
+end
+
+OIDCOAuthClientSecret            | oidc_client_secret          | The OpenID-Connect Client Secret
+| OIDCOAuthIntrospectionEndpoint | oidc_introspection_endpoint | The OpenID-Connect Introspection Endpoint
+|======================================================================================
+
+Optional parameters can be appended to the end fo the configuration file to avoid SSL verification. These can
+be used when a valid SSL server certificate is not available for communicating with the OpenID Provider.
+
+*NOTE: Using these parameters is insecure and should only be used in a development environment.*
+
+[options="header",cols="<1,<2"]
+|======================================================================================
+| Name                       | Value
+| OIDCSSLValidateServer      | Off
+| OIDCOAuthSSLValidateServer | Off
+|======================================================================================
+
+Finally, restart Apache on the appliance as follows:
+
+```
+# systemctl restart httpd
+```
 
 [[configuring-the-administrative-ui]]
 == Configuring the Administrative UI
@@ -242,13 +266,22 @@ To configure the appliance for OpenID-Connect Authentication:
                         --oidc-url
                         --oidc-client-id
                         --oidc-client-secret
+                        [--oidc-introspection-endpoint]
                         [--oidc-enable-sso]
+                        [--oidc-insecure]
 ```
+
+When the `--oidc-introspection-endpoint` is not specified, an attempt will be made to
+fetch the introspection endpoint by querying the OpenID-Connect Provider URL.
 
 When the `--oidc-client-host` is not specified, the configured appliance host
 is used for the ServerName and OpenID-Connect Redirect URI in the
 OpenID-Connect Apache configuration file. The `--oidc-client-host` is
 usually the externally reachable FQDN of the appliance.
+
+When `--oidc-insecure` is specified no SSL verification will be done when attempting
+to fetch the introspection endpoint and SSL verification will be disabled using parameters 
+`OIDCSSLValidateServer` and `OIDCOAuthSSLValidateServer` as described above.
 
 Configuring OpenID-Connect requires the following parameters:
 

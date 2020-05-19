@@ -14,7 +14,7 @@ module and should work with other OIDC Identity Providers.
 
 The current implementation only secures the Appliance's Web administrative UI with OIDC.
 
-*Note:* The REST API and Self-Service UI do not currently support OIDC.
+*Note:* The Self-Service UI does not currently support OIDC.
 
 1. <<requirements, Requirements>>
 2. <<configuring-keycloak, Configuring Keycloak>>
@@ -169,7 +169,7 @@ OIDCOAuthClientSecret            | oidc_client_secret          | The OpenID-Conn
 | OIDCOAuthIntrospectionEndpoint | oidc_introspection_endpoint | The OpenID-Connect Introspection Endpoint
 |======================================================================================
 
-Optional parametes can be appended to the end fo the configuration file to avoid SSL verification. These can
+Optional parameters can be appended to the end fo the configuration file to avoid SSL verification. These can
 be used when a valid SSL server certificate is not available for communicating with the OpenID Provider.
 
 *NOTE: Using these parameters is insecure and should only be used in a development environment.*
@@ -279,10 +279,9 @@ is used for the ServerName and OpenID-Connect Redirect URI in the
 OpenID-Connect Apache configuration file. The `--oidc-client-host` is
 usually the externally reachable FQDN of the appliance.
 
-When the `--oidc-insecure` is specified not SSL verification will be done when
-attempting to fetch the `--oidc-introspection-endpoint`, if it is not specified,
-and SSL verification will be turned off using these parameters as described above
-`OIDCSSLValidateServer` and `OIDCOAuthSSLValidateServer`
+When `--oidc-insecure` is specified no SSL verification will be done when attempting
+to fetch the introspection endpoint and SSL verification will be disabled using parameters 
+`OIDCSSLValidateServer` and `OIDCOAuthSSLValidateServer` as described above.
 
 Configuring OpenID-Connect requires the following parameters:
 

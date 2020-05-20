@@ -2,20 +2,11 @@
 // IMS_1.1/master.adoc
 // IMS_1.2/master.adoc
 // IMS_1.3/master.adoc
-[id="Target_environment_prerequisites_{context}"]
-= Prerequisites
+[id="Software_compatibility_{context}"]
+= Software compatibility
 
-Ensure that the following prerequisites are met in your Red Hat environment:
+Ensure that your software versions are compatible.
 
-. Set the BIOS settings of the physical hosts for optimal performance, rather than power-saving, according to the vendor's recommendations.
-. Disable CPU enhanced halt (C1E) in the BIOS settings, if applicable.
-
-ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-. Check the firewall and security group rules to ensure that the ports required for migration are open.
-endif::[]
-
-. Check your software versions for compatibility.
-+
 [cols="1,1", options="header"]
 |===
 |Software |Version
@@ -25,14 +16,21 @@ endif::[]
 ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
 |VMware |6.0 or later
 endif::[]
+ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
+|VMware Virtual Disk Development Kit (VDDK) a|6.5
+endif::[]
+ifdef::rhv_1-2_vddk,osp_1-2_vddk,rhv_1-3_vddk,osp_1-3_vddk[]
+|VMware Virtual Disk Development Kit (VDDK) a|* VMware 6.0 and 6.5: VDDK 6.5
+* VMware 6.7: VDDK 6.7
+endif::[]
 ifdef::rhv_1-1_vddk[]
 |Red Hat Virtualization |4.2
 endif::[]
 ifdef::rhv_1-2_vddk[]
-|Red Hat Virtualization |4.3.4 (or later)
+|Red Hat Virtualization |4.3.4 or later
 endif::[]
 ifdef::rhv_1-3_vddk[]
-|Red Hat Virtualization |4.3.5 (or later)
+|Red Hat Virtualization |4.3.5 or later
 endif::[]
 ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 |Red Hat CloudForms .<a|4.7.0, with the CFME 5.10.3 virtual appliance
@@ -40,15 +38,15 @@ ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
 *The CFME 5.10.4 virtual appliance does not support migration.*
 endif::[]
 ifdef::rhv_1-2_vddk,osp_1-2_vddk[]
-|Red Hat CloudForms .<a|4.7.6 (or later), with the CFME 5.10.5 (or later) virtual appliance
+|Red Hat CloudForms .<a|4.7.6 or later, with the CFME 5.10.5, or later, virtual appliance
 endif::[]
 ifdef::rhv_1-3_vddk,osp_1-3_vddk[]
-|Red Hat CloudForms .<a|5.0, with the CFME 5.11.0 (or later) virtual appliance
+|Red Hat CloudForms .<a|5.0, with the CFME 5.11.4, or later, virtual appliance
 endif::[]
 ifdef::rhv_1-1_vddk,rhv_1-2_vddk,rhv_1-3_vddk[]
 endif::[]
 ifdef::osp_1-1_vddk,osp_1-2_vddk,osp_1-3_vddk[]
-|Red Hat OpenStack Platform |13 (or later)
+|Red Hat OpenStack Platform |13 or later
 endif::[]
 ifdef::osp_1-1_vddk[]
 |RHOSP V2V Image for Red Hat OpenStack Director |14.0.2
@@ -57,7 +55,7 @@ ifdef::osp_1-2_vddk[]
 |RHOSP V2V Image for Red Hat OpenStack Director |14.0.4
 endif::[]
 ifdef::osp_1-3_vddk[]
-|Red Hat OpenStack Platform |TBD
-|RHOSP V2V Image for Red Hat OpenStack Director |TBD
+|UCI |CFME 5.11.4 Universal Conversion Host Image
+// To do: Update UCI name
 endif::[]
 |===

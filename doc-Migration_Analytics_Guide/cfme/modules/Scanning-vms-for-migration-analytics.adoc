@@ -1,17 +1,15 @@
 // Module included in the following assemblies:
 // doc-Migration_Analytics_Guide/cfme/master.adoc
-[id='Scanning-vms-for-migration-analytics']
+[id='Scanning-vms-for-migration-analytics_{context}']
 = Scanning the virtual machines
 
-You must scan the VMware virtual machines with SmartState analysis in Red Hat CloudForms.
-
-SmartState analysis uses the VM analysis profile, `default`.
+You can scan your VMware virtual machines in Red Hat CloudForms.
 
 [IMPORTANT]
 ====
 Some virtual machines should not be analyzed because the snapshot process may cause data corruption.
 
-These virtual machines are primarily those running on Windows operating systems with workloads requiring numerous transactions and disk read/write operations, for example, Microsoft Exchange Server, SharePoint, SQL Server, and Oracle Database.
+For more information, navigate to the link:https://docs.vmware.com/en/VMware-vSphere/index.html[VMware vSphere Documentation] for your vSphere version. Expand *ESXi and vCenter Server* -> *vSphere Virtual Machine Administration* -> *Managing Virtual Machines* -> *Using Snapshots To Manage Virtual Machines* and select *Snapshot Limitations*.
 
 You can exclude a virtual machine from the scan by assigning to it the link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/managing_infrastructure_and_inventory/index#to_tag_virtual_machines_and_templates[`exclusions` tag, with the `do_not_analyze` value].
 ====
@@ -19,7 +17,7 @@ You can exclude a virtual machine from the scan by assigning to it the link:http
 .Prerequisites
 
 * SmartState analysis and SmartProxy must be enabled.
-* You must have a valid VM analysis profile called `default`. If you create an alternate analysis profile, you must assign it with its own control policy.
+* You must have a valid VM analysis profile called `default`. If you create an analysis profile with a different name, you must link:https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0/html-single/assigning_a_custom_analysis_profile_to_a_virtual_machine/index#create-vm-control-policy[create a control policy] and assign it to the vSphere provider.
 
 .Procedure
 
@@ -30,13 +28,6 @@ You can exclude a virtual machine from the scan by assigning to it the link:http
 +
 Each virtual machine can take up to one minute to scan.
 
-. To view the results of the scan:
-
-.. Click your username image:user.png[] -> *Tasks* -> *My VM and Container Analysis Tasks*.
-.. From the *Zone* list, select *<All Zones>*.
-.. From the *24 Hour Time Period* list, select the period of time for the tasks you want to view.
-.. For *Task Status*, select the check boxes next to the status that you want to view.
-.. From the *Tasks State* list, select the state you want to view.
-.. Click *Apply*.
+. Click your username image:user.png[] -> *Tasks*.
 +
-The results of the SmartState analysis scan appear in each virtual machine's details page.
+The result of each SmartState analysis scan appears in *My Tasks*.

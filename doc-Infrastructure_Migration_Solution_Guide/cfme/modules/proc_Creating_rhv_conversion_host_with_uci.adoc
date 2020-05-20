@@ -1,0 +1,65 @@
+// Module included in the following assemblies:
+//
+// IMS_1.3/master.adoc
+[id='Creating_conversion_host_with_uci_{context}']
+= Creating a Red Hat Virtualization conversion host
+
+You can create a Red Hat Virtualization conversion host with the Universal Conversion Host Image (UCI) in the Administration Portal.
+
+.Prerequisites
+
+* The host on which you are deploying the conversion host must have link:https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html-single/virtualization_deployment_and_administration_guide/index#sect-nested_virt_setup[nested virtualization] enabled.
+* A network must be created and configured for the conversion host. See the migration network requirements for details.
+
+.Procedure
+
+. Log in to the Administration Portal.
+. link:https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.3/html-single/administration_guide/index#Uploading_Images_to_a_Data_Storage_Domain_storage_tasks[Upload the UCI] to the data storage domain.
+. Click *Compute* -> *Virtual Machines*.
+. Click *New* to open the *New Virtual Machine* dialog.
+. In the *General* tab, specify the following options:
+
+* *Cluster*: Specify the cluster where the conversion host will run. The cluster must contain a RHV host that is configured for nested virtualization.
+* *Operating System*: Select *Red Hat Enterprise Linux 8.x x64*.
+* *Optimized for*: Select *Server*.
+* *Name*: Specify the conversion host name that will be displayed in the Administration Portal.
+
+* In the *Instance Images* section:
+
+.. Click *Attach*.
+.. Click *Image*.
+.. Select the UCI from the list of available images and select the *OS* check box.
+.. Click *OK*.
+
+* Select a vNIC profile for the network interface.
+
+. In the *System* tab, specify the following options:
+
+* *Memory Size*: `10240 MB` or more
+* *Total Virtual CPUs*: `4` or more
+
+. In the *Initial Run* tab, specify the following options:
+
+* Select *Use Cloud-Init/Sysprep*.
+* *VM Hostname*: Specify the conversion host's FQDN.
+* Expand the *Authentication* section and paste the SSH public key in the *SSH Authorized Keys* field.
++
+This public key is associated with the SSH private key that CloudForms uses to connect to the conversion host.
+
+* The network interfaces use DHCP by default. If you do not want to use DHCP, expand the *Network* section and specify the following options:
+
+.. Select *In-guest Network Interface Name*.
+.. Enter the network interface name, for example, `eth0`, in the text field.
+.. For *IPv4 Boot Protocol*, select `Static`.
+.. Specify the *IPv4 Address*, *IPv4 Netmask*, and *IPv4 Gateway*.
+
+. In the *Host* tab, specify the following options:
+
+* In the *Start Running On* section, select *Specific Host(s)* and select a RHV host with nested virtualization enabled.
+* Select *Pass-Through Host CPU*.
+
+. Click *OK* to create the virtual machine.
++
+The conversion host is displayed in the list of virtual machines.
+
+. Click *Run* to start the virtual machine.

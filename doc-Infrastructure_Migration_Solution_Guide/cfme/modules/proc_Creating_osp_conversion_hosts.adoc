@@ -2,42 +2,62 @@
 //
 // IMS_1.1/master.adoc
 // IMS_1.2/master.adoc
-[id="Creating_osp_conversion_hosts"]
-= Creating the Red Hat OpenStack Platform conversion hosts
+// IMS_1.3/master.adoc
+[id="Creating_osp_conversion_hosts_{context}"]
+= Creating a Red Hat OpenStack Platform conversion host
 
-You can create the Red Hat OpenStack Platform conversion hosts with the conversion appliance. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
+You can create a Red Hat OpenStack Platform conversion host with the conversion appliance. The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
 
 [NOTE]
 ====
-For optimal performance, deploy conversion hosts on compute nodes with link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization enabled]. Nested virtualization is a technology preview.
+For optimal performance, deploy the conversion hosts on compute nodes with link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization enabled]. Nested virtualization is a technology preview.
 ====
+endif::[]
+ifdef::osp_1-3_vddk[]
+You can create a Red Hat OpenStack Platform conversion host with the Universal Conversion Host Image (UCI). The number of conversion hosts you deploy depends on your migration size and infrastructure capabilities.
+
+.Prerequisites
+
+* Deploy the conversion hosts on compute nodes with link:https://docs.openstack.org/devstack/latest/guides/devstack-with-nested-kvm.html[nested virtualization enabled]. Nested virtualization is a technology preview.
+endif::[]
 
 .Procedure
 
-. Navigate to link:https://access.redhat.com/downloads/[Red Hat Product Downloads].
-. In the *A-Z* tab, click *Red Hat OpenStack Platform*.
-. Click *Download Latest*.
-. Select `14.0` from the *Version* list.
+. Log in to Red Hat OpenStack Platform.
 
-ifdef::osp_1-1_vddk[]
-. In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.2 (x86_64)`, click *Download Now*, and save the image.
-endif::[]
-ifdef::osp_1-2_vddk,osp_1-3_vddk[]
-. In the *Product Software* tab, locate the `RHOSP V2V Image for Red Hat OpenStack Director 14.0.3 (x86_64)` (or later), click *Download Now*, and save the image.
-endif::[]
+ifdef::osp_1-1_vddk,osp_1-2_vddk[]
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-upload-image[Upload the V2V image] to the OpenStack Image Service.
 
-. Upload the image to Red Hat OpenStack Platform.
-. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the image] as a conversion host instance, with the following resources:
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the conversion host instance], specifying the following options:
+
+* *Instance Boot Source*: V2V image
+* link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-flavors[Resources]:
 +
 ** 4 vCPUs
 ** 10 GB RAM, if you use the default maximum number of concurrent migrations per conversion host, which is `10`. If you increase the number of concurrent migrations, you must add 1 GB RAM for each additional concurrent migration. If you reduce the number, you can reduce the RAM but the conversion host cannot have less than 8 GB RAM.
 ** `/tmp` (10 GB, or 1 GB for each concurrent migration)
 ** `/var/tmp` (10 GB, or 1 GB for each concurrent migration)
 ** `/var/logs` (5 GB)
+endif::[]
+ifdef::osp_1-3_vddk[]
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-upload-image[Upload the UCI] to the OpenStack Image Service.
 
-. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-resize-instance[Resize the instance] to accommodate its file system.
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-launch-instance[Launch the conversion host instance], specifying the following options:
+
+* *Instance Boot Source*: UCI
+* link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-flavors[Resources]:
 +
-The instance is created from an image, but the disk space defined in the image will not be sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size, or you can create a new partition and add it as a physical volume to the volume group.
+** 4 vCPUs
+** 10 GB RAM, if you use the default maximum number of concurrent migrations per conversion host, which is `10`. If you increase the number of concurrent migrations, you must add 1 GB RAM for each additional concurrent migration. If you reduce the number, you can reduce the RAM but the conversion host cannot have less than 8 GB RAM.
+** `/tmp` (10 GB, or 1 GB for each concurrent migration)
+** `/var/tmp` (10 GB, or 1 GB for each concurrent migration)
+** `/var/logs` (5 GB)
+endif::[]
+
+. link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/instances_and_images_guide/index#section-resize-instance[Resize the conversion host instance] to accommodate its file system.
++
+The conversion host instance is created from an image, but the disk space defined in the image is not sufficient. You can either extend the partition (and subsequently, extend the physical volume in the volume group) to the required size or you can create a new partition and add it as a physical volume to the volume group.
 +
 [NOTE]
 ====
@@ -45,11 +65,11 @@ You must resize `lv_root` to use all available disk space because the image will
 ====
 
 ifdef::osp_1-1_vddk[]
-. Add each conversion host's private SSH key to CloudForms:
+. Add each RHOSP conversion host's private SSH key to CloudForms:
 
 .. Log in to the CloudForms user interface.
-.. Click menu:Compute[*Clouds* > Providers].
-.. Select the Red Hat OpenStack Platform provider, click *Configuration* and select *Edit Selected Cloud Provider.*
+.. Click *Compute* -> *Clouds* -> *Providers*.
+.. Select the Red Hat OpenStack Platform provider tile, click *Configuration*, and select *Edit Selected Cloud Provider.*
 .. Click the *RSA key pair* tab in the *Endpoints* section.
 .. Enter the *Username* `cloud-user` and the *Private Key* of the conversion host instance. If you deploy multiple conversion hosts, they must use the same key pair.
 .. Click *Save*.

@@ -2,25 +2,38 @@
 //
 // IMS_1.1/master.adoc
 [id="Configuring_conversion_hosts_ansible_{context}"]
-ifdef::rhv_1-1_vddk,osp_1-1_vddk[]
-= Configuring the conversion hosts for VDDK transformation
+ifdef::rhv_1-1_vddk[]
+= Configuring the Red Hat Virtualization conversion hosts for VDDK transformation
+
+You can configure the Red Hat Virtualization (RHV) conversion hosts for VDDK transformation with Ansible playbooks.
 endif::[]
-ifdef::rhv_1-1_ssh,osp_1-1_ssh[]
-= Configuring the conversion hosts for SSH transformation
+ifdef::osp_1-1_vddk[]
+= Configuring the Red Hat OpenStack Platform conversion hosts for VDDK transformation
+
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for VDDK transformation with Ansible playbooks.
+endif::[]
+ifdef::rhv_1-1_ssh[]
+= Configuring the Red Hat Virtualization conversion hosts for SSH transformation
+
+You can configure the Red Hat Virtualization (RHV) conversion hosts for SSH transformation with Ansible playbooks.
+endif::[]
+ifdef::,osp_1-1_ssh[]
+= Configuring the Red Hat OpenStack Platform conversion hosts for SSH transformation
+
+You can configure the Red Hat OpenStack Platform (RHOSP) conversion hosts for SSH transformation with Ansible playbooks.
 endif::[]
 
-You must configure and verify the conversion hosts with Ansible playbooks.
 
 .Prerequisites
 
-* If you are configuring a previously configured host, first remove its existing entry in the CloudForms database with the `conversion_host_disable` playbook, to avoid multiple entries for the same host:
+* If you are configuring a previously configured host, you must remove its existing entry in the CloudForms database with the `conversion_host_disable` playbook, to avoid multiple entries for the same host:
 +
 ----
 $ ansible-playbook /usr/share/ovirt-ansible-v2v-conversion-host/playbooks/conversion_host_disable.yml
 ----
 
 ifdef::rhv_1-1_vddk,rhv_1-1_ssh[]
-* If a host already has an SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
+* If the RHV host has an existing SSH private key in `/var/lib/vdsm/.ssh/id_rsa`, delete the key manually before configuring the host. Conversion host configuration does not overwrite existing keys.
 endif::[]
 
 .Procedure
@@ -29,7 +42,7 @@ ifdef::rhv_1-1_vddk,rhv_1-1_ssh[]
 . Log in to the Manager machine using SSH.
 endif::[]
 ifdef::osp_1-1_vddk,osp_1-1_ssh[]
-. Log in to a conversion host.
+. Log in to a RHOSP conversion host.
 endif::[]
 . Install the `ovirt-ansible-v2v-conversion-host` package:
 +
@@ -159,7 +172,7 @@ endif::[]
 ifdef::osp_1-1_vddk[]
 <7> Specify the hostname or FQDN of the controller node.
 <8> Valid options are `non-ssl`, `ssl-without-validation`, or `ssl`. If you choose `ssl`, you must specify the `<Undercloud_ca_certificate>` and `<Overcloud_ca_certificate>`.
-<9> The CA chain is a concatenation of `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem`. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/director_installation_and_usage/index#appe-SSLTLS_Certificate_Configuration[chain that signs the Red Hat OpenStack Platform API certificates].
+<9> The CA chain is a concatenation of `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` and `/etc/pki/ca-trust/anchors/overcloud-cacert.pem`. If you deploy your own CA chain, use the link:https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/16.0/html-single/director_installation_and_usage/index#configuring-custom-ssl-tls-certificates[chain that signs the Red Hat OpenStack Platform API certificates].
 <10> Specify the `<Undercloud_ca_certificate>`, which is stored as `/etc/pki/ca-trust/source/anchors/undercloud-cacert.pem` on the undercloud server.
 <11> Specify the `<Overcloud_ca_certificate>`, which is stored as `/etc/pki/ca-trust/anchors/overcloud-cacert.pem` on one of the overcloud controllers.
 endif::[]

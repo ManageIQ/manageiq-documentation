@@ -9,32 +9,16 @@ Installing {product-title} consists of the following steps:
 
 After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
 
-[[choosing-the-appliance]]
-=== Choosing the Appliance Type
-
-There are two types of {product-title_short} appliances available to install on the VMware vSphere platform, depending on your performance needs:
-
-* `cfme-vsphere-.w.x.y.z.x86_64.vsphere.ova` - This image uses the LSI Logic Parallel/SAS driver on vSphere.
-* `cfme-vsphere-paravirtual.w.x.y.z.x86_64.vsphere.ova` - This image uses the paravirtualization (PVSCSI) driver on vSphere.
-
-PVSCSI and LSI Logic Parallel/SAS are essentially the same when it comes to overall performance capability. However, the PVSCSI controller is more efficient in the number of host compute cycles required to process the same number of input/output operations per second (IOPS). 
-
-If you have a storage I/O-intensive virtual machine, use the PVSCSI controller to save as many CPU cycles as possible, which can then be used by the application or host. Most modern operating systems with high I/O capability support one of these two controllers.
-
-ifdef::miq[]
 [[obtaining-the-appliance]]
 === Obtaining the appliance
 
-. In a browser, navigate to link:manageiq.org/download[].
-. Select *VMware vSphere* from the *--Choose your platform--* list.
-. Select *Stable* from the *--Choose a release--* list.
-. Follow the instructions to download the appliance.
+ifdef::miq[]
+. In a browser, navigate to link:https://www.manageiq.org/download[].
+. Find the table with the relevant type of release.
+. Click *VMware vSphere* from the list to download the appliance image.
 endif::miq[]
 
 ifdef::cfme[]
-[[obtaining-the-appliance]]
-=== Obtaining the Appliance
-
 . Go to link:https://access.redhat.com[access.redhat.com] and log in to the Red Hat Customer Portal using your customer account details.
 . Click *Downloads* in the menu bar.
 . Click *A-Z* to sort the product downloads alphabetically.
@@ -63,7 +47,7 @@ Use the following procedure to upload the {product-title} appliance OVF template
 
 . In the vSphere Client, select menu:File[Deploy OVF Template]. The Deploy OVF Template wizard appears.
 . Specify the source location and click *Next*.
-* Select *Deploy from File* to browse your file system for the OVF template, for example `cfme-vsphere-5.10.4.2-1.x86_64.vsphere.ova`.
+* Select *Deploy from File* to browse your file system for the OVF template, for example `manageiq-vsphere-ivanchuk-4.ova`.
 * Select *Deploy from URL* to specify a URL to an OVF template located on the internet.
 . View the *OVF Template Details* page and click *Next*.
 . Select the deployment configuration from the drop-down menu and click *Next*. The option selected typically controls the memory settings, number of CPUs and reservations, and application-level configuration parameters.

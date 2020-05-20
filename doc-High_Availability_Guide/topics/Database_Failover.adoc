@@ -8,6 +8,25 @@ The failover monitor daemon must run on all of the non-database {product-title_s
 This configuration is crucial for high availability to work in your environment. If the database failover monitor is not configured, non-database {product-title_short} appliances will not react to the failover event and will not be reconfigured against the new primary database host.
 ====
 
+=== Failover Configuration Settings
+
+Configuration settings are located in `/var/www/miq/config/ha_admin.yml`. 
+
+*Default settings*:
+
+[cols="1,1,1", frame="all", options="header"]
+|===
+|Parameter|Default Value|Description|
+`failover_attempts`|10|The number of times the `failover_monitor` will attempt to failover after discovering the connection to the current database is no longer active.
+|`db_check_frequency`|300s|The sleep interval in the monitor loop, it defines how frequently the connection to the database is checked.
+|`failover_check_frequency`|60s|The sleep interval between attempting to failover additional times.
+|===
+
+[NOTE]
+====
+`failover_attempts` and `failover_check_frequency` determine the time limit for the cluster to elect a new primary. To produce quicker failovers, reduce the value for `failover_check_frequency` and increase the value for `failover_attempts`.  
+====
+
 [[failover_monitor]]
 === Configuring the Failover Monitor
 

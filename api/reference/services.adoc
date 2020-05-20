@@ -427,6 +427,7 @@ Additional Service actions include:
 
 * link:#service-add-remove-resources[Adding and Removing Resources from Services]
 * link:#service-add-provider-vms[Adding Provider VMs to Services]
+* link:#service-queue-chargeback-report[Requesting a Chargeback Report for a Service]
 
 Other than service creates and edits, service actions return the action response as
 in the following example:
@@ -638,6 +639,40 @@ POST /api/services/:id
 }
 ----
 
+[[service-queue-chargeback-report]]
+==== Requesting a Chargeback Report for a Service
+
+This action will request a chargeback report for the service.
+
+----
+POST /api/services/:id
+----
+
+[source,json]
+----
+{
+  "action" : "queue_chargeback_report"
+}
+----
+
+The queue_chargeback_report action will return an action response which includes the task reference as shown here:
+
+[source,json]
+----
+{
+  "success": true,
+  "message": "Queued chargeback report generation for Service id:1 name:'test_service1'",
+  "task_id": "39",
+  "task_href": "http://localhost:3000/api/tasks/39"
+}
+----
+
+The task_href can be queried and upon completion of the task, the chargeback report for the service can be
+queried as follows:
+
+----
+GET /api/services/:id?attributes=chargeback_report
+----
 
 [[service-retiring-now]]
 ==== Service Retiring (now)
@@ -649,7 +684,7 @@ POST /api/services/:id
 [source,json]
 ----
 {
-  "action" : "retire"
+  "action" : "request_retire"
 }
 ----
 
@@ -663,7 +698,7 @@ POST /api/services/:id
 [source,json]
 ----
 {
-  "action" : "retire",
+  "action" : "request_retire",
   "resource" : { "date" : "10/30/2015", "warn" : "5" }
 }
 ----

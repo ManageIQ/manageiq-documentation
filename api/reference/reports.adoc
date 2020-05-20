@@ -17,6 +17,7 @@ and report results is through the following collections:
 
 * link:#querying-reports[Querying Reports]
 * link:#running-reports[Running Reports]
+* link:#requesting-result-downloads[Requesting Report Result Downloads]
 * link:#importing-reports[Importing Reports]
 
 [[querying-reports]]
@@ -332,6 +333,155 @@ GET /api/reports/80/results?expand=resources&attributes=created_on
   ]
 }
 ----
+
+[[requesting-result-downloads]]
+=== Requesting Report Result Downloads
+
+Requesting a *txt*, *csv* or *pdf* download of the report results can be done
+via the *request_download* action requiring the desired _result_type_ as
+follows:
+
+==== Request:
+
+[source,data]
+----
+POST /api/results/22
+----
+
+[source,data]
+----
+{
+  "action" : "request_download",
+  "result_type" : "csv"
+}
+----
+
+This triggers an async request of the report and returns an action response
+as follows:
+
+==== Response:
+
+[source,data]
+----
+{
+  "success": true,
+  "message": "Requesting a download of a csv report for Result id:22 name:VMware VM Summary",
+  "task_id": "46",
+  "task_href": "http://localhost:3000/api/tasks/46",
+  "task_results_href": "http://localhost:3000/api/tasks/46/task_results"
+}
+----
+
+The task can simply be queried for a _Finished_ state and the results then
+fetched via the _task_results_href_ provided above.
+
+Querying for the task completion:
+
+[source,data]
+----
+GET /api/tasks/46
+----
+
+[source,data]
+----
+{
+  "href": "http://localhost:3000/api/tasks/46",
+  "id": "46",
+  "name": "Generate Report result [csv]: 'VMware VM Summary'",
+  "state": "Finished",
+  "status": "Ok",
+  "message": "Generate Report result [csv]",
+  "userid": "admin",
+  "created_on": "2020-05-06T17:15:29Z",
+  "updated_on": "2020-05-06T17:15:30Z",
+  "pct_complete": null,
+  "context_data": {
+    "result_id": "22",
+    "result_type": "csv",
+    "session_id": "1cae5e9c-9b3e-4ee1-a286-bc2a0131233d-7f4bc905"
+  },
+  "results": null,
+  "miq_server_id": "3",
+  "identifier": null,
+  "started_on": "2020-05-06T17:15:30Z",
+  "zone": null,
+  "actions": [
+    {
+      "name": "delete",
+      "method": "post",
+      "href": "http://localhost:3000/api/tasks/46"
+    },
+    {
+      "name": "delete",
+      "method": "delete",
+      "href": "http://localhost:3000/api/tasks/46"
+    }
+  ]
+}
+----
+
+And the results can be fetched as follows:
+
+[source,data]
+----
+GET /api/tasks/46/task_results
+----
+
+This will return the report with the appropriately typed *Content-Type*,
+_application/txt_, _application/csv_, or _application/pdf_ as per the
+requested download.
+
+With a *request_download* action targeted at the collection level, one can
+also request the download for multiple report results as follows:
+
+[source,data]
+----
+POST /api/results
+----
+
+[source,data]
+----
+{
+  "action" : "request_download",
+  "resources" : [
+      { "id" : "15", "result_type" : "txt" },
+      { "id" : "17", "result_type" : "txt" },
+      { "id" : "22", "result_type" : "csv" }
+   ]
+}
+----
+
+[source,data]
+----
+{
+  "results" : [
+    {
+      "success": true,
+      "message": "Requesting a download of a txt report for Result id:15 name:VMware VM Summary",
+      "task_id": "54",
+      "task_href": "http://localhost:3000/api/tasks/54",
+      "task_results_href": "http://localhost:3000/api/tasks/54/task_results"
+    },
+    {
+      "success": true,
+      "message": "Requesting a download of a txt report for Result id:17 name:VMware VM Summary",
+      "task_id": "55",
+      "task_href": "http://localhost:3000/api/tasks/55",
+      "task_results_href": "http://localhost:3000/api/tasks/55/task_results"
+    },
+    {
+      "success": true,
+      "message": "Requesting a download of a txt report for Result id:22 name:VMware VM Summary",
+      "task_id": "56",
+      "task_href": "http://localhost:3000/api/tasks/56",
+      "task_results_href": "http://localhost:3000/api/tasks/56/task_results"
+    }
+  ]
+}
+----
+
+Each can then be individually queried and downloaded upon completion.
+
 
 [[importing-reports]]
 === Importing Reports

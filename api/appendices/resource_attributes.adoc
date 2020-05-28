@@ -154,9 +154,10 @@ POST /api/rates
 [cols="2,1,3",options="header",width="100%"]
 |=====================
 | Attribute | Type | Description
-| chargeback_rate_id | integer | Reference to parent Chargeback
+| chargeback_rate_id | integer | Reference to parent Chargeback. `<chargeback_rate>` can be used instead.
 | group | string | Group rate belongs to, i.e. *cpu*, *memory*, *net_io*, *disk_io*, etc.
-| source | string | The input value for calculation, i.e. *allocated*, *used*, etc. |
+| source | string | The input value for calculation, i.e. *allocated*, *used*, etc.
+| chargeback_tiers | Array of hashes| Each tier is represented by hash `{"start": 0.0, "finish": 'infinity', "fixed_rate": 2.0, "variable_rate": 0.0}] |
 |=====================
 
 ==== Optional attributes:
@@ -170,6 +171,10 @@ POST /api/rates
 | metric | string | Metrics, i.e. *derived_memory_available*, etc.
 | per_time | string | Measured per time, *hourly*, *daily*, *weekly*, *monthly* or *yearly*
 | per_unit | string | Measured per unit, i.e. *megabytes*, *gigabytes*, etc.
+| chargeback_rate | hash | `id` or `href` from `api/chargebacks` collection.
+| detail_measure | hash | `id` or `href` from `api/measure` collection. Details of related measure.
+| detail_currency | hash | `id` or `href` from `api/currencies` collection. Details of related currency.
+| chargeable_field | hash | `id` or `href` from `api/chargeable_fields` collection. Record representing metric. Contains equivalent columns: `metric, group, source`
 |=====================
 
 ___

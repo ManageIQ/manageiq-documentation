@@ -57,7 +57,7 @@ Optionally, one can query the rates details for a chargeback as follows:
 GET /api/chargebacks/:id/rates
 ----
 
-Example getting additional rates details
+Example getting additional rates details(attributes)
 
 ==== Request:
 
@@ -148,6 +148,252 @@ GET /api/chargebacks/1/rates?expand=resources&attributes=description,metric,grou
 }
 ----
 
+
+Example getting additional of rates details(relations)
+
+==== Request:
+
+----
+GET /api/rates?expand=resources&attributes=chargeback_rate,detail_measure,detail_currency,chargeable_field,chargeback_tiers
+----
+
+==== Response:
+
+[source,json]
+----{
+    "name": "rates",
+    "count": 138,
+    "subcount": 138,
+    "pages": 1,
+    "resources": [
+        {
+            "href": "http://localhost:3090/api/rates/544",
+            "id": "544",
+            "enabled": true,
+            "description": "Allocated CPU Count",
+            "group": "cpu",
+            "source": null,
+            "metric": "derived_vm_numvcpus",
+            "per_time": "hourly",
+            "per_unit": "cpu",
+            "friendly_rate": "Hourly @ 1.0 + 0.0 per Cpu from 0.0 to Infinity",
+            "chargeback_rate_id": "8",
+            "created_on": "2018-06-01T11:24:52Z",
+            "updated_on": "2018-06-01T11:24:52Z",
+            "chargeback_rate_detail_measure_id": null,
+            "chargeback_rate_detail_currency_id": "1",
+            "chargeable_field_id": "3",
+            "sub_metric": null,
+            "chargeback_rate": {
+                "id": "8",
+                "guid": "52a70f67-7ab8-47a0-ba36-7808ac2449e0",
+                "description": "solinux1",
+                "rate_type": "Compute",
+                "created_on": "2018-06-01T11:24:52Z",
+                "updated_on": "2018-06-01T11:24:52Z",
+                "default": false
+            },
+            "detail_currency": {
+                "id": "1",
+                "code": "USD",
+                "name": "United States Dollar",
+                "full_name": "United States Dollar",
+                "symbol": "$",
+                "unicode_hex": "36",
+                "created_at": "2019-06-13T18:10:32Z",
+                "updated_at": "2019-07-09T13:42:36Z"
+            },
+            "chargeable_field": {
+                "id": "3",
+                "chargeback_rate_detail_measure_id": null,
+                "metric": "derived_vm_numvcpus",
+                "group": "cpu",
+                "source": "allocated",
+                "description": "Allocated CPU Count"
+            },
+            "chargeback_tiers": [
+                {
+                    "id": "11010",
+                    "chargeback_rate_detail_id": "544",
+                    "start": 0.0,
+                    "finish": null,
+                    "fixed_rate": 1.0,
+                    "variable_rate": 0.0
+                }
+            ],
+            "actions": [
+                {
+                    "name": "edit",
+                    "method": "post",
+                    "href": "http://localhost:3090/api/rates/544"
+                },
+                {
+                    "name": "edit",
+                    "method": "patch",
+                    "href": "http://localhost:3090/api/rates/544"
+                },
+                {
+                    "name": "edit",
+                    "method": "put",
+                    "href": "http://localhost:3090/api/rates/544"
+                },
+                {
+                    "name": "delete",
+                    "method": "post",
+                    "href": "http://localhost:3090/api/rates/544"
+                },
+                {
+                    "name": "delete",
+                    "method": "delete",
+                    "href": "http://localhost:3090/api/rates/544"
+                }
+            ]
+        },
+        {
+            "href": "http://localhost:3090/api/rates/510",
+            "id": "510",
+            "enabled": true,
+            "description": "Allocated CPU Count",
+            "group": "cpu",
+            "source": null,
+            "metric": null,
+            "per_time": "hourly",
+            "per_unit": "cpu",
+            "friendly_rate": "Hourly @ 1.0 + 0.0 per Cpu from 0.0 to Infinity",
+            "chargeback_rate_id": "7",
+            "created_on": "2018-03-28T10:00:13Z",
+            "updated_on": "2018-03-28T10:00:13Z",
+            "chargeback_rate_detail_measure_id": null,
+            "chargeback_rate_detail_currency_id": "3",
+            "chargeable_field_id": "3",
+            "sub_metric": null,
+            "chargeback_rate": {
+                "id": "7",
+                "guid": "a72fd416-26ec-4aa0-bc94-0b741379dfcd",
+                "description": "teamA_compute_all",
+                "rate_type": "Compute",
+                "created_on": "2018-03-28T10:00:13Z",
+                "updated_on": "2018-03-28T10:00:13Z",
+                "default": false
+            },
+            "detail_currency": {
+                "id": "3",
+                "code": "GBP",
+                "name": "British Pound",
+                "full_name": "British Pound",
+                "symbol": "£",
+                "unicode_hex": "163",
+                "created_at": "2019-06-13T18:10:32Z",
+                "updated_at": "2019-07-09T13:42:35Z"
+            },
+            "chargeable_field": {
+                "id": "3",
+                "chargeback_rate_detail_measure_id": null,
+                "metric": "derived_vm_numvcpus",
+                "group": "cpu",
+                "source": "allocated",
+                "description": "Allocated CPU Count"
+            },
+            "chargeback_tiers": [
+                {
+                    "id": "10115",
+                    "chargeback_rate_detail_id": "510",
+                    "start": 0.0,
+                    "finish": 'infinity',
+                    "fixed_rate": 1.0,
+                    "variable_rate": 0.0
+                }
+            ]
+        },
+        {
+            "href": "http://localhost:3090/api/rates/1859",
+            "id": "1859",
+            "enabled": true,
+            "description": "My CPU allocation rate",
+            "group": "cpu",
+            "source": "allocated",
+            "metric": null,
+            "per_time": "daily",
+            "per_unit": "megahertz",
+            "friendly_rate": "Daily @ 2.0 + 0.0 per Megahertz from 0.0 to 1.0\nDaily @ 2.0 + 0.0 per Megahertz from 1.0 to Infinity",
+            "chargeback_rate_id": "1",
+            "created_on": "2020-05-26T10:34:39Z",
+            "updated_on": "2020-05-26T10:34:39Z",
+            "chargeback_rate_detail_measure_id": "1",
+            "chargeback_rate_detail_currency_id": "5",
+            "chargeable_field_id": "3",
+            "sub_metric": null,
+            "chargeback_rate": {
+                "id": "1",
+                "guid": "b47a0ef0-4335-11df-aba8-001d09066d98",
+                "description": "Default",
+                "rate_type": "Compute",
+                "created_on": "2020-04-23T14:43:50Z",
+                "updated_on": "2020-04-23T15:00:29Z",
+                "default": true
+            },
+            "detail_measure": {
+                "id": "1",
+                "name": "Bytes Units",
+                "units": [
+                    "bytes",
+                    "kilobytes",
+                    "megabytes",
+                    "gigabytes",
+                    "terabytes"
+                ],
+                "units_display": [
+                    "B",
+                    "KB",
+                    "MB",
+                    "GB",
+                    "TB"
+                ],
+                "step": 1024,
+                "created_at": "2020-04-23T14:43:50Z",
+                "updated_at": "2020-04-23T15:00:28Z"
+            },
+            "detail_currency": {
+                "id": "5",
+                "code": "AUD",
+                "name": "Australian Dollar",
+                "full_name": "Australian Dollar",
+                "symbol": "$",
+                "unicode_hex": null,
+                "created_at": "2019-06-13T18:10:32Z",
+                "updated_at": "2019-07-09T13:42:35Z"
+            },
+            "chargeable_field": {
+                "id": "3",
+                "chargeback_rate_detail_measure_id": null,
+                "metric": "derived_vm_numvcpus",
+                "group": "cpu",
+                "source": "allocated",
+                "description": "Allocated CPU Count"
+            },
+            "chargeback_tiers": [
+                {
+                    "id": "13114",
+                    "chargeback_rate_detail_id": "1859",
+                    "start": 0.0,
+                    "finish": 1.0,
+                    "fixed_rate": 2.0,
+                    "variable_rate": 0.0
+                },
+                {
+                    "id": "13115",
+                    "chargeback_rate_detail_id": "1859",
+                    "start": 1.0,
+                    "finish": 'infinity',
+                    "fixed_rate": 2.0,
+                    "variable_rate": 0.0
+                }
+            ]
+        },
+        ...
+----
+
+
 [[creating-rates]]
 === Creating Chargeback Rates
 
@@ -171,7 +417,15 @@ POST /api/rates
   "description": "My CPU allocation rate",
   "group" : "cpu",
   "per_unit" : "megahertz",
-  "source" : "allocated"
+  "source" : "allocated",
+  "chargeback_tiers": [
+       {
+          "start": 0.0,
+          "finish": "infinity",
+          "fixed_rate": 2.0,
+          "variable_rate": 0.0
+        }
+   ]
 }
 ----
 
@@ -180,23 +434,27 @@ POST /api/rates
 [source,json]
 ----
 {
-  "results": [
-    {
-      "href": "http://localhost:3000/api/rates/16",
-      "id": "16",
-      "enabled": true,
-      "description": "My CPU allocation rate",
-      "group": "cpu",
-      "source": "allocated",
-      "per_time": "daily",
-      "per_unit": "megahertz",
-      "friendly_rate": "",
-      "chargeback_rate_id": "1",
-      "chargeable_field_id": "1",
-      "created_on": "2016-08-16T08:27:22Z",
-      "updated_on": "2016-08-16T08:27:22Z"
-    }
-  ]
+    "results": [
+        {
+            "href": "http://localhost:3090/api/rates/1866",
+            "id": "1866",
+            "enabled": true,
+            "description": "My CPU allocation rate",
+            "group": "cpu",
+            "source": "allocated",
+            "metric": null,
+            "per_time": "daily",
+            "per_unit": "megahertz",
+            "friendly_rate": "Daily @ 2.0 + 0.0 per MHz from 0.0 to Infinity",
+            "chargeback_rate_id": "1",
+            "created_on": "2020-05-28T13:28:15Z",
+            "updated_on": "2020-05-28T13:28:15Z",
+            "chargeback_rate_detail_measure_id": null,
+            "chargeback_rate_detail_currency_id": null,
+            "chargeable_field_id": "1",
+            "sub_metric": null
+        }
+    ]
 }
 ----
 
@@ -221,7 +479,7 @@ POST /api/rates/16
 ----
 {
   "action" : "edit",
-  "resource" : { "rate" : "0.02" }
+  "resource" : { "description" : "Allocated NICs", "per_time": "hourly" }
 }
 ----
 
@@ -230,15 +488,23 @@ POST /api/rates/16
 [source,json]
 ----
 {
-  "href": "http://localhost:3000/api/rates/16",
-  "id": "16",
-  "enabled": true,
-  "description": "Allocated NICs",
-  "group": "net_io",
-  "rate": "0.02",
-  "per_time": "hourly",
-  "created_on": "2015-11-10T19:19:59Z",
-  "updated_on": "2015-11-10T19:23:57Z"
+    "href": "http://localhost:3090/api/rates/1800",
+    "id": "1800",
+    "description": "Allocated NICs",
+    "per_time": "hourly",
+    "chargeback_rate_id": "1",
+    "chargeable_field_id": "3",
+    "enabled": true,
+    "group": "net_io",
+    "source": null,
+    "metric": null,
+    "per_unit": "cpu",
+    "friendly_rate": "Hourly @ 2.0 + 0.0 per Cpu from 0.0 to Infinity",
+    "created_on": "2020-04-23T15:00:29Z",
+    "updated_on": "2020-05-28T13:24:33Z",
+    "chargeback_rate_detail_measure_id": "1",
+    "chargeback_rate_detail_currency_id": "5",
+    "sub_metric": null
 }
 ----
 

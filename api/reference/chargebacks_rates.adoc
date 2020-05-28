@@ -168,7 +168,15 @@ POST /api/rates
   "description": "My CPU allocation rate",
   "group" : "cpu",
   "per_unit" : "megahertz",
-  "source" : "allocated"
+  "source" : "allocated",
+  "chargeback_tiers": [
+       {
+          "start": 0.0,
+          "finish": "infinity",
+          "fixed_rate": 2.0,
+          "variable_rate": 0.0
+        }
+   ]
 }
 ----
 
@@ -177,23 +185,27 @@ POST /api/rates
 [source,json]
 ----
 {
-  "results": [
-    {
-      "href": "http://localhost:3000/api/rates/16",
-      "id": "16",
-      "enabled": true,
-      "description": "My CPU allocation rate",
-      "group": "cpu",
-      "source": "allocated",
-      "per_time": "daily",
-      "per_unit": "megahertz",
-      "friendly_rate": "",
-      "chargeback_rate_id": "1",
-      "chargeable_field_id": "1",
-      "created_on": "2016-08-16T08:27:22Z",
-      "updated_on": "2016-08-16T08:27:22Z"
-    }
-  ]
+    "results": [
+        {
+            "href": "http://localhost:3090/api/rates/1866",
+            "id": "1866",
+            "enabled": true,
+            "description": "My CPU allocation rate",
+            "group": "cpu",
+            "source": "allocated",
+            "metric": null,
+            "per_time": "daily",
+            "per_unit": "megahertz",
+            "friendly_rate": "Daily @ 2.0 + 0.0 per MHz from 0.0 to Infinity",
+            "chargeback_rate_id": "1",
+            "created_on": "2020-05-28T13:28:15Z",
+            "updated_on": "2020-05-28T13:28:15Z",
+            "chargeback_rate_detail_measure_id": null,
+            "chargeback_rate_detail_currency_id": null,
+            "chargeable_field_id": "1",
+            "sub_metric": null
+        }
+    ]
 }
 ----
 

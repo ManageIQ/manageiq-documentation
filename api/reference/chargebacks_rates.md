@@ -154,7 +154,7 @@ Example getting additional of rates details(relations)
 #### Response:
 
 ``` json
-----{
+{
     "name": "rates",
     "count": 138,
     "subcount": 138,
@@ -385,7 +385,6 @@ Example getting additional of rates details(relations)
             ]
         },
         ...
-----
 ```
 
 ### Creating Chargeback Rates
@@ -475,8 +474,8 @@ resource.
 
 ``` json
 {
-    "href": "http://localhost:3090/api/rates/1800",
-    "id": "1800",
+    "href": "http://localhost:3090/api/rates/16",
+    "id": "16",
     "description": "Allocated NICs",
     "per_time": "hourly",
     "chargeback_rate_id": "1",
@@ -1268,7 +1267,7 @@ Request
 
   - [Create Chargeback Rates](#creating-chargeback-rates)
 
-  - [Assign Chargeback Rates](#assign-rates)
+  - [Assign Chargeback Rates](#assign-rate)
 
   - [Run Chargeback Report](#run-report)
 
@@ -1729,7 +1728,7 @@ two endpoints: `/api/chargebacks` and `/api/rates`. Endpoint
 relations like rate details(`api/rates`), currencies(`api/currencies`),
 measures(`api/measures`), chargeable\_fields(`api/chargeable_fields`)
 and chargeback tiers. This entity is also used to [assigning
-rates](#assign-rates) to any resource.
+rates](#assign-rate) to any resource.
 
 ### Create Chargebacks (top-level rate entity)
 
@@ -1885,14 +1884,20 @@ There is request which list of report result.
 
 Allowed parameters:
 
-`hash_attribute=value` - enables hash sorting and pagination for value
-column `sort_by` - column from MiqReportResult\#report\#col\_order
-`sort_order` - `asc` or `desc` `limit` - count of records for one page
-`offset` - result will start form \<offset\>th record `filter_column` -
-chosen column for filtering `filter_string` - this string value is used
-for filtering on `<filter_column>`, record of report result will be
-returned in API when `<filter_string>` is contained in value of
-`<filter_column>` .
+`hash_attribute=value` - enables hash sorting and pagination for value column
+
+`sort_by` - column from `MiqReportResult#report#col_order`
+ 
+`sort_order` - `asc` or `desc`
+
+`limit` - count of records for one page  
+
+`offset` - result will start form `<offset>`. record
+
+`filter_column` - chosen column for filtering
+
+`filter_string` - this string value is used for filtering on `<filter_column>`, record of report result will be
+returned in API when `<filter_string>` is contained in value of `<filter_column>` .
 
 There is possibility to filter according to more columns. We need to add
 other filter parameters with suffix `_X` where `X` is number

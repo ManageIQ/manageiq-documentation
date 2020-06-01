@@ -151,7 +151,6 @@ request.
 | per\_time         | string  | Measured per time, **hourly**, **daily**, **weekly**, **monthly** or **yearly**                                                          |
 | per\_unit         | string  | Measured per unit, i.e. **megabytes**, **gigabytes**, etc.                                                                               |
 | chargeback\_rate  | hash    | `id` or `href` from `api/chargebacks` collection.                                                                                        |
-| detail\_measure   | hash    | `id` or `href` from `api/measure` collection. Details of related measure.                                                                |
 | detail\_currency  | hash    | `id` or `href` from `api/currencies` collection. Details of related currency.                                                            |
 | chargeable\_field | hash    | `id` or `href` from `api/chargeable_fields` collection. Record representing metric. Contains equivalent columns: `metric, group, source` |
 

@@ -54,8 +54,8 @@ for the provider.
 1.  From menu:Compute\[Infrastructure \> Providers\], select an
     infrastructure provider to update its settings.
 
-2.  Click ![1847](/images/1847.png)**Configuration**, and then
-    ![1851](/images/1851.png)**Edit Selected Infrastructure Provider**.
+2.  Click ![1847](../images/1847.png)**Configuration**, and then
+    ![1851](../images/1851.png)**Edit Selected Infrastructure Provider**.
 
 3.  In the **Credentials** area, click **C & U Database**.
 

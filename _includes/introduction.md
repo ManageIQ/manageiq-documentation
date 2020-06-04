@@ -26,7 +26,7 @@ infrastructure.
 
 The diagram below describes the capabilities of {{ site.data.product.title }}. Its
 features are designed to work together to provide robust management and
-maintenance of your virtual infrastructure. ![1845](/images/1845.png)
+maintenance of your virtual infrastructure. ![1845](../images/1845.png)
 
 The architecture comprises the following components:
 

@@ -6,12 +6,12 @@ network path to the repository.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Repositories\].
 
-2.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1848](/images/1848.png) (**Add a new Repository**).
+2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1848](../images/1848.png) (**Add a new Repository**).
 
 3.  In **Basic Information**, enter a **Name** and a UNC network
     **Path** to the repository location.
 
-    ![2240](/images/2240.png)
+    ![2240](../images/2240.png)
 
 4.  Click **Save**.

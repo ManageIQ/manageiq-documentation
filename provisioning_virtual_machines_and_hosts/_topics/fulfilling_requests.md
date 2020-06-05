@@ -58,9 +58,9 @@ quota is set for the tenant or group as a whole.
 
     </div>
 
-5.  Click ![1847](/images/1847.png)(**Configuration**),
-    ![1851](/images/1851.png)(**Edit this instance**).
-    ![6300](/images/6300.png)
+5.  Click ![1847](../images/1847.png)(**Configuration**),
+    ![1851](../images/1851.png)(**Edit this instance**).
+    ![6300](../images/6300.png)
 
     1.  Set the value for **Quota Source Type** to *user* or *group*.
 
@@ -103,13 +103,13 @@ in quotas.
 
 ##### Applying a Tag to a User or User Group
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Access Control** accordion, and select the user or group
     that you want to tag.
 
-3.  Click ![1941](/images/1941.png)(**Policy**), then click
-    ![1851](/images/1851.png)(**Edit Tags**).
+3.  Click ![1941](../images/1941.png)(**Policy**), then click
+    ![1851](../images/1851.png)(**Edit Tags**).
 
 4.  Select the appropriate customer tag to assign, then the value.
 
@@ -154,7 +154,7 @@ program flow.
 
 </div>
 
-![2353](/images/2353.png)
+![2353](../images/2353.png)
 
 **Code snippet demonstrating the state machine retry logic:**
 
@@ -184,7 +184,7 @@ The following image shows a simple state machine pertaining to approving
 a provision request. This instance can be found in
 menu:Datastore\[ManageIQ \> Infrastructure \> VM \> Provisioning \>
 StateMachines \> ProvisioningRequestApproval \> Default\].
-![2354](/images/2354.png)
+![2354](../images/2354.png)
 
 1.  The attribute **max\_vms** has a value of 1. State machine
     processing can use the attributes of the state machine instance to
@@ -213,7 +213,7 @@ menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines
 \> VMProvision\_VM\] class. Depending on your environment you can
 remove, change, or add steps to the provisioning process. For example,
 if you are not integrating with IPAM or a CMDB, then you can remove
-those execution steps. ![6281](/images/6281.png)
+those execution steps. ![6281](../images/6281.png)
 
 ##### Editing the Default State Instance
 
@@ -233,9 +233,9 @@ those execution steps. ![6281](/images/6281.png)
 
     </div>
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit this instance**).
-    ![6281](/images/6281.png)
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit this instance**).
+    ![6281](../images/6281.png)
 
 4.  For each step that you want to remove, clear the entries in the
     **Value**, **On Entry**, **On Exit**, and **On Error** columns.
@@ -264,7 +264,7 @@ provisioning request, its summary screen will show when it was
 provisioned in the **Lifecycle** area of the respective summary.
 
 1.  From menu:Services\[Workloads\], click the virtual machine or
-    instance that you want to view. ![2356](/images/2356.png)
+    instance that you want to view. ![2356](../images/2356.png)
 
 ##### Viewing a Virtual Machine or Instance Summary
 

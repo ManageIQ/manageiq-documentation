@@ -5,8 +5,8 @@ memory or the number of CPUs on a virtual machine.
 
 1.  Navigate to menu:Control\[Explorer\].
 
-2.  Click the **Alerts** accordion, then click ![1847](/images/1847.png)
-    (**Configuration**), ![1862](/images/1862.png) (**Add a new
+2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png)
+    (**Configuration**), ![1862](../images/1862.png) (**Add a new
     Alert**).
 
 3.  In the **Info** area:
@@ -23,7 +23,7 @@ memory or the number of CPUs on a virtual machine.
 4.  From **Hardware Attribute**, select Number of CPUs. From the next
     dropdown, select **Decreased**.
 
-    ![1973](/images/1973.png)
+    ![1973](../images/1973.png)
 
 5.  After setting the parameters, select what you want the alert to do.
     You can send an email, create an SNMP Trap, or send a management

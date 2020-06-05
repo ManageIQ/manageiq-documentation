@@ -5,16 +5,16 @@ the same time.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
 
-2.  Click ![1847](/images/1847.png) (**Configuration**).
+2.  Click ![1847](../images/1847.png) (**Configuration**).
 
 3.  Check the Hosts to edit.
 
-4.  Click ![1851](/images/1851.png) (**Edit Selected items**).
+4.  Click ![1851](../images/1851.png) (**Edit Selected items**).
 
 5.  Use **Credentials** to provide login credentials required for this
     host.
 
-    ![2216](/images/2216.png)
+    ![2216](../images/2216.png)
 
       - On the **Default** tab, type a user name with elevated security
         credentials and the users password. If you are using domain

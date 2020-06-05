@@ -13,8 +13,8 @@ To evacuate an instance:
     **Instances by Provider** accordion to filter instances by provider
     and/or availability zone.
 
-3.  Click ![2007](/images/2007.png)(**Lifecycle**), then
-    ![2097](/images/2097.png)(**Evacuate selected Instance**).
+3.  Click ![2007](../images/2007.png)(**Lifecycle**), then
+    ![2097](../images/2097.png)(**Evacuate selected Instance**).
 
 4.  On the **Evacuate Host** section, select your preferred evacuation
     options:
@@ -32,4 +32,4 @@ To evacuate an instance:
 Once the evacuation initiates, the instance list will reload with a
 message indicating that the selected instance is being evacuated. Upon
 completion, the instance list will reload and the evacuated instance
-will be displayed as ![2143](/images/2143.png) (**On**).
+will be displayed as ![2143](../images/2143.png) (**On**).

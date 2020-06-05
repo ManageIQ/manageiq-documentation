@@ -10,6 +10,6 @@ hardware devices attached to the instance.
 
 3.  Click the checkboxes for the items to refresh.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2003](/images/2003.png)(**Refresh Relationships and Power
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2003](../images/2003.png)(**Refresh Relationships and Power
     States**) on the **Instance Taskbar**.

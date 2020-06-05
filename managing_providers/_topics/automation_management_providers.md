@@ -134,8 +134,8 @@ Refresh a targeted repository:
 
 2.  Click on a repository.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Refresh this Repository](/images/2003.png) (**Refresh this
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Refresh this Repository](../images/2003.png) (**Refresh this
     Repository**).
 
 Alternately, you can refresh some or all repositories from the list
@@ -146,8 +146,8 @@ view:
 2.  Check those repositories to refresh. Click **Check All** to select
     all repositories.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Refresh Selected Ansible Repositories](/images/2003.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Refresh Selected Ansible Repositories](../images/2003.png)
     (**Refresh Selected Ansible Repositories**).
 
 {% include_relative _topics/ansible_credentials.md %}
@@ -232,12 +232,12 @@ add Ansible Tower as a provider.
 1.  Navigate to menu:Automation\[Ansible Tower \> Explorer\] and click
     on the **Providers** accordion tab.
 
-2.  Under ![Configuration](/images/1847.png) **Configuration**, click
-    ![Add a new Provider](/images/1862.png) **Add a new Provider**.
+2.  Under ![Configuration](../images/1847.png) **Configuration**, click
+    ![Add a new Provider](../images/1862.png) **Add a new Provider**.
 
 3.  In the **Add a new Provider** area:
 
-    ![Add\_Ansible\_Provider](/images/add-ansible-tower-provider.png)
+    ![Add\_Ansible\_Provider](../images/add-ansible-tower-provider.png)
 
     1.  Enter a **Name** for the new provider.
 
@@ -290,8 +290,8 @@ To refresh an Ansible Tower provider’s inventory in {{ site.data.product.title
 2.  Select the checkboxes for the Ansible Tower providers to refresh
     under **All Ansible Tower Providers**.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Refresh Relationships and Power States](/images/2003.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Refresh Relationships and Power States](../images/2003.png)
     (**Refresh Relationships and Power States**).
 
 4.  Click **OK**.
@@ -359,8 +359,8 @@ First, create a catalog:
 
 1.  Navigate to menu:Services\[Catalogs\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Add a New Catalog](/images/1862.png) (**Add a New Catalog**)
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Add a New Catalog](../images/1862.png) (**Add a New Catalog**)
 
 3.  Enter a **Name** and **Description** for the catalog.
 
@@ -374,8 +374,8 @@ Then, create an Ansible Tower service catalog item:
 2.  Click **Ansible Tower Templates** and select an Ansible Tower job or
     workflow template.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Create Service Dialog from Template](/images/1862.png) (**Create
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Create Service Dialog from Template](../images/1862.png) (**Create
     Service Dialog from this Template**).
 
 4.  Enter a **Service Dialog Name** (for example,
@@ -383,8 +383,8 @@ Then, create an Ansible Tower service catalog item:
 
 5.  Navigate to menu:Services\[Catalogs\]. Click **Catalog Items**.
 
-6.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Add a New Catalog Item](/images/1862.png) (**Add a New Catalog
+6.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Add a New Catalog Item](../images/1862.png) (**Add a New Catalog
     Item**) to create a new catalog item with the following details, at
     minimum:
 
@@ -420,7 +420,7 @@ To execute the Ansible Tower job:
 
 1.  Navigate to menu:Service Catalogs\[Ansible Tower catalog\].
 
-    ![order at catalog item](/images/order_at_catalog_item.png)
+    ![order at catalog item](../images/order_at_catalog_item.png)
 
 2.  Click **Order** for the catalog item.
 
@@ -486,8 +486,8 @@ virtual machine or instance, first create the button:
 3.  Click menu:VM and Instance\[Unassigned Buttons\]. This configures
     the button to run on virtual machines or instances.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1862](/images/1862.png) (**Add a new Button**).
+4.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1862](../images/1862.png) (**Add a new Button**).
 
       - In the **Adding a new Button** screen, configure the **Action**
         parameters as desired. **Dialog** can be left blank if the
@@ -515,7 +515,7 @@ virtual machine or instance, first create the button:
       - Configure **Visibility** to all users, or limit visibility by
         role as desired.
 
-        ![add button](/images/add_button.png)
+        ![add button](../images/add_button.png)
 
       - Click **Add**.
 
@@ -530,10 +530,10 @@ create a new button group:
         button group `VM Actions`.
 
       - In **Assign Buttons**, select the button you just created from
-        the **Unassigned** list and click ![1876](/images/1876.png) to
+        the **Unassigned** list and click ![1876](../images/1876.png) to
         assign it to **Selected**.
 
-        ![create button group](/images/create_button_group.png)
+        ![create button group](../images/create_button_group.png)
 
       - Click **Add**.
 
@@ -543,7 +543,7 @@ To assign the button to an existing button group:
     Button Group\].
 
 2.  In **Assign Buttons**, select the button you just created from the
-    **Unassigned** list and click ![1876](/images/1876.png) to assign it
+    **Unassigned** list and click ![1876](../images/1876.png) to assign it
     to **Selected**.
 
 3.  Click **Add**.
@@ -558,7 +558,7 @@ To use the button to run an Ansible Tower job on a virtual machine:
     click the button from the list to run the Ansible Tower job
     template.
 
-    ![run update button](/images/run_update_button.png)
+    ![run update button](../images/run_update_button.png)
 
 4.  Click **Submit** to execute the job.
 

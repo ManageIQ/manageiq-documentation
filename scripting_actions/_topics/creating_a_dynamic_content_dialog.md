@@ -18,8 +18,8 @@ The procedure describes the steps to create a dynamic content dialog.
     This example uses the **Cloud** Namespace but can also use the
     **Infrastructure** namespace.
 
-3.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a new Instance**).
+3.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a new Instance**).
 
 4.  In the **Main Info** area, enter **Name** = *dynamic\_list*,
     replacing *dynamic\_list* with an appropriate name for the method.

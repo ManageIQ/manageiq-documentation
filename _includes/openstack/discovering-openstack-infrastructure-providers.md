@@ -8,8 +8,8 @@ work if the Bare Metal service has been moved to a different port.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Discover Infrastructure Providers](/images/1942.png)
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Discover Infrastructure Providers](../images/1942.png)
     (**Discover Infrastructure Providers**).
 
 3.  Select **OpenStack Infrastructure** under **Discover**.

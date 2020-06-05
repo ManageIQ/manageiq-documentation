@@ -1,7 +1,7 @@
 1.  From the **Run** dropdown, select how often you want the analysis to
     run. Your options after that depend on which run option you choose.
 
-    ![image](/images/1938.png)
+    ![image](../images/1938.png)
 
       - Select **Once** to have the analysis run just one time.
 

@@ -6,8 +6,8 @@ Add a new policy profile and assign the virtual machine control policy
 1.  Navigate to menu:Control\[Explorer\].
 
 2.  Expand the **Policy Profiles** accordion, click
-    ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a New Policy Profile**).
+    ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a New Policy Profile**).
 
 3.  In the **Basic Information** area, enter a **Description** for the
     policy profile.
@@ -16,7 +16,7 @@ Add a new policy profile and assign the virtual machine control policy
     policy created in [???](#create-vm-control-policy) from the
     **Available Policies** list.
 
-5.  Click (![image](/images/1876.png)) to move the selected virtual
+5.  Click (![image](../images/1876.png)) to move the selected virtual
     machine control policy into this profile.
 
 6.  Click **Add**.

@@ -9,8 +9,8 @@ condition, you must remove the policy first.
 2.  Click the **Conditions** accordion, and click on the condition you
     want to remove.
 
-3.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1861.png) (**Delete this VM and Instance
+3.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1861.png) (**Delete this VM and Instance
     Condition**).
 
 4.  Click **OK** to confirm.

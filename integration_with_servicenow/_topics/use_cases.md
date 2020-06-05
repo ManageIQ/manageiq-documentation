@@ -13,7 +13,7 @@ amend the **ActiveCMDB** state to call the `create` method, for example:
 
     /Integration/ServiceNow/CMDB/create
 
-![StateActiveCMDBActiveCMDBstate](/images/6667.png)
+![StateActiveCMDBActiveCMDBstate](../images/6667.png)
 
 ### Virtual Machine Retirement
 
@@ -26,7 +26,7 @@ retirement, amend the **DeactivateCMDB** state to call the
 
     Integration/ServiceNow/CMDB/update_patch?description=VM%20${/#vm.guid}%20retired%20from%20{productname_short}
 
-![StateActiveCMDBDeactiveCMDBstate](/images/6668.png)
+![StateActiveCMDBDeactiveCMDBstate](../images/6668.png)
 
 ### Virtual Machine Reconfiguration (VMware Only)
 
@@ -39,4 +39,4 @@ a relationship value:
 
     /Integration/ServiceNow/CMDB/update_patch
 
-![ReconfigVMTaskComplete](/images/6670.png)
+![ReconfigVMTaskComplete](../images/6670.png)

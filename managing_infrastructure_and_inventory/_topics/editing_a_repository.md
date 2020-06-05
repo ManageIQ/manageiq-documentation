@@ -7,8 +7,8 @@ such as the name and path.
 
 2.  Click the repository to edit.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Edit the Selected Repository**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Edit the Selected Repository**).
 
 4.  In **Basic Info**, edit the name and path to connect to the
     repository.

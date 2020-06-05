@@ -5,7 +5,7 @@ specifying a repository and branch, along with user details. Currently,
 you can only add git domains via the **Import/Export** area of the user
 interface.
 
-![Import Datastore](/images/import-datastore.png)
+![Import Datastore](../images/import-datastore.png)
 
 1.  Navigate to menu:Automation\[Automate \> Import/Export\].
 

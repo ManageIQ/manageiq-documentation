@@ -5,7 +5,7 @@ the appliance server. Use this capability to disable certain classified
 regions like AWS GovCloud. Once disabled, the region will not be
 available when adding an Amazon EC2 provider.
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 

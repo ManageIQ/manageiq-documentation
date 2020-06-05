@@ -7,12 +7,12 @@ processors with the following steps:
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this VM**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Select **Yes** next to **Processors** to show processor options.
 
-    ![reconfigure processor](/images/reconfigure_processor.png)
+    ![reconfigure processor](../images/reconfigure_processor.png)
 
 5.  Specify the number of sockets and the number of cores per socket.
     The reconfiguration screen will calculate the **Total Processors**.

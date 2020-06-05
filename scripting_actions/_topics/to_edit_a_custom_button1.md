@@ -9,8 +9,8 @@ This procedure shows you how to edit a custom button.
 
 3.  Click the button you want to edit.
 
-4.  Click ![image](/images/1847.png)(**Configuration**),
-    ![image](/images/1851.png) (**Edit this Button**).
+4.  Click ![image](../images/1847.png)(**Configuration**),
+    ![image](../images/1851.png) (**Edit this Button**).
 
 5.  Modify as required.
 

@@ -8,7 +8,7 @@ procedure below.
 
 1.  Navigate to menu:Networks\[Floating IPs\].
 
-2.  Click ![COnfiguration](/images/1847.png)(**Configuration**) and
+2.  Click ![COnfiguration](../images/1847.png)(**Configuration**) and
     click Add a new Floating IP.
 
 3.  Select a **Network Manager**.

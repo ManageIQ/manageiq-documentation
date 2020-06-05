@@ -28,8 +28,8 @@ associated with the `admin` tenant.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Add a New Infrastructure Provider](/images/1862.png) (**Add
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Add a New Infrastructure Provider](../images/1862.png) (**Add
     a New Infrastructure Provider**).
 
 3.  Enter the **Name** of the provider to add. The **Name** is how the

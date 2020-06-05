@@ -11,4 +11,4 @@
 
 5.  Check the items to compare.
 
-6.  Click ![2148](/images/2148.png) (**Compare Selected VMs**).
+6.  Click ![2148](../images/2148.png) (**Compare Selected VMs**).

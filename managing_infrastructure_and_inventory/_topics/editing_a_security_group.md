@@ -10,8 +10,8 @@ To edit details of a security group:
 
 2.  Click on a security group to view the summary page.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Edit this Security Group](/images/1851.png) (**Edit this Security
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Edit this Security Group](../images/1851.png) (**Edit this Security
     Group**).
 
 4.  Under **Security Group Information**, edit the **Security Group

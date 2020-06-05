@@ -31,8 +31,8 @@ To create a playbook automate method:
 
 3.  Click the **Methods** tab.
 
-4.  Click ![image](/images/1847.png) (**Configuration**) then,
-    ![image](/images/1862.png) (**Add a New Method**).
+4.  Click ![image](../images/1847.png) (**Configuration**) then,
+    ![image](../images/1862.png) (**Add a New Method**).
 
 5.  In the **Main Info** area, select **Playbook** from the **Type**
     dropdown menu.
@@ -71,7 +71,7 @@ To create a playbook automate method:
     execution.
 
 13. Add required **Input Parameters** using the fields and values
-    available. Click the ![add parameter](/images/add_parameter.png) to
+    available. Click the ![add parameter](../images/add_parameter.png) to
     add additional input parameters.
 
     <div class="note">

@@ -13,8 +13,8 @@ To migrate a live instance:
     **Instances by Provider** accordion to filter instances by provider
     and/or availability zone.
 
-3.  Click ![2007](/images/2007.png)(**Lifecycle**), then
-    ![2097](/images/2097.png) (**Migrate selected Instance**).
+3.  Click ![2007](../images/2007.png)(**Lifecycle**), then
+    ![2097](../images/2097.png) (**Migrate selected Instance**).
 
 4.  On the **Migrate Instance** section, select your preferred migration
     options:
@@ -42,4 +42,4 @@ To migrate a live instance:
 Once the migration initiates, the instance list will reload with a
 message indicating that the selected instance is being migrated. Upon
 completion, the instance list will reload and the evacuated instance
-will be displayed as ![2143](/images/2143.png) (**On**).
+will be displayed as ![2143](../images/2143.png) (**On**).

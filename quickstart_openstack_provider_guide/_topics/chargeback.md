@@ -19,14 +19,14 @@ per tier if desired.
 2.  Click the **Rates** accordion and select **Compute** to create a CPU
     chargeback rate.
 
-3.  Click ![1847](/images/1847.png) **(Configuration)** and
-    ![1862](/images/1862.png) **(Add a new Chargeback Rate)**.
+3.  Click ![1847](../images/1847.png) **(Configuration)** and
+    ![1862](../images/1862.png) **(Add a new Chargeback Rate)**.
 
 4.  Type in a **Description** for the chargeback rate.
 
 5.  Select **Currency** and fill in the **Rate Details**.
 
-    ![chargeback rate details](/images/chargeback-rate-details.png)
+    ![chargeback rate details](../images/chargeback-rate-details.png)
 
 6.  Click **Add**.
 

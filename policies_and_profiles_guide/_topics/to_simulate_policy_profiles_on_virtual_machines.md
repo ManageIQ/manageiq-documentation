@@ -3,13 +3,13 @@
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\],
     select the virtual machines you need to evaluate.
 
-2.  Click ![image](/images/1941.png) (**Policy**), and then click
-    ![image](/images/1947.png) (**Policy Simulation**).
+2.  Click ![image](../images/1941.png) (**Policy**), and then click
+    ![image](../images/1947.png) (**Policy Simulation**).
 
 3.  From the **Select a Policy Profile to add** dropdown, click the
     policy you need to apply to the selected virtual machines.
 
-    ![image](/images/1948.png)
+    ![image](../images/1948.png)
 
 4.  The virtual machine thumbnail displays in the **Policy Simulation**
     area.

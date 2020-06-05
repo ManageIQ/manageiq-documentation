@@ -6,5 +6,5 @@ To delete a floating IP
 
 2.  SClick on a floating IP from the list view to view its summary page.
 
-3.  Click ![Configuration](/images/1847.png)(**Configuration**), then
+3.  Click ![Configuration](../images/1847.png)(**Configuration**), then
     click **Delete this Floating IP**.

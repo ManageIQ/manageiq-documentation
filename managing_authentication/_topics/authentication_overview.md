@@ -30,7 +30,7 @@ As the admin user, configure your authentication method from the
 
 To change authentication settings:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Select your server in the **Settings** accordion.
 

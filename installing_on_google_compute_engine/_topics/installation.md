@@ -30,7 +30,7 @@ You can upload the appliance with the following steps:
 
 2.  Click **Home** in the top left of the screen.
 
-3.  Click ![gce products services](/images/gce-products-services.png) to
+3.  Click ![gce products services](../images/gce-products-services.png) to
     show the **Products and Services** menu. Click **Storage**.
 
 4.  Create a bucket by clicking **Create Bucket**, and configure the
@@ -49,7 +49,7 @@ You can upload the appliance with the following steps:
     to begin the upload.
 
 6.  When the upload is complete, click ![gce products
-    services](/images/gce-products-services.png) menu:Products &
+    services](../images/gce-products-services.png) menu:Products &
     services\[Compute Engine\] on the left menu.
 
 7.  Create an image by clicking **Images** from the left menu, then
@@ -91,7 +91,7 @@ You can upload the appliance with the following steps:
         traffic**.
 
     5.  Click ![gce
-        managementsshkeys](/images/gce-managementsshkeys.png)**Management,
+        managementsshkeys](../images/gce-managementsshkeys.png)**Management,
         disk, networking, SSH keys**. Then, click the **SSH Keys** tab,
         add your entire SSH public key data in the **Username** box.
 

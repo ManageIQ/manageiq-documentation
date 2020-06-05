@@ -5,8 +5,8 @@ on it. This displays various options to access provider information.
 
 There are two methods of viewing an infrastructure provider’s details:
 the summary screen (default) and the dashboard screen. Use the summary
-![summary](/images/summary.png) and dashboard
-![dashboard](/images/dashboard.png) buttons to toggle between views.
+![summary](../images/summary.png) and dashboard
+![dashboard](../images/dashboard.png) buttons to toggle between views.
 
 Both the summary and dashboard screens contain a taskbar with
 **Reload**, **Configuration**, **Policy**, **Monitoring**, and
@@ -14,7 +14,7 @@ Both the summary and dashboard screens contain a taskbar with
 
 **Provider Summary Screen.**
 
-![providers summary screen](/images/providers-summary-screen.png)
+![providers summary screen](../images/providers-summary-screen.png)
 
 The provider summary screen displays information about the provider in
 table format.
@@ -29,7 +29,7 @@ table format.
 
 **Provider Dashboard Screen.**
 
-![providers summary dashboard](/images/providers-summary-dashboard.png)
+![providers summary dashboard](../images/providers-summary-dashboard.png)
 
 From the dashboard, you can view:
 
@@ -50,7 +50,7 @@ To view the dashboard:
 2.  Click the infrastructure provider to view.
 
 3.  To access the dashboard view, click
-    ![dashboard](/images/dashboard.png) (**Dashboard view**).
+    ![dashboard](../images/dashboard.png) (**Dashboard view**).
 
-To return to the summary view, click ![summary](/images/summary.png)
+To return to the summary view, click ![summary](../images/summary.png)
 (**Summary view**).

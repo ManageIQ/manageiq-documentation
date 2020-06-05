@@ -9,8 +9,8 @@ to customize them to your environment.
 2.  Click the **Conditions** accordion, and select the condition you
     want to copy.
 
-3.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1859.png) (**Copy this Condition to a new
+3.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1859.png) (**Copy this Condition to a new
     Condition**).
 
 4.  Make any changes you need for the new condition. The description

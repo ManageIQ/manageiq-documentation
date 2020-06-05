@@ -22,7 +22,7 @@ To revert a virtual machine to a snapshot:
 
 5.  Select the snapshot to revert to under **Available Snapshots**.
 
-6.  Click ![revert icon](/images/revert_icon.png)(**Revert to selected
+6.  Click ![revert icon](../images/revert_icon.png)(**Revert to selected
     snapshot**).
 
 7.  Click **OK**.

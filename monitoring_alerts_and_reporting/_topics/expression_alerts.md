@@ -8,12 +8,12 @@ less than 5% free space.
 1.  Navigate to menu:Control\[Explorer\].
 
 2.  Click on the **Alerts** accordion, then click
-    ![1847](/images/1847.png) (**Configuration**),
-    ![1862](/images/1862.png) (**Add a new Alert**).
+    ![1847](../images/1847.png) (**Configuration**),
+    ![1862](../images/1862.png) (**Add a new Alert**).
 
 3.  In the **Info** area:
 
-    ![expressionalerts](/images/expressionalerts.png)
+    ![expressionalerts](../images/expressionalerts.png)
 
       - Type in a description for the alert.
 
@@ -27,9 +27,9 @@ less than 5% free space.
 4.  Use the expression editor to create your expression. This is the
     same expression editor used to create **Conditions**.
 
-    ![expressioneditor](/images/expressioneditor.png)
+    ![expressioneditor](../images/expressioneditor.png)
 
-5.  Click ![1863](/images/1863.png) (**Commit expression element
+5.  Click ![1863](../images/1863.png) (**Commit expression element
     changes**) to accept the expression.
 
 6.  After setting the parameters, you then select what you want the

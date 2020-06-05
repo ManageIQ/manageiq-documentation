@@ -10,8 +10,8 @@ provider.
 
 2.  Click the network provider to remove.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Remove this Network Provider from the VMDB](/images/2098.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Remove this Network Provider from the VMDB](../images/2098.png)
     (**Remove this Network Provider from the VMDB**).
 
 4.  Click **OK**.

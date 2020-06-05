@@ -40,8 +40,8 @@ a specific date or immediately.
 
 2.  Select the virtual machine or instance that you want to retire.
 
-3.  Click ![2007](/images/2007.png)(**Lifecycle**), then
-    ![2010](/images/2010.png)(**Retire this VM/Instance**).
+3.  Click ![2007](../images/2007.png)(**Lifecycle**), then
+    ![2010](../images/2010.png)(**Retire this VM/Instance**).
 
 The virtual machine or instance is immediately stopped, and will be shut
 down if an attempt is made to restart it.
@@ -57,8 +57,8 @@ hours ahead of the present time.
 2.  Select the virtual machine or instance that you want to set a
     retirement date for.
 
-3.  Click ![2007](/images/2007.png)(**Lifecycle**), then
-    ![2010](/images/2010.png)(**Set Retirement Dates**).
+3.  Click ![2007](../images/2007.png)(**Lifecycle**), then
+    ![2010](../images/2010.png)(**Set Retirement Dates**).
 
 4.  From **Enter Retirement Date as**, select **Specific Date and Time**
     or **Time Delay from Now** to schedule retirement.
@@ -68,7 +68,7 @@ hours ahead of the present time.
 
         1.  Select a retirement date using the calendar control.
 
-        2.  Click ![clock](/images/clock.png) then select a retirement
+        2.  Click ![clock](../images/clock.png) then select a retirement
             time (in UTC) using the arrows.
 
     2.  To retire the virtual machine using a relative time, select
@@ -92,10 +92,10 @@ summary screen.
 2.  Select the virtual machine or instance that you want to remove the
     retirement date from.
 
-3.  Click ![2007](/images/2007.png)(**Lifecycle**), then click
-    ![2010](/images/2010.png)(**Set Retirement Date**).
+3.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
+    ![2010](../images/2010.png)(**Set Retirement Date**).
 
-4.  Click ![remove retirement date](/images/remove-retirement-date.png)
+4.  Click ![remove retirement date](../images/remove-retirement-date.png)
     to remove the retirement date.
 
 ### Setting Retirement in a Provision Request
@@ -120,7 +120,7 @@ screen appears where you can set up your provision requests.
 
 3.  Click **Submit**.
 
-    ![vm instance retirement](/images/vm-instance-retirement.png)
+    ![vm instance retirement](../images/vm-instance-retirement.png)
 
 ### Extending Retirement Dates
 
@@ -141,8 +141,8 @@ to change the number of days.
     (If you do not have a button group, add one and then create the
     button.)
 
-5.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Add a new Button**).
+5.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Add a new Button**).
 
 6.  Type in a button text and button hover text, and select the image
     you want to use.
@@ -173,10 +173,10 @@ to change the number of days.
 
     </div>
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit this Instance**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit this Instance**).
 
 4.  In the Value field, change the **vm\_retire\_extend\_days**
     attribute to the new value.
 
-5.  Click **Save**. ![6299](/images/6299.png)
+5.  Click **Save**. ![6299](../images/6299.png)

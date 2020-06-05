@@ -15,6 +15,6 @@ analysis resulted in an error, the error is shown here.
 4.  From the **Relationships** area in the summary, click **Analysis
     History**. A history of up to the last 10 analyses is displayed.
 
-    ![2179](/images/2179.png)
+    ![2179](../images/2179.png)
 
 5.  Click on a specific analysis to see its details.

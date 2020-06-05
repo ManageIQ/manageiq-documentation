@@ -4,8 +4,8 @@ bootable volumes not in use will be available.
 
 1.  Navigate to menu:Compute\[Clouds \> Instances\].
 
-2.  Click ![2007](/images/2007.png)(**Lifecycle**), then click
-    ![1862](/images/1862.png)(**Provision Instances**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
+    ![1862](../images/1862.png)(**Provision Instances**).
 
 3.  Select an OpenStack image, volume or volume snapshot from the list
     presented. These files must be available on your OpenStack provider.

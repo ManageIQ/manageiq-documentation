@@ -5,8 +5,8 @@
 
 2.  Select the **Domain** that you want to delete.
 
-3.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1861.png) (**Remove This Domain**).
+3.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1861.png) (**Remove This Domain**).
 
 4.  A window to confirm the removal of Domain appears.
 

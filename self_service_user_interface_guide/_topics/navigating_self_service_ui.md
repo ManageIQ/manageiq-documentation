@@ -19,7 +19,7 @@ administrative user interface option, and a help option. Besides that,
 you can see the current logged in LDAP user, for example,
 **Administrator**.
 
-![Top Menu Bar](/images/ssui-menu-bar.png)
+![Top Menu Bar](../images/ssui-menu-bar.png)
 
   - Shopping Cart
     Click the shopping cart icon to view services that are available to
@@ -34,13 +34,13 @@ you can see the current logged in LDAP user, for example,
     services, provisioning, service power operations, and so on. Click
     the bell icon to open or close the **Notifications** drawer, which
     shows various notification events. You can click the double arrows
-    (![Double Arrows Icon](/images/ssui_doublearrows_icon.png)) located
+    (![Double Arrows Icon](../images/ssui_doublearrows_icon.png)) located
     on the upper-left of the **Notifications** drawer to expand or
     contract the size of the **Notifications** screen as required.
 
   - Administration User Interface Link
     Clicking the menu icon (![Administration UI
-    icon](/images/ssui-administration-ui-icon.png)) shows the
+    icon](../images/ssui-administration-ui-icon.png)) shows the
     **Administration UI** link, which when clicked, takes you to the
     full administrative user interface login page in a new window or tab
     of your web browser.

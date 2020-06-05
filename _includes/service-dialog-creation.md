@@ -2,8 +2,8 @@
 
 2.  Click the **Service Dialogs** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![1862](/images/1862.png)(**Add a new Dialog**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![1862](../images/1862.png)(**Add a new Dialog**).
 
 4.  In **Dialog Information**, enter a **Label** and **Description**.
     Check the boxes for the buttons you want available at the bottom of
@@ -12,16 +12,16 @@
     As you enter the **Label** of the dialog, it should appear in the
     **Dialog** pane on the left.
 
-    1.  Click ![1862](/images/1862.png)(**Add**), then
-        ![1862](/images/1862.png)(**Add a New Tab to this Dialog**).
+    1.  Click ![1862](../images/1862.png)(**Add**), then
+        ![1862](../images/1862.png)(**Add a New Tab to this Dialog**).
 
     2.  Enter a **Label** and **Description** for this tab.
 
         As you enter the **Label** of the tab, it should appear in the
         **Dialog** pane on the left under the dialog you are creating.
 
-    3.  Click ![1862](/images/1862.png)(**Add**), then
-        ![1862](/images/1862.png)(**Add a New Box to this Tab**).
+    3.  Click ![1862](../images/1862.png)(**Add**), then
+        ![1862](../images/1862.png)(**Add a New Box to this Tab**).
 
     4.  Enter a **Label** and **Description** for this box.
 
@@ -30,8 +30,8 @@
 
 5.  Add an element to this box. Elements are controls that accept input.
 
-    1.  Click ![1862](/images/1862.png)(**Add**), then
-        ![1862](/images/1862.png)(**Add a New Element to this Box**).
+    1.  Click ![1862](../images/1862.png)(**Add**), then
+        ![1862](../images/1862.png)(**Add a New Element to this Box**).
 
     2.  Enter a **Label**, **Name**, and **Description** for this
         element.

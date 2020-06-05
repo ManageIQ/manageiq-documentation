@@ -13,7 +13,7 @@ The web interface uses virtual thumbnails to represent cloud providers.
 Each thumbnail contains four quadrants by default, which display basic
 information about each provider:
 
-![cloudthumbnail](/images/cloudthumbnail.png)
+![cloudthumbnail](../images/cloudthumbnail.png)
 
 1.  Number of instances
 
@@ -25,9 +25,9 @@ information about each provider:
 
 | Icon                      | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ |
-| ![2190](/images/2190.png) | Validated: Valid authentication credentials have been added.                   |
-| ![2191](/images/2191.png) | Invalid: Authentication credentials are invalid.                               |
-| ![2192](/images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
+| ![2190](../images/2190.png) | Validated: Valid authentication credentials have been added.                   |
+| ![2191](../images/2191.png) | Invalid: Authentication credentials are invalid.                               |
+| ![2192](../images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
 
 Provider authentication status
 

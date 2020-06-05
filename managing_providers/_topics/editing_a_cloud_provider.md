@@ -15,8 +15,8 @@ To use a different cloud provider, create a new one.
 
 2.  Click the cloud provider to edit.
 
-3.  Click ![Configuration](/images/1847.png) **(Configuration)**, and
-    then ![Edit Selected Cloud Provider](/images/1851.png) **(Edit
+3.  Click ![Configuration](../images/1847.png) **(Configuration)**, and
+    then ![Edit Selected Cloud Provider](../images/1851.png) **(Edit
     Selected Cloud Provider)**.
 
 4.  Edit the **Basic Information**. This varies depending on the

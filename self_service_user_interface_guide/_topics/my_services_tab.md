@@ -21,9 +21,9 @@ under the **Resources** section. You can also control power operations
 and life cycle of virtual machine resources via more options
 *(represented by three dots)*.
 
-![ssui my services](/images/ssui-my-services.png)
+![ssui my services](../images/ssui-my-services.png)
 
-![ssui my service details](/images/ssui-my-service-details.png)
+![ssui my service details](../images/ssui-my-service-details.png)
 
 **Virtual Machine Dashboard:.**
 
@@ -66,11 +66,11 @@ Service](#retiring-service).
     to schedule retirement for.
 
 2.  Click the ![Service Retire
-    Button](/images/ssui-retirement-button.png) button located on the
+    Button](../images/ssui-retirement-button.png) button located on the
     upper-right corner of the screen, then select **Set Retirement
     Dates**. The **Schedule Service Retirement** window will appear.
     ![ssui schedule service
-    retirement](/images/ssui-schedule-service-retirement.png)
+    retirement](../images/ssui-schedule-service-retirement.png)
 
 3.  Set the **Retirement Date**.
 
@@ -88,10 +88,10 @@ Service](#schedule-retirement).
     retire now.
 
 2.  Click the ![Service Retire
-    Button](/images/ssui-retirement-button.png) button located on the
+    Button](../images/ssui-retirement-button.png) button located on the
     upper right corner of the screen, then select **Retire**. The
     **Retire Service Now** window will appear to confirm your action.
-    ![ssui retire service now](/images/ssui-retire-service-now.png)
+    ![ssui retire service now](../images/ssui-retire-service-now.png)
 
 3.  Click **Yes, Retire Service Now**.
 
@@ -102,10 +102,10 @@ Follow this procedure to set ownership of a service.
 1.  From the **Services** screen, click on the more options button next
     to the service you want set ownership for, then click **Set
     Ownership**. Alternatively, click on the service. Click the ![ssui
-    service settings button](/images/ssui-service-settings-button.png)
+    service settings button](../images/ssui-service-settings-button.png)
     button located on the upper-right corner of the screen, then select
     **Set Ownership**. ![ssui set service
-    ownership](/images/ssui-set-service-ownership.png)
+    ownership](../images/ssui-set-service-ownership.png)
 
 2.  Select an owner from the list.
 
@@ -120,9 +120,9 @@ Follow this procedure to add or edit tags for a service.
 1.  From the **Services** screen, click on more options next to the
     service you want add or edit tags for, then click **Edit Tags**.
     Alternatively, click on the service. Click the ![ssui edit tags
-    button](/images/ssui-edit-tags-button.png) button located on the
+    button](../images/ssui-edit-tags-button.png) button located on the
     upper-right corner of the screen, then select **Edit Tags**. ![ssui
-    add edit tags](/images/ssui-add-edit-tags.png)
+    add edit tags](../images/ssui-add-edit-tags.png)
 
 2.  To add a tag, select the tag category and value from the lists, then
     click the blue plus (+) sign as shown in the screen capture.
@@ -139,7 +139,7 @@ Follow this procedure to remove a service.
 1.  From the **Services** screen, click on more options next to the
     service you want to remove, then click **Remove**. Alternatively,
     click on the service. Click the ![ssui service settings
-    button](/images/ssui-service-settings-button.png) button located on
+    button](../images/ssui-service-settings-button.png) button located on
     the upper-right corner of the screen, then select **Remove**. A
     confirmation window appears.
 
@@ -152,12 +152,12 @@ Follow this procedure to edit the name and description of a service.
 1.  From the **My Services** screen, click on more options next to the
     service you want to edit, then click **Edit**. Alternatively, click
     on the service. Click the ![ssui service settings
-    button](/images/ssui-service-settings-button.png) button located on
+    button](../images/ssui-service-settings-button.png) button located on
     the upper-right corner of the screen, then select **Edit**. An
     **Edit Service** screen appears.
 
 2.  Edit the name and description of the service as required. ![ssui
-    edit service](/images/ssui-edit-service.png)
+    edit service](../images/ssui-edit-service.png)
 
 3.  Click **Save**.
 
@@ -245,7 +245,7 @@ directly with your virtual machines.
 1.  From the **Services** screen, click on the required service.
 
 2.  In **Resources**, click the ![Access
-    Button](/images/ssui-access-button.png) button next to the virtual
+    Button](../images/ssui-access-button.png) button next to the virtual
     machine and select **VM Console**.
 
 The virtual machine console will open in a new window of your web
@@ -276,7 +276,7 @@ must be pre-configured and running on the virtual machine.
 </div>
 
 You can open the Web console (Cockpit) for a virtual machine from the
-![Access Button](/images/ssui-access-button.png) button.
+![Access Button](../images/ssui-access-button.png) button.
 
 1.  From the **My Services** screen, click on the service associated
     with the virtual machine you want to open the Web console for.
@@ -290,8 +290,8 @@ You can open the Web console (Cockpit) for a virtual machine from the
     will need to add this connection to the security exceptions. Click
     **Advanced → Add Exception → Confirm Security Exception**. After
     that, you will see the login screen. ![Cockpit
-    Login](/images/cockpit-login-nb.png)
+    Login](../images/cockpit-login-nb.png)
 
 4.  Once you have logged in, you will see the tabs for the dashboard and
     the individual machines added to Cockpit. ![Cockpit
-    UI](/images/cockpit-ui-nb.png)
+    UI](../images/cockpit-ui-nb.png)

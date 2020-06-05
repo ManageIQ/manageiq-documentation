@@ -14,8 +14,8 @@ To create an expression method:
 
 3.  Click the **Methods** tab.
 
-4.  Click ![image](/images/1847.png) (**Configuration**) then,
-    ![image](/images/1862.png) (**Add a New Method**).
+4.  Click ![image](../images/1847.png) (**Configuration**) then,
+    ![image](../images/1862.png) (**Add a New Method**).
 
 5.  In the **Main Info** area, select **expression** from the drop-down
     menu.
@@ -34,16 +34,16 @@ To create an expression method:
     2.  In the **Contains** field, input a value or click **User will
         input the value**.
 
-    3.  Click ![image](/images/1863.png) to complete the expression.
+    3.  Click ![image](../images/1863.png) to complete the expression.
 
 9.  Add **Input Parameters** for each of the user input fields required.
 
-    1.  Click ![image](/images/2366.png) to add a new parameter.
+    1.  Click ![image](../images/2366.png) to add a new parameter.
 
     2.  Provide a **Name**, **Default Value** and select a **Data Type**
         for each parameter.
 
-    3.  Click ![image](/images/1863.png) to add the parameter.
+    3.  Click ![image](../images/1863.png) to add the parameter.
 
         <div class="note">
 

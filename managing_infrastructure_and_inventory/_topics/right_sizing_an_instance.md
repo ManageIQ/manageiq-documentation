@@ -8,8 +8,8 @@ Operating Range** to calculate the recommendations.
 
 2.  Click an instance for right-sizing.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2163](/images/2163.png) (**Right-Size Recommendations**) button.
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2163](../images/2163.png) (**Right-Size Recommendations**) button.
 
 A new page appears with three levels of Memory and CPU recommendations,
 Conservative, Moderate, and Aggressive, next to the Normal Operating

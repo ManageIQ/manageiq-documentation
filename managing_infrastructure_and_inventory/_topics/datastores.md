@@ -7,12 +7,12 @@ NFS datastores. Datastores connected to a provider are automatically
 created on discovery. On creation of a repository, a datastore is
 automatically created.
 
-![datastores](/images/datastores.png)
+![datastores](../images/datastores.png)
 
 After detecting datastores, you might want to examine them more closely
 to see virtual machines, hosts, and available space.
 
-![2237](/images/2237.png)
+![2237](../images/2237.png)
 
 1.  File system type
 

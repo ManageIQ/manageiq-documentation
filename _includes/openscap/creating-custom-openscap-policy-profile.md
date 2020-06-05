@@ -10,16 +10,16 @@ To do so, you will first have to copy the policy you want to customize:
 2.  Click the **Policies** accordion, and select **Container Image
     Compliance Policies**, then click **OpenSCAP**.
 
-3.  Click ![image](/images/1847.png)(**Configuration**), and an option
+3.  Click ![image](../images/1847.png)(**Configuration**), and an option
     to copy the policy should appear; for example,
-    ![image](/images/1859.png) (**Copy this Container Image Policy**).
+    ![image](../images/1859.png) (**Copy this Container Image Policy**).
 
 4.  Click **OK** to confirm.
 
 The new policy is created with a prefix of **Copy of** in its
 description, and it can be viewed in the Policies accordion.
 
-![image](/images/1860-cppolicy.png)
+![image](../images/1860-cppolicy.png)
 
 You can now edit the copied policy. After editing copied policies, you
 can add them to a new policy profile. For instructions on how to edit

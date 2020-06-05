@@ -8,8 +8,8 @@ datastore is completely empty.
 
 2.  Click on the Datastore to remove.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Remove Datastore](/images/2098.png) (**Remove Datastore from
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Remove Datastore](../images/2098.png) (**Remove Datastore from
     Inventory**).
 
 4.  Click **OK**.

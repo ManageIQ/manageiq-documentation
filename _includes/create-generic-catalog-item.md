@@ -2,8 +2,8 @@
 
 2.  Click the **Catalog Items** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![1862](/images/1862.png)(**Add a New Catalog Item**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![1862](../images/1862.png)(**Add a New Catalog Item**).
 
 4.  Select **Generic** from the Catalog Item Type list.
 

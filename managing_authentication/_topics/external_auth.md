@@ -110,7 +110,7 @@ Finish configuring external authentication using the web user interface:
     virtual machine to synchronize the appliance’s time with an NTP
     server.
 
-3.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+3.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 4.  Select your server in the **Settings** accordion.
 
@@ -137,7 +137,7 @@ console.
 
 Using the web user interface:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Select your server in the **Settings** accordion.
 

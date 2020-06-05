@@ -10,8 +10,8 @@ not required temporarily.
     you need to disable or navigate to the policy from the policy
     profile.
 
-3.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1851.png) (**Edit Basic Info, Scope, Notes**).
+3.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1851.png) (**Edit Basic Info, Scope, Notes**).
 
 4.  Uncheck **Active**.
 

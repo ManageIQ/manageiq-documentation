@@ -6,5 +6,5 @@ To delete a security group:
 
 2.  Click on a security group in the list view to view its summary page.
 
-3.  Click on ![Configuration](/images/1847.png)(**Configuration**), then
+3.  Click on ![Configuration](../images/1847.png)(**Configuration**), then
     click **Delete this Security Group**.

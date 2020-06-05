@@ -31,13 +31,13 @@ Nodes with disabled firewalls are marked *non-compliant*.
 
 3.  Select **Host Compliance Policies**.
 
-4.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1862.png) (**Add a New Host/Node Compliance
+4.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1862.png) (**Add a New Host/Node Compliance
     Policy**).
 
 5.  Type in a **Description** for the policy.
 
-    ![image](/images/1935.png)
+    ![image](../images/1935.png)
 
 6.  Uncheck **Active** if you do not want this policy processed even
     when assigned to a resource.
@@ -51,7 +51,7 @@ Nodes with disabled firewalls are marked *non-compliant*.
 
     2.  A new drop-down will appear; from there, select **true**.
 
-    3.  Click ![image](/images/1863.png) (**Commit expression element
+    3.  Click ![image](../images/1863.png) (**Commit expression element
         changes**) to add the scope.
 
 8.  In the **Notes** area, add a detailed explanation of the policy.
@@ -82,8 +82,8 @@ analysis on an instance every 24 hours:
 
 3.  Select **Vm Control Policies**.
 
-4.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a New VM and Instance Control
+4.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a New VM and Instance Control
     Policy**).
 
 5.  Enter a **Description**. This will be the name given to your VM
@@ -101,7 +101,7 @@ analysis on an instance every 24 hours:
 
     2.  A new drop-down will appear; from there, select **true**.
 
-    3.  Click ![image](/images/1863.png) (**Commit expression element
+    3.  Click ![image](../images/1863.png) (**Commit expression element
         changes**) to add the scope.
 
 8.  Click **Add**. The policy is added and listed under **Vm Control
@@ -115,8 +115,8 @@ policy. To do so:
 2.  Click the **Policies** accordion, and select the control policy you
     just created.
 
-3.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1851.png) (**Edit this Policy’s Condition
+3.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1851.png) (**Edit this Policy’s Condition
     assignments**).
 
 4.  In the **VM Operation** section, select **VM Power On**.
@@ -128,8 +128,8 @@ You can now associate an action to the **VM Power On** event. To do so:
 
 1.  Select the **VM Power On** event.
 
-2.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1851.png) (**Edit Actions for this Policy Event**).
+2.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1851.png) (**Edit Actions for this Policy Event**).
 
 3.  In the **Order of Actions if ALL Conditions are True** section,
     select **Generate Log Message** and **Initiate SmartState Analysis
@@ -142,8 +142,8 @@ Next, create a policy profile and assign this new control policy to it:
 1.  Navigate to menu:Control\[Explorer\].
 
 2.  Click on the **Policy Profiles** accordion, then click
-    ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a New Policy Profile**).
+    ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a New Policy Profile**).
 
 3.  Enter `Most Recent SmartState` in the **Description** field.
 
@@ -160,8 +160,8 @@ cloud providers.
 
 2.  Select the overcloud you added in [???](#add-openstack-oc).
 
-3.  Click ![image](/images/1941.png) (**Policy**), then
-    ![image](/images/1851.png) (**Manage Policies**).
+3.  Click ![image](../images/1941.png) (**Policy**), then
+    ![image](../images/1851.png) (**Manage Policies**).
 
 4.  Under **Select Policy Profiles**, select **Most Recent SmartState**.
 

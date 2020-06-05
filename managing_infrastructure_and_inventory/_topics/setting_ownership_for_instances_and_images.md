@@ -10,13 +10,13 @@ and can be used to enforce quotas.
 
 3.  Click the checkboxes for the items to set ownership.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2155](/images/2155.png) (**Set Ownership**) on the **Instance
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2155](../images/2155.png) (**Set Ownership**) on the **Instance
     Taskbar**.
 
 5.  From the **Select an Owner** dropdown, select a user.
 
-    ![2156](/images/2156.png)
+    ![2156](../images/2156.png)
 
 6.  From the **Select a Group** dropdown, select a group
 

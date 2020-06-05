@@ -177,12 +177,12 @@ Directory domain in [Connecting {{ site.data.product.title_short }} to an Active
 Directory Domain](#connecting_to_AD_domain), complete the following
 steps:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Access Control** accordion, then click **Groups**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add a new Group**) to create a
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add a new Group**) to create a
     group.
 
 4.  In **Group Information**, select **Look Up External Authentication
@@ -192,7 +192,7 @@ steps:
 5.  In **User to Look Up**, enter the user name for a user in your AD
     group.
 
-    ![ad userlookup](/images/ad-userlookup.png)
+    ![ad userlookup](../images/ad-userlookup.png)
 
 6.  Click **Retrieve** to look up details for the user in Active
     Directory and pull group information for the user. As a result, the
@@ -203,7 +203,7 @@ steps:
     to associate a {{ site.data.product.title_short }} role with; for example, the
     `cloudforms` group.
 
-    ![assign ad roles](/images/assign_ad-roles.png)
+    ![assign ad roles](../images/assign_ad-roles.png)
 
 8.  Select a **Role** to map to the group.
 

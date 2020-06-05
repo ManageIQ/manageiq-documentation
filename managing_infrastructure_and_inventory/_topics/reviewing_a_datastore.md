@@ -6,7 +6,7 @@ summary.
 
 **Datastore Management Screen.**
 
-![view datastore new](/images/view-datastore-new.png)
+![view datastore new](../images/view-datastore-new.png)
 
 1.  **Datastore Taskbar**: Choose between **Configuration**, **Policy**
     and **Monitoring** options for the selected datastore.

@@ -3,8 +3,8 @@
 2.  Select your OpenStack Cinder manager to go to the Cinder manager’s
     summary page.
 
-3.  Click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-    ![Timelines](/images/1995.png) (**Timelines**) to view the events
+3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+    ![Timelines](../images/1995.png) (**Timelines**) to view the events
     timeline for the manager.
 
 4.  A timeline of either management events or policy events can be

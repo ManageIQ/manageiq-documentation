@@ -9,8 +9,8 @@ To add a security group to an instance:
 
 2.  Click on **Instances by Provider**, and select an instance.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Add a Security Group](/images/cloud-security.png) (**Add a
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Add a Security Group](../images/cloud-security.png) (**Add a
     Security Group**).
 
 4.  Select a **Security Group** from the drop-down menu to add to the
@@ -24,8 +24,8 @@ To remove a security group from an instance:
 
 2.  Click on **Instances by Provider**, and select an instance.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Remove a Security Group](/images/cloud-security.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Remove a Security Group](../images/cloud-security.png)
     (**Remove a Security Group**).
 
 4.  Select a **Security Group** from the drop-down menu to remove from

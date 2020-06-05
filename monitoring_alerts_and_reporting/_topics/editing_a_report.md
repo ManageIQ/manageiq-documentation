@@ -11,8 +11,8 @@ reports.
 2.  Click the menu:Reports\[All Reports\] accordion and select the
     report you want to edit.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**),
-    ![1851](/images/1851.png) (**Edit this Report**).
+3.  Click ![1847](../images/1847.png) (**Configuration**),
+    ![1851](../images/1851.png) (**Edit this Report**).
 
 4.  Make any changes you need.
 

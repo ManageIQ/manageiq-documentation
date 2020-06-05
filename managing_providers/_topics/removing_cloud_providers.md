@@ -7,8 +7,8 @@ in use.
 
 2.  Check the cloud providers to remove.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Remove Cloud Providers from the VMDB](/images/2098.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Remove Cloud Providers from the VMDB](../images/2098.png)
     (**Remove Cloud Providers from the VMDB**).
 
 4.  Click **OK**.

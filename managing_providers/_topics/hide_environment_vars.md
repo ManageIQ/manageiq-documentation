@@ -22,17 +22,17 @@ further detail.
 
 To configure user access to container environment variables:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Access Control** accordion, then click **Roles**.
 
 3.  Select a existing custom role from the **Access Control Roles**
-    list, and click ![1847](/images/1847.png) (**Configuration**), then
-    ![1851](/images/1851.png) (**Edit the selected Role**).
+    list, and click ![1847](../images/1847.png) (**Configuration**), then
+    ![1851](../images/1851.png) (**Edit the selected Role**).
 
     Alternatively, to create a new custom role, select a role from the
-    **Access Control Roles** list, and click ![1847](/images/1847.png)
-    (**Configuration**), then ![1851](/images/1851.png) (**Copy this
+    **Access Control Roles** list, and click ![1847](../images/1847.png)
+    (**Configuration**), then ![1851](../images/1851.png) (**Copy this
     Role to a new Role**).
 
 4.  Edit the name for the role if desired.
@@ -49,7 +49,7 @@ To configure user access to container environment variables:
 7.  Clear the **Environment Variables** checkbox to restrict the user
     role from viewing container environment variables.
 
-    ![restrict env vars](/images/restrict_env_vars.png)
+    ![restrict env vars](../images/restrict_env_vars.png)
 
 8.  Click **Save**.
 

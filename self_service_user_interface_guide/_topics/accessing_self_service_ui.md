@@ -9,7 +9,7 @@ Self Service URL:
 
     https://HOSTNAME/self_service/
 
-![Self Service Login Screen](/images/ssui-login-nb.png)
+![Self Service Login Screen](../images/ssui-login-nb.png)
 
 You can choose your preferred language for the Self Service user
 interface from the options in the **Language** list available on the

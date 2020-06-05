@@ -15,7 +15,7 @@ the server discovered from your cloud providers. The taskbar on each
 page is a menu driven set of buttons that provide access to functions
 related to instances and images.
 
-![image features](/images/image_features.png)
+![image features](../images/image_features.png)
 
 1.  History button
 
@@ -41,7 +41,7 @@ Console uses Virtual Thumbnails to describe instances and images. Each
 thumbnail contains four quadrants by default. This allows you to glance
 at an instance or image for a quick view of its contents.
 
-![3393](/images/3393.png)
+![3393](../images/3393.png)
 
 1.  Top left quadrant: Operating system of the Instance
 
@@ -53,14 +53,14 @@ at an instance or image for a quick view of its contents.
 
 | Icon                      | Description                                                                              |
 | ------------------------- | ---------------------------------------------------------------------------------------- |
-| ![2138](/images/2138.png) | Template: Cloud Image                                                                    |
-| ![2139](/images/2139.png) | Retired: Instance has been retired                                                       |
-| ![2140](/images/2140.png) | Archived: Instance has no provider or availability zone associated with it.              |
-| ![2141](/images/2141.png) | Orphaned: Instance has no availability zone but does have a provider associated with it. |
-| ![2142](/images/2142.png) | Disconnected: Instance is disconnected.                                                  |
-| ![2143](/images/2143.png) | On: Instance is powered on.                                                              |
-| ![2144](/images/2144.png) | Off: Instance is powered off.                                                            |
-| ![2145](/images/2145.png) | Suspended: Instance has been suspended.                                                  |
+| ![2138](../images/2138.png) | Template: Cloud Image                                                                    |
+| ![2139](../images/2139.png) | Retired: Instance has been retired                                                       |
+| ![2140](../images/2140.png) | Archived: Instance has no provider or availability zone associated with it.              |
+| ![2141](../images/2141.png) | Orphaned: Instance has no availability zone but does have a provider associated with it. |
+| ![2142](../images/2142.png) | Disconnected: Instance is disconnected.                                                  |
+| ![2143](../images/2143.png) | On: Instance is powered on.                                                              |
+| ![2144](../images/2144.png) | Off: Instance is powered off.                                                            |
+| ![2145](../images/2145.png) | Suspended: Instance has been suspended.                                                  |
 
 The **Instances** page has four accordions organizing your instances and
 images in different ways. All of these accordions share a set of common
@@ -147,27 +147,27 @@ Compare instances and images:
 
 3.  Click the checkboxes for the items to compare.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2148](/images/2148.png) (**Compare Selected items**). The
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2148](../images/2148.png) (**Compare Selected items**). The
     comparison displays in a compressed view with a limited set of
     properties listed.
 
 5.  To delete an item from the comparison, click
-    ![1861](/images/1861.png)(**Remove this VM from the comparison**) at
+    ![1861](../images/1861.png)(**Remove this VM from the comparison**) at
     the bottom of the items column.
 
 6.  To view many items on one screen, go to a compressed view by
-    clicking ![2024](/images/2024.png) (**Compressed View**). To return
-    to an expanded view, click ![2023](/images/2023.png) (**Expanded
+    clicking ![2024](../images/2024.png) (**Compressed View**). To return
+    to an expanded view, click ![2023](../images/2023.png) (**Expanded
     View**).
 
 7.  To limit the mode of the view, there are two buttons in the task
     bar.
 
-      - Click ![2022](/images/2022.png) (**Details Mode**) to see all
+      - Click ![2022](../images/2022.png) (**Details Mode**) to see all
         details for an attribute.
 
-      - Click ![2025](/images/2025.png) (**Exists Mode**) to limit the
+      - Click ![2025](../images/2025.png) (**Exists Mode**) to limit the
         view to if an attribute exists compared to the base or not. This
         only applies to attributes that can have a boolean property. For
         example, a user account exists or does not exist, or a piece of

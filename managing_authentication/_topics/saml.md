@@ -165,7 +165,7 @@ After configuring the HTTP server for SAML, update the
 {{ site.data.product.title_short }} appliance so that user interface can be accessed
 using SAML authentication.
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Select your server in the **Settings** accordion.
 

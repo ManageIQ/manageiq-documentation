@@ -10,7 +10,7 @@ Any filter applied will be in effect here.
 
 </div>
 
-![2202](/images/2202.png)
+![2202](../images/2202.png)
 
 Use the **Clusters Taskbar** to manage the analysis and tagging of your
 clusters. These buttons manage multiple clusters at one time. To manage
@@ -27,20 +27,20 @@ _topics/performing_smartstate_analysis_on_clusters.md %}
 
 2.  Check the clusters to compare.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2148](/images/2148.png) (**Compare Selected items**). The
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2148](../images/2148.png) (**Compare Selected items**). The
     comparison displays in a default expanded view and lists a limited
     set of properties.
 
-    ![2203](/images/2203.png)
+    ![2203](../images/2203.png)
 
 4.  To delete a cluster from the comparison, click
-    ![1861](/images/1861.png)(**Remove this Cluster from the
+    ![1861](../images/1861.png)(**Remove this Cluster from the
     Comparison**).
 
-5.  To go to a compressed view, click ![2024](/images/2024.png)
+5.  To go to a compressed view, click ![2024](../images/2024.png)
     (**Compressed View**). To return to an expanded view, click
-    ![2023](/images/2023.png) (**Expanded View**).
+    ![2023](../images/2023.png) (**Expanded View**).
 
 6.  To change the base cluster that all other clusters compare to, click
     its label at the top of its column.
@@ -50,23 +50,23 @@ _topics/performing_smartstate_analysis_on_clusters.md %}
 
 8.  There are three buttons in the taskbar to limit the type of views:
 
-      - Click ![2178](/images/2178.png) (**All attributes**) to see all
+      - Click ![2178](../images/2178.png) (**All attributes**) to see all
         attributes.
 
-      - Click ![2204](/images/2204.png) (**Attributes with different
+      - Click ![2204](../images/2204.png) (**Attributes with different
         values**) to see only the attributes that are different across
         clusters.
 
-      - Click ![2148](/images/2148.png) (**Attributes with the same
+      - Click ![2148](../images/2148.png) (**Attributes with the same
         values**) to see only the attributes that are the same across
         clusters.
 
 9.  To limit the mode of the view, there are two taskbar buttons.
 
-      - Click ![2022](/images/2022.png) (**Details Mode**) to see all
+      - Click ![2022](../images/2022.png) (**Details Mode**) to see all
         details for an attribute.
 
-      - Click ![2025](/images/2025.png) (**Exists Mode**) to only see if
+      - Click ![2025](../images/2025.png) (**Exists Mode**) to only see if
         an attribute exists compared to the base or not. This only
         applies to attributes that can have a Boolean property. For
         example, a user account exists or does not exist, or a piece of

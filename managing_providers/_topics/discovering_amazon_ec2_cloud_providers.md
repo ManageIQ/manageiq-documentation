@@ -5,8 +5,8 @@ associated with a particular set of Amazon EC2 account details.
 
 1.  Navigate to menu:Compute\[Clouds \> Providers\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Discover Cloud Providers](/images/1942.png) (**Discover
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Discover Cloud Providers](../images/1942.png) (**Discover
     Cloud Providers**).
 
 3.  Select Amazon EC2 from the **Discover Type** list.

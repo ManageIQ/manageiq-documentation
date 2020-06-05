@@ -3,7 +3,7 @@
 1.  Navigate to menu:Compute\[Clouds \> Key Pairs\]. You will see a list
     of existing key pairs.
 
-2.  Click the ![Download](/images/download-button.png) button, then
+2.  Click the ![Download](../images/download-button.png) button, then
     select the option to download key pairs data in your preferred
     format:
 

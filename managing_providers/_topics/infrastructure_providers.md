@@ -12,7 +12,7 @@ The web interface uses virtual thumbnails to represent infrastructure
 providers. Each thumbnail contains four quadrants by default, which
 display basic information about each provider:
 
-![2189](/images/2189.png)
+![2189](../images/2189.png)
 
 1.  Number of hosts
 
@@ -24,9 +24,9 @@ display basic information about each provider:
 
 | Icon                      | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ |
-| ![2190](/images/2190.png) | Validated: Valid authentication credentials have been added.                   |
-| ![2191](/images/2191.png) | Invalid: Authentication credentials are invalid.                               |
-| ![2192](/images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
+| ![2190](../images/2190.png) | Validated: Valid authentication credentials have been added.                   |
+| ![2191](../images/2191.png) | Invalid: Authentication credentials are invalid.                               |
+| ![2192](../images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
 
 Provider authentication status
 

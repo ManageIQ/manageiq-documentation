@@ -8,8 +8,8 @@ these steps:
 2.  Select your OpenStack Swift manager to go to the Swift manager’s
     summary page.
 
-3.  Click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-    ![Timelines](/images/1995.png) (**Timelines**) to view the events
+3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+    ![Timelines](../images/1995.png) (**Timelines**) to view the events
     timeline for the manager.
 
 4.  View a timeline of either management events or policy events:

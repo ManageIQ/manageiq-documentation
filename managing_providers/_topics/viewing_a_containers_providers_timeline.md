@@ -7,8 +7,8 @@ provider.
 
 2.  Click the desired containers provider for viewing the timeline.
 
-3.  Click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-    ![Timelines](/images/1995.png) (**Timelines**).
+3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+    ![Timelines](../images/1995.png) (**Timelines**).
 
 4.  From **Options**, customize the period of time to display and the
     types of events to see.

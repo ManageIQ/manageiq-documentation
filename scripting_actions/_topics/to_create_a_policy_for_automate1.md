@@ -8,8 +8,8 @@ This procedure shows you how to create a policy for automate.
 
 3.  Select **Vm Control Policies**.
 
-4.  Click ![image](/images/1847.png)(**Configuration**), then
-    ![image](/images/1862.png) (**Add a New Control Vm Policy**).
+4.  Click ![image](../images/1847.png)(**Configuration**), then
+    ![image](../images/1862.png) (**Add a New Control Vm Policy**).
 
 5.  Type in a **Description**.
 
@@ -19,8 +19,8 @@ This procedure shows you how to create a policy for automate.
 7.  Click **Add**. You are brought to the page where you add conditions
     and events to your new policy.
 
-8.  Click ![image](/images/1847.png)(**Configuration**), then
-    ![image](/images/1851.png) (**Edit this Policy’s Event
+8.  Click ![image](../images/1847.png)(**Configuration**), then
+    ![image](../images/1851.png) (**Edit this Policy’s Event
     assignments**).
 
       - Check the events you want to use to send to an **Automate
@@ -31,11 +31,11 @@ This procedure shows you how to create a policy for automate.
       - From the **Events** area, click on the **Description of the
         Event** you want to assign an action to.
 
-      - Click ![image](/images/1851.png) (**Edit Actions for this Policy
+      - Click ![image](../images/1851.png) (**Edit Actions for this Policy
         Event**).
 
 9.  Select **Raise Automation Event**, and click
-    ![image](/images/1876.png) (**Move selected Actions into this
+    ![image](../images/1876.png) (**Move selected Actions into this
     Event**).
 
 10. Click **Save**.

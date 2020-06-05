@@ -29,9 +29,9 @@ Software vulnerability databases are updated frequently. To apply these
 updates, a rescan is required. To schedule a recurring scan of container
 images:
 
-![:schedule openscap scan](/images/:schedule_openscap_scan.png)
+![:schedule openscap scan](../images/:schedule_openscap_scan.png)
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  From menu:Settings\[Zones\] in the left pane of the appliance,
     select **Schedules**.
@@ -69,13 +69,13 @@ Image scanning results are displayed in each image summary page.
 For an OpenSCAP HTML report, locate the **Configuration** section and
 select **OpenSCAP HTML**.
 
-![:container configuration](/images/:container_configuration.png)
+![:container configuration](../images/:container_configuration.png)
 
 For compliance and scanning history information, locate the
 **Compliance** section and note the **Status** field or select
 **Available** from the **History** field.
 
-![:container scan history](/images/:container_scan_history.png)
+![:container scan history](../images/:container_scan_history.png)
 
 ### Manual Scanning
 

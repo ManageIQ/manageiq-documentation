@@ -21,7 +21,7 @@ in {{ site.data.product.title }}.
 
 1.  In Google Cloud Platform, select your project from the top menu bar.
 
-2.  Click ![gce products services](/images/gce-products-services.png) to
+2.  Click ![gce products services](../images/gce-products-services.png) to
     show the **Products and Services** menu. Click **API Manager** to go
     to <https://console.cloud.google.com/apis/library/>.
 
@@ -41,7 +41,7 @@ in {{ site.data.product.title }}.
 <!-- end list -->
 
 1.  In Google Cloud Platform, select your project and navigate to ![gce
-    products services](/images/gce-products-services.png) menu:Products
+    products services](../images/gce-products-services.png) menu:Products
     and Services\[IAM & Admin \> IAM\] to go to
     <https://console.cloud.google.com/iam-admin/iam/>.
 
@@ -71,7 +71,7 @@ Compute Engine project to export events to {{ site.data.product.title }} with th
 following steps:
 
 1.  In Google Cloud Platform, click ![gce products
-    services](/images/gce-products-services.png) to show the **Products
+    services](../images/gce-products-services.png) to show the **Products
     and Services** menu, and click **Logging** to go to
     <https://console.cloud.google.com/logs/>.
 
@@ -90,7 +90,7 @@ following steps:
 7.  In the **Create Cloud Pub/Sub Topic** dialog, enter
     `manageiq-activity-log` as the **Name**. Click **Create**.
 
-    ![gce exports](/images/gce-exports.png)
+    ![gce exports](../images/gce-exports.png)
 
 8.  Click **Save**.
 

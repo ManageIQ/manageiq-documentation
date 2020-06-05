@@ -6,8 +6,8 @@ Refresh a repository for its properties and virtual machines.
 
 2.  Check the repositories to refresh.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2003](/images/2003.png) (**Refresh Relationships and Power
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2003](../images/2003.png) (**Refresh Relationships and Power
     States**).
 
 4.  Click **OK**.

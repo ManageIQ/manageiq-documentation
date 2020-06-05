@@ -14,8 +14,8 @@ the assigned action will not run.
 
 3.  Select **Vm Control Policies**.
 
-4.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a New VM and Instance Control
+4.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a New VM and Instance Control
     Policy**).
 
 5.  Enter a **Description**. This will be the name given to your VM
@@ -30,7 +30,7 @@ the assigned action will not run.
 
     You can use the drop-down list to create an expression for the
     **Scope**. Based on what you choose, different options appear. Click
-    ![image](/images/1863.png) (**Commit expression element changes**)
+    ![image](../images/1863.png) (**Commit expression element changes**)
     to add the scope.
 
 8.  Enter **Notes** if required.
@@ -41,8 +41,8 @@ the assigned action will not run.
 10. Select the newly-added VM control policy. You can now associate
     events, conditions, and actions with the policy.
 
-11. Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1851.png) (**Edit this Policy’s Event
+11. Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1851.png) (**Edit this Policy’s Event
     assignments**).
 
 12. Under **VM Operation**, set **VM Analysis Start** to **Yes**.
@@ -51,15 +51,15 @@ the assigned action will not run.
 
 14. Click the **VM Analysis Start** event to configure actions.
 
-15. Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1851.png) (**Edit Actions for this Policy Event**).
+15. Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1851.png) (**Edit Actions for this Policy Event**).
 
 16. In **Order of Actions if ALL Conditions are True**, select the
     action created in [???](#assign-profile-analysis-task-action) from
     the **Available Actions** list. This action will take place if the
     resources meet the conditions of the policy.
 
-    ![image](/images/edit-event.png)
+    ![image](../images/edit-event.png)
 
     <div class="note">
 
@@ -73,7 +73,7 @@ the assigned action will not run.
 
     </div>
 
-17. Click (![image](/images/1876.png)) which will move the action to
+17. Click (![image](../images/1876.png)) which will move the action to
     **Selected Actions**. The selected action is set to (S) Synchronous
     by default. From **Selected Actions**, select the action, then:
 

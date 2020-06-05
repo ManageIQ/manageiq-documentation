@@ -12,8 +12,8 @@ assigned to.
 2.  Click the **Actions** accordion, then click on the action you need
     to edit.
 
-3.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1851.png) (**Edit this Action**) on the detail view
+3.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1851.png) (**Edit this Action**) on the detail view
     of the action.
 
 4.  Make any required changes.

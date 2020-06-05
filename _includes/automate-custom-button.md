@@ -7,12 +7,12 @@
 
 4.  Click **Unassigned Buttons**.
 
-5.  Click ![image](/images/1847.png)(**Configuration**), then
-    ![image](/images/1862.png) (**Add a new Button**).
+5.  Click ![image](../images/1847.png)(**Configuration**), then
+    ![image](../images/1862.png) (**Add a new Button**).
 
     <div class="note">
 
-    If ![image](/images/1862.png) (**Add a new Button**) is not
+    If ![image](../images/1862.png) (**Add a new Button**) is not
     available, that means you have not created a button group for that
     object. To continue, create a button group first. See
     [???](#create-custom-button-group)

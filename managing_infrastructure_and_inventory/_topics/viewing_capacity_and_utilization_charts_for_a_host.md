@@ -14,8 +14,8 @@ enable this feature.
 
 2.  Click the Host to view capacity data.
 
-3.  Click ![1994](/images/1994.png) (**Monitoring**), and then
-    ![1994](/images/1994.png) (**Utilization**) or from the Host
+3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
+    ![1994](../images/1994.png) (**Utilization**) or from the Host
     accordion, click menu:Properties\[Capacity & Utilization\].
 
 4.  From **Interval**, select to view hourly or daily data points and
@@ -23,9 +23,9 @@ enable this feature.
     SmartTags. Use **Time Profiles** to select a time range for the
     data.
 
-    ![2220](/images/2220.png)
+    ![2220](../images/2220.png)
 
-![2221](/images/2221.png)
+![2221](../images/2221.png)
 
 The charts are displayed for CPU, memory, disk, network, and running
 virtual machines.

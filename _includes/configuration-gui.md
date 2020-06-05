@@ -1,4 +1,4 @@
-The options under the ![Configuration](/images/config-gear.png)
+The options under the ![Configuration](../images/config-gear.png)
 **Configuration** menu allow you to configure global options for your
 {{ site.data.product.title }} environment, view diagnostic information, and view
 analytics on the servers in the environment. The menu displays the

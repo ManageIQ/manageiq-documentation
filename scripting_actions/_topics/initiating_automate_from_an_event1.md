@@ -14,4 +14,4 @@ Automation Event Action. There are instances in the
 `/System/Process/Event Class` for the following Events that you can
 select as part of a Policy:
 
-![image](/images/2373.png)
+![image](../images/2373.png)

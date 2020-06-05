@@ -13,8 +13,8 @@ instance’s storage location so that a snapshot can be created.
 
 3.  Check the instances and images to analyze.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1942](/images/1942.png) (**Perform SmartState Analysis**) on the
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1942](../images/1942.png) (**Perform SmartState Analysis**) on the
     taskbar.
 
 5.  Click **OK**.

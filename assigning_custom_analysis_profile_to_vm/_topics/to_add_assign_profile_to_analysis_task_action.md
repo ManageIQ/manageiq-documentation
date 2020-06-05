@@ -9,13 +9,13 @@ Use this procedure to create a custom action by adding the **Assign
 Profile to Analysis Task** action type to the virtual machine analysis
 profile (created in [???](#vm-analysis-profile)).
 
-![image](/images/create-custom-action.png)
+![image](../images/create-custom-action.png)
 
 1.  Navigate to menu:Control\[Explorer\].
 
 2.  Expand the **Actions** accordion and click
-    ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a new Action**).
+    ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a new Action**).
 
 3.  Enter a **Description** for the new action. This will be the name
     given to your new action.

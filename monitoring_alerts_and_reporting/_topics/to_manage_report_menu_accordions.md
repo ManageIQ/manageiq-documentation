@@ -8,23 +8,23 @@
 
 4.  Click on **Top Level** to organize, add, and delete folders.
 
-      - Click ![movetotop](/images/movetotop.png) **(Move selected
+      - Click ![movetotop](../images/movetotop.png) **(Move selected
         folder to top)** to move the folder to the top of the list.
 
-      - Click ![moveup](/images/moveup.png) **(Move selected folder
+      - Click ![moveup](../images/moveup.png) **(Move selected folder
         up)** to move the folder up.
 
-      - Click ![movedown](/images/movedown.png) **(Move selected folder
+      - Click ![movedown](../images/movedown.png) **(Move selected folder
         down)** to move the folder down.
 
-      - Click ![movetobottom](/images/movetobottom.png) **(Move selected
+      - Click ![movetobottom](../images/movetobottom.png) **(Move selected
         folder to bottom)** to move the folder to the bottom of the
         list.
 
-      - Click ![delete](/images/delete.png) **(Delete selected folder
+      - Click ![delete](../images/delete.png) **(Delete selected folder
         and its contents)** to delete a folder.
 
-      - Click ![add](/images/add.png) **(Add folder to selected
+      - Click ![add](../images/add.png) **(Add folder to selected
         folder)** to add an folder.
 
         <div class="note">

@@ -9,8 +9,8 @@ child virtual machines. SmartState Analysis also can detect this.
 
 3.  Click the item to edit properties.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Edit selected item**) on the Taskbar.
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Edit selected item**) on the Taskbar.
 
 5.  From the **Parent VM** dropdown, select the parent virtual machine.
 

@@ -5,8 +5,8 @@
 2.  Click the **Schedules** accordion and select the schedule you want
     to edit.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1851](/images/1851.png) (**Edit this Schedule**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1851](../images/1851.png) (**Edit this Schedule**).
 
 4.  Make the required changes.
 

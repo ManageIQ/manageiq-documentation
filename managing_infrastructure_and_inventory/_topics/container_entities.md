@@ -13,7 +13,7 @@ page also provides metrics for **Aggregated Node Utilization**,
 **Network Utilization Trend**, **New Image Usage Trend**, **Node
 Utilization**, and **Pod Creation and Deletion Trends**.
 
-![Containers Overview](/images/containers-overview.png)
+![Containers Overview](../images/containers-overview.png)
 
 1.  Navigate to menu:Compute\[Containers \> Overview\].
 
@@ -65,7 +65,7 @@ surrounded by its related entities.
 2.  Click on a project.
 
 3.  On the project summary page, click ![Topology View
-    button](/images/topologyviewbutton.png) (**Topology View**) on the
+    button](../images/topologyviewbutton.png) (**Topology View**) on the
     top right side of the page.
 
 ### Limiting the Number of Containers Shown in the Topology View
@@ -87,8 +87,8 @@ packages included in an image.
 
 2.  Check the container image to analyze. You can check multiple images.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Perform SmartState Analysis](/images/1942.png) (**Perform
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Perform SmartState Analysis](../images/1942.png) (**Perform
     SmartState Analysis**).
 
 The container image is scanned. The process will copy over any required
@@ -165,7 +165,7 @@ To configure automatic tagging on container entities using labels:
         This node has six labels (key/value pairs) that were created in
         OpenShift and collected in the {{ site.data.product.title }} inventory:
 
-        ![ocpnode summary](/images/ocpnode-summary.png)
+        ![ocpnode summary](../images/ocpnode-summary.png)
 
         <div class="note">
 
@@ -193,7 +193,7 @@ To configure automatic tagging on container entities using labels:
         the label to. If the tag category does not exist yet in
         {{ site.data.product.title }}, it will be created automatically.
 
-        ![add label mapping](/images/add_label_mapping.png)
+        ![add label mapping](../images/add_label_mapping.png)
 
     4.  Click **Add**. The mapping will show in the table on the **Map
         Tags** tab.
@@ -204,13 +204,13 @@ To configure automatic tagging on container entities using labels:
 
     2.  Select the provider to refresh.
 
-    3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-        ![2003](/images/2003.png) (**Refresh Items and Relationships**).
+    3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+        ![2003](../images/2003.png) (**Refresh Items and Relationships**).
 
 The label will display on the entity’s summary page under **Smart
 Management** under **Company Tags** as `<Category> : <value>`.
 
-![ocp autotagged](/images/ocp-autotagged.png)
+![ocp autotagged](../images/ocp-autotagged.png)
 
 Any container entity with the OpenShift `zone` label will be tagged
 automatically as `category1` in {{ site.data.product.title }}. If the *value* for

@@ -5,8 +5,8 @@ environment, add a Red Hat Virtualization provider to the appliance.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Add a New Infrastructure Provider](/images/1862.png) (**Add
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Add a New Infrastructure Provider](../images/1862.png) (**Add
     a New Infrastructure Provider**).
 
 3.  Enter a **Name** for the provider.

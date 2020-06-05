@@ -5,7 +5,7 @@ want to see upon login.
 
 1.  Navigate to menu:Overview\[Dashboard\].
 
-2.  Click ![2259](/images/2259.png) **(Add a Widget)**.
+2.  Click ![2259](../images/2259.png) **(Add a Widget)**.
 
 3.  Select the widget you want to add from the list.
 

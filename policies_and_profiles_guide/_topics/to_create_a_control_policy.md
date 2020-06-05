@@ -22,13 +22,13 @@ Also, a description of all events is provided in events.
     **Container Node Control Policies** or **Container Image Control
     Policies**.
 
-4.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1862.png) (**Add a New Host / VM / Replicator / Pod
+4.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1862.png) (**Add a New Host / VM / Replicator / Pod
     / Node / Image Control Policy**).
 
 5.  Type in a **Description**.
 
-    ![image](/images/:../images/1849.png)
+    ![image](../images/:../images/1849.png)
 
 6.  Uncheck **Active** if you do not want this policy processed even
     when assigned to a resource.
@@ -42,7 +42,7 @@ Also, a description of all events is provided in events.
 9.  Click **Add**. You are brought to the page where you add conditions
     and events to your new policy.
 
-    ![image](/images/:../images/1850.png)
+    ![image](../images/:../images/1850.png)
 
-10. Click ![image](/images/1847.png) (**Configuration**) to associate
+10. Click ![image](../images/1847.png) (**Configuration**) to associate
     conditions, events, and actions with the policy.

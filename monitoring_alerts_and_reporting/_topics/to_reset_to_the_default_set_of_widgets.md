@@ -5,5 +5,5 @@ following steps:
 
 1.  Navigate to menu:Overview\[Dashboard\].
 
-2.  Click ![1900](/images/1900.png) **(Reset Dashboard Widgets to the
+2.  Click ![1900](../images/1900.png) **(Reset Dashboard Widgets to the
     defaults)**.

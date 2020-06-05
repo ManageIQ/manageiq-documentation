@@ -5,7 +5,7 @@ virtual thumbnail, a host taskbar, a host accordion, and a host summary.
 
 **Host Management Screen.**
 
-![2218](/images/2218.png)
+![2218](../images/2218.png)
 
 1.  **Host Taskbar**: Use the host taskbar to take actions on the
     selected host

@@ -5,8 +5,8 @@
 
 2.  Select the Domain you want to edit.
 
-3.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1851.png) (**Edit Selected Domain**).
+3.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1851.png) (**Edit Selected Domain**).
 
 4.  Make the required edits.
 

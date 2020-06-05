@@ -8,8 +8,8 @@ this procedure to change the priority order of domains.
 
 2.  Select the Domains you want to change the priority order for.
 
-3.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1851.png) (**Edit Priority Order of Domains**).
+3.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1851.png) (**Edit Priority Order of Domains**).
 
 4.  The list of Domains selected shows up. Note that you cannot change
     the priority of locked Domains and therefore locked Domains do not

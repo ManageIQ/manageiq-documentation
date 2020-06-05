@@ -13,7 +13,7 @@ imports, custom variable imports, and license uploads. When you click on
 **Settings** and expand it, you can configure **Analysis Profiles**,
 **Zones**, and **Schedules**.
 
-![2041](/images/2041.png)
+![2041](../images/2041.png)
 
 When you go the **Settings** accordion, you are automatically taken to
 the server list under **Zones**.
@@ -50,7 +50,7 @@ responsible for.
 The following diagram demonstrates an example of the multiple regions
 working together in a {{ site.data.product.title }} environment.
 
-![7151](/images/7151.png)
+![7151](../images/7151.png)
 
 The Master appliance is located in Chicago and contains a master region
 and a subregion that manages the worker appliances. The Mahwah
@@ -68,7 +68,7 @@ managing a single zone.
 </div>
 
 The following diagram provides a closer look at a region:
-![7150](/images/7150.png)
+![7150](../images/7150.png)
 
 In this region, we have several {{ site.data.product.title }} appliances acting as UI
 nodes and worker nodes. These worker nodes execute tasks on the
@@ -140,7 +140,7 @@ Settings**.
 
 After a provider has been discovered and its relationships refreshed,
 view the clusters, hosts, and datastores from the settings menu.
-Navigate to ![Configuration](/images/config-gear.png) **Configuration**,
+Navigate to ![Configuration](../images/config-gear.png) **Configuration**,
 then click on the menu:Settings\[Region \> C & U Collection\] tab.
 
 \======= Enabling a Cluster, Host, or Datastore for Capacity and
@@ -149,7 +149,7 @@ Utilization Collection
 To enable a cluster, host, or datastore for Capacity and Utilization
 Collection:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**),
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**),
     then click on the **Settings** accordion.
 
 2.  Select **Region**, then click on the **C & U Collection** tab.
@@ -187,7 +187,7 @@ resources. There are two kinds of tags.
 
   - **Company tags** which you will see under **My Company Tags** for a
     resource. Create company tags from the settings menu. Navigate to
-    ![Configuration](/images/config-gear.png) **Configuration**, then
+    ![Configuration](../images/config-gear.png) **Configuration**, then
     click the **Settings** accordion, then menu:Region\[My Company
     Tags\]. A selection of company tags is provided to you by default as
     samples. These can be deleted if you do not need them, but are not
@@ -199,14 +199,14 @@ resources. There are two kinds of tags.
 
 To create a tag category:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then **Region**, then click on
     the **My Company Categories** tab.
 
 3.  Click **Add** under the **Actions** column to create a new category.
 
-4.  In the **Category Information** area: ![2042](/images/2042.png)
+4.  In the **Category Information** area: ![2042](../images/2042.png)
 
       - Use **Name** to create a short name that refers to category in
         the VMDB.
@@ -256,7 +256,7 @@ value from that category nor be able to filter by that category.
 
 To delete a tag category:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then **Region**, then click on
     the **My Company Categories** tab.
@@ -277,7 +277,7 @@ tags from the category are unassigned from all resources.
 
 To create a company tag:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then **Region**, then click on
     the **My Company Tags** tab.
@@ -305,7 +305,7 @@ To create a company tag:
 
 To delete a company tag:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then **Region**, then click on
     the **My Company Tags** tab.
@@ -347,7 +347,7 @@ To import tags for a virtual machine from a CSV file:
 
 1.  Make sure the **CSV file** is in the required format.
 
-2.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 3.  Click on the **Settings** accordion, then **Region**, then click on
     the **Import Tags** tab.
@@ -414,7 +414,7 @@ To import asset tags for a virtual machine from a CSV file
 
 1.  Make sure the **CSV file** is in the required format.
 
-2.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 3.  Click on the **Settings** accordion, then **Region**, then click on
     the **Import** tab.
@@ -450,7 +450,7 @@ Any change to the help menu will take effect upon a full page reload.
 
 Customize the help menu using the following steps:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then **Region**.
 
@@ -474,23 +474,23 @@ one.
 
 To create a host analysis profile:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Analysis
     Profiles**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add Host Analysis Profile**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add Host Analysis Profile**).
 
 4.  In the **Basic Information** area, type in a **Name** and
-    **Description** for the analysis profile. ![2048](/images/2048.png)
+    **Description** for the analysis profile. ![2048](../images/2048.png)
 
 5.  Click **File** to collect information about a file or group of
     files.
 
 6.  From the **File Entry** area, click ![plus
-    green](/images/plus_green.png) (**Click to add a new entry**) to add
-    a file or group of files. ![2047](/images/2047.png)
+    green](../images/plus_green.png) (**Click to add a new entry**) to add
+    a file or group of files. ![2047](../images/2047.png)
 
       - Check **Collect Contents** to not only check for existence, but
         also gather the contents of the file. If you do this, then you
@@ -500,14 +500,14 @@ To create a host analysis profile:
 7.  Click **Event Log** to specify event log entries to collect.
 
 8.  From the **Event Log Entry** area, click ![plus
-    green](/images/plus_green.png) (**Click to add a new entry**) to add
+    green](../images/plus_green.png) (**Click to add a new entry**) to add
     a type of event log entry. Type in a **Name**. You can type in a
     specific message to find in **Filter Message**. In **Level**, set
     the value for the level of the entry and above. Specify the
     **Source** for the entry. Finally, set the \# number of days that
     you want to collect event log entries for. If you set this to 0, it
     will go as far back as there is data available.
-    ![2046](/images/2046.png)
+    ![2046](../images/2046.png)
 
 9.  Click **Add**.
 
@@ -515,31 +515,31 @@ To create a host analysis profile:
 
 To create a virtual machine analysis profile:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Analysis
     Profiles**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add VM Analysis Profile**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add VM Analysis Profile**).
 
 4.  In the **Basic Information** area, type in a **Name** and
-    **Description** for the analysis profile. ![2050](/images/2050.png)
+    **Description** for the analysis profile. ![2050](../images/2050.png)
 
 5.  You begin in the **Category** tab. From the **Category Selection**
     area, check the categories you want to collect information for. This
     is available for virtual machine profiles only.
-    ![2051](/images/2051.png)
+    ![2051](../images/2051.png)
 
 6.  Click the **File** tab to collect information about a file or group
     of files.
 
 7.  From the **File Entry** area, click ![plus
-    green](/images/plus_green.png) (**Add this entry**) to add a file or
+    green](../images/plus_green.png) (**Add this entry**) to add a file or
     group of files, then type a name. For virtual machines, specify the
     file to check for. Check the box under **Collect Contents** if you
     want to collect the file contents as well. The files can be no
-    larger than 1 MB. ![2052](/images/2052.png)
+    larger than 1 MB. ![2052](../images/2052.png)
 
 8.  Click the **Registry** tab to collect information on a registry key.
 
@@ -548,7 +548,7 @@ To create a virtual machine analysis profile:
     does not exist on a virtual machine, without providing a value, type
     \* in the **Registry Value** field. Then, you do not need to know
     the registry value to collect the keys. This is available for
-    virtual machine profiles only. ![2052 reg](/images/2052-reg.png)
+    virtual machine profiles only. ![2052 reg](../images/2052-reg.png)
 
 10. Click **Event Log** to specify event log entries to collect.
 
@@ -558,7 +558,7 @@ To create a virtual machine analysis profile:
     entry and above. Specify the **Source for the entry**. Finally, set
     the \# (number) of days that you want to collect event log entries
     for. If you set this to 0, it will go as far back as there is data
-    available. ![2054](/images/2054.png)
+    available. ![2054](../images/2054.png)
 
 12. Click **Add**.
 
@@ -566,14 +566,14 @@ To create a virtual machine analysis profile:
 
 To edit an analysis profile:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Analysis
     Profiles**.
 
 3.  Check the analysis profile you want to edit.
 
-4.  Click ![1851](/images/1851.png) (**Edit the selected Analysis
+4.  Click ![1851](../images/1851.png) (**Edit the selected Analysis
     Profiles**).
 
 5.  Make any changes.
@@ -587,14 +587,14 @@ hosts must be re-analyzed to collect the new or modified information.
 
 To copy an analysis profile:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Analysis
     Profiles**.
 
 3.  Check the analysis profile you want to copy.
 
-4.  Click ![1859](/images/1859.png) (**Copy the selected Analysis
+4.  Click ![1859](../images/1859.png) (**Copy the selected Analysis
     Profiles**).
 
 5.  Type a new **Name** and **Description**.
@@ -610,19 +610,19 @@ machines, you can create a default profile.
 
 To create a default analysis profile:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Analysis
     Profiles**.
 
 3.  Click on the analysis profile you want to set as the default.
 
-4.  Click ![1851](/images/1851.png) (**Edit the selected Analysis
+4.  Click ![1851](../images/1851.png) (**Edit the selected Analysis
     Profile**).
 
 5.  For a virtual machine profile, enter `default` in lower case in
     **Name**. For a host profile, enter host default. ![set default
-    analysis profile](/images/set_default_analysis_profile.png)
+    analysis profile](../images/set_default_analysis_profile.png)
 
 6.  Click **Save**.
 
@@ -658,16 +658,16 @@ cannot be deleted.
 
 To create a zone:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add a new Zone**) to create a
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add a new Zone**) to create a
     zone.
 
 4.  In the **Zone Information** area, type in a **Name** and
-    **Description** for the new zone. ![2057](/images/2057.png)
+    **Description** for the new zone. ![2057](../images/2057.png)
 
 5.  Use **SmartProxy Server IP** to specify the IP address of the server
     that you want SmartProxies installed in this zone to report to. If
@@ -682,7 +682,7 @@ To create a zone:
 7.  In the menu:Credentials\[Windows Domain\] area, type in Windows
     domain credentials to be able to collect running processes from
     Windows virtual machines that are on a domain.
-    ![2058](/images/2058.png)
+    ![2058](../images/2058.png)
 
 8.  In the **Settings** area, set the number for **Max Active VM
     Scans**. The default is `Unlimited`.
@@ -693,7 +693,7 @@ To create a zone:
 
 To delete a zone:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -705,8 +705,8 @@ To delete a zone:
 
     </div>
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![gui delete](/images/gui_delete.png) (**Delete this Zone**).
+4.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![gui delete](../images/gui_delete.png) (**Delete this Zone**).
 
 5.  Click **OK** to confirm.
 
@@ -714,14 +714,14 @@ To delete a zone:
 
 To edit a zone:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
 3.  Click the zone you want to edit.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1851](/images/1851.png) (**Edit this Zone**).
+4.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1851](../images/1851.png) (**Edit this Zone**).
 
 5.  Make the required changes.
 
@@ -734,7 +734,7 @@ SmartProxy role to run a SmartState Analysis.
 
 To add SmartProxy Affinity to a zone:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -764,7 +764,7 @@ servers sharing one VMDB.
 
 To change server settings:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -778,7 +778,7 @@ To change server settings:
 
 7.  Click **Save**.
 
-\======= Basic Information Settings ![2059](/images/2059.png)
+\======= Basic Information Settings ![2059](../images/2059.png)
 
   - Use **Company Name** (maximum 20 characters) to customize the
     interface with your company’s name. You will see the company name
@@ -889,7 +889,7 @@ the required software, you must specify its version in the
 
 </div>
 
-![2061](/images/2061.png)
+![2061](../images/2061.png)
 
   - If you select **VNC**, type in the port number used. This port must
     be open on the target virtual machine and the VNC software must be
@@ -949,7 +949,7 @@ To enable the notifier role:
 
 1.  Access each SNMP processing appliance using their web interfaces
 
-2.  Click ![Configuration](/images/config-gear.png) **Configuration**,
+2.  Click ![Configuration](../images/config-gear.png) **Configuration**,
     then click **Settings**.
 
 3.  Select the zone where the EVM server is located, and select the EVM
@@ -963,7 +963,7 @@ To enable the notifier role:
 To set the failover priority role:
 
 1.  From the settings menu, select . Click
-    ![Configuration](/images/config-gear.png) **Configuration**, then
+    ![Configuration](../images/config-gear.png) **Configuration**, then
     click **Diagnostics**.
 
 2.  Select the zone where the EVM server is located.
@@ -974,8 +974,8 @@ To set the failover priority role:
 4.  In the **Status of Roles for Servers** in **Zone Default** Zone
     area, click the role that you want to set the priority for.
 
-5.  Click ![1847](/images/1847.png)(**Configuration**), and
-    ![2097](/images/2097.png)(**Promote Server**) to make this the
+5.  Click ![1847](../images/1847.png)(**Configuration**), and
+    ![2097](../images/2097.png)(**Promote Server**) to make this the
     primary server for this role.
 
 \======= Outgoing SMTP Email Settings
@@ -991,7 +991,7 @@ enabled.
 
 </div>
 
-![outgoingsmtp](/images/outgoingsmtp.png)
+![outgoingsmtp](../images/outgoingsmtp.png)
 
   - Use **Host** to specify the host name of the mail server.
 
@@ -1022,7 +1022,7 @@ enabled.
 
 Web services are used by the server to communicate with the SmartProxy.
 
-![2064](/images/2064.png)
+![2064](../images/2064.png)
 
   - Set **Mode** to invoke to enable 2-way Web services communication
     between the {{ site.data.product.title }} appliance and the SmartProxy. Set
@@ -1038,7 +1038,7 @@ Web services are used by the server to communicate with the SmartProxy.
 
 \======= Logging Settings
 
-![2065](/images/2065.png)
+![2065](../images/2065.png)
 
   - Use **Log Level** to set the level of detail you want in the log.
     You can select from **fatal**, **error**, **warn**, **info**, and
@@ -1046,7 +1046,7 @@ Web services are used by the server to communicate with the SmartProxy.
 
 \======= Custom Support URL Settings
 
-![2066](/images/2066.png)
+![2066](../images/2066.png)
 
   - Use **URL** to specify a specific URL that you want to be accessible
     from the **About Product Assistance** area.
@@ -1063,7 +1063,7 @@ LDAP, LDAPS, Amazon, or an external IPA server.
 
 To change authentication settings:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Settings** accordion, then click **Zones**.
 
@@ -1095,7 +1095,7 @@ Only make these changes when directed to by Red Hat Support.
 
 To change the settings for a worker
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1129,7 +1129,7 @@ to validate your new settings before restarting the server.
 
 To change a database setting:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1206,7 +1206,7 @@ px.
 
 To upload a custom logo to the user interface:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1214,7 +1214,7 @@ To upload a custom logo to the user interface:
 
 4.  Click on the server.
 
-5.  Click the **Custom Logos** tab. ![2071](/images/2071.png)
+5.  Click the **Custom Logos** tab. ![2071](../images/2071.png)
 
 6.  In **Custom Logo Image (Shown on top right of all screens)**, click
     **Choose file** to go to the location where the logo file is
@@ -1249,7 +1249,7 @@ in PNG format with dimensions of 1280 px x 1000 px.
 
 To customize the login background:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1264,7 +1264,7 @@ To customize the login background:
     file is located.
 
     ![custom login about background
-    image](/images/custom-login-about-background-image.png)
+    image](../images/custom-login-about-background-image.png)
 
 7.  Click **Upload**. The icon is displayed above the file name box, and
     an option is shown to use the logo.
@@ -1278,7 +1278,7 @@ To customize the login background:
 
 To customize the login panel text:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Navigate to menu:Settings\[Configuration\].
 
@@ -1294,7 +1294,7 @@ To customize the login panel text:
     display on the login screen.
 
 8.  Click **Use Custom Login Text** to switch it to `Yes`. ![custom
-    login panel text](/images/custom-login-panel-text.png)
+    login panel text](../images/custom-login-panel-text.png)
 
 9.  Click **Save**.
 
@@ -1303,17 +1303,17 @@ To customize the login panel text:
 To enable displaying your custom logo in the corner of the
 {{ site.data.product.title }} user interface and on the login screen:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Access Control** accordion.
 
 3.  Click **Tenants**, then click **My Company**.
 
-4.  Click ![1847](/images/1847.png)(**Configuration**), then click
-    ![1851](/images/1851.png)(**Edit this item**).
+4.  Click ![1847](../images/1847.png)(**Configuration**), then click
+    ![1851](../images/1851.png)(**Edit this item**).
 
     ![use configuration
-    settings](/images/use-configuration-settings.png)
+    settings](../images/use-configuration-settings.png)
 
 5.  Click **Use Configuration Settings** to switch it to `Yes`.
 
@@ -1345,7 +1345,7 @@ Changing settings using this procedure may disable your
 
 To edit configuration files manually:
 
-1.  Click ![Configuration](/images/config-gear.png) **Configuration**.
+1.  Click ![Configuration](../images/config-gear.png) **Configuration**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1744,12 +1744,12 @@ addition, you can schedule compliance checks, and database backups.
 
 To schedule a SmartState Analysis or Compliance Check:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), and ![plus
-    green](/images/plus_green.png)(**Add a new Schedule**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), and ![plus
+    green](../images/plus_green.png)(**Add a new Schedule**).
 
 4.  In the **Basic Information** area, type in a **Name** and
     **Description** for the schedule.
@@ -1758,7 +1758,7 @@ To schedule a SmartState Analysis or Compliance Check:
 
 6.  From the **Action** list, select the type of analysis to schedule.
     Based on the type of analysis you choose, you are presented with one
-    of the following group boxes: ![2079](/images/2079.png)
+    of the following group boxes: ![2079](../images/2079.png)
 
       - **VM Analysis**: Displays **VM Selection** where you can choose
         to analyze **All VMs**, **All VMs for Provider**, **All VMs for
@@ -1879,15 +1879,15 @@ space based on transaction log size.
 
 To schedule a database backup:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png)(**Add a new Schedule**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png)(**Add a new Schedule**).
 
 4.  In the **Basic Information** area, type in a **Name** and
-    **Description** for the schedule. ![2082](/images/2082.png)
+    **Description** for the schedule. ![2082](../images/2082.png)
 
 5.  Select **Active** to enable this backup schedule.
 
@@ -1935,14 +1935,14 @@ To schedule a database backup:
 
 To modify a schedule:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
 3.  Click the schedule that you want to edit.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then click
-    ![1851](/images/1851.png) (**Edit this Schedule**).
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then click
+    ![1851](../images/1851.png) (**Edit this Schedule**).
 
 5.  Make the required changes.
 
@@ -1993,7 +1993,7 @@ schedules, including:
 
 ### Access Control
 
-Click ![config gear](/images/config-gear.png) (**Configuration**). Click
+Click ![config gear](../images/config-gear.png) (**Configuration**). Click
 on the **Access Control** accordion to see a hierarchy of the
 configurable items for users, groups, roles, and tenants. You can add
 and modify users, groups, account roles, tenants, and projects.
@@ -2005,12 +2005,12 @@ objects.
 
 To create a tenant:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
-3.  Click on the top-level **Tenant**, click ![1847](/images/1847.png)
-    (**Configuration**), and ![plus green](/images/plus_green.png)
+3.  Click on the top-level **Tenant**, click ![1847](../images/1847.png)
+    (**Configuration**), and ![plus green](../images/plus_green.png)
     (**Add child Tenant to this Tenant**) to create a tenant.
 
 4.  Enter a name for the tenant in the **Name** field.
@@ -2028,13 +2028,13 @@ organization.
 
 To create a project:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
 3.  Click on the **Tenant** where you want to add a **Project**, click
-    ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add Project to this Tenant**) to
+    ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add Project to this Tenant**) to
     create a project.
 
 4.  Enter a name for the project in the **Name** field.
@@ -2057,20 +2057,20 @@ details.
 
 </div>
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
 3.  Click on the **Tenant** or **Project** where you want to add a
-    quota, click ![1847](/images/1847.png) (**Configuration**), and
-    ![1851](/images/1851.png) (**Manage quotas for the Selected Item**)
+    quota, click ![1847](../images/1847.png) (**Configuration**), and
+    ![1851](../images/1851.png) (**Manage quotas for the Selected Item**)
     to create a quota.
 
 4.  In the list of pre-built quotas, switch **Enforced** next to the
     quota item you want to enable to `Yes`.
 
 5.  In the **Value** field, enter the constraints you want to apply to
-    the quota. ![manage quotas](/images/manage-quotas.png)
+    the quota. ![manage quotas](../images/manage-quotas.png)
 
 6.  Click **Save**.
 
@@ -2078,7 +2078,7 @@ details.
 
 To tag tenants and projects:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -2095,12 +2095,12 @@ To tag tenants and projects:
 
 To create a user:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Users**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add a new User**) to create a
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add a new User**) to create a
     user.
 
 4.  Enter a **Full Name**, **Username**, **Password** with confirmation,
@@ -2108,7 +2108,7 @@ To create a user:
     omitting the user email address can result in unsuccessful
     provisioning requests.
 
-    ![available groups](/images/available_groups.png)
+    ![available groups](../images/available_groups.png)
 
     <div class="important">
 
@@ -2133,14 +2133,14 @@ information or functions of the server.
 
 To delete a user:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Users**.
 
 3.  Select the user you want to delete.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and ![gui
-    delete](/images/gui_delete.png) (**Delete selected Users**) to
+4.  Click ![1847](../images/1847.png) (**Configuration**), and ![gui
+    delete](../images/gui_delete.png) (**Delete selected Users**) to
     delete a user.
 
 #### Groups
@@ -2158,18 +2158,18 @@ group by navigating to the settings menu, clicking **Change Group**,
 then selecting the desired group. The **Current Group** affects quota
 and other settings for the user.
 
-![change group](/images/change_group.png)
+![change group](../images/change_group.png)
 
 #### Creating a Group
 
 To create a user group:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Groups**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add a new Group**) to create a
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add a new Group**) to create a
     group.
 
 4.  Enter a name for the group in the **Name** field. To ensure
@@ -2199,13 +2199,13 @@ To create a user group:
             further limit the resources accessible to a user: for
             example, to specify a combination of tags that must exist on
             a resource. ![tag expression
-            editor](/images/tag_expression_editor.png)
+            editor](../images/tag_expression_editor.png)
 
     2.  Click the **Host & Clusters** tab.
 
         1.  Check the boxes for the host and clusters that you want to
             limit this user to. The items that have changed will show in
-            blue italicized font. ![2088](/images/2088.png)
+            blue italicized font. ![2088](../images/2088.png)
 
     3.  Click the **VMs & Templates** tab. This shows folders that you
         have created in your virtual infrastructure.
@@ -2226,7 +2226,7 @@ rights to resources in the console. The group’s role determines the
 scope of access for the users that are members of the group.
 
 ![cloudforms general config roles 460469 1017
-jcs](/images/cloudforms_general_config_roles_460469_1017_jcs.png)
+jcs](../images/cloudforms_general_config_roles_460469_1017_jcs.png)
 
 {{ site.data.product.title }} provides a default group of roles, but you can also
 create your own, or copy and edit the default groups.
@@ -2241,7 +2241,7 @@ directory service.
 
 To view details of a role and its level of access:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Roles**.
 
@@ -2277,12 +2277,12 @@ The table below shows a summary of the functions available to each role.
 
 To create a role:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Roles**.
 
-3.  Click ![1847](/images/1847.png) (Configuration), and ![plus
-    green](/images/plus_green.png) (Add a new Role). Alternatively, you
+3.  Click ![1847](../images/1847.png) (Configuration), and ![plus
+    green](../images/plus_green.png) (Add a new Role). Alternatively, you
     can copy an existing role to a new role by clicking **Copy this to a
     new Role**.
 
@@ -2290,17 +2290,17 @@ To create a role:
     **Access Restriction for Services, VMs, and Templates**, select if
     you want to limit users with this role to only see resources owned
     by the user or their group, owned by the user, or all resources
-    (**None**): ![role info](/images/role_info.png)
+    (**None**): ![role info](../images/role_info.png)
 
 5.  Under **Product Features (Editing)**, navigate to the appropriate
     feature and enable or disable it: ![product features
-    editing](/images/product_features_editing.png)
+    editing](../images/product_features_editing.png)
 
 6.  Click **Add**.
 
 ### Diagnostics
 
-Click ![config gear](/images/config-gear.png) (**Configuration**). Click
+Click ![config gear](../images/config-gear.png) (**Configuration**). Click
 on the **Diagnostics** tab to see the status of the different
 {{ site.data.product.title }} roles and workers for each server, view and collect
 logs, and gather data if there are any gaps in capacity and utilization
@@ -2384,7 +2384,7 @@ There are three role priorities.
 
 To set the priority of a failover role:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2395,12 +2395,12 @@ To set the priority of a failover role:
 4.  In the **Status** of **Roles for Servers** in **Zone Default Zone**
     area, click on the role that you want to set the priority for.
 
-5.  Click ![1847](/images/1847.png) (**Configuration**), and
-    ![2097](/images/2097.png) (**Promote Server**) to make this the
+5.  Click ![1847](../images/1847.png) (**Configuration**), and
+    ![2097](../images/2097.png) (**Promote Server**) to make this the
     primary server for this role.
 
-6.  Click ![1847](/images/1847.png) (**Configuration**), and ![gui
-    delete](/images/gui_delete.png) (**Demote Server**) to demote the
+6.  Click ![1847](../images/1847.png) (**Configuration**), and ![gui
+    delete](../images/gui_delete.png) (**Demote Server**) to demote the
     priority of this server for this role.
 
 #### Zone Diagnostics
@@ -2415,7 +2415,7 @@ collect capacity and utilization data that may be missing.
 
 To view the status of server roles:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2447,14 +2447,14 @@ To view the status of server roles:
 
 To remove an inactive server:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
 
 3.  Click on the name of the server in the tree view.
 
-4.  Click ![gui delete](/images/gui_delete.png) (**Delete Server**).
+4.  Click ![gui delete](../images/gui_delete.png) (**Delete Server**).
     This button is available only if the server is inactive.
 
 ##### Zone Log Collections
@@ -2484,21 +2484,21 @@ location.
 
 To set the location of the log depot:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
 
 3.  Click **Collect Logs**.
 
-4.  Click ![1851](/images/1851.png)(**Edit**).
+4.  Click ![1851](../images/1851.png)(**Edit**).
 
-5.  Select the **Type** of share. ![1851](/images/1851.png)
+5.  Select the **Type** of share. ![1851](../images/1851.png)
 
 6.  Using the fully qualified domain name (**FQDN**) of the depot
     server, type in the appropriate settings for the **URI**.
 
-    ![6254](/images/6254.png)
+    ![6254](../images/6254.png)
 
 7.  If required, enter your user **ID** and **password** then click
     **Validate** to confirm the settings.
@@ -2509,14 +2509,14 @@ To set the location of the log depot:
 
 To collect and download logs from all servers in a zone:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
 
 3.  Click the **Collect Logs** tab.
 
-4.  Click ![2104](/images/2104.png)(**Collect all logs**). All files in
+4.  Click ![2104](../images/2104.png)(**Collect all logs**). All files in
     the logs directory as well as configuration files are collected from
     the selected zone.
 
@@ -2541,7 +2541,7 @@ To repair capacity and utilization data:
 1.  Log in to a {{ site.data.product.title }} appliance located in the zone for which
     you want to gather the data.
 
-2.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 3.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2624,7 +2624,7 @@ You can see additional information on and restart the following items:
 
 To reload worker display:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2633,14 +2633,14 @@ To reload worker display:
 
 4.  Click the **Workers** tab.
 
-5.  Click ![2106](/images/2106.png) (**Refresh Current Workers
+5.  Click ![2106](../images/2106.png) (**Refresh Current Workers
     display**).
 
 \======= Restarting a Worker
 
 To restart a worker:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2651,8 +2651,8 @@ To restart a worker:
 
 5.  Click on the worker you want to restart.
 
-6.  Click ![1847](/images/1847.png) (**Configuration**), then
-    ![2102](/images/2102.png) (**Restart selected worker**).
+6.  Click ![1847](../images/1847.png) (**Configuration**), then
+    ![2102](../images/2102.png) (**Restart selected worker**).
 
 7.  Click **OK**.
 
@@ -2684,7 +2684,7 @@ server level supersede the ones at the zone level.
 
 To set the location of the log depot for a specific server
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2693,12 +2693,12 @@ To set the location of the log depot for a specific server
 
 4.  Click on the **Collect Logs** tab.
 
-5.  Click ![1851](/images/1851.png) (**Edit Log Depot Settings for the
+5.  Click ![1851](../images/1851.png) (**Edit Log Depot Settings for the
     selected Server**).
 
 6.  Select the **Type** of share.
 
-    ![6254](/images/6254.png)
+    ![6254](../images/6254.png)
 
 7.  Using the fully qualified domain name (**FQDN**) of the depot
     server, type in the appropriate settings for the **URI**.
@@ -2712,7 +2712,7 @@ To set the location of the log depot for a specific server
 
 To Collect the Current Log Set of a Server
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2721,8 +2721,8 @@ To Collect the Current Log Set of a Server
 
 4.  Click on the **Collect Logs** tab.
 
-5.  Click ![2104](/images/2104.png) (**Collect**), then click
-    ![2104](/images/2104.png) (**Collect current logs**). All current
+5.  Click ![2104](../images/2104.png) (**Collect**), then click
+    ![2104](../images/2104.png) (**Collect current logs**). All current
     log files in as well as configuration files are collected.
 
 6.  Click **OK**. The status of the log retrieval shows in the
@@ -2732,7 +2732,7 @@ To Collect the Current Log Set of a Server
 
 To Collect All Log Sets from a Server
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2741,8 +2741,8 @@ To Collect All Log Sets from a Server
 
 4.  Click **Collect Logs**.
 
-5.  Click ![2104](/images/2104.png) (**Collect**), then click
-    ![2104](/images/2104.png) (**Collect all logs**). All files in the
+5.  Click ![2104](../images/2104.png) (**Collect**), then click
+    ![2104](../images/2104.png) (**Collect all logs**). All files in the
     logs directory as well as configuration files are collected.
 
 6.  Click **OK**. The status of the log retrieval shows in the
@@ -2753,7 +2753,7 @@ To Collect All Log Sets from a Server
 The server and audit logs roll over daily. The previous logs are stored
 as zipped files in the `/var/www/miq/vmdb/log` folder. The current logs
 can be easily viewed and downloaded from the settings menu; select
-![Configuration](/images/config-gear.png) **Configuration**, then click
+![Configuration](../images/config-gear.png) **Configuration**, then click
 on the **Diagnostics** accordion.
 
 Use the server log to see all actions taken by the server including
@@ -2763,7 +2763,7 @@ communication with the SmartProxy and tasks.
 
 To view the server log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2779,7 +2779,7 @@ of the log.
 
 To reload the server log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2788,13 +2788,13 @@ To reload the server log:
 
 4.  Click **CFME Log**.
 
-5.  Click ![2106](/images/2106.png) (Reload the Log Display).
+5.  Click ![2106](../images/2106.png) (Reload the Log Display).
 
 \======= Downloading the Server Log
 
 To download the server log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2803,7 +2803,7 @@ To download the server log:
 
 4.  Click **CFME Log**.
 
-5.  Click ![2107](/images/2107.png) (**Download the Entire EVM Log
+5.  Click ![2107](../images/2107.png) (**Download the Entire EVM Log
     File**).
 
 <div class="note">
@@ -2817,7 +2817,7 @@ authentication.
 
 To view the audit log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2832,7 +2832,7 @@ The server automatically retrieves the last 1000 lines of the log.
 
 To reload the audit log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2841,13 +2841,13 @@ To reload the audit log:
 
 4.  Click **Audit Log**.
 
-5.  Click ![2106](/images/2106.png) (**Reload the Audit Log Display**).
+5.  Click ![2106](../images/2106.png) (**Reload the Audit Log Display**).
 
 \======= Downloading the Audit Log
 
 To download the audit log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the Diagnostics accordion, then click the Zone that you
     want to view.
@@ -2856,7 +2856,7 @@ To download the audit log:
 
 4.  Click Audit Log.
 
-5.  Click ![2107](/images/2107.png) (**Download the Entire Audit Log
+5.  Click ![2107](../images/2107.png) (**Download the Entire Audit Log
     File**).
 
 \======= Viewing the Production Log
@@ -2865,7 +2865,7 @@ Use the production log to see all actions performed using the console.
 
 To view the production log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2881,7 +2881,7 @@ of the log.
 
 To reload the production log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the Diagnostics accordion, then click the Zone that you
     want to view.
@@ -2890,14 +2890,14 @@ To reload the production log:
 
 4.  Click **Production Log**.
 
-5.  Click ![2106](/images/2106.png) (**Reload the Product Log
+5.  Click ![2106](../images/2106.png) (**Reload the Product Log
     Display**).
 
 \======= Downloading the Production Log
 
 To download the production log:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2906,7 +2906,7 @@ To download the production log:
 
 4.  Click **Production Log**.
 
-5.  Click ![2107](/images/2107.png) (**Download the Production Log
+5.  Click ![2107](../images/2107.png) (**Download the Production Log
     File**).
 
 ### Database Operations
@@ -2919,7 +2919,7 @@ connection, and database utilization.
 
 To view information on the VMDB:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Database** accordion.
 
@@ -3038,7 +3038,7 @@ processed and executed on the remote copy.
 Configure a {{ site.data.product.title }} instance to act as a remote copy from which
 data will be replicated to the global copy.
 
-1.  Click ![Configuration](/images/config-gear.png) **Configuration**.
+1.  Click ![Configuration](../images/config-gear.png) **Configuration**.
 
 2.  Click the **Settings** accordion.
 
@@ -3055,9 +3055,9 @@ data will be replicated to the global copy.
 Configure a {{ site.data.product.title }} instance to act as the global copy to which
 data is replicated from the remote copies.
 
-![Add Subscription](/images/add-subscription-global.png)
+![Add Subscription](../images/add-subscription-global.png)
 
-1.  Click ![Configuration](/images/config-gear.png) **Configuration**.
+1.  Click ![Configuration](../images/config-gear.png) **Configuration**.
 
 2.  Click the **Settings** accordion.
 
@@ -3119,7 +3119,7 @@ You can reset the replication relationship between the global copy and
 remote copies by temporarily removing and re-enabling the subscription
 from the global copy.
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Settings** accordion.
 
@@ -3173,7 +3173,7 @@ this operation.
 
 To run a single database backup:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Diagnostics** accordion and click the **Region** name.
 
@@ -3367,7 +3367,7 @@ order to reclaim unused space in your VMDB.
 
 To run database garbage collection:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Diagnostics** accordion and click the **Region** name.
 

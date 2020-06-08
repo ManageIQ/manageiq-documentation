@@ -6,7 +6,7 @@
 2.  Navigate through the various Domains and Namespaces until you reach
     the desired class or instance to copy.
 
-3.  Click ![image](/images/1847.png) (**Configuration**), then either
+3.  Click ![image](../images/1847.png) (**Configuration**), then either
     (**Copy this Class**) or (**Copy this Instance**) depending on the
     object chosen.
 

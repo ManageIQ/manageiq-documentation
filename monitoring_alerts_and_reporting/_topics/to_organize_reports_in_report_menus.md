@@ -16,28 +16,28 @@
 6.  Choose one of the following actions:
 
       - To add a report, select a report from the **Available Reports**
-        area on the right and click ![moveleft](/images/moveleft.png)
+        area on the right and click ![moveleft](../images/moveleft.png)
         **(Move selected reports left)**.
 
       - To remove a report from a folder, select the report from the
         **Selected Reports** area and click
-        ![moveright](/images/moveright.png) **(Move selected reports
+        ![moveright](../images/moveright.png) **(Move selected reports
         right)**.
 
       - To move a report to the top of the folder, select the report and
-        click ![movetotop](/images/movetotop.png) **(Move selected
+        click ![movetotop](../images/movetotop.png) **(Move selected
         reports to top)**.
 
       - To move a report up one place in the folder, select the report
-        and click ![moveup](/images/moveup.png) **(Move selected reports
+        and click ![moveup](../images/moveup.png) **(Move selected reports
         up)**.
 
       - To move a report down one place in the folder, select the report
-        and click ![movedown](/images/movedown.png) **(Move selected
+        and click ![movedown](../images/movedown.png) **(Move selected
         reports down)**.
 
       - To move a report to the bottom of the folder, select the report
-        and click ![movetobottom](/images/movetobottom.png) **(Move
+        and click ![movetobottom](../images/movetobottom.png) **(Move
         selected reports to bottom)**.
 
 7.  When you are finished making changes click **Commit**.

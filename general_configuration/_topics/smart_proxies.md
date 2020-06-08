@@ -36,8 +36,8 @@ To Enter Credentials and Operating System for the Target Host:
 
 2.  Select the host you want to edit.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), then
-    ![1851](/images/1851.png) (**Edit this item**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), then
+    ![1851](../images/1851.png) (**Edit this item**).
 
 4.  In **Credentials**, click the **Default** tab and enter your login
     credentials. If you are using domain credentials, the format for
@@ -45,7 +45,7 @@ To Enter Credentials and Operating System for the Target Host:
     hosts, if SSH login is disabled for the default user, click the
     **Remote Login** tab and enter a user with remote login access.
 
-    ![2112](/images/2112.png)
+    ![2112](../images/2112.png)
 
     <div class="important">
 

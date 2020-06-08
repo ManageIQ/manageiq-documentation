@@ -21,7 +21,7 @@ below:
 
   - Denied Requests
 
-![Dashboard Tab](/images/sui-dashboard.png)
+![Dashboard Tab](../images/sui-dashboard.png)
 
   - Monthly Charges - This Month To Date
     The Self Service user interface has added basic support for

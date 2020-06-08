@@ -25,8 +25,8 @@ To resize an instance through {{ site.data.product.title }}:
 
 2.  Click the instance whose flavor you want to change.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this Instance**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this Instance**).
 
 4.  In the **Reconfigure Instance** section, select the new flavor you
     want from the **Choose Flavor** dropdown.

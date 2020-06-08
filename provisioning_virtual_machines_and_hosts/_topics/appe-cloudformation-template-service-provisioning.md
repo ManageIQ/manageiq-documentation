@@ -15,8 +15,8 @@ Complete the following procedure to add new orchestration templates.
 1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
     Templates** in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Create a new
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Create a new
     Orchestration Template**.
 
 3.  Enter a **Name** and **Description** for your template.
@@ -47,8 +47,8 @@ input parameters defined in the orchestration template.
     template you created using the above procedure, that you want to
     create a service dialog from.
 
-3.  Click ![Configuration](/images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png)**Create Service Dialog
+3.  Click ![Configuration](../images/1847.png)**Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png)**Create Service Dialog
     from Orchestration Template**.
 
 4.  Enter a name for the service dialog in **Service Dialog Name**.
@@ -62,8 +62,8 @@ Complete the following procedure to create a new catalog.
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalogs** in the
     accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Add a New Catalog**.
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog**.
 
 3.  In **Basic Info**, add **Name** and **Description** for the new
     catalog.
@@ -80,8 +80,8 @@ item.
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
     in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Add a New Catalog
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog
     Item**.
 
 3.  Select **Orchestration** from the **Catalog Item Type** list.
@@ -141,8 +141,8 @@ menu:Services\[Requests\].
 
 2.  Click the stack to see a summary of its properties, resources, among
     other details including the running instances that are part of the
-    stack. ![Catalog\_Item\_State](/images/7180.png)
-    ![Stack\_Summary](/images/7181.png)
+    stack. ![Catalog\_Item\_State](../images/7180.png)
+    ![Stack\_Summary](../images/7181.png)
 
 You have now deployed instances and associated collection of resources
 (referred to as a stack) using an orchestration template.

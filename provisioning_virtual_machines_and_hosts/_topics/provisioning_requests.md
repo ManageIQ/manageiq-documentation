@@ -17,7 +17,7 @@ The following options are available when making provisioning requests:
 
   - Customize the guest operating system
 
-  - Schedule the provisioning ![2315](/images/2315.png)
+  - Schedule the provisioning ![2315](../images/2315.png)
 
 ### Requirements for Provisioning Virtual Machines and Instances
 
@@ -152,11 +152,11 @@ The following procedure connects to a PXE server and adds its details to
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
-2.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Add a New PXE Server**).
+2.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Add a New PXE Server**).
 
 3.  In **Basic Information**, type a **Name** that will be meaningful in
-    your environment. ![2316](/images/2316.png)
+    your environment. ![2316](../images/2316.png)
 
 4.  For **Depot Type**, select either **Network File System** (NFS) or
     **Samba**. The fields to enter in the dialog depend on the **Depot
@@ -183,8 +183,8 @@ The following procedure connects to a PXE server and adds its details to
 6.  Click **Add**.
 
 7.  Select the new PXE server from the tree on the left, and click
-    ![1847](/images/1847.png)(**Configuration**), then
-    ![2003](/images/2003.png)(**Refresh**) to see your existing images.
+    ![1847](../images/1847.png)(**Configuration**), then
+    ![2003](../images/2003.png)(**Refresh**) to see your existing images.
 
 <div class="informalexample">
 
@@ -201,13 +201,13 @@ The following procedure creates a system image type for PXE servers.
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
 2.  Click the **System Image Types** accordion.
-    ![2318](/images/2318.png)
+    ![2318](../images/2318.png)
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1848](/images/1848.png)(**Add a new System Image Type**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1848](../images/1848.png)(**Add a new System Image Type**).
 
 4.  In **Basic Information**, type in a **Name** and select a **Type**.
-    ![2317](/images/2317.png)
+    ![2317](../images/2317.png)
 
       - Use **Vm** if you want this image type to only apply to virtual
         machines.
@@ -231,8 +231,8 @@ The following procedure sets the image type for a chosen PXE image.
 2.  Click the **PXE Servers** accordion and select the image that you
     want to set a type for.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit this PXE Image**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit this PXE Image**).
 
 4.  From the **Basic Information** area, select the correct type. If
     this PXE image will be used as the **Windows Boot Environment**,
@@ -240,8 +240,8 @@ The following procedure sets the image type for a chosen PXE image.
     only one PXE Image can be identified as the **Windows Boot
     Environment**. Therefore, checking one as the **Windows Boot
     Environment**, will remove that from any other PXE image with that
-    check. ![2319](/images/2319.png) Click **Save**.
-    ![2320](/images/2320.png)
+    check. ![2319](../images/2319.png) Click **Save**.
+    ![2320](../images/2320.png)
 
 ### ISO Provisioning
 
@@ -272,8 +272,8 @@ Virtualization environment.
 
 2.  Click the **ISO Datastores** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**),
-    ![1862](/images/1862.png)(**Add a new ISO Datastore**).
+3.  Click ![1847](../images/1847.png)(**Configuration**),
+    ![1862](../images/1862.png)(**Add a new ISO Datastore**).
 
 4.  Select the Cloud or Infrastructure provider hosting the ISO
     Datastore.
@@ -291,8 +291,8 @@ The following procedure refreshes the chosen ISO datastore and updates
 
 2.  Click the **ISO Datastores** accordion, and select an ISO datastore.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then click
-    ![2003](/images/2003.png)(**Refresh Relationships**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then click
+    ![2003](../images/2003.png)(**Refresh Relationships**).
 
 #### Creating System Image Types for ISO
 
@@ -302,16 +302,16 @@ The following procedure creates a system image type for ISO Servers.
 
 2.  Click the **System Image Types** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Add a new System Image Type**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Add a new System Image Type**).
 
 4.  In **Basic Information**, type in a **Name** and select a **Type**.
-    ![2317](/images/2317.png)
+    ![2317](../images/2317.png)
 
       - Use **Vm** if you want this image type to only apply to virtual
         machines.
 
-5.  Click **Add**. ![2322](/images/2322.png)
+5.  Click **Add**. ![2322](../images/2322.png)
 
 <div class="informalexample">
 
@@ -330,11 +330,11 @@ The following procedure sets the image type for an ISO image.
 2.  Click the **ISO Datastores** accordion, and select the image that
     you want to set a type for.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit this ISO Image**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit this ISO Image**).
 
 4.  From the **Basic Information** area, select the correct **Type**.
-    ![2323](/images/2323.png)
+    ![2323](../images/2323.png)
 
 5.  Click **Save**.
 
@@ -409,11 +409,11 @@ or **Sysprep** files for the initial loading of the operating system.
 
 2.  Click the **Customization Templates** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**),
-    ![1862](/images/1862.png)(**Add a new Customization Template**).
+3.  Click ![1847](../images/1847.png)(**Configuration**),
+    ![1862](../images/1862.png)(**Add a new Customization Template**).
 
 4.  In **Basic Information**, type in a **Name** and **Description**.
-    ![2324](/images/2324.png)
+    ![2324](../images/2324.png)
 
 5.  Select the **Image Type**. This list should include the PXE image
     types you created.
@@ -470,8 +470,8 @@ To provision a virtual machine from a template:
 
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
 
-2.  Click ![2007](/images/2007.png)(**Lifecycle**), and then
-    ![1862](/images/1862.png)(**Provision VMs**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
+    ![1862](../images/1862.png)(**Provision VMs**).
 
 3.  Select a template from the list.
 
@@ -479,7 +479,7 @@ To provision a virtual machine from a template:
 
 5.  On the **Request** tab, enter the request information.
 
-    ![request info](/images/request-info.png)
+    ![request info](../images/request-info.png)
 
     In **Request Information**, enter your name and email address. The
     requester will receive status emails about the provisioning request
@@ -501,7 +501,7 @@ To provision a virtual machine from a template:
 7.  Click the **Catalog** tab to select the template to provision from.
     This tab is context sensitive based on provider.
 
-8.  For templates on VMware providers: ![2328](/images/2328.png)
+8.  For templates on VMware providers: ![2328](../images/2328.png)
 
     1.  For **Provision Type**, select **VMware** or **PXE**.
 
@@ -572,7 +572,7 @@ To provision a virtual machine from a template:
         datastore.
 
 11. Click the **Hardware** tab to set hardware options. ![provision
-    vms](/images/provision-vms.png)
+    vms](../images/provision-vms.png)
 
     1.  In **Hardware**, set the number of sockets, cores per socket,
         memory in MB, and disk format: thin, pre-allocated/thick or same
@@ -586,7 +586,7 @@ To provision a virtual machine from a template:
 
 12. Click **Network** to set the vLan adapter. Additional networking
     settings that are internal to the operating system appear on the
-    **Customize** tab. ![2335](/images/2335.png)
+    **Customize** tab. ![2335](../images/2335.png)
 
     1.  In **Network Adapter Information**, select the **vLan**.
 
@@ -602,7 +602,7 @@ To provision a virtual machine from a template:
 
 13. Click **Customize** to customize the operating system of the new
     virtual machine. These options vary based on the operating system of
-    the template. ![2336](/images/2336.png)
+    the template. ![2336](../images/2336.png)
 
 14. For Windows provisioning:
 
@@ -625,7 +625,7 @@ To provision a virtual machine from a template:
 
         </div>
 
-        ![2337](/images/2337.png)
+        ![2337](../images/2337.png)
 
         To modify the specification, select **Override Specification
         Values**.
@@ -663,7 +663,7 @@ To provision a virtual machine from a template:
     2.  In **Lifespan**, select to power on the virtual machines after
         they are created, and to set a retirement date. If you select a
         retirement period, you will be prompted for when you want a
-        retirement warning. ![2338](/images/2338.png)
+        retirement warning. ![2338](../images/2338.png)
 
 17. Click **Submit**.
 
@@ -798,8 +798,8 @@ Virtual machines can be cloned in other providers as well.
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and
     select the virtual machine you want to clone.
 
-2.  Click ![2007](/images/2007.png)(**Lifecycle**), and then
-    ![2339](/images/2339.png)(**Clone selected item**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
+    ![2339](../images/2339.png)(**Clone selected item**).
 
 3.  Enter the requested information in the dialogs. Be sure to check the
     **Catalog** tab.
@@ -813,8 +813,8 @@ Virtual machines can be cloned in other providers as well.
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and
     select the virtual machine you want to publish as a template.
 
-2.  Click ![2007](/images/2007.png)(**Lifecycle**), and then
-    ![2340](/images/2340.png)(**Publish selected VM to a Template**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
+    ![2340](../images/2340.png)(**Publish selected VM to a Template**).
 
 3.  Enter the requested information in the dialogs. Be sure to check the
     **Catalog** tab.
@@ -833,8 +833,8 @@ To rename a VMware virtual machine:
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and
     select the VMware virtual machine you want to rename.
 
-2.  Click ![1847](/images/1847.png)(**Configuration**),
-    ![1851](/images/1851.png)(**Rename selected item**).
+2.  Click ![1847](../images/1847.png)(**Configuration**),
+    ![1851](../images/1851.png)(**Rename selected item**).
 
 3.  In the **Basic Information** screen, provide a new **name**.
 
@@ -855,8 +855,8 @@ Second, the request goes through the approval phase. Finally,
 
 1.  Navigate to menu:Compute\[Clouds \> Instances\].
 
-2.  Click ![2007](/images/2007.png)(**Lifecycle**), then click
-    ![1862](/images/1862.png)(**Provision Instances**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
+    ![1862](../images/1862.png)(**Provision Instances**).
 
 3.  Select an image from the list presented.
 
@@ -976,8 +976,8 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 5.  Select one of the default dialogs.
 
-6.  Click ![1847](/images/1847.png)**(Configuration)**, and then
-    ![1859](/images/1859.png)**(Copy this Dialog)**.
+6.  Click ![1847](../images/1847.png)**(Configuration)**, and then
+    ![1859](../images/1859.png)**(Copy this Dialog)**.
 
 7.  Type a new **Name** and **Description** for the dialog.
 
@@ -1023,8 +1023,8 @@ used based on the type of provisioning selected.
 
 4.  Select one of the default dialogs.
 
-5.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![1859](/images/1859.png)(**Copy this Dialog**).
+5.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![1859](../images/1859.png)(**Copy this Dialog**).
 
 6.  Rename the dialog as shown in the examples below.
 
@@ -1084,7 +1084,7 @@ for LDAP or {{ site.data.product.title }} groups. To use provisioning profiles:
     instance.
 
 The diagram below shows where provisioning profiles are called during
-the entire provisioning process. ![2344](/images/2344.png)
+the entire provisioning process. ![2344](../images/2344.png)
 
 ##### Creating a Provisioning Profile Instance
 
@@ -1104,14 +1104,14 @@ the entire provisioning process. ![2344](/images/2344.png)
 
     </div>
 
-3.  Click ![1847](/images/1847.png)(**Configuration**),
-    ![2345](/images/2345.png)(**Add a New Instance**).
+3.  Click ![1847](../images/1847.png)(**Configuration**),
+    ![2345](../images/2345.png)(**Add a New Instance**).
 
 4.  Make the name of the tag identical to the name of the LDAP or
     {{ site.data.product.title }} group you are creating the instance for, replacing
     spaces in the group name with underscores. For example, change
     **{{ site.data.product.title }}-test group** to **{{ site.data.product.title }}-test\_group**.
-    ![6278](/images/6278.png)
+    ![6278](../images/6278.png)
 
 5.  In the dialog name field, enter the name of the customized dialog
     file. This file must reside on the {{ site.data.product.title }} appliance in the
@@ -1151,8 +1151,8 @@ To set the scope for a datastore:
 
 2.  Select the datastore to set the provisioning scope for.
 
-3.  Click ![1941](/images/1941.png)(**Policy**), and then
-    ![1851](/images/1851.png)(**Edit Tags**).
+3.  Click ![1941](../images/1941.png)(**Policy**), and then
+    ![1851](../images/1851.png)(**Edit Tags**).
 
 4.  From the **Select a customer tag to assign** drop down, select
     **Provisioning Scope** and then a value for the tag from the next

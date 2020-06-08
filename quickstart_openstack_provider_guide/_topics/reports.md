@@ -25,7 +25,7 @@ In addition, scheduled reports can be emailed directly to users:
 2.  Click the **Reports** accordion and select the report you want to
     view.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), then **Add a
+3.  Click ![1847](../images/1847.png) (**Configuration**), then **Add a
     new Schedule**.
 
 4.  Fill in the **Basic Information** section.

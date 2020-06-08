@@ -7,12 +7,12 @@ action. You can only assign this action to an analysis start event.
 1.  Navigate to menu:Control\[Explorer\].
 
 2.  Click the **Actions** accordion, then click
-    ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1862.png) (**Add a new Action**).
+    ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1862.png) (**Add a new Action**).
 
 3.  Type in a **Description** for the **Action Type**.
 
-    ![image](/images/1905.png)
+    ![image](../images/1905.png)
 
 4.  Select **Assign Profile to Analysis Task** from **Action Type**.
 

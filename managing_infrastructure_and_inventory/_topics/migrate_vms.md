@@ -12,10 +12,10 @@ To create a request to migrate a virtual machine:
 
 3.  Select the VM to migrate.
 
-4.  Click ![1847](/images/1847.png) btn:\[(Configuration)\], and then
-    ![2007](/images/2007.png) btn:\[(Lifecycle)\].
+4.  Click ![1847](../images/1847.png) btn:\[(Configuration)\], and then
+    ![2007](../images/2007.png) btn:\[(Lifecycle)\].
 
-5.  Click ![migration icon](/images/migration_icon.png) btn:\[(Migrate
+5.  Click ![migration icon](../images/migration_icon.png) btn:\[(Migrate
     selected items)\]. The Migrate Virtual Machine form will appear.
 
 6.  Under the **Request** tab:

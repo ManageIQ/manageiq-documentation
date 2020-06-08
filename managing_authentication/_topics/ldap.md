@@ -30,7 +30,7 @@ and related Red Hat Enterprise Linux documentation.
 
 To configure {{ site.data.product.title_short }} to use LDAP for authentication:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Select your server in the **Settings** accordion.
 
@@ -110,7 +110,7 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
         **Example: LDAP Configuration.**
 
         ![ldap authentication
-        full](/images/ldap-authentication-full.png)
+        full](../images/ldap-authentication-full.png)
 
 7.  Configure your **Role Settings**: In both LDAP and LDAPS, you can
     use groups from your directory service to set the role for the
@@ -231,7 +231,7 @@ one matching LDAP group to be successfully authenticated.
 
 To add another trusted forest:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Select your server in the **Settings** accordion.
 
@@ -241,7 +241,7 @@ To add another trusted forest:
     **Role Settings** area.
 
 5.  In the **Trusted Forest Settings** area, click ![green
-    plus](/images/green-plus.png)(**Click to add a new forest**).
+    plus](../images/green-plus.png)(**Click to add a new forest**).
 
 6.  Enter the **LDAP Host Name**, select a **Mode**, and enter an **LDAP
     Port**, **Base DN**, **Bind DN**, and **Bind Password**.
@@ -298,12 +298,12 @@ to account roles in {{ site.data.product.title_short }}. As a result, the users 
 the LDAP group will then be assigned to the {{ site.data.product.title_short }} roles
 associated with that group.
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Access Control** accordion, then click **Groups**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Add a new Group**) to create a
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Add a new Group**) to create a
     group.
 
 4.  There are two ways to specify the group to use:
@@ -328,7 +328,7 @@ associated with that group.
 
 6.  Select a **Project/Tenant** to map to the group.
 
-    ![assign ldap roles](/images/assign_ldap-roles.png)
+    ![assign ldap roles](../images/assign_ldap-roles.png)
 
 7.  Select any filters to apply to what this group can view in the
     **Assign Filters** area:
@@ -339,7 +339,7 @@ associated with that group.
 
     2.  In the **Host & Clusters** tab, select the host and clusters to
         limit the user to. The items that have changed show in a blue
-        italicized font. ![2093](/images/2093.png)
+        italicized font. ![2093](../images/2093.png)
 
     3.  In the **VMs & Templates** tab, select the folders created in
         your virtual infrastructure to limit the user to. The items that
@@ -395,7 +395,7 @@ In your LDAP directory service:
 
 On your {{ site.data.product.title_short }} appliance:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Settings** accordion, then select your server under
     **Zones**.
@@ -422,12 +422,12 @@ the last assigned group from the prior session.
 To configure the order in which {{ site.data.product.title_short }} looks up LDAP
 groups:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Access Control** accordion, then click **Groups**.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![plus
-    green](/images/plus_green.png) (**Edit Sequence of User Groups for
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+    green](../images/plus_green.png) (**Edit Sequence of User Groups for
     LDAP Look Up**) to prioritize which group a user will default to if
     LDAP returns multiple matching groups.
 

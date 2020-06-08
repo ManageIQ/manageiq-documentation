@@ -5,7 +5,7 @@
 In this chapter, you will learn about the different approval methods.
 The request can be approved manually in the {{ site.data.product.title }} console, set
 for automatic approval by setting options in the **Automate Explorer**,
-or by using an external method. ![2348](/images/2348.png) When using an
+or by using an external method. ![2348](../images/2348.png) When using an
 external method, the approval actually takes place on the external
 system and is sent directly for execution. This chapter discusses how to
 view and edit requests in the {{ site.data.product.title }} Console, how to approve a
@@ -32,7 +32,7 @@ trillion database IDs, this number can be several digits long.
 
 1.  Navigate to menu:Services\[Requests\].
 
-2.  Click ![2106](/images/2106.png)(**Reload the current display**).
+2.  Click ![2106](../images/2106.png)(**Reload the current display**).
 
 #### Approving a Provisioning Request
 
@@ -46,7 +46,7 @@ virtual machine or instance creation.
 
 3.  Type in a **Reason** for the approval.
 
-4.  Click ![1852](/images/1852.png)(**Approve this request**).
+4.  Click ![1852](../images/1852.png)(**Approve this request**).
 
 #### Denying a Provisioning Request
 
@@ -56,7 +56,7 @@ virtual machine or instance creation.
 
 3.  Type in a **Reason** for the denial.
 
-4.  Click ![2009](/images/2009.png)(**Deny this request**).
+4.  Click ![2009](../images/2009.png)(**Deny this request**).
 
 #### Copying a Provisioning Request
 
@@ -64,7 +64,7 @@ virtual machine or instance creation.
 
 2.  Click on the request you want to copy.
 
-3.  Click ![1859](/images/1859.png)(**Copy original provision
+3.  Click ![1859](../images/1859.png)(**Copy original provision
     request**).
 
 4.  Make changes to the request.
@@ -84,7 +84,7 @@ been already approved or denied, you cannot edit or delete the request.
 
 2.  Click on the request you want to edit.
 
-3.  Click ![1851](/images/1851.png)(**Edit the original provision
+3.  Click ![1851](../images/1851.png)(**Edit the original provision
     request**).
 
 4.  Make changes to the request.
@@ -97,7 +97,7 @@ been already approved or denied, you cannot edit or delete the request.
 
 2.  Click on the request you want to delete.
 
-3.  Click ![1861](/images/1861.png)(**Delete this request**).
+3.  Click ![1861](../images/1861.png)(**Delete this request**).
 
 4.  Click **OK** to confirm.
 
@@ -137,9 +137,9 @@ parameter for all others to be validated.
 
     </div>
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit this instance**).
-    ![6280](/images/6280.png)
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit this instance**).
+    ![6280](../images/6280.png)
 
     <div class="note">
 
@@ -195,8 +195,8 @@ images.
 2.  Click the **Templates** accordion, and select the templates that you
     want to tag.
 
-3.  Click ![1941](/images/1941.png)(**Policy**), and then
-    ![1851](/images/1851.png)(**Edit Tags**).
+3.  Click ![1941](../images/1941.png)(**Policy**), and then
+    ![1851](../images/1851.png)(**Edit Tags**).
 
 4.  Select a customer tag from the first dropdown, and then a value for
     the tag.
@@ -231,12 +231,12 @@ are set to **evmadmin@company.com** as a default.
 
 3.  Select an instance within the chosen class.
 
-4.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit this instance**).
+4.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit this instance**).
 
 5.  Type the desired email addresses in the **to\_email\_address** and
     **from\_email\_address** fields.
 
 6.  Click **Save**.
 
-    ![6282](/images/6282.png)
+    ![6282](../images/6282.png)

@@ -7,10 +7,10 @@ This procedure shows you how to create a schema.
 
 2.  Click on the **Schema** tab.
 
-3.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1851.png) (**Edit selected Schema**).
+3.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1851.png) (**Edit selected Schema**).
 
-4.  Click ![image](/images/2366.png) (**Click to add a new field**) to
+4.  Click ![image](../images/2366.png) (**Click to add a new field**) to
     create a new field.
 
 5.  Type in a **Name** for the new field.
@@ -37,7 +37,7 @@ This procedure shows you how to create a schema.
     Time** are fields used mostly for state machines. Leave blank if not
     applicable.
 
-12. Click ![image](/images/1863.png) (**Add this entry**) to confirm the
+12. Click ![image](../images/1863.png) (**Add this entry**) to confirm the
     fields values.
 
 13. For each new field, repeat steps 4 through 10.

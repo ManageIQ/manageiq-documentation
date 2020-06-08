@@ -6,8 +6,8 @@
 
 3.  Expand the **Settings** accordion, then click **Analysis Profiles**.
 
-4.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add VM Analysis Profile**).
+4.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add VM Analysis Profile**).
 
 5.  In **Basic Information**, enter **Name** and **Description** for the
     analysis profile.

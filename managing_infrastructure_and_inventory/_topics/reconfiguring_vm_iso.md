@@ -6,8 +6,8 @@ You can attach an ISO to a VMware virtual machine using following steps:
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this VM**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Under **CD/DVD Drives**, click **Connect**.
 
@@ -24,8 +24,8 @@ You can remove an ISO on VMware virtual machine using following steps:
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this VM**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Under **CD/DVD Drives**, locate the **Host File** and click
     **Disconnect**.

@@ -10,8 +10,8 @@ connect to {{ site.data.product.title }}.
 
 2.  Click the containers provider to edit.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Edit Selected Containers Provider](/images/1851.png) (**Edit
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Edit Selected Containers Provider](../images/1851.png) (**Edit
     Selected Containers Provider**).
 
 4.  Edit the **Name** if required.

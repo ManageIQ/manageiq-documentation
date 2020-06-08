@@ -33,8 +33,8 @@ To create a template based on an existing VM:
 
 3.  Select a VM.
 
-4.  Click ![Lifecycle](/images/2007.png) (**Lifecycle**), then click
-    ![Publish selected VM to a Template](/images/import.png) (**Publish
+4.  Click ![Lifecycle](../images/2007.png) (**Lifecycle**), then click
+    ![Publish selected VM to a Template](../images/import.png) (**Publish
     selected VM to a Template**).
 
 5.  Under the **Request** tab, provide **Request Information** and

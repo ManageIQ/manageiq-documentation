@@ -115,8 +115,8 @@ Container Template.
 1.  Navigate to menu:Compute\[Containers \> Container Templates\] and
     select the template for provisioning.
 
-2.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Create Service Dialog from Container
+2.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Create Service Dialog from Container
     Template**).
 
 3.  Enter a name for the dialog in **Service Dialog Name**.
@@ -309,8 +309,8 @@ Service methods have been split based on purpose.
 
 3.  Click the **Methods** tab.
 
-4.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Add a New Method**).
+4.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Add a New Method**).
 
 5.  Enter a **Name** and **Display Name**.
 
@@ -319,7 +319,7 @@ Service methods have been split based on purpose.
 7.  Click **Validate** and wait for your data entry to be successfully
     validated.
 
-8.  Click **Add**. ![6297](/images/6297.png)
+8.  Click **Add**. ![6297](../images/6297.png)
 
 ##### Creating an Instance in the Service Class
 
@@ -339,8 +339,8 @@ Service methods have been split based on purpose.
 
 3.  Click the **Instances** tab.
 
-4.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Add a new Instance**).
+4.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Add a new Instance**).
 
 5.  Enter a **Name** and **Display Name**.
 
@@ -351,7 +351,7 @@ Service methods have been split based on purpose.
 The instance is created so that it can be called from the
 **ServiceProvision** class.
 
-![6298](/images/6298.png)
+![6298](../images/6298.png)
 
 <div class="note">
 
@@ -385,8 +385,8 @@ Service methods have been split based on purpose.
 4.  Either create a new instance or select the **clone\_to\_service**
     instance.
 
-5.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1851](/images/1851.png)(**Edit Selected Instance**).
+5.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1851](../images/1851.png)(**Edit Selected Instance**).
 
 6.  In the **configurechilddialog** value, put the path to the method.
 
@@ -439,8 +439,8 @@ service catalog.
 
 2.  Click the **Catalog Items** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![1862](/images/1862.png)(**Add a New Catalog Bundle**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![1862](../images/1862.png)(**Add a New Catalog Bundle**).
 
 4.  Enter a name and description for the bundle. Select **Display in
     Catalog**.
@@ -486,8 +486,8 @@ Then, you will see the **Entry Point** field.
 3.  Select the catalog bundle you want to copy from **All Catalog
     Items**.
 
-4.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![Edit\_Sign](/images/1851.png)(**Copy Selected Item**).
+4.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
 
 5.  Enter a name for the copy of catalog bundle you are creating. Note
     that this name must not already be in use.
@@ -496,8 +496,8 @@ Then, you will see the **Entry Point** field.
 
 A copy of the catalog bundle is saved. You can now select this new copy
 of the catalog bundle and edit as required by navigating to
-![1847](/images/1847.png)(**Configuration**), then clicking
-![Edit\_Sign](/images/1851.png)(**Edit this Item**).
+![1847](../images/1847.png)(**Configuration**), then clicking
+![Edit\_Sign](../images/1851.png)(**Edit this Item**).
 
 #### Creating a Catalog Item
 
@@ -522,8 +522,8 @@ catalog.
 
 3.  Select the catalog item you want to copy from **All Catalog Items**.
 
-4.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![Edit\_Sign](/images/1851.png)(**Copy Selected Item**).
+4.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
 
 5.  Enter a name for the copy of catalog item you are creating. Note
     that this name must not already be in use.
@@ -532,8 +532,8 @@ catalog.
 
 A copy of the catalog item is saved. You can now select this new copy of
 the catalog item and edit as required by navigating to
-![1847](/images/1847.png)(**Configuration**), then clicking
-![Edit\_Sign](/images/1851.png)(**Edit this Item**).
+![1847](../images/1847.png)(**Configuration**), then clicking
+![Edit\_Sign](../images/1851.png)(**Edit this Item**).
 
 #### Creating a Generic Catalog Item
 
@@ -620,8 +620,8 @@ Complete the following procedure to add an orchestration template.
 1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
     Templates** in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png)**Create a new
+2.  Click ![Configuration](../images/1847.png)**Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png)**Create a new
     Orchestration Template**.
 
 3.  Enter a **Name** and **Description** for your template.
@@ -646,8 +646,8 @@ Complete the following procedure to edit orchestration templates.
 2.  Select the orchestration template you want to edit from the **All
     Orchestration Templates** list.
 
-3.  Click ![Configuration](/images/1847.png)**Configuration**, then
-    click ![Edit\_Sign](/images/1851.png)**Edit this Orchestration
+3.  Click ![Configuration](../images/1847.png)**Configuration**, then
+    click ![Edit\_Sign](../images/1851.png)**Edit this Orchestration
     Template**.
 
 4.  Edit the template as needed.
@@ -669,8 +669,8 @@ create a new template.
 1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
     Templates** in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png)**Configuration**, then
-    click ![Copy](/images/1859.png) **Copy this Orchestration
+2.  Click ![Configuration](../images/1847.png)**Configuration**, then
+    click ![Copy](../images/1859.png) **Copy this Orchestration
     Template**.
 
 3.  Change the **Description** and the actual content of the template as
@@ -696,8 +696,8 @@ Complete the following procedure to delete orchestration templates.
 2.  Select the orchestration template you want to delete from the **All
     Orchestration Templates** list.
 
-3.  Click ![Configuration](/images/1848.png)**Configuration**, then
-    click ![Delete](/images/1861.png)**Remove this Orchestration
+3.  Click ![Configuration](../images/1848.png)**Configuration**, then
+    click ![Delete](../images/1861.png)**Remove this Orchestration
     Template from Inventory**.
 
 4.  Click **OK**.

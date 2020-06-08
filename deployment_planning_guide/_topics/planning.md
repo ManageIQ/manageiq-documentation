@@ -37,7 +37,7 @@ responsible for.
 The following diagram demonstrates an example of the multiple regions
 working together in a {{ site.data.product.title }} environment.
 
-![7151](/images/7151.png)
+![7151](../images/7151.png)
 
 The master appliance is located in Chicago and contains a master region
 and a subregion that manages the worker appliances. The Mahwah
@@ -56,7 +56,7 @@ managing a single zone.
 
 The following diagram provides a closer look at a region:
 
-![7150](/images/7150.png)
+![7150](../images/7150.png)
 
 In this region, we have several {{ site.data.product.title }} appliances acting as UI
 nodes and worker nodes. These worker nodes execute tasks on the
@@ -152,7 +152,7 @@ it was queued there all along. As a result, a {{ site.data.product.title_short }
 operator in the global region can be seen as provisioning on behalf of a
 remote region.
 
-![Centralized Administration Diagram](/images/centralized_admin.png)
+![Centralized Administration Diagram](../images/centralized_admin.png)
 
 <div class="note">
 
@@ -277,7 +277,7 @@ there is no nesting information available by parent and child tenants.
 In the following example of a tenant quota report, *DevOps Teams* is a
 parent tenant and *Team Alpha* and *Team Bravo* are child tenants.
 
-![tenant quotas report](/images/tenant-quotas-report.png)
+![tenant quotas report](../images/tenant-quotas-report.png)
 
   - Total Quota: Total quota enforced per attribute for a tenant
 
@@ -353,7 +353,7 @@ On each appliance, configure the session data storage location using the
 `session_store` parameter within the advanced settings page in the
 {{ site.data.product.title_short }} user interface:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Click the **Advanced** tab.
 

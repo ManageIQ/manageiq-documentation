@@ -5,8 +5,8 @@
 2.  Click the **Dashboard Widgets** accordion and select the widget you
     want to generate.
 
-3.  Click ![1847](/images/1847.png) **(Configuration)**, and then
-    ![1847](/images/1847.png) **(Generate Widget Content now)**.
+3.  Click ![1847](../images/1847.png) **(Configuration)**, and then
+    ![1847](../images/1847.png) **(Generate Widget Content now)**.
 
 4.  Click **OK**.
 

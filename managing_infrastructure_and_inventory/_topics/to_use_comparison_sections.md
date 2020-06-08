@@ -11,7 +11,7 @@ the data in different ways.
 3.  Click the plus sign next to the sections name to expand it.
 
 4.  The following descriptions pertain to the **Expanded View**
-    ![2023](/images/2023.png). Whether you see the value of a property
+    ![2023](../images/2023.png). Whether you see the value of a property
     or an icon representing the property depends on the properties type.
 
       - A property displayed in the same color as the base means that
@@ -21,15 +21,15 @@ the data in different ways.
         that the compared virtual machine does not match the base for
         that property.
 
-5.  If you are in the **Compressed View** ![2024](/images/2024.png), the
+5.  If you are in the **Compressed View** ![2024](../images/2024.png), the
     values of the properties will not be displayed. The icons shown
     below will describe all items.
 
-      - A ![2150](/images/2150.png) (**checkmark**) means that the
+      - A ![2150](../images/2150.png) (**checkmark**) means that the
         compared virtual machine matches the base for that property. If
         you hover over it, the value of the property will display.
 
-      - A ![2151](/images/2151.png) (**x**) means that the compared
+      - A ![2151](../images/2151.png) (**x**) means that the compared
         virtual machine does not match the base for that property. If
         you hover over it, the value of the property will display.
 

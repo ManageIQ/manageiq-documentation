@@ -7,8 +7,8 @@ provider.
 
 2.  Click the network provider you want to monitor the timeline for.
 
-3.  Click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-    ![Timelines](/images/1995.png) (**Timelines**).
+3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+    ![Timelines](../images/1995.png) (**Timelines**).
 
 4.  From **Options**, select the event type and interval, and customize
     the period of time to display and the types of events to see.

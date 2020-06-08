@@ -8,8 +8,8 @@ refreshing.
 
 2.  Select the network providers to refresh.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Refresh Relationships and Power States](/images/2003.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Refresh Relationships and Power States](../images/2003.png)
     (**Refresh Relationships and Power States**).
 
 4.  Click **OK**.

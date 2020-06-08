@@ -10,8 +10,8 @@ To add an interface to a network router:
 
 2.  Select a network router from the list view.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Add Interface to this Router](/images/1851.png) (**Add Interface
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Add Interface to this Router](../images/1851.png) (**Add Interface
     to this Router**).
 
 4.  Select a **Subnet** from the list.

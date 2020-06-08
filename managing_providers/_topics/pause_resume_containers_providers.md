@@ -26,9 +26,9 @@ To pause a containers provider:
 
 2.  Click the containers provider that you want to pause.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
     then ![Pause this Containers
-    Provider](/images/pause-containers-provider.png) (**Pause this
+    Provider](../images/pause-containers-provider.png) (**Pause this
     Containers Provider**).
 
 4.  Click **OK**.
@@ -39,9 +39,9 @@ To resume a paused containers provider:
 
 2.  Click the paused containers provider that you want to resume.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
     then ![Resume this Containers
-    Provider](/images/resume-containers-provider.png) (**Resume this
+    Provider](../images/resume-containers-provider.png) (**Resume this
     Containers Provider**).
 
 4.  Click **OK**.

@@ -7,8 +7,8 @@ the following steps:
 
 2.  Select a **Cloud Volume Backup** to restore.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Restore backup to Cloud Volume](/images/volume-icon.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Restore backup to Cloud Volume](../images/volume-icon.png)
     (**Restore backup to Cloud Volume**).
 
 4.  Select the **Volume** to restore from the backup.

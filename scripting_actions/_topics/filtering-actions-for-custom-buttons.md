@@ -17,8 +17,8 @@ To apply filtering actions to a custom button:
 
 2.  Click the **Buttons** accordion. Select the custom button to use.
 
-3.  Click ![image](/images/1847.png)(**Configuration**), then
-    ![image](/images/1851.png) (**Edit this Button**).
+3.  Click ![image](../images/1847.png)(**Configuration**), then
+    ![image](../images/1851.png) (**Edit this Button**).
 
 4.  Click the **Advanced** tab.
 
@@ -29,7 +29,7 @@ To apply filtering actions to a custom button:
     2.  Create a visibility expression using the expression editor
         tools.
 
-    3.  Click ![Confirm](/images/1863.png) (**Confirm**) when finished
+    3.  Click ![Confirm](../images/1863.png) (**Confirm**) when finished
         defining the expression.
 
     4.  Provide **Disabled Button Text** in the field.
@@ -41,7 +41,7 @@ To apply filtering actions to a custom button:
     2.  Create a visibility expression using the expression editor
         tools.
 
-    3.  Click ![Confirm](/images/1863.png) (**Confirm**) when finished
+    3.  Click ![Confirm](../images/1863.png) (**Confirm**) when finished
         defining the expression.
 
 7.  Click **Save**.

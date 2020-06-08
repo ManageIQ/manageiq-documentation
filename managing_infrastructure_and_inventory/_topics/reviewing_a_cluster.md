@@ -6,7 +6,7 @@ summary.
 
 **Cluster Management Screen.**
 
-![2206](/images/2206.png)
+![2206](../images/2206.png)
 
 1.  **Cluster Taskbar**: Choose between **Configuration**, **Policy**
     and **Monitoring** options for the selected cluster

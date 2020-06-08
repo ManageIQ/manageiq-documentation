@@ -7,13 +7,13 @@ host.
 
 2.  Click the instance to view the timeline.
 
-3.  Click ![1994](/images/1994.png) (**Monitoring**), and then
-    ![1995](/images/1995.png) (**Timelines**) on the taskbar.
+3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
+    ![1995](../images/1995.png) (**Timelines**) on the taskbar.
 
 4.  From **Options**, customize the period of time to display, and the
     types of events to view.
 
-    ![2166](/images/2166.png)
+    ![2166](../images/2166.png)
 
       - Use the **Type** dropdown to select hourly or daily data points.
 

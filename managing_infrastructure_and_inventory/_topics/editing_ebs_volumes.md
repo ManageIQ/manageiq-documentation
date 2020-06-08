@@ -8,8 +8,8 @@ To edit a volume:
 
 2.  Select the volume to edit to open its summary page.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![Edit this Cloud Volume](/images/volume-icon.png) (**Edit
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![Edit this Cloud Volume](../images/volume-icon.png) (**Edit
     this Cloud Volume**).
 
 4.  Enter a new **Volume Name**.

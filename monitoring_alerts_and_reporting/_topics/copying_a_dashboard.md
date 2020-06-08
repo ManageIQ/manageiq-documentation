@@ -11,8 +11,8 @@ following steps as an administrative user:
 2.  Click the **Dashboards** accordion, then select the dashboard to
     copy.
 
-3.  Click ![1847](/images/1847.png) **(Configuration)**, then click
-    ![1851](/images/1851.png) **(Copy Selected Dashboard)**.
+3.  Click ![1847](../images/1847.png) **(Configuration)**, then click
+    ![1851](../images/1851.png) **(Copy Selected Dashboard)**.
 
 4.  In the **Basic Information** area, enter a **Name** and
     **Description**.

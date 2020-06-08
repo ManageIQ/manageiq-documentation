@@ -10,12 +10,12 @@ machine’s IP address.
 
 2.  Click the **Alert** accordion.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**),
-    ![1862](/images/1862.png) (**Add a new Alert**).
+3.  Click ![1847](../images/1847.png) (**Configuration**),
+    ![1862](../images/1862.png) (**Add a new Alert**).
 
 4.  In the **Info** area:
 
-    ![hostdlogalert](/images/hostdlogalert.png)
+    ![hostdlogalert](../images/hostdlogalert.png)
 
       - Type in a **Description** for the alert.
 

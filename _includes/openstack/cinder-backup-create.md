@@ -3,9 +3,9 @@
 2.  Click the volume you want to back up to open the volume’s summary
     page.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
     click ![Create a Backup of this Cloud
-    Volume](/images/volume-icon.png) (**Create a Backup of this Cloud
+    Volume](../images/volume-icon.png) (**Create a Backup of this Cloud
     Volume**).
 
 4.  Enter a name for the backup in **Backup Name**.

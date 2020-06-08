@@ -18,8 +18,8 @@ maintenance mode. To do so:
 
 2.  Click the OpenStack compute node to be removed from the provider.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Toggle Maintenance Mode**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Toggle Maintenance Mode**).
 
     <div class="note">
 
@@ -38,8 +38,8 @@ provider:
 
 2.  Click the provider to be scaled down.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Scale Down**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Scale Down**).
 
 4.  From the **Scale Infrastructure Provider Down** section, check the
     nodes to be removed from the provider. You can only do this for

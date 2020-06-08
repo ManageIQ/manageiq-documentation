@@ -10,8 +10,8 @@ First, create a catalog:
 
 1.  Navigate to menu:Services\[Catalogs\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Add a New Catalog](/images/1862.png) (**Add a New Catalog**)
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Add a New Catalog](../images/1862.png) (**Add a New Catalog**)
 
 3.  Enter a **Name** and **Description** for the catalog.
 
@@ -25,8 +25,8 @@ Then, create an Ansible Tower service catalog item:
 2.  Click **Ansible Tower Templates** and select an Ansible Tower job or
     workflow template.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Create Service Dialog from Template](/images/1862.png) (**Create
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Create Service Dialog from Template](../images/1862.png) (**Create
     Service Dialog from this Template**).
 
 4.  Enter a **Service Dialog Name** (for example,
@@ -34,8 +34,8 @@ Then, create an Ansible Tower service catalog item:
 
 5.  Navigate to menu:Services\[Catalogs\]. Click **Catalog Items**.
 
-6.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Add a New Catalog Item](/images/1862.png) (**Add a New Catalog
+6.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Add a New Catalog Item](../images/1862.png) (**Add a New Catalog
     Item**) to create a new catalog item with the following details, at
     minimum:
 

@@ -11,24 +11,24 @@ applicable, you will see these additional buttons:
 2.  Click a completed report to view. Click one of the following buttons
     for the view you want:
 
-      - Click ![graph view](/images/graph-view.png)for **Graph View**.
+      - Click ![graph view](../images/graph-view.png)for **Graph View**.
 
-      - Click ![hybrid view](/images/hybrid-view.png)for **Hybrid
+      - Click ![hybrid view](../images/hybrid-view.png)for **Hybrid
         View**.
 
-      - Click ![tabular view](/images/tabular-view.png)for **Tabular
+      - Click ![tabular view](../images/tabular-view.png)for **Tabular
         View**.
 
 ##### Filtering Report Data
 
 To filter the report information you see, use the ![data
-view](/images/data-view.png) **Data View** button.
+view](../images/data-view.png) **Data View** button.
 
 1.  Navigate to menu:Overview\[Reports\].
 
 2.  Click a completed report to view.
 
-3.  Click the ![data view](/images/data-view.png) button for **Data
+3.  Click the ![data view](../images/data-view.png) button for **Data
     View**, which opens the search field.
 
 4.  Select the criteria from the dropdown menu to filter by, and enter
@@ -38,8 +38,8 @@ view](/images/data-view.png) **Data View** button.
 
 ##### Sorting Reports by Column
 
-In ![tabular view](/images/tabular-view.png) tabular and ![hybrid
-view](/images/hybrid-view.png) hybrid view, you can sort a list of
+In ![tabular view](../images/tabular-view.png) tabular and ![hybrid
+view](../images/hybrid-view.png) hybrid view, you can sort a list of
 reports by column.
 
 1.  Navigate to menu:Overview\[Reports \> Saved Reports\].

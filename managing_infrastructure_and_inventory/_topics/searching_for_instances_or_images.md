@@ -25,15 +25,15 @@ Search for instances and images:
 
 2.  Click the accordion for the desired items to search.
 
-    ![2136](/images/2136.png)
+    ![2136](../images/2136.png)
 
 3.  In the **Name Filter** bar in the upper right corner of the window,
     type your criteria.
 
-4.  Click ![2135](/images/2135.png)(**Search by Name within results**)
+4.  Click ![2135](../images/2135.png)(**Search by Name within results**)
     or press **Enter**.
 
 5.  Type in other criteria to filter on what is currently displayed.
 
-6.  Click ![2135](/images/2135.png) (**Search by Name within results**)
+6.  Click ![2135](../images/2135.png) (**Search by Name within results**)
     or press **Enter**.

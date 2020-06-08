@@ -17,12 +17,12 @@ The Summary divides into the following categories.
     For example, click **Network** to view the network adapters
     connected to the host.
 
-    ![2227](/images/2227.png)
+    ![2227](../images/2227.png)
 
   - **Relationships** include information on the provider, cluster,
     datastores, resource pools, and installed virtual machines.
 
-    ![2228](/images/2228.png)
+    ![2228](../images/2228.png)
 
   - **Security** shows the number of users, groups, patches installed,
     and firewall rules on the host. Click on any of these items to see
@@ -47,7 +47,7 @@ The Summary divides into the following categories.
 
     </div>
 
-    ![2230](/images/2230.png)
+    ![2230](../images/2230.png)
 
   - **Smart Management** shows all tags assigned to this host.
 

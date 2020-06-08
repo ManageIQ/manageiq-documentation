@@ -9,4 +9,4 @@ each host.
 
 3.  From the host accordion, click menu:Properties\[Storage Adapters\].
 
-![2232](/images/2232.png)
+![2232](../images/2232.png)

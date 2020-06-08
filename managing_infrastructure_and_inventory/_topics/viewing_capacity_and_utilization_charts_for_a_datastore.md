@@ -13,8 +13,8 @@ feature.
 1.  Navigate to menu:Compute\[Infrastructure \> Datastores\], then click
     the Datastore for which to view Capacity and Utilization data.
 
-2.  Click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-    ![Utilization](/images/1994.png) (**Utilization**).
+2.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+    ![Utilization](../images/1994.png) (**Utilization**).
 
 3.  From **Interval**, select to view hourly or daily data points and
     the dates to view data.

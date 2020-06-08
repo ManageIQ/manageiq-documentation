@@ -7,8 +7,8 @@ This procedure shows you how to create a method.
 
 2.  Click the **Methods** tab.
 
-3.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1862.png) (**Add a New Method**).
+3.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1862.png) (**Add a New Method**).
 
 4.  In the **Main Info** area, type in a **Name** and **Display Name**.
 

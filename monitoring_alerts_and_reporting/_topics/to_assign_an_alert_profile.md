@@ -8,8 +8,8 @@ directly to a resource.
 2.  Click on the **Alert Profiles** accordion, then click on the alert
     profile that you want to assign.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**),
-    ![1851](/images/1851.png) (**Edit Assignments for this Alert
+3.  Click ![1847](../images/1847.png) (**Configuration**),
+    ![1851](../images/1851.png) (**Edit Assignments for this Alert
     Profile**).
 
 4.  The options presented change based on if the alert is for a cluster,

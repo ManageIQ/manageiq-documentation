@@ -18,13 +18,13 @@ view the report in a full screen.
 4.  Click on the report download buttons for the type of export you
     want.
 
-      - Click ![textimage](/images/textimage.png) **(Download this
+      - Click ![textimage](../images/textimage.png) **(Download this
         report in text format)** to download as text.
 
-      - Click ![textimage](/images/textimage.png) **(Download this
+      - Click ![textimage](../images/textimage.png) **(Download this
         report in csv format)** to download as a comma-separated file.
 
-      - Click ![2134](/images/2134.png) **(Download this report in PDF
+      - Click ![2134](../images/2134.png) **(Download this report in PDF
         format)** to download as PDF.
 
       - The report is automatically named with the type of report and

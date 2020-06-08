@@ -3,11 +3,11 @@
 **Target Type: Cloning a Template to a Virtual Machine.**
 
 ![Target Type: Cloning a Template to a Virtual
-Machine](/images/:../images/2377.png)
+Machine](../images/:../images/2377.png)
 
 **Target Type: Clone to Template.**
 
-![Target Type: Clone to Template](/images/:../images/2378.png)
+![Target Type: Clone to Template](../images/:../images/2378.png)
 
 | Question                                                                                | Answer                                                                                                                                                                                                                    |
 | --------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

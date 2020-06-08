@@ -18,8 +18,8 @@ an existing rate, or creating a new rate.
 2.  Click the **Rates** accordion and select an existing rate from under
     **Compute** or **Storage**.
 
-3.  Click ![1847](/images/1847.png) **(Configuration)** and
-    ![1851](/images/1851.png) **(Edit this Chargeback Rate)**.
+3.  Click ![1847](../images/1847.png) **(Configuration)** and
+    ![1851](../images/1851.png) **(Edit this Chargeback Rate)**.
 
 4.  Edit the rate as desired.
 
@@ -33,8 +33,8 @@ an existing rate, or creating a new rate.
 2.  Click the **Rates** accordion and select an existing rate from under
     **Compute** or **Storage**.
 
-3.  Click ![1847](/images/1847.png) **(Configuration)** and
-    ![1859](/images/1859.png) **(Copy this Chargeback Rate)**.
+3.  Click ![1847](../images/1847.png) **(Configuration)** and
+    ![1859](../images/1859.png) **(Copy this Chargeback Rate)**.
 
 4.  Edit the rate as desired.
 
@@ -60,8 +60,8 @@ To configure this rate:
 2.  Click the **Rates** accordion and select **Compute** to create a CPU
     chargeback rate.
 
-    1.  Click ![1847](/images/1847.png) **(Configuration)** and
-        ![1862](/images/1862.png) **(Add a new Chargeback Rate)**.
+    1.  Click ![1847](../images/1847.png) **(Configuration)** and
+        ![1862](../images/1862.png) **(Add a new Chargeback Rate)**.
 
 3.  Type in a **Description** for the chargeback rate.
 
@@ -104,7 +104,7 @@ To configure this rate:
         2.  In **Rate**, specify `0.6` for the **Fixed** rate, and `0.2`
             for **Variable**.
 
-            ![tiered chargeback](/images/tiered_chargeback.png)
+            ![tiered chargeback](../images/tiered_chargeback.png)
 
 6.  Click **Add** at the bottom of the screen to save the chargeback
     rate.

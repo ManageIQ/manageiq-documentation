@@ -17,11 +17,11 @@ dashboard UI.
 1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
     Templates** in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Create a new
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Create a new
     Orchestration Template**. The **Adding a new Orchestration
     Template** window is displayed.
-    ![Adding\_a\_new\_Orchestration\_Template](/images/7148.png)
+    ![Adding\_a\_new\_Orchestration\_Template](../images/7148.png)
 
 3.  In **Name**, enter a name for the new template.
 
@@ -47,8 +47,8 @@ UI.
 2.  Select the orchestration template you want to edit from the **All
     Orchestration Templates** list.
 
-3.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Edit\_Sign](/images/1851.png) **Edit selected Orchestration
+3.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Edit\_Sign](../images/1851.png) **Edit selected Orchestration
     Template**. The **Edit selected Orchestration Template** window is
     displayed.
 
@@ -67,8 +67,8 @@ template.
 1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
     Templates** in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Copy](/images/1859.png) **Copy selected Orchestration
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Copy](../images/1859.png) **Copy selected Orchestration
     Template**. The **Copy selected Orchestration Template** window is
     displayed.
 
@@ -94,8 +94,8 @@ UI.
 2.  Select the orchestration template you want to delete from the **All
     Orchestration Templates** list.
 
-3.  Click ![Configuration](/images/1848.png) **Configuration**, then
-    click ![Delete](/images/1861.png) **Remove selected Orchestration
+3.  Click ![Configuration](../images/1848.png) **Configuration**, then
+    click ![Delete](../images/1861.png) **Remove selected Orchestration
     Template from Inventory**.
 
 4.  A warning window to confirm the permanent removal of the selected

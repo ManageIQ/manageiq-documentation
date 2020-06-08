@@ -7,8 +7,8 @@ require removal from the VMDB.
 
 2.  Check the hosts to remove.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1861](/images/1861.png) (**Remove items from the VMDB**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1861](../images/1861.png) (**Remove items from the VMDB**).
 
 4.  Click **OK**.
 

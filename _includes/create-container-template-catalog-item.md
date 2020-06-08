@@ -12,8 +12,8 @@ item.
 1.  Navigate to menu:Services\[Catalogs\], then click on the **Catalog
     Items** accordion.
 
-2.  Click ![1847](/images/1847.png)(**Configuration**), then
-    ![1862](/images/1862.png)(**Add a New Catalog Item**).
+2.  Click ![1847](../images/1847.png)(**Configuration**), then
+    ![1862](../images/1862.png)(**Add a New Catalog Item**).
 
 3.  Select **OpenShift Template** from the **Catalog Item Type** list.
 

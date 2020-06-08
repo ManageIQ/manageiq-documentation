@@ -10,22 +10,22 @@ the {{ site.data.product.title }} console.
 3.  Click **Power Operations**, then click the button for the desired
     power operation.
 
-      - Click ![1999](/images/1999.png) (**Start**) to start the
+      - Click ![1999](../images/1999.png) (**Start**) to start the
         selected instances.
 
-      - Click ![2000](/images/2000.png) (**Terminate**) to terminate the
+      - Click ![2000](../images/2000.png) (**Terminate**) to terminate the
         selected instances.
 
-      - Click ![2004](/images/2004.png) (**Suspend**) to suspend the
+      - Click ![2004](../images/2004.png) (**Suspend**) to suspend the
         selected instances.
 
-      - Click ![2001](/images/2001.png) (**Reset**) to reset the
+      - Click ![2001](../images/2001.png) (**Reset**) to reset the
         selected instances.
 
-      - Click ![2002](/images/2002.png) (**Stop Guest**) to stop the
+      - Click ![2002](../images/2002.png) (**Stop Guest**) to stop the
         guest operating system.
 
-      - Click ![2003](/images/2003.png) (**Restart Guest**) to restart
+      - Click ![2003](../images/2003.png) (**Restart Guest**) to restart
         the guest operating system.
 
 4.  Click **OK**.

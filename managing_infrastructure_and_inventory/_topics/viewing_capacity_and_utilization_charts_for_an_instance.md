@@ -17,17 +17,17 @@ feature.
 
 3.  Click the item to view.
 
-4.  Click ![1994](/images/1994.png) (**Monitoring**), and then
-    ![1994](/images/1994.png) (**Utilization**) on the taskbar.
+4.  Click ![1994](../images/1994.png) (**Monitoring**), and then
+    ![1994](../images/1994.png) (**Utilization**) on the taskbar.
 
 5.  Select to view hourly, most recent hour, or daily data points for
     the dates to view data.
 
-    ![2309](/images/2309.png)
+    ![2309](../images/2309.png)
 
 6.  Select a **Time Profile**.
 
-![5063](/images/5063.png)
+![5063](../images/5063.png)
 
 <div class="note">
 

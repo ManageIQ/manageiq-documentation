@@ -10,15 +10,15 @@ This procedure describes how to assign an action to an event.
 3.  From the **Events** area, click on the description of the event you
     want to assign an action to.
 
-4.  Click ![image](/images/1847.png) (**Configuration**),
-    ![image](/images/1851.png) (**Edit Actions for this Policy Event**).
+4.  Click ![image](../images/1847.png) (**Configuration**),
+    ![image](../images/1851.png) (**Edit Actions for this Policy Event**).
 
 5.  Select all the appropriate actions from the **Available Actions**
     box, inside the **Order of Actions if ALL Conditions are True**.
     These are the actions that will take place if the resources meet the
     Condition of the Policy.
 
-    ![image](/images/1882.png)
+    ![image](../images/1882.png)
 
     <div class="note">
 
@@ -32,12 +32,12 @@ This procedure describes how to assign an action to an event.
 
     </div>
 
-6.  Click the add button ( ![image](/images/1876.png)), then:
+6.  Click the add button ( ![image](../images/1876.png)), then:
 
-      - Click the action, then click ![image](/images/1883.png) (**Set
+      - Click the action, then click ![image](../images/1883.png) (**Set
         selected Actions to Asynchronous**) to make it asynchronous.
 
-      - Click the action, then click ![image](/images/1884.png) (**Set
+      - Click the action, then click ![image](../images/1884.png) (**Set
         selected Actions to Synchronous**) to make it synchronous. If
         creating a synchronous action, use the up and down arrows to
         identify in what order you want the actions to run.

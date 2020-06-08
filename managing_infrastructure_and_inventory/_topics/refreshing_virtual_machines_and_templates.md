@@ -10,8 +10,8 @@ container, and hardware devices attached to the virtual machine.
 
 3.  Check the items to refresh.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2003](/images/2003.png) (**Refresh Relationships and Power
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2003](../images/2003.png) (**Refresh Relationships and Power
     States**) on the **Virtual Machine Taskbar**.
 
 The console returns a refreshed list of the data associated with the

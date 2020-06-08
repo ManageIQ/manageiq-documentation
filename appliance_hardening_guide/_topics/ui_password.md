@@ -10,7 +10,7 @@ standard user in the appliance.
 
 1.  Access the appliance through your web browser and log in.
 
-2.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 3.  In the accordion tree on the left, click on **Access Control**, then
     select the **Administrator** under the **Users** section. This

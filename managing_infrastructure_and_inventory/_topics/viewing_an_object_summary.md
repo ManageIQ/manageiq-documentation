@@ -16,7 +16,7 @@ about container entities and their components.
         **Relationships** box on the right-hand side of the summary
         page.
 
-        ![Entity Relationships](/images/entity-relationships.png)
+        ![Entity Relationships](../images/entity-relationships.png)
 
       - Additional information on aggregated capacity of all CPU cores
         of all nodes, and aggregated capacity of all memory of all
@@ -36,8 +36,8 @@ about container entities and their components.
       - The version of the underlying operating system and software.
 
 To view the timeline of events for a node from a container nodes summary
-page, click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-![Timelines](/images/1995.png) (**Timelines**).
+page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+![Timelines](../images/1995.png) (**Timelines**).
 
   - Viewing a Containers Summary
     Navigate to menu:Compute\[Containers \> Containers\] to view

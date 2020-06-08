@@ -12,4 +12,4 @@ clicking the **Reorder** button, then enter the options associated with
 the order, and add to shopping cart. You can click on more options
 *(represented by three dots)* next to an order to **Remove** the order.
 
-![Orders Tab](/images/sui-orders.png)
+![Orders Tab](../images/sui-orders.png)

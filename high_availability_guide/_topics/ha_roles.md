@@ -21,7 +21,7 @@ zone to show how a highly available environment might be scaled with
 server roles and zones.
 
 ![cloudforms ha architecture 431939 0917 ece
-02](/images/cloudforms_ha_architecture_431939_0917_ece-02.png)
+02](../images/cloudforms_ha_architecture_431939_0917_ece-02.png)
 
 See
 [Regions](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#regions)

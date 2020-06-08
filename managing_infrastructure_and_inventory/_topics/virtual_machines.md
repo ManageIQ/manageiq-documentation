@@ -13,7 +13,7 @@ user, it will be in effect here. The **Virtual Machines** taskbar is a
 menu driven set of buttons that provide access to functions related to
 virtual machines.
 
-![2124](/images/2124.png)
+![2124](../images/2124.png)
 
 1.  History button
 
@@ -40,7 +40,7 @@ templates. Each thumbnail contains four quadrants by default. This
 allows you to glance at a virtual machine for a quick view of its
 contents.
 
-![2137](/images/2137.png)
+![2137](../images/2137.png)
 
 1.  Top left quadrant: Operating system of the Virtual Machine
 
@@ -52,14 +52,14 @@ contents.
 
 | Icon                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| ![2138](/images/2138.png) | Template: Virtual Template                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ![2139](/images/2139.png) | Retired: When a virtual machine or instance is no longer required, it can be retired. Once a virtual machine or instance reaches its retirement date and time, it is immediately shut down and not allowed to restart. If an attempt to restart is made, {{ site.data.product.title }} will shut down the virtual machine or instance.                                                                                                                  |
-| ![2140](/images/2140.png) | Archived: An archived virtual machine has no host or datastore associated with it. Archiving is done to move virtual machines to a low cost storage, either on demand or during retirement, if requested, to avoid incurring extra cost on a virtualized infrastructure due to virtual machine sprawl.                                                                                                                                    |
-| ![2141](/images/2141.png) | Orphaned: An orphaned virtual machine has no host but has a datastore associated with it. Orphaned virtual machines are those that have been removed from their providers but still exist on the storage. An orphaned virtual machine is unable to identify the associated host. A virtual machine also shows as orphaned if it exists on a different host than the host expected by the provider’s server.                               |
-| ![2142](/images/2142.png) | Disconnected: A disconnected virtual machine is one that has lost connection to either the provider’s storage, host, or both. A disconnect is usually a result of network issues on the provider side. For instance, if during virtual machine provisioning the storage is not set up or deleted, the virtual machine will still exist on the provider, but will not run on the host as it has lost connection to its provider’s storage. |
-| ![2143](/images/2143.png) | On: Virtual Machine is powered on.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| ![2144](/images/2144.png) | Off: Virtual Machine is powered off.                                                                                                                                                                                                                                                                                                                                                                                                      |
-| ![2145](/images/2145.png) | Suspended: Virtual Machine has been suspended.                                                                                                                                                                                                                                                                                                                                                                                            |
+| ![2138](../images/2138.png) | Template: Virtual Template                                                                                                                                                                                                                                                                                                                                                                                                                |
+| ![2139](../images/2139.png) | Retired: When a virtual machine or instance is no longer required, it can be retired. Once a virtual machine or instance reaches its retirement date and time, it is immediately shut down and not allowed to restart. If an attempt to restart is made, {{ site.data.product.title }} will shut down the virtual machine or instance.                                                                                                                  |
+| ![2140](../images/2140.png) | Archived: An archived virtual machine has no host or datastore associated with it. Archiving is done to move virtual machines to a low cost storage, either on demand or during retirement, if requested, to avoid incurring extra cost on a virtualized infrastructure due to virtual machine sprawl.                                                                                                                                    |
+| ![2141](../images/2141.png) | Orphaned: An orphaned virtual machine has no host but has a datastore associated with it. Orphaned virtual machines are those that have been removed from their providers but still exist on the storage. An orphaned virtual machine is unable to identify the associated host. A virtual machine also shows as orphaned if it exists on a different host than the host expected by the provider’s server.                               |
+| ![2142](../images/2142.png) | Disconnected: A disconnected virtual machine is one that has lost connection to either the provider’s storage, host, or both. A disconnect is usually a result of network issues on the provider side. For instance, if during virtual machine provisioning the storage is not set up or deleted, the virtual machine will still exist on the provider, but will not run on the host as it has lost connection to its provider’s storage. |
+| ![2143](../images/2143.png) | On: Virtual Machine is powered on.                                                                                                                                                                                                                                                                                                                                                                                                        |
+| ![2144](../images/2144.png) | Off: Virtual Machine is powered off.                                                                                                                                                                                                                                                                                                                                                                                                      |
+| ![2145](../images/2145.png) | Suspended: Virtual Machine has been suspended.                                                                                                                                                                                                                                                                                                                                                                                            |
 
 The **Virtual Machines** page has three accordions organizing your
 virtual machines and templates in different ways. All of these
@@ -145,8 +145,8 @@ the host’s authentication credentials.
 
 3.  Check the **Virtual Machines** and **Templates** to analyze.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), then
-    ![1942](/images/1942.png) (**Perform SmartState Analysis**).
+4.  Click ![1847](../images/1847.png) (**Configuration**), then
+    ![1942](../images/1942.png) (**Perform SmartState Analysis**).
 
 5.  Click **OK**.
 
@@ -194,30 +194,30 @@ Compare virtual machines and templates:
 
 3.  Check the items to compare.
 
-4.  Click ![1847](/images/1847.png) btn:\[(Configuration)\], and then
-    ![2148](/images/2148.png) btn:\[(Compare Selected items)\]. The
+4.  Click ![1847](../images/1847.png) btn:\[(Configuration)\], and then
+    ![2148](../images/2148.png) btn:\[(Compare Selected items)\]. The
     comparison displays in a compressed view with a limited set of
     properties listed.
 
-    ![2149](/images/2149.png)
+    ![2149](../images/2149.png)
 
 5.  To delete an item from the comparison, click
-    ![1861](/images/1861.png)btn:\[(Remove this item from Inventory)\]
+    ![1861](../images/1861.png)btn:\[(Remove this item from Inventory)\]
     at the bottom of the items column. This option is only available
     when comparing more than two virtual machines.
 
 6.  To view many items on one screen, go to a compressed view by
-    clicking ![2024](/images/2024.png) btn:\[(Compressed View)\]. To
-    return to an expanded view, click ![2023](/images/2023.png)
+    clicking ![2024](../images/2024.png) btn:\[(Compressed View)\]. To
+    return to an expanded view, click ![2023](../images/2023.png)
     btn:\[(Expanded View)\].
 
 7.  To limit the mode of the view, there are two buttons in the task
     bar.
 
-      - Click ![2022](/images/2022.png) btn:\[(Details Mode)\] to see
+      - Click ![2022](../images/2022.png) btn:\[(Details Mode)\] to see
         all details for an attribute.
 
-      - Click ![2025](/images/2025.png) btn:\[(Exists Mode)\] to limit
+      - Click ![2025](../images/2025.png) btn:\[(Exists Mode)\] to limit
         the view to if an attribute exists compared to the base or not.
         This only applies to attributes that can have a boolean
         property. For example, a user account exists or does not exist,

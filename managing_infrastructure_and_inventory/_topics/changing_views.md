@@ -10,8 +10,8 @@ current view can also be controlled from the Virtual Machines pages.
 
 3.  Click the appropriate button for the desired view.
 
-      - Click ![2020](/images/2020.png) for **Grid View**.
+      - Click ![2020](../images/2020.png) for **Grid View**.
 
-      - Click ![2021](/images/2021.png) for **Tile View**.
+      - Click ![2021](../images/2021.png) for **Tile View**.
 
-      - Click ![2022](/images/2022.png) for **List View**.
+      - Click ![2022](../images/2022.png) for **List View**.

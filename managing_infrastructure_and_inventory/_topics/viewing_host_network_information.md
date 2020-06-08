@@ -9,4 +9,4 @@ and local area networks for each host.
 
 3.  From the host accordion, click menu:Properties\[Network\].
 
-![2231](/images/2231.png)
+![2231](../images/2231.png)

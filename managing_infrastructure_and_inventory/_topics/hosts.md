@@ -9,13 +9,13 @@ Any applied filters will be in effect here.
 
 </div>
 
-![2212](/images/2212.png)
+![2212](../images/2212.png)
 
 After adding or sorting your hosts, click on one to examine it more
 closely and see its virtual machines, SmartProxy settings, and
 properties.
 
-![2222](/images/2222.png)
+![2222](../images/2222.png)
 
 1.  Top left quadrant: Number of virtual machines on this host
 
@@ -27,9 +27,9 @@ properties.
 
 | Icon                      | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ |
-| ![2190](/images/2190.png) | Validated: Valid authentication credentials have been added.                   |
-| ![2191](/images/2191.png) | Invalid: Authentication credentials are invalid                                |
-| ![2192](/images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
+| ![2190](../images/2190.png) | Validated: Valid authentication credentials have been added.                   |
+| ![2191](../images/2191.png) | Invalid: Authentication credentials are invalid                                |
+| ![2192](../images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
 
 ## Filtering Hosts
 
@@ -53,25 +53,25 @@ host software and version information, and hardware.
 
 2.  Check the hosts to compare.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2148](/images/2148.png) (**Compare selected Hosts**). The
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2148](../images/2148.png) (**Compare selected Hosts**). The
     comparison displays in a default expanded view, which lists a
     limited set of properties.
 
 4.  To remove a host from the comparison, click
-    ![1861](/images/1861.png) (**Remove this Host from the comparison**)
+    ![1861](../images/1861.png) (**Remove this Host from the comparison**)
     at the bottom of the column.
 
-5.  To go to a compressed view, click ![2024](/images/2024.png)
+5.  To go to a compressed view, click ![2024](../images/2024.png)
     (**Compressed View**). To return to an expanded view, click
-    ![2023](/images/2023.png) (**Expanded View**).
+    ![2023](../images/2023.png) (**Expanded View**).
 
 6.  To limit the mode of the view, there are two buttons in the taskbar.
 
-      - Click ![2022](/images/2022.png) (**Details Mode**) to see all
+      - Click ![2022](../images/2022.png) (**Details Mode**) to see all
         details for an attribute.
 
-      - Click ![2025](/images/2025.png) (**Exists Mode**) to limit the
+      - Click ![2025](../images/2025.png) (**Exists Mode**) to limit the
         view to if an attribute exists compared to the base or not. This
         only applies to attributes that can have a Boolean property. For
         example, a user account exists or does not exist, or a piece of

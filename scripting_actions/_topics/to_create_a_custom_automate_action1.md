@@ -6,8 +6,8 @@ This procedure shows you how to create a custom Automate action.
 
 2.  Click the **Actions** accordion.
 
-3.  Click ![image](/images/1847.png)(**Configuration**), then
-    ![image](/images/1862.png) (**Add a new Action**).
+3.  Click ![image](../images/1847.png)(**Configuration**), then
+    ![image](../images/1862.png) (**Add a new Action**).
 
 4.  Type in a **Description** for the Action.
 

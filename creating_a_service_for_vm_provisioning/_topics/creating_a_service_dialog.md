@@ -46,8 +46,8 @@ sample service:
 
 2.  Click the **Service Dialogs** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![1862](/images/1862.png)(**Add a new Dialog**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![1862](../images/1862.png)(**Add a new Dialog**).
 
 4.  Enter basic information for your dialog under **General**:
 
@@ -56,8 +56,8 @@ sample service:
 
 5.  Add a new tab to the dialog:
 
-    1.  Click ![1862](/images/1862.png)**Create Tab**. Then, click the
-        ![pencil](/images/1851.png)icon on the new tab to edit tab
+    1.  Click ![1862](../images/1862.png)**Create Tab**. Then, click the
+        ![pencil](../images/1851.png)icon on the new tab to edit tab
         information.
 
     2.  Enter `General` in **Label**.
@@ -68,8 +68,8 @@ sample service:
 
 6.  Add a new section to the tab:
 
-    1.  Click ![1862](/images/1862.png)**Add Section**. Then, click the
-        ![pencil](/images/1851.png)icon on the upper-right to edit
+    1.  Click ![1862](../images/1862.png)**Add Section**. Then, click the
+        ![pencil](../images/1851.png)icon on the upper-right to edit
         section details.
 
     2.  Enter `Service and VM Name` in **Label**.
@@ -83,7 +83,7 @@ sample service:
 
     1.  From the list of elements on the left, click the **Text Box**
         element, then drag-and-drop it inside the section. Then, click
-        the ![pencil](/images/1851.png)icon next to the element to edit
+        the ![pencil](../images/1851.png)icon next to the element to edit
         its field details.
 
     2.  Enter `Service Name` in **Label**.
@@ -100,7 +100,7 @@ sample service:
 
     1.  From the list of elements on the left, click the **Text Box**
         element, then drag-and-drop it inside the section. Then, click
-        the ![pencil](/images/1851.png)icon next to the element to edit
+        the ![pencil](../images/1851.png)icon next to the element to edit
         its field details.
 
     2.  Enter `VM Name` in **Label**.
@@ -117,7 +117,7 @@ sample service:
 
     1.  From the list of elements on the left, click the **Text Box**
         element, then drag-and-drop it inside the section. Then, click
-        the ![pencil](/images/1851.png)icon next to the element to edit
+        the ![pencil](../images/1851.png)icon next to the element to edit
         its field details.
 
     2.  Enter `VM Description` in **Label**.
@@ -131,8 +131,8 @@ sample service:
 
 10. Add a new section to the tab:
 
-    1.  Click ![1862](/images/1862.png)**Add Section**. Then, click the
-        ![pencil](/images/1851.png)icon on the upper-right to edit
+    1.  Click ![1862](../images/1862.png)**Add Section**. Then, click the
+        ![pencil](../images/1851.png)icon on the upper-right to edit
         section details.
 
     2.  Enter `VM Characteristics` in **Label**.
@@ -146,7 +146,7 @@ sample service:
 
     1.  From the list of elements on the left, click the **Dropdown**
         element, then drag-and-drop it inside the section. Then, click
-        the ![pencil](/images/1851.png)icon next to the element to edit
+        the ![pencil](../images/1851.png)icon next to the element to edit
         its field details.
 
     2.  Enter `Number of CPUs` in **Label**.
@@ -165,7 +165,7 @@ sample service:
     1.  From the list of elements on the left, click the **Dropdown**
         element, then drag-and-drop it inside the section.
 
-    2.  Click the ![pencil](/images/1851.png)icon next to the element to
+    2.  Click the ![pencil](../images/1851.png)icon next to the element to
         edit its field details.
 
     3.  Enter `VM Memory` in **Label**.

@@ -17,8 +17,8 @@ To add a network adapter to a virtual machine:
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this VM**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Click **Add Network** next to the disk you want to resize to show
     resizing options.
@@ -42,8 +42,8 @@ To remove a network adapter from a virtual machine:
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this VM**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Click **Delete** next to the network adapter you want to remove.
 

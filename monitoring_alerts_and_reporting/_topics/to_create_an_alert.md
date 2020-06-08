@@ -12,8 +12,8 @@ more information, see *General Configuration*.
 
 1.  Navigate to menu:Control\[Explorer\].
 
-2.  Click the **Alerts** accordion, then click ![1847](/images/1847.png)
-    (**Configuration**), ![1862](/images/1862.png) (**Add a New
+2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png)
+    (**Configuration**), ![1862](../images/1862.png) (**Add a New
     Alert**).
 
 3.  Enter the basic details of the alert:
@@ -55,7 +55,7 @@ more information, see *General Configuration*.
         address entered under accounts.
 
     3.  Enter the email address of a user in the **Add (enter
-        manually)** field and click ![2261](/images/2261.png) to add a
+        manually)** field and click ![2261](../images/2261.png) to add a
         user not registered in {{ site.data.product.title }}.
 
 6.  Optionally, select **Send an SNMP Trap** to configure options so

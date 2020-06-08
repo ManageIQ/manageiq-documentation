@@ -10,4 +10,4 @@ Access a tree view of the hosts and clusters for a provider from the
 3.  Click on the **Relationships** accordion, then click **Hosts &
     Clusters**.
 
-![hostsandclusters](/images/hostsandclusters.png)
+![hostsandclusters](../images/hostsandclusters.png)

@@ -7,14 +7,14 @@ provider.
 
 2.  Click a provider.
 
-3.  Click ![Monitoring](/images/1994.png) (**Monitoring**), and then
-    ![Timelines](/images/1995.png) (**Timelines**)from the taskbar, or
+3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
+    ![Timelines](../images/1995.png) (**Timelines**)from the taskbar, or
     from the provider accordion, click menu:Properties\[Timeline\].
 
 4.  From **Options**, customize the period of time to display and the
     types of events to see.
 
-    ![provider timeline](/images/provider-timeline.png)
+    ![provider timeline](../images/provider-timeline.png)
 
       - Use **Show** to select regular Management Events or Policy
         Events.

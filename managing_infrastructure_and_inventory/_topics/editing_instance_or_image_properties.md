@@ -9,8 +9,8 @@ instances. SmartState Analysis also can detect this.
 
 3.  Click the item to edit properties.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png)(**Edit this Instance or Edit this Image**)
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png)(**Edit this Instance or Edit this Image**)
     on the Taskbar.
 
 5.  From the **Parent Instance** dropdown, select the parent instance.

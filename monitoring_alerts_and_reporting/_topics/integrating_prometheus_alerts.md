@@ -106,8 +106,8 @@ the installation, so it is not required to create these profiles.
 2.  Click to expand **Node Alert Profiles**, then click **Prometheus
     Node Profile**.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    click ![1851](/images/1851.png) (**Edit assignments for this Alert
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    click ![1851](../images/1851.png) (**Edit assignments for this Alert
     Profile**). Assign the profile to **The Enterprise** from the
     **Assign To** list.
 

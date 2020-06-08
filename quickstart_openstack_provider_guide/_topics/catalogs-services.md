@@ -49,8 +49,8 @@ catalog first:
 
 2.  Click the **Catalogs** accordion.
 
-3.  Click ![1847](/images/1847.png)(**Configuration**), and then
-    ![1862](/images/1862.png)(**Add a New Catalog**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), and then
+    ![1862](../images/1862.png)(**Add a New Catalog**).
 
 4.  Enter a **Name** and **Description**, leaving everything else blank.
 

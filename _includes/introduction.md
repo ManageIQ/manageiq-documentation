@@ -90,7 +90,7 @@ time:
 Use the following table as a guideline to calculate minimum requirements
 for your database:
 
-![5780](/images/5780.png)
+![5780](../images/5780.png)
 
 <div class="note">
 

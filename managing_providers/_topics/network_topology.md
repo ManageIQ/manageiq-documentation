@@ -12,7 +12,7 @@ Each entity in the graph displays a color indication of its status:
 green indicates an active entity, while red indicates inactivity or an
 issue.
 
-![network topology](/images/network_topology.png)
+![network topology](../images/network_topology.png)
 
 1.  Navigate to menu:Networks\[Topology\].
 

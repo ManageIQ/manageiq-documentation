@@ -5,7 +5,7 @@
 2.  Go to the **Instances** or **Images** accordion.
 
 3.  Click **All Instances** or **All Images**, then click
-    ![2125](/images/2125.png) (**Advanced Search**) to open the
+    ![2125](../images/2125.png) (**Advanced Search**) to open the
     expression editor.
 
 4.  Use the expression editor to choose the appropriate options for your
@@ -19,26 +19,26 @@
 
       - Click **Field** to create criteria based on field values.
 
-        ![2126](/images/2126.png)
+        ![2126](../images/2126.png)
 
       - Click **Count of** to create criteria based on the count of
         something, such as the number of snapshots for an instance, or
         the number of instances on a host.
 
-        ![2127](/images/2127.png)
+        ![2127](../images/2127.png)
 
       - Click **Tag** to create criteria based on tags assigned to your
         virtual infrastructure, such as for power states or production
         tagging.
 
-        ![2128](/images/2128.png)
+        ![2128](../images/2128.png)
 
       - Click **Find** to seek a particular value, and then check a
         property.
 
-        ![2130](/images/2130.png)
+        ![2130](../images/2130.png)
 
-5.  Click ![1863](/images/1863.png) (**Commit Expression Element
+5.  Click ![1863](../images/1863.png) (**Commit Expression Element
     Changes**) to add the expression.
 
 6.  Click **Save**.

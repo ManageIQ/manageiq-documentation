@@ -6,7 +6,7 @@ interface before they will be accessible to the user here. You can
 filter or sort the service catalog items by **Name**, **Description**
 and **Catalog Name**.
 
-![Service Catalog](/images/ssui-service-catalog-nb.png)
+![Service Catalog](../images/ssui-service-catalog-nb.png)
 
 Click on a service to go to the page where you can enter the requested
 information in the dialog fields under **Service and VM Name** and **VM
@@ -28,10 +28,10 @@ from the cart if required, and order the services in the cart all at one
 time. Or, you can even choose to clear all the services in the cart and
 exit.
 
-![Shopping Cart](/images/ssui-shopping-cart-nb.png)
+![Shopping Cart](../images/ssui-shopping-cart-nb.png)
 
 If you click **Add to Shopping Cart** for the same item, you will see a
 pop up window alerting you that there is an identical item in the cart
 but if you want to add it anyway.
 
-![Duplicate Item in the Shopping Cart](/images/ssui_duplicate_item.png)
+![Duplicate Item in the Shopping Cart](../images/ssui_duplicate_item.png)

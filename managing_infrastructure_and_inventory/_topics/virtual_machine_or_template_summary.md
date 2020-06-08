@@ -20,31 +20,31 @@ you get more detailed information in these categories.
     categories can be clicked on for additional detail. For example,
     click **Container** to view notes associated with a virtual machine.
 
-    ![2167](/images/2167.png)
+    ![2167](../images/2167.png)
 
   - **Lifecycle** shows the date of discovery and the last analysis. If
     a retirement date and time or owner has been set, these display as
     well.
 
-    ![2168](/images/2168.png)
+    ![2168](../images/2168.png)
 
   - **Relationships** include information on the parent host, genealogy
     such as parent and child virtual machines, and drift.
 
-    ![2169](/images/2169.png)
+    ![2169](../images/2169.png)
 
   - **Storage Relationships** shows relationships to Filers, LUNs,
     Volumes and File Shares.
 
   - **VMsafe** shows properties of the VMsafe agent if it is enabled.
 
-    ![2170](/images/2170.png)
+    ![2170](../images/2170.png)
 
   - **Normal Operating Ranges** shows the values for the normal
     operating range for this virtual machine. These statistics are used
     in calculating right sizing recommendations.
 
-    ![2171](/images/2171.png)
+    ![2171](../images/2171.png)
 
   - **Power Management** displays the current power state, last boot
     time, and last power state change. **State Changed On** is the date
@@ -53,19 +53,19 @@ you get more detailed information in these categories.
     operating system does not cause the container power state to change
     and will not update this value.
 
-    ![2172](/images/2172.png)
+    ![2172](../images/2172.png)
 
   - **Security** includes information on users, groups, and security
     patches. Recall that the items shown on the **Summary** screen
     change based on the guest operating system.
 
-    ![2173](/images/2173.png)
+    ![2173](../images/2173.png)
 
   - **Configuration** includes information on applications, services,
     packages, and init processes. This section changes depending on the
     base operating system.
 
-    ![2174](/images/2174.png)
+    ![2174](../images/2174.png)
 
   - **Datastore Allocation Summary** shows how many and how much disk
     space has been allocated to this virtual machine as well as disk
@@ -74,7 +74,7 @@ you get more detailed information in these categories.
   - **Datastore Actual Usage Summary** shows how much disk and memory
     the virtual machine is actually using.
 
-    ![2175](/images/2175.png)
+    ![2175](../images/2175.png)
 
   - **Diagnostics** provides a link to viewing running processes and the
     information from the latest collected event logs.

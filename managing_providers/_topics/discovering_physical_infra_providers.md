@@ -6,9 +6,9 @@ infrastructure providers in a given subnet range.
 
 1.  Navigate to menu:Compute\[Physical Infrastructure \> Providers\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
     click ![Discover Physical Infrastructure
-    Providers](/images/1942.png) (**Discover Physical Infrastructure
+    Providers](../images/1942.png) (**Discover Physical Infrastructure
     Providers**).
 
 3.  Select the provider in **Discovery Type**.

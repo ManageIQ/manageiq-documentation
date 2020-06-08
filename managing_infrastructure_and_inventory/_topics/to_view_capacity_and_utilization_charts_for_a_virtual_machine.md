@@ -24,8 +24,8 @@ The virtual machine must be powered on to collect the data.
 
 2.  Click the item you want to view.
 
-3.  Click ![1994](/images/1994.png) (**Monitoring**), and then
-    ![1994](/images/1994.png) (**Utilization**).
+3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
+    ![1994](../images/1994.png) (**Utilization**).
 
 4.  From **Interval**, select to view **Daily**, **Hourly**, or **Most
     Recent Hour** data points. When choosing **Daily**, you can also
@@ -34,13 +34,13 @@ The virtual machine must be powered on to collect the data.
     want to view hourly data. If you are using **Time Profiles**, you
     will be able to select that as an option, also.
 
-    ![2246](/images/2246.png)
+    ![2246](../images/2246.png)
 
 5.  From **Compare to**, select **Parent Host** or **Parent Cluster**.
     The capacity and utilization charts for both items will show
     simultaneously.
 
-    ![2247](/images/2247.png)
+    ![2247](../images/2247.png)
 
 <div class="note">
 

@@ -11,7 +11,7 @@ template from its Datastore or Provider.
 
 3.  Check the items to remove.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1861](/images/1861.png) (**Remove from the VMDB**) button.
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1861](../images/1861.png) (**Remove from the VMDB**) button.
 
 5.  Click **OK**.

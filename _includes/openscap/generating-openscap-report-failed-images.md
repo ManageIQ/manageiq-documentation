@@ -27,14 +27,14 @@ To create a report showing image compliance:
     Failed OpenSCAP Rule Results\] for a report showing which images
     have failed the OpenSCAP compliance.
 
-4.  Click ![play arrow](/images/play_arrow.png) **Queue**.
+4.  Click ![play arrow](../images/play_arrow.png) **Queue**.
 
 5.  The report generation is placed in the queue and its status shows in
     the reports page.
 
-    ![failedimagescan](/images/failedimagescan.png)
+    ![failedimagescan](../images/failedimagescan.png)
 
-6.  Click ![reload](/images/reload.png) **(Refresh this page)** to
+6.  Click ![reload](../images/reload.png) **(Refresh this page)** to
     update the status.
 
 7.  Navigate to the **Saved Reports** accordion, and click the report
@@ -44,11 +44,11 @@ To create a report showing image compliance:
     want. The report is automatically named with the type of report and
     date.
 
-      - Click ![textimage](/images/textimage.png) **(Download this
+      - Click ![textimage](../images/textimage.png) **(Download this
         report in text format)** to download as text.
 
-      - Click ![textimage](/images/textimage.png) **(Download this
+      - Click ![textimage](../images/textimage.png) **(Download this
         report in CSV format)** to download as a comma-separated file.
 
-      - Click ![2134](/images/2134.png) **(Download this report in PDF
+      - Click ![2134](../images/2134.png) **(Download this report in PDF
         format)** to download as PDF.

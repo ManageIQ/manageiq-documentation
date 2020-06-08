@@ -9,8 +9,8 @@ instead of creating an entirely new report.
 2.  Click the menu:Reports\[All Reports\] accordion and select the
     report that you want to copy.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1859](/images/1859.png) (**Copy this report**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1859](../images/1859.png) (**Copy this report**).
 
 4.  On the Columns tab, edit the **Basic Report Info** area to include a
     new **Menu Name**. Each **Menu Name** must be unique.

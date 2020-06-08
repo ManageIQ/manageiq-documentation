@@ -8,7 +8,7 @@ alerts associated with the alert profile.
 2.  Click on the **Alert Profiles** accordion, then click the alert
     profile you want to remove.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**),
-    ![1861](/images/1861.png) (**Delete this Alert Profile**).
+3.  Click ![1847](../images/1847.png) (**Configuration**),
+    ![1861](../images/1861.png) (**Delete this Alert Profile**).
 
 4.  Click **OK** to confirm.

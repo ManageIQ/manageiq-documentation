@@ -165,7 +165,7 @@ Complete the following steps to enable WebMKS support in
     settings page in the {{ site.data.product.title_short }} user interface for the
     changes to take effect.
 
-5.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+5.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 6.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -186,7 +186,7 @@ Open a web-based VNC or SPICE console for a virtual machine.
 
 2.  Click on the virtual machine that you want to access.
 
-3.  Click ![screen](/images/screen.png) (**Access**) and select **VM
+3.  Click ![screen](../images/screen.png) (**Access**) and select **VM
     Console** or **Web Console**.
 
 The virtual machine console opens in a new tab in your browser.

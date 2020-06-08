@@ -7,14 +7,14 @@ configuration events over time.
 
 2.  Click the cluster to view the timeline.
 
-3.  Click ![1994](/images/1994.png) (**Monitoring**), and then
-    ![1994](/images/1994.png) (**Timelines**) or from the accordion
+3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
+    ![1994](../images/1994.png) (**Timelines**) or from the accordion
     menu, click menu:Properties\[Timelines\].
 
 4.  From **Options**, customize the period of time to display, and the
     types of events to see.
 
-    ![2210](/images/2210.png)
+    ![2210](../images/2210.png)
 
       - Use the **Interval** dropdown to select hourly or daily data
         points.

@@ -8,8 +8,8 @@ the existing one, then change the values associated with it.
 2.  Click on the **Alert** accordion, then click on the alert that you
     want to copy.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**),
-    ![1859](/images/1859.png) (**Copy this Alert**). Click **OK** to
+3.  Click ![1847](../images/1847.png) (**Configuration**),
+    ![1859](../images/1859.png) (**Copy this Alert**). Click **OK** to
     confirm.
 
 4.  Make the required changes.

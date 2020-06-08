@@ -54,7 +54,7 @@ addresses and names; substitute values for your environment as needed:
 
 The following diagram shows the HAProxy configuration in this procedure:
 ![cloudforms ha architecture 431939 0917 ece
-01](/images/cloudforms_ha_architecture_431939_0917_ece-01.png)
+01](../images/cloudforms_ha_architecture_431939_0917_ece-01.png)
 
 To configure HAProxy load balancing:
 

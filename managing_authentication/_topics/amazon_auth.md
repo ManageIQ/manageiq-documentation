@@ -15,7 +15,7 @@ documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.htm
 
 To configure {{ site.data.product.title_short }} to use AWS IAM authentication:
 
-1.  Click ![config gear](/images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
 2.  Select your server in the **Settings** accordion.
 

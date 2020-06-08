@@ -16,7 +16,7 @@ To configure registration for a region:
 
 1.  Log in to the appliance as the `admin` user.
 
-2.  Click ![Configuration](/images/config-gear.png)(**Configuration**).
+2.  Click ![Configuration](../images/config-gear.png)(**Configuration**).
 
 3.  Select **Region** in the accordion menu and click the **Red Hat
     Updates** tab.

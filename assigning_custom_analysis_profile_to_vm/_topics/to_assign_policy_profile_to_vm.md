@@ -16,8 +16,8 @@ profile will apply to all hosts or virtual machines for that provider.
     menu:Compute\[Infrastructure \> Virtual Machines\]. Select the
     virtual machine or instance.
 
-2.  Click ![image](/images/1941.png) (**Policy**), then
-    ![image](/images/1851.png) (**Manage Policies**).
+2.  Click ![image](../images/1941.png) (**Policy**), then
+    ![image](../images/1851.png) (**Manage Policies**).
 
 3.  Under **Select Policy Profiles**, select the policy profile created
     in [???](#create-policy-profile-assign-vm-control-policy). It will
@@ -26,8 +26,8 @@ profile will apply to all hosts or virtual machines for that provider.
 
 4.  Click **Save**.
 
-5.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/smartstate-icon.png) (**Perform SmartState
+5.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/smartstate-icon.png) (**Perform SmartState
     Analysis**). A pop-up window appears to confirm the action.
 
 6.  Click **OK**. SmartState analysis is initiated for the selected

@@ -11,7 +11,7 @@ To delete a virtual machine snapshot:
 
 4.  Select the snapshot to delete under **Available Snapshots**.
 
-5.  Click ![1861](/images/1861.png) and select **Delete Selected
+5.  Click ![1861](../images/1861.png) and select **Delete Selected
     Snapshot**.
 
 6.  Click **OK**.

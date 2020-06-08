@@ -7,8 +7,8 @@ require removal.
 
 2.  Check the repositories to remove.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1861](/images/1861.png) (**Remove from the VMDB**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1861](../images/1861.png) (**Remove from the VMDB**).
 
 4.  Click **OK**.
 

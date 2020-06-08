@@ -44,8 +44,8 @@ storage. NFS storage does not have these requirements.
         the **Virtual Machine** accordion list and view its summary
         screen.
 
-    2.  Click ![1847](/images/1847.png) (**Configuration**), and then
-        ![2146](/images/2146.png)(**Edit Server Relationship**).
+    2.  Click ![1847](../images/1847.png) (**Configuration**), and then
+        ![2146](../images/2146.png)(**Edit Server Relationship**).
 
     3.  Select the server that relates to this instance of the
         {{ site.data.product.title }} appliance.

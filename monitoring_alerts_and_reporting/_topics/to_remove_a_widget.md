@@ -6,7 +6,7 @@ displayed in the dashboard.
 1.  Navigate to menu:Overview\[Dashboard\].
 
 2.  From the widget that you want to remove, click
-    ![2260](/images/2260.png) **(Remove from Dashboard)** in the upper
+    ![2260](../images/2260.png) **(Remove from Dashboard)** in the upper
     right corner of the widget.
 
 3.  Click **OK**.

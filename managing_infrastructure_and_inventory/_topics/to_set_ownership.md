@@ -10,13 +10,13 @@ filter and can be used to enforce quotas.
 
 3.  Check the items to set ownership.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2155](/images/2155.png) (**Set Ownership**) on the **Virtual
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2155](../images/2155.png) (**Set Ownership**) on the **Virtual
     Machine Taskbar**.
 
 5.  From the **Select an Owner** dropdown, select a user, and from the
     **Select a Group** dropdown, select a group.
 
-    ![2156](/images/2156.png)
+    ![2156](../images/2156.png)
 
 6.  Click **Save**.

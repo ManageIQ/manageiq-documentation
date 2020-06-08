@@ -5,8 +5,8 @@ type of alert can be created for a cluster, host, or virtual machine.
 
 1.  Navigate to menu:Control\[Explorer\].
 
-2.  Click the **Alerts** accordion, then click ![1847](/images/1847.png)
-    (**Configuration**), ![1862](/images/1862.png) (**Add a new
+2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png)
+    (**Configuration**), ![1862](../images/1862.png) (**Add a new
     Alert**).
 
 3.  In the **Info** area:
@@ -23,7 +23,7 @@ type of alert can be created for a cluster, host, or virtual machine.
 4.  In the **VMware Alarm Parameters** area select the provider and
     alarm.
 
-    ![1984](/images/1984.png)
+    ![1984](../images/1984.png)
 
 5.  After setting the parameters, you then select what you want the
     alert to do. You can send an email, create an SNMP Trap, or send a

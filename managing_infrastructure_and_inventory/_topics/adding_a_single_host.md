@@ -7,8 +7,8 @@ a New Host** button.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
 
-2.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1862](/images/1862.png) (**Add a New item**).
+2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1862](../images/1862.png) (**Add a New item**).
 
 3.  Type the **Name**, **Host Name**, and **IP Address** of the host to
     add. **Name** is how the device is labeled in the console. Select
@@ -24,7 +24,7 @@ a New Host** button.
 
     </div>
 
-    ![2214](/images/2214.png)
+    ![2214](../images/2214.png)
 
 4.  In the **Credentials** box, the **Default** tab provides fields to
     type a user name with elevated security credentials and the user’s
@@ -33,7 +33,7 @@ a New Host** button.
     `SSH` login is disabled for the **Default** user, type in a user
     with remote login access on the **Remote Login** tab.
 
-    ![2215](/images/2215.png)
+    ![2215](../images/2215.png)
 
 5.  Click **Validate** to check the credentials.
 

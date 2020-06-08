@@ -5,7 +5,7 @@
 2.  From the **Export dropdown**, select policy profiles, policies, or
     alerts, depending on what you want to export.
 
-    ![2013](/images/2013.png)
+    ![2013](../images/2013.png)
 
 3.  From the **Available Profiles** or **Available Policies** or
     **Available Alerts** list, select the items to export. Use the

@@ -8,12 +8,12 @@ Utilization must be enabled for performance thresholds to be detected.
 
 2.  Click the **Alerts** accordion.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**),
-    ![1862](/images/1862.png) (**Add a new Alert**).
+3.  Click ![1847](../images/1847.png) (**Configuration**),
+    ![1862](../images/1862.png) (**Add a new Alert**).
 
 4.  In the **Info** area:
 
-    ![1979](/images/1979.png)
+    ![1979](../images/1979.png)
 
       - Type in a **Description** for the alert.
 

@@ -15,8 +15,8 @@ the provider.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
 
-2.  Click ![1847](/images/1847.png) (**Configuration**), then click
-    ![1862](/images/1862.png) (**Add a New Infrastructure Provider**).
+2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+    ![1862](../images/1862.png) (**Add a New Infrastructure Provider**).
 
 3.  Enter the **Name** of the provider to add. The **Name** is how the
     device is labeled in the console.

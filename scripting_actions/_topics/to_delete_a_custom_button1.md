@@ -8,7 +8,7 @@ This procedure shows you how to delete a custom button.
 2.  From the **Object Type** tree in the accordion menu, select the type
     of object you want to remove the button from.
 
-3.  Click ![image](/images/1847.png) (**Configuration**). then click
-    ![image](/images/2098.png) (**Remove this button**).
+3.  Click ![image](../images/1847.png) (**Configuration**). then click
+    ![image](../images/2098.png) (**Remove this button**).
 
 4.  Click **OK** to confirm that you want to delete this button.

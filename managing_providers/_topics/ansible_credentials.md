@@ -12,8 +12,8 @@ when run.
 
 1.  Navigate to menu:Automation\[Ansible \> Credentials\].
 
-2.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Add a New Credential](/images/1862.png) (**Add a New
+2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Add a New Credential](../images/1862.png) (**Add a New
     Credential**).
 
 3.  Provide a **Name** for the credential.

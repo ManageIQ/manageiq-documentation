@@ -15,8 +15,8 @@ dependencies carefully before deleting a provider.
 
 2.  Select the check box for the provider to delete.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), then
-    ![Remove Infrastructure Providers from the VMDB](/images/2098.png)
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+    ![Remove Infrastructure Providers from the VMDB](../images/2098.png)
     (**Remove Infrastructure Providers from the VMDB**).
 
 4.  Click (**OK**).

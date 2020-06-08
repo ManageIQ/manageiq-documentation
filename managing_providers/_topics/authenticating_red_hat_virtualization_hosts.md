@@ -13,9 +13,9 @@ authenticate its hosts to enable full functionality.
 4.  Select the hosts to authenticate. You can select all hosts using the
     **Check All** option.
 
-5.  Click ![Configuration](/images/1847.png) (**Configuration**).
+5.  Click ![Configuration](../images/1847.png) (**Configuration**).
 
-6.  Click ![Edit this item](/images/1851.png) (**Edit this item**).
+6.  Click ![Edit this item](../images/1851.png) (**Edit this item**).
 
 7.  In the **Credentials** area, enter credentials for the following, as
     required:

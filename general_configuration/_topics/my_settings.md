@@ -7,7 +7,7 @@ and personal tags. You can also configure the color scheme, and button
 options on the main dashboard.
 
 These options are available by clicking your username
-![user](/images/user.png) to open the settings menu, then **My
+![user](../images/user.png) to open the settings menu, then **My
 Settings**.
 
 ### Visual Settings
@@ -34,7 +34,7 @@ Use the following procedure to change grid and tile icons:
 
 3.  Click **Save**.
 
-![7110](/images/7110.png)
+![7110](../images/7110.png)
 
   - Set **Show Infrastructure Provider Quadrants** to `ON` to see the
     four icons in your provider under menu:Compute\[Infrastructure \>
@@ -74,7 +74,7 @@ display on each resource page.
 
 2.  In the **Default Items Per Page** area, select the default number of
     items to display for each view from the corresponding drop down
-    list. ![2017](/images/2017.png)
+    list. ![2017](../images/2017.png)
 
 3.  Click **Save**.
 
@@ -101,7 +101,7 @@ zone for the console. These settings are specific to the logged-on user.
     the **Visual** tab.
 
 2.  Make selections from **Display Settings** for the following items:
-    ![2141](/images/2141.png)
+    ![2141](../images/2141.png)
 
     1.  Use **Chart Theme** to select a group of colors and font sizes
         specifically for charts.
@@ -142,25 +142,25 @@ Use the following procedure to set general view options:
     you want to view each type of screen listed. The selected view shows
     as a blue icon.
 
-    ![7114](/images/7114.png)
+    ![7114](../images/7114.png)
 
-3.  Click ![2020](/images/2020.png) (**Grid View**) to view virtual
+3.  Click ![2020](../images/2020.png) (**Grid View**) to view virtual
     thumbnails or icons.
 
-4.  Click ![2021](/images/2021.png)(**Tile View**) for a view that
+4.  Click ![2021](../images/2021.png)(**Tile View**) for a view that
     combines the virtual thumbnail with some text properties that
     describe the items.
 
-5.  Click ![2022](/images/2022.png)(**List View**) to view a detailed
+5.  Click ![2022](../images/2022.png)(**List View**) to view a detailed
     text listing.
 
-6.  Click ![2023](/images/2023.png)(**Expanded View**) for an expanded
+6.  Click ![2023](../images/2023.png)(**Expanded View**) for an expanded
     view.
 
-7.  Click ![2024](/images/2024.png)(**Compressed View**) for a
+7.  Click ![2024](../images/2024.png)(**Compressed View**) for a
     compressed view.
 
-8.  Click ![2025](/images/2025.png)(**Exists Mode**) to view only
+8.  Click ![2025](../images/2025.png)(**Exists Mode**) to view only
     whether an attribute exists or not.
 
 9.  Click **Save**.
@@ -174,16 +174,16 @@ menu:Compute\[Services\] tab.
     the **Default Views** tab.
 
 2.  In the **Services** area, click the appropriate button for the way
-    you want to view each item. ![7115](/images/7115.png)
+    you want to view each item. ![7115](../images/7115.png)
 
-      - Click ![2020](/images/2020.png) (**Grid View**) to view virtual
+      - Click ![2020](../images/2020.png) (**Grid View**) to view virtual
         thumbnails or icons.
 
-      - Click ![2021](/images/2021.png) (**Tile View**) for a view that
+      - Click ![2021](../images/2021.png) (**Tile View**) for a view that
         combines the virtual thumbnail with some text properties that
         describe the items.
 
-      - Click ![2022](/images/2022.png) (**List View**) to view a text
+      - Click ![2022](../images/2022.png) (**List View**) to view a text
         listing.
 
 3.  Click **Save**.
@@ -197,16 +197,16 @@ menu:Compute\[Clouds\] tab.
     the **Default Views** tab.
 
 2.  In the **Clouds** area, click the appropriate button for the way you
-    want to view each item. ![clouds](/images/clouds.png)
+    want to view each item. ![clouds](../images/clouds.png)
 
-      - Click ![2020](/images/2020.png) (**Grid View**) to view virtual
+      - Click ![2020](../images/2020.png) (**Grid View**) to view virtual
         thumbnails or icons.
 
-      - Click ![2021](/images/2021.png) (**Tile View**) for a view that
+      - Click ![2021](../images/2021.png) (**Tile View**) for a view that
         combines the virtual thumbnail with some text properties that
         describe the items.
 
-      - Click ![2022](/images/2022.png) (**List View**) to view a
+      - Click ![2022](../images/2022.png) (**List View**) to view a
         detailed text listing.
 
 3.  Click **Save**.
@@ -220,16 +220,16 @@ components in the menu:Compute\[Infrastructure\] tab.
     the **Default Views** tab.
 
 2.  In the **Infrastructure** area, click the appropriate button for the
-    way you want to view each item. ![2032](/images/2032.png)
+    way you want to view each item. ![2032](../images/2032.png)
 
-      - Click ![2020](/images/2020.png) (**Grid View**) to view virtual
+      - Click ![2020](../images/2020.png) (**Grid View**) to view virtual
         thumbnails or icons.
 
-      - Click ![2021](/images/2021.png) (**Tile View**) for a view that
+      - Click ![2021](../images/2021.png) (**Tile View**) for a view that
         combines the virtual thumbnail with some text properties that
         describe the items.
 
-      - Click ![2022](/images/2022.png) (**List View**) to view a
+      - Click ![2022](../images/2022.png) (**List View**) to view a
         detailed text listing.
 
 3.  Click **Save**.
@@ -243,16 +243,16 @@ menu:Compute\[Containers\] tab.
     the **Default Views** tab.
 
 2.  In the **Containers** area, click the appropriate button for the way
-    you want to view each item. ![containers](/images/containers.png)
+    you want to view each item. ![containers](../images/containers.png)
 
-      - Click ![2020](/images/2020.png) (**Grid View**) to view virtual
+      - Click ![2020](../images/2020.png) (**Grid View**) to view virtual
         thumbnails or icons.
 
-      - Click ![2021](/images/2021.png) (**Tile View**) for a view that
+      - Click ![2021](../images/2021.png) (**Tile View**) for a view that
         combines the virtual thumbnail with some text properties that
         describe the items.
 
-      - Click ![2022](/images/2022.png) (**List View**) to view a text
+      - Click ![2022](../images/2022.png) (**List View**) to view a text
         listing.
 
 3.  Click **Save**.
@@ -339,9 +339,9 @@ To create a time profile:
 1.  From the settings menu, navigate to **My Settings**, then click on
     the **Time Profiles** tab.
 
-2.  Click ![1847](/images/1847.png)(**Configuration**), and ![plus
-    green](/images/plus_green.png)(**Add a new Time Profile**).
-    ![2039](/images/2039.png)
+2.  Click ![1847](../images/1847.png)(**Configuration**), and ![plus
+    green](../images/plus_green.png)(**Add a new Time Profile**).
+    ![2039](../images/2039.png)
 
 3.  Type a meaningful name in the **Description** field.
 
@@ -399,8 +399,8 @@ To edit a time profile:
 
 2.  Check the time profile you want to edit.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and
-    ![1851](/images/1851.png) (**Edit selected Time Profile**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and
+    ![1851](../images/1851.png) (**Edit selected Time Profile**).
 
 4.  Make the required changes.
 
@@ -415,8 +415,8 @@ To copy a time profile:
 
 2.  Check the time profile you want to copy.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and
-    ![1859](/images/1859.png) (**Copy selected Time Profile**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and
+    ![1859](../images/1859.png) (**Copy selected Time Profile**).
 
 4.  Make the required changes.
 
@@ -431,7 +431,7 @@ To delete a time profile:
 
 2.  Check the time profile you want to delete.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and ![gui
-    delete](/images/gui_delete.png) (**Delete selected Time Profiles**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and ![gui
+    delete](../images/gui_delete.png) (**Delete selected Time Profiles**).
 
 4.  Click **Save**.

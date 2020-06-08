@@ -12,7 +12,7 @@
         specific host, a single VM, or you can select VMs using a global
         filter.
 
-        ![image](/images/1939.png)
+        ![image](../images/1939.png)
 
       - If you choose **Host Compliance Check**, you are presented with
         **Host Selection** where you can choose to analyze all hosts,

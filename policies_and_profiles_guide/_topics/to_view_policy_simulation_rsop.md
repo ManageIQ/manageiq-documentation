@@ -10,11 +10,11 @@ area in the {{ site.data.product.title }} console.
 2.  From the **Event Selection** area, select a type of event, and then
     the specific event you need the result for.
 
-    ![image](/images/1963.png)
+    ![image](../images/1963.png)
 
 3.  From the **VM Selection** area, select the virtual machine from a
     provider, cluster, host, or a single virtual machine.
 
-    ![image](/images/1962.png)
+    ![image](../images/1962.png)
 
 4.  Click **Submit**.

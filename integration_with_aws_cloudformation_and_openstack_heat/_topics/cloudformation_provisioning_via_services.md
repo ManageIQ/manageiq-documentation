@@ -8,13 +8,13 @@ launched from the **Service Catalog**.
 
 Use this procedure to add a new catalog using the dashboard UI.
 
-![Adding\_a\_New\_Catalog](/images/7149.png)
+![Adding\_a\_New\_Catalog](../images/7149.png)
 
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalogs** in the
     accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Add a New Catalog**.
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog**.
     The **Adding a new Catalog** window is displayed.
 
 3.  In **Basic Info**, add **Name** and **Description** for the new
@@ -35,11 +35,11 @@ parameters defined in the orchestration template.
 2.  From **All Orchestration Templates**, select the orchestration
     template you want to create a service dialog from.
 
-3.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Create Service
+3.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Create Service
     Dialog** from **Orchestration Template**. The **Adding a new Service
     Dialog from Orchestration Template** window is displayed.
-    ![Adding\_a\_new\_Service\_Dialog\_from\_Orchestration\_Template](/images/7156.png)
+    ![Adding\_a\_new\_Service\_Dialog\_from\_Orchestration\_Template](../images/7156.png)
 
 4.  In **Service Dialog Information**, add a **Service Dialog Name**.
 
@@ -53,16 +53,16 @@ UI.
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
     in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Add a New Catalog
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog
     Item**. The **Adding a new Service Catalog Item** window is
     displayed.
-    ![Adding\_a\_new\_Service\_Catalog\_Item](/images/7146.png)
+    ![Adding\_a\_new\_Service\_Catalog\_Item](../images/7146.png)
 
 3.  Choose **Orchestration** from **Catalog Item Type**.
 
 4.  In **Basic Info**, add **Name** and **Description**. Select the
-    **Display** in **Catalog box**. ![Basic\_Info](/images/7147.png)
+    **Display** in **Catalog box**. ![Basic\_Info](../images/7147.png)
 
 5.  Select the **Catalog**, **Dialog**, and **Orchestration Template**
     from their respective list.
@@ -82,10 +82,10 @@ UI.
     Catalogs** in the accordion menu. From **All Services** catalogs,
     select the **catalog item** that you want to order. The **Service**
     window with the name and description of the service to be ordered is
-    displayed. ![Service\_Catalog](/images/7172.png)
+    displayed. ![Service\_Catalog](../images/7172.png)
 
 2.  Click **Order**. The **Order Service** window with **Options** and
-    **Parameter** is displayed. ![Order\_Service](/images/7173.png)
+    **Parameter** is displayed. ![Order\_Service](../images/7173.png)
 
 3.  Enter stack name in **Stack Name**.
 
@@ -126,23 +126,23 @@ provisioning process in menu:Services\[Requests\].
 
 1.  Initially, the **Request State** shows **Pending** with its
     **Approval State** as **Pending Approval**.
-    ![Requests](/images/7177.png)
+    ![Requests](../images/7177.png)
 
 2.  After the request is **Approved**, the various stages of fulfillment
     are executed, and reflect accordingly under **Request State**.
-    ![Request\_State](/images/7178.png)
-    ![Request\_State](/images/7179.png)
+    ![Request\_State](../images/7178.png)
+    ![Request\_State](../images/7179.png)
 
 3.  After the **Request State** is **Finished**, you can see the stack
     entry created in menu:Compute\[Clouds \> Stacks\]. In the screen
     capture below, you can see the heat-stack we created from the
     catalog item ordered from the **Service Catalog** as shown in the
-    previous section. ![Catalog\_Item\_State](/images/7180.png)
+    previous section. ![Catalog\_Item\_State](../images/7180.png)
 
 4.  You can click on the stack to see a summary of its properties and
     relationships, and the instance(s) included in the stack. You can
     click on the instance(s) to see all instance details.
-    ![Stack\_Summary](/images/7181.png)
+    ![Stack\_Summary](../images/7181.png)
 
 You have now deployed instances and its associated collection of
 resources (called a stack) using an orchestration template.

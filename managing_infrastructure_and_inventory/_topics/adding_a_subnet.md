@@ -4,7 +4,7 @@ Add a subnet to an existing cloud network following the procedure below.
 
 1.  Navigate to menu:Networks\[Subnets\].
 
-2.  Click ![Configuration](/images/1847.png)(**Configuration**), then
+2.  Click ![Configuration](../images/1847.png)(**Configuration**), then
     click **Add a new Cloud Subnet**.
 
 3.  Select a **Network Manager**.

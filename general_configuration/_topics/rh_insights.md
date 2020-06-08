@@ -133,9 +133,9 @@ list
 The Inventory tab helps you discover the issues within your system. This
 tab lists the hostname of the system, the system type, the time of last
 check in and the status. You can filter the list by using
-![image](/images/rh-access-insights-action.png) (**Actions**) for all
+![image](../images/rh-access-insights-action.png) (**Actions**) for all
 systems that require actions and
-![image](/images/rh-access-insights-no-action.png) (**No Actions**) for
+![image](../images/rh-access-insights-no-action.png) (**No Actions**) for
 all systems that are working without issues and require no actions.
 Filter the list by **System Status** and **System Health** attributes or
 use the search tool to find a system in your inventory.

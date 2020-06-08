@@ -12,8 +12,8 @@ To create a new key pair:
 
 1.  Navigate to menu:Compute\[Clouds \> Key Pairs\].
 
-2.  Click ![1847](/images/1847.png)(**Configuration**),
-    ![2345](/images/2345.png)(**Add a new Key Pair**).
+2.  Click ![1847](../images/1847.png)(**Configuration**),
+    ![2345](../images/2345.png)(**Add a new Key Pair**).
 
 3.  Enter a **Name** for the key pair.
 

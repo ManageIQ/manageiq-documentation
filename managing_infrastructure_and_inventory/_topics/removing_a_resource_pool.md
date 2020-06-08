@@ -7,8 +7,8 @@ might require removal from the VMDB.
 
 2.  Click on the resource pool to remove.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1861](/images/1861.png) (**Remove from the VMDB**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1861](../images/1861.png) (**Remove from the VMDB**).
 
 4.  Click **OK**.
 

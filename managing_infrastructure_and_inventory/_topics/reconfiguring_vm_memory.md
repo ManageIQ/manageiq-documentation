@@ -7,8 +7,8 @@ machine’s memory size with the following steps:
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![1851](/images/1851.png) (**Reconfigure this VM**).
+3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Select **Yes** next to **Memory** to show memory options.
 

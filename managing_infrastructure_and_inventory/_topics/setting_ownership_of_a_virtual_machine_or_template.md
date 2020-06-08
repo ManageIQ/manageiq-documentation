@@ -10,12 +10,12 @@ items.
 
 3.  Click the item to set ownership.
 
-4.  Click ![1847](/images/1847.png) (**Configuration**), and then
-    ![2155](/images/2155.png)(**Set Ownership**) on the taskbar.
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+    ![2155](../images/2155.png)(**Set Ownership**) on the taskbar.
 
 5.  From the **Select an Owner** dropdown, select a user.
 
-    ![2162](/images/2162.png)
+    ![2162](../images/2162.png)
 
 6.  From the **Select a Group** dropdown, select a group.
 

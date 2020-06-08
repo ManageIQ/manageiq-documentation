@@ -47,7 +47,7 @@ The {{ site.data.product.title_short }} user interface uses virtual thumbnails t
 represent containers providers. Each thumbnail contains four quadrants
 by default, which display basic information about each provider:
 
-![cp quad icon](/images/cp-quad-icon.png)
+![cp quad icon](../images/cp-quad-icon.png)
 
 1.  Number of nodes
 
@@ -59,9 +59,9 @@ by default, which display basic information about each provider:
 
 | Icon                      | Description                                                                    |
 | ------------------------- | ------------------------------------------------------------------------------ |
-| ![2190](/images/2190.png) | Validated: Valid authentication credentials have been added.                   |
-| ![2191](/images/2191.png) | Invalid: Authentication credentials are invalid.                               |
-| ![2192](/images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
+| ![2190](../images/2190.png) | Validated: Valid authentication credentials have been added.                   |
+| ![2191](../images/2191.png) | Invalid: Authentication credentials are invalid.                               |
+| ![2192](../images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
 
 Containers provider authentication status
 

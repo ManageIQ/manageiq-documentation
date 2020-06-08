@@ -74,9 +74,9 @@ group can talk to each other on any port.
     Access & Security\].
 
 2.  Navigate to menu:Security Groups\[Manage Rules\] on the row for the
-    default security group. ![7216](/images/7216.png)
+    default security group. ![7216](../images/7216.png)
 
-3.  Click **Add Rule**. ![4941](/images/4941.png)
+3.  Click **Add Rule**. ![4941](../images/4941.png)
 
 4.  Configure the rule.
 
@@ -204,14 +204,14 @@ of the instances involved.
     Security\].
 
 3.  Click menu:Floating IPs\[Allocate IP To Project\]. The **Allocate
-    Floating IP** window is displayed. ![7218](/images/7218.png)
+    Floating IP** window is displayed. ![7218](../images/7218.png)
 
 4.  Click **Allocate IP** to allocate a floating IP from the pool. The
     allocated IP address appears in the **Floating IPs** table.
 
 5.  Select the newly allocated IP address from the **Floating IPs**
     table. Click **Associate** to assign the IP address to a specific
-    instance. ![7217](/images/7217.png)
+    instance. ![7217](../images/7217.png)
 
 6.  Select an instance with which to associate the floating IP Address.
 

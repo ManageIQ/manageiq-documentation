@@ -3,8 +3,8 @@
 1.  Navigate to menu:Automation\[Automate \> Explorer\], navigate to the
     namespace you want to add a class to.
 
-2.  Click ![image](/images/1847.png) (**Configuration**), then
-    ![image](/images/1862.png) (**Add a new Class**).
+2.  Click ![image](../images/1847.png) (**Configuration**), then
+    ![image](../images/1862.png) (**Add a new Class**).
 
 3.  Type in a unique **Name** and **Description**.
 

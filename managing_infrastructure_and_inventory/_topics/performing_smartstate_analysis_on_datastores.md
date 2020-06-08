@@ -23,8 +23,8 @@ valid security credentials are supplied for that host.
 
 2.  Select the datastores to analyze.
 
-3.  Click ![Configuration](/images/1847.png) (**Configuration**), and
-    then ![Perform SmartState Analysis](/images/1942.png) (**Perform
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+    then ![Perform SmartState Analysis](../images/1942.png) (**Perform
     SmartState Analysis**).
 
 4.  Click **OK**.

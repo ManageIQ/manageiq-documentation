@@ -5,7 +5,7 @@ procedure below.
 
 1.  Navigate to menu:Networks\[Network Routers\].
 
-2.  Click ![Configuration](/images/1847.png)(**Configuration**) and
+2.  Click ![Configuration](../images/1847.png)(**Configuration**) and
     click **Add a new Router**.
 
 3.  In the **Network Provider** area, select a **Network Manager**.

@@ -3,8 +3,8 @@ Use the following procedure to create an Orchestration catalog item.
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
     in the accordion menu.
 
-2.  Click ![Configuration](/images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png) **Add a New Catalog
+2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog
     Item**. The **Adding a new Service Catalog Item** window is
     displayed.
 

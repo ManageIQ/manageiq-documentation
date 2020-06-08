@@ -2,8 +2,8 @@
 
 2.  Click the **Reports** accordion.
 
-3.  Click ![1847](/images/1847.png)**(Configuration)**,
-    ![1862](/images/1862.png) **(Add a new Report)**.
+3.  Click ![1847](../images/1847.png)**(Configuration)**,
+    ![1862](../images/1862.png) **(Add a new Report)**.
 
 4.  On the **Columns** tab, fill out the **Basic Report Info** area.
 
@@ -17,13 +17,13 @@
       - From the **Base the report on** list, select **Chargebacks**.
 
       - Select the fields to include in the report from the **Available
-        Fields** list, then click ![2289](/images/2289.png) **(Move
+        Fields** list, then click ![2289](../images/2289.png) **(Move
         selected fields down)**. In addition to the fields, you can also
         select any tags that you have created and assigned.
 
       - Change the order of the fields in the report by clicking
-        ![2290](/images/2290.png) **(Move selected fields up)** or
-        ![2289](/images/2289.png) **(Move selected fields down)\]**.
+        ![2290](../images/2290.png) **(Move selected fields up)** or
+        ![2289](../images/2289.png) **(Move selected fields down)\]**.
 
 6.  Click the **Formatting** tab to set the size of paper for a PDF and
     column header format.

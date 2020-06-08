@@ -11,8 +11,8 @@ input parameters defined in the orchestration template.
     [???](#example-adding-orchestration-template) to create a service
     dialog from it.
 
-3.  Click ![Configuration](/images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](/images/1848.png)**Create Service Dialog
+3.  Click ![Configuration](../images/1847.png)**Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png)**Create Service Dialog
     from Orchestration Template**.
 
 4.  Enter a name for the service dialog in **Service Dialog Name**.

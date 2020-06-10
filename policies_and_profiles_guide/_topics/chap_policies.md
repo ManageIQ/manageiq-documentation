@@ -2,13 +2,11 @@
 
 ### Control Policies
 
-A control policy is a combination of an event, a condition, and an
-action. This combination provides management capabilities in your
-virtual environment.
+A control policy is a combination of an event, a condition, and an action. This combination provides management capabilities in your virtual environment.
 
   - An event is a trigger to check a condition.
 
-  - A condition is a test triggered by an event.
+  - A condition is a test that is triggered by an event.
 
   - An action is an execution that occurs if a condition is met.
 
@@ -33,16 +31,8 @@ _topics/editing_basic_info_scope_and_notes_for_a_policy.md %}
 
 ### Compliance Policies
 
-Compliance policies are specifically designed to secure your environment
-by checking conditions that you create. These conditions can include the
-same conditions that you would use in a control policy, and most of the
-procedures are the same. However, a compliance policy automatically
-assigns the mark as a compliant action when the entity type (virtual
-machine or host, for example) to which the policy applies passes all of
-the conditions. If any of the conditions are not met, then the virtual
-machine or host is marked as non-compliant. The compliance status is
-shown in the summary screen for the entity type and on the compare and
-drift screens.
+Compliance policies are designed to secure your environment by checking conditions that you create. These conditions can include the same conditions that you would use in a control policy, and most of the procedures are the same. However, a compliance policy automatically assigns the mark as a compliant action when the entity type (virtual
+machine or host, for example) to which the policy applies passes all of the conditions. If any of the conditions are not met, then the virtual machine or host is marked as non-compliant. The compliance status is shown in the summary screen for the entity type and on the compare and drift screens.
 
 {% include_relative _topics/to_create_a_compliance_policy.md %}
 
@@ -52,19 +42,13 @@ _topics/to_create_a_condition_to_check_file_contents_of_a_host.md
 
 #### Checking for Compliance
 
-After you have created your compliance policies and assigned them to a
-policy profile, you can check compliance in two ways. You can either
-schedule the compliance check or perform the check directly from the
-summary screen.
+After you have created your compliance policies and assigned them to a policy profile, you can check compliance in two ways. You can either schedule the compliance check or perform the check directly from the summary screen.
 
-The compliance check runs all compliance policies that are assigned to
-the host or virtual machine. If the item fails any of the checks, it is
-marked as non-compliant in the item’s summary screen.
+The compliance check runs all compliance policies that are assigned to the host or virtual machine. If the item fails any of the checks, it is marked as non-compliant in the item’s summary screen.
 
 <div class="note">
 
-To schedule, you must have `EvmRole-administrator` access to the
-{{ site.data.product.title }} server.
+To schedule, you must have `EvmRole-administrator` access to the {{ site.data.product.title }} server.
 
 </div>
 

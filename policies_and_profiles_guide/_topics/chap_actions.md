@@ -1,13 +1,11 @@
-Actions are performed after the condition is evaluated. Control comes
-with a set of default actions that you can choose from. You can also
-create some of your own.
+Actions are performed after the condition is evaluated. Control comes with a set of default actions that you can choose from. You can also create some of your own.
 
 | Action                                                      | Description                                                                                                        |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | Cancel vCenter Task                                         | Stop current vCenter Task. Due to limitations of vCenter, this applies only to cloning tasks.                      |
 | Check Host or VM Compliance                                 | Run compliance checks.                                                                                             |
 | Collect Running Processes on VM Guest OS                    | Collect the list of running processes from the guest operating system.                                             |
-| Connect All CD-ROM Drives for Virtual Machine               | Connect all the CD-ROM drives for the virtual Machine.                                                             |
+| Connect All CD-ROM Drives for Virtual Machine               | Connect all the CD-ROM drives for the virtual machine.                                                             |
 | Connect All Floppy Drives for Virtual Machine               | Connect all the floppy drives for the virtual machine.                                                             |
 | Connect All Floppy and CD-ROM Drives for Virtual Machine    | Connect all of the floppy and CD-ROM drives for virtual machine.                                                   |
 | Convert to Template                                         | Convert this virtual machine to a template.                                                                        |
@@ -29,7 +27,7 @@ create some of your own.
 | Raise Automation Event                                      | Used with {{ site.data.product.title }} automate.                                                                                |
 | Refresh data from vCenter                                   | Perform a refresh of the vCenter.                                                                                  |
 | Remove Virtual Machine from Inventory                       | Take the virtual machine out of inventory.                                                                         |
-| Retire Virtual Machine                                      | Retire the virtual machine. (It will remain in inventory, but cannot be started.)                                  |
+| Retire Virtual Machine                                      | Retire the virtual machine. (It remains in inventory, but cannot be started.)                                  |
 | Show EVM Event on Timeline                                  | To show the EVM event on the timeline.                                                                             |
 | Shutdown Virtual Machines Guest OS                          | Shut down the virtual machine’s operating system.                                                                  |
 | Start Virtual Machine                                       | Power on the virtual machine.                                                                                      |
@@ -40,10 +38,7 @@ Default Actions and Descriptions
 
 ### Custom Actions
 
-You can create a custom action using the {{ site.data.product.title }} console. Enter
-a description and action type. Procedures for each type of action are
-shown in the sections below. When you create a policy, you can associate
-actions with specific events.
+You can create a custom action by using the {{ site.data.product.title }} console. Enter a description and action type. Procedures for each type of action are shown in the following sections. When you create a policy, you can associate actions with specific events.
 
 | Custom Action                     | Description                                                                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |

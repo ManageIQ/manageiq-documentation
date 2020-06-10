@@ -1,6 +1,4 @@
-Events are triggers that cause a condition to be tested. Control
-provides several Events, that can be divided into functional types.
-Events cannot be modified.
+Events are triggers that cause a condition to be tested. Control provides several Events, that can be divided into functional types. Events cannot be modified.
 
 | Category                  | Description                                                                                                                                                                                          |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

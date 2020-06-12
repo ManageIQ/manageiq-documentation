@@ -13,10 +13,9 @@
       - If you choose **Container Image Compliance Check**, you are presented with **Image Selection** where you can choose to
         analyze all images, all images for a specific provider, or a single image.
 
-<div class="note">
+
+**Note:**
 
 You can schedule a host analysis only for connected virtual machines, not repository virtual machines that were discovered through that host. Since repository virtual machines do not retain a relationship with the host that discovered them, there is no current way to scan them through the scheduling feature. The host is shown because it might have connected virtual machines in the future when the schedule is set to run.
-
-</div>
 
 {% include_relative _topics/compliance_check_timer.md %}

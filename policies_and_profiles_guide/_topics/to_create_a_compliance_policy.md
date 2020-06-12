@@ -6,7 +6,7 @@ Carefully plan the purpose of your policy before creating it. You can also use a
 
 1. Browse to menu: **Control > Explorer**.
 
-2. Click on the **Policies** accordion, and select **Compliance Policies**.
+2. Click the **Policies** accordion, and select **Compliance Policies**.
 
 3. Select either **Host Compliance Policies** or **VM Compliance Policies** or **Replicator Compliance Policies** or **Pod Compliance Policies** or **Container Node Compliance Policies** or **Container Image Compliance Policies**.
 
@@ -16,7 +16,7 @@ Carefully plan the purpose of your policy before creating it. You can also use a
 
     ![image](../images/1935.png)
 
-6. Uncheck **Active** if you do not want this policy processed even when assigned to a resource.
+6. Uncheck **Active** if you do not want this policy to be processed even when assigned to a resource.
 
 7. You can enter a scope here. (You can also create a scope as part of a condition, or not use one at all.) If the host or virtual machine is not included in the scope, no actions run.
 
@@ -24,41 +24,25 @@ Carefully plan the purpose of your policy before creating it. You can also use a
 
 9. Click **Add**.
 
-You should add one or several conditions:
+You must add one or several conditions:
 
-  - You can create a new condition by clicking
-    ![image](../images/1847.png)**Configuration**,
-    ![image](../images/1862.png)**Create a new Condition assigned to
-    this Policy**, as described in
-    [???](#Creating_a_new_Policy_Condition).
+  - You can create a new condition by clicking ![image](../images/1847.png)**Configuration**, ![image](../images/1862.png)**Create a new Condition assigned to this Policy**, as described in [???](#Creating_a_new_Policy_Condition).
 
-  - You can use an existing condition by clicking
-    ![image](../images/1847.png)**Configuration**,
-    ![image](../images/1851.png)**Edit this Policy’s Condition
-    assignments**, as described in
-    [???](#policy-edit-condition-assignment).
+  - You can use an existing condition by clicking ![image](../images/1847.png)**Configuration**, ![image](../images/1851.png)**Edit this Policy’s Condition assignments**, as described in [???](#policy-edit-condition-assignment).
 
-By default, if any of the conditions are false, the virtual machine is
-marked as non-compliant. To add other actions, such as sending an email
-if the virtual machine fails the compliance test:
+By default, if any of the conditions are false, the virtual machine is marked as non-compliant. To add other actions, such as sending an email if the virtual machine fails the compliance test:
 
-1.  Click the **Compliance Check** event under the policy (exact name
-    depends on entity type, for example **VM Compliance Check**.
+1.  Click the **Compliance Check** event under the policy (exact name depends on entity type, for example **VM Compliance Check**.
 
-2. Click ![image](../images/1847.png)**Configuration**,
-    ![image](../images/1851.png)**Edit Actions for this Policy Event**.
+2. Click ![image](../images/1847.png)**Configuration**, ![image](../images/1851.png)**Edit Actions for this Policy Event**.
 
-3. Select **Stop Virtual Machine** and **Send Email** from the
-    **Available Actions** area in **Order of Actions if ANY conditions
+3. Select **Stop Virtual Machine** and **Send Email** from the **Available Actions** area in **Order of Actions if ANY conditions
     are False**. (**Mark as Non-Compliant** should already be selected.)
 
     ![image](../images/1933.png)
 
-4. Click ![image](../images/1876.png)**Move selected Actions into this
-    Event**.
+4. Click ![image](../images/1876.png)**Move selected Actions into this Event**.
 
 5. Click **Add**.
 
-You can now make this part of a policy profile. After assigning the
-policy profile to the virtual machine, you can check it for its
-compliance status either on a schedule or on demand.
+You can now make this part of a policy profile. After assigning the policy profile to the virtual machine, you can check it for its compliance status either on a schedule or on demand.

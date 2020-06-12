@@ -12,7 +12,7 @@ If you have not created a condition to use with this policy, you can create one 
 
    ![image_1864](../images/1864.png)
 
-5. Click ![image_1851](../images/1851.png) (**Edit this Scope**) in the **Scope** area to create a general expression based on a simple attribute, such as operating system version. Based on what you choose, different options display. **Scope** is optional.
+5. Click ![image_1851](../images/1851.png)**Edit this Scope** in the **Scope** area to create a general expression based on a simple attribute, such as operating system version. Based on what you choose, different options display. **Scope** is optional.
 
       - Click **Field** to create criteria based on field values.
 

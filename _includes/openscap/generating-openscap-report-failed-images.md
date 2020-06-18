@@ -1,54 +1,31 @@
-You can output the results of an OpenSCAP scan of images to a report for
-an overview of the security risk level of images. The **Images by Failed
-OpenSCAP Rule Results** is included with {{ site.data.product.title_short }} and
-shows whether the image has passed or failed OpenSCAP policy criteria,
-and the security risk.
+You can output the results of an OpenSCAP scan of images to a report for an overview of the security risk level of images. The **Images by Failed OpenSCAP Rule Results are included with {{ site.data.product.title_short }} and shows whether the image passed or failed OpenSCAP policy criteria, and the security risk.
 
-<div class="note">
 
-You can also create a copy of this report and edit it to contain
-additional information, such as the project name where the image is
-used, to produce more useful results. See [Editing a
-Report](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/monitoring_alerts_and_reporting/#editing-a-report)
-and See [Reportable Fields in
-{{ site.data.product.title }}](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/monitoring_alerts_and_reporting/#appe_reportable_fields)
-in *Monitoring, Alerts, and Reporting* for instructions on customizing
-reports.
+**Note**: You can also create a copy of this report and edit it to contain additional information, such as the project name where the image is used to produce more useful results. For more information, see [Editing a Report](https://www.ibm.com/support/knowledgecenter/SSFC4F_2.0.0/Infra_mgmt/monitoring_alerts_and_reporting/index.html#editing-a-report) and [Reportable Fields in {{ site.data.product.title }}](https://www.ibm.com/support/knowledgecenter/SSFC4F_2.0.0/Infra_mgmt/monitoring_alerts_and_reporting/index.html#reportable-fields-in-ibm-cloud-pak-for-multicloud-management---infrastructure-management)
+in *Monitoring, Alerts, and Reporting* for instructions on customizing reports.
 
-</div>
+Steps to create a report to show image compliance:
 
-To create a report showing image compliance:
+1. Browse to menu: **Overview > Reports**.
 
-1.  Navigate to menu:Overview\[Reports\].
+2. Click the menu: **Reports > All Reports** accordion.
 
-2.  Click the menu:Reports\[All Reports\] accordion.
+3. Browse to menu: **Configuration Management > Containers > Images by Failed OpenSCAP Rule Results** to run a report that shows which images failed the OpenSCAP compliance.
 
-3.  Navigate to menu:Configuration Management\[Containers \> Images by
-    Failed OpenSCAP Rule Results\] for a report showing which images
-    have failed the OpenSCAP compliance.
+4. Click ![play arrow](../images/play_arrow.png) **Queue**.
 
-4.  Click ![play arrow](../images/play_arrow.png) **Queue**.
-
-5.  The report generation is placed in the queue and its status shows in
-    the reports page.
+5. The report generation is placed in the queue and its status shows in the reports page.
 
     ![failedimagescan](../images/failedimagescan.png)
 
-6.  Click ![reload](../images/reload.png) **(Refresh this page)** to
-    update the status.
+6. Click ![reload](../images/reload.png) **(Refresh this page)** to update the status.
 
-7.  Navigate to the **Saved Reports** accordion, and click the report
-    when it is completed.
+7. Browse to the **Saved Reports** accordion, and click the report when it completes.
 
-8.  Click on the report download buttons for the type of export you
-    want. The report is automatically named with the type of report and
-    date.
+8. Click the report download buttons for the type of export you want. The report is automatically named with the type of report and date.
 
-      - Click ![textimage](../images/textimage.png) **(Download this
-        report in text format)** to download as text.
+      - Click ![textimage](../images/textimage.png) **Download this report in text format** to download as text.
 
-      - Click ![textimage](../images/textimage.png) **(Download this
-        report in CSV format)** to download as a comma-separated file.
+      - Click ![textimage](../images/textimage.png) **Download this report in CSV format** to download as a comma-separated file.
 
-      - Click ![2134](../images/2134.png) **(Download this report in PDF
-        format)** to download as PDF.
+      - Click ![2134](../images/2134.png) **Download this report in PDF format** to download as PDF.

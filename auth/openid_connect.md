@@ -14,10 +14,8 @@ been tested with KeyCloak but is implemented generically using Apache’s
 mod\_auth\_openidc module and should work with other OIDC Identity
 Providers.
 
-The current implementation only secures the Appliance’s Web
-administrative UI with OIDC.
-
-**Note:** The Self-Service UI does not currently support OIDC.
+The current implementation secures the Appliance’s Web
+administrative and Self-Service UI with OIDC.
 
 1.  [Requirements](#requirements)
 
@@ -65,9 +63,12 @@ following:
 | Client Protocol                    | openid-connect                                    |
 | Access Type                        | confidential                                      |
 | Valid Redirect URIs                | <https://<miq-appliance>>                         |
+|                                    | <https://<miq-appliance>/ui/service/>             |
 |                                    | <https://<miq-appliance>/oidc_login/redirect_uri> |
 | User Info Signed                   | unsigned                                          |
 | Request Object Signature Algorithm | any                                               |
+
+*Note*: The trailing / for the /ui/service/ entry is required.
 
 The value used for OIDCClientSecret (*oidc\_client\_secret*) in the
 *manageiq-external-auth-oidc.conf* file is taken from the Keycloak

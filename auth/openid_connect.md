@@ -15,7 +15,7 @@ mod\_auth\_openidc module and should work with other OIDC Identity
 Providers.
 
 The current implementation secures the Appliance’s Web
-administrative and self service UI with OIDC.
+administrative and Self-Service UI with OIDC.
 
 1.  [Requirements](#requirements)
 
@@ -67,6 +67,8 @@ following:
 |                                    | <https://<miq-appliance>/oidc_login/redirect_uri> |
 | User Info Signed                   | unsigned                                          |
 | Request Object Signature Algorithm | any                                               |
+
+*Note*: The trailing / for the /ui/service/ entry is required.
 
 The value used for OIDCClientSecret (*oidc\_client\_secret*) in the
 *manageiq-external-auth-oidc.conf* file is taken from the Keycloak

@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on Microsoft SCVMM
+# Installing on Microsoft SCVMM
 
 {% include_relative _topics/installation.md %}
 

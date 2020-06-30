@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on OpenShift Container Platform
+# Installing on OpenShift Container Platform
 
 {% include_relative _topics/installation.md %}
 

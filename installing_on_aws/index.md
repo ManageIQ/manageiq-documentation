@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on Amazon Elastic Compute Cloud (Amazon EC2)
+# Installing on Amazon Elastic Compute Cloud (Amazon EC2)
 
 {% include_relative _topics/installation.md %}
 

@@ -1,7 +1,7 @@
 ---
 ---
 
-# Red Hat CloudForms REST API
+# REST API
 
 {% include_relative _topics/chap-specification.md %}
 

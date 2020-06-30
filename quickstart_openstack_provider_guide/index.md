@@ -1,7 +1,7 @@
 ---
 ---
 
-# QuickStart Guide for CloudForms with Red Hat OpenStack Platform
+# QuickStart Guide for {{ site.data.product.title }} with Red Hat OpenStack Platform
 
 {% include introduction.md %}
 
@@ -60,9 +60,9 @@ For information about tenant mapping and the Keystone V3 API, see
 
 ## Performing a SmartState Analysis
 
-Red Hat CloudForms can analyze a cloud Instance or infrastructure host
+{{ site.data.product.title }} can analyze a cloud Instance or infrastructure host
 to collect metadata such as user accounts, applications, software
-patches, and other internal information. This key CloudForms feature is
+patches, and other internal information. This key feature is
 called SmartState Analysis. SmartState analysis can be initiated
 manually or automatically using Control Policies.
 

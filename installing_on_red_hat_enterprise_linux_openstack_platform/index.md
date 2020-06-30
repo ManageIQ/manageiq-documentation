@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on Red Hat OpenStack Platform
+# Installing on Red Hat OpenStack Platform
 
 {% include_relative _topics/installation.md %}
 

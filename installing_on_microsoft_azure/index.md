@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on Microsoft Azure
+# Installing on Microsoft Azure
 
 {% include_relative _topics/installation.md %}
 

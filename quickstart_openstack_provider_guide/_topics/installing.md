@@ -8,9 +8,7 @@ This chapter describes how to install and configure {{ site.data.product.title }
 
 ### Obtaining and Installing the {{ site.data.product.title }} Appliance
 
-First, download the appliance from the Red Hat Customer Portal:
-
-{% include cfme-obtaining-the-appliance.md %}
+First, download the appliance:
 
 Afterwards, upload or install the appliance image as a virtual machine
 or instance on a supported virtualization environment or cloud provider.

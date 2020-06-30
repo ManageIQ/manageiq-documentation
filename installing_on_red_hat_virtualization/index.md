@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on Red Hat Virtualization
+# Installing on Red Hat Virtualization
 
 {% include_relative _topics/installation.md %}
 

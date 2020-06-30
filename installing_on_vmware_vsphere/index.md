@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on VMware vSphere
+# Installing on VMware vSphere
 
 {% include_relative _topics/installation.md %}
 

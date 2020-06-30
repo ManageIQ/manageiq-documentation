@@ -1,7 +1,7 @@
 ---
 ---
 
-# Installing Red Hat CloudForms on Google Compute Engine
+# Installing on Google Compute Engine
 
 {% include_relative _topics/installation.md %}
 

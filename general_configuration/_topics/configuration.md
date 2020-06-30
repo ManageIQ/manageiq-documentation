@@ -128,7 +128,7 @@ Regions are also used for database replication.
 
 ##### Capacity and Utilization Collection
 
-\======= Capacity and Utilization Collection Settings
+###### Capacity and Utilization Collection Settings
 
 Use **C & U Collection Settings** to select specifically which clusters
 and datastores you want to collect usage data for. By selecting a
@@ -143,7 +143,7 @@ view the clusters, hosts, and datastores from the settings menu.
 Navigate to ![Configuration](../images/config-gear.png) **Configuration**,
 then click on the menu:Settings\[Region \> C & U Collection\] tab.
 
-\======= Enabling a Cluster, Host, or Datastore for Capacity and
+###### Enabling a Cluster, Host, or Datastore for Capacity and
 Utilization Collection
 
 To enable a cluster, host, or datastore for Capacity and Utilization
@@ -177,7 +177,7 @@ Collection:
 
 ##### Tags
 
-\======= Company Tag Categories and Tags
+###### Company Tag Categories and Tags
 
 {{ site.data.product.title }} allows you to create your own set of tags and tag
 categories. Use tags to create a customized, searchable index for your
@@ -195,7 +195,7 @@ resources. There are two kinds of tags.
 
   - **System tags** are assigned automatically by {{ site.data.product.title }}.
 
-\======= Creating a Tag Category
+###### Creating a Tag Category
 
 To create a tag category:
 
@@ -252,7 +252,7 @@ value from that category nor be able to filter by that category.
 
 </div>
 
-\======= Deleting a Tag Category
+###### Deleting a Tag Category
 
 To delete a tag category:
 
@@ -273,7 +273,7 @@ tags from the category are unassigned from all resources.
 
 </div>
 
-\======= Creating a Company Tag
+###### Creating a Company Tag
 
 To create a company tag:
 
@@ -301,7 +301,7 @@ To create a company tag:
 
 5.  Click **Add** once again to add the new entry to the table.
 
-\======= Deleting a Company Tag
+###### Deleting a Company Tag
 
 To delete a company tag:
 
@@ -322,7 +322,7 @@ To delete a company tag:
 
 4.  Click **OK** to confirm.
 
-\======= Importing Tags for Virtual Machines
+###### Importing Tags for Virtual Machines
 
 You can import a **CSV** file with tag assignments into the VMDB. For
 the import to be successful, be aware of the following:
@@ -341,7 +341,7 @@ the import to be successful, be aware of the following:
         rhel6,Department,Presales
         rhel6,Department,Support
 
-\======= Importing Tags for a Virtual Machine from a CSV File
+###### Importing Tags for a Virtual Machine from a CSV File
 
 To import tags for a virtual machine from a CSV file:
 
@@ -368,7 +368,7 @@ To import tags for a virtual machine from a CSV file:
 
 6.  Click **Apply**.
 
-\======= Importing Custom Values for Virtual Machines and Hosts
+###### Importing Custom Values for Virtual Machines and Hosts
 
 You can import a **CSV** file with asset tag information into the VMDB
 for a virtual machine or import custom values for hosts. For the import
@@ -408,7 +408,7 @@ For hosts, the value for custom\_1 will show in the **Host Summary**
 page as the **Custom Identifier** in the **Properties** area. All of the
 custom values will show in the **Custom Fields** area.
 
-\======= Importing Asset Tags for a Virtual Machine from a CSV File
+###### Importing Asset Tags for a Virtual Machine from a CSV File
 
 To import asset tags for a virtual machine from a CSV file
 
@@ -778,7 +778,7 @@ To change server settings:
 
 7.  Click **Save**.
 
-\======= Basic Information Settings ![2059](../images/2059.png)
+###### Basic Information Settings ![2059](../images/2059.png)
 
   - Use **Company Name** (maximum 20 characters) to customize the
     interface with your company’s name. You will see the company name
@@ -809,7 +809,7 @@ To change server settings:
   - Use **Default Locale** to specify the default language for this
     server.
 
-\======= Server Control Settings
+###### Server Control Settings
 
 A server role defines what a server can do. Red Hat recommends that
 Database Operations, Event Monitor, Reporting, Scheduler, SmartState
@@ -830,7 +830,7 @@ are enabled by default on all servers.
 
 </div>
 
-\======= Server Roles
+###### Server Roles
 
 <div class="note">
 
@@ -871,7 +871,7 @@ are enabled by default on all servers.
 | Web Services                          | This role is enabled by default. The Web Services roles provides API access and must be enabled if the User Interface role is enabled to log into the user interface. You can also enable the Web Services role to provide API-only access to the server. Uncheck Web Services to stop this {{ site.data.product.title_short }} server from acting as a web service provider. More than one {{ site.data.product.title_short }} server can have this role in a zone.                                                                                                                                                                                                           | N/A                  | Active/Active                      |
 | Websocket                             | This role enables starting or stopping websocket workers required for proxying remote consoles.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      | N/A                  | Active/Active                      |
 
-\======= VMware Console Settings
+###### VMware Console Settings
 
 If you are using the {{ site.data.product.title }} control feature set, then you have
 the ability to connect to a Web console for virtual machines that are
@@ -908,12 +908,12 @@ the required software, you must specify its version in the
     provider must be registered to it. For vCenter version 4, the VMware
     vCenter Management Webservices must be running.
 
-\======= NTP Servers Settings In the **NTP Servers** area, you can
+###### NTP Servers Settings In the **NTP Servers** area, you can
 specify the NTP servers to use as source for clock synchronization here.
 The NTP settings specified here will override Zone NTP settings. Enter
 one NTP server hostname or IP address in each text box.
 
-\======= Configuring SNMP
+###### Configuring SNMP
 
 You can use Simple Network Management Protocol (SNMP) traps to send
 alerts for various aspects of a {{ site.data.product.title }} environment.
@@ -978,7 +978,7 @@ To set the failover priority role:
     ![2097](../images/2097.png)(**Promote Server**) to make this the
     primary server for this role.
 
-\======= Outgoing SMTP Email Settings
+###### Outgoing SMTP Email Settings
 
 To use the email action in {{ site.data.product.title }}, set an email address to send
 emails from.
@@ -1018,7 +1018,7 @@ enabled.
   - Use **Test E-mail Address** if you want to test your email settings.
     Click **Verify** to send a test email.
 
-\======= Web Services Settings
+###### Web Services Settings
 
 Web services are used by the server to communicate with the SmartProxy.
 
@@ -1036,7 +1036,7 @@ Web services are used by the server to communicate with the SmartProxy.
   - If **Web Services** are enabled, you have the option to use
     **ws-security**.
 
-\======= Logging Settings
+###### Logging Settings
 
 ![2065](../images/2065.png)
 
@@ -1044,7 +1044,7 @@ Web services are used by the server to communicate with the SmartProxy.
     You can select from **fatal**, **error**, **warn**, **info**, and
     **debug**. The default setting is 'info'.
 
-\======= Custom Support URL Settings
+###### Custom Support URL Settings
 
 ![2066](../images/2066.png)
 
@@ -1059,7 +1059,7 @@ Use the **Authentication** tab to specify how you want users
 authenticated on the console. You can use the VMDB or integrate with
 LDAP, LDAPS, Amazon, or an external IPA server.
 
-\======= Changing Authentication Settings
+###### Changing Authentication Settings
 
 To change authentication settings:
 
@@ -1091,7 +1091,7 @@ Only make these changes when directed to by Red Hat Support.
 
 </div>
 
-\======= Changing Settings for a Worker
+###### Changing Settings for a Worker
 
 To change the settings for a worker
 
@@ -1125,7 +1125,7 @@ to validate your new settings before restarting the server.
 
 </div>
 
-\======= Changing a Database Setting
+###### Changing a Database Setting
 
 To change a database setting:
 
@@ -1166,7 +1166,7 @@ restart is complete, the new database settings are in effect.
 
 ##### Customization and Logos
 
-\======= Custom Logos
+###### Custom Logos
 
 Use **Custom Logos** to display your own logo in the corner of the
 {{ site.data.product.title_short }} user interface and on the login screen. Use the
@@ -1193,7 +1193,7 @@ interface.
 
 </div>
 
-\======= Uploading a Custom Logo to the User Interface
+###### Uploading a Custom Logo to the User Interface
 
 <div class="note">
 
@@ -1237,7 +1237,7 @@ on how to set the configuration settings.
 
 </div>
 
-\======= Customizing the Login Background
+###### Customizing the Login Background
 
 <div class="note">
 
@@ -1274,7 +1274,7 @@ To customize the login background:
 
 9.  Click **Save**.
 
-\======= Customizing the Login Panel Text
+###### Customizing the Login Panel Text
 
 To customize the login panel text:
 
@@ -1298,7 +1298,7 @@ To customize the login panel text:
 
 9.  Click **Save**.
 
-\======= Displaying the Custom Configuration Settings
+###### Displaying the Custom Configuration Settings
 
 To enable displaying your custom logo in the corner of the
 {{ site.data.product.title }} user interface and on the login screen:
@@ -1341,7 +1341,7 @@ Changing settings using this procedure may disable your
 
 </div>
 
-\======= Editing Configuration Files Manually
+###### Editing Configuration Files Manually
 
 To edit configuration files manually:
 
@@ -1361,7 +1361,7 @@ To edit configuration files manually:
 
 6.  Click **Save**.
 
-\======= Configuration Parameters
+###### Configuration Parameters
 
 Table: authentication
 
@@ -1740,7 +1740,7 @@ analyze, you can filter which ones to analyze. You may also specify only
 one virtual machine or perform an analysis on all virtual machines. In
 addition, you can schedule compliance checks, and database backups.
 
-\======= Scheduling a SmartState Analysis or Compliance Check
+###### Scheduling a SmartState Analysis or Compliance Check
 
 To schedule a SmartState Analysis or Compliance Check:
 
@@ -1931,7 +1931,7 @@ To schedule a database backup:
 
 12. Click **Add**.
 
-\======= Modifying a Schedule
+###### Modifying a Schedule
 
 To modify a schedule:
 
@@ -2443,7 +2443,7 @@ To view the status of server roles:
 | User Interface                        | Y                        | N                     |
 | Web Services                          | Y                        | N                     |
 
-\======= Removing an Inactive Server
+###### Removing an Inactive Server
 
 To remove an inactive server:
 
@@ -2480,7 +2480,7 @@ See your network administrator if you need to set up one of these
 shares. You will also need a user that has write access to that
 location.
 
-\======= Setting the Location of the Log Depot
+###### Setting the Location of the Log Depot
 
 To set the location of the log depot:
 
@@ -2505,7 +2505,7 @@ To set the location of the log depot:
 
 8.  Click **Save**.
 
-\======= Collecting and Downloading Logs from All Servers in a Zone
+###### Collecting and Downloading Logs from All Servers in a Zone
 
 To collect and download logs from all servers in a zone:
 
@@ -2534,7 +2534,7 @@ extracting the monthly performance data. Gap collection need to be
 completed for each zone individually. Therefore, the procedure below
 need to be repeated for each zone.
 
-\======= Repairing Capacity and Utilization Data
+###### Repairing Capacity and Utilization Data
 
 To repair capacity and utilization data:
 
@@ -2620,7 +2620,7 @@ You can see additional information on and restart the following items:
   - **VM Analysis Collectors** that run and process SmartState Analyses
     on virtual machines.
 
-\======= Reloading Worker Display
+###### Reloading Worker Display
 
 To reload worker display:
 
@@ -2636,7 +2636,7 @@ To reload worker display:
 5.  Click ![2106](../images/2106.png) (**Refresh Current Workers
     display**).
 
-\======= Restarting a Worker
+###### Restarting a Worker
 
 To restart a worker:
 
@@ -2658,7 +2658,7 @@ To restart a worker:
 
 ##### Server and Audit Logs
 
-\======= Collecting Server Logs and Configuration Files
+###### Collecting Server Logs and Configuration Files
 
 While you can designate a central location to collect logs for all
 servers in a specific zone, you can override those values for a specific
@@ -2680,7 +2680,7 @@ See your network administrator to set up one of these shares. You also
 need a user that has write access to that location. Settings at the
 server level supersede the ones at the zone level.
 
-\======= Setting the Location of the Log Depot for a Specific Server
+###### Setting the Location of the Log Depot for a Specific Server
 
 To set the location of the log depot for a specific server
 
@@ -2708,7 +2708,7 @@ To set the location of the log depot for a specific server
 
 9.  Click **Save**.
 
-\======= Collecting the Current Log Set of a Server
+###### Collecting the Current Log Set of a Server
 
 To Collect the Current Log Set of a Server
 
@@ -2728,7 +2728,7 @@ To Collect the Current Log Set of a Server
 6.  Click **OK**. The status of the log retrieval shows in the
     {{ site.data.product.title }} console.
 
-\======= Collecting All Log Sets from a Server
+###### Collecting All Log Sets from a Server
 
 To Collect All Log Sets from a Server
 
@@ -2748,7 +2748,7 @@ To Collect All Log Sets from a Server
 6.  Click **OK**. The status of the log retrieval shows in the
     {{ site.data.product.title }} console.
 
-\======= Viewing the Server, Audit, and Production Logs
+###### Viewing the Server, Audit, and Production Logs
 
 The server and audit logs roll over daily. The previous logs are stored
 as zipped files in the `/var/www/miq/vmdb/log` folder. The current logs
@@ -2759,7 +2759,7 @@ on the **Diagnostics** accordion.
 Use the server log to see all actions taken by the server including
 communication with the SmartProxy and tasks.
 
-\======= Viewing the Server Log
+###### Viewing the Server Log
 
 To view the server log:
 
@@ -2775,7 +2775,7 @@ To view the server log:
 The {{ site.data.product.title }} server automatically retrieves the last 1000 lines
 of the log.
 
-\======= Reloading the Server Log
+###### Reloading the Server Log
 
 To reload the server log:
 
@@ -2790,7 +2790,7 @@ To reload the server log:
 
 5.  Click ![2106](../images/2106.png) (Reload the Log Display).
 
-\======= Downloading the Server Log
+###### Downloading the Server Log
 
 To download the server log:
 
@@ -2813,7 +2813,7 @@ authentication.
 
 </div>
 
-\======= Viewing the Audit Log
+###### Viewing the Audit Log
 
 To view the audit log:
 
@@ -2828,7 +2828,7 @@ To view the audit log:
 
 The server automatically retrieves the last 1000 lines of the log.
 
-\======= Reloading the Audit Log
+###### Reloading the Audit Log
 
 To reload the audit log:
 
@@ -2843,7 +2843,7 @@ To reload the audit log:
 
 5.  Click ![2106](../images/2106.png) (**Reload the Audit Log Display**).
 
-\======= Downloading the Audit Log
+###### Downloading the Audit Log
 
 To download the audit log:
 
@@ -2859,7 +2859,7 @@ To download the audit log:
 5.  Click ![2107](../images/2107.png) (**Download the Entire Audit Log
     File**).
 
-\======= Viewing the Production Log
+###### Viewing the Production Log
 
 Use the production log to see all actions performed using the console.
 
@@ -2877,7 +2877,7 @@ To view the production log:
 The {{ site.data.product.title }} server automatically retrieves the last 1000 lines
 of the log.
 
-\======= Reloading the Production Log
+###### Reloading the Production Log
 
 To reload the production log:
 
@@ -2893,7 +2893,7 @@ To reload the production log:
 5.  Click ![2106](../images/2106.png) (**Reload the Product Log
     Display**).
 
-\======= Downloading the Production Log
+###### Downloading the Production Log
 
 To download the production log:
 

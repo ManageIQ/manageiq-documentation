@@ -10,6 +10,6 @@
 
 # Appendix
 
-# Example PostgreSQL Configuration File
+## Example PostgreSQL Configuration File
 
 {% include example-postgresql-config-file.md %}

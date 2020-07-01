@@ -152,7 +152,7 @@ From the {{ site.data.product.title_short }} user interface:
 
 Make sure the user’s Active Directory groups for the appliance are
 created and appropriate roles assigned to those groups. See
-[Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#roles)
+[Roles](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#roles)
 in *General Configuration* for more information.
 
 </div>

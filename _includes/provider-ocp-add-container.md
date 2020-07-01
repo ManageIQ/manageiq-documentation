@@ -71,7 +71,7 @@
         To obtain a token for your provider, run the `oc get secret`
         command on your provider; see [Obtaining an OpenShift Container
         Platform Management
-        Token](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token).
+        Token](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html#obtaining-an-openshift-container-platform-management-token).
 
         For example:
 

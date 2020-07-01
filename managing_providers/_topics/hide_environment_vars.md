@@ -54,5 +54,5 @@ To configure user access to container environment variables:
 8.  Click **Save**.
 
 For more information about user roles, see
-[Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#roles)
+[Roles](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#roles)
 in *General Configuration*.

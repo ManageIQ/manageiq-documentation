@@ -214,12 +214,12 @@ to work with {{ site.data.product.title_short }}:
 
 2.  On your {{ site.data.product.title_short }} appliance, create the equivalent
     groups. See [Creating a User
-    Group](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating-a-user-group)
+    Group](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#creating-a-group)
     in *General Configuration*.
 
 3.  On your {{ site.data.product.title_short }} appliance, assign EVM roles to the
     groups. See [Creating a
-    Role](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating-a-role)
+    Role](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#creating-a-role)
     in *General Configuration*.
 
 </div>

@@ -252,7 +252,7 @@ following before creating a provision request.
 1.  Add the **ISO Datastore**. The Red Hat Virtualization Manager system
     must have already been discovered or added into the VMDB. For more
     information, see [Adding a Red Hat Enterprise Virtualization Manager
-    Provider](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_enterprise_virtualization_manager_provider)
+    Provider](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html#adding-a-red-hat-virtualization-provider)
     in *Managing Providers*.
 
 2.  Refresh the **ISO Datastore**.
@@ -786,7 +786,7 @@ virtual machine is provisioned has it marked.
 For an example of virtual machine provisioning request using cloud-init
 via REST API, see *Provisioning a Virtual Machine Using Cloud-init* in
 the [{{ site.data.product.title }} REST
-API](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/red_hat_cloudforms_rest_api/index)
+API](https://www.manageiq.org/docs/reference/latest/rest_api/index.html#provisioning-a-virtual-machine-using-cloud-init)
 guide.
 
 </div>
@@ -1142,7 +1142,7 @@ To enable these resources for all groups, set the scope to **All**. To
 limit access to a select group, create a tag in the **Provisioning
 Scope** category with the exact name of the user group and set this tag
 on the desired resources. See
-[Tags](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#regions)
+[Tags](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#regions)
 in *General Configuration* for information on creating tags.
 
 To set the scope for a datastore:

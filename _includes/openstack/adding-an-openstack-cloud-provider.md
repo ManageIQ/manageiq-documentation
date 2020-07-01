@@ -11,7 +11,7 @@ with the `admin` tenant.
 In OpenStack, you must add `admin` as a member of all tenants that users
 want to access and use in {{ site.data.product.title_short }}.
 
-<a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0-beta/html-single/managing_infrastructure_and_inventory/index#tenants" target="_blank">Cloud
+<a href="https://www.manageiq.org/docs/reference/latest/managing_infrastructure_and_inventory/index.html#cloud-tenants" target="_blank">Cloud
 Tenants</a> in *Managing Infrastructure and Inventory* for information on working
 with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
 
@@ -178,6 +178,6 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 
   - Collecting capacity and utilization data from an OpenStack cloud
     provider requires selecting the **Collect for All Clusters** option
-    under **Configuration**, in the settings menu. For information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#capacity-and-utilization-collections" target="_blank">Capacity and Utilization Collections</a> in the *General Configuration Guide*.
+    under **Configuration**, in the settings menu. For information, see <a href="https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#capacity-and-utilization-collection" target="_blank">Capacity and Utilization Collections</a> in the *General Configuration Guide*.
 
 </div>

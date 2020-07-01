@@ -7,7 +7,7 @@ can be defined for any object type available.
 
 <div class="note">
 
-An Ansible Playbook catalog item must exist in order to create an Ansible Playbook custom button. For more information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/provisioning_virtual_machines_and_hosts/catalogs-services#create-playbook-service-catalog-item" target="_blank">Creating an Ansible Playbook Service Catalog Item</a> in the Provisioning Virtual Machines and Hosts guide.
+An Ansible Playbook catalog item must exist in order to create an Ansible Playbook custom button. For more information, see <a href="https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html#creating-an-ansible-playbook-service-catalog-item" target="_blank">Creating an Ansible Playbook Service Catalog Item</a> in the Provisioning Virtual Machines and Hosts guide.
 
 </div>
 
@@ -50,7 +50,7 @@ An Ansible Playbook catalog item must exist in order to create an Ansible Playbo
         **Specific Hosts** and leave the associated text field blank.
 
       - To use admin-specified host values, remove the **Hosts** field when creating the dialog the service uses. In this
-        configuration, the field will not appear to users. See <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/provisioning_virtual_machines_and_hosts/catalogs-services#service-dialogs" target="_blank">Service Dialogs</a> for information on generating a service dialog.
+        configuration, the field will not appear to users. See <a href="https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html#service-dialogs" target="_blank">Service Dialogs</a> for information on generating a service dialog.
 
     </div>
 

@@ -143,7 +143,7 @@ Additionally, the following must be configured to use {{ site.data.product.title
     cloud instances that you want to control.
 
   - For more information, see
-    [SmartProxies](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.2/html-single/general_configuration/#smartproxies)
+    [SmartProxies](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#smartproxies)
     in the {{ site.data.product.title_short }} *General Configuration* guide.
 
 ### Terminology

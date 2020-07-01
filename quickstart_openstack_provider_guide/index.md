@@ -100,24 +100,24 @@ Cloud instance provisioning goes through three phases:
 1.  Request: This includes ownership information, tags, virtual hardware
     requirements, the operating system, and any customization required.
     See [Provisioning
-    Requests](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/#provisioning-requests)
+    Requests](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html#provisioning-requests)
     from the [Provisioning Virtual Machines and
-    Hosts](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/)
+    Hosts](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html)
     guide for more details.
 
 2.  Approval: Provisioning requests are then approved or denied. This
     phase can happen automatically or manually. See [Provisioning
     Request Approval
-    Methods](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/#provisioning-request-approval-methods)
+    Methods](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html#provisioning-request-approval-methods)
     from the [Provisioning Virtual Machines and
-    Hosts](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/)
+    Hosts](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html)
     guide for more details.
 
 3.  Provision: Approved provisioning requests are executed. See [Working
     with Provisioning
-    Requests](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/#working-with-provisioning-requests)
+    Requests](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html#working-with-provisioning-requests)
     from the [Provisioning Virtual Machines and
-    Hosts](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/)
+    Hosts](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html)
     guide for more details.
 
 ### Provisioning an OpenStack Instance from an Image
@@ -129,9 +129,9 @@ Cloud instance provisioning goes through three phases:
 {% include openstack/storage-manager-available.md %}
 
 For more information, see [Storage
-Managers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#storage_managers)
+Managers](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html#storage-managers)
 from the [Managing
-Providers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/)
+Providers](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html)
 guide.
 
 ### Managing Block Storage
@@ -166,9 +166,9 @@ To take a volume snapshot:
 
 For more information about available options for block storage resources
 in {{ site.data.product.title_short }}, see [OpenStack Block Storage
-Managers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#openstack_block_storage_managers)
+Managers](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html#openstack-block-storage-managers)
 (from the [Managing
-Providers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/)
+Providers](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html)
 guide).
 
 ### Managing Object Storage
@@ -210,9 +210,8 @@ and features frequently used by specific tenants.
 
 This capability is made possible through the *Automate* model. See
 [Understanding the Automate
-Model](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/scripting_actions_in_cloudforms/#understanding-the-automate-model)
-from the [Scripting Actions in
-CloudForms](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/scripting_actions_in_cloudforms/)
+Model](https://www.manageiq.org/docs/reference/latest/scripting_actions/index.html#understanding-the-automate-model)
+from the [Scripting Actions in ManageIQ](https://www.manageiq.org/docs/reference/latest/scripting_actions/index.html)
 guide for more details.
 
 </div>
@@ -237,9 +236,9 @@ does, create a custom button for any tenant within the OpenStack Cloud
 
 The button will show in the object type you added the button to. See
 [Invoking
-Automate](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/scripting_actions_in_cloudforms/#invoking-automate)
+Automate](https://www.manageiq.org/docs/reference/latest/scripting_actions/index.html#invoking-automate)
 from the [Scripting Actions in
-CloudForms](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/scripting_actions_in_cloudforms/)
+ManageIQ](https://www.manageiq.org/docs/reference/latest/scripting_actions/index.html)
 guide for more in-depth coverage.
 
 # Managing Keypairs

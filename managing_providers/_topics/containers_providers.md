@@ -38,7 +38,7 @@ containers entities except volumes can be tagged.
 This chapter provides details on managing containers providers. For
 details on working with the resources within a container environment,
 see [Container
-Entities](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_infrastructure_and_inventory/#container_entities)
+Entities](https://www.manageiq.org/docs/reference/latest/managing_infrastructure_and_inventory/index.html#container-entities)
 in *Managing Infrastructure and Inventory*.
 
 </div>

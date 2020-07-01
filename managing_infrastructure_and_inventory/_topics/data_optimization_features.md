@@ -14,10 +14,10 @@ in the *Deployment Planning Guide*.
     sections in the *Deployment Planning Guide*:
 
       - [Assigning the Capacity and Utilization Server
-        Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/Capacity_Planning#assigning_the_capacity_and_utilization_server_roles)
+        Roles](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles)
 
       - [Capacity and Utilization Data
-        Collected](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/capacity_planning#data_collected)
+        Collected](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#capacity-and-utilization-data-collected)
 
 </div>
 

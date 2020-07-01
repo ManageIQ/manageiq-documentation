@@ -8,7 +8,7 @@ parameters specified by the user.
 
   - You must first sync your playbook repositories before using them to
     create a method. See [Adding a Playbook
-    Repository](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/managing_providers/automation_management_providers#adding-a-playbook-repository)
+    Repository](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html#adding-a-playbook-repository)
     in *Managing Providers* for information on initial playbook
     repository set-up.
 

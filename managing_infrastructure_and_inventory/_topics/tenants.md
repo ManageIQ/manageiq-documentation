@@ -39,7 +39,7 @@ have visibility into these tenants.
 This section describes OpenStack cloud tenant usage. For information
 about tenants created in {{ site.data.product.title_short }} for access and resource
 control, see [Access
-Control](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#access-control)
+Control](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#access-control)
 in *General Configuration*.
 
 </div>

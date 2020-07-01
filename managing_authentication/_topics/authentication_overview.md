@@ -18,7 +18,7 @@ with their credentials.
 
 For further information on managing users, groups, and account roles,
 see [Access
-Control](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#access-control)
+Control](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#access-control)
 in *General Configuration*.
 
 </div>
@@ -45,7 +45,7 @@ To change authentication settings:
       - To configure authentication locally using the Virtual Management
         Database (VMDB), choose **Database**. This is the default
         method. See [Creating a
-        User](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#creating_a_user)
+        User](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#creating-a-user)
         in *General Configuration* to create users from
         {{ site.data.product.title_short }}.
 

@@ -147,7 +147,7 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
             must be defined in the VMDB where the User ID is the same as
             the user’s name in your directory service typed in
             lowercase. See [Creating a
-            User](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating_a_user)
+            User](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#creating-a-user)
             in *General Configuration* for steps on creating users.
 
             </div>

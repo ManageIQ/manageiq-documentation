@@ -99,7 +99,7 @@ Adding new Schedule details.
 <div class="note">
 
 See
-<https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/paged/general-configuration>
+<https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#outgoing-smtp-email-settings>
 in the *General Configuration* guide, to learn how to verify the address
 and validate outgoing email settings.
 

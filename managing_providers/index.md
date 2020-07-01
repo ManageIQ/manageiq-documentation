@@ -40,7 +40,7 @@ This guide covers working with providers and managers in
 
 For information on working with the resources contained by a provider or
 manager, see [Managing Infrastructure and
-Inventory](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_infrastructure_and_inventory/).
+Inventory](https://www.manageiq.org/docs/reference/latest/managing_infrastructure_and_inventory/index.html).
 
 {% include_relative _topics/infrastructure_providers.md %}
 

@@ -13,7 +13,7 @@ the non-database {{ site.data.product.title_short }} appliances.
 1.  Deploy a {{ site.data.product.title_short }} appliance with an extra (and
     unpartitioned) disk for the database at a size appropriate for your
     deployment. For recommendations on disk space, see [Database
-    Requirements](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements)
+    Requirements](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#database-requirements)
     in the *Deployment Planning Guide*.
 
 2.  Configure time synchronization on the appliance by editing
@@ -242,7 +242,7 @@ standby appliance to the cluster.
     unpartitioned) disk for the database that is the same size as the
     primary database-only appliance, as it will contain the same data.
     For recommendations on disk space, see [Database
-    Requirements](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements)
+    Requirements](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#database-requirements)
     in the *Deployment Planning Guide*.
 
 2.  Configure time synchronization on the appliance by editing

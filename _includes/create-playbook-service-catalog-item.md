@@ -5,7 +5,7 @@
     inventory. Check your inventory and add the appropriate resources
     before creating an Ansible service. For more information, see
     [Automation Management
-    Providers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/managing_providers/#automation_management_providers)
+    Providers](https://www.manageiq.org/docs/reference/latest/managing_providers/index.html#automation-management-providers)
     in *Managing Providers*.
 
   - Debugging verbosity is available for Ansible playbook catalog items.

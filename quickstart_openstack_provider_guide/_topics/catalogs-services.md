@@ -21,9 +21,9 @@ Creating a *service catalog* involves:
 <div class="note">
 
 For more information about catalogs and services, see [Catalogs and
-Services](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/single/provisioning-virtual-machines-and-hosts/#catalogs-services)
+Services](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html#catalogs-and-services)
 from the [Provisioning Virtual Machines and
-Hosts](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/)
+Hosts](https://www.manageiq.org/docs/reference/latest/provisioning_virtual_machines_and_hosts/index.html)
 guide.
 
 </div>

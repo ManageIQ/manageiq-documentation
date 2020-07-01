@@ -24,9 +24,9 @@ server roles and zones.
 02](../images/cloudforms_ha_architecture_431939_0917_ece-02.png)
 
 See
-[Regions](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#regions)
+[Regions](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#regions)
 and
-[Servers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#servers)
+[Servers](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#servers)
 in *General Configuration* for more information on configuring servers
 and roles.
 

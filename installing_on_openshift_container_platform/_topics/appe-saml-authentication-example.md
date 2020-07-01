@@ -25,9 +25,8 @@ The configuration map includes the following parameters:
     <div class="important">
 
     Enabling external authentication must be done from the
-    {{ site.data.product.title_short }} user interface; see [Configuring External
-    Authentication](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/managing_authentication_for_cloudforms/external_auth)
-    in *Managing Authentication* for details.
+    {{ site.data.product.title_short }} user interface; see the Authentication section
+    in the [User Reference](https://www.manageiq.org/docs/reference/) for details.
 
     </div>
 

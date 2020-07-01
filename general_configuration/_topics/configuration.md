@@ -877,7 +877,7 @@ If you are using the {{ site.data.product.title }} control feature set, then you
 the ability to connect to a Web console for virtual machines that are
 registered to a host. To use this feature, you must have VNC installed,
 [VMware’s WebMKS SDK enabled in
-{{ site.data.product.title_short }}](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/managing_infrastructure_and_inventory/sect_virtual_machines#vnc_and_spice_consoles),
+{{ site.data.product.title_short }}](https://www.manageiq.org/docs/reference/latest/managing_infrastructure_and_inventory/index.html#configuring-webmks-support-in-manageiq),
 or the VMRC native desktop application installed for your environment.
 
 <div class="note">
@@ -3388,7 +3388,7 @@ Appliances](#changing-the-password-on-the-worker-appliances).
 <div class="note">
 
 See [Appliance
-Types](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#appliance-types)
+Types](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#appliance-types)
 in the *Deployment Planning Guide* for a summary of different types of
 appliances.
 

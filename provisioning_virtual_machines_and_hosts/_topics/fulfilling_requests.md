@@ -69,7 +69,7 @@ quota is set for the tenant or group as a whole.
         A user creating a provisioning request must have an email
         address saved in their profile, or provisioning may fail. See
         [Creating a
-        User](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating_a_user)
+        User](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#creating-a-user)
         in *General Configuration* for details on configuring users.
 
         </div>

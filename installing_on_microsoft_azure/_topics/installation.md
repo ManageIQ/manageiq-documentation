@@ -475,9 +475,9 @@ storage connection string again using the following commands:
     data.
 
   - See [Database
-    Requirements](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/deployment_planning_guide/#database-requirements)
+    Requirements](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#database-requirements)
     for some general guidelines for your database requirements.
 
-  - For information about Azure ports used by {{ site.data.product.title_short }},
+  - For information about ports used by {{ site.data.product.title_short }},
     see
-    <https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/appliance_hardening_guide/#chap_red_hat_cloudforms_security_guide_firewall>.
+    <https://www.manageiq.org/docs/reference/latest/appliance_hardening_guide/index.html#configuring-firewall-ports>.

@@ -8,12 +8,12 @@ Red Hat Virtualization provider:
     \> Server Control\]. For more information on capacity and
     utilization collection, see [Assigning the Capacity and Utilization
     Server
-    Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#assigning_the_capacity_and_utilization_server_roles)
+    Roles](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles)
     in the *Deployment Planning Guide*.
 
   - For information on selecting clusters and datastores used to collect
     data, see [Capacity and Utilization
-    Collections](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#capacity-and-utilization-collections)
+    Collections](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html#capacity-and-utilization-collection)
     in the *General Configuration Guide*.
 
   - In your Red Hat Virtualization environment, install the Data
@@ -26,5 +26,5 @@ Red Hat Virtualization provider:
 
       - To create a {{ site.data.product.title_short }} user in the Data Warehouse
         database, see [Data Collection for Red Hat Enterprise
-        Virtualization](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#data_collection_for_rhev_33_34)
+        Virtualization](https://www.manageiq.org/docs/reference/latest/deployment_planning_guide/index.html#data-collection-for-red-hat-virtualization)
         in the *Deployment Planning Guide*.

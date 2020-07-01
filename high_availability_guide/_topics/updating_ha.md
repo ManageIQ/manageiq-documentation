@@ -31,7 +31,7 @@ Appliances must be subscribed to the following channels:
 If any appliance shows it is not registered or is missing a subscription
 to any of these channels, see *Registering and Updating {{ site.data.product.title }}*
 in [General
-Configuration](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/)
+Configuration](https://www.manageiq.org/docs/reference/latest/general_configuration/index.html)
 to register and subscribe the appliance.
 
 **Updating the Appliances.**

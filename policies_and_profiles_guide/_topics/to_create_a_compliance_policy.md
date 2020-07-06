@@ -26,9 +26,9 @@ Carefully plan the purpose of your policy before creating it. You can also use a
 
 You must add one or several conditions:
 
-  - You can create a new condition by clicking ![image](../images/1847.png)**Configuration**, ![image](../images/1862.png)**Create a new Condition assigned to this Policy**, as described in [???](#Creating_a_new_Policy_Condition).
+  - You can create a new condition by clicking ![image](../images/1847.png)**Configuration**, ![image](../images/1862.png)**Create a new Condition assigned to this Policy**, as described in [Creating a New Policy Condition](#creating-a-new-policy-condition).
 
-  - You can use an existing condition by clicking ![image](../images/1847.png)**Configuration**, ![image](../images/1851.png)**Edit this Policy’s Condition assignments**, as described in [???](#policy-edit-condition-assignment).
+  - You can use an existing condition by clicking ![image](../images/1847.png)**Configuration**, ![image](../images/1851.png)**Edit this Policy’s Condition assignments**, as described in [Editing Policy Condition Assignments](#editing-policy-condition-assignments).
 
 By default, if any of the conditions are false, the virtual machine is marked as non-compliant. To add other actions, such as sending an email if the virtual machine fails the compliance test:
 

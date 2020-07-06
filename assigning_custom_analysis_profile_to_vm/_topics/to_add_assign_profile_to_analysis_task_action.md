@@ -7,7 +7,7 @@ create custom actions using the {{ site.data.product.title_short }} user interfa
 
 Use this procedure to create a custom action by adding the **Assign
 Profile to Analysis Task** action type to the virtual machine analysis
-profile (created in [???](#vm-analysis-profile)).
+profile (created in [Creating a Virtual Machine Analysis Profile](#creating-a-virtual-machine-analysis-profile)).
 
 ![image](../images/create-custom-action.png)
 

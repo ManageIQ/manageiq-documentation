@@ -10,7 +10,7 @@ The built-in OpenSCAP policy profile cannot be edited. However, you can edit cop
 
 #### Assigning the Built-In OpenSCAP Policy Profile
 
-The OpenSCAP policy profile included with {{ site.data.product.title }} is not automatically assigned. You still need to assign it to a container provider. The method for doing so is similar to that of any normal policy profile (as in [???](#profile-assign)):
+The OpenSCAP policy profile included with {{ site.data.product.title }} is not automatically assigned. You still need to assign it to a container provider. The method for doing so is similar to that of any normal policy profile. For more information, see [Assigning Policy Profiles](#assigning-policy-profiles).
 
 1. Browse to menu: **Compute > Containers > Providers**, check the providers that you need to assign the OpenSCAP policy profile to.
 
@@ -24,7 +24,7 @@ The OpenSCAP policy profile included with {{ site.data.product.title }} is not a
 
 #### Scheduling an OpenSCAP Compliance Check on Container Images
 
-Once you assign the built-in OpenSCAP policy profile to a container provider, you can schedule a compliance check against the policy profile. The method for doing is similar to that of scheduling a normal compliance check ([???](#compliance-schedule)):
+Once you assign the built-in OpenSCAP policy profile to a container provider, you can schedule a compliance check against the policy profile. The method for doing is similar to that of scheduling a normal compliance check ([Scheduling a Compliance Check](#scheduling-a-compliance-check)):
 
 {% include_relative _topics/steps_schedule-compliance-check.md %}
 
@@ -44,12 +44,12 @@ To do so, you must first copy the policy that you want to customize:
 
 You can now edit the copied policy. For instructions on how to edit policies, see:
 
-  - [???](#policy-edit-basic)
+  - [Editing Basic Information, Scope, and Notes for a Policy](#editing-basic-information-scope-and-notes-for-a-policy)
 
-  - [???](#policy-edit-condition-assignment)
+  - [Editing Policy Condition Assignments](#editing-policy-condition-assignments)
 
-  - [???](#policy-edit-event-assignment)
+  - [Editing Policy Event Assignments](#editing-policy-event-assignments)
 
-After editing copied policies, you can now add them to a new policy profile. For instructions on how to create a new policy profile (and add policies to it), see [???](#profiles-create).
+After editing copied policies, you can now add them to a new policy profile. For instructions on how to create a new policy profile (and add policies to it), see [Creating Policy Profiles](#creating-policy-profiles).
 
-Once you have a customized policy profile, you can assign it to a container provider. For instructions, see [???](#profile-assign).
+Once you have a customized policy profile, you can assign it to a container provider. For instructions, see [Assigning Policy Profiles](#assigning-policy-profiles).

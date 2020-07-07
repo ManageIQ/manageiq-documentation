@@ -8,7 +8,7 @@ The procedures in this section use the SSL certificate and the following key fil
 
 The appliance image ships with a default SSL certificate and it is recommended to change this certificate. You can use a certificate that is signed by a trusted CA, or generate a self-signed certificate.
 
-For more information, see the [Appliance Hardening Guide](#_chap_red_hat_cloudforms_security_guide_ssl_certs) on generating an SSL certificate.
+For more information, see the [Generating SSL Certificates section](#generating-ssl-certificates-for-your-appliance-and-database).
 
 
   - `/var/www/miq/vmdb/certs/server.cer` - Signed or self-signed certificate for the database appliance.

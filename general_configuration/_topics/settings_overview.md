@@ -9,7 +9,7 @@ To view or modify global settings for your appliance, click your
 username ![user](../images/user.png)to open the settings dropdown menu,
 and click **My Settings** to modify. The availability of each menu item
 depends on the role assigned to your user account. For more information
-on roles, see [???](#roles).
+on roles, see [Roles](#roles).
 
 The following menu items are available from the settings menu:
 

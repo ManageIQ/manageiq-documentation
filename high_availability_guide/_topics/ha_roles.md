@@ -7,13 +7,13 @@ roles and tiers use built-in high availability mechanisms like primary,
 secondary, and tertiary failover.
 
 You can configure additional worker appliances as needed using the steps
-in [???](#installation_appliances_addl), and then assign zones and
+in [Installing Additional Appliances](#installing-additional-manageiq-appliances), and then assign zones and
 server roles. The non-database {{ site.data.product.title_short }} appliances and
 roles can be configured in any order.
 
 The following diagram shows an example of a highly available database
 configuration that contains worker appliances, providers, and the
-HAProxy load balancer configured in [???](#configuring_HAProxy).
+HAProxy load balancer configured in [Configuring the HAProxy Load Balancer](#configuring-the-haproxy-load-balancer).
 
 The worker appliances in the diagram are labeled by server role (**User
 Interface**, **Management**, and **Database Ops**) and corresponding

@@ -1,8 +1,7 @@
 ## Configuring the HAProxy Load Balancer
 
-After configuring the appliances as described in [???](#installation),
-configure a load balancer to direct traffic to the non-database
-{{ site.data.product.title_short }} appliances.
+After configuring the appliances as described in [Installing the Appliances](#installing-the-appliances),
+configure a load balancer to direct traffic to the non-database {{ site.data.product.title_short }} appliances.
 
 The following steps highlight the configuration requirements for the
 load balancer, which in this case is HAProxy. The load balancer is

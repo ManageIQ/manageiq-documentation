@@ -2,23 +2,19 @@
 
 Installing {{ site.data.product.title }} consists of the following steps:
 
-1.  Downloading the appliance for your environment as a virtual machine
-    snapshot template.
+1. Downloading the appliance for your environment as a virtual machine snapshot template.
 
-2.  Setting up a virtual machine based on the appliance.
+2. Setting up a virtual machine based on the appliance.
 
-3.  Configuring the {{ site.data.product.title_short }} appliance.
+3. Configuring the {{ site.data.product.title_short }} appliance.
 
-After you have completed all the procedures in this guide, you will have
-a working environment on which additional customizations and
-configurations can be performed.
+After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
 
 ### Obtaining the appliance
 
 ### Requirements
 
-Below are the two sets of requirements for installing {{ site.data.product.title }} on
-Amazon EC2.
+Below are the two sets of requirements for installing {{ site.data.product.title }} on Amazon EC2.
 
 ### {{ site.data.product.title_short }} Requirements
 
@@ -30,44 +26,30 @@ Amazon EC2.
 
 #### Amazon EC2 Requirements
 
-  - An Amazon S3 bucket to store the disk image that will be imported to
-    AWS as a snapshot.
+  - An Amazon S3 bucket to store the disk image that will be imported to AWS as a snapshot.
 
   - A VM import service role (IAM role) named `vmimport`.
 
-For information on creating an Amazon S3 bucket and a VM Import Service
-Role, see the [Amazon EC2
+For information on creating an Amazon S3 bucket and a VM Import Service Role, see the [Amazon EC2
 documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html).
 
 ### Uploading the Appliance to an Amazon S3 Bucket
 
-From your local file system, you can now upload the
-{{ site.data.product.title_short }} appliance VHD image obtained in [Obtaining the
-appliance](#obtaining-the-appliance) to the Amazon S3 bucket, using your
-choice of tool.
+From your local file system, you can now upload the {{ site.data.product.title_short }} appliance VHD image obtained in [Obtaining the appliance](#obtaining-the-appliance) to the Amazon S3 bucket, using your choice of tool, such as AWS client or directly upload the Appliance image from your S3 bucket on AWS Management Console.
 
 ### Configuring Amazon EC2 to Import the Appliance
 
-<div class="important">
+**Important:**
 
-These are the procedural steps as of the time of writing. For the latest
-information on importing a virtual machine as an image, see the [Amazon
-EC2
-documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html).
+These are the procedural steps as of the time of writing. For the latest information on importing a virtual machine as an image, see the [Amazon EC2 documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html).
 
-</div>
-
-1.  Install the AWS client on the computer you want to interact with the
-    AWS API from.
+1. Install the AWS client on the computer you want to interact with the AWS API from.
 
         $ pip install awscli
 
-2.  Configure and download your AWS secret/access key by following the
-    steps in the [Managing Access Keys for Your AWS
-    Account](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)
-    documentation.
+2. Configure and download your AWS secret/access key by following the steps in the [Managing Access Keys for Your AWS Account](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html) documentation.
 
-3.  Configure the AWS client with your access/secret key. For example:
+3. Configure the AWS client with your access/secret key. For example:
 
         $ aws configure
         AWS Access Key ID [******]: ACCESS_KEY
@@ -75,8 +57,7 @@ documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-i
         Default region name [None]:
         Default output format [None]:
 
-4.  Create the `trust-policy.json` file for the **vmimport** role. For
-    example:
+4. Create the `trust-policy.json` file for the **vmimport** role. For example:
 
         {
            "Version": "2012-10-17",
@@ -94,19 +75,16 @@ documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-i
            ]
         }
 
-5.  Create the **vmimport** role using the `trust-policy.json` file that
-    you just created.
+5. Create the **vmimport** role using the `trust-policy.json` file that you just created.
 
         $ aws iam create-role --role-name vmimport --assume-role-policy-document file://trust-policy.json
 
-    <div class="note">
+    **Note:**
 
     This user must have permissions to create and modify IAM roles.
 
-    </div>
-
-6.  Create the `role-policy.json` file. Be sure to use the exact S3
-    bucket name. For example:
+    
+6. Create the `role-policy.json` file. Be sure to use the exact S3 bucket name. For example:
 
         {
           "Version": "2012-10-17",
@@ -172,8 +150,7 @@ documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-i
          ]
         }
 
-7.  Apply the **vmimport** role to the {{ site.data.product.title_short }} appliance
-    image you uploaded to the S3 bucket.
+7. Apply the **vmimport** role to the {{ site.data.product.title_short }} appliance image you uploaded to the S3 bucket.
 
         $ aws iam put-role-policy --role-name vmimport --policy-name vmimport --policy-document file://role-policy.json
 
@@ -181,10 +158,10 @@ documentation](https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-i
 
 To import the appliance:
 
-1.  Create a containers.json file:
+1. Create a containers.json file:
 
         {
-            "Description": " NAME OF IMPORTED SNAPSHOT IN AWS",
+            "Description": "NAME OF IMPORTED SNAPSHOT IN AWS",
             "Format": "vhd",
             "UserBucket": {
                 "S3Bucket": "BUCKET WITH UPLOADED .VHD IMAGE",
@@ -196,30 +173,22 @@ To import the appliance:
     export requirements, such as image formats, instances, volume and
     file system types, and using regions.
 
-2.  Use the AWS-CLI tools to import a disk as a snapshot. See the [AWS
-    documentation](//docs.aws.amazon.com) on using VM Import/Export to
-    import a disk as a snapshot.
+2. Use the AWS-CLI tools to import a disk as a snapshot. See the [AWS documentation](//docs.aws.amazon.com) on using VM Import/Export to import a disk as a snapshot.
 
-    <div class="note">
+    **Note:**
 
-    You can either specify a region, or if not, ensure that the S3
-    bucket is in the same region where you want to import the snapshot.
+    You can either specify a region, or if not, ensure that the S3 bucket is in the same region where you want to import the snapshot.
 
-    </div>
-
+    
         $ aws ec2 import-snapshot --disk-container file://containers.json
 
-3.  Check the progress of your snapshot import by running the following
-    command:
+3.  Check the progress of your snapshot import by running the following command:
 
     ```
      $ aws ec2 describe-import-snapshot-tasks --import-task-ids SNAPSHOT_ID_GOT_FROM_RESPONSE
     ```
 
-4.  Create an AMI from the snapshot. See the [AWS
-    documentation](//docs.aws.amazon.com) on using options with the
-    following command to create and register a Linux AMI from a
-    snapshot.
+4.  Create an AMI from the snapshot. See the [AWS documentation](//docs.aws.amazon.com) on using options with the following command to create and register a Linux AMI from a snapshot.
 
     ```
      $ aws ec2 register-image

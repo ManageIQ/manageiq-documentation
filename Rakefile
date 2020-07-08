@@ -1,6 +1,13 @@
-desc "Run tests by executing the ascii_binder build"
-task :test do
-  exec("bundle exec asciibinder build --distro manageiq")
+require 'jekyll'
+
+desc "Run Jekyll clean"
+task :clean do
+  Jekyll::Commands::Clean.process({})
 end
 
-task :default => :test
+desc "Run Jekyll build"
+task :build do
+  Jekyll::Commands::Build.process(:profile => true)
+end
+
+task :default => :build

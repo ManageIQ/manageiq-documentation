@@ -1,0 +1,11 @@
+### Phase 1: Create Provision Request
+
+![image](../images/2375.png)
+
+| Question                                                                        | Answer                                                                                                                                                                                                                                                                |
+| ------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Where do I create a new provisioning profile based on a users LDAP group?       | Navigate to \[`VM / Provisioning / Profile`\] of either the **Cloud** or **Infrastructure** namespace in your domain.                                                                                                                                                 |
+| Where can I specify a pre-dialog to present to a Requester in their LDAP group? | Custom pre-dialogs can be defined in \[`VM / Provisioning /
+Profile / <LDAP Group Name>`\] of either the **Cloud** or **Infrastructure** namespace in your domain.                                                                                                    |
+| I would like to customize our dialogs. Where are all the dialogs kept?          | All dialogs are located on each {{ site.data.product.title }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory.                                                                                                                                                           |
+| What happens if I do not specify any profiles for provisioning?                 | {{ site.data.product.title }} searches for a matching LDAP group in the \[`VM / Provisioning / Profile`\] class of either the **Cloud** or **Infrastructure** namespace in your domain. If an LDAP profile is NOT found then {{ site.data.product.title }} will use the `missing class instance`. |

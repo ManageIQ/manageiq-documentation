@@ -104,7 +104,7 @@ Seed the sssd.conf configuration file
 file, however the template, *sssd.conf.erb*, is now delivered with
 ManageIQ which can be used to seed the */etc/sssd/sssd.conf*.
 
-    # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
+    # TEMPLATE_DIR="{{ site.data.product.appliance_rpm_dir }}/TEMPLATE"
     # mkdir -p /etc/sssd
     # cp ${TEMPLATE_DIR}/etc/sssd/sssd.conf.erb /etc/sssd/sssd.conf
     # chmod 600 /etc/sssd/sssd.conf
@@ -262,7 +262,7 @@ the SSSD cache as follows then retry:
 
 Create the Apache configuration files
 
-    # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
+    # TEMPLATE_DIR="{{ site.data.product.appliance_rpm_dir }}/TEMPLATE"
     # cp ${TEMPLATE_DIR}/etc/pam.d/httpd-auth                         \
                         /etc/pam.d/httpd-auth
     # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf       \

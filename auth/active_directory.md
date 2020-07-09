@@ -124,7 +124,7 @@ readable by Apache.
 
 Create the Apache configuration files
 
-    # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
+    # TEMPLATE_DIR="{{ site.data.product.appliance_rpm_dir }}/TEMPLATE"
     # cp ${TEMPLATE_DIR}/etc/pam.d/httpd-auth                         \
                         /etc/pam.d/httpd-auth
     # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf       \

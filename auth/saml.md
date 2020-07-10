@@ -50,7 +50,7 @@ First ssh to the appliance as root, then create that directory:
 
 Copy the Apache remote user and SAML template configuration files:
 
-    # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
+    # TEMPLATE_DIR="{{ site.data.product.appliance_rpm_dir }}/TEMPLATE"
     # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf        \
         /etc/httpd/conf.d/
     # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-saml.conf \

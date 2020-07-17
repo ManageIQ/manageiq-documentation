@@ -11,9 +11,8 @@ with the `admin` tenant.
 In OpenStack, you must add `admin` as a member of all tenants that users
 want to access and use in {{ site.data.product.title_short }}.
 
-See [Cloud
-Tenants](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0-beta/html-single/managing_infrastructure_and_inventory/index#tenants)
-in *Managing Infrastructure and Inventory* for information on working
+<a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0-beta/html-single/managing_infrastructure_and_inventory/index#tenants" target="_blank">Cloud
+Tenants</a> in *Managing Infrastructure and Inventory* for information on working
 with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
 
 </div>
@@ -25,21 +24,16 @@ with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
 You can set whether {{ site.data.product.title }} should use the Telemetry service or
 Advanced Message Queueing Protocol (AMQP) for event monitoring. If you
 choose Telemetry, you should first configure the **ceilometer** service
-on the overcloud to store events. See [???](#openstack-events-oc) for
-instructions.
+on the overcloud to store events. See [???](#openstack-events-oc) for instructions.
 
-For more information, see [OpenStack Telemetry
-(ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-telemetry)
-in the Red Hat OpenStack Platform *Architecture Guide*.
+For more information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-telemetry" target="_blank">OpenStack Telemetry
+(ceilometer)</a> in the Red Hat OpenStack Platform *Architecture Guide*.
 
 </div>
 
 <div class="note">
 
-To authenticate the provider using a self-signed Certificate Authority
-(CA), configure the {{ site.data.product.title_short }} appliance to trust the
-certificate using the steps in [???](#app-self_signed_CA) before adding
-the provider.
+To authenticate the provider using a self-signed Certificate Authority (CA), configure the {{ site.data.product.title_short }} appliance to trust the certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA) before adding the provider.
 
 </div>
 
@@ -88,10 +82,7 @@ the provider.
 
     <div class="note">
 
-    For more information, see the definition of host aggregates and
-    availability zones in [OpenStack Compute
-    (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute)
-    in the Red Hat OpenStack Platform *Architecture Guide*.
+    For more information, see the definition of host aggregates and availability zones in <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute" target="_blank">OpenStack Compute (nova)</a> in the Red Hat OpenStack Platform *Architecture Guide*.
 
     </div>
 
@@ -193,9 +184,6 @@ the provider.
 
   - Collecting capacity and utilization data from an OpenStack cloud
     provider requires selecting the **Collect for All Clusters** option
-    under **Configuration**, in the settings menu. For information, see
-    [Capacity and Utilization
-    Collections](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#capacity-and-utilization-collections)
-    in the *General Configuration Guide*.
+    under **Configuration**, in the settings menu. For information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#capacity-and-utilization-collections" target="_blank">Capacity and Utilization Collections</a> in the *General Configuration Guide*.
 
 </div>

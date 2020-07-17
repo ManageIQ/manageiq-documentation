@@ -15,7 +15,7 @@
     If ![image](../images/1862.png) (**Add a new Button**) is not
     available, that means you have not created a button group for that
     object. To continue, create a button group first. See
-    [???](#create-custom-button-group)
+    [Creating a Custom Button}(#create-custom-button-group).
 
     </div>
 
@@ -51,7 +51,7 @@
         <div class="note">
 
         For more about setting visibility and enablement for a custom
-        button, see [???](#filtering-actions-custom-buttons).
+        button, see [Filtering](#setting-enablement-and-visibility-for-custom-buttons).
 
         </div>
 

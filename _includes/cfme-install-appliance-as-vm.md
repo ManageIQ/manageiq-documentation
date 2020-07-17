@@ -34,8 +34,7 @@
     step4](../images/virt-manager-install-step4.png)
 
 8.  Configure the virtual machine with two additional virtual disks. One
-    will be used for the internal database
-    ([???](#configuring_a_database)), while the other will be used for
+    will be used for the internal database, while the other will be used for
     mounting images and SmartState analysis.
 
     ![virt manager install

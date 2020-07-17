@@ -8,6 +8,6 @@
 
 5. Type in a **Button Group Text** and **Button Group Hover Text**, and select the **Button Group Image** that you want to use.
 
-6. If custom buttons have already been created, assign them to the button group. If not, see [???](#create-a-custom-button) to create custom buttons.
+6. If custom buttons have already been created, assign them to the button group. If not, see [Creating a Custom Button](#create-a-custom-button).
 
 7. Click **Add**.

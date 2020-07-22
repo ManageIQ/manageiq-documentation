@@ -24,7 +24,7 @@ with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
 You can set whether {{ site.data.product.title }} should use the Telemetry service or
 Advanced Message Queueing Protocol (AMQP) for event monitoring. If you
 choose Telemetry, you should first configure the **ceilometer** service
-on the overcloud to store events. See [???](#openstack-events-oc) for instructions.
+on the overcloud to store events. See <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/10/html/quickstart_guide_for_cloudforms_with_red_hat_openstack_platform/add-openstack-oc#openstack-events-oc" target="_blank">Configuring the Overcloud to Store Events</a> for instructions.
 
 For more information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-telemetry" target="_blank">OpenStack Telemetry
 (ceilometer)</a> in the Red Hat OpenStack Platform *Architecture Guide*.

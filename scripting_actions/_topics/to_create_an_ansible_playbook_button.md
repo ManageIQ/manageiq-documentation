@@ -7,11 +7,7 @@ can be defined for any object type available.
 
 <div class="note">
 
-An Ansible Playbook catalog item must exist in order to create an
-Ansible Playbook custom button. For more information, see [Creating an
-Ansible Playbook Service Catalog
-Item](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/provisioning_virtual_machines_and_hosts/catalogs-services#create-playbook-service-catalog-item)
-in the Provisioning Virtual Machines and Hosts guide.
+An Ansible Playbook catalog item must exist in order to create an Ansible Playbook custom button. For more information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/provisioning_virtual_machines_and_hosts/catalogs-services#create-playbook-service-catalog-item" target="_blank">Creating an Ansible Playbook Service Catalog Item</a> in the Provisioning Virtual Machines and Hosts guide.
 
 </div>
 
@@ -31,8 +27,7 @@ in the Provisioning Virtual Machines and Hosts guide.
 
     If ![image](../images/1862.png) (**Add a new Button**) is not
     available, that means you have not created a button group for that
-    object. To continue, create a button group first. See
-    [???](#create-custom-button-group).
+    object. To continue, see [Creating a Custom Button Group](#create-custom-button-group).
 
     </div>
 
@@ -54,11 +49,8 @@ in the Provisioning Virtual Machines and Hosts guide.
       - To allow user-provided host values, set the custom button to
         **Specific Hosts** and leave the associated text field blank.
 
-      - To use admin-specified host values, remove the **Hosts** field
-        when creating the dialog the service uses. In this
-        configuration, the field will not appear to users. See [Service
-        Dialogs](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/provisioning_virtual_machines_and_hosts/catalogs-services#service-dialogs)
-        for information on generating a service dialog.
+      - To use admin-specified host values, remove the **Hosts** field when creating the dialog the service uses. In this
+        configuration, the field will not appear to users. See <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/provisioning_virtual_machines_and_hosts/catalogs-services#service-dialogs" target="_blank">Service Dialogs</a> for information on generating a service dialog.
 
     </div>
 

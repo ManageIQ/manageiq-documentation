@@ -21,7 +21,7 @@ associated with the `admin` tenant.
 
   - To authenticate the provider using a self-signed Certificate
     Authority (CA), configure the {{ site.data.product.title_short }} appliance to
-    trust the certificate using the steps in [???](#app-self_signed_CA)
+    trust the certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA)
     before adding the provider.
 
 </div>

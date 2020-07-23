@@ -123,7 +123,7 @@ The following *User Session Note* mappers must be manually created:
 
 Copy the Apache OIDC template configuration files:
 
-    # TEMPLATE_DIR="/var/www/miq/system/TEMPLATE"
+    # TEMPLATE_DIR="{{ site.data.product.appliance_rpm_dir }}/TEMPLATE"
     # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user-openidc.conf \
         /etc/httpd/conf.d/
     # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-openidc.conf.erb \

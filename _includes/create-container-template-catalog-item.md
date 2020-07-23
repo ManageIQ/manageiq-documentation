@@ -2,7 +2,7 @@
 
 Before adding a new catalog item for container template provisioning,
 create a service dialog from a container template. See
-[???](#creating-a-service-dialog-from-container-template) for details.
+[Creating a Service Dialog from Container Template](#creating-a-service-dialog-from-container-template) for details.
 
 </div>
 

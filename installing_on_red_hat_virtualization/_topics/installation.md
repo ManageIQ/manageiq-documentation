@@ -182,4 +182,4 @@ Your Red Hat Virtualization environment now contains a running
 {{ site.data.product.title_short }} appliance.
 
 Next, configure the database on the disk you created by following the
-steps in [???](#configuring-an-internal-database).
+steps in [Configuring an Internal Database](#configuring-an-internal-database).

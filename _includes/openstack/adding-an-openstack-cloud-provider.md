@@ -21,10 +21,7 @@ with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
 
 <div class="note">
 
-You can set whether {{ site.data.product.title }} should use the Telemetry service or
-Advanced Message Queueing Protocol (AMQP) for event monitoring. If you
-choose Telemetry, you should first configure the **ceilometer** service
-on the overcloud to store events. See <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/10/html/quickstart_guide_for_cloudforms_with_red_hat_openstack_platform/add-openstack-oc#openstack-events-oc" target="_blank">Configuring the Overcloud to Store Events</a> for instructions.
+You can set whether {{ site.data.product.title }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the overcloud to store events. See [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events) for instructions.
 
 For more information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-telemetry" target="_blank">OpenStack Telemetry
 (ceilometer)</a> in the Red Hat OpenStack Platform *Architecture Guide*.
@@ -146,10 +143,7 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
     OpenStack provider. Click the **Events** tab in the **Endpoints**
     section to start.
 
-      - To use the Telemetry service of the OpenStack provider, select
-        **Ceilometer**. Before you do so, the provider must first be
-        configured accordingly. See [???](#openstack-events-oc) for
-        details.
+      - To use the Telemetry service of the OpenStack provider, select **Ceilometer**. Before you do so, the provider must first be configured accordingly. See [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events) for details.
 
       - If you prefer to use the AMQP Messaging bus instead, or eventing
         is not enabled on Ceilometer, select **AMQP** and configure the

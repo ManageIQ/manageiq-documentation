@@ -5,8 +5,7 @@ from the Support Matrix and [Running a SmartState
 Analysis](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#running-a-smartstate-analysis)
 in the *Managing Providers* guide for more information.
 
-Enabling SmartState analysis is similar to [???](#cf-caputils), in that
-the procedure also involves enabling server roles on a specific server.
+Enabling SmartState analysis is similar to [Assigning the Capacity and Utilization Server Roles](../deployment_planning_guide/index#assigning-the-capacity-and-utilization-server-roles), in that the procedure also involves enabling server roles on a specific server.
 To do so:
 
 1.  Click i\*Configuration\*.

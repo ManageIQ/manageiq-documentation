@@ -72,26 +72,18 @@ following:
     is not returned.
 
   - For small result sets where *limit* is less than
-    max\_results\_per\_page, the *limit* will be honored.
+    max_results_per_page, the *limit* will be honored.
 
   - For large result sets where the *limit* is greater than
-    max\_results\_per\_page, *limit* will be ignored and the result will
-    be limited to the first max\_results\_per\_page resources.
+    max_results_per_page, *limit* will be ignored and the result will
+    be limited to the first max_results_per_page resources.
 
-<div class="note">
+### About max_results_per_page
 
-<div class="title">
-
-About max\_results\_per\_page
-
-</div>
-
-If the default value for max\_results\_per\_page does not meet your
+If the default value for max_results_per_page does not meet your
 needs, it can be changed using the Advanced Settings feature in the UI.
-It is recommended however that it is not set to some arbitrarily large
+However, it is *NOT* recommended to set it to some arbitrarily large
 number in an effort to circumvent the pagination feature. The pagination
-feature is designed to prevent excessive load, which is easy to do with
-collections such as metric rollups and event streams that may have
-millions of records.
-
-</div>
+feature is designed to prevent excessive load on the API workers, which
+is easy to do with large collections such as metric rollups and event
+streams that may have millions of records.

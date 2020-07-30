@@ -47,7 +47,7 @@
     ![image](../images/1851.png) (**Edit Actions for this Policy Event**).
 
 16. In **Order of Actions if ALL Conditions are True**, select the
-    action created in [???](#assign-profile-analysis-task-action) from
+    action created in [Creating an Action to Assign the Virtual Machine Analysis Profile to the Analysis Task](#assign-profile-analysis-task-action) from
     the **Available Actions** list. This action will take place if the
     resources meet the conditions of the policy.
 

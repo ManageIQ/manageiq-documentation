@@ -22,14 +22,10 @@ bootable volumes not in use will be available.
     **Look Up** button to populate the other fields based on the email
     address.
 
-    <div class="note">
+    **Note:**
 
-    Parameters with a \* next to the label are required to submit the
-    provisioning request. To change the required parameters, see
-    [???](#provisioning-dialogs-customizing).
-
-    </div>
-
+    Parameters with a \* next to the label are required to submit the provisioning request. To change the required parameters, see [Customizing Provisioning Dialogs](#customizing-provisioning-dialogs).
+    
 6.  Click the **Purpose** tab to select the appropriate tags for the
     provisioned instance.
 
@@ -53,8 +49,7 @@ bootable volumes not in use will be available.
     1.  Select a flavor from the **Instance Type** list.
 
     2.  Select a **Guest Access Key Pair** for access to the instance.
-        For more information about key pairs, see
-        [???](#provision-keypairs).
+        For more information about key pairs, see [Managing Key Pairs](#managing-key-pairs).
 
 10. Click the **Volumes** tab to provision any volumes with the
     instance. Volumes are useful for augmenting ephemeral storage of

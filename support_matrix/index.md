@@ -14,7 +14,7 @@ A summary of the supported platforms and features in {{ site.data.product.title_
 - [Feature Support on Cloud Providers](#feature-cloud-providers)
 - [Feature Support on Container Providers](#feature-container-providers)
 - [Feature Support on Network Providers](#feature-network-providers)
-- [Feature Support on Configuration Management Providers](#feature-configuration-management-providers)
+- [Feature Support on Automation Management Providers](#feature-automation-management-providers)
 - [Remote Console Support](#remote-console-support)
 - [Operating System Support](#operating-system-support)
 - [Smart State Analysis Support](#smart-state-analysis-support)
@@ -533,12 +533,12 @@ This section outlines the status of support for {{ site.data.product.title_short
 | Create/Update/Delete Subnet   | Yes                              | No                        | No              | No                          |
 | Create/Update/Delete Routers  | Yes                              | No                        | No              | No                          |
 
-### 5.6. Configuration Management Providers
-{: #feature-configuration-management-providers}
+### 5.6. Automation Management Providers
+{: #feature-automation-management-providers}
 
-The following table outlines the status of support for {{ site.data.product.title_short }} features on configuration management providers.
+The following table outlines the status of support for {{ site.data.product.title_short }} features on automation management providers.
 
-#### Table 5.12. Configuration Management Provider Feature Support
+#### Table 5.12. Automation Management Provider Feature Support
 | Feature                        | Ansible Tower |
 | ------------------------------ | ------------- |
 | Groups Inventory               | Yes           |
@@ -546,8 +546,6 @@ The following table outlines the status of support for {{ site.data.product.titl
 | Job Template Inventory         | Yes           |
 | Integrate with Service Catalog | Yes           |
 | Automate Workflows             | Yes           |
-
-**Note:** {{ site.data.product.title_short }} supports Ansible Tower 3.7 and later as a configuration management provider.
 
 ## Chapter 6. Remote Console Support
 {: #remote-console-support}

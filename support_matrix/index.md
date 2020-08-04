@@ -36,12 +36,12 @@ The following table lists the browsers that work with {{ site.data.product.title
 
 #### Table 2.1. Supported Browsers
 
-| Browser                                                 |
-| ------------------------------------------------------- |
-| Google Chrome                                           |
-| Mozilla Firefox                                         |
-| Safari                                                  |
-| Microsoft Internet Explorer Edge - Version 44 and newer |
+| Browser         |
+| --------------- |
+| Google Chrome   |
+| Mozilla Firefox |
+| Safari          |
+| Microsoft Edge  |
 
 ## Chapter 3. Supported Runtime Platforms for {{site.data.keyword.inf_man}}
 {: #supported-platforms}

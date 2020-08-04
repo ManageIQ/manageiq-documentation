@@ -22,7 +22,7 @@ A summary of the supported platforms and features in {{ site.data.product.title_
 
 ## Chapter 1. Introduction
 {: #introduction}
-This release of {{ site.data.product.title_short }} is available in 2 formats: virtual appliance and podified (via that includes the following key components:
+This release of {{ site.data.product.title_short }} is available in 2 formats: virtual appliance and podified that includes the following key components:
 
 - CentOS Linux release 8.2.2004 (Core)
 - Rails 5.2.4.3
@@ -396,7 +396,7 @@ The following table outlines the status of support for {{ site.data.product.titl
 
 ### 5.3.4. IBM PowerVC
 
-The following table outlines the status of support for actions that you can perform on IBM® PowerVC™, and the {{ site.data.product.title_short }} features that allow you to interact with cloud deployments that use IBM® PowerVC™ as a provider.
+The following table outlines the status of support for actions that you can perform on IBM® PowerVC™ via the OpenStack API, and the {{ site.data.product.title_short }} features that allow you to interact with cloud deployments that use IBM® PowerVC™ as a provider.
 
 #### Table 5.8. IBM PowerVC Provider Feature Support
 

@@ -5,7 +5,7 @@
 A summary of the supported platforms and features in {{ site.data.product.title_short }}.
 {:shortdesc}
 
-- [Introduction](#introduction)
+- [Build](#build)
 - [Supported Browsers](#supported-browsers)
 - [Supported Platforms](#supported-platforms)
 - [Provisioning Support on Infrastructure Providers](#prov-infrastructure-providers)
@@ -20,8 +20,8 @@ A summary of the supported platforms and features in {{ site.data.product.title_
 - [Smart State Analysis Support](#smart-state-analysis-support)
 - [Supported Guest Operating Systems](#supported-guest-operating-systems)
 
-## Chapter 1. Introduction
-{: #introduction}
+## Chapter 1. Build
+{: #build}
 This release of {{ site.data.product.title_short }} is available in 2 formats: virtual appliance and podified that includes the following key components:
 
 - CentOS Linux release 8.2.2004 (Core)

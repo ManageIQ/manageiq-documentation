@@ -22,66 +22,45 @@ A summary of the supported platforms and features in {{ site.data.product.title_
 
 ## Chapter 1. Introduction
 {: #introduction}
-This release of {{ site.data.product.title_short }} is also delivered as a virtual appliance that includes the following key components:
+This release of {{ site.data.product.title_short }} is available in 2 formats: virtual appliance and podified (via that includes the following key components:
 
 - CentOS Linux release 8.2.2004 (Core)
 - Rails 5.2.4.3
 - Ruby 2.6.3p62
 - PostgreSQL 10.6
-- Infrastructure Management Engine 10.1.0
 - Apache 2.4.37
 
 ## Chapter 2. Supported Browsers
 {: #supported-browsers}
-The following table outlines the browsers that are supported for viewing the {{ site.data.product.title_short }} web user interface.
-
-Browser support is divided into tiers:
-
-- Tier 1: Browser and operating system combinations that are fully tested and fully supported. IBM is committed to fixing issues with browsers on this tier.
-
-- Tier 2: Browser and operating system combinations that are partially tested, and are likely to work. Limited support is provided for this tier. IBM attempts to fix issues with browsers on this tier.
-
-- Tier 3: Browser and operating system combinations that are not tested, but might work. Minimal support is provided for this tier. IBM attempts to fix only minor issues with browsers on this tier.
+The following table lists the browsers that work with {{ site.data.product.title_short }}.
 
 #### Table 2.1. Supported Browsers
 
-| Support tier | Browser                                                          |
-| ------------ | ---------------------------------------------------------------- |
-| Tier 1       | Google Chrome - Chrome for Business. See [Chapter 6. Remote Console Support](#remote-console-support) for information on VMRC plug-in support. Mozilla Firefox - Firefox Extended Support Release |
-| Tier 2       | Microsoft Internet Explorer Edge - Version 44 and newer          |
-| Tier 3       | Safari on MacOS (Mojave) - version 12.1.x                        |
+| Browser                                                 |
+| ------------------------------------------------------- |
+| Google Chrome                                           |
+| Mozilla Firefox                                         |
+| Safari                                                  |
+| Microsoft Internet Explorer Edge - Version 44 and newer |
 
-## Chapter 3. Supported Platforms for {{site.data.keyword.inf_man}}
+## Chapter 3. Supported Runtime Platforms for {{site.data.keyword.inf_man}}
 {: #supported-platforms}
 
- The following table lists platforms that can host the {{site.data.keyword.inf_man}} appliance, and platforms that can be managed by the {{site.data.keyword.inf_man_notm}} appliance as providers.
+ The following table lists platforms on which {{site.data.keyword.inf_man}} can be installed and run from.
 
 #### Table 3.1. Supported Platforms
-| Platform                                                     | Support for {{ site.data.product.title_short }} Appliance  | Supported for Management |
-| ------------------------------------------------------------ | ---------------------------------------------------------- | ------------------------ |
-| Amazon EC2 [a]                                               | Yes                                                        | Yes                      |
-| Microsoft Azure [a]                                          | No                                                         | Yes                      |
-| Google Compute Engine                                        | No                                                         | Yes                      |
-| Microsoft System Center Virtual Machine Manager (SCVMM) 2016 | No                                                         | Yes                      |
-| Microsoft System Center Virtual Machine Manager (SCVMM) 2019 | No                                                         | Yes                      |
-| OpenShift Container Platform (OCP) 3.11                      | No                                                         | Yes                      |
-| OpenShift Container Platform (OCP) 4.1                       | No                                                         | Yes                      |
-| OpenShift Container Platform (OCP) 4.2                       | No                                                         | Yes                      |
-| OpenShift Container Platform (OCP) 4.3                       | Yes                                                        | Yes                      |
-| OpenShift Container Platform (OCP) 4.4 or higher             | Yes                                                        | Yes                      |
-| Red Hat OpenStack Platform (OSP) 10 [b]                      | Yes                                                        | Yes                      |
-| Red Hat OpenStack Platform (OSP) 13 [b]                      | Yes                                                        | Yes                      |
-| Red Hat Virtualization (RHV) 4.2 [c]                         | No                                                         | Yes                      |
-| Red Hat Virtualization (RHV) 4.3 [c]                         | No                                                         | Yes                      |
-| VMware vSphere 6.0                                           | Yes                                                        | Yes                      |
-| VMware vSphere 6.5                                           | Yes                                                        | Yes                      |
-| VMware vSphere 6.7                                           | Yes                                                        | Yes                      |
+| Platform                                                     | Appliance or Podfied |
+| ------------------------------------------------------------ | -------------------- |
+| Amazon Web Services (AWS)                                    | Appliance            |
+| Microsoft Azure                                              | Appliance            |
+| Google Cloud Platform (GCP)                                  | Appliance            |
+| Microsoft System Center Virtual Machine Manager (SCVMM)      | Appliance            |
+| Kubernetes                                                   | Podified             |
+| OpenShift Container Platform (OCP)                           | Podified             |
+| Red Hat OpenStack Platform (OSP)                             | Appliance            |
+| Red Hat Virtualization (RHV)                                 | Appliance            |
+| VMware vSphere                                               | Appliance            |
 
-[a] As the pace of change in public cloud features is high, constantly changing and evolving, the compatibility for {{ site.data.product.title_short }} is as of the time of the GA of the product. Best effort basis during errata cycle for public cloud vendor introduced breaking changes (intended or unintended) to existing functionality. Any other changes or additions would be considered as a Request For Enhancement (RFE) which is evaluated for potential inclusion in future releases. RFE can be requested via your standard support mechanisms.
-
-[b] See Red Hat OpenStack Platform Life Cycle for product lifecycle information.
-
-[c] See Red Hat Enterprise Virtualization Life Cycle for product lifecycle information.
 
 ## Chapter 4. Provisioning Support
 
@@ -92,15 +71,13 @@ The following table outlines the status of support for provisioning on infrastru
 
 #### Table 4.1. Infrastructure Provider Provisioning Support
 
-| Feature                                      | Microsoft System Center VMM (SCVMM)  | Red Hat Virtualization (RHV) Manager | VMware vCenter |
+| Feature                                      | Microsoft System Center VMM (SCVMM)  | Red Hat Virtualization (RHV) Manager | VMware vSphere |
 | -------------------------------------------- | ------------------------------------ | ------------------------------------ | -------------- |
-| Provision VM/Instance using PXE              | No [a]                               | Yes                                  | No             |
+| Provision VM/Instance using PXE              | No                                   | Yes                                  | No             |
 | Provision VM/Instance using ISO              | No                                   | Yes                                  | No             |
 | Clone from VM/Instance to VM/Instance        | No                                   | No                                   | Yes            |
 | Provision from Template/Image to VM/Instance | Yes                                  | Yes                                  | Yes            |
 | Provision from VM/Instance to Template/Image | No                                   | No                                   | Yes            |
-
-[a] Available when using Red Hat Satellite with {{ site.data.product.title_short }}.
 
 ### 4.2. Cloud Providers
 {: #prov-cloud-providers}
@@ -109,22 +86,22 @@ The following table outlines the status of support for provisioning on cloud pro
 
 #### Table 4.2. Cloud Provider Provisioning Support
 
-| Feature                                      | Red Hat OpenStack Platform (OSP) | Amazon EC2 | Microsoft Azure | Google Compute Engine |
-| -------------------------------------------- | -------------------------------- | ---------- | --------------- | --------------------- |
-| Provision VM/Instance using PXE              | No                               | No         | No              | No                    |
-| Provision VM/Instance using ISO              | No                               | No         | No              | No                    |
-| Clone from VM/Instance to VM/Instance        | No                               | No         | No              | No                    |
-| Provision from Template/Image to VM/Instance | Yes                              | Yes        | Yes             | Yes                   |
-| Provision from VM/Instance to Template/Image | No                               | No         | No              | No                    |
-| Orchestration Template Provisioning          | Yes                              | Yes        | Yes             | No                    |
+| Feature                                      | Red Hat OpenStack Platform (OSP) | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) |
+| -------------------------------------------- | -------------------------------- | ------------------------- | --------------- | --------------------------- |
+| Provision VM/Instance using PXE              | No                               | No                        | No              | No                          |
+| Provision VM/Instance using ISO              | No                               | No                        | No              | No                          |
+| Clone from VM/Instance to VM/Instance        | No                               | No                        | No              | No                          |
+| Provision from Template/Image to VM/Instance | Yes                              | Yes                       | Yes             | Yes                         |
+| Provision from VM/Instance to Template/Image | No                               | No                        | No              | No                          |
+| Orchestration Template Provisioning          | Yes                              | Yes                       | Yes             | No                          |
 
 
 ## Chapter 5. Feature Support
 {: #feature-support}
 
-{{site.data.keyword.inf_man_notm}} allows you to perform actions on the providers that it manages, and provides features for interacting with and providing information about those providers. This section outlines the status of support for actions that you can perform on providers, and the {{site.data.keyword.inf_man_notm}} features that allow you to interact with those providers.
+{{ site.data.product.title_short }} allows you to perform actions on the providers that it manages, and provides features for interacting with and providing information about those providers. This section outlines the status of support for actions that you can perform on providers, and the {{ site.data.product.title_short }} features that allow you to interact with those providers.
 
-**Note:** You can run a rake command to retrieve a list of provider features supported across all platforms. Run the following command in your {{site.data.keyword.inf_man_notm}} appliance to retrieve the supported features in a comma-separated values (.csv) file format. The comma-separated values are displayed on the command-line interface (CLI) by default. You can use a pipe to redirect the output to a file.
+**Note:** You can run a rake command to retrieve a list of provider features supported across all platforms. Run the following command in your {{ site.data.product.title_short }} appliance to retrieve the supported features in a comma-separated values (.csv) file format. The comma-separated values are displayed on the command-line interface (CLI) by default. You can use a pipe to redirect the output to a file.
 
 ```
 ruby /var/www/miq/vmdb/tools/feature_support_matrix.rb
@@ -133,11 +110,11 @@ ruby /var/www/miq/vmdb/tools/feature_support_matrix.rb
 ### 5.1. Infrastructure Providers
 {: #feature-infrastructure-providers}
 
- The following tables outline the status of support for {{site.data.keyword.inf_man_notm}} features on infrastructure providers.
+ The following tables outline the status of support for {{ site.data.product.title_short }} features on infrastructure providers.
 
 ### 5.1.1. Red Hat Virtualization
 
-The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on Red Hat Virtualization (RHV) infrastructure providers.
+The following table outlines the status of support for {{ site.data.product.title_short }} features on Red Hat Virtualization (RHV) infrastructure providers.
 
 #### Table 5.1. Red Hat Virtualization Provider Feature Support
 
@@ -172,15 +149,13 @@ The following table outlines the status of support for {{site.data.keyword.inf_m
 | Clone from VM/Instance to VM/Instance                        | No      | No      |
 | Cloud-Init                                                   | Yes     | Yes     |
 | Customize Windows Templates with Sysprep during Provisioning | Yes     | Yes     |
-| OVN Provider                                                 | Yes     | Yes [b] |
+| OVN Provider                                                 | Yes     | Yes     |
 
 [a] On some operating system and browser combinations.
 
-[b] Technology Preview.
-
 ### 5.1.2. VMware vSphere
 
-The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on VMware vSphere infrastructure providers.
+The following table outlines the status of support for {{ site.data.product.title_short }} features on VMware vSphere infrastructure providers.
 
 #### Table 5.2. VMware vSphere Provider Feature Support
 
@@ -260,7 +235,7 @@ The following table outlines the status of support for Microsoft SCVMM infrastru
 
 ## 5.2. OpenStack Platform Director Infrastructure Providers
 
-The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on OpenStack Platform (OSP) director infrastructure providers.
+The following table outlines the status of support for {{ site.data.product.title_short }} features on OpenStack Platform (OSP) director infrastructure providers.
 
 #### Table 5.4. OpenStack Platform Director Infrastructure Provider Feature Support
 | Feature                                | OpenStack Platform (OSP) Director |
@@ -285,11 +260,11 @@ The following table outlines the status of support for {{site.data.keyword.inf_m
 ## 5.3. Cloud Providers
 {: #feature-cloud-providers}
 
-The following section outlines the status of support for {{site.data.keyword.inf_man_notm}} features on cloud providers.
+The following section outlines the status of support for {{ site.data.product.title_short }} features on cloud providers.
 
 ### 5.3.1. Red Hat OpenStack Platform
 
-The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on Red Hat OpenStack Platform (RHOSP) cloud providers.
+The following table outlines the status of support for {{ site.data.product.title_short }} features on Red Hat OpenStack Platform (RHOSP) cloud providers.
 
 #### Table 5.5. Red Hat OpenStack Platform Feature Support
 | Feature                                    | OSP 10 | OSP 13 |
@@ -333,52 +308,52 @@ The following table outlines the status of support for {{site.data.keyword.inf_m
 | Cloud-Init                                 | Yes    | Yes    |
 | Sysprep Windows Templates                  | Yes    | Yes    |
 
-### 5.3.2. Amazon EC2
+### 5.3.2. Amazon Web Services (AWS)
 
- The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on Amazon EC2 cloud providers.
+ The following table outlines the status of support for {{ site.data.product.title_short }} features on Amazon Web Services (AWS) cloud providers.
 
-#### Table 5.6. Amazon EC2 Feature Support
+#### Table 5.6. Amazon Web Services Feature Support
 
-| Feature                                      | Amazon EC2 |
-| -------------------------------------------- | ---------- |
-| Relationship Discovery                       | Yes        |
-| VM Drift Comparison                          | Yes        |
-| Track VM Genealogy                           | Yes        |
-| Capacity & Utilization                       | Yes        |
-| Capture VM/Instance Event Timelines          | Yes        |
-| Discovery - Provider                         | Yes        |
-| Disk Addition to VM/Instance                 | Yes        |
-| Key Pairs Inventory                          | Yes        |
-| Key Pairs Management                         | Yes        |
-| Reporting                                    | Yes        |
-| Right Sizing                                 | Yes        |
-| Chargeback                                   | Yes        |
-| Remote Console VM Access                     | No         |
-| Snapshot Creation and Removal                | No         |
-| VM / Instance Compliance Enforcement         | Yes        |
-| VM / Instance Policy Enforcement             | Yes        |
-| VM / Instance Power Operations               | Yes        |
-| VM / Instance Retirement                     | Yes        |
-| Alerts - Real Time                           | No         |
-| Alerts - VM Value Changed                    | No         |
-| Alerts - Reconfigured                        | No         |
-| Integrate with Service Catalogs              | Yes        |
-| Virtual Machine Reconfiguration              | No         |
-| Volume Inventory                             | No         |
-| Volume Creation/Deletion                     | No         |
-| VM Migration                                 | No         |
-| Automation Work Flows                        | Yes        |
-| Network Manager - Read Only                  | Yes        |
-| Network Manager - CRUD Actions Supported     | No         |
-| Storage Manager                              | Yes        |
-| Provision VM/Instance using PXE              | No         |
-| Provision VM/Instance using ISO              | No         |
-| Provision from Template/Image to VM/Instance | Yes        |
-| Clone from VM/Instance to VM/Instance        | No         |
+| Feature                                      | Amazon Web Services (AWS) |
+| -------------------------------------------- | ------------------------- |
+| Relationship Discovery                       | Yes                       |
+| VM Drift Comparison                          | Yes                       |
+| Track VM Genealogy                           | Yes                       |
+| Capacity & Utilization                       | Yes                       |
+| Capture VM/Instance Event Timelines          | Yes                       |
+| Discovery - Provider                         | Yes                       |
+| Disk Addition to VM/Instance                 | Yes                       |
+| Key Pairs Inventory                          | Yes                       |
+| Key Pairs Management                         | Yes                       |
+| Reporting                                    | Yes                       |
+| Right Sizing                                 | Yes                       |
+| Chargeback                                   | Yes                       |
+| Remote Console VM Access                     | No                        |
+| Snapshot Creation and Removal                | No                        |
+| VM / Instance Compliance Enforcement         | Yes                       |
+| VM / Instance Policy Enforcement             | Yes                       |
+| VM / Instance Power Operations               | Yes                       |
+| VM / Instance Retirement                     | Yes                       |
+| Alerts - Real Time                           | No                        |
+| Alerts - VM Value Changed                    | No                        |
+| Alerts - Reconfigured                        | No                        |
+| Integrate with Service Catalogs              | Yes                       |
+| Virtual Machine Reconfiguration              | No                        |
+| Volume Inventory                             | No                        |
+| Volume Creation/Deletion                     | No                        |
+| VM Migration                                 | No                        |
+| Automation Work Flows                        | Yes                       |
+| Network Manager - Read Only                  | Yes                       |
+| Network Manager - CRUD Actions Supported     | No                        |
+| Storage Manager                              | Yes                       |
+| Provision VM/Instance using PXE              | No                        |
+| Provision VM/Instance using ISO              | No                        |
+| Provision from Template/Image to VM/Instance | Yes                       |
+| Clone from VM/Instance to VM/Instance        | No                        |
 
 ### 5.3.3. Microsoft Azure
 
- The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on Microsoft Azure cloud providers.
+ The following table outlines the status of support for {{ site.data.product.title_short }} features on Microsoft Azure cloud providers.
 
 #### Table 5.7. Microsoft Azure Feature Support
 | Feature                                      | Microsoft Azure |
@@ -457,59 +432,59 @@ The following table outlines the status of support for actions that you can perf
 | Provision from Template/Image to VM/Instance | Yes     |
 | Clone from VM/Instance to VM/Instance        | No      |
 
-### 5.3.5. Google Compute Engine
+### 5.3.5. Google Cloud Platform (GCP)
 
 The following table outlines the status of support for {{ site.data.product.title_short }} features on Google Compute Engine cloud providers.
 
 #### Table 5.9. Google Compute Engine Feature Support
 
-| Feature                                      | Google Compute Engine |
-| -------------------------------------------- | --------------------- |
-| Relationship Discovery                       | Yes                   |
-| VM Drift Comparison                          | No                    |
-| Track VM Genealogy                           | Yes                   |
-| Capacity & Utilization                       | Yes                   |
-| Capture Cloud Layer Timelines                | No                    |
-| Capture VM/Instance Event Timelines          | Yes                   |
-| Discovery - Provider                         | No                    |
-| Disk Addition to VM/Instance                 | No                    |
-| Key Pairs Inventory                          | Yes                   |
-| Key Pairs Management                         | No                    |
-| Optimization - Bottleneck Identification     | No                    |
-| Reporting                                    | Yes                   |
-| Right Sizing                                 | Yes                   |
-| Chargeback                                   | Yes                   |
-| Remote Console VM Access                     | No                    |
-| Snapshot Creation and Removal                | No                    |
-| VM / Instance Compliance Enforcement         | Yes                   |
-| VM / Instance Policy Enforcement             | Yes                   |
-| VM / Instance Power Operations               | Yes                   |
-| VM / Instance Retirement                     | Yes                   |
-| Alerts - Real Time                           | No                    |
-| Alerts - VM Value Changed                    | No                    |
-| Alerts - Reconfigured                        | No                    |
-| Integrate with Service Catalogs              | Yes                   |
-| Virtual Machine Reconfiguration              | No                    |
-| Volume Inventory                             | Yes                   |
-| Volume Creation/Deletion                     | No                    |
-| VM Migration                                 | No                    |
-| Automation Work Flows                        | Yes                   |
-| Network Manager - Read Only                  | Yes                   |
-| Network Manager - CRUD Actions Supported     | No                    |
-| Storage Manager                              | No                    |
-| Provider TLS                                 | No                    |
-| Provision VM/Instance using PXE              | No                    |
-| Provision VM/Instance using ISO              | No                    |
-| Provision from Template/Image to VM/Instance | Yes                   |
-| Provision from VM/Instance to Template/Image | No                    |
-| Host Power Operations                        | No                    |
-| Provision Host                               | No                    |
-| Clone from VM/Instance to VM/Instance        | No                    |
+| Feature                                      | Google Cloud Platform (GCP) |
+| -------------------------------------------- | --------------------------- |
+| Relationship Discovery                       | Yes                         |
+| VM Drift Comparison                          | No                          |
+| Track VM Genealogy                           | Yes                         |
+| Capacity & Utilization                       | Yes                         |
+| Capture Cloud Layer Timelines                | No                          |
+| Capture VM/Instance Event Timelines          | Yes                         |
+| Discovery - Provider                         | No                          |
+| Disk Addition to VM/Instance                 | No                          |
+| Key Pairs Inventory                          | Yes                         |
+| Key Pairs Management                         | No                          |
+| Optimization - Bottleneck Identification     | No                          |
+| Reporting                                    | Yes                         |
+| Right Sizing                                 | Yes                         |
+| Chargeback                                   | Yes                         |
+| Remote Console VM Access                     | No                          |
+| Snapshot Creation and Removal                | No                          |
+| VM / Instance Compliance Enforcement         | Yes                         |
+| VM / Instance Policy Enforcement             | Yes                         |
+| VM / Instance Power Operations               | Yes                         |
+| VM / Instance Retirement                     | Yes                         |
+| Alerts - Real Time                           | No                          |
+| Alerts - VM Value Changed                    | No                          |
+| Alerts - Reconfigured                        | No                          |
+| Integrate with Service Catalogs              | Yes                         |
+| Virtual Machine Reconfiguration              | No                          |
+| Volume Inventory                             | Yes                         |
+| Volume Creation/Deletion                     | No                          |
+| VM Migration                                 | No                          |
+| Automation Work Flows                        | Yes                         |
+| Network Manager - Read Only                  | Yes                         |
+| Network Manager - CRUD Actions Supported     | No                          |
+| Storage Manager                              | No                          |
+| Provider TLS                                 | No                          |
+| Provision VM/Instance using PXE              | No                          |
+| Provision VM/Instance using ISO              | No                          |
+| Provision from Template/Image to VM/Instance | Yes                         |
+| Provision from VM/Instance to Template/Image | No                          |
+| Host Power Operations                        | No                          |
+| Provision Host                               | No                          |
+| Clone from VM/Instance to VM/Instance        | No                          |
 
 ### 5.4. Container Providers
 {: #feature-container-providers}
 
-The following section outlines the status of support for {{site.data.keyword.inf_man_notm}} features on OpenShift Container Platform container providers. 
+The following section outlines the status of support for {{ site.data.product.title_short }} features on OpenShift Container Platform container providers. 
 
 #### Table 5.10. OpenShift Container Platform Provider Feature Support
 
@@ -539,29 +514,29 @@ The following section outlines the status of support for {{site.data.keyword.inf
 ### 5.5. Network Providers
 {: #feature-network-providers}
 
-This section outlines the status of support for {{site.data.keyword.inf_man_notm}} features on network providers.
+This section outlines the status of support for {{ site.data.product.title_short }} features on network providers.
 
 #### Table 5.11. Network Provider Feature Support
 
-| Feature                       | Red Hat OpenStack Platform (OSP) | Amazon EC2 | Microsoft Azure | Google Compute Engine |
-| ----------------------------- | -------------------------------- | ---------- | --------------- | --------------------- |
-| Network Manager Relationships | Yes                              | Yes        | Yes             | Yes                   |
-| Relationship Discovery        | Yes                              | Yes        | Yes             | Yes                   |
-| Cloud Network Inventory       | Yes                              | Yes        | Yes             | Yes                   |
-| Cloud Subnet Inventory        | Yes                              | Yes        | Yes             | Yes                   |
-| Network Router Inventory      | Yes                              | No         | No              | Yes                   |
-| Security Groups               | Yes                              | Yes        | Yes             | Yes                   |
-| Floating IP Addresses         | Yes                              | Yes        | Yes             | Yes                   |
-| Network Ports                 | Yes                              | Yes        | Yes             | Yes                   |
-| Load Balancer Inventory       | No                               | Yes        | Yes             | Yes                   |
-| Create/Update/Delete Network  | Yes                              | No         | No              | No                    |
-| Create/Update/Delete Subnet   | Yes                              | No         | No              | No                    |
-| Create/Update/Delete Routers  | Yes                              | No         | No              | No                    |
+| Feature                       | Red Hat OpenStack Platform (OSP) | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) |
+| ----------------------------- | -------------------------------- | ------------------------- | --------------- | --------------------------- |
+| Network Manager Relationships | Yes                              | Yes                       | Yes             | Yes                         |
+| Relationship Discovery        | Yes                              | Yes                       | Yes             | Yes                         |
+| Cloud Network Inventory       | Yes                              | Yes                       | Yes             | Yes                         |
+| Cloud Subnet Inventory        | Yes                              | Yes                       | Yes             | Yes                         |
+| Network Router Inventory      | Yes                              | No                        | No              | Yes                         |
+| Security Groups               | Yes                              | Yes                       | Yes             | Yes                         |
+| Floating IP Addresses         | Yes                              | Yes                       | Yes             | Yes                         |
+| Network Ports                 | Yes                              | Yes                       | Yes             | Yes                         |
+| Load Balancer Inventory       | No                               | Yes                       | Yes             | Yes                         |
+| Create/Update/Delete Network  | Yes                              | No                        | No              | No                          |
+| Create/Update/Delete Subnet   | Yes                              | No                        | No              | No                          |
+| Create/Update/Delete Routers  | Yes                              | No                        | No              | No                          |
 
 ### 5.6. Configuration Management Providers
 {: #feature-configuration-management-providers}
 
-The following table outlines the status of support for {{site.data.keyword.inf_man_notm}} features on configuration management providers. 
+The following table outlines the status of support for {{ site.data.product.title_short }} features on configuration management providers.
 
 #### Table 5.12. Configuration Management Provider Feature Support
 | Feature                        | Ansible Tower |
@@ -572,16 +547,16 @@ The following table outlines the status of support for {{site.data.keyword.inf_m
 | Integrate with Service Catalog | Yes           |
 | Automate Workflows             | Yes           |
 
-**Note:** {{site.data.keyword.inf_man_notm}} supports Ansible Tower 3.7 and later as a configuration management provider.
+**Note:** {{ site.data.product.title_short }} supports Ansible Tower 3.7 and later as a configuration management provider.
 
 ## Chapter 6. Remote Console Support
 {: #remote-console-support}
 
-{{site.data.keyword.inf_man_notm}} allows you to access the console of virtual machines and instances on the providers it managers using HTML5-based VNC consoles. This section outlines the status of support for remote consoles in {{site.data.keyword.inf_man_notm}}.
+{{ site.data.product.title_short }} allows you to access the console of virtual machines and instances on the providers it managers using HTML5-based VNC consoles. This section outlines the status of support for remote consoles in {{ site.data.product.title_short }}.
 
-**Note:** For VMware vSphere providers, {{site.data.keyword.inf_man_notm}} supports the versions of VMRC that VMware supports. However, VMware does not support VMRC for Mac operating systems. See VMware VMRC documentation for more information.
+**Note:** For VMware vSphere providers, {{ site.data.product.title_short }} supports the versions of VMRC that VMware supports. However, VMware does not support VMRC for Mac operating systems. See VMware VMRC documentation for more information.
 
- For all other providers, {{site.data.keyword.inf_man_notm}} supports HTML5-based VNC consoles. The following have been tested with {{ site.data.product.title_short }} Engine:
+ For all other providers, {{ site.data.product.title_short }} supports HTML5-based VNC consoles. The following have been tested with {{ site.data.product.title_short }} Engine:
 
 - Windows: UltraVNC 1.1.8.8 - http://www.uvnc.com/
 - Linux/Mac: SSVNC 1.0.29 - http://www.karlrunge.com/x11vnc/ssvnc.html. At the time of this writing, this is the only client that supports the VNC repeater configuration. 
@@ -677,7 +652,7 @@ The following tables outline the status of support for remote consoles on provid
 | Red Hat Virtualization (RHV) 4.3 | SPICE           | Yes     | No     | No      | No    | No    |
 | Red Hat OpenStack Platform 10    | VNC             | Yes     | No     | No      | No    | No    |
 | Red Hat OpenStack Platform 13    | VNC             | Yes     | No     | No      | No    | No    |
-| Amazon EC2                       | N/A             | No      | N/A    | N/A     | N/A   | N/A   |
+| Amazon Web Services (AWS)        | N/A             | No      | N/A    | N/A     | N/A   | N/A   |
 | Microsoft SCVMM                  | N/A             | No      | N/A    | N/A     | N/A   | N/A   |
 
 #### Table 6.7. Remote Console Support on Windows 10
@@ -693,7 +668,7 @@ The following tables outline the status of support for remote consoles on provid
 | Red Hat Virtualization (RHV) 4.3 | SPICE           | Yes     | No     | No      | No    | No    | No   |
 | Red Hat OpenStack Platform 10    | VNC             | Yes     | No     | No      | No    | No    | No   |
 | Red Hat OpenStack Platform 13    | VNC             | Yes     | No     | No      | No    | No    | No   |
-| Amazon EC2                       | N/A             | No      | N/A    | N/A     | N/A   | N/A   | N/A  |
+| Amazon Web Services (AWS)        | N/A             | No      | N/A    | N/A     | N/A   | N/A   | N/A  |
 | Microsoft SCVMM                  | N/A             | No      | N/A    | N/A     | N/A   | N/A   | N/A  |
 
 #### Table 6.8. Remote Console Support on Windows 2012 Server
@@ -708,7 +683,7 @@ The following tables outline the status of support for remote consoles on provid
 | Red Hat Virtualization (RHV) 4.3 | SPICE           | Yes     | No     | No      | No    | No    |
 | Red Hat OpenStack Platform 10    | VNC             | Yes     | No     | No      | No    | No    |
 | Red Hat OpenStack Platform 13    | VNC             | Yes     | No     | No      | No    | No    |
-| Amazon EC2                       | N/A             | No      | N/A    | N/A     | N/A   | N/A   |
+| Amazon Web Services (AWS)        | N/A             | No      | N/A    | N/A     | N/A   | N/A   |
 | Microsoft SCVMM                  | N/A             | No      | N/A    | N/A     | N/A   | N/A   |
 
 
@@ -745,7 +720,9 @@ This section outlines the supported operating systems by infrastructure and clou
 | Red Hat OpenStack Platform 10 [a] | Yes           | Yes         | Yes        | Yes          | Yes          |
 | Red Hat OpenStack Platform 13 [a] | Yes           | Yes         | Yes        | Yes          | Yes          |
 | Microsoft Azure                   | Yes           | Yes         | Yes        | Yes          | Yes          |
-| Amazon EC2                        | Yes           | Yes         | Yes        | Yes          | Yes          |
+| Amazon Web Services (AWS)         | Yes           | Yes         | Yes        | Yes          | Yes          |
+| Google Cloud Platform (GCP)       |               |             |            |              |              |
+
 [a] See Section 8.2, [Supported Guest Operating Systems](#supported-guest-operating-systems).
 
 #### Table 7.3. Linux Support by Infrastructure Providers
@@ -775,14 +752,15 @@ This section outlines the supported operating systems by infrastructure and clou
 | Red Hat OpenStack Platform 10 [a] | Yes    | Yes    | Yes    | Yes  |
 | Red Hat OpenStack Platform 13 [a] | Yes    | Yes    | Yes    | Yes  |
 | Microsoft Azure                   | Yes    | Yes    | Yes    | Yes  |
-| Amazon EC2                        | Yes    | Yes    | Yes    | Yes  |
+| Amazon Web Services (AWS)         | Yes    | Yes    | Yes    | Yes  |
+| Google Cloud Platform (GCP)       |        |        |        |      |
 
 [a] See Section 8.2, [Supported Guest Operating Systems](#supported-guest-operating-systems).
 
 ## Chapter 8. Smart State Analysis Support
 {: #smart-state-analysis-support}
 
-{{site.data.keyword.inf_man_notm}} allows you to analyze virtual machines and instances on the providers it manages to collect information about the base operating system on those virtual machines or instances, their virtual hardware, installed applications, and other details. This operation is known as SmartState analysis. This section outlines the status of support for SmartState analysis of virtual machines and instances by guest operating system, file system, and by provider.
+{{ site.data.product.title_short }} allows you to analyze virtual machines and instances on the providers it manages to collect information about the base operating system on those virtual machines or instances, their virtual hardware, installed applications, and other details. This operation is known as SmartState analysis. This section outlines the status of support for SmartState analysis of virtual machines and instances by guest operating system, file system, and by provider.
 
 ### 8.1. File Systems
 
@@ -816,7 +794,8 @@ The following tables outline SmartState analysis support for different file syst
 | Red Hat OpenStack Platform 10 [a] | No   | Yes  | No    | No  |
 | Red Hat OpenStack Platform 13 [a] | No   | Yes  | No    | No  |
 | Microsoft Azure                   | No   | Yes  | Yes   | Yes |
-| Amazon EC2                        | No   | Yes  | Yes   | Yes |
+| Amazon Web Services (AWS)         | No   | Yes  | Yes   | Yes |
+| Google Cloud Platform (GCP)       | No   | No   | No    | No  |
 
 [a] See Section 8.2, [Supported Guest Operating Systems](#supported-guest-operating-systems).
 
@@ -848,7 +827,8 @@ The following tables outline SmartState analysis support for different file syst
 | Red Hat OpenStack Platform 10 [a] | Yes  | Yes  | Yes |
 | Red Hat OpenStack Platform 13 [a] | Yes  | Yes  | Yes |
 | Microsoft Azure                   | Yes  | Yes  | Yes |
-| Amazon EC2                        | Yes  | Yes  | Yes |
+| Amazon Web Services (AWS)         | Yes  | Yes  | Yes |
+| Google Cloud Platform (GCP)       |      |      |     |
 
 [a] See Section 8.2, [Supported Guest Operating Systems](#supported-guest-operating-systems).
 
@@ -880,7 +860,8 @@ The following tables outline SmartState analysis support for different file syst
 | Red Hat OpenStack Platform 10 [a]  | Yes  | Yes              |
 | Red Hat OpenStack Platform 13 [a]  | Yes  | Yes              |
 | Microsoft Azure                    | Yes  | Yes              |
-| Amazon EC2                         | Yes  | Yes              |
+| Amazon Web Services (AWS)          | Yes  | Yes              |
+| Google Cloud Platform (GCP)        |      |                  |
 
 [a] See Section 8.2, [Supported Guest Operating Systems](#supported-guest-operating-systems).
 

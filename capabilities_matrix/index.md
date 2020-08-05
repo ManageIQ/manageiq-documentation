@@ -1,7 +1,7 @@
 ---
 ---
 
-# Support Matrix
+# Capabilities Matrix
 
 {% include_relative _topics/browsers.md %}
 

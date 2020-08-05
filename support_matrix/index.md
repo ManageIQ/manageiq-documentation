@@ -3,8 +3,6 @@
 
 # Support Matrix
 
-{% include_relative _topics/build.md %}
-
 {% include_relative _topics/browsers.md %}
 
 {% include_relative _topics/runtime_platforms.md %}

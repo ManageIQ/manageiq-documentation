@@ -1,6 +1,6 @@
 ### Cloud Providers
 
-The following table outline the status of support for {{ site.data.product.title_short }} features on various cloud providers.
+The following table outlines the capabilities of {{ site.data.product.title_short }} that are known to work for various cloud providers.
 
 | Feature                                    | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform | IBM PowerVC via the OpenStack API     |
 | ------------------------------------------ | ------------------------- | --------------- | --------------------------- | -------------------------- | ------------------------------------- |
@@ -33,7 +33,7 @@ The following table outline the status of support for {{ site.data.product.title
 | Instance Migration                         | No                        | No              | No                          | Yes                        | Yes                                   |
 | Automation Work Flows                      | Yes                       | No              | Yes                         | Yes                        | Yes                                   |
 | Network Manager - Read Only                | No                        | Yes             | Yes                         | No                         | Yes                                   |
-| Network Manager - CRUD Actions Supported   | No                        | No              | No                          | No                         | No                                    |
+| Network Manager - CRUD Actions             | No                        | No              | No                          | No                         | No                                    |
 | Storage Manager                            | Yes                       | No              | No                          | Yes                        | No                                    |
 | Provision from Template/Image to Instance  | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
 | Provision from Image Snapshot to Instance  | No                        | No              | No                          | Yes                        | No                                    |

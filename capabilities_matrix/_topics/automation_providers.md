@@ -1,6 +1,6 @@
 ### Automation Providers
 
-The following table outlines the status of support for {{ site.data.product.title_short }} features on various automation providers.
+The following table outlines the capabilities of {{ site.data.product.title_short }} that are known to work for various automation providers.
 
 | Feature                        | Ansible Tower | Embedded Ansible | Automation Engine |
 | ------------------------------ | ------------- | ---------------- | ----------------- |

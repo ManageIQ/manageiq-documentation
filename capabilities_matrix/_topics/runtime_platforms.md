@@ -1,4 +1,4 @@
-## Supported Runtime Platforms for {{site.data.keyword.inf_man}}
+## Runtime Platforms
 
 The following table lists platforms on which {{site.data.keyword.inf_man}} can be installed and run from.
 

@@ -1,6 +1,6 @@
-### Infrastructure Providers Features Support
+### Infrastructure Providers
 
- The following table outline the status of support for {{ site.data.product.title_short }} features on various virtual infrastructure providers.
+ The following table outlines the capabilities of {{ site.data.product.title_short }} that are known to work for various virtual infrastructure providers.
 
 | Feature                                                      | VMware vSphere | Red Hat Virtualization (RHV) | Microsoft System Center Virtual Machine Manager (SCVMM) | OpenStack Platform (OSP) Director |
 | ------------------------------------------------------------ | -------------- | ---------------------------- | ------------------------------------------------------- | --------------------------------- |

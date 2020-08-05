@@ -3,6 +3,14 @@
 {{ site.data.product.title_short }} allows you to analyze virtual machines and instances on the providers it manages to collect information about the base operating system on those virtual machines or instances, their virtual hardware, installed applications, and other details. This operation is known as SmartState analysis. The sections below outline what ManageIQ can parse.
 
 
+### Volume Managers
+
+| Volume Manager                 | OS Family | Known To Work |
+| -------------------------------| --------- | ------------- |
+| Logical Disk Manager (LDM)     | Windows   | Yes           |
+| Logical Volume Manager (Linux) | Linux     | Yes           |
+
+
 ### File Systems
 
 | File System | OS Family | Known To Work |
@@ -16,13 +24,6 @@
 | XFS         | Linux     | Yes           |
 | ReiserFS    | Linux     | Yes           |
 | CDfs        | Linux     | Yes           |
-
-### Volume Managers
-
-| Volume Manager                 | OS Family | Known To Work |
-| -------------------------------| --------- | ------------- |
-| Logical Disk Manager (LDM)     | Windows   | Yes           |
-| Logical Volume Manager (Linux) | Linux     | Yes           |
 
 
 ### File Formats

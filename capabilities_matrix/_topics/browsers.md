@@ -1,6 +1,6 @@
-## Supported Browsers
+## Web Browsers
 
-The following table lists the browsers that work with {{ site.data.product.title_short }}.
+The following table lists the browsers that are known to work with {{ site.data.product.title_short }}.
 
 | Browser         |
 | --------------- |

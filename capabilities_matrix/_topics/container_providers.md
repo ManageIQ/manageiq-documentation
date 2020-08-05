@@ -1,6 +1,6 @@
 ### Container Providers
 
-The following section outlines the status of support for {{ site.data.product.title_short }} features on various container providers.
+The following table outlines the capabilities of {{ site.data.product.title_short }} for various container providers.
 
 | Feature                                 | OpenShift Container Platform (OCP) 3.11 | OpenShift Container Platform (OCP) 4.x | Kubernetes |
 | --------------------------------------- | --------------------------------------- |--------------------------------------- | ---------- |

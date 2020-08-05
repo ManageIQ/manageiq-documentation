@@ -28,7 +28,5 @@ ruby /var/www/miq/vmdb/tools/feature_support_matrix.rb
 
 {% include_relative _topics/remote_consoles.md %}
 
-{% include_relative _topics/operating_systems.md %}
-
 {% include_relative _topics/smartstate_analysis.md %}
 

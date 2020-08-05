@@ -12,8 +12,8 @@
 | Discovery - Provider                                         | Yes            | Yes                          | Yes                                                     | No                                |
 | Reporting                                                    | Yes            | Yes                          | Yes                                                     | Yes                               |
 | Right Sizing                                                 | Yes            | Yes                          | No                                                      | No                                |
-| Chargeback                                                   | Yes            | Yes                          | Yes [a]                                                 | No                                |
-| Remote Console VM Access [b]                                 | Yes            | Yes                          | Yes                                                     | No                                |
+| Chargeback                                                   | Yes            | Yes                          | Yes (but limited to inventory allocation)               | No                                |
+| Remote Console VM Access (see section below)                 | Yes            | Yes                          | Yes                                                     | No                                |
 | Snapshot Creation and Removal                                | Yes            | Yes                          | No                                                      | No                                |
 | VM / Instance Compliance Enforcement                         | Yes            | Yes                          | Yes                                                     | No                                |
 | VM / Instance Policy Enforcement                             | Yes            | Yes                          | Yes                                                     | No                                |
@@ -52,5 +52,14 @@
 | OpenStack Upgrade                                            | No             | No                           | No                                                      | No                                |
 
 
-[a] Limited to inventory allocation.
-[b] On some operating system and browser combinations.
+#### Remote Consoles
+
+| Provider                         | Connection Type |
+| -------------------------------- | --------------- |
+| VMware vSphere 6.0               | VNC             |
+|                                  | VMRC            |
+|                                  | WebMKS          |
+| VMware vSphere 6.5 and higher    | VMRC            |
+|                                  | WebMKS          |
+| Red Hat Virtualization (RHV)     | SPICE           |
+| Microsoft SCVMM                  | N/A             |

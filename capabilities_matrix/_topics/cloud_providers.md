@@ -54,3 +54,12 @@ The following table outline the status of support for {{ site.data.product.title
 | Create/Update/Delete Network               | No                        | No              | No                          | Yes                        | No                                    |
 | Create/Update/Delete Subnet                | No                        | No              | No                          | Yes                        | No                                    |
 | Create/Update/Delete Routers               | No                        | No              | No                          | Yes                        | No                                    |
+
+#### Remote Consoles
+
+| Provider                         | Connection Type |
+| -------------------------------- | --------------- |
+| Red Hat OpenStack Platform (OSP) | VNC             |
+| Amazon Web Services (AWS)        | N/A             |
+| Google Cloud Platform (GCP)      | N/A             |
+| Microsoft Azure                  | N/A             |

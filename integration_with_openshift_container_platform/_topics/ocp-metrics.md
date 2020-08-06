@@ -3,7 +3,7 @@ Platform node, pod, and container, you must first enable *cluster
 metrics* for your OpenShift cluster. This involves running the OpenShift
 Metrics services inside your cluster. If cluster metrics are already
 enabled on OpenShift, skip this section and proceed to
-[???](#Obtaining_OpenShift_Management_Token).
+[Retrieving the OpenShift Container Platform Management Token](#retrieving-the-openshift-container-platform-management-token).
 
 <div class="note">
 

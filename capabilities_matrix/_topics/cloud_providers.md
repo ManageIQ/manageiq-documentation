@@ -10,10 +10,10 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Capacity & Utilization                     | Yes                       | Yes             | Yes                         | Yes                        | No                                    |
 | Capture Cloud Layer Timelines              | No                        | No              | No                          | Yes                        | Yes                                   |
 | Capture Instance Event Timelines           | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
-| Discovery - Provider                       | Yes                       | Yes             | No                          | No                         | No                                    |
+| Discovery - Provider                       | No                        | No              | No                          | No                         | No                                    |
 | Disk Addition to Instance                  | Yes                       | Yes             | No                          | Yes                        | No                                    |
 | Key Pairs Inventory                        | Yes                       | No              | Yes                         | Yes                        | Yes                                   |
-| Key Pairs Management                       | Yes                       | Yes             | No                          | Yes                        | Yes                                   |
+| Key Pairs Management                       | Yes                       | No              | No                          | Yes                        | Yes                                   |
 | Reporting                                  | Yes                       | Yes             | Yes                         | Yes                        | No                                    |
 | Right Sizing                               | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
 | Chargeback                                 | Yes                       | Yes             | Yes                         | Yes                        | No                                    |
@@ -25,7 +25,7 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Instance Retirement                        | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
 | Alerts - Real Time                         | No                        | No              | No                          | Yes                        | No                                    |
 | Alerts - Instance Value Changed            | No                        | No              | No                          | No                         | No                                    |
-| Alerts - Reconfigured                      | No                        | No              | No                          | No                         | No                                    |
+| Alerts - Instance Reconfigured             | No                        | No              | No                          | No                         | No                                    |
 | Integrate with Service Catalogs            | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
 | Instance Reconfiguration                   | No                        | No              | No                          | Yes                        | Yes                                   |
 | Volume Inventory                           | No                        | No              | Yes                         | Yes                        | Yes                                   |
@@ -35,7 +35,7 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Network Manager - Read Only                | No                        | Yes             | Yes                         | No                         | Yes                                   |
 | Network Manager - CRUD Actions             | No                        | No              | No                          | No                         | No                                    |
 | Storage Manager                            | Yes                       | No              | No                          | Yes                        | No                                    |
-| Provision from Template/Image to Instance  | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
+| Provision from Image to Instance           | Yes                       | Yes             | Yes                         | Yes                        | Yes                                   |
 | Provision from Image Snapshot to Instance  | No                        | No              | No                          | Yes                        | No                                    |
 | Provision from Volume to Instance          | No                        | No              | No                          | Yes                        | No                                    |
 | Provision from Volume Snapshot to Instance | No                        | No              | No                          | Yes                        | No                                    |
@@ -53,7 +53,7 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Load Balancer Inventory                    | Yes                       | Yes             | Yes                         | No                         | No                                    |
 | Create/Update/Delete Network               | No                        | No              | No                          | Yes                        | No                                    |
 | Create/Update/Delete Subnet                | No                        | No              | No                          | Yes                        | No                                    |
-| Create/Update/Delete Routers               | No                        | No              | No                          | Yes                        | No                                    |
+| Create/Update/Delete Routers               | Yes                       | Yes             | No                          | Yes                        | No                                    |
 
 #### Remote Consoles
 

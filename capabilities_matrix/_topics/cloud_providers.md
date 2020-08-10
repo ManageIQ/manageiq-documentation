@@ -54,6 +54,8 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Create/Update/Delete Network               | No                        | No              | No                          | Yes                        | No                                    |
 | Create/Update/Delete Subnet                | No                        | No              | No                          | Yes                        | No                                    |
 | Create/Update/Delete Routers               | Yes                       | Yes             | No                          | Yes                        | No                                    |
+| Tag Mapping from Provider                  | Yes                       | Yes             | No                          | Yes                        | Yes                                   |
+| Tag Mapping to Provider                    | No                        | No              | No                          | No                         | No                                    |
 
 #### Remote Consoles
 

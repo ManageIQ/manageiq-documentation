@@ -51,6 +51,8 @@
 | Nodes Policy Enforcement                                     | No             | No                           | No                                                      | Yes                               |
 | Nodes Evacuate                                               | No             | No                           | No                                                      | Yes                               |
 | OpenStack Upgrade                                            | No             | No                           | No                                                      | No                                |
+| Tag Mapping from Provider                                    | No             | No                           | No                                                      | No                                |
+| Tag Mapping to Provider                                      | No             | No                           | No                                                      | No                                |
 
 
 #### Remote Consoles

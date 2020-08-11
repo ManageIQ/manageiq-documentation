@@ -24,3 +24,5 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Smart State                             | Yes                                     | No                                     | No         |
 | OpenSCAP Execution and Report           | Yes                                     | No                                     | Yes        |
 | Cross Linking Underlying Infrastructure | Yes                                     | Yes                                    | Yes        |
+| Tag Mapping from Provider               | Yes                                     | Yes                                    | Yes        |
+| Tag Mapping to Provider                 | No                                      | No                                     | No         |

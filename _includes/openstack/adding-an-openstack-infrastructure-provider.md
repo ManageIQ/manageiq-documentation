@@ -10,14 +10,7 @@ associated with the `admin` tenant.
 
 <div class="note">
 
-  - You can set whether {{ site.data.product.title }} should use the Telemetry service
-    or Advanced Message Queueing Protocol (AMQP) for event monitoring.
-    If you choose Telemetry, you should first configure the
-    **ceilometer** service on the undercloud to store events. See
-    [???](#openstack-events-uc) for instructions. For more information,
-    see [OpenStack Telemetry
-    (ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/architecture_guide/#comp-telemetry)
-    in the Red Hat OpenStack Platform *Architecture Guide*.
+  - You can set whether {{ site.data.product.title }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the undercloud to store events. See [Configuring the Undercloud to Store Events](#configuring-the-undercloud-to-store-events) for instructions. For more information, see [OpenStack Telemetry (ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/architecture_guide/#comp-telemetry) in the Red Hat OpenStack Platform *Architecture Guide*.
 
   - To authenticate the provider using a self-signed Certificate
     Authority (CA), configure the {{ site.data.product.title_short }} appliance to
@@ -101,10 +94,7 @@ associated with the `admin` tenant.
     OpenStack provider. Click the **Events** tab in the **Endpoints**
     section to start.
 
-      - To use the Telemetry service of the OpenStack provider, select
-        **Ceilometer**. Before you do so, the provider must first be
-        configured accordingly. See [???](#openstack-events-uc) for
-        details.
+      - To use the Telemetry service of the OpenStack provider, select **Ceilometer**. Before you do so, the provider must first be configured accordingly. See [Configuring the Undercloud to Store Events](#configuring-the-undercloud-to-store-events) for details.
 
       - If you prefer to use the AMQP Messaging bus instead, select
         **AMQP**. When you do: In **Hostname (or IPv4 or IPv6 address)**

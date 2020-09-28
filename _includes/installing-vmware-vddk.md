@@ -42,6 +42,7 @@ To install VMware VDDK:
         # cp vmware-vix-disklib-distrib/ -rf /usr/lib/vmware-vix-disklib/
         # ln -s /usr/lib/vmware-vix-disklib/lib64/libvixDiskLib.so /usr/lib/libvixDiskLib.so
         # ln -s /usr/lib/vmware-vix-disklib/lib64/libvixDiskLib.so.6 /usr/lib/libvixDiskLib.so.6
+        # ln -s /usr/lib/vmware-vix-disklib/lib64/libvixDiskLib.so.6.7.0 /usr/lib/libvixDiskLib.so.6.7.0
 
 5.  Run `ldconfig` to instruct {{ site.data.product.title_short }} to find the newly
     installed VDDK library.

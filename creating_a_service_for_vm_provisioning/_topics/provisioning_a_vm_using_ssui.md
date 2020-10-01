@@ -1,7 +1,7 @@
 ## Provisioning a Virtual Machine Using the Self Service User Interface
 
 1.  Log in to the Self Service User Interface at
-    <https://<your_cloudforms_appliance>/self_service>.
+    <https://<your_cloudforms_appliance>/ui/service>.
 
 2.  Click the **Service Catalog** tab.
 

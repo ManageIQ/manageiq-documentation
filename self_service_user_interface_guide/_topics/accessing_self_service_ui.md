@@ -7,7 +7,7 @@ login credentials.
 
 Self Service URL:
 
-    https://HOSTNAME/self_service/
+    https://HOSTNAME/ui/service/
 
 ![Self Service Login Screen](../images/ssui-login-nb.png)
 

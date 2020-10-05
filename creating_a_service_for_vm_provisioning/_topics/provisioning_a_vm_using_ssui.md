@@ -1,7 +1,7 @@
 ## Provisioning a Virtual Machine Using the Self Service User Interface
 
 1.  Log in to the Self Service User Interface at
-    <https://<your_cloudforms_appliance>/ui/service>.
+    <https://<hostname>/ui/service>.
 
 2.  Click the **Service Catalog** tab.
 
@@ -27,9 +27,7 @@ You have ordered a new provisioning request. You can follow its progress
 and see additional details of the order request by selecting it from the
 **Orders** tab.
 
-Also, see the [Self Service User Interface
-Guide](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/self_service_user_interface_guide/)
-for more information about using the Self Service user interface.
+Also, see the [Self Service User Interface Guide](/self_service_user_interface_guide/_topics/accessing_self_service_ui.md) for more information about using the Self Service user interface.
 
 **Summary.**
 

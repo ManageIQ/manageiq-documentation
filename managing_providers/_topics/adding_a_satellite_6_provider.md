@@ -11,7 +11,7 @@ Satelllite 6 provider added to {{ site.data.product.title }}.
 
 4.  Enter a **URL** for the provider. This is the root URL for the
     Satellite 6 server and can be either an IP address or a hostname.
-    For example, *<http://satellite6.example.com>*.
+    For example, `http://satellite6.example.com`.
 
 5.  Select **Verify Peer Certificate** to use encrypted communication
     with the provider. This requires the **SSL certificates** from your

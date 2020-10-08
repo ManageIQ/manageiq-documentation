@@ -9,7 +9,7 @@ The categories of predefined reports available on {{ site.data.product.title }} 
 
 For more detailed information on managing reports, see [Monitoring,
 Alerts, and
-Reporting](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/single/monitoring-alerts-and-reporting/).
+Reporting](../monitoring_alerts_and_reporting/index.html).
 
 ### Generating a Single Report
 

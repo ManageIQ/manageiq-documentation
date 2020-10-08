@@ -1,23 +1,15 @@
 # Data Optimization
 
-{{ site.data.product.title }} optimization functions allow you to view utilization
-trends in your environment. In addition, you can predict where you have
-capacity for additional virtual machines, see [Planning Where to Put a
-New Virtual
-Machine](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/deployment_planning_guide/#planning-where-to-put-a-new-virtual-machine)
+{{ site.data.product.title }} optimization functions allow you to view utilization trends in your environment. In addition, you can predict where you have capacity for additional virtual machines, see [Planning Where to Put a New Virtual Machine](../deployment_planning_guide/index.html#planning-where-to-put-a-new-virtual-machine)
 in the *Deployment Planning Guide*.
 
 <div class="note">
 
-  - To access the utilization report features, you will first need to
-    enable data collection in {{ site.data.product.title }}; see the following
-    sections in the *Deployment Planning Guide*:
+  - To access the utilization report features, you will first need to enable data collection in {{ site.data.product.title }}; see the following sections in the *Deployment Planning Guide*:
 
-      - [Assigning the Capacity and Utilization Server
-        Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/Capacity_Planning#assigning_the_capacity_and_utilization_server_roles)
+      - [Assigning the Capacity and Utilization Server Roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles)
 
-      - [Capacity and Utilization Data
-        Collected](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/capacity_planning#data_collected)
+      - [Capacity and Utilization Data Collected](../deployment_planning_guide/index.html#capacity-and-utilization-data-collected)
 
 </div>
 

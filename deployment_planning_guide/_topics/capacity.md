@@ -6,7 +6,7 @@
 
 For some capacity and utilization data, {{ site.data.product.title }} calculates and shows trend lines in the charts. Trend lines are created by using linear regression, which is calculated by using the capacity and utilization data that is collected by {{ site.data.product.title }} during the interval you specify for the chart. The more data that you have the better the predictive value of the trend line.
 
-There are three server roles that are associated with the collection and metric creation of capacity and utilization.
+Three server roles are associated with the collection and metric creation of capacity and utilization.
 
   - The Capacity & Utilization Coordinator role checks to see whether it is time to collect data, somewhat like a scheduler. If it is time, a job is queued for the Capacity & Utilization Data Collector. The Coordinator role is required to complete capacity and utilization data collection. If more than one server in a specific zone has this role, only one is active at a time.
 
@@ -21,7 +21,7 @@ There are three server roles that are associated with the collection and metric 
 <div class="note">
 
 In addition to setting the server role, you must also select which
-clusters and datastores to collect data for. For more information, see the **General Configuration** guide. You must have super administrator rights to edit these settings.
+clusters and data stores to collect data for. For more information, see the **General Configuration** guide. You must have super administrator privileges to edit these settings.
 
 </div>
 
@@ -284,12 +284,35 @@ Capacity and utilization charts for host, clusters, virtual machines, and datast
 
 3. Click a data point to open a shortcut menu for the chart. In this example, you can use the shortcut menu to go to the hourly chart or display the virtual machines that were running at the time the data was captured.
 
-      - If you are viewing the **CPU**, **Disk**, **Memory**, or
-        **Network** charts, selecting from the **Chart** option will change all of the charts on the page to the new interval selected.
+      - If you are viewing the **CPU**, **Disk**, **Memory**, or **Network** charts, selecting from the **Chart** option will change all of the charts on the page to the new interval selected.
 
-      - If you are viewing the **CPU**, **Disk**, **Memory**, or
-        **Network** charts, selecting from the **Display** option will allow you to drill into the virtual machines or **Hosts** that were running at the time.
+      - If you are viewing the **CPU**, **Disk**, **Memory**, or **Network** charts, selecting from the **Display** option will allow you to drill into the virtual machines or **Hosts** that were running at the time.
 
-      - If you are viewing the **VM** or **Hosts** chart, the
-        **Display** menu allows you to view running or stopped
-        virtual machines. The time of the data point will be displayed in addition to the virtual machines that apply. From here, click a virtual machine to view its details.
+      - If you are viewing the **VM** or **Hosts** chart, the **Display** menu allows you to view running or stopped virtual machines. The time of the data point will be displayed in addition to the virtual machines that apply. From here, click a virtual machine to view its details.
+
+### Planning Where to Put a New Virtual Machine
+
+You can use the data that is collected in the VMDB to plan where you can put more virtual machines. With {{ site.data.product.title }}, you can use a reference virtual machine as an example to plan on which hosts and clusters you can place a new virtual machine.
+
+** Note:** For more information about utilization trends and identifying bottlenecks in your environment, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization) in Managing Infrastructure and Inventory.
+
+1. Navigate to **Optimize** > **Planning**.
+2. From **Reference VM Selection**, use the drop-down menu to select the virtual machine that is most like the one that you want to add.
+
+   ![2254](../images/2254.png)
+
+3. Select the required VM Options for what you want to base the calculations on.
+
+   ![2255](../images/2255.png)
+
+   From the **Source** list, select the type of data to use as the source for your projections. For example, select **Allocation** to calculate based on the current allocation values of each resource (CPU, memory, or disk space) for the reference virtual machine. Use **Reservation** to project based on the current guaranteed value of the specific resource (CPU Speed, CPU count, memory, or disk space) although that amount might not be allocated to the virtual machine at a specific moment in time. Select **Usage** if you want to calculate based on usage history of the reference virtual machine. Use **Manual Input** to enter your own set of parameters for each resource.
+
+4. From **Target Options / Limits**, select if you want to use clusters or hosts as your targets.
+      
+   ![2256](../images/2256.png)
+
+   Also, select the limit of how high the projection can go for CPU, memory, and datastore space. If you are targeting hosts, you are able to select a filter for which hosts can be targets. 
+5. From Trend Options, select how far back you want to use the trend data for, a Time Profile and Time Zone if applicable. Note that Time Profile will only show if the logged on user has a Time Profile available.
+6. Click Submit.
+
+The **Summary** tab shows the best clusters or hosts on which to place the virtual machines. The **Report** tab shows the best fit and statistics on the reference virtual machine in a tabular format. From the **Report** tab, you can also create a PDF of the report or download the data in `txt` or `csv` format. 

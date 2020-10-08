@@ -68,16 +68,13 @@ Containers provider authentication status
 ## Obtaining an OpenShift Container Platform Management Token
 
 When deploying OpenShift using `openshift-ansible-3.0.20` (or later
-versions), the OpenShift Container Platform [service
-account](https://docs.openshift.com/container-platform/latest/admin_guide/service_accounts.html)
-and
-[roles](https://docs.openshift.com/container-platform/latest/admin_guide/manage_authorization_policy.html)
-required by {{ site.data.product.title }} are installed by default.
+versions), the OpenShift Container Platform [service account](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html)
+and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title }} are installed by default.
 
 <div class="note">
 
 See the [OpenShift Container Platform
-documentation](https://docs.openshift.com/container-platform/latest/architecture/additional_concepts/authorization.html#roles)
+documentation](https://docs.openshift.com/container-platform/4.5/authentication/using-rbac.html#default-roles_using-rbac)
 for a list of the default roles.
 
 </div>
@@ -94,9 +91,7 @@ Use the OpenShift Cluster Metrics plug-in to collect node, pod, and
 container metrics into one location. This helps track usage and find
 common issues.
 
-  - Configure {{ site.data.product.title }} to allow for all three [**Capacity &
-    Utilization** server
-    roles](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/deployment-planning-guide/#assigning_the_capacity_and_utilization_server_roles).
+  - Configure {{ site.data.product.title }} to allow for all three [Capacity & Utilization server roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles).
 
   - Enable cluster metrics using the [OpenShift Container Platform
     documentation](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/installation_and_configuration/#install-config-cluster-metrics).

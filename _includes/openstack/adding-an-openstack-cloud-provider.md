@@ -8,12 +8,9 @@ with the `admin` tenant.
 
 <div class="note">
 
-In OpenStack, you must add `admin` as a member of all tenants that users
-want to access and use in {{ site.data.product.title_short }}.
+In OpenStack, you must add `admin` as a member of all tenants that users want to access and use in {{ site.data.product.title_short }}.
 
-<a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/5.0-beta/html-single/managing_infrastructure_and_inventory/index#tenants" target="_blank">Cloud
-Tenants</a> in *Managing Infrastructure and Inventory* for information on working
-with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
+See [Cloud Tenants](../managing_infrastructure_and_inventory/index.html#cloud-tenants) in *Managing Infrastructure and Inventory* for information on working with OpenStack tenants (projects) in {{ site.data.product.title_short }}.
 
 </div>
 

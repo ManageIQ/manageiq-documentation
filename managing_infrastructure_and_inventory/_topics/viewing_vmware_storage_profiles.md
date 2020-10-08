@@ -19,5 +19,5 @@ To view a virtual machine’s storage profile:
 You can assign a storage profile when provisioning a VMware virtual
 machine in {{ site.data.product.title }}, by using the virtual machine as a template
 to clone. See [Provisioning Virtual
-Machines](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/single/provisioning-virtual-machines-and-hosts/#provisioning-virtual-machines)
+Machines](../provisioning_virtual_machines_and_hosts/index.html#provisioning-virtual-machines)
 in *Provisioning Virtual Machines and Hosts* for instructions.

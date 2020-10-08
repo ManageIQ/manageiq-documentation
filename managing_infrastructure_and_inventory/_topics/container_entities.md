@@ -218,5 +218,5 @@ automatically as `category1` in {{ site.data.product.title }}. If the *value* fo
 : south`.
 
 You can use these tags to create reports. See [Monitoring, Alerts, and
-Reporting](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/single/monitoring-alerts-and-reporting/)
+Reporting](../monitoring_alerts_and_reporting/index.html)
 for details on creating reports.

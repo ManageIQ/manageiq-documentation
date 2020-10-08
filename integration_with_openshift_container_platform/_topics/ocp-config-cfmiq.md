@@ -1,7 +1,6 @@
 Configuring {{ site.data.product.title_short }} involves two steps:
 
-1.  [Configuring {{ site.data.product.title_short }} Capacity and
-    Utilization](../deployment_planning_guide/index.html#capacity-and-utilization-collection), and
+1.  [Configuring {{ site.data.product.title_short }} Capacity and Utilization](../deployment_planning_guide/index.html#capacity-and-utilization-collection), and
 
 2.  [Enabling SmartState Analysis](#enabling-smartstate-analysis)
 

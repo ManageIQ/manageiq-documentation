@@ -32,7 +32,7 @@ below:
     more information about configuring chargeback rates in the full
     administrative user interface and how {{ site.data.product.title }} calculates
     chargeback costs, see
-    [Chargeback](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/single/monitoring-alerts-and-reporting/#sect_chargeback)
+    [Chargeback](../monitoring_alerts_and_reporting/index.html#chargeback)
     in the *Monitoring, Alerts, and Reporting* guide.
 
 <div class="note">

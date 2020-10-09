@@ -1,17 +1,12 @@
 # Data Optimization
 
-{{ site.data.product.title }} optimization functions allow you to view utilization trends in your environment. In addition, you can predict where you have capacity for additional virtual machines, see [Planning Where to Put a New Virtual Machine](../deployment_planning_guide/index.html#planning-where-to-put-a-new-virtual-machine)
+{{ site.data.product.title }} optimization functions allow you to view utilization trends in your environment. In addition, you can predict where you have capacity for more virtual machines, see [Planning Where to Put a New Virtual Machine](../deployment_planning_guide/index.html#planning-where-to-put-a-new-virtual-machine)
 in the *Deployment Planning Guide*.
 
-<div class="note">
+**Note:** To access the utilization report features, you will first need to enable data collection in {{ site.data.product.title }}; see the following sections in the *Deployment Planning Guide*:
 
-  - To access the utilization report features, you will first need to enable data collection in {{ site.data.product.title }}; see the following sections in the *Deployment Planning Guide*:
-
-      - [Assigning the Capacity and Utilization Server Roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles)
-
-      - [Capacity and Utilization Data Collected](../deployment_planning_guide/index.html#capacity-and-utilization-data-collected)
-
-</div>
+- [Assigning the Capacity and Utilization Server Roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles)
+- [Capacity and Utilization Data Collected](../deployment_planning_guide/index.html#capacity-and-utilization-data-collected)
 
 ## Utilization Trends
 
@@ -27,10 +22,9 @@ This procedure shows you how to view a utilization trend summary.
 
 2.  Click **Summary** if it is not already selected.
 
-3.  Expand the tree on the left side, until you can see the desired
-    providers, clusters, or datastores.
+3.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 
-4.  Click on the item.
+4.  Click the item.
 
 5.  Use the **Options** section in the **Summary** tab to change the
     characteristics of the data.
@@ -41,8 +35,7 @@ This procedure shows you how to view a utilization trend summary.
       - Use **Selected Day** for the date you want to see percent
         utilization for in the chart on the **Summary** tab.
 
-      - Use **Classification** to only see trends for a specific applied
-        tag.
+      - Use **Classification** to see trends only for a specific applied tag.
 
       - Use **Time Profile** to select an existing time profile. If the
         logged on user does not have any time profiles available, this
@@ -57,10 +50,9 @@ trend.
 
 1.  Navigate to menu:Overview\[Utilization\].
 
-2.  Expand the tree on the left side, until you can see the desired
-    providers, clusters, or datastores.
+2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 
-3.  Click on the item.
+3.  Click the item.
 
 4.  Click **Details** if it is not already selected.
 
@@ -74,10 +66,9 @@ reports.
 
 1.  Navigate to menu:Overview\[Utilization\].
 
-2.  Expand the tree on the left side, until you can see the desired
-    providers, clusters, or datastores.
+2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 
-3.  Click on the item.
+3.  Click the item.
 
 4.  Click **Report** if it is not already selected.
 

@@ -4,14 +4,8 @@ Metrics services inside your cluster. If cluster metrics are already
 enabled on OpenShift, skip this section and proceed to
 [Retrieving the OpenShift Container Platform Management Token](#retrieving-the-openshift-container-platform-management-token).
 
-<div class="note">
-
-This section is an abridged version of a more detailed chapter, namely
-[Enabling Cluster Metrics](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.9/html/installation_and_configuration/install-config-cluster-metrics)
-from the OpenShift Container Platform *Installation and Configuration*
-documentation. Refer to that chapter for more information.
-
-</div>
+**Note:** This section is an abridged version of a more detailed chapter, namely
+[Enabling Cluster Metrics](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.9/html/installation_and_configuration/install-config-cluster-metrics) from the OpenShift Container Platform *Installation and Configuration* documentation. Refer to that chapter for more information.
 
 ## Configuring the Required Service Accounts
 

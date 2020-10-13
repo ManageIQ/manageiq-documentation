@@ -36,7 +36,7 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
     ![Figure showing example standard type bucket created.](../images/buckets.png){: caption="Figure 3. Example Standard type bucket created" caption-side="bottom"}
 
 
-2. Upload the {{ site.data.product.title }} installation image (file name: `cfme-rhos-5.11.4.x86_64.qcow2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). **Note:** You can use the Aspera high-speed transfer plug-in to upload images larger than 200 MB.  
+2. Upload the {{ site.data.product.title }} installation image (file name: `manageiq-openstack-jansa-1.qc2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). **Note:** You can use the Aspera high-speed transfer plug-in to upload images larger than 200 MB.  
 ![Figure showing example that uses Aspera uploaded file to bucket.](../images/upload_images_to_bucket.png){: caption="Figure 4. Example using Aspera uploaded file to bucket" caption-side="bottom"}
 
 3. From IBM Cloud Identity and Access Management (IAM), create an authorization between the Virtual Private Cloud (VPC) Infrastructure (source service) > Image Service for VPC (resource type) and Cloud Object Storage (target service). For more information, see [Create an authorization](https://cloud.ibm.com/docs/iam?topic=iam-serviceauth#serviceauth).

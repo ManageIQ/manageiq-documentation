@@ -25,7 +25,9 @@ environment, add a VMware vCenter provider to the appliance.
 6.  Select the appropriate **Zone** for the provider. By default, the
     zone is set to **default**.
 
-7.  In the **Credentials** area, under **Default**, provide the login
+7.  Optional: Enter the **Host Default VNC Start Port** and **Host Default VNC End Port**. These properties are used for remote console access with VNC. If VNC is available from the hosts, list the available port range using the start and end port.     
+    
+8.  In the **Credentials** area, under **Default**, provide the login
     credentials required for the VMware vCenter administrative user:
 
       - Enter the user name in the **Username** field.
@@ -37,4 +39,4 @@ environment, add a VMware vCenter provider to the appliance.
       - Click **Validate** to confirm {{ site.data.product.title }} can connect to the
         VMware vCenter.
 
-8.  Click **Add**.
+9.  Click **Add**.

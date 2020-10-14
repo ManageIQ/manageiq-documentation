@@ -23,14 +23,8 @@ server roles and zones.
 ![cloudforms ha architecture 431939 0917 ece
 02](../images/cloudforms_ha_architecture_431939_0917_ece-02.png)
 
-See
-[Regions](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#regions)
-and
-[Servers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#servers)
-in *General Configuration* for more information on configuring servers
-and roles.
+See [Regions](../general_configuration/index.html#regions)
+and [Servers](../general_configuration/index.html#servers)
+in *General Configuration* for more information on configuring servers and roles.
 
-See [Deploying CloudForms at
-Scale](https://access.redhat.com/documentation/en-us/reference_architectures/2017/html/deploying_cloudforms_at_scale/)
-for further recommendations on scaling your {{ site.data.product.title_short }}
-environment.
+[//]: <This needs a replacement topic created. See [Deploying CloudForms at Scale](https://access.redhat.com/documentation/en-us/reference_architectures/2017/html/deploying_cloudforms_at_scale/) for further recommendations on scaling your {{ site.data.product.title_short }} environment.>

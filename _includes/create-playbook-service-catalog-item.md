@@ -1,12 +1,6 @@
-<div class="note">
+**Note:**
 
-  - Before creating an Ansible service, at least one repository, one
-    playbook, and one credential must exist in the {{ site.data.product.title }}
-    inventory. Check your inventory and add the appropriate resources
-    before creating an Ansible service. For more information, see
-    [Automation Management
-    Providers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/managing_providers/#automation_management_providers)
-    in *Managing Providers*.
+  - Before creating an Ansible service, at least one repository, one playbook, and one credential must exist in the {{ site.data.product.title }} inventory. Check your inventory and add the appropriate resources before creating an Ansible service. For more information, see [Automation Management Providers](../managing_providers/index.html#automation-management-providers) in *Managing Providers*.
 
   - Debugging verbosity is available for Ansible playbook catalog items.
     Selecting a higher verbosity value provides more detailed output as
@@ -24,12 +18,9 @@
   - Only users with administrator privileges can run a service dialog
     based on a playbook.
 
-</div>
-
 1.  Navigate to menu:Services\[Catalogs\].
 
-2.  In the **Catalog Items** accordion, click on the **All Catalog
-    Items**.
+2.  In the **Catalog Items** accordion, click on the **All Catalog Items**.
 
 3.  Click ![1847](../images/1847.png)(**Configuration**), then
     ![1862](../images/1862.png)(**Add a New Catalog Item**).

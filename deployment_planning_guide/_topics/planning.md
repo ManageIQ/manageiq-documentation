@@ -86,9 +86,7 @@ server roles start worker processes.
 Some roles are also dependent on other roles. For example, because the
 {{ site.data.product.title_short }} user interface relies on the API for access, the
 Web Services role must be enabled with the User Interface role for users
-to log in to the appliance. See [Server
-Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/general_configuration/configuration#server-roles)
-in *General Configuration* for details on each server role and its
+to log in to the appliance. See [Server Roles](../general_configuration/index.html#server-roles) in *General Configuration* for details on each server role and its
 function.
 
 #### Appliance Types
@@ -97,8 +95,7 @@ Depending on the needs of your environment, you may choose to separate
 worker and database tasks between appliances. One example of this is to
 implement a highly available configuration so that certain appliances
 are running the PostgreSQL database and providing failover. For more
-details about configuring high availability, see the [*High Availability
-Guide*](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/high_availability_guide/).
+details about configuring high availability, see the [High Availability Guide](../high_availability_guide/index.html).
 
 The following provides a summary of types of appliances:
 

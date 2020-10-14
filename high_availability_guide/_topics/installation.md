@@ -12,9 +12,7 @@ the non-database {{ site.data.product.title_short }} appliances.
 
 1.  Deploy a {{ site.data.product.title_short }} appliance with an extra (and
     unpartitioned) disk for the database at a size appropriate for your
-    deployment. For recommendations on disk space, see [Database
-    Requirements](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements)
-    in the *Deployment Planning Guide*.
+    deployment. For recommendations on disk space, see [Database Requirements](../deployment_planning_guide/index.html#database-requirements) in the *Deployment Planning Guide*.
 
 2.  Configure time synchronization on the appliance by editing
     `/etc/chrony.conf` with valid NTP server information.
@@ -238,12 +236,8 @@ case of failure.
 Follow these steps to create a new standby appliance, or to add another
 standby appliance to the cluster.
 
-1.  Deploy a {{ site.data.product.title_short }} appliance with an extra (and
-    unpartitioned) disk for the database that is the same size as the
-    primary database-only appliance, as it will contain the same data.
-    For recommendations on disk space, see [Database
-    Requirements](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/deployment_planning_guide/introduction#database-requirements)
-    in the *Deployment Planning Guide*.
+1.  Deploy a {{ site.data.product.title_short }} appliance with an extra (and unpartitioned) disk for the database that is the same size as the primary database-only appliance, as it will contain the same data.
+    For recommendations on disk space, see [Database Requirements](../deployment_planning_guide/index.html#database-requirements) in the *Deployment Planning Guide*.
 
 2.  Configure time synchronization on the appliance by editing
     `/etc/chrony.conf` with valid NTP server information.

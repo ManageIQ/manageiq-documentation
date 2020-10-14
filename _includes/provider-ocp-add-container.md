@@ -1,8 +1,7 @@
 1.  Navigate to menu:Compute\[Containers \> Providers\].
 
 2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
-    click ![Add a New Containers Provider](../images/1862.png) (**Add a
-    New Containers Provider**).
+    click ![Add a New Containers Provider](../images/1862.png) (**Add a New Containers Provider**).
 
 3.  Enter a **Name** for the provider.
 
@@ -52,34 +51,26 @@
           - **SSL without validation**: Authenticate the provider
             insecurely (not recommended).
 
-    2.  Enter the **Hostname** (or IPv4 or IPv6 address) of the
-        provider.
+    2.  Enter the **Hostname** (or IPv4 or IPv6 address) of the provider.
 
-        <div class="important">
+        **Important:**
 
         The **Hostname** must use a unique fully qualified domain name.
-
-        </div>
-
+        
     3.  Enter the **API Port** of the provider. The default port is
         `8443`.
 
     4.  Enter a token for your provider in the **Token** box.
 
-        <div class="note">
+        **Note:**
 
-        To obtain a token for your provider, run the `oc get secret`
-        command on your provider; see [Obtaining an OpenShift Container
-        Platform Management
-        Token](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#Obtaining_OpenShift_Container_Platform_Management_Token).
+        To obtain a token for your provider, run the `oc get secret` command on your provider; see [Obtaining an OpenShift Container Platform Management Token](../managing_providers/index.html#obtaining-an-openshift-container-platform-management-token).
 
         For example:
 
         \# oc get secret --namespace management-infra
         management-admin-token-8ixxs --template='{{index .data
         "ca.crt"}}' | base64 --decode
-
-        </div>
 
     5.  Click **Validate** to confirm that {{ site.data.product.title }} can connect
         to the OpenShift Container Platform provider.

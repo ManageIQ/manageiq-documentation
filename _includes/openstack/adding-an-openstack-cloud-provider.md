@@ -164,7 +164,7 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 
 12. Click **Add** after configuring the cloud provider.
 
-<div class="note">
+**Note:**
 
   - To collect inventory and metrics from an OpenStack environment, the
     {{ site.data.product.title }} appliance requires that the adminURL endpoint for
@@ -173,8 +173,4 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
     than `192.168.x.x`. Additionally, all the Keystone endpoints must be
     accessible, otherwise refresh will fail.
 
-  - Collecting capacity and utilization data from an OpenStack cloud
-    provider requires selecting the **Collect for All Clusters** option
-    under **Configuration**, in the settings menu. For information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#capacity-and-utilization-collections" target="_blank">Capacity and Utilization Collections</a> in the *General Configuration Guide*.
-
-</div>
+  - Collecting capacity and utilization data from an OpenStack cloud provider requires selecting the **Collect for All Clusters** option under **Configuration**, in the settings menu. For information, see [Capacity and Utilization Collections](../general_configuration/index.html#capacity-and-utilization-collection) in the *General Configuration Guide*.

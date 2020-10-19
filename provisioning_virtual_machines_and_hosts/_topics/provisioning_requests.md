@@ -958,6 +958,10 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 {% include provisioning-requests-openstack.md %}
 
+#### Provisioning an IBM Power Systems Virtual Servers Instance from an Image
+
+{% include provisioning-requests-ibm-cloud-powervs.md %}
+
 #### Customizing Provisioning Dialogs
 
 {% include provisioning-dialogs-customization.md %}

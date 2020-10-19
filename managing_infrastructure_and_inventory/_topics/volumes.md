@@ -48,3 +48,16 @@ _topics/restoring_an_openstack_volume_backup.md %}
 {% include_relative _topics/editing_openstack_volumes.md %}
 
 {% include_relative _topics/deleting_openstack_volumes.md %}
+
+## IBM Power Systems Virtual Servers Block Storage Manager Volumes
+
+This section outlines the actions that you can perform on IBM Power
+Systems Virtual Servers Block Storage manager volumes.
+
+{% include_relative _topics/creating_ibm_cloud_powervs_volumes.md %}
+
+{% include_relative _topics/attaching_ibm_cloud_powervs_volumes.md %}
+
+{% include_relative _topics/detaching_ibm_cloud_powervs_volumes.md %}
+
+{% include_relative _topics/deleting_ibm_cloud_powervs_volumes.md %}

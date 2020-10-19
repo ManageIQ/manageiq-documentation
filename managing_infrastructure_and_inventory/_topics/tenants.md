@@ -4,12 +4,9 @@ A tenant is an OpenStack term for an organizational unit or project.
 {{ site.data.product.title_short }} creates cloud tenants to match existing OpenStack
 tenants for managing resources and controlling visibility of objects.
 
-<div class="note">
+**Note:**
 
-OpenStack tenant mapping must be enabled for cloud tenants to be
-created. See [Tenant Mapping](#tenant-mapping) for details.
-
-</div>
+OpenStack tenant mapping must be enabled for cloud tenants to be created. See [Tenant Mapping](#tenant-mapping) for details.
 
 OpenStack uses tenants for the following reasons:
 
@@ -34,15 +31,9 @@ To see multiple tenants in {{ site.data.product.title }}, the user authenticatin
 your OpenStack environment from {{ site.data.product.title }} must be configured to
 have visibility into these tenants.
 
-<div class="note">
+**Note:**
 
-This section describes OpenStack cloud tenant usage. For information
-about tenants created in {{ site.data.product.title_short }} for access and resource
-control, see [Access
-Control](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#access-control)
-in *General Configuration*.
-
-</div>
+This section describes OpenStack cloud tenant usage. For information about tenants created in {{ site.data.product.title_short }} for access and resource control, see [Access Control](../general_configuration/index.html#access-control) in *General Configuration*.
 
 ## Tenant Mapping
 

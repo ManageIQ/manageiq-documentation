@@ -14,14 +14,11 @@ in your {{ site.data.product.title_short }} environment as an administrative use
 After completing the setup of an authentication system, users can log in
 with their credentials.
 
-<div class="note">
+**Note:**
 
 For further information on managing users, groups, and account roles,
-see [Access
-Control](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#access-control)
+see [Access Control](../general_configuration/index.html#access-control)
 in *General Configuration*.
-
-</div>
 
 ## Configuring Authentication Settings in {{ site.data.product.title_short }}
 
@@ -44,19 +41,18 @@ To change authentication settings:
 
       - To configure authentication locally using the Virtual Management
         Database (VMDB), choose **Database**. This is the default
-        method. See [Creating a
-        User](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/#creating_a_user)
+        method. See [Creating a User](../general_configuration/index.html#creating-a-user)
         in *General Configuration* to create users from
         {{ site.data.product.title_short }}.
 
       - To configure LDAP-based authentication to use with IdM or Active
         Directory, choose **LDAP** or **LDAPS**, see
-        [???](#ldap_settings) for configuration steps.
+        [Configuring LDAP Authentication with IdM and Active Directory](../managing_authentication/index.html#configuring-ldap-authentication-with-idm-and-active-directory) for configuration steps.
 
       - To configure Amazon AWS Identity and Access Management (IAM)
-        authentication, choose **Amazon**, see [???](#amazon_settings)
+        authentication, choose **Amazon**, see [Configuring AWS Identity and Access Management (IAM) Authentication](../managing_authentication/index.html#configuring-aws-identity-and-access-management-iam-authentication)
         for configuration steps.
 
       - To configure federated authentication to use with IdM or Red Hat
         Single Sign-On (SSO), choose **External (httpd)** and follow the
-        steps for your authentication method in [???](#external_auth).
+        steps for your authentication method in [Configuring Federated Authentication with SAML](../managing_authentication/index.html#configuring-federated-authentication-with-saml).

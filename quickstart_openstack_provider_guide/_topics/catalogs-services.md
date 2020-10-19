@@ -18,15 +18,9 @@ Creating a *service catalog* involves:
     service. This method is called from a service provisioning instance
     in the **Automate** model.
 
-<div class="note">
+**Note:**
 
-For more information about catalogs and services, see [Catalogs and
-Services](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/single/provisioning-virtual-machines-and-hosts/#catalogs-services)
-from the [Provisioning Virtual Machines and
-Hosts](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/provisioning_virtual_machines_and_hosts/)
-guide.
-
-</div>
+For more information about catalogs and services, see [Catalogs and Services](../provisioning_virtual_machines_and_hosts/index.html#catalogs-and-services) from the [Provisioning Virtual Machines and Hosts](../provisioning_virtual_machines_and_hosts/index.html) guide.
 
 ### Creating a Service Dialog
 

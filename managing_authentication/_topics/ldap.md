@@ -9,13 +9,11 @@ If you choose LDAP or LDAPS as your authentication mode, the required
 parameters are exposed under **LDAP Settings**. Be sure to validate your
 settings before saving them.
 
-<div class="important">
+**Important:**
 
 This procedure requires a preconfigured authentication system such as
 Red Hat Identity Management (IdM) or Active Directory (AD) with user
 groups configured.
-
-</div>
 
 LDAP authentication for {{ site.data.product.title_short }} requires group membership
 to be defined by the LDAP RFC 2307 schema, where group members are
@@ -93,7 +91,7 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
         Principal Name** or *cn=users,dc=acme,dc=com* for
         **Distinguished Name**, in **Base DN**.
 
-        <div class="note">
+        **Note:**
 
         The `ldapsearch(1)` command can be used to get details of your
         LDAP settings. To get details related to a specific user, run:
@@ -105,27 +103,18 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
 
             # ldapsearch -D "cn=directory manager" -H ldap://www.acme.com:389 -b "dc=acme,dc=com" -s sub "(objectclass=*)" -w password
 
-        </div>
-
         **Example: LDAP Configuration.**
 
-        ![ldap authentication
-        full](../images/ldap-authentication-full.png)
+        ![ldap authentication full](../images/ldap-authentication-full.png)
 
 7.  Configure your **Role Settings**: In both LDAP and LDAPS, you can
     use groups from your directory service to set the role for the
     authenticated LDAP user. The LDAP user must be assigned one of the
-    account role groups. See [Assigning {{ site.data.product.title_short }} Account
-    Roles Using LDAP Groups](#assigning_account_roles_using_ldap_groups)
-    for more information.
+    account role groups. See [Assigning {{ site.data.product.title_short }} Account Roles Using LDAP Groups](../managing_authentication/index.html#assigning-manageiq-account-roles-using-ldap-groups) for more information.
 
       - For LDAP users not belonging to a group:
 
-          - Select a {{ site.data.product.title_short }} group from the **Default
-            Group for Users** list. This default group can be used for
-            all LDAP users who use LDAP for authentication only. Do not
-            select **Get User Groups from LDAP**, which will hide the
-            **Default Group for Users** option.
+          - Select a {{ site.data.product.title_short }} group from the **Default Group for Users** list. This default group can be used for all LDAP users who use LDAP for authentication only. Do not select **Get User Groups from LDAP**, which will hide the **Default Group for Users** option.
 
       - For LDAP users belonging to a group:
 
@@ -141,18 +130,14 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
             enables user records to be automatically created in
             {{ site.data.product.title_short }} when a user logs in.
 
-            <div class="important">
+            **Important:**
 
             If you do not select **Get User Groups from LDAP**, the user
             must be defined in the VMDB where the User ID is the same as
             the user’s name in your directory service typed in
-            lowercase. See [Creating a
-            User](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating_a_user)
-            in *General Configuration* for steps on creating users.
+            lowercase. See [Creating a User](../general_configuration/index.html#creating-a-user) in *General Configuration* for steps on creating users.
 
-            </div>
-
-            <div class="note">
+            **Note:**
 
             If your LDAP directory uses the `groupMembership` attribute
             to contain a user’s group membership, you can use a
@@ -165,9 +150,7 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
             menu:Configuration\[Settings \> Advanced\] by changing
             `group_attribute: memberof` to `:group_attribute:
             groupmembership`.
-
-            </div>
-
+            
           - Select **Get Groups from Home Forest** to use the LDAP
             groups from the LDAP user’s home forest. This will allow you
             to discover groups on your directory server and create
@@ -176,14 +159,12 @@ To configure {{ site.data.product.title_short }} to use LDAP for authentication:
             to that group. This option is only displayed when **Get User
             Groups from LDAP** is selected.
 
-            <div class="note">
+            **Note:**
 
             In most environments, it is recommended to select both the
             **Get User Groups from LDAP** and **Get Groups from Home
             Forest** options.
-
-            </div>
-
+            
           - Select **Follow Referrals** to look up and bind a user that
             exists in a domain other than the one configured in the LDAP
             authentication settings.
@@ -210,9 +191,7 @@ the `group_attribute` field in the {{ site.data.product.title_short }} advanced
 settings. In menu:Configuration\[Settings \> Advanced\], change
 `group_attribute: memberof` to `:group_attribute: groupmembership`.
 
-To assign account roles using LDAP groups, see [Assigning
-{{ site.data.product.title_short }} Account Roles Using LDAP
-Groups](#assigning_account_roles_using_ldap_groups).
+To assign account roles using LDAP groups, see [Assigning {{ site.data.product.title_short }} Account Roles Using LDAP Groups](../managing_authentication/index.html#assigning-manageiq-account-roles-using-ldap-groups).
 
 ## Adding Trusted Forests
 
@@ -250,29 +229,22 @@ To add another trusted forest:
 
 After adding other trusted LDAP forests, you can then change the order
 in which {{ site.data.product.title_short }} looks up the forests for authentication.
-For instructions, see [Configuring Lookup Priority for LDAP
-Groups](#ldap_lookup_priority).
+For instructions, see [Configuring Lookup Priority for LDAP Groups](../managing_authentication/index.html#configuring-lookup-priority-for-ldap-groups).
 
 ## Assigning {{ site.data.product.title_short }} Account Roles Using LDAP Groups
 
-After configuring LDAP authentication as described in [Configuring LDAP
-Authentication with IdM and Active Directory](#ldap_settings), you can
-associate {{ site.data.product.title_short }} account roles with your LDAP users. The
-LDAP directory server defines the groups and users for
-{{ site.data.product.title_short }}, while {{ site.data.product.title_short }} defines the account
-roles, and maps the roles to the privileges the LDAP user has.
+After configuring LDAP authentication as described in [Configuring LDAP Authentication with IdM and Active Directory](../managing_authentication/index.html#configuring-ldap-authentication-with-idm-and-active-directory), you can associate {{ site.data.product.title_short }} account roles with your LDAP users. The LDAP directory server defines the groups and users for
+{{ site.data.product.title_short }}, while {{ site.data.product.title_short }} defines the account roles, and maps the roles to the privileges the LDAP user has.
 
 There are two ways to associate your LDAP groups with
 {{ site.data.product.title_short }} account roles:
 
-  - Create groups in {{ site.data.product.title_short }} that match your existing
-    LDAP groups by name, and assign the groups account roles; or
+  - Create groups in {{ site.data.product.title_short }} that match your existing LDAP groups by name, and assign the groups account roles; or
 
   - Create groups on your directory server based on the default account
     roles in {{ site.data.product.title_short }}.
 
-The users in your LDAP groups then inherit the {{ site.data.product.title_short }}
-account roles for the LDAP group(s) they are in.
+The users in your LDAP groups then inherit the {{ site.data.product.title_short }} account roles for the LDAP group(s) they are in.
 
 The authentication process then happens as such:
 
@@ -364,8 +336,7 @@ In your LDAP directory service:
 
 1.  Define a distribution group for one or more of the account roles
     with the names shown in the table below. This group must be in the
-    LDAP directory source you specified for the server. See [Configuring
-    LDAP Authentication with IdM and Active Directory](#ldap_settings).
+    LDAP directory source you specified for the server. See [Configuring LDAP Authentication with IdM and Active Directory](../managing_authentication/index.html#configuring-ldap-authentication-with-idm-and-active-directory).
 
     | Directory Service Distribution Group Name | Account Role               |
     | ----------------------------------------- | -------------------------- |
@@ -400,27 +371,19 @@ On your {{ site.data.product.title_short }} appliance:
 2.  Click the **Settings** accordion, then select your server under
     **Zones**.
 
-3.  Click the **Authentication** tab and enable **Get User Groups from
-    LDAP** after typing in all of the required LDAP authentication
-    settings. See [Configuring LDAP Authentication with IdM and Active
-    Directory](#ldap_settings).
+3.  Click the **Authentication** tab and enable **Get User Groups from    LDAP** after typing in all of the required LDAP authentication settings. See [Configuring LDAP Authentication with IdM and Active Directory](managing_authentication/index.html#configuring-ldap-authentication-with-idm-and-active-directory).
 
 ## Configuring Lookup Priority for LDAP Groups
 
-{{ site.data.product.title_short }} can have multiple LDAP groups configured, which
-the appliance will attempt to authenticate with one by one until it
-succeeds. The lookup priority of these groups can be rearranged.
+{{ site.data.product.title_short }} can have multiple LDAP groups configured, which the appliance will attempt to authenticate with one by one until it succeeds. The lookup priority of these groups can be rearranged.
 
-<div class="note">
+**Note:**
 
 On initial login, a user’s *current group* assignment is the highest
 priority group. User group membership, on subsequent logins, is set as
 the last assigned group from the prior session.
 
-</div>
-
-To configure the order in which {{ site.data.product.title_short }} looks up LDAP
-groups:
+To configure the order in which {{ site.data.product.title_short }} looks up LDAP groups:
 
 1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 

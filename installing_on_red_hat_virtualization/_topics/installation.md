@@ -28,14 +28,12 @@ Virtualization requires:
 
   - 4 vCPUs.
 
-<div class="note">
+**Note:**
 
 See [Creating a Virtual
 Machine](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/virtual_machine_management_guide/chap-installing_linux_virtual_machines#Creating_a_virtual_machine_linux_vm)
 in the Red Hat Virtualization *Virtual Machine Management Guide* for
 information on specifying memory for a new virtual machine.
-
-</div>
 
 ### Obtaining the Appliance
 
@@ -61,7 +59,7 @@ storage domain from the Red Hat Virtualization Administration Portal.
   - You must import the required certificate authority into the web
     browser used to access the Administration Portal.
 
-<div class="note">
+**Note:**
 
 To import the certificate authority, browse to
 `https://<engine_address>/ovirt-engine/services/pki-resource?resource=ca-certificate&format=X509-PEM-CA`
@@ -70,8 +68,6 @@ the certificate authority in
 [Firefox](https://access.redhat.com/solutions/95103), [Internet
 Explorer](https://access.redhat.com/solutions/17864), or [Google
 Chrome](https://access.redhat.com/solutions/1168383).
-
-</div>
 
 To upload the appliance:
 
@@ -95,14 +91,12 @@ upload. You can also pause, cancel, or resume uploads from the
 
 The status shows **OK** when the image has completed uploading.
 
-<div class="note">
+**Note:**
 
 See the [Uploading Images to a Data Storage
 Domain](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-storage_tasks#Uploading_Images_to_a_Data_Storage_Domain)
 in the *Red Hat Virtualization Administration Guide* for more
 information.
-
-</div>
 
 1.  If the upload times out and you see the message, `Reason: timeout
     due to transfer inactivity`, increase the timeout value:

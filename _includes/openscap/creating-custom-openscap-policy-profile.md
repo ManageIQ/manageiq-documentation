@@ -15,4 +15,4 @@ The new policy is created with a prefix of **Copy of** in its description, and i
 
 ![image](../images/1860-cppolicy.png)
 
-You can now edit the copied policy. After editing copied policies, you can add them to a new policy profile. For instructions on how to edit policies, create a new policy profile, and add policies to it, see the [Policies and Profiles](https://www.ibm.com/support/knowledgecenter/SSFC4F_2.0.0/Infra_mgmt/policies_and_profiles_guide/index.html) guide. Once you have a customized policy profile, you can assign it to a containers provider.
+You can now edit the copied policy. After editing copied policies, you can add them to a new policy profile. For instructions on how to edit policies, create a new policy profile, and add policies to it, see the [Policies and Profiles](../policies_and_profiles_guide/index.html) guide. Once you have a customized policy profile, you can assign it to a containers provider.

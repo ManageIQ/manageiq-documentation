@@ -17,6 +17,4 @@ To enable these server roles:
 
 {% include cap-util-assign-server-roles.md %}
 
-For more information, see [Capacity and Utilization
-Collection](https://www.ibm.com/support/knowledgecenter/SSFC4F_2.0.0/Infra_mgmt/deployment_planning_guide/index.html#capacity-and-utilization-collection)
-in the *Deployment Planning Guide*.
+For more information, see [Capacity and Utilization Collection](../deployment_planning_guide/index.html#capacity-and-utilization-collection) in the *Deployment Planning Guide*.

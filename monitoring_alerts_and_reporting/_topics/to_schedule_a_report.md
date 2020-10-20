@@ -96,11 +96,7 @@ Adding new Schedule details.
 
 6.  Click **Add**.
 
-<div class="note">
+**Note:**
 
-See
-<https://access.redhat.com/documentation/en/red-hat-cloudforms/4.7/paged/general-configuration>
-in the *General Configuration* guide, to learn how to verify the address
-and validate outgoing email settings.
-
-</div>
+See [Outgoing SMTP Email Settings](../general_configuration/index.html#outgoing-smtp-email-settings)
+in the *General Configuration* guide, to learn how to verify the address and validate outgoing email settings.

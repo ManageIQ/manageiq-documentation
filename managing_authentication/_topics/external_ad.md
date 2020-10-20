@@ -148,14 +148,9 @@ From the {{ site.data.product.title_short }} user interface:
 
 7.  Click **Save**.
 
-<div class="important">
+**Important:**
 
-Make sure the user’s Active Directory groups for the appliance are
-created and appropriate roles assigned to those groups. See
-[Roles](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#roles)
-in *General Configuration* for more information.
-
-</div>
+Make sure the user’s Active Directory groups for the appliance are created and appropriate roles assigned to those groups. See [Roles](../general_configuration/index.html#roles) in *General Configuration* for more information.
 
 {{ site.data.product.title_short }} is now configured to use authentication from your
 Active Directory domain.

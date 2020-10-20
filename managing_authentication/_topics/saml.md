@@ -57,7 +57,7 @@ authentication. All SAML-related certificates and keys are accessed from
         # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-remote-user.conf /etc/httpd/conf.d/
         # cp ${TEMPLATE_DIR}/etc/httpd/conf.d/manageiq-external-auth-saml.conf /etc/httpd/conf.d/
 
-    <div class="note">
+    **Note:**
 
     The following are notable SAML configuration defaults in the
     `manageiq-external-auth-saml.conf` file:
@@ -78,8 +78,6 @@ authentication. All SAML-related certificates and keys are accessed from
     URLs, must not be modified as the appliance expects them to be
     defined as such.
 
-    </div>
-
 3.  Generate the service provider files on the appliance using the
     Apache HTTP server’s `mod_auth_mellon` command
     `mellon_create_metadata.sh`:
@@ -90,15 +88,13 @@ authentication. All SAML-related certificates and keys are accessed from
     The `mellon_create_metadata.sh` script creates file names based on
     the appliance URL.
 
-    <div class="note">
+    **Note:**
 
     If your appliance is behind a load balancer or uses a virtual IP
     address, use the hostname associated with the VIP. For example: `#
     /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh
     https://my-haproxy-ka https://my-haproxy-ka/saml2`
-
-    </div>
-
+    
 4.  Rename the files created by the `mellon_create_metadata.sh` script
     to match the expected file names from the
     `manageiq-external-auth-saml.conf` file:
@@ -192,18 +188,15 @@ using SAML authentication.
     there are issues with the identity provider or you require `admin`
     access to the appliance, you cannot log in through the appliance
     login screen until you re-enable local login as described in
-    [Re-enabling Local Login ](#re-enable-local-login).
+    [Re-enabling Local Login ](../managing_authentication/index.html#re-enabling-local-login-optional).
 
 9.  Check **Get User Groups from External Authentication (httpd)**.
 
 10. Click **Save**.
 
-<div class="important">
+**Important:**
 
-Ensure the user’s groups are created on the appliance and appropriate
-roles are assigned to those groups. See *SAML Assertions* in [SAML
-Assertions](#saml-assertions) for more information on the parameters
-used by the {{ site.data.product.title_short }} appliance.
+Ensure the user’s groups are created on the appliance and appropriate roles are assigned to those groups. See [SAML Assertions](../managing_authentication/index.html#saml-assertions) for more information on the parameters used by the {{ site.data.product.title_short }} appliance.
 
 For example, to configure user groups from your SAML identity provider
 to work with {{ site.data.product.title_short }}:
@@ -213,16 +206,10 @@ to work with {{ site.data.product.title_short }}:
     `REMOTE_USER_GROUPS=Administrators;CloudAdministrators;Users`
 
 2.  On your {{ site.data.product.title_short }} appliance, create the equivalent
-    groups. See [Creating a User
-    Group](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating-a-user-group)
-    in *General Configuration*.
+    groups. See [Creating a User Group](../general_configuration/index.html#creating-a-user) in *General Configuration*.
 
 3.  On your {{ site.data.product.title_short }} appliance, assign EVM roles to the
-    groups. See [Creating a
-    Role](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#creating-a-role)
-    in *General Configuration*.
-
-</div>
+    groups. See [Creating a Role](../general_configuration/index.html#creating-a-role) in *General Configuration*.
 
 Complete the above steps on each appliance in the settings menu, then
 navigate to menu:Configuration\[Access Control\].
@@ -259,12 +246,10 @@ appliance client in Red Hat SSO as mappers.
 | fullname  | AttributeStatement Mapper | User Attribute | fullName  |
 | groups    | Group Mapper              | Group List     | groups    |
 
-<div class="important">
+**Important:**
 
 The `fullName` attribute was not available in the default database as of
 this writing and was added as a user attribute.
-
-</div>
 
 ## Re-enabling Local Login *(Optional)*
 

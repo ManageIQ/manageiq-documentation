@@ -214,13 +214,9 @@ The following procedure creates a system image type for PXE servers.
 
 5.  Click **Add**.
 
-<div class="informalexample">
+**Example:**
 
-After creating the System Image Types, assign the types to each image on
-your PXE servers. To do this, you will select each image on the PXE
-server and identify its type.
-
-</div>
+After creating the System Image Types, assign the types to each image on your PXE servers. To do this, you will select each image on the PXE server and identify its type.
 
 #### Setting the PXE Image Type for a PXE Image
 
@@ -228,32 +224,19 @@ The following procedure sets the image type for a chosen PXE image.
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
-2.  Click the **PXE Servers** accordion and select the image that you
-    want to set a type for.
+2.  Click the **PXE Servers** accordion and select the image that you want to set a type for.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1851](../images/1851.png)(**Edit this PXE Image**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1851](../images/1851.png)(**Edit this PXE Image**).
 
-4.  From the **Basic Information** area, select the correct type. If
-    this PXE image will be used as the **Windows Boot Environment**,
-    check **Windows Boot Environment**. At the time of this writing,
-    only one PXE Image can be identified as the **Windows Boot
-    Environment**. Therefore, checking one as the **Windows Boot
-    Environment**, will remove that from any other PXE image with that
-    check. ![2319](../images/2319.png) Click **Save**.
+4.  From the **Basic Information** area, select the correct type. If this PXE image will be used as the **Windows Boot Environment**, check **Windows Boot Environment**. At the time of this writing, only one PXE Image can be identified as the **Windows Boot Environment**. Therefore, checking one as the **Windows Boot Environment**, will remove that from any other PXE image with that check. ![2319](../images/2319.png) Click **Save**.
     ![2320](../images/2320.png)
 
 ### ISO Provisioning
 
-{{ site.data.product.title }} also allows ISO provisioning from Red Hat Virtualization
-Manager datastores. To use this feature, you will need to do the
+{{ site.data.product.title }} also allows ISO provisioning from Red Hat Virtualization Manager datastores. To use this feature, you will need to do the
 following before creating a provision request.
 
-1.  Add the **ISO Datastore**. The Red Hat Virtualization Manager system
-    must have already been discovered or added into the VMDB. For more
-    information, see [Adding a Red Hat Enterprise Virtualization Manager
-    Provider](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/managing_providers/#adding_a_red_hat_enterprise_virtualization_manager_provider)
-    in *Managing Providers*.
+1.  Add the **ISO Datastore**. The Red Hat Virtualization Manager system must have already been discovered or added into the VMDB. For more information, see [Adding a Red Hat Enterprise Virtualization Manager Provider](../managing_providers/index.html#adding-a-red-hat-virtualization-provider) in *Managing Providers*.
 
 2.  Refresh the **ISO Datastore**.
 
@@ -265,8 +248,7 @@ following before creating a provision request.
 
 #### Adding an ISO Datastore
 
-The following procedure adds an ISO Datastore from your Red Hat
-Virtualization environment.
+The following procedure adds an ISO Datastore from your Red Hat Virtualization environment.
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
@@ -275,8 +257,7 @@ Virtualization environment.
 3.  Click ![1847](../images/1847.png)(**Configuration**),
     ![1862](../images/1862.png)(**Add a new ISO Datastore**).
 
-4.  Select the Cloud or Infrastructure provider hosting the ISO
-    Datastore.
+4.  Select the Cloud or Infrastructure provider hosting the ISO Datastore.
 
 5.  Click **Add**.
 
@@ -284,15 +265,13 @@ The ISO datastore is added to {{ site.data.product.title }}.
 
 #### Refreshing an ISO Datastore
 
-The following procedure refreshes the chosen ISO datastore and updates
-{{ site.data.product.title }} with available ISOs.
+The following procedure refreshes the chosen ISO datastore and updates {{ site.data.product.title }} with available ISOs.
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
 2.  Click the **ISO Datastores** accordion, and select an ISO datastore.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then click
-    ![2003](../images/2003.png)(**Refresh Relationships**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then click ![2003](../images/2003.png)(**Refresh Relationships**).
 
 #### Creating System Image Types for ISO
 
@@ -302,24 +281,18 @@ The following procedure creates a system image type for ISO Servers.
 
 2.  Click the **System Image Types** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1862](../images/1862.png)(**Add a new System Image Type**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1862](../images/1862.png)(**Add a new System Image Type**).
 
 4.  In **Basic Information**, type in a **Name** and select a **Type**.
     ![2317](../images/2317.png)
 
-      - Use **Vm** if you want this image type to only apply to virtual
-        machines.
+      - Use **Vm** if you want this image type to only apply to virtual machines.
 
 5.  Click **Add**. ![2322](../images/2322.png)
 
-<div class="informalexample">
+**Example:**
 
-After creating the system image types, assign the types to each image on
-your ISO servers. To do this, you will select each image on the ISO
-server and identify its type.
-
-</div>
+After creating the system image types, assign the types to each image on your ISO servers. To do this, you will select each image on the ISO server and identify its type.
 
 #### Setting the Image Type for an ISO Image
 
@@ -327,11 +300,9 @@ The following procedure sets the image type for an ISO image.
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
-2.  Click the **ISO Datastores** accordion, and select the image that
-    you want to set a type for.
+2.  Click the **ISO Datastores** accordion, and select the image that you want to set a type for.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1851](../images/1851.png)(**Edit this ISO Image**).
+3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1851](../images/1851.png)(**Edit this ISO Image**).
 
 4.  From the **Basic Information** area, select the correct **Type**.
     ![2323](../images/2323.png)
@@ -340,23 +311,14 @@ The following procedure sets the image type for an ISO image.
 
 ### Customization Templates for Virtual Machine and Instance Provisioning
 
-Add a customization template to provide **Kickstart**, **Cloud-Init**,
-or **Sysprep** files for the initial loading of the operating system.
+Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysprep** files for the initial loading of the operating system.
 
-  - When creating a template using Red Hat Virtualization, install the
-    **cloud-init** package on the source virtual machine. This enables
-    Cloud-Init to source configuration scripts when a virtual machine
-    built on that template boots.
+  - When creating a template using Red Hat Virtualization, install the **cloud-init** package on the source virtual machine. This enables
+    Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
 
-  - See [Using Cloud-Init to Automate the Configuration of Virtual
-    Machines](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6/html-single/Virtual_Machine_Management_Guide/index.html#sect-Using_Cloud-Init_to_Automate_the_Configuration_of_Virtual_Machines)
-    in the Red Hat Virtualization *Administration Guide* for more
-    information on using Cloud-Init in a Red Hat Virtualization
-    environment.
+  - See [Using Cloud-Init to Automate the Configuration of Virtual Machines](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6/html-single/Virtual_Machine_Management_Guide/index.html#sect-Using_Cloud-Init_to_Automate_the_Configuration_of_Virtual_Machines) in the Red Hat Virtualization *Administration Guide* for more information on using Cloud-Init in a Red Hat Virtualization environment.
 
-  - See the [Cloud-Init
-    Documentation](http://cloudinit.readthedocs.org/en/latest/) web site
-    for example scripts.
+  - See the [Cloud-Init Documentation](http://cloudinit.readthedocs.org/en/latest/) web site for example scripts.
 
 <!-- end list -->
 
@@ -415,29 +377,21 @@ or **Sysprep** files for the initial loading of the operating system.
 4.  In **Basic Information**, type in a **Name** and **Description**.
     ![2324](../images/2324.png)
 
-5.  Select the **Image Type**. This list should include the PXE image
-    types you created.
+5.  Select the **Image Type**. This list should include the PXE image types you created.
 
-6.  In **Type**, select **Kickstart** or **CloudInit** for Linux based
-    systems, and **Sysprep** for Windows based system.
+6.  In **Type**, select **Kickstart** or **CloudInit** for Linux based systems, and **Sysprep** for Windows based system.
 
-7.  In the **Script** area, either paste the script from another source
-    or type the script directly into the {{ site.data.product.title }} interface.
+7.  In the **Script** area, either paste the script from another source or type the script directly into the {{ site.data.product.title }} interface.
 
 8.  Click **Add**.
 
-<div class="informalexample">
+**Example:**
 
-The default dialogs show all possible parameters for provisioning. To
-limit the options shown, see [Customizing Provisioning
-Dialogs](#provisioning-dialogs-customizing).
-
-</div>
+The default dialogs show all possible parameters for provisioning. To limit the options shown, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
 ### Provisioning Virtual Machines
 
-There are four types of provisioning requests available in
-{{ site.data.product.title }}:
+There are four types of provisioning requests available in {{ site.data.product.title }}:
 
 1.  Provision a new virtual machine from a template
 
@@ -449,22 +403,14 @@ There are four types of provisioning requests available in
 
 #### Provisioning a Virtual Machine from a Template
 
-You can provision virtual machines through various methods. One method
-is to provision a virtual machine directly from a template stored on a
-provider.
+You can provision virtual machines through various methods. One method is to provision a virtual machine directly from a template stored on a provider.
 
-<div class="important">
+**Important:**
 
-  - To provision a virtual machine, you must have the "Automation
-    Engine" role enabled.
+  - To provision a virtual machine, you must have the "Automation Engine" role enabled.
 
-  - During virtual machine provisioning, the **Customize** tab is hidden
-    if the template has an unknown operating system (OS) type. To make
-    the **Customize** tab visible in the user interface, you will need
-    to set the OS type from the provider or perform SmartState analysis
-    on the template to detect the OS type.
-
-</div>
+  - During virtual machine provisioning, the **Customize** tab is hidden if the template has an unknown operating system (OS) type. To make
+    the **Customize** tab visible in the user interface, you will need to set the OS type from the provider or perform SmartState analysis on the template to detect the OS type.
 
 To provision a virtual machine from a template:
 
@@ -481,25 +427,16 @@ To provision a virtual machine from a template:
 
     ![request info](../images/request-info.png)
 
-    In **Request Information**, enter your name and email address. The
-    requester will receive status emails about the provisioning request
-    such as auto-approval, quota, provision complete, retirement,
+    In **Request Information**, enter your name and email address. The requester will receive status emails about the provisioning request such as auto-approval, quota, provision complete, retirement,
     request pending approval, and request denied.
 
-    <div class="note">
+    **Note:**
 
-    Parameters with a \* next to the label are required to submit the
-    provisioning request. To change the required parameters, see
-    [Customizing Provisioning
-    Dialogs](#provisioning-dialogs-customizing).
+    Parameters with a \* next to the label are required to submit the provisioning request. To change the required parameters, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
+    
+6.  Click the **Purpose** tab to select the appropriate tags for the provisioned virtual machines.
 
-    </div>
-
-6.  Click the **Purpose** tab to select the appropriate tags for the
-    provisioned virtual machines.
-
-7.  Click the **Catalog** tab to select the template to provision from.
-    This tab is context sensitive based on provider.
+7.  Click the **Catalog** tab to select the template to provision from. This tab is context sensitive based on provider.
 
 8.  For templates on VMware providers: ![2328](../images/2328.png)
 
@@ -611,7 +548,7 @@ To provision a virtual machine from a template:
         from the list in the custom specification area. The values that
         are honored by {{ site.data.product.title }} display.
 
-        <div class="note">
+        **Note:**
 
         Any values in the specification that do not show in the
         {{ site.data.product.title }} console’s request dialogs are not used by
@@ -623,12 +560,9 @@ To provision a virtual machine from a template:
         options, and server license. If more than one network card is
         specified, only the first is used.
 
-        </div>
-
         ![2337](../images/2337.png)
 
-        To modify the specification, select **Override Specification
-        Values**.
+        To modify the specification, select **Override Specification Values**.
 
     2.  Select **Sysprep Answer File**, to upload a Sysprep file or use
         one that exists for a custom specification on the Provider where
@@ -691,17 +625,11 @@ Cloud-init is a tool for automating the initial setup of virtual
 machines. In {{ site.data.product.title_short }}, you can use cloud-init via REST API
 to provision a virtual machine that was created based on a template.
 
-<div class="note">
+**Note:**
 
-To use cloud-init, the template from which the virtual machine is
-provisioned must have cloud-init package installed, and have the **Use
-Cloud-Init/Sysprep** option selected.
+To use cloud-init, the template from which the virtual machine is provisioned must have cloud-init package installed, and have the **Use Cloud-Init/Sysprep** option selected.
 
-</div>
-
-For a virtual machine provision request via REST API, ensure the
-following two fields in the request’s body are set correctly, otherwise
-cloud-init may not work.
+For a virtual machine provision request via REST API, ensure the following two fields in the request’s body are set correctly, otherwise cloud-init may not work.
 
   - VLAN
 
@@ -709,8 +637,7 @@ cloud-init may not work.
 
 **VLAN.**
 
-The value of **VLAN** in the API request can be one of the following
-options:
+The value of **VLAN** in the API request can be one of the following options:
 
 | VLAN value                    | Note                                                                                                                       | vNIC profile                                                                    |
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
@@ -757,52 +684,31 @@ machine provision dialog’s **Customize** tab\]
     \> Virtual Machine\]), this option located under the **Customize**
     tab’s **Customize** drop-down list is called **Specification**.
 
-<div class="note">
+**Note:**
 
-For cloud-init to work *(that is, to have the provisioned virtual
-machine marked with **Use cloud-init** and the customized template as
-well as customized parameters, if any, will be used)* "sysprep\_enabled"
-must be set to “fields”. If you do not set it correctly, the customized
-template will be ignored and the provisioned virtual machine will not be
-marked with **Use cloud-init**; although, the template from which the
-virtual machine is provisioned has it marked.
-
-</div>
+For cloud-init to work *(that is, to have the provisioned virtual machine marked with **Use cloud-init** and the customized template as well as customized parameters, if any, will be used)* "sysprep\_enabled" must be set to “fields”. If you do not set it correctly, the customized template will be ignored and the provisioned virtual machine will not be
+marked with **Use cloud-init**; although, the template from which the virtual machine is provisioned has it marked.
 
 **For both Windows and Linux template**:
 
   - **“disabled”** - Do not customize
     In the {{ site.data.product.title_short }} user interface, when you navigate to
-    the virtual machine provision dialog (menu:Compute\[Infrastructure
-    \> Virtual Machine\]), this option located under the **Customize**
-    tab’s **Customize** drop-down list is called **\<None\>**. The
-    customized template will be ignored, and the provisioned virtual
-    machine will not be marked with **Use cloud-init**, even though the
-    template from which the virtual machine was provisioned, has it
-    marked. The default value is 'disabled'.
+    the virtual machine provision dialog (menu:Compute\[Infrastructure \> Virtual Machine\]), this option located under the **Customize**
+    tab’s **Customize** drop-down list is called **\<None\>**. The customized template will be ignored, and the provisioned virtual machine will not be marked with **Use cloud-init**, even though the template from which the virtual machine was provisioned, has it marked. The default value is 'disabled'.
 
-<div class="note">
+**Note:**
 
-For an example of virtual machine provisioning request using cloud-init
-via REST API, see *Provisioning a Virtual Machine Using Cloud-init* in
-the [{{ site.data.product.title }} REST
-API](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/red_hat_cloudforms_rest_api/index)
-guide.
-
-</div>
+For an example of virtual machine provisioning request using cloud-init via REST API, see *Provisioning a Virtual Machine Using Cloud-init* in the [{{ site.data.product.title }} REST API Guide](../rest_api/index.html#provisioning-a-virtual-machine-using-cloud-init) guide.
 
 #### Cloning a Virtual Machine
 
 Virtual machines can be cloned in other providers as well.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and
-    select the virtual machine you want to clone.
+1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and select the virtual machine you want to clone.
 
-2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
-    ![2339](../images/2339.png)(**Clone selected item**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then ![2339](../images/2339.png)(**Clone selected item**).
 
-3.  Enter the requested information in the dialogs. Be sure to check the
-    **Catalog** tab.
+3.  Enter the requested information in the dialogs. Be sure to check the **Catalog** tab.
 
 4.  Schedule the request on the **Schedule** tab.
 
@@ -1142,12 +1048,7 @@ Some non-default placement methods, for example the
 **vmware\_best\_fit\_with\_scope** methods, may require you to set
 **Provisioning Scope** tags for a host and a datastore.
 
-To enable these resources for all groups, set the scope to **All**. To
-limit access to a select group, create a tag in the **Provisioning
-Scope** category with the exact name of the user group and set this tag
-on the desired resources. See
-[Tags](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/general_configuration/#regions)
-in *General Configuration* for information on creating tags.
+To enable these resources for all groups, set the scope to **All**. To limit access to a select group, create a tag in the **Provisioning Scope** category with the exact name of the user group and set this tag on the desired resources. See [Tags](../general_configuration/index.html#tags) in *General Configuration* for information on creating tags.
 
 To set the scope for a datastore:
 

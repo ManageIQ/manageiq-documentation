@@ -28,12 +28,6 @@ Appliances must be subscribed to the following channels:
 
   - {product-repo\_server}
 
-If any appliance shows it is not registered or is missing a subscription
-to any of these channels, see *Registering and Updating {{ site.data.product.title }}*
-in [General
-Configuration](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html-single/general_configuration/)
-to register and subscribe the appliance.
-
 **Updating the Appliances.**
 
 Follow this procedure to update appliances in your environment without

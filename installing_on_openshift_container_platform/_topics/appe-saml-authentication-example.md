@@ -22,14 +22,12 @@ The configuration map includes the following parameters:
 
     `auth-type` values
 
-    <div class="important">
+    **Important:**
 
     Enabling external authentication must be done from the
     {{ site.data.product.title_short }} user interface; see [Configuring External
-    Authentication](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html/managing_authentication_for_cloudforms/external_auth)
+    Authentication](../managing_authentication/index.html#configuring-identity-management-external-authentication-with-manageiq)
     in *Managing Authentication* for details.
-
-    </div>
 
   - auth-kerberos-realms
     The Kerberos realms to join.

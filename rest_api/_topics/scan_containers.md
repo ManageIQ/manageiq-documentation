@@ -2,17 +2,11 @@
 
 Scan containers using SmartState Analysis.
 
-<div class="note">
+**Note:**
 
-  - Scanning containers requires enabling the SmartProxy server role.
-    See
-    [Servers](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.6/html-single/general_configuration/#servers)
-    in the *General Configuration Guide* for information on server
-    roles.
+  - Scanning containers requires enabling the SmartProxy server role. See [Server Roles](../general_configuration/index.html#server-roles) in the *General Configuration Guide* for information on server roles.
 
   - Attached OpenSCAP policies do not affect responses.
-
-</div>
 
 ##### Request:
 

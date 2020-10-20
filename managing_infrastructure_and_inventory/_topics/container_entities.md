@@ -20,7 +20,7 @@ Utilization**, and **Pod Creation and Deletion Trends**.
 2.  Click the desired containers entity, or provider, if applicable, for
     viewing the summary with further information.
 
-<div class="note">
+**Note:**
 
 To reliably associate pods and images, {{ site.data.product.title_short }} requires
 information from the `docker-pullable` field, added in OpenShift
@@ -30,8 +30,6 @@ inspection (done as part of Smart State Analysis) to fail due to
 associating a container to the wrong image. Consequently,
 {{ site.data.product.title_short }} may not report accurate information about pods
 and images in OpenShift providers before version 3.3.1.2.
-
-</div>
 
 {% include_relative _topics/viewing_an_object_summary.md %}
 
@@ -87,26 +85,16 @@ packages included in an image.
 
 2.  Check the container image to analyze. You can check multiple images.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
-    then ![Perform SmartState Analysis](../images/1942.png) (**Perform
-    SmartState Analysis**).
+3.  Click ![Configuration](../images/1847.png) (**Configuration**), and then ![Perform SmartState Analysis](../images/1942.png) (**Perform SmartState Analysis**).
 
-The container image is scanned. The process will copy over any required
-files for the image. After reloading the image page, all new or updated
-packages are listed.
+The container image is scanned. The process will copy over any required files for the image. After reloading the image page, all new or updated packages are listed.
 
-To monitor the status of container image SmartState Analysis tasks,
-navigate to the settings menu, then **Tasks**. The status of each task
-is displayed including time started, time ended, what part of the task
-is currently running, and any errors encountered.
+To monitor the status of container image SmartState Analysis tasks, navigate to the settings menu, then **Tasks**. The status of each task is displayed including time started, time ended, what part of the task is currently running, and any errors encountered.
 
-<div class="note">
+**Note:**
 
-See [*Scanning Container Images in CloudForms with
-OpenSCAP*](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/scanning_container_images_in_cloudforms_with_openscap/)
+See [*Scanning Container Images in {{ site.data.product.product.title_short }} with OpenSCAP*](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.7/html-single/scanning_container_images_in_cloudforms_with_openscap/)
 for details on scanning container images using OpenSCAP policies.
-
-</div>
 
 ## Configuring Automatic Tagging for Container Entities
 
@@ -131,27 +119,17 @@ following container entities:
 
   - Container builds
 
-<div class="note">
+**Note:**
 
-Tags automatically created from OpenShift labels are completely managed
-by the {{ site.data.product.title }} system and cannot be manually assigned or
-unassigned. Deleting a mapping rule from {{ site.data.product.title }} immediately
-deletes the resulting tags.
+Tags automatically created from OpenShift labels are completely managed by the {{ site.data.product.title }} system and cannot be manually assigned or unassigned. Deleting a mapping rule from {{ site.data.product.title }} immediately deletes the resulting tags.
 
-</div>
+You can view a container entity’s OpenShift labels on the entity’s details page under **Labels**.
 
-You can view a container entity’s OpenShift labels on the entity’s
-details page under **Labels**.
-
-The following example shows how to configure tagging for a node, but the
-same steps can be used for mapping labels to tags on other container
-entities.
+The following example shows how to configure tagging for a node, but the same steps can be used for mapping labels to tags on other container entities.
 
 To configure automatic tagging on container entities using labels:
 
-1.  Note the *key* of the OpenShift label you want to map to a
-    {{ site.data.product.title }} tag. OpenShift labels consist of two parts: a *key*
-    and a *value*.
+1.  Note the *key* of the OpenShift label you want to map to a {{ site.data.product.title }} tag. OpenShift labels consist of two parts: a *key* and a *value*.
 
     1.  Navigate to menu:Compute\[Containers \> Nodes\].
 
@@ -167,15 +145,13 @@ To configure automatic tagging on container entities using labels:
 
         ![ocpnode summary](../images/ocpnode-summary.png)
 
-        <div class="note">
+        **Note:**
 
         To create an OpenShift label, see [Developer CLI
         Operations](https://docs.openshift.com/container-platform/3.3/cli_reference/basic_cli_operations.html)
         in the OpenShift Container Platform *CLI Reference* guide. A new
         label added in OpenShift will only show up in {{ site.data.product.title }}
         after the next OpenShift provider refresh.
-
-        </div>
 
 2.  Navigate to **Configuration** and select the region.
 
@@ -207,16 +183,12 @@ To configure automatic tagging on container entities using labels:
     3.  Click ![1847](../images/1847.png) (**Configuration**), and then
         ![2003](../images/2003.png) (**Refresh Items and Relationships**).
 
-The label will display on the entity’s summary page under **Smart
-Management** under **Company Tags** as `<Category> : <value>`.
+The label will display on the entity’s summary page under **Smart Management** under **Company Tags** as `<Category> : <value>`.
 
 ![ocp autotagged](../images/ocp-autotagged.png)
 
-Any container entity with the OpenShift `zone` label will be tagged
-automatically as `category1` in {{ site.data.product.title }}. If the *value* for
-`zone` is `south`, for example, the entity will be tagged as `category1
+Any container entity with the OpenShift `zone` label will be tagged automatically as `category1` in {{ site.data.product.title }}. If the *value* for `zone` is `south`, for example, the entity will be tagged as `category1
 : south`.
 
-You can use these tags to create reports. See [Monitoring, Alerts, and
-Reporting](../monitoring_alerts_and_reporting/index.html)
+You can use these tags to create reports. See [Monitoring, Alerts, and Reporting](../monitoring_alerts_and_reporting/index.html)
 for details on creating reports.

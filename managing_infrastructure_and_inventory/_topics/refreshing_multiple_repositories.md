@@ -14,7 +14,7 @@ Refresh a repository for its properties and virtual machines.
 
 Identify a SmartProxy that has access to the repository to refresh it.
 
-<div class="note">
+**Note:**
 
 If you are using more than one {{ site.data.product.title }} appliance, be sure to set
 the **Default Repository** SmartProxy on all of the appliances.

@@ -27,7 +27,7 @@ Add a subnet to an existing cloud network following the procedure below.
     5.  Input the **Subnet CIDR** address in CIDR format, which contains
         the IP address range and subnet mask in one value.
 
-        <div class="note">
+        **Note:**
 
         Determine the address by calculating the number of bits masked
         in the subnet mask and append that value to the IP address

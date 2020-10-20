@@ -73,7 +73,7 @@ Optionally without the create action signature:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#service-catalogs)
@@ -356,7 +356,7 @@ POST /api/services
 In the above example *parent\_service* is an *href* or *id* reference to
 an existing service.
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#services) page for a
@@ -715,7 +715,7 @@ monitored as follows:
 
     GET /api/service_requests/:id
 
-<div class="note">
+**Note:**
 
 The request tasks of service requests can be queried by expanding the
 request\_tasks as follows:

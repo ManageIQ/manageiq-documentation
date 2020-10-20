@@ -9,7 +9,7 @@ created using linear regression. The calculation uses the capacity and
 utilization data collected by {{ site.data.product.title }} during the interval you
 specify.
 
-<div class="note">
+**Note:**
 
 You must have a server with network visibility to your provider assigned
 the server role of **Capacity & Utilization Collector** to use this
@@ -42,7 +42,7 @@ The virtual machine must be powered on to collect the data.
 
     ![2247](../images/2247.png)
 
-<div class="note">
+**Note:**
 
 Daily charts only include full days of data. This means {{ site.data.product.title }}
 does not show daily data for a day without a complete 24 data point

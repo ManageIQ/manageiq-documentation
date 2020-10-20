@@ -5,7 +5,7 @@ have the super administrator or administrator role, you can customize
 the accordions, the folders within them, and the locations of your
 reports.
 
-<div class="note">
+**Note:**
 
 When you create your own report, the report is not automatically
 available. You must add it to a report menu.

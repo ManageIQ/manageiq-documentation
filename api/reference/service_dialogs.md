@@ -71,7 +71,7 @@ or creating multiple Service Dialogs:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#service_dialogs) page

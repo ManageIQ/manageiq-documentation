@@ -26,7 +26,7 @@
             Machines/ServiceProvision\_Template/CatalogItemTermination**
             and click **Apply**.
 
-            <div class="note">
+            **Note:**
 
             The entry point must be a State Machine since the
             **Provisioning Entry Point** list is filtered to only show

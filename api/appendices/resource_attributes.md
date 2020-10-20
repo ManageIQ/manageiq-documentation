@@ -99,7 +99,7 @@ the REST API
 | --------- | ------ | -------------------- |
 | type      | string | Authentication class |
 
-<div class="note">
+**Note:**
 
 For a complete list of authentication classes supported and the related
 attributes for each type, send the *OPTIONS /api/authentications*
@@ -481,7 +481,7 @@ Credentials hash specification attributes are:
 | description | string | Description of tag                                                                                                        |
 | category    | hash   | Category identifier for which the tag is getting added to, requires an **href**, **id** or **name** attribute in the hash |
 
-<div class="note">
+**Note:**
 
 When adding with a **create** action on the tags subcollection of the
 category via /api/categories/:id/tags, the category should not be

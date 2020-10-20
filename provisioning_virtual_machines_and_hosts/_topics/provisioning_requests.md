@@ -527,7 +527,7 @@ To provision a virtual machine from a template:
 
     1.  In **Network Adapter Information**, select the **vLan**.
 
-        <div class="note">
+        **Note:**
 
         A VMware virtual machine can be provisioned to a DVPortgroup by
         selecting it from the **vLan** list. Prior to provisioning a
@@ -651,7 +651,7 @@ The value of **VLAN** in the API request can be one of the following options:
 The value of sysprep\_enabled in the API request must be in the
 following format.
 
-<div class="note">
+**Note:**
 
 Sysprep\_enabled is written in the order: \[value\] - \[it’s meaning\] -
 \[how it appears in the {{ site.data.product.title_short }} user interface virtual
@@ -778,7 +778,7 @@ Second, the request goes through the approval phase. Finally,
     LDAP, you can use the **Look Up** button to populate the other
     fields based on the email address.
 
-    <div class="note">
+    **Note:**
 
     Parameters with a \* next to the label are required to submit the
     provisioning request. To change the required parameters, see
@@ -905,7 +905,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
         for the field. Set the `:required:` parameter to either `true`
         or `false` based on your needs.
 
-        <div class="note">
+        **Note:**
 
         If you set `:required:` to `true`, the field must have a value
         for the provision request to be submitted.
@@ -963,7 +963,7 @@ used based on the type of provisioning selected.
         `:required:` parameter to either `true` or `false` based on your
         needs.
 
-        <div class="note">
+        **Note:**
 
         If you set `:required:` to `true`, the field must have a value
         for the provision request to be submitted.
@@ -1003,7 +1003,7 @@ the entire provisioning process. ![2344](../images/2344.png)
 2.  Using the tree located in the accordion, click menu:DOMAIN\[Cloud \>
     VM \> Provisioning \> Profile\].
 
-    <div class="note">
+    **Note:**
 
     **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ
@@ -1031,7 +1031,7 @@ the entire provisioning process. ![2344](../images/2344.png)
     instructions on creating a custom dialog file, see [Customizing
     Provisioning Dialogs](#provisioning-dialogs-customizing).
 
-    <div class="note">
+    **Note:**
 
     Be sure that the custom dialog file exists. If it does not, an error
     will appear when the user clicks on the **Provisioning** button in

@@ -2,7 +2,7 @@
 
 View Capacity & Utilization data for hosts that are part of a cluster.
 
-<div class="note">
+**Note:**
 
 Your {{ site.data.product.title }} server requires network visibility to the provider
 assigned the **Server Role** of **Capacity & Utilization Collector** to
@@ -30,7 +30,7 @@ enable this feature.
 The charts are displayed for CPU, memory, disk, network, and running
 virtual machines.
 
-<div class="note">
+**Note:**
 
 Daily charts only include full days of data. If a day does not include
 all the 24 data points for a day, the data does not show for that day.

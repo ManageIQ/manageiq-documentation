@@ -225,7 +225,7 @@ To create a snapshot from the Resources screen:
     click on the virtual machine, then click **Snapshots** to view
     available snapshots.
 
-<div class="note">
+**Note:**
 
 You can revert or delete a snapshot only from the snapshot summary
 screen. To do so, navigate to **Snapshots** \> **View**, click more
@@ -268,7 +268,7 @@ Service user interface have enabled for users to access the Web console
 
 #### Accessing the Web Console
 
-<div class="note">
+**Note:**
 
 Launching of Cockpit requires as IP address for the virtual machine. It
 must be pre-configured and running on the virtual machine.

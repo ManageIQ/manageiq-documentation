@@ -15,7 +15,7 @@ To add a Google Compute Engine provider to {{ site.data.product.title }}, you ne
 
   - A service account JSON key for your project
 
-    <div class="note">
+    **Note:**
 
     You can generate a private JSON key for your project in menu:IAM &
     Admin\[Service Accounts\] in Google Cloud Platform. This key is used
@@ -53,7 +53,7 @@ To add a Google Compute Engine provider to {{ site.data.product.title }}, you ne
 
 10. Click **Add**.
 
-<div class="note">
+**Note:**
 
 Make sure that NTP synchronization is enabled and working. When clocks
 are not synchronized, the following error will be raised:

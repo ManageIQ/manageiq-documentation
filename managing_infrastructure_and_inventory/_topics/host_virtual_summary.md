@@ -28,7 +28,7 @@ The Summary divides into the following categories.
     and firewall rules on the host. Click on any of these items to see
     further details.
 
-    <div class="note">
+    **Note:**
 
     Run a SmartState Analysis on the host to retrieve this information.
 
@@ -41,7 +41,7 @@ The Summary divides into the following categories.
   - **Configuration** shows the number of packages and services
     installed. Click on any of these items to see more details.
 
-    <div class="note">
+    **Note:**
 
     Run a SmartState Analysis on the host to retrieve this information.
 

@@ -48,7 +48,7 @@ in a single request.
 }
 ```
 
-<div class="note">
+**Note:**
 
 group can be specified via **description**, **href**, or **id**
 
@@ -67,7 +67,7 @@ or creating multiple users:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#users) page for a
@@ -139,7 +139,7 @@ Users can also update their currently selected group with the
 }
 ```
 
-<div class="note">
+**Note:**
 
 The group reference can be via **description**, **href** or **id**.
 Also, only a group that the user belongs to can be specified.

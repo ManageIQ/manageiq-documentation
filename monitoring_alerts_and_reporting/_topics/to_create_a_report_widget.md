@@ -32,7 +32,7 @@
     in **Starting Date**. Select a **Starting Time** based on a 24 hour
     clock in the selected time zone.
 
-    <div class="note">
+    **Note:**
 
     If you change the time zone, you will need to reset the starting
     date and time.

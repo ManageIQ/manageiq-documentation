@@ -49,7 +49,7 @@ groups in a single request.
 }
 ```
 
-<div class="note">
+**Note:**
 
 role can be specified via **name**, **href**, or **id**
 
@@ -70,7 +70,7 @@ or creating multiple groups:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#groups) page for a

@@ -1,6 +1,6 @@
 # Adding or Viewing Network Providers
 
-<div class="note">
+**Note:**
 
 All supported network providers — OpenStack Network, Azure Network, and
 Amazon EC2 Network, are added or removed automatically upon adding or
@@ -29,7 +29,7 @@ Accordion tabs in the sidebar provide access to **Properties** and
 Click on **Reload**, **Configuration**, **Policy**, and **Monitoring**
 actions in the taskbar to manage the selected provider.
 
-<div class="note">
+**Note:**
 
 Alternatively, click on a cloud provider to see the cloud provider
 details and its relationships such as Network Manager, Tenants,

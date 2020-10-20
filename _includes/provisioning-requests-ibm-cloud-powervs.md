@@ -29,7 +29,7 @@ from images.
 
     1.  Select the **Processor** type.
 
-    <div class="note">
+    **Note:**
 
     See [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#processor)
     for more information.
@@ -40,7 +40,7 @@ from images.
 
     3.  Optionally, select **Attach Volumes** items.
 
-    <div class="note">
+    **Note:**
 
     Note: A VM cannot have disks from different storage types. Only existing
     volumes matching the **Storage Type** will be available for selection.
@@ -49,7 +49,7 @@ from images.
 
     4.  Select a **Storage Type**.
 
-    <div class="note">
+    **Note:**
 
     See [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#storage)
     for more information on volume types.
@@ -58,7 +58,7 @@ from images.
 
     5.  Enter number of **Entitled Processors**.
 
-    <div class="note">
+    **Note:**
 
     If 'dedicated' **Processor** is selected, **Entitled Processors** must be
     allocated in whole numbers.
@@ -98,7 +98,7 @@ from images.
 
     2.  In the **Other** section, select **Migratable** and **VM pinning**
 
-    <div class="note">
+    **Note:**
 
     [Learn more](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#pinning)
     about VM pinning.

@@ -71,7 +71,7 @@ in a single request.
 }
 ```
 
-<div class="note">
+**Note:**
 
 *restrictions* for **vms** can be either *user* or *user\_or\_group*
 
@@ -92,7 +92,7 @@ or creating multiple roles:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#roles) page for a

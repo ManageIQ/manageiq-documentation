@@ -76,7 +76,7 @@ follows:
 }
 ```
 
-<div class="note">
+**Note:**
 
 host can be referenced by **href** or **id**
 

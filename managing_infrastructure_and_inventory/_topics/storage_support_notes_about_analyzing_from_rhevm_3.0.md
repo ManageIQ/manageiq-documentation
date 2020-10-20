@@ -23,7 +23,7 @@ storage. NFS storage does not have these requirements.
 
             directlun=<LUN ID 1>:readonly,<LUN ID 2>:readonly,<LUN ID N>:readonly
 
-        <div class="note">
+        **Note:**
 
         The {{ site.data.product.title }} appliance must reside in the same data
         center as the storage you are trying to connect. If you have

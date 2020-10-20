@@ -8,7 +8,7 @@ which has widgets, dashboard controls and feedback. The Self Service
 user interface supports role-based access control (RBAC) of menus and
 features, similar to in the full administrative user interface.
 
-<div class="note">
+**Note:**
 
 All catalog items, dialogs, buttons, icons among other items must be
 configured in the full administrative user interface before they are

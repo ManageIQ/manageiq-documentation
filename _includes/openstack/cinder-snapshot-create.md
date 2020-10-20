@@ -14,7 +14,7 @@
 Click **Cloud Volume Snapshots** on the summary page of a volume to view
 the snapshots for that volume.
 
-<div class="note">
+**Note:**
 
 See [Create, Use, or Delete Volume
 Snapshots](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/storage_guide/#section-create-clone-delete-vol-snapshots)

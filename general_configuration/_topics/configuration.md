@@ -58,7 +58,7 @@ technology center contains a single subregion that manages two zones.
 Likewise the San Diego technology center contains a single subregion
 managing a single zone.
 
-<div class="note">
+**Note:**
 
   - Replicating a parent region to a higher-level parent is not
     supported.
@@ -88,7 +88,7 @@ database that includes all information across multiple subordinate
 regions. The subordinate regions replicate their information to the
 master.
 
-<div class="note">
+**Note:**
 
 The subordinate regions are not aware of each other from a database
 perspective. You cannot see information from one subordinate region in
@@ -162,7 +162,7 @@ Collection:
 
 5.  Click **Save**.
 
-<div class="note">
+**Note:**
 
 1.  As new clusters, hosts, and datastores are discovered, you will need
     to come back to this configuration to enable collection of capacity
@@ -211,7 +211,7 @@ To create a tag category:
       - Use **Name** to create a short name that refers to category in
         the VMDB.
 
-        <div class="note">
+        **Note:**
 
         The **Name** and **Single Value** fields cannot be changed after
         the category has been added.
@@ -266,7 +266,7 @@ To delete a tag category:
 
 4.  Click **OK** to confirm.
 
-<div class="note">
+**Note:**
 
 When you delete a tag category, the category values are removed, and any
 tags from the category are unassigned from all resources.
@@ -285,7 +285,7 @@ To create a company tag:
 3.  In the **Choose a Category** area, select a category from the
     **Category** list.
 
-    <div class="note">
+    **Note:**
 
       - Some categories only allow one value to be assigned to a
         resource.
@@ -313,7 +313,7 @@ To delete a company tag:
 3.  Click **Delete** under the **Actions** column next to the tag to
     delete it.
 
-    <div class="note">
+    **Note:**
 
     When you delete a tag, the tag is also deleted from any resource to
     which it was assigned.
@@ -357,7 +357,7 @@ To import tags for a virtual machine from a CSV file:
 
 5.  Click **Upload**.
 
-    <div class="note">
+    **Note:**
 
     If there are any problems with the file, such as an incorrect column
     name, unknown virtual machine, unknown tag, or multiple values for a
@@ -427,7 +427,7 @@ To import asset tags for a virtual machine from a CSV file
 
 6.  Click **Upload**.
 
-    <div class="note">
+    **Note:**
 
     If there are any problems with the file, such as an incorrect column
     name, unknown virtual machine or host, a message appears.
@@ -442,7 +442,7 @@ To import asset tags for a virtual machine from a CSV file
 this feature to define menu labels, URLs and how each window opens for
 users.
 
-<div class="note">
+**Note:**
 
 Any change to the help menu will take effect upon a full page reload.
 
@@ -646,7 +646,7 @@ VC East is discovered by one of the {{ site.data.product.title }} appliances in 
 analyzing twenty virtual machines, this job can be processed by either
 Appliance A or B, but not C or D.
 
-<div class="note">
+**Note:**
 
 Only users assigned the super administrator role can create zones. There
 must always be at least one zone. The **Default Zone** is provided and
@@ -699,7 +699,7 @@ To delete a zone:
 
 3.  Click the zone you want to remove.
 
-    <div class="note">
+    **Note:**
 
     You cannot delete a zone if there are servers assigned to it.
 
@@ -753,7 +753,7 @@ multiple servers in your environment that are reporting to one central
 VMDB, then you can edit some of these settings from the console by
 specifying which server you want to change.
 
-<div class="note">
+**Note:**
 
 The server selection options are only available if you have multiple
 servers sharing one VMDB.
@@ -796,7 +796,7 @@ To change server settings:
 
   - Use **Appliance Time Zone** to set the time zone for this server.
 
-    <div class="note">
+    **Note:**
 
     This is the time zone used when created scheduled analyses. This is
     not the same as the **Time Zone** parameter, which is found by
@@ -821,7 +821,7 @@ are enabled by default on all servers.
     which you refresh your virtual machine repositories. This host must
     have access to your repositories to analyze its virtual machines.
 
-<div class="note">
+**Note:**
 
   - Only super administrators can change server roles.
 
@@ -832,7 +832,7 @@ are enabled by default on all servers.
 
 ###### Server Roles
 
-<div class="note">
+**Note:**
 
   - Server roles that are in an active/active high availability
     configuration *(load balancing and failover protection)* are active
@@ -879,7 +879,7 @@ registered to a host. To use this feature, you must have VNC installed,
 [VMware’s WebMKS SDK enabled in {{ site.data.product.title_short }}](../managing_infrastructure_and_inventory/index.html#configuring-webmks-support-in-manageiq),
 or the VMRC native desktop application installed for your environment.
 
-<div class="note">
+**Note:**
 
 See vendor documentation to ensure you are installing appropriate
 applications for your virtual infrastructure. Once you have installed
@@ -982,7 +982,7 @@ To set the failover priority role:
 To use the email action in {{ site.data.product.title }}, set an email address to send
 emails from.
 
-<div class="note">
+**Note:**
 
 To be able to send any emails from the server, you must have the
 Notifier server role enabled. You can test the settings without the role
@@ -1084,7 +1084,7 @@ To change authentication settings:
 Use the Workers page to specify the number of workers and amount of
 memory allowed to be used for each type.
 
-<div class="note">
+**Note:**
 
 Only make these changes when directed to by Red Hat Support.
 
@@ -1117,7 +1117,7 @@ Use the Database page to specify the location of your Virtual Machine
 Database (VMDB) and its login credentials. By default, the type is
 PostgreSQL on the Server.
 
-<div class="note">
+**Note:**
 
 The server may not start if the database settings are changed. Be sure
 to validate your new settings before restarting the server.
@@ -1173,7 +1173,7 @@ procedures below to upload a custom logo to the user interface, and to
 customize the login background and login panel text on the user
 interface.
 
-<div class="note">
+**Note:**
 
   - If you have upgraded from an earlier {{ site.data.product.title }} version and
     your custom logo was already in use before migration, although your
@@ -1194,7 +1194,7 @@ interface.
 
 ###### Uploading a Custom Logo to the User Interface
 
-<div class="note">
+**Note:**
 
 Make sure the desired logo is accessible from the computer where you are
 running the {{ site.data.product.title_short }} user interface. The file must be in
@@ -1227,7 +1227,7 @@ To upload a custom logo to the user interface:
 
 9.  Click **Save**.
 
-<div class="note">
+**Note:**
 
 To enable displaying your custom logo, ensure the option to use
 configuration settings for the tenant under **Access Control** is set to
@@ -1238,7 +1238,7 @@ on how to set the configuration settings.
 
 ###### Customizing the Login Background
 
-<div class="note">
+**Note:**
 
 Make sure the background image that you want to use is accessible from
 the computer where you are running the user interface. The file must be
@@ -1773,7 +1773,7 @@ To schedule a SmartState Analysis or Compliance Check:
         choose to analyze **All Hosts**, **All Hosts for Provider**, **A
         single Host**, or **Global Filters**.
 
-        <div class="note">
+        **Note:**
 
         You can only schedule host analyses for connected virtual
         machines, not repository virtual machines that were discovered
@@ -1825,7 +1825,7 @@ To schedule a SmartState Analysis or Compliance Check:
 
 9.  Select a **Time Zone**.
 
-    <div class="note">
+    **Note:**
 
     If you change the **Time Zone**, you will need to reset the stating
     date and time.
@@ -1841,7 +1841,7 @@ To schedule a SmartState Analysis or Compliance Check:
 
 ##### Scheduling a Database Backup
 
-<div class="note">
+**Note:**
 
 Set `wal_keep_segments` parameter to a value that ensures
 {{ site.data.product.title_short }} scheduled backups finish. Create a test backup
@@ -1916,7 +1916,7 @@ To schedule a database backup:
 
 9.  Select a **Time Zone**.
 
-    <div class="note">
+    **Note:**
 
     If you change the **Time Zone**, you will need to reset the stating
     date and time.
@@ -2047,7 +2047,7 @@ To create a project:
 Use the following procedure to allocate or edit quotas for tenants and
 projects.
 
-<div class="note">
+**Note:**
 
 Quota is allocated based on the user’s current group. If the user
 belongs to multiple groups, you must change to the desired group before
@@ -2230,7 +2230,7 @@ jcs](../images/cloudforms_general_config_roles_460469_1017_jcs.png)
 {{ site.data.product.title }} provides a default group of roles, but you can also
 create your own, or copy and edit the default groups.
 
-<div class="note">
+**Note:**
 
 If you have enabled **Get Role from LDAP** under **LDAP Settings**, then
 the role is determined by the LDAP user’s group membership in the
@@ -2549,7 +2549,7 @@ To repair capacity and utilization data:
 
     1.  Select the appropriate **Timezone**.
 
-        <div class="note">
+        **Note:**
 
         Do not select more than one week unless instructed to do so by
         Red Hat Support.
@@ -2805,7 +2805,7 @@ To download the server log:
 5.  Click ![2107](../images/2107.png) (**Download the Entire EVM Log
     File**).
 
-<div class="note">
+**Note:**
 
 Use the **Audit Log** to see changes to the user interface and
 authentication.
@@ -3089,7 +3089,7 @@ data is replicated from the remote copies.
 
 7.  Click **Save**.
 
-<div class="note">
+**Note:**
 
 Once you configure a {{ site.data.product.title }} instance to act as a global copy,
 and one or more other instances to act as remote copies: \* centralized
@@ -3163,7 +3163,7 @@ from the global copy.
 (NFS)**, **Samba**, **Amazon Web Service(AWS) S3** and **OpenStack
 Swift** storage.
 
-<div class="note">
+**Note:**
 
 Database backups to **AWS S3** require valid AWS credentials to perform
 this operation.
@@ -3245,7 +3245,7 @@ To restore a database from a backup:
 
     2.  Specify the location of the backup file.
 
-        <div class="note">
+        **Note:**
 
         The appliance console menu may respond slowly if connections are
         open and the server is still shutting down. If this occurs, wait
@@ -3279,7 +3279,7 @@ To restore a database from a backup:
 Preserve data at the file system level by performing a binary backup.
 This includes all databases, users and roles, and other objects.
 
-<div class="note">
+**Note:**
 
 This procedure uses the `pg_basebackup` utility to perform a remote
 database backup and create a full replacement of the PostgreSQL data
@@ -3308,7 +3308,7 @@ required to perform this procedure.
 
         # pg_basebackup -X fetch -h hostname -U root -Ft -z -D filename
 
-    <div class="note">
+    **Note:**
 
     **-h** *hostname* specifies the IP address of the database server.
 
@@ -3515,7 +3515,7 @@ empty metrics tables and reorganize the database. Periodic maintenance
 can be configured to run hourly, daily, weekly, or monthly, at a
 specified hour and on a specified day.
 
-<div class="note">
+**Note:**
 
 Periodic maintenance can impact appliance performance while it is
 running. Red Hat recommends scheduling periodic maintenance

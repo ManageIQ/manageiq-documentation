@@ -108,7 +108,7 @@ database cluster to re-configure the database replication:
     5.  Enter the new primary database-only appliance hostname or IP
         address.
 
-        <div class="note">
+        **Note:**
 
         The hostname or IP address must be visible to all appliances
         that communicate with this database, including the non-database
@@ -154,7 +154,7 @@ On the standby database-only appliances, configure the following:
     6.  Enter the new standby database-only appliance hostname or IP
         address.
 
-        <div class="note">
+        **Note:**
 
         The hostname or IP address must be visible to all appliances
         that communicate with this database, including the engine
@@ -202,7 +202,7 @@ reconfigure `database.yml` before restarting.
 
     2.  Select **Start Database Failover Monitor**.
 
-<div class="note">
+**Note:**
 
 You can view a summary of the updated appliances by running `repmgr
 cluster show` on one of the database appliances.

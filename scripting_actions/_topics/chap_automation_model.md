@@ -98,7 +98,7 @@ for either a class or the entire model. Finally, you can reset the
 datastore to its default. Always be sure to export the current datastore
 before importing or resetting.
 
-<div class="note">
+**Note:**
 
 The datastores you are exporting or importing between must use the same
 {{ site.data.product.title_short }} version.

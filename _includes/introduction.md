@@ -92,7 +92,7 @@ for your database:
 
 ![5780](../images/5780.png)
 
-<div class="note">
+**Note:**
 
 When enabling capacity and utilization for metrics gathering over a
 period of time, it is recommended that the VMDB size scale accordingly.

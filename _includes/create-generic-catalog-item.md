@@ -29,16 +29,11 @@
         2.  **Retirement Entry Point (Domain/NS/Cls/Inst)** requires you
             to select an Automate instance to run upon retirement.
 
-            <div class="note">
+            **Note:**
 
-            The entry point must be a State Machine since the
-            **Provisioning Entry Point** list is filtered to only show
-            State Machine class instances. No other entry points will be
+            The entry point must be a State Machine since the **Provisioning Entry Point** list is filtered to only show State Machine class instances. No other entry points will be
             available from the **Provisioning Entry Point** field.
 
-            </div>
-
-6.  In the **Details** subtab, write a **Long Description** for the
-    catalog item.
+6.  In the **Details** subtab, write a **Long Description** for the catalog item.
 
 7.  Click **Add**.

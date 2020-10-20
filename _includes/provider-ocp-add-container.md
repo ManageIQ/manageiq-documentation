@@ -38,7 +38,7 @@
             provider’s CA certificate to the **Trusted CA
             Certificates** box in PEM format.
 
-            <div class="note">
+            **Note:**
 
             You can obtain your OpenShift Container Platform provider’s
             CA certificate for all endpoints (default, metrics, alerts)
@@ -121,7 +121,7 @@
             provider’s CA certificate to the **Trusted CA
             Certificates** box in PEM format.
 
-            <div class="note">
+            **Note:**
 
             In OpenShift, the default deployment of the router generates
             certificates during installation, which can be used with the
@@ -148,7 +148,7 @@
 11. Click the **Advanced** tab to add image inspector settings for
     scanning container images on your provider using OpenSCAP.
 
-    <div class="note">
+    **Note:**
 
       - These settings control downloading the image inspector container
         image from the registry and obtaining the Common Vulnerabilities
@@ -180,7 +180,7 @@
 
 12. Click **Add**.
 
-<div class="note">
+**Note:**
 
 You can also set global default image-inspector settings for all
 OpenShift providers in the advanced settings menu by editing the values

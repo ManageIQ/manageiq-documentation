@@ -1,6 +1,6 @@
 # Resizing a Virtual Machine Disk
 
-<div class="note">
+**Note:**
 
 This functionality is available on VMware virtual machines only.
 

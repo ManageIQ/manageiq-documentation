@@ -170,7 +170,7 @@ posted to the /api/providers URL.
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#providers) page for a
@@ -216,7 +216,7 @@ which include:
 | ManageIQ::Providers::Vmware::CloudManager         |
 | ManageIQ::Providers::Vmware::InfraManager         |
 
-<div class="note">
+**Note:**
 
 Please note that the provider **type** classes have changed in the
 appliance from earlier releases (*v2.0.0* of the API). Please refer to
@@ -364,7 +364,7 @@ Editing provider is available via the **edit** action with the
 }
 ```
 
-<div class="note">
+**Note:**
 
 type is a restricted attribute and cannot be edited.
 
@@ -487,7 +487,7 @@ attribute specifies the supported provider class names which include:
 | ManageIQ::Providers::Foreman::Provider      |
 | ManageIQ::Providers::Openstack::Provider    |
 
-<div class="note">
+**Note:**
 
 When managing providers of *provider* provider\_class, Tagging and
 Policy management does not currently apply. So requests including the

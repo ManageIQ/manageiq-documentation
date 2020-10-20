@@ -44,7 +44,7 @@ You can now assign this policy to a **Policy Profile**. Then, assign the
 policy profile to the virtual machines. Every time this event happens on
 the virtual machine the appropriate Automate Model will be initiated.
 
-<div class="note">
+**Note:**
 
 If you want the policy to initiate an Automate Model from the
 `/System/Process/Request` class, then you can create your own custom

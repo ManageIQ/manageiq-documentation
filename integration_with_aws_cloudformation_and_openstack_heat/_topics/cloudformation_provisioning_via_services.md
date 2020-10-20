@@ -94,7 +94,7 @@ UI.
 5.  **Timeout** is optional. You can type the number of seconds to
     timeout the provision at the provider side.
 
-    <div class="note">
+    **Note:**
 
     The number of seconds get converted (rounded) to minutes when
     ordering the provision through Red Hat Enterprise Linus OpenStack
@@ -105,7 +105,7 @@ UI.
 6.  You can use the default parameter values from the template, or enter
     new values as appropriate.
 
-    <div class="note">
+    **Note:**
 
     The Parameters vary per dialog; therefore, the parameters shown in
     the **Order Service** window may or may not exist depending on the

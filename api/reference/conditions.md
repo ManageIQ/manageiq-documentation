@@ -60,7 +60,7 @@ or creating multiple conditions:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#conditions) page for

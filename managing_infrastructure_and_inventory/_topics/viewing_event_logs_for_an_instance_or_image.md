@@ -3,7 +3,7 @@
 Using an **Analysis Profile**, collect event log information from your
 instances.
 
-<div class="note">
+**Note:**
 
 This feature is only available for Windows.
 

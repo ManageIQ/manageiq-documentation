@@ -3,7 +3,7 @@
 Edit information about a provider such as the name, IP address, and
 login credentials.
 
-<div class="note">
+**Note:**
 
 The **Type** value is unchangeable.
 

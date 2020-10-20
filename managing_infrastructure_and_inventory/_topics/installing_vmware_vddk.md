@@ -7,7 +7,7 @@ environment requires the Virtual Disk Development Kit (VDDK).
 1.  Download VDDK 5.5 (`VMware-vix-disklib-5.5.0-1284542.x86_64.tar.gz`
     at the time of this writing) from the VMware website.
 
-    <div class="note">
+    **Note:**
 
     If you do not already have a login ID to VMware, then you will need
     to create one. At the time of this writing, the file can be found by
@@ -53,7 +53,7 @@ environment requires the Virtual Disk Development Kit (VDDK).
 6.  Run `ldconfig` in order for {{ site.data.product.title }} to find the newly
     installed VDDK library.
 
-    <div class="note">
+    **Note:**
 
     Use the following command to verify the VDDK files are listed and
     accessible to the appliance:

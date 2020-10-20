@@ -25,7 +25,7 @@ undercloud, you can also set this manually. To do so:
 
         store_events = True
 
-<div class="note">
+**Note:**
 
 Passing the newly created environment file to the overcloud deployment
 is environment specific and requires executing commands in particular

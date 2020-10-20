@@ -53,7 +53,7 @@
 
     ![image](../images/edit-action.png)
 
-    <div class="note">
+    **Note:**
 
     Each selected action can be executed synchronously or
     asynchronously; a synchronous action will not start until the

@@ -169,7 +169,7 @@ the **request\_state** reaches the **finished** state. Specifically,
 
     GET /api/provision_requests/3068
 
-<div class="note">
+**Note:**
 
 The requests tasks of a provisioning request can also be queried by
 expanding the request\_tasks subcollection as follows:

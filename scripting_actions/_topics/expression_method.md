@@ -45,7 +45,7 @@ To create an expression method:
 
     3.  Click ![image](../images/1863.png) to add the parameter.
 
-        <div class="note">
+        **Note:**
 
         If **User will input the value** is checked, arguments for each
         input parameter names using the prefix “arg”.

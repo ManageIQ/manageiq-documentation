@@ -73,7 +73,7 @@ information on alternative secure communication configurations, see
 from the OpenShift Container Platform *Installation and Configuration*
 documentation.
 
-<div class="note">
+**Note:**
 
 This section is an abridged version of a more detailed chapter, namely
 [Metrics Data Storage](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.9/html/installation_and_configuration/install-config-cluster-metrics#metrics-data-storage)

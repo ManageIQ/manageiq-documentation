@@ -78,7 +78,7 @@ or creating multiple configuration script sources:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#configuration-script-sources)

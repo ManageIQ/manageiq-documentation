@@ -28,7 +28,7 @@ profile (created in [Creating a Virtual Machine Analysis Profile](#creating-a-vi
 
 6.  Click **Add**.
 
-<div class="note">
+**Note:**
 
 You can only associate this action with an analysis start event.
 

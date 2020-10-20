@@ -19,7 +19,7 @@ instance’s storage location so that a snapshot can be created.
 
 5.  Click **OK**.
 
-<div class="note">
+**Note:**
 
 <div class="title">
 

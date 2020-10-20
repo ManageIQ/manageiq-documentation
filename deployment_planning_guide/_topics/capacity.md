@@ -18,7 +18,7 @@ Three server roles are associated with the collection and metric creation of cap
 
 {% include cap-util-assign-server-roles.md %}
 
-<div class="note">
+**Note:**
 
 In addition to setting the server role, you must also select which
 clusters and data stores to collect data for. For more information, see the **General Configuration** guide. You must have super administrator privileges to edit these settings.
@@ -232,7 +232,7 @@ installation of RHEL-OSP and registration to a satellite that has access to both
 
 {{ site.data.product.title }} generates charts from the collected data that can be used to plan your hardware and virtual machine needs. Depending on the type of data, these charts can include lines for averages, maximums, minimums, and trends.
 
-<div class="note">
+**Note:**
 
 For reporting of daily capacity and utilization data, incomplete days (days with less than 24 hourly data points from midnight to midnight) that are at the beginning or end of the requested interval are excluded. Days with less than 24 hourly data points would be inaccurate and including them would skew trend lines. Therefore, at least one full day of hourly data from midnight to midnight is necessary for displaying the capacity and utilization charts under the menu: **Compute > Infrastructure** tab.
 

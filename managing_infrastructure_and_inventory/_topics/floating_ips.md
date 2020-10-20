@@ -6,7 +6,7 @@ IP addresses, which can then be dynamically assigned to an instance. All
 incoming traffic destined for that floating IP is routed to the instance
 to which it has been assigned.
 
-<div class="note">
+**Note:**
 
 Red Hat OpenStack Networking allocates floating IP addresses to all
 projects (tenants) from the same IP ranges/CIDRs. As a result, every

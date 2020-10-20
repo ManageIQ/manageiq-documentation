@@ -61,7 +61,7 @@ a remote host.
   - **Vault Password**: Ansible Vault credentials have only the **Vault
     Password** attribute that may be configured.
 
-<div class="note">
+**Note:**
 
 For more information on Ansible Vault, see [Using Vault in
 playbooks](http://docs.ansible.com/ansible/latest/playbooks_vault.html).
@@ -263,7 +263,7 @@ VMware credentials have several attributes that may be configured:
 
   - **vCenter Host**: The vCenter hostname or IP address to connect to.
 
-<div class="note">
+**Note:**
 
 If the VMware guest tools are not running on the instance, VMware
 inventory sync may not return an IP address for that instance.

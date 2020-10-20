@@ -224,7 +224,7 @@ Attributes which can also be specified when creating categories include:
 | single\_value |
 | syntax        |
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#categories) page for
@@ -276,7 +276,7 @@ or simply:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#tags) page for a list

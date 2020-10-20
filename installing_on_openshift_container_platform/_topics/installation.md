@@ -148,7 +148,7 @@ contexts, and create persistent storage.
         $ oc describe scc privileged | grep Users
         Users:                  system:admin,system:serviceaccount:openshift-infra:build-controller,system:serviceaccount:management-infra:management-admin,system:serviceaccount:management-infra:inspector-admin,system:serviceaccount:logging:aggregated-logging-fluentd,system:serviceaccount:<your-project>:cfme-privileged
 
-    <div class="note">
+    **Note:**
 
     For more information on SCCs, see the [OpenShift
     documentation](https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html).
@@ -181,7 +181,7 @@ contexts, and create persistent storage.
     available from the image stream or repository configured in
     [Templates and Images](#templates-images).
 
-    <div class="note">
+    **Note:**
 
     For NFS-backed volumes, ensure your NFS server firewall is
     configured to allow traffic on port 2049 (TCP) from the OpenShift
@@ -214,7 +214,7 @@ contexts, and create persistent storage.
 
             $ oc process cfme-pv-server-example.yaml -p NFS_HOST=nfs.example.com | oc create -f -
 
-        <div class="note">
+        **Note:**
 
         There are three parameters required to process the template.
         Only NFS\_HOST is required, PV\_SIZE and BASE\_PATH contain
@@ -238,7 +238,7 @@ contexts, and create persistent storage.
 
             cfme-db             15Gi       RWO           Retain          Available                                          49s
 
-        <div class="note">
+        **Note:**
 
         Red Hat recommends validating NFS share connectivity from an
         OpenShift node before attempting a deployment.
@@ -309,7 +309,7 @@ project.
 
         $ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,POSTGRESQL_MEM_LIMIT=4Gi,APPLICATION_DOMAIN=hostname
 
-    <div class="important">
+    **Important:**
 
     The `APPLICATION_DOMAIN` parameter specifies the hostname used to
     reach the {{ site.data.product.title_short }} application, which eventually
@@ -318,10 +318,7 @@ project.
     {{ site.data.product.title_short }} application will not be accessible after the
     deployment; however, this can be fixed by changing the route. For
     more information on OpenShift template parameters, see the
-    [OpenShift Container Platform Developer
-    Guide](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-templates).
-
-    </div>
+    [OpenShift Container Platform Developer Guide](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-templates).
 
 #### Deploying the {{ site.data.product.title_short }} Appliance Using an External Database
 
@@ -353,7 +350,7 @@ To deploy the appliance:
 Verify the deployment was successful by running the following commands
 as a regular user under the {{ site.data.product.title_short }} project:
 
-<div class="note">
+**Note:**
 
 The first deployment can take several minutes to complete while
 OpenShift downloads the necessary images.
@@ -402,7 +399,7 @@ OpenShift downloads the necessary images.
 
 3.  Check the readiness of the {{ site.data.product.title_short }} pod:
 
-    <div class="note">
+    **Note:**
 
     Allow approximately five minutes once pods are in running state for
     {{ site.data.product.title_short }} to start responding on HTTPS.
@@ -438,7 +435,7 @@ OpenShift downloads the necessary images.
         deploymentconfig "memcached" updated
         deploymentconfig "postgresql" updated
 
-    <div class="note">
+    **Note:**
 
     The configuration change trigger is kept enabled; to have full
     control of your deployments, you can alternatively turn it off. See

@@ -5,7 +5,7 @@ After adding an Amazon EC2 provider and configuring an SNS topic in
 then configure CloudWatch rules on your EC2 provider to automatically
 get events in {{ site.data.product.title_short }} for monitoring the provider.
 
-<div class="note">
+**Note:**
 
 The following procedures are accurate at time of publishing. See the
 [Amazon AWS

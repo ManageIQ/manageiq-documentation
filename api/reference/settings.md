@@ -53,7 +53,7 @@ GET /api/zones/:id/settings
 GET /api/regions/:id/settings
 ```
 
-<div class="note">
+**Note:**
 
 <div class="title">
 

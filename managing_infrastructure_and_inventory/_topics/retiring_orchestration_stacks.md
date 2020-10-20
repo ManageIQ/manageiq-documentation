@@ -20,7 +20,7 @@ To set a retirement date:
 
 6.  Click **Save**.
 
-<div class="note">
+**Note:**
 
 Saving a blank date will remove all retirement dates.
 

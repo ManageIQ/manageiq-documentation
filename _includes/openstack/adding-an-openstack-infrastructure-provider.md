@@ -8,7 +8,7 @@ the `admin` credentials, a user in {{ site.data.product.title }} provisions into
 `admin` tenant, and sees images, networks, and instances that are
 associated with the `admin` tenant.
 
-<div class="note">
+**Note:**
 
   - You can set whether {{ site.data.product.title }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the undercloud to store events. See [Configuring the Undercloud to Store Events](#configuring-the-undercloud-to-store-events) for instructions. For more information, see [OpenStack Telemetry (ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/architecture_guide/#comp-telemetry) in the Red Hat OpenStack Platform *Architecture Guide*.
 
@@ -33,7 +33,7 @@ associated with the `admin` tenant.
 5.  Select the **API Version** of your OpenStack provider’s Keystone
     service from the list. The default is `Keystone v2`.
 
-    <div class="note">
+    **Note:**
 
     {% include openstack/osp-keystone-api-v3.md %}
 
@@ -42,7 +42,7 @@ associated with the `admin` tenant.
 6.  Select the appropriate **Zone** for the provider. By default, the
     zone is set to **default**.
 
-    <div class="note">
+    **Note:**
 
     For more information, see the definition of host aggregates and
     availability zones in [OpenStack Compute
@@ -124,7 +124,7 @@ associated with the `admin` tenant.
 
 10. Click **Add** after configuring the infrastructure provider.
 
-<div class="note">
+**Note:**
 
 {{ site.data.product.title }} requires that the `adminURL` endpoint for all OpenStack
 services be on a non-private network. Accordingly, assign the adminURL

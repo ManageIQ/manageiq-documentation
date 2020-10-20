@@ -18,7 +18,7 @@
 The new class is created and you can create a schema, add instances and
 methods.
 
-<div class="note">
+**Note:**
 
 For each class, create a schema if you did not choose to inherit from an
 existing class. The schema can include attributes, methods, assertions,

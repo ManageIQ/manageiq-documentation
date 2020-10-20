@@ -73,7 +73,7 @@ or creating multiple orchestration templates:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#orchestration_templates)

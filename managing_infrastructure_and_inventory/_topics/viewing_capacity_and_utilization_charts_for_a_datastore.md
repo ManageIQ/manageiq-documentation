@@ -2,7 +2,7 @@
 
 You can view capacity and utilization data for a datastore.
 
-<div class="note">
+**Note:**
 
 {{ site.data.product.title }} requires network visibility to your provider assigned
 the server role of *Capacity & Utilization Collector* to enable this
@@ -26,7 +26,7 @@ feature.
         host and exists in the VMDB. Also, a template connected to a
         management system and exists in the VMDB.
 
-        <div class="note">
+        **Note:**
 
         Templates cannot be connected to a host.
 
@@ -49,7 +49,7 @@ feature.
 
 5.  Use **Time Profiles** to select a time range for the data.
 
-<div class="note">
+**Note:**
 
 Daily charts only include full days of data. If a day does not include
 all the 24 data points for a day, the data does not show for that day.

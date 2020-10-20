@@ -30,7 +30,7 @@ has the following requirements:
 
   - Depending on your infrastructure, allow time for the upload.
 
-<div class="note">
+**Note:**
 
 These are the procedural steps as of the time of writing. For more
 information, consult the VMware documentation.

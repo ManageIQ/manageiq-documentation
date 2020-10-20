@@ -37,7 +37,7 @@
 
 7.  Click **Save**.
 
-<div class="note">
+**Note:**
 
 Only reports that are not already in another folder can be assigned.
 

@@ -4,7 +4,7 @@ View the list of snapshots to see a history of their creation and size.
 {{ site.data.product.title }} provides the description, size, and creation time of the
 snapshot as well as a view of the genealogy of the snapshots.
 
-<div class="note">
+**Note:**
 
 Snapshot size is only available after the successful completion of a
 **SmartState Analysis**.

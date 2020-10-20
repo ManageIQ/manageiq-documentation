@@ -46,7 +46,7 @@ This format for this table uses the following header columns:
 
             host    all      all   192.168.1.0  255.255.255.0            md5
 
-        <div class="note">
+        **Note:**
 
         `ADDRESS` is not required for `local` connections.
 

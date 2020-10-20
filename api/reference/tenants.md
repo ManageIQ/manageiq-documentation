@@ -71,7 +71,7 @@ For example, creating a new tenant:
 
 Parent can be specify by *id* or *href*
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#tenants) page for a
@@ -95,7 +95,7 @@ Editing a Tenant is available via the **edit** action with the
 }
 ```
 
-<div class="note">
+**Note:**
 
 type is a restricted attribute and cannot be edited.
 

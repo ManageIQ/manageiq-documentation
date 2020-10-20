@@ -3,7 +3,7 @@
 Perform a SmartState analysis on a host to collect additional
 information about it, such as patches, CPU, and memory.
 
-<div class="note">
+**Note:**
 
   - SmartState analysis on hosts is processed by the **Provider
     Operations** role. It is enabled by default.

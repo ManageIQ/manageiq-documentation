@@ -4,7 +4,7 @@ Pass environment values directly through the `vm_fields` attribute group
 of a provisioning request by first adding `"placement_auto":"false"` to
 the hash.
 
-<div class="note">
+**Note:**
 
 Once `"placement_auto:"false"` has been added, you must pass values for
 all the required fields on the Environment tab.

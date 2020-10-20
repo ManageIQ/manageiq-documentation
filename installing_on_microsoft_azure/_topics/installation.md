@@ -38,7 +38,7 @@ the following requirements are met:
 
 #### Using the Azure PowerShell Script
 
-<div class="note">
+**Note:**
 
 Make sure Azure Resource Manager cmdlets are available; see [Azure
 Resource Manager
@@ -139,7 +139,7 @@ latest installation information.
         # Create the VM
         New-AzureRmVM -ResourceGroupName $ResourceGroupName -Location $Location -VM $VirtualMachine
 
-    <div class="note">
+    **Note:**
 
     These are the procedural steps as of the time of writing. For more
     information, see the following Azure documentation.
@@ -161,7 +161,7 @@ Complete the following steps to upload and provision the
 
 ##### Installing the Azure Command-Line Interface
 
-<div class="note">
+**Note:**
 
 For a complete Azure CLI 2.0 command reference, see [Azure CLI 2.0:
 Command reference -
@@ -213,7 +213,7 @@ az](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
 Complete the following steps to create resources in Microsoft Azure
 using the Azure CLI.
 
-<div class="note">
+**Note:**
 
   - If you already have resources you can use, you can skip this section
     and go directly to [Uploading and Provisioning the
@@ -440,7 +440,7 @@ using the Azure Command-Line Interface (Azure CLI).
 You have successfully provisioned a {{ site.data.product.title_short }} virtual
 appliance in Microsoft Azure.
 
-<div class="note">
+**Note:**
 
 The exported storage connection string does not persist after a system
 reboot. If any of the commands in the above steps fail, export the

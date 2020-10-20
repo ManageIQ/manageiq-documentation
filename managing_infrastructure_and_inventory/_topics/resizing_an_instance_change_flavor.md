@@ -7,7 +7,7 @@ has:
 
   - Enough capacity to support the needs of the new flavor
 
-<div class="note">
+**Note:**
 
 Keep in mind that the instance will undergo a controlled shutdown when
 you change its flavor.

@@ -81,7 +81,7 @@ resources and collections defined in this API.
 | edit   | PUT/PATCH/POST | Edit attributes in resource           |
 | delete | DELETE         | Delete resource                       |
 
-<div class="note">
+**Note:**
 
 <div class="title">
 

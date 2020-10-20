@@ -249,7 +249,7 @@ or creating multiple policies:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#policies) page for a

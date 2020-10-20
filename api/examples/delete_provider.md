@@ -31,7 +31,7 @@ Or via the delete action as follows:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Delete actions are done asynchronously as it could take a while to
 complete. The delete task can be queried if needed as follows

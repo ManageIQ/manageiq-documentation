@@ -75,7 +75,7 @@ template.
 3.  You can copy the selected template to create a new template, and
     include the changes as required.
 
-    <div class="note">
+    **Note:**
 
     In order to create the new template its content must be unique.
 

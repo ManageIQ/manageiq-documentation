@@ -32,14 +32,14 @@ specification.
 }
 ```
 
-<div class="note">
+**Note:**
 
 Specifying an owner can be done via **href**, **id**, **name** or
 **userid**
 
 </div>
 
-<div class="note">
+**Note:**
 
 Specifying a group can be done via **href**, **id** or **description**
 

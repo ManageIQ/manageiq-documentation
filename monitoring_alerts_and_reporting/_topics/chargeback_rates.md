@@ -146,7 +146,7 @@ set at $0.10 per GB per day, the Storage Used Cost would be $25.
 
   - 250 GB \* $0.10 (per GB per day) = $25 Storage Used Cost
 
-<div class="note">
+**Note:**
 
 The following chargeback rates are not supported for containers
 providers:

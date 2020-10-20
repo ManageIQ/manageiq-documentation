@@ -97,7 +97,7 @@ following steps:
 When changes occur to Google Compute Engine instances, {{ site.data.product.title }}
 is now notified and reports these changes as events.
 
-<div class="note">
+**Note:**
 
 For additional information about Google Compute Engine, see the Google
 Cloud Platform documentation:

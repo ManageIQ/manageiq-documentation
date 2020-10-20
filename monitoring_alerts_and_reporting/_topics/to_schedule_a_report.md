@@ -3,7 +3,7 @@
 You can view historical data by creating reports on a scheduled basis.
 In addition, scheduled reports can be emailed directly to users.
 
-<div class="note">
+**Note:**
 
 You may need to disable, change the report filter, or change the
 frequency of a schedule. To do this, you will need to edit the schedule.

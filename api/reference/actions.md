@@ -63,7 +63,7 @@ or creating multiple actions:
 }
 ```
 
-<div class="note">
+**Note:**
 
 Please refer to the [Resource
 Attributes](../appendices/resource_attributes.html#actions) page for a

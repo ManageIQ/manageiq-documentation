@@ -13,7 +13,7 @@
 5.  Select either a saved virtual machine search or a virtual machine
     report filter.
 
-    <div class="note">
+    **Note:**
 
     The set of items to select will depend on the type of resource you
     are searching.

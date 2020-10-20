@@ -1,6 +1,6 @@
 ### Deleting a Widget
 
-<div class="note">
+**Note:**
 
 Default widgets cannot be deleted, but they can be copied.
 

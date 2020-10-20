@@ -66,7 +66,7 @@ organizational units arranged in a hierarchy:
 You can copy classes and instances from locked Domains into your own
 custom domains.
 
-<div class="note">
+**Note:**
 
 Changing the existing classes or instances shipped with the product is
 not recommended because this may hinder the operation of

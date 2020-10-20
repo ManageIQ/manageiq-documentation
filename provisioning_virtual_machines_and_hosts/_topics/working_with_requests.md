@@ -126,7 +126,7 @@ parameter for all others to be validated.
     \> Provisioning \> StateMachines \> ProvisionRequestApproval
     Class\].
 
-    <div class="note">
+    **Note:**
 
     DOMAIN must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ
@@ -141,7 +141,7 @@ parameter for all others to be validated.
     ![1851](../images/1851.png)(**Edit this instance**).
     ![6280](../images/6280.png)
 
-    <div class="note">
+    **Note:**
 
     Do not change any values other than those listed below. Doing so may
     prevent the automatic approval process from running.
@@ -218,7 +218,7 @@ are set to **evmadmin@company.com** as a default.
 2.  Choose the following Namespace: menu:DOMAIN\[Cloud \> VM \>
     Provisioning \> Email\].
 
-    <div class="note">
+    **Note:**
 
     **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ

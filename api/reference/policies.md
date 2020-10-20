@@ -251,11 +251,8 @@ or creating multiple policies:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#policies) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#policies) page for a
 list of available attributes when creating policies.
-
-</div>
 
 ### Editing Policies
 

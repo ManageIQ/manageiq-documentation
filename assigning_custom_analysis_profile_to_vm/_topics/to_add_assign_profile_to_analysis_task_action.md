@@ -32,8 +32,5 @@ profile (created in [Creating a Virtual Machine Analysis Profile](#creating-a-vi
 
 You can only associate this action with an analysis start event.
 
-</div>
-
 The action is created and added to the **Available Actions** list.
-Associate this action with the **VM Analysis Start** event when you
-create a virtual machine control policy in the next procedure.
+Associate this action with the **VM Analysis Start** event when you create a virtual machine control policy in the next procedure.

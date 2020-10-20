@@ -52,8 +52,6 @@ To install VMware VDDK:
 
         # ldconfig -p | grep vix
 
-    </div>
-
 6.  Restart the {{ site.data.product.title_short }} appliance.
 
 The VDDK is now installed on the {{ site.data.product.title_short }} appliance. This

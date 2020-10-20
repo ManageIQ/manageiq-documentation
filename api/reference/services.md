@@ -75,11 +75,8 @@ Optionally without the create action signature:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#service-catalogs)
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#service-catalogs)
 page for a list of available attributes when creating Service Catalogs.
-
-</div>
 
 #### Editing Service Catalogs
 
@@ -358,11 +355,8 @@ an existing service.
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#services) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#services) page for a
 list of available attributes when creating Services.
-
-</div>
 
 #### Service Actions ====
 
@@ -719,8 +713,6 @@ monitored as follows:
 
 The request tasks of service requests can be queried by expanding the
 request\_tasks as follows:
-
-</div>
 
     GET /api/service_requests/:id?expand=request_tasks
 

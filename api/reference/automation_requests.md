@@ -183,10 +183,7 @@ the **request\_state** reaches the **finished** state.
 
 **Note:**
 
-The request tasks of an automation request can also be queried by
-expanding the request\_tasks subcollection as follows:
-
-</div>
+The request tasks of an automation request can also be queried by expanding the request\_tasks subcollection as follows:
 
     GET /api/automation_requests/:id?expand=request_tasks
 

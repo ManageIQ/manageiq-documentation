@@ -448,11 +448,8 @@ Example follows:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#chargeback-rates)
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#chargeback-rates)
 page for a list of available attributes when creating Chargeback Rates.
-
-</div>
 
 ### Updating Chargeback Rates
 

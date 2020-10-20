@@ -33,7 +33,4 @@ Supported attribute actions for PATCH include, add, edit and remove.
 
 **Note:**
 
-Note that the description attribute is no longer defined for this
-service.
-
-</div>
+Note that the description attribute is no longer defined for this service.

@@ -80,12 +80,8 @@ or creating multiple configuration script sources:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#configuration-script-sources)
-page for a list of available attributes when creating configuration
-script sources.
-
-</div>
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#configuration-script-sources)
+page for a list of available attributes when creating configuration script sources.
 
 ### Editing Configuration Script Sources
 

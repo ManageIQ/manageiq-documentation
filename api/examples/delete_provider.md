@@ -33,10 +33,7 @@ Or via the delete action as follows:
 
 **Note:**
 
-Delete actions are done asynchronously as it could take a while to
-complete. The delete task can be queried if needed as follows
-
-</div>
+Delete actions are done asynchronously as it could take a while to complete. The delete task can be queried if needed as follows
 
 ##### Request:
 

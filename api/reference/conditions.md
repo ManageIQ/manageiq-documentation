@@ -62,11 +62,8 @@ or creating multiple conditions:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#conditions) page for
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#conditions) page for
 a list of available attributes when creating conditions.
-
-</div>
 
 ### Editing Conditions
 

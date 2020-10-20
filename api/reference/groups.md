@@ -55,8 +55,6 @@ role can be specified via **name**, **href**, or **id**
 
 tenant can be specified via **href** or **id**
 
-</div>
-
 or creating multiple groups:
 
 ``` json
@@ -72,11 +70,8 @@ or creating multiple groups:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#groups) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#groups) page for a
 list of available attributes when creating Groups.
-
-</div>
 
 ### Editing Groups
 

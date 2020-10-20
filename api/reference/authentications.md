@@ -101,11 +101,8 @@ Also supporting bulk creates:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#authentications) page
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#authentications) page
 for a list of available attributes when creating authentications.
-
-</div>
 
 ### Editing Authentications
 

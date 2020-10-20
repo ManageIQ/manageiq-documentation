@@ -27,11 +27,6 @@ undercloud, you can also set this manually. To do so:
 
 **Note:**
 
-Passing the newly created environment file to the overcloud deployment
-is environment specific and requires executing commands in particular
-order depending on use of variables. For further information please see
-[*Director Installation and
-Usage*](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/director_installation_and_usage/)
+Passing the newly created environment file to the overcloud deployment is environment specific and requires executing commands in particular order depending on use of variables. For further information please see
+[*Director Installation and Usage*](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/director_installation_and_usage/)
 in the Red Hat OpenStack Platform documentation.
-
-</div>

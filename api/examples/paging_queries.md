@@ -132,7 +132,4 @@ expected responses for each subsequent page.
 
 **Note:**
 
-In this last request, the **subcount** was less than the requested page
-size thus denoting the last page of data being returned.
-
-</div>
+In this last request, the **subcount** was less than the requested page size thus denoting the last page of data being returned.

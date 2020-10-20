@@ -52,8 +52,6 @@ in a single request.
 
 group can be specified via **description**, **href**, or **id**
 
-</div>
-
 or creating multiple users:
 
 ``` json
@@ -69,11 +67,8 @@ or creating multiple users:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#users) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#users) page for a
 list of available attributes when creating Users.
-
-</div>
 
 ### Editing Users
 
@@ -143,8 +138,6 @@ Users can also update their currently selected group with the
 
 The group reference can be via **description**, **href** or **id**.
 Also, only a group that the user belongs to can be specified.
-
-</div>
 
 ### Deleting Users
 

@@ -73,11 +73,8 @@ Parent can be specify by *id* or *href*
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#tenants) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#tenants) page for a
 list of available attributes when creating Tenants.
-
-</div>
 
 ### Editing Tenants
 
@@ -98,8 +95,6 @@ Editing a Tenant is available via the **edit** action with the
 **Note:**
 
 type is a restricted attribute and cannot be edited.
-
-</div>
 
 ### Deleting Tenants
 

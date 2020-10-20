@@ -105,8 +105,6 @@ For a complete list of authentication classes supported and the related
 attributes for each type, send the *OPTIONS /api/authentications*
 request.
 
-</div>
-
 ### Category Attributes
 
     POST /api/categories
@@ -483,11 +481,7 @@ Credentials hash specification attributes are:
 
 **Note:**
 
-When adding with a **create** action on the tags subcollection of the
-category via /api/categories/:id/tags, the category should not be
-specified in the resource.
-
-</div>
+When adding with a **create** action on the tags subcollection of the category via /api/categories/:id/tags, the category should not be specified in the resource.
 
 ### Tenant Attributes
 

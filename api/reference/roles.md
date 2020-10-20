@@ -77,8 +77,6 @@ in a single request.
 
 features can be specified via **identifier**, **href**, or **id**
 
-</div>
-
 or creating multiple roles:
 
 ``` json
@@ -94,11 +92,8 @@ or creating multiple roles:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#roles) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#roles) page for a
 list of available attributes when creating Roles.
-
-</div>
 
 ### Editing Roles
 

@@ -75,12 +75,8 @@ or creating multiple orchestration templates:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#orchestration_templates)
-page for a list of available attributes when creating orchestration
-templates.
-
-</div>
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#orchestration_templates)
+page for a list of available attributes when creating orchestration templates.
 
 ### Editing Orchestration Templates
 

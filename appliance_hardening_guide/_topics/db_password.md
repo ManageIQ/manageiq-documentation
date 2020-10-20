@@ -49,9 +49,7 @@ This format for this table uses the following header columns:
         **Note:**
 
         `ADDRESS` is not required for `local` connections.
-
-        </div>
-
+        
   - METHOD
     The authentication method, which includes:
 

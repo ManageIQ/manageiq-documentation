@@ -45,9 +45,7 @@
             from `/etc/origin/master/ca.crt`. Paste the output (a block
             of text starting with `-----BEGIN CERTIFICATE-----`) into
             the **Trusted CA Certificates** field.
-
-            </div>
-
+            
           - **SSL without validation**: Authenticate the provider
             insecurely (not recommended).
 
@@ -131,8 +129,6 @@
             in `/etc/origin/master/service-signer.crt` on the first
             master in a cluster.
 
-            </div>
-
           - **SSL without validation**: Authenticate the provider
             insecurely using SSL. (Not recommended)
 
@@ -159,8 +155,6 @@
         OpenSCAP scanning:
         <https://www.redhat.com/security/data/metrics/ds/>. This
         information is based on the source code of OpenSCAP.
-
-    </div>
 
     1.  Enter the proxy information for the provider in either **HTTP**,
         **HTTPS**, or **NO Proxy** depending on your environment.
@@ -190,5 +184,3 @@ For example:
 
     :image_inspector_registry: registry.access.redhat.com
     :image_inspector_repository: openshift3/image-inspector
-
-</div>

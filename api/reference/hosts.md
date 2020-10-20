@@ -79,5 +79,3 @@ follows:
 **Note:**
 
 host can be referenced by **href** or **id**
-
-</div>

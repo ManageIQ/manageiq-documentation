@@ -292,8 +292,6 @@ the **request\_state** reaches the **finished** state. Specifically,
 The requests tasks of a provisioning request can also be queried by
 expanding the request\_tasks subcollection as follows:
 
-</div>
-
     GET /api/provision_requests/:id?expand=request_tasks
 
 or by fetching them directly as follows:

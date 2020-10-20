@@ -89,23 +89,13 @@ About permissions and security:
 
 </div>
 
-Advertising of the common actions depends purely on the role and
-permissions of that the current API user does have for the particular
-resource.
-
-</div>
+Advertising of the common actions depends purely on the role and permissions of that the current API user does have for the particular resource.
 
 ### Collections
 
-Resources can be grouped into collections. Each collection is
-homogeneous so that it contains only one type of resource, and
-unordered. Resources can also exist outside any collection. In this
-case, we refer to these resources as singleton resources. Collections
-are themselves resources as well.
+Resources can be grouped into collections. Each collection is homogeneous so that it contains only one type of resource, and unordered. Resources can also exist outside any collection. In this case, we refer to these resources as singleton resources. Collections are themselves resources as well.
 
-Collections can exist globally, at the top level of an API, but can also
-be contained inside a single resource. In the latter case, we refer to
-these collections as sub-collections. Sub-collections are usually used
+Collections can exist globally, at the top level of an API, but can also be contained inside a single resource. In the latter case, we refer to these collections as sub-collections. Sub-collections are usually used
 to express some kind of “contained in” relationship
 
 Collections are serialized in JSON in the following way:

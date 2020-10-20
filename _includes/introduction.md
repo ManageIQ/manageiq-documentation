@@ -94,15 +94,10 @@ for your database:
 
 **Note:**
 
-When enabling capacity and utilization for metrics gathering over a
-period of time, it is recommended that the VMDB size scale accordingly.
-Evaluate the number of instances in your provider inventory and storage
-duration requirements to plan for increased VMDB sizing requirements.
+When enabling capacity and utilization for metrics gathering over a period of time, it is recommended that the VMDB size scale accordingly.
+Evaluate the number of instances in your provider inventory and storage duration requirements to plan for increased VMDB sizing requirements.
 
-</div>
-
-Use the following information to plan for your increased VMDB needs when
-working with metrics gathering:
+Use the following information to plan for your increased VMDB needs when working with metrics gathering:
 
   - Realtime metrics data are stored for 4 hours.
 

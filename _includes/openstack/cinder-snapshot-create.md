@@ -16,8 +16,5 @@ the snapshots for that volume.
 
 **Note:**
 
-See [Create, Use, or Delete Volume
-Snapshots](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/storage_guide/#section-create-clone-delete-vol-snapshots)
+See [Create, Use, or Delete Volume Snapshots](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/storage_guide/#section-create-clone-delete-vol-snapshots)
 in the *Storage Guide* for more information about snapshots.
-
-</div>

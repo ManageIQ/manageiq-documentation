@@ -112,11 +112,8 @@ or creating multiple alert definitions:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#alert-definitions)
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#alert-definitions)
 page for a list of available attributes when creating alert definitions.
-
-</div>
 
 ### Editing Alert Definitions
 

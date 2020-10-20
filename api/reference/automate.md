@@ -88,8 +88,6 @@ GET /api/automate
 
 The fqname is always returned by this query
 
-</div>
-
 If desired a sub-set of attributes can be asked via as follows:
 
 ``` data
@@ -119,8 +117,6 @@ follows:
 **Note:**
 
 The fqname in the query is *not* case sensitive
-
-</div>
 
 ``` data
 GET /api/automate/manageiq

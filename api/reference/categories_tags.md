@@ -226,11 +226,8 @@ Attributes which can also be specified when creating categories include:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#categories) page for
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#categories) page for
 a list of available attributes when creating Categories.
-
-</div>
 
 ### Creating Tags
 
@@ -278,11 +275,8 @@ or simply:
 
 **Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#tags) page for a list
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#tags) page for a list
 of available attributes when creating Tags.
-
-</div>
 
 ### Editing Categories & Tags
 

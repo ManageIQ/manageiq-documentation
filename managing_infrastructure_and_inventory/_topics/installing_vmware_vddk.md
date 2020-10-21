@@ -12,12 +12,8 @@ environment requires the Virtual Disk Development Kit (VDDK).
     If you do not already have a login ID to VMware, then you will need
     to create one. At the time of this writing, the file can be found by
     navigating to menu:Downloads\[All Downloads, Drivers & Tools \>
-    VMware vSphere \> Drivers & Tools\]. Expand **Automation Tools and
-    SDKs**, and select **vSphere Virtual Disk Development Kit 5.5**.
-    Alternatively, find the file by searching for it using the *Search*
-    on the VMware site.
-
-    </div>
+    VMware vSphere \> Drivers & Tools\]. Expand **Automation Tools and SDKs**, and select **vSphere Virtual Disk Development Kit 5.5**.
+    Alternatively, find the file by searching for it using the *Search* on the VMware site.
 
 2.  Download and copy the
     `VMware-vix-disklib-5.5.0-1284542.x86_64.tar.gz` file to the `/root`
@@ -50,17 +46,13 @@ environment requires the Virtual Disk Development Kit (VDDK).
         Enjoy,
         --the VMware team
 
-6.  Run `ldconfig` in order for {{ site.data.product.title }} to find the newly
-    installed VDDK library.
+6.  Run `ldconfig` in order for {{ site.data.product.title }} to find the newly installed VDDK library.
 
     **Note:**
 
-    Use the following command to verify the VDDK files are listed and
-    accessible to the appliance:
+    Use the following command to verify the VDDK files are listed and accessible to the appliance:
 
         # ldconfig -p | grep vix
-
-    </div>
 
 7.  Restart the {{ site.data.product.title }} appliance.
 

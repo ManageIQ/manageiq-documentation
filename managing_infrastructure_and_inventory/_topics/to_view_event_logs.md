@@ -7,8 +7,6 @@ virtual machines.
 
 This feature is only available for Windows.
 
-</div>
-
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
 
 2.  Click the accordion for the item to view event logs.
@@ -17,5 +15,4 @@ This feature is only available for Windows.
 
 4.  From **Diagnostics** click **Event Logs**.
 
-The collected event log entries are displayed. Sort this list by
-clicking on the column headers.
+The collected event log entries are displayed. Sort this list by clicking on the column headers.

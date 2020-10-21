@@ -31,5 +31,3 @@ available when adding an Amazon EC2 provider.
 In AWS, Government regions are disabled by default. To enable a disabled
 region, be sure to do so in the `production.yml` configuration file
 manually.
-
-</div>

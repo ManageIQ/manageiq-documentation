@@ -8,8 +8,6 @@ displays the clusters discovered in your enterprise environment.
 
 Any filter applied will be in effect here.
 
-</div>
-
 ![2202](../images/2202.png)
 
 Use the **Clusters Taskbar** to manage the analysis and tagging of your

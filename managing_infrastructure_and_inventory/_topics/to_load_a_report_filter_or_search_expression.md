@@ -10,15 +10,11 @@
 
 4.  Click **Load**.
 
-5.  Select either a saved virtual machine search or a virtual machine
-    report filter.
+5.  Select either a saved virtual machine search or a virtual machine report filter.
 
     **Note:**
 
-    The set of items to select will depend on the type of resource you
-    are searching.
-
-    </div>
+    The set of items to select will depend on the type of resource you are searching.
 
     ![2131](../images/2131.png)
 

@@ -114,7 +114,4 @@ appliance, then deploy a virtual machine to run the appliance.
 
       - $vmName = "NAME\_OF\_YOUR\_NEW\_VM"
 
-    </div>
-
-Your SCVMM environment now contains a running {{ site.data.product.title_short }}
-appliance which you can configure.
+Your SCVMM environment now contains a running {{ site.data.product.title_short }} appliance which you can configure.

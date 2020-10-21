@@ -6,13 +6,10 @@ from the provider afterwards. Once a node is in maintenance mode, it can
 be repurposed (for examle, re-provision it as a Controller node),
 repaired, or decommissioned altogether.
 
-Before scaling down, evacuate or migrate any instances hosted on the
-node you are removing. For instructions on either procedure, see
-[Migrating a Live Instance](#_to_live_migrate_an_instance) or
+Before scaling down, evacuate or migrate any instances hosted on the node you are removing. For instructions on either procedure, see [Migrating a Live Instance](#_to_live_migrate_an_instance) or
 [Evacuating an Instance](#_to_evacuate_an_instance).
 
-After migrating or evacuating instances from the node, set the node to
-maintenance mode. To do so:
+After migrating or evacuating instances from the node, set the node to maintenance mode. To do so:
 
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
 
@@ -26,13 +23,9 @@ maintenance mode. To do so:
     This option can only be used with OpenStack providers with at least
     two Compute nodes.
 
-    </div>
+Repeat this procedure for every node you want to remove from the cloud provider.
 
-Repeat this procedure for every node you want to remove from the cloud
-provider.
-
-After setting a Compute node to maintenance mode, you can scale down its
-provider:
+After setting a Compute node to maintenance mode, you can scale down its provider:
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
 

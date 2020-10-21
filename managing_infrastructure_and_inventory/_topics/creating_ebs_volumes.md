@@ -20,12 +20,9 @@ To create a volume:
 
     **Note:**
 
-    See [Amazon EBS Volume
-    Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+    See [Amazon EBS Volume Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
     for more information on volume types.
-
-    </div>
-
+    
 7.  Enter the size of the volume in gigabytes (GB).
 
 8.  Select whether the volume should be encrypted using the

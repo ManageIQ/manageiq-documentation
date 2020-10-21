@@ -34,8 +34,6 @@ limit for the cluster to elect a new primary. To produce quicker
 failovers, reduce the value for `failover_check_frequency` and increase
 the value for `failover_attempts`.
 
-</div>
-
 ### Configuring the Failover Monitor
 
 Configure the failover monitor only on the non-database
@@ -63,9 +61,7 @@ following steps:
 
     You can check the status of the simulated failure by viewing the
     most recent `evm.log` log on the engine appliances.
-
-    </div>
-
+    
 3.  Check the appliance console summary screen for the primary database.
     If configured correctly, the **{{ site.data.product.title_abbr_uc }} Database**
     value in the appliance console summary should have switched from the
@@ -124,10 +120,7 @@ the standby database-only appliance, configure the following:
         with this database, including the engine appliances and any
         global region databases.
 
-        </div>
-
-    7.  Select `y` to configure the replication manager for automatic
-        failover.
+    7.  Select `y` to configure the replication manager for automatic failover.
 
         **Note:**
 
@@ -135,11 +128,8 @@ the standby database-only appliance, configure the following:
         overwrite the existing node ID (this cannot be undone).
         Additionally, select `y` to overwrite and reconfigure the
         replication settings in `/etc/repmgr.conf` when prompted.
-
-        </div>
-
-    8.  Confirm that the replication standby server configuration
-        details are correct, and select `y` to apply the configuration.
+        
+    8.  Confirm that the replication standby server configuration details are correct, and select `y` to apply the configuration.
 
 The standby server will then run an initial synchronization with the
 primary database, and start locally in standby mode.

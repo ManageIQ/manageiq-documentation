@@ -133,11 +133,7 @@ information since a snapshot might be created.
 
 **Note:**
 
-SmartState Analysis of a virtual machine requires access to its host. To
-perform a successful analysis, edit the virtual machine’s host and enter
-the host’s authentication credentials.
-
-</div>
+SmartState Analysis of a virtual machine requires access to its host. To perform a successful analysis, edit the virtual machine’s host and enter the host’s authentication credentials.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
 

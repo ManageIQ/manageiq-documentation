@@ -35,10 +35,7 @@ has the following requirements:
 These are the procedural steps as of the time of writing. For more
 information, consult the VMware documentation.
 
-</div>
-
-Use the following procedure to upload the {{ site.data.product.title }} appliance OVF
-template from your local file system using the vSphere Client.
+Use the following procedure to upload the {{ site.data.product.title }} appliance OVF template from your local file system using the vSphere Client.
 
 1.  In the vSphere Client, select menu:File\[Deploy OVF Template\]. The
     Deploy OVF Template wizard appears.

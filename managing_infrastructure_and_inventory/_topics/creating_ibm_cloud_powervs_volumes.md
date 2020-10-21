@@ -21,8 +21,6 @@ To create a volume:
     See [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#storage)
     for more information on volume types.
 
-    </div>
-
 7.  Enter the size of the volume in gigabytes (GB).
 
 9.  Click **Add**.

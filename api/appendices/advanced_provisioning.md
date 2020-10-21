@@ -48,11 +48,9 @@ only required if you need to override a default value.
 | ctrlscsi\#\#           | string | Required | VirtualBusLogicController, VirtualLsiLogicController | VirtualLsiLogicController |
 | ctrlscsi\#\#.sharedBus | string | Optional | noSharing, physicalSharing, virtualSharing           | noSharing                 |
 
-<div class="note">
+**Note:**
 
 The \#\# value defines the controller bus number
-
-</div>
 
 Example:
 

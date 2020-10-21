@@ -4,8 +4,6 @@
 
 This functionality is available on VMware virtual machines only.
 
-</div>
-
 You can add or remove network adapters on a VMware virtual machine from
 the **Reconfigure this VM** button.
 

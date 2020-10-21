@@ -49,7 +49,4 @@ gather information from the user requesting the virtual machine, hiding
 all the complexity of the details needed to actually deploy any of the
 components.
 
-</div>
-
-You can now provision a virtual machine through Red Hat Virtualization
-using the Self Service user interface.
+You can now provision a virtual machine through Red Hat Virtualization using the Self Service user interface.

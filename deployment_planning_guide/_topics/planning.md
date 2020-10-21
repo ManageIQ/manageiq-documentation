@@ -52,8 +52,6 @@ managing a single zone.
 
   - Parent regions can be configured after the child regions are online.
 
-</div>
-
 The following diagram provides a closer look at a region:
 
 ![7150](../images/7150.png)
@@ -72,8 +70,6 @@ services (SNMP).
 this case, all PostgreSQL instances must be running on a server that is
 deployed from the {{ site.data.product.title_short }} appliance. High availability is
 achieved by database replication between two or more database servers.
-
-</div>
 
 ### Roles
 
@@ -139,8 +135,6 @@ global region using centralized administration:
 above are not supported. Centralized administration capabilities are not
 supported from the Self Service user interface.
 
-</div>
-
 With centralized administration, the remote\_queue\_put leverages a new
 system-to-system REST API request to forward the original request to the
 remote region. This request is put in the local queue in the remote
@@ -158,8 +152,6 @@ role-based access control (RBAC) rules on the remote region. The user in
 the remote region which matches the logged-in user’s **user ID** will be
 used to enforce RBAC in the target region. The operation will fail on
 the remote system if the user does not have the required permissions.
-
-</div>
 
 ### Tenancy
 
@@ -183,8 +175,6 @@ If you do not add any additional tenants, all resources and user
 accounts are contained in a single base tenant which is your
 {{ site.data.product.title_short }} appliance itself. In {{ site.data.product.title_short }}, is
 sometimes referred as 'tenant zero'.
-
-</div>
 
 **Tenancy Account Roles.**
 
@@ -267,9 +257,7 @@ other reports.
 Currently, in tenant quota reports you will see all of the tenants but
 there is no nesting information available by parent and child tenants.
 
-</div>
-
-**Example:.**
+**Example:**
 
 In the following example of a tenant quota report, *DevOps Teams* is a
 parent tenant and *Team Alpha* and *Team Bravo* are child tenants.
@@ -396,7 +384,7 @@ configurations are not overwritten on {{ site.data.product.title_short }} upgrad
 The following file name example follows `01_miq_overrides.conf`
 alphabetically in the `/etc/manageiq/postgresql.conf.d` directory:
 
-**Example.**
+**Example:**
 
     test_miq_overrides.conf
 
@@ -410,6 +398,6 @@ information.
 The following example queries the {{ site.data.product.title_short }} for current
 value set for `max_wal_senders`:
 
-**Example.**
+**Example:**
 
     `psql -d vmdb_production -c 'show max_wal_senders'

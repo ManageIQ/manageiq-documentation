@@ -72,14 +72,11 @@ template.
     Template**. The **Copy selected Orchestration Template** window is
     displayed.
 
-3.  You can copy the selected template to create a new template, and
-    include the changes as required.
+3.  You can copy the selected template to create a new template, and include the changes as required.
 
     **Note:**
 
     In order to create the new template its content must be unique.
-
-    </div>
 
 4.  Click **Save**.
 

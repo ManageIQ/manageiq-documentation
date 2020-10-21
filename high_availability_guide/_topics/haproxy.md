@@ -32,11 +32,7 @@ Platform. See the [OpenStack Networking
 Guide](https://access.redhat.com/documentation/en/red-hat-openstack-platform/10/single/networking-guide/)
 for more information.
 
-</div>
-
-This configuration uses two HAProxy servers and a virtual IP (configured
-by `keepalived`). The following example procedure uses the following IP
-addresses and names; substitute values for your environment as needed:
+This configuration uses two HAProxy servers and a virtual IP (configured by `keepalived`). The following example procedure uses the following IP addresses and names; substitute values for your environment as needed:
 
   - HAProxy1: 10.19.137.131 (cf-hap1.example.com)
 
@@ -96,8 +92,6 @@ To configure HAProxy load balancing:
         which node is the backup. VRRP communication between routers
         uses multicast IPv4 address 224.0.0.18 and IP protocol number
         112.
-
-        </div>
 
             [root@cf-hap1 ~]# firewall-cmd --permanent  --add-port=80/tcp --add-port=443/tcp --add-port=8443/tcp && firewall-cmd --reload
 
@@ -269,10 +263,7 @@ To configure HAProxy load balancing:
       - The IP of {{ site.data.product.title_abbr_uc }} Appliance 2 is 10.19.137.129
         (cfme2.example.com).
 
-    </div>
-
-7.  Configure the appropriate IPs for load balancing on the `cf-hap2`
-    server as well:
+7.  Configure the appropriate IPs for load balancing on the `cf-hap2` server as well:
 
         [root@cf-hap2 ~]# cat /etc/haproxy/haproxy.cfg
         global

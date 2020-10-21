@@ -83,16 +83,11 @@ If any of the following conditions are true, configuration fails:
 
   - The IPA server cannot reach the appliance by its FQDN
 
-  - The time is not synchronized between the appliance and the IPA
-    server
+  - The time is not synchronized between the appliance and the IPA server
 
   - The IPA server admin password is entered incorrectly
 
-</div>
-
-Alternatively, you can configure external authentication using the
-`appliance_console_cli` command instead of using the appliance console
-menu:
+Alternatively, you can configure external authentication using the `appliance_console_cli` command instead of using the appliance console menu:
 
     $ ssh root@appliance.test.company.com
     [appliance]# /bin/appliance_console_cli --host appliance.test.company.com \

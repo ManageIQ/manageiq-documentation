@@ -22,9 +22,4 @@ summary.
 
 **Note:**
 
-To view **Content** section details, run a SmartState Analysis on the
-datastore. For information on how to perform SmartState Analysis, see
-[Performing SmartState Analysis on
-Datastores](#smartstate_analysis_datastore).
-
-</div>
+To view **Content** section details, run a SmartState Analysis on the datastore. For information on how to perform SmartState Analysis, see [Performing SmartState Analysis on Datastores](#smartstate_analysis_datastore).

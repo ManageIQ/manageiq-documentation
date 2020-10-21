@@ -14,8 +14,4 @@ provides an ability to:
 
 **Note:**
 
-When importing a template into {{ site.data.product.title }}, the selected elements
-are converted according to their type. For example, lists convert to
-list boxes, and single items convert to text boxes.
-
-</div>
+When importing a template into {{ site.data.product.title }}, the selected elements are converted according to their type. For example, lists convert to list boxes, and single items convert to text boxes.

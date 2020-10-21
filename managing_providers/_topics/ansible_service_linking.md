@@ -26,19 +26,11 @@ object.
 
 **Note:**
 
-  - This example utilizes the \`syncrou.manageiq-vmdb\`role. This role
-    allows {{ site.data.product.title_short }} users to modify and/or change VMDB
-    objects using an Ansible playbook. For information on implementing
-    and utilizing roles when writing Ansible playbooks for
-    {{ site.data.product.title_short }}, see [???](#installing-ansible-roles).
+  - This example utilizes the \`syncrou.manageiq-vmdb\` role. This role allows {{ site.data.product.title_short }} users to modify and/or change VMDB objects using an Ansible playbook. For information on implementing and utilizing roles when writing Ansible playbooks for {{ site.data.product.title_short }}, see [Installing Ansible Roles](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/administration_guide/chap-Automating_RHV_Configuration_using_Ansible#Installing_Ansible_Roles).
 
-  - For more information on Ansible Galaxy and roles, see the [Ansible
-    Galaxy
-    documentation](http://docs.ansible.com/ansible/latest/galaxy.html).
+  - For more information on Ansible Galaxy and roles, see the [Ansible Galaxy documentation](http://docs.ansible.com/ansible/latest/galaxy.html).
 
   - Note the provider ID in order to successfully link to the service.
-
-</div>
 
 1.  Create and register the resource.
 

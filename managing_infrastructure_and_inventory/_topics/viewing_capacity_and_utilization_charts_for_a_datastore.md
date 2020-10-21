@@ -4,11 +4,7 @@ You can view capacity and utilization data for a datastore.
 
 **Note:**
 
-{{ site.data.product.title }} requires network visibility to your provider assigned
-the server role of *Capacity & Utilization Collector* to enable this
-feature.
-
-</div>
+{{ site.data.product.title }} requires network visibility to your provider assigned the server role of *Capacity & Utilization Collector* to enable this feature.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Datastores\], then click
     the Datastore for which to view Capacity and Utilization data.
@@ -16,11 +12,9 @@ feature.
 2.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
     ![Utilization](../images/1994.png) (**Utilization**).
 
-3.  From **Interval**, select to view hourly or daily data points and
-    the dates to view data.
+3.  From **Interval**, select to view hourly or daily data points and the dates to view data.
 
-4.  Use **Show VM Types** to include only managed/registered,
-    managed/unregistered, or unmanaged virtual machines.
+4.  Use **Show VM Types** to include only managed/registered, managed/unregistered, or unmanaged virtual machines.
 
       - **Managed/Registered VM** - A virtual machine connected to a
         host and exists in the VMDB. Also, a template connected to a
@@ -29,8 +23,6 @@ feature.
         **Note:**
 
         Templates cannot be connected to a host.
-
-        </div>
 
       - **Managed/Unregistered VM** - A virtual machine or template that
         resides on a repository that is no longer connected to a
@@ -51,10 +43,6 @@ feature.
 
 **Note:**
 
-Daily charts only include full days of data. If a day does not include
-all the 24 data points for a day, the data does not show for that day.
+Daily charts only include full days of data. If a day does not include all the 24 data points for a day, the data does not show for that day.
 
-</div>
-
-For information about data optimization including utilization trend
-reports, see [???](#data-optimization).
+For information about data optimization including utilization trend reports, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization).

@@ -24,8 +24,6 @@ and then quickly determine what systems are affected.
     Preview Features Support
     Scope](https://access.redhat.com/support/offerings/techpreview/).
 
-</div>
-
 The Red Hat Insights plugin has the following options:
 
   - Actions

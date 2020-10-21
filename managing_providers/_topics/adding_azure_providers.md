@@ -17,9 +17,7 @@ Manager (Classic) mode.
 
 **Note:**
 
-In the steps described in [Create Active Directory application and
-service principal account using the Azure
-portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/):
+In the steps described in [Create Active Directory application and service principal account using the Azure portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/):
 
   - The **Application ID** obtained during *Get Application ID and
     Authentication Key* is your **Client ID**. In the same section,
@@ -52,11 +50,7 @@ portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-
     storage. The **Subscription ID** is in the form of a Globally Unique
     Identifier (GUID).
 
-</div>
-
-So, after a service principal account (instance of an application in a
-directory) has been created using the Azure portal, the following four
-pieces of information will be available within the Azure AD module.
+So, after a service principal account (instance of an application in a directory) has been created using the Azure portal, the following four pieces of information will be available within the Azure AD module.
 
   - Directory ID (Tenant ID)
 
@@ -66,8 +60,7 @@ pieces of information will be available within the Azure AD module.
 
   - Client Key
 
-You can now use these values in the procedure below to add an Azure
-cloud instance as a provider to {{ site.data.product.title_short }}.
+You can now use these values in the procedure below to add an Azure cloud instance as a provider to {{ site.data.product.title_short }}.
 
 **To Add an Azure Cloud Provider**:
 

@@ -68,8 +68,6 @@ In the default configuration, the default security group accepts all
 connections from the default source; all instances within the default
 group can talk to each other on any port.
 
-</div>
-
 1.  From the OpenStack dashboard, navigate to menu:Project\[Compute \>
     Access & Security\].
 
@@ -222,5 +220,3 @@ of the instances involved.
 
 To disassociate a floating IP address from an instance when it is no
 longer required, click **Release Floating IPs**.
-
-</div>

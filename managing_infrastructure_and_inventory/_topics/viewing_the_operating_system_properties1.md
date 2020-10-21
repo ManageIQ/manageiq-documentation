@@ -10,8 +10,6 @@ subcategory of the **Summary** to see more detail on that section.
 When you perform a SmartState Analysis on an instance or image, you get
 more detailed information in these categories:
 
-</div>
-
   - **Properties** include information such as the base operating
     system, hostname, IP addresses, instance vendor, cloud resources,
     and snapshots. This includes the ability to analyze multiple

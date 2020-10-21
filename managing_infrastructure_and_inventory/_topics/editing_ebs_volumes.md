@@ -18,11 +18,8 @@ To edit a volume:
 
     **Note:**
 
-    See [Amazon EBS Volume
-    Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
+    See [Amazon EBS Volume Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
     for more information on each of the volume types.
-
-    </div>
 
 6.  Enter a new size in gigabytes.
 

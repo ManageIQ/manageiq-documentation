@@ -25,13 +25,8 @@ storage. NFS storage does not have these requirements.
 
         **Note:**
 
-        The {{ site.data.product.title }} appliance must reside in the same data
-        center as the storage you are trying to connect. If you have
-        multiple data centers with `iSCSI` or `FCP` storage, you need a
-        {{ site.data.product.title }} appliance in each data center to support virtual
-        machine scanning.
-
-        </div>
+        The {{ site.data.product.title }} appliance must reside in the same data center as the storage you are trying to connect. If you have multiple data centers with `iSCSI` or `FCP` storage, you need a
+        {{ site.data.product.title }} appliance in each data center to support virtual machine scanning.
 
 2.  **Set Server Relationship** - This is required to allow the virtual
     machine SmartState analysis job to determine which data center a

@@ -100,18 +100,13 @@ UI.
     ordering the provision through Red Hat Enterprise Linus OpenStack
     Platform. For example, 100 seconds rounds to two minutes.
 
-    </div>
-
-6.  You can use the default parameter values from the template, or enter
-    new values as appropriate.
+6.  You can use the default parameter values from the template, or enter new values as appropriate.
 
     **Note:**
 
     The Parameters vary per dialog; therefore, the parameters shown in
     the **Order Service** window may or may not exist depending on the
     dialog.
-
-    </div>
 
 7.  Click **Submit**.
 

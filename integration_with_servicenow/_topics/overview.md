@@ -29,5 +29,3 @@ You can manage records in the **CMDB\_CI\_SERVER** table, including
 
 Configuration item (CI) and record are used interchangeably and refer to
 items in a ServiceNow database table.
-
-</div>

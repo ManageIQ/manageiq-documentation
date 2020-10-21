@@ -57,8 +57,7 @@ and [roles](https://docs.openshift.com/container-platform/4.5/authentication/und
 
 **Note:**
 
-See the [OpenShift Container Platform
-documentation](https://docs.openshift.com/container-platform/4.5/authentication/using-rbac.html#default-roles_using-rbac)
+See the [OpenShift Container Platform documentation](https://docs.openshift.com/container-platform/4.5/authentication/using-rbac.html#default-roles_using-rbac)
 for a list of the default roles.
 
 Run the following to obtain the token needed to add an OpenShift Container Platform provider:

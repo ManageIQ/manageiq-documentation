@@ -13,5 +13,3 @@ features, similar to in the full administrative user interface.
 All catalog items, dialogs, buttons, icons among other items must be
 configured in the full administrative user interface before they are
 available to users in the Self Service user interface.
-
-</div>

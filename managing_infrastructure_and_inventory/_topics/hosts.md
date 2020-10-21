@@ -7,13 +7,9 @@ hosts discovered in your enterprise environment.
 
 Any applied filters will be in effect here.
 
-</div>
-
 ![2212](../images/2212.png)
 
-After adding or sorting your hosts, click on one to examine it more
-closely and see its virtual machines, SmartProxy settings, and
-properties.
+After adding or sorting your hosts, click on one to examine it more closely and see its virtual machines, SmartProxy settings, and properties.
 
 ![2222](../images/2222.png)
 

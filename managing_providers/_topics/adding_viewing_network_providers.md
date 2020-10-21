@@ -6,8 +6,6 @@ All supported network providers — OpenStack Network, Azure Network, and
 Amazon EC2 Network, are added or removed automatically upon adding or
 removing the respective cloud provider.
 
-</div>
-
 Viewing network providers:
 
 1.  Navigate to menu:Networks\[Providers\] to see a list of all network
@@ -31,10 +29,5 @@ actions in the taskbar to manage the selected provider.
 
 **Note:**
 
-Alternatively, click on a cloud provider to see the cloud provider
-details and its relationships such as Network Manager, Tenants,
-Instances among others. In Relationships, click Network Manager to see
-information about the network provider, and its relationship with the
-cloud provider, on the summary page.
-
-</div>
+Alternatively, click on a cloud provider to see the cloud provider details and its relationships such as Network Manager, Tenants, Instances among others. In Relationships, click Network Manager to see
+information about the network provider, and its relationship with the cloud provider, on the summary page.

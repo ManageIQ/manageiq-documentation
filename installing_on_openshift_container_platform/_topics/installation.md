@@ -150,10 +150,7 @@ contexts, and create persistent storage.
 
     **Note:**
 
-    For more information on SCCs, see the [OpenShift
-    documentation](https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html).
-
-    </div>
+    For more information on SCCs, see the [OpenShift documentation](https://docs.openshift.com/container-platform/3.7/admin_guide/manage_scc.html).
 
 5.  As the admin user, add the `httpd-configmap-generator` service
     account to the `httpd-scc-sysadmin` SCC before the Httpd Configmap
@@ -183,21 +180,12 @@ contexts, and create persistent storage.
 
     **Note:**
 
-    For NFS-backed volumes, ensure your NFS server firewall is
-    configured to allow traffic on port 2049 (TCP) from the OpenShift
-    cluster.
+    For NFS-backed volumes, ensure your NFS server firewall is configured to allow traffic on port 2049 (TCP) from the OpenShift cluster.
 
-    Red Hat recommends setting permissions for the pv-app (privileged
-    pod volume) as 777, uid/gid 0 (owned by root). For more information
-    on configuring persistent storage in OpenShift Container Platform,
-    see the [OpenShift Container Platform Installation and
-    Configuration](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/installation_and_configuration/#configuring-persistent-storage)
+    Red Hat recommends setting permissions for the pv-app (privileged pod volume) as 777, uid/gid 0 (owned by root). For more information on configuring persistent storage in OpenShift Container Platform, see the [OpenShift Container Platform Installation and Configuration](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/installation_and_configuration/#configuring-persistent-storage)
     guide.
 
-    </div>
-
-    1.  Configure your NFS server host details within these files, and
-        edit any other settings needed to match your environment.
+    1.  Configure your NFS server host details within these files, and edit any other settings needed to match your environment.
 
     2.  Create the two persistent volumes:
 
@@ -228,8 +216,6 @@ contexts, and create persistent storage.
           - NFS\_HOST - No Default - Hostname or IP address of the NFS
             server
 
-        </div>
-
     4.  Verify the persistent volumes were created successfully:
 
             $ oc get pv
@@ -242,8 +228,6 @@ contexts, and create persistent storage.
 
         Red Hat recommends validating NFS share connectivity from an
         OpenShift node before attempting a deployment.
-
-        </div>
 
 8.  Increase the maximum number of imported images on ImageStream.
 
@@ -355,10 +339,7 @@ as a regular user under the {{ site.data.product.title_short }} project:
 The first deployment can take several minutes to complete while
 OpenShift downloads the necessary images.
 
-</div>
-
-1.  Confirm the {{ site.data.product.title_short }} pod is bound to the correct
-    security context constraints:
+1.  Confirm the {{ site.data.product.title_short }} pod is bound to the correct security context constraints:
 
     1.  List and obtain the name of the `cfme-app` pod:
 
@@ -403,9 +384,7 @@ OpenShift downloads the necessary images.
 
     Allow approximately five minutes once pods are in running state for
     {{ site.data.product.title_short }} to start responding on HTTPS.
-
-    </div>
-
+    
         $ oc describe pods <cfme_pod_name>
         ...
         Conditions:
@@ -442,8 +421,6 @@ OpenShift downloads the necessary images.
     the [OpenShift Container Platform Developer
     Guide](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-triggering-builds)
     for more information on deployment triggers.
-
-    </div>
 
 ### Logging into {{ site.data.product.title_short }}
 

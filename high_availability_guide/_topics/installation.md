@@ -67,8 +67,6 @@ the non-database {{ site.data.product.title_short }} appliances.
 
 Do not create a region at this stage in the procedure.
 
-</div>
-
 You have now created the empty database.
 
 You can check the configuration on the appliance console details screen.
@@ -220,10 +218,7 @@ Run these steps from the appliance console:
         {{ site.data.product.title_short }} appliances and any global region
         databases.
 
-        </div>
-
-    6.  Confirm that the replication server configuration details are
-        correct, and select `y` to apply the configuration.
+    6.  Confirm that the replication server configuration details are correct, and select `y` to apply the configuration.
 
 This configures database replication in the cluster.
 
@@ -304,10 +299,7 @@ appliance console:
         with this database, including the engine appliances and any
         global region databases.
 
-        </div>
-
-    7.  Select `y` to configure the replication manager for automatic
-        failover.
+    7.  Select `y` to configure the replication manager for automatic failover.
 
     8.  Confirm that the replication standby server configuration
         details are correct, and select `y` to apply the configuration.

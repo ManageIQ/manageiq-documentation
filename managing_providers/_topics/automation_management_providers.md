@@ -67,13 +67,8 @@ default. Enable this server role to utilize Ansible Automation Inside.
 
 **Note:**
 
-Configure your {{ site.data.product.title_short }} appliance network identity
-(hostname/IP address) before enabling the Embedded Ansible server role.
-Restart the `evmserverd` service on the appliance with the enabled
-Embedded Ansible server role after making any changes to the hostname or
-IP address.
-
-</div>
+Configure your {{ site.data.product.title_short }} appliance network identity (hostname/IP address) before enabling the Embedded Ansible server role.
+Restart the `evmserverd` service on the appliance with the enabled Embedded Ansible server role after making any changes to the hostname or IP address.
 
 1.  Navigate to the settings menu, then **Configuration** →
     **Settings**.
@@ -202,14 +197,11 @@ provider is as follows:
 
 **Note:**
 
-  - For more information on Ansible playbooks, see the [Ansible playbook
-    documentation](https://docs.ansible.com/ansible/playbooks.html).
+  - For more information on Ansible playbooks, see the [Ansible playbook documentation](https://docs.ansible.com/ansible/playbooks.html).
 
   - For more information on worklows, see
     [Workflows](https://docs.ansible.com/ansible-tower/latest/html/userguide/workflows.html)
     in the Ansible Tower *User Guide*.
-
-</div>
 
 #### Adding an Ansible Tower Provider
 
@@ -227,8 +219,6 @@ add Ansible Tower as a provider.
     provider URL. Adding the trailing slash to the provider URL may
     result in a validation error.
 
-</div>
-
 1.  Navigate to menu: **Automation > Ansible Tower > Explorer** and click on the **Providers** accordion tab.
 
 2.  Under ![Configuration](../images/1847.png) **Configuration**, click
@@ -242,9 +232,7 @@ add Ansible Tower as a provider.
 
     2.  Add a **Zone** for the provider.
 
-    3.  Enter the **URL** location or IP address to the Ansible Tower
-        server. Add a trailing slash to the end of the Ansible Tower
-        provider URL.
+    3.  Enter the **URL** location or IP address to the Ansible Tower server. Add a trailing slash to the end of the Ansible Tower provider URL.
 
 4.  Select the **Verify Peer Certificate** checkbox if desired.
 
@@ -255,29 +243,20 @@ add Ansible Tower as a provider.
 
 7.  Click **Add**.
 
-After adding the Ansible Tower provider, refresh its relationships and
-power states in order to view the current inventory.
+After adding the Ansible Tower provider, refresh its relationships and power states in order to view the current inventory.
 
 #### Refreshing an Ansible Tower Provider
 
-Refresh relationships of all items related to an existing Ansible Tower
-configuration management provider including inventory, hosts, virtual
-machines, and clusters.
+Refresh relationships of all items related to an existing Ansible Tower configuration management provider including inventory, hosts, virtual machines, and clusters.
 
 You can refresh inventory from {{ site.data.product.title }}, or by enabling the
 **Update on Launch** option for inventory groups in Ansible Tower. The
-**Update on Launch** option allows Ansible Tower to automatically update
-inventory using a dynamic inventory script before launching an Ansible
-Tower job from a playbook. See the [Ansible Tower documentation](http://docs.ansible.com/ansible-tower/index.html) for more information.
+**Update on Launch** option allows Ansible Tower to automatically update inventory using a dynamic inventory script before launching an Ansible Tower job from a playbook. See the [Ansible Tower documentation](http://docs.ansible.com/ansible-tower/index.html) for more information.
 
-<div class="important">
+**Important**
 
-It can take a long time to retrieve information from providers
-containing many virtual machines or instances. The Ansible Tower dynamic
-inventory script can be modified to limit updates to specific items and
+It can take a long time to retrieve information from providers containing many virtual machines or instances. The Ansible Tower dynamic inventory script can be modified to limit updates to specific items and
 reduce refresh time.
-
-</div>
 
 To refresh an Ansible Tower provider’s inventory in {{ site.data.product.title }}:
 
@@ -304,9 +283,7 @@ Automate.
 
 **Note:**
 
-To view and access Ansible Tower inventories and job or workflow
-templates in {{ site.data.product.title }}, you must first create them in Ansible
-Tower.
+To view and access Ansible Tower inventories and job or workflow templates in {{ site.data.product.title }}, you must first create them in Ansible Tower.
 
 To view a list of Ansible Tower providers and inventory:
 
@@ -330,13 +307,9 @@ To view the systems in your Ansible Tower inventory:
 
 You can execute an Ansible Tower playbook from {{ site.data.product.title }} by creating a service catalog item from an Ansible Tower job or workflow template.
 
-<div class="important">
+**Important:**
 
-You must first create the job or workflow template in Ansible Tower. The
-job or workflow templates are automatically discovered by
-{{ site.data.product.title }} when refreshing your Ansible Tower provider’s inventory.
-
-</div>
+You must first create the job or workflow template in Ansible Tower. The job or workflow templates are automatically discovered by {{ site.data.product.title }} when refreshing your Ansible Tower provider’s inventory.
 
 First, create a catalog:
 

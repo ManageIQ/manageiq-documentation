@@ -4,8 +4,6 @@
 
 This functionality is available on VMware virtual machines only.
 
-</div>
-
 You can extend a VMware virtual machine’s disk with the following steps:
 
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].

@@ -21,11 +21,7 @@ instance’s storage location so that a snapshot can be created.
 
 **Note:**
 
-<div class="title">
-
-Restrictions on Displaying Files Collected
-
-</div>
+## Restrictions on Displaying Files Collected
 
   - File size bigger than 20k characters
 
@@ -42,8 +38,6 @@ Restrictions on Displaying Files Collected
   - MIME .txt non binary file
 
   - Non MIME .conf ascii file
-
-</div>
 
 <div class="important">
 

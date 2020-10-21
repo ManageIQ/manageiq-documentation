@@ -10,8 +10,6 @@ subcategory of the **Summary** to see more detail on that section.
 When you perform a SmartState Analysis on a virtual machine or template,
 you get more detailed information in these categories.
 
-</div>
-
   - **Properties** include information such as the base operating
     system, hostname, IP addresses, Virtual Machine vendor, CPU
     Affinity, devices attached to the system, and snapshots. This

@@ -30,10 +30,7 @@ Virtualization requires:
 
 **Note:**
 
-See [Creating a Virtual
-Machine](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/virtual_machine_management_guide/chap-installing_linux_virtual_machines#Creating_a_virtual_machine_linux_vm)
-in the Red Hat Virtualization *Virtual Machine Management Guide* for
-information on specifying memory for a new virtual machine.
+See [Creating a Virtual Machine](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/virtual_machine_management_guide/chap-installing_linux_virtual_machines#Creating_a_virtual_machine_linux_vm) in the Red Hat Virtualization *Virtual Machine Management Guide* for information on specifying memory for a new virtual machine.
 
 ### Obtaining the Appliance
 
@@ -85,18 +82,13 @@ To upload the appliance:
 
 7.  Click **OK**.
 
-A progress bar in the **Status** column indicates the status of the
-upload. You can also pause, cancel, or resume uploads from the
-**Upload** menu.
+A progress bar in the **Status** column indicates the status of the upload. You can also pause, cancel, or resume uploads from the **Upload** menu.
 
 The status shows **OK** when the image has completed uploading.
 
 **Note:**
 
-See the [Uploading Images to a Data Storage
-Domain](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-storage_tasks#Uploading_Images_to_a_Data_Storage_Domain)
-in the *Red Hat Virtualization Administration Guide* for more
-information.
+See the [Uploading Images to a Data Storage Domain](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html/administration_guide/sect-storage_tasks#Uploading_Images_to_a_Data_Storage_Domain) in the *Red Hat Virtualization Administration Guide* for more information.
 
 1.  If the upload times out and you see the message, `Reason: timeout
     due to transfer inactivity`, increase the timeout value:

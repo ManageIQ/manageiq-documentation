@@ -6,19 +6,14 @@ snapshot as well as a view of the genealogy of the snapshots.
 
 **Note:**
 
-Snapshot size is only available after the successful completion of a
-**SmartState Analysis**.
+Snapshot size is only available after the successful completion of a **SmartState Analysis**.
 
-</div>
+1. Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+2. Click the appropriate accordion containing the item you wish to view the snapshots of.
 
-2.  Click the appropriate accordion containing the item you wish to view
-    the snapshots of.
+3. Click on the item to view its **Summary**.
 
-3.  Click on the item to view its **Summary**.
+4. From the **Summary**, click *Snapshots* in the **Properties** area.
 
-4.  From the **Summary**, click *Snapshots* in the **Properties** area.
-
-5.  The list of snapshots show in a tree format and captures their
-    genealogy.
+5. The list of snapshots show in a tree format and captures their genealogy.

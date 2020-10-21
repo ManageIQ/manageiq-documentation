@@ -10,8 +10,6 @@ instances.
 
 Adding a new key pair is currently only supported for OpenStack.
 
-</div>
-
 {% include_relative _topics/adding_new_key_pair.md %}
 
 {% include_relative _topics/removing_key_pair.md %}

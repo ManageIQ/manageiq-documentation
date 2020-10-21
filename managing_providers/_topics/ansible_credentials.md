@@ -63,10 +63,7 @@ a remote host.
 
 **Note:**
 
-For more information on Ansible Vault, see [Using Vault in
-playbooks](http://docs.ansible.com/ansible/latest/playbooks_vault.html).
-
-</div>
+For more information on Ansible Vault, see [Using Vault in playbooks](http://docs.ansible.com/ansible/latest/playbooks_vault.html).
 
 ### Network
 
@@ -247,13 +244,9 @@ Satellite credentials have several attributes that may be configured:
 Selecting this credential type enables synchronization of inventory with
 VMware vCenter.
 
-<div class="important">
+**Important:**
 
-If both {{ site.data.product.title_short }} and a VMware provider are located in the
-same IPv6-only network, use a DNS-resolvable hostname for the VMware
-provider in the **vCenter Host** field when adding credentials.
-
-</div>
+If both {{ site.data.product.title_short }} and a VMware provider are located in the same IPv6-only network, use a DNS-resolvable hostname for the VMware provider in the **vCenter Host** field when adding credentials.
 
 VMware credentials have several attributes that may be configured:
 
@@ -265,7 +258,4 @@ VMware credentials have several attributes that may be configured:
 
 **Note:**
 
-If the VMware guest tools are not running on the instance, VMware
-inventory sync may not return an IP address for that instance.
-
-</div>
+If the VMware guest tools are not running on the instance, VMware inventory sync may not return an IP address for that instance.

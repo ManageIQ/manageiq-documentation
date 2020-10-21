@@ -7,8 +7,7 @@ Create a filter for viewing your hosts.
 2.  Click ![2125](../images/2125.png) (**Advanced Search**) to open the
     expression editor.
 
-3.  Use the expression editor to choose the appropriate options for your
-    criteria.
+3.  Use the expression editor to choose the appropriate options for your criteria.
 
 4.  Click **Save**.
 
@@ -18,9 +17,6 @@ Create a filter for viewing your hosts.
 
     This title depends on the type of resource you are searching.
 
-    </div>
-
 6.  Click **Save**.
 
-The filter is saved and displays in the **My Filters** area of the
-**Filter** accordion.
+The filter is saved and displays in the **My Filters** area of the **Filter** accordion.

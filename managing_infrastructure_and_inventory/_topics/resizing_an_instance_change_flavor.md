@@ -9,15 +9,10 @@ has:
 
 **Note:**
 
-Keep in mind that the instance will undergo a controlled shutdown when
-you change its flavor.
+Keep in mind that the instance will undergo a controlled shutdown when you change its flavor.
 
-For more information about the requirements and underlying OpenStack
-process involved, see [Resize an
-Instance](https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/single/instances-and-images-guide/#section-resize-instance)
+For more information about the requirements and underlying OpenStack process involved, see [Resize an Instance](https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/single/instances-and-images-guide/#section-resize-instance)
 in the Red Hat OpenStack Platform *Instances and Images Guide*.
-
-</div>
 
 To resize an instance through {{ site.data.product.title }}:
 
@@ -35,7 +30,5 @@ To resize an instance through {{ site.data.product.title }}:
     might take several minutes before {{ site.data.product.title }} verifies whether
     the change was successful.
 
-See [???](#flavors) and [Manage
-Flavors](https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/single/instances-and-images-guide/#section-flavors)
-in the Red Hat OpenStack Platform *Instances and Images Guide* for more
+See [Flavors](#flavors) and [Manage Flavors](https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/single/instances-and-images-guide/#section-flavors) in the Red Hat OpenStack Platform *Instances and Images Guide* for more
 information.

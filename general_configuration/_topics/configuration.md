@@ -65,8 +65,6 @@ managing a single zone.
 
   - Parent regions can be configured after the child regions are online.
 
-</div>
-
 The following diagram provides a closer look at a region:
 ![7150](../images/7150.png)
 
@@ -94,8 +92,6 @@ The subordinate regions are not aware of each other from a database
 perspective. You cannot see information from one subordinate region in
 another. The only VMDB with data visibility to all subordinate regions
 is the top level.
-
-</div>
 
 **Master Regions Scope**
 
@@ -173,8 +169,6 @@ Collection:
     capacity and utilization data from cloud providers such as Red Hat
     OpenStack Platform or Amazon EC2.
 
-</div>
-
 ##### Tags
 
 ###### Company Tag Categories and Tags
@@ -215,8 +209,6 @@ To create a tag category:
 
         The **Name** and **Single Value** fields cannot be changed after
         the category has been added.
-
-        </div>
 
       - Use **Description** to type a brief explanation of how the
         category should be used. This shows when you try to add a value
@@ -271,8 +263,6 @@ To delete a tag category:
 When you delete a tag category, the category values are removed, and any
 tags from the category are unassigned from all resources.
 
-</div>
-
 ###### Creating a Company Tag
 
 To create a company tag:
@@ -293,9 +283,7 @@ To create a company tag:
       - For some databases such as **PostgreSQL**, tags are case
         sensitive. For example, filtering by 'Linux' in title case give
         you different results from filtering by 'linux' in lower case.
-
-    </div>
-
+    
 4.  Click **Add** under the **Actions** column, and type a **Name** and
     **Description** for your new value.
 
@@ -317,9 +305,7 @@ To delete a company tag:
 
     When you delete a tag, the tag is also deleted from any resource to
     which it was assigned.
-
-    </div>
-
+    
 4.  Click **OK** to confirm.
 
 ###### Importing Tags for Virtual Machines
@@ -363,8 +349,6 @@ To import tags for a virtual machine from a CSV file:
     name, unknown virtual machine, unknown tag, or multiple values for a
     tag that should have only one, an error message will appear in the
     console for those records.
-
-    </div>
 
 6.  Click **Apply**.
 
@@ -432,8 +416,6 @@ To import asset tags for a virtual machine from a CSV file
     If there are any problems with the file, such as an incorrect column
     name, unknown virtual machine or host, a message appears.
 
-    </div>
-
 7.  Click **Apply**.
 
 ##### Customizing the Help Menu
@@ -445,8 +427,6 @@ users.
 **Note:**
 
 Any change to the help menu will take effect upon a full page reload.
-
-</div>
 
 Customize the help menu using the following steps:
 
@@ -652,8 +632,6 @@ Only users assigned the super administrator role can create zones. There
 must always be at least one zone. The **Default Zone** is provided and
 cannot be deleted.
 
-</div>
-
 ##### Creating a Zone
 
 To create a zone:
@@ -702,8 +680,6 @@ To delete a zone:
     **Note:**
 
     You cannot delete a zone if there are servers assigned to it.
-
-    </div>
 
 4.  Click ![1847](../images/1847.png) (**Configuration**), then click
     ![gui delete](../images/gui_delete.png) (**Delete this Zone**).
@@ -758,8 +734,6 @@ specifying which server you want to change.
 The server selection options are only available if you have multiple
 servers sharing one VMDB.
 
-</div>
-
 ##### Changing Server Settings
 
 To change server settings:
@@ -804,10 +778,7 @@ To change server settings:
     exploring the **Display Settings** area, and is the time zone
     displayed in the console.
 
-    </div>
-
-  - Use **Default Locale** to specify the default language for this
-    server.
+  - Use **Default Locale** to specify the default language for this server.
 
 ###### Server Control Settings
 
@@ -828,8 +799,6 @@ are enabled by default on all servers.
   - If you are using more than one {{ site.data.product.title }} appliance, be sure to
     set this on all of the appliances.
 
-</div>
-
 ###### Server Roles
 
 **Note:**
@@ -846,8 +815,6 @@ are enabled by default on all servers.
 
   - For information on region and zone diagnostics and server role
     priorities, see [Diagnostics](#diagnostics).
-
-</div>
 
 | Server Role                           | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          | Zone or Region Aware | Primary/Secondary or Active/Active |
 | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ---------------------------------- |
@@ -885,8 +852,6 @@ See vendor documentation to ensure you are installing appropriate
 applications for your virtual infrastructure. Once you have installed
 the required software, you must specify its version in the
 {{ site.data.product.title_short }} configuration settings.
-
-</div>
 
 ![2061](../images/2061.png)
 
@@ -988,8 +953,6 @@ To be able to send any emails from the server, you must have the
 Notifier server role enabled. You can test the settings without the role
 enabled.
 
-</div>
-
 ![outgoingsmtp](../images/outgoingsmtp.png)
 
   - Use **Host** to specify the host name of the mail server.
@@ -1088,8 +1051,6 @@ memory allowed to be used for each type.
 
 Only make these changes when directed to by Red Hat Support.
 
-</div>
-
 ###### Changing Settings for a Worker
 
 To change the settings for a worker
@@ -1121,8 +1082,6 @@ PostgreSQL on the Server.
 
 The server may not start if the database settings are changed. Be sure
 to validate your new settings before restarting the server.
-
-</div>
 
 ###### Changing a Database Setting
 
@@ -1190,8 +1149,6 @@ interface.
     [simpara\_title](#display-custom-settings) for the procedure on how
     to set the configuration settings.
 
-</div>
-
 ###### Uploading a Custom Logo to the User Interface
 
 **Note:**
@@ -1200,8 +1157,6 @@ Make sure the desired logo is accessible from the computer where you are
 running the {{ site.data.product.title_short }} user interface. The file must be in
 portable network graphics (png) format with dimensions of 350 px x 70
 px.
-
-</div>
 
 To upload a custom logo to the user interface:
 
@@ -1234,8 +1189,6 @@ configuration settings for the tenant under **Access Control** is set to
 `Yes`. See [simpara\_title](#display-custom-settings) for the procedure
 on how to set the configuration settings.
 
-</div>
-
 ###### Customizing the Login Background
 
 **Note:**
@@ -1243,8 +1196,6 @@ on how to set the configuration settings.
 Make sure the background image that you want to use is accessible from
 the computer where you are running the user interface. The file must be
 in PNG format with dimensions of 1280 px x 1000 px.
-
-</div>
 
 To customize the login background:
 
@@ -1783,29 +1734,21 @@ To schedule a SmartState Analysis or Compliance Check:
         The host is shown because it may have connected virtual machines
         in the future when the schedule is set to run.
 
-        </div>
-
-      - **Cluster / Deployment Role Analysis**: Displays **Cluster
-        Selection** where you can choose to analyze **All Clusters**,
+      - **Cluster / Deployment Role Analysis**: Displays **Cluster Selection** where you can choose to analyze **All Clusters**,
         **All Clusters for Provider**, or **A single Cluster**.
 
       - **Datastore Analysis**: Displays **Datastore Selection** where
-        you can choose to analyze **All Datastores**, **All Datastores
-        for Host**, **All Datastores for Provider**, **A single
-        Datastore**, or **Global Filters**.
+        you can choose to analyze **All Datastores**, **All Datastores for Host**, **All Datastores for Provider**, **A single Datastore**, or **Global Filters**.
 
       - **VM Compliance Check**: Displays **VM Selection** where you can
-        choose to analyze **All VMs**, **All VMs for Provider**, **All
-        VMs for Cluster**, **All VMs for Host**, **A single VM**, or
+        choose to analyze **All VMs**, **All VMs for Provider**, **All VMs for Cluster**, **All VMs for Host**, **A single VM**, or
         **Global Filters**.
 
       - **Host Compliance Check**: Displays **Host Selection** where you
         can choose to analyze **All Hosts**, **All Hosts for Provider**,
-        **All Hosts for Cluster**, **A single Host**, or **Global
-        Filters**.
+        **All Hosts for Cluster**, **A single Host**, or **Global Filters**.
 
-      - **Database Backup**: Under **Type**, displays **Network File
-        System**, **Samba**, **Amazon AWS S3** and **OpenStack Swift**..
+      - **Database Backup**: Under **Type**, displays **Network File System**, **Samba**, **Amazon AWS S3** and **OpenStack Swift**..
         See [Scheduling a Database Backup](#database_backup) for details
         on scheduling a database backup.
 
@@ -1830,8 +1773,6 @@ To schedule a SmartState Analysis or Compliance Check:
     If you change the **Time Zone**, you will need to reset the stating
     date and time.
 
-    </div>
-
 10. Type or select a date to begin the schedule in **Starting Date**.
 
 11. Select a **Starting Time** based on a 24 hour clock in the selected
@@ -1854,8 +1795,6 @@ Measure free space in MB and ensure the denominator matches in units.
 Setting `wal_keep_segments` to this value will cause the transaction log
 to occupy, at a minimum, one quarter of the current free space. Adjust
 your calculation accordingly upon successful testing.
-
-</div>
 
 To set the `wal_keep_segments` value:
 
@@ -1920,8 +1859,6 @@ To schedule a database backup:
 
     If you change the **Time Zone**, you will need to reset the stating
     date and time.
-
-    </div>
 
 10. Type or select a date to begin the schedule in **Starting Date**.
 
@@ -2053,8 +1990,6 @@ Quota is allocated based on the user’s current group. If the user
 belongs to multiple groups, you must change to the desired group before
 allocating or editing group quota. See [Groups](#groups) for more
 details.
-
-</div>
 
 1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
@@ -2235,8 +2170,6 @@ create your own, or copy and edit the default groups.
 If you have enabled **Get Role from LDAP** under **LDAP Settings**, then
 the role is determined by the LDAP user’s group membership in the
 directory service.
-
-</div>
 
 To view details of a role and its level of access:
 
@@ -2554,8 +2487,6 @@ To repair capacity and utilization data:
         Do not select more than one week unless instructed to do so by
         Red Hat Support.
 
-        </div>
-
     2.  Select a **Start Date**.
 
     3.  Select an **End Date**.
@@ -2807,10 +2738,7 @@ To download the server log:
 
 **Note:**
 
-Use the **Audit Log** to see changes to the user interface and
-authentication.
-
-</div>
+Use the **Audit Log** to see changes to the user interface and authentication.
 
 ###### Viewing the Audit Log
 
@@ -3098,8 +3026,6 @@ complete. \* you will see the type of region you are logging into
 (global or remote) on the {{ site.data.product.title_short }} user interface login
 screen.
 
-</div>
-
 Database replication and centralized administration are now enabled on
 your instances. To open virtual machines of a remote region from the
 global region and perform required operations:
@@ -3167,8 +3093,6 @@ Swift** storage.
 
 Database backups to **AWS S3** require valid AWS credentials to perform
 this operation.
-
-</div>
 
 To run a single database backup:
 
@@ -3251,10 +3175,7 @@ To restore a database from a backup:
         open and the server is still shutting down. If this occurs, wait
         a minute and try again.
 
-        </div>
-
-10. Enter `Y` to keep the database backup after restoring from it. Enter
-    `N` to delete it.
+10. Enter `Y` to keep the database backup after restoring from it. Enter `N` to delete it.
 
 11. Press `Y` to confirm.
 
@@ -3287,8 +3208,6 @@ directory, capturing the exact state of the database when the backup
 finishes. For more information on the `pg_basebackup` utility, see the
 PostgreSQL documentation.
 
-</div>
-
 ##### Performing a Binary Backup
 
 Create a binary backup and store it as a `gzip` tar file inside the
@@ -3314,8 +3233,6 @@ required to perform this procedure.
 
     **-D** *filename* specifies the name of the directory created to
     contain the backup.
-
-    </div>
 
 ##### Restoring a Database from the Binary Backup
 
@@ -3521,8 +3438,6 @@ Periodic maintenance can impact appliance performance while it is
 running. Red Hat recommends scheduling periodic maintenance
 infrequently, and at off hours.
 
-</div>
-
 To configure hourly and periodic database maintenance:
 
 1.  Log in to the appliance as the **root** user.
@@ -3544,13 +3459,11 @@ you choose, and are specified using the same dialog. The dialog finishes
 configuration with a **"Database maintenance configuration updated"**
 message when complete.
 
-To reset your database maintenance settings, enter **Configure Database
-Maintenance** again from the appliance console menu, and confirm that
+To reset your database maintenance settings, enter **Configure Database Maintenance** again from the appliance console menu, and confirm that
 you want to unconfigure the settings in the configuration dialog. This
 deletes the current settings.
 
-To configure a new database maintenance schedule, enter the **Configure
-Database Maintenance** menu item once again and configure the values
+To configure a new database maintenance schedule, enter the **Configure Database Maintenance** menu item once again and configure the values
 using the dialog.
 
 #### Creating a Database Dump

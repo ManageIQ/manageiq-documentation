@@ -7,11 +7,7 @@ Be sure to validate your settings before saving them.
 
 **Note:**
 
-For further information on AWS Identity and Access Management settings,
-see the [AWS
-documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).
-
-</div>
+For further information on AWS Identity and Access Management settings, see the [AWS documentation](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).
 
 To configure {{ site.data.product.title_short }} to use AWS IAM authentication:
 

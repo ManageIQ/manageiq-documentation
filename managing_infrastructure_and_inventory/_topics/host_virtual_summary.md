@@ -32,8 +32,6 @@ The Summary divides into the following categories.
 
     Run a SmartState Analysis on the host to retrieve this information.
 
-    </div>
-
   - **Storage Relationships** shows the relationship the host has to
     LUNs, volumes, and file shares. The **Storage Inventory Role** must
     be enabled in the zone for these items to be populated.
@@ -44,8 +42,6 @@ The Summary divides into the following categories.
     **Note:**
 
     Run a SmartState Analysis on the host to retrieve this information.
-
-    </div>
 
     ![2230](../images/2230.png)
 

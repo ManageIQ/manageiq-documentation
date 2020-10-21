@@ -40,12 +40,8 @@ the following requirements are met:
 
 **Note:**
 
-Make sure Azure Resource Manager cmdlets are available; see [Azure
-Resource Manager
-Cmdlets](https://msdn.microsoft.com/en-us/library/mt125356.aspx) for the
+Make sure Azure Resource Manager cmdlets are available; see [Azure Resource Manager Cmdlets](https://msdn.microsoft.com/en-us/library/mt125356.aspx) for the
 latest installation information.
-
-</div>
 
 1.  Log in to **Azure Resource Manager** using the cmdlet:
 
@@ -152,8 +148,6 @@ latest installation information.
 
       - <https://azure.microsoft.com/en-us/documentation/articles/virtual-machines-windows-create-powershell>
 
-    </div>
-
 #### Using the Azure Command-Line Interface
 
 Complete the following steps to upload and provision the
@@ -163,11 +157,7 @@ Complete the following steps to upload and provision the
 
 **Note:**
 
-For a complete Azure CLI 2.0 command reference, see [Azure CLI 2.0:
-Command reference -
-az](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
-
-</div>
+For a complete Azure CLI 2.0 command reference, see [Azure CLI 2.0: Command reference - az](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
 
 1.  Import the Microsoft repository key.
 
@@ -215,17 +205,9 @@ using the Azure CLI.
 
 **Note:**
 
-  - If you already have resources you can use, you can skip this section
-    and go directly to [Uploading and Provisioning the
-    {{ site.data.product.title_short }} Virtual Appliance Using the Azure
-    Command-Line
-    Interface](#uploading-provisioning-appliance-using-azure-cli).
+  - If you already have resources you can use, you can skip this section and go directly to [Uploading and Provisioning the {{ site.data.product.title_short }} Virtual Appliance Using the Azure Command-Line Interface](#uploading-provisioning-appliance-using-azure-cli).
 
-  - For a complete Azure CLI 2.0 command reference, see [Azure CLI 2.0:
-    Command reference -
-    az](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
-
-</div>
+  - For a complete Azure CLI 2.0 command reference, see [Azure CLI 2.0: Command reference - az](https://docs.microsoft.com/en-us/cli/azure/?view=azure-cli-latest).
 
 1.  Create a resource group in an Azure region.
 
@@ -442,9 +424,7 @@ appliance in Microsoft Azure.
 
 **Note:**
 
-The exported storage connection string does not persist after a system
-reboot. If any of the commands in the above steps fail, export the
-storage connection string again using the following commands:
+The exported storage connection string does not persist after a system reboot. If any of the commands in the above steps fail, export the storage connection string again using the following commands:
 
 1.  Get the storage account connection string.
 
@@ -467,12 +447,7 @@ storage connection string again using the following commands:
 
         $ export AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azrhelclistact;AccountKey=NreGk...=="
 
-</div>
-
-  - You will need to create a data disk for the database; see
-    <https://docs.microsoft.com/en-us/azure/virtual-machines/linux/add-disk>
-    for information about how to add a persistent disk to store your
-    data.
+  - You will need to create a data disk for the database; see [Add a disk to a Linux VM](https://docs.microsoft.com/en-us/azure/virtual-machines/linux/add-disk) for information about how to add a persistent disk to store your data.
 
   - See [Database Requirements](../deployment_planning_guide/index.html#database-requirements) for some general guidelines for your database requirements.
 

@@ -8,8 +8,6 @@ your hosts from the Host Taskbar.
 `root` or administrator credentials are required to get patch
 information.
 
-</div>
-
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
 
 2.  Click on the host to refresh.

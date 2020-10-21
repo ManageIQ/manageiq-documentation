@@ -32,13 +32,9 @@ the same time.
 
         **Note:**
 
-        Login credentials are required for performing SmartState
-        Analysis on the host’s virtual machines and templates.
+        Login credentials are required for performing SmartState Analysis on the host’s virtual machines and templates.
 
-        </div>
-
-        For each type of credential used, the following information is
-        required:
+        For each type of credential used, the following information is required:
 
       - Use **User ID** to specify a login ID.
 

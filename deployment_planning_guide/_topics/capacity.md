@@ -23,8 +23,6 @@ Three server roles are associated with the collection and metric creation of cap
 In addition to setting the server role, you must also select which
 clusters and data stores to collect data for. For more information, see the **General Configuration** guide. You must have super administrator privileges to edit these settings.
 
-</div>
-
 ### Adding Database Credentials for Data Collection
 
 After you create the new user, add the user’s credentials to the settings for the provider.
@@ -60,10 +58,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
     <div class="important">
 
-    For RHV 4.2, the PostgreSQL database is delivered as a software
-    collection in version 9.5 and must be enabled first. Therefore, to
-    run the following psql commands, you need to enable the
-    *rh-postgresql95* collection and load into the current shell prompt by using the source command:
+    For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you need to enable the *rh-postgresql95* collection and load into the current shell prompt by using the source command:
 
     $ source /opt/rh/rh-postgresql95/enable
 
@@ -235,8 +230,6 @@ installation of RHEL-OSP and registration to a satellite that has access to both
 **Note:**
 
 For reporting of daily capacity and utilization data, incomplete days (days with less than 24 hourly data points from midnight to midnight) that are at the beginning or end of the requested interval are excluded. Days with less than 24 hourly data points would be inaccurate and including them would skew trend lines. Therefore, at least one full day of hourly data from midnight to midnight is necessary for displaying the capacity and utilization charts under the menu: **Compute > Infrastructure** tab.
-
-</div>
 
 #### Capacity and Utilization Charts for Hosts, Clusters, and Virtual Machines
 

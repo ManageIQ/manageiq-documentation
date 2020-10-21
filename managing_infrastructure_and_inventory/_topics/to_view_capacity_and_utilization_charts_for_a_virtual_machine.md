@@ -11,13 +11,9 @@ specify.
 
 **Note:**
 
-You must have a server with network visibility to your provider assigned
-the server role of **Capacity & Utilization Collector** to use this
-feature.
+You must have a server with network visibility to your provider assigned the server role of **Capacity & Utilization Collector** to use this feature.
 
 The virtual machine must be powered on to collect the data.
-
-</div>
 
 1.  From menu:Compute\[Infrastructure \> Virtual Machines\], click the
     accordion that you want to view capacity data for.
@@ -44,11 +40,6 @@ The virtual machine must be powered on to collect the data.
 
 **Note:**
 
-Daily charts only include full days of data. This means {{ site.data.product.title }}
-does not show daily data for a day without a complete 24 data point
-range for a day.
+Daily charts only include full days of data. This means {{ site.data.product.title }} does not show daily data for a day without a complete 24 data point range for a day.
 
-</div>
-
-For information about data optimization including utilization trend
-reports, see [???](#data-optimization).
+For information about data optimization including utilization trend reports, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization).

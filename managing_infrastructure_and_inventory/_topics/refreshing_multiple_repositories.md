@@ -18,5 +18,3 @@ Identify a SmartProxy that has access to the repository to refresh it.
 
 If you are using more than one {{ site.data.product.title }} appliance, be sure to set
 the **Default Repository** SmartProxy on all of the appliances.
-
-</div>

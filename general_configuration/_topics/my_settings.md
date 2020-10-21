@@ -116,10 +116,7 @@ zone for the console. These settings are specific to the logged-on user.
         Time) in the console. When the clocks are set back, it correctly
         displays as EST (Eastern Standard Time).
 
-        </div>
-
-    3.  Use **Locale** to select the language in which to display the
-        console.
+    3.  Use **Locale** to select the language in which to display the console.
 
 3.  Click **Save**.
 
@@ -385,10 +382,7 @@ reports:
     that is also set to roll up capacity and utilization data, the
     report does not find any records.
 
-For non-performance reports, the user’s time zone is used when
-displaying dates and times in report rows.
-
-</div>
+For non-performance reports, the user’s time zone is used when displaying dates and times in report rows.
 
 #### Editing a Time Profile
 

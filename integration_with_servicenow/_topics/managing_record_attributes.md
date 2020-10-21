@@ -9,11 +9,7 @@ Ruby methods.
 
 **Note:**
 
-Some attributes are not free-text (variable) fields, that is, they must
-be specific values. For example, the `vendor` value must already exist
-in the ServiceNow Vendor table beforehand.
-
-</div>
+Some attributes are not free-text (variable) fields, that is, they must be specific values. For example, the `vendor` value must already exist in the ServiceNow Vendor table beforehand.
 
 ### Create and Update (\_patch) Record
 

@@ -13,8 +13,6 @@ The current SAML implementation only secures the {{ site.data.product.title_shor
 appliance’s web user interface with SAML. The REST API and self service
 user interface do not currently support SAML.
 
-</div>
-
 **SAML Requirements.**
 
 The following is required in order to enable SAML authentication to the
@@ -33,11 +31,7 @@ server’s `mod_auth_mellon` module.
 
 **Note:**
 
-For more information about Red Hat Single Sign-On (RH-SSO), see the [Red
-Hat Single Sign-On
-documentation](https://access.redhat.com/products/red-hat-single-sign-on).
-
-</div>
+For more information about Red Hat Single Sign-On (RH-SSO), see the [Red Hat Single Sign-On documentation](https://access.redhat.com/products/red-hat-single-sign-on).
 
 ### Configuring the HTTP Server for SAML Authentication with Red Hat Single Sign-On (RH-SSO)
 
@@ -90,9 +84,9 @@ authentication. All SAML-related certificates and keys are accessed from
 
     **Note:**
 
-    If your appliance is behind a load balancer or uses a virtual IP
-    address, use the hostname associated with the VIP. For example: `#
-    /usr/libexec/mod_auth_mellon/mellon_create_metadata.sh
+    If your appliance is behind a load balancer or uses a virtual IP address, use the hostname associated with the VIP. 
+    For example:
+    `#/usr/libexec/mod_auth_mellon/mellon_create_metadata.sh
     https://my-haproxy-ka https://my-haproxy-ka/saml2`
     
 4.  Rename the files created by the `mellon_create_metadata.sh` script

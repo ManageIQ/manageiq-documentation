@@ -171,8 +171,7 @@ To configure automatic tagging on container entities using labels:
 
         ![add label mapping](../images/add_label_mapping.png)
 
-    4.  Click **Add**. The mapping will show in the table on the **Map
-        Tags** tab.
+    4.  Click **Add**. The mapping will show in the table on the **Map Tags** tab.
 
 5.  Refresh the provider to complete the mapping:
 

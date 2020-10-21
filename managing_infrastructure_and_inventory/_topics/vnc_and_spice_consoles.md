@@ -31,31 +31,17 @@ and WebMKS consoles:
     WebMKS support in {{ site.data.product.title_short }}, see [Configuring WebMKS
     Support in {{ site.data.product.title_short }}](#configuring-the-webmks-support).
 
-</div>
-
-All of the above make use of the websocket protocol supported by all
-recent versions of browsers, and can use SSL to encrypt the websocket
-connection.
+All of the above make use of the websocket protocol supported by all recent versions of browsers, and can use SSL to encrypt the websocket connection.
 
   - OpenStack
-    {{ site.data.product.title }} only makes an API call to get the URL for the
-    console and open that console in a web browser; see [Directly
-    Connect to a VNC
-    Console](https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/single/instances-and-images-guide/#connect_to_an_instance)
-    in the Red Hat OpenStack Platform *Instances and Images Guide* for
-    more details.
+    {{ site.data.product.title }} only makes an API call to get the URL for the console and open that console in a web browser; see [Directly Connect to a VNC Console](https://access.redhat.com/documentation/en/red-hat-openstack-platform/8/single/instances-and-images-guide/#connect_to_an_instance)
+    in the Red Hat OpenStack Platform *Instances and Images Guide* for more details.
 
   - Red Hat Enterprise Virtualization Manager and VMware
-    By default, the websocket connection runs over HTTPS or HTTP based
-    on how the application was accessed. Under an appliance, you will
-    most likely use HTTPS, and, therefore, the websocket connection will
+    By default, the websocket connection runs over HTTPS or HTTP based on how the application was accessed. Under an appliance, you will most likely use HTTPS, and, therefore, the websocket connection will
     be wss:// (websocket with SSL).
 
-    When configuring Red Hat Virtualization Manager for virtual machine
-    console access, set the display type for each virtual machine to
-    `noVNC` or `SPICE HTML5`. For more information on configuring
-    console options, see [Configuring Console
-    Options](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/virtual_machine_management_guide/index#sect-Configuring_Console_Options)
+    When configuring Red Hat Virtualization Manager for virtual machine console access, set the display type for each virtual machine to `noVNC` or `SPICE HTML5`. For more information on configuring console options, see [Configuring Console Options](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.2/html-single/virtual_machine_management_guide/index#sect-Configuring_Console_Options)
     in the Red Hat Virtualization *Virtual Machine Management Guide*.
 
 ## Configuring Console Access to VMware ESXi Hosts At A Network Layer

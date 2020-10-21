@@ -8,12 +8,7 @@ to which it has been assigned.
 
 **Note:**
 
-Red Hat OpenStack Networking allocates floating IP addresses to all
-projects (tenants) from the same IP ranges/CIDRs. As a result, every
-subnet of floating IPs is consumable by any and all projects. Manage
-this behavior using quotas for specific projects.
-
-</div>
+Red Hat OpenStack Networking allocates floating IP addresses to all projects (tenants) from the same IP ranges/CIDRs. As a result, every subnet of floating IPs is consumable by any and all projects. Manage this behavior using quotas for specific projects.
 
 {% include_relative _topics/adding_floating_ips.md %}
 

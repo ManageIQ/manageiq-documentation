@@ -7,8 +7,6 @@ login credentials.
 
 The **Type** value is unchangeable.
 
-</div>
-
 To use a different cloud provider, create a new one.
 
 1.  Navigate to menu:Compute\[Clouds \> Providers\].

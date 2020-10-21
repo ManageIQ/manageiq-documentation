@@ -34,5 +34,4 @@ Add a subnet to an existing cloud network following the procedure below.
         range. For example, the subnet mask 255.255.255.0 has 24 masked
         bits. To use this mask with the IPv4 address range
         192.168.122.0, specify the address 192.168.122.0/24.
-
-        </div>
+        

@@ -23,8 +23,6 @@ templates:
 
   - Sealing a template is not supported for Windows OS VMs.
 
-</div>
-
 To create a template based on an existing VM:
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
@@ -65,9 +63,7 @@ To create a template based on an existing VM:
         details from appearing in subsequent VMs that are created using
         the same template. It also ensures the functionality of other
         features, such as predictable vNIC order.
-
-        </div>
-
+        
     3.  The **Number of VMs** indicates the output will be a single
         template.
 

@@ -16,8 +16,7 @@ with their credentials.
 
 **Note:**
 
-For further information on managing users, groups, and account roles,
-see [Access Control](../general_configuration/index.html#access-control)
+For further information on managing users, groups, and account roles, see [Access Control](../general_configuration/index.html#access-control)
 in *General Configuration*.
 
 ## Configuring Authentication Settings in {{ site.data.product.title_short }}

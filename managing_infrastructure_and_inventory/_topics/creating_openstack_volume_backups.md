@@ -6,8 +6,7 @@ restore it in the future.
 <div class="important">
 
 For OpenStack Block Storage managers, the `openstack-cinder-backup`
-service must be enabled on the OpenStack Block Storage manager to create
-a volume backup.
+service must be enabled on the OpenStack Block Storage manager to create a volume backup.
 
 </div>
 

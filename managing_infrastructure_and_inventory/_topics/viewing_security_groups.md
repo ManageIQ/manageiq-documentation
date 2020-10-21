@@ -6,18 +6,12 @@ This procedure describes how to view security groups.
 
 2.  Click the desired security groups for viewing the details.
 
-      - In **Properties**, you can view the basic information of the
-        security group.
+      - In **Properties**, you can view the basic information of the security group.
 
-      - In **Relationships**, you can view the cloud provider and the
-        instances associated with the security group.
+      - In **Relationships**, you can view the cloud provider and the instances associated with the security group.
 
-      - In **Firewall Rules**, you can view a list of ports and IP
-        ranges that are accessible.
+      - In **Firewall Rules**, you can view a list of ports and IP ranges that are accessible.
 
         **Note:**
 
-        This box is not available if you have not set any rules for your
-        security group.
-
-        </div>
+        This box is not available if you have not set any rules for your security group.

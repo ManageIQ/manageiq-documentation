@@ -5,7 +5,7 @@ button. This feature allows users to select a playbook to run as well as
 an inventory target to run it against. An Ansible playbook type button
 can be defined for any object type available.
 
-<div class="note">
+**Note:**
 
 An Ansible Playbook catalog item must exist in order to create an Ansible Playbook custom button. For more information, see [Creating an Ansible Playbook Service Catalog Item](../provisioning_virtual_machines_and_hosts/index.html#creating-an-ansible-playbook-service-catalog-item) in the Provisioning Virtual Machines and Hosts guide.
 
@@ -23,7 +23,7 @@ An Ansible Playbook catalog item must exist in order to create an Ansible Playbo
 5.  Click ![image](../images/1847.png)(**Configuration**), then
     ![image](../images/1862.png) (**Add a new Button**).
 
-    <div class="note">
+    **Note:**
 
     If ![image](../images/1862.png) (**Add a new Button**) is not
     available, that means you have not created a button group for that
@@ -41,7 +41,7 @@ An Ansible Playbook catalog item must exist in order to create an Ansible Playbo
     DNS names for each host in the text field, separating each with a
     comma.
 
-    <div class="note">
+    **Note:**
 
     {{ site.data.product.title_short }} supports two configurations for host value
     input:

@@ -62,7 +62,7 @@ Security groups specify what IP traffic is allowed to reach an instance
 on its public IP address. Security group rules are processed before
 network traffic reaches firewall rules defined within the guest itself.
 
-<div class="note">
+**Note:**
 
 In the default configuration, the default security group accepts all
 connections from the default source; all instances within the default
@@ -218,7 +218,7 @@ of the instances involved.
 7.  Click **Associate** to associate the IP address with the selected
     instance.
 
-<div class="note">
+**Note:**
 
 To disassociate a floating IP address from an instance when it is no
 longer required, click **Release Floating IPs**.

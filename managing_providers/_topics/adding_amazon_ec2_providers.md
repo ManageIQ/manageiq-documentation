@@ -20,7 +20,7 @@ Complete the following procedure to add an Amazon EC2 cloud provider in
 
     1.  Enter the **Endpoint URL**.
 
-        <div class="note">
+        **Note:**
 
         AWS allows users to set a custom endpoint URL when connecting to
         certain services, which you can add in the

@@ -27,7 +27,7 @@
       - Click ![add](../images/add.png) **(Add folder to selected
         folder)** to add an folder.
 
-        <div class="note">
+        **Note:**
 
         If you are creating a new folder, **Top Level** must be selected
         under **Reports**. Be sure to select the folder you want to

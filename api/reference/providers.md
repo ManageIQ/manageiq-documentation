@@ -170,13 +170,10 @@ posted to the /api/providers URL.
 }
 ```
 
-<div class="note">
+**Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#providers) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#providers) page for a
 list of available attributes when creating providers.
-
-</div>
 
 For example, creating a VMware type provider:
 
@@ -216,14 +213,12 @@ which include:
 | ManageIQ::Providers::Vmware::CloudManager         |
 | ManageIQ::Providers::Vmware::InfraManager         |
 
-<div class="note">
+**Note:**
 
 Please note that the provider **type** classes have changed in the
 appliance from earlier releases (*v2.0.0* of the API). Please refer to
 the [Provider Types](../appendices/provider_types.html) page for a
 mapping from the old to the new types.
-
-</div>
 
 ### Specifying Credentials
 
@@ -364,11 +359,9 @@ Editing provider is available via the **edit** action with the
 }
 ```
 
-<div class="note">
+**Note:**
 
 type is a restricted attribute and cannot be edited.
-
-</div>
 
 ### Deleting Providers
 
@@ -487,13 +480,11 @@ attribute specifies the supported provider class names which include:
 | ManageIQ::Providers::Foreman::Provider      |
 | ManageIQ::Providers::Openstack::Provider    |
 
-<div class="note">
+**Note:**
 
 When managing providers of *provider* provider\_class, Tagging and
 Policy management does not currently apply. So requests including the
 tags, policies and policy\_profiles subcollections will be rejected.
-
-</div>
 
 ### Provider Examples
 

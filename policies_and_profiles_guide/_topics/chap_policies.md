@@ -45,7 +45,7 @@ After you have created your compliance policies and assigned them to a policy pr
 
 The compliance check runs all compliance policies that are assigned to the host or virtual machine. If the item fails any of the checks, it is marked as non-compliant in the item’s summary screen.
 
-<div class="note">
+**Note:**
 
 To schedule, you must have `EvmRole-administrator` access to the {{ site.data.product.title }} server.
 

@@ -4,7 +4,7 @@ After initial installation and creation of a {{ site.data.product.title }}
 environment, add a Microsoft System Center Virtual Machine Manager
 (SCVMM) provider to the appliance.
 
-<div class="note">
+**Note:**
 
 To authenticate the provider using a self-signed Certificate Authority
 (CA), configure the {{ site.data.product.title_short }} appliance to trust the

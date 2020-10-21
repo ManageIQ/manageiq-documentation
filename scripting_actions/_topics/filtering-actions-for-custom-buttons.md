@@ -5,7 +5,7 @@ whether a custom button is visible and enabled. Each method has a target
 object, for example, a virtual machine or host, and expressions can set
 a custom button to visible, hidden, or disabled.
 
-<div class="note">
+**Note:**
 
 Filtering works on single objects and is not applicable to lists.
 

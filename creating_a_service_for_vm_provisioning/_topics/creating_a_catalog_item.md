@@ -40,7 +40,7 @@ Create a service catalog item to represent that service in a catalog.
 
 8.  Click **Add**.
 
-<div class="note">
+**Note:**
 
 In {{ site.data.product.title_short }}, service catalog items can be more complex
 than a single virtual machine and are provisioned through a series of

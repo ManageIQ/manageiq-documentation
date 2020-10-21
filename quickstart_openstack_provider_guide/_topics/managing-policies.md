@@ -5,7 +5,7 @@ using virtual machine analysis profiles. These are the steps required to
 create a custom virtual machine analysis profile, and assigning it to a
 cloud instance for use with SmartState analysis, via a control policy.
 
-<div class="note">
+**Note:**
 
 For more detailed information about {{ site.data.product.title_short }} policies, see
 [Assigning a Custom Analysis Profile to a Virtual

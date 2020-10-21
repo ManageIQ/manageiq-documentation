@@ -16,7 +16,7 @@ To edit a volume:
 
 5.  Select a new volume type from the **Cloud Volume Type** list.
 
-    <div class="note">
+    **Note:**
 
     See [Amazon EBS Volume
     Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)

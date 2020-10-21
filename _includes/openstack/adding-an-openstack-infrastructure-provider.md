@@ -8,7 +8,7 @@ the `admin` credentials, a user in {{ site.data.product.title }} provisions into
 `admin` tenant, and sees images, networks, and instances that are
 associated with the `admin` tenant.
 
-<div class="note">
+**Note:**
 
   - You can set whether {{ site.data.product.title }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the undercloud to store events. See [Configuring the Undercloud to Store Events](#configuring-the-undercloud-to-store-events) for instructions. For more information, see [OpenStack Telemetry (ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/architecture_guide/#comp-telemetry) in the Red Hat OpenStack Platform *Architecture Guide*.
 
@@ -16,8 +16,6 @@ associated with the `admin` tenant.
     Authority (CA), configure the {{ site.data.product.title_short }} appliance to
     trust the certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA)
     before adding the provider.
-
-</div>
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
 
@@ -33,26 +31,19 @@ associated with the `admin` tenant.
 5.  Select the **API Version** of your OpenStack provider’s Keystone
     service from the list. The default is `Keystone v2`.
 
-    <div class="note">
+    **Note:**
 
     {% include openstack/osp-keystone-api-v3.md %}
 
-    </div>
+6.  Select the appropriate **Zone** for the provider. By default, the zone is set to **default**.
 
-6.  Select the appropriate **Zone** for the provider. By default, the
-    zone is set to **default**.
-
-    <div class="note">
+    **Note:**
 
     For more information, see the definition of host aggregates and
-    availability zones in [OpenStack Compute
-    (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute)
+    availability zones in [OpenStack Compute (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute)
     in the Red Hat OpenStack Platform *Architecture Guide*.
 
-    </div>
-
-7.  In the **Default** tab, under **Endpoints**, configure the host and
-    authentication details of your OpenStack provider:
+7.  In the **Default** tab, under **Endpoints**, configure the host and authentication details of your OpenStack provider:
 
     1.  Select a **Security Protocol** method to specify how to
         authenticate the provider:
@@ -111,27 +102,14 @@ associated with the `admin` tenant.
 
           - Click **Validate** to confirm the credentials.
 
-9.  You can also configure SSH access to all hosts managed by the
-    OpenStack infrastructure provider. To do so, click on the **RSA key
-    pair** tab in the **Endpoints** section.
+9.  You can also configure SSH access to all hosts managed by the OpenStack infrastructure provider. To do so, click on the **RSA key pair** tab in the **Endpoints** section.
 
-    1.  From there, enter the **Username** of an account with privileged
-        access.
+    1.  From there, enter the **Username** of an account with privileged access.
 
-    2.  If you selected **SSL** in **Endpoints \> Default \> Security
-        Protocol** earlier, use the **Browse** button to find and set a
-        private key.
+    2.  If you selected **SSL** in **Endpoints \> Default \> Security Protocol** earlier, use the **Browse** button to find and set a private key.
 
 10. Click **Add** after configuring the infrastructure provider.
 
-<div class="note">
+**Note:**
 
-{{ site.data.product.title }} requires that the `adminURL` endpoint for all OpenStack
-services be on a non-private network. Accordingly, assign the adminURL
-endpoint an IP address of something other than `192.168.x.x`. The
-`adminURL` endpoint must be accessible to the {{ site.data.product.title }} appliance
-that is responsible for collecting inventory and gathering metrics from
-the OpenStack environment. Additionally, all the Keystone endpoints must
-be accessible, otherwise refresh will fail.
-
-</div>
+{{ site.data.product.title }} requires that the `adminURL` endpoint for all OpenStack services be on a non-private network. Accordingly, assign the adminURL endpoint an IP address of something other than `192.168.x.x`. The `adminURL` endpoint must be accessible to the {{ site.data.product.title }} appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment. Additionally, all the Keystone endpoints must be accessible, otherwise refresh will fail.

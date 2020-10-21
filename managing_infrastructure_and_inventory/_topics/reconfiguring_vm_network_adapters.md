@@ -1,6 +1,6 @@
 # Adding or Removing Virtual Machine Network Adapters
 
-<div class="note">
+**Note:**
 
 This functionality is available on VMware virtual machines only.
 

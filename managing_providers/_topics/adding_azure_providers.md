@@ -15,7 +15,7 @@ as a provider in {{ site.data.product.title_short }}. Currently, all of these st
 can be performed using either the Azure Resource Manager or Service
 Manager (Classic) mode.
 
-<div class="note">
+**Note:**
 
 In the steps described in [Create Active Directory application and
 service principal account using the Azure

@@ -102,7 +102,7 @@ appliance, then deploy a virtual machine to run the appliance.
         Update-SCVMConfiguration -VMConfiguration $vmc
         New-SCVirtualMachine -Name $vmName -VMConfiguration $vmc
 
-    <div class="note">
+    **Note:**
 
     Substitute these values in your PowerShell script:
 

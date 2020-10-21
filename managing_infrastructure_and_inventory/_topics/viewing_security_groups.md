@@ -15,7 +15,7 @@ This procedure describes how to view security groups.
       - In **Firewall Rules**, you can view a list of ports and IP
         ranges that are accessible.
 
-        <div class="note">
+        **Note:**
 
         This box is not available if you have not set any rules for your
         security group.

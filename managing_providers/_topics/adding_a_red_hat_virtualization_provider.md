@@ -3,7 +3,7 @@
 After initial installation and creation of a {{ site.data.product.title }}
 environment, add a Red Hat Virtualization provider to the appliance.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Navigate to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
     click ![Add a New Infrastructure Provider](../images/1862.png) (**Add
@@ -21,11 +21,9 @@ environment, add a Red Hat Virtualization provider to the appliance.
       - Enter the **Hostname** or IPv4 or IPv6 address of the Red Hat
         Virtualization Manager.
 
-        <div class="important">
+        **Important:**
 
         The **Hostname** must be a unique fully qualified domain name.
-
-        </div>
 
       - Enter the **API Port** if your provider uses a non-standard port
         for access.
@@ -53,25 +51,13 @@ environment, add a Red Hat Virtualization provider to the appliance.
           - Click **Validate** to confirm {{ site.data.product.title_short }} can
             connect to the Red Hat Virtualization Manager.
 
-7.  Under **Endpoints** in the **C & U Database** tab, you can configure
-    capacity and utilization metrics collection by providing login
-    credentials for the {{ site.data.product.title_short }} user of the Red Hat
-    Virtualization Data Warehouse database. You can also configure this
-    later by editing the provider. Configure the following in the **C &
-    U Database** tab:
+7.  Under **Endpoints** in the **C & U Database** tab, you can configure capacity and utilization metrics collection by providing login credentials for the {{ site.data.product.title_short }} user of the Red Hat Virtualization Data Warehouse database. You can also configure this later by editing the provider. Configure the following in the **C & U Database** tab:
 
-    <div class="important">
+    **Important**
 
-    To collect capacity and utilization data from a Red Hat
-    Virtualization provider, the capacity and utilization server roles
-    must be enabled in {{ site.data.product.title_short }}. The Red Hat
-    Virtualization environment must also contain the Data Warehouse and
-    Reports components and a {{ site.data.product.title_short }} user. Specific
-    clusters, hosts, and datastores can also be configured for
-    collection. See [???](#enabling_CU_RHV) for configuration details.
-
-    </div>
-
+    To collect capacity and utilization data from a Red Hat Virtualization provider, the capacity and utilization server roles must be enabled in {{ site.data.product.title_short }}. The Red Hat Virtualization environment must also contain the Data Warehouse and Reports components and a {{ site.data.product.title_short }} user. Specific clusters, hosts, and datastores can also be configured for
+    collection. See [Enabling Red Hat Virtualization Capacity and Utilization Data Collection](#enabling-red-hat-virtualization-capacity-and-utilization-data-collection) for configuration details.
+    
       - Enter the database hostname or IPv4 or IPv6 address in
         **Hostname**.
 

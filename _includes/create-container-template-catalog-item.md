@@ -1,16 +1,12 @@
-<div class="note">
+**Note:**
 
 Before adding a new catalog item for container template provisioning,
 create a service dialog from a container template. See
 [Creating a Service Dialog from Container Template](#creating-a-service-dialog-from-container-template) for details.
 
-</div>
+Complete the following procedure to create an OpenShift Template catalog item.
 
-Complete the following procedure to create an OpenShift Template catalog
-item.
-
-1.  Navigate to menu:Services\[Catalogs\], then click on the **Catalog
-    Items** accordion.
+1.  Navigate to menu:Services\[Catalogs\], then click on the **Catalog Items** accordion.
 
 2.  Click ![1847](../images/1847.png)(**Configuration**), then
     ![1862](../images/1862.png)(**Add a New Catalog Item**).

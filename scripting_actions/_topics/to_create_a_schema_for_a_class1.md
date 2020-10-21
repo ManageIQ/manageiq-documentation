@@ -46,7 +46,7 @@ This procedure shows you how to create a schema.
 
 The class schema is created, and you can now add instances to it.
 
-<div class="note">
+**Note:**
 
 You may need to edit a class schema to reorder, add, edit, or remove a
 field. Classes define the order in which fields are processed and you

@@ -5,7 +5,7 @@ When you click on a specific instance or image, you will see the
 the item, called the **Summary**. Where applicable, click on a
 subcategory of the **Summary** to see more detail on that section.
 
-<div class="note">
+**Note:**
 
 When you perform a SmartState Analysis on an instance or image, you get
 more detailed information in these categories:

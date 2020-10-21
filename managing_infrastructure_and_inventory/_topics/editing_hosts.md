@@ -30,7 +30,7 @@ the same time.
         calls made directly to the host system. If this is not supplied,
         **Default** credentials are used.
 
-        <div class="note">
+        **Note:**
 
         Login credentials are required for performing SmartState
         Analysis on the host’s virtual machines and templates.

@@ -162,7 +162,7 @@ to change the number of days.
 2.  Click menu:DOMAIN\[Cloud \> VM \> Retirement \> Email \>
     vm\_retire\_extend\].
 
-    <div class="note">
+    **Note:**
 
     DOMAIN must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ

@@ -2,7 +2,7 @@
 
 This section outlines the basic procedure to create an alert.
 
-<div class="note">
+**Note:**
 
 To send emails or SNMP traps from the {{ site.data.product.title }} server, you must
 enable the Notifier server role and set up SMTP email or SNMP traps. For
@@ -36,7 +36,7 @@ more information, see *General Configuration*.
 
 4.  Configure the parameters of the alert.
 
-    <div class="note">
+    **Note:**
 
     The available parameters depend on the options you selected in the
     **Based On** and **What to Evaluate** lists. See later sections for

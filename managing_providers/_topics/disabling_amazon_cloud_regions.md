@@ -26,7 +26,7 @@ available when adding an Amazon EC2 provider.
 
 6.  Click **Save**.
 
-<div class="note">
+**Note:**
 
 In AWS, Government regions are disabled by default. To enable a disabled
 region, be sure to do so in the `production.yml` configuration file

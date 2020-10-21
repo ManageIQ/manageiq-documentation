@@ -131,7 +131,7 @@ with a host or provider, ensure the virtual machine is registered with
 that system to be properly analyzed; the server requires this
 information since a snapshot might be created.
 
-<div class="note">
+**Note:**
 
 SmartState Analysis of a virtual machine requires access to its host. To
 perform a successful analysis, edit the virtual machine’s host and enter

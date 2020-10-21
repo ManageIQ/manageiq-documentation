@@ -6,7 +6,7 @@ and receive IP addresses using Dynamic Host Configuration Protocol
 Red Hat OpenStack Platform deployment or elsewhere, such as the physical
 network.
 
-<div class="note">
+**Note:**
 
   - Keystone API v3 is required to create cloud tenants on Red Hat
     OpenStack Platform cloud providers. For more information, see

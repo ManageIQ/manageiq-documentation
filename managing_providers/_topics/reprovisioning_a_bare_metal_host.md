@@ -91,7 +91,7 @@ this provisioning request might require approval from an administrator.
 If not, the provisioning request launches depending on your choice for
 the schedule.
 
-<div class="note">
+**Note:**
 
 Previously provisioned hosts might require manual selection of PXE boot
 from the boot menu, otherwise they might boot to hard disk and not

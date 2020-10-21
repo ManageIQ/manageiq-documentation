@@ -29,12 +29,10 @@ disks; installation will fail if the disks are not blank.
         first appliance. For worker and multi-region setups, use this
         option to copy key from another appliance.
 
-        <div class="note">
+        **Note:**
 
         All {{ site.data.product.title_short }} appliances in a multi-region
         deployment must use the same key.
-
-        </div>
 
 6.  Choose **Create Internal Database** for the database location.
 

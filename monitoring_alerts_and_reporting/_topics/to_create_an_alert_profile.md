@@ -4,7 +4,7 @@ Alert profiles enable you to create groups of standard alerts. An alert
 profile can have as many alerts assigned as you need, and can be
 assigned to clusters, datastores, hosts, and virtual machines.
 
-<div class="note">
+**Note:**
 
 Each profile type under the **Alert Profile** accordion menu will have
 its own **Alert Selections** and subsequent **Assignments** choices.

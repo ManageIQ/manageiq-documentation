@@ -27,7 +27,7 @@ that shows only Windows virtual machines.
       - Use the **Base the report on** table dropdown to choose a table
         to get fields from.
 
-        <div class="note">
+        **Note:**
 
         If you change the report base or the interval, all selections
         below will be reset.
@@ -48,7 +48,7 @@ that shows only Windows virtual machines.
     would be useful for analyzing performance data over a specific
     period of time.
 
-    <div class="note">
+    **Note:**
 
     Please note that if you do this, you will not see individual
     records, but rather the calculation as a column header.
@@ -130,7 +130,7 @@ that shows only Windows virtual machines.
       - Click ![1863](../images/1863.png) `(Commit Expression Element
         Changes)` to add the expression.
 
-        <div class="note">
+        **Note:**
 
         The filters that you apply will show at the bottom of the report
         so that you know which filters have been applied.
@@ -201,7 +201,7 @@ that shows only Windows virtual machines.
 14. When you have the report that you want, click **Add** to create the
     new report.
 
-<div class="note">
+**Note:**
 
 After the new report is created, to make the report accessible from the
 report menu, you must add it to a report menu.

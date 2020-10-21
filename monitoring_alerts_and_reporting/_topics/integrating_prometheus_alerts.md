@@ -1,6 +1,6 @@
 ## OpenShift Prometheus Alerts
 
-<div class="note">
+**Note:**
 
 This feature is currently available as a technology preview only. For
 more information on the support scope for features marked as technology
@@ -93,7 +93,7 @@ comprises the following steps:
 Complete the following procedure to assign Prometheus alert profiles to
 the enterprise using the {{ site.data.product.title_short }} user interface.
 
-<div class="note">
+**Note:**
 
 Both Node and Provider alert profiles are created automatically during
 the installation, so it is not required to create these profiles.
@@ -122,7 +122,7 @@ the installation, so it is not required to create these profiles.
 
 7.  Click **Save**.
 
-    <div class="note">
+    **Note:**
 
     Alerts triggered before assigning the profiles to the enterprise
     will not appear in {{ site.data.product.title_short }} at all.

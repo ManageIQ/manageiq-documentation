@@ -73,13 +73,10 @@ Optionally without the create action signature:
 }
 ```
 
-<div class="note">
+**Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#service-catalogs)
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#service-catalogs)
 page for a list of available attributes when creating Service Catalogs.
-
-</div>
 
 #### Editing Service Catalogs
 
@@ -356,13 +353,10 @@ POST /api/services
 In the above example *parent\_service* is an *href* or *id* reference to
 an existing service.
 
-<div class="note">
+**Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#services) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#services) page for a
 list of available attributes when creating Services.
-
-</div>
 
 #### Service Actions ====
 
@@ -715,12 +709,10 @@ monitored as follows:
 
     GET /api/service_requests/:id
 
-<div class="note">
+**Note:**
 
 The request tasks of service requests can be queried by expanding the
 request\_tasks as follows:
-
-</div>
 
     GET /api/service_requests/:id?expand=request_tasks
 

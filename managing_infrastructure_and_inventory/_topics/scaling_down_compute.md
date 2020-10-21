@@ -21,7 +21,7 @@ maintenance mode. To do so:
 3.  Click ![1847](../images/1847.png) (**Configuration**), and then
     ![1851](../images/1851.png) (**Toggle Maintenance Mode**).
 
-    <div class="note">
+    **Note:**
 
     This option can only be used with OpenStack providers with at least
     two Compute nodes.

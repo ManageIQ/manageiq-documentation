@@ -14,7 +14,7 @@ Create a filter for viewing your hosts.
 
 5.  Type in a name for the search expression in **Save this search as**.
 
-    <div class="note">
+    **Note:**
 
     This title depends on the type of resource you are searching.
 

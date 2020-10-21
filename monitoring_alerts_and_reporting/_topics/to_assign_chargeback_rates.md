@@ -4,7 +4,7 @@
 **Compute** and **Storage**. You can assign either a custom chargeback
 rate, or a default rate for Compute, Storage, or Container Images.
 
-<div class="note">
+**Note:**
 
 The **Default Container Image Rate** can be useful when applied to a
 containers provider with multiple images, where only some of the images
@@ -56,7 +56,7 @@ chargeback rates to **The Enterprise**, **Selected Datastores**,
 The rate is assigned. The next time you generate a chargeback report,
 these values will be used.
 
-<div class="note">
+**Note:**
 
 When viewing chargeback, there is a rate for a virtual machine for the
 number of the CPUs. The chargeback for this parameter is calculated

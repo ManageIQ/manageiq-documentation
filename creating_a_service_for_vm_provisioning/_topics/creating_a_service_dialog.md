@@ -11,7 +11,7 @@ virtual machines in Red Hat Virtualization, users must enter their own
 unique name for the virtual machine they choose or the operation will
 fail, so this field must be exposed.
 
-<div class="note">
+**Note:**
 
 A service requires an assigned service dialog, regardless of exposing
 details to user. A simple service dialog with a **Submit** and

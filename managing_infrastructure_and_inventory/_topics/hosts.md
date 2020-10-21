@@ -3,7 +3,7 @@
 The **Hosts** page under menu:Compute\[Infrastructure\] displays the
 hosts discovered in your enterprise environment.
 
-<div class="note">
+**Note:**
 
 Any applied filters will be in effect here.
 

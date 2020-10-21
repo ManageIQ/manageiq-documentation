@@ -7,7 +7,7 @@ instance. If neither exists, the value is determined from the
 The attributes can be reduced or extended as required by amending the
 Ruby methods.
 
-<div class="note">
+**Note:**
 
 Some attributes are not free-text (variable) fields, that is, they must
 be specific values. For example, the `vendor` value must already exist

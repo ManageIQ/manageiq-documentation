@@ -2,7 +2,7 @@
 
 This procedure shows you how to create a custom button.
 
-<div class="note">
+**Note:**
 
 Custom buttons can be migrated to other {{ site.data.product.title }} appliances. See
 [Migrating Custom Buttons](#export-import-custom-button) for guidance on

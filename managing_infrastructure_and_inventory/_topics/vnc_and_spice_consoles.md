@@ -15,7 +15,7 @@ and WebMKS consoles:
 
   - VNC consoles for OpenStack using OpenStack-supplied websocket proxy.
 
-<div class="note">
+**Note:**
 
   - VMware no longer supports the MKS console type. Also, VMRC is no
     longer a browser plugin but a native desktop application. As a

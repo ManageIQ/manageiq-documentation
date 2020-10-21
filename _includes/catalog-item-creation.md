@@ -18,13 +18,11 @@
 
 7.  Select a **Dialog**.
 
-    <div class="note">
+    **Note:**
 
     You can only choose from the catalogs and dialogs you have already
     created. If you haven’t done so, leave the values blank and edit
     later.
-
-    </div>
 
 8.  Select a **Zone**.
 
@@ -37,14 +35,12 @@
 12. Select the provisioning and retirement entry points, that is the
     Automate instance to run upon provisioning and retirement.
 
-    <div class="note">
+    **Note:**
 
     The entry point must be a State Machine since the **Provisioning
     Entry Point** list is filtered to only show State Machine class
     instances. No other entry points will be available from the
     **Provisioning Entry Point** field.
-
-    </div>
 
 13. Select **Additional Tenants**.
 

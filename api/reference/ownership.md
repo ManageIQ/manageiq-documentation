@@ -32,21 +32,15 @@ specification.
 }
 ```
 
-<div class="note">
+**Note:**
 
-Specifying an owner can be done via **href**, **id**, **name** or
-**userid**
+Specifying an owner can be done via **href**, **id**, **name** or **userid**
 
-</div>
-
-<div class="note">
+**Note:**
 
 Specifying a group can be done via **href**, **id** or **description**
 
-</div>
-
-Setting ownership can be done on a specific resource or multiple
-resources in a single request:
+Setting ownership can be done on a specific resource or multiple resources in a single request:
 
 ### Setting Ownership to single resource
 

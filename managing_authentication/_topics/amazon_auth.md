@@ -5,7 +5,7 @@ authentication mode, required parameters are exposed under **Amazon
 Primary AWS Account Settings for IAM** (Identity and Access Management).
 Be sure to validate your settings before saving them.
 
-<div class="note">
+**Note:**
 
 For further information on AWS Identity and Access Management settings,
 see the [AWS

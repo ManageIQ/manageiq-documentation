@@ -12,7 +12,7 @@ provides an ability to:
 
   - Model the stack and its elements in the UI.
 
-<div class="note">
+**Note:**
 
 When importing a template into {{ site.data.product.title }}, the selected elements
 are converted according to their type. For example, lists convert to

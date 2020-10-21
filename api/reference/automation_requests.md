@@ -181,12 +181,9 @@ queryable automation request itself, i.e.
 In the above example, the request could be queried periodically until
 the **request\_state** reaches the **finished** state.
 
-<div class="note">
+**Note:**
 
-The request tasks of an automation request can also be queried by
-expanding the request\_tasks subcollection as follows:
-
-</div>
+The request tasks of an automation request can also be queried by expanding the request\_tasks subcollection as follows:
 
     GET /api/automation_requests/:id?expand=request_tasks
 

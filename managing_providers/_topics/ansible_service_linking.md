@@ -24,7 +24,7 @@ to Amazon EC2 and linked back to the service. Examples are provided for
 linking the resource to its service by both an *href slug* and as an
 object.
 
-<div class="note">
+**Note:**
 
   - This example utilizes the \`syncrou.manageiq-vmdb\`role. This role
     allows {{ site.data.product.title_short }} users to modify and/or change VMDB

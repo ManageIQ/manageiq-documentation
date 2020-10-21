@@ -51,7 +51,7 @@ use the following credentials:
 
   - Password: **smartvm**
 
-<div class="note">
+**Note:**
 
 You can also change the password of the **admin** account from the login
 screen. To do so, click the **Update Password** link.

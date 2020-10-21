@@ -35,7 +35,7 @@ below:
     [Chargeback](../monitoring_alerts_and_reporting/index.html#chargeback)
     in the *Monitoring, Alerts, and Reporting* guide.
 
-<div class="note">
+**Note:**
 
 If you are on the first day of the month, there can be no data yet
 therefore resulting in zero dollar amount. Also, if you have a lot of

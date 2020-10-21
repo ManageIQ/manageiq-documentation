@@ -3,7 +3,7 @@
 The `manageiq-automate` role allows users of {{ site.data.product.title }} Automate to
 modify and add to the automate workspace via an Ansible playbook.
 
-<div class="note">
+**Note:**
 
 When using this role in a playbook on a {{ site.data.product.title }} appliance with
 Embedded Ansible activated, add an empty `roles` directory at the root

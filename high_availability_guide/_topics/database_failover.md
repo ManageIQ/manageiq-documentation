@@ -27,7 +27,7 @@ Configuration settings are located in
 | `db_check_frequency`       | 300s          | The sleep interval in the monitor loop, it defines how frequently the connection to the database is checked.                                      |
 | `failover_check_frequency` | 60s           | The sleep interval between attempting to failover additional times.                                                                               |
 
-<div class="note">
+**Note:**
 
 `failover_attempts` and `failover_check_frequency` determine the time
 limit for the cluster to elect a new primary. To produce quicker
@@ -59,7 +59,7 @@ following steps:
 
         # systemctl status postgresql.service
 
-    <div class="note">
+    **Note:**
 
     You can check the status of the simulated failure by viewing the
     most recent `evm.log` log on the engine appliances.
@@ -118,7 +118,7 @@ the standby database-only appliance, configure the following:
     6.  Enter the new standby database-only appliance hostname or IP
         address.
 
-        <div class="note">
+        **Note:**
 
         The hostname must be visible to all appliances that communicate
         with this database, including the engine appliances and any
@@ -129,7 +129,7 @@ the standby database-only appliance, configure the following:
     7.  Select `y` to configure the replication manager for automatic
         failover.
 
-        <div class="note">
+        **Note:**
 
         If re-using the node’s identification number, select `y` to
         overwrite the existing node ID (this cannot be undone).

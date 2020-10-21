@@ -3,7 +3,7 @@
 View capacity and utilization data for instances that are part of a
 cluster.
 
-<div class="note">
+**Note:**
 
 You must have a server with network visibility to your provider assigned
 the server role of **Capacity & Utilization Collector** to use this
@@ -29,7 +29,7 @@ feature.
 
 ![5063](../images/5063.png)
 
-<div class="note">
+**Note:**
 
 Daily charts only include full days of data. This means {{ site.data.product.title }}
 does not show daily data for a day without a complete 24 data point

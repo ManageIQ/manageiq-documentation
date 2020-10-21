@@ -3,7 +3,7 @@
 Refresh the relationships and power states of the items associated with
 your hosts from the Host Taskbar.
 
-<div class="note">
+**Note:**
 
 `root` or administrator credentials are required to get patch
 information.

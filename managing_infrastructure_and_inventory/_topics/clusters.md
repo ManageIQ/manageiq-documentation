@@ -4,7 +4,7 @@ Clusters provide high availability and load balancing for a group of
 hosts. The **Clusters** page under menu:Compute\[Infrastructure\]
 displays the clusters discovered in your enterprise environment.
 
-<div class="note">
+**Note:**
 
 Any filter applied will be in effect here.
 

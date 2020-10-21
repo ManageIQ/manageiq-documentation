@@ -7,7 +7,7 @@ To enable external authentication using SAML, complete the following
 steps to configure your HTTP server, then your {{ site.data.product.title_short }}
 appliance.
 
-<div class="note">
+**Note:**
 
 The current SAML implementation only secures the {{ site.data.product.title_short }}
 appliance’s web user interface with SAML. The REST API and self service
@@ -31,7 +31,7 @@ While other SAML identity providers can be used with
 Single Sign-On (RH-SSO) 7.0, which is implemented using the Apache HTTP
 server’s `mod_auth_mellon` module.
 
-<div class="note">
+**Note:**
 
 For more information about Red Hat Single Sign-On (RH-SSO), see the [Red
 Hat Single Sign-On

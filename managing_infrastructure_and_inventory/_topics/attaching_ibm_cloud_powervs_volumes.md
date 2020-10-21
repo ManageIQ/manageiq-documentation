@@ -13,7 +13,7 @@ To attach a volume to an instance:
 
 4.  Select an instance from the list.
 
-    <div class="note">
+    **Note:**
 
     Note: A VM cannot have disks from different storage types. Only VMs
     matching storage type will be available for selection.

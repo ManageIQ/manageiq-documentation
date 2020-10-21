@@ -31,8 +31,7 @@ A service dialog contains three components:
 
 <div class="important">
 
-The names of the elements must correspond to the options used in the
-provisioning dialog.
+The names of the elements must correspond to the options used in the provisioning dialog.
 
 </div>
 
@@ -98,32 +97,22 @@ provisioning dialog.
 
         <div class="important">
 
-        Element names must correspond to the options used in the
-        provisioning dialog. **Name** must use only alphanumeric
-        characters and underscores without spaces. It is also used to
-        retrieve the value of this element in the method used with the
+        Element names must correspond to the options used in the provisioning dialog. **Name** must use only alphanumeric characters and underscores without spaces. It is also used to retrieve the value of this element in the method used with the
         dialog and must start with **dialog\_service\_type**.
 
         </div>
 
-    3.  Optional: Add additional information in **Help** to assist the
-        user to complete the fields in the service dialog. This field is
-        useful for explaining unfamiliar terminology or providing
-        configuration tips. This information is presented when you hover
-        over the \[\!\] exclamation mark in the Service Dialog while
-        ordering a Service Catalog later.
+    3.  Optional: Add additional information in **Help** to assist the user to complete the fields in the service dialog. This field is useful for explaining unfamiliar terminology or providing configuration tips. This information is presented when you hover
+        over the \[\!\] exclamation mark in the Service Dialog while ordering a Service Catalog later.
 
     4.  Set other options as required.
 
     5.  Click **Save**.
 
-8.  Optional: Repeat the above step to add more elements to the existing
-    section, or create and add elements to a new section as required.
+8.  Optional: Repeat the above step to add more elements to the existing section, or create and add elements to a new section as required.
 
-9.  Optional: Repeat the step to add a new tab to the dialog, and
-    subsequent steps to add sections and elements to it as required.
+9.  Optional: Repeat the step to add a new tab to the dialog, and subsequent steps to add sections and elements to it as required.
 
 10. Click **Save** to create the dialog.
 
-The service dialog is now created, and added to the **Service Dialogs**
-accordion.
+The service dialog is now created, and added to the **Service Dialogs** accordion.

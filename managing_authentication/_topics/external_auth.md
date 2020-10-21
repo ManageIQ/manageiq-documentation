@@ -75,7 +75,7 @@ Using the appliance console:
 
 10. Enter `y` to proceed.
 
-<div class="note">
+**Note:**
 
 If any of the following conditions are true, configuration fails:
 

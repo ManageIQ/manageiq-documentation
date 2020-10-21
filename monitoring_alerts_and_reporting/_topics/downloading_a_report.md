@@ -30,7 +30,7 @@ view the report in a full screen.
       - The report is automatically named with the type of report and
         date.
 
-<div class="note">
+**Note:**
 
 Edit and delete buttons are only visible to administrators and super
 administrators. Edit and delete functions are only available to

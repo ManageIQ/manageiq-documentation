@@ -165,7 +165,7 @@ with the provisioning request. The method should be created in the
 `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template`
 class of the **Automate** model.
 
-<div class="note">
+**Note:**
 
 **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
 Domain. If necessary, you can copy the class from the ManageIQ domain
@@ -299,7 +299,7 @@ Service methods have been split based on purpose.
     StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
     StateMachines \> Methods\].
 
-    <div class="note">
+    **Note:**
 
     **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ
@@ -329,7 +329,7 @@ Service methods have been split based on purpose.
     StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
     StateMachines \> Methods\].
 
-    <div class="note">
+    **Note:**
 
     **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ
@@ -353,7 +353,7 @@ The instance is created so that it can be called from the
 
 ![6298](../images/6298.png)
 
-<div class="note">
+**Note:**
 
 After the method has been created, it must be mapped to an instance in
 the `DOMAIN/Service/Service/Provisioning/StateMachines` class. The name
@@ -374,7 +374,7 @@ Service methods have been split based on purpose.
     StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
     StateMachines \> Methods\].
 
-    <div class="note">
+    **Note:**
 
     **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ
@@ -415,7 +415,7 @@ service catalog.
     `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template`
     class that calls the method.
 
-    <div class="note">
+    **Note:**
 
     DOMAIN must be a user-defined Domain and not the locked ManageIQ
     Domain. If necessary, you can copy the class from the ManageIQ
@@ -465,7 +465,7 @@ service catalog.
 A catalog bundle is created and visible in the **Service Catalog**
 accordion.
 
-<div class="note">
+**Note:**
 
 You should also create and specify an Entry Point in the
 `DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class
@@ -508,7 +508,7 @@ will be part of the service.
 
 #### Copying a Catalog Item
 
-<div class="note">
+**Note:**
 
 When copying a catalog item for reuse, you must click **Display in
 Catalog** in the copied catalog item for the item to appear in the
@@ -605,7 +605,7 @@ ability to:
 
   - Model the stack and its elements in the user interface.
 
-<div class="note">
+**Note:**
 
 When importing a template into {{ site.data.product.title_short }}, the selected
 elements are converted according to their type. For example, lists
@@ -652,7 +652,7 @@ Complete the following procedure to edit orchestration templates.
 
 4.  Edit the template as needed.
 
-    <div class="note">
+    **Note:**
 
     You can only edit the name and description of a read-only template
     as there can be stacks associated with the template.
@@ -677,7 +677,7 @@ create a new template.
     required. {{ site.data.product.title_short }} automatically prefixes *Copy of* to
     the old template **Name**.
 
-    <div class="note">
+    **Note:**
 
     To create a copy of an orchestration template into a new template,
     the old and new template content must differ.
@@ -702,7 +702,7 @@ Complete the following procedure to delete orchestration templates.
 
 4.  Click **OK**.
 
-<div class="note">
+**Note:**
 
 Read-only templates cannot be deleted.
 

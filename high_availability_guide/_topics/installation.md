@@ -63,7 +63,7 @@ the non-database {{ site.data.product.title_short }} appliances.
 
     7.  Create the database password.
 
-<div class="note">
+**Note:**
 
 Do not create a region at this stage in the procedure.
 
@@ -213,7 +213,7 @@ Run these steps from the appliance console:
     5.  Enter the primary database-only appliance hostname or IP
         address.
 
-        <div class="note">
+        **Note:**
 
         The hostname must be visible to all appliances that communicate
         with this database, including the non-database
@@ -298,7 +298,7 @@ appliance console:
     6.  Enter the standby database-only appliance hostname or IP
         address.
 
-        <div class="note">
+        **Note:**
 
         The hostname must be visible to all appliances that communicate
         with this database, including the engine appliances and any

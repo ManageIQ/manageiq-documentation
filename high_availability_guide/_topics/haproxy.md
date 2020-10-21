@@ -25,7 +25,7 @@ profile. When an end user accesses the virtual IP, it directs traffic to
 the appropriate {{ site.data.product.title_short }} appliance based on the configured
 HAProxy policy.
 
-<div class="note">
+**Note:**
 
 Additional configuration is required to run HAProxy on Red Hat OpenStack
 Platform. See the [OpenStack Networking
@@ -89,7 +89,7 @@ To configure HAProxy load balancing:
 
     1.  On the `cf-hap1` server, run the following:
 
-        <div class="note">
+        **Note:**
 
         `keepalived` uses VRRP (Virtual Redundancy Router Protocol) to
         monitor the servers and determine which node is the master and
@@ -258,7 +258,7 @@ To configure HAProxy load balancing:
           server cfme1 10.19.137.130:8443 check inter 1s
           server cfme2 10.19.137.129:8443  check inter 1s
 
-    <div class="note">
+    **Note:**
 
       - The virtual IP in this configuration is 10.19.137.135
         (cf-haproxy.example.com).

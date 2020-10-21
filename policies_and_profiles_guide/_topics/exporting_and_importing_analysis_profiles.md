@@ -18,7 +18,7 @@
 
         bundle exec rake evm:import:scan_profiles -- --source exports/host_default.yaml
 
-    <div class="note">
+    **Note:**
 
     If the default profile exists in {{ site.data.product.title_short }}, the new profile does not overwrite the old profile. Instead, it duplicates the file items in the default profile.
 

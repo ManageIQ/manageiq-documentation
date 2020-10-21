@@ -63,13 +63,10 @@ or creating multiple actions:
 }
 ```
 
-<div class="note">
+**Note:**
 
-Please refer to the [Resource
-Attributes](../appendices/resource_attributes.html#actions) page for a
+Please refer to the [Resource Attributes](../appendices/resource_attributes.html#actions) page for a
 list of available attributes when creating actions.
-
-</div>
 
 ### Editing Actions
 

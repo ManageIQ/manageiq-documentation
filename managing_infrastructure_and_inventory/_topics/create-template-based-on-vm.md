@@ -5,7 +5,7 @@ simplify the subsequent, repeated creation of similar VMs. Templates
 capture the configuration of software, configuration of hardware, and
 the software installed on the VM on which the template is based.
 
-<div class="note">
+**Note:**
 
 Virtual machines must meet the following criteria to publish as
 templates:
@@ -57,7 +57,7 @@ To create a template based on an existing VM:
 
     2.  (Optional) Check **Seal Template**.
 
-        <div class="note">
+        **Note:**
 
         Sealing, which uses the `virt-sysprep` command, removes
         system-specific details from a virtual machine before creating a

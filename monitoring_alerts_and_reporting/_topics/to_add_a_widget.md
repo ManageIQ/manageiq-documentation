@@ -9,7 +9,7 @@ want to see upon login.
 
 3.  Select the widget you want to add from the list.
 
-<div class="note">
+**Note:**
 
 Only widgets that are not currently showing on the dashboard will appear
 in this list.

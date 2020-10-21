@@ -6,7 +6,7 @@ this screen, click on instances to see details of all instances the key
 pair relates to. You can use the key pairs added during provisioning
 instances.
 
-<div class="note">
+**Note:**
 
 Adding a new key pair is currently only supported for OpenStack.
 

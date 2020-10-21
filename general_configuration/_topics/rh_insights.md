@@ -12,7 +12,7 @@ to stability, security, or performance. A glance at the display allows
 users to sort by category, view details of the impact and resolution,
 and then quickly determine what systems are affected.
 
-<div class="note">
+**Note:**
 
   - To use Red Hat Insights, the {{ site.data.product.title_short }} appliance must
     be registered to Red Hat Subscription Management or Satellite

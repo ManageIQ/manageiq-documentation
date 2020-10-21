@@ -3,7 +3,7 @@
 {{ site.data.product.title }} allows you to create chargeback reports to monitor costs
 you charged.
 
-<div class="note">
+**Note:**
 
 When creating a chargeback report, the **Total Cost** is the complete
 cost for the chosen workload over the selected time frame. Total costs

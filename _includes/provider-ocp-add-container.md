@@ -38,16 +38,14 @@
             provider’s CA certificate to the **Trusted CA
             Certificates** box in PEM format.
 
-            <div class="note">
+            **Note:**
 
             You can obtain your OpenShift Container Platform provider’s
             CA certificate for all endpoints (default, metrics, alerts)
             from `/etc/origin/master/ca.crt`. Paste the output (a block
             of text starting with `-----BEGIN CERTIFICATE-----`) into
             the **Trusted CA Certificates** field.
-
-            </div>
-
+            
           - **SSL without validation**: Authenticate the provider
             insecurely (not recommended).
 
@@ -121,7 +119,7 @@
             provider’s CA certificate to the **Trusted CA
             Certificates** box in PEM format.
 
-            <div class="note">
+            **Note:**
 
             In OpenShift, the default deployment of the router generates
             certificates during installation, which can be used with the
@@ -130,8 +128,6 @@
             the cluster uses for service certificates, which is stored
             in `/etc/origin/master/service-signer.crt` on the first
             master in a cluster.
-
-            </div>
 
           - **SSL without validation**: Authenticate the provider
             insecurely using SSL. (Not recommended)
@@ -148,7 +144,7 @@
 11. Click the **Advanced** tab to add image inspector settings for
     scanning container images on your provider using OpenSCAP.
 
-    <div class="note">
+    **Note:**
 
       - These settings control downloading the image inspector container
         image from the registry and obtaining the Common Vulnerabilities
@@ -159,8 +155,6 @@
         OpenSCAP scanning:
         <https://www.redhat.com/security/data/metrics/ds/>. This
         information is based on the source code of OpenSCAP.
-
-    </div>
 
     1.  Enter the proxy information for the provider in either **HTTP**,
         **HTTPS**, or **NO Proxy** depending on your environment.
@@ -180,7 +174,7 @@
 
 12. Click **Add**.
 
-<div class="note">
+**Note:**
 
 You can also set global default image-inspector settings for all
 OpenShift providers in the advanced settings menu by editing the values
@@ -190,5 +184,3 @@ For example:
 
     :image_inspector_registry: registry.access.redhat.com
     :image_inspector_repository: openshift3/image-inspector
-
-</div>

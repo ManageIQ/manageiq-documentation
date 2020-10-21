@@ -246,11 +246,9 @@ reference as follows:
 }
 ```
 
-<div class="note">
+**Note:**
 
 event\_time above is optional. If skipped, current time will be used.
-
-</div>
 
 ### Adding a Lifecycle Event to a Virtual Machine
 

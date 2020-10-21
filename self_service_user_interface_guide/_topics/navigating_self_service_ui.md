@@ -53,7 +53,7 @@ you can see the current logged in LDAP user, for example,
     Self Service user interface version number, which can be useful for
     support purposes.
 
-<div class="note">
+**Note:**
 
 The resources linked to in the help icon will be, by default, the ones
 listed above. System administrators can change them to other resources

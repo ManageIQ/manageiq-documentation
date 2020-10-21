@@ -45,7 +45,7 @@ technology center contains a single subregion that manages two zones.
 Likewise, the San Diego technology center contains a single subregion
 managing a single zone.
 
-<div class="note">
+**Note:**
 
   - Replicating a parent region to a higher-level parent is not
     supported.
@@ -66,7 +66,7 @@ All appliances can connect to the authentication services (Active
 Directory, LDAP, Identity Management), outgoing mail (SMTP), and network
 services (SNMP).
 
-<div class="note">
+**Note:**
 
 {{ site.data.product.title_short }} can be configured in a highly available setup. In
 this case, all PostgreSQL instances must be running on a server that is
@@ -133,7 +133,7 @@ global region using centralized administration:
 
   - Opening a virtual machine in the remote region
 
-<div class="note">
+**Note:**
 
 {{ site.data.product.title_short }} life cycle operations other than those listed
 above are not supported. Centralized administration capabilities are not
@@ -151,7 +151,7 @@ remote region.
 
 ![Centralized Administration Diagram](../images/centralized_admin.png)
 
-<div class="note">
+**Note:**
 
 The operations initiated from the global region are subject to the
 role-based access control (RBAC) rules on the remote region. The user in
@@ -177,7 +177,7 @@ A tenant can also contain a self-contained child tenant known as a
 allocating resources to a small group or team within a larger
 organization.
 
-<div class="note">
+**Note:**
 
 If you do not add any additional tenants, all resources and user
 accounts are contained in a single base tenant which is your
@@ -262,7 +262,7 @@ You can allocate and enforce quotas for the following attributes:
 You can generate or schedule a report for **Tenant Quotas** similar to
 other reports.
 
-<div class="note">
+**Note:**
 
 Currently, in tenant quota reports you will see all of the tenants but
 there is no nesting information available by parent and child tenants.

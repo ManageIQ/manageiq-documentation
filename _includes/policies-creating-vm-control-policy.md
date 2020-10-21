@@ -53,28 +53,16 @@
 
     ![image](../images/edit-action.png)
 
-    <div class="note">
+    **Note:**
 
     Each selected action can be executed synchronously or
-    asynchronously; a synchronous action will not start until the
-    previous synchronous action is completed, while an asynchronous
-    action allows the next action to start whether or not the first
-    action has completed. Also, at least one {{ site.data.product.title }} server in
-    the {{ site.data.product.title }} zone must have the notifier server role enabled
+    asynchronously; a synchronous action will not start until the previous synchronous action is completed, while an asynchronous action allows the next action to start whether or not the first action has completed. Also, at least one {{ site.data.product.title }} server in the {{ site.data.product.title }} zone must have the notifier server role enabled
     for the trap to be sent.
 
-    </div>
+17. Click (![image](../images/1876.png)) which will move the action to **Selected Actions**. The selected action is set to (S) Synchronous by default. From **Selected Actions**, select the action, then:
 
-17. Click (![image](../images/1876.png)) which will move the action to
-    **Selected Actions**. The selected action is set to (S) Synchronous
-    by default. From **Selected Actions**, select the action, then:
+      - Click **A** (Set selected Actions to Asynchronous) to make it asynchronous.
 
-      - Click **A** (Set selected Actions to Asynchronous) to make it
-        asynchronous.
-
-      - Click **S** (Set selected Actions to Synchronous) to make it
-        synchronous. If creating a synchronous action, use the up and
-        down arrows to identify in what order you want the actions to
-        run.
+      - Click **S** (Set selected Actions to Synchronous) to make it synchronous. If creating a synchronous action, use the up and down arrows to identify in what order you want the actions to run.
 
 18. Click **Save**.

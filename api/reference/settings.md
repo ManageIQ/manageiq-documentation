@@ -53,7 +53,7 @@ GET /api/zones/:id/settings
 GET /api/regions/:id/settings
 ```
 
-<div class="note">
+**Note:**
 
 <div class="title">
 
@@ -61,16 +61,11 @@ Authorization
 
 </div>
 
-  - For users with an *EvmGroup-super\_administrator* role, the complete
-    advanced settings are returned.
+  - For users with an *EvmGroup-super\_administrator* role, the complete advanced settings are returned.
 
-  - For users with roles that include the *Configuration Settings*
-    feature, only a whitelisted set of settings are returned.
+  - For users with roles that include the *Configuration Settings* feature, only a whitelisted set of settings are returned.
 
-  - Requests from all other users will be rejected with a Forbidden
-    error.
-
-</div>
+  - Requests from all other users will be rejected with a Forbidden error.
 
 ### Updating Settings
 

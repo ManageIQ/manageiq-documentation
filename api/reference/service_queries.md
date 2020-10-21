@@ -96,15 +96,11 @@ Service dialogs can be queried directly from the primary collection:
                                 &target_id=:target_id
                                 &target_type=:target_type
 
-<div class="note">
+**Note:**
 
-Above :target\_type would be a valid resource type containing the
-service dialog like *service\_template* or *service*.
+Above :target\_type would be a valid resource type containing the service dialog like *service\_template* or *service*.
 
-</div>
-
-Or from the Service Template where they are defined and from the related
-ordered services as follows:
+Or from the Service Template where they are defined and from the related ordered services as follows:
 
     GET /api/service_templates/:id/service_dialogs
     GET /api/service_templates/:id/service_dialogs/:service_dialog_id

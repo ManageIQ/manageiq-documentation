@@ -6,7 +6,6 @@ Assign the policy profile you created in [Creating a Policy Profile and Assignin
 
 Policy profiles can be specified at multiple levels. If you assign a policy profile to a provider (Amazon EC2 or OpenStack for example), the profile will apply to all hosts or virtual machines for that provider.
 
-
 1. Browse to menu: **Compute > Clouds > Instances** or menu: **Compute > Infrastructure > Virtual Machines**. Select the virtual machine or instance.
 
 2. Click ![image](../images/1941.png) **Policy**, then ![image](../images/1851.png) **Manage Policies**.

@@ -80,7 +80,7 @@ To use a Microsoft System Center Virtual Machine Manager (SCVMM)
 provider, add it to the appliance and set up the SCVMM server for
 authentication.
 
-<div class="note">
+**Note:**
 
 To use a SCVMM provider, you must have at least one network adapter
 available for communication between the host and the SCVMM management

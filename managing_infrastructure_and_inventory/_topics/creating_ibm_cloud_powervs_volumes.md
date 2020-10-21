@@ -16,7 +16,7 @@ To create a volume:
 
 5.  Select the type of the volume from the **Cloud Volume Type** list.
 
-    <div class="note">
+    **Note:**
 
     See [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#storage)
     for more information on volume types.

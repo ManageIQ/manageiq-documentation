@@ -109,7 +109,7 @@ zone for the console. These settings are specific to the logged-on user.
     2.  Use **Time Zone** to select the time zone in which to display
         the console.
 
-        <div class="note">
+        **Note:**
 
         In time zones where clocks are set forward for daylight savings
         time, the time zone correctly displays as EDT (Eastern Daylight
@@ -369,7 +369,7 @@ To create a time profile:
 
 8.  Click **Add**.
 
-<div class="note">
+**Note:**
 
 The following relationships exist between time zones and performance
 reports:

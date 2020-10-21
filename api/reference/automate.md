@@ -84,11 +84,9 @@ GET /api/automate
 }
 ```
 
-<div class="note">
+**Note:**
 
 The fqname is always returned by this query
-
-</div>
 
 If desired a sub-set of attributes can be asked via as follows:
 
@@ -116,11 +114,9 @@ GET /api/automate?attributes=name,source
 Querying any object in the Automate Model by its fully qualified name as
 follows:
 
-<div class="note">
+**Note:**
 
 The fqname in the query is *not* case sensitive
-
-</div>
 
 ``` data
 GET /api/automate/manageiq

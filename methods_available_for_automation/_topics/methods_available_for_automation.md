@@ -6,7 +6,7 @@ Infrastructure. This document describes the methods available for use in
 {{ site.data.product.title }}. This document is organized by the object hierarchy in
 the Automate Model.
 
-<div class="note">
+**Note:**
 
 Users of {{ site.data.product.title }} can construct custom automation methods in Ruby
 to extend the product. {{ site.data.product.title }} ships with a core set of Ruby

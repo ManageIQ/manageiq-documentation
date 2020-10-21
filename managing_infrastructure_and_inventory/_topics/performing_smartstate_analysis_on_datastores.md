@@ -6,7 +6,7 @@ managed/unregistered, and unmanaged virtual machines. To perform a
 SmartState analysis, the datastore is accessible from a running host and
 valid security credentials are supplied for that host.
 
-<div class="note">
+**Note:**
 
   - SmartState analysis on datastores is processed by the **Provider
     Operations** role. It is enabled by default.

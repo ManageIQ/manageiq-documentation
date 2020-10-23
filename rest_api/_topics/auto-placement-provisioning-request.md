@@ -1,24 +1,16 @@
 #### Placement of Environmental Variables in Provisioning Requests
 
-Pass environment values directly through the `vm_fields` attribute group
-of a provisioning request by first adding `"placement_auto":"false"` to
-the hash.
+Pass environment values directly through the `vm_fields` attribute group of a provisioning request by first adding `"placement_auto":"false"` to the hash.
 
 **Note:**
 
-Once `"placement_auto:"false"` has been added, you must pass values for
-all the required fields on the Environment tab.
+Once `"placement_auto:"false"` has been added, you must pass values for all the required fields on the Environment tab.
 
-</div>
-
-The example request displays how the `vm_fields` attribute group should
-appear when passing environment values.
+The example request displays how the `vm_fields` attribute group should appear when passing environment values.
 
 ##### Request:
 
-Provisioning requests are made available via the following entrypoint,
-either by specifying a create action or by posting the request directly
-to /api/provision\_requests:
+Provisioning requests are made available via the following entrypoint, either by specifying a create action or by posting the request directly to /api/provision\_requests:
 
     POST /api/provision_requests
 

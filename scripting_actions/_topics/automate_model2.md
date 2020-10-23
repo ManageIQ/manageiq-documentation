@@ -72,7 +72,5 @@ Changing the existing classes or instances shipped with the product is
 not recommended because this may hinder the operation of
 {{ site.data.product.title }}. You can link to these methods using relationships.
 
-</div>
-
 To reset the Automate model to default settings, navigate to
 menu:Automate\[Import/Export\] and click the **Reset** option.

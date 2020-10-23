@@ -97,4 +97,3 @@ Previously provisioned hosts might require manual selection of PXE boot
 from the boot menu, otherwise they might boot to hard disk and not
 reprovision.
 
-</div>

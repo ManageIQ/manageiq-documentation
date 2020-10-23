@@ -42,4 +42,3 @@ therefore resulting in zero dollar amount. Also, if you have a lot of
 data, it might not have rolled into the new month yet, resulting in no
 data and dollar amount for month to date.
 
-</div>

@@ -55,11 +55,9 @@ the non-database {{ site.data.product.title_short }} appliances.
         will not run. This is required in highly available database
         deployments.
 
-        <div class="warning">
-
+        **Warning:**
+        
         This configuration is not reversible.
-
-        </div>
 
     7.  Create the database password.
 

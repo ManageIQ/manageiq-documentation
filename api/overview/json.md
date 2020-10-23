@@ -83,11 +83,7 @@ resources and collections defined in this API.
 
 **Note:**
 
-<div class="title">
-
-About permissions and security:
-
-</div>
+#### About permissions and security:
 
 Advertising of the common actions depends purely on the role and permissions of that the current API user does have for the particular resource.
 

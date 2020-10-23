@@ -13,8 +13,6 @@ The procedure describes the steps to create a dynamic content dialog.
     Domain. If necessary, you can copy the class from the ManageIQ
     domain into a custom domain.
 
-    </div>
-
     This example uses the **Cloud** Namespace but can also use the
     **Infrastructure** namespace.
 

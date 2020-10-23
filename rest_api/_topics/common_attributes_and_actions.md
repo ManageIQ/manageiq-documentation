@@ -27,7 +27,5 @@ Actions
 
 **Note:**
 
-The availability of these common actions depends on the role and
-permissions that the current API user has for a particular resource.
+The availability of these common actions depends on the role and permissions that the current API user has for a particular resource.
 
-</div>

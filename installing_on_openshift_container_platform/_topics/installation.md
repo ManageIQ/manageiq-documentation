@@ -1,56 +1,34 @@
 ## Installing {{ site.data.product.title }}
 
-{{ site.data.product.title }} can be installed on OpenShift Container Platform in a
-few steps.
+{{ site.data.product.title }} can be installed on OpenShift Container Platform in a few steps.
 
 This procedure uses a template to deploy a multi-pod
-{{ site.data.product.title_short }} appliance with the database stored in a
-persistent volume on OpenShift Container Platform. It provides a
-step-by-step setup, including cluster administrative tasks as well as
-information and commands for the application developer using the
-deployment.
+{{ site.data.product.title_short }} appliance with the database stored in a persistent volume on OpenShift Container Platform. It provides a step-by-step setup, including cluster administrative tasks as well as
+information and commands for the application developer using the deployment.
 
-The ultimate goal of the deployment is to be able to deconstruct the
-{{ site.data.product.title_short }} appliance into several containers running on a
+The ultimate goal of the deployment is to be able to deconstruct the {{ site.data.product.title_short }} appliance into several containers running on a
 pod or a series of pods.
 
-Running the {{ site.data.product.title_short }} appliance in a series of pods has
-several advantages. For example, running each worker in a separate pod
-allows OpenShift Container Platform to manage worker processes and
-reduce worker memory consumption. OpenShift can also easily scale
-workers by adding or removing pods, and perform upgrades by using
-images.
+Running the {{ site.data.product.title_short }} appliance in a series of pods has several advantages. For example, running each worker in a separate pod allows OpenShift Container Platform to manage worker processes and
+reduce worker memory consumption. OpenShift can also easily scale workers by adding or removing pods, and perform upgrades by using images.
 
-There are two options for installing {{ site.data.product.title_short }} on
-OpenShift:
+There are two options for installing {{ site.data.product.title_short }} on OpenShift:
 
   - During OpenShift Container Platform 3.7 installation:
 
-      - When you install OpenShift Container Platform 3.7, you have the
-        option to install {{ site.data.product.title_short }} inside OpenShift at the
-        time. This method leverages the Ansible installer to run and
-        deploy the {{ site.data.product.title_short }} template, instead of building
-        the environment manually. See the [OpenShift Container
-        Platform 3.7 Release
-        Notes](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/release_notes/index#ocp-37-installation)
-        for details.
+      - When you install OpenShift Container Platform 3.7, you have the option to install {{ site.data.product.title_short }} inside OpenShift at the time. This method leverages the Ansible installer to run and deploy the {{ site.data.product.title_short }} template, instead of building the environment manually. See the [OpenShift Container Platform 3.7 Release Notes](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/release_notes/index#ocp-37-installation) for details.
 
-  - Manual install on an existing OpenShift Container Platform
-    environment:
+  - Manual install on an existing OpenShift Container Platform environment:
 
       - Deploy {{ site.data.product.title_short }} pods using the
         {{ site.data.product.title_short }} template (*.yaml* file). This is the
         method described in this guide.
 
-After deployment, you can configure the {{ site.data.product.title_short }}
-environment to use any external authentication configurations supported
-by {{ site.data.product.title_short }}.
+After deployment, you can configure the {{ site.data.product.title_short }} environment to use any external authentication configurations supported by {{ site.data.product.title_short }}.
 
 ### Prerequisites
 
-To successfully deploy a {{ site.data.product.title_short }} appliance on OpenShift
-Container Platform, you need a functioning **OpenShift Container
-Platform 3.7** install with the following configured:
+To successfully deploy a {{ site.data.product.title_short }} appliance on OpenShift Container Platform, you need a functioning **OpenShift Container Platform 3.7** install with the following configured:
 
   - NFS or other compatible volume provider
 
@@ -60,16 +38,13 @@ Platform 3.7** install with the following configured:
 
 <div class="important">
 
-OpenShift Container Platform 3.7 is required for this installation. Red
-Hat has not tested this procedure with earlier versions of OpenShift
-Container Platform.
+OpenShift Container Platform 3.7 is required for this installation. Red Hat has not tested this procedure with earlier versions of OpenShift Container Platform.
 
 </div>
 
 #### Cluster Sizing
 
-To avoid deployment failures due to resource starvation, Red Hat
-recommends the following minimum cluster size for a test environment:
+To avoid deployment failures due to resource starvation, Red Hat recommends the following minimum cluster size for a test environment:
 
   - 1 master node with at least 8 vCPUs and 12GB RAM
 
@@ -236,8 +211,7 @@ contexts, and create persistent storage.
     more than five images for deployments.
 
     You can modify this setting on the master node at
-    `/etc/origin/master/master-config.yaml` so OpenShift can import
-    additional images.
+    `/etc/origin/master/master-config.yaml` so OpenShift can import additional images.
 
     1.  Add the following at the end of the
         `/etc/origin/master/master-config.yaml` file:
@@ -251,16 +225,13 @@ contexts, and create persistent storage.
             $ systemctl restart atomic-openshift-master
 
 9.  On each OpenShift node, persistently enable the
-    `container_manage_cgroup` SELinux boolean to allow container
-    processes to make changes to the *cgroup* configuration:
+    `container_manage_cgroup` SELinux boolean to allow container processes to make changes to the *cgroup* configuration:
 
         # setsebool -P container_manage_cgroup on
 
 ### Deploying the {{ site.data.product.title_short }} Appliance
 
-To deploy the appliance on OpenShift Container Platform, create the
-{{ site.data.product.title_short }} template and verify it is available in your
-project.
+To deploy the appliance on OpenShift Container Platform, create the {{ site.data.product.title_short }} template and verify it is available in your project.
 
 1.  As a regular user, create the {{ site.data.product.title_short }} template:
 
@@ -273,8 +244,7 @@ project.
         NAME         DESCRIPTION                                    PARAMETERS        OBJECTS
         cloudforms   CloudForms appliance with persistent storage   18 (1 blank)      12
 
-3.  (Optional) Customize the template’s deployment parameters. Use the
-    following command to see the available parameters and descriptions:
+3.  (Optional) Customize the template’s deployment parameters. Use the following command to see the available parameters and descriptions:
 
         $ oc process --parameters -n <your-project> cloudforms
 
@@ -282,40 +252,30 @@ project.
 
         $ oc edit dc/<deployconfig_name>
 
-4.  To deploy {{ site.data.product.title_short }} from template using default
-    settings, run:
+4.  To deploy {{ site.data.product.title_short }} from template using default settings, run:
 
         $ oc new-app --template=cloudforms
 
-    Alternatively, to deploy {{ site.data.product.title_short }} from a template
-    using customized settings, add the `-p` option and the desired
+    Alternatively, to deploy {{ site.data.product.title_short }} from a template using customized settings, add the `-p` option and the desired
     parameters to the command. For example:
 
         $ oc new-app --template=cloudforms -p DATABASE_VOLUME_CAPACITY=2Gi,POSTGRESQL_MEM_LIMIT=4Gi,APPLICATION_DOMAIN=hostname
 
     **Important:**
 
-    The `APPLICATION_DOMAIN` parameter specifies the hostname used to
-    reach the {{ site.data.product.title_short }} application, which eventually
-    constructs the route to the {{ site.data.product.title_short }} pod. If you do
-    not specify the `APPLICATION_DOMAIN` parameter, the
-    {{ site.data.product.title_short }} application will not be accessible after the
-    deployment; however, this can be fixed by changing the route. For
-    more information on OpenShift template parameters, see the
+    The `APPLICATION_DOMAIN` parameter specifies the hostname used to reach the {{ site.data.product.title_short }} application, which eventually
+    constructs the route to the {{ site.data.product.title_short }} pod. If you do not specify the `APPLICATION_DOMAIN` parameter, the {{ site.data.product.title_short }} application will not be accessible after the deployment; however, this can be fixed by changing the route. For more information on OpenShift template parameters, see the
     [OpenShift Container Platform Developer Guide](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-templates).
 
 #### Deploying the {{ site.data.product.title_short }} Appliance Using an External Database
 
-Before attempting to deploy {{ site.data.product.title_short }} using an external
-database deployment, ensure the following conditions are satisfied:
+Before attempting to deploy {{ site.data.product.title_short }} using an external database deployment, ensure the following conditions are satisfied:
 
-  - Your OpenShift cluster can access the external PostgreSQL server
+  - Your OpenShift cluster can access the external PostgreSQL server.
 
-  - The {{ site.data.product.title_short }} user, password, and role have been
-    created on the external PostgreSQL server
+  - The {{ site.data.product.title_short }} user, password, and role have been created on the external PostgreSQL server.
 
-  - The intended {{ site.data.product.title_short }} database is created, and
-    ownership has been assigned to the {{ site.data.product.title_short }} user
+  - The intended {{ site.data.product.title_short }} database is created, and ownership has been assigned to the {{ site.data.product.title_short }} user.
 
 To deploy the appliance:
 
@@ -323,21 +283,17 @@ To deploy the appliance:
 
         $ oc create -f templates/cfme-template-ext-db.yaml
 
-2.  Launch the deployment with the following command. The database
-    server IP address is required, and the other settings must match
-    your remote PostgreSQL server.
+2.  Launch the deployment with the following command. The database server IP address is required, and the other settings must match your remote PostgreSQL server.
 
         $ oc new-app --template=cloudforms-ext-db -p DATABASE_IP=<server_ip> -p DATABASE_USER=<user> -p DATABASE_PASSWORD=<password> -p DATABASE_NAME=<database_name>
 
 ### Verifying the Configuration
 
-Verify the deployment was successful by running the following commands
-as a regular user under the {{ site.data.product.title_short }} project:
+Verify the deployment was successful by running the following commands as a regular user under the {{ site.data.product.title_short }} project:
 
 **Note:**
 
-The first deployment can take several minutes to complete while
-OpenShift downloads the necessary images.
+The first deployment can take several minutes to complete while OpenShift downloads the necessary images.
 
 1.  Confirm the {{ site.data.product.title_short }} pod is bound to the correct security context constraints:
 
@@ -354,8 +310,7 @@ OpenShift downloads the necessary images.
 
             $ oc export pod <cfme_pod_name>
 
-    3.  Examine the output to verify that `openshift.io/scc` has the
-        value `anyuid`:
+    3.  Examine the output to verify that `openshift.io/scc` has the value `anyuid`:
 
             ...
             metadata:
@@ -363,8 +318,7 @@ OpenShift downloads the necessary images.
                 openshift.io/scc: anyuid
             ...
 
-2.  Verify the persistent volumes are attached to the `postgresql` and
-    `cfme-app` pods:
+2.  Verify the persistent volumes are attached to the `postgresql` and `cfme-app` pods:
 
         $ oc volume pods --all
         pods/postgresql-1-437jg
@@ -382,8 +336,7 @@ OpenShift downloads the necessary images.
 
     **Note:**
 
-    Allow approximately five minutes once pods are in running state for
-    {{ site.data.product.title_short }} to start responding on HTTPS.
+    Allow approximately five minutes once pods are in running state for {{ site.data.product.title_short }} to start responding on HTTPS.
     
         $ oc describe pods <cfme_pod_name>
         ...
@@ -393,13 +346,9 @@ OpenShift downloads the necessary images.
         Volumes:
         ...
 
-4.  After you have successfully validated your {{ site.data.product.title_short }}
-    deployment, disable automatic image change triggers to prevent
-    unintended upgrades.
+4.  After you have successfully validated your {{ site.data.product.title_short }} deployment, disable automatic image change triggers to prevent unintended upgrades.
 
-    By default, on initial deployments the automatic image change
-    trigger is enabled. This could potentially start an unintended
-    upgrade on a deployment if a newer image is found in the
+    By default, on initial deployments the automatic image change trigger is enabled. This could potentially start an unintended upgrade on a deployment if a newer image is found in the
     ImageStream.
 
     Disable the automatic image change triggers for
@@ -416,20 +365,14 @@ OpenShift downloads the necessary images.
 
     **Note:**
 
-    The configuration change trigger is kept enabled; to have full
-    control of your deployments, you can alternatively turn it off. See
-    the [OpenShift Container Platform Developer
-    Guide](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-triggering-builds)
+    The configuration change trigger is kept enabled; to have full control of your deployments, you can alternatively turn it off. See the [OpenShift Container Platform Developer Guide](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.7/html-single/developer_guide/#dev-guide-triggering-builds)
     for more information on deployment triggers.
 
 ### Logging into {{ site.data.product.title_short }}
 
-As part of the deployment, a route to the {{ site.data.product.title_short }}
-appliance is created for HTTPS access. Once the pods have been
-successfully deployed, you can log into {{ site.data.product.title_short }}.
+As part of the deployment, a route to the {{ site.data.product.title_short }} appliance is created for HTTPS access. Once the pods have been successfully deployed, you can log into {{ site.data.product.title_short }}.
 
-You can obtain the {{ site.data.product.title_short }} host address from the project
-in the OpenShift user interface, or by opening a shell on the pod and
+You can obtain the {{ site.data.product.title_short }} host address from the project in the OpenShift user interface, or by opening a shell on the pod and
 getting the route information.
 
 1.  To open a shell on the pod, run:

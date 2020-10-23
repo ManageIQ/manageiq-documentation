@@ -8,8 +8,6 @@ copy, edit, and delete reports.
 
 Please note that only customer-created reports can be deleted.
 
-</div>
-
 1.  Navigate to menu:Overview\[Reports\].
 
 2.  Click the menu:Reports\[All Reports\] accordion and select the
@@ -23,7 +21,5 @@ Please note that only customer-created reports can be deleted.
 
     The **Delete this report from the Database** option will only appear
     on reports you have created. Default reports cannot be deleted.
-
-    </div>
 
 4.  Click **OK**.

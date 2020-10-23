@@ -40,15 +40,9 @@ This procedure shows you how to create a policy for automate.
 
 10. Click **Save**.
 
-You can now assign this policy to a **Policy Profile**. Then, assign the
-policy profile to the virtual machines. Every time this event happens on
-the virtual machine the appropriate Automate Model will be initiated.
+You can now assign this policy to a **Policy Profile**. Then, assign the policy profile to the virtual machines. Every time this event happens on the virtual machine the appropriate Automate Model will be initiated.
 
 **Note:**
 
-If you want the policy to initiate an Automate Model from the
-`/System/Process/Request` class, then you can create your own custom
-action. Be sure to have an instance in the `/System/Process/Request`
-class for it to map to.
+If you want the policy to initiate an Automate Model from the `/System/Process/Request` class, then you can create your own custom action. Be sure to have an instance in the `/System/Process/Request` class for it to map to.
 
-</div>

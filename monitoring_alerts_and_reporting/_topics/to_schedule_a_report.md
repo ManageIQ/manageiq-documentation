@@ -5,10 +5,7 @@ In addition, scheduled reports can be emailed directly to users.
 
 **Note:**
 
-You may need to disable, change the report filter, or change the
-frequency of a schedule. To do this, you will need to edit the schedule.
-
-</div>
+You may need to disable, change the report filter, or change the frequency of a schedule. To do this, you will need to edit the schedule.
 
 There are two ways to schedule a report:
 
@@ -19,10 +16,8 @@ Add a new Schedule through the **Reports** accordion:
 2.  Select a report from the **Reports** accordion and click
     ![1847](../images/1847.png) **Configuration**.
 
-3.  Click ![1862](../images/1862.png) **Add a New Schedule** or click the
-    Schedules accordion and click ![1847](../images/1847.png)
-    **Configuration** \> ![1862](../images/1862.png) **Add a New
-    Schedule**.
+3.  Click ![1862](../images/1862.png) **Add a New Schedule** or click the Schedules accordion and click ![1847](../images/1847.png)
+    **Configuration** \> ![1862](../images/1862.png) **Add a New Schedule**.
 
 or
 
@@ -62,8 +57,7 @@ Adding new Schedule details.
         prompted to select how many hours you want between each
         analysis.
 
-      - Type or select a date to begin the schedule in **Starting
-        Date**.
+      - Type or select a date to begin the schedule in **Starting Date**.
 
       - Select a **Starting Time** based on a 24 hour clock in the
         {{ site.data.product.title }} appliance’s Time Zone.

@@ -171,10 +171,7 @@ the **request\_state** reaches the **finished** state. Specifically,
 
 **Note:**
 
-The requests tasks of a provisioning request can also be queried by
-expanding the request\_tasks subcollection as follows:
-
-</div>
+The requests tasks of a provisioning request can also be queried by expanding the request\_tasks subcollection as follows:
 
     GET /api/provision_requests/:id?expand=request_tasks
 
@@ -182,7 +179,5 @@ An alias **tasks** is also defined for the above subcollection:
 
     GET /api/provision_requests/:id?expand=tasks
 
-For a list of attributes available for the provision request attribute
-groups please refer to the [Provision Request Supported
-Attributes](../appendices/provision_attributes.html) in the appendices
+For a list of attributes available for the provision request attribute groups please refer to the [Provision Request Supported Attributes](../appendices/provision_attributes.html) in the appendices
 section.

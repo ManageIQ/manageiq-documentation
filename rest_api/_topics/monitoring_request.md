@@ -68,8 +68,6 @@ In the above example, the request can be queried periodically until the
 The `requests` tasks of a provisioning request can also be queried by
 expanding the `request_tasks` subcollection as follows:
 
-</div>
-
     GET /api/provision_requests/:id?expand=request_tasks
 
 An alias **tasks** is also defined for the above subcollection:

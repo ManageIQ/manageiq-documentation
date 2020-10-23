@@ -1,18 +1,12 @@
 # Enabling Amazon EC2 Events
 
-After adding an Amazon EC2 provider and configuring an SNS topic in
-[???](#amazon-provider-aws-config-notifications), create a CloudTrail,
-then configure CloudWatch rules on your EC2 provider to automatically
-get events in {{ site.data.product.title_short }} for monitoring the provider.
+After adding an Amazon EC2 provider and configuring an SNS topic in [Enabling AWS Config Notifications](#enabling-aws-config-notifications), create a CloudTrail,
+then configure CloudWatch rules on your EC2 provider to automatically get events in {{ site.data.product.title_short }} for monitoring the provider.
 
 **Note:**
 
-The following procedures are accurate at time of publishing. See the
-[Amazon AWS
-documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)
+The following procedures are accurate at time of publishing. See the [Amazon AWS documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/)
 for further details on these steps.
-
-</div>
 
 ## Creating a CloudTrail
 
@@ -48,11 +42,9 @@ To create a CloudWatch rule for EC2:
 
 1.  Navigate to menu:Events\[Rules\] and click **Create rule**.
 
-2.  Select the **Event Pattern** radio button to specify the event
-    source.
+2.  Select the **Event Pattern** radio button to specify the event source.
 
-3.  Edit the **Event Pattern Preview** box, and paste and save the
-    following code to create a rule based on a custom event pattern:
+3.  Edit the **Event Pattern Preview** box, and paste and save the following code to create a rule based on a custom event pattern:
 
         {
           "source": [

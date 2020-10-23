@@ -1,7 +1,7 @@
 ---
 ---
 
-# Creating a Service in CloudForms for Virtual Machine Provisioning
+# Creating a Service in {{ site.data.product.product.title_short }} for Virtual Machine Provisioning
 
 {% include_relative _topics/overview.md %}
 

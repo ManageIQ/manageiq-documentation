@@ -47,15 +47,9 @@ To create an expression method:
 
         **Note:**
 
-        If **User will input the value** is checked, arguments for each
-        input parameter names using the prefix “arg”.
+        If **User will input the value** is checked, arguments for each input parameter names using the prefix “arg”.
 
-        For example, if there are 3 fields then the input parameter
-        names should be arg1, arg2, and arg3. If there are two runtime
-        parameters arg1 and arg2 must be defined in the input
-        parameters. In the default value for these fields values can be
+        For example, if there are 3 fields then the input parameter names should be arg1, arg2, and arg3. If there are two runtime parameters arg1 and arg2 must be defined in the input parameters. In the default value for these fields values can be
         substituted from other objects in the Automate Workspace.
-
-        </div>
 
 10. Click **Add**.

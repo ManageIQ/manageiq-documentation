@@ -9,8 +9,6 @@ alerts from one to another. You can export and import for use with other
 The appliances you are exporting or importing data between must use the
 same {{ site.data.product.title_short }} version.
 
-</div>
-
 1.  Copy the file to import to a location that is accessible to your
     {{ site.data.product.title }} console.
 

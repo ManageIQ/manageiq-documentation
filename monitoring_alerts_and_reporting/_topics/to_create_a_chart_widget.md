@@ -33,12 +33,6 @@
     If you change the time zone, you will need to reset the starting
     date and time.
 
-    </div>
-
-8.  In the **Visibility** area, select **\<To All Users\>**, so that all
-    users can use this widget no matter what user role they are
-    assigned. Select **\<By Role\>** to assign this widget to specific
-    user roles. Select **\<By Group\>** to assign this widget to
-    specific groups.
+8.  In the **Visibility** area, select **\<To All Users\>**, so that all users can use this widget no matter what user role they are assigned. Select **\<By Role\>** to assign this widget to specific user roles. Select **\<By Group\>** to assign this widget to specific groups.
 
 9.  Click **Add**.

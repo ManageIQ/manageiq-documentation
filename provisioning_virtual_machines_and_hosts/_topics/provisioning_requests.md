@@ -529,62 +529,34 @@ To provision a virtual machine from a template:
 
         **Note:**
 
-        A VMware virtual machine can be provisioned to a DVPortgroup by
-        selecting it from the **vLan** list. Prior to provisioning a
-        virtual machine, the DVPortgroup must be created on a vSphere
-        Distributed Switch (VDS) in VMware vCenter in order for
-        {{ site.data.product.title }} to list the DVPortgroup under **vLan**.
+        A VMware virtual machine can be provisioned to a DVPortgroup by selecting it from the **vLan** list. Prior to provisioning a virtual machine, the DVPortgroup must be created on a vSphere
+        Distributed Switch (VDS) in VMware vCenter in order for {{ site.data.product.title }} to list the DVPortgroup under **vLan**.
 
-        </div>
-
-13. Click **Customize** to customize the operating system of the new
-    virtual machine. These options vary based on the operating system of
-    the template. ![2336](../images/2336.png)
+13. Click **Customize** to customize the operating system of the new virtual machine. These options vary based on the operating system of the template. ![2336](../images/2336.png)
 
 14. For Windows provisioning:
 
-    1.  To use a custom specification from the provider, click
-        **Specification**. To select an appropriate template, choose
-        from the list in the custom specification area. The values that
-        are honored by {{ site.data.product.title }} display.
+    1.  To use a custom specification from the provider, click **Specification**. To select an appropriate template, choose from the list in the custom specification area. The values that are honored by {{ site.data.product.title }} display.
 
         **Note:**
 
-        Any values in the specification that do not show in the
-        {{ site.data.product.title }} console’s request dialogs are not used by
-        {{ site.data.product.title }}. For example, for Windows operating systems, if
-        you have any run once values in the specification, they are not
-        used in creating the new virtual machines. Currently, for a
-        Windows operating system, {{ site.data.product.title }} honors the unattended
-        GUI, identification, workgroup information, user data, windows
-        options, and server license. If more than one network card is
-        specified, only the first is used.
+        Any values in the specification that do not show in the {{ site.data.product.title }} console’s request dialogs are not used by {{ site.data.product.title }}. For example, for Windows operating systems, if you have any run once values in the specification, they are not used in creating the new virtual machines. Currently, for a Windows operating system, {{ site.data.product.title }} honors the unattended GUI, identification, workgroup information, user data, windows options, and server license. If more than one network card is specified, only the first is used.
 
         ![2337](../images/2337.png)
 
         To modify the specification, select **Override Specification Values**.
 
-    2.  Select **Sysprep Answer File**, to upload a Sysprep file or use
-        one that exists for a custom specification on the Provider where
-        the template resides. To upload a file, click **Browse** to find
-        the file, and then upload. To use an answer file in
-        **Customization Specification**, click on the item. The answer
-        file will automatically upload for viewing. You cannot make
-        modifications to it.
+    2.  Select **Sysprep Answer File**, to upload a Sysprep file or use one that exists for a custom specification on the Provider where the template resides. To upload a file, click **Browse** to find the file, and then upload. To use an answer file in **Customization Specification**, click on the item. The answer file will automatically upload for viewing. You cannot make modifications to it.
 
 15. For Linux provisioning:
 
-    1.  Under **Credentials**, enter a **Root Password** for the
-        **root** user to access the instance.
+    1.  Under **Credentials**, enter a **Root Password** for the **root** user to access the instance.
 
-    2.  Enter a **IP Address Information** for the instance. Leave as
-        **DHCP** for automatic IP assignment from the provider.
+    2.  Enter a **IP Address Information** for the instance. Leave as **DHCP** for automatic IP assignment from the provider.
 
     3.  Enter any **DNS** information for the instance if necessary.
 
-    4.  Select **Customize Template** for additional instance
-        configuration. Select from the Kickstart or Cloud-Init
-        customization templates stored on your appliance.
+    4.  Select **Customize Template** for additional instance configuration. Select from the Kickstart or Cloud-Init customization templates stored on your appliance.
 
 16. Click the **Schedule** tab to select when provisioning begins.
 
@@ -657,23 +629,14 @@ Sysprep\_enabled is written in the order: \[value\] - \[it’s meaning\] -
 \[how it appears in the {{ site.data.product.title_short }} user interface virtual
 machine provision dialog’s **Customize** tab\]
 
-</div>
-
 **For Windows template**:
 
   - **"fields"** - Sysprep Specification
-    In the {{ site.data.product.title_short }} user interface, when you navigate to
-    the virtual machine provision dialog (menu:Compute\[Infrastructure
-    \> Virtual Machine\]), this option located under the **Customize**
-    tab’s **Customize** drop-down list is called **Sysprep
-    Specification**.
+    In the {{ site.data.product.title_short }} user interface, when you navigate to the virtual machine provision dialog (menu:Compute\[Infrastructure
+    \> Virtual Machine\]), this option located under the **Customize** tab’s **Customize** drop-down list is called **Sysprep Specification**.
 
-  - **"file"** - Sysprep answer file
-    In the {{ site.data.product.title_short }} user interface, when you navigate to
-    the virtual machine provision dialog (menu:Compute\[Infrastructure
-    \> Virtual Machine\]), this option located under the **Customize**
-    tab’s **Customize** drop-down list is called **Sysprep answer
-    file**.
+  - **"file"** - Sysprep answer file in the {{ site.data.product.title_short }} user interface, when you navigate to the virtual machine provision dialog (menu:Compute\[Infrastructure \> Virtual Machine\]), this option located under the **Customize**
+    tab’s **Customize** drop-down list is called **Sysprep answer file**.
 
 **For Linux template**:
 
@@ -785,15 +748,11 @@ Second, the request goes through the approval phase. Finally,
     [Customizing Provisioning
     Dialogs](#provisioning-dialogs-customizing).
 
-    </div>
-
-6.  Click the **Purpose** tab to select the appropriate tags for the
-    provisioned instance.
+6.  Click the **Purpose** tab to select the appropriate tags for the provisioned instance.
 
 7.  Click the **Catalog** tab for basic instance options.
 
-    1.  To change the image to use as a basis for the instance, select
-        it from the list of images.
+    1.  To change the image to use as a basis for the instance, select it from the list of images.
 
     2.  Select the **Number of VMs** to provision.
 
@@ -907,20 +866,12 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
         **Note:**
 
-        If you set `:required:` to `true`, the field must have a value
-        for the provision request to be submitted.
-
-        </div>
+        If you set `:required:` to `true`, the field must have a value for the provision request to be submitted.
 
 9.  Click **Add**.
 
-If you are using **Provisioning Profiles**, you can specify a specific
-file that holds the customizations. To do this, you must create an
-instance mapping to this file in the {{ site.data.product.title }}
-**Applications/provisioning/profile/VM provisioning by group** class. By
-default, if you are using provisioning profiles and the group does not
-have a defined instance, the appropriate default dialog file will be
-used based on the type of provisioning selected.
+If you are using **Provisioning Profiles**, you can specify a specific file that holds the customizations. To do this, you must create an instance mapping to this file in the {{ site.data.product.title }}
+**Applications/provisioning/profile/VM provisioning by group** class. By default, if you are using provisioning profiles and the group does not have a defined instance, the appropriate default dialog file will be used based on the type of provisioning selected.
 
 ##### Creating a Custom Provision Dialog
 
@@ -965,80 +916,49 @@ used based on the type of provisioning selected.
 
         **Note:**
 
-        If you set `:required:` to `true`, the field must have a value
-        for the provision request to be submitted.
-
-        </div>
+        If you set `:required:` to `true`, the field must have a value for the provision request to be submitted.
 
 9.  Click **Add**.
 
-Enter the name of the new dialog into the dialog name field in the
-appropriate {{ site.data.product.title }} **Applications/provisioning/profile
-instance**. This dialog can now be referred to in an instance in the
+Enter the name of the new dialog into the dialog name field in the appropriate {{ site.data.product.title }} **Applications/provisioning/profile instance**. This dialog can now be referred to in an instance in the
 Provisioning Profiles class so that it can be used for groups of users.
 
 #### Provisioning Profiles
 
-Provisioning profiles can be used to customize the dialogs and the state
-machine (steps used to provision the machine). Profiles can be created
-for LDAP or {{ site.data.product.title }} groups. To use provisioning profiles:
+Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or {{ site.data.product.title }} groups. To use provisioning profiles:
 
-  - Create a **Provisioning Profile** instance for the LDAP or
-    {{ site.data.product.title }} group. If no instance exists, then default settings
-    will be used.
+  - Create a **Provisioning Profile** instance for the LDAP or {{ site.data.product.title }} group. If no instance exists, then default settings will be used.
 
-  - If customizing dialogs, create a custom dialog file, and specify the
-    name of that file in the provisioning profile instance. If
-    customizing the states for provisioning, create a state instance and
-    set the name of the state instance in the provisioning profile
-    instance.
+  - If customizing dialogs, create a custom dialog file, and specify the name of that file in the provisioning profile instance. If customizing the states for provisioning, create a state instance and set the name of the state instance in the provisioning profile instance.
 
-The diagram below shows where provisioning profiles are called during
-the entire provisioning process. ![2344](../images/2344.png)
+The diagram below shows where provisioning profiles are called during the entire provisioning process. ![2344](../images/2344.png)
 
 ##### Creating a Provisioning Profile Instance
 
 1.  Navigate to menu:Automate\[Explorer\].
 
-2.  Using the tree located in the accordion, click menu:DOMAIN\[Cloud \>
-    VM \> Provisioning \> Profile\].
+2.  Using the tree located in the accordion, click menu:DOMAIN\[Cloud \> VM \> Provisioning \> Profile\].
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
-    Domain. If necessary, you can copy the class from the ManageIQ
-    domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
-    This example uses the **Cloud** Namespace, but can also use the
-    **Infrastructure** namespace.
-
-    </div>
-
+    This example uses the **Cloud** Namespace, but can also use the **Infrastructure** namespace.
+    
 3.  Click ![1847](../images/1847.png)(**Configuration**),
     ![2345](../images/2345.png)(**Add a New Instance**).
 
-4.  Make the name of the tag identical to the name of the LDAP or
-    {{ site.data.product.title }} group you are creating the instance for, replacing
-    spaces in the group name with underscores. For example, change
+4.  Make the name of the tag identical to the name of the LDAP or {{ site.data.product.title }} group you are creating the instance for, replacing spaces in the group name with underscores. For example, change
     **{{ site.data.product.title }}-test group** to **{{ site.data.product.title }}-test\_group**.
     ![6278](../images/6278.png)
 
-5.  In the dialog name field, enter the name of the customized dialog
-    file. This file must reside on the {{ site.data.product.title }} appliance in the
-    `/var/www/miq/vmdb/db/fixtures` directory. Red Hat recommends naming
-    the file in the format `miq_provision_dialogs-groupname.rb` and
-    copying this file to all {{ site.data.product.title }} appliances. For
-    instructions on creating a custom dialog file, see [Customizing
-    Provisioning Dialogs](#provisioning-dialogs-customizing).
+5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the {{ site.data.product.title }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. Red Hat recommends naming
+    the file in the format `miq_provision_dialogs-groupname.rb` and copying this file to all {{ site.data.product.title }} appliances. For instructions on creating a custom dialog file, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
     **Note:**
 
-    Be sure that the custom dialog file exists. If it does not, an error
-    will appear when the user clicks on the **Provisioning** button in
-    the {{ site.data.product.title }} console.
-
-    </div>
-
+    Be sure that the custom dialog file exists. If it does not, an error will appear when the user clicks on the **Provisioning** button in the {{ site.data.product.title }} console.
+    
 6.  Click **Add**.
 
 ##### Setting Provisioning Scope Tags

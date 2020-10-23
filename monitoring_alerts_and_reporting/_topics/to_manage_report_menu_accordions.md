@@ -35,13 +35,8 @@
         double-click on **New Folder**, then click on **Top Level** in
         the **Reports** area.
 
-        </div>
-
-5.  When you are finished adding folders, click **Commit**. To revert,
-    click **Discard**.
+5.  When you are finished adding folders, click **Commit**. To revert, click **Discard**.
 
 6.  Click **Save**.
 
-The new folder is added, and you can add folders in which to store
-reports to it. You can also organize the reports into folder that are
-meaningful to you.
+The new folder is added, and you can add folders in which to store reports to it. You can also organize the reports into folder that are meaningful to you.

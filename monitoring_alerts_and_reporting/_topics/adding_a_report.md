@@ -31,13 +31,8 @@ that shows only Windows virtual machines.
 
         If you change the report base or the interval, all selections
         below will be reset.
-
-        </div>
-
-      - Select fields that you want in the report from **Available
-        Fields**, and then click ![2289](../images/2289.png) `(Move
-        selected fields down)`. In addition to the fields, you can also
-        select any tags that you have created and assigned.
+      
+      - Select fields that you want in the report from **Available Fields**, and then click ![2289](../images/2289.png) `(Move selected fields down)`. In addition to the fields, you can also select any tags that you have created and assigned.
 
       - Change the order of the fields in the report by clicking
         ![2290](../images/2290.png) `(Move selected fields up)` or
@@ -52,8 +47,6 @@ that shows only Windows virtual machines.
 
     Please note that if you do this, you will not see individual
     records, but rather the calculation as a column header.
-
-    </div>
 
     ![2291](../images/2291.png)
 
@@ -135,8 +128,6 @@ that shows only Windows virtual machines.
         The filters that you apply will show at the bottom of the report
         so that you know which filters have been applied.
 
-        </div>
-
 10. Click on the **Summary** tab to select sort order, sort type,
     groupings, and group calculations for the report. **Summary** groups
     rows of data based on the sort breaks. You can only sort by fields
@@ -206,4 +197,3 @@ that shows only Windows virtual machines.
 After the new report is created, to make the report accessible from the
 report menu, you must add it to a report menu.
 
-</div>

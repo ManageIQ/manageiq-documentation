@@ -24,4 +24,3 @@ For each class, create a schema if you did not choose to inherit from an
 existing class. The schema can include attributes, methods, assertions,
 and relationships.
 
-</div>

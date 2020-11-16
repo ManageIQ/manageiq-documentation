@@ -371,7 +371,7 @@ On your {{ site.data.product.title_short }} appliance:
 2.  Click the **Settings** accordion, then select your server under
     **Zones**.
 
-3.  Click the **Authentication** tab and enable **Get User Groups from    LDAP** after typing in all of the required LDAP authentication settings. See [Configuring LDAP Authentication with IdM and Active Directory](managing_authentication/index.html#configuring-ldap-authentication-with-idm-and-active-directory).
+3.  Click the **Authentication** tab and enable **Get User Groups from    LDAP** after typing in all of the required LDAP authentication settings. See [Configuring LDAP Authentication with IdM and Active Directory](../../managing_authentication/index.html#configuring-ldap-authentication-with-idm-and-active-directory).
 
 ## Configuring Lookup Priority for LDAP Groups
 

@@ -18,8 +18,6 @@ partial data.
     provider. Resuming the provider re-enables the link between
     {{ site.data.product.title_short }} and the provider.
 
-</div>
-
 To pause a containers provider:
 
 1.  Navigate to menu:Compute\[Containers \> Providers\].

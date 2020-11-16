@@ -16,8 +16,6 @@ file with the following contents:
 {{ site.data.product.title_short }} will automatically install the role once it sees
 the `requirements.yml` file in the playbook.
 
-</div>
-
 #### Role Variables
 
 The `manageiq_automate` role employs the following variables when

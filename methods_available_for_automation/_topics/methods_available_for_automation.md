@@ -22,8 +22,6 @@ document the use of gems either in the core set or a custom set. It is
 the responsibility of the author of such custom automation to own the
 life cycle of any gem being referenced in those methods.
 
-</div>
-
 {% include_relative _topics/about_evm.root.md %}
 
 {% include_relative _topics/method_hierarchy.md %}

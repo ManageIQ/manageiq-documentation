@@ -5,10 +5,7 @@ This procedure shows you how to create a custom button.
 **Note:**
 
 Custom buttons can be migrated to other {{ site.data.product.title }} appliances. See
-[Migrating Custom Buttons](#export-import-custom-button) for guidance on
-migrating custom buttons to a new {{ site.data.product.title_short }} appliance.
-
-</div>
+[Migrating Custom Buttons](#export-import-custom-button) for guidance on migrating custom buttons to a new {{ site.data.product.title_short }} appliance.
 
 {% include automate-custom-button.md %}
 

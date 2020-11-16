@@ -15,29 +15,18 @@
 
     3.  Enter the virtual machine description in **VM Description**.
 
-5.  In **VM Characteristics**, enter **Number of CPUs** and **VM
-    Memory**.
+5.  In **VM Characteristics**, enter **Number of CPUs** and **VM Memory**.
 
-6.  Click **Add to Shopping Cart** and access the shopping cart by
-    clicking its icon on the upper-right corner of the screen.
+6.  Click **Add to Shopping Cart** and access the shopping cart by clicking its icon on the upper-right corner of the screen.
 
 7.  Click **Order**.
 
-You have ordered a new provisioning request. You can follow its progress
-and see additional details of the order request by selecting it from the
-**Orders** tab.
+You have ordered a new provisioning request. You can follow its progress and see additional details of the order request by selecting it from the **Orders** tab.
 
-Also, see the [Self Service User Interface Guide](../../self_service_user_interface_guide/index.md) for more information about using the Self Service user interface.
+Also, see the [Self Service User Interface Guide](../self_service_user_interface_guide/index.html) for more information about using the Self Service user interface.
 
 **Summary.**
 
-As part of the above sample service, you created a provisioning dialog
-that defines the options that can be set on a virtual machine. Then, you
-created a service dialog which allows us to expose certain options to be
-set by the user. For our example, the service name, virtual machine
-name, virtual machine description, and virtual machine characteristics
-are configurable. Additionally, you created a service catalog and
-finally a catalog item. The catalog item combines the service dialog
-with all of the options in the provisioning dialog. Lastly, you
-provisioned a Red Hat Virtualization virtual machine using the Self
-Service user interface.
+As part of the above sample service, you created a provisioning dialog that defines the options that can be set on a virtual machine. Then, you created a service dialog which allows us to expose certain options to be
+set by the user. For our example, the service name, virtual machine name, virtual machine description, and virtual machine characteristics are configurable. Additionally, you created a service catalog and
+finally a catalog item. The catalog item combines the service dialog with all of the options in the provisioning dialog. Lastly, you provisioned a Red Hat Virtualization virtual machine using the Self Service user interface.

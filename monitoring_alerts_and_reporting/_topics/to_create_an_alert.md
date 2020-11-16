@@ -8,13 +8,9 @@ To send emails or SNMP traps from the {{ site.data.product.title }} server, you 
 enable the Notifier server role and set up SMTP email or SNMP traps. For
 more information, see *General Configuration*.
 
-</div>
-
 1.  Navigate to menu:Control\[Explorer\].
 
-2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png)
-    (**Configuration**), ![1862](../images/1862.png) (**Add a New
-    Alert**).
+2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png) (**Configuration**), ![1862](../images/1862.png) (**Add a New Alert**).
 
 3.  Enter the basic details of the alert:
 
@@ -38,21 +34,13 @@ more information, see *General Configuration*.
 
     **Note:**
 
-    The available parameters depend on the options you selected in the
-    **Based On** and **What to Evaluate** lists. See later sections for
-    the details of these parameters.
+    The available parameters depend on the options you selected in the **Based On** and **What to Evaluate** lists. See later sections for the details of these parameters.
 
-    </div>
+5.  Optionally, select **Send an E-mail** to configure options so that an email is sent when the alert is triggered:
 
-5.  Optionally, select **Send an E-mail** to configure options so that
-    an email is sent when the alert is triggered:
+    1.  Enter the email address from which to send the email in the **From** field.
 
-    1.  Enter the email address from which to send the email in the
-        **From** field.
-
-    2.  Select a user from the **Add a User** list to add a user
-        registered in {{ site.data.product.title }}. The user must have a valid email
-        address entered under accounts.
+    2.  Select a user from the **Add a User** list to add a user registered in {{ site.data.product.title }}. The user must have a valid email address entered under accounts.
 
     3.  Enter the email address of a user in the **Add (enter
         manually)** field and click ![2261](../images/2261.png) to add a

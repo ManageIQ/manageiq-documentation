@@ -22,4 +22,4 @@
 
     If the default profile exists in {{ site.data.product.title_short }}, the new profile does not overwrite the old profile. Instead, it duplicates the file items in the default profile.
 
-    </div>
+    

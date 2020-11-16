@@ -33,8 +33,6 @@ Or via the delete action as follows:
 Delete actions are done asynchronously as it can take a while to
 complete. The delete task can be queried as follows:
 
-</div>
-
 #### Request:
 
     GET /api/tasks/625

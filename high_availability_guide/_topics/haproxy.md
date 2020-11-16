@@ -28,8 +28,7 @@ HAProxy policy.
 **Note:**
 
 Additional configuration is required to run HAProxy on Red Hat OpenStack
-Platform. See the [OpenStack Networking
-Guide](https://access.redhat.com/documentation/en/red-hat-openstack-platform/10/single/networking-guide/)
+Platform. See the [OpenStack Networking Guide](https://access.redhat.com/documentation/en/red-hat-openstack-platform/10/single/networking-guide/)
 for more information.
 
 This configuration uses two HAProxy servers and a virtual IP (configured by `keepalived`). The following example procedure uses the following IP addresses and names; substitute values for your environment as needed:
@@ -48,8 +47,7 @@ This configuration uses two HAProxy servers and a virtual IP (configured by `kee
     (cfme2.example.com)
 
 The following diagram shows the HAProxy configuration in this procedure:
-![cloudforms ha architecture 431939 0917 ece
-01](../images/cloudforms_ha_architecture_431939_0917_ece-01.png)
+![ha architecture 431939 0917 ece 01](../images/ha_architecture_431939_0917_ece-01.png)
 
 To configure HAProxy load balancing:
 

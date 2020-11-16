@@ -37,4 +37,3 @@ administrators. Edit and delete functions are only available to
 customer-created reports. The {{ site.data.product.title }} pre-configured reports
 cannot be edited or deleted, but they can be copied.
 
-</div>

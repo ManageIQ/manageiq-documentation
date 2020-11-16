@@ -48,8 +48,5 @@ The class schema is created, and you can now add instances to it.
 
 **Note:**
 
-You may need to edit a class schema to reorder, add, edit, or remove a
-field. Classes define the order in which fields are processed and you
-may need to process some items before others.
+You may need to edit a class schema to reorder, add, edit, or remove a field. Classes define the order in which fields are processed and you may need to process some items before others.
 
-</div>

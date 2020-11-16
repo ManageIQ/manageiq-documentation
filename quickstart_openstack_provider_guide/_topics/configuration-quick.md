@@ -56,11 +56,8 @@ use the following credentials:
 You can also change the password of the **admin** account from the login
 screen. To do so, click the **Update Password** link.
 
-</div>
-
 You can access and configure most {{ site.data.product.title }} settings through the
-**Configuration** menu. You can access this menu through **Administrator
-| EVM** \> **Configuration**.
+**Configuration** menu. You can access this menu through **Administrator | EVM** \> **Configuration**.
 
 {% include configuration-gui.md %}
 
@@ -72,8 +69,7 @@ drivers, network information, hardware, and security patches on assets
 managed by the OpenStack provider. Enabling SmartState Analysis involves
 two steps:
 
-1.  [Configuring {{ site.data.product.title_short }} Capacity and
-    Utilization](#cf-caputils), and
+1.  [Configuring {{ site.data.product.title_short }} Capacity and Utilization](#cf-caputils), and
 
 2.  [Enabling SmartState Analysis](#cf-smartproxy)
 
@@ -90,8 +86,7 @@ To enable these server roles:
 
 {% include cap-util-assign-server-roles.md %}
 
-For more information, see [Capacity and Utilization
-Collection](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/deployment-planning-guide/#capacity_and_utilization_collection)
+For more information, see [Capacity and Utilization Collection](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/deployment-planning-guide/#capacity_and_utilization_collection)
 from the *Deployment Planning Guide*.
 
 #### Enabling SmartState Analysis

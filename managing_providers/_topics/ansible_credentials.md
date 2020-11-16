@@ -218,8 +218,7 @@ configured:
         followed by the path `/ovirt_engine/api`. Example:
         `https://your.rhv.com/ovirt_engine/api`
 
-      - See [Ansible
-        Roles](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/administration_guide/chap-automating_rhv_configuration_using_ansible#Ansible_Roles)
+      - See [Ansible Roles](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/administration_guide/chap-automating_rhv_configuration_using_ansible#Ansible_Roles)
         for more information on Ansible Roles available for Red Hat
         Virtualization.
 

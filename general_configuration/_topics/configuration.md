@@ -2159,8 +2159,7 @@ When you create a group, you must specify a role to give the group
 rights to resources in the console. The group’s role determines the
 scope of access for the users that are members of the group.
 
-![cloudforms general config roles 460469 1017
-jcs](../images/cloudforms_general_config_roles_460469_1017_jcs.png)
+![general config roles jcs](../images/general_config_roles_jcs.png)
 
 {{ site.data.product.title }} provides a default group of roles, but you can also
 create your own, or copy and edit the default groups.

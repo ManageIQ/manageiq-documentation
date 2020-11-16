@@ -1,15 +1,11 @@
 ### Setting Enablement and Visibility for Custom Buttons
 
-{{ site.data.product.title }} adds methods for evaluating an expression to determine
-whether a custom button is visible and enabled. Each method has a target
-object, for example, a virtual machine or host, and expressions can set
-a custom button to visible, hidden, or disabled.
+{{ site.data.product.title }} adds methods for evaluating an expression to determine whether a custom button is visible and enabled. Each method has a target
+object, for example, a virtual machine or host, and expressions can set a custom button to visible, hidden, or disabled.
 
 **Note:**
 
 Filtering works on single objects and is not applicable to lists.
-
-</div>
 
 To apply filtering actions to a custom button:
 

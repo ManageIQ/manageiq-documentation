@@ -109,8 +109,6 @@ Cloud Platform documentation:
   - For information on Google Cloud Pub/Sub API operations and costs,
     see <https://cloud.google.com/pubsub/>.
 
-</div>
-
 ## Viewing Google Compute Engine Events in {{ site.data.product.title }}
 
 In {{ site.data.product.title }}, view events for your Google Compute Engine project

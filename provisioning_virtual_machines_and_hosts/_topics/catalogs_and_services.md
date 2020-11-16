@@ -167,11 +167,7 @@ class of the **Automate** model.
 
 **Note:**
 
-**DOMAIN** must be a user-defined Domain and not the locked ManageIQ
-Domain. If necessary, you can copy the class from the ManageIQ domain
-into a custom domain.
-
-</div>
+**DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
 A method is provided below that was created for the following scenario:
 
@@ -301,12 +297,8 @@ Service methods have been split based on purpose.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
-    Domain. If necessary, you can copy the class from the ManageIQ
-    domain into a custom domain.
-
-    </div>
-
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+    
 3.  Click the **Methods** tab.
 
 4.  Click ![1847](../images/1847.png)(**Configuration**), then
@@ -331,11 +323,7 @@ Service methods have been split based on purpose.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
-    Domain. If necessary, you can copy the class from the ManageIQ
-    domain into a custom domain.
-
-    </div>
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
 3.  Click the **Instances** tab.
 
@@ -355,12 +343,8 @@ The instance is created so that it can be called from the
 
 **Note:**
 
-After the method has been created, it must be mapped to an instance in
-the `DOMAIN/Service/Service/Provisioning/StateMachines` class. The name
-of the instance must be specified as the **Entry Point**. This method
+After the method has been created, it must be mapped to an instance in the `DOMAIN/Service/Service/Provisioning/StateMachines` class. The name of the instance must be specified as the **Entry Point**. This method
 must be called before the provision job begins.
-
-</div>
 
 ##### Associating a Method with an Automate Instance
 
@@ -376,11 +360,7 @@ Service methods have been split based on purpose.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ
-    Domain. If necessary, you can copy the class from the ManageIQ
-    domain into a custom domain.
-
-    </div>
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
 4.  Either create a new instance or select the **clone\_to\_service**
     instance.
@@ -417,11 +397,7 @@ service catalog.
 
     **Note:**
 
-    DOMAIN must be a user-defined Domain and not the locked ManageIQ
-    Domain. If necessary, you can copy the class from the ManageIQ
-    domain into a custom domain.
-
-    </div>
+    DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
 5.  Associate method with Automate instance.
 
@@ -468,14 +444,8 @@ accordion.
 **Note:**
 
 You should also create and specify an Entry Point in the
-`DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class
-for each catalog item that is part of a bundle. If you do not, then the
-pre and post provision processing will occur for each item in the bundle
-in addition to processing for the **Catalog Bundle**. To set the entry
-point, go into each **Catalog Item** and check **Display in Catalog**.
+`DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that is part of a bundle. If you do not, then the pre and post provision processing will occur for each item in the bundle in addition to processing for the **Catalog Bundle**. To set the entry point, go into each **Catalog Item** and check **Display in Catalog**.
 Then, you will see the **Entry Point** field.
-
-</div>
 
 #### Copying a Catalog Bundle
 
@@ -483,26 +453,21 @@ Then, you will see the **Entry Point** field.
 
 2.  Click the **Catalog Items** accordion.
 
-3.  Select the catalog bundle you want to copy from **All Catalog
-    Items**.
+3.  Select the catalog bundle you want to copy from **All Catalog Items**.
 
 4.  Click ![1847](../images/1847.png)(**Configuration**), and then
     ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
 
-5.  Enter a name for the copy of catalog bundle you are creating. Note
-    that this name must not already be in use.
+5.  Enter a name for the copy of catalog bundle you are creating. Note that this name must not already be in use.
 
 6.  Click **Add**.
 
-A copy of the catalog bundle is saved. You can now select this new copy
-of the catalog bundle and edit as required by navigating to
-![1847](../images/1847.png)(**Configuration**), then clicking
+A copy of the catalog bundle is saved. You can now select this new copy of the catalog bundle and edit as required by navigating to ![1847](../images/1847.png)(**Configuration**), then clicking
 ![Edit\_Sign](../images/1851.png)(**Edit this Item**).
 
 #### Creating a Catalog Item
 
-Create a catalog item for each virtual machine or cloud instance that
-will be part of the service.
+Create a catalog item for each virtual machine or cloud instance that will be part of the service.
 
 {% include catalog-item-creation.md %}
 
@@ -510,11 +475,7 @@ will be part of the service.
 
 **Note:**
 
-When copying a catalog item for reuse, you must click **Display in
-Catalog** in the copied catalog item for the item to appear in the
-catalog.
-
-</div>
+When copying a catalog item for reuse, you must click **Display in Catalog** in the copied catalog item for the item to appear in the catalog.
 
 1.  Navigate to menu:Services\[Catalogs\].
 
@@ -525,14 +486,11 @@ catalog.
 4.  Click ![1847](../images/1847.png)(**Configuration**), and then
     ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
 
-5.  Enter a name for the copy of catalog item you are creating. Note
-    that this name must not already be in use.
+5.  Enter a name for the copy of catalog item you are creating. Note that this name must not already be in use.
 
 6.  Click **Add**.
 
-A copy of the catalog item is saved. You can now select this new copy of
-the catalog item and edit as required by navigating to
-![1847](../images/1847.png)(**Configuration**), then clicking
+A copy of the catalog item is saved. You can now select this new copy of the catalog item and edit as required by navigating to ![1847](../images/1847.png)(**Configuration**), then clicking
 ![Edit\_Sign](../images/1851.png)(**Edit this Item**).
 
 #### Creating a Generic Catalog Item
@@ -582,57 +540,38 @@ the choices made in the dialog.
 
 ### Orchestration Stacks
 
-Cloud orchestration is a service that allows you to create, update, and
-manage cloud resources and their software components as a single unit
-and then deploy them in an automated, repeatable way through a template.
-Templates use a human-readable syntax and can be defined in text files,
-thereby allowing users to check them into version control. Templates
-allow you to easily deploy and reconfigure infrastructure for
-applications within your cloud. A user can author the stack templates,
-or can upload them from other sources.
+Cloud orchestration is a service that allows you to create, update, and manage cloud resources and their software components as a single unit and then deploy them in an automated, repeatable way through a template.
+Templates use a human-readable syntax and can be defined in text files, thereby allowing users to check them into version control. Templates allow you to easily deploy and reconfigure infrastructure for applications within your cloud. A user can author the stack templates, or can upload them from other sources.
 
-{{ site.data.product.title }} supports adding Amazon CloudFormation, OpenStack Heat,
-Microsoft Azure, VNF, and VMware vApp template type, and provides the
-ability to:
+{{ site.data.product.title }} supports adding Amazon CloudFormation, OpenStack Heat, Microsoft Azure, VNF, and VMware vApp template type, and provides the ability to:
 
   - Inventory stacks and elements of each type into the
     {{ site.data.product.title_short }} VMDB.
 
-  - Model the relationships of instances to their stacks, inclusive of
-    the user interface. For example, selecting an instance within a
-    region that is within a stack, the user interface shows this on the
-    standard instance view.
+  - Model the relationships of instances to their stacks, inclusive of the user interface. For example, selecting an instance within a region that is within a stack, the user interface shows this on the standard instance view.
 
   - Model the stack and its elements in the user interface.
 
 **Note:**
 
-When importing a template into {{ site.data.product.title_short }}, the selected
-elements are converted according to their type. For example, lists
-convert to list boxes, and single items convert to text boxes.
-
-</div>
+When importing a template into {{ site.data.product.title_short }}, the selected elements are converted according to their type. For example, lists convert to list boxes, and single items convert to text boxes.
 
 #### Creating an Orchestration Template
 
 Complete the following procedure to add an orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
 
 2.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png)**Create a new
-    Orchestration Template**.
+    click ![Green\_Plus\_Sign](../images/1848.png)**Create a new Orchestration Template**.
 
 3.  Enter a **Name** and **Description** for your template.
 
-4.  Select the template type from the **Template Type** list. The
-    default is Amazon CloudFormation.
+4.  Select the template type from the **Template Type** list. The default is Amazon CloudFormation.
 
 5.  Select **Draft** to create a draft template.
 
-6.  Add your template in the area below for the selected **Template
-    Type**.
+6.  Add your template in the area below for the selected **Template Type**.
 
 7.  Click **Add**.
 
@@ -640,49 +579,35 @@ Complete the following procedure to add an orchestration template.
 
 Complete the following procedure to edit orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
 
-2.  Select the orchestration template you want to edit from the **All
-    Orchestration Templates** list.
+2.  Select the orchestration template you want to edit from the **All Orchestration Templates** list.
 
 3.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Edit\_Sign](../images/1851.png)**Edit this Orchestration
-    Template**.
+    click ![Edit\_Sign](../images/1851.png)**Edit this Orchestration Template**.
 
 4.  Edit the template as needed.
 
     **Note:**
 
-    You can only edit the name and description of a read-only template
-    as there can be stacks associated with the template.
-
-    </div>
+    You can only edit the name and description of a read-only template as there can be stacks associated with the template.
 
 5.  Click **Save**.
 
 #### Copying Orchestration Templates
 
-Complete the following procedure to copy an orchestration template to
-create a new template.
+Complete the following procedure to copy an orchestration template to create a new template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
 
 2.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Copy](../images/1859.png) **Copy this Orchestration
-    Template**.
+    click ![Copy](../images/1859.png) **Copy this Orchestration Template**.
 
-3.  Change the **Description** and the actual content of the template as
-    required. {{ site.data.product.title_short }} automatically prefixes *Copy of* to
-    the old template **Name**.
+3.  Change the **Description** and the actual content of the template as required. {{ site.data.product.title_short }} automatically prefixes *Copy of* to the old template **Name**.
 
     **Note:**
 
-    To create a copy of an orchestration template into a new template,
-    the old and new template content must differ.
-
-    </div>
+    To create a copy of an orchestration template into a new template, the old and new template content must differ.
 
 4.  Click **Add**.
 
@@ -690,15 +615,11 @@ create a new template.
 
 Complete the following procedure to delete orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
 
-2.  Select the orchestration template you want to delete from the **All
-    Orchestration Templates** list.
+2.  Select the orchestration template you want to delete from the **All Orchestration Templates** list.
 
-3.  Click ![Configuration](../images/1848.png)**Configuration**, then
-    click ![Delete](../images/1861.png)**Remove this Orchestration
-    Template from Inventory**.
+3.  Click ![Configuration](../images/1848.png)**Configuration**, then click ![Delete](../images/1861.png)**Remove this Orchestration Template from Inventory**.
 
 4.  Click **OK**.
 
@@ -706,4 +627,3 @@ Complete the following procedure to delete orchestration templates.
 
 Read-only templates cannot be deleted.
 
-</div>

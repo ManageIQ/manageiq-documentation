@@ -21,11 +21,7 @@ parameters,
 
 **Note:**
 
-If attributes and distinct are not specified we try to store the result
-in a variable called values with a hash consisting of id and name. This
-makes it compatible with our existing dynamic dialog result set.
-
-</div>
+If attributes and distinct are not specified we try to store the result in a variable called values with a hash consisting of id and name. This makes it compatible with our existing dynamic dialog result set.
 
 | Optional Input Parameter | Explanation                                                                                                                                               |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |

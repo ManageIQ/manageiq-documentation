@@ -28,21 +28,12 @@
 
     ![2267](../images/2267.png)
 
-7.  Select a **Time Zone**. Type or select a date to begin the schedule
-    in **Starting Date**. Select a **Starting Time** based on a 24 hour
-    clock in the selected time zone.
+7.  Select a **Time Zone**. Type or select a date to begin the schedule in **Starting Date**. Select a **Starting Time** based on a 24 hour clock in the selected time zone.
 
     **Note:**
 
-    If you change the time zone, you will need to reset the starting
-    date and time.
+    If you change the time zone, you will need to reset the starting date and time.
 
-    </div>
-
-8.  In the **Visibility** area, select **\<To All Users\>**, so that all
-    users can use this widget no matter what user role they are
-    assigned. Select **\<By Role\>** to assign this widget to specific
-    user roles. Select **\<By Group\>** to assign this widget to
-    specific groups.
+8.  In the **Visibility** area, select **\<To All Users\>**, so that all users can use this widget no matter what user role they are assigned. Select **\<By Role\>** to assign this widget to specific user roles. Select **\<By Group\>** to assign this widget to specific groups.
 
 9.  Click **Add**.

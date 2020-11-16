@@ -2,21 +2,12 @@
 
 **Note:**
 
-This feature is currently available as a technology preview only. For
-more information on the support scope for features marked as technology
-preview, see [Technology Preview Features Support
-Scope](https://access.redhat.com/support/offerings/techpreview).
-
-</div>
+This feature is currently available as a technology preview only. For more information on the support scope for features marked as technology preview, see [Technology Preview Features Support Scope](https://access.redhat.com/support/offerings/techpreview).
 
 Prometheus is used as an external alerting component.
-{{ site.data.product.title_short }} integrates Prometheus alerts for use with
-OpenShift Container Platform. {{ site.data.product.title_short }} collects events
-from Prometheus, generates alerts based on these events, and then
-attaches alerts to inventory objects.
+{{ site.data.product.title_short }} integrates Prometheus alerts for use with OpenShift Container Platform. {{ site.data.product.title_short }} collects events from Prometheus, generates alerts based on these events, and then attaches alerts to inventory objects.
 
-It is possible to view ongoing alerts in {{ site.data.product.title_short }} by
-navigating to menu:Monitor\[Alerts\] and manage their life cycle,
+It is possible to view ongoing alerts in {{ site.data.product.title_short }} by navigating to menu:Monitor\[Alerts\] and manage their life cycle,
 including the ability to:
 
   - View active alerts per provider in the **Overview** screen.
@@ -98,8 +89,6 @@ the enterprise using the {{ site.data.product.title_short }} user interface.
 Both Node and Provider alert profiles are created automatically during
 the installation, so it is not required to create these profiles.
 
-</div>
-
 1.  Navigate to menu:Control\[Explorer\], then click **Alert Profiles**
     in the accordion menu.
 
@@ -126,8 +115,6 @@ the installation, so it is not required to create these profiles.
 
     Alerts triggered before assigning the profiles to the enterprise
     will not appear in {{ site.data.product.title_short }} at all.
-
-    </div>
 
 #### Adding an OpenShift Containers Provider with a Prometheus Alert Endpoint
 

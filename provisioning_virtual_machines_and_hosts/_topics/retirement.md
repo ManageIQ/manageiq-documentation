@@ -164,14 +164,9 @@ to change the number of days.
 
     **Note:**
 
-    DOMAIN must be a user-defined Domain and not the locked ManageIQ
-    Domain. If necessary, you can copy the class from the ManageIQ
-    domain into a custom domain.
+    DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
-    This example uses the **Cloud** Namespace, but you can also use the
-    **Infrastructure** namespace.
-
-    </div>
+    This example uses the **Cloud** Namespace, but you can also use the **Infrastructure** namespace.
 
 3.  Click ![1847](../images/1847.png)(**Configuration**), then
     ![1851](../images/1851.png)(**Edit this Instance**).

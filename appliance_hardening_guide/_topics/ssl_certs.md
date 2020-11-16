@@ -73,7 +73,7 @@ After the certificate and key files have been copied, restart the appliance:
 
 The appliance now uses your own certificate.
 
-If your environment consists of multiple appliances connecting to a single database appliance, you can use your certificate and key files to set up SSL for the database connection. For more information, see [Configuring the Database to use SSL](#_chap_red_hat_cloudforms_security_guide_setting_ssl_for_the_database_appliance).
+If your environment consists of multiple appliances connecting to a single database appliance, you can use your certificate and key files to set up SSL for the database connection. For more information, see [Configuring the Database to use SSL](#configuring-the-database-to-use-ssl).
 
 **Important:**
 

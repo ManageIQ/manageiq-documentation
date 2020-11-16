@@ -14,4 +14,3 @@ want to see upon login.
 Only widgets that are not currently showing on the dashboard will appear
 in this list.
 
-</div>

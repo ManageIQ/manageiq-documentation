@@ -159,4 +159,3 @@ providers:
 
   - Allocated memory
 
-</div>

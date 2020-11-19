@@ -531,6 +531,10 @@ to execute an Ansible Tower playbook in {{ site.data.product.title }}.
 
 {% include create-orchestration-catalog-item.md %}
 
+#### Creating a VMware Content Library OVF Template Catalog Item
+
+{% include create-vmware-content-library-catalog-item.md %}
+
 #### Provisioning a Service
 
 {% include catalog-order.md %}

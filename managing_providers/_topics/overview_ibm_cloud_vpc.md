@@ -1,0 +1,3 @@
+# IBM Cloud Virtual Server for VPC 
+
+[IBM Cloud Virtual Server for VPC](https://www.ibm.com/cloud/vpc) (virtual private cloud) consist of virtual machines (VMs) within IBM’s VPC infrastructure, a public cloud construct. Virtual servers for VPC enable the deployment of a secured private space in a publicly accessible environment by way of a single-tenant infrastructure in a multitenant public cloud. VPCs are logically isolated networks where cloud compute, storage and networking resources are deployed and used to host business workloads, applications and websites. Like networks in traditional on-premises data centers, VPCs utilize cloud security functions and models that match the functionality of those found in offline data centers.

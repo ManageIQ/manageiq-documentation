@@ -1,5 +1,11 @@
 ## Migrating from Appliances
 
+### Notes
+- Current architecture in podified limits us to running a single server and zone in a Kubernetes namespace.
+  Therefore, when migrating from a multi-appliance and/or multi-zone appliance architecture, you will need to choose a single server to assume the identity of.
+  This server should have the UI and web service roles enabled before taking the database backup to ensure that those workers will start when deployed in the podified environment.
+  All desired roles and settings will need to be configured on this server.
+
 ### Collect data from the appliance
 1. Take a backup of the database
 

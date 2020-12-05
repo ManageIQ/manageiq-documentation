@@ -89,7 +89,7 @@ Advertising of the common actions depends purely on the role and permissions of 
 
 ### Collections
 
-Resources can be grouped into collections. Each collection is homogeneous so that it contains only one type of resource, and unordered. Resources can also exist outside any collection. In this case, we refer to these resources as singleton resources. Collections are themselves resources as well.
+Resources can be grouped into collections. Each collection is homogeneous so that it contains only one type of resource, and is unordered. Resources can also exist outside any collection. In this case, we refer to these resources as singleton resources. Collections are themselves resources as well.
 
 Collections can exist globally, at the top level of an API, but can also be contained inside a single resource. In the latter case, we refer to these collections as sub-collections. Sub-collections are usually used
 to express some kind of “contained in” relationship
@@ -141,7 +141,7 @@ attribute.
 
 ### Collection actions
 
-The actions performed against a collection of resources, are in most
+The actions performed against a collection of resources are in most
 cases batch operations against multiple resources. The action request
 must include an HTTP body with the action name and the list of resource
 representations that the action will be performed against.

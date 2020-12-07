@@ -13,7 +13,7 @@ Complete the following procedure to add an IBM Cloud VPC provider in {{ site.dat
 5. Select the appropriate **Zone**.
 6. Select the appropriate **Region**.
 
-7. Under **Endpoints**, enter your **IBM Cloud API Key**.
+7. Under **Endpoint**, enter your **IBM Cloud API Key**.
    
    For more information on managing IBM Cloud API keys, including how to create one, see [Managing user API keys](https://cloud.ibm.com/docs/account?topic=account-userapikey).
 

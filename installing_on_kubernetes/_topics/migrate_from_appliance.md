@@ -8,6 +8,18 @@
   This server should have the UI and web service roles enabled before taking the database backup to ensure that those workers will start when deployed in the podified environment.
   All desired roles and settings will need to be configured on this server.
 
+- Multi-region:
+  Multi-region deployments are slightly more complicated in a podified environment since postgres isn't as easily exposed outside the project / cluster.
+  If all of the region databases are running outside of the cluster or all of the remote region databases are running outside of the cluster and the global database is in the cluster, everything is configured in the same way as appliances.
+  If the global region database is migrated from an appliance to a pod, the replication subscriptions will need to be recreated.
+  If any of the remote region databases are running in the cluster, the `postgresql` service for those databases will need to be exposed using a [node port](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport).
+  To publish the postgresql service on a node port, patch the service using `$ kubectl patch service/postgresql --patch '{"spec": {"type": "NodePort"}}'`.
+  Now you will see the node port listed (31871 in this example) as well as the internal service port (5432).  This node port can be used along with the IP address of any node in the cluster to access the postgresql service.
+
+        $ oc get service/postgresql
+        NAME         TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
+        postgresql   NodePort   192.0.2.1    <none>        5432:31871/TCP   2m
+
 ### Collect data from the appliance
 1. Take a backup of the database
 

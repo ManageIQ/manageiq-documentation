@@ -6,4 +6,6 @@ Your IBM Terraform provider can still create new hosts independently of {{ site.
 
 2. Select your Terraform provider using the checkbox, and click menu: **Configuration > Refresh Relationships and Power States**. This triggers the refresh.
 
-3. When the refresh is complete, select the Terraform provider to check the updated list of hosts groups in the provider.
+3. When the refresh is complete, select the Terraform provider to check the updated list of Configuration profiles and Configured systems in the provider.
+
+

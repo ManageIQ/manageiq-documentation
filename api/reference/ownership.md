@@ -6,11 +6,15 @@
 Setting ownership of resources is provided with the **set\_ownership**
 action. This action is available for the following resources:
 
-|                |
-| -------------- |
-| /api/vms       |
-| /api/templates |
-| /api/services  |
+|                        |
+| ---------------------- |
+| /api/auth_key_pairs    |
+| /api/cloud_templates   |
+| /api/instances         |
+| /api/service_templates |
+| /api/services          |
+| /api/templates         |
+| /api/vms               |
 
   - [Specifying Ownership](#specifying-ownership)
 

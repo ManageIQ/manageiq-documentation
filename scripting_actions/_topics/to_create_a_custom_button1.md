@@ -10,3 +10,5 @@ Custom buttons can be migrated to other {{ site.data.product.title }} appliances
 {% include automate-custom-button.md %}
 
 The button will show in the object type you added the button to.
+
+Please note that there are two ways of creating custom buttons, and creation through the "Automation > Automate > Generic Objects" screen will necessitate adding an attribute/value pair that is not required when adding through the "Automation > Customization > Buttons" screen.

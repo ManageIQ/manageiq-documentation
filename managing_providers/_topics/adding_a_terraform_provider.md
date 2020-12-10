@@ -1,8 +1,8 @@
 # Adding an IBM Terraform Provider
 
-To start provisioning bare metal machines, you need at least one IBM Terraform provider added to {{ site.data.product.title }}.
+To start discovering the Terraform templates and virtual machines, you need at least one IBM Terraform provider added to {{ site.data.product.title }}.
 
-1. Navigate to menu: **Configuration > Providers**.
+1. Browse to menu: **Configuration > Providers**.
 
 2. Select menu: **Configuration > Add a new Provider**.
 
@@ -12,7 +12,9 @@ To start provisioning bare metal machines, you need at least one IBM Terraform p
 
 5. Select a **Zone**, choose **default**.
    ### In the Endpoint section:
-6. Enter the **Managed Services URL** for the provider. This is the URL for the IBM Terraform server (Cloud Automation Management API) and can be either an IP address or a hostname. 
+6. Enter the **Managed Services URL** for the provider.
+   
+   This is the URL for Managed Services and can be either an IP address or a hostname. 
     
     For example, `https://cam.apps.test.example.com`.
 
@@ -22,7 +24,7 @@ To start provisioning bare metal machines, you need at least one IBM Terraform p
 
 8. Select **SSL verification** as **Verify** or **Do not verify**.
  
-9. Enter a **Username** for a user on the provider. This must be a user in IBM CloudPak for Multicloud Management.
+9.  Enter a **Username** for a user on the provider. This must be a user in IBM CloudPak for Multicloud Management.
 
 10. Enter a **Password**.
 

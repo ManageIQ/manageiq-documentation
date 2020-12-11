@@ -11,4 +11,4 @@ Configure the following to collect capacity and utilization data from a Red Hat 
 
       - To install the Data Warehouse and Reports components in a Red Hat Virtualization environment, see the [Data Warehouse Guide](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/data_warehouse_guide/).
 
-      - To create a {{ site.data.product.title_short }} user in the Data Warehouse database, see [Data Collection for Red Hat Enterprise Virtualization](../deployment_planning_guide/#data_collection_for_rhev_33_34) in the *Deployment Planning Guide*.
+      - To create a {{ site.data.product.title_short }} user in the Data Warehouse database, see [Data Collection for Red Hat Enterprise Virtualization](../deployment_planning_guide/index.html#data-collection-for-red-hat-virtualization) in the *Deployment Planning Guide*.

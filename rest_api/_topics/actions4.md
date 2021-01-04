@@ -23,7 +23,7 @@ attribute.
 
 **Collection actions.**
 
-The actions performed against a collection of resources, are in most
+The actions performed against a collection of resources are in most
 cases batch operations against multiple resources. The action request
 must include an HTTP body with the action name and the list of resource
 representations that the action will be performed against.

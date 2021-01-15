@@ -11,7 +11,7 @@ Management of Tasks is available via the following endpoint:
 
 ### Querying Tasks
 
-Querying all Takss:
+Querying all Tasks:
 
     GET /api/tasks
 

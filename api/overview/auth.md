@@ -5,7 +5,7 @@
 
 There are two methods of authentication for the REST API, these are:
 
-  - Basic Authentication
+  - Basic Authentication (without a challenge)
 
   - Token based Authentication
 
@@ -18,6 +18,17 @@ in with each HTTP request as follows:
 $ curl --user username:password
         -i -X GET -H "Accept: application/json"
         http://localhost:3000/api/services/1013
+```
+
+Note: our version of HTTP Basic does NOT send a WWW-Authenticate challenge. Any clients which autodetect HTTP Basic from a server challenge may fail to send the necessary credentials. This can be worked around by either forcing HTTP Basic authentication if possible, or by manually creating the header:
+
+``` sh
+# base64-encode a (ascii or utf-8) string of "username:password", without a trailing newline
+$ echo -n 'username:password' | base64
+dXNlcm5hbWU6cGFzc3dvcmQ=
+
+# use it in the header
+$ wget -SO- --header 'Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=' http://localhost:3000/api
 ```
 
 However, for multiple REST API calls to the Appliance, it is recommended

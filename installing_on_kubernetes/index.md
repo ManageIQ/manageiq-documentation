@@ -6,3 +6,5 @@
 {% include_relative _topics/prepare_kubernetes_namespace.md %}
 
 {% include_relative _topics/migrate_from_appliance.md %}
+
+{% include_relative _topics/upgrading.md %}

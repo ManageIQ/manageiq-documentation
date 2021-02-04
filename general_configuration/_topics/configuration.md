@@ -3085,18 +3085,18 @@ from the global copy.
 **Prerequisites:**
    - Velero and Restic must be installed and working in your cluster. For more information on Velero, see the [Velero documentation](https://velero.io/docs/v1.5/). For more information on Restic, see the [Restic documentation](https://restic.readthedocs.io/en/stable/) 
 
-**Note:** The operator adds labels and/or annotations to everything that needs to be backed up. You can easily and quickly backup only what is required. The operator will add annotations for restic volume backups for example, `backup.velero.io/backup-volumes: miq-pgdb-volume`.
+**Note:** The operator adds labels and/or annotations to everything that needs to be backed up. You can easily and quickly backup only what is required. The operator will add annotations for restic volume backups for example, `backup.velero.io/backup-volumes: <volume-label>`.
 
-1. The backup label key can be configured by adding the following to the CR. The default applies the label `manageiq.org/backup=t` if nothing else is specified.
+1. The backup label key can be configured by adding the following to the CR. The default label is applied if no value is specified for `backupLabelName`.
    ```
    ...
    spec:
      ...
-     backupLabelName: <name of your openshift OIDC CA cert> (default: manageiq.org/backup)
+     backupLabelName: <your label name>
    ```
 2. Create a backup by running the command:
    ```
-   velero backup create <your backup name> --include-namespaces <your namespace> -l manageiq.org/backup=t
+   velero backup create <your backup name> --include-namespaces <your namespace> -l <your label name>
    ```
 3. In order to restore a backup, first ensure the {{ site.data.product.title }} CRD exists. Then, restore the backup by running the commands:
    ```

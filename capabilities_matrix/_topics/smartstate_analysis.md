@@ -7,40 +7,40 @@
 
 | Volume Manager                 | OS Family | Known To Work |
 | -------------------------------| --------- | ------------- |
-| Logical Disk Manager (LDM)     | Windows   | Yes           |
-| Logical Volume Manager (Linux) | Linux     | Yes           |
+| Logical Disk Manager (LDM)     | Windows   | ✅            |
+| Logical Volume Manager (Linux) | Linux     | ✅            |
 
 
 ### File Systems
 
 | File System | OS Family | Known To Work |
 | ------------| --------- | ------------- |
-| FAT         | Windows   | Yes           |
-| FAT32       | Windows   | Yes           |
-| NTFS        | Windows   | Yes           |
-| ReFS        | Windows   | No            |
-| Ext3        | Linux     | Yes           |
-| Ext4        | Linux     | Yes           |
-| XFS         | Linux     | Yes           |
-| ReiserFS    | Linux     | Yes           |
-| CDfs        | Linux     | Yes           |
+| FAT         | Windows   | ✅            |
+| FAT32       | Windows   | ✅            |
+| NTFS        | Windows   | ✅            |
+| ReFS        | Windows   | ❌            |
+| Ext3        | Linux     | ✅            |
+| Ext4        | Linux     | ✅            |
+| XFS         | Linux     | ✅            |
+| ReiserFS    | Linux     | ✅            |
+| CDfs        | Linux     | ✅            |
 
 
 ### File Formats
 
 | File Format       | OS Family | Known To Work |
 | ------------------| --------- | ------------- |
-| Registry          | Windows   | Yes           |
-| Win32 Accounts    | Windows   | Yes           |
-| Win32 Event Log   | Windows   | Yes           |
-| Win32 Services    | Windows   | Yes           |
-| Win32 Software    | Windows   | Yes           |
-| Win32 System      | Windows   | Yes           |
-| SQLite            | Linux     | Yes           |
-| Berkeley DB (BDB) | Linux     | Yes           |
-| Conary            | Linux     | Yes           |
-| RPM               | Linux     | Yes           |
-| /etc/passwd       | Linux     | Yes           |
-| /etc/group        | Linux     | Yes           |
-| /etc/init.d       | Linux     | Yes           |
-| /etc/systemd      | Linux     | Yes           |
+| Registry          | Windows   | ✅            |
+| Win32 Accounts    | Windows   | ✅            |
+| Win32 Event Log   | Windows   | ✅            |
+| Win32 Services    | Windows   | ✅            |
+| Win32 Software    | Windows   | ✅            |
+| Win32 System      | Windows   | ✅            |
+| SQLite            | Linux     | ✅            |
+| Berkeley DB (BDB) | Linux     | ✅            |
+| Conary            | Linux     | ✅            |
+| RPM               | Linux     | ✅            |
+| /etc/passwd       | Linux     | ✅            |
+| /etc/group        | Linux     | ✅            |
+| /etc/init.d       | Linux     | ✅            |
+| /etc/systemd      | Linux     | ✅            |

@@ -2,7 +2,7 @@
 
 The following table lists platforms on which {{site.data.keyword.inf_man}} can be installed and run from.
 
-| Platform                                                     | Appliance or Podfied |
+| Platform                                                     | Appliance or Podified |
 | ------------------------------------------------------------ | -------------------- |
 | Amazon Web Services (AWS)                                    | Appliance            |
 | Microsoft Azure                                              | Appliance            |

@@ -505,12 +505,9 @@ To create a zone:
 
 6.  Optionally, you can configure **NTP servers** for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the menu: **Operations** > **Server** page.
 
-7.  In the menu: **Credentials - Windows Domain** area, type in Windows domain credentials to be able to collect running processes from Windows virtual machines that are on a domain.
-    ![2058](../images/2058.png)
+7.  In the **Settings** area, set the number for **Max Active VM Scans**. The default is `Unlimited`.
 
-8.  In the **Settings** area, set the number for **Max Active VM Scans**. The default is `Unlimited`.
-
-9.  Click **Save**.
+8.  Click **Save**.
 
 ##### Deleting a Zone
 

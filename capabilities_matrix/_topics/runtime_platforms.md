@@ -1,6 +1,6 @@
 ## Runtime Platforms
 
-The following table lists platforms on which {{site.data.keyword.inf_man}} can be installed and run from.
+The following table lists platforms on which {{ site.data.product.title_short }} can be installed and run from.
 
 | Platform                                                     | Appliance or Podified |
 | ------------------------------------------------------------ | -------------------- |

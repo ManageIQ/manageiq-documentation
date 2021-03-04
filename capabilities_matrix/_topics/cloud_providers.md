@@ -2,8 +2,8 @@
 
 The following tables outline the capabilities of {{ site.data.product.title_short }} that are known to work for various cloud providers.
 
-| Discovery                      | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform (OSP) | IBM PowerVC via the OpenStack API | IBM Power Systems Virtual Servers | Oracle Cloud  |
-| ------------------------------ | ------------------------- | --------------- | --------------------------- | -------------------------------- | --------------------------------- | ----------------------------------|---------------|
+| Discovery                      | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform (OSP) | IBM PowerVC via the OpenStack API | IBM Power Systems Virtual Servers  | Oracle Cloud  |
+| ------------------------------ | ------------------------- | --------------- | --------------------------- | -------------------------------- | --------------------------------- | ---------------------------------- |---------------|
 | Compute Inventory              | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ✅                                | ✅            |
 |   - Key Pairs                  | ✅                        | ❌              | ✅                          | ✅                               | ✅                                | ✅                                | ❌            |
 | Network Inventory              | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ✅                                | ✅            |
@@ -23,9 +23,8 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Metrics                        | ✅                        | ✅              | ✅                          | ✅                               | ❌                                | ❌                                | ❌            |
 | Forensic Analysis (SmartState) | ✅                        | ✅              | ❌                          | ✅                               | ❌                                | ❌                                | ❌            |
 
-| General Features                | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform (OSP) | IBM PowerVC via the OpenStack API | IBM Power Systems Virtual Servers | Oracle Cloud  |
-| ------------------------------- | ------------------------- | --------------- | --------------------------- | -------------------------------- | --------------------------------- | ----------------------------------|---------------|
-| Discovery - Provider            | ❌                        | ❌              | ❌                          | ❌                               | ❌                                | ❌                                | ❌            |
+| General Features                | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform (OSP) | IBM PowerVC via the OpenStack API | IBM Power Systems Virtual Servers  | Oracle Cloud  |
+| ------------------------------- | ------------------------- | --------------- | --------------------------- | -------------------------------- | --------------------------------- | ---------------------------------- |---------------|
 | Relationship Discovery          | ✅                        | ✅              | ✅                          | ✅                               | ❌                                | ✅                                | ✅            |
 | Instance Drift Comparison       | ✅                        | ✅              | ❌                          | ✅                               | ❌                                | ❌                                | ❌            |
 | Instance Genealogy              | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ❌                                | ✅            |
@@ -34,19 +33,17 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Cloud Layer Timelines           | ❌                        | ❌              | ❌                          | ✅                               | ✅                                | ❌                                | ❌            |
 | Reporting                       | ✅                        | ✅              | ✅                          | ✅                               | ❌                                | ❌                                | ❌            |
 | Right Sizing                    | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ❌                                | ❌            |
-| Chargeback                      | ✅                        | ✅              | ✅                          | ✅                               | ❌                                | ✅ (Allocation only)              | ❌            
+| Chargeback                      | ✅                        | ✅              | ✅                          | ✅                               | ❌                                | ✅ (Allocation only)              | ❌            |
 | Automation Work Flows           | ✅                        | ❌              | ✅                          | ✅                               | ✅                                | ❌                                | ❌            |
 | Tag Mapping from Provider       | ✅                        | ✅              | ❌                          | ✅                               | ✅                                | ❌                                | ❌            |
 | Tag Mapping to Provider         | ❌                        | ❌              | ❌                          | ❌                               | ❌                                | ❌                                | ❌            |
 | Instance Policy Enforcement     | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ✅                                | ✅            |
 | Instance Compliance Enforcement | ✅                        | ✅              | ✅                          | ✅                               | ❌                                | ❌                                | ❌            |
 | Alerts - Real Time              | ❌                        | ❌              | ❌                          | ✅                               | ❌                                | ❌                                | ❌            |
-| Alerts - Instance Value Changed | ❌                        | ❌              | ❌                          | ❌                               | ❌                                | ❌                                | ❌            |
-| Alerts - Instance Reconfigured  | ❌                        | ❌              | ❌                          | ❌                               | ❌                                | ❌                                | ❌            |
 | Integrate with Service Catalogs | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ✅                                | ✅            |
 
-| Feature                                | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform (OSP) | IBM PowerVC via the OpenStack API | IBM Power Systems Virtual Servers | Oracle Cloud  |
-| -------------------------------------- | ------------------------- | --------------- | --------------------------- | -------------------------------- | --------------------------------- | ----------------------------------|---------------|
+| Operations                             | Amazon Web Services (AWS) | Microsoft Azure | Google Cloud Platform (GCP) | Red Hat OpenStack Platform (OSP) | IBM PowerVC via the OpenStack API | IBM Power Systems Virtual Servers  | Oracle Cloud  |
+| -------------------------------------- | ------------------------- | --------------- | --------------------------- | -------------------------------- | --------------------------------- | ---------------------------------- |---------------|
 | Instance Remote Console Access         | ❌                        | ❌              | ❌                          | ✅ (VNC)                         | ✅ (NovaLink-managed hosts only)  | ❌                                | ❌            |
 | Instance Power Operations              | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ✅                                | ❌            |
 | Instance Provisioning                  | ✅                        | ✅              | ✅                          | ✅                               | ✅                                | ✅                                | ❌            |

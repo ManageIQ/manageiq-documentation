@@ -13,7 +13,6 @@
 
 | General Features                                             | VMware vSphere | Red Hat Virtualization (RHV) | Microsoft System Center Virtual Machine Manager (SCVMM) | OpenStack Platform (OSP) Director |
 | ------------------------------------------------------------ | -------------- | ---------------------------- | ------------------------------------------------------- | --------------------------------- |
-| Discovery - Provider                                         | ✅             | ✅                           | ✅                                                      | ❌                                |
 | Relationship Discovery                                       | ✅             | ✅                           | ✅                                                      | ✅                                |
 | Drift Comparison                                             | ✅             | ✅                           | ✅                                                      | ✅ (Nodes)                        |
 | VM Genealogy                                                 | ✅             | ✅                           | ✅                                                      | ✅                                |
@@ -43,7 +42,7 @@
 |   - from Template to VM                                      | ✅             | ✅                           | ✅                                                      | ❌                                |
 |   - from VM to Template                                      | ✅             | ✅                           | ❌                                                      | ❌                                |
 |   - Clone from VM to VM                                      | ✅             | ❌                           | ❌                                                      | ❌                                |
-|   - Customize Windows Templates with Sysprep                 | ✅             | ✅                           | ❌                                                      | ❌                                |
+|   - Sysprep Windows Templates                                | ✅             | ✅                           | ❌                                                      | ❌                                |
 |   - Cloud-init                                               | ❌             | ✅                           | ❌                                                      | ❌                                |
 | VM Retirement                                                | ✅             | ✅                           | ✅                                                      | ❌                                |
 | VM Reconfiguration                                           | ✅             | ✅                           | ❌                                                      | ❌                                |

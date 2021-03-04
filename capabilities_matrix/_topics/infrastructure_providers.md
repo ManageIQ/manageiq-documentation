@@ -1,58 +1,62 @@
 ### Infrastructure Providers
 
- The following table outlines the capabilities of {{ site.data.product.title_short }} that are known to work for various virtual infrastructure providers.
+ The following tables outline the capabilities of {{ site.data.product.title_short }} that are known to work for various virtual infrastructure providers.
 
-| Feature                                                      | VMware vSphere | Red Hat Virtualization (RHV) | Microsoft System Center Virtual Machine Manager (SCVMM) | OpenStack Platform (OSP) Director |
+| Discovery                                                    | VMware vSphere | Red Hat Virtualization (RHV) | Microsoft System Center Virtual Machine Manager (SCVMM) | OpenStack Platform (OSP) Director |
 | ------------------------------------------------------------ | -------------- | ---------------------------- | ------------------------------------------------------- | --------------------------------- |
-| Relationship Discovery                                       | ✅             | ✅                           | ✅                                                      | ✅                                |
-| VM Drift Comparison                                          | ✅             | ✅                           | ✅                                                      | ❌                                |
-| Track VM Genealogy                                           | ✅             | ✅                           | ✅                                                      | ✅                                |
-| Capacity & Utilization                                       | ✅             | ✅                           | ❌                                                      | ❌                                |
-| Capture VM/Instance Event Timelines                          | ✅             | ✅                           | ✅                                                      | ❌                                |
+| Compute Inventory                                            | ✅             | ✅                           | ✅                                                      | ✅ (Nodes and Services)           |
+| Network Inventory                                            | ✅             | ✅ (OVN)                     | ❌                                                      | ❌                                |
+| Storage Inventory                                            | ✅             | ❌                           | ❌                                                      | ❌                                |
+| Events                                                       | ✅             | ✅                           | ✅                                                      | ✅                                |
+| Metrics                                                      | ✅             | ✅                           | ✅                                                      | ✅                                |
+| Forensic Analysis (SmartState)                               | ✅             | ✅                           | ❌                                                      | ✅ (Nodes)                        |
+
+| General Features                                             | VMware vSphere | Red Hat Virtualization (RHV) | Microsoft System Center Virtual Machine Manager (SCVMM) | OpenStack Platform (OSP) Director |
+| ------------------------------------------------------------ | -------------- | ---------------------------- | ------------------------------------------------------- | --------------------------------- |
 | Discovery - Provider                                         | ✅             | ✅                           | ✅                                                      | ❌                                |
+| Relationship Discovery                                       | ✅             | ✅                           | ✅                                                      | ✅                                |
+| Drift Comparison                                             | ✅             | ✅                           | ✅                                                      | ✅ (Nodes)                        |
+| VM Genealogy                                                 | ✅             | ✅                           | ✅                                                      | ✅                                |
+| Capacity & Utilization                                       | ✅             | ✅                           | ❌                                                      | ✅                                |
+| VM Event Timelines                                           | ✅             | ✅                           | ✅                                                      | ❌                                |
+| Infrastructure Event Timelines                               | ❌             | ❌                           | ❌                                                      | ✅                                |
 | Reporting                                                    | ✅             | ✅                           | ✅                                                      | ✅                                |
 | Right Sizing                                                 | ✅             | ✅                           | ❌                                                      | ❌                                |
 | Chargeback                                                   | ✅             | ✅                           | ✅ (Allocation only)                                    | ❌                                |
-| Remote Console VM Access (see section below)                 | ✅             | ✅                           | ✅                                                      | ❌                                |
-| Snapshot Creation and Removal                                | ✅             | ✅                           | ❌                                                      | ❌                                |
+| Automation Work Flows                                        | ✅             | ✅                           | ✅                                                      | ❌                                |
+| Tag Mapping from Provider                                    | ❌             | ❌                           | ❌                                                      | ❌                                |
+| Tag Mapping to Provider                                      | ❌             | ❌                           | ❌                                                      | ❌                                |
 | VM Compliance Enforcement                                    | ✅             | ✅                           | ✅                                                      | ❌                                |
 | VM Policy Enforcement                                        | ✅             | ✅                           | ✅                                                      | ❌                                |
-| VM Power Operations                                          | ✅             | ✅                           | ✅                                                      | ❌                                |
-| VM Retirement                                                | ✅             | ✅                           | ✅                                                      | ❌                                |
 | Alerts - Real Time                                           | ✅             | ❌                           | ❌                                                      | ❌                                |
 | Alerts - VM Value Changed                                    | ✅             | ✅                           | ❌                                                      | ❌                                |
 | Alerts - VM Reconfigured                                     | ✅             | ✅                           | ❌                                                      | ❌                                |
 | Integrate with Service Catalogs                              | ✅             | ✅                           | ✅                                                      | ❌                                |
+
+| Operations                                                   | VMware vSphere | Red Hat Virtualization (RHV) | Microsoft System Center Virtual Machine Manager (SCVMM) | OpenStack Platform (OSP) Director |
+| ------------------------------------------------------------ | -------------- | ---------------------------- | ------------------------------------------------------- | --------------------------------- |
+| VM Remote Console Access (see section below)                 | ✅             | ✅                           | ✅                                                      | ❌                                |
+| VM Power Operations                                          | ✅             | ✅                           | ✅                                                      | ❌                                |
+| VM Provisioning                                              |                |                              |                                                         |                                 |
+|   - using PXE                                                | ✅             | ✅                           | ❌                                                      | ❌                                |
+|   - using ISO                                                | ❌             | ✅                           | ❌                                                      | ❌                                |
+|   - from Template to VM                                      | ✅             | ✅                           | ✅                                                      | ❌                                |
+|   - from VM to Template                                      | ✅             | ✅                           | ❌                                                      | ❌                                |
+|   - Clone from VM to VM                                      | ✅             | ❌                           | ❌                                                      | ❌                                |
+|   - Customize Windows Templates with Sysprep                 | ✅             | ✅                           | ❌                                                      | ❌                                |
+|   - Cloud-init                                               | ❌             | ✅                           | ❌                                                      | ❌                                |
+| VM Retirement                                                | ✅             | ✅                           | ✅                                                      | ❌                                |
 | VM Reconfiguration                                           | ✅             | ✅                           | ❌                                                      | ❌                                |
-| Automation Work Flows                                        | ✅             | ✅                           | ✅                                                      | ❌                                |
-| Provision VM using PXE                                       | ✅             | ✅                           | ❌                                                      | ❌                                |
-| Provision VM using ISO                                       | ❌             | ✅                           | ❌                                                      | ❌                                |
-| Provision from Template to VM                                | ✅             | ✅                           | ✅                                                      | ❌                                |
-| Provision from VM to Template                                | ✅             | ✅                           | ❌                                                      | ❌                                |
-| Clone from VM to VM                                          | ✅             | ❌                           | ❌                                                      | ❌                                |
-| Disk Addition to VM                                          | ✅             | ✅                           | ❌                                                      | ❌                                |
-| Network Interface Add/Remove to VM                           | ✅             | ✅                           | ❌                                                      | ❌                                |
-| Host Power Operations                                        | ✅             | ❌                           | ❌                                                      | ❌                                |
-| Provision Host                                               | ❌             | ❌                           | ❌                                                      | ❌                                |
-| Cloud-Init                                                   | ❌             | ✅                           | ❌                                                      | ❌                                |
-| Customize Windows Templates with Sysprep during Provisioning | ✅             | ✅                           | ❌                                                      | ❌                                |
-| OVN Provider                                                 | ❌             | ✅                           | ❌                                                      | ❌                                |
-| Nodes Inventory                                              | ❌             | ❌                           | ❌                                                      | ✅                                |
-| OpenStack Services Inventory                                 | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Nodes Drift Comparison                                       | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Nodes Smart State                                            | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Capacity & Utilization                                       | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Capture Infrastructure Event Timelines                       | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Node Power Operation                                         | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Capacity Planning                                            | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Add/Remove Node                                              | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Scale Down Node                                              | ❌             | ❌                           | ❌                                                      | ✅ (Compute nodes only)           |
-| Scale Up Nodes                                               | ❌             | ❌                           | ❌                                                      | ✅ (Compute nodes only)           |
-| Nodes Policy Enforcement                                     | ❌             | ❌                           | ❌                                                      | ✅                                |
-| Nodes Evacuate                                               | ❌             | ❌                           | ❌                                                      | ✅                                |
-| OpenStack Upgrade                                            | ❌             | ❌                           | ❌                                                      | ❌                                |
-| Tag Mapping from Provider                                    | ❌             | ❌                           | ❌                                                      | ❌                                |
-| Tag Mapping to Provider                                      | ❌             | ❌                           | ❌                                                      | ❌                                |
+|   - Disk Addition                                            | ✅             | ✅                           | ❌                                                      | ❌                                |
+|   - Network Interface Add/Remove                             | ✅             | ✅                           | ❌                                                      | ❌                                |
+| VM Snapshot Creation and Removal                             | ✅             | ✅                           | ❌                                                      | ❌                                |
+| Host Power Operations                                        | ✅             | ❌                           | ❌                                                      | ✅                                |
+| Node Operations                                              |                |                              |                                                         |                                 |
+|   - Add/Remove Node                                          | ❌             | ❌                           | ❌                                                      | ✅                                |
+|   - Scale Down Node                                          | ❌             | ❌                           | ❌                                                      | ✅ (Compute nodes only)           |
+|   - Scale Up Nodes                                           | ❌             | ❌                           | ❌                                                      | ✅ (Compute nodes only)           |
+|   - Nodes Policy Enforcement                                 | ❌             | ❌                           | ❌                                                      | ✅                                |
+|   - Nodes Evacuate                                           | ❌             | ❌                           | ❌                                                      | ✅                                |
 
 
 #### Remote Consoles

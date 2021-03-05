@@ -1,5 +1,5 @@
 Change your password to ensure more private and secure access to
-{{ site.data.product.title }}.
+{{ site.data.product.title_short }}.
 
 1.  Navigate to the URL for the login screen. (<https://xx.xx.xx.xx> on
     the virtual machine instance)

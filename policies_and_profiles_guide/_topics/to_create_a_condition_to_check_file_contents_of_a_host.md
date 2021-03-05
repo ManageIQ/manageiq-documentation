@@ -1,6 +1,6 @@
 #### Creating a Compliance Condition to Check Host File Contents
 
-{{ site.data.product.title }} Control provides the ability to create a compliance condition that checks file contents. Use this to be sure that internal operating system settings meet your security criteria. Regular expressions are used to create the search pattern. Test your regular expressions thoroughly before using them in a production environment.
+{{ site.data.product.title_short }} Control provides the ability to create a compliance condition that checks file contents. Use this to be sure that internal operating system settings meet your security criteria. Regular expressions are used to create the search pattern. Test your regular expressions thoroughly before using them in a production environment.
 
 Note that to search file contents you need to have collected the file using a host analysis profile.
 

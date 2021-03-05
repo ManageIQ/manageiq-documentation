@@ -8,14 +8,14 @@ help accomplish these tasks.
     a specified period of time, a vMotion should occur to a more
     suitable host. For this reason, VMware’s Distributed Resource
     Scheduler (DRS) was not practical, as the CPU Ready metric could not
-    trigger DRS. The solution was to leverage {{ site.data.product.title }} Control
-    and {{ site.data.product.title }} Automate to drive the management of this
+    trigger DRS. The solution was to leverage {{ site.data.product.title_short }} Control
+    and {{ site.data.product.title_short }} Automate to drive the management of this
     workflow.
 
   - Power on only during business hours - An organization which gave a
-    group of self-service users {{ site.data.product.title }} access had a requirement
+    group of self-service users {{ site.data.product.title_short }} access had a requirement
     to only allow certain virtual machines to be powered during business
-    hours. This was solved with {{ site.data.product.title }} Automate.
+    hours. This was solved with {{ site.data.product.title_short }} Automate.
 
   - Auto-Tagging virtual machines based on file contents - An IT
     organization needed a way to consume information from a text file on

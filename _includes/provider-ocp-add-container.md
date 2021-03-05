@@ -70,7 +70,7 @@
         management-admin-token-8ixxs --template='{{index .data
         "ca.crt"}}' | base64 --decode
 
-    5.  Click **Validate** to confirm that {{ site.data.product.title }} can connect
+    5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect
         to the OpenShift Container Platform provider.
 
 9.  For the **Prometheus** alerts service, add the Prometheus alerts
@@ -138,7 +138,7 @@
     3.  Enter the **API Port** if your Hawkular or Prometheus provider
         uses a non-standard port for access. The default port is `443`.
 
-    4.  Click **Validate** to confirm that {{ site.data.product.title }} can connect
+    4.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect
         to the metrics endpoint.
 
 11. Click the **Advanced** tab to add image inspector settings for

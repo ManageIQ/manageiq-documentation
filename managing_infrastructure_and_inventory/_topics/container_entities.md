@@ -37,7 +37,7 @@ and images in OpenShift providers before version 3.3.1.2.
 
 The **Topology** widget is an interactive topology graph, showing the
 status and relationships between the different entities of the
-containers providers and projects to which {{ site.data.product.title }} has access.
+containers providers and projects to which {{ site.data.product.title_short }} has access.
 
   - The topology graph includes pods, containers, services, nodes,
     virtual machines, hosts, routes, and replicators within the overall
@@ -99,10 +99,10 @@ for details on scanning container images using OpenSCAP policies.
 ## Configuring Automatic Tagging for Container Entities
 
 Container object labels in OpenShift can be used to automatically create
-tags and tag categories in {{ site.data.product.title }}. This is done by mapping
-{{ site.data.product.title }} tags to existing OpenShift or Kubernetes labels.
+tags and tag categories in {{ site.data.product.title_short }}. This is done by mapping
+{{ site.data.product.title_short }} tags to existing OpenShift or Kubernetes labels.
 
-Labels from OpenShift can be mapped to {{ site.data.product.title }} tags for the
+Labels from OpenShift can be mapped to {{ site.data.product.title_short }} tags for the
 following container entities:
 
   - Projects
@@ -121,7 +121,7 @@ following container entities:
 
 **Note:**
 
-Tags automatically created from OpenShift labels are completely managed by the {{ site.data.product.title }} system and cannot be manually assigned or unassigned. Deleting a mapping rule from {{ site.data.product.title }} immediately deletes the resulting tags.
+Tags automatically created from OpenShift labels are completely managed by the {{ site.data.product.title_short }} system and cannot be manually assigned or unassigned. Deleting a mapping rule from {{ site.data.product.title_short }} immediately deletes the resulting tags.
 
 You can view a container entity’s OpenShift labels on the entity’s details page under **Labels**.
 
@@ -129,19 +129,19 @@ The following example shows how to configure tagging for a node, but the same st
 
 To configure automatic tagging on container entities using labels:
 
-1.  Note the *key* of the OpenShift label you want to map to a {{ site.data.product.title }} tag. OpenShift labels consist of two parts: a *key* and a *value*.
+1.  Note the *key* of the OpenShift label you want to map to a {{ site.data.product.title_short }} tag. OpenShift labels consist of two parts: a *key* and a *value*.
 
     1.  Navigate to menu:Compute\[Containers \> Nodes\].
 
     2.  Select a node to open its summary page.
 
-    3.  Under **Labels**, note the label(s) to map to {{ site.data.product.title }}
+    3.  Under **Labels**, note the label(s) to map to {{ site.data.product.title_short }}
         tag(s). Any OpenShift labels will list the *key* in the left
         column of the **Labels** table, and the *value* in the right
         column of the **Labels** table.
 
         This node has six labels (key/value pairs) that were created in
-        OpenShift and collected in the {{ site.data.product.title }} inventory:
+        OpenShift and collected in the {{ site.data.product.title_short }} inventory:
 
         ![ocpnode summary](../images/ocpnode-summary.png)
 
@@ -150,7 +150,7 @@ To configure automatic tagging on container entities using labels:
         To create an OpenShift label, see [Developer CLI
         Operations](https://docs.openshift.com/container-platform/3.3/cli_reference/basic_cli_operations.html)
         in the OpenShift Container Platform *CLI Reference* guide. A new
-        label added in OpenShift will only show up in {{ site.data.product.title }}
+        label added in OpenShift will only show up in {{ site.data.product.title_short }}
         after the next OpenShift provider refresh.
 
 2.  Navigate to **Configuration** and select the region.
@@ -165,9 +165,9 @@ To configure automatic tagging on container entities using labels:
     2.  Specify the *key* from the OpenShift label you noted earlier in
         the **Label** field.
 
-    3.  Specify a {{ site.data.product.title }} tag category in **Category** to map
+    3.  Specify a {{ site.data.product.title_short }} tag category in **Category** to map
         the label to. If the tag category does not exist yet in
-        {{ site.data.product.title }}, it will be created automatically.
+        {{ site.data.product.title_short }}, it will be created automatically.
 
         ![add label mapping](../images/add_label_mapping.png)
 
@@ -186,7 +186,7 @@ The label will display on the entity’s summary page under **Smart Management**
 
 ![ocp autotagged](../images/ocp-autotagged.png)
 
-Any container entity with the OpenShift `zone` label will be tagged automatically as `category1` in {{ site.data.product.title }}. If the *value* for `zone` is `south`, for example, the entity will be tagged as `category1
+Any container entity with the OpenShift `zone` label will be tagged automatically as `category1` in {{ site.data.product.title_short }}. If the *value* for `zone` is `south`, for example, the entity will be tagged as `category1
 : south`.
 
 You can use these tags to create reports. See [Monitoring, Alerts, and Reporting](../monitoring_alerts_and_reporting/index.html)

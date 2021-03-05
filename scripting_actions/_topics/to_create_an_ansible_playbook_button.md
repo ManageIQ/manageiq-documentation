@@ -1,6 +1,6 @@
 ### Creating an Ansible Playbook Button
 
-{{ site.data.product.title }} includes an option to create an Ansible Playbook custom
+{{ site.data.product.title_short }} includes an option to create an Ansible Playbook custom
 button. This feature allows users to select a playbook to run as well as
 an inventory target to run it against. An Ansible playbook type button
 can be defined for any object type available.

@@ -2,7 +2,7 @@
 
 The Security Content Automation Protocol (SCAP) is a set of standards to
 assist with vulnerability management and policy compliance.
-{{ site.data.product.title }} provides a set of SCAP standards to apply to your
+{{ site.data.product.title_short }} provides a set of SCAP standards to apply to your
 appliance. View these SCAP rules in the
 `/var/www/miq/vmdb/productization/appliance_console/config/scap_rules.yml`
 file.
@@ -11,7 +11,7 @@ To apply the SCAP standards to your appliance’s server:
 
 1.  Log in to the appliance as the `root` user.
 
-2.  Enter the `appliance_console` command. The {{ site.data.product.title }} Appliance
+2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} Appliance
     summary screen displays.
 
 3.  Press `Enter` to manually configure settings.

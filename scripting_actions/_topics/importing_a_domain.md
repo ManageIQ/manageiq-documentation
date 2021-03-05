@@ -1,6 +1,6 @@
 ### Importing a Domain from a Git Repository
 
-{{ site.data.product.title }} can import an Automate domain from a Git repository by
+{{ site.data.product.title_short }} can import an Automate domain from a Git repository by
 specifying a repository and branch, along with user details. Currently,
 you can only add git domains via the **Import/Export** area of the user
 interface.

@@ -3,7 +3,7 @@
 If you find that a report is not giving you the data that you need, you
 can edit it after it has been created. Note that only reports that you
 have created can be modified. Only administrators and super
-administrators of {{ site.data.product.title }} can add, copy, edit, and delete
+administrators of {{ site.data.product.title_short }} can add, copy, edit, and delete
 reports.
 
 1.  Navigate to menu:Overview\[Reports\].

@@ -4,7 +4,7 @@ View Capacity & Utilization data for hosts that are part of a cluster.
 
 **Note:**
 
-Your {{ site.data.product.title }} server requires network visibility to the provider
+Your {{ site.data.product.title_short }} server requires network visibility to the provider
 assigned the **Server Role** of **Capacity & Utilization Collector** to enable this feature.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].

@@ -1,6 +1,6 @@
 # Containers Providers
 
-A containers provider is a service that manages container resources, that can be added to the {{ site.data.product.title }} appliance.
+A containers provider is a service that manages container resources, that can be added to the {{ site.data.product.title_short }} appliance.
 
 {{ site.data.product.title_short }} can connect to OpenShift Container Platform containers providers and manage them similarly to infrastructure and cloud providers. This allows you to gain control over different aspects of your containers environment and answer questions such as:
 
@@ -53,7 +53,7 @@ Containers provider authentication status
 
 When deploying OpenShift using `openshift-ansible-3.0.20` (or later
 versions), the OpenShift Container Platform [service account](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html)
-and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title }} are installed by default.
+and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title_short }} are installed by default.
 
 **Note:**
 
@@ -69,7 +69,7 @@ Run the following to obtain the token needed to add an OpenShift Container Platf
 
 Use the OpenShift Cluster Metrics plug-in to collect node, pod, and container metrics into one location. This helps track usage and find common issues.
 
-  - Configure {{ site.data.product.title }} to allow for all three [Capacity & Utilization server roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles).
+  - Configure {{ site.data.product.title_short }} to allow for all three [Capacity & Utilization server roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles).
 
   - Enable cluster metrics using the [OpenShift Container Platform documentation](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/installation_and_configuration/#install-config-cluster-metrics).
 

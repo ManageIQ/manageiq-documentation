@@ -14,7 +14,7 @@ components.
 4.  Click **OK**.
 
 When a host is refreshed and a new virtual machine is discovered on that
-host, {{ site.data.product.title }} checks to see if the virtual machine is already
+host, {{ site.data.product.title_short }} checks to see if the virtual machine is already
 registered with another host. If this is the case, the host that the
 virtual machine is associated with switches to the new host. If the
 SmartProxy is monitoring a provider, this happens automatically. If not,

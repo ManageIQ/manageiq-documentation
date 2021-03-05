@@ -24,11 +24,11 @@ project might require higher quotas and another project might require
 restricted access to certain ports. OpenStack allows you to define these
 limits and apply them to a project.
 
-{{ site.data.product.title }} can abstract information from tenants including quotas
+{{ site.data.product.title_short }} can abstract information from tenants including quotas
 and relationships to other OpenStack objects.
 
-To see multiple tenants in {{ site.data.product.title }}, the user authenticating to
-your OpenStack environment from {{ site.data.product.title }} must be configured to
+To see multiple tenants in {{ site.data.product.title_short }}, the user authenticating to
+your OpenStack environment from {{ site.data.product.title_short }} must be configured to
 have visibility into these tenants.
 
 **Note:**

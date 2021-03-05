@@ -1,4 +1,4 @@
-Through {{ site.data.product.title }}, you can perform a *Compute scale down* on a Red
+Through {{ site.data.product.title_short }}, you can perform a *Compute scale down* on a Red
 Hat OpenStack infrastructure provider. This process involves decreasing
 its Compute nodes used by an OpenStack infrastructure provider. Doing so
 involves putting a Compute node into *maintenance mode* and removing it

@@ -60,7 +60,7 @@ Adding new Schedule details.
       - Type or select a date to begin the schedule in **Starting Date**.
 
       - Select a **Starting Time** based on a 24 hour clock in the
-        {{ site.data.product.title }} appliance’s Time Zone.
+        {{ site.data.product.title_short }} appliance’s Time Zone.
 
 4.  Use the **E-Mail after Running** feature to send an email after the
     report has been generated to selected users. The email will include

@@ -4,12 +4,12 @@ Click the **Reports** accordion under menu:Overview\[Reports\] to see a
 list of reports available. These reports have been constructed to help
 you view the most commonly requested and significant data. From here,
 you can also create reports if you have appropriate access.
-{{ site.data.product.title }} provides a large group of default reports organized into
+{{ site.data.product.title_short }} provides a large group of default reports organized into
 categories. Each category has its own set of subfolders.
 
 {% include reports-categories.md %}
 
-For a complete list of reportable fields in {{ site.data.product.title }}, see
+For a complete list of reportable fields in {{ site.data.product.title_short }}, see
 [???](#_appe_reportable_fields).
 
 {% include_relative _topics/running_reports.md %}

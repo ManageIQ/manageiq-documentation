@@ -2,7 +2,7 @@
 
 Actions are performed after the condition is evaluated. You can
 associate actions with specific events when you create a policy.
-{{ site.data.product.title }} provides a set of default actions, but you can also
+{{ site.data.product.title_short }} provides a set of default actions, but you can also
 create custom actions using the {{ site.data.product.title_short }} user interface.
 
 Use this procedure to create a custom action by adding the **Assign

@@ -30,7 +30,7 @@ below:
     administrative user interface. This provides a quick summary of
     where you are from cost standpoint to that point in the month. For
     more information about configuring chargeback rates in the full
-    administrative user interface and how {{ site.data.product.title }} calculates
+    administrative user interface and how {{ site.data.product.title_short }} calculates
     chargeback costs, see
     [Chargeback](../monitoring_alerts_and_reporting/index.html#chargeback)
     in the *Monitoring, Alerts, and Reporting* guide.

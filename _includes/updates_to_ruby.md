@@ -1,7 +1,7 @@
 ## Updates to Rails and Ruby
 
 Changes within Ruby and Rails versions can create issues for custom code
-and automation in {{ site.data.product.title }} environments.
+and automation in {{ site.data.product.title_short }} environments.
 
 Before proceeding with major upgrades that include changes to versions
 of Ruby and Rails, review the below resources.

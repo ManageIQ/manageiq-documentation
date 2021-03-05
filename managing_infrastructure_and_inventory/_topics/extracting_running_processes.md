@@ -1,6 +1,6 @@
 # Extracting Running Processes from Virtual Machines and Templates
 
-{{ site.data.product.title }} can collect processes running on Windows virtual
+{{ site.data.product.title_short }} can collect processes running on Windows virtual
 machines. To do this, enter domain credentials for the zone where the
 virtual machine is located.
 

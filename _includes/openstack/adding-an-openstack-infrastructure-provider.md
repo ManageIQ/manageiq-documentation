@@ -1,16 +1,16 @@
-After initial installation and creation of a {{ site.data.product.title }}
+After initial installation and creation of a {{ site.data.product.title_short }}
 environment, add an OpenStack infrastructure provider to the appliance.
-{{ site.data.product.title }} supports operating with the OpenStack `admin` tenant.
-When creating an OpenStack infrastructure provider in {{ site.data.product.title }},
+{{ site.data.product.title_short }} supports operating with the OpenStack `admin` tenant.
+When creating an OpenStack infrastructure provider in {{ site.data.product.title_short }},
 select the OpenStack infrastructure provider’s `admin` user because it
 is the default administrator of the OpenStack `admin` tenant. When using
-the `admin` credentials, a user in {{ site.data.product.title }} provisions into the
+the `admin` credentials, a user in {{ site.data.product.title_short }} provisions into the
 `admin` tenant, and sees images, networks, and instances that are
 associated with the `admin` tenant.
 
 **Note:**
 
-  - You can set whether {{ site.data.product.title }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the undercloud to store events. See [Configuring the Undercloud to Store Events](#configuring-the-undercloud-to-store-events) for instructions. For more information, see [OpenStack Telemetry (ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/architecture_guide/#comp-telemetry) in the Red Hat OpenStack Platform *Architecture Guide*.
+  - You can set whether {{ site.data.product.title_short }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the undercloud to store events. See [Configuring the Undercloud to Store Events](#configuring-the-undercloud-to-store-events) for instructions. For more information, see [OpenStack Telemetry (ceilometer)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/architecture_guide/#comp-telemetry) in the Red Hat OpenStack Platform *Architecture Guide*.
 
   - To authenticate the provider using a self-signed Certificate
     Authority (CA), configure the {{ site.data.product.title_short }} appliance to
@@ -78,10 +78,10 @@ associated with the `admin` tenant.
         its corresponding password in the **Password** and **Confirm
         Password** fields.
 
-    5.  Click **Validate** to confirm {{ site.data.product.title }} can connect to the
+    5.  Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
         OpenStack provider.
 
-8.  Next, configure how {{ site.data.product.title }} should receive events from the
+8.  Next, configure how {{ site.data.product.title_short }} should receive events from the
     OpenStack provider. Click the **Events** tab in the **Endpoints**
     section to start.
 
@@ -112,4 +112,4 @@ associated with the `admin` tenant.
 
 **Note:**
 
-{{ site.data.product.title }} requires that the `adminURL` endpoint for all OpenStack services be on a non-private network. Accordingly, assign the adminURL endpoint an IP address of something other than `192.168.x.x`. The `adminURL` endpoint must be accessible to the {{ site.data.product.title }} appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment. Additionally, all the Keystone endpoints must be accessible, otherwise refresh will fail.
+{{ site.data.product.title_short }} requires that the `adminURL` endpoint for all OpenStack services be on a non-private network. Accordingly, assign the adminURL endpoint an IP address of something other than `192.168.x.x`. The `adminURL` endpoint must be accessible to the {{ site.data.product.title_short }} appliance that is responsible for collecting inventory and gathering metrics from the OpenStack environment. Additionally, all the Keystone endpoints must be accessible, otherwise refresh will fail.

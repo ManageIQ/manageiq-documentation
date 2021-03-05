@@ -1,6 +1,6 @@
 # Discovering Amazon EC2 Cloud Providers
 
-{{ site.data.product.title }} provides the ability to discover cloud providers
+{{ site.data.product.title_short }} provides the ability to discover cloud providers
 associated with a particular set of Amazon EC2 account details.
 
 1.  Navigate to menu:Compute\[Clouds \> Providers\].

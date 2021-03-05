@@ -1,8 +1,8 @@
-# {{ site.data.product.title }} Lifecycle
+# {{ site.data.product.title_short }} Lifecycle
 
 This guide discusses lifecycle activities such as provisioning and
-retirement that are part of the {{ site.data.product.title }} Automate component.
-{{ site.data.product.title }} Automate enables real-time, bidirectional process
+retirement that are part of the {{ site.data.product.title_short }} Automate component.
+{{ site.data.product.title_short }} Automate enables real-time, bidirectional process
 integration and adaptive automation for management events and
 administrative or operational activities.
 
@@ -37,4 +37,4 @@ pre-processing and post-processing. Pre-processing acquires IP addresses
 for the user, creates CMDB instances, and creates the virtual machine or
 instance based on information in the request. Post-processing activates
 the CMDB instance and emails the user. The steps for provisioning may be
-modified at any time using {{ site.data.product.title }}. ![2314](../images/2314.png)
+modified at any time using {{ site.data.product.title_short }}. ![2314](../images/2314.png)

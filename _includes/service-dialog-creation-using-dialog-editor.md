@@ -1,4 +1,4 @@
-{{ site.data.product.title }} includes a drag-and-drop service dialog editor to create
+{{ site.data.product.title_short }} includes a drag-and-drop service dialog editor to create
 service dialogs. The editor, with its drag-and-drop feature, provides a
 visual representation of the components that comprise a service dialog.
 You can easily design your service dialog utilizing dialog tabs,

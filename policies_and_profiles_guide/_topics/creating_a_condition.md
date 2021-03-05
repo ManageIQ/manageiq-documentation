@@ -1,6 +1,6 @@
 ### Creating a Condition
 
-You can create a condition either from within a policy screen or by going directly to the expression editor in the {{ site.data.product.title }} console. You need to define a description and an expression element. The expression element defines what criteria you want to use to test the condition.
+You can create a condition either from within a policy screen or by going directly to the expression editor in the {{ site.data.product.title_short }} console. You need to define a description and an expression element. The expression element defines what criteria you want to use to test the condition.
 
 1. Browse to menu: **Control > Explorer**.
 

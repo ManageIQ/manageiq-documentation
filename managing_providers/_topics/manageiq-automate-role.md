@@ -1,11 +1,11 @@
 ### Modifying the Automate Workspace Using the `manageiq-automate` Role.
 
-The `manageiq-automate` role allows users of {{ site.data.product.title }} Automate to
+The `manageiq-automate` role allows users of {{ site.data.product.title_short }} Automate to
 modify and add to the automate workspace via an Ansible playbook.
 
 **Note:**
 
-When using this role in a playbook on a {{ site.data.product.title }} appliance with
+When using this role in a playbook on a {{ site.data.product.title_short }} appliance with
 Embedded Ansible activated, add an empty `roles` directory at the root
 of the playbook. In the `roles` directory, include a `requirements.yml`
 file with the following contents:

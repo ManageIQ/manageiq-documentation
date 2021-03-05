@@ -1,7 +1,7 @@
 ## Examples
 
 This section provides a collection of examples of using the REST API to
-interact with resources in a {{ site.data.product.title }} environment.
+interact with resources in a {{ site.data.product.title_short }} environment.
 
 ### General Queries
 

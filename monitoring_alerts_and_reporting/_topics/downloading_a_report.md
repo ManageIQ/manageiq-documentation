@@ -34,6 +34,6 @@ view the report in a full screen.
 
 Edit and delete buttons are only visible to administrators and super
 administrators. Edit and delete functions are only available to
-customer-created reports. The {{ site.data.product.title }} pre-configured reports
+customer-created reports. The {{ site.data.product.title_short }} pre-configured reports
 cannot be edited or deleted, but they can be copied.
 

@@ -1,6 +1,6 @@
 # Viewing User Information for an Instance or Image
 
-{{ site.data.product.title }}'s **SmartState Analysis** feature returns user
+{{ site.data.product.title_short }}'s **SmartState Analysis** feature returns user
 information. Explore the user to get details on the user’s account,
 including group memberships.
 

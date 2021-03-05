@@ -1,7 +1,7 @@
 You can output the results of an OpenSCAP scan of images to a report for an overview of the security risk level of images. The **Images by Failed OpenSCAP Rule Results are included with {{ site.data.product.title_short }} and shows whether the image passed or failed OpenSCAP policy criteria, and the security risk.
 
 
-**Note**: You can also create a copy of this report and edit it to contain additional information, such as the project name where the image is used to produce more useful results. For more information, see [Editing a Report](../monitoring_alerts_and_reporting/index.html#editing-a-report) and [Reportable Fields in {{ site.data.product.title }}](../monitoring_alerts_and_reporting/index.html#reportable-fields-in-manageiq) in *Monitoring, Alerts, and Reporting* for instructions on customizing reports.
+**Note**: You can also create a copy of this report and edit it to contain additional information, such as the project name where the image is used to produce more useful results. For more information, see [Editing a Report](../monitoring_alerts_and_reporting/index.html#editing-a-report) and [Reportable Fields in {{ site.data.product.title_short }}](../monitoring_alerts_and_reporting/index.html#reportable-fields-in-manageiq) in *Monitoring, Alerts, and Reporting* for instructions on customizing reports.
 
 Steps to create a report to show image compliance:
 

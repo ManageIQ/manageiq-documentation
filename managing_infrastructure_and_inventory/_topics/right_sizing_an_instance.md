@@ -1,7 +1,7 @@
 # Right Sizing an Instance
 
-{{ site.data.product.title }} uses collected statistics to recommend the best size for
-an instance. {{ site.data.product.title }} uses the information from the **Normal
+{{ site.data.product.title_short }} uses collected statistics to recommend the best size for
+an instance. {{ site.data.product.title_short }} uses the information from the **Normal
 Operating Range** to calculate the recommendations.
 
 1.  Navigate to menu:Compute\[Clouds \> Instances\].

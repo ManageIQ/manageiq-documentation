@@ -2,7 +2,7 @@
 
 You can specify any attribute via the **URI** or **CMDB** class
 instance. If neither exists, the value is determined from the
-{{ site.data.product.title }} **VM** or **miq\_provision** objects.
+{{ site.data.product.title_short }} **VM** or **miq\_provision** objects.
 
 The attributes can be reduced or extended as required by amending the
 Ruby methods.
@@ -23,7 +23,7 @@ record.
 | Attribute          | Value                                             |
 | virtual            | Boolean true or false, set to true.               |
 | name VMs           | Virtual infrastructure name.                      |
-| short\_description | {{ site.data.product.title }} virtual machine GUID.             |
+| short\_description | {{ site.data.product.title_short }} virtual machine GUID.             |
 | host\_name         | The virtual machine’s operating system hostname.  |
 | cpu\_count         | The virtual machine’s CPU count.                  |
 | ram                | The virtual machine’s memory.                     |
@@ -46,5 +46,5 @@ all records in the specified **ServiceNow table** and writes their
 attributes to `automation.log`.
 
 1.  sys\_id attribute is not required during `create`. Its value is
-    returned from the `create` request and the {{ site.data.product.title }} object
+    returned from the `create` request and the {{ site.data.product.title_short }} object
     custom attribute **servicenow\_sys\_id** is created and updated.

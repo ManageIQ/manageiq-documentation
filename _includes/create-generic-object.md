@@ -1,5 +1,5 @@
 Model a new resource by creating a generic object class and adding it to
-your {{ site.data.product.title }} inventory. Each generic object class can have
+your {{ site.data.product.title_short }} inventory. Each generic object class can have
 attributes, associations, and methods. Once created, generic objects
 classes are visible to users of the Service user interface at the
 resource level.

@@ -4,7 +4,7 @@ The heterogeneous virtual machine container and guest support combined
 with the ability to analyze information inside the virtual machine -
 such as disk space, patch level or installed applications - provides
 in-depth information across the virtual environment. This rich set of
-information enables {{ site.data.product.title }} users to improve problem resolution
+information enables {{ site.data.product.title_short }} users to improve problem resolution
 times and effectively manage virtual machines.
 
 The **Virtual Machines** pages display all virtual machines that were
@@ -53,7 +53,7 @@ contents.
 | Icon                      | Description                                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | ![2138](../images/2138.png) | Template: Virtual Template                                                                                                                                                                                                                                                                                                                                                                                                                |
-| ![2139](../images/2139.png) | Retired: When a virtual machine or instance is no longer required, it can be retired. Once a virtual machine or instance reaches its retirement date and time, it is immediately shut down and not allowed to restart. If an attempt to restart is made, {{ site.data.product.title }} will shut down the virtual machine or instance.                                                                                                                  |
+| ![2139](../images/2139.png) | Retired: When a virtual machine or instance is no longer required, it can be retired. Once a virtual machine or instance reaches its retirement date and time, it is immediately shut down and not allowed to restart. If an attempt to restart is made, {{ site.data.product.title_short }} will shut down the virtual machine or instance.                                                                                                                  |
 | ![2140](../images/2140.png) | Archived: An archived virtual machine has no host or datastore associated with it. Archiving is done to move virtual machines to a low cost storage, either on demand or during retirement, if requested, to avoid incurring extra cost on a virtualized infrastructure due to virtual machine sprawl.                                                                                                                                    |
 | ![2141](../images/2141.png) | Orphaned: An orphaned virtual machine has no host but has a datastore associated with it. Orphaned virtual machines are those that have been removed from their providers but still exist on the storage. An orphaned virtual machine is unable to identify the associated host. A virtual machine also shows as orphaned if it exists on a different host than the host expected by the provider’s server.                               |
 | ![2142](../images/2142.png) | Disconnected: A disconnected virtual machine is one that has lost connection to either the provider’s storage, host, or both. A disconnect is usually a result of network issues on the provider side. For instance, if during virtual machine provisioning the storage is not set up or deleted, the virtual machine will still exist on the provider, but will not run on the host as it has lost connection to its provider’s storage. |
@@ -123,9 +123,9 @@ _topics/searching_by_virtual_machine_or_template_name.md %}
 
 Analyze a virtual machine to collect metadata such as user accounts,
 applications, software patches, and other internal information. If
-{{ site.data.product.title }} is not set up for automatic analysis, perform a manual
+{{ site.data.product.title_short }} is not set up for automatic analysis, perform a manual
 analysis of a virtual machine. To perform a SmartState analysis,
-{{ site.data.product.title }} requires a running SmartProxy with visibility to the
+{{ site.data.product.title_short }} requires a running SmartProxy with visibility to the
 virtual machine’s storage location. If the virtual machine is associated
 with a host or provider, ensure the virtual machine is registered with
 that system to be properly analyzed; the server requires this
@@ -164,7 +164,7 @@ _topics/storage_support_notes_about_analyzing_from_rhevm_3.0.md
 
 ## Comparing Virtual Machines and Templates
 
-The {{ site.data.product.title }} Server allows you to compare multiple virtual
+The {{ site.data.product.title_short }} Server allows you to compare multiple virtual
 machines. This allows you to see how different virtual machines are from
 their original template. This helps detect missing patches, unmanaged
 user accounts, or unauthorized services.

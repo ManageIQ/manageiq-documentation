@@ -9,7 +9,7 @@
 
 {% include_relative _topics/additional_configuration.md %}
 
-## Logging In After Installing {{ site.data.product.title }}
+## Logging In After Installing {{ site.data.product.title_short }}
 
 {% include initial-login.md %}
 

@@ -1,6 +1,6 @@
 ## Configuring Image Scanning
 
-{{ site.data.product.title }} manages vulnerability scanning of container images. When
+{{ site.data.product.title_short }} manages vulnerability scanning of container images. When
 an OpenShift provider is added, OpenShift images from the internal
 registry are discovered. To enable image scanning, perform the following
 configuration steps:
@@ -97,7 +97,7 @@ Refreshing the image page will reflect the latest compliance history.
 
 ## OpenSCAP Policy Profile
 
-{{ site.data.product.title }} is pre-configured with a default scanning policy
+{{ site.data.product.title_short }} is pre-configured with a default scanning policy
 profile. This includes conditions to scan and identify compliance, as
 well as annotate compliance failure. SmartState analysis is performed
 when new images are added to OpenShift.

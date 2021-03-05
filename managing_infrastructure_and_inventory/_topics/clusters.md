@@ -19,7 +19,7 @@ _topics/performing_smartstate_analysis_on_clusters.md %}
 
 ## Comparing Clusters
 
-{{ site.data.product.title }} provides features to compare properties of clusters.
+{{ site.data.product.title_short }} provides features to compare properties of clusters.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Clusters\].
 

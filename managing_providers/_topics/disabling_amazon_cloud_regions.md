@@ -1,6 +1,6 @@
 # Disabling Amazon Cloud Regions
 
-{{ site.data.product.title }} allows administrators to disable Amazon cloud regions on
+{{ site.data.product.title_short }} allows administrators to disable Amazon cloud regions on
 the appliance server. Use this capability to disable certain classified
 regions like AWS GovCloud. Once disabled, the region will not be
 available when adding an Amazon EC2 provider.

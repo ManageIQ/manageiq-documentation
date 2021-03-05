@@ -18,4 +18,4 @@ begins 5 minutes after the server is started, and every 10 minutes after
 that. Therefore, the longest the collection takes after enabling the
 Capacity & Utilization Collector role is 10 minutes. The first
 collection from a particular provider may take a few minutes since
-{{ site.data.product.title }} is gathering data points going one month back in time.
+{{ site.data.product.title_short }} is gathering data points going one month back in time.

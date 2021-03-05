@@ -4,7 +4,7 @@ You can view capacity and utilization data for a datastore.
 
 **Note:**
 
-{{ site.data.product.title }} requires network visibility to your provider assigned the server role of *Capacity & Utilization Collector* to enable this feature.
+{{ site.data.product.title_short }} requires network visibility to your provider assigned the server role of *Capacity & Utilization Collector* to enable this feature.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Datastores\], then click
     the Datastore for which to view Capacity and Utilization data.
@@ -34,7 +34,7 @@ You can view capacity and utilization data for a datastore.
       - **Not Managed** - Files discovered on a datastore that do not
         have a virtual machine associated with them in the VMDB. These
         files might be registered to a management system that
-        {{ site.data.product.title }} does not have configuration information.
+        {{ site.data.product.title_short }} does not have configuration information.
         Possible causes might be the management system has not been
         discovered or the management system has been discovered but no
         security credentials are provided.

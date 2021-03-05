@@ -1,6 +1,6 @@
 # Discovering OpenStack Infrastructure Providers
 
-{{ site.data.product.title }} has the ability to discover OpenStack infrastructure
+{{ site.data.product.title_short }} has the ability to discover OpenStack infrastructure
 providers. In this process, {{ site.data.product.title_short }} scans a network
 segment and searches for the Bare Metal (Ironic) service which runs on
 port `6385` by default. Note that, currently, the discovery does not

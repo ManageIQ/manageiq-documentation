@@ -1,7 +1,7 @@
-Once {{ site.data.product.title }} is installed, you can log in and perform
+Once {{ site.data.product.title_short }} is installed, you can log in and perform
 administration tasks.
 
-Log in to {{ site.data.product.title }} for the first time after installing by:
+Log in to {{ site.data.product.title_short }} for the first time after installing by:
 
 1.  Navigate to the URL for the login screen. (<https://xx.xx.xx.xx> on
     the virtual machine instance)

@@ -32,7 +32,7 @@ machine’s IP address.
 
       - Use **Message Filter** to look for specific text in a message.
         Use **Message Level** to filter based on message level.
-        {{ site.data.product.title }} reports on the specified level and above. Use
+        {{ site.data.product.title_short }} reports on the specified level and above. Use
         **Message Source** to filter log messages based on its source.
 
       - Set **How Far Back to Check** in days you want to look for this

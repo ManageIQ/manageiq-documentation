@@ -2,7 +2,7 @@
 
 You can group instances using security groups to restrict port or IP
 address accessibility. Security groups can be created and assigned to
-instances using {{ site.data.product.title }} instance provisioning.
+instances using {{ site.data.product.title_short }} instance provisioning.
 
 Cloud providers that currently support this function include: Amazon
 EC2, OpenStack, and Red Hat Enterprise Virtualization.

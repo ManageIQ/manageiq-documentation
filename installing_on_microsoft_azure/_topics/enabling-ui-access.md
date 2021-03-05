@@ -1,6 +1,6 @@
 ## Enabling {{ site.data.product.title_short }} User Interface Access
 
-To access the {{ site.data.product.title }} virtual appliance user interface, you need
+To access the {{ site.data.product.title_short }} virtual appliance user interface, you need
 to enable access over ports `80` and `443` to the virtual machine. You
 can do this using the CLI or from within the Azure portal.
 

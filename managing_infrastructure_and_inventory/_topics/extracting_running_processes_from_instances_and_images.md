@@ -1,6 +1,6 @@
 # Extracting Running Processes from Instances and Images
 
-{{ site.data.product.title }} can collect processes running on Windows instances. To
+{{ site.data.product.title_short }} can collect processes running on Windows instances. To
 do this, enter domain credentials for the zone where the instance is
 located. The instance must be running and must have an IP address in the
 VMDB, usually obtained from a SmartState Analysis.

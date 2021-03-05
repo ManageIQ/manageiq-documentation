@@ -1,13 +1,13 @@
 ### Migrating Custom Buttons
 
 This workflow demonstrates how to export custom buttons from one
-{{ site.data.product.title }} appliance and import them in another
+{{ site.data.product.title_short }} appliance and import them in another
 {{ site.data.product.title_short }} appliance.
 
 1.  Export custom buttons from the source {{ site.data.product.title_short }}
     appliance:
 
-    1.  SSH into the {{ site.data.product.title }} appliance as `root`.
+    1.  SSH into the {{ site.data.product.title_short }} appliance as `root`.
 
     2.  Create a temporary directory:
 

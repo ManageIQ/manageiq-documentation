@@ -13,10 +13,10 @@ directly to a resource.
     Profile**).
 
 4.  The options presented change based on if the alert is for a cluster,
-    datastore, {{ site.data.product.title }} server, host, or virtual machine and
+    datastore, {{ site.data.product.title_short }} server, host, or virtual machine and
     instance. You can assign to the enterprise, to specific hosts,
     cluster, resource pools, and providers, or based on assign tags. For
-    a {{ site.data.product.title }} server alert profile, you can only assign to
-    {{ site.data.product.title }} servers in the current Region.
+    a {{ site.data.product.title_short }} server alert profile, you can only assign to
+    {{ site.data.product.title_short }} servers in the current Region.
 
 5.  Click **Save**.

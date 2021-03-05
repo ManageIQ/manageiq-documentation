@@ -1,6 +1,6 @@
 This guide assumes that you have:
 
-  - [Already deployed {{ site.data.product.title }} on your chosen platform](https://www.ibm.com/support/knowledgecenter/SSFC4F_2.0.0/mcm/infrastructure/infra_mgmt_intro.html)
+  - [Already deployed {{ site.data.product.title_short }} on your chosen platform](https://www.ibm.com/support/knowledgecenter/SSFC4F_2.0.0/mcm/infrastructure/infra_mgmt_intro.html)
 
   - [Already deployed OpenShift Container Platform](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.9/html/installation_and_configuration/)
 

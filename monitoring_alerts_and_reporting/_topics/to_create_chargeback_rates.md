@@ -1,6 +1,6 @@
 ### Creating Chargeback Rates
 
-{{ site.data.product.title }} allows you to create your own set of computing and
+{{ site.data.product.title_short }} allows you to create your own set of computing and
 storage costs to use for billing.
 
 Chargeback rates can be configured at a single rate or in tiers, where

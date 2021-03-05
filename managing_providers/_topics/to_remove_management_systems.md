@@ -3,10 +3,10 @@
 If a provider has been decommissioned or requires some troubleshooting,
 it might require deletion from the VMDB.
 
-Deleting a provider removes the account information from {{ site.data.product.title }}
+Deleting a provider removes the account information from {{ site.data.product.title_short }}
 console. You will no longer be able to view any associated history
 including chargeback reports generated for the deleted provider.
-Additionally, if {{ site.data.product.title }} is the database of record, deleting
+Additionally, if {{ site.data.product.title_short }} is the database of record, deleting
 providers would become a major problem for the other systems relying on
 it for accurate and consistent billing information. Review all the
 dependencies carefully before deleting a provider.

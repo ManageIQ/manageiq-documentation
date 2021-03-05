@@ -1,6 +1,6 @@
 # Editing a Containers Provider
 
-Edit information about a provider such as the name, hostname, IP address or port, and credentials as required. If you have just upgraded your {{ site.data.product.title_short }} environment from an older version, edit the provider to specify the authentication method the provider uses to connect to {{ site.data.product.title }}.
+Edit information about a provider such as the name, hostname, IP address or port, and credentials as required. If you have just upgraded your {{ site.data.product.title_short }} environment from an older version, edit the provider to specify the authentication method the provider uses to connect to {{ site.data.product.title_short }}.
 
 1.  Navigate to menu:Compute\[Containers \> Providers\].
 
@@ -49,7 +49,7 @@ Edit information about a provider such as the name, hostname, IP address or port
         \# oc get secret --namespace management-infra
         management-admin-token-8ixxs --template='{{index .data "ca.crt"}}' | base64 --decode
 
-    5.  Click **Validate** to confirm that {{ site.data.product.title }} can connect to the OpenShift Container Platform provider.
+    5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect to the OpenShift Container Platform provider.
 
 6.  Under **Endpoints** in the **Metrics** tab, configure the following for gathering capacity and utilization metrics for Hawkular or Prometheus based on the selection:
 
@@ -66,7 +66,7 @@ Edit information about a provider such as the name, hostname, IP address or port
 
     3.  Enter the **API Port** if your provider uses a non-standard port for access. The default port is `443`.
 
-    4.  Click **Validate** to confirm that {{ site.data.product.title }} can connect to the endpoint.
+    4.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect to the endpoint.
 
 7.  Under **Endpoints** in the **Alerts** tab, configure the following for Prometheus alerting from the cluster.
 
@@ -80,6 +80,6 @@ Edit information about a provider such as the name, hostname, IP address or port
 
         2.  Enter the **API Port** if your provider uses a non-standard port for access. The default port is `443`.
 
-        3.  Click **Validate** to confirm that {{ site.data.product.title }} can connect to the endpoint.
+        3.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect to the endpoint.
 
 8.  Click **Save**.

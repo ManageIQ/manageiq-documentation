@@ -1,5 +1,5 @@
 Create a request to provision Red Hat OpenStack Platform cloud instances
-from images, volumes, and volume snapshots using {{ site.data.product.title }}. Only
+from images, volumes, and volume snapshots using {{ site.data.product.title_short }}. Only
 bootable volumes not in use will be available.
 
 1.  Navigate to menu:Compute\[Clouds \> Instances\].
@@ -18,7 +18,7 @@ bootable volumes not in use will be available.
     during the provisioning process for items such as auto-approval,
     quota, provision complete, retirement, request pending approval, and
     request denied. The other information is optional. If the
-    {{ site.data.product.title }} Server is configured to use LDAP, you can use the
+    {{ site.data.product.title_short }} Server is configured to use LDAP, you can use the
     **Look Up** button to populate the other fields based on the email
     address.
 

@@ -1,7 +1,7 @@
 ## Tasks
 
 The options under the **Tasks** menu allow you to view and control
-currently running tasks in {{ site.data.product.title }}. The status of each task is
+currently running tasks in {{ site.data.product.title_short }}. The status of each task is
 displayed, including time started, time ended, what part of the task is
 currently running, and any errors encountered.
 

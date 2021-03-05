@@ -5,7 +5,7 @@ Update, Delete) using the REST API.
 
 The commands below use basic authentication via the `--user
 admin:smartvm` credentials argument. For multiple API calls, it is
-recommended to access the {{ site.data.product.title }} REST API via token-based
+recommended to access the {{ site.data.product.title_short }} REST API via token-based
 authentication. See [Authentication](#_sect_authentication) for details.
 
 **Show a Collection of Resources.**

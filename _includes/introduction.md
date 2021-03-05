@@ -1,13 +1,13 @@
-## Introduction to {{ site.data.product.title }}
+## Introduction to {{ site.data.product.title_short }}
 
-{{ site.data.product.title }} delivers the insight, control, and automation that
+{{ site.data.product.title_short }} delivers the insight, control, and automation that
 enterprises need to address the challenges of managing virtual
 environments. This technology enables enterprises with existing virtual
 infrastructures to improve visibility and control, and those starting
 virtualization deployments to build and operate a well-managed virtual
 infrastructure.
 
-{{ site.data.product.title }} provides the following feature sets:
+{{ site.data.product.title_short }} provides the following feature sets:
 
   - Insight: Discovery, Monitoring, Utilization, Performance, Reporting,
     Analytic, Chargeback, and Trending.
@@ -24,17 +24,17 @@ infrastructure.
 
 ### Architecture
 
-The diagram below describes the capabilities of {{ site.data.product.title }}. Its
+The diagram below describes the capabilities of {{ site.data.product.title_short }}. Its
 features are designed to work together to provide robust management and
 maintenance of your virtual infrastructure. ![1845](../images/1845.png)
 
 The architecture comprises the following components:
 
-  - The {{ site.data.product.title }} appliance (appliance) which is supplied as a
+  - The {{ site.data.product.title_short }} appliance (appliance) which is supplied as a
     secure, high-performance, preconfigured virtual machine. It provides
     support for HTTPS communications.
 
-  - The {{ site.data.product.title }} Server (Server) resides on the appliance. It is
+  - The {{ site.data.product.title_short }} Server (Server) resides on the appliance. It is
     the software layer that communicates between the SmartProxy and the
     Virtual Management Database. It includes support for HTTPS
     communications.
@@ -45,7 +45,7 @@ The architecture comprises the following components:
     Infrastructure. It also holds status information regarding appliance
     tasks.
 
-  - The {{ site.data.product.title }} Console (Console) is the Web interface used to
+  - The {{ site.data.product.title_short }} Console (Console) is the Web interface used to
     view and control the Server and appliance. It is consumed through
     Web 2.0 mash-ups and web services (WS Management) interfaces.
 
@@ -58,12 +58,12 @@ The architecture comprises the following components:
 
 ### Requirements
 
-To use {{ site.data.product.title }}, certain virtual hardware, database, and browser
+To use {{ site.data.product.title_short }}, certain virtual hardware, database, and browser
 requirements must be met in your environment.
 
 #### Virtual Hardware Requirements
 
-The {{ site.data.product.title }} appliance requires the following virtual hardware at
+The {{ site.data.product.title_short }} appliance requires the following virtual hardware at
 minimum:
 
   - 4 VCPUs
@@ -115,7 +115,7 @@ Use the following information to plan for your increased VMDB needs when working
 
 #### Browser Requirements
 
-To use {{ site.data.product.title }}, the following browser requirements must be met:
+To use {{ site.data.product.title_short }}, the following browser requirements must be met:
 
   - One of the following web browsers:
 
@@ -129,9 +129,9 @@ To use {{ site.data.product.title }}, the following browser requirements must be
 
 #### Additional Requirements
 
-Additionally, the following must be configured to use {{ site.data.product.title }}:
+Additionally, the following must be configured to use {{ site.data.product.title_short }}:
 
-  - The {{ site.data.product.title }} appliance must already be installed and
+  - The {{ site.data.product.title_short }} appliance must already be installed and
     activated in your enterprise environment.
 
   - The SmartProxy must have visibility into the virtual machines and
@@ -146,7 +146,7 @@ before proceeding.
 
   - Account Role
     The level of access a user has to different parts and functions of
-    the {{ site.data.product.title }} console. There are a variety of Account Roles,
+    the {{ site.data.product.title_short }} console. There are a variety of Account Roles,
     which can be assigned to users to restrict or allow access to parts
     of the console and virtual infrastructure.
 
@@ -154,7 +154,7 @@ before proceeding.
     An execution that is performed after a condition is evaluated.
 
   - Alert
-    {{ site.data.product.title }} alerts notify administrators and monitoring systems
+    {{ site.data.product.title_short }} alerts notify administrators and monitoring systems
     of critical configuration changes and threshold limits in the
     virtual environment. The notification can take the form of either an
     email or an SNMP trap.
@@ -169,19 +169,19 @@ before proceeding.
     usage of these resources are scaled depending on the user
     requirements and metered for cost.
 
-  - {{ site.data.product.title }} Appliance
+  - {{ site.data.product.title_short }} Appliance
     A virtual machine where the virtual management database (VMDB) and
-    {{ site.data.product.title }} reside.
+    {{ site.data.product.title_short }} reside.
 
-  - {{ site.data.product.title }} Console
-    A web-based interface into the {{ site.data.product.title }} appliance.
+  - {{ site.data.product.title_short }} Console
+    A web-based interface into the {{ site.data.product.title_short }} appliance.
 
-  - {{ site.data.product.title }} Role
-    A designation assigned to a {{ site.data.product.title }} server that defines what
-    a {{ site.data.product.title }} server can do.
+  - {{ site.data.product.title_short }} Role
+    A designation assigned to a {{ site.data.product.title_short }} server that defines what
+    a {{ site.data.product.title_short }} server can do.
 
-  - {{ site.data.product.title }} Server
-    The application that runs on the {{ site.data.product.title }} appliance and
+  - {{ site.data.product.title_short }} Server
+    The application that runs on the {{ site.data.product.title_short }} appliance and
     communicates with the SmartProxy and the VMDB.
 
   - Cluster
@@ -193,7 +193,7 @@ before proceeding.
     subsequent action.
 
   - Discovery
-    Process run by the {{ site.data.product.title }} server which finds virtual
+    Process run by the {{ site.data.product.title_short }} server which finds virtual
     machine and cloud providers.
 
   - Drift
@@ -204,8 +204,8 @@ before proceeding.
     A trigger to check a condition.
 
   - Event Monitor
-    Software on the {{ site.data.product.title }} appliance which monitors external
-    providers for events and sends them to the {{ site.data.product.title }} server.
+    Software on the {{ site.data.product.title_short }} appliance which monitors external
+    providers for events and sends them to the {{ site.data.product.title_short }} server.
 
   - Host
     A computer running a hypervisor, capable of hosting and monitoring
@@ -241,7 +241,7 @@ before proceeding.
     A set of policies.
 
   - Refresh
-    A process run by the {{ site.data.product.title }} server which checks for
+    A process run by the {{ site.data.product.title_short }} server which checks for
     relationships of the provider or host to other resources, such as
     storage locations, repositories, virtual machines, or instances. It
     also checks the power states of those resources.
@@ -265,24 +265,24 @@ before proceeding.
 
   - SmartProxy
     The SmartProxy is a software agent that acts on behalf of the
-    {{ site.data.product.title }} appliance to perform actions on hosts, providers,
+    {{ site.data.product.title_short }} appliance to perform actions on hosts, providers,
     storage and virtual machines.
 
   -
-    The SmartProxy can be configured to reside on the {{ site.data.product.title }}
+    The SmartProxy can be configured to reside on the {{ site.data.product.title_short }}
     appliance or on an ESX server version. The SmartProxy can be
-    deployed from the {{ site.data.product.title }} appliance, and provides visibility
+    deployed from the {{ site.data.product.title_short }} appliance, and provides visibility
     to the VMFS storage. Each storage location must have a SmartProxy
     with visibility to it. The SmartProxy acts on behalf of the
-    {{ site.data.product.title }} appliance. If the SmartProxy is not embedded in the
-    {{ site.data.product.title }} server, it communicates with the {{ site.data.product.title }}
+    {{ site.data.product.title_short }} appliance. If the SmartProxy is not embedded in the
+    {{ site.data.product.title_short }} server, it communicates with the {{ site.data.product.title_short }}
     appliance over HTTPS on standard port 443.
 
   - SmartState Analysis
     Process run by the SmartProxy which collects the details of a
     virtual machine or instance. Such details include accounts, drivers,
     network information, hardware, and security patches. This process is
-    also run by the {{ site.data.product.title }} server on hosts and clusters. The
+    also run by the {{ site.data.product.title_short }} server on hosts and clusters. The
     data is stored in the VMDB.
 
   - SmartTags
@@ -294,7 +294,7 @@ before proceeding.
     resides that is connected to a resource.
 
   - Tags
-    Descriptive terms defined by a {{ site.data.product.title }} user or the system
+    Descriptive terms defined by a {{ site.data.product.title_short }} user or the system
     used to categorize a resource.
 
   - Template
@@ -305,7 +305,7 @@ before proceeding.
   - Unmanaged Virtual Machine
     Files discovered on a datastore that do not have a virtual machine
     associated with them in the VMDB. These files may be registered to a
-    provider that the {{ site.data.product.title }} server does not have configuration
+    provider that the {{ site.data.product.title_short }} server does not have configuration
     information on. Possible causes may be that the provider has not
     been discovered or that the provider has been discovered, but no
     security credentials have been provided.
@@ -317,7 +317,7 @@ before proceeding.
     provide a scalable and on-demand method of system provisioning.
 
   - Virtual Management Database (VMDB)
-    Database used by the {{ site.data.product.title }} appliance to store information
+    Database used by the {{ site.data.product.title_short }} appliance to store information
     about your resources, users, and anything else required to manage
     your virtual enterprise.
 
@@ -333,7 +333,7 @@ before proceeding.
     user interface or database.
 
   - Zones
-    {{ site.data.product.title }} Infrastructure can be organized into zones to
+    {{ site.data.product.title_short }} Infrastructure can be organized into zones to
     configure failover and to isolate traffic. Zones can be created
     based on your environment. Zones can be based on geographic
     location, network location, or function. When first started, new

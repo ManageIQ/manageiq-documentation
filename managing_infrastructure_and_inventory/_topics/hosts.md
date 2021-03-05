@@ -42,7 +42,7 @@ _topics/performing_smartstate_analysis_on_hosts.md %}
 
 ## Comparing Hosts
 
-{{ site.data.product.title }} allows you to compare hosts and check operating systems,
+{{ site.data.product.title_short }} allows you to compare hosts and check operating systems,
 host software and version information, and hardware.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].

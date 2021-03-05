@@ -1,6 +1,6 @@
 # Adding Azure Providers
 
-{{ site.data.product.title }} supports Microsoft Azure providers. Before
+{{ site.data.product.title_short }} supports Microsoft Azure providers. Before
 {{ site.data.product.title_short }} can be authenticated to Microsoft Azure, you must
 complete a series of prerequisite steps using the Azure portal; see
 [Create Active Directory application and service principal account using

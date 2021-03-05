@@ -1,7 +1,7 @@
 # Retiring Virtual Machines
 
 Specify a retirement date and time for virtual machines or instances
-using {{ site.data.product.title }}.
+using {{ site.data.product.title_short }}.
 
 To set retirement date and time:
 

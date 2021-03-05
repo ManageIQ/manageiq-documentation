@@ -1,6 +1,6 @@
 # Viewing User Information for a Virtual Machine or Template
 
-{{ site.data.product.title }}'s **SmartState Analysis** feature returns user
+{{ site.data.product.title_short }}'s **SmartState Analysis** feature returns user
 information. Drill into the user to get details on the user’s account,
 including group memberships.
 

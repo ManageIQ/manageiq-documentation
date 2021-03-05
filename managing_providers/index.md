@@ -3,7 +3,7 @@
 
 # Managing Providers
 
-{{ site.data.product.title }} can manage a variety of external environments, known as providers and managers. A provider or manager is any system that {{ site.data.product.title_short }} integrates with for the purpose of collecting data and performing operations.
+{{ site.data.product.title_short }} can manage a variety of external environments, known as providers and managers. A provider or manager is any system that {{ site.data.product.title_short }} integrates with for the purpose of collecting data and performing operations.
 
 In {{ site.data.product.title_short }}, a *provider* is an external virtualization, cloud, or containers environment that manages multiple virtual machines
 or instances residing on multiple hosts. One example is Red Hat Virtualization, a platform that manages multiple hosts and virtual machines.

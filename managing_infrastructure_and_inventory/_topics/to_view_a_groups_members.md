@@ -1,6 +1,6 @@
 # Viewing Group Information for a Virtual Machine or Template
 
-{{ site.data.product.title }}'s **SmartState Analysis** feature returns group
+{{ site.data.product.title_short }}'s **SmartState Analysis** feature returns group
 information. Explore a group to get a list of its users.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].

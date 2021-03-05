@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1.  Downloading the appliance for your environment as a virtual machine
     image template.
@@ -17,7 +17,7 @@ configurations can be performed.
 
 ### Uploading the Appliance on OpenStack
 
-Log in to your OpenStack dashboard to upload your {{ site.data.product.title }}
+Log in to your OpenStack dashboard to upload your {{ site.data.product.title_short }}
 appliance.
 
 1.  Log in to the OpenStack dashboard.
@@ -51,7 +51,7 @@ appliance.
 
 12. Click **Create Image**.
 
-You have successfully uploaded the {{ site.data.product.title }} appliance.
+You have successfully uploaded the {{ site.data.product.title_short }} appliance.
 
 The appliance image is placed in a queue to be uploaded. It may take
 some time before the Status of the image changes from Queued to Active.
@@ -96,13 +96,13 @@ group can talk to each other on any port.
 
 A flavor is a resource allocation profile that specifies, for example,
 how many virtual CPUs and how much RAM can be allocated to an instance.
-You can, for example, run {{ site.data.product.title }} on a Red Hat OpenStack
+You can, for example, run {{ site.data.product.title_short }} on a Red Hat OpenStack
 m1.large flavor, which specifies a virtual machine with 4 cores, 12 GB
-RAM, and 80 GB disk space. Creating a flavor to run {{ site.data.product.title }} is
+RAM, and 80 GB disk space. Creating a flavor to run {{ site.data.product.title_short }} is
 optional.
 
 The following procedure demonstrates creating a flavor with the minimum
-requirements (4 cores, 12 GB RAM, 44 GB disk space) for {{ site.data.product.title }}.
+requirements (4 cores, 12 GB RAM, 44 GB disk space) for {{ site.data.product.title_short }}.
 For more information about flavors, see the Red Hat OpenStack Platform
 Administration User Guide.
 
@@ -112,7 +112,7 @@ Administration User Guide.
 
 3.  Click **Create Flavor** to display the **Create Flavor** dialog.
 
-4.  Configure the settings to define a flavor that meets {{ site.data.product.title }}
+4.  Configure the settings to define a flavor that meets {{ site.data.product.title_short }}
     system requirements.
 
     1.  Enter a name for the flavor.
@@ -131,7 +131,7 @@ Administration User Guide.
 
 5.  Click **Create Flavor**.
 
-A new flavor specific to {{ site.data.product.title }} is created.
+A new flavor specific to {{ site.data.product.title_short }} is created.
 
 ### Launching the Instance
 

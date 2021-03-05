@@ -10,8 +10,8 @@
     status.
 
     This category also provides reports relating to the operation of
-    {{ site.data.product.title }}, such as user IDs and snapshots taken by
-    {{ site.data.product.title }}.
+    {{ site.data.product.title_short }}, such as user IDs and snapshots taken by
+    {{ site.data.product.title_short }}.
 
   - **VM Sprawl**: usage information and disk waste.
 

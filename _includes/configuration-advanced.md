@@ -75,7 +75,7 @@ configuration of the appliance:
 </tr>
 <tr class="even">
 <td><p><strong>Restart Appliance</strong></p></td>
-<td><p>Restart the {{ site.data.product.title }} appliance. You can either restart the appliance and clear the logs or just restart the appliance.</p></td>
+<td><p>Restart the {{ site.data.product.title_short }} appliance. You can either restart the appliance and clear the logs or just restart the appliance.</p></td>
 </tr>
 <tr class="odd">
 <td><p><strong>Shut Down Appliance</strong></p></td>
@@ -83,11 +83,11 @@ configuration of the appliance:
 </tr>
 <tr class="even">
 <td><p><strong>Summary Information</strong></p></td>
-<td><p>Go back to the network summary screen for the {{ site.data.product.title }} appliance.</p></td>
+<td><p>Go back to the network summary screen for the {{ site.data.product.title_short }} appliance.</p></td>
 </tr>
 <tr class="odd">
 <td><p><strong>Quit</strong></p></td>
-<td><p>Leave the {{ site.data.product.title }} appliance console.</p></td>
+<td><p>Leave the {{ site.data.product.title_short }} appliance console.</p></td>
 </tr>
 </tbody>
 </table>

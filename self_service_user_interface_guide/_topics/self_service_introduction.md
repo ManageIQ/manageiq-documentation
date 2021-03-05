@@ -1,6 +1,6 @@
-# {{ site.data.product.title }} Self Service
+# {{ site.data.product.title_short }} Self Service
 
-{{ site.data.product.title }} Self Service is a web-based graphical user interface for
+{{ site.data.product.title_short }} Self Service is a web-based graphical user interface for
 ordering and managing IT service requests. You can enable self-service
 tenant end users, who can easily access their services, track requests,
 and manage their accounts using the Self Service user interface (SSUI),

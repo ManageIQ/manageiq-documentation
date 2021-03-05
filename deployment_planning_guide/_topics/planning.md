@@ -1,8 +1,8 @@
 ## Planning
 
 This guide provides some general guidelines to planning a deployment on
-{{ site.data.product.title }}. This includes creating multiple regions containing
-{{ site.data.product.title }} appliances, CPU sizing recommendations, database sizing
+{{ site.data.product.title_short }}. This includes creating multiple regions containing
+{{ site.data.product.title_short }} appliances, CPU sizing recommendations, database sizing
 recommendations, and database configuration.
 
 ### Regions
@@ -35,7 +35,7 @@ resources can be adjusted according to the workload those roles are
 responsible for.
 
 The following diagram demonstrates an example of the multiple regions
-working together in a {{ site.data.product.title }} environment.
+working together in a {{ site.data.product.title_short }} environment.
 
 ![7151](../images/7151.png)
 
@@ -56,10 +56,10 @@ The following diagram provides a closer look at a region:
 
 ![7150](../images/7150.png)
 
-In this region, we have several {{ site.data.product.title }} appliances acting as UI
+In this region, we have several {{ site.data.product.title_short }} appliances acting as UI
 nodes and worker nodes. These worker nodes execute tasks on the
 providers in your environment. The region also uses a region database
-that reports to a master database on the main {{ site.data.product.title }} appliance.
+that reports to a master database on the main {{ site.data.product.title_short }} appliance.
 All appliances can connect to the authentication services (Active
 Directory, LDAP, Identity Management), outgoing mail (SMTP), and network
 services (SNMP).
@@ -106,7 +106,7 @@ Appliance types
 
 ### Centralized Administration
 
-{{ site.data.product.title }} includes centralized administration capabilities, where
+{{ site.data.product.title_short }} includes centralized administration capabilities, where
 certain operations can be initiated from the global region and processed
 and executed on remote regions. From the global region, you can also
 access the user interfaces of virtual machines residing in remote
@@ -155,7 +155,7 @@ the remote system if the user does not have the required permissions.
 
 ### Tenancy
 
-{{ site.data.product.title }} supports multitenancy. Tenants can be totally separate
+{{ site.data.product.title_short }} supports multitenancy. Tenants can be totally separate
 or they can be in a parent-child or peer relationship. Tenants in a
 relationship can share or inherit a certain configuration. You can
 subdivide and create child tenants and they, in turn, can have child
@@ -360,7 +360,7 @@ interface appliance behind the load balancer.
 
 ### Database Configuration
 
-This section describes the {{ site.data.product.title }} PostgreSQL database
+This section describes the {{ site.data.product.title_short }} PostgreSQL database
 configuration. The below table provides information on each file: its
 location, primary function, and notes regarding behavior or
 recommendations.

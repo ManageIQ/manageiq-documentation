@@ -1,6 +1,6 @@
 # Infrastructure Providers
 
-In {{ site.data.product.title }}, an infrastructure provider is a virtual
+In {{ site.data.product.title_short }}, an infrastructure provider is a virtual
 infrastructure environment that you can add to a {{ site.data.product.title_short }}
 appliance to manage and interact with the resources in that environment.
 This chapter describes the different types of infrastructure providers

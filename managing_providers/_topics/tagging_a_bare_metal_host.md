@@ -1,6 +1,6 @@
 # Tagging a Bare Metal Host
 
-{{ site.data.product.title }} can also control policy settings of bare metal systems
+{{ site.data.product.title_short }} can also control policy settings of bare metal systems
 from Red Hat Satellite 6 through tagging. Tagging attaches levels of
 metadata to help define the policy rules required for a set of systems.
 

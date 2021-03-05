@@ -2,7 +2,7 @@
 
 You must first create the job or workflow template in Ansible Tower. The
 job or workflow templates are automatically discovered by
-{{ site.data.product.title }} when refreshing your Ansible Tower provider’s inventory.
+{{ site.data.product.title_short }} when refreshing your Ansible Tower provider’s inventory.
 
 </div>
 

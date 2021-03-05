@@ -1,6 +1,6 @@
 ## Overview
 
-{{ site.data.product.title }} provides the ability to define services, which can
+{{ site.data.product.title_short }} provides the ability to define services, which can
 include one or more virtual machines or instances, and can be deployed
 across hybrid environments. Services can be made available to users
 through the Self Service user interface, allowing users to order

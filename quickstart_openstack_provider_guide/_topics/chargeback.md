@@ -6,7 +6,7 @@ see [???](#cf-caputils).
 
 ### Creating Chargeback Rates
 
-{{ site.data.product.title }} allows you to create your own set of computing and
+{{ site.data.product.title_short }} allows you to create your own set of computing and
 storage costs to use for billing.
 
 Chargeback rates can be configured at a single rate or in tiers, where
@@ -49,7 +49,7 @@ After assigning a chargeback rate, assign it to a cloud provider.
 
 ### Creating a Chargeback Report
 
-{{ site.data.product.title }} allows you to create chargeback reports to monitor costs
+{{ site.data.product.title_short }} allows you to create chargeback reports to monitor costs
 you charged.
 
 {% include chargeback-report-creation.md %}

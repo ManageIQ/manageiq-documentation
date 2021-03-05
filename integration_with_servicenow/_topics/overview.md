@@ -1,6 +1,6 @@
 ## Overview
 
-{{ site.data.product.title }} integration with ServiceNow enables authentication with
+{{ site.data.product.title_short }} integration with ServiceNow enables authentication with
 an existing ServiceNow database and **add/amend** items in the
 ServiceNow database during state machine processing, such as the virtual
 machine provisioning state machine. Note that information in this guide

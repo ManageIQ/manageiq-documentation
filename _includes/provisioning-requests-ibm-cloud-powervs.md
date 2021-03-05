@@ -1,5 +1,5 @@
 For an overview of IBM Power Systems Virtual Servers, including terminology
-used in {{ site.data.product.title }}, see [Getting started with IBM Power
+used in {{ site.data.product.title_short }}, see [Getting started with IBM Power
 Systems Virtual Servers](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-getting-started)
 
 Create a request to provision IBM Power Systems Virtual Servers instances

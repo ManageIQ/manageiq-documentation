@@ -16,5 +16,5 @@ information.
     ![2003](../images/2003.png) (**Refresh Relationships and Power
     States**) on the Host Taskbar.
 
-{{ site.data.product.title }} determines the state (running, stopped, or paused) of
+{{ site.data.product.title_short }} determines the state (running, stopped, or paused) of
 all virtual machines registered to the host.

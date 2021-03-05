@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1.  Downloading the VHD image to your SCVMM Library.
 

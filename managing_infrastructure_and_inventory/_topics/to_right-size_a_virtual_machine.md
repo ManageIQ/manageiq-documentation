@@ -1,7 +1,7 @@
 # Right Sizing a Virtual Machine
 
-{{ site.data.product.title }} uses collected statistics to recommend the best size for
-a virtual machine. {{ site.data.product.title }} uses the information from the
+{{ site.data.product.title_short }} uses collected statistics to recommend the best size for
+a virtual machine. {{ site.data.product.title_short }} uses the information from the
 **Normal Operating Range** to calculate the recommendations.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].

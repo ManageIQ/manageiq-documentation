@@ -2,7 +2,7 @@
 
 The options under the **My Settings** menu allow you to configure user
 interface display options specific to the user account with which you
-log in to {{ site.data.product.title }}, such as the default view displayed on login,
+log in to {{ site.data.product.title_short }}, such as the default view displayed on login,
 and personal tags. You can also configure the color scheme, and button
 options on the main dashboard.
 
@@ -81,7 +81,7 @@ display on each resource page.
 #### Setting the Start Page
 
 Use the following procedure to set the default start page after logging
-in. For example, instead of going to the **{{ site.data.product.title }}** dashboard,
+in. For example, instead of going to the **{{ site.data.product.title_short }}** dashboard,
 you can set the default start page to see a list of your virtual
 machines.
 
@@ -123,7 +123,7 @@ zone for the console. These settings are specific to the logged-on user.
 ### Default Views
 
 The options under the **Default Views** menu allow you to configure the
-default layout used to display individual screens in the {{ site.data.product.title }}
+default layout used to display individual screens in the {{ site.data.product.title_short }}
 user interface. The options you select under this menu specify the
 default options for each screen, but you can also change the layout for
 each screen using the layout buttons on each screen.

@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1.  Downloading the appliance for your environment as a virtual machine
     image template.
@@ -17,7 +17,7 @@ configurations can be performed.
 
 ### Uploading the Appliance on VMware vSphere
 
-Uploading the {{ site.data.product.title }} appliance file onto VMware vSphere systems
+Uploading the {{ site.data.product.title_short }} appliance file onto VMware vSphere systems
 has the following requirements:
 
   - 44 GB of space on the chosen vSphere datastore.
@@ -35,7 +35,7 @@ has the following requirements:
 These are the procedural steps as of the time of writing. For more
 information, consult the VMware documentation.
 
-Use the following procedure to upload the {{ site.data.product.title }} appliance OVF template from your local file system using the vSphere Client.
+Use the following procedure to upload the {{ site.data.product.title_short }} appliance OVF template from your local file system using the vSphere Client.
 
 1.  In the vSphere Client, select menu:File\[Deploy OVF Template\]. The
     Deploy OVF Template wizard appears.
@@ -58,13 +58,13 @@ Use the following procedure to upload the {{ site.data.product.title }} applianc
 5.  Select the host or cluster on which you want to deploy the OVF
     template and click **Next**.
 
-6.  Select the host on which you want to run the run the {{ site.data.product.title }}
+6.  Select the host on which you want to run the run the {{ site.data.product.title_short }}
     appliance, and click **Next**.
 
 7.  Navigate to, and select the resource pool where you want to run the
-    {{ site.data.product.title }} appliance and click **Next**.
+    {{ site.data.product.title_short }} appliance and click **Next**.
 
-8.  Select a datastore to store the deployed {{ site.data.product.title }} appliance,
+8.  Select a datastore to store the deployed {{ site.data.product.title_short }} appliance,
     and click Next. Ensure to select a datastore large enough to
     accommodate the virtual machine and all of its virtual disk files.
 

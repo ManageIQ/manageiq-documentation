@@ -1,7 +1,7 @@
 # Enabling Public AMIs from Amazon EC2
 
 By default, public AMIs from an Amazon EC2 provider are not viewable in
-{{ site.data.product.title }}. To make these images viewable, you must edit the main
+{{ site.data.product.title_short }}. To make these images viewable, you must edit the main
 configuration file for the appliance.
 
 **Note:**

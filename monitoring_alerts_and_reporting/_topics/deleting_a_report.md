@@ -1,7 +1,7 @@
 ### Deleting a Report
 
 Delete reports when you find that they are no longer useful. Only
-administrators and super administrators of {{ site.data.product.title }} can add,
+administrators and super administrators of {{ site.data.product.title_short }} can add,
 copy, edit, and delete reports.
 
 **Note:**

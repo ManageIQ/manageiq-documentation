@@ -7,7 +7,7 @@ Configure the following to collect capacity and utilization data from a Red Hat 
   - For information on selecting clusters and datastores used to collect data, see [Capacity and Utilization Data Collected](../deployment_planning_guide/index.html#capacity-and-utilization-data-collected) in the *General Configuration Guide*.
 
   - In your Red Hat Virtualization environment, install the Data
-    Warehouse and Reports components, and create a {{ site.data.product.title }} user in the Data Warehouse database:
+    Warehouse and Reports components, and create a {{ site.data.product.title_short }} user in the Data Warehouse database:
 
       - To install the Data Warehouse and Reports components in a Red Hat Virtualization environment, see the [Data Warehouse Guide](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/data_warehouse_guide/).
 

@@ -55,12 +55,12 @@ can also be passed through a relationship:
 ### Methods
 
 Methods are pieces of code associated with a class or object to perform
-a task. {{ site.data.product.title }} allows for Ruby methods or backing a method
+a task. {{ site.data.product.title_short }} allows for Ruby methods or backing a method
 using an Ansible playbook. You can create your own methods or use
 relationships to link to pre-existing ones.
 
-{{ site.data.product.title }} ships with a core set of Ruby gems used by the
-{{ site.data.product.title }} Rails Application. The Ruby gems in this set are subject
+{{ site.data.product.title_short }} ships with a core set of Ruby gems used by the
+{{ site.data.product.title_short }} Rails Application. The Ruby gems in this set are subject
 to change. If you are calling gems using Automate that are no longer in
 this release, you can install them by using the `gem install` command.
 
@@ -71,7 +71,7 @@ the responsibility of the author of such custom automation to own the
 life cycle of any gem being referenced in those methods.
 
 The Release Notes list Ruby gems that have been added, updated, or
-removed in the latest version of {{ site.data.product.title }}.
+removed in the latest version of {{ site.data.product.title_short }}.
 
 {% include_relative _topics/to_create_a_method1.md %}
 
@@ -92,7 +92,7 @@ allows you to see the results in tree and XML view.
 ### Importing, Exporting, and Resetting the Datastore
 
 The **Automate Model** can be exported and imported as a YAML file.
-{{ site.data.product.title }} allows you to back up your model by export. Red Hat may provide you with new or updated classes, and provides an import function
+{{ site.data.product.title_short }} allows you to back up your model by export. Red Hat may provide you with new or updated classes, and provides an import function
 for either a class or the entire model. Finally, you can reset the datastore to its default. Always be sure to export the current datastore before importing or resetting.
 
 **Note:**

@@ -30,7 +30,7 @@ When using these items in a method, prefix them with `vm.`. For example:
 | Evm Owner                             | evm\_owner\_id                       |
 | Evm Owner Email                       | evm\_owner\_email                    |
 | Evm Owner Name                        | evm\_owner\_name                     |
-| {{ site.data.product.title }} Unique ID (Guid)      | guid                                 |
+| {{ site.data.product.title_short }} Unique ID (Guid)      | guid                                 |
 | Format                                | format                               |
 | Host                                  | host\_id                             |
 | Host Name                             | host\_name                           |

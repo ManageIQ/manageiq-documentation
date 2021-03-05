@@ -20,7 +20,7 @@
 
 ### Authentication
 
-There are two methods of authentication for the {{ site.data.product.title }} REST
+There are two methods of authentication for the {{ site.data.product.title_short }} REST
 API:
 
   - **Basic Authentication**: The user and password credentials are

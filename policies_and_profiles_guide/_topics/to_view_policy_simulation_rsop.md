@@ -1,6 +1,6 @@
 ### Viewing Policy Simulation - Resultant Set of Policy (RSOP)
 
-After the Policy Profiles are assigned, you can see the final result of the resolution of all policies based on which Events occur. Based on the result, you can adjust your Policies. To view RSOP, go to the control area in the {{ site.data.product.title }} console.
+After the Policy Profiles are assigned, you can see the final result of the resolution of all policies based on which Events occur. Based on the result, you can adjust your Policies. To view RSOP, go to the control area in the {{ site.data.product.title_short }} console.
 
 1. Browse to menu: **Control > Simulation**.
 

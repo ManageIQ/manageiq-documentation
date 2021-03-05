@@ -1,6 +1,6 @@
 # Triggering a Refresh of an IBM Terraform Provider
 
-Your IBM Terraform provider can still create new hosts independently of {{ site.data.product.title }}. Your {{ site.data.product.title }} detects these changes after an automatic refresh period. However, you can trigger a manual refresh to avoid waiting for the automatic refresh.
+Your IBM Terraform provider can still create new hosts independently of {{ site.data.product.title_short }}. Your {{ site.data.product.title_short }} detects these changes after an automatic refresh period. However, you can trigger a manual refresh to avoid waiting for the automatic refresh.
 
 1. Navigate to menu: **Configuration > Providers**. 
 

@@ -1,7 +1,7 @@
 # Managing Security Groups for Cloud Instances
 
 Manage security groups associated with cloud provider instances using
-{{ site.data.product.title }}.
+{{ site.data.product.title_short }}.
 
 To add a security group to an instance:
 

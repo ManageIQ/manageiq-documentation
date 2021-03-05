@@ -85,7 +85,7 @@ This format for this table uses the following header columns:
 Using a combination of these options, you create a series of rules that
 govern which hosts can access your database and which hosts are denied.
 For example, you might change the default HBA rules to only allow remote
-access to the {{ site.data.product.title }} database (`vmdb_production`) from hosts in
+access to the {{ site.data.product.title_short }} database (`vmdb_production`) from hosts in
 a certain subnet. The modified HBA table would looks like this:
 
     # TYPE  DATABASE          USER  ADDRESS         METHOD
@@ -93,7 +93,7 @@ a certain subnet. The modified HBA table would looks like this:
     host    vmdb_production   all   192.168.1.0/24  md5
     #hostssl all              all   all             md5
 
-These restrictions help when structuring your {{ site.data.product.title }} appliances
+These restrictions help when structuring your {{ site.data.product.title_short }} appliances
 in relationships. For example, use these database restrictions to grant
 access only between a master database appliance in one region and
 appliances connecting from a separate region.

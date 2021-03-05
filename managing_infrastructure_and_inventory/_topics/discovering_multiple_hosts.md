@@ -1,6 +1,6 @@
 # Discovering Multiple Hosts
 
-If not using a provider, use {{ site.data.product.title }}'s Discovery to find hosts
+If not using a provider, use {{ site.data.product.title_short }}'s Discovery to find hosts
 in your environment within a range of IP addresses.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
@@ -16,6 +16,6 @@ in your environment within a range of IP addresses.
 
 5.  Click **Start**.
 
-{{ site.data.product.title }} searches for the supported hosts. When available, the
+{{ site.data.product.title_short }} searches for the supported hosts. When available, the
 new hosts display. They are named by hostname and IP address. To make
 them identifiable, edit the basic information for each host.

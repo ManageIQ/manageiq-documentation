@@ -6,7 +6,7 @@ Policy profiles are groups of policies that you can assign wholesale to virtual 
 
 ### Simulating Policy
 
-Before assigning a policy profile to a virtual machine, use the {{ site.data.product.title }} controls policy simulation feature to determine if a virtual machine passes a policy profile.
+Before assigning a policy profile to a virtual machine, use the {{ site.data.product.title_short }} controls policy simulation feature to determine if a virtual machine passes a policy profile.
 
 {% include_relative
 _topics/to_simulate_policy_profiles_on_virtual_machines.md %}

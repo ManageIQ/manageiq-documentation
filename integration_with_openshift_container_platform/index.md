@@ -19,7 +19,7 @@
 
 {% include_relative _topics/ocp-retrieve-tokens.md %}
 
-## Configuring {{ site.data.product.title }}
+## Configuring {{ site.data.product.title_short }}
 
 {% include_relative _topics/ocp-config-cfmiq.md %}
 

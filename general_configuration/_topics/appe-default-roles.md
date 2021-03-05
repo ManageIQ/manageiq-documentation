@@ -1,6 +1,6 @@
 # Default Roles
 
-This section outlines the default roles provided in {{ site.data.product.title }} and
+This section outlines the default roles provided in {{ site.data.product.title_short }} and
 the product features to which they are granted access.
 
 # EvmRole-super\_administrator

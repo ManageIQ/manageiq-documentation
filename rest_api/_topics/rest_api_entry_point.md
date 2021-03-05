@@ -1,7 +1,7 @@
 #### REST API Entry Point
 
 The REST API is available via the `/api` URL prefix. It is accessed on
-the {{ site.data.product.title }} server as follows:
+the {{ site.data.product.title_short }} server as follows:
 
     https://<host_fqdn>/api
 

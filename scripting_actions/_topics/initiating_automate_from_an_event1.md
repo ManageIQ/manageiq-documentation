@@ -1,6 +1,6 @@
 ### Initiating Automate from an Event
 
-You can also use a {{ site.data.product.title }} Policy Event to initiate automation.
+You can also use a {{ site.data.product.title_short }} Policy Event to initiate automation.
 You can either use the provided Raise Automation Event action or create
 a custom automation action. The first case will start in the
 `/System/Process` class, but then go to the Event that initiated the

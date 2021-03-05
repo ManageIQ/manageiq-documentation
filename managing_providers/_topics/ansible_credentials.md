@@ -1,12 +1,12 @@
 # Credentials
 
-Credentials are utilized by {{ site.data.product.title }} for authentication when
+Credentials are utilized by {{ site.data.product.title_short }} for authentication when
 running Ansible playbooks against machines, synchronizing with inventory
 sources, and importing project content from a version control system.
 
 ## Adding Credentials
 
-{{ site.data.product.title }} can store credentials used by playbooks. Credentials
+{{ site.data.product.title_short }} can store credentials used by playbooks. Credentials
 saved in {{ site.data.product.title_short }} are matched and executed with a playbook
 when run.
 

@@ -7,7 +7,7 @@ virtual machine, with which you can interact - on your cloud provider.
 The **Instance** and **Images** containers, combined with the ability to
 analyze information inside each instance or image, provides in-depth
 information across the cloud environment. This rich set of information
-enables {{ site.data.product.title }} users to improve problem resolution times and
+enables {{ site.data.product.title_short }} users to improve problem resolution times and
 effectively manage instances and images in their cloud environment.
 
 The **Instances** and **Images** pages display all instances and images
@@ -121,7 +121,7 @@ _topics/creating_an_instance_or_image_report.md %}
 
 ## Comparing Instances and Images
 
-You can compare multiple instances in {{ site.data.product.title }} server. This
+You can compare multiple instances in {{ site.data.product.title_short }} server. This
 allows you to see how different instances are from their original image.
 This helps detect missing patches, unmanaged user accounts, or
 unauthorized services.

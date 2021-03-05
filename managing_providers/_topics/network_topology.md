@@ -2,7 +2,7 @@
 
 The **Topology** widget is an interactive topology graph, showing the
 status and relationships between the different entities of the network
-providers that {{ site.data.product.title }} has access to.
+providers that {{ site.data.product.title_short }} has access to.
 
 The topology graph includes cloud subnets, virtual machines, security
 groups, floating IP addresses, cloud networks, network routers, cloud

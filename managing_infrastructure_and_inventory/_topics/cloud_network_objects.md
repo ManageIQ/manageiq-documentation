@@ -1,6 +1,6 @@
 # Cloud Networks
 
-{{ site.data.product.title }} enables configuration and administration for the
+{{ site.data.product.title_short }} enables configuration and administration for the
 software-defined networking component of Red Hat OpenStack Platform. The
 virtual network infrastructure enables connectivity between instances
 and the physical external network.

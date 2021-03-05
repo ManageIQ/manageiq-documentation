@@ -1,6 +1,6 @@
 ## Ansible Service Linking
 
-{{ site.data.product.title }} provides a module allowing inventoried resources such as
+{{ site.data.product.title_short }} provides a module allowing inventoried resources such as
 virtual machines created using Ansible playbooks to link back to the
 services used to generate them. During service ordering of a playbook
 the `add_provider_vms` module will allow the playbook to connect back to

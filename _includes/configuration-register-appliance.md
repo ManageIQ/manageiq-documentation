@@ -1,5 +1,5 @@
 Before you can access and apply package updates, you must register and
-subscribe the {{ site.data.product.title }} appliance to either Red Hat Content
+subscribe the {{ site.data.product.title_short }} appliance to either Red Hat Content
 Delivery Network (CDN) or to a Red Hat Satellite server.
 
 You need the following to register your appliance:
@@ -23,7 +23,7 @@ To configure registration for a region:
 
 4.  Click **Edit Registration**.
 
-5.  Configure registration details for the {{ site.data.product.title }} appliance
+5.  Configure registration details for the {{ site.data.product.title_short }} appliance
     using one of two available options:
 
     1.  To register with Red Hat Subscription Management:

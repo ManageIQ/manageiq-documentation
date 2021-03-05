@@ -1,6 +1,6 @@
 # Introduction to Authentication in {{ site.data.product.title_short }}
 
-{{ site.data.product.title }} provides several methods to authenticate users.
+{{ site.data.product.title_short }} provides several methods to authenticate users.
 Authentication can be configured from {{ site.data.product.title_short }} using the
 local database, or {{ site.data.product.title_short }} can use protocols such as LDAP
 and SAML to connect to a pre-configured authentication system such as

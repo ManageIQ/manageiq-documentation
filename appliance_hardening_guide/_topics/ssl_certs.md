@@ -28,7 +28,7 @@ For example:
     Country Name (2 letter code) [XX]:US
     State or Province Name (full name) []:North Carolina
     Locality Name (eg, city) [Default City]:Raleigh
-    Organization Name (eg, company) [Default Company Ltd]:{{ site.data.product.title }}
+    Organization Name (eg, company) [Default Company Ltd]:{{ site.data.product.title_short }}
     Organizational Unit Name (eg, section) []:Customer Content Services
     Common Name (eg, your name or your server's hostname) []:$(hostname)
     Email Address []:example@example.com
@@ -81,6 +81,6 @@ Updates from the Red Hat Content Delivery Network might overwrite these certific
 
 **Note:**
 
-See also the following article for information on replacing SSL certificates in {{ site.data.product.title }} :
+See also the following article for information on replacing SSL certificates in {{ site.data.product.title_short }} :
 <https://access.redhat.com/articles/449033>.
 

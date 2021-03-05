@@ -2,15 +2,15 @@
 
 When an Automate method is launched, it has one global variable: `$evm`.
 The `$evm` variable allows the method to communicate back to
-{{ site.data.product.title }}. The `$evm.root` is the root object in the workspace, it
-provides access to the data currently loaded in the {{ site.data.product.title }}
+{{ site.data.product.title_short }}. The `$evm.root` is the root object in the workspace, it
+provides access to the data currently loaded in the {{ site.data.product.title_short }}
 model. It uses the object’s data to solve more complex problems by
-integrating with {{ site.data.product.title }} methods.
+integrating with {{ site.data.product.title_short }} methods.
 
 The following is an excerpt from the **InspectMe** method that can be
 found in the **ManageIQ\\System\\Request** namespace. The dumpRoot
 method accesses the `$evm.root` object, and sends all of its attributes
-to the {{ site.data.product.title }} Automate log for review. In the dumpServer
+to the {{ site.data.product.title_short }} Automate log for review. In the dumpServer
 Method, the inspect method is run based on the value of the miq\_server
 obtained from the `$evm.root` object.
 

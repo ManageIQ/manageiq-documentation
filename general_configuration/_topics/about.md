@@ -1,8 +1,8 @@
 ## About
 
 Click the question mark icon (![questionmark](../images/questionmark.png))
-at the top right of the {{ site.data.product.title }} user interface to open a
-dropdown menu with links to {{ site.data.product.title }} documentation and the Red
+at the top right of the {{ site.data.product.title_short }} user interface to open a
+dropdown menu with links to {{ site.data.product.title_short }} documentation and the Red
 Hat Customer Portal, and for information about the current
 {{ site.data.product.title_short }} session.
 

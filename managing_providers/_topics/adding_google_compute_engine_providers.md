@@ -1,12 +1,12 @@
 # Adding Google Compute Engine Providers
 
-After initial installation and creation of a {{ site.data.product.title }}
+After initial installation and creation of a {{ site.data.product.title_short }}
 environment, add a Google Compute Engine provider by following this
 procedure.
 
 **Prerequisites.**
 
-To add a Google Compute Engine provider to {{ site.data.product.title }}, you need:
+To add a Google Compute Engine provider to {{ site.data.product.title_short }}, you need:
 
   - A Google Cloud Platform account
 

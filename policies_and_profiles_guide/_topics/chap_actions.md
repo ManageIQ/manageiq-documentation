@@ -17,14 +17,14 @@ Actions are performed after the condition is evaluated. Control comes with a set
 | Disconnect All Floppy and CD-ROM Drives for Virtual Machine | Disconnect all of the floppy and CD-ROM drives for virtual machine.                                                |
 | Execute an external script                                  | Run an external script.                                                                                            |
 | Generate Audit Event                                        | Write an entry to the audit log and to the VMDB.                                                                   |
-| Generate log message                                        | Write an entry to the {{ site.data.product.title }} log.                                                                         |
+| Generate log message                                        | Write an entry to the {{ site.data.product.title_short }} log.                                                                         |
 | Initiate SmartState Analysis for Host                       | Start a SmartState Analysis for a host.                                                                            |
 | Initiate SmartState Analysis for VM                         | Start a SmartState Analysis for a virtual machine.                                                                 |
-| Invoke a Custom Automation                                  | For use with {{ site.data.product.title }} automate. It enables you to run tasks and notifications automatically.                |
+| Invoke a Custom Automation                                  | For use with {{ site.data.product.title_short }} automate. It enables you to run tasks and notifications automatically.                |
 | Mark as Non-Compliant                                       | Used with compliance policies. Mark resource as non-compliant. (Compliance status is viewable in summary screens.) |
 | Prevent current event from proceeding                       | Stop the current event from continuing.                                                                            |
 | Put Virtual Machine Guest OS in Standby                     | Put the virtual machines operating system in standby mode.                                                         |
-| Raise Automation Event                                      | Used with {{ site.data.product.title }} automate.                                                                                |
+| Raise Automation Event                                      | Used with {{ site.data.product.title_short }} automate.                                                                                |
 | Refresh data from vCenter                                   | Perform a refresh of the vCenter.                                                                                  |
 | Remove Virtual Machine from Inventory                       | Take the virtual machine out of inventory.                                                                         |
 | Retire Virtual Machine                                      | Retire the virtual machine. (It remains in inventory, but cannot be started.)                                  |
@@ -38,7 +38,7 @@ Default Actions and Descriptions
 
 ### Custom Actions
 
-You can create a custom action by using the {{ site.data.product.title }} console. Enter a description and action type. Procedures for each type of action are shown in the following sections. When you create a policy, you can associate actions with specific events.
+You can create a custom action by using the {{ site.data.product.title_short }} console. Enter a description and action type. Procedures for each type of action are shown in the following sections. When you create a policy, you can associate actions with specific events.
 
 | Custom Action                     | Description                                                                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -47,7 +47,7 @@ You can create a custom action by using the {{ site.data.product.title }} consol
 | Delete Snapshots by Age           | Removes snapshots based on how old they are.                                                                                  |
 | Evaluate Alerts                   | Checks for alerts. This is required for the alert to be delivered.                                                            |
 | Inherit Parent Tags               | Assigns tags from the parent cluster, host, datastore, or resource pool.                                                      |
-| Invoke a Custom Automation        | For use with {{ site.data.product.title }} automate.                                                                                        |
+| Invoke a Custom Automation        | For use with {{ site.data.product.title_short }} automate.                                                                                        |
 | Reconfigure CPUs                  | Reconfigure the number of CPUs for a virtual machine to the number you specify.                                               |
 | Reconfigure Memory                | Reconfigure the amount of memory for a virtual machine to the amount you specify.                                             |
 | Remove Tags                       | Removes tags from the resource.                                                                                               |

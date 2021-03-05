@@ -27,7 +27,7 @@ hosts.
 
       - Confirm the password in the **Confirm Password** field.
 
-      - Click **Validate** to confirm {{ site.data.product.title }} can connect to the
+      - Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
         VMware vCenter host.
 
 8.  If editing multiple hosts, select a host from the **Select Host to

@@ -1,6 +1,6 @@
 ### Setting the Password for the Administrative User
 
-{{ site.data.product.title }} uses a unique `admin` user to control all functions in
+{{ site.data.product.title_short }} uses a unique `admin` user to control all functions in
 the web-based user interface. After installing the appliance, change the
 default password of the `admin` to restrict administrative access to the
 appliance’s UI.
@@ -29,5 +29,5 @@ standard user in the appliance.
 8.  Test your new password by logging into the user interface.
     Additionally, test your new password in the appliance console.
 
-The {{ site.data.product.title }} appliance now has a non-default `admin` password.
+The {{ site.data.product.title_short }} appliance now has a non-default `admin` password.
 This restricts access to your appliance’s administrative functions.

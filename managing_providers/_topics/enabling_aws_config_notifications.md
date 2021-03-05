@@ -1,7 +1,7 @@
 # Enabling AWS Config Notifications
 
 Amazon’s AWS Config notifies subscribers of changes in a region through
-its Simple Notification Service (SNS). {{ site.data.product.title }} subscribes to the
+its Simple Notification Service (SNS). {{ site.data.product.title_short }} subscribes to the
 SNS service for AWS Config deltas and converts the deltas into
 {{ site.data.product.title_short }} events.
 

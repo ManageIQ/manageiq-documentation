@@ -174,7 +174,7 @@ The Web console (Cockpit) is an interactive Linux server administrative interfac
 containers, storage administration, network configuration, and inspecting logs. While Cockpit allows you to monitor and administer several servers at the same time, your browser connects to a primary server that runs the Cockpit web service through which connections to
 additional servers can be established.
 
-The {{ site.data.product.title }} full administrative user interface and the Self Service user interface have enabled for users to access the Web console
+The {{ site.data.product.title_short }} full administrative user interface and the Self Service user interface have enabled for users to access the Web console
 (Cockpit interface) for a given virtual machine.
 
 #### Accessing the Web Console

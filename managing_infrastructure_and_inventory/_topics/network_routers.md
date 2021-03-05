@@ -1,6 +1,6 @@
 ## Configuring Network Routers
 
-{{ site.data.product.title }} enables configuration for Red Hat OpenStack Platform
+{{ site.data.product.title_short }} enables configuration for Red Hat OpenStack Platform
 provider cloud network routing services using an SDN-based virtual
 router.
 

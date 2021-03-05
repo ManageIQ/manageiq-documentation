@@ -21,7 +21,7 @@ The following options are available when making provisioning requests:
 
 ### Requirements for Provisioning Virtual Machines and Instances
 
-{{ site.data.product.title }} supports the provisioning of VMware ESX hypervisors. To
+{{ site.data.product.title_short }} supports the provisioning of VMware ESX hypervisors. To
 provision a virtual machine from VMware providers, you must have an
 appliance with the Automation Engine role enabled.
 
@@ -66,17 +66,17 @@ requirements.
 <tr class="even">
 <td><p>Red Hat Virtualization Manager History Database</p></td>
 <td><p>Red Hat Virtualization Manager Data Warehouse (DWH) properly installed with access to the PostgreSQL database on the Red Hat Virtualization Manager server. Port 5432 open in iptables.</p>
-<p>md5 authentication allowed to {{ site.data.product.title }} appliances in <code>pg_hba.conf</code>.</p>
+<p>md5 authentication allowed to {{ site.data.product.title_short }} appliances in <code>pg_hba.conf</code>.</p>
 <p>PostgreSQL set to listen for connections on <code>*:5432</code> in <code>postgresql.conf</code>.</p>
-<p>Credentials provided during database setup to be used in {{ site.data.product.title }} UI.</p></td>
+<p>Credentials provided during database setup to be used in {{ site.data.product.title_short }} UI.</p></td>
 </tr>
 <tr class="odd">
-<td><p>Storage Supported for {{ site.data.product.title }} Virtual Machine Analysis</p></td>
-<td><p>NFS - {{ site.data.product.title }} server must be able to mount NFS storage domain.</p>
+<td><p>Storage Supported for {{ site.data.product.title_short }} Virtual Machine Analysis</p></td>
+<td><p>NFS - {{ site.data.product.title_short }} server must be able to mount NFS storage domain.</p>
 <p>iSCSI / FCP - Cluster must use full Red Hat Enterprise Linux (not Red Hat Virtualization Hypervisor) Hosts.</p>
 <p>DirectLUN Hook installed on each host and registered to Red Hat Virtualization Managers.</p>
-<p>Must have {{ site.data.product.title }} appliance in each Cluster with this storage type.</p>
-<p>{{ site.data.product.title }} appliance virtual machine container must have DirectLUN attribute set.</p>
+<p>Must have {{ site.data.product.title_short }} appliance in each Cluster with this storage type.</p>
+<p>{{ site.data.product.title_short }} appliance virtual machine container must have DirectLUN attribute set.</p>
 <p>Local storage - Not yet supported (Red Hat does not recommend due to single point of failure).</p></td>
 </tr>
 </tbody>
@@ -85,7 +85,7 @@ requirements.
 ### PXE Provisioning
 
 PXE is a boot method that allows you to load files from across a network
-link. {{ site.data.product.title }} uses it for files required for provisioning
+link. {{ site.data.product.title_short }} uses it for files required for provisioning
 virtual machines. PXE can be used for provisioning for either Red Hat
 Virtualization Manager or VMware.
 
@@ -108,7 +108,7 @@ Virtualization Manager or VMware.
   - NFS or SAMBA read and write access to create and modify files on the
     PXE server
 
-  - {{ site.data.product.title }} Server uses NFS mount to read and write the response
+  - {{ site.data.product.title_short }} Server uses NFS mount to read and write the response
     files
 
   - HTTP read access to the NFS share location as virtual machines use
@@ -148,7 +148,7 @@ Virtualization Manager or VMware.
 #### Connecting to a PXE Server
 
 The following procedure connects to a PXE server and adds its details to
-{{ site.data.product.title }}.
+{{ site.data.product.title_short }}.
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
@@ -164,7 +164,7 @@ The following procedure connects to a PXE server and adds its details to
 
       - For NFS, type in the **URI**, **Access URL**, **PXE Directory**,
         **Windows Images Directory**, and **Customization Directory**.
-        When you provision, {{ site.data.product.title }} writes a text file to the
+        When you provision, {{ site.data.product.title_short }} writes a text file to the
         **PXE Directory**. The file is named after the MAC address of
         the NIC that is assigned to the virtual machine. It contains
         where to get the kernel and initrd image. This file is removed
@@ -233,7 +233,7 @@ The following procedure sets the image type for a chosen PXE image.
 
 ### ISO Provisioning
 
-{{ site.data.product.title }} also allows ISO provisioning from Red Hat Virtualization Manager datastores. To use this feature, you will need to do the
+{{ site.data.product.title_short }} also allows ISO provisioning from Red Hat Virtualization Manager datastores. To use this feature, you will need to do the
 following before creating a provision request.
 
 1.  Add the **ISO Datastore**. The Red Hat Virtualization Manager system must have already been discovered or added into the VMDB. For more information, see [Adding a Red Hat Enterprise Virtualization Manager Provider](../managing_providers/index.html#adding-a-red-hat-virtualization-provider) in *Managing Providers*.
@@ -261,11 +261,11 @@ The following procedure adds an ISO Datastore from your Red Hat Virtualization e
 
 5.  Click **Add**.
 
-The ISO datastore is added to {{ site.data.product.title }}.
+The ISO datastore is added to {{ site.data.product.title_short }}.
 
 #### Refreshing an ISO Datastore
 
-The following procedure refreshes the chosen ISO datastore and updates {{ site.data.product.title }} with available ISOs.
+The following procedure refreshes the chosen ISO datastore and updates {{ site.data.product.title_short }} with available ISOs.
 
 1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
 
@@ -362,7 +362,7 @@ Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysp
 | ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Kickstart          | Takes the values from the **Customize** tab in **Provisioning Dialog** and substitutes them into the script.                                                                                                              | *Configure Networking based on values from provisioning dialog \<% if evm\[:addr\_mode\].first == 'static' %\> \<% network\_string = "network --onboot yes --device=eth0 --bootproto=static --noipv6" %\> \<% \["ip", :ip\_addr, "netmask", :subnet\_mask, "gateway", :gateway, "hostname", :hostname, "nameserver", :dns\_servers\].each\_slice(2) do |ks\_key, evm\_key| %\> \<% network\_string \<\< " --*{ks\_key} \#{evm\[evm\_key\]}" unless evm\[evm\_key\].blank? %\> \<% end %\> \<%= network\_string %\> \<% else %\> network --device=eth0 --bootproto=dhcp \<% end %\> |
 | Kickstart          | Encrypts the root password from the **Customize** tab in the **Provisioning Dialog**.                                                                                                                                     | rootpw --iscrypted \<%= ManageIQ::Password.md5crypt(evm\[:root\_password\]) %\>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| Kickstart          | Sends status of the provision back to {{ site.data.product.title }} Server for display in the {{ site.data.product.title }} Console.                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| Kickstart          | Sends status of the provision back to {{ site.data.product.title_short }} Server for display in the {{ site.data.product.title_short }} Console.                                                                                                                  |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | Sysprep            | Encrypts the root password from the **Customize** tab in the **Provisioning Dialog**. The value for the **AdministratorPassword** line must be inserted to use the password from the **Provision Dialog** and encrypt it. | \<UserAccounts\> \<AdministratorPassword\> \<Value\>\<%= ManageIQ::Password.sysprep\_crypt(evm\[:root\_password\]) %\>\</Value\> \<PlainText\>false\</PlainText\> \</AdministratorPassword\> \</UserAccounts\>                                                                                                                                                                                                                                                                                                                                                                     |
 
 ### Adding a Customization Template
@@ -381,7 +381,7 @@ Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysp
 
 6.  In **Type**, select **Kickstart** or **CloudInit** for Linux based systems, and **Sysprep** for Windows based system.
 
-7.  In the **Script** area, either paste the script from another source or type the script directly into the {{ site.data.product.title }} interface.
+7.  In the **Script** area, either paste the script from another source or type the script directly into the {{ site.data.product.title_short }} interface.
 
 8.  Click **Add**.
 
@@ -391,7 +391,7 @@ The default dialogs show all possible parameters for provisioning. To limit the 
 
 ### Provisioning Virtual Machines
 
-There are four types of provisioning requests available in {{ site.data.product.title }}:
+There are four types of provisioning requests available in {{ site.data.product.title_short }}:
 
 1.  Provision a new virtual machine from a template
 
@@ -491,7 +491,7 @@ To provision a virtual machine from a template:
     virtual machines to reside.
 
     1.  If provisioning from a template on VMware, you can either let
-        {{ site.data.product.title }} decide for you by checking **Choose
+        {{ site.data.product.title_short }} decide for you by checking **Choose
         Automatically**, or select a specific cluster, resource pool,
         folder, host, and datastore. VMware virtual machines can also be
         provisioned to a clustered datastore by selecting it under
@@ -504,7 +504,7 @@ To provision a virtual machine from a template:
         virtual machine.
 
     2.  If provisioning from a template on Red Hat, you can either let
-        {{ site.data.product.title }} decide for you by checking **Choose
+        {{ site.data.product.title_short }} decide for you by checking **Choose
         Automatically**, or select a datacenter, cluster, host and
         datastore.
 
@@ -530,17 +530,17 @@ To provision a virtual machine from a template:
         **Note:**
 
         A VMware virtual machine can be provisioned to a DVPortgroup by selecting it from the **vLan** list. Prior to provisioning a virtual machine, the DVPortgroup must be created on a vSphere
-        Distributed Switch (VDS) in VMware vCenter in order for {{ site.data.product.title }} to list the DVPortgroup under **vLan**.
+        Distributed Switch (VDS) in VMware vCenter in order for {{ site.data.product.title_short }} to list the DVPortgroup under **vLan**.
 
 13. Click **Customize** to customize the operating system of the new virtual machine. These options vary based on the operating system of the template. ![2336](../images/2336.png)
 
 14. For Windows provisioning:
 
-    1.  To use a custom specification from the provider, click **Specification**. To select an appropriate template, choose from the list in the custom specification area. The values that are honored by {{ site.data.product.title }} display.
+    1.  To use a custom specification from the provider, click **Specification**. To select an appropriate template, choose from the list in the custom specification area. The values that are honored by {{ site.data.product.title_short }} display.
 
         **Note:**
 
-        Any values in the specification that do not show in the {{ site.data.product.title }} console’s request dialogs are not used by {{ site.data.product.title }}. For example, for Windows operating systems, if you have any run once values in the specification, they are not used in creating the new virtual machines. Currently, for a Windows operating system, {{ site.data.product.title }} honors the unattended GUI, identification, workgroup information, user data, windows options, and server license. If more than one network card is specified, only the first is used.
+        Any values in the specification that do not show in the {{ site.data.product.title_short }} console’s request dialogs are not used by {{ site.data.product.title_short }}. For example, for Windows operating systems, if you have any run once values in the specification, they are not used in creating the new virtual machines. Currently, for a Windows operating system, {{ site.data.product.title_short }} honors the unattended GUI, identification, workgroup information, user data, windows options, and server license. If more than one network card is specified, only the first is used.
 
         ![2337](../images/2337.png)
 
@@ -661,7 +661,7 @@ marked with **Use cloud-init**; although, the template from which the virtual ma
 
 **Note:**
 
-For an example of virtual machine provisioning request using cloud-init via REST API, see *Provisioning a Virtual Machine Using Cloud-init* in the [{{ site.data.product.title }} REST API Guide](../rest_api/index.html#provisioning-a-virtual-machine-using-cloud-init) guide.
+For an example of virtual machine provisioning request using cloud-init via REST API, see *Provisioning a Virtual Machine Using Cloud-init* in the [{{ site.data.product.title_short }} REST API Guide](../rest_api/index.html#provisioning-a-virtual-machine-using-cloud-init) guide.
 
 #### Cloning a Virtual Machine
 
@@ -694,7 +694,7 @@ Virtual machines can be cloned in other providers as well.
 
 #### Renaming a Provisioned Virtual Machine (VMware Virtual Machines Only)
 
-{{ site.data.product.title }} allows you to rename a VMware virtual machine without
+{{ site.data.product.title_short }} allows you to rename a VMware virtual machine without
 having to reprovision it.
 
 To rename a VMware virtual machine:
@@ -718,7 +718,7 @@ as a standard virtual machine from virtualization infrastructure. First,
 a user makes a request for instances and specifies the image, volume or
 volume snapshot, tags, availability zone and hardware profile flavor.
 Second, the request goes through the approval phase. Finally,
-{{ site.data.product.title }} executes the request.
+{{ site.data.product.title_short }} executes the request.
 
 #### Provisioning an EC2 Instance from an Image
 
@@ -737,7 +737,7 @@ Second, the request goes through the approval phase. Finally,
     requester status emails during the provisioning process for items
     such as auto-approval, quota, provision complete, retirement,
     request pending approval, and request denied. The other information
-    is optional. If the {{ site.data.product.title }} Server is configured to use
+    is optional. If the {{ site.data.product.title_short }} Server is configured to use
     LDAP, you can use the **Look Up** button to populate the other
     fields based on the email address.
 
@@ -833,7 +833,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 ##### Adding a Provision Dialog for All Users
 
-1.  Login to the {{ site.data.product.title }} console for the {{ site.data.product.title }} server
+1.  Login to the {{ site.data.product.title_short }} console for the {{ site.data.product.title_short }} server
     where you want to change the dialog.
 
 2.  Navigate to menu:Automate\[Customization\].
@@ -870,7 +870,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 9.  Click **Add**.
 
-If you are using **Provisioning Profiles**, you can specify a specific file that holds the customizations. To do this, you must create an instance mapping to this file in the {{ site.data.product.title }}
+If you are using **Provisioning Profiles**, you can specify a specific file that holds the customizations. To do this, you must create an instance mapping to this file in the {{ site.data.product.title_short }}
 **Applications/provisioning/profile/VM provisioning by group** class. By default, if you are using provisioning profiles and the group does not have a defined instance, the appropriate default dialog file will be used based on the type of provisioning selected.
 
 ##### Creating a Custom Provision Dialog
@@ -920,14 +920,14 @@ If you are using **Provisioning Profiles**, you can specify a specific file that
 
 9.  Click **Add**.
 
-Enter the name of the new dialog into the dialog name field in the appropriate {{ site.data.product.title }} **Applications/provisioning/profile instance**. This dialog can now be referred to in an instance in the
+Enter the name of the new dialog into the dialog name field in the appropriate {{ site.data.product.title_short }} **Applications/provisioning/profile instance**. This dialog can now be referred to in an instance in the
 Provisioning Profiles class so that it can be used for groups of users.
 
 #### Provisioning Profiles
 
-Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or {{ site.data.product.title }} groups. To use provisioning profiles:
+Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or {{ site.data.product.title_short }} groups. To use provisioning profiles:
 
-  - Create a **Provisioning Profile** instance for the LDAP or {{ site.data.product.title }} group. If no instance exists, then default settings will be used.
+  - Create a **Provisioning Profile** instance for the LDAP or {{ site.data.product.title_short }} group. If no instance exists, then default settings will be used.
 
   - If customizing dialogs, create a custom dialog file, and specify the name of that file in the provisioning profile instance. If customizing the states for provisioning, create a state instance and set the name of the state instance in the provisioning profile instance.
 
@@ -948,16 +948,16 @@ The diagram below shows where provisioning profiles are called during the entire
 3.  Click ![1847](../images/1847.png)(**Configuration**),
     ![2345](../images/2345.png)(**Add a New Instance**).
 
-4.  Make the name of the tag identical to the name of the LDAP or {{ site.data.product.title }} group you are creating the instance for, replacing spaces in the group name with underscores. For example, change
-    **{{ site.data.product.title }}-test group** to **{{ site.data.product.title }}-test\_group**.
+4.  Make the name of the tag identical to the name of the LDAP or {{ site.data.product.title_short }} group you are creating the instance for, replacing spaces in the group name with underscores. For example, change
+    **{{ site.data.product.title_short }}-test group** to **{{ site.data.product.title_short }}-test\_group**.
     ![6278](../images/6278.png)
 
-5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the {{ site.data.product.title }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. Red Hat recommends naming
-    the file in the format `miq_provision_dialogs-groupname.rb` and copying this file to all {{ site.data.product.title }} appliances. For instructions on creating a custom dialog file, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
+5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the {{ site.data.product.title_short }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. Red Hat recommends naming
+    the file in the format `miq_provision_dialogs-groupname.rb` and copying this file to all {{ site.data.product.title_short }} appliances. For instructions on creating a custom dialog file, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
     **Note:**
 
-    Be sure that the custom dialog file exists. If it does not, an error will appear when the user clicks on the **Provisioning** button in the {{ site.data.product.title }} console.
+    Be sure that the custom dialog file exists. If it does not, an error will appear when the user clicks on the **Provisioning** button in the {{ site.data.product.title_short }} console.
     
 6.  Click **Add**.
 

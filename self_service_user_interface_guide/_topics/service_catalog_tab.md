@@ -13,7 +13,7 @@ information in the dialog fields under **Service and VM Name** and **VM
 Characteristics** associated with the service. Note that there is now an
 ability to add dynamic dialog elements within the Self Service user
 interface, meaning you can include a particular dialog field where
-{{ site.data.product.title }} will communicate to the instance and method, obtain the
+{{ site.data.product.title_short }} will communicate to the instance and method, obtain the
 required information, and enter the value in the field dynamically.
 After you have entered all information in the dialog fields, click **Add
 to Shopping Cart**.

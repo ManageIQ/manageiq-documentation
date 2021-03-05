@@ -1,7 +1,7 @@
 # Controlling the Power State of an Instance
 
 Follow this procedure to control the power states of an instance through
-the {{ site.data.product.title }} console.
+the {{ site.data.product.title_short }} console.
 
 1.  Navigate to menu:Compute\[Clouds \> Instances\].
 

@@ -1,6 +1,6 @@
 # Discovering Azure Providers
 
-{{ site.data.product.title }} provides the ability to discover a set of Microsoft
+{{ site.data.product.title_short }} provides the ability to discover a set of Microsoft
 Azure providers across all regions.
 
 1.  Navigate to menu:Compute\[Clouds \> Providers\].

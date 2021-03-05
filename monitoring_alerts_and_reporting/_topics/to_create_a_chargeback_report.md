@@ -1,6 +1,6 @@
 ### Creating a Chargeback Report
 
-{{ site.data.product.title }} allows you to create chargeback reports to monitor costs
+{{ site.data.product.title_short }} allows you to create chargeback reports to monitor costs
 you charged.
 
 **Note:**

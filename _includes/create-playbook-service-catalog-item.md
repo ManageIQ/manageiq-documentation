@@ -1,6 +1,6 @@
 **Note:**
 
-  - Before creating an Ansible service, at least one repository, one playbook, and one credential must exist in the {{ site.data.product.title }} inventory. Check your inventory and add the appropriate resources before creating an Ansible service. For more information, see [Automation Management Providers](../managing_providers/index.html#automation-management-providers) in *Managing Providers*.
+  - Before creating an Ansible service, at least one repository, one playbook, and one credential must exist in the {{ site.data.product.title_short }} inventory. Check your inventory and add the appropriate resources before creating an Ansible service. For more information, see [Automation Management Providers](../managing_providers/index.html#automation-management-providers) in *Managing Providers*.
 
   - Debugging verbosity is available for Ansible playbook catalog items.
     Selecting a higher verbosity value provides more detailed output as

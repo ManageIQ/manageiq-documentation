@@ -19,7 +19,7 @@ Virtualization virtual machine disks:
 
   - The virtual machine requires at least one existing disk to allow
     adding additional disks. This is because the destination storage
-    cannot be specified from the {{ site.data.product.title }} dialog, so the storage
+    cannot be specified from the {{ site.data.product.title_short }} dialog, so the storage
     associated with the existing disk is reused.
 
 </div>

@@ -1,7 +1,7 @@
 ## Installing the Appliances
 
 This chapter outlines the steps for installing and configuring the
-{{ site.data.product.title }} components needed for high availability: a database
+{{ site.data.product.title_short }} components needed for high availability: a database
 cluster comprised of primary and standby database-only appliances, and
 two (at minimum) non-database {{ site.data.product.title_short }} appliances.
 

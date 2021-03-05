@@ -1,6 +1,6 @@
 # Adding a VMware vCenter Provider
 
-After initial installation and creation of a {{ site.data.product.title }}
+After initial installation and creation of a {{ site.data.product.title_short }}
 environment, add a VMware vCenter provider to the appliance.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
@@ -36,7 +36,7 @@ environment, add a VMware vCenter provider to the appliance.
 
       - Confirm the password in the **Confirm Password** field.
 
-      - Click **Validate** to confirm {{ site.data.product.title }} can connect to the
+      - Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
         VMware vCenter.
 
 9.  Click **Add**.

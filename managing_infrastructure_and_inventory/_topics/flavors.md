@@ -7,7 +7,7 @@ during instance provisioning. You can also change the flavor of a
 provisioned instance; see [???](#_to_resize_an_instance_via_flavor) for
 instructions.
 
-{{ site.data.product.title }} provides the ability to view individual flavor
+{{ site.data.product.title_short }} provides the ability to view individual flavor
 information and instances currently using the flavor.
 
 {% include_relative _topics/adding_a_flavor.md %}

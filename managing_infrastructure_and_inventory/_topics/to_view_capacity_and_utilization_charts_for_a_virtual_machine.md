@@ -4,9 +4,9 @@ You can view capacity and utilization data for virtual machines that are
 part of a cluster. Note that daily charts only include full days of
 data. If all 24 data points for a day are not available, daily charts
 are not displayed. For some capacity and utilization data,
-{{ site.data.product.title }} calculates and shows trend lines in the charts which are
+{{ site.data.product.title_short }} calculates and shows trend lines in the charts which are
 created using linear regression. The calculation uses the capacity and
-utilization data collected by {{ site.data.product.title }} during the interval you
+utilization data collected by {{ site.data.product.title_short }} during the interval you
 specify.
 
 **Note:**
@@ -40,6 +40,6 @@ The virtual machine must be powered on to collect the data.
 
 **Note:**
 
-Daily charts only include full days of data. This means {{ site.data.product.title }} does not show daily data for a day without a complete 24 data point range for a day.
+Daily charts only include full days of data. This means {{ site.data.product.title_short }} does not show daily data for a day without a complete 24 data point range for a day.
 
 For information about data optimization including utilization trend reports, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization).

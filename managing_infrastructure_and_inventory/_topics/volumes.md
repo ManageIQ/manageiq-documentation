@@ -3,7 +3,7 @@
 A volume is a block storage device that you can attach to or detach from
 an instance to manage the storage available to that instance. Volumes
 are managed through storage managers, which are added automatically to
-{{ site.data.product.title }} when the corresponding provider is added.
+{{ site.data.product.title_short }} when the corresponding provider is added.
 
 ## Amazon Elastic Block Store Manager Volumes
 

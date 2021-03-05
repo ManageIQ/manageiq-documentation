@@ -2,9 +2,9 @@
 
 ### Capacity and Utilization Collection
 
-{{ site.data.product.title }} server can collect and analyze capacity and utilization data from your virtual infrastructure. Use this data to understand the limitations of your current environment and plan for growth.
+{{ site.data.product.title_short }} server can collect and analyze capacity and utilization data from your virtual infrastructure. Use this data to understand the limitations of your current environment and plan for growth.
 
-For some capacity and utilization data, {{ site.data.product.title }} calculates and shows trend lines in the charts. Trend lines are created by using linear regression, which is calculated by using the capacity and utilization data that is collected by {{ site.data.product.title }} during the interval you specify for the chart. The more data that you have the better the predictive value of the trend line.
+For some capacity and utilization data, {{ site.data.product.title_short }} calculates and shows trend lines in the charts. Trend lines are created by using linear regression, which is calculated by using the capacity and utilization data that is collected by {{ site.data.product.title_short }} during the interval you specify for the chart. The more data that you have the better the predictive value of the trend line.
 
 Three server roles are associated with the collection and metric creation of capacity and utilization.
 
@@ -12,7 +12,7 @@ Three server roles are associated with the collection and metric creation of cap
 
   - The Capacity & Utilization Data Collector performs the actual collection of capacity and utilization data. This role has a dedicated worker, and there can be more than one server with this role in a zone.
 
-  - The Capacity & Utilization Data Processor processes all of the data that is collected, allowing {{ site.data.product.title }} to create charts. This role has a dedicated worker, and there can be more than one server with this role in a zone.
+  - The Capacity & Utilization Data Processor processes all of the data that is collected, allowing {{ site.data.product.title_short }} to create charts. This role has a dedicated worker, and there can be more than one server with this role in a zone.
 
 ### Assigning the Capacity and Utilization Server Roles
 
@@ -43,7 +43,7 @@ After you create the new user, add the user’s credentials to the settings for 
 
 ### Data Collection for Red Hat Virtualization
 
-To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add a user to the RHV-M history database for {{ site.data.product.title }} to use.
+To collect capacity and utilization data for Red Hat Virtualization (RHV), you must add a user to the RHV-M history database for {{ site.data.product.title_short }} to use.
 
 Perform this procedure on the PostgreSQL server where the history
 database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
@@ -221,11 +221,11 @@ installation of RHEL-OSP and registration to a satellite that has access to both
         # . ~/keystonerc_admin
         # ceilometer sample-list -m cpu |wc -l
 
-12. Add the configured OpenStack provider to {{ site.data.product.title }}. See After adding the provider, capacity, and utilization data for your instances populate in a few minutes.
+12. Add the configured OpenStack provider to {{ site.data.product.title_short }}. See After adding the provider, capacity, and utilization data for your instances populate in a few minutes.
 
 ### Capacity and Utilization Data Collected
 
-{{ site.data.product.title }} generates charts from the collected data that can be used to plan your hardware and virtual machine needs. Depending on the type of data, these charts can include lines for averages, maximums, minimums, and trends.
+{{ site.data.product.title_short }} generates charts from the collected data that can be used to plan your hardware and virtual machine needs. Depending on the type of data, these charts can include lines for averages, maximums, minimums, and trends.
 
 **Note:**
 
@@ -285,7 +285,7 @@ Capacity and utilization charts for host, clusters, virtual machines, and datast
 
 ### Planning Where to Put a New Virtual Machine
 
-You can use the data that is collected in the VMDB to plan where you can put more virtual machines. With {{ site.data.product.title }}, you can use a reference virtual machine as an example to plan on which hosts and clusters you can place a new virtual machine.
+You can use the data that is collected in the VMDB to plan where you can put more virtual machines. With {{ site.data.product.title_short }}, you can use a reference virtual machine as an example to plan on which hosts and clusters you can place a new virtual machine.
 
 ** Note:** For more information about utilization trends and identifying bottlenecks in your environment, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization) in Managing Infrastructure and Inventory.
 

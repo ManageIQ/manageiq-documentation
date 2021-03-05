@@ -1,6 +1,6 @@
 # Migrating Virtual Machines
 
-{{ site.data.product.title }} supports migrating virtual machines between datacenters,
+{{ site.data.product.title_short }} supports migrating virtual machines between datacenters,
 clusters, resource pools, folders and hosts. Create and submit a request
 with detailed environment information to which to migrate the VM.
 

@@ -6,7 +6,7 @@
 
 The options under the **Settings** area provide a hierarchical view of
 options that allow you to configure global options for the
-infrastructure of your {{ site.data.product.title }} environment. At the top level,
+infrastructure of your {{ site.data.product.title_short }} environment. At the top level,
 you have **Settings** including users, LDAP Groups, account roles,
 capacity and utilization collection, tag categories, values, and
 imports, custom variable imports, and license uploads. When you click on
@@ -48,7 +48,7 @@ resources can be adjusted according to the workload those roles are
 responsible for.
 
 The following diagram demonstrates an example of the multiple regions
-working together in a {{ site.data.product.title }} environment.
+working together in a {{ site.data.product.title_short }} environment.
 
 ![7151](../images/7151.png)
 
@@ -68,10 +68,10 @@ managing a single zone.
 The following diagram provides a closer look at a region:
 ![7150](../images/7150.png)
 
-In this region, we have several {{ site.data.product.title }} appliances acting as UI
+In this region, we have several {{ site.data.product.title_short }} appliances acting as UI
 nodes and worker nodes. These worker nodes execute tasks on the
 providers in your environment. The Region also uses a region database
-that reports to a master database on the main {{ site.data.product.title }} appliance.
+that reports to a master database on the main {{ site.data.product.title_short }} appliance.
 All appliances can connect to the authentication services (Active
 Directory, LDAP, Identity Management), outgoing mail (SMTP), and network
 services (SNMP).
@@ -118,7 +118,7 @@ is the top level.
 ##### Region Settings
 
 In the **Region** area, set items that apply to your entire
-{{ site.data.product.title }} infrastructure such as users, LDAP Groups, capacity and
+{{ site.data.product.title_short }} infrastructure such as users, LDAP Groups, capacity and
 utilization collection, company tags and tag categories, and licensing.
 Regions are also used for database replication.
 
@@ -173,7 +173,7 @@ Collection:
 
 ###### Company Tag Categories and Tags
 
-{{ site.data.product.title }} allows you to create your own set of tags and tag
+{{ site.data.product.title_short }} allows you to create your own set of tags and tag
 categories. Use tags to create a customized, searchable index for your
 resources. Depending on your database type, your tags may be case
 sensitive. After creating these values, you can apply them to your
@@ -185,9 +185,9 @@ resources. There are two kinds of tags.
     click the **Settings** accordion, then menu:Region\[My Company
     Tags\]. A selection of company tags is provided to you by default as
     samples. These can be deleted if you do not need them, but are not
-    recreated by {{ site.data.product.title }}.
+    recreated by {{ site.data.product.title_short }}.
 
-  - **System tags** are assigned automatically by {{ site.data.product.title }}.
+  - **System tags** are assigned automatically by {{ site.data.product.title_short }}.
 
 ###### Creating a Tag Category
 
@@ -420,7 +420,7 @@ To import asset tags for a virtual machine from a CSV file
 
 ##### Customizing the Help Menu
 
-{{ site.data.product.title }} allows administrators to customize the help menu. Use
+{{ site.data.product.title_short }} allows administrators to customize the help menu. Use
 this feature to define menu labels, URLs and how each window opens for
 users.
 
@@ -474,7 +474,7 @@ To create a host analysis profile:
 
       - Check **Collect Contents** to not only check for existence, but
         also gather the contents of the file. If you do this, then you
-        can use the contents to create policies in {{ site.data.product.title }}
+        can use the contents to create policies in {{ site.data.product.title_short }}
         Control.
 
 7.  Click **Event Log** to specify event log entries to collect.
@@ -608,21 +608,21 @@ To create a default analysis profile:
 
 #### Zones
 
-You can organize your {{ site.data.product.title }} Infrastructure into zones to
+You can organize your {{ site.data.product.title_short }} Infrastructure into zones to
 configure failover and isolate traffic. A provider that is discovered by
 a server in a specific zone gets monitored and managed in that zone. All
 jobs, such as a SmartState Analysis or VM power operation, dispatched by
-a server in a specific zone can get processed by any {{ site.data.product.title }}
+a server in a specific zone can get processed by any {{ site.data.product.title_short }}
 appliance assigned to that same zone.
 
 Zones can be created based on your own environment. You can make zones
 based on geographic location, network location, or function. When first
 started, a new server is put into the default zone.
 
-Suppose you have four {{ site.data.product.title }} appliances with two in the East
+Suppose you have four {{ site.data.product.title_short }} appliances with two in the East
 zone, appliances A and B, and two in the West zone, appliances C and D.
-VC East is discovered by one of the {{ site.data.product.title }} appliances in the
-{{ site.data.product.title }} Eastern zone. If Appliance A dispatches a job of
+VC East is discovered by one of the {{ site.data.product.title_short }} appliances in the
+{{ site.data.product.title_short }} Eastern zone. If Appliance A dispatches a job of
 analyzing twenty virtual machines, this job can be processed by either
 Appliance A or B, but not C or D.
 
@@ -723,7 +723,7 @@ To add SmartProxy Affinity to a zone:
 
 #### Servers
 
-Server settings enables you to control how each {{ site.data.product.title }} server
+Server settings enables you to control how each {{ site.data.product.title_short }} server
 operates including authentication, logging, and email. If you have
 multiple servers in your environment that are reporting to one central
 VMDB, then you can edit some of these settings from the console by
@@ -742,9 +742,9 @@ To change server settings:
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
-3.  Click the zone where the {{ site.data.product.title }} server is located.
+3.  Click the zone where the {{ site.data.product.title_short }} server is located.
 
-4.  In the **Servers** area, click on the {{ site.data.product.title }} server.
+4.  In the **Servers** area, click on the {{ site.data.product.title_short }} server.
 
 5.  Click **Server**.
 
@@ -765,7 +765,7 @@ To change server settings:
     consoles logged on user.
 
   - Use **Zone** to isolate traffic and provide load balancing
-    capabilities. Specify the zone that you want this {{ site.data.product.title }}
+    capabilities. Specify the zone that you want this {{ site.data.product.title_short }}
     appliance to be a member of. At startup, the zone is set to default.
 
   - Use **Appliance Time Zone** to set the time zone for this server.
@@ -796,7 +796,7 @@ are enabled by default on all servers.
 
   - Only super administrators can change server roles.
 
-  - If you are using more than one {{ site.data.product.title }} appliance, be sure to
+  - If you are using more than one {{ site.data.product.title_short }} appliance, be sure to
     set this on all of the appliances.
 
 ###### Server Roles
@@ -840,7 +840,7 @@ are enabled by default on all servers.
 
 ###### VMware Console Settings
 
-If you are using the {{ site.data.product.title }} control feature set, then you have
+If you are using the {{ site.data.product.title_short }} control feature set, then you have
 the ability to connect to a Web console for virtual machines that are
 registered to a host. To use this feature, you must have VNC installed,
 [VMware’s WebMKS SDK enabled in {{ site.data.product.title_short }}](../managing_infrastructure_and_inventory/index.html#configuring-webmks-support-in-manageiq),
@@ -880,12 +880,12 @@ one NTP server hostname or IP address in each text box.
 ###### Configuring SNMP
 
 You can use Simple Network Management Protocol (SNMP) traps to send
-alerts for various aspects of a {{ site.data.product.title }} environment.
+alerts for various aspects of a {{ site.data.product.title_short }} environment.
 
 **Requirements**
 
   - Configure your SNMP management station to accept traps from
-    {{ site.data.product.title }} appliances. Consult your management station’s
+    {{ site.data.product.title_short }} appliances. Consult your management station’s
     documentation.
 
   - Each appliance that could process SNMP traps must have the `snmpd`
@@ -944,7 +944,7 @@ To set the failover priority role:
 
 ###### Outgoing SMTP Email Settings
 
-To use the email action in {{ site.data.product.title }}, set an email address to send
+To use the email action in {{ site.data.product.title_short }}, set an email address to send
 emails from.
 
 **Note:**
@@ -987,11 +987,11 @@ Web services are used by the server to communicate with the SmartProxy.
 ![2064](../images/2064.png)
 
   - Set **Mode** to invoke to enable 2-way Web services communication
-    between the {{ site.data.product.title }} appliance and the SmartProxy. Set
+    between the {{ site.data.product.title_short }} appliance and the SmartProxy. Set
     **Mode** to disabled to use Web services from the SmartProxy to the
-    {{ site.data.product.title }} appliance only. When the {{ site.data.product.title }} appliance
+    {{ site.data.product.title_short }} appliance only. When the {{ site.data.product.title_short }} appliance
     has work for the SmartProxy, the work will be placed in a queue in
-    the VMDB. The work will be completed either when the {{ site.data.product.title }}
+    the VMDB. The work will be completed either when the {{ site.data.product.title_short }}
     appliance is able to contact the SmartProxy or when the next
     SmartProxy heartbeat occurs, whichever comes first.
 
@@ -1134,7 +1134,7 @@ interface.
 
 **Note:**
 
-  - If you have upgraded from an earlier {{ site.data.product.title }} version and
+  - If you have upgraded from an earlier {{ site.data.product.title_short }} version and
     your custom logo was already in use before migration, although your
     logo image file is still in place in `vmdb/public/upload` you may
     have to uncheck and recheck the option to **Use Custom Logo Image**
@@ -1164,7 +1164,7 @@ To upload a custom logo to the user interface:
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
-3.  Click the zone where the {{ site.data.product.title }} server is located.
+3.  Click the zone where the {{ site.data.product.title_short }} server is located.
 
 4.  Click on the server.
 
@@ -1251,7 +1251,7 @@ To customize the login panel text:
 ###### Displaying the Custom Configuration Settings
 
 To enable displaying your custom logo in the corner of the
-{{ site.data.product.title }} user interface and on the login screen:
+{{ site.data.product.title_short }} user interface and on the login screen:
 
 1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
@@ -1320,9 +1320,9 @@ Table: authentication
 | amazon\_key                    | If using Amazon for the authentication mode, specify your Amazon Key. This is the same as Amazon Access Key in Configuration-Operations-Server-Amazon Settings in the appliance console. Default: blank                                                                                                                                                                                                                                                 |
 | amazon\_secret                 | If using Amazon for the authentication mode, specify your Amazon Secret. This is the same as Amazon Secret Key in Configuration-Operations-Server-Amazon Settings in the appliance console. Default: blank                                                                                                                                                                                                                                              |
 | basedn                         | If using ldap for the authentication mode, specify your Base DN. This is the same as Base DN in Configuration-Operations- Server-LDAP Settings in the appliance console. Default: blank                                                                                                                                                                                                                                                                 |
-| bind\_dn                       | The user name to bind to the LDAP server. This user must have read access to all users and groups that will be used for {{ site.data.product.title }} authentication and role assignment. This is the same as Bind DN in Configuration-Operations-Server-LDAP Settings in the appliance console. Default: blank                                                                                                                                                       |
+| bind\_dn                       | The user name to bind to the LDAP server. This user must have read access to all users and groups that will be used for {{ site.data.product.title_short }} authentication and role assignment. This is the same as Bind DN in Configuration-Operations-Server-LDAP Settings in the appliance console. Default: blank                                                                                                                                                       |
 | bind\_pwd:                     | The password for the bind\_dn user. This is the same as Bind Password in Configuration-Operations- Server-LDAP Settings in the appliance console. Default: blank                                                                                                                                                                                                                                                                                        |
-| get\_direct\_groups            | Use this to get the LDAP roles from the LDAP users' home forest. This is the same as Get Roles from Home Forest in the Authentication page for the {{ site.data.product.title }} Server. Default: true                                                                                                                                                                                                                                                                |
+| get\_direct\_groups            | Use this to get the LDAP roles from the LDAP users' home forest. This is the same as Get Roles from Home Forest in the Authentication page for the {{ site.data.product.title_short }} Server. Default: true                                                                                                                                                                                                                                                                |
 | group\_memberships\_max\_depth | When traversing group memberships in the LDAP directory it will stop at this value. Default: 2                                                                                                                                                                                                                                                                                                                                                          |
 | ldaphost                       | Use ldaphost to specify the fully qualified domain name of your LDAP server. This is the same as LDAP Host Name in Configuration-Operations-Server-LDAP Settings in the appliance console. Default: blank                                                                                                                                                                                                                                               |
 | ldapport                       | Specify the port of your LDAP server. This is the same as LDAP Port in Configuration-Operations- Server-LDAP Settings in the appliance console. Default: 389                                                                                                                                                                                                                                                                                            |
@@ -1337,13 +1337,13 @@ Table: coresident\_miqproxy
 | use\_vim\_broker      | Specify if you want the coresident SmartProxy to use a shared connection through the VIM broker to communicate with the VC or ESX host for SmartState Analysis. If it is disabled, then each SmartProxy SmartState Analysis would create its own connection. Default: true        |
 | concurrent\_per\_ems  | Specify the number of co-resident SmartProxy SmartState Analyses that can be run against a specific management system at the same time. Default: 1                                                                                                                                |
 | concurrent\_per\_host | Specify the number of co-resident SmartProxy SmartState Analyses that can be run against a specific host at the same time. Default: 1                                                                                                                                             |
-| scan\_via\_host       | If you change scan\_via\_host to false, {{ site.data.product.title }} will use the Management System to scan which is limited by the concurrent\_per\_ems setting instead of the concurrent\_per\_host setting. Note this will greatly increase traffic to the Management System. Default: true |
+| scan\_via\_host       | If you change scan\_via\_host to false, {{ site.data.product.title_short }} will use the Management System to scan which is limited by the concurrent\_per\_ems setting instead of the concurrent\_per\_host setting. Note this will greatly increase traffic to the Management System. Default: true |
 
 Table: ems\_refresh
 
 | Parameters                                          | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| capture\_vm\_created\_on\_date                      | Set to false to turn off historical event retrieval. Set to true to turn on. By setting the flag to true {{ site.data.product.title }} will try to set the "ems\_created\_on" column in the vms table after an ems refresh for new VMs and any VMs with a nil "ems\_created\_on" value. {{ site.data.product.title }} looks at event information in our database as well as looking up historical event data from the management system. This is optional since the historical lookup could timeout. Default: false |
+| capture\_vm\_created\_on\_date                      | Set to false to turn off historical event retrieval. Set to true to turn on. By setting the flag to true {{ site.data.product.title_short }} will try to set the "ems\_created\_on" column in the vms table after an ems refresh for new VMs and any VMs with a nil "ems\_created\_on" value. {{ site.data.product.title_short }} looks at event information in our database as well as looking up historical event data from the management system. This is optional since the historical lookup could timeout. Default: false |
 | collect\_advanced\_settings                         | Set to false if you do not want to collect advanced Virtual Machine settings during a management system refresh. This will increase the speed of the refresh, but less data will be collected. If the parameter is not listed, then the value is true. Default: true                                                                                                                                                                                                                    |
 | ec2                                                 |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | get\_private\_images                                | For EC2 refreshes only; whether or not to retrieve private images. Default: true                                                                                                                                                                                                                                                                                                                                                                                                        |
@@ -1352,7 +1352,7 @@ Table: ems\_refresh
 | public\_images\_filters                             | For EC2 refreshes only; a filter to reduce the number of public images. Default: all public images                                                                                                                                                                                                                                                                                                                                                                                      |
 | ignore\_terminated\_instances                       | For EC2 refreshes only; whether or not to ignore terminated instances. Default: true                                                                                                                                                                                                                                                                                                                                                                                                    |
 | full\_refresh\_threshold                            | The number of targeted refreshes requested before they are rolled into a full refresh. For example, if the system and/or the user target a refresh against 7 VMs and 2 Hosts (9 targets), when the refresh actually occurs it will do a partial refresh against those 9 targets only. However, if a 10th had been added, the system would perform a full EMS refresh instead. Default: 100                                                                                              |
-| raise\_vm\_snapshot\_complete\_if\_created\_within: | Raises vm\_snapshot\_complete event for a snapshot being added to VMDB only if the create time in Virtual Center is within the configured period of time. This prevents raising events for old snapshots when a new VC is added to {{ site.data.product.title }}. Default: 15.minutes                                                                                                                                                                                                                 |
+| raise\_vm\_snapshot\_complete\_if\_created\_within: | Raises vm\_snapshot\_complete event for a snapshot being added to VMDB only if the create time in Virtual Center is within the configured period of time. This prevents raising events for old snapshots when a new VC is added to {{ site.data.product.title_short }}. Default: 15.minutes                                                                                                                                                                                                                 |
 | refresh\_interval                                   | Scheduler does a periodic full EMS refresh every refresh\_interval. Default: 24.hours                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 Table: host\_scan
@@ -1365,7 +1365,7 @@ Table: log
 
 | Parameters            | Description                                                                                                                                                                                                                                                                                                                      |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| level                 | Specify the required level of logging for the {{ site.data.product.title }} appliance. Possible levels from most detailed to least detailed are: debug, info, warn, error, fatal. This is the same as Log Level in Configuration-Operations-Server-Logging in the appliance console and applies immediately to the evm.log file. Default: info |
+| level                 | Specify the required level of logging for the {{ site.data.product.title_short }} appliance. Possible levels from most detailed to least detailed are: debug, info, warn, error, fatal. This is the same as Log Level in Configuration-Operations-Server-Logging in the appliance console and applies immediately to the evm.log file. Default: info |
 | level\_aws            | Specify the level of logging for Amazon Web Services communications. Possible levels from most detailed to least detailed are: debug, info, warn, error, fatal. This applies to the aws.log file. Default: info                                                                                                                  |
 | level\_aws\_in\_evm   | Specify what level of Amazon Web Services communication log should be also shown in evm.log. Possible levels from most detailed to least detailed are: debug, info, warn, error, fatal. Default: error                                                                                                                           |
 | level\_fog            | Specify the level of logging for Fog communications. Possible levels from most detailed to least detailed are: debug, info, warn, error, fatal. This applies to the fog.log file. Default: info                                                                                                                                  |
@@ -1390,7 +1390,7 @@ Table: callsites
 | enabled        | Specify if you want keep track of the code that is accessing the database. Enabling call sites will decrease performance because of the amount of information tracked. The db\_stats: enabled parameter must be set to true to use this. Default: false |
 | depth          | Specify how many levels in the call stack to track for each database access. Default: 10                                                                                                                                                                |
 | min\_threshold | Do not keep track of code that does not access the database this many times per log\_frequency. Default: 10                                                                                                                                             |
-| path           | Set the path for the {{ site.data.product.title }} appliance log. This is the same as Log Path in Configuration-Operations- Server-Logging in the appliance console. Default: If no value is present, the path is /var/www/miq/vmdb/log.                              |
+| path           | Set the path for the {{ site.data.product.title_short }} appliance log. This is the same as Log Path in Configuration-Operations- Server-Logging in the appliance console. Default: If no value is present, the path is /var/www/miq/vmdb/log.                              |
 | line\_limit    | Limit how many characters are retained in a single log line. 0 means no limit. Default: 0                                                                                                                                                               |
 
 Table: collection
@@ -1486,14 +1486,14 @@ Table: server
 | company                       | Specify the label you want to use for your company’s tagging. This is the same as Company Name in Configuration-Operations- Server-Basic Info. Default: "My Company"                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | custom\_logo                  | Specify if you want to use a custom logo. This is the same as Use Custom Logo in Configuration-Custom Logo-Logo Selection. Default: false                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | events                        |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| disk\_usage\_gt\_percent      | For {{ site.data.product.title }} operational alerts, specify at what threshold the disk usage alerts will be triggered. Default: 80                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
-| heartbeat\_timeout            | How long to wait until the server heartbeat is considered timed out. if the timeout is exceeded, other appliances in the zone/region can vie for the roles active on the timed out {{ site.data.product.title }} appliance. Default: 2.minutes                                                                                                                                                                                                                                                                                                                                                          |
-| host                          | {{ site.data.product.title }} Server’s IP address. Default: blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
-| hostname                      | {{ site.data.product.title }} Server’s hostname. Default: localhost.localdomain                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
-| listening\_port               | Specify the port number on which the web server is listening. Note that this does not set the port that VMDB listens on. When deploying the SmartHost from the {{ site.data.product.title }} appliance, it tells the SmartHost (miqhost) what port to talk to the VMDB on. Default: "443"                                                                                                                                                                                                                                                                                                               |
+| disk\_usage\_gt\_percent      | For {{ site.data.product.title_short }} operational alerts, specify at what threshold the disk usage alerts will be triggered. Default: 80                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| heartbeat\_timeout            | How long to wait until the server heartbeat is considered timed out. if the timeout is exceeded, other appliances in the zone/region can vie for the roles active on the timed out {{ site.data.product.title_short }} appliance. Default: 2.minutes                                                                                                                                                                                                                                                                                                                                                          |
+| host                          | {{ site.data.product.title_short }} Server’s IP address. Default: blank                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| hostname                      | {{ site.data.product.title_short }} Server’s hostname. Default: localhost.localdomain                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+| listening\_port               | Specify the port number on which the web server is listening. Note that this does not set the port that VMDB listens on. When deploying the SmartHost from the {{ site.data.product.title_short }} appliance, it tells the SmartHost (miqhost) what port to talk to the VMDB on. Default: "443"                                                                                                                                                                                                                                                                                                               |
 | mks\_version                  | Specify the version of the VMware MKS Plugin to use for the VM Console. This is the same as VMware MKS Plugin Version in Configuration-Operations- Server-VM Console. Default : 2.1.0.0                                                                                                                                                                                                                                                                                                                                                                                                   |
-| name                          | Set the name to display for the {{ site.data.product.title }} appliance that you are logged on to in the appliance console. This is the same as appliance Name in Configuration-Operations- Server-Basic Information. Default : EVM                                                                                                                                                                                                                                                                                                                                                                     |
-| role                          | Specify the roles for this {{ site.data.product.title }} Server, separated by commas without spaces. The possible values are automate, database\_operations, ems\_inventory, ems\_metrics\_collector, ems\_metrics\_coordinator, ems\_metrics\_processor, ems\_operations, event, notifier, reporting, scheduler, smartproxy, smartstate, user\_interface, web\_services. This is the same as Server Roles in Configuration-Operations- Server- Server Control. Default: database\_operations, event, reporting, scheduler, smartstate, ems\_operations, ems\_inventory, user\_interface, web\_services |
+| name                          | Set the name to display for the {{ site.data.product.title_short }} appliance that you are logged on to in the appliance console. This is the same as appliance Name in Configuration-Operations- Server-Basic Information. Default : EVM                                                                                                                                                                                                                                                                                                                                                                     |
+| role                          | Specify the roles for this {{ site.data.product.title_short }} Server, separated by commas without spaces. The possible values are automate, database\_operations, ems\_inventory, ems\_metrics\_collector, ems\_metrics\_coordinator, ems\_metrics\_processor, ems\_operations, event, notifier, reporting, scheduler, smartproxy, smartstate, user\_interface, web\_services. This is the same as Server Roles in Configuration-Operations- Server- Server Control. Default: database\_operations, event, reporting, scheduler, smartstate, ems\_operations, ems\_inventory, user\_interface, web\_services |
 | session\_store                | Where to store the session information for all web requests. The possible values are sql, memory, or cache. SQL stores the session information in the database regardless of the type of database server. Memory stores all the session information in memory of the server process. Cache stores the information in a memcache server. Default: cache                                                                                                                                                                                                                                    |
 | startup\_timeout              | The amount of time in seconds that the server will wait and prevent logins during server startup before assuming the server has timed out starting and will redirect the user to the log page after login. Default: 300                                                                                                                                                                                                                                                                                                                                                                   |
 | vnc\_port                     | If using VNC for remote console, the port used by VNC. Default: 5800                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
@@ -1508,7 +1508,7 @@ Table: server
 | name                          | Criteria used to start killing workers. Default: used\_swap\_percent\_gt\_value                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
 | value                         | Value of the criteria used. Default: 80                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | start\_algorithm              |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
-| name                          | After server startup, criteria that must be met to decide if the {{ site.data.product.title }} Server can start a new worker. Default: used\_swap\_percent\_lt\_value                                                                                                                                                                                                                                                                                                                                                                                                                                   |
+| name                          | After server startup, criteria that must be met to decide if the {{ site.data.product.title_short }} Server can start a new worker. Default: used\_swap\_percent\_lt\_value                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | value                         | Value of criteria used. Default: 60                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 Table: session
@@ -1588,7 +1588,7 @@ Table: workers
 | poll                                                    | How often the workers checks for work. This value only is only used when the worker has no more work to do from the queue. It will wait for an amount of time determined by the poll value and poll method. Therefore, if there is constant work on the queue, the worker will not wait in between messages. Default: 1.seconds                                                           |
 | event\_catcher\_openstack                               | Contains settings that supersede the event\_catcher for event\_catcher\_openstack.                                                                                                                                                                                                                                                                                                        |
 | poll                                                    | How often the workers checks for work. This value only is only used when the worker has no more work to do from the queue. It will wait for an amount of time determined by the poll value and poll method. Therefore, if there is constant work on the queue, the worker will not wait in between messages. Default: 15.seconds                                                          |
-| topics                                                  | List of AMQP topics that should be monitored by {{ site.data.product.title }} when gathering events from OpenStack.                                                                                                                                                                                                                                                                                     |
+| topics                                                  | List of AMQP topics that should be monitored by {{ site.data.product.title_short }} when gathering events from OpenStack.                                                                                                                                                                                                                                                                                     |
 | duration                                                | Qpid Specific. Length of time (in seconds) the receiver should wait for a message from the Qpid broker before timing out. Default: 10.seconds                                                                                                                                                                                                                                             |
 | capacity                                                | Qpid Specific. The total number of messages that can be held locally by the Qpid client before it needs to fetch more messages from the broker. Default: 50.seconds                                                                                                                                                                                                                       |
 | amqp\_port                                              | Port used for AMQP. Default: 5672                                                                                                                                                                                                                                                                                                                                                         |
@@ -1602,10 +1602,10 @@ Table: workers
 | memory\_threshold                                       | How much memory to allow the worker to grow to before gracefully requesting it to exit and restart. Default: 150.megabytes                                                                                                                                                                                                                                                                |
 | nice\_delta                                             | Tells the worker monitor what Unix "nice" value to assign the workers when starting. A lower number is less nice to other processes. Default: 3                                                                                                                                                                                                                                           |
 | performance\_collection\_interval                       | Controls how often the schedule worker will put performance collection request on the queue to be picked up by the collection worker. Default: 3.minutes                                                                                                                                                                                                                                  |
-| performance\_collection\_start\_delay                   | How long after {{ site.data.product.title }} Server has started before starting capacity and utilization collection, if collection needs to be done. Default: 5.minutes                                                                                                                                                                                                                                 |
+| performance\_collection\_start\_delay                   | How long after {{ site.data.product.title_short }} Server has started before starting capacity and utilization collection, if collection needs to be done. Default: 5.minutes                                                                                                                                                                                                                                 |
 | poll                                                    | How often the workers checks for work. This value only is only used when the worker has no more work to do from the queue. It will wait for an amount of time determined by the poll value and poll method. Therefore, if there is constant work on the queue, the worker will not wait in between messages. Default: 15.seconds                                                          |
-| server\_logs\_stats\_interval                           | How often to log the {{ site.data.product.title }} Server statistics. Default: 5.minutes                                                                                                                                                                                                                                                                                                                |
-| server\_stats\_interval                                 | How often to collect the {{ site.data.product.title }} Server statistics. Default: 60.seconds                                                                                                                                                                                                                                                                                                           |
+| server\_logs\_stats\_interval                           | How often to log the {{ site.data.product.title_short }} Server statistics. Default: 5.minutes                                                                                                                                                                                                                                                                                                                |
+| server\_stats\_interval                                 | How often to collect the {{ site.data.product.title_short }} Server statistics. Default: 60.seconds                                                                                                                                                                                                                                                                                                           |
 | session\_timeout\_interval                              | How often to check to see if a UI (appliance console) session has timed out. Default: 30.seconds                                                                                                                                                                                                                                                                                          |
 | storage\_file\_collection\_interval                     | How often to perform file inventory of storage locations. Default: 1.days                                                                                                                                                                                                                                                                                                                 |
 | storage\_file\_collection\_time\_utc                    | What time to perform file inventory of storage locations. Default: "06:00"                                                                                                                                                                                                                                                                                                                |
@@ -2108,7 +2108,7 @@ To create a user group:
 
 4.  Enter a name for the group in the **Name** field. To ensure
     compatibility with tags, use underscores in place of spaces. For
-    example, {{ site.data.product.title }}-`test_group`.
+    example, {{ site.data.product.title_short }}-`test_group`.
 
 5.  Select a **Role** to map to this group. For a description of each
     {{ site.data.product.title_short }} role, see [Account Roles and
@@ -2161,7 +2161,7 @@ scope of access for the users that are members of the group.
 
 ![general config roles jcs](../images/general_config_roles_jcs.png)
 
-{{ site.data.product.title }} provides a default group of roles, but you can also
+{{ site.data.product.title_short }} provides a default group of roles, but you can also
 create your own, or copy and edit the default groups.
 
 **Note:**
@@ -2195,7 +2195,7 @@ The table below shows a summary of the functions available to each role.
 | Desktop                    | Access to VDI pages.                                                                                                                                                                                                                                |
 | Operator                   | Performs operations of virtual infrastructure. Can view and perform all functions on virtual infrastructure items including starting and stopping virtual machines. Cannot assign policy, but can view policy simulation from Virtual Machine page. |
 | Security                   | Enforces security for the virtual environment. Can assign policies to policy profiles, control user accounts, and view all parts of virtual infrastructure. Cannot create policies or perform actions on virtual infrastructure.                    |
-| Super Administrator        | Administrator of {{ site.data.product.title }} and the virtual infrastructure. Can access all functionality and configuration areas.                                                                                                                              |
+| Super Administrator        | Administrator of {{ site.data.product.title_short }} and the virtual infrastructure. Can access all functionality and configuration areas.                                                                                                                              |
 | Support                    | Access to features required by a support department such as diagnostics (logs). Can view all infrastructure items and logs. Cannot perform actions on them.                                                                                         |
 | Tenant Administrator       | Configures settings applicable to a Tenant. Sets Branding, maps groups/roles, configures LDAP credentials, and configures dashboard settings.                                                                                                       |
 | Tenant Quota Administrator | Configures quota limits for the tenant, applying usage constraints for CPU, Memory, Storage, Maximum number of VMs, and Maximum number of Templates.                                                                                                |
@@ -2233,14 +2233,14 @@ To create a role:
 
 Click ![config gear](../images/config-gear.png) (**Configuration**). Click
 on the **Diagnostics** tab to see the status of the different
-{{ site.data.product.title }} roles and workers for each server, view and collect
+{{ site.data.product.title_short }} roles and workers for each server, view and collect
 logs, and gather data if there are any gaps in capacity and utilization
 information. The Diagnostics area is designed in a hierarchy.
 
   - At the **region** level, you can see replication status, backup the
     VMDB, and run garbage collection on the VMDB.
 
-  - At the **zone** level, you can see {{ site.data.product.title }} roles by servers
+  - At the **zone** level, you can see {{ site.data.product.title_short }} roles by servers
     and servers by roles. In addition, you can set log collection values
     for a specific zone, and collect gap data for capacity and
     utilization.
@@ -2259,7 +2259,7 @@ Regions are used primarily to consolidate multiple VMDBs into one master
 VMDB for reporting while zones are used to define functional groups of
 servers. There can be only one region per VMDB, but multiple zones per
 region (or VMDB). Some server roles are aware of each other across
-{{ site.data.product.title }} appliances at the region level. This means that
+{{ site.data.product.title_short }} appliances at the region level. This means that
 redundancy and failover rules apply at the region level. You can also
 set priorities for the server roles that provide failover.
 
@@ -2452,14 +2452,14 @@ To collect and download logs from all servers in a zone:
     the selected zone.
 
 5.  Click **OK**. The status of the log retrieval shows in the
-    {{ site.data.product.title }} console.
+    {{ site.data.product.title_short }} console.
 
 ##### Capacity and Utilization Repair
 
-Under certain circumstances, it is possible that {{ site.data.product.title }} is not
+Under certain circumstances, it is possible that {{ site.data.product.title_short }} is not
 able to collect capacity and utilization data. This could be due to
 password expiration, a change in rights to the cloud provider and this
-change didn’t provide enough granularity to the {{ site.data.product.title }} service
+change didn’t provide enough granularity to the {{ site.data.product.title_short }} service
 account, or network connectivity. The gap data is collected directly by
 extracting the monthly performance data. Gap collection need to be
 completed for each zone individually. Therefore, the procedure below
@@ -2469,7 +2469,7 @@ need to be repeated for each zone.
 
 To repair capacity and utilization data:
 
-1.  Log in to a {{ site.data.product.title }} appliance located in the zone for which
+1.  Log in to a {{ site.data.product.title_short }} appliance located in the zone for which
     you want to gather the data.
 
 2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
@@ -2500,14 +2500,14 @@ time period specified.
 #### Server Diagnostics
 
 Under **Diagnostics** for a server, you can view the status of
-{{ site.data.product.title }} workers running on the server, set log collection
+{{ site.data.product.title_short }} workers running on the server, set log collection
 setting for only that server, and view the server’s current
-{{ site.data.product.title }} and audit logs.
+{{ site.data.product.title_short }} and audit logs.
 
 ##### Workers
 
 The **Workers** tab enables you to see the status of and restart
-{{ site.data.product.title }} workers.
+{{ site.data.product.title_short }} workers.
 
 You can see additional information on and restart the following items:
 
@@ -2518,7 +2518,7 @@ You can see additional information on and restart the following items:
     and utilization data.
 
   - **Event Handlers** put events from the Event Monitor into the VMDB
-    and starts {{ site.data.product.title }} processes if needed base on that
+    and starts {{ site.data.product.title_short }} processes if needed base on that
     information.
 
   - **Event Monitors** that communicate with the external cloud provider
@@ -2544,7 +2544,7 @@ You can see additional information on and restart the following items:
 
   - **User Interface Worker** that allows users access to the console.
 
-  - **Web Services Worker** that maintains {{ site.data.product.title }} Web services.
+  - **Web Services Worker** that maintains {{ site.data.product.title_short }} Web services.
 
   - **VM Analysis Collectors** that run and process SmartState Analyses
     on virtual machines.
@@ -2655,7 +2655,7 @@ To Collect the Current Log Set of a Server
     log files in as well as configuration files are collected.
 
 6.  Click **OK**. The status of the log retrieval shows in the
-    {{ site.data.product.title }} console.
+    {{ site.data.product.title_short }} console.
 
 ###### Collecting All Log Sets from a Server
 
@@ -2675,7 +2675,7 @@ To Collect All Log Sets from a Server
     logs directory as well as configuration files are collected.
 
 6.  Click **OK**. The status of the log retrieval shows in the
-    {{ site.data.product.title }} console.
+    {{ site.data.product.title_short }} console.
 
 ###### Viewing the Server, Audit, and Production Logs
 
@@ -2701,7 +2701,7 @@ To view the server log:
 
 4.  Click **CFME Log**.
 
-The {{ site.data.product.title }} server automatically retrieves the last 1000 lines
+The {{ site.data.product.title_short }} server automatically retrieves the last 1000 lines
 of the log.
 
 ###### Reloading the Server Log
@@ -2800,7 +2800,7 @@ To view the production log:
 
 4.  Click **Production Log**.
 
-The {{ site.data.product.title }} server automatically retrieves the last 1000 lines
+The {{ site.data.product.title_short }} server automatically retrieves the last 1000 lines
 of the log.
 
 ###### Reloading the Production Log
@@ -2879,14 +2879,14 @@ replicate to the top region.
 
 <div class="important">
 
-All {{ site.data.product.title }} databases in a multi-region deployment must use the
+All {{ site.data.product.title_short }} databases in a multi-region deployment must use the
 same security key.
 
 </div>
 
 ##### Creating a Region
 
-In principle, a region is created when you set up your {{ site.data.product.title }}
+In principle, a region is created when you set up your {{ site.data.product.title_short }}
 environment on the first appliance for the region. However, you can also
 create a region on an appliance where a database has already been set
 up. This process involves dropping and rebuilding the existing database
@@ -2961,7 +2961,7 @@ processed and executed on the remote copy.
 
 ##### Configuring a Remote Copy
 
-Configure a {{ site.data.product.title }} instance to act as a remote copy from which
+Configure a {{ site.data.product.title_short }} instance to act as a remote copy from which
 data will be replicated to the global copy.
 
 1.  Click ![Configuration](../images/config-gear.png) **Configuration**.
@@ -2978,7 +2978,7 @@ data will be replicated to the global copy.
 
 ##### Configuring the Global Copy
 
-Configure a {{ site.data.product.title }} instance to act as the global copy to which
+Configure a {{ site.data.product.title_short }} instance to act as the global copy to which
 data is replicated from the remote copies.
 
 ![Add Subscription](../images/add-subscription-global.png)
@@ -3018,7 +3018,7 @@ data is replicated from the remote copies.
 
 **Note:**
 
-Once you configure a {{ site.data.product.title }} instance to act as a global copy,
+Once you configure a {{ site.data.product.title_short }} instance to act as a global copy,
 and one or more other instances to act as remote copies: \* centralized
 administration is automatically enabled after the initial data sync is
 complete. \* you will see the type of region you are logging into
@@ -3080,7 +3080,7 @@ from the global copy.
 
 8.  Click **Save**.
 
-#### Backing Up and Restoring {{ site.data.product.title }} in a Kubernetes Based Environment (podified)
+#### Backing Up and Restoring {{ site.data.product.title_short }} in a Kubernetes Based Environment (podified)
 
 **Prerequisites:**
    - Velero and Restic must be installed and working in your cluster. For more information on Velero, see the [Velero documentation](https://velero.io/docs/v1.5/). For more information on Restic, see the [Restic documentation](https://restic.readthedocs.io/en/stable/) 
@@ -3098,7 +3098,7 @@ from the global copy.
    ```
    velero backup create <your backup name> --include-namespaces <your namespace> -l <your label name>
    ```
-3. In order to restore a backup, first ensure the {{ site.data.product.title }} CRD exists. Then, restore the backup by running the commands:
+3. In order to restore a backup, first ensure the {{ site.data.product.title_short }} CRD exists. Then, restore the backup by running the commands:
    ```
    oc new-project <your namespace>
    velero restore create --from-backup <your backup name>
@@ -3108,7 +3108,7 @@ from the global copy.
 
 ##### Running a Single Database Backup 
 
-{{ site.data.product.title }} supports database backups to **Network File System
+{{ site.data.product.title_short }} supports database backups to **Network File System
 (NFS)**, **Samba**, **Amazon Web Service(AWS) S3** and **OpenStack
 Swift** storage.
 
@@ -3159,7 +3159,7 @@ restore a backup from a local file, NFS, or Samba.
 To restore a database from a backup:
 
 1.  Save the database backup file as `/tmp/evm_db.backup`.
-    {{ site.data.product.title }} looks specifically for this file when restoring a
+    {{ site.data.product.title_short }} looks specifically for this file when restoring a
     database from a local backup.
 
 2.  If you are restoring a database backup on a high availability
@@ -3332,7 +3332,7 @@ appliances.
 
 ##### Changing the Password on the Database Appliance
 
-{{ site.data.product.title }} provides a default database password for the internal
+{{ site.data.product.title_short }} provides a default database password for the internal
 PostgreSQL database.
 
 To change the password, you need to stop the {{ site.data.product.title_short }}
@@ -3445,7 +3445,7 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
 
 You can schedule hourly or periodic database maintenance through the
 appliance console. Performing regular PostgreSQL database maintenance
-helps to maintain a more responsive {{ site.data.product.title }} environment.
+helps to maintain a more responsive {{ site.data.product.title_short }} environment.
 
 Hourly database maintenance tasks, such as reindexing, are useful for
 highly active database tables such as metrics, workers, and servers.

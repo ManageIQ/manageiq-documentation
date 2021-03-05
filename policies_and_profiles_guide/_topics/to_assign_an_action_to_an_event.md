@@ -16,7 +16,7 @@ This procedure describes how to assign an action to an event.
 
     **Note:**
 
-    Each selected action can be executed synchronously or asynchronously; synchronous actions will not start until the previous synchronous action is completed, and asynchronous action allows the next action to start whether the first action has completed or not. Also, at least one {{ site.data.product.title }} server in the {{ site.data.product.title }} zone must have the notifier server role that is enabled for the trap to be sent.
+    Each selected action can be executed synchronously or asynchronously; synchronous actions will not start until the previous synchronous action is completed, and asynchronous action allows the next action to start whether the first action has completed or not. Also, at least one {{ site.data.product.title_short }} server in the {{ site.data.product.title_short }} zone must have the notifier server role that is enabled for the trap to be sent.
 
 6. Click the add button ![image](../images/1876.png), then:
 

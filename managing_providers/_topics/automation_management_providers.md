@@ -1,12 +1,12 @@
 # Automation Management Providers
 
-In {{ site.data.product.title }}, an automation management provider is a management
+In {{ site.data.product.title_short }}, an automation management provider is a management
 tool that integrates with {{ site.data.product.title_short }} to simplify automation
 operations for your resources. This chapter describes the automation
-management providers that you can use with {{ site.data.product.title }}, and how to
+management providers that you can use with {{ site.data.product.title_short }}, and how to
 work with them.
 
-{{ site.data.product.title }} provides automation management features through the
+{{ site.data.product.title_short }} provides automation management features through the
 following:
 
 **Automate** enables real-time, bi-directional process integration. This
@@ -31,7 +31,7 @@ occur.
 
 ## Ansible
 
-Ansible integrates with {{ site.data.product.title }} to provide automation solutions,
+Ansible integrates with {{ site.data.product.title_short }} to provide automation solutions,
 using playbooks, for Service, Policy and Alert actions. Ansible
 playbooks consist of series of *plays* or tasks that define automation
 across a set of hosts, known as the inventory.
@@ -49,7 +49,7 @@ cloud management:
     {{ site.data.product.title_short }} alert.
 
 Ansible is built into {{ site.data.product.title_short }} so there is nothing to
-install. The basic workflow when using Ansible in {{ site.data.product.title }} is as
+install. The basic workflow when using Ansible in {{ site.data.product.title_short }} is as
 follows:
 
 1.  Enable the **Embedded Ansible** server role.
@@ -62,7 +62,7 @@ follows:
 
 ### Enabling the Embedded Ansible Server Role
 
-In {{ site.data.product.title }}, the **Embedded Ansible** role is disabled by
+In {{ site.data.product.title_short }}, the **Embedded Ansible** role is disabled by
 default. Enable this server role to utilize Ansible Automation Inside.
 
 **Note:**
@@ -92,7 +92,7 @@ confirm the state of your embedded Ansible worker.
 
 ### Adding a Playbook Repository
 
-Add a repository so that {{ site.data.product.title }} can discover and make available
+Add a repository so that {{ site.data.product.title_short }} can discover and make available
 your playbooks.
 
 1.  Navigate to menu:Automation\[Ansible \> Repositories\].
@@ -120,7 +120,7 @@ to {{ site.data.product.title_short }}.
 
 ### Refreshing Repositories
 
-{{ site.data.product.title }} allows you to refresh a targeted playbook repository or
+{{ site.data.product.title_short }} allows you to refresh a targeted playbook repository or
 all repositories in your inventory to ensure your playbooks are current.
 
 Refresh a targeted repository:
@@ -153,8 +153,8 @@ view:
 
 ### Ansible Tower
 
-Ansible Tower is a management tool integrated with {{ site.data.product.title }},
-designed to help automate infrastructure operations. {{ site.data.product.title }}
+Ansible Tower is a management tool integrated with {{ site.data.product.title_short }},
+designed to help automate infrastructure operations. {{ site.data.product.title_short }}
 allows you to execute Ansible Tower jobs or workflows using service
 catalogs and Automate. No custom configuration or Ruby scripting is
 needed in {{ site.data.product.title_short }}, as configuration is done in Ansible
@@ -163,7 +163,7 @@ Tower using playbooks.
 You can use the large library of existing Ansible playbooks as
 {{ site.data.product.title_short }} state machines to automate tasks such as
 deployments, backups, package updates, and maintenance in your
-{{ site.data.product.title }} environment. This can be particularly useful for quickly
+{{ site.data.product.title_short }} environment. This can be particularly useful for quickly
 applying changes across large environments with many virtual machines or
 instances.
 
@@ -176,7 +176,7 @@ integration.
 
 #### Working with an Ansible Tower Provider
 
-The basic workflow when using {{ site.data.product.title }} with an Ansible Tower
+The basic workflow when using {{ site.data.product.title_short }} with an Ansible Tower
 provider is as follows:
 
 1.  Create an Ansible playbook which performs a specific task.
@@ -205,7 +205,7 @@ provider is as follows:
 
 #### Adding an Ansible Tower Provider
 
-To access your Ansible Tower inventory from {{ site.data.product.title }}, you must
+To access your Ansible Tower inventory from {{ site.data.product.title_short }}, you must
 add Ansible Tower as a provider.
 
 **Note:**
@@ -249,7 +249,7 @@ After adding the Ansible Tower provider, refresh its relationships and power sta
 
 Refresh relationships of all items related to an existing Ansible Tower configuration management provider including inventory, hosts, virtual machines, and clusters.
 
-You can refresh inventory from {{ site.data.product.title }}, or by enabling the
+You can refresh inventory from {{ site.data.product.title_short }}, or by enabling the
 **Update on Launch** option for inventory groups in Ansible Tower. The
 **Update on Launch** option allows Ansible Tower to automatically update inventory using a dynamic inventory script before launching an Ansible Tower job from a playbook. See the [Ansible Tower documentation](http://docs.ansible.com/ansible-tower/index.html) for more information.
 
@@ -258,7 +258,7 @@ You can refresh inventory from {{ site.data.product.title }}, or by enabling the
 It can take a long time to retrieve information from providers containing many virtual machines or instances. The Ansible Tower dynamic inventory script can be modified to limit updates to specific items and
 reduce refresh time.
 
-To refresh an Ansible Tower provider’s inventory in {{ site.data.product.title }}:
+To refresh an Ansible Tower provider’s inventory in {{ site.data.product.title_short }}:
 
 1.  Navigate to menu: **Automation > Ansible Tower > Explorer** and click the **Providers** accordion tab.
 
@@ -270,12 +270,12 @@ To refresh an Ansible Tower provider’s inventory in {{ site.data.product.title
 
 4.  Click **OK**.
 
-{{ site.data.product.title }} then queries the Ansible Tower API and obtains an
+{{ site.data.product.title_short }} then queries the Ansible Tower API and obtains an
 inventory of all available hosts, job and workflow templates.
 
 #### Viewing Ansible Tower Providers and Inventory
 
-{{ site.data.product.title }} automatically updates its inventory from Ansible Tower.
+{{ site.data.product.title_short }} automatically updates its inventory from Ansible Tower.
 This includes system groups (known as Inventories in Ansible Tower),
 basic information about individual systems, and available Ansible Tower
 job or workflow templates to be executed from the service catalog or
@@ -283,7 +283,7 @@ Automate.
 
 **Note:**
 
-To view and access Ansible Tower inventories and job or workflow templates in {{ site.data.product.title }}, you must first create them in Ansible Tower.
+To view and access Ansible Tower inventories and job or workflow templates in {{ site.data.product.title_short }}, you must first create them in Ansible Tower.
 
 To view a list of Ansible Tower providers and inventory:
 
@@ -305,11 +305,11 @@ To view the systems in your Ansible Tower inventory:
 
 #### Executing an Ansible Tower Job or Workflow Template from a Service Catalog
 
-You can execute an Ansible Tower playbook from {{ site.data.product.title }} by creating a service catalog item from an Ansible Tower job or workflow template.
+You can execute an Ansible Tower playbook from {{ site.data.product.title_short }} by creating a service catalog item from an Ansible Tower job or workflow template.
 
 **Important:**
 
-You must first create the job or workflow template in Ansible Tower. The job or workflow templates are automatically discovered by {{ site.data.product.title }} when refreshing your Ansible Tower provider’s inventory.
+You must first create the job or workflow template in Ansible Tower. The job or workflow templates are automatically discovered by {{ site.data.product.title_short }} when refreshing your Ansible Tower provider’s inventory.
 
 First, create a catalog:
 
@@ -370,10 +370,10 @@ To execute the Ansible Tower job:
 
 3.  Enter any variables requested and click **Submit**.
 
-{{ site.data.product.title }} takes you to the **Requests** queue page and show the
+{{ site.data.product.title_short }} takes you to the **Requests** queue page and show the
 status of the job.
 
-The service item’s details can be viewed in menu: **Services > My Services** in {{ site.data.product.title }}.
+The service item’s details can be viewed in menu: **Services > My Services** in {{ site.data.product.title_short }}.
 
 **Note:**
 
@@ -381,10 +381,10 @@ Instead of running a single job at a time, multiple service catalog items can al
 
 #### Executing an Ansible Tower Job Using a Custom Automate Button
 
-{{ site.data.product.title }} can execute Ansible Tower jobs on virtual machines or
+{{ site.data.product.title_short }} can execute Ansible Tower jobs on virtual machines or
 instances using custom buttons in Automate.
 
-Ansible Tower jobs can either be non-customizable, which do not require any extra configuration from the user, or alternatively, they can allow the user to specify a parameter (for example, a package name to install). In Ansible Tower jobs containing a dialog, {{ site.data.product.title }} accepts additional information from the user and adds it to the appropriate API call in Automate, and then sends it into Ansible Tower.
+Ansible Tower jobs can either be non-customizable, which do not require any extra configuration from the user, or alternatively, they can allow the user to specify a parameter (for example, a package name to install). In Ansible Tower jobs containing a dialog, {{ site.data.product.title_short }} accepts additional information from the user and adds it to the appropriate API call in Automate, and then sends it into Ansible Tower.
 
 **Prerequisites.**
 
@@ -392,11 +392,11 @@ Before creating an Automate button to execute an Ansible Tower job, the followin
 
   - An Ansible playbook in Ansible Tower. See the [Ansible Tower documentation](https://docs.ansible.com/) for instructions.
 
-  - Ansible Tower must be able to reach virtual machines or instances deployed by {{ site.data.product.title }} at the IP level.
+  - Ansible Tower must be able to reach virtual machines or instances deployed by {{ site.data.product.title_short }} at the IP level.
 
   - The virtual machine template must have the Ansible Tower environment’s public SSH key injected. For cloud instances, `cloud-init` can be used and the public SSH key can be passed without rebuilding the image.
 
-  - Any dynamic inventory scripts used must be configured to return the virtual machine names exactly as they are stored in {{ site.data.product.title }}, without the UUID appended.
+  - Any dynamic inventory scripts used must be configured to return the virtual machine names exactly as they are stored in {{ site.data.product.title_short }}, without the UUID appended.
 
 **Executing an Ansible Tower Job using a Custom Automate Button.**
 
@@ -472,11 +472,11 @@ To use the button to run an Ansible Tower job on a virtual machine:
 
 4.  Click **Submit** to execute the job.
 
-{{ site.data.product.title }} then confirms the job has been executed.
+{{ site.data.product.title_short }} then confirms the job has been executed.
 
 If you selected a service dialog to run when creating the button,
-{{ site.data.product.title }} will then prompt you to enter variables to complete the
-task. After entering your desired parameters, {{ site.data.product.title }} takes you
+{{ site.data.product.title_short }} will then prompt you to enter variables to complete the
+task. After entering your desired parameters, {{ site.data.product.title_short }} takes you
 to the **Requests** page.
 
-The service item’s details can be viewed in menu: **Services > My Services** in {{ site.data.product.title }}.
+The service item’s details can be viewed in menu: **Services > My Services** in {{ site.data.product.title_short }}.

@@ -1,6 +1,6 @@
 # Adding a Red Hat Virtualization Provider
 
-After initial installation and creation of a {{ site.data.product.title }}
+After initial installation and creation of a {{ site.data.product.title_short }}
 environment, add a Red Hat Virtualization provider to the appliance.
 
 1.  Navigate to menu: **Compute > Infrastructure > Providers**.

@@ -46,17 +46,17 @@ Satellite 6 environment requires the following:
     3.  **Last Name**
 
     4.  This form also contains optional fields for users to enter a
-        plain text **Note** to inform {{ site.data.product.title }} administrators of
+        plain text **Note** to inform {{ site.data.product.title_short }} administrators of
         any special details, and a field to provide a manager’s name in
         case administrators require approval from a user’s manager.
 
-6.  Select the **Purpose** tab and select any {{ site.data.product.title }} policy
+6.  Select the **Purpose** tab and select any {{ site.data.product.title_short }} policy
     tags that apply to the system.
 
 7.  Select the **Catalog** tab. This screen displays the list of chosen
     machines to reprovision and their current details. Select a **target
     host group** from the **Configuration Profile** list.
-    {{ site.data.product.title }} communicates with Red Hat Satellite to apply the
+    {{ site.data.product.title_short }} communicates with Red Hat Satellite to apply the
     configuration from this host group to the selected host and
     reprovision the system.
 
@@ -72,7 +72,7 @@ Satellite 6 environment requires the following:
     Provisioning bare metal systems still requires access to the network
     that Red Hat Satellite 6 manages. This is because Red Hat Satellite
     controls PXE booting, kickstarts, and Puppet configuration for bare
-    metal systems. Ensure the IP address you enter in {{ site.data.product.title }}
+    metal systems. Ensure the IP address you enter in {{ site.data.product.title_short }}
     can access a DHCP service that Red Hat Satellite 6 provides either
     through the main server or through a Red Hat Satellite 6 Capsule
     server.
@@ -86,7 +86,7 @@ Satellite 6 environment requires the following:
 
 10. Click **Submit**.
 
-Depending on the request settings on your {{ site.data.product.title }} appliance,
+Depending on the request settings on your {{ site.data.product.title_short }} appliance,
 this provisioning request might require approval from an administrator.
 If not, the provisioning request launches depending on your choice for
 the schedule.

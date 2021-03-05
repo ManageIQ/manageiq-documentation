@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} on Red Hat Virtualization consists of the
+Installing {{ site.data.product.title_short }} on Red Hat Virtualization consists of the
 following steps:
 
 1.  Downloading the appliance for your environment as a virtual machine

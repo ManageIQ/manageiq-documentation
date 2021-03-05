@@ -56,7 +56,7 @@
     **Note:**
 
     Each selected action can be executed synchronously or
-    asynchronously; a synchronous action will not start until the previous synchronous action is completed, while an asynchronous action allows the next action to start whether or not the first action has completed. Also, at least one {{ site.data.product.title }} server in the {{ site.data.product.title }} zone must have the notifier server role enabled
+    asynchronously; a synchronous action will not start until the previous synchronous action is completed, while an asynchronous action allows the next action to start whether or not the first action has completed. Also, at least one {{ site.data.product.title_short }} server in the {{ site.data.product.title_short }} zone must have the notifier server role enabled
     for the trap to be sent.
 
 17. Click (![image](../images/1876.png)) which will move the action to **Selected Actions**. The selected action is set to (S) Synchronous by default. From **Selected Actions**, select the action, then:

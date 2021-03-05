@@ -1,6 +1,6 @@
 ## Catalogs and Services
 
-Through the use of catalogs, {{ site.data.product.title }} provides support for
+Through the use of catalogs, {{ site.data.product.title_short }} provides support for
 multi-tier service provisioning to deploy layered workloads across
 hybrid environments. You can create customized dialogs that will give
 consumers of the services the ability to input just a few parameters and
@@ -33,7 +33,7 @@ Using automate requests, services and catalog items, generic objects can
 be directly accessed or passed, during any step, as a parameter to a
 service state machine. As a result, generic objects can be used to
 quickly add the capability to provision and collect data on resources
-not supported by {{ site.data.product.title }}.
+not supported by {{ site.data.product.title_short }}.
 
 #### Viewing Generic Objects Classes
 
@@ -59,7 +59,7 @@ information for each object.
 
 #### Exporting Generic Objects
 
-Export generic objects from {{ site.data.product.title }} to create a shared library.
+Export generic objects from {{ site.data.product.title_short }} to create a shared library.
 
 Exporting a generic object requires the object has been created in
 {{ site.data.product.title_short }}.
@@ -511,7 +511,7 @@ Create a catalog item that uses an Ansible Playbook to back it.
 #### Creating an Ansible Tower Service Catalog Item
 
 Create a service catalog item from an Ansible Tower template you can use
-to execute an Ansible Tower playbook in {{ site.data.product.title }}.
+to execute an Ansible Tower playbook in {{ site.data.product.title_short }}.
 
 {% include create-tower-catalog-item.md %}
 
@@ -547,7 +547,7 @@ the choices made in the dialog.
 Cloud orchestration is a service that allows you to create, update, and manage cloud resources and their software components as a single unit and then deploy them in an automated, repeatable way through a template.
 Templates use a human-readable syntax and can be defined in text files, thereby allowing users to check them into version control. Templates allow you to easily deploy and reconfigure infrastructure for applications within your cloud. A user can author the stack templates, or can upload them from other sources.
 
-{{ site.data.product.title }} supports adding Amazon CloudFormation, OpenStack Heat, Microsoft Azure, VNF, and VMware vApp template type, and provides the ability to:
+{{ site.data.product.title_short }} supports adding Amazon CloudFormation, OpenStack Heat, Microsoft Azure, VNF, and VMware vApp template type, and provides the ability to:
 
   - Inventory stacks and elements of each type into the
     {{ site.data.product.title_short }} VMDB.

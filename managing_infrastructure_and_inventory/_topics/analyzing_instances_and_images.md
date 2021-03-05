@@ -2,9 +2,9 @@
 
 Analyze an instance to collect metadata such as user accounts,
 applications, software patches, and other internal information. If
-{{ site.data.product.title }} is not set up for automatic analysis, perform a manual
+{{ site.data.product.title_short }} is not set up for automatic analysis, perform a manual
 analysis of an instance. To perform a SmartState Analysis,
-{{ site.data.product.title }} requires a running SmartProxy with visibility to the
+{{ site.data.product.title_short }} requires a running SmartProxy with visibility to the
 instance’s storage location so that a snapshot can be created.
 
 1.  Navigate to menu:Compute\[Clouds \> Instances\].

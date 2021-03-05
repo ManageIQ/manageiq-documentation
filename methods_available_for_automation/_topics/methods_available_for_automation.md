@@ -1,19 +1,19 @@
-## Methods Available for Use with {{ site.data.product.title }}
+## Methods Available for Use with {{ site.data.product.title_short }}
 
-Methods can be used from within {{ site.data.product.title }} to create custom actions
-and workflows for the objects managed for your {{ site.data.product.title }}
+Methods can be used from within {{ site.data.product.title_short }} to create custom actions
+and workflows for the objects managed for your {{ site.data.product.title_short }}
 Infrastructure. This document describes the methods available for use in
-{{ site.data.product.title }}. This document is organized by the object hierarchy in
+{{ site.data.product.title_short }}. This document is organized by the object hierarchy in
 the Automate Model.
 
 **Note:**
 
-Users of {{ site.data.product.title }} can construct custom automation methods in Ruby
-to extend the product. {{ site.data.product.title }} ships with a core set of Ruby
-gems used by the {{ site.data.product.title }} Rails Application. The Ruby gems in
+Users of {{ site.data.product.title_short }} can construct custom automation methods in Ruby
+to extend the product. {{ site.data.product.title_short }} ships with a core set of Ruby
+gems used by the {{ site.data.product.title_short }} Rails Application. The Ruby gems in
 this set are subject to change, and have changed since the previous
 version. If you are calling gems using Automate that are no longer in
-the {{ site.data.product.title }} appliance, you can install them by using the `gem
+the {{ site.data.product.title_short }} appliance, you can install them by using the `gem
 install` command.
 
 While gems can be imported into automation methods using `require`, it
@@ -277,15 +277,15 @@ _topics/management_system_folders_ems_folder.md %}
 </tr>
 <tr class="odd">
 <td><p>custom_keys</p></td>
-<td><p>Lists {{ site.data.product.title }} Server custom keys</p></td>
+<td><p>Lists {{ site.data.product.title_short }} Server custom keys</p></td>
 </tr>
 <tr class="even">
 <td><p>custom_get(key)</p></td>
-<td><p>Gets value for specified {{ site.data.product.title }} Server custom key</p></td>
+<td><p>Gets value for specified {{ site.data.product.title_short }} Server custom key</p></td>
 </tr>
 <tr class="odd">
 <td><p>custom_set(key, value)</p></td>
-<td><p>Sets value for specified {{ site.data.product.title }} Server custom key</p></td>
+<td><p>Sets value for specified {{ site.data.product.title_short }} Server custom key</p></td>
 </tr>
 <tr class="even">
 <td><p>ssh_exec(script)</p></td>
@@ -441,7 +441,7 @@ cpu_rdy = host.get_realtime_metric(:v_pct_cpu_ready_delta_summation, [15.minutes
 
 ### Request (miq\_request)
 
-Request objects are submitted to {{ site.data.product.title }} Server for processing.
+Request objects are submitted to {{ site.data.product.title_short }} Server for processing.
 After the request phase, the request becomes a task object. The table
 below shows the relationship between a request object and a task object.
 
@@ -1008,13 +1008,13 @@ _topics/service_reconfiguration_task_service_reconfigure_task.md
 
 ### Servers (miq\_server)
 
-These methods are available to the {{ site.data.product.title }} Server.
+These methods are available to the {{ site.data.product.title_short }} Server.
 
 | Method         | Use                                           |
 | -------------- | --------------------------------------------- |
-| zone           | Returns {{ site.data.product.title }} Servers Zone          |
-| region\_number | Returns {{ site.data.product.title }} Servers Region Number |
-| region\_name   | Returns {{ site.data.product.title }} Servers Region Name   |
+| zone           | Returns {{ site.data.product.title_short }} Servers Zone          |
+| region\_number | Returns {{ site.data.product.title_short }} Servers Region Number |
+| region\_name   | Returns {{ site.data.product.title_short }} Servers Region Name   |
 
 ``` ruby
   #########################
@@ -1172,15 +1172,15 @@ object.
 </tr>
 <tr class="odd">
 <td><p>custom_get(key)</p></td>
-<td><p>Get the value of specified {{ site.data.product.title }} Server key from the object</p></td>
+<td><p>Get the value of specified {{ site.data.product.title_short }} Server key from the object</p></td>
 </tr>
 <tr class="even">
 <td><p>custom_keys</p></td>
-<td><p>List all {{ site.data.product.title }} Server custom keys for the object</p></td>
+<td><p>List all {{ site.data.product.title_short }} Server custom keys for the object</p></td>
 </tr>
 <tr class="odd">
 <td><p>custom_set(key, value)</p></td>
-<td><p>Set a custom {{ site.data.product.title }} Server key value</p></td>
+<td><p>Set a custom {{ site.data.product.title_short }} Server key value</p></td>
 </tr>
 <tr class="even">
 <td><p>datacenter</p></td>
@@ -1271,7 +1271,7 @@ object.
 </tr>
 <tr class="even">
 <td><p>miq_provision</p></td>
-<td><p>If VM was created using {{ site.data.product.title }} Server provisioning, this is the miq_provision task instance that created the VM</p></td>
+<td><p>If VM was created using {{ site.data.product.title_short }} Server provisioning, this is the miq_provision task instance that created the VM</p></td>
 </tr>
 <tr class="odd">
 <td><p>move_into_folder(folder) [2]</p></td>

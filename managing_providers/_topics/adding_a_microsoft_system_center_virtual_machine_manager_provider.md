@@ -1,6 +1,6 @@
 # Adding a Microsoft SCVMM Provider
 
-After initial installation and creation of a {{ site.data.product.title }}
+After initial installation and creation of a {{ site.data.product.title_short }}
 environment, add a Microsoft System Center Virtual Machine Manager
 (SCVMM) provider to the appliance.
 
@@ -47,7 +47,7 @@ the provider.
 
         3.  Enter the password again in the **Confirm Password** field.
 
-7.  Click **Validate** to confirm that {{ site.data.product.title }} can connect to
+7.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect to
     the Microsoft System Center Virtual Machine Manager.
 
 8.  Click **Add**.

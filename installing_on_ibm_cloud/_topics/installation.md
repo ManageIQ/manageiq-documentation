@@ -35,18 +35,20 @@ Create a custom Linux-based image to deploy {{ site.data.product.title_short }} 
     You must also create a bucket in IBM Cloud Object Storage to store your images.
     ![Figure showing example standard type bucket created.](../images/buckets.png){: caption="Figure 3. Example Standard type bucket created" caption-side="bottom"}
 
+2. Rename the {{ site.data.product.title_short }} installation image file and change the file extension from `.qc2` to `.qcow2`.
+For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (file name: `manageiq-openstack-kasparov-1.qcow2`).
 
-2. Upload the {{ site.data.product.title_short }} installation image (file name: `manageiq-openstack-jansa-1.qc2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). 
+3. Upload the {{ site.data.product.title_short }} installation image (file name: `manageiq-openstack-kasparov-1.qcow2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). 
    
    **Note:** You can use the Aspera high-speed transfer plug-in to upload images larger than 200 MB.  
-![Figure showing example that uses Aspera uploaded file to bucket.](../images/upload_images_to_bucket.png){: caption="Figure 4. Example using Aspera uploaded file to bucket" caption-side="bottom"}
+![Figure showing example that uses Aspera uploaded file to bucket.](../images/upload_images_to_bucket_2.png){: caption="Figure 4. Example using Aspera uploaded file to bucket" caption-side="bottom"}
 
-1. From IBM Cloud Identity and Access Management (IAM), create an authorization between the Virtual Private Cloud (VPC) Infrastructure (source service) > Image Service for VPC (resource type) and Cloud Object Storage (target service). For more information, see [Create an authorization](https://cloud.ibm.com/docs/iam?topic=iam-serviceauth#serviceauth).
+4. From IBM Cloud Identity and Access Management (IAM), create an authorization between the Virtual Private Cloud (VPC) Infrastructure (source service) > Image Service for VPC (resource type) and Cloud Object Storage (target service). For more information, see [Create an authorization](https://cloud.ibm.com/docs/iam?topic=iam-serviceauth#serviceauth).
     
     **Important**: The configuration must be set up as this example or permissions can fail. 
     ![Figure showing example IAM authorization.](../images/service_auth_vpc.png){: caption="Figure 5. Example IAM authorization" caption-side="bottom"}
 
-2. Create a generation 2 Virtual Private Cloud (**Must be generation 2**). For more information, see [Create a VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started#create-and-configure-vpc)
+5. Create a generation 2 Virtual Private Cloud (**Must be generation 2**). For more information, see [Create a VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started#create-and-configure-vpc)
   
     a. Create a VPC - The VPC must be in the same resource group and region as your bucket.
 
@@ -56,11 +58,11 @@ Create a custom Linux-based image to deploy {{ site.data.product.title_short }} 
 
     ![Figure showing example VPC.](../images/service_auth_vpc.png){: caption="Figure 6. Example VPC" caption-side="bottom"}
 
-3. Configure an access control list (ACL) to limit the subnet's inbound and outbound traffic.
+6. Configure an access control list (ACL) to limit the subnet's inbound and outbound traffic.
 
     ![Figure showing example ACL.](../images/config_ACL.png){: caption="Figure 7. Example ACL" caption-side="bottom"}
 
-4. Import the {{ site.data.product.title_short }} installation images from the bucket into the VPC.
+7. Import the {{ site.data.product.title_short }} installation images from the bucket into the VPC.
   
     a. Browse to **VPC Infrastructure** > **Compute** > **Custom images** and select **import custom image**.
 
@@ -80,11 +82,11 @@ Create a custom Linux-based image to deploy {{ site.data.product.title_short }} 
 
     h. Click **Import custom image**.
 
-    ![Figure showing example of custom image imported.](../images/select_qcow2_image.png){: caption="Figure 9. Example of custom image imported" caption-side="bottom"}
+    ![Figure showing example of custom image imported.](../images/select_qcow2_image_2.png){: caption="Figure 9. Example of custom image imported" caption-side="bottom"}
 
     ![Figure showing example of custom image listing after successful image creation.](../images/results_vpc_images.png){: caption="Figure 10. Example of custom image listing after successful image creation" caption-side="bottom"}
 
-5. Create a virtual server from the custom image by clicking the "three dot menu" of that image, then selecting "New virtual server".
+8. Create a virtual server from the custom image by clicking the "three dot menu" of that image, then selecting "New virtual server".
 ![Figure showing select three dot menu for New virtual server.](../images/select_new_server.png){: caption="Figure 11. Select New virtual server from the three dot menu" caption-side="bottom"}
   
    a. Enter your name. Select the Virtual private cloud and Resource group.
@@ -108,11 +110,11 @@ Create a custom Linux-based image to deploy {{ site.data.product.title_short }} 
 
     g. Select create virtual server instance. 
  
-8. Update the security group that allows inbound and outbound traffic. Open the server instance, go down to the Network interfaces section, and then modify the security group.
+9. Update the security group that allows inbound and outbound traffic. Open the server instance, go down to the Network interfaces section, and then modify the security group.
 
    ![Figure showing example security group that allows inbound and outbound traffic.](../images/security_inbound_outbound.png){: caption="Figure 15. Example security group that allows inbound and outbound traffic" caption-side="bottom"}
 
-9. Assign the floating IP address:
+10. Assign the floating IP address:
 
    ![Figure showing example Floating IP address.](../images/floating_ip_vpc.png){: caption="Figure 16. Example Floating IP address assigned" caption-side="bottom"}
 

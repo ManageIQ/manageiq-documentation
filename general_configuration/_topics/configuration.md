@@ -2913,7 +2913,7 @@ the data in the database.
 
 5.  Enter `Y` to confirm.
 
-6.  Choose `Configure Database`.
+6.  Choose `Configure Application`.
 
 7.  Enter a database region number that has not been used in your
     environment. Do not enter duplicate region numbers because this can

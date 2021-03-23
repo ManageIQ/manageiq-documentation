@@ -17,7 +17,7 @@ disks; installation will fail if the disks are not blank.
 
 3.  Press **Enter** to manually configure settings.
 
-4.  Select **Configure Database** from the menu.
+4.  Select **Configure Application** from the menu.
 
 5.  You are prompted to create or fetch an encryption key.
 

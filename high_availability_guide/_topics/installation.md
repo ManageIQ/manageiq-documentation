@@ -36,7 +36,7 @@ the non-database {{ site.data.product.title_short }} appliances.
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    2.  Select **Configure Database**.
+    2.  Select **Configure Application**.
 
     3.  Select **Create key** to create the encryption key. You can
         create a new key, or use an existing key on your system by
@@ -122,7 +122,7 @@ and secondary database-only appliances can be configured.
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    2.  Select **Configure Database**.
+    2.  Select **Configure Application**.
 
     3.  Configure this appliance to use the encryption key from the
         primary database-only appliance:
@@ -340,7 +340,7 @@ and any additional appliances in the region using the following steps:
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    2.  Select **Configure Database**.
+    2.  Select **Configure Application**.
 
     3.  Configure this appliance to use the encryption key from the
         primary database-only appliance:

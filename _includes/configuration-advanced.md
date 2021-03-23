@@ -26,7 +26,7 @@ configuration of the appliance:
 <td><p>Restore the Virtual Management Database (VMDB) from a previous backup.</p></td>
 </tr>
 <tr class="even">
-<td><p><strong>Configure Database</strong></p></td>
+<td><p><strong>Configure Application</strong></p></td>
 <td><p>Configure the VMDB. Use this option to configure the database for the appliance after installing and running it for the first time.</p></td>
 </tr>
 <tr class="odd">

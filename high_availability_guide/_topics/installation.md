@@ -36,7 +36,7 @@ the non-database {{ site.data.product.title_short }} appliances.
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    For standard manageiq installations, a pre-sized database disk is already attached, initialized, encryption key generated, database configured with a region, and the application started.
+    For standard {{ site.data.product.title_short }} installations, a pre-sized database disk is already attached, initialized, encryption key generated, database configured with a region, and the application started.
 
     2. Select **Stop evm server processes**, select `y`.
     3. Quit from appliance console and `run systemctl disable evmserverd` to make this a standalone database server.

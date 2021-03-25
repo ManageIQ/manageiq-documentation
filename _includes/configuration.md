@@ -88,7 +88,7 @@ necessary to alter the `max_connections` setting.
 
 3.  Press **Enter** to manually configure settings.
 
-4.  Select **Configure Database** from the menu.
+4.  Select **Configure Application** from the menu.
 
 5.  You are prompted to create or fetch a security key.
 
@@ -136,7 +136,7 @@ has a region configured with a database.
 
 3.  Press **Enter** to manually configure settings.
 
-4.  Select **Configure Database** from the menu.
+4.  Select **Configure Application** from the menu.
 
 5.  You are prompted to create or fetch a security key. Since this is
     not the first {{ site.data.product.title_short }} appliance, choose **2) Fetch key from

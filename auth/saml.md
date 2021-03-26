@@ -267,7 +267,7 @@ from the SAML IDP.
 
 Configuring SAML requires the IDP metadata file. The --saml-idp-metadata
 option allows the user to specify the file path of a copy that was
-downloaded to the appliance or by a URL, in which case the CLI downlaods
+downloaded to the appliance or by a URL, in which case the CLI downloads
 the copy from the IDP.
 
 Examples:

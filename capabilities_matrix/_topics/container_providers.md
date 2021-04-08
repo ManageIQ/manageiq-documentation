@@ -8,7 +8,6 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Track Container Image Relationship      | ✅                                      | ✅                                     | ✅         | ✅                                      |
 | Capacity & Utilization                  | ✅                                      | ✅                                     | ✅         | ❌                                      |
 | Capture Container Event Timelines       | ✅                                      | ✅                                     | ✅         | ✅                                      |
-| Discovery - Provider                    | ❌                                      | ❌                                     | ❌         | ❌                                      |
 | Reporting                               | ✅                                      | ✅                                     | ✅         | ✅                                      |
 | Chargeback                              | ✅                                      | ✅                                     | ✅         | ✅ (Allocation only)                    |
 | Remote Cockpit Node Access              | ✅                                      | ❌                                     | ❌         | ❌                                      |

@@ -661,7 +661,7 @@ marked with **Use cloud-init**; although, the template from which the virtual ma
 
 **Note:**
 
-For an example of virtual machine provisioning request using cloud-init via REST API, see *Provisioning a Virtual Machine Using Cloud-init* in the [{{ site.data.product.title_short }} REST API Guide](../rest_api/index.html#provisioning-a-virtual-machine-using-cloud-init) guide.
+For an example of virtual machine provisioning request using cloud-init via REST API, see *Provision Requests* in the [{{ site.data.product.title_short }} API Guide](../api/reference/provision_requests.html).
 
 #### Cloning a Virtual Machine
 

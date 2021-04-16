@@ -197,7 +197,7 @@ provider is as follows:
 
 **Note:**
 
-  - For more information on Ansible playbooks, see the [Ansible playbook documentation](https://docs.ansible.com/ansible/playbooks.html).
+  - For more information on Ansible playbooks, see the [Ansible playbook documentation](https://docs.ansible.com/ansible/latest/user_guide/playbooks.html).
 
   - For more information on worklows, see
     [Workflows](https://docs.ansible.com/ansible-tower/latest/html/userguide/workflows.html)

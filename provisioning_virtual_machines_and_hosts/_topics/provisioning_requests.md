@@ -845,7 +845,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 5.  Select one of the default dialogs.
 
-6.  Click ![1847](../images/1847.png)**(Configuration)**, and then
+6.  Click **Configuration**, and then click
     ![1859](../images/1859.png)**(Copy this Dialog)**.
 
 7.  Type a new **Name** and **Description** for the dialog.

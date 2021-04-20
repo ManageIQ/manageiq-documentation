@@ -1,14 +1,12 @@
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview** > **Reports**.
 
 2.  Click the **Reports** accordion.
 
-3.  Click ![1847](../images/1847.png)**(Configuration)**,
-    ![1862](../images/1862.png) **(Add a new Report)**.
+3.  Click **Configuration**, then click ![1862](../images/1862.png) **Add a new Report**.
 
 4.  On the **Columns** tab, fill out the **Basic Report Info** area.
 
-      - Type a unique name in **Menu Name** for how you want the report
-        described in the menu list.
+      - Type a unique name in **Menu Name** for how you want the report described in the menu list.
 
       - Type the **Title** to display on the report.
 
@@ -16,17 +14,13 @@
 
       - From the **Base the report on** list, select **Chargebacks**.
 
-      - Select the fields to include in the report from the **Available
-        Fields** list, then click ![2289](../images/2289.png) **(Move
-        selected fields down)**. In addition to the fields, you can also
-        select any tags that you have created and assigned.
+      - Select the fields to include in the report from the **Available Fields** list, then click ![2289](../images/2289.png) **Move selected fields down**. In addition to the fields, you can also select any tags that you have created and assigned.
 
       - Change the order of the fields in the report by clicking
-        ![2290](../images/2290.png) **(Move selected fields up)** or
-        ![2289](../images/2289.png) **(Move selected fields down)\]**.
+        ![2290](../images/2290.png) **Move selected fields up** or
+        ![2289](../images/2289.png) **Move selected fields down**.
 
-6.  Click the **Formatting** tab to set the size of paper for a PDF and
-    column header format.
+6.  Click the **Formatting** tab to set the size of paper for a PDF and column header format.
 
       - From the **PDF Output** area, select the page size from the
         **Page Size** list.

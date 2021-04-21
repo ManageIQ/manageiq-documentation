@@ -30,8 +30,6 @@ display basic information about each provider:
 
 Provider authentication status
 
-{% include_relative
-_topics/discovering_multiple_management_systems.md %}
 
 {% include_relative _topics/discovering_physical_infra_providers.md
 %}

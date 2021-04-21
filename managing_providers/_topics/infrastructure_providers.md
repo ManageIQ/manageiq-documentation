@@ -30,10 +30,6 @@ display basic information about each provider:
 
 Provider authentication status
 
-
-{% include_relative _topics/discovering_physical_infra_providers.md
-%}
-
 ## Red Hat Virtualization Providers
 
 To use a Red Hat Virtualization provider, add it to the appliance and

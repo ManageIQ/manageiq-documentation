@@ -4,112 +4,68 @@
 
 ### Settings
 
-The options under the **Settings** area provide a hierarchical view of
-options that allow you to configure global options for the
-infrastructure of your {{ site.data.product.title_short }} environment. At the top level,
-you have **Settings** including users, LDAP Groups, account roles,
-capacity and utilization collection, tag categories, values, and
-imports, custom variable imports, and license uploads. When you click on
-**Settings** and expand it, you can configure **Analysis Profiles**,
-**Zones**, and **Schedules**.
+The options under the **Settings** area provide a hierarchical view of options that allow you to configure global options for the infrastructure of your {{ site.data.product.title_short }} environment. At the top level, you have **Settings** including users, LDAP Groups, account roles, capacity and utilization collection, tag categories, values, and imports, custom variable imports, and license uploads. When you click on
+**Settings** and expand it, you can configure **Analysis Profiles**, **Zones**, and **Schedules**.
 
 ![2041](../images/2041.png)
 
-When you go the **Settings** accordion, you are automatically taken to
-the server list under **Zones**.
+When you go the **Settings** accordion, you are automatically taken to the server list under **Zones**.
 
 #### Regions
 
-Use **Regions** for centralizing data which is collected from public and
-private virtualization environments. A region is ultimately represented
-as a single database for the VMDB. Regions are particularly useful when
-multiple geographical locations need to be managed as they enable all
-the data collection to happen at each particular location and avoid data
-collection traffic across slow links between networks.
+Use **Regions** for centralizing data which is collected from public and private virtualization environments. A region is ultimately represented as a single database for the VMDB. Regions are particularly useful when
+multiple geographical locations need to be managed as they enable all the data collection to happen at each particular location and avoid data collection traffic across slow links between networks.
 
-When multiple regions are being used, each with their own unique ID, a
-master region can be created to centralize the data of all the children
-regions into a single master database. To do this, configure each child
-region to replicate its data to the master region database (Red Hat
-recommends use of region 99). This parent and child region is a
-one-to-many relationship.
+When multiple regions are being used, each with their own unique ID, a master region can be created to centralize the data of all the children regions into a single master database. To do this, configure each child
+region to replicate its data to the master region database (Red Hat recommends use of region 99). This parent and child region is a one-to-many relationship.
 
 Regions can contain multiple zones, which in turn contain appliances.
-Zones are used for further segregating network traffic along with
-enabling failover configurations. Each appliance has the capability to
-be configured for a number of specialized server roles. These roles are
+Zones are used for further segregating network traffic along with enabling failover configurations. Each appliance has the capability to be configured for a number of specialized server roles. These roles are
 limited to the zone containing the appliance they run on.
 
-Only one failover type of each server role can run in a zone. If
-multiple appliances have the same failover role, the extras are used as
-backups that activate only if the primary appliance fails. Non-failover
-server roles can run on multiple appliances simultaneously in a zone, so
-resources can be adjusted according to the workload those roles are
-responsible for.
+Only one failover type of each server role can run in a zone. If multiple appliances have the same failover role, the extras are used as backups that activate only if the primary appliance fails. Non-failover server roles can run on multiple appliances simultaneously in a zone, so resources can be adjusted according to the workload those roles are responsible for.
 
-The following diagram demonstrates an example of the multiple regions
-working together in a {{ site.data.product.title_short }} environment.
+The following diagram demonstrates an example of the multiple regions working together in a {{ site.data.product.title_short }} environment.
 
 ![7151](../images/7151.png)
 
-The Master appliance is located in Chicago and contains a master region
-and a subregion that manages the worker appliances. The Mahwah
-technology center contains a single subregion that manages two zones.
-Likewise the San Diego technology center contains a single subregion
-managing a single zone.
+The Master appliance is located in Chicago and contains a master region and a subregion that manages the worker appliances. The Mahwah technology center contains a single subregion that manages two zones.
+Likewise the San Diego technology center contains a single subregion managing a single zone.
 
 **Note:**
 
-  - Replicating a parent region to a higher-level parent is not
-    supported.
+  - Replicating a parent region to a higher-level parent is not supported.
 
   - Parent regions can be configured after the child regions are online.
 
 The following diagram provides a closer look at a region:
 ![7150](../images/7150.png)
 
-In this region, we have several {{ site.data.product.title_short }} appliances acting as UI
-nodes and worker nodes. These worker nodes execute tasks on the
-providers in your environment. The Region also uses a region database
-that reports to a master database on the main {{ site.data.product.title_short }} appliance.
-All appliances can connect to the authentication services (Active
-Directory, LDAP, Identity Management), outgoing mail (SMTP), and network
-services (SNMP).
+In this region, we have several {{ site.data.product.title_short }} appliances acting as UI nodes and worker nodes. These worker nodes execute tasks on the providers in your environment. The Region also uses a region database that reports to a master database on the main {{ site.data.product.title_short }} appliance.
+All appliances can connect to the authentication services (Active Directory, LDAP, Identity Management), outgoing mail (SMTP), and network services (SNMP).
 
 ##### Region Scope
 
-Regions are used to consolidate data from multiple VMDBs to a central
-database. The database at the top level, the master VMDB, cannot be used
-for operational tasks such as SmartState Analysis or Capacity and
-Utilization data collection. It is intended for use as a reporting
-database that includes all information across multiple subordinate
-regions. The subordinate regions replicate their information to the
-master.
+Regions are used to consolidate data from multiple VMDBs to a central database. The database at the top level, the master VMDB, cannot be used for operational tasks such as SmartState Analysis or Capacity and Utilization data collection. It is intended for use as a reporting
+database that includes all information across multiple subordinate regions. The subordinate regions replicate their information to the master.
 
 **Note:**
 
-The subordinate regions are not aware of each other from a database
-perspective. You cannot see information from one subordinate region in
-another. The only VMDB with data visibility to all subordinate regions
-is the top level.
+The subordinate regions are not aware of each other from a database perspective. You cannot see information from one subordinate region in another. The only VMDB with data visibility to all subordinate regions is the top level.
 
 **Master Regions Scope**
 
-  - Reports all information from all subordinate VMDBs reporting up to
-    it.
+  - Reports all information from all subordinate VMDBs reporting up to it.
 
-  - Can perform power operations on virtual machines from subordinate
-    regions.
+  - Can perform power operations on virtual machines from subordinate regions.
 
   - Controls its own access control list.
 
 **Subordinate Regions Scope**
 
-  - Each subordinate controls its own access control independent of the
-    other regions.
+  - Each subordinate controls its own access control independent of the other regions.
 
-  - Can only do work (such as SmartState Analysis and Capacity and
-    Utilization collection) in its own region.
+  - Can only do work (such as SmartState Analysis and Capacity and Utilization collection) in its own region.
 
   - Has no knowledge of the other regions.
 
@@ -117,8 +73,7 @@ is the top level.
 
 ##### Region Settings
 
-In the **Region** area, set items that apply to your entire
-{{ site.data.product.title_short }} infrastructure such as users, LDAP Groups, capacity and
+In the **Region** area, set items that apply to your entire {{ site.data.product.title_short }} infrastructure such as users, LDAP Groups, capacity and
 utilization collection, company tags and tag categories, and licensing.
 Regions are also used for database replication.
 
@@ -126,29 +81,19 @@ Regions are also used for database replication.
 
 ###### Capacity and Utilization Collection Settings
 
-Use **C & U Collection Settings** to select specifically which clusters
-and datastores you want to collect usage data for. By selecting a
-cluster, you are choosing to collect data for all hosts and virtual
-machines that are part of that cluster. You must also have a server with
-the Capacity & Utilization **Coordinator**, **Data Collector**, and
-**Data Processor** roles enabled as well. See Section **Server Control
-Settings**.
+Use **C & U Collection Settings** to select specifically which clusters and datastores you want to collect usage data for. By selecting a cluster, you are choosing to collect data for all hosts and virtual machines that are part of that cluster. You must also have a server with
+the Capacity & Utilization **Coordinator**, **Data Collector**, and **Data Processor** roles enabled as well. See Section **Server Control Settings**.
 
-After a provider has been discovered and its relationships refreshed,
-view the clusters, hosts, and datastores from the settings menu.
-Navigate to ![Configuration](../images/config-gear.png) **Configuration**,
-then click on the menu:Settings\[Region \> C & U Collection\] tab.
+After a provider has been discovered and its relationships refreshed, view the clusters, hosts, and datastores from the settings menu.
+Navigate to **Settings**, then click on **Application Settings**. Click the menu: **Settings** > **Region**, then select the **C & U Collection** tab.
 
 ###### Enabling a Cluster, Host, or Datastore for Capacity and
 Utilization Collection
 
-To enable a cluster, host, or datastore for Capacity and Utilization
-Collection:
+To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**),
-    then click on the **Settings** accordion.
-
-2.  Select **Region**, then click on the **C & U Collection** tab.
+1.  Click **Settings**, then click on **Application Settings**. 
+2.  Click the **Settings** accordion, then select **Region**, then click on the **C & U Collection** tab.
 
 3.  In the **Clusters** area, check all clusters and hosts that you want
     to collect data for.
@@ -174,16 +119,9 @@ Collection:
 ###### Company Tag Categories and Tags
 
 {{ site.data.product.title_short }} allows you to create your own set of tags and tag
-categories. Use tags to create a customized, searchable index for your
-resources. Depending on your database type, your tags may be case
-sensitive. After creating these values, you can apply them to your
-resources. There are two kinds of tags.
+categories. Use tags to create a customized, searchable index for your resources. Depending on your database type, your tags may be case sensitive. After creating these values, you can apply them to your resources. There are two kinds of tags.
 
-  - **Company tags** which you will see under **My Company Tags** for a
-    resource. Create company tags from the settings menu. Navigate to
-    ![Configuration](../images/config-gear.png) **Configuration**, then
-    click the **Settings** accordion, then menu:Region\[My Company
-    Tags\]. A selection of company tags is provided to you by default as
+  - **Company tags** which you will see under **My Company Tags** for a resource. Create company tags from the settings menu. Browse to **Settings** > **Application Settings**. Click the **Settings** accordion, then select the **Region** and click on the **Tags** tab, then **My Company Tags**. A selection of company tags is provided to you by default as
     samples. These can be deleted if you do not need them, but are not
     recreated by {{ site.data.product.title_short }}.
 
@@ -193,14 +131,14 @@ resources. There are two kinds of tags.
 
 To create a tag category:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then **Region**, then click on
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then **Region**.
+3.  Select the **Tags** tab, then click on
     the **My Company Categories** tab.
 
-3.  Click **Add** under the **Actions** column to create a new category.
+4.  Click **Add** under the **Actions** column to create a new category.
 
-4.  In the **Category Information** area: ![2042](../images/2042.png)
+5.  In the **Category Information** area: ![2042](../images/2042.png)
 
       - Use **Name** to create a short name that refers to category in
         the VMDB.
@@ -232,31 +170,28 @@ To create a tag category:
         this, be sure to assign this tag to all the resources that you
         want to group by.
 
-5.  Click **Add**.
+6.  Click **Add**.
 
-Repeat these steps for each category you need. After you have created
-the category, you can add values to it.
+Repeat these steps for each category you need. After you have created the category, you can add values to it.
 
-<div class="important">
+**Important**
 
-If no values are created for a category, you are unable to assign a
-value from that category nor be able to filter by that category.
+If no values are created for a category, you are unable to assign a value from that category nor be able to filter by that category.
 
-</div>
 
 ###### Deleting a Tag Category
 
 To delete a tag category:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then **Region**, then click on
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then **Region**.
+3.  Select the **Tags** tab, then click on
     the **My Company Categories** tab.
 
-3.  Click **Delete** under the **Actions** column for the category you
+4.  Click **Delete** under the **Actions** column for the category you
     want to delete.
 
-4.  Click **OK** to confirm.
+5.  Click **OK** to confirm.
 
 **Note:**
 
@@ -267,13 +202,12 @@ tags from the category are unassigned from all resources.
 
 To create a company tag:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then **Region**, then click on
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then **Region**.
+3.  Select the **Tags** tab, then click on
     the **My Company Tags** tab.
 
-3.  In the **Choose a Category** area, select a category from the
-    **Category** list.
+4.  In the **Choose a Category** area, select a category from the **Category** list.
 
     **Note:**
 
@@ -284,41 +218,34 @@ To create a company tag:
         sensitive. For example, filtering by 'Linux' in title case give
         you different results from filtering by 'linux' in lower case.
     
-4.  Click **Add** under the **Actions** column, and type a **Name** and
-    **Description** for your new value.
+5.  Click **Add** under the **Actions** column, and type a **Name** and **Description** for your new value.
 
-5.  Click **Add** once again to add the new entry to the table.
+6.  Click **Add** once again to add the new entry to the table.
 
 ###### Deleting a Company Tag
 
 To delete a company tag:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then **Region**, then click on
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then **Region**.
+3.  Select the **Tags** tab, then click on
     the **My Company Tags** tab.
 
-3.  Click **Delete** under the **Actions** column next to the tag to
-    delete it.
+4.  Click **Delete** under the **Actions** column next to the tag to delete it.
 
     **Note:**
 
-    When you delete a tag, the tag is also deleted from any resource to
-    which it was assigned.
+    When you delete a tag, the tag is also deleted from any resource to which it was assigned.
     
-4.  Click **OK** to confirm.
+5.  Click **OK** to confirm.
 
 ###### Importing Tags for Virtual Machines
 
-You can import a **CSV** file with tag assignments into the VMDB. For
-the import to be successful, be aware of the following:
+You can import a **CSV** file with tag assignments into the VMDB. For the import to be successful, be aware of the following:
 
-  - The file must be in the following format, with one line for each
-    virtual machine. One virtual machine per tag must be on a separate
-    line even if you are assigning multiple tags of the same category.
+  - The file must be in the following format, with one line for each virtual machine. One virtual machine per tag must be on a separate line even if you are assigning multiple tags of the same category.
 
-  - You must use the display names of the category and the display name
-    for the tag for the import to work.
+  - You must use the display names of the category and the display name for the tag for the import to work.
 
         name,category,entry
         evm2,Provisioning Scope,All
@@ -332,31 +259,25 @@ the import to be successful, be aware of the following:
 To import tags for a virtual machine from a CSV file:
 
 1.  Make sure the **CSV file** is in the required format.
-
-2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-3.  Click on the **Settings** accordion, then **Region**, then click on
+2.  Browse to **Settings** > **Application Settings**.
+3.  Click on the **Settings** accordion, then **Region**.
+4.  Select the **Tags** tab, then click on
     the **Import Tags** tab.
 
-4.  Click **Choose file** to go to the location where the file is
-    located.
+5.  Click **Choose file** to go to the location where the file is located.
 
-5.  Click **Upload**.
+6.  Click **Upload**.
 
     **Note:**
 
-    If there are any problems with the file, such as an incorrect column
-    name, unknown virtual machine, unknown tag, or multiple values for a
-    tag that should have only one, an error message will appear in the
-    console for those records.
+    If there are any problems with the file, such as an incorrect column name, unknown virtual machine, unknown tag, or multiple values for a
+    tag that should have only one, an error message will appear in the console for those records.
 
-6.  Click **Apply**.
+7.  Click **Apply**.
 
 ###### Importing Custom Values for Virtual Machines and Hosts
 
-You can import a **CSV** file with asset tag information into the VMDB
-for a virtual machine or import custom values for hosts. For the import
-to be successful, the file must be in the following format, with one
+You can import a **CSV** file with asset tag information into the VMDB for a virtual machine or import custom values for hosts. For the import to be successful, the file must be in the following format, with one
 line for each virtual machine or host.
 
   - There are two columns.
@@ -376,10 +297,7 @@ line for each virtual machine or host.
     SQLSrvr,1090430
     Firewall,8230500
 
-For virtual machines, the value for custom\_1 will show in the **VM
-Summary** page as the **Custom Identifier** page as the **Custom
-Identifier** in the **Properties** area. All of the custom values will
-show in the **Custom Fields** area.
+For virtual machines, the value for custom\_1 will show in the **VM Summary** page as the **Custom Identifier** page as the **Custom Identifier** in the **Properties** area. All of the custom values will show in the **Custom Fields** area.
 
 **Host Import Example**
 
@@ -389,40 +307,45 @@ show in the **Custom Fields** area.
     esxd2.galaxy.local,16199125,16569419
 
 For hosts, the value for custom\_1 will show in the **Host Summary**
-page as the **Custom Identifier** in the **Properties** area. All of the
-custom values will show in the **Custom Fields** area.
+page as the **Custom Identifier** in the **Properties** area. All of the custom values will show in the **Custom Fields** area.
 
 ###### Importing Asset Tags for a Virtual Machine from a CSV File
 
 To import asset tags for a virtual machine from a CSV file
 
 1.  Make sure the **CSV file** is in the required format.
-
-2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-3.  Click on the **Settings** accordion, then **Region**, then click on
-    the **Import** tab.
-
-4.  Select the type of custom variable you want to import, either
+2.  Browse to **Settings** > **Application Settings**.
+3.  Click on the **Settings** accordion, then **Region**.
+4.  Select the **Tags** tab, then click on
+    the **Import Variables** tab.
+5.  Select the type of custom variable you want to import, either
     **Host** or **VM**.
 
-5.  Click **Choose file** to go to the location where the custom
-    variable file is located.
+6.  Click **Choose file** to go to the location where the custom variable file is located.
 
-6.  Click **Upload**.
+7.  Click **Upload**.
 
     **Note:**
 
-    If there are any problems with the file, such as an incorrect column
-    name, unknown virtual machine or host, a message appears.
+    If there are any problems with the file, such as an incorrect column name, unknown virtual machine or host, a message appears.
 
-7.  Click **Apply**.
+8.  Click **Apply**.
+
+##### Tag Mapping
+
+You can map labels from external providers to tags within {{ site.data.product.title_short }}.
+
+1. Browse to **Settings** > **Application Settings**.
+2. Click on the **Settings** accordion, then select the **Region**.
+3. Select the **Tags** tab, then click on
+    the **Map Tags** tab.
+4. Click **Add** to create a tag map.
+5. In the **Choose a resource entity and label**, select the **Entity** and enter a **Resource label**, then enter a **Tag Category**.
+6. Click **Add**.     
 
 ##### Customizing the Help Menu
 
-{{ site.data.product.title_short }} allows administrators to customize the help menu. Use
-this feature to define menu labels, URLs and how each window opens for
-users.
+{{ site.data.product.title_short }} allows administrators to customize the help menu. Use this feature to define menu labels, URLs and how each window opens for users.
 
 **Note:**
 
@@ -430,15 +353,10 @@ Any change to the help menu will take effect upon a full page reload.
 
 Customize the help menu using the following steps:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
+1.  Browse to **Settings** > **Application Settings**.
 2.  Click on the **Settings** accordion, then **Region**.
-
 3.  Click on the **Help Menu** tab.
-
-4.  Provide custom **Menu item labels** and an associated **URL** for
-    each. Define how each window should open by selecting from the
-    options in the **Open in** menu.
+4.  Provide custom **Menu item labels** and an associated **URL** for each. Define how each window should open by selecting from the options in the **Open in** menu.
 
 5.  Click **Submit**.
 
@@ -446,47 +364,31 @@ Customize the help menu using the following steps:
 
 ##### Creating an Analysis Profile
 
-You can create an analysis profile by referring to the sample profiles
-provided in the console. You can copy the sample profile or create a new
+You can create an analysis profile by referring to the sample profiles provided in the console. You can copy the sample profile or create a new
 one.
 
 ##### Creating a Host Analysis Profile
 
 To create a host analysis profile:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
-2.  Click on the **Settings** accordion, then click **Analysis
-    Profiles**.
-
-3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
+3.  Click **Configuration**, and ![plus
     green](../images/plus_green.png) (**Add Host Analysis Profile**).
 
-4.  In the **Basic Information** area, type in a **Name** and
-    **Description** for the analysis profile. ![2048](../images/2048.png)
+4.  In the **Basic Information** area, type in a **Name** and **Description** for the analysis profile. ![2048](../images/2048.png)
 
-5.  Click **File** to collect information about a file or group of
-    files.
+5.  Click **File** to collect information about a file or group of files.
 
 6.  From the **File Entry** area, click ![plus
-    green](../images/plus_green.png) (**Click to add a new entry**) to add
-    a file or group of files. ![2047](../images/2047.png)
+    green](../images/plus_green.png) (**Click to add a new entry**) to add a file or group of files. ![2047](../images/2047.png)
 
-      - Check **Collect Contents** to not only check for existence, but
-        also gather the contents of the file. If you do this, then you
-        can use the contents to create policies in {{ site.data.product.title_short }}
-        Control.
+      - Check **Collect Contents** to not only check for existence, but also gather the contents of the file. If you do this, then you can use the contents to create policies in {{ site.data.product.title_short }} Control.
 
 7.  Click **Event Log** to specify event log entries to collect.
 
-8.  From the **Event Log Entry** area, click ![plus
-    green](../images/plus_green.png) (**Click to add a new entry**) to add
-    a type of event log entry. Type in a **Name**. You can type in a
-    specific message to find in **Filter Message**. In **Level**, set
-    the value for the level of the entry and above. Specify the
-    **Source** for the entry. Finally, set the \# number of days that
-    you want to collect event log entries for. If you set this to 0, it
-    will go as far back as there is data available.
+8.  From the **Event Log Entry** area, click ![plus green](../images/plus_green.png) **Click to add a new entry** to add a type of event log entry. Type in a **Name**. You can type in a specific message to find in **Filter Message**. In **Level**, set the value for the level of the entry and above. Specify the **Source** for the entry. Finally, set the \# number of days that you want to collect event log entries for. If you set this to 0, it will go as far back as there is data available.
     ![2046](../images/2046.png)
 
 9.  Click **Add**.
@@ -495,50 +397,28 @@ To create a host analysis profile:
 
 To create a virtual machine analysis profile:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
-2.  Click on the **Settings** accordion, then click **Analysis
-    Profiles**.
+3.  Click **Configuration**, and ![plus green](../images/plus_green.png) **Add VM Analysis Profile**.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
-    green](../images/plus_green.png) (**Add VM Analysis Profile**).
+4.  In the **Basic Information** area, type in a **Name** and **Description** for the analysis profile. ![2050](../images/2050.png)
 
-4.  In the **Basic Information** area, type in a **Name** and
-    **Description** for the analysis profile. ![2050](../images/2050.png)
-
-5.  You begin in the **Category** tab. From the **Category Selection**
-    area, check the categories you want to collect information for. This
-    is available for virtual machine profiles only.
+5.  You begin in the **Category** tab. From the **Category Selection** area, check the categories you want to collect information for. This is available for virtual machine profiles only.
     ![2051](../images/2051.png)
 
-6.  Click the **File** tab to collect information about a file or group
-    of files.
+6.  Click the **File** tab to collect information about a file or group of files.
 
-7.  From the **File Entry** area, click ![plus
-    green](../images/plus_green.png) (**Add this entry**) to add a file or
-    group of files, then type a name. For virtual machines, specify the
-    file to check for. Check the box under **Collect Contents** if you
-    want to collect the file contents as well. The files can be no
-    larger than 1 MB. ![2052](../images/2052.png)
+7.  From the **File Entry** area, click ![plus green](../images/plus_green.png) **Add this entry** to add a file or group of files, then type a name. For virtual machines, specify the file to check for. Check the box under **Collect Contents** if you want to collect the file contents as well. The files can be no larger than 1 MB. ![2052](../images/2052.png)
 
 8.  Click the **Registry** tab to collect information on a registry key.
 
-9.  From the **Registry Entry** area, type your **Registry Key** and
-    **Registry Value**. To evaluate whether a registry key exists or
-    does not exist on a virtual machine, without providing a value, type
-    \* in the **Registry Value** field. Then, you do not need to know
-    the registry value to collect the keys. This is available for
-    virtual machine profiles only. ![2052 reg](../images/2052-reg.png)
+9.  From the **Registry Entry** area, type your **Registry Key** and **Registry Value**. To evaluate whether a registry key exists or does not exist on a virtual machine, without providing a value, type
+    \* in the **Registry Value** field. Then, you do not need to know the registry value to collect the keys. This is available for virtual machine profiles only. ![2052 reg](../images/2052-reg.png)
 
 10. Click **Event Log** to specify event log entries to collect.
 
-11. From the **Event Log Entry** area, complete the fields to add a type
-    of event log entry. You can type in a specific message to find in
-    **Filter Message**. In **Level**, set the value for the level of the
-    entry and above. Specify the **Source for the entry**. Finally, set
-    the \# (number) of days that you want to collect event log entries
-    for. If you set this to 0, it will go as far back as there is data
-    available. ![2054](../images/2054.png)
+11. From the **Event Log Entry** area, complete the fields to add a type of event log entry. You can type in a specific message to find in **Filter Message**. In **Level**, set the value for the level of the entry and above. Specify the **Source for the entry**. Finally, set the \# (number) of days that you want to collect event log entries for. If you set this to 0, it will go as far back as there is data available. ![2054](../images/2054.png)
 
 12. Click **Add**.
 
@@ -546,15 +426,11 @@ To create a virtual machine analysis profile:
 
 To edit an analysis profile:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then click **Analysis
-    Profiles**.
-
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 3.  Check the analysis profile you want to edit.
 
-4.  Click ![1851](../images/1851.png) (**Edit the selected Analysis
-    Profiles**).
+4.  Click ![1851](../images/1851.png) **Edit the selected Analysis Profiles**.
 
 5.  Make any changes.
 
@@ -567,15 +443,12 @@ hosts must be re-analyzed to collect the new or modified information.
 
 To copy an analysis profile:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then click **Analysis
-    Profiles**.
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
 3.  Check the analysis profile you want to copy.
 
-4.  Click ![1859](../images/1859.png) (**Copy the selected Analysis
-    Profiles**).
+4.  Click **Configuration**, then ![1859](../images/1859.png) **Copy the selected Analysis Profiles**.
 
 5.  Type a new **Name** and **Description**.
 
@@ -585,39 +458,26 @@ To copy an analysis profile:
 
 ##### Setting a Default Analysis Profile
 
-If you want to set an analysis profile to be used for all virtual
-machines, you can create a default profile.
+If you want to set an analysis profile to be used for all virtual machines, you can create a default profile.
 
 To create a default analysis profile:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-2.  Click on the **Settings** accordion, then click **Analysis
-    Profiles**.
+1.  Browse to **Settings** > **Application Settings**.
+2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
 3.  Click on the analysis profile you want to set as the default.
 
-4.  Click ![1851](../images/1851.png) (**Edit the selected Analysis
-    Profile**).
+4.  Click **Configuration**, then ![1851](../images/1851.png) **Edit the selected Analysis Profile**.
 
-5.  For a virtual machine profile, enter `default` in lower case in
-    **Name**. For a host profile, enter host default. ![set default
-    analysis profile](../images/set_default_analysis_profile.png)
+5.  For a virtual machine profile, enter `default` in lower case in **Name**. For a host profile, enter `host default`. ![set default analysis profile](../images/set_default_analysis_profile.png)
 
 6.  Click **Save**.
 
 #### Zones
 
-You can organize your {{ site.data.product.title_short }} Infrastructure into zones to
-configure failover and isolate traffic. A provider that is discovered by
-a server in a specific zone gets monitored and managed in that zone. All
-jobs, such as a SmartState Analysis or VM power operation, dispatched by
-a server in a specific zone can get processed by any {{ site.data.product.title_short }}
-appliance assigned to that same zone.
+You can organize your {{ site.data.product.title_short }} Infrastructure into zones to configure failover and isolate traffic. A provider that is discovered by a server in a specific zone gets monitored and managed in that zone. All jobs, such as a SmartState Analysis or VM power operation, dispatched by a server in a specific zone can get processed by any {{ site.data.product.title_short }} appliance assigned to that same zone.
 
-Zones can be created based on your own environment. You can make zones
-based on geographic location, network location, or function. When first
-started, a new server is put into the default zone.
+Zones can be created based on your own environment. You can make zones based on geographic location, network location, or function. When first started, a new server is put into the default zone.
 
 Suppose you have four {{ site.data.product.title_short }} appliances with two in the East
 zone, appliances A and B, and two in the West zone, appliances C and D.
@@ -628,42 +488,27 @@ Appliance A or B, but not C or D.
 
 **Note:**
 
-Only users assigned the super administrator role can create zones. There
-must always be at least one zone. The **Default Zone** is provided and
-cannot be deleted.
+Only users assigned the super administrator role can create zones. There must always be at least one zone. The **Default Zone** is provided and cannot be deleted.
 
 ##### Creating a Zone
 
 To create a zone:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
+1.  Browse to **Settings** > **Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
-    green](../images/plus_green.png) (**Add a new Zone**) to create a
-    zone.
+3.  Click **Configuration**, and ![plus green](../images/plus_green.png) **Add a new Zone** to create a zone.
 
-4.  In the **Zone Information** area, type in a **Name** and
-    **Description** for the new zone. ![2057](../images/2057.png)
+4.  In the **Zone Information** area, type in a **Name** and **Description** for the new zone. ![2057](../images/2057.png)
 
-5.  Use **SmartProxy Server IP** to specify the IP address of the server
-    that you want SmartProxies installed in this zone to report to. If
-    this is not set, then the IP address of the server that deployed the
-    SmartProxy is used. This does not apply to embedded SmartProxies.
+5.  Use **SmartProxy Server IP** to specify the IP address of the server that you want SmartProxies installed in this zone to report to. If this is not set, then the IP address of the server that deployed the SmartProxy is used. This does not apply to embedded SmartProxies.
 
-6.  Optionally, you can configure **NTP servers** for the entire zone in
-    the NTP Servers area. These settings will be used if the NTP servers
-    have not been set for the appliance in the menu:Operations\[Server\]
-    page.
+6.  Optionally, you can configure **NTP servers** for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the menu: **Operations** > **Server** page.
 
-7.  In the menu:Credentials\[Windows Domain\] area, type in Windows
-    domain credentials to be able to collect running processes from
-    Windows virtual machines that are on a domain.
+7.  In the menu: **Credentials - Windows Domain** area, type in Windows domain credentials to be able to collect running processes from Windows virtual machines that are on a domain.
     ![2058](../images/2058.png)
 
-8.  In the **Settings** area, set the number for **Max Active VM
-    Scans**. The default is `Unlimited`.
+8.  In the **Settings** area, set the number for **Max Active VM Scans**. The default is `Unlimited`.
 
 9.  Click **Save**.
 
@@ -671,8 +516,7 @@ To create a zone:
 
 To delete a zone:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
+1.  Browse to **Settings** > **Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 
 3.  Click the zone you want to remove.
@@ -681,8 +525,8 @@ To delete a zone:
 
     You cannot delete a zone if there are servers assigned to it.
 
-4.  Click ![1847](../images/1847.png) (**Configuration**), then click
-    ![gui delete](../images/gui_delete.png) (**Delete this Zone**).
+4.  Click ![1847](../images/1847.png) **Configuration**, then click 
+    ![gui delete](../images/gui_delete.png) **Delete this Zone**.
 
 5.  Click **OK** to confirm.
 
@@ -690,58 +534,46 @@ To delete a zone:
 
 To edit a zone:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
+1.  Browse to **Settings** > **Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
-
 3.  Click the zone you want to edit.
 
-4.  Click ![1847](../images/1847.png) (**Configuration**), then click
-    ![1851](../images/1851.png) (**Edit this Zone**).
+4.  Click ![1847](../images/1847.png) **Configuration**, then click
+    ![1851](../images/1851.png) **Edit this Zone**.
 
-5.  Make the required changes.
+5.  Complete the required changes.
 
 6.  Click **Save**.
 
 ##### Adding SmartProxy Affinity to a Zone:
 
-Enable SmartProxy Affinity for zones containing servers with the
-SmartProxy role to run a SmartState Analysis.
+Enable SmartProxy Affinity for zones containing servers with the SmartProxy role to run a SmartState Analysis.
 
 To add SmartProxy Affinity to a zone:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
+1.  Browse to **Settings** > **Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
-
 3.  Click the zone in which you want to enable SmartProxy Affinity.
-
 4.  Click the **SmartProxy Affinity** tab and click the appropriate
     server.
-
 5.  Click **Save**.
 
 #### Servers
 
 Server settings enables you to control how each {{ site.data.product.title_short }} server
-operates including authentication, logging, and email. If you have
-multiple servers in your environment that are reporting to one central
-VMDB, then you can edit some of these settings from the console by
-specifying which server you want to change.
+operates including authentication, logging, and email. If you have multiple servers in your environment that are reporting to one central
+VMDB, then you can edit some of these settings from the console by specifying which server you want to change.
 
 **Note:**
 
-The server selection options are only available if you have multiple
-servers sharing one VMDB.
+The server selection options are only available if you have multiple servers sharing one VMDB.
 
 ##### Changing Server Settings
 
 To change server settings:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
+1.  Browse to **Settings** > **Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
-
 3.  Click the zone where the {{ site.data.product.title_short }} server is located.
 
 4.  In the **Servers** area, click on the {{ site.data.product.title_short }} server.
@@ -911,13 +743,11 @@ To enable the `snmpd` and `snmptrapd` daemons
 
 To enable the notifier role:
 
-1.  Access each SNMP processing appliance using their web interfaces
+1. Access each SNMP processing appliance using their web interfaces.
 
-2.  Click ![Configuration](../images/config-gear.png) **Configuration**,
-    then click **Settings**.
-
-3.  Select the zone where the EVM server is located, and select the EVM
-    server.
+2. Browse to **Settings** > **Application Settings**.
+    
+3. Click on the **Settings** accordion, then click **Zones**. Select the zone where the EVM server is located, and select the EVM server.
 
 4.  In the **Server Control** area, set the **Notifier** server role
     option to `ON`.
@@ -926,21 +756,15 @@ To enable the notifier role:
 
 To set the failover priority role:
 
-1.  From the settings menu, select . Click
-    ![Configuration](../images/config-gear.png) **Configuration**, then
-    click **Diagnostics**.
+1.  Browse to **Settings** > **Application Settings** then click the **Diagnostics** accordion.
 
 2.  Select the zone where the EVM server is located.
 
-3.  Click **Roles by Servers** or **Servers by Roles** to view your
-    servers.
+3.  Click **Roles by Servers** or **Servers by Roles** to view your servers.
 
-4.  In the **Status of Roles for Servers** in **Zone Default** Zone
-    area, click the role that you want to set the priority for.
+4.  In the **Status of Roles for Servers** in **Zone Default Zone** area, click the role that you want to set the priority for.
 
-5.  Click ![1847](../images/1847.png)(**Configuration**), and
-    ![2097](../images/2097.png)(**Promote Server**) to make this the
-    primary server for this role.
+5.  Click **Configuration**, and ![2097](../images/2097.png)**Promote Server** to make this the primary server for this role.
 
 ###### Outgoing SMTP Email Settings
 
@@ -949,8 +773,7 @@ emails from.
 
 **Note:**
 
-To be able to send any emails from the server, you must have the
-Notifier server role enabled. You can test the settings without the role
+To be able to send any emails from the server, you must have the Notifier server role enabled. You can test the settings without the role
 enabled.
 
 ![outgoingsmtp](../images/outgoingsmtp.png)
@@ -961,21 +784,17 @@ enabled.
 
   - Use **Domain** to specify the domain name for the mail server.
 
-  - Set **Start TLS Automatically** on `ON` if the mail server requires
-    TLS.
+  - Set **Start TLS Automatically** on `ON` if the mail server requires TLS.
 
   - Select the appropriate **SSL Verify Mode**.
 
-  - Use the **Authentication** drop down to specify if you want to use
-    `login`, `plain`, or no authentication.
+  - Use the **Authentication** drop down to specify if you want to use `login`, `plain`, or no authentication.
 
-  - Use **User Name** to specify the user name required for login
-    authentication.
+  - Use **User Name** to specify the user name required for login authentication.
 
   - Use **Password** to specify the password for login authentication.
 
-  - Use **From E-mail Address** to set the address you want to send the
-    email from.
+  - Use **From E-mail Address** to set the address you want to send the email from.
 
   - Use **Test E-mail Address** if you want to test your email settings.
     Click **Verify** to send a test email.
@@ -990,13 +809,9 @@ Web services are used by the server to communicate with the SmartProxy.
     between the {{ site.data.product.title_short }} appliance and the SmartProxy. Set
     **Mode** to disabled to use Web services from the SmartProxy to the
     {{ site.data.product.title_short }} appliance only. When the {{ site.data.product.title_short }} appliance
-    has work for the SmartProxy, the work will be placed in a queue in
-    the VMDB. The work will be completed either when the {{ site.data.product.title_short }}
-    appliance is able to contact the SmartProxy or when the next
-    SmartProxy heartbeat occurs, whichever comes first.
+    has work for the SmartProxy, the work will be placed in a queue in the VMDB. The work will be completed either when the {{ site.data.product.title_short }} appliance is able to contact the SmartProxy or when the next SmartProxy heartbeat occurs, whichever comes first.
 
-  - If **Web Services** are enabled, you have the option to use
-    **ws-security**.
+  - If **Web Services** are enabled, you have the option to use **ws-security**.
 
 ###### Logging Settings
 
@@ -1017,15 +832,14 @@ Web services are used by the server to communicate with the SmartProxy.
 
 ##### Authentication
 
-Use the **Authentication** tab to specify how you want users
-authenticated on the console. You can use the VMDB or integrate with
+Use the **Authentication** tab to specify how you want users authenticated on the console. You can use the VMDB or integrate with
 LDAP, LDAPS, Amazon, or an external IPA server.
 
 ###### Changing Authentication Settings
 
 To change authentication settings:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Settings** accordion, then click **Zones**.
 
@@ -1035,8 +849,7 @@ To change authentication settings:
 
 5.  Click the **Authentication** tab.
 
-6.  Use **Session Timeout** to set the period of inactivity before a
-    user is logged out of the console.
+6.  Use **Session Timeout** to set the period of inactivity before a user is logged out of the console.
 
 7.  Set the authentication method in **Mode**.
 
@@ -1055,7 +868,7 @@ Only make these changes when directed to by Red Hat Support.
 
 To change the settings for a worker
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1067,15 +880,13 @@ To change the settings for a worker
 
 6.  Go to the type of worker you have been directed to change.
 
-7.  If applicable, change Count or Memory Threshold using the dropdown
-    boxes.
+7.  If applicable, change Count or Memory Threshold using the dropdown boxes.
 
 8.  Click **Save**.
 
 ##### Database
 
-Use the Database page to specify the location of your Virtual Machine
-Database (VMDB) and its login credentials. By default, the type is
+Use the Database page to specify the location of your Virtual Machine Database (VMDB) and its login credentials. By default, the type is
 PostgreSQL on the Server.
 
 **Note:**
@@ -1087,7 +898,7 @@ to validate your new settings before restarting the server.
 
 To change a database setting:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1097,70 +908,48 @@ To change a database setting:
 
 5.  Click the **Database** tab.
 
-6.  In the **Database** area, select the **Type** of database. You can
-    select from **External Database on another CFME appliance**,
-    **External Postgres Database**, and **Internal Database on this CFME
-    Appliance**.
+6.  In the **Database** area, select the **Type** of database. You can select from **External Database on another CFME appliance**,
+    **External Postgres Database**, and **Internal Database on this CFME Appliance**.
 
-      - Use **Hostname** to specify the IP address or hostname of the
-        external database server.
+      - Use **Hostname** to specify the IP address or hostname of the external database server.
 
       - Use **Database Name** to specify the name of your VMDB.
 
       - Specify the **User Name** to connect to the VMDB.
 
-      - Use **Password** and **Verify Password** to specify the password
-        for the user name.
+      - Use **Password** and **Verify Password** to specify the password for the user name.
 
 7.  Click **Validate** to check the settings.
 
 8.  Click **Save**.
 
-9.  Click **OK** to the warning that the server will restart immediately
-    after you save the changes.
+9.  Click **OK** to the warning that the server will restart immediately after you save the changes.
 
-During the restart, you are unable to access the server. When the
-restart is complete, the new database settings are in effect.
+During the restart, you are unable to access the server. When the restart is complete, the new database settings are in effect.
 
 ##### Customization and Logos
 
 ###### Custom Logos
 
-Use **Custom Logos** to display your own logo in the corner of the
-{{ site.data.product.title_short }} user interface and on the login screen. Use the
-procedures below to upload a custom logo to the user interface, and to
-customize the login background and login panel text on the user
-interface.
+Use **Custom Logos** to display your own logo in the corner of the {{ site.data.product.title_short }} user interface and on the login screen. Use the procedures below to upload a custom logo to the user interface, and to
+customize the login background and login panel text on the user interface.
 
 **Note:**
 
-  - If you have upgraded from an earlier {{ site.data.product.title_short }} version and
-    your custom logo was already in use before migration, although your
-    logo image file is still in place in `vmdb/public/upload` you may
-    have to uncheck and recheck the option to **Use Custom Logo Image**
-    to re-enable displaying your custom logo. See
-    [simpara\_title](#uploading-a-custom-logo-to-the-console) for the
-    procedure on how to access the **Use Custom Logo Image** option, or
-    if you want to upload another custom logo to the user interface and
-    customize the login background image and login panel text.
+  - If you have upgraded from an earlier {{ site.data.product.title_short }} version and your custom logo was already in use before migration, although your logo image file is still in place in `vmdb/public/upload` you may have to uncheck and recheck the option to **Use Custom Logo Image** to re-enable displaying your custom logo. See [Uploading a Custom Logo to the User Interface](#uploading-a-custom-logo-to-the-console) for the procedure on how to access the **Use Custom Logo Image** option, or if you want to upload another custom logo to the user interface and customize the login background image and login panel text.
 
-  - Additionally, ensure the option to use configuration settings for
-    the tenant under **Access Control** is set to `Yes`; see
-    [simpara\_title](#display-custom-settings) for the procedure on how
-    to set the configuration settings.
+  - Additionally, ensure the option to use configuration settings for the tenant under **Access Control** is set to `Yes`; see
+    [Displaying the Custom Configuration Settings](#displaying-the-custom-configuration-settings) for the procedure on how to set the configuration settings.
 
 ###### Uploading a Custom Logo to the User Interface
 
 **Note:**
 
-Make sure the desired logo is accessible from the computer where you are
-running the {{ site.data.product.title_short }} user interface. The file must be in
-portable network graphics (png) format with dimensions of 350 px x 70
-px.
+Make sure the desired logo is accessible from the computer where you are running the {{ site.data.product.title_short }} user interface. The file must be in portable network graphics (png) format with dimensions of 350 px x 70 px.
 
 To upload a custom logo to the user interface:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1170,12 +959,9 @@ To upload a custom logo to the user interface:
 
 5.  Click the **Custom Logos** tab. ![2071](../images/2071.png)
 
-6.  In **Custom Logo Image (Shown on top right of all screens)**, click
-    **Choose file** to go to the location where the logo file is
-    located.
+6.  In **Custom Logo Image (Shown on top right of all screens)**, click **Choose file** to go to the location where the logo file is located.
 
-7.  Click **Upload**. The icon is displayed above the file name box, and
-    an option is shown to use the logo.
+7.  Click **Upload**. The icon is displayed above the file name box, and an option is shown to use the logo.
 
 8.  Check **Use Custom Logo Image** to add the logo to your user
     interface.
@@ -1193,13 +979,11 @@ on how to set the configuration settings.
 
 **Note:**
 
-Make sure the background image that you want to use is accessible from
-the computer where you are running the user interface. The file must be
-in PNG format with dimensions of 1280 px x 1000 px.
+Make sure the background image that you want to use is accessible from the computer where you are running the user interface. The file must be in PNG format with dimensions of 1280 px x 1000 px.
 
 To customize the login background:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1228,32 +1012,30 @@ To customize the login background:
 
 To customize the login panel text:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
-2.  Navigate to menu:Settings\[Configuration\].
+2.  Click on the **Settings** accordion, then click **Zones**.
 
-3.  Click on the **Settings** accordion, then click **Zones**.
+3.  Click the zone where the server is located.
 
-4.  Click the zone where the server is located.
+4.  Click on the server.
 
-5.  Click on the server.
+5.  Click the **Custom Logos** tab.
 
-6.  Click the **Custom Logos** tab.
-
-7.  In **Custom Login Panel Text**, enter the text that you want to
+6.  In **Custom Login Panel Text**, enter the text that you want to
     display on the login screen.
 
-8.  Click **Use Custom Login Text** to switch it to `Yes`. ![custom
+7.  Click **Use Custom Login Text** to switch it to `Yes`. ![custom
     login panel text](../images/custom-login-panel-text.png)
 
-9.  Click **Save**.
+8.  Click **Save**.
 
 ###### Displaying the Custom Configuration Settings
 
 To enable displaying your custom logo in the corner of the
 {{ site.data.product.title_short }} user interface and on the login screen:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Access Control** accordion.
 
@@ -1694,7 +1476,7 @@ addition, you can schedule compliance checks, and database backups.
 
 To schedule a SmartState Analysis or Compliance Check:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
@@ -1817,7 +1599,7 @@ space based on transaction log size.
 
 To schedule a database backup:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
@@ -1871,7 +1653,7 @@ To schedule a database backup:
 
 To modify a schedule:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
@@ -1929,10 +1711,9 @@ schedules, including:
 
 ### Access Control
 
-Click ![config gear](../images/config-gear.png) (**Configuration**). Click
+Browse to **Settings** > **Application Settings**. Click
 on the **Access Control** accordion to see a hierarchy of the
-configurable items for users, groups, roles, and tenants. You can add
-and modify users, groups, account roles, tenants, and projects.
+configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, tenants, and projects.
 
 #### Creating a Tenant
 
@@ -1941,7 +1722,7 @@ objects.
 
 To create a tenant:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -1964,7 +1745,7 @@ organization.
 
 To create a project:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -1991,7 +1772,7 @@ belongs to multiple groups, you must change to the desired group before
 allocating or editing group quota. See [Groups](#groups) for more
 details.
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -2012,7 +1793,7 @@ details.
 
 To tag tenants and projects:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -2029,7 +1810,7 @@ To tag tenants and projects:
 
 To create a user:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Users**.
 
@@ -2067,7 +1848,7 @@ information or functions of the server.
 
 To delete a user:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Users**.
 
@@ -2098,7 +1879,7 @@ and other settings for the user.
 
 To create a user group:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Groups**.
 
@@ -2172,7 +1953,7 @@ directory service.
 
 To view details of a role and its level of access:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Roles**.
 
@@ -2208,17 +1989,15 @@ The table below shows a summary of the functions available to each role.
 
 To create a role:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click **Settings** > **Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Roles**.
 
-3.  Click ![1847](../images/1847.png) (Configuration), and ![plus
-    green](../images/plus_green.png) (Add a new Role). Alternatively, you
-    can copy an existing role to a new role by clicking **Copy this to a
-    new Role**.
+3.  Click **Configuration**, and ![plus
+    green](../images/plus_green.png) **Add a new Role**. Alternatively, you can copy an existing role to a new role by clicking **Copy the selected Role to a new Role**.
 
 4.  In the **Role Information** area, type a name for the new role. For
-    **Access Restriction for Services, VMs, and Templates**, select if
+    **Access Restriction for Catalog Items, Orchestration Stacks, Key Pairs, Services, VMs, and Templates**, select if
     you want to limit users with this role to only see resources owned
     by the user or their group, owned by the user, or all resources
     (**None**): ![role info](../images/role_info.png)
@@ -2231,51 +2010,29 @@ To create a role:
 
 ### Diagnostics
 
-Click ![config gear](../images/config-gear.png) (**Configuration**). Click
-on the **Diagnostics** tab to see the status of the different
-{{ site.data.product.title_short }} roles and workers for each server, view and collect
-logs, and gather data if there are any gaps in capacity and utilization
-information. The Diagnostics area is designed in a hierarchy.
+Browse to **Settings** > **Application Settings**. Click on the **Diagnostics** tab to see the status of the different {{ site.data.product.title_short }} roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information. The Diagnostics area is designed in a hierarchy.
 
-  - At the **region** level, you can see replication status, backup the
-    VMDB, and run garbage collection on the VMDB.
+  - At the **region** level, you can see replication status, backup the VMDB, and run garbage collection on the VMDB.
 
-  - At the **zone** level, you can see {{ site.data.product.title_short }} roles by servers
-    and servers by roles. In addition, you can set log collection values
-    for a specific zone, and collect gap data for capacity and
-    utilization.
+  - At the **zone** level, you can see {{ site.data.product.title_short }} roles by servers and servers by roles. In addition, you can set log collection values for a specific zone, and collect gap data for capacity and utilization.
 
-  - At the **server** level, you can see the workers for each server,
-    set log collection values for a specific server, and view current
-    logs.
+  - At the **server** level, you can see the workers for each server, set log collection values for a specific server, and view current logs.
 
 #### Region Diagnostics
 
-Using the console, you can set the priority of server regional roles,
-review and reset replication, and create backups of your database either
-on demand or on a schedule.
+Using the console, you can set the priority of server regional roles, review and reset replication, and create backups of your database either on demand or on a schedule.
 
-Regions are used primarily to consolidate multiple VMDBs into one master
-VMDB for reporting while zones are used to define functional groups of
-servers. There can be only one region per VMDB, but multiple zones per
-region (or VMDB). Some server roles are aware of each other across
-{{ site.data.product.title_short }} appliances at the region level. This means that
-redundancy and failover rules apply at the region level. You can also
-set priorities for the server roles that provide failover.
+Regions are used primarily to consolidate multiple VMDBs into one master VMDB for reporting while zones are used to define functional groups of servers. There can be only one region per VMDB, but multiple zones per region (or VMDB). Some server roles are aware of each other across {{ site.data.product.title_short }} appliances at the region level. This means that redundancy and failover rules apply at the region level. You can also set priorities for the server roles that provide failover.
 
 ##### Server Role Priorities
 
-If you have multiple servers in your environment with duplicate failover
-roles, then you can set the priority of the server role.
+If you have multiple servers in your environment with duplicate failover roles, then you can set the priority of the server role.
 
   - Only server roles that support failover can be marked as primary.
     These roles only allow one server to be active at a time. These are
-    **Notifier**, **Capacity & Utilization Coordinator**, **Event
-    Monitor**, **Scheduler**, **Storage Inventory**, and **Provider
-    Inventory**.
+    **Notifier**, **Capacity & Utilization Coordinator**, **Event Monitor**, **Scheduler**, **Storage Inventory**, and **Provider Inventory**.
 
-  - All other server roles are additive. The more servers with that role
-    in a zone the more work that can be performed.
+  - All other server roles are additive. The more servers with that role in a zone the more work that can be performed.
 
 There are three role priorities.
 
@@ -2315,7 +2072,7 @@ There are three role priorities.
 
 To set the priority of a failover role:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2346,7 +2103,7 @@ collect capacity and utilization data that may be missing.
 
 To view the status of server roles:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2378,7 +2135,7 @@ To view the status of server roles:
 
 To remove an inactive server:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2415,7 +2172,7 @@ location.
 
 To set the location of the log depot:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2440,7 +2197,7 @@ To set the location of the log depot:
 
 To collect and download logs from all servers in a zone:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2469,13 +2226,11 @@ need to be repeated for each zone.
 
 To repair capacity and utilization data:
 
-1.  Log in to a {{ site.data.product.title_short }} appliance located in the zone for which
-    you want to gather the data.
+1.  Log in to a {{ site.data.product.title_short }} appliance located in the zone for which you want to gather the data.
 
-2.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+2.  Browse to **Settings** > **Application Settings**.
 
-3.  Click on the **Diagnostics** accordion, then click the **Zone** that
-    you want to view.
+3.  Click on the **Diagnostics** accordion, then click the **Zone** that you want to view.
 
 4.  Click **C & U Gap Collection**.
 
@@ -2492,17 +2247,12 @@ To repair capacity and utilization data:
 
 5.  Click **Submit**.
 
-After the gap collection has completed for this zone, repeat these same
-steps for the next zone. You can check for completion by going to the
-clusters page and checking for the capacity and utilization data for the
-time period specified.
+After the gap collection has completed for this zone, repeat these same steps for the next zone. You can check for completion by going to the clusters page and checking for the capacity and utilization data for the time period specified.
 
 #### Server Diagnostics
 
 Under **Diagnostics** for a server, you can view the status of
-{{ site.data.product.title_short }} workers running on the server, set log collection
-setting for only that server, and view the server’s current
-{{ site.data.product.title_short }} and audit logs.
+{{ site.data.product.title_short }} workers running on the server, set log collection setting for only that server, and view the server’s current {{ site.data.product.title_short }} and audit logs.
 
 ##### Workers
 
@@ -2553,7 +2303,7 @@ You can see additional information on and restart the following items:
 
 To reload worker display:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2569,7 +2319,7 @@ To reload worker display:
 
 To restart a worker:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2613,7 +2363,7 @@ server level supersede the ones at the zone level.
 
 To set the location of the log depot for a specific server
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2641,7 +2391,7 @@ To set the location of the log depot for a specific server
 
 To Collect the Current Log Set of a Server
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2661,7 +2411,7 @@ To Collect the Current Log Set of a Server
 
 To Collect All Log Sets from a Server
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2692,7 +2442,7 @@ communication with the SmartProxy and tasks.
 
 To view the server log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2708,7 +2458,7 @@ of the log.
 
 To reload the server log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2723,7 +2473,7 @@ To reload the server log:
 
 To download the server log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2743,7 +2493,7 @@ Use the **Audit Log** to see changes to the user interface and authentication.
 
 To view the audit log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2758,7 +2508,7 @@ The server automatically retrieves the last 1000 lines of the log.
 
 To reload the audit log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2773,10 +2523,9 @@ To reload the audit log:
 
 To download the audit log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
-2.  Click on the Diagnostics accordion, then click the Zone that you
-    want to view.
+2.  Click on the **Diagnostics** accordion, then click the Zone that you want to view.
 
 3.  Select the server that you want to view.
 
@@ -2791,7 +2540,7 @@ Use the production log to see all actions performed using the console.
 
 To view the production log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2807,10 +2556,9 @@ of the log.
 
 To reload the production log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
-2.  Click on the Diagnostics accordion, then click the Zone that you
-    want to view.
+2.  Click on the **Diagnostics** accordion, then click the Zone that you want to view.
 
 3.  Select the server that you want to view.
 
@@ -2823,10 +2571,9 @@ To reload the production log:
 
 To download the production log:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
-2.  Click on the **Diagnostics** accordion, then click the **Zone** that
-    you want to view.
+2.  Click on the **Diagnostics** accordion, then click the **Zone** that you want to view.
 
 3.  Select the server that you want to view.
 
@@ -2845,7 +2592,7 @@ connection, and database utilization.
 
 To view information on the VMDB:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Database** accordion.
 
@@ -2877,31 +2624,18 @@ Assign each server participating in the region a unique number during
 the regionalization process, then set your subordinate regions to
 replicate to the top region.
 
-<div class="important">
+**Important**
 
-All {{ site.data.product.title_short }} databases in a multi-region deployment must use the
-same security key.
-
-</div>
+All {{ site.data.product.title_short }} databases in a multi-region deployment must use the same security key.
 
 ##### Creating a Region
 
-In principle, a region is created when you set up your {{ site.data.product.title_short }}
-environment on the first appliance for the region. However, you can also
-create a region on an appliance where a database has already been set
-up. This process involves dropping and rebuilding the existing database
-to accommodate the new region number, and takes several minutes to
-complete.
+In principle, a region is created when you set up your {{ site.data.product.title_short }} environment on the first appliance for the region. However, you can also create a region on an appliance where a database has already been set up. This process involves dropping and rebuilding the existing database to accommodate the new region number, and takes several minutes to complete.
 
-<div class="warning">
+**Warning**
 
 Performing this procedure destroys any existing data and cannot be
-undone. Back up the existing database before proceeding. By default, new
-appliances are assigned region 0. Do not use this number when creating a
-region because duplicate region numbers can compromise the integrity of
-the data in the database.
-
-</div>
+undone. Back up the existing database before proceeding. By default, new appliances are assigned region 0. Do not use this number when creating a region because duplicate region numbers can compromise the integrity of the data in the database.
 
 1.  Log in to the appliance as the **root** user.
 
@@ -2932,39 +2666,25 @@ the data in the database.
 #### Configuring Database Replication and Centralized Administration
 
 To configure database replication, you must configure one
-{{ site.data.product.title_short }} instance to act as a global copy, and one or more
-other instances to act as remote copies. This database replication
-relationship can only be configured on {{ site.data.product.title_short }} instances
-that are of the same version. Configuring database replication in this
-version of {{ site.data.product.title_short }} automatically enables centralized
+{{ site.data.product.title_short }} instance to act as a global copy, and one or more other instances to act as remote copies. This database replication relationship can only be configured on {{ site.data.product.title_short }} instances that are of the same version. Configuring database replication in this version of {{ site.data.product.title_short }} automatically enables centralized
 administration, eliminating the need for further configuration.
-Centralized administration in {{ site.data.product.title_short }} supports life cycle
-management operations that can be initiated from the global copy and
-processed and executed on the remote copy.
+Centralized administration in {{ site.data.product.title_short }} supports life cycle management operations that can be initiated from the global copy and processed and executed on the remote copy.
 
-<div class="important">
+**Important**
 
-  - You must configure at least one remote copy before you can configure
-    the global copy. Changes to the role of a {{ site.data.product.title_short }}
-    instance take several minutes to take effect.
+  - You must configure at least one remote copy before you can configure the global copy. Changes to the role of a {{ site.data.product.title_short }} instance take several minutes to take effect.
 
-  - The region number must be unique on each {{ site.data.product.title_short }}
-    instance where replication is configured. See [Creating a
-    Region](#creating_a_region) for instructions on how to create a
-    region.
+  - The region number must be unique on each {{ site.data.product.title_short }} instance where replication is configured. See [Creating a Region](#creating_a_region) for instructions on how to create a region.
 
   - Enabling the `EvmRole-user_global_region` role will only provide
     access to specific operations that can be performed on a global
     region.
 
-</div>
-
 ##### Configuring a Remote Copy
 
-Configure a {{ site.data.product.title_short }} instance to act as a remote copy from which
-data will be replicated to the global copy.
+Configure a {{ site.data.product.title_short }} instance to act as a remote copy from which data will be replicated to the global copy.
 
-1.  Click ![Configuration](../images/config-gear.png) **Configuration**.
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Settings** accordion.
 
@@ -3043,7 +2763,7 @@ You can reset the replication relationship between the global copy and
 remote copies by temporarily removing and re-enabling the subscription
 from the global copy.
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Settings** accordion.
 
@@ -3119,7 +2839,7 @@ this operation.
 
 To run a single database backup:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Diagnostics** accordion and click the **Region** name.
 
@@ -3306,7 +3026,7 @@ order to reclaim unused space in your VMDB.
 
 To run database garbage collection:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Browse to **Settings** > **Application Settings**.
 
 2.  Click the **Diagnostics** accordion and click the **Region** name.
 

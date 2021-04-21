@@ -53,9 +53,6 @@ appliance.
 {% include_relative
 _topics/adding_an_openstack_infrastructure_provider.md %}
 
-{% include openstack/discovering-openstack-infrastructure-providers.md
-%}
-
 ## VMware vCenter Providers
 
 To use a VMware vCenter provider, add it to the appliance and

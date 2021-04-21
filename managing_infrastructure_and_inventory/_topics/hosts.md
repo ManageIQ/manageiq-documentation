@@ -87,8 +87,6 @@ host software and version information, and hardware.
 
 {% include_relative _topics/refreshing_multiple_hosts.md %}
 
-{% include_relative _topics/discovering_multiple_hosts.md %}
-
 {% include_relative _topics/adding_a_single_host.md %}
 
 {% include_relative _topics/editing_hosts.md %}

@@ -30,12 +30,6 @@ display basic information about each provider:
 
 Provider authentication status
 
-{% include_relative
-_topics/discovering_multiple_management_systems.md %}
-
-{% include_relative _topics/discovering_physical_infra_providers.md
-%}
-
 ## Red Hat Virtualization Providers
 
 To use a Red Hat Virtualization provider, add it to the appliance and
@@ -58,9 +52,6 @@ appliance.
 
 {% include_relative
 _topics/adding_an_openstack_infrastructure_provider.md %}
-
-{% include openstack/discovering-openstack-infrastructure-providers.md
-%}
 
 ## VMware vCenter Providers
 

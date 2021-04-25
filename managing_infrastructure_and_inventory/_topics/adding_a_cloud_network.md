@@ -2,18 +2,15 @@
 
 Add a new cloud network following the steps in this procedure:
 
-1.  Navigate to menu:Networks\[Networks\].
+1.  Browse to menu: **Network** > **Networks**.
 
-2.  Click ![Configuration](../images/1847.png)(**Configuration**) and
-    click **Add a new Cloud Network**.
+2.  Click **Configuration** and then click **Add a new Cloud Network**.
 
-3.  In the **Network Providers** area, select a **Network Manager** from
-    the drop-down menu.
+3.  In the **Network Providers** area, select a **Network Manager** from the drop-down menu.
 
 4.  Under **Placement**, select a **Cloud Tenant**.
 
-5.  In the **Network Provider Information** section, choose a **Provider
-    Network Type**.
+5.  In the **Network Provider Information** section, choose a **Provider Network Type**.
 
       - If **Local** is selected, provide a **Physical Network** name.
 

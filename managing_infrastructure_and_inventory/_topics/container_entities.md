@@ -10,15 +10,13 @@ providers and entities known to {{ site.data.product.title_short }}. The **Overv
 page provides links to other summary pages which contain further
 information on the containers providers and entities. The **Overview**
 page also provides metrics for **Aggregated Node Utilization**,
-**Network Utilization Trend**, **New Image Usage Trend**, **Node
-Utilization**, and **Pod Creation and Deletion Trends**.
+**Network Utilization Trend**, **New Image Usage Trend**, **Node Utilization**, and **Pod Creation and Deletion Trends**.
 
 ![Containers Overview](../images/containers-overview.png)
 
-1.  Navigate to menu:Compute\[Containers \> Overview\].
+1.  Browse to menu: **Compute** > **Containers** > **Overview**.
 
-2.  Click the desired containers entity, or provider, if applicable, for
-    viewing the summary with further information.
+2.  Click the desired containers entity, or provider, if applicable, for viewing the summary with further information.
 
 **Note:**
 
@@ -45,10 +43,9 @@ containers providers and projects to which {{ site.data.product.title_short }} h
 
 ### Viewing the Topology for Container Providers
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute** > **Containers** > **Providers**.
 
-2.  Click the desired containers provider for viewing the provider
-    summary.
+2.  Click the desired containers provider for viewing the provider summary.
 
 3.  On the provider summary page, click **Topology** in the **Overview**
     box on the right side of the page.
@@ -58,7 +55,7 @@ containers providers and projects to which {{ site.data.product.title_short }} h
 The project topology page displays the project as the center node,
 surrounded by its related entities.
 
-1.  Navigate to menu:Compute\[Containers \> Projects\].
+1.  Browse to menu: **Compute** > **Containers** > **Projects**.
 
 2.  Click on a project.
 
@@ -81,11 +78,11 @@ surrounded by its related entities.
 Perform a SmartState Analysis of a container image to inspect the
 packages included in an image.
 
-1.  Navigate to menu:Compute\[Containers \> Container Images\].
+1.  Browse to menu: **Compute** > **Containers** > **Container Images**.
 
 2.  Check the container image to analyze. You can check multiple images.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), and then ![Perform SmartState Analysis](../images/1942.png) (**Perform SmartState Analysis**).
+3.  Click **Configuration**, and then ![Perform SmartState Analysis](../images/1942.png) **Perform SmartState Analysis**.
 
 The container image is scanned. The process will copy over any required files for the image. After reloading the image page, all new or updated packages are listed.
 
@@ -131,7 +128,7 @@ To configure automatic tagging on container entities using labels:
 
 1.  Note the *key* of the OpenShift label you want to map to a {{ site.data.product.title_short }} tag. OpenShift labels consist of two parts: a *key* and a *value*.
 
-    1.  Navigate to menu:Compute\[Containers \> Nodes\].
+    1.  Browse to menu: **Compute** > **Containers** > **Container Nodes**.
 
     2.  Select a node to open its summary page.
 
@@ -147,8 +144,7 @@ To configure automatic tagging on container entities using labels:
 
         **Note:**
 
-        To create an OpenShift label, see [Developer CLI
-        Operations](https://docs.openshift.com/container-platform/3.3/cli_reference/basic_cli_operations.html)
+        To create an OpenShift label, see [Developer CLI Operations](https://docs.openshift.com/container-platform/4.7/cli_reference/openshift_cli/developer-cli-commands.html)
         in the OpenShift Container Platform *CLI Reference* guide. A new
         label added in OpenShift will only show up in {{ site.data.product.title_short }}
         after the next OpenShift provider refresh.
@@ -159,11 +155,9 @@ To configure automatic tagging on container entities using labels:
 
 4.  Click **Add** to create a new mapping rule.
 
-    1.  Select a container entity to tag from the **Entity** list, or
-        select **\<All\>** to tag all entities.
+    1.  Select a container entity to tag from the **Entity** list, or select **All** to tag all entities.
 
-    2.  Specify the *key* from the OpenShift label you noted earlier in
-        the **Label** field.
+    2.  Specify the *key* from the OpenShift label you noted earlier in the **Label** field.
 
     3.  Specify a {{ site.data.product.title_short }} tag category in **Category** to map
         the label to. If the tag category does not exist yet in
@@ -175,12 +169,12 @@ To configure automatic tagging on container entities using labels:
 
 5.  Refresh the provider to complete the mapping:
 
-    1.  Navigate to menu:Compute\[Containers \> Providers\].
+    1.  Navigate to menu: **Compute** > **Containers** > **Providers**.
 
     2.  Select the provider to refresh.
 
-    3.  Click ![1847](../images/1847.png) (**Configuration**), and then
-        ![2003](../images/2003.png) (**Refresh Items and Relationships**).
+    3.  Click **Configuration**, and then
+        ![2003](../images/2003.png) **Refresh Items and Relationships**.
 
 The label will display on the entity’s summary page under **Smart Management** under **Company Tags** as `<Category> : <value>`.
 

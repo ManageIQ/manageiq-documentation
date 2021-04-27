@@ -37,12 +37,11 @@ task status, and task state.
 
 To filter the virtual machine and container analysis task list:
 
-1.  From the settings menu, select **Tasks**.
+1.  From the **Settings** menu, select **Tasks**.
 
 2.  Click **My VM and Container Analysis Tasks**.
 
-3.  From the **Zone** list, select a specific zone, or select **\<All
-    Zones\>**.
+3.  From the **Zone** list, select a specific zone, or select **All Zones**.
 
 4.  From the **24 Hour Time Period** list, select the period of time to
     view the tasks.
@@ -59,7 +58,7 @@ To filter the virtual machine and container analysis task list:
 To delete a task from the list of virtual machine and container analysis
 tasks:
 
-1.  From the settings menu, select **Tasks**.
+1.  From the **Settings** menu, select **Tasks**.
 
 2.  Click **My VM and Container Analysis Tasks**.
 
@@ -76,14 +75,11 @@ tasks:
 
 ### My Other UI Tasks
 
-The **My Other UI Tasks** menu allows you to view all tasks running in
-the user interface for the currently logged-in user.
+The **My Other UI Tasks** menu allows you to view all tasks running in the user interface for the currently logged-in user.
 
 #### Filtering the My Other UI Tasks List
 
-This procedure describes how to filter the user interface analysis task
-list. You can filter the task list by time period, task status, and task
-state.
+This procedure describes how to filter the user interface analysis task list. You can filter the task list by time period, task status, and task state.
 
 To filter the other user interface task list:
 
@@ -91,11 +87,9 @@ To filter the other user interface task list:
 
 2.  Click **My Other UI Tasks**.
 
-3.  From the **24 Hour Time Period** list, select the period of time to
-    view the tasks.
+3.  From the **24 Hour Time Period** list, select the period of time to view the tasks.
 
-4.  For **Task Status**, select the check boxes next to the status to
-    view.
+4.  For **Task Status**, select the check boxes next to the status to view.
 
 5.  From the **Tasks State** list, select the state to view.
 
@@ -151,12 +145,11 @@ and task state.
 
 To filter the virtual machine and container analysis task list:
 
-1.  From the settings menu, select **Tasks**.
+1.  From the **Settings** menu, select **Tasks**.
 
 2.  Click **All VM and Container Analysis Tasks**.
 
-3.  From the **Zone** list, select a specific zone, or select **\<All
-    Zones\>**.
+3.  From the **Zone** list, select a specific zone, or select **All Zones**.
 
 4.  From the **24 Hour Time Period** list, select the period of time to
     view the tasks.
@@ -201,7 +194,7 @@ can filter the task list by time period, task status, and task state.
 
 To filter the all other tasks list:
 
-1.  From the settings menu, select **Tasks**.
+1.  From the **Settings** menu, select **Tasks**.
 
 2.  Click **All Other Tasks**.
 

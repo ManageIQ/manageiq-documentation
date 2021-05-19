@@ -3,12 +3,15 @@
 
 # Capabilities Matrix
 
-{% include_relative _topics/browsers.md %}
+## Platforms and Browsers
+
+{% include_relative _topics/providers.md %}
 
 {% include_relative _topics/runtime_platforms.md %}
 
+{% include_relative _topics/browsers.md %}
 
-## Capabilities
+## Provider Capabilities
 
 {{ site.data.product.title_short }} allows you to discover and interact with various providers.  What follows are the capabilities available in various areas for the providers under management.
 

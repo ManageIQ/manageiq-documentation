@@ -1,9 +1,9 @@
-## Smart State Analysis Capabilities
+### Smart State Analysis Capabilities
 
 {{ site.data.product.title_short }} allows you to analyze virtual machines and instances on the providers it manages to collect information about the base operating system on those virtual machines or instances, their virtual hardware, installed applications, and other details. This operation is known as SmartState analysis. The sections below outline what ManageIQ can parse.
 
 
-### Volume Managers
+#### Volume Managers
 
 | Volume Manager                 | OS Family | Known To Work |
 | -------------------------------| --------- | ------------- |
@@ -11,7 +11,7 @@
 | Logical Volume Manager (Linux) | Linux     | ✅            |
 
 
-### File Systems
+#### File Systems
 
 | File System | OS Family | Known To Work |
 | ------------| --------- | ------------- |
@@ -26,7 +26,7 @@
 | CDfs        | Linux     | ✅            |
 
 
-### File Formats
+#### File Formats
 
 | File Format       | OS Family | Known To Work |
 | ------------------| --------- | ------------- |

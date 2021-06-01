@@ -55,6 +55,32 @@ When deploying OpenShift using `openshift-ansible-3.0.20` (or later
 versions), the OpenShift Container Platform [service account](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html)
 and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title_short }} are installed by default.
 
+For newer versions of OpenShift you have to create a service-account with the proper permissions for {{ site.data.product.title_short }}.
+
+1. Create a namespace for the service account
+   ```
+   oc adm new-project management-infra --description="Management-Infrastructure"
+   ```
+
+2. Create a service account in that project
+   ```
+   oc create serviceaccount management-admin -n management-infra
+   ```
+
+3. Create the cluster role
+   ```
+   echo '{"apiVersion": "v1", "kind": "ClusterRole", "metadata": {"name": "management-infra-admin"}, "rules": [{"resources": ["pods/proxy"], "verbs": ["*"]}]}' | oc create -f -
+   ```
+
+4. Apply roles and policies to the service account
+   ```
+   oc policy add-role-to-user -n management-infra admin -z management-admin
+   oc policy add-role-to-user -n management-infra management-infra-admin -z management-admin
+   oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:management-infra:management-admin
+   oc adm policy add-scc-to-user privileged system:serviceaccount:management-infra:management-admin
+   oc adm policy add-cluster-role-to-user self-provisioner system:serviceaccount:management-infra:management-admin
+   ```
+
 **Note:**
 
 See the [OpenShift Container Platform documentation](https://docs.openshift.com/container-platform/4.5/authentication/using-rbac.html#default-roles_using-rbac)

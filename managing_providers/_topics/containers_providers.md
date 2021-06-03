@@ -59,26 +59,28 @@ For newer versions of OpenShift you have to create a service-account with the pr
 
 1. Create a namespace for the service account
    ```
-   oc adm new-project management-infra --description="Management-Infrastructure"
+   project_name="management-manageiq" # Pick a name for your project
+   oc adm new-project $project_name --description="ManageIQ Project"
    ```
 
 2. Create a service account in that project
    ```
-   oc create serviceaccount management-admin -n management-infra
+   service_account_name="management-admin"
+   oc create serviceaccount $service_account_name -n $project_name
    ```
 
 3. Create the cluster role
    ```
-   echo '{"apiVersion": "v1", "kind": "ClusterRole", "metadata": {"name": "management-infra-admin"}, "rules": [{"resources": ["pods/proxy"], "verbs": ["*"]}]}' | oc create -f -
+   echo '{"apiVersion": "v1", "kind": "ClusterRole", "metadata": {"name": "management-manageiq-admin"}, "rules": [{"resources": ["pods/proxy"], "verbs": ["*"]}]}' | oc create -f -
    ```
 
 4. Apply roles and policies to the service account
    ```
-   oc policy add-role-to-user -n management-infra admin -z management-admin
-   oc policy add-role-to-user -n management-infra management-infra-admin -z management-admin
-   oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:management-infra:management-admin
-   oc adm policy add-scc-to-user privileged system:serviceaccount:management-infra:management-admin
-   oc adm policy add-cluster-role-to-user self-provisioner system:serviceaccount:management-infra:management-admin
+   oc policy add-role-to-user -n $project_name admin -z $service_account_name
+   oc policy add-role-to-user -n $project_name management-manageiq-admin -z $service_account_name
+   oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:$project_name:$service_account_name
+   oc adm policy add-scc-to-user privileged system:serviceaccount:$project_name:$service_account_name
+   oc adm policy add-cluster-role-to-user self-provisioner system:serviceaccount:$project_name:$service_account_name
    ```
 
 **Note:**
@@ -88,7 +90,7 @@ for a list of the default roles.
 
 Run the following to obtain the token needed to add an OpenShift Container Platform provider:
 
-    # oc sa get-token -n management-infra management-admin
+    # oc sa get-token -n $project_name $service_account_name
     eyJhbGciOiJSUzI1NiI...
 
 ## Enabling OpenShift Cluster Metrics

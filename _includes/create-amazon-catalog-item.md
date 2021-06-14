@@ -4,11 +4,9 @@ options in the provisioning dialog. Users can then order Red Hat
 Enterprise Linux instances from the **Service Catalog** in the
 {{ site.data.product.title_short }} Service user interface.
 
-1.  Navigate to menu:Services\[Catalogs\], then click on the **Catalog
-    Items** accordion.
+1.  Browse to menu: **Services > Catalogs**, then click on the **Catalog Items** accordion.
 
-2.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1862](../images/1862.png)(**Add a New Catalog Item**).
+2.  Click **Configuration**, then ![1862](../images/1862.png)**Add a New Catalog Item**.
 
 3.  Select **Amazon** from the **Catalog Item Type** list.
 

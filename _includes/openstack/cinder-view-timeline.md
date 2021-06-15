@@ -1,4 +1,4 @@
-1.  Navigate to menu:Storage\[Storage Managers\].
+1.  Browse to menu: **Storage > Storage Managers**.
 
 2.  Select your OpenStack Cinder manager to go to the Cinder manager’s
     summary page.

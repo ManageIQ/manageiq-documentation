@@ -28,4 +28,4 @@ The following menu items are available from the settings menu:
 The **Application Settings** menu is now accessible from **Settings** > **Application Settings** from the user
 interface.
 
-This menu allows you to specify enterprise, region, zone, and server settings for your {{ site.data.product.title_short }} infrastructure. Diagnostics such as logs and the status of processes are also shown here. 
+This menu allows you to specify enterprise, region, zone, and server settings for your {{ site.data.product.title_short }} infrastructure. Diagnostics such as logs and the status of processes are also shown here.

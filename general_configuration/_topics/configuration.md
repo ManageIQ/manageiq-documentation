@@ -2746,7 +2746,7 @@ Database replication and centralized administration are now enabled on
 your instances. To open virtual machines of a remote region from the
 global region and perform required operations:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], then
+1.  Browse to menu: **Compute < Infrastructure < Virtual Machines**, then
     click **VMs & Templates** and select a virtual machine in the global
     region.
 

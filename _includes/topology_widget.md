@@ -3,7 +3,7 @@
   - Hovering over any individual graph element will display a summary of
     details for the individual element.
 
-  - Double-click the entities in the graph to navigate to their summary
+  - Double-click the entities in the graph to browse to their summary
     pages.
 
   - It is possible to drag elements to reposition the graph.

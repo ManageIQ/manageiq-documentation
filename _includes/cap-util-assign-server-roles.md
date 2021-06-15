@@ -1,7 +1,7 @@
 1.  Click **Configuration**, then select the server to configure from
-    menu:Settings\[Zone\] in the accordion menu on the left.
+    menu: **Settings > Zone** in the accordion menu on the left.
 
-2.  Browse to the **Server Roles** list in the menu: **Serve > Server Control** section. From there, set the required capacity and
+2.  Browse to the **Server Roles** list in the menu: **Server > Server Control** section. From there, set the required capacity and
     utilization roles to **ON**, namely:
 
     1.  **Capacity & Utilization Coordinator**

@@ -13,7 +13,7 @@ This workflow demonstrates how to export custom buttons from one
 
             # mkdir /tmp/custom_buttons
 
-    3.  Navigate to the Virtual Management Database (VMDB) directory:
+    3.  Browse to the Virtual Management Database (VMDB) directory:
 
             # vmdb
 
@@ -35,7 +35,7 @@ This workflow demonstrates how to export custom buttons from one
 
     1.  SSH to the target {{ site.data.product.title_short }} appliance as `root`.
 
-    2.  Navigate to the VMDB directory:
+    2.  Browse to the VMDB directory:
 
             # vmdb
 
@@ -47,7 +47,7 @@ To verify successful import of custom buttons:
 
 1.  Log in to the target {{ site.data.product.title_short }} appliance.
 
-2.  Navigate to menu:Automation\[Automate \> Customization\].
+2.  Browse to menu: **Automation > Automate > Customization**.
 
 3.  Click **Buttons** in the accordion menu.
 

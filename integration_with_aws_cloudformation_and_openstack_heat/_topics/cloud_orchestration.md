@@ -14,10 +14,9 @@ or can upload them from other sources.
 Use this procedure to add new orchestration templates using the
 dashboard UI.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+2.  Click **Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png) **Create a new
     Orchestration Template**. The **Adding a new Orchestration
     Template** window is displayed.
@@ -41,13 +40,11 @@ dashboard UI.
 Use this procedure to edit orchestration templates using the dashboard
 UI.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
-2.  Select the orchestration template you want to edit from the **All
-    Orchestration Templates** list.
+2.  Select the orchestration template you want to edit from the **All Orchestration Templates** list.
 
-3.  Click ![Configuration](../images/1847.png) **Configuration**, then
+3.  Click **Configuration**, then
     click ![Edit\_Sign](../images/1851.png) **Edit selected Orchestration
     Template**. The **Edit selected Orchestration Template** window is
     displayed.
@@ -64,10 +61,9 @@ UI.
 Use this procedure to copy an orchestration template to create a new
 template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+2.  Click **Configuration**, then
     click ![Copy](../images/1859.png) **Copy selected Orchestration
     Template**. The **Copy selected Orchestration Template** window is
     displayed.
@@ -85,13 +81,13 @@ template.
 Use this procedure to delete orchestration templates using the dashboard
 UI.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration
     Templates** in the accordion menu.
 
 2.  Select the orchestration template you want to delete from the **All
     Orchestration Templates** list.
 
-3.  Click ![Configuration](../images/1848.png) **Configuration**, then
+3.  Click **Configuration**, then
     click ![Delete](../images/1861.png) **Remove selected Orchestration
     Template from Inventory**.
 

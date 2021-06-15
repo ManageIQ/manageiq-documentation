@@ -6,9 +6,9 @@ resource level.
 
 Create a generic object class using the following steps:
 
-1.  Navigate to menu:Automation\[Automate \> Generic Objects\].
+1.  Browse to menu: **Automation > Automate > Generic Objects**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     click ![Add a New Generic Object Class](../images/1862.png) (**Add a
     New Generic Object Class**).
 

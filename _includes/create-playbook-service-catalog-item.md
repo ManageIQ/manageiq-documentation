@@ -18,11 +18,11 @@
   - Only users with administrator privileges can run a service dialog
     based on a playbook.
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Browse to menu: **Services < Catalogs**.
 
 2.  In the **Catalog Items** accordion, click on the **All Catalog Items**.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then
+3.  Click **Configuration**, then
     ![1862](../images/1862.png)(**Add a New Catalog Item**).
 
 4.  Select **Ansible Playbook** from the **Catalog Item Type** drop-down

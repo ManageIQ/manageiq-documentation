@@ -8,9 +8,9 @@ job or workflow templates are automatically discovered by
 
 First, create a catalog:
 
-1.  Navigate to menu:Services\[Catalogs\].
+1. Browse to menu: **Services > Catalogs**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     ![Add a New Catalog](../images/1862.png) (**Add a New Catalog**)
 
 3.  Enter a **Name** and **Description** for the catalog.
@@ -19,22 +19,22 @@ First, create a catalog:
 
 Then, create an Ansible Tower service catalog item:
 
-1.  Navigate to menu:Automation\[Ansible Tower \> Explorer\], then click
+1.  Browse to menu: **Automation < Ansible Tower < Explorer**, then click
     on the **Templates** accordion menu.
 
 2.  Click **Ansible Tower Templates** and select an Ansible Tower job or
     workflow template.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![Create Service Dialog from Template](../images/1862.png) (**Create
     Service Dialog from this Template**).
 
 4.  Enter a **Service Dialog Name** (for example,
     *ansible\_tower\_job*)and click **Save**.
 
-5.  Navigate to menu:Services\[Catalogs\]. Click **Catalog Items**.
+5.  Browse to menu: **Services > Catalogs**. Click **Catalog Items**.
 
-6.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+6.  Click **Configuration**, then
     ![Add a New Catalog Item](../images/1862.png) (**Add a New Catalog
     Item**) to create a new catalog item with the following details, at
     minimum:

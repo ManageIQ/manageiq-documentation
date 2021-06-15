@@ -5,7 +5,7 @@ Systems Virtual Servers](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-
 Create a request to provision IBM Power Systems Virtual Servers instances
 from images.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
     ![1862](../images/1862.png)(**Provision Instances**).

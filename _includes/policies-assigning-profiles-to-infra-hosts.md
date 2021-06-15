@@ -1,4 +1,4 @@
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\], verify the
+1.  Browse to menu: **Compute > Infrastructure > Providers**, verify the
     provider you need to assign the policy profiles to.
 
 2.  Click ![image](../images/1941.png) (**Policy**), and then click

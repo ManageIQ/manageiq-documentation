@@ -1,7 +1,7 @@
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse  to menu: **Control < Explorer**.
 
 2.  Click on the **Policy Profiles** accordion, then click
-    ![image](../images/1847.png) (**Configuration**), then
+    **Configuration**, then
     ![image](../images/1862.png) (**Add a New Policy Profile**).
 
 3.  In the **Basic Information** area, type in a unique description for

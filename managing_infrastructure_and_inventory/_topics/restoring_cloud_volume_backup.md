@@ -3,11 +3,11 @@
 In case of data loss, you can restore from a cloud volume backup with
 the following steps:
 
-1.  Navigate to menu:Storage\[Block Storage \> Volume Backups\].
+1.  Browse to menu: **Storage > Block Storage > Volume Backups**.
 
 2.  Select a **Cloud Volume Backup** to restore.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     click ![Restore backup to Cloud Volume](../images/volume-icon.png)
     (**Restore backup to Cloud Volume**).
 

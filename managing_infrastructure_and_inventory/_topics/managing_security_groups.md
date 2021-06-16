@@ -5,11 +5,11 @@ Manage security groups associated with cloud provider instances using
 
 To add a security group to an instance:
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click on **Instances by Provider**, and select an instance.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     click ![Add a Security Group](../images/cloud-security.png) (**Add a
     Security Group**).
 
@@ -20,11 +20,11 @@ To add a security group to an instance:
 
 To remove a security group from an instance:
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click on **Instances by Provider**, and select an instance.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     click ![Remove a Security Group](../images/cloud-security.png)
     (**Remove a Security Group**).
 

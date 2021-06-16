@@ -2,7 +2,7 @@ Create a request to provision Red Hat OpenStack Platform cloud instances
 from images, volumes, and volume snapshots using {{ site.data.product.title_short }}. Only
 bootable volumes not in use will be available.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**
 
 2.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
     ![1862](../images/1862.png)(**Provision Instances**).

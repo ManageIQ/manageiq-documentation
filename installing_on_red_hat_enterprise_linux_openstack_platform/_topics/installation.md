@@ -22,7 +22,7 @@ appliance.
 
 1.  Log in to the OpenStack dashboard.
 
-2.  In the **Project** tab, navigate to menu:Compute\[Images\].
+2.  In the **Project** tab, browse to menu: **Compute > Images**.
 
 3.  Click **Create Image**.
 
@@ -68,10 +68,9 @@ In the default configuration, the default security group accepts all
 connections from the default source; all instances within the default
 group can talk to each other on any port.
 
-1.  From the OpenStack dashboard, navigate to menu:Project\[Compute \>
-    Access & Security\].
+1.  From the OpenStack dashboard, browse to menu: **Project > Compute > Access & Security**.
 
-2.  Navigate to menu:Security Groups\[Manage Rules\] on the row for the
+2.  Browse to menu: **Security Groups > Manage Rules on the row for the
     default security group. ![7216](../images/7216.png)
 
 3.  Click **Add Rule**. ![4941](../images/4941.png)
@@ -108,7 +107,7 @@ Administration User Guide.
 
 1.  Log in to the OpenStack dashboard as admin.
 
-2.  In the **Admin** tab, navigate to menu:System\[Flavors\].
+2.  In the **Admin** tab, browse to menu: **System > Flavors**.
 
 3.  Click **Create Flavor** to display the **Create Flavor** dialog.
 
@@ -135,8 +134,7 @@ A new flavor specific to {{ site.data.product.title_short }} is created.
 
 ### Launching the Instance
 
-1.  From the OpenStack dashboard, navigate to menu:Project\[Compute \>
-    Instances\].
+1.  From the OpenStack dashboard, browse to menu: **Project > Compute > Instances**.
 
 2.  Click **Launch Instance**.
 
@@ -198,8 +196,7 @@ of the instances involved.
 
         $ nova-manage floating create IP_BLOCK
 
-2.  In the **Project** tab, navigate to menu:Compute\[Access &
-    Security\].
+2.  In the **Project** tab, browse to menu: **Compute > Access & Security**.
 
 3.  Click menu:Floating IPs\[Allocate IP To Project\]. The **Allocate
     Floating IP** window is displayed. ![7218](../images/7218.png)

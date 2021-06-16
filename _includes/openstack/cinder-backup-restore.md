@@ -1,9 +1,9 @@
-1.  Navigate to menu:Storage\[Block Storage \> Volumes\].
+1.  Browse to menu: **Storage > Block Storage > Volumes**.
 
 2.  Click the volume whose backup you want to restore. This will open
     the volume’s summary page.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     click ![Restore from a Backup of this Cloud
     Volume](../images/volume-icon.png) (**Restore from a Backup of this
     Cloud Volume**).

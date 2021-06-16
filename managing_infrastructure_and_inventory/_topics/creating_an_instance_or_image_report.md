@@ -3,7 +3,7 @@
 For a listing of instances and images, you can create a quick report in
 CSV, TXT, or PDF formats.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the desired items for report creation.
 

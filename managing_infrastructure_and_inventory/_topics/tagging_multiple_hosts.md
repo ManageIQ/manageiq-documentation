@@ -3,7 +3,7 @@
 To categorize hosts together, apply tags to multiple hosts at the same
 time.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Check the hosts to tag.
 

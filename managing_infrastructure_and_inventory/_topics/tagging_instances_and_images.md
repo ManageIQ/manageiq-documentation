@@ -1,6 +1,6 @@
 # Tagging Instances and Images
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the items to tag.
 

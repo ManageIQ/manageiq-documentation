@@ -4,7 +4,7 @@ While you can set the default view for different pages from the settings
 menu, then menu:Configuration\[My Settings \> Default Views\], the
 current view can also be controlled from the Virtual Machines pages.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to view.
 

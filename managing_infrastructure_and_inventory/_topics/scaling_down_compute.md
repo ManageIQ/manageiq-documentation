@@ -11,11 +11,11 @@ Before scaling down, evacuate or migrate any instances hosted on the node you ar
 
 After migrating or evacuating instances from the node, set the node to maintenance mode. To do so:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Click the OpenStack compute node to be removed from the provider.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![1851](../images/1851.png) (**Toggle Maintenance Mode**).
 
     **Note:**
@@ -27,11 +27,11 @@ Repeat this procedure for every node you want to remove from the cloud provider.
 
 After setting a Compute node to maintenance mode, you can scale down its provider:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click the provider to be scaled down.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![1851](../images/1851.png) (**Scale Down**).
 
 4.  From the **Scale Infrastructure Provider Down** section, check the

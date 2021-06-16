@@ -141,13 +141,13 @@ Use the comparison feature to:
 
 Compare instances and images:
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the items to analyze.
 
 3.  Click the checkboxes for the items to compare.
 
-4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+4.  Click **Configuration**, and then
     ![2148](../images/2148.png) (**Compare Selected items**). The
     comparison displays in a compressed view with a limited set of
     properties listed.

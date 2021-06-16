@@ -5,7 +5,7 @@ an OpenShift provider is added, OpenShift images from the internal
 registry are discovered. To enable image scanning, perform the following
 configuration steps:
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Select the checkboxes of the OpenShift providers on which to enable
     scanning.
@@ -31,9 +31,9 @@ images:
 
 ![:schedule openscap scan](../images/:schedule_openscap_scan.png)
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click **Configuration**.
 
-2.  From menu:Settings\[Zones\] in the left pane of the appliance,
+2.  From menu: **Settings > Zones** in the left pane of the appliance,
     select **Schedules**.
 
 3.  From the drop-down menu, click menu:Configuration\[Add a new
@@ -62,7 +62,7 @@ images:
 
 Image scanning results are displayed in each image summary page.
 
-1.  Select menu:Compute\[Containers \> Container Images\].
+1.  Select menu: **Compute > Containers > Container Images**.
 
 2.  Click the desired image.
 

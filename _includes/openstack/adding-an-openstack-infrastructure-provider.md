@@ -17,9 +17,9 @@ associated with the `admin` tenant.
     trust the certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA)
     before adding the provider.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     click ![Add a New Infrastructure Provider](../images/1862.png) (**Add
     a New Infrastructure Provider**).
 

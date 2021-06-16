@@ -29,18 +29,16 @@ A service dialog contains three components:
     drop-down lists or text fields, to fill in the options on the
     provisioning dialog.
 
-<div class="important">
+**Important:**
 
 The names of the elements must correspond to the options used in the provisioning dialog.
 
-</div>
-
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Browse to menu: **Automation > Automate > Customization**.
 
 2.  Click the **Service Dialogs** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), and then
-    ![1862](../images/1862.png)(**Add a new Dialog**).
+3.  Click **Configuration**, and then
+    ![1862](../images/1862.png)**Add a new Dialog**.
 
     ![edit section1](../images/edit-section1.png)
 

@@ -1,6 +1,6 @@
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute > Containers > Providers**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     click ![Add a New Containers Provider](../images/1862.png) (**Add a New Containers Provider**).
 
 3.  Enter a **Name** for the provider.

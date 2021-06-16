@@ -1,10 +1,10 @@
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse to menu: **Control > Explorer**.
 
 2.  Expand the **Policies** accordion, and click **Control Policies**.
 
 3.  Select **Vm Control Policies**.
 
-4.  Click ![image](../images/1847.png) (**Configuration**), then
+4.  Click **Configuration**, then
     ![image](../images/1862.png) (**Add a New VM and Instance Control
     Policy**).
 

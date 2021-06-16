@@ -1,6 +1,6 @@
 # Creating an Instance or Image Filter
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Go to the **Instances** or **Images** accordion.
 

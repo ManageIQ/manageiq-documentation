@@ -25,9 +25,9 @@ For more information, see <a href="https://access.redhat.com/documentation/en-us
 
 To authenticate the provider using a self-signed Certificate Authority (CA), configure the {{ site.data.product.title_short }} appliance to trust the certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA) before adding the provider.
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\].
+1.  Browse to menu: **Compute > Clouds > Providers**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+2.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.

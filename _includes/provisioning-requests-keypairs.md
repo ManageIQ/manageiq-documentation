@@ -4,15 +4,15 @@ Key
 Pairs](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/instances_and_images_guide/ch-manage_instances#section-manage-keypair)
 in the *Instances and Images Guide*.
 
-To manage key pairs, navigate to menu:Compute\[Clouds \> Key Pairs\].
+To manage key pairs, browse to menu: **Compute > Clouds > Key Pairs**.
 From there, you can view a list of available key pairs. Click on a key
 pair to view its details.
 
 To create a new key pair:
 
-1.  Navigate to menu:Compute\[Clouds \> Key Pairs\].
+1.  Browse to menu: **Compute > Clouds > Key Pairs**.
 
-2.  Click ![1847](../images/1847.png)(**Configuration**),
+2.  Click **Configuration**,
     ![2345](../images/2345.png)(**Add a new Key Pair**).
 
 3.  Enter a **Name** for the key pair.

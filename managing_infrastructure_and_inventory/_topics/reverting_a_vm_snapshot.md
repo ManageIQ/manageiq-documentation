@@ -12,7 +12,7 @@ To revert a virtual machine to a snapshot:
 
 1.  Power the virtual machine off.
 
-2.  Navigate to menu: **Compute > Infrastructure > Virtual Machines**.
+2.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 3.  Select the target virtual machine, and open it to view its details.
 

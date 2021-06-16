@@ -21,6 +21,6 @@ OpenSCAP is an auditing tool that is used for hardening the security of your ent
 
 For image scanning to work, make sure that your {{ site.data.product.title_short }} appliance has the **SmartProxy** and **SmartState Analysis** roles enabled:
 
-1. From the Settings menu, navigate to menu: **Configuration > Server**.
+1. From the Settings menu, browse to menu: **Configuration > Server**.
 
 2. Under Server Control, ensure **SmartState Analysis** and **SmartProxy** roles are enabled.

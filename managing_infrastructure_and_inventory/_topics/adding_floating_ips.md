@@ -6,9 +6,9 @@ your instances.
 Add floating IP addresses to an existing cloud network by following the
 procedure below.
 
-1.  Navigate to menu:Networks\[Floating IPs\].
+1.  Browse to menu: **Networks > Floating IPs**.
 
-2.  Click ![COnfiguration](../images/1847.png)(**Configuration**) and
+2.  Click **Configuration** and
     click Add a new Floating IP.
 
 3.  Select a **Network Manager**.

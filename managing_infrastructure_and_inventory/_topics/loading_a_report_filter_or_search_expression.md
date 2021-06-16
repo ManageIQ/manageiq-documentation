@@ -1,6 +1,6 @@
 # Loading a Report Filter or Search Expression
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the items to search (either **Instances** or
     **Images**).

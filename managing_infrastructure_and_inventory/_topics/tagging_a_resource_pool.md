@@ -2,7 +2,7 @@
 
 Use tags to categorize a resource pool.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Resource Pools\].
+1.  Browse to menu: **Compute > Infrastructure > Resource Pools**.
 
 2.  Click the resource pool to tag.
 

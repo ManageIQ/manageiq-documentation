@@ -1,10 +1,10 @@
 # Changing Views for Instances and Images
 
 While you can set the default view for different pages from the settings
-menu, then menu:Configuration\[My Settings \> Default Views\], the
+menu, then menu: **Configuration > My Settings > Default Views**, the
 current view can also be controlled from the Instances pages.
 
-1.  Browse to menu: **Compute < Clouds > Instances**.
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the items to view.
 

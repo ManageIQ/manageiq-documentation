@@ -7,7 +7,7 @@ details on the underlying OpenStack process.
 
 To migrate a live instance:
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  On the right pane, click the instance to be migrated. Use the
     **Instances by Provider** accordion to filter instances by provider

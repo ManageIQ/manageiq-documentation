@@ -3,11 +3,11 @@
 You can reconfigure a VMware or Red Hat Virtualization virtual machine’s
 processors with the following steps:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu:Compute\[Infrastructure \> Virtual Machines\].
 
 2.  Select the target virtual machine.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Select **Yes** next to **Processors** to show processor options.

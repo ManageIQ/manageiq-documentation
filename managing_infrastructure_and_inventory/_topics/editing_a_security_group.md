@@ -6,11 +6,11 @@ adding new firewall rules.
 
 To edit details of a security group:
 
-1.  Navigate to menu:Networks\[Security Groups\].
+1.  Browse to menu: **Networks > Security Groups**.
 
 2.  Click on a security group to view the summary page.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![Edit this Security Group](../images/1851.png) (**Edit this Security
     Group**).
 

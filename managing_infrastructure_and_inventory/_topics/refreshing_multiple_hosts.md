@@ -3,11 +3,11 @@
 Manually refresh a host for its properties and related infrastructure
 components.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Check the hosts to refresh.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![2003](../images/2003.png) (**Refresh Relationships and Power
     States**).
 

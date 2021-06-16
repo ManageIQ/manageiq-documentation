@@ -1,6 +1,6 @@
 # Downloading Key Pairs
 
-1.  Navigate to menu:Compute\[Clouds \> Key Pairs\]. You will see a list
+1.  Browse to menu: **Compute > Clouds > Key Pairs**. You will see a list
     of existing key pairs.
 
 2.  Click the ![Download](../images/download-button.png) button, then

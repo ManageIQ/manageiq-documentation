@@ -22,7 +22,7 @@ information. Detecting drift provides you the following benefits:
 
 Detect drift on instances or images:
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the item to view drift.
 

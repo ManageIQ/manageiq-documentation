@@ -18,7 +18,7 @@ details, or report view.
 
 This procedure shows you how to view a utilization trend summary.
 
-1.  Navigate to menu:Overview\[Utilization\].
+1.  Browse to menu: **Overview > Utilization**.
 
 2.  Click **Summary** if it is not already selected.
 
@@ -48,7 +48,7 @@ This procedure shows you how to view a utilization trend summary.
 This procedure shows you how to view detail lines of a utilization
 trend.
 
-1.  Navigate to menu:Overview\[Utilization\].
+1.  Browse to menu: **Overview > Utilization**.
 
 2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 
@@ -64,7 +64,7 @@ trend.
 To find out more about resource utilization, view utilization trend
 reports.
 
-1.  Navigate to menu:Overview\[Utilization\].
+1.  Browse to menu: **Overview < Utilization**.
 
 2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 

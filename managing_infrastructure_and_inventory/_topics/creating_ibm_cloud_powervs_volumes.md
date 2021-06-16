@@ -6,11 +6,9 @@ To create a volume:
 
 1.  Browse to menu: **Storage > Block Storage > Volumes**.
 
-2.  Click **Configuration**, then
-    click ![1862](../images/1862.png) (**Add a new Cloud Volume**).
+2.  Click **Configuration**, then click ![1862](../images/1862.png) **Add a new Cloud Volume**.
 
-3.  Select the desired IBM Power Systems Virtual Servers instance from the
-    **Storage Manager** list.
+3.  Select the desired IBM Power Systems Virtual Servers instance from the **Storage Manager** list.
 
 4.  Enter a **Volume Name**.
 

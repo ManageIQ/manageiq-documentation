@@ -70,7 +70,7 @@ group can talk to each other on any port.
 
 1.  From the OpenStack dashboard, browse to menu: **Project > Compute > Access & Security**.
 
-2.  Browse to menu: **Security Groups < Manage Rules on the row for the
+2.  Browse to menu: **Security Groups > Manage Rules on the row for the
     default security group. ![7216](../images/7216.png)
 
 3.  Click **Add Rule**. ![4941](../images/4941.png)

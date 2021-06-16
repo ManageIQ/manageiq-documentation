@@ -3,7 +3,7 @@
 Virtual machines and images can be sorted by Name, Availability Zone,
 Flavor, Cloud Provider, Compliant, Last Analysis Time, and Region.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the desired items to sort.
 

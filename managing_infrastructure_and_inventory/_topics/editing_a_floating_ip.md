@@ -2,11 +2,11 @@
 
 To manage the port associations of a floating IP:
 
-1.  Navigate to menu:Networks\[Floating IPs\].
+1.  Browse to menu: **Networks > Floating IPs**.
 
 2.  Click on a floating IP from the list view.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![Manage the port association of this Floating IP](../images/1851.png)
     (**Manage the port association of this Floating IP**).
 

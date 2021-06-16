@@ -169,7 +169,7 @@ To configure automatic tagging on container entities using labels:
 
 5.  Refresh the provider to complete the mapping:
 
-    1.  Navigate to menu: **Compute** > **Containers** > **Providers**.
+    1.  Browse to menu: **Compute** > **Containers** > **Providers**.
 
     2.  Select the provider to refresh.
 

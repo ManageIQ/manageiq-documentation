@@ -21,11 +21,11 @@ _topics/performing_smartstate_analysis_on_clusters.md %}
 
 {{ site.data.product.title_short }} provides features to compare properties of clusters.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Clusters\].
+1.  Browse to menu: **Compute > Infrastructure > Clusters**.
 
 2.  Check the clusters to compare.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![2148](../images/2148.png) (**Compare Selected items**). The
     comparison displays in a default expanded view and lists a limited
     set of properties.

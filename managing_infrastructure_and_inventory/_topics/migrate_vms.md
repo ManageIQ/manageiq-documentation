@@ -6,17 +6,15 @@ with detailed environment information to which to migrate the VM.
 
 To create a request to migrate a virtual machine:
 
-1.  Navigat to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click **VMs & Templates** on the accordion menu.
 
 3.  Select the VM to migrate.
 
-4.  Click ![1847](../images/1847.png) btn:\[(Configuration)\], and then
-    ![2007](../images/2007.png) btn:\[(Lifecycle)\].
+4.  Click **Configuration**, and then ![2007](../images/2007.png) **Lifecycle**.
 
-5.  Click ![migration icon](../images/migration_icon.png) btn:\[(Migrate
-    selected items)\]. The Migrate Virtual Machine form will appear.
+5.  Click ![migration icon](../images/migration_icon.png) **Migrate selected items**. The Migrate Virtual Machine form will appear.
 
 6.  Under the **Request** tab:
 

@@ -3,11 +3,11 @@
 If a repository is decommissioned or requires troubleshooting, it might
 require removal.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Repositories\].
+1.  Browse to menu: **Compute > Infrastructure > Repositories**.
 
 2.  Check the repositories to remove.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![1861](../images/1861.png) (**Remove from the VMDB**).
 
 4.  Click **OK**.

@@ -93,6 +93,7 @@ Utilization Collection
 To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 
 1.  Click **Settings**, then click on **Application Settings**. 
+
 2.  Click the **Settings** accordion, then select **Region**, then click on the **C & U Collection** tab.
 
 3.  In the **Clusters** area, check all clusters and hosts that you want
@@ -131,8 +132,10 @@ categories. Use tags to create a customized, searchable index for your resources
 
 To create a tag category:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
+
 2.  Click on the **Settings** accordion, then **Region**.
+
 3.  Select the **Tags** tab, then click on
     the **My Company Categories** tab.
 
@@ -184,7 +187,9 @@ If no values are created for a category, you are unable to assign a value from t
 To delete a tag category:
 
 1.  Browse to **Settings** > **Application Settings**.
+
 2.  Click on the **Settings** accordion, then **Region**.
+
 3.  Select the **Tags** tab, then click on
     the **My Company Categories** tab.
 
@@ -203,7 +208,9 @@ tags from the category are unassigned from all resources.
 To create a company tag:
 
 1.  Browse to **Settings** > **Application Settings**.
+
 2.  Click on the **Settings** accordion, then **Region**.
+
 3.  Select the **Tags** tab, then click on
     the **My Company Tags** tab.
 
@@ -227,7 +234,9 @@ To create a company tag:
 To delete a company tag:
 
 1.  Browse to **Settings** > **Application Settings**.
+
 2.  Click on the **Settings** accordion, then **Region**.
+
 3.  Select the **Tags** tab, then click on
     the **My Company Tags** tab.
 

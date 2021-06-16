@@ -1,6 +1,6 @@
 # Orchestration Stacks
 
-Navigate to menu:Compute\[Clouds \> Stacks\] to see a list of
+Browse to menu: **Compute > Clouds > Stacks** to see a list of
 orchestration stacks along with information such as *Name*, *Provider*,
 *Type*, *Status*, *Instances*, *Security Groups*, and *Cloud Networks*.
 Click on a stack to see more information about it, including properties,

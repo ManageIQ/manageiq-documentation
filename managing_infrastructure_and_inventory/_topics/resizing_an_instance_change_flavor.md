@@ -16,11 +16,11 @@ in the Red Hat OpenStack Platform *Instances and Images Guide*.
 
 To resize an instance through {{ site.data.product.title_short }}:
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the instance whose flavor you want to change.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![1851](../images/1851.png) (**Reconfigure this Instance**).
 
 4.  In the **Reconfigure Instance** section, select the new flavor you

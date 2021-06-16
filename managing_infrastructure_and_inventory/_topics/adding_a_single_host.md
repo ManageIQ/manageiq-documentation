@@ -5,10 +5,9 @@ first. If the host has not been found during **Host Discovery** or
 **Provider Refresh**, and the host’s IP address is known, use the **Add
 a New Host** button.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**), then click
-    ![1862](../images/1862.png) (**Add a New item**).
+2.  Click ![1847](../images/1847.png) ((../images/1862.png) (**Add a New item**).
 
 3.  Type the **Name**, **Host Name**, and **IP Address** of the host to
     add. **Name** is how the device is labeled in the console. Select

@@ -16,7 +16,7 @@ provides you the following benefits:
 
 Detect drift on hosts:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Click on the host to view drift.
 

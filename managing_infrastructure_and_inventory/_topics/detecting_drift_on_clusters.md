@@ -16,7 +16,7 @@ Detecting drift provides users with the following benefits:
 
 Detect drift on clusters:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Clusters\].
+1.  Browse to menu: **Compute > Infrastructure > Clusters**.
 
 2.  Click on the cluster to view drift.
 

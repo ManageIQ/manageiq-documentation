@@ -3,7 +3,7 @@
 View the timeline of events for an instance or image if registered to a
 host.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the instance to view the timeline.
 

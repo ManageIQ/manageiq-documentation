@@ -2,7 +2,7 @@
 
 Use tags to categorize clusters.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Clusters\].
+1.  :Compute\[Infrastructure \> Clusters\].
 
 2.  Check the Clusters to tag.
 

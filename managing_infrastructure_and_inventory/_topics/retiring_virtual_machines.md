@@ -5,7 +5,7 @@ using {{ site.data.product.title_short }}.
 
 To set retirement date and time:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the virtual machines or instances for retirement.
 

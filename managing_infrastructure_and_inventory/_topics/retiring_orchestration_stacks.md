@@ -5,7 +5,7 @@ retire them immediately.
 
 To set a retirement date:
 
-1.  Navigate to menu:Compute\[Clouds \> Stacks\].
+1.  Browse to menu: **Compute > Clouds > Stacks**.
 
 2.  Select the orchestration stacks to retire on a set date and time.
 
@@ -26,7 +26,7 @@ Saving a blank date will remove all retirement dates.
 
 To retire selected stacks immediately:
 
-1.  Navigate to menu:Compute\[Clouds \> Stacks\].
+1.  Browse to menu: **Compute > Clouds > Stacks**.
 
 2.  Select the orchestration stacks to retire now.
 

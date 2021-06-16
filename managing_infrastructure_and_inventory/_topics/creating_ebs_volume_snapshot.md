@@ -10,14 +10,10 @@ To create a snapshot of a volume:
 
 2.  Click the volume to snapshot to open the volume’s summary page.
 
-3.  Click **Configuration**, then
-    click ![Create a Snapshot of this Cloud
-    Volume](../images/volume-icon.png) (**Create a Snapshot of this Cloud
-    Volume**).
+3.  Click **Configuration**, then click ![Create a Snapshot of this Cloud Volume](../images/volume-icon.png) **Create a Snapshot of this Cloud Volume**.
 
 4.  Enter a name for the snapshot in **Snapshot Name**.
 
 5.  Click **Save**.
 
-Click **Cloud Volume Snapshots** on the summary page of a volume to view
-the snapshots for that volume.
+Click **Cloud Volume Snapshots** on the summary page of a volume to view the snapshots for that volume.

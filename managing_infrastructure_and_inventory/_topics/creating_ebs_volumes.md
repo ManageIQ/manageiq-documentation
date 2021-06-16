@@ -4,9 +4,9 @@ You can create and attach volumes to your storage manager.
 
 To create a volume:
 
-1.  Navigate to menu:Storage\[Block Storage \> Volumes\].
+1.  Browse to menu: **Storage > Block Storage > Volumes**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     click ![1862](../images/1862.png) (**Add a new Cloud Volume**).
 
 3.  Select the Amazon Elastic Block Store manager from the **Storage

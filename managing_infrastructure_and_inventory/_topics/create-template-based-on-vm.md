@@ -25,7 +25,7 @@ templates:
 
 To create a template based on an existing VM:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click on a oVirt / RHV provider.
 

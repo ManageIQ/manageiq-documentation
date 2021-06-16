@@ -3,7 +3,7 @@
 Apply tags to object stores to categorize them together at the same
 time.
 
-1.  Navigate to menu:Storage\[Object Stores\].
+1.  Browse to menu: **Storage > Object Stores**.
 
 2.  Select the object stores to tag.
 

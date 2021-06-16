@@ -2,7 +2,7 @@
 
 To delete a virtual machine snapshot:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the target virtual machine, and open it to view its details.
 

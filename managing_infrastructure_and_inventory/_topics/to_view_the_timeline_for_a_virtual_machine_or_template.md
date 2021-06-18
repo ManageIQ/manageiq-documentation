@@ -3,7 +3,7 @@
 View the timeline of events for a virtual machine or template if
 registered to a Host.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the virtual machine to view the timeline.
 

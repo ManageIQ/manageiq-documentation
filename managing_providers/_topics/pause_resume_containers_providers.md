@@ -20,11 +20,11 @@ partial data.
 
 To pause a containers provider:
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click the containers provider that you want to pause.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+3.  Click **Configuration**, and
     then ![Pause this Containers
     Provider](../images/pause-containers-provider.png) (**Pause this
     Containers Provider**).
@@ -33,11 +33,11 @@ To pause a containers provider:
 
 To resume a paused containers provider:
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click the paused containers provider that you want to resume.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+3.  Click **Configuration**, and
     then ![Resume this Containers
     Provider](../images/resume-containers-provider.png) (**Resume this
     Containers Provider**).

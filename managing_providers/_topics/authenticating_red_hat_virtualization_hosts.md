@@ -3,7 +3,7 @@
 After adding a Red Hat Virtualization infrastructure provider, you must
 authenticate its hosts to enable full functionality.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click on a provider to display its summary screen.
 
@@ -13,7 +13,7 @@ authenticate its hosts to enable full functionality.
 4.  Select the hosts to authenticate. You can select all hosts using the
     **Check All** option.
 
-5.  Click ![Configuration](../images/1847.png) (**Configuration**).
+5.  Click **Configuration**.
 
 6.  Click ![Edit this item](../images/1851.png) (**Edit this item**).
 

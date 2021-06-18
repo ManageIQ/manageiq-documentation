@@ -2,7 +2,7 @@
 
 This procedure describes how to view security groups.
 
-1.  Navigate to menu:Networks\[Security Groups\].
+1.  Browse to menu: **Networks > Security Groups**.
 
 2.  Click the desired security groups for viewing the details.
 

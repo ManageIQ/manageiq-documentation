@@ -64,7 +64,7 @@ The **Topology** widget is an interactive topology graph, showing the status and
 
 To view an OpenStack provider through the **Topology** widget:
 
-1.  Browse to <span class="menuchoice"> **Compute > Cloud > Providers** </span>.
+1.  Browse to menu: **Compute > Cloud > Providers**.
 
 2.  Click the desired OpenStack cloud provider for viewing the provider summary.
 

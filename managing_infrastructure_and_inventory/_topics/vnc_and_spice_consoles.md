@@ -121,7 +121,7 @@ machines that will be accessed through the HTML5 or VNC console on the
 
 4.  Select **Security Profile**.
 
-5.  Navigate to the **Firewall Properties** dialog window by selecting
+5.  Browse to the **Firewall Properties** dialog window by selecting
     the **Properties** link from the **Firewall** section.
 
 6.  In the **Firewall Properties**, scroll down to **GDB Server** and
@@ -168,7 +168,7 @@ Complete the following steps to enable WebMKS support in
 
 Open a web-based VNC or SPICE console for a virtual machine.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click on the virtual machine that you want to access.
 

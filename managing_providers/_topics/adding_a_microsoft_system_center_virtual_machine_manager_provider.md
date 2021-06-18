@@ -10,9 +10,9 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA) before adding
 the provider.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+2.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a New Infrastructure Provider**).
 
 3.  Enter the **Name** of the provider to add. The **Name** is how the

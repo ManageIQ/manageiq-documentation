@@ -7,7 +7,7 @@ detail to find when the last analysis was completed and if it completed
 successfully. If the analysis resulted in an error, the error is shown
 here.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the item to view genealogy.
 

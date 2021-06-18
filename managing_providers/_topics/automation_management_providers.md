@@ -70,7 +70,7 @@ default. Enable this server role to utilize Ansible Automation Inside.
 Configure your {{ site.data.product.title_short }} appliance network identity (hostname/IP address) before enabling the Embedded Ansible server role.
 Restart the `evmserverd` service on the appliance with the enabled Embedded Ansible server role after making any changes to the hostname or IP address.
 
-1.  Navigate to the settings menu, then **Configuration** →
+1.  Browse to the settings menu, then **Configuration** →
     **Settings**.
 
 2.  Select the desired server under **Zones**.
@@ -82,7 +82,7 @@ Restart the `evmserverd` service on the appliance with the enabled Embedded Ansi
 Verify that the Embedded Ansible worker has started to utilize its
 features.
 
-1.  Navigate to the settings menu, then **Configuration** →
+1.  Browse to the settings menu, then **Configuration** →
     **Diagnostics** and click on the desired server.
 
 2.  Click on the **Workers** tab.
@@ -95,7 +95,7 @@ confirm the state of your embedded Ansible worker.
 Add a repository so that {{ site.data.product.title_short }} can discover and make available
 your playbooks.
 
-1.  Navigate to menu:Automation\[Ansible \> Repositories\].
+1.  Browse to menu: **Automation > Ansible > Repositories**.
 
 2.  Click **Add**.
 
@@ -125,23 +125,23 @@ all repositories in your inventory to ensure your playbooks are current.
 
 Refresh a targeted repository:
 
-1.  Navigate to menu:Automation\[Ansible \> Repositories\].
+1.  Browse to menu: **Automation > Ansible > Repositories**.
 
 2.  Click on a repository.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![Refresh this Repository](../images/2003.png) (**Refresh this
     Repository**).
 
 Alternately, you can refresh some or all repositories from the list
 view:
 
-1.  Navigate to menu:Automation\[Ansible \> Repositories\].
+1.  Browse to menu: **Automation > Ansible > Repositories**.
 
 2.  Check those repositories to refresh. Click **Check All** to select
     all repositories.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![Refresh Selected Ansible Repositories](../images/2003.png)
     (**Refresh Selected Ansible Repositories**).
 
@@ -219,9 +219,9 @@ add Ansible Tower as a provider.
     provider URL. Adding the trailing slash to the provider URL may
     result in a validation error.
 
-1.  Navigate to menu: **Automation > Ansible Tower > Explorer** and click on the **Providers** accordion tab.
+1.  Browse to menu: **Automation > Ansible Tower > Explorer** and click on the **Providers** accordion tab.
 
-2.  Under ![Configuration](../images/1847.png) **Configuration**, click
+2.  Under **Configuration**, click
     ![Add a new Provider](../images/1862.png) **Add a new Provider**.
 
 3.  In the **Add a new Provider** area:
@@ -260,11 +260,11 @@ reduce refresh time.
 
 To refresh an Ansible Tower provider’s inventory in {{ site.data.product.title_short }}:
 
-1.  Navigate to menu: **Automation > Ansible Tower > Explorer** and click the **Providers** accordion tab.
+1.  Browse to menu: **Automation > Ansible Tower > Explorer** and click the **Providers** accordion tab.
 
 2.  Select the checkboxes for the Ansible Tower providers to refresh under **All Ansible Tower Providers**.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), and
+3.  Click **Configuration**, and
     then ![Refresh Relationships and Power States](../images/2003.png)
     (**Refresh Relationships and Power States**).
 
@@ -287,7 +287,7 @@ To view and access Ansible Tower inventories and job or workflow templates in {{
 
 To view a list of Ansible Tower providers and inventory:
 
-1.  Navigate to menu: **Automation > Ansible Tower > Explorer**.
+1.  Browse to menu: **Automation > Ansible Tower > Explorer**.
 
 2.  select the **Providers** accordion menu to display a list of **All Ansible Tower Providers**.
 
@@ -299,7 +299,7 @@ Similarly, all discovered job and workflow templates are accessed under the prov
 
 To view the systems in your Ansible Tower inventory:
 
-1.  Navigate to menu: **Automation > Ansible Tower > Explorer** and click **Configured Systems**.
+1.  Browse to menu: **Automation > Ansible Tower > Explorer** and click **Configured Systems**.
 
 2.  Under **All Ansible Tower Configured Systems**, select **Ansible Tower Configured Systems** to display a list.
 
@@ -313,9 +313,9 @@ You must first create the job or workflow template in Ansible Tower. The job or 
 
 First, create a catalog:
 
-1.  Navigate to menu: **Services > Catalogs** and click **Catalog Items**.
+1.  Browse to menu: **Services > Catalogs** and click **Catalog Items**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     ![Add a New Catalog](../images/1862.png) (**Add a New Catalog**)
 
 3.  Enter a **Name** and **Description** for the catalog.
@@ -324,19 +324,19 @@ First, create a catalog:
 
 Then, create an Ansible Tower service catalog item:
 
-1.  Navigate to menu: **Automation > Ansible Tower > Explorer**, then click the **Templates** according menu.
+1.  Browse to menu: **Automation > Ansible Tower > Explorer**, then click the **Templates** according menu.
 
 2.  Click **Ansible Tower Templates** and select an Ansible Tower job or workflow template.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![Create Service Dialog from Template](../images/1862.png) (**Create Service Dialog from this Template**).
 
 4.  Enter a **Service Dialog Name** (for example,
     *ansible\_tower\_job*)and click **Save**.
 
-5.  Navigate to menu: **Services > Catalogs** and click **Catalog Items**.
+5.  Browse to menu: **Services > Catalogs** and click **Catalog Items**.
 
-6.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+6.  Click **Configuration**, then
     ![Add a New Catalog Item](../images/1862.png) (**Add a New Catalog Item**) to create a new catalog item with the following details, at minimum:
 
       - For **Catalog Item type**, select **Ansible Tower**.
@@ -362,7 +362,7 @@ Then, create an Ansible Tower service catalog item:
 
 To execute the Ansible Tower job:
 
-1.  Navigate to menu: **Service > Catalogs** and click on **Service Catalogs** then click **Ansible Tower catalog**.
+1.  Browse to menu: **Service > Catalogs** and click on **Service Catalogs** then click **Ansible Tower catalog**.
 
     ![order at catalog item](../images/order_at_catalog_item.png)
 
@@ -402,13 +402,13 @@ Before creating an Automate button to execute an Ansible Tower job, the followin
 
 To configure a custom button to execute an Ansible Tower job on a virtual machine or instance, first create the button:
 
-1.  Navigate to menu: **Automation > Automate > Customization**.
+1.  Browse to menu: **Automation > Automate > Customization**.
 
 2.  Click the **Buttons** accordion menu.
 
 3.  Click menu: **VM and Instance** > **Unassigned Buttons**. This configures the button to run on virtual machines or instances.
 
-4.  Click ![1847](../images/1847.png) (**Configuration**), then click
+4.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a new Button**).
 
       - In the **Adding a new Button** screen, configure the **Action** parameters as desired. **Dialog** can be left blank if the playbook does not require extra variables. To ask the user to enter extra information when running the task, **Service Dialog** must be selected.
@@ -438,7 +438,7 @@ To configure a custom button to execute an Ansible Tower job on a virtual machin
 
 If you do not have an existing button group to assign the new button to, create a new button group:
 
-1.  From menu: **Automation > Automate > Customization**, navigate to menu: **Buttons** and click **VM and Instance > Add a new Button Group**, and configure the following:
+1.  From menu: **Automation > Automate > Customization**, browse to menu: **Buttons** and click **VM and Instance > Add a new Button Group**, and configure the following:
 
       - Configure **Basic Info** as desired. For example, name the button group `VM Actions`.
 
@@ -452,7 +452,7 @@ If you do not have an existing button group to assign the new button to, create 
 
 To assign the button to an existing button group:
 
-1.  Navigate to menu: **Buttons > VM and Instance > VM Actions > Edit this Button Group**.
+1.  Browse to menu: **Buttons > VM and Instance > VM Actions > Edit this Button Group**.
 
 2.  In **Assign Buttons**, select the button you just created from the **Unassigned** list and click ![1876](../images/1876.png) to assign it to **Selected**.
 
@@ -460,7 +460,7 @@ To assign the button to an existing button group:
 
 To use the button to run an Ansible Tower job on a virtual machine:
 
-1.  Navigate to menu: **Compute > Infrastructure > Virtual Machines**.
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the virtual machine to run the Ansible Tower job template on.
 

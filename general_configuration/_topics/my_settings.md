@@ -6,7 +6,7 @@ log in to {{ site.data.product.title_short }}, such as the default view displaye
 and personal tags. You can also configure the color scheme, and button
 options on the main dashboard.
 
-These options are available by clicking **Settings** > **My Settings**.
+These options are available by clicking **Settings > My Settings**.
 
 ### Visual Settings
 
@@ -21,7 +21,7 @@ properties at a glance.
 
 Use the following procedure to change grid and tile icons:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Visual** tab.
 
 2.  In **Grid/Tile Icons**, set items to `ON` to display all four
@@ -32,18 +32,18 @@ Use the following procedure to change grid and tile icons:
 ![7110](../images/7110.png)
 
   - Set **Show Infrastructure Provider Quadrants** to `ON` to see the
-    four icons in your provider under menu: **Compute** > **Infrastructure** > **Providers**.
+    four icons in your provider under menu: **Compute > Infrastructure > Providers**.
 
-  - Set **Show Cloud Provider Quadrants** to `ON` to see the four icons in your hosts under menu: **Cloud** > **Providers**.
+  - Set **Show Cloud Provider Quadrants** to `ON` to see the four icons in your hosts under menu: **Cloud > Providers**.
 
-  - Set **Show Host Quadrants** to `ON` to see the four icons in your hosts under menu: **Compute** > **Infrastructure** > **Hosts**.
+  - Set **Show Host Quadrants** to `ON` to see the four icons in your hosts under menu: **Compute > Infrastructure > Hosts**.
 
-  - Set **Show Datastores Quadrants** to `ON` to see the four icons in your datastores under menu: **Compute** > **Infrastructure** > **Datastores**.
+  - Set **Show Datastores Quadrants** to `ON` to see the four icons in your datastores under menu: **Compute > Infrastructure > Datastores**.
 
-  - Set **Show VM Quadrants** to `ON` to see the four icons in your virtual machines under menu: **Compute** > **Infrastructure** > **Virtual Machines**.
+  - Set **Show VM Quadrants** to `ON` to see the four icons in your virtual machines under menu: **Compute > Infrastructure > Virtual Machines**.
 
   - Set **Show Template Quadrants** to `ON` to see the four icons in
-    your templates under menu: **Compute** > **Infrastructure** > **Virtual Machines** > **Templates**.
+    your templates under menu: **Compute > Infrastructure > Virtual Machines > Templates**.
 
 Set any of the above options to `OFF` to see only one icon instead of
 four quadrants.
@@ -57,7 +57,7 @@ four quadrants.
 Use the following procedure to set the default number of items to
 display on each resource page.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on the **Visual** tab.
+1.  From the **Settings** menu, browse to **My Settings**, then click on the **Visual** tab.
 
 2.  In the **Default Items Per Page** area, select the default number of
     items to display for each view from the corresponding drop down
@@ -72,7 +72,7 @@ in. For example, instead of going to the **{{ site.data.product.title_short }}**
 you can set the default start page to see a list of your virtual
 machines.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Visual** tab.
 
 2.  In the **Start Page** area, select the page to display at login.
@@ -84,7 +84,7 @@ machines.
 Use the following procedure to set your own themes, colors, and time
 zone for the console. These settings are specific to the logged-on user.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Visual** tab.
 
 2.  Make selections from **Display Settings** for the following items:
@@ -119,7 +119,7 @@ each screen using the layout buttons on each screen.
 
 Use the following procedure to set general view options:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.
 
 2.  In the **General** area, click the appropriate button for the way
@@ -153,7 +153,7 @@ Use the following procedure to set general view options:
 
 Use the following procedure to set default views for services in the menu: **Compute** > **Services** tab.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on the **Default Views** tab.
+1.  From the **Settings** menu, browse to **My Settings**, then click on the **Default Views** tab.
 
 2.  In the **Services** area, click the appropriate button for the way
     you want to view each item. ![7115](../images/7115.png)
@@ -174,7 +174,7 @@ Use the following procedure to set default views for services in the menu: **Com
 
 Use the following procedure to set default views for clouds in the menu: **Compute** > **Clouds** tab.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.
 
 2.  In the **Clouds** area, click the appropriate button for the way you
@@ -197,7 +197,7 @@ Use the following procedure to set default views for clouds in the menu: **Compu
 Use the following procedure to set default views for infrastructure
 components in the menu: **Compute** > **Infrastructure** tab.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.
 
 2.  In the **Infrastructure** area, click the appropriate button for the
@@ -220,7 +220,7 @@ components in the menu: **Compute** > **Infrastructure** tab.
 Use the following procedure to set default views for containers in the
 menu: **Compute** > **Containers** tab.
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.
 
 2.  In the **Containers** area, click the appropriate button for the way
@@ -248,7 +248,7 @@ templates. These settings are available to all users.
 
 To set default filters for cloud components:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Filters** tab.
 
 2.  From the **Cloud** folder, check the boxes for the default filters
@@ -260,7 +260,7 @@ To set default filters for cloud components:
 
 To set default filters for containers:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Filters** tab.
 
 2.  From the **Containers** folder, check the boxes for the default
@@ -273,7 +273,7 @@ To set default filters for containers:
 
 To set default filters for infrastructure components:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Filters** tab.
 
 2.  In the **Infrastructure** folder, select the default filters that
@@ -285,7 +285,7 @@ To set default filters for infrastructure components:
 
 To set default filters for physical infrastructure components:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Filters** tab.
 
 2.  In the **Physical Infrastructure** folder, select the default
@@ -298,7 +298,7 @@ To set default filters for physical infrastructure components:
 
 To set default filters for services:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Filters** tab.
 
 2.  In the **Services** folder, select the default filters that you want
@@ -317,10 +317,10 @@ reports.
 
 To create a time profile:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Time Profiles** tab.
 
-2.  Click ![1847](../images/1847.png)**Configuration**, and ![plus
+2.  Click **Configuration**, and ![plus
     green](../images/plus_green.png)**Add a new Time Profile**.
     ![2039](../images/2039.png)
 
@@ -372,12 +372,12 @@ For non-performance reports, the user’s time zone is used when displaying date
 
 To edit a time profile:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Time Profiles** tab.
 
 2.  Check the time profile you want to edit.
 
-3.  Click ![1847](../images/1847.png) **Configuration**, and
+3.  Click **Configuration**, and
     ![1851](../images/1851.png) **Edit selected Time Profile**.
 
 4.  Make the required changes.
@@ -388,12 +388,12 @@ To edit a time profile:
 
 To copy a time profile:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Time Profiles** tab.
 
 2.  Check the time profile you want to copy.
 
-3.  Click ![1847](../images/1847.png) **Configuration**, and
+3.  Click **Configuration**, and
     ![1859](../images/1859.png) **Copy selected Time Profile**.
 
 4.  Make the required changes.
@@ -404,12 +404,12 @@ To copy a time profile:
 
 To delete a time profile:
 
-1.  From the **Settings** menu, navigate to **My Settings**, then click on
+1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Time Profiles** tab.
 
 2.  Check the time profile you want to delete.
 
-3.  Click ![1847](../images/1847.png) **Configuration**, and ![gui
+3.  Click **Configuration**, and ![gui
     delete](../images/gui_delete.png) **Delete selected Time Profiles**.
 
 4.  Click **Save**.

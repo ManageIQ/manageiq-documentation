@@ -2,11 +2,11 @@
 
 Edit information about a provider such as the name, hostname, IP address or port, and credentials as required. If you have just upgraded your {{ site.data.product.title_short }} environment from an older version, edit the provider to specify the authentication method the provider uses to connect to {{ site.data.product.title_short }}.
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click the containers provider to edit.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), and then ![Edit Selected Containers Provider](../images/1851.png) (**Edit Selected Containers Provider**).
+3.  Click **Configuration**, and then ![Edit Selected Containers Provider](../images/1851.png) (**Edit Selected Containers Provider**).
 
 4.  Edit the **Name** if required.
 

@@ -263,7 +263,7 @@ Capacity and utilization charts for host, clusters, virtual machines, and datast
 
 #### Zooming into a Chart
 
-1. Navigate to the chart you want to zoom. If you hover anywhere on the chart, two dashed lines appear to target a coordinate of the chart.
+1. Browse to the chart you want to zoom. If you hover anywhere on the chart, two dashed lines appear to target a coordinate of the chart.
 
 2. Click ![2251](../images/2251.png)(**Click to zoom in**) in the lower left corner of the chart to zoom into it.
 
@@ -271,7 +271,7 @@ Capacity and utilization charts for host, clusters, virtual machines, and datast
 
 #### Drilling into Chart Data
 
-1. Navigate to the chart you want to get more detail from.
+1. Browse to the chart you want to get more detail from.
 
 2. Hover over a data point to see the coordinates.
 
@@ -289,7 +289,7 @@ You can use the data that is collected in the VMDB to plan where you can put mor
 
 ** Note:** For more information about utilization trends and identifying bottlenecks in your environment, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization) in Managing Infrastructure and Inventory.
 
-1. Navigate to **Optimize** > **Planning**.
+1. Browse to **Optimize > Planning**.
 2. From **Reference VM Selection**, use the drop-down menu to select the virtual machine that is most like the one that you want to add.
 
    ![2254](../images/2254.png)

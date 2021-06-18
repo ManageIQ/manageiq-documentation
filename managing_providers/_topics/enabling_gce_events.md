@@ -40,7 +40,7 @@ in {{ site.data.product.title_short }}.
 
 <!-- end list -->
 
-1.  In Google Cloud Platform, select your project and navigate to ![gce
+1.  In Google Cloud Platform, select your project and browse to ![gce
     products services](../images/gce-products-services.png) menu:Products
     and Services\[IAM & Admin \> IAM\] to go to
     <https://console.cloud.google.com/iam-admin/iam/>.
@@ -114,8 +114,8 @@ Cloud Platform documentation:
 In {{ site.data.product.title_short }}, view events for your Google Compute Engine project
 by following these steps:
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\] and select your
+1.  Browse to menu: **Compute > Clouds > Providers** and select your
     Google Compute Engine project.
 
-2.  Click menu:Monitoring\[Timelines\] on the provider summary page to
+2.  Click menu: **Monitoring > Timelines** on the provider summary page to
     see an events timeline for the project.

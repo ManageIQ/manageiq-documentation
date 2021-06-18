@@ -40,7 +40,7 @@ this recreated topic until it is recreated too.
 
 To create a CloudWatch rule for EC2:
 
-1.  Navigate to menu:Events\[Rules\] and click **Create rule**.
+1.  Browse to menu: **Events > Rules** and click **Create rule**.
 
 2.  Select the **Event Pattern** radio button to specify the event source.
 
@@ -78,7 +78,7 @@ To create a CloudWatch rule for EC2:
 Repeat the same procedure to create a CloudWatch rule for volumes,
 pasting the code snippet below to the **Event Pattern Preview** box:
 
-1.  Navigate to menu:Events\[Rules\] and click **Create rule**.
+1.  Browse to menu: **Events > Rules** and click **Create rule**.
 
 2.  Select the **Event Pattern** radio button to specify the event
     source.
@@ -113,7 +113,7 @@ pasting the code snippet below to the **Event Pattern Preview** box:
 Repeat the same procedure to create a CloudWatch rule for snapshots,
 pasting the code snippet below to the **Event Pattern Preview** box:
 
-1.  Navigate to menu:Events\[Rules\] and click **Create rule**.
+1.  Browse to menu: **Events > Rules** and click **Create rule**.
 
 2.  Select the **Event Pattern** radio button to specify the event
     source.

@@ -6,7 +6,7 @@ You can view capacity and utilization data for a datastore.
 
 {{ site.data.product.title_short }} requires network visibility to your provider assigned the server role of *Capacity & Utilization Collector* to enable this feature.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Datastores\], then click
+1.  Browse to menu: **Compute > Infrastructure > Datastores**, then click
     the Datastore for which to view Capacity and Utilization data.
 
 2.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then

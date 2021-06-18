@@ -1,11 +1,11 @@
 ## Viewing a Container Entity Summary
 
 Container entity (object) summaries are found at
-menu:Compute\[Containers \> *Entity*\], where you can view information
+menu: **Compute > Containers > Entity**, where you can view information
 about container entities and their components.
 
   - Viewing a Containers Provider Summary
-    Navigate to menu:Compute\[Containers \> Providers\] to view
+    Browse to menu: **Compute > Containers > Providers** to view
     information on different aspects of a containers provider. The
     summary includes:
 
@@ -25,7 +25,7 @@ about container entities and their components.
 <!-- end list -->
 
   - Viewing a Container Nodes Summary
-    Navigate to menu:Compute\[Containers \> Container Nodes\] to view
+    Browse to menu: **Compute > Containers > Container Nodes** to view
     information on different aspects of a container node. The summary
     includes:
 
@@ -40,7 +40,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 ![Timelines](../images/1995.png) (**Timelines**).
 
   - Viewing a Containers Summary
-    Navigate to menu:Compute\[Containers \> Containers\] to view
+    Browse to menu: **Compute > Containers > Containers** to view
     information on different aspects of a container. The summary
     includes:
 
@@ -56,7 +56,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Container Images Summary
-    Navigate to menu:Compute\[Containers \> Container Images\] to view
+    Browse to menu: **Compute > Containers > Container Images** to view
     information on different aspects of a container image. The summary
     includes:
 
@@ -67,7 +67,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing an Image Registries Summary
-    Navigate to menu:Compute\[Containers \> Image Registries\] to view
+    Browse to menu: **Compute > Containers > Image Registries** to view
     information on different aspects of an image registry. The summary
     includes:
 
@@ -82,7 +82,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Pods Summary
-    Navigate to menu:Compute\[Containers \> Pods\] to view information
+    Browse to menu: **Compute > Containers > Pods** to view information
     on different aspects of a pod. The summary includes:
 
       - The containers that are part of the pod.
@@ -98,7 +98,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Replicators Summary
-    Navigate to menu:Compute\[Containers \>Replicators\] to view
+    Browse to menu: **Compute > Containers > Replicators** to view
     information on different aspects of a replicator. The summary
     includes:
 
@@ -111,7 +111,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Container Services Summary
-    Navigate to menu:Compute\[Containers \> Container Services\] to view
+    Browse to menu: **Compute > Containers > Container Services** to view
     information on different aspects of a container service. The summary
     includes:
 
@@ -124,7 +124,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Volumes Summary
-    Navigate to menu:Compute\[Containers \> Volumes\] to view
+    Browse to menu: **Compute > Containers > Volumes** to view
     information on the persistent volumes of a container provider. The
     summary includes:
 
@@ -139,7 +139,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Container Builds Summary
-    Navigate to menu:Compute\[Containers \> Container Builds\] to view
+    Browse to menu: **Compute > Containers > Container Builds** to view
     different aspects of a container build. The summary includes:
 
       - The build configuration the container build is based on.
@@ -153,7 +153,7 @@ page, click ![Monitoring](../images/1994.png) (**Monitoring**), and then
 <!-- end list -->
 
   - Viewing a Container Templates Summary
-    Navigate to menu:Compute\[Containers \> Container Templates\] to
+    Browse to menu: **Compute > Containers > Container Templates** to
     view different aspects of a container template. The summary
     includes:
 

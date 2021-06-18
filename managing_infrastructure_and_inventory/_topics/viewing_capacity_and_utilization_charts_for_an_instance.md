@@ -9,7 +9,7 @@ You must have a server with network visibility to your provider assigned
 the server role of **Capacity & Utilization Collector** to use this
 feature.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion to view capacity data.
 

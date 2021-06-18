@@ -9,11 +9,11 @@ The **Type** value is unchangeable.
 
 To use a different cloud provider, create a new one.
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\].
+1.  Browse to menu: **Compute > Clouds > Providers**.
 
 2.  Click the cloud provider to edit.
 
-3.  Click ![Configuration](../images/1847.png) **(Configuration)**, and
+3.  Click **Configuration**, and
     then ![Edit Selected Cloud Provider](../images/1851.png) **(Edit
     Selected Cloud Provider)**.
 

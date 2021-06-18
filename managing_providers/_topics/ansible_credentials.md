@@ -10,9 +10,9 @@ sources, and importing project content from a version control system.
 saved in {{ site.data.product.title_short }} are matched and executed with a playbook
 when run.
 
-1.  Navigate to menu:Automation\[Ansible \> Credentials\].
+1.  Browse to menu: **Automation > Ansible > Credentials**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     ![Add a New Credential](../images/1862.png) (**Add a New
     Credential**).
 

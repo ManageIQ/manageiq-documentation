@@ -28,7 +28,7 @@ Satellite 6 environment requires the following:
 
 <!-- end list -->
 
-1.  Navigate to menu:Configuration\[Management\].
+1.  Browse to menu: **Configuration > Management**.
 
 2.  Select **Configured Systems** from the accordion menu on the left.
     This displays the system list.

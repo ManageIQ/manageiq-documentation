@@ -61,7 +61,7 @@ Use the following procedure to upload the {{ site.data.product.title_short }} ap
 6.  Select the host on which you want to run the run the {{ site.data.product.title_short }}
     appliance, and click **Next**.
 
-7.  Navigate to, and select the resource pool where you want to run the
+7.  Browse to, and select the resource pool where you want to run the
     {{ site.data.product.title_short }} appliance and click **Next**.
 
 8.  Select a datastore to store the deployed {{ site.data.product.title_short }} appliance,

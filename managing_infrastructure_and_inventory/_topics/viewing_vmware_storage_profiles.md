@@ -10,7 +10,7 @@ disks with them.
 
 To view a virtual machine’s storage profile:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click a VMware virtual machine to open its summary page.
 

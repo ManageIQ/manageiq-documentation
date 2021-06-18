@@ -8,7 +8,7 @@ snapshot as well as a view of the genealogy of the snapshots.
 
 Snapshot size is only available after the successful completion of a **SmartState Analysis**.
 
-1. Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1. Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2. Click the appropriate accordion containing the item you wish to view the snapshots of.
 

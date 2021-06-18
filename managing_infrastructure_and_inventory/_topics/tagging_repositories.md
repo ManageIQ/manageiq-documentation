@@ -2,7 +2,7 @@
 
 Apply tags to categorize certain repositories together at the same time.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Repositories\].
+1.  Browse to menu: **Compute > Infrastructure > Repositories**.
 
 2.  Check the repositories to tag.
 

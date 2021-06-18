@@ -1,6 +1,6 @@
 # Comparing Genealogy of a Virtual Machine or Template
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the item to view genealogy.
 

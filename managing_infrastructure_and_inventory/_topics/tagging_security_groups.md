@@ -2,7 +2,7 @@
 
 Apply tags to security groups to categorize them.
 
-1.  Navigate to menu:Networks\[Security Groups\].
+1.  Browse to menu: **Networks > Security Groups**.
 
 2.  Select the security group to tag.
 

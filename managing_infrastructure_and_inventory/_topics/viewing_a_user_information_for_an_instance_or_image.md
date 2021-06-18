@@ -4,7 +4,7 @@
 information. Explore the user to get details on the user’s account,
 including group memberships.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click on the instance or image to open its summary page.
 

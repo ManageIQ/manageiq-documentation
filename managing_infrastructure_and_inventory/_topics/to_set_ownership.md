@@ -4,13 +4,13 @@ You can set the owner of a group of virtual machines and templates by
 either individual user or group. This allows you an additional way to
 filter and can be used to enforce quotas.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to change.
 
 3.  Check the items to set ownership.
 
-4.  Click ![1847](../images/1847.png) (**Configuration**), and then
+4.  Click **Configuration**, and then
     ![2155](../images/2155.png) (**Set Ownership**) on the **Virtual
     Machine Taskbar**.
 

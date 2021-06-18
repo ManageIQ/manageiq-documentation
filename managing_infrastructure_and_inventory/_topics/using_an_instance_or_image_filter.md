@@ -1,6 +1,6 @@
 # Using an Instance or Image Filter
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click on the **Instances** or **Images** accordion.
 

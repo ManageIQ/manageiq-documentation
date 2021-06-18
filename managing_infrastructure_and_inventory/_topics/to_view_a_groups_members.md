@@ -3,7 +3,7 @@
 {{ site.data.product.title_short }}'s **SmartState Analysis** feature returns group
 information. Explore a group to get a list of its users.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the item to view user information.
 

@@ -4,7 +4,7 @@
 information. Drill into the user to get details on the user’s account,
 including group memberships.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the item to view user information.
 

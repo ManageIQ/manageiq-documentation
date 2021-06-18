@@ -2,7 +2,7 @@
 
 Create a filter for viewing your hosts.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Click ![2125](../images/2125.png) (**Advanced Search**) to open the
     expression editor.

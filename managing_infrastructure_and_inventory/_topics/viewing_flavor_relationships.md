@@ -3,7 +3,7 @@
 Use the **Relationship** section in the flavor accordion to see items
 related to the flavor.
 
-1.  Navigate to menu:Compute\[Clouds \> Flavors\].
+1.  Browse to menu: **Compute > Clouds > Flavors**.
 
 2.  Click a flavor to view the configuration.
 

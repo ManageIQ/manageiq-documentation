@@ -3,9 +3,9 @@
 To start provisioning bare metal machines, you need at least one Red Hat
 Satelllite 6 provider added to {{ site.data.product.title_short }}.
 
-1.  Navigate to menu:Configuration\[Management\].
+1.  Browse to menu: **Configuration > Management**.
 
-2.  Select menu:Configuration\[Add a new Provider\].
+2.  Select menu: **Configuration > Add a new Provider**.
 
 3.  Enter a **Name** for the provider.
 

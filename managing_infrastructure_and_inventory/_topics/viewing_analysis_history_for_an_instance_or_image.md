@@ -6,7 +6,7 @@ instance accordion or the instance summary. Use this detail to find when
 the last analysis was completed and if it completed successfully. If the
 analysis resulted in an error, the error is shown here.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the desired item to view analysis history.
 

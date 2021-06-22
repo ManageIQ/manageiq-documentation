@@ -33,7 +33,8 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Cloud Layer Timelines           | ❌  | ❌    | ❌  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Reporting                       | ✅  | ✅    | ✅  | ✅        | ❌                   | ✅                   | ✅                   | ✅     |
 | Right Sizing                    | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
-| Chargeback                      | ✅  | ✅    | ✅  | ✅        | ✅ (Allocation only) | ✅ (Allocation only) | ✅ (Allocation only) | ❌     |
+| Chargeback by Allocation        | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ❌     |
+| Chargeback by Usage             | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |
 | Automation Work Flows           | ✅  | ❌    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Tag Mapping from Provider       | ✅  | ✅    | ❌  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Tag Mapping to Provider         | ❌  | ❌    | ❌  | ❌        | ❌                   | ❌                   | ❌                   | ❌     |

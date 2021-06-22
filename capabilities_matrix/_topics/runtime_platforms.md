@@ -1,4 +1,4 @@
-## Runtime Platforms
+### Runtime Platforms
 
 The following table lists platforms on which {{ site.data.product.title_short }} can be installed and run from. They can be obtained from the [downloads page](/download/).
 

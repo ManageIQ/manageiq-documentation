@@ -11,26 +11,27 @@
 | Metrics                                                      | ✅      | ✅          | ✅    | ✅                      |
 | Forensic Analysis (SmartState)                               | ✅      | ✅          | ❌    | ✅ (Nodes)              |
 
-| General Features                                             | vSphere | oVirt / RHV | SCVMM                | OpenStack undercloud |
-| ------------------------------------------------------------ | ------- | ----------- | ---------------------| -------------------- |
-| Relationship Discovery                                       | ✅      | ✅          | ✅                   | ✅                   |
-| Drift Comparison                                             | ✅      | ✅          | ✅                   | ✅ (Nodes)           |
-| VM Genealogy                                                 | ✅      | ✅          | ✅                   | ✅                   |
-| Capacity & Utilization                                       | ✅      | ✅          | ❌                   | ✅                   |
-| VM Event Timelines                                           | ✅      | ✅          | ✅                   | ❌                   |
-| Infrastructure Event Timelines                               | ❌      | ❌          | ❌                   | ✅                   |
-| Reporting                                                    | ✅      | ✅          | ✅                   | ✅                   |
-| Right Sizing                                                 | ✅      | ✅          | ❌                   | ❌                   |
-| Chargeback                                                   | ✅      | ✅          | ✅ (Allocation only) | ❌                   |
-| Automation Work Flows                                        | ✅      | ✅          | ✅                   | ❌                   |
-| Tag Mapping from Provider                                    | ❌      | ❌          | ❌                   | ❌                   |
-| Tag Mapping to Provider                                      | ❌      | ❌          | ❌                   | ❌                   |
-| VM Compliance Enforcement                                    | ✅      | ✅          | ✅                   | ❌                   |
-| VM Policy Enforcement                                        | ✅      | ✅          | ✅                   | ❌                   |
-| Alerts - Real Time                                           | ✅      | ❌          | ❌                   | ❌                   |
-| Alerts - VM Value Changed                                    | ✅      | ✅          | ❌                   | ❌                   |
-| Alerts - VM Reconfigured                                     | ✅      | ✅          | ❌                   | ❌                   |
-| Integrate with Service Catalogs                              | ✅      | ✅          | ✅                   | ❌                   |
+| General Features                                             | vSphere | oVirt / RHV | SCVMM | OpenStack undercloud |
+| ------------------------------------------------------------ | ------- | ----------- | ------| -------------------- |
+| Relationship Discovery                                       | ✅      | ✅          | ✅    | ✅                   |
+| Drift Comparison                                             | ✅      | ✅          | ✅    | ✅ (Nodes)           |
+| VM Genealogy                                                 | ✅      | ✅          | ✅    | ✅                   |
+| Capacity & Utilization                                       | ✅      | ✅          | ❌    | ✅                   |
+| VM Event Timelines                                           | ✅      | ✅          | ✅    | ❌                   |
+| Infrastructure Event Timelines                               | ❌      | ❌          | ❌    | ✅                   |
+| Reporting                                                    | ✅      | ✅          | ✅    | ✅                   |
+| Right Sizing                                                 | ✅      | ✅          | ❌    | ❌                   |
+| Chargeback by Allocation                                     | ✅      | ✅          | ✅    | ❌                   |
+| Chargeback by Usage                                          | ✅      | ✅          | ❌    | ❌                   |
+| Automation Work Flows                                        | ✅      | ✅          | ✅    | ❌                   |
+| Tag Mapping from Provider                                    | ❌      | ❌          | ❌    | ❌                   |
+| Tag Mapping to Provider                                      | ❌      | ❌          | ❌    | ❌                   |
+| VM Compliance Enforcement                                    | ✅      | ✅          | ✅    | ❌                   |
+| VM Policy Enforcement                                        | ✅      | ✅          | ✅    | ❌                   |
+| Alerts - Real Time                                           | ✅      | ❌          | ❌    | ❌                   |
+| Alerts - VM Value Changed                                    | ✅      | ✅          | ❌    | ❌                   |
+| Alerts - VM Reconfigured                                     | ✅      | ✅          | ❌    | ❌                   |
+| Integrate with Service Catalogs                              | ✅      | ✅          | ✅    | ❌                   |
 
 | Operations                                                   | vSphere | oVirt / RHV | SCVMM | OpenStack undercloud    |
 | ------------------------------------------------------------ | ------- | ----------- | ----- | ----------------------- |

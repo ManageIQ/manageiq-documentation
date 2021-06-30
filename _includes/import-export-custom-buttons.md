@@ -4,8 +4,7 @@ This workflow demonstrates how to export custom buttons from one
 {{ site.data.product.title_short }} appliance and import them in another
 {{ site.data.product.title_short }} appliance.
 
-1.  Export custom buttons from the source {{ site.data.product.title_short }}
-    appliance:
+1.  Export custom buttons from the source {{ site.data.product.title_short }} appliance:
 
     1.  SSH into the {{ site.data.product.title_short }} appliance as `root`.
 
@@ -21,8 +20,7 @@ This workflow demonstrates how to export custom buttons from one
 
             # rake evm:export:custom_buttons -- --directory /tmp/custom_buttons
 
-    5.  Confirm the `yaml` file was created by navigating to the new
-        directory:
+    5.  Confirm the `yaml` file was created by browsing to the new directory:
 
             # cd /tmp/custom_buttons
 
@@ -30,8 +28,7 @@ This workflow demonstrates how to export custom buttons from one
 
         scp -r /tmp/custom_buttons/ hostname:/tmp/custom_buttons
 
-3.  Import custom buttons on the target {{ site.data.product.title_short }}
-    appliance:
+3.  Import custom buttons on the target {{ site.data.product.title_short }} appliance:
 
     1.  SSH to the target {{ site.data.product.title_short }} appliance as `root`.
 

@@ -8,25 +8,30 @@ Installing {{ site.data.product.title_short }} consists of the following steps:
 
 3.  Configuring the {{ site.data.product.title_short }} appliance.
 
-After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
+After you have completed all the procedures in this guide, you will have a working environment on
+which additional customizations and configurations can be performed.
 
 ### Obtaining the {{ site.data.product.title_short }} Virtual Appliance
 
 ### Uploading and Provisioning the {{ site.data.product.title_short }} Virtual Appliance in IBM Cloud
 
-To upload the {{ site.data.product.title_short }} appliance file in IBM Cloud, ensure the following requirements are met:
+To upload the {{ site.data.product.title_short }} appliance file in IBM Cloud, ensure the following
+requirements are met:
 
-  - Approximately 2 GB of space for each image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {{ site.data.product.title_short }} appliance.
+  - Approximately 2 GB of space for each image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the
+    {{ site.data.product.title_short }} appliance.
 
-  - You must have an IBM Cloud user account with the following roles: 
-![Figure showing the required roles for an IBM Cloud user account.](../images/required_roles.png){: caption="Figure 1. Required roles for IBM Cloud user account" caption-side="bottom"}
+  - You must have an IBM Cloud user account with the following roles:
+![Figure showing the required roles for an IBM Cloud user account.](../images/required_roles.png)
+{: caption="Figure 1. Required roles for IBM Cloud user account" caption-side="bottom"}
 
   - Depending on your infrastructure, allow time for the upload.
 
 ### Step A. Setting up the Custom image for {{ site.data.product.title_short }} in IBM Cloud
 {: #config-image}
 
-Create a custom Linux-based image to deploy {{ site.data.product.title_short }} as a virtual server instance in IBM Cloud.
+Create a custom Linux-based image to deploy {{ site.data.product.title_short }} as a virtual server
+instance in IBM Cloud.
 
 1. If you don't already have an instance of IBM Cloud Object Storage, see [Getting started with IBM Cloud Object Storage](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started)
 
@@ -64,7 +69,7 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
 
 7. Import the {{ site.data.product.title_short }} installation images from the bucket into the VPC.
   
-    a. Browse to **VPC Infrastructure** > **Compute** > **Custom images** and select **import custom image**.
+    a. Browse to **VPC Infrastructure > Compute > Custom images** and select **import custom image**.
 
     b. Enter a name.
 

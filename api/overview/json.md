@@ -11,7 +11,7 @@ for all requests and responses is **application/json**.
 
 As is general practice with REST, clients should not make assumptions
 about the server’s URL space. Clients are expected to discover all URL’s
-by navigating the API. To keep this document readable, we still mention
+by browsing the API. To keep this document readable, we still mention
 specific URL’s, generally in the form of an absolute path. Clients
 should not use these, or assume that the actual URL structure follows
 these examples, and instead use discovered URL’s. Any client should

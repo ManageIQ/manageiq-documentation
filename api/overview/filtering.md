@@ -70,7 +70,7 @@ Where op supports the following operators:
 When strings, value to be quoted in single or double quotes. When
 datetimes, only strict comparison operators are supported.
 
-Example Query VMs named sample\*, created\_on \> 2019-09-01, and return
+Example Query VMs named sample\*, created\_on > 2019-09-01, and return
 name and vendor
 
     GET /api/vms?expand=resources&attributes=name,vendor&filter[]=created_on>2019-09-01&filter[]=name='sample%'

@@ -4,4 +4,5 @@
 
 3. Click **Order**.
 
-4. On the **Order Service** screen, select the box for **Do you want to continue?** and click **Submit**.
+4. On the **Order Service** screen, select the box for **Do you want to continue?** and click
+   **Submit**.

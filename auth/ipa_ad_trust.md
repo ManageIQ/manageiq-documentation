@@ -100,7 +100,7 @@ Server.
     Press any key
 
 4.  From the Advanced Setting menu, select the menu item **Configure
-    External Authentication (httpd)**
+    External Authentication (httpd**)
 
 5.  Enter the FQDN of the IPA Server, i.e. *ipaserver.test.company.com*
 

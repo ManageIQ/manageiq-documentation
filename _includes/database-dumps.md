@@ -1,10 +1,8 @@
-Creating a database dump from the appliance console can be used to
-provide additional information when raising a support case. Options
-exist to generate a database dump excluding specified tables and to
-split the database dump into multiple parts.
+Creating a database dump from the appliance console can be used to provide additional information
+when raising a support case. Options exist to generate a database dump excluding specified tables
+and to split the database dump into multiple parts.
 
-Database dumps require name or location information based on the `Dump
-Output File Name` selection:
+Database dumps require name or location information based on the `Dump Output File Name` selection:
 
 |                              |          |
 | ---------------------------- | -------- |
@@ -23,8 +21,7 @@ To create a database dump:
 
 3.  Type `appliance_console` and press `Enter`.
 
-4.  From the Advanced Settings, select option 5, `Create a Database
-    Dump`.
+4.  From the Advanced Settings, select option 5, `Create a Database Dump`.
 
 5.  Select a `Dump Output File Name` from the list.
 

@@ -64,7 +64,7 @@ trend.
 To find out more about resource utilization, view utilization trend
 reports.
 
-1.  Browse to menu: **Overview < Utilization**.
+1.  Browse to menu: **Overview > Utilization**.
 
 2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 

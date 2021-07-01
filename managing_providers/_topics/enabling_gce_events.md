@@ -41,15 +41,14 @@ in {{ site.data.product.title_short }}.
 <!-- end list -->
 
 1.  In Google Cloud Platform, select your project and browse to ![gce
-    products services](../images/gce-products-services.png) menu:Products
-    and Services\[IAM & Admin \> IAM\] to go to
-    <https://console.cloud.google.com/iam-admin/iam/>.
+    products services](../images/gce-products-services.png) menu: **Products and Services > IAM & Admin > IAM**
+    to go to <https://console.cloud.google.com/iam-admin/iam/>.
 
 2.  Assign **Logs Configuration Writer** permissions to your project:
 
     1.  If the `cloud-logs@system.gserviceaccount.com` account is
         already listed under **Members**, ensure **Logs Configuration
-        Writer** is selected under **Role(s)**.
+        Writer** is selected under **Role(s**).
 
     2.  If the `cloud-logs@system.gserviceaccount.com` account is not
         listed under **Members**:
@@ -60,8 +59,8 @@ in {{ site.data.product.title_short }}.
             `cloud-logs@system.gserviceaccount.com` in **Members** to
             add the Google APIs service account to the permissions list.
 
-        3.  In the **Select a Role** dropdown, select menu:Logging\[Logs
-            Configuration Writer\] and click **Add**.
+        3.  In the **Select a Role** dropdown, select menu: **Logging > Logs Configuration Writer**
+            and click **Add**.
 
 ## Configuring Google Compute Engine to Export Events
 

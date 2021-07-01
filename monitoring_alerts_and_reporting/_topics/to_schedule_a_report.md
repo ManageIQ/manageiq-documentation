@@ -11,23 +11,22 @@ There are two ways to schedule a report:
 
 Add a new Schedule through the **Reports** accordion:
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
-2.  Select a report from the **Reports** accordion and click
-    ![1847](../images/1847.png) **Configuration**.
+2.  Select a report from the **Reports** accordion and click **Configuration**.
 
 3.  Click ![1862](../images/1862.png) **Add a New Schedule** or click the Schedules accordion and click ![1847](../images/1847.png)
-    **Configuration** \> ![1862](../images/1862.png) **Add a New Schedule**.
+    **Configuration** > ![1862](../images/1862.png) **Add a New Schedule**.
 
 or
 
 Add a new Schedule through the **Schedules** accordion:
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
 2.  Click the **Schedules** accordion.
 
-3.  Click ![1847](../images/1847.png) **Configuration**.
+3.  Click **Configuration**.
 
 4.  Click ![1862](../images/1862.png) **Add a New Schedule**.
 
@@ -68,16 +67,16 @@ Adding new Schedule details.
 
       - Check **Send an E-mail**.
 
-      - In **From (leave blank for default)**, type in the sending
+      - In **From (leave blank for default**), type in the sending
         email.
 
       - Use **Add a User**, to select a specific user. The user must
         have a valid email address entered under accounts.
 
-      - Use **Add (enter manually)** to type in the address not
+      - Use **Add (enter manually**) to type in the address not
         registered to a User.
 
-      - Then, click ![1862](../images/1862.png) **(Add)**.
+      - Then, click ![1862](../images/1862.png) (**Add**).
 
 5.  If you are sending an email after the report runs, then you can
     select further options under Email Options.

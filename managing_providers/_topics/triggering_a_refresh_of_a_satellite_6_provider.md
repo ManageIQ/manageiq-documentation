@@ -5,10 +5,10 @@ Your Satellite 6 provider can still create new hosts independently of
 after an automatic refresh period. However, you can trigger a manual
 refresh to avoid waiting for the automatic refresh.
 
-1.  Navigate to menu:Configuration\[Management\].
+1.  Browse to menu: **Configuration > Management**.
 
 2.  Select your Red Hat Satellite 6 provider using the checkbox, and
-    click menu:Configuration\[Refresh Relationships and Power States\].
+    click menu: **Configuration > Refresh Relationships and Power States**.
     This triggers the refresh.
 
 3.  When the refresh is complete, select the Red Hat Satellite 6

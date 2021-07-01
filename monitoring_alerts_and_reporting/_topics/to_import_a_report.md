@@ -4,7 +4,7 @@ Reports are stored in the VMDB; however, you can share customized
 reports among VMDBs. To do this use the export and import feature of
 reports.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
 2.  Select **Custom Reports** from the **Import/Export** accordion.
 

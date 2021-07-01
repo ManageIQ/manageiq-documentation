@@ -2,11 +2,11 @@
 
 This procedure shows you how to create a custom Automate action.
 
-1.  Navigate to menu:Control\[Explorer\] accordion.
+1.  Browse to menu: **Control > Explorer** accordion.
 
 2.  Click the **Actions** accordion.
 
-3.  Click ![image](../images/1847.png)(**Configuration**), then
+3.  Click **Configuration**, then
     ![image](../images/1862.png) (**Add a new Action**).
 
 4.  Type in a **Description** for the Action.

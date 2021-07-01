@@ -2,13 +2,13 @@
 
 This procedure shows you how to create an instance.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Browse to menu: **Automatio > Automate > Explorer**.
 
 2.  Click the class you want to define a schema for.
 
 3.  Click the **Instances** tab.
 
-4.  Click ![image](../images/1847.png) (**Configuration**), then
+4.  Click **Configuration**, then
     ![image](../images/1862.png) (**Add a new Instance**).
 
 5.  In the **Main Info** area, type in a **Name**, **Display Name** and

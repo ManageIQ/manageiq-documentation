@@ -1,9 +1,9 @@
 ### Creating a Class
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\], navigate to the
+1.  Browse to menu: **Automation > Automate > Explorer**, navigate to the
     namespace you want to add a class to.
 
-2.  Click ![image](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     ![image](../images/1862.png) (**Add a new Class**).
 
 3.  Type in a unique **Name** and **Description**.
@@ -23,4 +23,3 @@ methods.
 For each class, create a schema if you did not choose to inherit from an
 existing class. The schema can include attributes, methods, assertions,
 and relationships.
-

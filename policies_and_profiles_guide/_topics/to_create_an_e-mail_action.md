@@ -4,7 +4,7 @@ To send emails from the {{ site.data.product.title_short }} server, you must hav
 
 1. Browse to menu: **Control > Explorer**.
 
-2. Click the **Actions** accordion, then click ![image](../images/1847.png)**Configuration**, ![image](../images/1862.png)**Add a new Action**.
+2. Click the **Actions** accordion, then click ![image](../images/1847.png**)Configuration**, ![image](../images/1862.png**)Add a new Action**.
 
 3. Type in a **Description** for the action.
 

@@ -154,7 +154,7 @@ To create a snapshot from the Resources screen:
 
 **Note:**
 
-You can revert or delete a snapshot only from the snapshot summary screen. To do so, navigate to **Snapshots** \> **View**, click more options *(represented by three dots)* next to the snapshot you want to revert or delete, and then click **Revert** or **Delete** as required.
+You can revert or delete a snapshot only from the snapshot summary screen. To do so, navigate to **Snapshots** > **View**, click more options *(represented by three dots)* next to the snapshot you want to revert or delete, and then click **Revert** or **Delete** as required.
 Revert returns a virtual machine to a previous state when you took the snapshot.
 
 ### Accessing the Virtual Machine Console

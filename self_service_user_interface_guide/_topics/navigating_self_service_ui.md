@@ -1,4 +1,4 @@
-## Navigating the Self Service User Interface
+## browsing the Self Service User Interface
 
 The Self Service user interface has a slideout navigation menu on the left that can be minimized by clicking the menu icon (≡), like in the full administrative user interface. The slideout navigation menu comprises of the following tabs:
 
@@ -36,9 +36,9 @@ you can see the current logged in LDAP user, for example,
 The resources linked to in the help icon will be, by default, the ones listed above. System administrators can change them to other resources as required for the logged in user.
 
   - Role-Based Access Control
-    The Self Service user interface supports role-based access control of menus and features. If you are a member of multiple user groups, you can change the acting group by navigating to ***Administrator***
-    \> **Change Group**, then select the new group from the available options in the list.
+    The Self Service user interface supports role-based access control of menus and features. If you are a member of multiple user groups, you can change the acting group by browsing to ***Administrator***
+    > **Change Group**, then select the new group from the available options in the list.
 
   - Switch Language
-    Although you can set your preferred language for the user interface from the login screen itself, you can switch to a different language than what is currently set also by navigating to ***Administrator***
-    \> **Switch Language** within the Self Service user interface.
+    Although you can set your preferred language for the user interface from the login screen itself, you can switch to a different language than what is currently set also by browsing to ***Administrator***
+    > **Switch Language** within the Self Service user interface.

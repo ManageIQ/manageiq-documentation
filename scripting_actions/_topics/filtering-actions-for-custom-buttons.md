@@ -9,11 +9,11 @@ Filtering works on single objects and is not applicable to lists.
 
 To apply filtering actions to a custom button:
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Browse to menu: **Automation > Automate > Customization**.
 
 2.  Click the **Buttons** accordion. Select the custom button to use.
 
-3.  Click ![image](../images/1847.png)(**Configuration**), then
+3.  Click **Configuration**, then
     ![image](../images/1851.png) (**Edit this Button**).
 
 4.  Click the **Advanced** tab.

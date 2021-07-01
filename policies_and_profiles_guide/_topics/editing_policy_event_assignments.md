@@ -6,7 +6,7 @@ The policy evaluates its scopes and conditions when specified events occur in yo
 
 2. Click the **Policies** accordion and select the control policy that you want to assign events to.
 
-3. Click ![image](../images/1847.png)**Configuration**, ![image](../images/1851.png)**Edit this Policy’s Event assignments**.
+3. Click ![image](../images/1847.png**)Configuration**, ![image](../images/1851.png**)Edit this Policy’s Event assignments**.
 
 4. Check all the events that you want to assign to this policy.
 

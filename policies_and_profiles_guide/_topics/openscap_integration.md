@@ -14,7 +14,7 @@ The OpenSCAP policy profile included with {{ site.data.product.title_short }} is
 
 1. Browse to menu: **Compute > Containers > Providers**, check the providers that you need to assign the OpenSCAP policy profile to.
 
-2. Click ![image](../images/1941.png)**Policy**, and then click ![image](../images/1851.png)**Manage Policies**.
+2. Click ![image](../images/1941.png**)Policy**, and then click ![image](../images/1851.png**)Manage Policies**.
 
 3. From the **Select Policy Profiles** area, click the triangle next to **OpenSCAP profile** to expand it and see its member policies.
 

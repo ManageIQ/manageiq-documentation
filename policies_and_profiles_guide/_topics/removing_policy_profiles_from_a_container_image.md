@@ -2,7 +2,7 @@
 
 1. Browse to menu: **Compute > Containers > Container Images**, select the container images that you need to remove the policy profiles from.
 
-2. Click ![image](../images/1941.png)**Policy**, and then click ![image](../images/1851.png)**Manage Policies**.
+2. Click ![image](../images/1941.png**)Policy**, and then click ![image](../images/1851.png**)Manage Policies**.
 
 3. From the **Select Policy Profiles** area, click the triangle next to a desired policy profile to expand it and see its member policies.
 

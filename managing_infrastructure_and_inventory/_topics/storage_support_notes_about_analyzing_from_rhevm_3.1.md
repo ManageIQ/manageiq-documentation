@@ -37,8 +37,7 @@ Red Hat Enterprise Virtualization Manager 3.1 and above.
             appliance in the **Virtual Machine** accordion list and view
             its summary screen.
 
-          - Click menu:Configuration\[Edit Management Engine
-            Relationship\].
+          - Click menu: **Configuration > Edit Management Engine Relationship**.
 
           - Select the server that relates to this instance of the
             {{ site.data.product.title_short }} appliance.

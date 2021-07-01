@@ -7,7 +7,7 @@ interface.
 
 ![Import Datastore](../images/import-datastore.png)
 
-1.  Navigate to menu:Automation\[Automate \> Import/Export\].
+1.  Browse to menu: **Automation > Automate > Import/Export**.
 
 2.  In **Import Datastore via git**, enter the **Git URL**. Select the
     branch or tag to use.

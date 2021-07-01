@@ -172,13 +172,13 @@ OpenStack credentials have several attributes that may be configured:
 
   - **Username**: The username to use to connect to OpenStack.
 
-  - **Password (API Key)**: The password or API key to use to connect to
+  - **Password (API Key**): The password or API key to use to connect to
     OpenStack.
 
-  - **Host (Authentication URL)**: The host to be used for
+  - **Host (Authentication URL**): The host to be used for
     authentication.
 
-  - **Project (Tenant Name)**: The Tenant name or Tenant ID used for
+  - **Project (Tenant Name**): The Tenant name or Tenant ID used for
     OpenStack. This value is usually the same as the username.
 
   - **Domain name**: The FQDN to be used to connect to OpenStack.
@@ -209,7 +209,7 @@ configured:
   - **Password**: The password to use to connect to Red Hat
     Virtualization.
 
-  - **Host (Authentication URL)**: The host to be used for
+  - **Host (Authentication URL**): The host to be used for
     authentication.
 
     <div class="important">

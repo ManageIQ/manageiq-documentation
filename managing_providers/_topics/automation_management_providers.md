@@ -406,7 +406,7 @@ To configure a custom button to execute an Ansible Tower job on a virtual machin
 
 2.  Click the **Buttons** accordion menu.
 
-3.  Click menu: **VM and Instance** > **Unassigned Buttons**. This configures the button to run on virtual machines or instances.
+3.  Click menu: **VM and Instance > Unassigned Buttons**. This configures the button to run on virtual machines or instances.
 
 4.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a new Button**).

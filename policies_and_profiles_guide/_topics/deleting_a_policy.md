@@ -6,6 +6,6 @@ You can remove policies that you no longer need. You can remove only the policie
 
 2. Click the **Policies** accordion, and select the policy that you want to remove.
 
-3. Click ![image](../images/1847.png)**Configuration**, ![image](../images/1861.png)**Delete this Host/VM and Instance/Replicator/Pod/Node/Image Policy**.
+3. Click ![image](../images/1847.png**)Configuration**, ![image](../images/1861.png**)Delete this Host/VM and Instance/Replicator/Pod/Node/Image Policy**.
 
 4. Click **OK** to confirm.

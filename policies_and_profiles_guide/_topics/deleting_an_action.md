@@ -6,6 +6,6 @@ Delete unused actions to keep your environment uncluttered. You can't delete def
 
 2. Click the **Actions** accordion, click the action that you need to remove.
 
-3. Click ![image](../images/1847.png)**Configuration**, ![image](../images/1861.png)**Delete this Action** on the detail view of the tree.
+3. Click ![image](../images/1847.png**)Configuration**, ![image](../images/1861.png**)Delete this Action** on the detail view of the tree.
 
 4. Click **OK** to confirm.

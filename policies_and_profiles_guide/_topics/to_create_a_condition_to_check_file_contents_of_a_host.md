@@ -8,7 +8,7 @@ Note that to search file contents you need to have collected the file using a ho
 
 2. Click the **Conditions** accordion, and select **Host Conditions**.
 
-3. Click ![image](../images/1847.png)**Configuration**, ![image](../images/1862.png)**Add a New Host Condition**.
+3. Click ![image](../images/1847.png**)Configuration**, ![image](../images/1862.png**)Add a New Host Condition**.
 
 4. In **Basic Information**, type in a **Description** for the condition.
 
@@ -16,7 +16,7 @@ Note that to search file contents you need to have collected the file using a ho
 
 5. Editing the **Scope** area is not necessary for this procedure. Skip editing any **Scope** conditions.
 
-6. If the **Expression** area is not automatically opened, click ![image](../images/1851.png)**Edit this Expression**, then edit the condition area to create a general condition based on a simple attribute. Based on what you choose, different options appear.
+6. If the **Expression** area is not automatically opened, click ![image](../images/1851.png**)Edit this Expression**, then edit the condition area to create a general condition based on a simple attribute. Based on what you choose, different options appear.
 
       - Click **Find**, then **Host.Files : Name**, and the parameters to select the file that you want to check.
 
@@ -25,7 +25,7 @@ Note that to search file contents you need to have collected the file using a ho
 
         ![image](../images/1936.png)
 
-7. Click ![image](../images/1863.png)**Commit expression element changes** to add the expression.
+7. Click ![image](../images/1863.png**)Commit expression element changes** to add the expression.
 
 8. In **Notes** area, type in a detailed explanation of the condition.
 

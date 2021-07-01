@@ -3,8 +3,7 @@
 Complete the following procedure to order catalog items from the service
 catalog.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Service
-    Catalogs** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Service Catalogs** in the accordion menu.
 
 2.  From **All Services**, select the catalog and the services (catalog
     items) that you want to order from your catalog, then click
@@ -26,4 +25,4 @@ catalog.
 You have now submitted your service provisioning request. Once a request
 has been approved, the various stages of fulfillment will be processed.
 You can monitor the request status and other details in
-menu:Services\[Requests\].
+menu: **Services > Requests**.

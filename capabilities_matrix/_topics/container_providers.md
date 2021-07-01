@@ -9,7 +9,8 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Capacity & Utilization                  | ✅             | ✅            | ✅         | ❌                   |
 | Capture Container Event Timelines       | ✅             | ✅            | ✅         | ✅                   |
 | Reporting                               | ✅             | ✅            | ✅         | ✅                   |
-| Chargeback                              | ✅             | ✅            | ✅         | ✅ (Allocation only) |
+| Chargeback by Allocation                | ✅             | ✅            | ✅         | ✅                   |
+| Chargeback by Usage                     | ✅             | ✅            | ✅         | ❌                   |
 | Remote Cockpit Node Access              | ✅             | ❌            | ❌         | ❌                   |
 | Container Node Compliance Enforcement   | ✅             | ✅            | ✅         | ✅                   |
 | Container Node Policy Enforcement       | ✅             | ✅            | ✅         | ✅                   |

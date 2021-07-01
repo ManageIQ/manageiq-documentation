@@ -2,7 +2,7 @@
 
 1. Browse to menu: **Compute > Containers > Replicators**, select the replicator that you want to check for compliance.
 
-2. Click ![image](../images/1941.png)**Policy**, and then ![image](../images/1942.png)**Check Compliance of Last Known Configuration**.
+2. Click ![image](../images/1941.png**)Policy**, and then ![image](../images/1942.png**)Check Compliance of Last Known Configuration**.
 
 3. A confirmation message appears. Click **OK**.
 

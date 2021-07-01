@@ -12,7 +12,7 @@ same {{ site.data.product.title_short }} version.
 1.  Copy the file to import to a location that is accessible to your
     {{ site.data.product.title_short }} console.
 
-2.  Navigate to menu:Control\[Import/Export\].
+2.  Browse to menu: **Control > Import/Export**.
 
 3.  Click **Choose file** to navigate to the location of the file.
 

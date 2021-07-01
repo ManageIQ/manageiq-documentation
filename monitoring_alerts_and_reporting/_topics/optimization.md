@@ -6,13 +6,13 @@ memory and disk and identify potential savings.
 
 ### Running an Optimization Report
 
-1.  Navigate to menu:Overview\[Optimization\].
+1.  Browse to menu: **Overview > Optimization**.
 
 2.  Click **Queue Report** for each report type you choose to run.
 
 ### Viewing Optimization Reports
 
-1.  Navigate to menu:Overview\[Optimization\].
+1.  Browse to menu: **Overview > Optimization**.
 
 2.  Click on the report type you wish to view details for.
 

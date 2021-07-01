@@ -29,7 +29,7 @@ To add a network adapter to a virtual machine:
 
 A request to add the network adapter is then processed for the virtual
 machine. You can view the details for the new network adapter by
-navigating to the **Reconfigure this VM** area. When the network adapter
+browsing to the **Reconfigure this VM** area. When the network adapter
 is added, a name and MAC address are assigned to the adapter.
 
 ## Removing a Network Adapter from a VMware Virtual Machine

@@ -1,6 +1,6 @@
 ### Accessing Usage Data
 
-1.  Navigate to menu:Overview\[Usage\].
+1.  Browse to menu: **Overview > Usage**.
 
 2.  In the **Options** area, select a **Date**. More choices will
     display.

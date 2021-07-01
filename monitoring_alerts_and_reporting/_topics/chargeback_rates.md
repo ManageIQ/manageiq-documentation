@@ -2,7 +2,7 @@
 
 {{ site.data.product.title_short }} provides a default set of rates for calculating
 chargeback costs, but you can create your own set of computing and
-storage costs by navigating to menu:Overview\[Chargeback\] and clicking
+storage costs by browsing to menu: **Overview > Chargeback** and clicking
 the **Rates** accordion.
 
 You can configure chargeback rates for various resources by selecting

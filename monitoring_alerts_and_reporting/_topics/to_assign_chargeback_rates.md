@@ -11,7 +11,7 @@ containers provider with multiple images, where only some of the images
 have a chargeback rate assigned; the images without a custom rate will
 then use the default rate.
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Browse to menu: **Overview > Chargeback**.
 
 2.  Click the **Assignments** accordion, and click either **Compute** or
     **Storage**.

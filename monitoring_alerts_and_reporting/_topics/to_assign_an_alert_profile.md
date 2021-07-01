@@ -3,12 +3,12 @@
 After an alert profile is created and verified, you can assign it
 directly to a resource.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse to menu: **Control > Explorer**.
 
 2.  Click on the **Alert Profiles** accordion, then click on the alert
     profile that you want to assign.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**),
+3.  Click **Configuration**,
     ![1851](../images/1851.png) (**Edit Assignments for this Alert
     Profile**).
 

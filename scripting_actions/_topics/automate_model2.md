@@ -73,4 +73,4 @@ not recommended because this may hinder the operation of
 {{ site.data.product.title_short }}. You can link to these methods using relationships.
 
 To reset the Automate model to default settings, navigate to
-menu:Automate\[Import/Export\] and click the **Reset** option.
+menu: **Automate > Import/Export** and click the **Reset** option.

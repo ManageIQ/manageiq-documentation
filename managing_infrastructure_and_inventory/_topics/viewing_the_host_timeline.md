@@ -9,7 +9,7 @@ host.
 
 3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
     ![1995](../images/1995.png) (**Timelines**) or from the host
-    accordion, click menu:Properties\[Timelines\].
+    accordion, click menu: **Properties > Timelines**.
 
 4.  From **Options**, customize the period of time to display and the
     types of events to see.

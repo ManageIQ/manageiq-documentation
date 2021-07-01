@@ -13,7 +13,7 @@ assigned the **Server Role** of **Capacity & Utilization Collector** to enable t
 
 3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
     ![1994](../images/1994.png) (**Utilization**) or from the Host
-    accordion, click menu:Properties\[Capacity & Utilization\].
+    accordion, click menu: **Properties > Capacity & Utilization**.
 
 4.  From **Interval**, select to view hourly or daily data points and the dates to view data. Use **Group by** to group the lines by SmartTags. Use **Time Profiles** to select a time range for the data.
 

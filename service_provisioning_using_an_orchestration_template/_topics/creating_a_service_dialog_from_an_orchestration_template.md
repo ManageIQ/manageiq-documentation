@@ -3,7 +3,7 @@
 Complete the following procedure to create a service dialog based on the
 input parameters defined in the orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and click **Orchestration
+1.  Browse to menu: **Services > Catalogs** and click **Orchestration
     Templates** in the accordion menu.
 
 2.  Expand **All Orchestration Templates**, then click the orchestration
@@ -11,8 +11,8 @@ input parameters defined in the orchestration template.
     [???](#example-adding-orchestration-template) to create a service
     dialog from it.
 
-3.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png)**Create Service Dialog
+3.  Click **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png**)Create Service Dialog
     from Orchestration Template**.
 
 4.  Enter a name for the service dialog in **Service Dialog Name**.

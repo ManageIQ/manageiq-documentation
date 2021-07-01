@@ -4,10 +4,10 @@ Complete the following procedure to create a new catalog item from the
 orchestration template you created in
 [???](#example-adding-orchestration-template).
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
+1.  Browse to menu: **Services > Catalogs** and select **Catalog Items**
     in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+2.  Click **Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog
     Item**.
 

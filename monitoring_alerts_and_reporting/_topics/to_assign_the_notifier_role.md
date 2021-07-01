@@ -1,6 +1,6 @@
 ### Assigning the Notifier Role
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click **Configuration**.
 
 2.  Click the **Settings** accordion, and select the {{ site.data.product.title_short }}
     server.

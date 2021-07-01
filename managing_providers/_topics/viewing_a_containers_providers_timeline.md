@@ -3,7 +3,7 @@
 View the timeline of events for instances registered to a containers
 provider.
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click the desired containers provider for viewing the timeline.
 

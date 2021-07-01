@@ -8,7 +8,7 @@ Edit an action to modify its properties. You can't edit any of the default actio
 
 2. Click the **Actions** accordion, and then click the action that you need to edit.
 
-3. Click ![image](../images/1847.png)**Configuration**, ![image](../images/1851.png)**Edit this Action** on the detail view of the action.
+3. Click ![image](../images/1847.png**)Configuration**, ![image](../images/1851.png**)Edit this Action** on the detail view of the action.
 
 4. Make any required changes.
 

@@ -2,12 +2,12 @@
 
 This procedure shows you how to create a schema.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\], and click the
+1.  Browse to menu: **Automation > Automate > Explorer**, and click the
     class you want to define a schema for.
 
 2.  Click on the **Schema** tab.
 
-3.  Click ![image](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     ![image](../images/1851.png) (**Edit selected Schema**).
 
 4.  Click ![image](../images/2366.png) (**Click to add a new field**) to

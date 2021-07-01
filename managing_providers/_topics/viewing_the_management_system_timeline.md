@@ -3,13 +3,13 @@
 View the timeline of events for the virtual machines registered to a
 provider.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click a provider.
 
 3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
     ![Timelines](../images/1995.png) (**Timelines**)from the taskbar, or
-    from the provider accordion, click menu:Properties\[Timeline\].
+    from the provider accordion, click menu: **Properties > Timeline**.
 
 4.  From **Options**, customize the period of time to display and the
     types of events to see.

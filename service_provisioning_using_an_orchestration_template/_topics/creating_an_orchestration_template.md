@@ -2,10 +2,10 @@
 
 Complete the following procedure to create a new orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration
     Templates** in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+2.  Click **Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png) **Create a new
     Orchestration Template**.
 

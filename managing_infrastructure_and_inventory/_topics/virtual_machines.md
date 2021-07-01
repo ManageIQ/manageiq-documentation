@@ -96,7 +96,7 @@ The **Virtual Machine Filter** accordion is provided so that you can
 easily navigate through groups of virtual machines. You can use the ones
 provided or create your own through **Advanced Filtering** capabilities.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Go to the **VMs** or **Templates** accordion.
 
@@ -135,13 +135,13 @@ information since a snapshot might be created.
 
 SmartState Analysis of a virtual machine requires access to its host. To perform a successful analysis, edit the virtual machine’s host and enter the host’s authentication credentials.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to analyze.
 
 3.  Check the **Virtual Machines** and **Templates** to analyze.
 
-4.  Click ![1847](../images/1847.png) (**Configuration**), then
+4.  Click **Configuration**, then
     ![1942](../images/1942.png) (**Perform SmartState Analysis**).
 
 5.  Click **OK**.
@@ -184,36 +184,36 @@ Use the comparison feature to:
 
 Compare virtual machines and templates:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to analyze.
 
 3.  Check the items to compare.
 
-4.  Click ![1847](../images/1847.png) btn:\[(Configuration)\], and then
-    ![2148](../images/2148.png) btn:\[(Compare Selected items)\]. The
+4.  Click **Configuration**, and then
+    ![2148](../images/2148.png)(**Compare Selected items**). The
     comparison displays in a compressed view with a limited set of
     properties listed.
 
     ![2149](../images/2149.png)
 
 5.  To delete an item from the comparison, click
-    ![1861](../images/1861.png)btn:\[(Remove this item from Inventory)\]
+    ![1861](../images/1861.png)(**Remove this item from Inventory**)
     at the bottom of the items column. This option is only available
     when comparing more than two virtual machines.
 
 6.  To view many items on one screen, go to a compressed view by
-    clicking ![2024](../images/2024.png) btn:\[(Compressed View)\]. To
+    clicking ![2024](../images/2024.png) (**Compressed View**). To
     return to an expanded view, click ![2023](../images/2023.png)
-    btn:\[(Expanded View)\].
+    (**Expanded View**).
 
 7.  To limit the mode of the view, there are two buttons in the task
     bar.
 
-      - Click ![2022](../images/2022.png) btn:\[(Details Mode)\] to see
+      - Click ![2022](../images/2022.png) (**Details Mode**) to see
         all details for an attribute.
 
-      - Click ![2025](../images/2025.png) btn:\[(Exists Mode)\] to limit
+      - Click ![2025](../images/2025.png) (**Exists Mode**) to limit
         the view to if an attribute exists compared to the base or not.
         This only applies to attributes that can have a boolean
         property. For example, a user account exists or does not exist,
@@ -223,7 +223,7 @@ Compare virtual machines and templates:
     to, click its label at the top of its column.
 
 9.  To go to the summary screen for a virtual machine, click its
-    btn:\[Virtual Thumbnail\] or icon.
+    **Virtual Thumbnail** button or icon.
 
 {% include_relative
 _topics/virtual_machine_and_templates_comparison_sections.md %}

@@ -6,13 +6,13 @@ If you have not created a condition to use with this policy, you can create one 
 
 2. Click the **Policies** accordion, and select the policy that you want to create a new condition for.
 
-3. Click ![image_1847](../images/1847.png)**Configuration**, ![image](../images/1862.png)**Create a new Condition assigned to this Policy**.
+3. Click ![image_1847](../images/1847.png**)Configuration**, ![image](../images/1862.png**)Create a new Condition assigned to this Policy**.
 
 4. Type in a **Description** for the condition. It must be unique to all the conditions.
 
    ![image_1864](../images/1864.png)
 
-5. Click ![image_1851](../images/1851.png)**Edit this Scope** in the **Scope** area to create a general expression based on a simple attribute, such as operating system version. Based on what you choose, different options display. **Scope** is optional.
+5. Click ![image_1851](../images/1851.png**)Edit this Scope** in the **Scope** area to create a general expression based on a simple attribute, such as operating system version. Based on what you choose, different options display. **Scope** is optional.
 
       - Click **Field** to create criteria based on field values.
 
@@ -40,11 +40,11 @@ If you have not created a condition to use with this policy, you can create one 
 
         ![image_1869](../images/1869.png)
 
-6. Click ![image_1863](../images/1863.png)**Commit expression element changes** to add the scope.
+6. Click ![image_1863](../images/1863.png**)Commit expression element changes** to add the scope.
 
-7. Click ![image_1851](../images/1851.png)**Edit this Expression** in the **Expression** area. Based on what you choose, options display according to the choices that are presented in the **Scope** area.
+7. Click ![image_1851](../images/1851.png**)Edit this Expression** in the **Expression** area. Based on what you choose, options display according to the choices that are presented in the **Scope** area.
 
-8. Click ![image_1863](../images/1863.png)**Commit Expression Element Changes** to add the expression.
+8. Click ![image_1863](../images/1863.png**)Commit Expression Element Changes** to add the expression.
 
 9. In **Notes**, type in a detailed explanation of the condition.
 

@@ -6,7 +6,7 @@ You can create a condition either from within a policy screen or by going direct
 
 2. Click the **Conditions** accordion, and select either **Host / Node Conditions** or **VM and Instance Conditions** or **Replicator Conditions** or **Pod** or **Node Conditions** or **Image Conditions**.
 
-3. Click ![image_1847](../images/1847.png) **Configuration**, then ![image_1862](../images/1862.png)**Add a New Host / VM / Replicator / Pod / Node / Image Condition**.
+3. Click ![image_1847](../images/1847.png) **Configuration**, then ![image_1862](../images/1862.png**)Add a New Host / VM / Replicator / Pod / Node / Image Condition**.
 
 4. Enter a **Description** for the condition.
 
@@ -42,7 +42,7 @@ You can create a condition either from within a policy screen or by going direct
 
         ![image_1892](../images/1892.png)
 
-6. Click ![image_1863](../images/1863.png)**Commit expression element changes** to add the scope.
+6. Click ![image_1863](../images/1863.png**)Commit expression element changes** to add the scope.
 
 7. Click **Edit this Expression** in the **Expression** area to create a general condition based on a simple attribute. Based on what you choose, different options appear.
 
@@ -72,7 +72,7 @@ You can create a condition either from within a policy screen or by going direct
 
         ![image_1897](../images/1897.png)
 
-8. Click ![image](../images/1863.png)**Commit expression element changes** to add the expression.
+8. Click ![image](../images/1863.png**)Commit expression element changes** to add the expression.
 
 9. In **Notes**, type in a detailed explanation of the condition.
 

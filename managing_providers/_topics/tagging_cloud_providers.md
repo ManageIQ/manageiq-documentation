@@ -3,7 +3,7 @@
 Apply tags to all cloud providers to categorize them together at the
 same time.
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\].
+1.  Browse to menu: **Compute > Clouds > Providers**.
 
 2.  Select the checkboxes for the Cloud Providers to tag.
 

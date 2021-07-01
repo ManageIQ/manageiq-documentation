@@ -16,20 +16,19 @@ You can view role information and the product features the role can access (mark
 
 To configure user access to container environment variables:
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click **Configuration**.
 
 2.  Click the **Access Control** accordion, then click **Roles**.
 
-3.  Select a existing custom role from the **Access Control Roles** list, and click ![1847](../images/1847.png) (**Configuration**), then ![1851](../images/1851.png) (**Edit the selected Role**).
+3.  Select a existing custom role from the **Access Control Roles** list, and click **Configuration**, then ![1851](../images/1851.png) (**Edit the selected Role**).
 
-    Alternatively, to create a new custom role, select a role from the **Access Control Roles** list, and click ![1847](../images/1847.png) (**Configuration**), then ![1851](../images/1851.png) (**Copy this Role to a new Role**).
+    Alternatively, to create a new custom role, select a role from the **Access Control Roles** list, and click **Configuration**, then ![1851](../images/1851.png) (**Copy this Role to a new Role**).
 
 4.  Edit the name for the role if desired.
 
 5.  For **Access Restriction for Services, VMs, and Templates**, select if you want to limit users with this role to only see resources owned by the user or their group, owned by the user, or all resources (**None**).
 
-6.  Expand the **Product Features (Editing)** tree options to show menu:Everything\[Compute \> Containers \> Containers Explorer \> All
-    Containers \> View Containers\].
+6.  Expand the **Product Features (Editing**) tree options to show menu: **Everything > Compute > Containers > Containers Explorer > All Containers > View Containers**.
 
 7.  Clear the **Environment Variables** checkbox to restrict the user role from viewing container environment variables.
 

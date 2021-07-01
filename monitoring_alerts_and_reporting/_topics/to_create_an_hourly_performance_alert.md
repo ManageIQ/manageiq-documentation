@@ -4,11 +4,11 @@ Hourly performance alerts enable you to be notified immediately when an
 hourly performance threshold has been met for a cluster. Capacity and
 Utilization must be enabled for performance thresholds to be detected.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse to menu: **Control > Explorer**.
 
 2.  Click the **Alerts** accordion.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**),
+3.  Click **Configuration**,
     ![1862](../images/1862.png) (**Add a new Alert**).
 
 4.  In the **Info** area:

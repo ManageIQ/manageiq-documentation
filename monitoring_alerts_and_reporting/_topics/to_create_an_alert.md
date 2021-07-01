@@ -8,9 +8,9 @@ To send emails or SNMP traps from the {{ site.data.product.title_short }} server
 enable the Notifier server role and set up SMTP email or SNMP traps. For
 more information, see *General Configuration*.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse to menu: **Control > Explorer**.
 
-2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png) (**Configuration**), ![1862](../images/1862.png) (**Add a New Alert**).
+2.  Click the **Alerts** accordion, then click **Configuration**, ![1862](../images/1862.png) (**Add a New Alert**).
 
 3.  Enter the basic details of the alert:
 
@@ -43,7 +43,7 @@ more information, see *General Configuration*.
     2.  Select a user from the **Add a User** list to add a user registered in {{ site.data.product.title_short }}. The user must have a valid email address entered under accounts.
 
     3.  Enter the email address of a user in the **Add (enter
-        manually)** field and click ![2261](../images/2261.png) to add a
+        manually**) field and click ![2261](../images/2261.png) to add a
         user not registered in {{ site.data.product.title_short }}.
 
 6.  Optionally, select **Send an SNMP Trap** to configure options so

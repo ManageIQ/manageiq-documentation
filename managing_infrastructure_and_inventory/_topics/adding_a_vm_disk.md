@@ -7,8 +7,7 @@ machine with the following steps:
 
 2.  Select the target virtual machine.
 
-3.  Click **Configuration**, and then
-    ![1851](../images/1851.png) (**Reconfigure this VM**).
+3.  Click **Configuration**, and then ![1851](../images/1851.png) (**Reconfigure this VM**).
 
 4.  Click **Add Disk**.
 
@@ -16,6 +15,6 @@ machine with the following steps:
 
 6.  Click **Submit**.
 
-After the disk has been added, you can view the new disk by navigating
-to menu:Compute\[Infrastructure \> Virtual Machines\]. . Open the target
+After the disk has been added, you can view the new disk by browsing to menu:
+**Compute > Infrastructure > Virtual Machines**. Open the target
 virtual machine, then click **Devices** to view the new disk.

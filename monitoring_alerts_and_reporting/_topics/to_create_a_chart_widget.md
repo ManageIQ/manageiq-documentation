@@ -1,12 +1,12 @@
 ### Creating a Chart Widget
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **OverviewReports**.
 
 2.  Click the **Dashboard Widgets** accordion and click the **Charts**
     folder.
 
-3.  Click ![1847](../images/1847.png) **(Configuration)**, then click
-    ![1862](../images/1862.png) **(Add a new Widget)**.
+3.  Click **Configuration**, then click
+    ![1862](../images/1862.png) (**Add a new Widget**).
 
 4.  In the **Basic Information** area, type in a **Title** and
     **Description**. By default the widget will be active as soon as you

@@ -6,12 +6,12 @@ have created can be modified. Only administrators and super
 administrators of {{ site.data.product.title_short }} can add, copy, edit, and delete
 reports.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
-2.  Click the menu:Reports\[All Reports\] accordion and select the
+2.  Click the menu: **Reports > All Reports** accordion and select the
     report you want to edit.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**),
+3.  Click **Configuration**,
     ![1851](../images/1851.png) (**Edit this Report**).
 
 4.  Make any changes you need.

@@ -8,14 +8,13 @@ copy, edit, and delete reports.
 
 Please note that only customer-created reports can be deleted.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
-2.  Click the menu:Reports\[All Reports\] accordion and select the
+2.  Click the menu: **Reports > All Reports** accordion and select the
     report you want to delete.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**),
-    ![1861](../images/1861.png) (**Delete this Report from the
-    Database**).
+3.  Click **Configuration**,
+    ![1861](../images/1861.png) (**Delete this Report from the Database**).
 
     **Note:**
 

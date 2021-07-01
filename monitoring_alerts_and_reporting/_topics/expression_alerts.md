@@ -5,10 +5,10 @@ possible criteria for clusters, datastores, hosts, and virtual machines.
 The following procedure creates an alert for when a host’s datastore has
 less than 5% free space.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse to menu: **Control > Explorer**.
 
 2.  Click on the **Alerts** accordion, then click
-    ![1847](../images/1847.png) (**Configuration**),
+    **Configuration**,
     ![1862](../images/1862.png) (**Add a new Alert**).
 
 3.  In the **Info** area:
@@ -19,7 +19,7 @@ less than 5% free space.
 
       - From **Based On**, select **Host/Node**.
 
-      - For **What to Evaluate**, select **Expression (Custom)**.
+      - For **What to Evaluate**, select **Expression (Custom**).
 
       - In **Notification Frequency**, select how often you want to be
         notified if the expression is evaluated to true.

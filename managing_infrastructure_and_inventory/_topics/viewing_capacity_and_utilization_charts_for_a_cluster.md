@@ -8,7 +8,7 @@ View capacity and utilization for a cluster.
 
 3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
     ![1994](../images/1994.png) (**Utilization**) or from the accordion
-    menu, click menu:Properties\[Capacity & Utilization\].
+    menu, click menu: **Properties > Capacity & Utilization**.
 
     ![2208](../images/2208.png)
 

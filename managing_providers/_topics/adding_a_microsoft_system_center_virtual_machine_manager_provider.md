@@ -20,7 +20,7 @@ the provider.
 
 4.  Select **Microsoft System Center VMM** from the **Type** list.
 
-5.  Enter the **Host Name or IP address(IPv4 or IPv6)** of the provider.
+5.  Enter the **Host Name or IP address(IPv4 or IPv6**) of the provider.
 
     <div class="important">
 
@@ -28,7 +28,7 @@ the provider.
 
     </div>
 
-6.  Select **Kerberos** or **Basic (SSL)** from the **Security
+6.  Select **Kerberos** or **Basic (SSL**) from the **Security
     Protocol** list.
 
     1.  For **Kerberos**:
@@ -39,7 +39,7 @@ the provider.
 
         3.  Enter the password again in the **Confirm Password** field.
 
-    2.  For **Basic (SSL)**:
+    2.  For **Basic (SSL**):
 
         1.  Enter the user name in the **Username** field.
 

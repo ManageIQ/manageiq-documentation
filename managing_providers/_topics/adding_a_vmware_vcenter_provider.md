@@ -14,7 +14,7 @@ environment, add a VMware vCenter provider to the appliance.
 
 4.  Select **VMware vCenter** from the **Type** list.
 
-5.  Enter the **Host Name or IP address(IPv4 or IPv6)** of the provider.
+5.  Enter the **Host Name or IP address(IPv4 or IPv6**) of the provider.
 
     <div class="important">
 

@@ -3,7 +3,7 @@
 In {{ site.data.product.title_short }}, view events for a Swift storage manager by following
 these steps:
 
-1.  Navigate to menu:Storage\[Storage Providers\].
+1.  Browse to menu: **Storage > Storage Providers**.
 
 2.  Select your OpenStack Swift manager to go to the Swift manager’s
     summary page.

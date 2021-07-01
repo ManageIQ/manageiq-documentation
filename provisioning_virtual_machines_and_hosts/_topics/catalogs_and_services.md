@@ -40,7 +40,7 @@ not supported by {{ site.data.product.title_short }}.
 View a list of generic objects and click through to see detailed summary
 information for each object.
 
-1.  Navigate to menu:Automate\[Generic Objects\].
+1.  Browse to menu: **Automate > Generic Objects**.
 
 2.  Click on a generic object class in the table to view its summary
     information.
@@ -112,30 +112,27 @@ service dialog, be sure to plan what items you need the user to input.
 Complete the following procedure to create a Service Dialog from a
 Container Template.
 
-1.  Navigate to menu:Compute\[Containers \> Container Templates\] and
+1.  Browse to menu: **Compute > Containers > Container Templates** and
     select the template for provisioning.
 
-2.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1862](../images/1862.png)(**Create Service Dialog from Container
-    Template**).
+2.  Click **Configuration**, then
+    ![1862](../images/1862.png)(**Create Service Dialog from Container Template**).
 
 3.  Enter a name for the dialog in **Service Dialog Name**.
 
 4.  Click **Save**.
 
-You can use this service dialog when creating a catalog item for
-container template provisioning; see [Creating an OpenShift Template
-Catalog Item](#create-container-template-catalog-item).
+You can use this service dialog when creating a catalog item for container template provisioning;
+see [Creating an OpenShift Template Catalog Item](#create-container-template-catalog-item).
 
 ##### Importing Service Dialogs
 
 You can share service dialogs between appliances using the export and
 import features.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Browse to menu: **Automation > Automate > Customization**.
 
-2.  In the **Import/Export** accordion, click **Service Dialog
-    Import/Export**.
+2.  In the **Import/Export** accordion, click **Service Dialog Import/Export**.
 
 3.  In the **Import** area, click **Browse** to select an import file.
 
@@ -146,13 +143,11 @@ import features.
 You can share service dialogs between appliances using the export and
 import features.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Browse to menu: **Automation > Automate > Customization**.
 
-2.  In the **Import/Export** accordion, click **Service Dialog
-    Import/Export**.
+2.  In the **Import/Export** accordion, click **Service Dialog Import/Export**.
 
-3.  In the **Export** area, select the service dialogs that you want to
-    export.
+3.  In the **Export** area, select the service dialogs that you want to export.
 
 4.  Click **Export**.
 
@@ -160,14 +155,15 @@ import features.
 
 ##### Creating a Method to Associate with the Dialog
 
-You will need to create a method that connects the values in the dialog
-with the provisioning request. The method should be created in the
+You will need to create a method that connects the values in the dialog with the provisioning
+request. The method should be created in the
 `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template`
 class of the **Automate** model.
 
 **Note:**
 
-**DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+**DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you
+can copy the class from the ManageIQ domain into a custom domain.
 
 A method is provided below that was created for the following scenario:
 
@@ -289,46 +285,43 @@ A method is provided below that was created for the following scenario:
 
 Service methods have been split based on purpose.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Browse to menu: **Automation > Automate > Explorer**.
 
-2.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
-    StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
-    StateMachines \> Methods\].
+2.  Service Class is located at menu: **DOMAIN > Service > Provisioning > StateMachines > Methods**
+    and menu: **Domain > Service > Retirement > StateMachines > Methods**.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you
+    can copy the class from the ManageIQ domain into a custom domain.
     
 3.  Click the **Methods** tab.
 
-4.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1862](../images/1862.png)(**Add a New Method**).
+4.  Click **Configuration**, then ![1862](../images/1862.png)(**Add a New Method**).
 
 5.  Enter a **Name** and **Display Name**.
 
 6.  In the **Data** field, enter the method contents.
 
-7.  Click **Validate** and wait for your data entry to be successfully
-    validated.
+7.  Click **Validate** and wait for your data entry to be successfully validated.
 
 8.  Click **Add**. ![6297](../images/6297.png)
 
 ##### Creating an Instance in the Service Class
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Browse to menu: **Automation > Automate > Explorer**.
 
-2.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
-    StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
-    StateMachines \> Methods\].
+2.  Service Class is located at menu: **DOMAIN > Service > Provisioning > StateMachines > Methods**
+    and menu: **Domain > Service > Retirement > StateMachines > Methods**.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you
+    can copy the class from the ManageIQ domain into a custom domain.
 
 3.  Click the **Instances** tab.
 
-4.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1862](../images/1862.png)(**Add a new Instance**).
+4.  Click **Configuration**, then ![1862](../images/1862.png)(**Add a new Instance**).
 
 5.  Enter a **Name** and **Display Name**.
 
@@ -336,8 +329,7 @@ Service methods have been split based on purpose.
 
 7.  Click **Add**.
 
-The instance is created so that it can be called from the
-**ServiceProvision** class.
+The instance is created so that it can be called from the **ServiceProvision** class.
 
 ![6298](../images/6298.png)
 
@@ -350,23 +342,21 @@ must be called before the provision job begins.
 
 Service methods have been split based on purpose.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Browse to menu: **Automation > Automate > Explorer**.
 
 2.  From the accordion menu, click the required service method.
 
-3.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
-    StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
-    StateMachines \> Methods\].
+3.  Service Class is located at menu: **DOMAIN > Service > Provisioning > StateMachines > Methods**
+    and menu: **Domain > Service > Retirement > StateMachines > Methods**.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you
+    can copy the class from the ManageIQ domain into a custom domain.
 
-4.  Either create a new instance or select the **clone\_to\_service**
-    instance.
+4.  Either create a new instance or select the **clone\_to\_service** instance.
 
-5.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1851](../images/1851.png)(**Edit Selected Instance**).
+5.  Click **Configuration**, then ![1851](../images/1851.png)(**Edit Selected Instance**).
 
 6.  In the **configurechilddialog** value, put the path to the method.
 
@@ -374,11 +364,9 @@ Service methods have been split based on purpose.
 
 ### Catalogs
 
-Catalogs are used to create groups of virtual machines or instances for
-provisioning. For example, a complete package of a database server,
-desktop with specialized software already on it, and a firewall. You
-will need to complete the following steps to create and provision a
-service catalog.
+Catalogs are used to create groups of virtual machines or instances for provisioning. For example,
+a complete package of a database server, desktop with specialized software already on it, and a
+firewall. You will need to complete the following steps to create and provision a service catalog.
 
 1.  Create **Catalog Items** for each virtual machine or instance that
     will be part of the service.
@@ -397,29 +385,27 @@ service catalog.
 
     **Note:**
 
-    DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+    DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can
+    copy the class from the ManageIQ domain into a custom domain.
 
 5.  Associate method with Automate instance.
 
-6.  Create a **Catalog Bundle**, adding each of the catalog items to it.
-    Select the **Service Dialog** you created. Use the instance created
-    in the
-    `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template`
-    class as the **Entry Point**. Check **Display in Catalog** box.
+6.  Create a **Catalog Bundle**, adding each of the catalog items to it. Select the
+    **Service Dialog** you created. Use the instance created in the
+    `DOMAIN/Service/Provisioning/StateMachines/ServiceProvision_Template` class as the
+    **Entry Point**. Check **Display in Catalog** box.
 
 7.  Provision a service.
 
 #### Creating a Catalog Bundle
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Browse to menu: **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), and then
-    ![1862](../images/1862.png)(**Add a New Catalog Bundle**).
+3.  Click **Configuration**, and then ![1862](../images/1862.png)(**Add a New Catalog Bundle**).
 
-4.  Enter a name and description for the bundle. Select **Display in
-    Catalog**.
+4.  Enter a name and description for the bundle. Select **Display in Catalog**.
 
 5.  Select the required **Catalog**.
 
@@ -433,8 +419,8 @@ service catalog.
 
 10. Select **Additional Tenants**.
 
-11. Click on the **Resources** tab, then select the catalog item you
-    want to add to the bundle from the **Add a Resource** dropdown.
+11. Click on the **Resources** tab, then select the catalog item you want to add to the bundle from
+    the **Add a Resource** dropdown.
 
 12. Click **Add**.
 
@@ -444,25 +430,28 @@ accordion.
 **Note:**
 
 You should also create and specify an Entry Point in the
-`DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that is part of a bundle. If you do not, then the pre and post provision processing will occur for each item in the bundle in addition to processing for the **Catalog Bundle**. To set the entry point, go into each **Catalog Item** and check **Display in Catalog**.
-Then, you will see the **Entry Point** field.
+`DOMAIN/Service/Provisioning/StateMachines/Methods/CatalogBundle` class for each catalog item that
+is part of a bundle. If you do not, then the pre and post provision processing will occur for each
+item in the bundle in addition to processing for the **Catalog Bundle**. To set the entry point, go
+into each **Catalog Item** and check **Display in Catalog**. Then, you will see the **Entry Point**
+field.
 
 #### Copying a Catalog Bundle
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Browse to menu: **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
 3.  Select the catalog bundle you want to copy from **All Catalog Items**.
 
-4.  Click ![1847](../images/1847.png)(**Configuration**), and then
-    ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
+4.  Click **Configuration**, and then ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
 
 5.  Enter a name for the copy of catalog bundle you are creating. Note that this name must not already be in use.
 
 6.  Click **Add**.
 
-A copy of the catalog bundle is saved. You can now select this new copy of the catalog bundle and edit as required by navigating to ![1847](../images/1847.png)(**Configuration**), then clicking
+A copy of the catalog bundle is saved. You can now select this new copy of the catalog bundle and
+edit as required by browsing to **Configuration**, then clicking
 ![Edit\_Sign](../images/1851.png)(**Edit this Item**).
 
 #### Creating a Catalog Item
@@ -475,30 +464,31 @@ Create a catalog item for each virtual machine or cloud instance that will be pa
 
 **Note:**
 
-When copying a catalog item for reuse, you must click **Display in Catalog** in the copied catalog item for the item to appear in the catalog.
+When copying a catalog item for reuse, you must click **Display in Catalog** in the copied catalog
+item for the item to appear in the catalog.
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Browse to menu: **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
 3.  Select the catalog item you want to copy from **All Catalog Items**.
 
-4.  Click ![1847](../images/1847.png)(**Configuration**), and then
-    ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
+4.  Click **Configuration**, and then ![Edit\_Sign](../images/1851.png)(**Copy Selected Item**).
 
-5.  Enter a name for the copy of catalog item you are creating. Note that this name must not already be in use.
+5.  Enter a name for the copy of catalog item you are creating. Note that this name must not
+    already be in use.
 
 6.  Click **Add**.
 
-A copy of the catalog item is saved. You can now select this new copy of the catalog item and edit as required by navigating to ![1847](../images/1847.png)(**Configuration**), then clicking
+A copy of the catalog item is saved. You can now select this new copy of the catalog item and edit
+as required by browsing to **Configuration**, then clicking
 ![Edit\_Sign](../images/1851.png)(**Edit this Item**).
 
 #### Creating a Generic Catalog Item
 
-Create generic catalog items for services non-specific to virtualization
-or cloud environments. This catalog item type can serve a wide array of
-needs, from creating a vLAN across a network to accessing virtual
-machine IP addresses and adding them to a load balancer pool.
+Create generic catalog items for services non-specific to virtualization or cloud environments. This
+catalog item type can serve a wide array of needs, from creating a vLAN across a network to
+accessing virtual machine IP addresses and adding them to a load balancer pool.
 
 {% include create-generic-catalog-item.md %}
 
@@ -547,27 +537,32 @@ the choices made in the dialog.
 Cloud orchestration is a service that allows you to create, update, and manage cloud resources and their software components as a single unit and then deploy them in an automated, repeatable way through a template.
 Templates use a human-readable syntax and can be defined in text files, thereby allowing users to check them into version control. Templates allow you to easily deploy and reconfigure infrastructure for applications within your cloud. A user can author the stack templates, or can upload them from other sources.
 
-{{ site.data.product.title_short }} supports adding Amazon CloudFormation, OpenStack Heat, Microsoft Azure, VNF, and VMware vApp template type, and provides the ability to:
+{{ site.data.product.title_short }} supports adding Amazon CloudFormation, OpenStack Heat,
+Microsoft Azure, VNF, and VMware vApp template type, and provides the ability to:
 
-  - Inventory stacks and elements of each type into the
-    {{ site.data.product.title_short }} VMDB.
+  - Inventory stacks and elements of each type into the {{ site.data.product.title_short }} VMDB.
 
-  - Model the relationships of instances to their stacks, inclusive of the user interface. For example, selecting an instance within a region that is within a stack, the user interface shows this on the standard instance view.
+  - Model the relationships of instances to their stacks, inclusive of the user interface. For
+    example, selecting an instance within a region that is within a stack, the user interface shows
+    this on the standard instance view.
 
   - Model the stack and its elements in the user interface.
 
 **Note:**
 
-When importing a template into {{ site.data.product.title_short }}, the selected elements are converted according to their type. For example, lists convert to list boxes, and single items convert to text boxes.
+When importing a template into {{ site.data.product.title_short }}, the selected elements are
+converted according to their type. For example, lists convert to list boxes, and single items
+convert to text boxes.
 
 #### Creating an Orchestration Template
 
 Complete the following procedure to add an orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion
+    menu.
 
-2.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png)**Create a new Orchestration Template**.
+2.  Click **Configuration**, then click
+    ![Green\_Plus\_Sign](../images/1848.png)(**Create a new Orchestration Template**).
 
 3.  Enter a **Name** and **Description** for your template.
 
@@ -583,18 +578,21 @@ Complete the following procedure to add an orchestration template.
 
 Complete the following procedure to edit orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion
+    menu.
 
-2.  Select the orchestration template you want to edit from the **All Orchestration Templates** list.
+2.  Select the orchestration template you want to edit from the **All Orchestration Templates**
+    list.
 
-3.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Edit\_Sign](../images/1851.png)**Edit this Orchestration Template**.
+3.  Click **Configuration**, then click
+    ![Edit\_Sign](../images/1851.png)(**Edit this Orchestration Template**).
 
 4.  Edit the template as needed.
 
     **Note:**
 
-    You can only edit the name and description of a read-only template as there can be stacks associated with the template.
+    You can only edit the name and description of a read-only template as there can be stacks
+    associated with the template.
 
 5.  Click **Save**.
 
@@ -602,16 +600,20 @@ Complete the following procedure to edit orchestration templates.
 
 Complete the following procedure to copy an orchestration template to create a new template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion
+    menu.
 
-2.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Copy](../images/1859.png) **Copy this Orchestration Template**.
+2.  Click **Configuration**, then click
+    ![Copy](../images/1859.png)(**Copy this Orchestration Template**).
 
-3.  Change the **Description** and the actual content of the template as required. {{ site.data.product.title_short }} automatically prefixes *Copy of* to the old template **Name**.
+3.  Change the **Description** and the actual content of the template as required.
+    {{ site.data.product.title_short }} automatically prefixes *Copy of* to the old template
+    **Name**.
 
     **Note:**
 
-    To create a copy of an orchestration template into a new template, the old and new template content must differ.
+    To create a copy of an orchestration template into a new template, the old and new template
+    content must differ.
 
 4.  Click **Add**.
 
@@ -619,15 +621,17 @@ Complete the following procedure to copy an orchestration template to create a n
 
 Complete the following procedure to delete orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates** in the accordion
+    menu.
 
-2.  Select the orchestration template you want to delete from the **All Orchestration Templates** list.
+2.  Select the orchestration template you want to delete from the **All Orchestration Templates**
+    list.
 
-3.  Click ![Configuration](../images/1848.png)**Configuration**, then click ![Delete](../images/1861.png)**Remove this Orchestration Template from Inventory**.
+3.  Click **Configuration**, then click 
+    ![Delete](../images/1861.png)(**Remove this Orchestration Template from Inventory**).
 
 4.  Click **OK**.
 
 **Note:**
 
 Read-only templates cannot be deleted.
-

@@ -12,12 +12,11 @@ services easier in the cloud.
 
 Complete the following procedure to add new orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
-    Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Orchestration Templates**
+    in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png) **Create a new
-    Orchestration Template**.
+2.  Click **Configuration**, then click
+    ![Green\_Plus\_Sign](../images/1848.png)(**Create a new Orchestration Template**).
 
 3.  Enter a **Name** and **Description** for your template.
 
@@ -40,16 +39,15 @@ using a service dialog.
 Complete the following procedure to create a service dialog based on the
 input parameters defined in the orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and click **Orchestration
-    Templates** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and click **Orchestration Templates**
+    in the accordion menu.
 
 2.  Expand **All Orchestration Templates**, then click the orchestration
     template you created using the above procedure, that you want to
     create a service dialog from.
 
-3.  Click ![Configuration](../images/1847.png)**Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png)**Create Service Dialog
-    from Orchestration Template**.
+3.  Click **Configuration**, then
+    click ![Green\_Plus\_Sign](../images/1848.png)(**Create Service Dialog from Orchestration Template**).
 
 4.  Enter a name for the service dialog in **Service Dialog Name**.
 
@@ -59,11 +57,11 @@ input parameters defined in the orchestration template.
 
 Complete the following procedure to create a new catalog.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalogs** in the
+1.  Browse to menu: **Services > Catalogs** and select **Catalogs** in the
     accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog**.
+2.  Click **Configuration**, then click
+    ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog**.
 
 3.  In **Basic Info**, add **Name** and **Description** for the new
     catalog.
@@ -77,12 +75,11 @@ Complete the following procedure to create a new catalog.
 Complete the following procedure to create a new orchestration catalog
 item.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
+1.  Browse to menu: **Services > Catalogs** and select **Catalog Items**
     in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
-    click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog
-    Item**.
+2.  Click **Configuration**, then click
+    ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog Item**.
 
 3.  Select **Orchestration** from the **Catalog Item Type** list.
 
@@ -107,8 +104,8 @@ item.
 Complete the following procedure to order your catalog item from the
 service catalog.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Service
-    Catalogs** in the accordion menu.
+1.  Browse to menu: **Services > Catalogs** and select **Service Catalogs**
+    in the accordion menu.
 
 2.  Expand **All Services**, then click the catalog item you want to
     order from the service catalog.
@@ -131,13 +128,13 @@ service catalog.
 The provisioning service request is submitted. Once a request has been
 approved, the various stages of fulfillment will be processed. You can
 monitor the request status and other details in
-menu:Services\[Requests\].
+menu: **Services > Requests**.
 
 # Orchestration Stacks
 
 1.  Once the status of the provisioning request in
-    menu:Services\[Requests\] is **Finished**, click
-    menu:Compute\[Clouds \> Stacks\] to see the newly deployed stack.
+    menu: **Services > Requests** is **Finished**, click
+    menu: **Compute > Clouds > Stacks** to see the newly deployed stack.
 
 2.  Click the stack to see a summary of its properties, resources, among
     other details including the running instances that are part of the

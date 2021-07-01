@@ -1,9 +1,8 @@
 # {{ site.data.product.title_short }} Lifecycle
 
-This guide discusses lifecycle activities such as provisioning and
-retirement that are part of the {{ site.data.product.title_short }} Automate component.
-{{ site.data.product.title_short }} Automate enables real-time, bidirectional process
-integration and adaptive automation for management events and
+This guide discusses lifecycle activities such as provisioning and retirement that are part of the
+{{ site.data.product.title_short }} Automate component. {{ site.data.product.title_short }}
+Automate enables real-time, bidirectional process integration and adaptive automation for management events and
 administrative or operational activities.
 
   - Operations Management with service level resource enforcement.
@@ -21,7 +20,7 @@ administrative or operational activities.
 
 Provisioning requires the **Automation Engine** server role enabled.
 Check your server role settings in the settings menu,
-menu:Configuration\[Server \> Server Control\].
+menu: **Configuration > Server > Server Control**.
 
 </div>
 

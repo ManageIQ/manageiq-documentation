@@ -6,7 +6,7 @@ Some reports can be viewed as charts as well as lists. This will depend
 on the type of data and on how the report has been created. Where
 applicable, you will see these additional buttons:
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
 2.  Click a completed report to view. Click one of the following buttons
     for the view you want:
@@ -24,7 +24,7 @@ applicable, you will see these additional buttons:
 To filter the report information you see, use the ![data
 view](../images/data-view.png) **Data View** button.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
 2.  Click a completed report to view.
 
@@ -42,7 +42,7 @@ In ![tabular view](../images/tabular-view.png) tabular and ![hybrid
 view](../images/hybrid-view.png) hybrid view, you can sort a list of
 reports by column.
 
-1.  Navigate to menu:Overview\[Reports \> Saved Reports\].
+1.  Browse to menu: **Overview > Reports > Saved Reports**.
 
 2.  Click a report name to show a list of completed reports.
 

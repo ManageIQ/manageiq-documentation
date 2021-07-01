@@ -29,7 +29,7 @@ host analysis profile.
 | Escape Character                 |                                                                                 |
 | \\                               | put before a metacharacter to search for that actual character                  |
 | Metacharacters                   |                                                                                 |
-| ^ \[ . $ { \* ( \\ + ) | ? \< \> | must be used with the Escape Character if you are searching specifically for it |
+| ^ \[ . $ { \* ( \\ + ) | ? \< > | must be used with the Escape Character if you are searching specifically for it |
 | Special characters               |                                                                                 |
 | \\n                              | new line                                                                        |
 | \\t                              | tab                                                                             |

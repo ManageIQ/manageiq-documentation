@@ -4,12 +4,12 @@ Add reports if the default reports do not include what you need or you
 want to narrow the scope of a report. For example, you may want a report
 that shows only Windows virtual machines.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Browse to menu: **Overview > Reports**.
 
-2.  Click the menu:Reports\[All Reports\] accordion.
+2.  Click the menu: **Reports > All Reports** accordion.
 
-3.  Click ![1847](../images/1847.png) **(Configuration)**, then click
-    ![1862](../images/1862.png) **(Add a New Report)**.
+3.  Click **Configuration**, then click
+    ![1862](../images/1862.png) (**Add a New Report**).
 
 4.  In the **Columns** tab, edit the **Basic Report Info** area.
 

@@ -133,64 +133,57 @@ Virtualization Manager or VMware.
 
 **Additional Requirements for Provisioning Windows Virtual Machines**
 
-  - WinPE ISO built with rhev-agent-tools (for RHEV-M environments) and
-    configured to mount shares for Windows source files and Sysprep
-    files and configured to run customization script
+  - WinPE ISO built with rhev-agent-tools (for RHEV-M environments) and configured to
+    mount shares for Windows source files and Sysprep files and configured to run
+    customization script
 
-  - Windows based WIM file with operating system installed and
-    configured with Sysprep
+  - Windows based WIM file with operating system installed and configured with Sysprep
 
   - Sample Sysprep unattend file to be used with the operating system
 
-  - Sample PXE menu item that downloads WinPE ISO, mount in memdisk and
-    boot into WinPE environment
+  - Sample PXE menu item that downloads WinPE ISO, mount in memdisk and boot into WinPE
+    environment
 
 #### Connecting to a PXE Server
 
 The following procedure connects to a PXE server and adds its details to
 {{ site.data.product.title_short }}.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
-2.  Click ![1847](../images/1847.png)(**Configuration**), then
-    ![1862](../images/1862.png)(**Add a New PXE Server**).
+2.  Click **Configuration**, then ![1862](../images/1862.png)(**Add a New PXE Server**).
 
-3.  In **Basic Information**, type a **Name** that will be meaningful in
-    your environment. ![2316](../images/2316.png)
+3.  In **Basic Information**, type a **Name** that will be meaningful in your
+    environment. ![2316](../images/2316.png)
 
-4.  For **Depot Type**, select either **Network File System** (NFS) or
-    **Samba**. The fields to enter in the dialog depend on the **Depot
-    Type**.
+4.  For **Depot Type**, select either **Network File System** (NFS) or **Samba**. The
+    fields to enter in the dialog depend on the **Depot Type**.
 
       - For NFS, type in the **URI**, **Access URL**, **PXE Directory**,
         **Windows Images Directory**, and **Customization Directory**.
         When you provision, {{ site.data.product.title_short }} writes a text file to the
-        **PXE Directory**. The file is named after the MAC address of
-        the NIC that is assigned to the virtual machine. It contains
-        where to get the kernel and initrd image. This file is removed
-        after a successful provision. The **Windows Images Directory**
-        is where the files are located on your NFS for the provisioning
-        of Windows operating systems. The **Customization Directory** is
+        **PXE Directory**. The file is named after the MAC address of the NIC that is
+        assigned to the virtual machine. It contains where to get the kernel and initrd
+        image. This file is removed after a successful provision. The
+        **Windows Images Directory** is where the files are located on your NFS for the
+        provisioning of Windows operating systems. The **Customization Directory** is
         where your Kickstart and Sysprep files are located.
 
-      - If using a **Depot Type** of **Samba**, you will not need
-        **Access URL**, but you will need a **User ID**, and
-        **Password**, in addition to the items required for NFS.
+      - If using a **Depot Type** of **Samba**, you will not need **Access URL**, but you
+        will need a **User ID**, and **Password**, in addition to the items required for
+        NFS.
 
-5.  For **PXE Image Menus**, type the **Filename** for the PXE Boot
-    menu.
+5.  For **PXE Image Menus**, type the **Filename** for the PXE Boot menu.
 
 6.  Click **Add**.
 
-7.  Select the new PXE server from the tree on the left, and click
-    ![1847](../images/1847.png)(**Configuration**), then
-    ![2003](../images/2003.png)(**Refresh**) to see your existing images.
+7.  Select the new PXE server from the tree on the left, and click **Configuration**,
+    then ![2003](../images/2003.png)(**Refresh**) to see your existing images.
 
 <div class="informalexample">
 
-Next, create PXE Image types to associate with the customization
-templates and to specify if the image type is for a virtual machine, a
-host, or both.
+Next, create PXE Image types to associate with the customization templates and to specify
+if the image type is for a virtual machine, a host, or both.
 
 </div>
 
@@ -198,45 +191,52 @@ host, or both.
 
 The following procedure creates a system image type for PXE servers.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
-2.  Click the **System Image Types** accordion.
-    ![2318](../images/2318.png)
+2.  Click the **System Image Types** accordion. ![2318](../images/2318.png)
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then
+3.  Click **Configuration**, then
     ![1848](../images/1848.png)(**Add a new System Image Type**).
 
 4.  In **Basic Information**, type in a **Name** and select a **Type**.
     ![2317](../images/2317.png)
 
-      - Use **Vm** if you want this image type to only apply to virtual
-        machines.
+      - Use **Vm** if you want this image type to only apply to virtual machines.
 
 5.  Click **Add**.
 
 **Example:**
 
-After creating the System Image Types, assign the types to each image on your PXE servers. To do this, you will select each image on the PXE server and identify its type.
+After creating the System Image Types, assign the types to each image on your PXE
+servers. To do this, you will select each image on the PXE server and identify its type.
 
 #### Setting the PXE Image Type for a PXE Image
 
 The following procedure sets the image type for a chosen PXE image.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
-2.  Click the **PXE Servers** accordion and select the image that you want to set a type for.
+2.  Click the **PXE Servers** accordion and select the image that you want to set a type
+    for.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1851](../images/1851.png)(**Edit this PXE Image**).
+3.  Click **Configuration**, then ![1851](../images/1851.png)(**Edit this PXE Image**).
 
-4.  From the **Basic Information** area, select the correct type. If this PXE image will be used as the **Windows Boot Environment**, check **Windows Boot Environment**. At the time of this writing, only one PXE Image can be identified as the **Windows Boot Environment**. Therefore, checking one as the **Windows Boot Environment**, will remove that from any other PXE image with that check. ![2319](../images/2319.png) Click **Save**.
-    ![2320](../images/2320.png)
+4.  From the **Basic Information** area, select the correct type. If this PXE image will
+    be used as the **Windows Boot Environment**, check **Windows Boot Environment**. At
+    the time of this writing, only one PXE Image can be identified as the
+    **Windows Boot Environment**. Therefore, checking one as the
+    **Windows Boot Environment**, will remove that from any other PXE image with that
+    check. ![2319](../images/2319.png) Click **Save**. ![2320](../images/2320.png)
 
 ### ISO Provisioning
 
-{{ site.data.product.title_short }} also allows ISO provisioning from Red Hat Virtualization Manager datastores. To use this feature, you will need to do the
-following before creating a provision request.
+{{ site.data.product.title_short }} also allows ISO provisioning from Red Hat
+Virtualization Manager datastores. To use this feature, you will need to do the following
+before creating a provision request.
 
-1.  Add the **ISO Datastore**. The Red Hat Virtualization Manager system must have already been discovered or added into the VMDB. For more information, see [Adding a Red Hat Enterprise Virtualization Manager Provider](../managing_providers/index.html#adding-a-red-hat-virtualization-provider) in *Managing Providers*.
+1.  Add the **ISO Datastore**. The Red Hat Virtualization Manager system must have
+    already been discovered or added into the VMDB. For more information, see
+    [Adding a Red Hat Enterprise Virtualization Manager Provider](../managing_providers/index.html#adding-a-red-hat-virtualization-provider) in *Managing Providers*.
 
 2.  Refresh the **ISO Datastore**.
 
@@ -248,14 +248,14 @@ following before creating a provision request.
 
 #### Adding an ISO Datastore
 
-The following procedure adds an ISO Datastore from your Red Hat Virtualization environment.
+The following procedure adds an ISO Datastore from your Red Hat Virtualization
+environment.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
 2.  Click the **ISO Datastores** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**),
-    ![1862](../images/1862.png)(**Add a new ISO Datastore**).
+3.  Click **Configuration**, ![1862](../images/1862.png)(**Add a new ISO Datastore**).
 
 4.  Select the Cloud or Infrastructure provider hosting the ISO Datastore.
 
@@ -265,23 +265,26 @@ The ISO datastore is added to {{ site.data.product.title_short }}.
 
 #### Refreshing an ISO Datastore
 
-The following procedure refreshes the chosen ISO datastore and updates {{ site.data.product.title_short }} with available ISOs.
+The following procedure refreshes the chosen ISO datastore and updates
+{{ site.data.product.title_short }} with available ISOs.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
 2.  Click the **ISO Datastores** accordion, and select an ISO datastore.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then click ![2003](../images/2003.png)(**Refresh Relationships**).
+3.  Click **Configuration**, then click
+    ![2003](../images/2003.png)(**Refresh Relationships**).
 
 #### Creating System Image Types for ISO
 
 The following procedure creates a system image type for ISO Servers.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
 2.  Click the **System Image Types** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1862](../images/1862.png)(**Add a new System Image Type**).
+3.  Click **Configuration**, then
+    ![1862](../images/1862.png)(**Add a new System Image Type**).
 
 4.  In **Basic Information**, type in a **Name** and select a **Type**.
     ![2317](../images/2317.png)
@@ -292,17 +295,19 @@ The following procedure creates a system image type for ISO Servers.
 
 **Example:**
 
-After creating the system image types, assign the types to each image on your ISO servers. To do this, you will select each image on the ISO server and identify its type.
+After creating the system image types, assign the types to each image on your ISO
+servers. To do this, you will select each image on the ISO server and identify its type.
 
 #### Setting the Image Type for an ISO Image
 
 The following procedure sets the image type for an ISO image.
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
-2.  Click the **ISO Datastores** accordion, and select the image that you want to set a type for.
+2.  Click the **ISO Datastores** accordion, and select the image that you want to set a
+    type for.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1851](../images/1851.png)(**Edit this ISO Image**).
+3.  Click **Configuration**, then ![1851](../images/1851.png)(**Edit this ISO Image**).
 
 4.  From the **Basic Information** area, select the correct **Type**.
     ![2323](../images/2323.png)
@@ -311,10 +316,12 @@ The following procedure sets the image type for an ISO image.
 
 ### Customization Templates for Virtual Machine and Instance Provisioning
 
-Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysprep** files for the initial loading of the operating system.
+Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysprep**
+files for the initial loading of the operating system.
 
-  - When creating a template using Red Hat Virtualization, install the **cloud-init** package on the source virtual machine. This enables
-    Cloud-Init to source configuration scripts when a virtual machine built on that template boots.
+  - When creating a template using Red Hat Virtualization, install the **cloud-init**
+    package on the source virtual machine. This enables Cloud-Init to source
+    configuration scripts when a virtual machine built on that template boots.
 
   - See [Using Cloud-Init to Automate the Configuration of Virtual Machines](https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Virtualization/3.6/html-single/Virtual_Machine_Management_Guide/index.html#sect-Using_Cloud-Init_to_Automate_the_Configuration_of_Virtual_Machines) in the Red Hat Virtualization *Administration Guide* for more information on using Cloud-Init in a Red Hat Virtualization environment.
 
@@ -367,11 +374,11 @@ Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysp
 
 ### Adding a Customization Template
 
-1.  Navigate to menu:Compute\[Infrastructure \> PXE\].
+1.  Browse to menu: **Compute > Infrastructure > PXE**.
 
 2.  Click the **Customization Templates** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**),
+3.  Click **Configuration**,
     ![1862](../images/1862.png)(**Add a new Customization Template**).
 
 4.  In **Basic Information**, type in a **Name** and **Description**.
@@ -379,15 +386,18 @@ Add a customization template to provide **Kickstart**, **Cloud-Init**, or **Sysp
 
 5.  Select the **Image Type**. This list should include the PXE image types you created.
 
-6.  In **Type**, select **Kickstart** or **CloudInit** for Linux based systems, and **Sysprep** for Windows based system.
+6.  In **Type**, select **Kickstart** or **CloudInit** for Linux based systems, and
+    **Sysprep** for Windows based system.
 
-7.  In the **Script** area, either paste the script from another source or type the script directly into the {{ site.data.product.title_short }} interface.
+7.  In the **Script** area, either paste the script from another source or type the
+    script directly into the {{ site.data.product.title_short }} interface.
 
 8.  Click **Add**.
 
 **Example:**
 
-The default dialogs show all possible parameters for provisioning. To limit the options shown, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
+The default dialogs show all possible parameters for provisioning. To limit the options
+shown, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
 ### Provisioning Virtual Machines
 
@@ -403,18 +413,21 @@ There are four types of provisioning requests available in {{ site.data.product.
 
 #### Provisioning a Virtual Machine from a Template
 
-You can provision virtual machines through various methods. One method is to provision a virtual machine directly from a template stored on a provider.
+You can provision virtual machines through various methods. One method is to provision a
+virtual machine directly from a template stored on a provider.
 
 **Important:**
 
   - To provision a virtual machine, you must have the "Automation Engine" role enabled.
 
-  - During virtual machine provisioning, the **Customize** tab is hidden if the template has an unknown operating system (OS) type. To make
-    the **Customize** tab visible in the user interface, you will need to set the OS type from the provider or perform SmartState analysis on the template to detect the OS type.
+  - During virtual machine provisioning, the **Customize** tab is hidden if the template
+    has an unknown operating system (OS) type. To make the **Customize** tab visible in
+    the user interface, you will need to set the OS type from the provider or perform
+    SmartState analysis on the template to detect the OS type.
 
 To provision a virtual machine from a template:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
     ![1862](../images/1862.png)(**Provision VMs**).
@@ -427,14 +440,18 @@ To provision a virtual machine from a template:
 
     ![request info](../images/request-info.png)
 
-    In **Request Information**, enter your name and email address. The requester will receive status emails about the provisioning request such as auto-approval, quota, provision complete, retirement,
-    request pending approval, and request denied.
+    In **Request Information**, enter your name and email address. The requester will
+    receive status emails about the provisioning request such as auto-approval, quota,
+    provision complete, retirement, request pending approval, and request denied.
 
     **Note:**
 
-    Parameters with a \* next to the label are required to submit the provisioning request. To change the required parameters, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
+    Parameters with a \* next to the label are required to submit the provisioning
+    request. To change the required parameters, see
+    [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
     
-6.  Click the **Purpose** tab to select the appropriate tags for the provisioned virtual machines.
+6.  Click the **Purpose** tab to select the appropriate tags for the provisioned virtual
+    machines.
 
 7.  Click the **Catalog** tab to select the template to provision from. This tab is context sensitive based on provider.
 
@@ -615,7 +632,7 @@ The value of **VLAN** in the API request can be one of the following options:
 | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------- |
 | \<empty\>                     | Must be written within the \<..\>                                                                                          | No vNIC profile                                                                 |
 | \<Template\>                  | Must be written within the \<..\>                                                                                          | Use the template’s default vNIC profile                                         |
-| profile\_name (network\_name) | Must include a space between profile\_name (network\_name), otherwise it will fail. For example, **ovirtmgmt (ovirtmgmt)** | Set the specified vNIC profile.                                                 |
+| profile\_name (network\_name) | Must include a space between profile\_name (network\_name), otherwise it will fail. For example, **ovirtmgmt (ovirtmgmt**) | Set the specified vNIC profile.                                                 |
 | vNIC profile ID               |                                                                                                                            | Set the specified vNIC profile, such as `3a8dce01-dd59-4a46-8a6f-823acccda79f`. |
 
 **sysprep\_enabled.**
@@ -632,61 +649,75 @@ machine provision dialog’s **Customize** tab\]
 **For Windows template**:
 
   - **"fields"** - Sysprep Specification
-    In the {{ site.data.product.title_short }} user interface, when you navigate to the virtual machine provision dialog (menu:Compute\[Infrastructure
-    \> Virtual Machine\]), this option located under the **Customize** tab’s **Customize** drop-down list is called **Sysprep Specification**.
+    In the {{ site.data.product.title_short }} user interface, when you navigate to the
+    virtual machine provision dialog (menu: **Compute > Infrastructure > Virtual Machine**),
+    this option located under the **Customize** tab’s **Customize** drop-down list is called
+    **Sysprep Specification**.
 
-  - **"file"** - Sysprep answer file in the {{ site.data.product.title_short }} user interface, when you navigate to the virtual machine provision dialog (menu:Compute\[Infrastructure \> Virtual Machine\]), this option located under the **Customize**
-    tab’s **Customize** drop-down list is called **Sysprep answer file**.
+  - **"file"** - Sysprep answer file in the {{ site.data.product.title_short }} user
+    interface, when you navigate to the virtual  machine provision dialog (menu:
+    **Compute > Infrastructure > Virtual Machine**), this option located under the
+    **Customize** tab’s **Customize** drop-down list is called **Sysprep answer file**.
 
 **For Linux template**:
 
-  - **“fields”** - Customized template and any Customized parameters
-    will be used
-    In the {{ site.data.product.title_short }} user interface, when you navigate to
-    the virtual machine provision dialog (menu:Compute\[Infrastructure
-    \> Virtual Machine\]), this option located under the **Customize**
-    tab’s **Customize** drop-down list is called **Specification**.
+  - **“fields”** - Customized template and any Customized parameters will be used in the
+    {{ site.data.product.title_short }} user interface, when you navigate to the virtual
+    machine provision dialog (menu: **Compute > Infrastructure > Virtual Machine**), this
+    option located under the **Customize** tab’s **Customize** drop-down list is called
+    **Specification**.
 
 **Note:**
 
-For cloud-init to work *(that is, to have the provisioned virtual machine marked with **Use cloud-init** and the customized template as well as customized parameters, if any, will be used)* "sysprep\_enabled" must be set to “fields”. If you do not set it correctly, the customized template will be ignored and the provisioned virtual machine will not be
-marked with **Use cloud-init**; although, the template from which the virtual machine is provisioned has it marked.
+For cloud-init to work *(that is, to have the provisioned virtual machine marked with
+**Use cloud-init** and the customized template as well as customized parameters, if any,
+will be used)* "sysprep\_enabled" must be set to “fields”. If you do not set it correctly,
+the customized template will be ignored and the provisioned virtual machine will not be
+marked with **Use cloud-init**; although, the template from which the virtual machine is
+provisioned has it marked.
 
 **For both Windows and Linux template**:
 
   - **“disabled”** - Do not customize
     In the {{ site.data.product.title_short }} user interface, when you navigate to
-    the virtual machine provision dialog (menu:Compute\[Infrastructure \> Virtual Machine\]), this option located under the **Customize**
-    tab’s **Customize** drop-down list is called **\<None\>**. The customized template will be ignored, and the provisioned virtual machine will not be marked with **Use cloud-init**, even though the template from which the virtual machine was provisioned, has it marked. The default value is 'disabled'.
+    the virtual machine provision dialog (menu: **Compute > Infrastructure > Virtual Machine**),
+    this option located under the **Customize**
+    tab’s **Customize** drop-down list is called **\<None\>**. The customized template will be
+    ignored, and the provisioned virtual machine will not be marked with **Use cloud-init**,
+    even though the template from which the virtual machine was provisioned, has it marked. The
+    default value is 'disabled'.
 
 **Note:**
 
-For an example of virtual machine provisioning request using cloud-init via REST API, see *Provision Requests* in the [{{ site.data.product.title_short }} API Guide](../api/reference/provision_requests.html).
+For an example of virtual machine provisioning request using cloud-init via REST API, see
+*Provision Requests* in the 
+[{{ site.data.product.title_short }} API Guide](../api/reference/provision_requests.html).
 
 #### Cloning a Virtual Machine
 
 Virtual machines can be cloned in other providers as well.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and select the virtual machine you want to clone.
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**, and select the virtual
+    machine you want to clone.
 
-2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then ![2339](../images/2339.png)(**Clone selected item**).
+2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
+3.  ![2339](../images/2339.png)(**Clone selected item**).
 
-3.  Enter the requested information in the dialogs. Be sure to check the **Catalog** tab.
+4.  Enter the requested information in the dialogs. Be sure to check the **Catalog** tab.
 
-4.  Schedule the request on the **Schedule** tab.
+5.  Schedule the request on the **Schedule** tab.
 
-5.  Click **Submit**.
+6.  Click **Submit**.
 
 #### Publishing a Virtual Machine to a Template (VMware Virtual Machines Only)
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and
-    select the virtual machine you want to publish as a template.
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**, and select the virtual
+    machine you want to publish as a template.
 
 2.  Click ![2007](../images/2007.png)(**Lifecycle**), and then
     ![2340](../images/2340.png)(**Publish selected VM to a Template**).
 
-3.  Enter the requested information in the dialogs. Be sure to check the
-    **Catalog** tab.
+3.  Enter the requested information in the dialogs. Be sure to check the **Catalog** tab.
 
 4.  Schedule the request on the **Schedule** tab.
 
@@ -699,11 +730,10 @@ having to reprovision it.
 
 To rename a VMware virtual machine:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\], and
-    select the VMware virtual machine you want to rename.
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**, and select the VMware
+    virtual machine you want to rename.
 
-2.  Click ![1847](../images/1847.png)(**Configuration**),
-    ![1851](../images/1851.png)(**Rename selected item**).
+2.  Click **Configuration**, ![1851](../images/1851.png)(**Rename selected item**).
 
 3.  In the **Basic Information** screen, provide a new **name**.
 
@@ -713,16 +743,15 @@ The renamed virtual machine will appear in the inventory view.
 
 ### Provisioning Instances
 
-Cloud instances follow the same process (Request, Approval, Deployment)
-as a standard virtual machine from virtualization infrastructure. First,
-a user makes a request for instances and specifies the image, volume or
-volume snapshot, tags, availability zone and hardware profile flavor.
-Second, the request goes through the approval phase. Finally,
+Cloud instances follow the same process (Request, Approval, Deployment) as a standard
+virtualmachine from virtualization infrastructure. First,a user makes a request for
+instances and specifies the image, volume or volume snapshot, tags, availability zone and
+hardware profile flavor. Second, the request goes through the approval phase. Finally,
 {{ site.data.product.title_short }} executes the request.
 
 #### Provisioning an EC2 Instance from an Image
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
     ![1862](../images/1862.png)(**Provision Instances**).
@@ -731,22 +760,19 @@ Second, the request goes through the approval phase. Finally,
 
 4.  Click **Continue**.
 
-5.  On the **Request** tab, enter information about this provisioning
-    request. In **Request Information**, type in at least a first and
-    last name and an email address. This email is used to send the
-    requester status emails during the provisioning process for items
-    such as auto-approval, quota, provision complete, retirement,
-    request pending approval, and request denied. The other information
-    is optional. If the {{ site.data.product.title_short }} Server is configured to use
-    LDAP, you can use the **Look Up** button to populate the other
-    fields based on the email address.
+5.  On the **Request** tab, enter information about this provisioning request. In
+    **Request Information**, type in at least a first and last name and an email address.
+    This email is used to send the requester status emails during the provisioning process
+    for items such as auto-approval, quota, provision complete, retirement, request pending
+    approval, and request denied. The other information is optional. If the
+    {{ site.data.product.title_short }} Server is configured to use LDAP, you can use the
+    **Look Up** button to populate the other fields based on the email address.
 
     **Note:**
 
-    Parameters with a \* next to the label are required to submit the
-    provisioning request. To change the required parameters, see
-    [Customizing Provisioning
-    Dialogs](#provisioning-dialogs-customizing).
+    Parameters with a \* next to the label are required to submit the provisioning request.
+    To change the required parameters, see
+    [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
 6.  Click the **Purpose** tab to select the appropriate tags for the provisioned instance.
 
@@ -833,59 +859,61 @@ Request 99 in region 123 results in Request ID 123000000000099.
 
 ##### Adding a Provision Dialog for All Users
 
-1.  Login to the {{ site.data.product.title_short }} console for the {{ site.data.product.title_short }} server
-    where you want to change the dialog.
+1.  Login to the {{ site.data.product.title_short }} console for the
+    {{ site.data.product.title_short }} server  where you want to change the dialog.
 
-2.  Navigate to menu:Automate\[Customization\].
+2.  Browse to menu: **Automate > Customization**.
 
 3.  Click the **Provisioning Dialogs** accordion.
 
-4.  Click the type of dialog you want to create: **Host Provision**,
-    **VM Provision** or **VM Migrate**.
+4.  Click the type of dialog you want to create: **Host Provision**, **VM Provision** or
+    **VM Migrate**.
 
 5.  Select one of the default dialogs.
 
 6.  Click **Configuration**, and then click
-    ![1859](../images/1859.png)**(Copy this Dialog)**.
+    ![1859](../images/1859.png)(**Copy this Dialog**).
 
 7.  Type a new **Name** and **Description** for the dialog.
 
 8.  In the **Content** field,
 
-      - To remove a tab from display, change its display value to
-        ignore. By choosing ignore, you not only hide the tab, but also
-        skip any fields on that tab that were required. To show the tab,
-        change the display value to show.
+      - To remove a tab from display, change its display value to ignore. By choosing
+        ignore, you not only hide the tab, but also skip any fields on that tab that were
+        required. To show the tab, change the display value to show.
 
-      - To hide a field, change its `:display:` value from `:edit` to
-        `:hide`. To display fields of most data types, use `:edit`. To
-        display a button, use `:show`. To set a default value for a
-        field, add `:default: defaultvalue` to the list of parameters
-        for the field. Set the `:required:` parameter to either `true`
-        or `false` based on your needs.
+      - To hide a field, change its `:display:` value from `:edit` to `:hide`. To display
+        fields of most data types, use `:edit`. To display a button, use `:show`. To set a
+        default value for a field, add `:default: defaultvalue` to the list of parameters
+        for the field. Set the `:required:` parameter to either `true` or `false` based on
+        your needs.
 
         **Note:**
 
-        If you set `:required:` to `true`, the field must have a value for the provision request to be submitted.
+        If you set `:required:` to `true`, the field must have a value for the provision
+        request to be submitted.
 
 9.  Click **Add**.
 
-If you are using **Provisioning Profiles**, you can specify a specific file that holds the customizations. To do this, you must create an instance mapping to this file in the {{ site.data.product.title_short }}
-**Applications/provisioning/profile/VM provisioning by group** class. By default, if you are using provisioning profiles and the group does not have a defined instance, the appropriate default dialog file will be used based on the type of provisioning selected.
+If you are using **Provisioning Profiles**, you can specify a specific file that holds the
+customizations. To do this, you must create an instance mapping to this file in the
+{{ site.data.product.title_short }}
+**Applications/provisioning/profile/VM provisioning by group** class. By default, if you
+are using provisioning profiles and the group does not have a defined instance, the
+appropriate default dialog file will be used based on the type of provisioning selected.
 
 ##### Creating a Custom Provision Dialog
 
-1.  Navigate to menu:Automate\[Customization\].
+1.  Browse to menu: **Automate > Customization**.
 
 2.  Click on the **Provisioning Dialogs** accordion.
 
-3.  Click on the type of dialog you want to create, **Host Provision**,
-    **VM Provision** or **VM Migrate**.
+3.  Click on the type of dialog you want to create, **Host Provision**, **VM Provision** or
+    **VM Migrate**.
 
 4.  Select one of the default dialogs.
 
-5.  Click ![1847](../images/1847.png)(**Configuration**), and then
-    ![1859](../images/1859.png)(**Copy this Dialog**).
+5.  Click **Configuration**, and then ![1859](../images/1859.png)(**Copy this Dialog**).
 
 6.  Rename the dialog as shown in the examples below.
 
@@ -920,40 +948,53 @@ If you are using **Provisioning Profiles**, you can specify a specific file that
 
 9.  Click **Add**.
 
-Enter the name of the new dialog into the dialog name field in the appropriate {{ site.data.product.title_short }} **Applications/provisioning/profile instance**. This dialog can now be referred to in an instance in the
-Provisioning Profiles class so that it can be used for groups of users.
+Enter the name of the new dialog into the dialog name field in the appropriate
+{{ site.data.product.title_short }} **Applications/provisioning/profile instance**. This
+dialog can now be referred to in an instance in the Provisioning Profiles class so that it
+can be used for groups of users.
 
 #### Provisioning Profiles
 
-Provisioning profiles can be used to customize the dialogs and the state machine (steps used to provision the machine). Profiles can be created for LDAP or {{ site.data.product.title_short }} groups. To use provisioning profiles:
+Provisioning profiles can be used to customize the dialogs and the state machine (steps used
+to provision the machine). Profiles can be created for LDAP or
+{{ site.data.product.title_short }} groups. To use provisioning profiles:
 
-  - Create a **Provisioning Profile** instance for the LDAP or {{ site.data.product.title_short }} group. If no instance exists, then default settings will be used.
+  - Create a **Provisioning Profile** instance for the LDAP or {{ site.data.product.title_short }} group.
+    If no instance exists, then default settings will be used.
 
-  - If customizing dialogs, create a custom dialog file, and specify the name of that file in the provisioning profile instance. If customizing the states for provisioning, create a state instance and set the name of the state instance in the provisioning profile instance.
+  - If customizing dialogs, create a custom dialog file, and specify the name of that file in the
+    provisioning profile instance. If customizing the states for provisioning, create a state instance and
+    set the name of the state instance in the provisioning profile instance.
 
-The diagram below shows where provisioning profiles are called during the entire provisioning process. ![2344](../images/2344.png)
+The diagram below shows where provisioning profiles are called during the entire provisioning process.
+![2344](../images/2344.png)
 
 ##### Creating a Provisioning Profile Instance
 
-1.  Navigate to menu:Automate\[Explorer\].
+1.  Browse to menu: **Automate > Explorer**.
 
-2.  Using the tree located in the accordion, click menu:DOMAIN\[Cloud \> VM \> Provisioning \> Profile\].
+2.  Using the tree located in the accordion, click menu: **DOMAIN > Cloud > VM > Provisioning > Profile**.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can
+    copy the class from the ManageIQ domain into a custom domain.
 
     This example uses the **Cloud** Namespace, but can also use the **Infrastructure** namespace.
     
-3.  Click ![1847](../images/1847.png)(**Configuration**),
+3.  Click **Configuration**,
     ![2345](../images/2345.png)(**Add a New Instance**).
 
-4.  Make the name of the tag identical to the name of the LDAP or {{ site.data.product.title_short }} group you are creating the instance for, replacing spaces in the group name with underscores. For example, change
-    **{{ site.data.product.title_short }}-test group** to **{{ site.data.product.title_short }}-test\_group**.
-    ![6278](../images/6278.png)
+4.  Make the name of the tag identical to the name of the LDAP or {{ site.data.product.title_short }}
+    group you are creating the instance for, replacing spaces in the group name with underscores. For
+    example, change **{{ site.data.product.title_short }}-test group**to
+    **{{ site.data.product.title_short }}-test\_group**. ![6278](../images/6278.png)
 
-5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the {{ site.data.product.title_short }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. Red Hat recommends naming
-    the file in the format `miq_provision_dialogs-groupname.rb` and copying this file to all {{ site.data.product.title_short }} appliances. For instructions on creating a custom dialog file, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
+5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the
+    {{ site.data.product.title_short }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. Red
+    Hat recommends naming the file in the format `miq_provision_dialogs-groupname.rb` and copying this
+    file to all {{ site.data.product.title_short }} appliances. For instructions on creating a custom
+    dialog file, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
     **Note:**
 
@@ -968,20 +1009,23 @@ Some non-default placement methods, for example the
 **vmware\_best\_fit\_with\_scope** methods, may require you to set
 **Provisioning Scope** tags for a host and a datastore.
 
-To enable these resources for all groups, set the scope to **All**. To limit access to a select group, create a tag in the **Provisioning Scope** category with the exact name of the user group and set this tag on the desired resources. See [Tags](../general_configuration/index.html#tags) in *General Configuration* for information on creating tags.
+To enable these resources for all groups, set the scope to **All**. To limit access to a select
+group, create a tag in the **Provisioning Scope** category with the exact name of the user
+group and set this tag on the desired resources. See
+[Tags](../general_configuration/index.html#tags) in *General Configuration* for information on
+creating tags.
 
 To set the scope for a datastore:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Datastores\].
+1.  Browse to menu: **Compute > Infrastructure > Datastores**.
 
 2.  Select the datastore to set the provisioning scope for.
 
 3.  Click ![1941](../images/1941.png)(**Policy**), and then
     ![1851](../images/1851.png)(**Edit Tags**).
 
-4.  From the **Select a customer tag to assign** drop down, select
-    **Provisioning Scope** and then a value for the tag from the next
-    drop down menu.
+4.  From the **Select a customer tag to assign** drop down, select **Provisioning Scope** and
+    then a value for the tag from the next drop down menu.
 
 5.  Click **Save**.
 

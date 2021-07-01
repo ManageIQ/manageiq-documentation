@@ -3,7 +3,7 @@
 Apply tags to network providers to categorize them together at the same
 time.
 
-1.  Navigate to menu:Networks\[Providers\].
+1.  Browse to menu: **Networks > Providers**.
 
 2.  Select the network providers to tag.
 

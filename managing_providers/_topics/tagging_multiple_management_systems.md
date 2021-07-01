@@ -3,7 +3,7 @@
 Apply tags to all providers to categorize them together at the same
 time.
 
-1.  Navigate to menu:Infrastructure\[Providers\].
+1.  Browse to menu: **Infrastructure > Providers**.
 
 2.  Check the providers to tag.
 

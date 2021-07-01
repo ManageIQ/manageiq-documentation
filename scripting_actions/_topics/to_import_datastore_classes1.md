@@ -2,7 +2,7 @@
 
 This procedure shows you how to import datastore classes.
 
-1.  Navigate to menu:Automation\[Automate \> Import/Export\].
+1.  Browse to menu: **Automation > Automate > Import/Export**.
 
 2.  Export the datastore so that you have a backup.
 

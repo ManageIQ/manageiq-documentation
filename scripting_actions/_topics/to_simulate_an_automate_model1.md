@@ -2,7 +2,7 @@
 
 This procedure shows you how to simulate an automate model.
 
-1.  Navigate to menu:Automation\[Automate \> Simulation\].
+1.  Browse to menu: **Automation > Automate > Simulation**.
 
 2.  In **Object Details**, select a type of object from
     `/System/Process/` that will initiate the model. The **Message**

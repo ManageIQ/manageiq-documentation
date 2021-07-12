@@ -2,12 +2,7 @@
 
 ### Fulfilling a Request
 
-After a request has been approved, {{ site.data.product.title_short }} then goes through the steps required to
-complete the request. The steps followed for a regular provision from a virtual machine to a vitual machine (not
-to a template) are found by browsing to menu: **Automate > Explorer**, then listed under menu:
-**DOMAIN > Cloud|Infrastructure > VM > Provisioning > VMProvision\_VM > Provision VM from Template (template)**.
-The value for each state shows where the instance resides in the **Datastore** accordion. The default set of
-execution steps is shown below. For more information on state machines, see [State Machines](#state-machines).
+After a request has been approved, {{ site.data.product.title_short }} then goes through the steps required to complete the request. The steps followed for a regular provision from a virtual machine to a vitual machine (not to a template) are found by browsing to menu: **Automate > Explorer**, then listed under menu: **DOMAIN > Cloud|Infrastructure > VM > Provisioning > VMProvision\_VM > Provision VM from Template (template)**. The value for each state shows where the instance resides in the **Datastore** accordion. The default set of execution steps is shown below. For more information on state machines, see [State Machines](#state-machines).
 
 ### Default Execution Steps in States Instance
 
@@ -29,47 +24,37 @@ execution steps is shown below. For more information on state machines, see [Sta
 
 #### Quotas
 
-Quotas allow you to establish maximum usage thresholds for an user, group, or tenant for provisioned virtual
-machines or instances and are integrated into provisioning profiles. These maximums are checked after the
-approval but before the actual provision request is started. The quota is set for the tenant or group as a 
-whole.
+Quotas allow you to establish maximum usage thresholds for an user, group, or tenant for provisioned virtual machines or instances and are integrated into provisioning profiles. These maximums are checked after the approval but before the actual provision request is started. The quota is set for the tenant or group as a whole.
 
 ##### Applying User or Group Quotas
 
-1.  Log in as a user with administrator or super administrator rights to the {{ site.data.product.title_short }}
-    console.
+1. Log in as a user with administrator or super administrator rights to the {{ site.data.product.title_short }} console.
 
-2.  Browse to menu: **Automate > Explorer**.
+2. Browse to menu: **Automate > Explorer**.
 
-3.  Copy the menu: **ManageIQ > System > CommonMethods > QuotaStateMachine > quota** instance to a custom
-    DOMAIN.
+3. Copy the menu: **ManageIQ > System > CommonMethods > QuotaStateMachine > quota** instance to a custom DOMAIN.
 
-4.  From the accordion menu, click menu: **DOMAIN > System > CommonMethods > QuotaStateMachine > quota**.
+4. From the accordion menu, click menu: **DOMAIN > System > CommonMethods > QuotaStateMachine > quota**.
 
     **Note:**
 
     By default, quotas are applied to tenants and do not require any change in menu: **Automate > Explorer**.
 
-5.  Click **Configuration**, ![1851](../images/1851.png)(**Edit this instance**). ![6300](../images/6300.png)
+5. Click **Configuration**, ![1851](../images/1851.png)(**Edit this instance**). ![6300](../images/6300.png)
 
-    1.  Set the value for **Quota Source Type** to *user* or *group*.
+    1. Set the value for **Quota Source Type** to *user* or *group*.
 
         **Important:**
 
-        A user creating a provisioning request must have an email address saved in their profile, or
-        provisioning may fail. See [Creating a User](../general_configuration/index.html#creating-a-user) in
-        *General Configuration* for details on configuring users.
+        A user creating a provisioning request must have an email address saved in their profile, or provisioning may fail. See [Creating a User](../general_configuration/index.html#creating-a-user) in *General Configuration* for details on configuring users.
 
-    2.  Set the values for **VM Warning Count**, **VM Maximum Count**, **Storage Warning Limit**,
-        **Storage Maximum Limit**, **CPU Warning Count**, **CPU Maximum Count**, **Memory Warning Limit**, or
-        **Memory Maximum Limit** to be the maximums for a specific user or group.
+    2. Set the values for **VM Warning Count**, **VM Maximum Count**, **Storage Warning Limit**, **Storage Maximum Limit**, **CPU Warning Count**, **CPU Maximum Count**, **Memory Warning Limit**, or **Memory Maximum Limit** to be the maximums for a specific user or group.
 
-6.  Click **Save**.
+6. Click **Save**.
 
 ##### Using Tags for Owner and Group Quotas
 
-{{ site.data.product.title_short }} provides tags for enforcing quotas for the owners of virtual machines or instances. Ownership of a virtual machine or instance can be set either during the provisioning process or by using
-the **Configuration Set Ownership** button. If a virtual machine or instance has an owner, the value is displayed in the **Lifecycle** section of the virtual machine or instance summary page.
+{{ site.data.product.title_short }} provides tags for enforcing quotas for the owners of virtual machines or instances. Ownership of a virtual machine or instance can be set either during the provisioning process or by using the **Configuration Set Ownership** button. If a virtual machine or instance has an owner, the value is displayed in the **Lifecycle** section of the virtual machine or instance summary page.
 
 Quota tags can be assigned directly to **either** a group or owner **not** to a configuration item. The table below shows the tags for use in quotas.
 
@@ -81,17 +66,15 @@ Quota tags can be assigned directly to **either** a group or owner **not** to a 
 
 ##### Applying a Tag to a User or User Group
 
-1.  Click **Configuration**.
+1. Click **Configuration**.
 
-2.  Click the **Access Control** accordion, and select the user or group
-    that you want to tag.
+2. Click the **Access Control** accordion, and select the user or group that you want to tag.
 
-3.  Click ![1941](../images/1941.png)(**Policy**), then click
-    ![1851](../images/1851.png)(**Edit Tags**).
+3. Click ![1941](../images/1941.png)(**Policy**), then click ![1851](../images/1851.png)(**Edit Tags**).
 
-4.  Select the appropriate customer tag to assign, then the value.
+4. Select the appropriate customer tag to assign, then the value.
 
-5.  Click **Save**.
+5. Click **Save**.
 
 **Note:**
 
@@ -99,8 +82,7 @@ When quotas are applied by both automate instance and tagging, the tagged values
 
 ##### State Machines
 
-The automate state machine processes an ordered list of states. It can ensure the successful completion of a step before the next step is run, permit steps to be retried, allow setting a maximum time to retry the state before exiting, and number of retries before exiting the state.
-Before each state is executed, the `On_Entry` method is executed and after the state ends the `On_Exit` or `On_Error` method is executed based on how the state ends.
+The automate state machine processes an ordered list of states. It can ensure the successful completion of a step before the next step is run, permit steps to be retried, allow setting a maximum time to retry the state before exiting, and number of retries before exiting the state. Before each state is executed, the `On_Entry` method is executed and after the state ends the `On_Exit` or `On_Error` method is executed based on how the state ends.
 
 The following components make up a {{ site.data.product.title_short }} automate state machine:
 
@@ -113,8 +95,7 @@ The following components make up a {{ site.data.product.title_short }} automate 
 | Max Retries   | Maximum number of times to retry the state before exiting.                                                                                                                                                      |
 | Max Time      | Maximum time in seconds to retry the state before exiting.                                                                                                                                                      |
 
-In the diagram below, you can see how these components combine to create
-a state machine workflow.
+In the diagram below, you can see how these components combine to create a state machine workflow.
 
 **Note:**
 
@@ -146,70 +127,53 @@ The retry logic, `On_Entry` and `On_Error` are distinct cases in the program flo
       $evm.root['ae_result'] = 'retry'
       $evm.root['ae_retry_interval'] = '1.minute'
 
-The following image shows a simple state machine pertaining to approving a provision request. This instance can be
-found in menu:
-**Datastore > ManageIQ > Infrastructure > VM > Provisioning > StateMachines > ProvisioningRequestApproval > Default**.
-![2354](../images/2354.png)
+The following image shows a simple state machine pertaining to approving a provision request. This instance can be found in menu: **Datastore > ManageIQ > Infrastructure > VM > Provisioning > StateMachines > ProvisioningRequestApproval > Default**. ![2354](../images/2354.png)
 
-1.  The attribute **max\_vms** has a value of 1. State machine processing can use the attributes of the state machine
-    instance to make logic decisions. In this case, the **validate\_request** method, which is processed during the
-    **On\_Entry** portion of the **ValidateRequest** state, evaluates the **max\_vms** attribute. If the number of
-    machines requested is less than the **max\_vms** value, the request can be auto-approved.
+1. The attribute **max\_vms** has a value of 1. State machine processing can use the attributes of the state machine instance to make logic decisions. In this case, the **validate\_request** method, which is processed during the **On\_Entry** portion of the **ValidateRequest** state, evaluates the **max\_vms** attribute. If the number of machines requested is less than the **max\_vms** value, the request can be auto-approved.
 
-2.  **ValidateRequest** is the first state to be executed.
+2. **ValidateRequest** is the first state to be executed.
 
-3.  **ApproveRequest** is the next state to be executed.
+3. **ApproveRequest** is the next state to be executed.
 
 **Note:**
 
-Grayed out items reflect values that are set in the class schema. These values can be overwritten on a per instance
-basis.
+Grayed out items reflect values that are set in the class schema. These values can be overwritten on a per instance basis.
 
 ##### Customizing Provisioning States
 
-The steps followed when provisioning a virtual machine or cloud instance are completed based on instances from the
-menu: **DOMAIN > Cloud|Infrastructure > VM > Provisioning > StateMachines > VMProvision\_VM** class. Depending on your
-environment you can remove, change, or add steps to the provisioning process. For example, if you are not integrating
-with IPAM or a CMDB, then you can remove those execution steps. ![6281](../images/6281.png)
+The steps followed when provisioning a virtual machine or cloud instance are completed based on instances from the menu: **DOMAIN > Cloud|Infrastructure > VM > Provisioning > StateMachines > VMProvision\_VM** class. Depending on your environment you can remove, change, or add steps to the provisioning process. For example, if you are not integrating with IPAM or a CMDB, then you can remove those execution steps. ![6281](../images/6281.png)
 
 ##### Editing the Default State Instance
 
-1.  Browse to menu: **Automate > Explorer**.
+1. Browse to menu: **Automate > Explorer**.
 
-2.  From the accordion menu, click menu: **DOMAIN > Cloud > VM > Provisioning > StateMachines > VMProvision\_VM**.
+2. From the accordion menu, click menu: **DOMAIN > Cloud > VM > Provisioning > StateMachines > VMProvision\_VM**.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class
-    from the ManageIQ domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
     This example uses the **Cloud** Namespace, but can also use the **Infrastructure** namespace.
 
-3.  Click **Configuration**, then ![1851](../images/1851.png)(**Edit this instance**). ![6281](../images/6281.png)
+3. Click **Configuration**, then ![1851](../images/1851.png)(**Edit this instance**). ![6281](../images/6281.png)
 
-4.  For each step that you want to remove, clear the entries in the **Value**, **On Entry**, **On Exit**, and
-    **On Error** columns.
+4. For each step that you want to remove, clear the entries in the **Value**, **On Entry**, **On Exit**, and **On Error** columns.
 
-5.  Click **Save**.
+5. Click **Save**.
 
 ##### Viewing the Status of a Provisioning Request
 
-After a request has been approved, the various stages of fulfillment are executed. You can see the progress of the
-provisioning process by viewing its status.
+After a request has been approved, the various stages of fulfillment are executed. You can see the progress of the provisioning process by viewing its status.
 
-1.  Browse to menu: **Services > Requests**. The list of requests is shown.
+1. Browse to menu: **Services > Requests**. The list of requests is shown.
 
-2.  Click on a specific request for more information. Once the provisioning begins, if the request was supposed to
-    create more than one virtual machine or instance, a field will appear called **Provisioned VMs**. Click on the
-    number that appears next to it for information on each of the individual provisions.
+2. Click on a specific request for more information. Once the provisioning begins, if the request was supposed to create more than one virtual machine or instance, a field will appear called **Provisioned VMs**. Click on the number that appears next to it for information on each of the individual provisions.
 
 ##### Viewing a Provisioned Virtual Machine or Instance
 
-When a virtual machine or instance is created as a result of a provisioning request, its summary screen will show when
-it was provisioned in the **Lifecycle** area of the respective summary.
+When a virtual machine or instance is created as a result of a provisioning request, its summary screen will show when it was provisioned in the **Lifecycle** area of the respective summary.
 
-1.  From menu: **Services > Workloads**, click the virtual machine or instance that you want to view.
-    ![2356](../images/2356.png)
+1. From menu: **Services > Workloads**, click the virtual machine or instance that you want to view. ![2356](../images/2356.png)
 
 ##### Viewing a Virtual Machine or Instance Summary
 

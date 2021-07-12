@@ -2,25 +2,13 @@
 
 ### Provisioning Request Approval Methods
 
-In this chapter, you will learn about the different approval methods.
-The request can be approved manually in the {{ site.data.product.title_short }} console, set
-for automatic approval by setting options in the **Automate Explorer**,
-or by using an external method. ![2348](../images/2348.png) When using an
-external method, the approval actually takes place on the external system and is sent
-directly for execution. This chapter discusses how to view and edit request in the
-{{ site.data.product.title_short }} Console, how to approve a request, and how to set
-automatic approval parameters.
+In this chapter, you will learn about the different approval methods. The request can be approved manually in the {{ site.data.product.title_short }} console, set for automatic approval by setting options in the **Automate Explorer**, or by using an external method. ![2348](../images/2348.png) When using an external method, the approval actually takes place on the external system and is sent directly for execution. This chapter discusses how to view and edit request in the {{ site.data.product.title_short }} Console, how to approve a request, and how to set automatic approval parameters.
 
 ### Working with Provisioning Requests
 
-After a provisioning request is sent, if you have proper authority, you can copy,
-edit, delete, approve, or deny a request.
+After a provisioning request is sent, if you have proper authority, you can copy, edit, delete, approve, or deny a request.
 
-After submission, the appliance assigns each provision request a **Request ID**. If
-an error occurs during the approval or provisioning process, use this ID to locate
-the request in the appliance logs. The **Request ID** consists of the region
-associated with the request followed by the request number. As regions define a range
-of one trillion database IDs, this number can be several digits long.
+After submission, the appliance assigns each provision request a **Request ID**. If an error occurs during the approval or provisioning process, use this ID to locate the request in the appliance logs. The **Request ID** consists of the region associated with the request followed by the request number. As regions define a range of one trillion database IDs, this number can be several digits long.
 
 **Request ID Format**
 
@@ -28,126 +16,107 @@ of one trillion database IDs, this number can be several digits long.
 
 #### Reloading the Status of Provisioning Requests
 
-1.  Browse to menu: **Services > Requests**.
+1. Browse to menu: **Services > Requests**.
 
-2.  Click ![2106](../images/2106.png)(**Reload the current display**).
+2. Click ![2106](../images/2106.png)(**Reload the current display**).
 
 #### Approving a Provisioning Request
 
-After a user creates provisioning request, administrators have the ability to approve
-the request and allow {{ site.data.product.title_short }} to complete virtual machine
-or instance creation.
+After a user creates provisioning request, administrators have the ability to approve the request and allow {{ site.data.product.title_short }} to complete virtual machine or instance creation.
 
-1.  Browse to menu: **Services > Requests**.
+1. Browse to menu: **Services > Requests**.
 
-2.  Click on the request you want to approve.
+2. Click on the request you want to approve.
 
-3.  Type in a **Reason** for the approval.
+3. Type in a **Reason** for the approval.
 
-4.  Click ![1852](../images/1852.png)(**Approve this request**).
+4. Click ![1852](../images/1852.png)(**Approve this request**).
 
 #### Denying a Provisioning Request
 
-1.  Browse to menu: **Services > Requests**.
+1. Browse to menu: **Services > Requests**.
 
-2.  Click on the request you want to deny.
+2. Click on the request you want to deny.
 
-3.  Type in a **Reason** for the denial.
+3. Type in a **Reason** for the denial.
 
-4.  Click ![2009](../images/2009.png)(**Deny this request**).
+4. Click ![2009](../images/2009.png)(**Deny this request**).
 
 #### Copying a Provisioning Request
 
-1.  Browse to menu: **Services > Requests**.
+1. Browse to menu: **Services > Requests**.
 
-2.  Click on the request you want to copy.
+2. Click on the request you want to copy.
 
-3.  Click ![1859](../images/1859.png)(**Copy original provision request**).
+3. Click ![1859](../images/1859.png)(**Copy original provision request**).
 
-4.  Make changes to the request.
+4. Make changes to the request.
 
-5.  Click **Submit**.
+5. Click **Submit**.
 
 <div class="informalexample">
 
-If the logged in user is not same as the requester or the request has been already
-approved or denied, you cannot edit or delete the request.
+If the logged in user is not same as the requester or the request has been already approved or denied, you cannot edit or delete the request.
 
 </div>
 
 #### Editing a Provisioning Request
 
-1.  Browse to menu: **Services > Requests**.
+1. Browse to menu: **Services > Requests**.
 
-2.  Click on the request you want to edit.
+2. Click on the request you want to edit.
 
-3.  Click ![1851](../images/1851.png)(**Edit the original provision request**).
+3. Click ![1851](../images/1851.png)(**Edit the original provision request**).
 
-4.  Make changes to the request.
+4. Make changes to the request.
 
-5.  Click **Submit**.
+5. Click **Submit**.
 
 #### Deleting a Provisioning Request
 
-1.  Browse to menu: **Services > Requests**.
+1. Browse to menu: **Services > Requests**.
 
-2.  Click on the request you want to delete.
+2. Click on the request you want to delete.
 
-3.  Click ![1861](../images/1861.png)(**Delete this request**).
+3. Click ![1861](../images/1861.png)(**Delete this request**).
 
-4.  Click **OK** to confirm.
+4. Click **OK** to confirm.
 
 #### Automatically Approving Requests
 
-You can set thresholds for automatic approval of provisioning requests and,
-therefore, remove the requirement to manually approve the request. You can do this
-either as a global default or on a per template basis.
+You can set thresholds for automatic approval of provisioning requests and, therefore, remove the requirement to manually approve the request. You can do this either as a global default or on a per template basis.
 
 ##### Enabling Global Defaults for Automatic Approval
 
-To enable a global set of default approval values, edit the defaults instance by browsing to
-menu: **Automate > Explorer**, then menu:
-**DOMAIN > Cloud|Infrastructure > VM > Provisioning > StateMachines > ProvisionRequestApproval**
-in the accordion menu. The parameters in this instance are used by the methods in that same
-class. By default, the maximum number of virtual machines or instances that can be automatically
-approved for provisioning is 1. To skip the check for the maximum number of virtual machines,
-set this field to 0. Set this field to -1 to force manual approval. At a minimum, you must
-change this parameter for all others to be validated.
+To enable a global set of default approval values, edit the defaults instance by browsing to menu: **Automate > Explorer**, then menu: **DOMAIN > Cloud|Infrastructure > VM > Provisioning > StateMachines > ProvisionRequestApproval** in the accordion menu. The parameters in this instance are used by the methods in that same class. By default, the maximum number of virtual machines or instances that can be automatically approved for provisioning is 1. To skip the check for the maximum number of virtual machines, set this field to 0. Set this field to -1 to force manual approval. At a minimum, you must change this parameter for all others to be validated.
 
-1.  Browse to menu: **Automate > Explorer**.
+1. Browse to menu: **Automate > Explorer**.
 
-2.  From the tree in the accordion menu, select menu:
-    **DOMAIN > Cloud > VM > Provisioning > StateMachines > ProvisionRequestApproval Class**.
+2. From the tree in the accordion menu, select menu: **DOMAIN > Cloud > VM > Provisioning > StateMachines > ProvisionRequestApproval Class**.
 
     **Note:**
 
-    DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you
-    can copy the class from the ManageIQ domain into a custom domain.
+    DOMAIN must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
     This example uses the **Cloud** Namespace but can also use the **Infrastructure** namespace.
 
-3.  Click **Configuration**, then ![1851](../images/1851.png)(**Edit this instance**).
-    ![6280](../images/6280.png)
+3. Click **Configuration**, then ![1851](../images/1851.png)(**Edit this instance**). ![6280](../images/6280.png)
 
     **Note:**
 
-    Do not change any values other than those listed below. Doing so may prevent the automatic
-    approval process from running.
+    Do not change any values other than those listed below. Doing so may prevent the automatic approval process from running.
 
-      - Use **max\_cpus** to set the number of CPUs allowed to approve automatically the
-        provisioning request.
+    - Use **max\_cpus** to set the number of CPUs allowed to approve automatically the provisioning request.
 
-      - Use **max\_vms** to set the maximum number of virtual machines or instances that are
-        allowed to be provisioned automatically approve the request. If this is set to blank, no
-        requests will be automatically approved.
+    - Use **max\_vms** to set the maximum number of virtual machines or instances that are allowed to be provisioned automatically approve the request. If this is set to blank, no requests will be automatically approved.
 
-      - Use **max\_memory** to set the maximum memory allowed to approve automatically the provisioning request.
+    - Use **max\_memory** to set the maximum memory allowed to approve automatically the provisioning request.
 
-      - Use **max\_retirement\_days** to set the maximum number of days until the virtual machine or instance is retired to automatically approve this request.
+    - Use **max\_retirement\_days** to set the maximum number of days until the virtual machine or instance is retired to automatically approve this request.
 
-      - If a value is blank or **0**, the parameter is ignored.
+    - If a value is blank or **0**, the parameter is ignored.
 
-4.  Click **Save**.
+4. Click **Save**.
 
 The thresholds for automatic approval are set. The next time a provision request is created these thresholds will be checked. If the requirements are met, the provisioning request will be approved with no user intervention.
 
@@ -164,42 +133,36 @@ The thresholds for automatic approval are set. The next time a provision request
 
 ##### Assigning Tags to a Template for Auto Approval
 
-1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
+1. Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
-2.  Click the **Templates** accordion, and select the templates that you want to tag.
+2. Click the **Templates** accordion, and select the templates that you want to tag.
 
-3.  Click ![1941](../images/1941.png)(**Policy**), and then
-    ![1851](../images/1851.png)(**Edit Tags**).
+3. Click ![1941](../images/1941.png)(**Policy**), and then ![1851](../images/1851.png)(**Edit Tags**).
 
-4.  Select a customer tag from the first dropdown, and then a value for the tag.
+4. Select a customer tag from the first dropdown, and then a value for the tag.
 
-The thresholds for automatic approval for a specific template are set. The next time a provision
-request is created for this template these thresholds will be checked. If the requirements are
-met, the provisioning request will be approved with no user intervention.
+The thresholds for automatic approval for a specific template are set. The next time a provision request is created for this template these thresholds will be checked. If the requirements are met, the provisioning request will be approved with no user intervention.
 
 ##### Setting Provisioning Notification Email Addresses
 
-{{ site.data.product.title_short }} contains a set of Automate instances for provisioning. These
-Automate instances also include email fields to set the sender and recipient of provisioning
-notifications, such as requests. These fields are set to **evmadmin@company.com** as a default.
+{{ site.data.product.title_short }} contains a set of Automate instances for provisioning. These Automate instances also include email fields to set the sender and recipient of provisioning notifications, such as requests. These fields are set to **evmadmin@company.com** as a default.
 
-1.  Browse to menu: **Automate > Explorer***.
+1. Browse to menu: **Automate > Explorer**.
 
-2.  Choose the following Namespace: menu: **DOMAIN > Cloud > VM > Provisioning > Email**.
+2. Choose the following Namespace: menu: **DOMAIN > Cloud > VM > Provisioning > Email**.
 
     **Note:**
 
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary,
-    you can copy the class from the ManageIQ domain into a custom domain.
+    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
 
     This example uses the **Cloud** Namespace, but can also use the **Infrastructure** namespace.
 
-3.  Select an instance within the chosen class.
+3. Select an instance within the chosen class.
 
-4.  Click **Configuration**, then ![1851](../images/1851.png)(**Edit this instance**).
+4. Click **Configuration**, then ![1851](../images/1851.png)(**Edit this instance**).
 
-5.  Type the desired email addresses in the **to\_email\_address** and **from\_email\_address** fields.
+5. Type the desired email addresses in the **to\_email\_address** and **from\_email\_address** fields.
 
-6.  Click **Save**.
+6. Click **Save**.
 
     ![6282](../images/6282.png)

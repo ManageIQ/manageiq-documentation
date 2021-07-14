@@ -39,6 +39,8 @@ For information on working with the resources contained by a provider or manager
 
 {% include_relative _topics/cloud_providers.md %}
 
+{% include_relative _topics/image_import.md %}
+
 {% include_relative _topics/networking_providers.md %}
 
 {% include_relative _topics/containers_providers.md %}

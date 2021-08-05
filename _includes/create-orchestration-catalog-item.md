@@ -1,23 +1,31 @@
-Use the following procedure to create an Orchestration catalog item.
+# Create Orchestration Catalog Items
 
-1.  Browse to menu: **Services > Catalogs** and select **Catalog Items** in the accordion menu.
+Use the following procedure to create an Orchestration
+catalog item.
 
-2.  Click **Configuration**, then click
-    ![Green\_Plus\_Sign](../images/1848.png) (**Add a New Catalog Item**). The
-    **Adding a new Service Catalog Item** window is displayed.
+1. Browse to menu: **Services > Catalogs** and select
+   **Catalog Items** in the accordion menu.
 
-3.  Select **Orchestration** from the **Catalog Item Type** list.
+2. Click **Configuration**, then click
+   ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog Item**.
+   The **Adding a new Service Catalog Item** window is
+   displayed.
 
-4.  Enter the basic details in the **Basic Info**:
+3. Select **Orchestration** from the **Catalog Item Type**
+   list.
 
-    1.  Enter a **Name** and **Description** for the new service catalog item.
+4. Enter the basic details in the **Basic Info**:
 
-    2.  Select **Display in Catalog** box.
+    1. Enter a **Name** and **Description** for the new
+       service catalog item.
 
-    3.  Select the appropriate catalog from the **Catalog** list.
+    2. Select **Display in Catalog** box.
 
-    4.  Select the appropriate dialog from the **Dialog** list.
+    3. Select the appropriate catalog from the **Catalog**
+       list.
 
-    5.  Select the **Orchestration Template** from the list.
+    4. Select the appropriate dialog from the **Dialog** list.
 
-5.  Click **Add**.
+    5. Select the **Orchestration Template** from the list.
+
+5. Click **Add**.

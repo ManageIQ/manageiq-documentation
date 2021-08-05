@@ -6,23 +6,21 @@
     #
     #   name = value
     #
-    # (The "=" is optional.)  Whitespace may be used.  Comments are introduced with
-    # "#" anywhere on a line.  The complete list of parameter names and allowed
-    # values can be found in the PostgreSQL documentation.
+    # (The "=" is optional.)  Whitespace may be used.  Comments are introduced with "+" anywhere on
+    # a line.  The complete list of parameter names and allowed values can be foundin the 
+    # PostgreSQL documentation.
     #
-    # The commented-out settings shown in this file represent the default values.
-    # Re-commenting a setting is NOT sufficient to revert it to the default value;
-    # you need to reload the server.
+    # The commented-out settings shown in this file represent the default values. Re-commenting a
+    # setting is NOT sufficient to revert it to the default value; you need to reload the server.
     #
-    # This file is read on server startup and when the server receives a SIGHUP
-    # signal.  If you edit the file on a running system, you have to SIGHUP the
-    # server for the changes to take effect, or use "pg_ctl reload".  Some
-    # parameters, which are marked below, require a server shutdown and restart to
-    # take effect.
+    # This file is read on server startup and when the server receives a SIGHUP signal. If you edit
+    # the file on a running system, you have to SIGHUP the serve for the changes to take effect, or
+    # use "pg_ctl reload".  Some parameters, which are marked below, require a server shutdown and
+    # restart to take effect.
     #
     # Any parameter can also be given as a command-line option to the server, e.g.,
-    # "postgres -c log_connections=on".  Some parameters can be changed at run time
-    # with the "SET" SQL command.
+    # "postgres -c log_connections=on".  Some parameters can be changed at run time with the "SET"
+    # SQL command.
     #
     # Memory units:  kB = kilobytes        Time units:  ms  = milliseconds
     #                MB = megabytes                     s   = seconds
@@ -116,10 +114,9 @@
     #temp_buffers = 8MB         # min 800kB
     #max_prepared_transactions = 0      # zero disables the feature
                         # (change requires restart)
-    # Note:  Increasing max_prepared_transactions costs ~600 bytes of shared memory
-    # per transaction slot, plus lock space (see max_locks_per_transaction).
-    # It is not advisable to set max_prepared_transactions nonzero unless you
-    # actively intend to use prepared transactions.
+    # Note:  Increasing max_prepared_transactions costs ~600 bytes of shared memory per transaction
+    # slot, plus lock space (see max_locks_per_transaction). It is not advisable to set
+    # max_prepared_transactions nonzero unless you actively intend to use prepared transactions.
     #work_mem = 1MB             # min 64kB
     #maintenance_work_mem = 16MB        # min 1MB
     #max_stack_depth = 2MB          # min 100kB

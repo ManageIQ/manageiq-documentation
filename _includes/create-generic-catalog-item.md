@@ -1,38 +1,48 @@
-1.  Browse to menu: **Service > Catalogs**.
+# Creating Generic Catalog Items
 
-2.  Click the **Catalog Items** accordion.
+1. Browse to menu: **Service > Catalogs**.
 
-3.  Click **Configuration**, and then ![1862](../images/1862.png)(**Add a New Catalog Item**).
+2. Click the **Catalog Items** accordion.
 
-4.  Select **Generic** from the Catalog Item Type list.
+3. Click **Configuration**, and then
+   ![1862](../images/1862.png) **Add a New Catalog Item**.
 
-5.  In the **Basic Info** subtab:
+4. Select **Generic** from the Catalog Item Type list.
 
-    1.  Type a **Name/Description**.
+5. In the **Basic Info** subtab:
 
-    2.  Check **Display in Catalog** to display the item in the catalog. A **Dialog** will be
-        required if you select **Display in Catalog**.
+    1. Type a **Name/Description**.
 
-    1.  Choose a **Catalog** to which to add the new item.
+    2. Check **Display in Catalog** to display the item in
+       the catalog. A **Dialog** will be required if you
+       select **Display in Catalog**.
 
-    2.  Select a **Dialog** from the available options.
+    3. Choose a **Catalog** to which to add the new item.
 
-    3.  Choose a **Subtype** from the list menu.
+    4. Select a **Dialog** from the available options.
 
-    4.  Add **Entry Point(NS/Cls/Inst**) options.
+    5. Choose a **Subtype** from the list menu.
 
-        1.  **Provisioning Entry Point (Domain/NS/Cls/Inst**) requires you to select an Automate
-            instance to run upon provisioning.
+    6. Add **Entry Point(NS/Cls/Inst)** options.
 
-        1.  **Retirement Entry Point (Domain/NS/Cls/Inst**) requires you to select an Automate
-            instance to run upon retirement.
+        1. **Provisioning Entry Point (Domain/NS/Cls/Inst)**
+           requires you to select an Automate instance to
+           run upon provisioning.
 
-            **Note:**
+        1. **Retirement Entry Point (Domain/NS/Cls/Inst)**
+           requires you to select an Automate instance to
+           run upon retirement.
 
-            The entry point must be a State Machine since the **Provisioning Entry Point** list is
-            filtered to only show State Machine class instances. No other entry points will be
-            available from the **Provisioning Entry Point** field.
+           **Note:**
 
-6.  In the **Details** subtab, write a **Long Description** for the catalog item.
+           The entry point must be a State Machine since
+           the **Provisioning Entry Point** list is
+           filtered to only show State Machine class
+           instances. No other entry points will be
+           available from the **Provisioning Entry Point**
+           field.
 
-7.  Click **Add**.
+6. In the **Details** subtab, write a **Long Description**
+   for the catalog item.
+
+7. Click **Add**.

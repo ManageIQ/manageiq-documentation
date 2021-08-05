@@ -1,13 +1,15 @@
-1.  Browse to menu: **Storage > Block Storage > Volumes**.
+# Attaching a Cinder Instance
 
-2.  Select the volume to attach.
+1. Browse to menu: **Storage > Block Storage > Volumes**.
 
-3.  Click **Configuration**, then click
-    ![Attach selected Cloud Volume to an Instance](../images/volume-icon.png) (**Attach selected Cloud Volume to an Instance**)
-    to open the **Attach Cloud Volume** screen.
+2. Select the volume to attach.
 
-4.  Select an instance from the list.
+3. Click **Configuration**, then click
+   ![Attach selected Cloud Volume to an Instance](../images/volume-icon.png) **Attach selected Cloud Volume to an Instance**
+   to open the **Attach Cloud Volume** screen.
 
-5.  Optionally, enter a **Device Mountpoint**.
+4. Select an instance from the list.
 
-6.  Click **Attach**.
+5. Optionally, enter a **Device Mountpoint**.
+
+6. Click **Attach**.

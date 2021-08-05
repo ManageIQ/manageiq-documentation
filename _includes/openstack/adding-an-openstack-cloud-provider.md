@@ -1,14 +1,16 @@
+# Adding an OpenStack Cloud Provider
+
 {{ site.data.product.title_short }} supports operating with the OpenStack `admin` tenant. When
 creating an OpenStack provider in {{ site.data.product.title_short }}, select the OpenStack
 provider’s `admin` user because it is the default administrator of the OpenStack `admin` tenant.
-When using the `admin` credentials, a user in {{ site.data.product.title_short }} provisions into
-the `admin` tenant, and sees images, networks, and instances that are associated with the `admin`
-tenant.
+When using the `admin` credentials, a user in {{ site.data.product.title_short }} provisions
+into the `admin` tenant, and sees images, networks, and instances that are associated with the
+`admin` tenant.
 
 **Note:**
 
-In OpenStack, you must add `admin` as a member of all tenants that users want to access and use in
-{{ site.data.product.title_short }}.
+In OpenStack, you must add `admin` as a member of all tenants that users want to access and use
+in {{ site.data.product.title_short }}.
 
 See [Cloud Tenants](../managing_infrastructure_and_inventory/index.html#cloud-tenants) in
 *Managing Infrastructure and Inventory* for information on working with OpenStack tenants
@@ -19,12 +21,12 @@ See [Cloud Tenants](../managing_infrastructure_and_inventory/index.html#cloud-te
 **Note:**
 
 You can set whether {{ site.data.product.title_short }} should use the Telemetry service or
-Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should
-first configure the **ceilometer** service on the overcloud to store events. See
+Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you
+should first configure the **ceilometer** service on the overcloud to store events. See
 [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events)
 for instructions.
 
-For more information, see 
+For more information, see
 <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-telemetry" target="_blank">
 OpenStack Telemetry (ceilometer)</a> in the Red Hat OpenStack Platform *Architecture Guide*.
 
@@ -34,20 +36,19 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 {{ site.data.product.title_short }} appliance to trust the certificate using the steps in
 [Using a Self-Signed CA Certificate](#app-self_signed_CA) before adding the provider.
 
-1.  Browse to menu: **Compute > Clouds > Providers**.
+1. Browse to menu: **Compute > Clouds > Providers**.
 
-2.  Click **Configuration**, then click ![1862](../images/1862.png) (**Add a New Cloud Provider**).
+2. Click **Configuration**, then click ![1862](../images/1862.png) **Add a New Cloud Provider**.
 
-3.  Enter a **Name** for the provider.
+3. Enter a **Name** for the provider.
 
-4.  From the **Type** list, select **OpenStack**.
+4. From the **Type** list, select **OpenStack**.
 
-5.  Select the appropriate **API Version** from the list. The default is `Keystone v2`.
+5. Select the appropriate **API Version** from the list. The default is `Keystone v2`.
 
-    If you select `Keystone v3`, enter the `Keystone V3 Domain ID` that
-    {{ site.data.product.title_short }} should use. This is the domain of the user account you will
-    be specifying later in the **Default** tab. If domains are not configured in the provider,
-    enter **default**.
+    If you select `Keystone v3`, enter the `Keystone V3 Domain ID` that {{ site.data.product.title_short }}
+    should use. This is the domain of the user account you will be specifying later in the
+    **Default** tab. If domains are not configured in the provider, enter **default**.
 
     **Note:**
 
@@ -57,104 +58,79 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 
     {% include openstack/osp-keystone-api-v3.md %}
 
-6.  Enter a region number in **Region**.
+6. Enter a region number in **Region**.
 
-7.  Enter the appropriate **Zone** for the provider. If you do not specify a zone, it is set to
-    `default`.
+7. Enter the appropriate **Zone** for the provider. If you do not specify a zone, it is set to
+   `default`.
 
-8.  (Optional) Enable tenant mapping by toggling the **Tenant Mapping
-    Enabled** option to **Yes**. This synchronizes resources and users
-    between the OpenStack cloud provider and {{ site.data.product.title_short }}. By
-    default, tenant mapping is disabled.
+8. (Optional) Enable tenant mapping by toggling the **Tenant Mapping Enabled** option to **Yes**.
+   This synchronizes resources and users between the OpenStack cloud provider and
+   {{ site.data.product.title_short }}. By default, tenant mapping is disabled.
 
-9.  Select the appropriate **Zone** for the provider. By default, the
-    zone is set to **default**.
+9. Select the appropriate **Zone** for the provider. By default, the zone is set to **default**.
 
     **Note:**
 
-    For more information, see the definition of host aggregates and availability zones in
-    [OpenStack Compute (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute)
-    in the Red Hat OpenStack Platform *Architecture Guide*.
+    For more information, see the definition of host aggregates and availability zones in [OpenStack Compute (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute) in the Red Hat OpenStack Platform *Architecture Guide*.
 
-10. In the **Default** tab, under **Endpoints**, configure the host and authentication details of
-    your OpenStack provider:
+10. In the **Default** tab, under **Endpoints**, configure the host and authentication details
+    of your OpenStack provider:
 
-    1.  Select a **Security Protocol** method to specify how to authenticate the provider:
+    1. Select a **Security Protocol** method to specify how to authenticate the provider:
 
-          - **SSL without validation**: Authenticate the provider insecurely using SSL.
+        - **SSL without validation**: Authenticate the provider insecurely using SSL.
 
-          - **SSL**: Authenticate the provider securely using a trusted Certificate Authority.
-            Select this option if the provider has a valid SSL certificate and it is signed by a
-            trusted Certificate Authority. No further configuration is required for this option.
-            This is the recommended authentication method.
+        - **SSL**: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option. This is the recommended authentication method.
 
-          - **Non-SSL**: Connect to the provider insecurely using only HTTP protocol, without SSL.
+        - **Non-SSL**: Connect to the provider insecurely using only HTTP protocol, without SSL.
 
-    1.  In **Hostname (or IPv4 or IPv6 address**), enter the public IP or fully qualified domain
-        name of the OpenStack Keystone service.
+    2. In **Hostname (or IPv4 or IPv6 address**), enter the public IP or fully qualified domain name of the OpenStack Keystone service.
 
         **Note:**
 
-        The hostname required here is also the **OS\_AUTH\_URL** value in the **\~/overcloudrc** file generated by the director (see [Accessing the Overcloud](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/director_installation_and_usage/#sect-Accessing_the_Overcloud)
-        in Red Hat OpenStack Platform *Director Installation and Usage*), or the
-        **\~/keystonerc\_admin** file generated by Packstack (see
-        [Evaluating OpenStack: Single-Node Deployment](https://access.redhat.com/articles/1127153)).
+        The hostname required here is also the **OS\_AUTH\_URL** value in the **\~/overcloudrc**
+        file generated by the director (see
+        [Accessing the Overcloud](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/director_installation_and_usage/#sect-Accessing_the_Overcloud) in Red Hat OpenStack Platform
+        *Director Installation and Usage*), or the **\~/keystonerc\_admin** file generated by
+        Packstack (see [Evaluating OpenStack: Single-Node Deployment](https://access.redhat.com/articles/1127153)).
 
-    1.  In **API Port**, set the public port used by the OpenStack Keystone service. By default,
-        OpenStack uses port 5000 for non-SSL security protocol. For SSL, API port is 13000 by
-        default.
+    3. In **API Port**, set the public port used by the OpenStack Keystone service. By default, OpenStack uses port 5000 for non-SSL security protocol. For SSL, API port is 13000 by default.
 
-    1.  In the **Username** field, enter the name of a user in the OpenStack environment.
+    4. In the **Username** field, enter the name of a user in the OpenStack environment.
 
         <div class="important">
 
-        In environments that use Keystone v3 authentication, the user must have the **admin** role
-        for the relevant domain.
+        In environments that use Keystone v3 authentication, the user must have the **admin** role for the relevant domain.
 
         </div>
 
-    2.  In the **Password** field, enter the password for the user.
+    5. In the **Password** field, enter the password for the user.
 
-    3.  Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
+    6. Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
         OpenStack provider.
 
-1.  Next, configure how {{ site.data.product.title_short }} should receive events from the
+11. Next, configure how {{ site.data.product.title_short }} should receive events from the
     OpenStack provider. Click the **Events** tab in the **Endpoints** section to start.
 
-      - To use the Telemetry service of the OpenStack provider, select **Ceilometer**. Before you
-        do so, the provider must first be configured accordingly. See
-        [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events)
-        for details.
+    - To use the Telemetry service of the OpenStack provider, select **Ceilometer**. Before you do so, the provider must first be configured accordingly. See [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events) for details.
 
-      - If you prefer to use the AMQP Messaging bus instead, or eventing is not enabled on
-        Ceilometer, select **AMQP** and configure the following:
+    - If you prefer to use the AMQP Messaging bus instead, or eventing is not enabled on Ceilometer, select **AMQP** and configure the following:
 
-        1.  Select a **Security Protocol** method.
+        1. Select a **Security Protocol** method.
 
-        2.  In **Hostname (or IPv4 or IPv6 address**) (of the **Events** tab, under **Endpoints**),
+        2. In **Hostname (or IPv4 or IPv6 address**) (of the **Events** tab, under **Endpoints**),
             enter the public IP or fully qualified domain name of the AMQP host.
 
-        1.  In the **API Port**, set the public port used by AMQP. By default, OpenStack uses port
-            5672 for this.
+        3. In the **API Port**, set the public port used by AMQP. By default, OpenStack uses port 5672 for this.
 
-        1.  In the **Username** field, enter the name of an OpenStack user with privileged access
-            (for example, **admin**). Then, provide its corresponding password in the **Password**
-            field.
+        4. In the **Username** field, enter the name of an OpenStack user with privileged access (for example, **admin**). Then, provide its corresponding password in the **Password** field.
 
-        1.  Click **Validate** to confirm the credentials.
+        5. Click **Validate** to confirm the credentials.
 
-2.  Click **Add** after configuring the cloud provider.
+12. Click **Add** after configuring the cloud provider.
 
 **Note:**
 
-  - To collect inventory and metrics from an OpenStack environment, the
-    {{ site.data.product.title_short }} appliance requires that the adminURL endpoint for the
-    OpenStack environment be on a non-private network. Hence, the OpenStack adminURL endpoint
-    should be assigned an IP address other than `192.168.x.x`. Additionally, all the Keystone
-    endpoints must be accessible, otherwise refresh will fail.
+- To collect inventory and metrics from an OpenStack environment, the {{ site.data.product.title_short }} appliance requires that the adminURL endpoint for the OpenStack environment be on a non-private network. Hence, the OpenStack adminURL endpoint should be assigned an IP address other than `192.168.x.x`. Additionally, all the Keystone endpoints must be accessible, otherwise refresh will fail.
 
-  - Collecting capacity and utilization data from an OpenStack cloud provider requires selecting
-    the **Collect for All Clusters** option under **Configuration**, in the settings menu. For
-    information, see
-    [Capacity and Utilization Collections](../general_configuration/index.html#capacity-and-utilization-collection)
-    in the *General Configuration Guide*.
+- Collecting capacity and utilization data from an OpenStack cloud provider requires selecting the **Collect for All Clusters** option under **Configuration**, in the settings menu. For information, see [Capacity and Utilization Collections](../general_configuration/index.html#capacity-and-utilization-collection) in the *General Configuration Guide*.

@@ -1,19 +1,19 @@
-1.  Browse to menu: **Storage > Block Storage > Volumes**.
+# Creating a Cinder Snapshot
 
-2.  Click the volume to snapshot to open the volume’s summary page.
+1. Browse to menu: **Storage > Block Storage > Volumes**.
 
-3.  Click **Configuration**, then click
-    ![Create a Snapshot of this Cloud Volume](../images/volume-icon.png) (**Create a Snapshot of this Cloud Volume**).
+2. Click the volume to snapshot to open the volume’s summary page.
 
-4.  Enter a name for the snapshot in **Snapshot Name**.
+3. Click **Configuration**, then click
+   ![Create a Snapshot of this Cloud Volume](../images/volume-icon.png) **Create a Snapshot of this Cloud Volume**.
 
-5.  Click **Save**.
+4. Enter a name for the snapshot in **Snapshot Name**.
 
-Click **Cloud Volume Snapshots** on the summary page of a volume to view the snapshots for that
-volume.
+5. Click **Save**.
+
+Click **Cloud Volume Snapshots** on the summary page of a volume to view the snapshots for that volume.
 
 **Note:**
 
-See
-[Create, Use, or Delete Volume Snapshots](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/storage_guide/#section-create-clone-delete-vol-snapshots)
+See [Create, Use, or Delete Volume Snapshots](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html-single/storage_guide/#section-create-clone-delete-vol-snapshots)
 in the *Storage Guide* for more information about snapshots.

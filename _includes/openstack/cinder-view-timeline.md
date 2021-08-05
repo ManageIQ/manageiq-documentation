@@ -1,25 +1,27 @@
-1.  Browse to menu: **Storage > Storage Managers**.
+# Viewing a Cinder Timeline
 
-2.  Select your OpenStack Cinder manager to go to the Cinder manager’s summary page.
+1. Browse to menu: **Storage > Storage Managers**.
 
-3.  Click ![Monitoring](../images/1994.png) (**Monitoring**), and then
-    ![Timelines](../images/1995.png) (**Timelines**)
-    to view the events timeline for the manager.
+2. Select your OpenStack Cinder manager to go to the Cinder manager’s summary page.
 
-4.  A timeline of either management events or policy events can be viewed.
+3. Click ![Monitoring](../images/1994.png) **Monitoring**, and then
+   ![Timelines](../images/1995.png) **Timelines** to view the events timeline for
+   the manager.
 
-    1.  To view management events, select **Management Events**.
+4. A timeline of either management events or policy events can be viewed.
 
-    2.  Specify the type of event to view.
+    1. To view management events, select **Management Events**.
 
-    3.  Specify the timeline for the events to view.
+    2. Specify the type of event to view.
 
-    4.  Click **Apply**.
+    3. Specify the timeline for the events to view.
 
-5.  To view policy events, select **Policy Events**.
+    4. Click **Apply**.
 
-    1.  Specify if you want to view successful events, failed events, or both.
+5. To view policy events, select **Policy Events**.
 
-    2.  Specify the timeline for the events to view.
+    1. Specify if you want to view successful events, failed events, or both.
 
-    3.  Click **Apply**.
+    2. Specify the timeline for the events to view.
+
+    3. Click **Apply**.

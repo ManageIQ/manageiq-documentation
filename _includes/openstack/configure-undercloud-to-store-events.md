@@ -1,3 +1,5 @@
+# Configuring Undercloud to Store Events
+
 To allow {{ site.data.product.title_short }} to receive events from a Red Hat OpenStack Platform
 environment, you must configure the **notification\_driver** option for the Compute service and
 Orchestration service in that environment. See

@@ -1,18 +1,17 @@
 # Editing Hosts
 
-If multiple hosts have the same settings or credentials, edit them at
-the same time.
+If multiple hosts have the same settings or credentials, edit them at the
+same time.
 
-1.  Browse to menu: **Compute > Infrastructure > Hosts**.
+1. Browse to menu: **Compute > Infrastructure > Hosts**.
 
-2.  Click **Configuration**.
+2. Click **Configuration**.
 
-3.  Check the Hosts to edit.
+3. Check the Hosts to edit.
 
-4.  Click ![1851](../images/1851.png) (**Edit Selected items**).
+4. Click ![1851](../images/1851.png) **Edit Selected items**.
 
-5.  Use **Credentials** to provide login credentials required for this
-    host.
+5. Use **Credentials** to provide login credentials required for this host.
 
     ![2216](../images/2216.png)
 
@@ -32,7 +31,8 @@ the same time.
 
         **Note:**
 
-        Login credentials are required for performing SmartState Analysis on the host’s virtual machines and templates.
+        Login credentials are required for performing SmartState Analysis
+        on the host’s virtual machines and templates.
 
         For each type of credential used, the following information is required:
 
@@ -42,7 +42,7 @@ the same time.
 
       - Use **Verify Password** to confirm the password.
 
-6.  Test the credentials by using the *Select Host to validate against*
-    drop down and click **Validate**.
+6. Test the credentials by using the *Select Host to validate against*
+   drop down and click **Validate**.
 
-7.  Click **Save**.
+7. Click **Save**.

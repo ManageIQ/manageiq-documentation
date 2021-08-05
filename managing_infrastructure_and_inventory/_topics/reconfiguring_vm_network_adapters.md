@@ -11,38 +11,37 @@ the **Reconfigure this VM** button.
 
 To add a network adapter to a virtual machine:
 
-1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
+1. Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
-2.  Select the target virtual machine.
+2. Select the target virtual machine.
 
-3.  Click **Configuration**, and then
-    ![1851](../images/1851.png) (**Reconfigure this VM**).
+3. Click **Configuration**, and then
+   ![1851](../images/1851.png) **Reconfigure this VM**.
 
-4.  Click **Add Network** next to the disk you want to resize to show
-    resizing options.
+4. Click **Add Network** next to the disk you want to resize to show resizing options.
 
-5.  Select the type of adapter from the list under **vLan**.
+5. Select the type of adapter from the list under **vLan**.
 
-6.  Click **Confirm Add**.
+6. Click **Confirm Add**.
 
-7.  Click **Submit**.
+7. Click **Submit**.
 
-A request to add the network adapter is then processed for the virtual
-machine. You can view the details for the new network adapter by
-browsing to the **Reconfigure this VM** area. When the network adapter
-is added, a name and MAC address are assigned to the adapter.
+A request to add the network adapter is then processed for the virtual machine. You
+can view the details for the new network adapter by browsing to the
+**Reconfigure this VM** area. When the network adapter is added, a name and MAC
+address are assigned to the adapter.
 
 ## Removing a Network Adapter from a VMware Virtual Machine
 
 To remove a network adapter from a virtual machine:
 
-1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
+1. Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
-2.  Select the target virtual machine.
+2. Select the target virtual machine.
 
-3.  Click **Configuration**, and then
-    ![1851](../images/1851.png) (**Reconfigure this VM**).
+3. Click **Configuration**, and then
+   ![1851](../images/1851.png) **Reconfigure this VM**.
 
-4.  Click **Delete** next to the network adapter you want to remove.
+4. Click **Delete** next to the network adapter you want to remove.
 
-5.  Click **Submit**.
+5. Click **Submit**.

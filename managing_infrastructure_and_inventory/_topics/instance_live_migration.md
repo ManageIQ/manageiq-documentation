@@ -1,3 +1,5 @@
+# Instance live Migration
+
 *Live migration* involves moving a live instance between Compute nodes.
 Live migration is useful for avoiding instance downtime during cloud
 maintenance or load management. See [How to Migrate a Live
@@ -7,16 +9,16 @@ details on the underlying OpenStack process.
 
 To migrate a live instance:
 
-1.  Browse to menu: **Compute > Clouds > Instances**.
+1. Browse to menu: **Compute > Clouds > Instances**.
 
-2.  On the right pane, click the instance to be migrated. Use the
+2. On the right pane, click the instance to be migrated. Use the
     **Instances by Provider** accordion to filter instances by provider
     and/or availability zone.
 
-3.  Click ![2007](../images/2007.png)(**Lifecycle**), then
-    ![2097](../images/2097.png) (**Migrate selected Instance**).
+3. Click ![2007](../images/2007.png) **Lifecycle**, then
+    ![2097](../images/2097.png) **Migrate selected Instance**.
 
-4.  On the **Migrate Instance** section, select your preferred migration
+4. On the **Migrate Instance** section, select your preferred migration
     options:
 
       - **Auto-select Host?**: let the OpenStack provider automatically
@@ -37,9 +39,9 @@ To migrate a live instance:
         provider from verifying first whether the destination host has
         available disk space to host the instance.
 
-5.  Click **Submit**.
+5. Click **Submit**.
 
 Once the migration initiates, the instance list will reload with a
 message indicating that the selected instance is being migrated. Upon
 completion, the instance list will reload and the evacuated instance
-will be displayed as ![2143](../images/2143.png) (**On**).
+will be displayed as ![2143](../images/2143.png) **On**.

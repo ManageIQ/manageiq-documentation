@@ -3,8 +3,7 @@
 
 ## Collection Filtering
 
-When querying collections, filters can be specified by providing one or
-more filter\[\]=…​ parameter.
+When querying collections, filters can be specified by providing one or more filter\[\]=…​ parameter.
 
     GET /api/:collection?filter[]=...&filter[]=...&filter[]=...
 
@@ -12,8 +11,7 @@ Syntax for a filter is as follows:
 
     filter[]=attribute op value
 
-By default, filters are logically *anded* together, for a logical or,
-prefix the attribute with *or* as follows:
+By default, filters are logically *anded* together, for a logical or, prefix the attribute with *or* as follows:
 
     filter[]=or attribute op value
 

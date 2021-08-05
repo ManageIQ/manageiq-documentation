@@ -1,17 +1,17 @@
-Currently, the `appliance_console_cli` feature is a subset of the full functionality of the
-`appliance_console` itself, and covers functions most likely to be scripted by using the
-command-line interface (CLI).
+# Appe Appliance Console CLI
 
-1.  After starting the {{ site.data.product.title_short }} appliance, log in with a user name of
-    `root` and the default password of `smartvm`. This displays the Bash prompt for the root user.
+Currently, the `appliance_console_cli` feature is a subset of the full functionality of the `appliance_console` itself, and
+covers functions most likely to be scripted by using the command-line interface (CLI).
 
-2.  Enter the `appliance_console_cli` or `appliance_console_cli --help` command to see a list of
-    options available with the command, or simply enter `appliance_console_cli --option <argument>`
-    directly to use a specific option.
+1. After starting the {{ site.data.product.title_short }} appliance, log in with a user name of `root` and the default
+   password of `smartvm`. This displays the Bash prompt for the root user.
 
-#### Database Configuration Options
+2. Enter the `appliance_console_cli` or `appliance_console_cli --help` command to see a list of options available with the
+   command, or simply enter `appliance_console_cli --option <argument>` directly to use a specific option.
 
-|                  |                                                                                            | 
+## Database Configuration Options
+
+|                  |                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------ |
 | Option           | Description                                                                                |
 | --region (-r)    | region number (create a new region in the database - requires database credentials passed) |
@@ -25,7 +25,7 @@ command-line interface (CLI).
 
 {: caption="Table 1. Database Configuration Options" caption-side="top"}
 
-#### v2_key Options
+## v2_key Options
 
 |                   |                                                            |
 | ----------------- | ---------------------------------------------------------- |
@@ -38,7 +38,7 @@ command-line interface (CLI).
 
 {: caption="Table 2. v2_key Options" caption-side="top"}
 
-#### IPA Server Options
+## IPA Server Options
 
 |                       |                                                                                                  |
 | --------------------- | ------------------------------------------------------------------------------------------------ |
@@ -55,16 +55,15 @@ command-line interface (CLI).
 
 **Note**:
 
-  - In order to configure authentication through an IPA server, in addition to using
-    **Configure External Authentication (httpd)** in the `appliance_console`, external
-    authentication can be optionally configured via the `appliance_console_cli`
-    (command-line interface).
+- In order to configure authentication through an IPA server, in addition to using
+  **Configure External Authentication (httpd)** in the `appliance_console`, external authentication can be optionally
+  configured via the `appliance_console_cli` (command-line interface).
 
-  - Specifying **--host** will update the hostname of the appliance. If this step was already
-    performed via the `appliance_console` and the necessary updates that are made to `/etc/hosts`
-    if DNS is not properly configured, the **--host** option can be omitted.
+- Specifying **--host** will update the hostname of the appliance. If this step was already performed via the
+  `appliance_console` and the necessary updates that are made to `/etc/hosts` if DNS is not properly configured, the
+  **--host** option can be omitted.
 
-#### Certificate Options
+## Certificate Options
 
 |                              |                                                                                 |
 | ---------------------------- | ------------------------------------------------------------------------------- |
@@ -77,9 +76,10 @@ command-line interface (CLI).
 
 {: caption="Table 4. Certificate Options" caption-side="top"}
 
-**Note**: The certificate options augment the functionality of the `certmonger` tool and enable creating a certificate signing request (CSR), and specifying `certmonger` the directories to store the keys.
+**Note**: The certificate options augment the functionality of the `certmonger` tool and enable creating a certificate
+signing request (CSR), and specifying `certmonger` the directories to store the keys.
 
-#### Other Options
+## Other Options
 
 |                 |                                                                                     |
 | --------------- | ----------------------------------------------------------------------------------- |
@@ -104,7 +104,8 @@ To copy the v2_key from a host *some.example.com* to local machine:
 
 You could combine the two to join a region where *db.example.com* is the appliance hosting the database:
 
-    # appliance_console_cli --fetch-key db.example.com --sshlogin root --sshpassword smartvm --hostname db.example.com --password mydatabasepassword
+    # appliance_console_cli --fetch-key db.example.com --sshlogin root --sshpassword smartvm
+    --hostname db.example.com --password mydatabasepassword
 
 To configure external authentication:
 

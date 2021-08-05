@@ -3,14 +3,14 @@
 View the timeline of events for an instance or image if registered to a
 host.
 
-1.  Browse to menu: **Compute > Clouds > Instances**.
+1. Browse to menu: **Compute > Clouds > Instances**.
 
-2.  Click the instance to view the timeline.
+2. Click the instance to view the timeline.
 
-3.  Click ![1994](../images/1994.png) (**Monitoring**), and then
-    ![1995](../images/1995.png) (**Timelines**) on the taskbar.
+3. Click ![1994](../images/1994.png) **Monitoring**, and then
+    ![1995](../images/1995.png) **Timelines** on the taskbar.
 
-4.  From **Options**, customize the period of time to display, and the
+4. From **Options**, customize the period of time to display, and the
     types of events to view.
 
     ![2166](../images/2166.png)
@@ -32,5 +32,5 @@ host.
         **Summary**, you only see the **Power On** event in the
         timeline.
 
-5.  To see more detail on an item in the timeline, click on it. A
+5. To see more detail on an item in the timeline, click on it. A
     balloon appears with a clickable link to the resource.

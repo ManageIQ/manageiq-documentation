@@ -56,7 +56,7 @@ surrounded by its related entities.
 2.  Click on a project.
 
 3.  On the project summary page, click
-    ![Topology View button](../images/topologyviewbutton.png) (**Topology View**) on the
+    ![Topology View button](../images/topologyviewbutton.png) **Topology View** on the
     top right side of the page.
 
 ### Limiting the Number of Containers Shown in the Topology View

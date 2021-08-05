@@ -2,32 +2,33 @@
 
 Installing {{ site.data.product.title_short }} consists of the following steps:
 
-1.  Downloading the appliance for your environment as a virtual machine image template.
+1. Downloading the appliance for your environment as a virtual machine image template.
 
-2.  Setting up a virtual machine based on the appliance.
+2. Setting up a virtual machine based on the appliance.
 
-3.  Configuring the {{ site.data.product.title_short }} appliance.
+3. Configuring the {{ site.data.product.title_short }} appliance.
 
-After you have completed all the procedures in this guide, you will have a working environment on
-which additional customizations and configurations can be performed.
+After you have completed all the procedures in this guide, you will have a working
+environment on which additional customizations and configurations can be performed.
 
 ### Obtaining the {{ site.data.product.title_short }} Virtual Appliance
 
 ### Uploading and Provisioning the {{ site.data.product.title_short }} Virtual Appliance in IBM Cloud
 
-To upload the {{ site.data.product.title_short }} appliance file in IBM Cloud, ensure the following
-requirements are met:
+To upload the {{ site.data.product.title_short }} appliance file in IBM Cloud, ensure
+the following requirements are met:
 
-  - Approximately 2 GB of space for each image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the
+- Approximately 2 GB of space for each image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the
     {{ site.data.product.title_short }} appliance.
 
-  - You must have an IBM Cloud user account with the following roles:
+- You must have an IBM Cloud user account with the following roles:
 ![Figure showing the required roles for an IBM Cloud user account.](../images/required_roles.png)
 {: caption="Figure 1. Required roles for IBM Cloud user account" caption-side="bottom"}
 
-  - Depending on your infrastructure, allow time for the upload.
+- Depending on your infrastructure, allow time for the upload.
 
 ### Step A. Setting up the Custom image for {{ site.data.product.title_short }} in IBM Cloud
+
 {: #config-image}
 
 Create a custom Linux-based image to deploy {{ site.data.product.title_short }} as a virtual server
@@ -43,17 +44,17 @@ instance in IBM Cloud.
 2. Rename the {{ site.data.product.title_short }} installation image file and change the file extension from `.qc2` to `.qcow2`.
 For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (file name: `manageiq-openstack-kasparov-1.qcow2`).
 
-3. Upload the {{ site.data.product.title_short }} installation image (file name: `manageiq-openstack-kasparov-1.qcow2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). 
-   
+3. Upload the {{ site.data.product.title_short }} installation image (file name: `manageiq-openstack-kasparov-1.qcow2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console).
+
    **Note:** You can use the Aspera high-speed transfer plug-in to upload images larger than 200 MB.  
 ![Figure showing example that uses Aspera uploaded file to bucket.](../images/upload_images_to_bucket_2.png){: caption="Figure 4. Example using Aspera uploaded file to bucket" caption-side="bottom"}
 
 4. From IBM Cloud Identity and Access Management (IAM), create an authorization between the Virtual Private Cloud (VPC) Infrastructure (source service) > Image Service for VPC (resource type) and Cloud Object Storage (target service). For more information, see [Create an authorization](https://cloud.ibm.com/docs/iam?topic=iam-serviceauth#serviceauth).
-    
-    **Important**: The configuration must be set up as this example or permissions can fail. 
+
+    **Important**: The configuration must be set up as this example or permissions can fail.
     ![Figure showing example IAM authorization.](../images/service_auth_vpc.png){: caption="Figure 5. Example IAM authorization" caption-side="bottom"}
 
-5. Create a generation 2 Virtual Private Cloud (**Must be generation 2**). For more information, see [Create a VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started#create-and-configure-vpc)
+5. Create a generation 2 Virtual Private Cloud **Must be generation 2**. For more information, see [Create a VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started#create-and-configure-vpc)
   
     a. Create a VPC - The VPC must be in the same resource group and region as your bucket.
 
@@ -107,14 +108,14 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
 
    ![Figure showing add ssh key.](../images/ssh_keys.png){: caption="Figure 13. Add an ssh key" caption-side="bottom"}
 
-   f. Add storage to your virtual service. For example, 100 gigabytes. This volume is needed to configure the {{ site.data.product.title_short }} appliance. 
+   f. Add storage to your virtual service. For example, 100 gigabytes. This volume is needed to configure the {{ site.data.product.title_short }} appliance.
 
    **Note:** Make sure that the data volume name is unique and not named the same as another volume across your virtual server instances.
 
    ![Figure showing example Data volumes.](../images/data_volumes.png){: caption="Figure 14. Example Data volumes" caption-side="bottom"}
 
-    g. Select create virtual server instance. 
- 
+    g. Select create virtual server instance.
+
 9. Update the security group that allows inbound and outbound traffic. Open the server instance, go down to the Network interfaces section, and then modify the security group.
 
    ![Figure showing example security group that allows inbound and outbound traffic.](../images/security_inbound_outbound.png){: caption="Figure 15. Example security group that allows inbound and outbound traffic" caption-side="bottom"}
@@ -123,15 +124,16 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
 
    ![Figure showing example Floating IP address.](../images/floating_ip_vpc.png){: caption="Figure 16. Example Floating IP address assigned" caption-side="bottom"}
 
-
 ### Step B. Setting up the {{ site.data.product.title_short }} appliance
 
 1. Use the `ssh` command to connect to your virtual server instance (appliance) by using the floating IP address. Log in with a username of `root` and the default password `smartvm`. The Bash prompt for the root user is displayed.
   
    Example ssh as root user:
+
    ```
    ssh root@<host_ip_address>
    ```
+
 2. Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance summary screen is displayed.
 
    ![Figure showing example appliance_console.](../images/setup_appliance.png){: caption="Figure 17. Welcome to the Appliance Console" caption-side="bottom"}
@@ -143,9 +145,9 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
 4. Select _5) Configure database_ from the menu.
 
     - You are prompted to create or fetch an encryption key.
-    If this instance is the first {{ site.data.product.title_short }} appliance, select _1) Create key_.
-    
-    - If this is not the first {{ site.data.product.title_short }} appliance, select _2) Fetch key_ from remote system to fetch the key from the first appliance. For worker and multi-region setups, use this option to copy key from another appliance.
+    If this instance is the first {{ site.data.product.title_short }} appliance, select_1) Create key_.
+
+    - If this is not the first {{ site.data.product.title_short }} appliance, select_2) Fetch key_ from remote system to fetch the key from the first appliance. For worker and multi-region setups, use this option to copy key from another appliance.
 
     **Note:** All {{ site.data.product.title_short }} appliances in a multi-region deployment must use the same key.
 
@@ -154,14 +156,16 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
 6. Choose a disk for the database. The disk can be either a disk you attached previously, or a partition on the current disk.
 
     **Important:** Best practice is using a separate disk for the database.
-    
+
     If an unpartitioned disk is attached to the virtual machine, the dialog shows the options. For example,
+
     ```
     1) /dev/vdb: 20480
     2) Don't partition the disk
     ```
+
     - Enter 1 to choose /dev/vdb for the database location. This option creates a logical volume by using this device and mounts the volume to the appliance in a location appropriate for storing the database. The default location is /var/lib/pgsql, which can be found in the environment variable $APPLIANCE_PG_MOUNT_POINT.
-    
+
     - Enter 2 to continue without partitioning the disk. A second prompt confirms this choice. Selecting this option results in using the root file system for the data directory (not advised in most cases).
 
 7. Enter N for "Should this appliance run as a stand-alone database server?"
@@ -171,9 +175,9 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
 
     **Important:** Creating a new region deletes any existing data on the chosen database.
 
-9.  Create and confirm a password for the database.
+9. Create and confirm a password for the database.
 
-    {{ site.data.product.title_short }} configures the internal database. This takes a few minutes. 
+    {{ site.data.product.title_short }} configures the internal database. This takes a few minutes.
 
 10. Once {{ site.data.product.title_short }} is installed, you can log in and complete administrative tasks.
     - Log in to Red Hat {{ site.data.product.title_short }} for the first time by:
@@ -181,4 +185,3 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
     - Enter the default credentials (Username: admin | Password: smartvm) for the initial login.
     - Click Login.
   
-    

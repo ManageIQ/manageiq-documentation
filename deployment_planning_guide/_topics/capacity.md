@@ -299,10 +299,10 @@ own set of special features that include zooming in on a chart and shortcut menu
 1. Browse to the chart you want to zoom. If you hover anywhere on the chart, two dashed lines
    appear to target a coordinate of the chart.
 
-2. Click ![2251](../images/2251.png)(**Click to zoom in**) in the lower left corner of the chart to
+2. Click ![2251](../images/2251.png) **Click to zoom in** in the lower left corner of the chart to
    zoom into it.
 
-3. To go back to the regular view click ![2252](../images/2252.png)(**Click to zoom out**) on the
+3. To go back to the regular view click ![2252](../images/2252.png) **Click to zoom out** on the
    enlarged chart.
 
 #### Drilling into Chart Data

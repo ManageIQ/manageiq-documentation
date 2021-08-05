@@ -4,30 +4,32 @@ You can create and attach volumes to your storage manager.
 
 To create a volume:
 
-1.  Browse to menu: **Storage > Block Storage > Volumes**.
+1. Browse to menu: **Storage > Block Storage > Volumes**.
 
-2.  Click **Configuration**, then
-    click ![1862](../images/1862.png) (**Add a new Cloud Volume**).
+2. Click **Configuration**, then click
+   ![1862](../images/1862.png) **Add a new Cloud Volume**.
 
-3.  Select the Amazon Elastic Block Store manager from the **Storage
-    Manager** list.
+3. Select the Amazon Elastic Block Store manager from the
+   **Storage Manager** list.
 
-4.  Select an availability zone from the **Availability Zone** list.
+4. Select an availability zone from the
+   **Availability Zone** list.
 
-5.  Enter a **Volume Name**.
+5. Enter a **Volume Name**.
 
-6.  Select the type of the volume from the **Cloud Volume Type** list.
+6. Select the type of the volume from the
+   **Cloud Volume Type** list.
 
     **Note:**
 
     See [Amazon EBS Volume Types](http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html)
     for more information on volume types.
-    
-7.  Enter the size of the volume in gigabytes (GB).
 
-8.  Select whether the volume should be encrypted using the
-    **Encryption** toggle.
+7. Enter the size of the volume in gigabytes (GB).
 
-9.  Click **Add**.
+8. Select whether the volume should be encrypted using the
+   **Encryption** toggle.
+
+9. Click **Add**.
 
 The volume appears in the list of volumes after it has been provisioned.

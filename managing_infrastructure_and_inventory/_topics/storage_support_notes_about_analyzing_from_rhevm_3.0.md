@@ -1,10 +1,8 @@
 # SmartState Analysis on Red Hat Enterprise Virtualization Manager 3.0 - Storage Support Notes
 
-There are two additional steps required to perform a SmartState Analysis
-on Red Hat Enterprise Virtualization Manager 3.0 using `iSCSI` or `FCP`
-storage. NFS storage does not have these requirements.
+There are two additional steps required to perform a SmartState Analysis on Red Hat Enterprise Virtualization Manager 3.0 using `iSCSI` or `FCP` storage. NFS storage does not have these requirements.
 
-1.  Enable `DirectLUN` support for the host and {{ site.data.product.title_short }}
+1. Enable `DirectLUN` support for the host and {{ site.data.product.title_short }}
     appliance that performs the analysis.
 
       - Enable `DirectLUN` on host.
@@ -25,22 +23,12 @@ storage. NFS storage does not have these requirements.
 
         **Note:**
 
-        The {{ site.data.product.title_short }} appliance must reside in the same data center as the storage you are trying to connect. If you have multiple data centers with `iSCSI` or `FCP` storage, you need a
-        {{ site.data.product.title_short }} appliance in each data center to support virtual machine scanning.
+        The {{ site.data.product.title_short }} appliance must reside in the same data center as the storage you are trying to connect. If you have multiple data centers with `iSCSI` or `FCP` storage, you need a {{ site.data.product.title_short }} appliance in each data center to support virtual machine scanning.
 
-2.  **Set Server Relationship** - This is required to allow the virtual
-    machine SmartState analysis job to determine which data center a
-    {{ site.data.product.title_short }} appliance is running and therefore identify what
-    storage it has access to in a Red Hat Enterprise Virtualization
-    environment.
+2. **Set Server Relationship** - This is required to allow the virtual machine SmartState analysis job to determine which data center a {{ site.data.product.title_short }} appliance is running and therefore identify what storage it has access to in a Red Hat Enterprise Virtualization environment.
 
-    1.  After setting up a {{ site.data.product.title_short }} appliance and performing a
-        refresh of the Provider, find the {{ site.data.product.title_short }} appliance in
-        the **Virtual Machine** accordion list and view its summary
-        screen.
+    1. After setting up a {{ site.data.product.title_short }} appliance and performing a refresh of the Provider, find the {{ site.data.product.title_short }} appliance in the **Virtual Machine** accordion list and view its summary screen.
 
-    2.  Click **Configuration**, and then
-        ![2146](../images/2146.png)(**Edit Server Relationship**).
+    2. Click **Configuration**, and then ![2146](../images/2146.png) **Edit Server Relationship**.
 
-    3.  Select the server that relates to this instance of the
-        {{ site.data.product.title_short }} appliance.
+    3. Select the server that relates to this instance of the {{ site.data.product.title_short }} appliance.

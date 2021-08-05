@@ -4,106 +4,103 @@ For an overview of IBM Power Systems Virtual Servers, including terminology used
 
 Create a request to provision IBM Power Systems Virtual Servers instances from images.
 
-1.  Browse to menu: **Compute > Clouds > Instances**.
+1. Browse to menu: **Compute > Clouds > Instances**.
 
-2.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
-    ![1862](../images/1862.png)(**Provision Instances**).
+2. Click ![2007](../images/2007.png)**Lifecycle**, then click
+   ![1862](../images/1862.png) **Provision Instances**.
 
-3.  Select an image from the list presented. Each image is associated with a single Power Systems
-    Virtual Servers provider instance. If there are multiple provider instances registered be sure
-    to select an image associated with the desired instance.
+3. Select an image from the list presented. Each image is associated with a single Power
+   Systems Virtual Servers provider instance. If there are multiple provider instances
+   registered be sure to select an image associated with the desired instance.
 
-4.  Click **Continue**.
+4. Click **Continue**.
 
-5.  Click the **General** tab for general instance options.
+5. Click the **General** tab for general instance options.
 
-    1.  Select the **Number of Instances** to provision.
+    1. Select the **Number of Instances** to provision.
 
-    2.  Type an **Instance Name**.
+    2. Type an **Instance Name**.
 
-6.  Click the **Profile** tab for hardware profile options.
+6. Click the **Profile** tab for hardware profile options.
 
-    1.  Select the **Processor** type.
+    1. Select the **Processor** type.
 
     **Note:**
 
-    See
-    [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#processor)
+    See [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#processor)
     for more information.
-    
-    1.  Select a **Machine Type**.
 
-    2.  Optionally, select **Attach Volumes** items.
+    1. Select a **Machine Type**.
 
-    **Note:**
-
-    Note: A VM cannot have disks from different storage types. Only existing volumes matching the
-    **Storage Type** will be available for selection.
-
-    1.  Select a **Storage Type**.
+    2. Optionally, select **Attach Volumes** items.
 
     **Note:**
 
-    See
-    [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#storage)
+    Note: A VM cannot have disks from different storage types. Only existing volumes
+    matching the **Storage Type** will be available for selection.
+
+    1. Select a **Storage Type**.
+
+    **Note:**
+
+    See [Power Systems Virtual Servers documentation](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#storage)
     for more information on volume types.
 
-    1.  Enter number of **Entitled Processors**.
+    1. Enter number of **Entitled Processors**.
 
     **Note:**
 
-    If 'dedicated' **Processor** is selected, **Entitled Processors** must be allocated in whole numbers.
+    If 'dedicated' **Processor** is selected, **Entitled Processors** must be allocated in
+    whole numbers.
 
-    If 'shared' or 'uncapped' **Processor** is selected, **Entitled Processors** must be allocated
-    in a multiple of '0.25'.
+    If 'shared' or 'uncapped' **Processor** is selected, **Entitled Processors** must be
+    allocated in a multiple of '0.25'.
 
-    1.  Enter **Memory (GB**).
+    1. Enter **Memory (GB)**.
 
-    2.  Optionally, select a **Key Pair**.
+    2. Optionally, select a **Key Pair**.
 
-7.  Click the **New Volumes** tab to optionally create new volumes to be attached to the VM.
+7. Click the **New Volumes** tab to optionally create new volumes to be attached to the VM.
 
-    All new volumes will be the **Storage Type** selected in the **Profile** tab. For each new volume:
+    All new volumes will be the **Storage Type** selected in the **Profile** tab. For each
+    new volume:
 
-    1.  Type a volume **Name**.
+    1. Type a volume **Name**.
 
-    2.  Enter **Size (GB**).
+    2. Enter **Size (GB)**.
 
-    3.  Select a **Sharable**.
+    3. Select a **Sharable**.
 
-8.  Click the **Network** tab to select networks.
+8. Click the **Network** tab to select networks.
 
-    1.  Select an existing network from **Network Interface**. If 'None' is selected then
-        **Attach to New Public Network** must be  selected.
+    1. Select an existing network from **Network Interface**. If 'None' is selected then **Attach to New Public Network** must be  selected.
 
-    1.  Select **Attach to New Public Network** to create a new public network to attach to the VM.
+    2. Select **Attach to New Public Network** to create a new public network to attach to the VM.
 
-9.  Click the **Customization** tab for additional options.
+9. Click the **Customization** tab for additional options.
 
-    1.  Use the **Upload File** section to upload a Cloud-init file.
+    1. Use the **Upload File** section to upload a Cloud-init file.
 
-    2.  In the **Other** section, select **Migratable** and **VM pinning**
+    2. In the **Other** section, select **Migratable** and **VM pinning**
 
     **Note:**
 
-    [Learn more](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#pinning)
-    about VM pinning.
-    
-    1.  In the **IP Address Information** section, optionally enter an IP address to request for
-        the selected **Network Interface** in the **Network** tab.
+    [Learn more](https://cloud.ibm.com/docs/power-iaas?topic=power-iaas-power-iaas-faqs#pinning) about VM pinning.
 
-1.  Click **Submit**.
+    1. In the **IP Address Information** section, optionally enter an IP address to request for the selected **Network Interface** in the **Network** tab.
 
-The provisioning request is sent for approval. For the provisioning to begin, a user with the
-admin, approver, or super admin account role must approve the request. The admin and super admin
-roles can also edit, delete, and deny the requests. You will be able to see all provisioning
-requests where you are either the requester or the approver.
+10. Click **Submit**.
 
-After submission, the appliance assigns each provision request a **Request ID**. If an error occurs
-during the approval or provisioning process, use this ID to locate the request in the appliance
-logs. The Request ID consists of the region associated with the request followed by the request
-number. As regions define a range of one trillion database IDs, this number can be several digits
-long.
+The provisioning request is sent for approval. For the provisioning to begin, a user with
+the admin, approver, or super admin account role must approve the request. The admin and
+super admin roles can also edit, delete, and deny the requests. You will be able to see all
+provisioning requests where you are either the requester or the approver.
+
+After submission, the appliance assigns each provision request a **Request ID**. If an
+error occurs during the approval or provisioning process, use this ID to locate the request
+in the appliance logs. The Request ID consists of the region associated with the request
+followed by the request number. As regions define a range of one trillion database IDs,
+this number can be several digits long.
 
 **Request ID Format**
 

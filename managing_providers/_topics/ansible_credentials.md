@@ -1,27 +1,24 @@
 # Credentials
 
 Credentials are utilized by {{ site.data.product.title_short }} for authentication when
-running Ansible playbooks against machines, synchronizing with inventory
-sources, and importing project content from a version control system.
+running Ansible playbooks against machines, synchronizing with inventory sources, and
+importing project content from a version control system.
 
 ## Adding Credentials
 
-{{ site.data.product.title_short }} can store credentials used by playbooks. Credentials
-saved in {{ site.data.product.title_short }} are matched and executed with a playbook
-when run.
+{{ site.data.product.title_short }} can store credentials used by playbooks. Credentials saved
+in {{ site.data.product.title_short }} are matched and executed with a playbook when run.
 
-1.  Browse to menu: **Automation > Ansible > Credentials**.
+1. Browse to menu: **Automation > Ansible > Credentials**.
 
-2.  Click **Configuration**, then
-    ![Add a New Credential](../images/1862.png) (**Add a New
-    Credential**).
+2. Click **Configuration**, then
+   ![Add a New Credential](../images/1862.png) **Add a New Credential**.
 
-3.  Provide a **Name** for the credential.
+3. Provide a **Name** for the credential.
 
-4.  Select the **Credential Type**. Additional fields will appear
-    depending on the type chosen.
+4. Select the **Credential Type**. Additional fields will appear depending on the type chosen.
 
-5.  Click **Add**.
+5. Click **Add**.
 
 ## Credential Types
 
@@ -37,28 +34,28 @@ an SSH key, or a key password. They define SSH and user-level privilege
 escalation access for playbooks, and are used when running playbooks on
 a remote host.
 
-  - **Username**: The username to be used for SSH authentication.
+- **Username**: The username to be used for SSH authentication.
 
-  - **Password**: The actual password to be used for SSH authentication.
+- **Password**: The actual password to be used for SSH authentication.
 
-  - **SSH Private Key**: Copy or drag-and-drop the SSH private key for
+- **SSH Private Key**: Copy or drag-and-drop the SSH private key for
     the machine credential.
 
-  - **Private Key Passphrase**: If the SSH Private Key used is protected
+- **Private Key Passphrase**: If the SSH Private Key used is protected
     by a password, you can configure a Key Password for the private key.
 
-  - **Privilege Escalation**: Specifies the type of escalation privilege
+- **Privilege Escalation**: Specifies the type of escalation privilege
     to assign to specific users. Options include **sudo**, **su**,
     **pbrun**, **pfexec**.
 
-  - **Privilege Escalation Username**: Enter the username to use with
+- **Privilege Escalation Username**: Enter the username to use with
     escalation privileges on the remote system.
 
-  - **Privilege Escalation Password**: Enter the actual password to be
+- **Privilege Escalation Password**: Enter the actual password to be
     used to authenticate the user via the selected privilege escalation
     type on the remote system.
 
-  - **Vault Password**: Ansible Vault credentials have only the **Vault
+- **Vault Password**: Ansible Vault credentials have only the **Vault
     Password** attribute that may be configured.
 
 **Note:**
@@ -72,22 +69,22 @@ and manage networking devices.
 
 Network credentials have several attributes that may be configured:
 
-  - **Username**: The username to use in conjunction with the network
+- **Username**: The username to use in conjunction with the network
     device.
 
-  - **Password**: The password to use in conjunction with the network
+- **Password**: The password to use in conjunction with the network
     device.
 
-  - **Authorize**: Select this from the Options field to add an
+- **Authorize**: Select this from the Options field to add an
     Authorize password which signs the RSA key with a password.
 
-  - **Authorize password**: If **Authorize** is checked, enter a
+- **Authorize password**: If **Authorize** is checked, enter a
     password in the **Authorize Password** field.
 
-  - **SSH Key**: Copy or drag-and-drop the actual SSH Private Key to be
+- **SSH Key**: Copy or drag-and-drop the actual SSH Private Key to be
     used to authenticate the user to the network via SSH.
 
-  - **Private key passphrase**: The actual passphrase for the private
+- **Private key passphrase**: The actual passphrase for the private
     key to be used to authenticate the user to the network via SSH.
 
 ### SCM
@@ -99,17 +96,17 @@ system such as Git, Subversion, or Mercurial.
 Source Control credentials have several attributes that may be
 configured:
 
-  - **Username**: The username to use in conjunction with the source
+- **Username**: The username to use in conjunction with the source
     control system.
 
-  - **Password**: The password to use in conjunction with the source
+- **Password**: The password to use in conjunction with the source
     control system.
 
-  - **Private key passphrase**: If the SSH private key used is protected
+- **Private key passphrase**: If the SSH private key used is protected
     by a passphrase, you may configure a key passphrase for the private
     key.
 
-  - **Private Key**: Copy or drag-and-drop the actual SSH Private Key to
+- **Private Key**: Copy or drag-and-drop the actual SSH Private Key to
     be used to authenticate the user to the source control system via
     SSH.
 
@@ -118,13 +115,13 @@ configured:
 Selecting this credential type enables synchronization of cloud
 inventory with Amazon Web Services.
 
-  - **Access Key**: User credentials that allow for programmatic calls
+- **Access Key**: User credentials that allow for programmatic calls
     to Amazon Web Services.
 
-  - **Secret Key**: The secret key that corresponds to the user access
+- **Secret Key**: The secret key that corresponds to the user access
     key.
 
-  - **STS Token**: Token generated by Amazon Web Services Security Token
+- **STS Token**: Token generated by Amazon Web Services Security Token
     Service.
 
 ### Azure Classic (deprecated)
@@ -134,10 +131,10 @@ inventory with Microsoft Windows Azure Classic.
 
 Microsoft Azure credentials have several attributes to configure:
 
-  - **Subscription ID**: The Subscription UUID for the Microsoft Azure
+- **Subscription ID**: The Subscription UUID for the Microsoft Azure
     Classic account.
 
-  - **Management Certificate**: The PEM file that corresponds to the
+- **Management Certificate**: The PEM file that corresponds to the
     certificate you uploaded in the Microsoft Azure Classic console.
 
 ### Azure
@@ -147,21 +144,21 @@ inventory with Microsoft Azure.
 
 Microsoft Azure credentials have several attributes to configure:
 
-  - **Username**: The username to use to connect to the Microsoft Azure
+- **Username**: The username to use to connect to the Microsoft Azure
     account.
 
-  - **Password**: The password to use to connect to the Microsoft Azure
+- **Password**: The password to use to connect to the Microsoft Azure
     account.
 
-  - **Subscription ID**: The Subscription UUID for the Microsoft Azure
+- **Subscription ID**: The Subscription UUID for the Microsoft Azure
     account.
 
-  - **Tenant ID**: The Tenant ID for the Microsoft Azure account.
+- **Tenant ID**: The Tenant ID for the Microsoft Azure account.
 
-  - **Client Secret**: The Client Secret for the Microsoft Azure
+- **Client Secret**: The Client Secret for the Microsoft Azure
     account.
 
-  - **Client ID**: The Client ID for the Microsoft Azure account.
+- **Client ID**: The Client ID for the Microsoft Azure account.
 
 ### OpenStack
 
@@ -170,18 +167,18 @@ inventory with Red Hat OpenStack Platform.
 
 OpenStack credentials have several attributes that may be configured:
 
-  - **Username**: The username to use to connect to OpenStack.
+- **Username**: The username to use to connect to OpenStack.
 
-  - **Password (API Key**): The password or API key to use to connect to
+- **Password (API Key**): The password or API key to use to connect to
     OpenStack.
 
-  - **Host (Authentication URL**): The host to be used for
+- **Host (Authentication URL**): The host to be used for
     authentication.
 
-  - **Project (Tenant Name**): The Tenant name or Tenant ID used for
+- **Project (Tenant Name**): The Tenant name or Tenant ID used for
     OpenStack. This value is usually the same as the username.
 
-  - **Domain name**: The FQDN to be used to connect to OpenStack.
+- **Domain name**: The FQDN to be used to connect to OpenStack.
 
 ### Rackspace
 
@@ -191,9 +188,9 @@ inventory with Rackspace.
 Rackspace credentials have the following attributes that may be
 configured:
 
-  - **Username**: The username to use to connect to vCenter.
+- **Username**: The username to use to connect to vCenter.
 
-  - **API Key**: The public key related to the administrator ID.
+- **API Key**: The public key related to the administrator ID.
 
 ### Red Hat Virtualization
 
@@ -203,22 +200,22 @@ inventory with Red Hat Virtualization.
 Red Hat Virtualization credentials have several attributes that may be
 configured:
 
-  - **Username**: The username to use to connect to Red Hat
+- **Username**: The username to use to connect to Red Hat
     Virtualization.
 
-  - **Password**: The password to use to connect to Red Hat
+- **Password**: The password to use to connect to Red Hat
     Virtualization.
 
-  - **Host (Authentication URL**): The host to be used for
+- **Host (Authentication URL**): The host to be used for
     authentication.
 
     <div class="important">
 
-      - Enter in **Host** the Red Hat Virtualization provider URL,
+  - Enter in **Host** the Red Hat Virtualization provider URL,
         followed by the path `/ovirt_engine/api`. Example:
         `https://your.rhv.com/ovirt_engine/api`
 
-      - See [Ansible Roles](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/administration_guide/chap-automating_rhv_configuration_using_ansible#Ansible_Roles)
+  - See [Ansible Roles](https://access.redhat.com/documentation/en-us/red_hat_virtualization/4.1/html/administration_guide/chap-automating_rhv_configuration_using_ansible#Ansible_Roles)
         for more information on Ansible Roles available for Red Hat
         Virtualization.
 
@@ -231,11 +228,11 @@ inventory with Red Hat Satellite 6.
 
 Satellite credentials have several attributes that may be configured:
 
-  - **Username**: The username to use to connect to Satellite 6.
+- **Username**: The username to use to connect to Satellite 6.
 
-  - **Password**: The password to use to connect to Satellite 6.
+- **Password**: The password to use to connect to Satellite 6.
 
-  - **Satellite 6 Host**: The Satellite 6 URL or IP address to connect
+- **Satellite 6 Host**: The Satellite 6 URL or IP address to connect
     to.
 
 ### VMware
@@ -249,11 +246,11 @@ If both {{ site.data.product.title_short }} and a VMware provider are located in
 
 VMware credentials have several attributes that may be configured:
 
-  - **Username**: The username to use to connect to vCenter.
+- **Username**: The username to use to connect to vCenter.
 
-  - **Password**: The password to use to connect to vCenter.
+- **Password**: The password to use to connect to vCenter.
 
-  - **vCenter Host**: The vCenter hostname or IP address to connect to.
+- **vCenter Host**: The vCenter hostname or IP address to connect to.
 
 **Note:**
 

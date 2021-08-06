@@ -1,15 +1,15 @@
 # Refreshing Network Providers
 
-Refresh a network provider to find other resources related to it. Ensure
-the selected network providers have the correct credentials before
-refreshing.
+Refresh a network provider to find other
+resources related to it. Ensure the
+selected network providers have the correct
+credentials before refreshing.
 
-1.  Browse to menu: **Networks > Providers**.
+1. Browse to menu: **Networks > Providers**.
 
-2.  Select the network providers to refresh.
+2. Select the network providers to refresh.
 
-3.  Click **Configuration**, and
-    then ![Refresh Relationships and Power States](../images/2003.png)
-    (**Refresh Relationships and Power States**).
+3. Click **Configuration**, and then
+   ![Refresh Relationships and Power States](../images/2003.png) **Refresh Relationships and Power States**.
 
-4.  Click **OK**.
+4. Click **OK**.

@@ -1,13 +1,6 @@
 # Reportable Fields in {{ site.data.product.title_short }}
 
-{{ site.data.product.title_short }} provides a set of out of the box reports covering a
-variety of areas. These fields are collected by {{ site.data.product.title_short }} from the
-different parts of the infrastructure. Most of the fields are named
-directly as the vendor would name them. However, there are some fields
-that {{ site.data.product.title_short }} calculates given this data. Note that this list may
-vary by Provider and may change as new Providers are added to
-{{ site.data.product.title_short }}. Also, note that the value returned by each reportable
-field below is in megabytes (MB).
+{{ site.data.product.title_short }} provides a set of out of the box reports covering a variety of areas. These fields are collected by {{ site.data.product.title_short }} from the different parts of the infrastructure. Most of the fields are named directly as the vendor would name them. However, there are some fields that {{ site.data.product.title_short }} calculates given this data. Note that this list may vary by Provider and may change as new Providers are added to {{ site.data.product.title_short }}. Also, note that the value returned by each reportable field below is in megabytes (MB).
 
 | Reportable Field                                                                              |
 | --------------------------------------------------------------------------------------------- |

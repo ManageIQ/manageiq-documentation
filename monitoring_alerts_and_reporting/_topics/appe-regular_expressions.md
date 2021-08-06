@@ -1,14 +1,6 @@
 # Regular Expressions
 
-In {{ site.data.product.title_short }}, regular expressions can be used to search the
-contents of a file for a specific string for use in a condition. Below
-are listed the items most commonly used with {{ site.data.product.title_short }} to search
-strings. These are a small subset of all the items available to use in
-regular expressions. If you are unfamiliar with regular expressions,
-there are many resources available on the Internet, including
-[www.regular-expressions.info](http://www.regular-expressions.info/).
-Note that if you want to search a file, you must collect it as part of a
-host analysis profile.
+In {{ site.data.product.title_short }}, regular expressions can be used to search the contents of a file for a specific string for use in a condition. Below are listed the items most commonly used with {{ site.data.product.title_short }} to search strings. These are a small subset of all the items available to use in regular expressions. If you are unfamiliar with regular expressions, there are many resources available on the Internet, including [www.regular-expressions.info](http://www.regular-expressions.info/). Note that if you want to search a file, you must collect it as part of a host analysis profile.
 
 |                                  |                                                                                 |
 | -------------------------------- | ------------------------------------------------------------------------------- |

@@ -7,47 +7,35 @@ This feature is currently available as a technology preview only. For more infor
 Prometheus is used as an external alerting component.
 {{ site.data.product.title_short }} integrates Prometheus alerts for use with OpenShift Container Platform. {{ site.data.product.title_short }} collects events from Prometheus, generates alerts based on these events, and then attaches alerts to inventory objects.
 
-It is possible to view ongoing alerts in {{ site.data.product.title_short }} by browsing to menu: **Monitor > Alerts** and manage their life cycle,
-including the ability to:
+It is possible to view ongoing alerts in {{ site.data.product.title_short }} by browsing to menu: **Monitor > Alerts** and manage their life cycle, including the ability to:
 
-  - View active alerts per provider in the **Overview** screen.
+- View active alerts per provider in the **Overview** screen.
 
-  - View alert data and related objects.
+- View alert data and related objects.
 
-  - Comment, assign, and acknowledge alerts in the **All Alerts**
-    screen.
+- Comment, assign, and acknowledge alerts in the **All Alerts** screen.
 
 <div class="important">
 
-Network utilization metrics for OpenShift Container Platform are only
-collected for `eth0` network interfaces. Therefore, network utilization
-trend will not be displayed for network interfaces other than `eth0` on
-the overview screen of the provider.
+Network utilization metrics for OpenShift Container Platform are only collected for `eth0` network interfaces. Therefore, network utilization trend will not be displayed for network interfaces other than `eth0` on the overview screen of the provider.
 
 </div>
 
 ### Configuring Prometheus Alerts in {{ site.data.product.title_short }}
 
-Configuring and enabling Prometheus alerts in {{ site.data.product.title_short }}
-comprises the following steps:
+Configuring and enabling Prometheus alerts in {{ site.data.product.title_short }} comprises the following steps:
 
-1.  Deploying and configuring Prometheus on OpenShift.
+1. Deploying and configuring Prometheus on OpenShift.
 
-2.  Assigning Prometheus alert profiles to the enterprise in
-    {{ site.data.product.title_short }}.
+2. Assigning Prometheus alert profiles to the enterprise in {{ site.data.product.title_short }}.
 
-3.  Adding an OpenShift Containers Provider with a Prometheus alert
-    endpoint in {{ site.data.product.title_short }}.
+3. Adding an OpenShift Containers Provider with a Prometheus alert endpoint in {{ site.data.product.title_short }}.
 
 #### Deploying and Configuring Prometheus on OpenShift
 
-1.  Deploy Prometheus on OpenShift by following the steps covered in
-    [Prometheus on OpenShift Container
-    Platform](https://docs.openshift.com/container-platform/3.7/install_config/cluster_metrics.html#openshift-prometheus).
+1. Deploy Prometheus on OpenShift by following the steps covered in [Prometheus on OpenShift Container Platform](https://docs.openshift.com/container-platform/3.7/install_config/cluster_metrics.html#openshift-prometheus).
 
-2.  Add Prometheus to an OpenShift cluster and configure alert
-    definitions. See the example code block below for configuring alerts
-    (currently must be done on the Prometheus side):
+2. Add Prometheus to an OpenShift cluster and configure alert definitions. See the example code block below for configuring alerts (currently must be done on the Prometheus side):
 
         $ oc edit configmap -n openshift-metrics prometheus
         # Supported labels:
@@ -76,55 +64,38 @@ comprises the following steps:
                   url: "https://www.example.com/too_many_requests_fixing_instructions"
                   description: "Too many authenticated requests"
 
-3.  Reload the Prometheus configuration. You can do this by deleting the
-    Prometheus pod, then redeploying with the new configuration.
+3. Reload the Prometheus configuration. You can do this by deleting the Prometheus pod, then redeploying with the new configuration.
 
 #### Assigning Prometheus Alert Profiles to the Enterprise
 
-Complete the following procedure to assign Prometheus alert profiles to
-the enterprise using the {{ site.data.product.title_short }} user interface.
+Complete the following procedure to assign Prometheus alert profiles to the enterprise using the {{ site.data.product.title_short }} user interface.
 
 **Note:**
 
-Both Node and Provider alert profiles are created automatically during
-the installation, so it is not required to create these profiles.
+Both Node and Provider alert profiles are created automatically during the installation, so it is not required to create these profiles.
 
-1.  Browse to menu: **Control > Explorer**, then click **Alert Profiles**
-    in the accordion menu.
+1. Browse to menu: **Control > Explorer**, then click **Alert Profiles** in the accordion menu.
 
-2.  Click to expand **Node Alert Profiles**, then click **Prometheus
-    Node Profile**.
+2. Click to expand **Node Alert Profiles**, then click **Prometheus Node Profile**.
 
-3.  Click **Configuration**, then
-    click ![1851](../images/1851.png) (**Edit assignments for this Alert
-    Profile**). Assign the profile to **The Enterprise** from the
-    **Assign To** list.
+3. Click **Configuration**, then click ![1851](../images/1851.png) **Edit assignments for this Alert Profile**. Assign the profile to **The Enterprise** from the **Assign To** list.
 
-4.  Click **Save**.
+4. Click **Save**.
 
-5.  Click to expand **Provider Alert Profiles**, then click **Prometheus
-    Provider Profile**.
+5. Click to expand **Provider Alert Profiles**, then click **Prometheus Provider Profile**.
 
-6.  Click **Configuration**, then click **Edit assignments for this
-    Alert Profile**. Assign the profile to **The Enterprise** from the
-    **Assign To** list.
+6. Click **Configuration**, then click **Edit assignments for this Alert Profile**. Assign the profile to **The Enterprise** from the **Assign To** list.
 
-7.  Click **Save**.
+7. Click **Save**.
 
     **Note:**
 
-    Alerts triggered before assigning the profiles to the enterprise
-    will not appear in {{ site.data.product.title_short }} at all.
+    Alerts triggered before assigning the profiles to the enterprise will not appear in {{ site.data.product.title_short }} at all.
 
 #### Adding an OpenShift Containers Provider with a Prometheus Alert Endpoint
 
-Complete the following procedure to add an OpenShift Containers Provider
-with a Prometheus Alert Endpoint using the {{ site.data.product.title_short }} user
-interface.
+Complete the following procedure to add an OpenShift Containers Provider with a Prometheus Alert Endpoint using the {{ site.data.product.title_short }} user interface.
 
 {% include provider-ocp-add-container.md %}
 
-Once you have completed the procedure, you will have OpenShift
-Prometheus alerts enabled in {{ site.data.product.title_short }}, and can manage
-their life cyle from the menu: **Monitor > Alerts** screen in the user
-interface.
+Once you have completed the procedure, you will have OpenShift Prometheus alerts enabled in {{ site.data.product.title_short }}, and can manage their life cyle from the menu: **Monitor > Alerts** screen in the user interface.

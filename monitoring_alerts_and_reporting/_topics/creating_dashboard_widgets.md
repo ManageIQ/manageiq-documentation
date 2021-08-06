@@ -16,5 +16,4 @@
 
 {% include_relative _topics/exporting_a_widget.md %}
 
-{% include_relative
-_topics/to_generate_widget_content_immediately.md %}
+{% include_relative_topics/to_generate_widget_content_immediately.md %}

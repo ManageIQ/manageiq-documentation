@@ -1,4 +1,7 @@
-Events are triggers that cause a condition to be tested. Control provides several Events, that can be divided into functional types. Events cannot be modified.
+# Chap Events
+
+Events are triggers that cause a condition to be tested. Control provides several Events,
+that can be divided into functional types. Events cannot be modified.
 
 | Category                  | Description                                                                                                                                                                                          |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -15,10 +18,9 @@ Events are triggers that cause a condition to be tested. Control provides severa
 | VM Operation              | Events associated with power states or locations of virtual machines and virtual desktop machines. These include, but are not limited to, power off, power on, reset, resume, shutdown, and suspend. |
 | Service Lifecycle         | Events associated with service lifecycle. These include, but are not limited to, provisioning completed, start request, started, stop request, stopped, retirement warning, and retired.             |
 
-Event Types
+## Event Types
 
-Each type has a set of events that you can select to trigger the
-checking of a condition.
+Each type has a set of events that you can select to trigger the checking of a condition.
 
 | Event                                | Description                                                                                                                                                                                                                                   |
 | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

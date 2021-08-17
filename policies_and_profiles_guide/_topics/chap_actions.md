@@ -1,4 +1,7 @@
-Actions are performed after the condition is evaluated. Control comes with a set of default actions that you can choose from. You can also create some of your own.
+# Chap Actions
+
+Actions are performed after the condition is evaluated. Control comes with a set of
+default actions that you can choose from. You can also create some of your own.
 
 | Action                                                      | Description                                                                                                        |
 | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
@@ -36,9 +39,12 @@ Actions are performed after the condition is evaluated. Control comes with a set
 
 Default Actions and Descriptions
 
-### Custom Actions
+## Custom Actions
 
-You can create a custom action by using the {{ site.data.product.title_short }} console. Enter a description and action type. Procedures for each type of action are shown in the following sections. When you create a policy, you can associate actions with specific events.
+You can create a custom action by using the {{ site.data.product.title_short }} console.
+Enter a description and action type. Procedures for each type of action are shown in the
+following sections. When you create a policy, you can associate actions with specific
+events.
 
 | Custom Action                     | Description                                                                                                                   |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- |
@@ -59,9 +65,7 @@ You can create a custom action by using the {{ site.data.product.title_short }} 
 
 Custom Actions and Descriptions
 
-{% include_relative
-_topics/to_create_an_assign_profile_to_analysis_task_action.md
-%}
+{% include_relative_topics/to_create_an_assign_profile_to_analysis_task_action.md%}
 
 {% include_relative _topics/to_create_a_snapshot_action.md %}
 
@@ -71,23 +75,19 @@ _topics/to_create_an_assign_profile_to_analysis_task_action.md
 
 {% include_relative _topics/to_create_an_inherit_tag_action.md %}
 
-{% include_relative _topics/to_create_a_cpu_reconfigure_action.md
-%}
+{% include_relative _topics/to_create_a_cpu_reconfigure_action.md%}
 
-{% include_relative
-_topics/to_create_a_memory_reconfigure_action.md %}
+{% include_relative_topics/to_create_a_memory_reconfigure_action.md %}
 
 {% include_relative _topics/to_create_an_remove_tag_action.md %}
 
-{% include_relative _topics/to_create_an_ansible_playbook_run.md
-%}
+{% include_relative _topics/to_create_an_ansible_playbook_run.md%}
 
 {% include_relative _topics/to_create_an_e-mail_action.md %}
 
 {% include_relative _topics/to_create_an_snmp_action.md %}
 
-{% include_relative
-_topics/to_create_a_set_custom_attribute_action.md %}
+{% include_relative_topics/to_create_a_set_custom_attribute_action.md %}
 
 {% include_relative _topics/to_create_a_tag_action.md %}
 

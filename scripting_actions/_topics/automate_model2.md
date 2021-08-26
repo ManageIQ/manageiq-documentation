@@ -30,7 +30,7 @@ organizational units arranged in a hierarchy:
   - **Methods** - Methods are functions within the model. Methods use
     Ruby code to execute various operations needed for a Class.
 
-{{ site.data.product.title_short }} contains a set of preconfigured Domains for users:
+{{ site.data.product.title_short }} contains a preconfigured Domain for users:
 
   - **ManageIQ** - The core domain for {{ site.data.product.title_short }} Automate
     operations. This domain is locked with the following Namespaces:
@@ -43,25 +43,15 @@ organizational units arranged in a hierarchy:
       - **Infrastructure** - General infrastructure VM lifecycle from
         provisioning, retirement, methods, email.
 
+      - **Integration** - Used to interface with systems outside of
+        {{ site.data.product.title_short }}. Use this namespace to integrate
+        with additional systems.
+
       - **Service** - Service lifecycle from provisioning, retirement,
         methods, email.
 
       - **System** - System contains classes that can provide the start
         points for all {{ site.data.product.title_short }} Automate activities.
-
-  - **RedHat** - Domain containing advanced operations, specifically
-    interactions with supported cloud and infrastructure providers. This
-    domain is locked with the following Namespaces:
-
-      - **Cloud** - Red Hat-supported cloud instance lifecycle from
-        provisioning, retirement, methods, email.
-
-      - **Infrastructure** - Red Hat-supported cloud instance lifecycle
-        from provisioning, retirement, methods, email.
-
-      - **Integration** - Used to interface with systems outside of
-        {{ site.data.product.title_short }}. Use this namespace to integrate with additional
-        systems.
 
 You can copy classes and instances from locked Domains into your own
 custom domains.

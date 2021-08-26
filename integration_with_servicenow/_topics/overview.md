@@ -11,7 +11,7 @@ The following new namespace and class delivers support for the
 management of **ServiceNow Configuration Management Database** (CMDB)
 records using **ServiceNow’s RESTful** web service.
 
-    /RedHat/Integration/ServiceNow/CMDB
+    /Integration/ServiceNow/CMDB
 
 You can manage records in the **CMDB\_CI\_SERVER** table, including
 `create`, `update`, and/or `delete`. The following methods are included:

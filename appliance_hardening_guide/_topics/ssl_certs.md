@@ -69,7 +69,7 @@ Copy the certificate and key files to the certificate directory on the appliance
 
 After the certificate and key files have been copied, restart the appliance:
 
-    [root@ ~]# systemctl restart evmserverd
+    [root@ ~]# systemctl restart manageiq
 
 The appliance now uses your own certificate.
 

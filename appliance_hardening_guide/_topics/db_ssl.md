@@ -23,9 +23,9 @@ To configure SSL on the database appliance:
 
 1.  Log in as `root` to the appliance where the database resides.
 
-2.  Stop the `evmserverd` and `postgresql` services:
+2.  Stop the `manageiq` and `postgresql` services:
 
-        [root@appliance2 ~]# systemctl stop evmserverd
+        [root@appliance2 ~]# systemctl stop manageiq
         [root@appliance2 ~]# systemctl stop postgresql.service
 
 3.  Install the server key file in the correct location and set the ownership and permissions for it:
@@ -74,10 +74,10 @@ To configure SSL on the database appliance:
 
     This changes the incoming communication protocol to use SSL and refuse any unencrypted PostgreSQL connections.
 
-9.  Start the `postgresql` and `evmserverd` services so that the changes take effect:
+9.  Start the `postgresql` and `manageiq` services so that the changes take effect:
 
         [root@{{ site.data.product.title_short_l }}1 ~]# systemctl start postgresql.service
-        [root@{{ site.data.product.title_short_l }}1 ~]# systemctl start evmserverd
+        [root@{{ site.data.product.title_short_l }}1 ~]# systemctl start manageiq
 
 The database appliance now accepts only connections from connecting appliances that use SSL. The following procedure sets up connecting appliances to communicate to the database by using SSL. Use this procedure for each connecting appliance:
 

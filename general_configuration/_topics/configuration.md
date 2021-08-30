@@ -2999,7 +2999,7 @@ restoring data.
 
 3.  Stop both the EVM and PostgreSQL servers:
 
-        # systemctl stop evmserverd
+        # systemctl stop manageiq
         # systemctl stop $APPLIANCE_PG_SERVICE
 
 4.  Rename the existing data directory:
@@ -3022,7 +3022,7 @@ restoring data.
 8.  Restart the PostgreSQL and EVM servers:
 
         # systemctl start $APPLIANCE_PG_SERVICE
-        # systemctl start evmserverd
+        # systemctl start manageiq
 
 #### Running Database Garbage Collection
 
@@ -3063,7 +3063,7 @@ PostgreSQL database.
 
 To change the password, you need to stop the {{ site.data.product.title_short }}
 service, change the password for the PostgreSQL database, run a command
-to change the password in the configuration file that `evmserverd` uses
+to change the password in the configuration file that `manageiq` uses
 to access the server, and restart the {{ site.data.product.title_short }} appliance.
 
 1.  Stop the {{ site.data.product.title_short }} service:
@@ -3073,7 +3073,7 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
     2.  To stop the {{ site.data.product.title_short }} service, run the following
         command:
 
-            service evmserverd stop
+            service manageiq stop
 
 2.  Use `pgadmin` to change the password for your {{ site.data.product.title_short }}
     database (default is `vmdb_production`). If you do not have
@@ -3091,14 +3091,14 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
         \q
         ```
 
-3.  Change the password in the configuration file that `evmserverd` uses
+3.  Change the password in the configuration file that `manageiq` uses
     to access the server:
 
         /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
 
 4.  Restart the {{ site.data.product.title_short }} service:
 
-        service evmserverd start
+        service manageiq start
 
 5.  Verify that you can log in to the {{ site.data.product.title_short }} console.
 
@@ -3111,16 +3111,16 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
     2.  To stop the {{ site.data.product.title_short }} service, run the following
         command:
 
-            service evmserverd stop
+            service manageiq stop
 
-2.  Change the password in the configuration file that `evmserverd` uses
+2.  Change the password in the configuration file that `manageiq` uses
     to access the server:
 
         /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
 
 3.  Restart the {{ site.data.product.title_short }} service:
 
-        service evmserverd start
+        service manageiq start
 
     <div class="important">
 
@@ -3159,13 +3159,13 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
     3.  Save the new **database.yml**.
 
 5.  Run the following command to change the password in the
-    configuration file that `evmserverd` uses to access the server:
+    configuration file that `manageiq` uses to access the server:
 
         /var/www/miq/vmdb/tools/fix_auth.rb --databaseyml --password newpassword
 
 6.  Restart the new worker appliance:
 
-        service evmserverd restart
+        service manageiq restart
 
 #### Creating a Database Dump
 

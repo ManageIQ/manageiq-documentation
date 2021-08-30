@@ -39,7 +39,7 @@ the non-database {{ site.data.product.title_short }} appliances.
     For standard {{ site.data.product.title_short }} installations, a pre-sized database disk is already attached, initialized, encryption key generated, database configured with a region, and the application started.
 
     2. Select **Stop evm server processes**, select `y`.
-    3. Quit from appliance console and `run systemctl disable evmserverd` to make this a standalone database server.
+    3. Quit from appliance console and `run systemctl disable manageiq` to make this a standalone database server.
 
     Alternatively, if you attached a new database disk and have not yet configured the application:
 
@@ -58,7 +58,7 @@ the non-database {{ site.data.product.title_short }} appliances.
     6.  For **Should this appliance run as a standalone database
         server?**, select `y`. Selecting this option configures this
         appliance as a database-only appliance, and therefore the
-        {{ site.data.product.title_abbr_uc }} application and `evmserverd` processes
+        {{ site.data.product.title_abbr_uc }} application and `manageiq` processes
         will not run. This is required in highly available database
         deployments.
 

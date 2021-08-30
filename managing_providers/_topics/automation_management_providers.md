@@ -68,7 +68,7 @@ default. Enable this server role to utilize Ansible Automation Inside.
 **Note:**
 
 Configure your {{ site.data.product.title_short }} appliance network identity (hostname/IP address) before enabling the Embedded Ansible server role.
-Restart the `evmserverd` service on the appliance with the enabled Embedded Ansible server role after making any changes to the hostname or IP address.
+Restart the `manageiq` service on the appliance with the enabled Embedded Ansible server role after making any changes to the hostname or IP address.
 
 1.  Browse to the settings menu, then **Configuration** →
     **Settings**.

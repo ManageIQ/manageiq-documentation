@@ -60,9 +60,9 @@ while some steps apply to all appliances.
 4.  Start each database-only appliance.
 
 5.  Start each non-database {{ site.data.product.title_short }} appliance again, and
-    stop `evmserverd` on each just after boot:
+    stop `manageiq` on each just after boot:
 
-        # systemctl stop evmserverd
+        # systemctl stop manageiq
 
 6.  Apply updates by running the following on each appliance:
 

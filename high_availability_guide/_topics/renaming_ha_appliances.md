@@ -33,10 +33,10 @@ following:
 
         # systemctl stop postgresql.service
 
-4.  Stop `evmserverd` on each non-database {{ site.data.product.title_short }}
+4.  Stop `manageiq` on each non-database {{ site.data.product.title_short }}
     appliance:
 
-        # systemctl stop evmserverd
+        # systemctl stop manageiq
 
 ### Updating the Primary Database-Only Appliance Hostname
 
@@ -172,19 +172,19 @@ Repeat these steps on any additional standby database-only appliances.
 <div class="important">
 
 If you are using non-dedicated database appliances, also stop
-`evmserverd` on those appliances before changing their hostnames, and
+`manageiq` on those appliances before changing their hostnames, and
 reconfigure `database.yml` before restarting.
 
 </div>
 
 #### Restarting Services
 
-1.  Start `evmserverd` on each non-database {{ site.data.product.title_short }}
+1.  Start `manageiq` on each non-database {{ site.data.product.title_short }}
     appliance:
 
-        # systemctl start evmserverd
+        # systemctl start manageiq
 
-    After `evmserverd` has started successfully, all appliances will be
+    After `manageiq` has started successfully, all appliances will be
     able connect to the database.
 
 2.  Restart the failover monitor on the non-database

@@ -74,7 +74,7 @@ and run the following commands replacing `dbpassword` with your database
 password:
 
     [root@{productname_short_l} ~]# fix_auth --databaseyml --hostname localhost --password dbpassword
-    [root@{productname_short_l} ~]# systemctl restart evmserverd
+    [root@{productname_short_l} ~]# systemctl restart manageiq
 
 This completes the new encryption key generation for your
 {{ site.data.product.title_short }} infrastructure.

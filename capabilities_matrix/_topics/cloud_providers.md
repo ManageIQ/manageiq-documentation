@@ -19,7 +19,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Storage Inventory              | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ✅     | ✅    |
 |   - Storage Manager            | ✅  | ❌    | ❌  | ✅        | ❌      | ✅      | ✅     | ❌    |
 |   - Volumes                    | ❌  | ❌    | ✅  | ✅        | ✅      | ✅      | ✅     | ✅    |
-| Events                         | ✅  | ✅    | ✅  | ✅        | ✅      | ❌      | ❌     | ✅    |
+| Events                         | ✅  | ✅    | ✅  | ✅        | ✅      | ❌      | ✅     | ✅    |
 | Metrics                        | ✅  | ✅    | ✅  | ✅        | ❌      | ❌      | ❌     | ✅    |
 | Forensic Analysis (SmartState) | ✅  | ✅    | ❌  | ✅        | ❌      | ❌      | ❌     | ❌    |
 
@@ -29,14 +29,14 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Instance Drift Comparison       | ✅  | ✅    | ❌  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |
 | Instance Genealogy              | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ✅                   | ✅     |
 | Capacity & Utilization          | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ✅     |
-| Instance Event Timelines        | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ✅     |
+| Instance Event Timelines        | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ✅                   | ✅     |
 | Cloud Layer Timelines           | ❌  | ❌    | ❌  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Reporting                       | ✅  | ✅    | ✅  | ✅        | ❌                   | ✅                   | ✅                   | ✅     |
 | Right Sizing                    | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Chargeback by Allocation        | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ❌     |
 | Chargeback by Usage             | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |
 | Automation Work Flows           | ✅  | ❌    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
-| Tag Mapping from Provider       | ✅  | ✅    | ❌  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
+| Tag Mapping from Provider       | ✅  | ✅    | ❌  | ✅        | ✅                   | ❌                   | ✅                   | ❌     |
 | Tag Mapping to Provider         | ❌  | ❌    | ❌  | ❌        | ❌                   | ❌                   | ❌                   | ❌     |
 | Instance Policy Enforcement     | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ✅     |
 | Instance Compliance Enforcement | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |
@@ -47,8 +47,8 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | -------------------------------------- | --- | ----- | --- | --------- | -------------------------------- | -------- | ------- | ------------ |
 | Instance Remote Console Access         | ❌  | ❌    | ❌  | ✅ (VNC)  | ✅ (NovaLink-managed hosts only) | ❌       | ❌      | ❌           |
 | Instance Power Operations              | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ✅           |
-| Instance Provisioning                  | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ❌      | ❌           |
-|   - from Image to Instance             | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ❌      | ❌           |
+| Instance Provisioning                  | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ❌           |
+|   - from Image to Instance             | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ❌           |
 |   - from Image Snapshot to Instance    | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 |   - from Volume to Instance            | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 |   - from Volume Snapshot to Instance   | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
@@ -62,7 +62,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Instance Snapshot Creation and Removal | ❌  | ❌    | ❌  | ✅        | ✅                               | ❌       | ❌      | ❌           |
 | Key Pairs Management                   | ✅  | ❌    | ❌  | ✅        | ✅                               | ✅       | ❌      | ❌           |
 | Network Manager - CRUD Actions         | ❌  | ❌    | ❌  | ❌        | ❌                               | ❌       | ❌      | ❌           |
-|   - Create/Update/Delete Network       | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
-|   - Create/Update/Delete Subnet        | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
+|   - Create/Update/Delete Network       | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ✅      | ❌           |
+|   - Create/Update/Delete Subnet        | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ✅      | ❌           |
 |   - Create/Update/Delete Routers       | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
-| Volume Creation/Deletion               | ❌  | ❌    | ❌  | ✅        | ✅                               | ✅       | ❌      | ❌           |
+| Volume Creation/Deletion               | ❌  | ❌    | ❌  | ✅        | ✅                               | ✅       | ✅      | ❌           |

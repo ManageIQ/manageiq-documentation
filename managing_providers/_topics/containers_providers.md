@@ -103,7 +103,9 @@ Use the OpenShift Cluster Metrics plug-in to collect node, pod, and container me
 
 {% include_relative _topics/adding_an_openshift_provider.md %}
 
-{% include_relative _topics/adding_an_azure_kubernetes_provider.md %}s
+{% include_relative _topics/adding_an_azure_kubernetes_provider.md %}
+
+{% include_relative _topics/adding_an_oracle_kubernetes_engine_provider.md %}
 
 {% include_relative _topics/tagging_containers_providers.md %}
 

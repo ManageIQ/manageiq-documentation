@@ -1,4 +1,4 @@
-1.  Navigate to menu:Storage\[Object Stores\] to display a list of
+1.  Browse to menu: **Storage > Object Stores** to display a list of
     object store containers.
 
 2.  Click a container to open a summary page for that object store

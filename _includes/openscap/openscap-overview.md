@@ -1,6 +1,6 @@
 OpenSCAP is an auditing tool that is used for hardening the security of your enterprise. This tool is built upon the knowledge and resources that are provided by the many experienced security experts active in the upstream OpenSCAP ecosystem. For more information about OpenSCAP, see <https://www.open-scap.org/>.
 
-{{ site.data.product.title }} supports OpenSCAP. It provides a built-in OpenSCAP policy profile for managing the security of your container images. These policies ensure that new container images from any provider within {{ site.data.product.title_short }} are scanned against the latest Common Vulnerabilities and Exposures (CVE) content that is distributed by Red Hat.
+{{ site.data.product.title_short }} supports OpenSCAP. It provides a built-in OpenSCAP policy profile for managing the security of your container images. These policies ensure that new container images from any provider within {{ site.data.product.title_short }} are scanned against the latest Common Vulnerabilities and Exposures (CVE) content that is distributed by Red Hat.
 
 **Note**:
 
@@ -21,6 +21,6 @@ OpenSCAP is an auditing tool that is used for hardening the security of your ent
 
 For image scanning to work, make sure that your {{ site.data.product.title_short }} appliance has the **SmartProxy** and **SmartState Analysis** roles enabled:
 
-1. From the Settings menu, navigate to menu: **Configuration > Server**.
+1. From the Settings menu, browse to menu: **Configuration > Server**.
 
 2. Under Server Control, ensure **SmartState Analysis** and **SmartProxy** roles are enabled.

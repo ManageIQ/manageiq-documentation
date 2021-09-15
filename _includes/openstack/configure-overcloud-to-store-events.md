@@ -2,7 +2,7 @@ By default, the Telemetry service does not store events emitted by other
 services in a Red Hat OpenStack Platform environment. The following
 procedure outlines how to enable the Telemetry service on your OpenStack
 cloud provider to store such events. This ensures that events are
-exposed to {{ site.data.product.title }} when a Red Hat OpenStack Platform environment
+exposed to {{ site.data.product.title_short }} when a Red Hat OpenStack Platform environment
 is added as a cloud provider.
 
 1.  Log in to the undercloud host.

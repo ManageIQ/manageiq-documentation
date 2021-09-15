@@ -2,9 +2,9 @@
 
 You can create a new flavor for the provider.
 
-1.  Navigate to menu:Compute\[Clouds \> Flavors\].
+1.  Browse to menu: **Compute > Clouds > Flavors**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+2.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a new Flavor**).
 
 3.  Select the provider from the **Provider** list.

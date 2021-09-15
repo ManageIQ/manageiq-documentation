@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1.  Downloading the appliance for your environment as a virtual machine
     image template.
@@ -17,11 +17,11 @@ configurations can be performed.
 
 ### Uploading the Appliance on Google Compute Engine
 
-When the {{ site.data.product.title }} Google Compute Engine appliance has finished
+When the {{ site.data.product.title_short }} Google Compute Engine appliance has finished
 downloading to your system, upload the appliance to Google Compute
 Engine.
 
-To upload the {{ site.data.product.title }} Google Compute Engine appliance file you
+To upload the {{ site.data.product.title_short }} Google Compute Engine appliance file you
 will need: \* 44 GB of storage space. \* 12 GB RAM. \* 4 vCPUs.
 
 You can upload the appliance with the following steps:
@@ -44,7 +44,7 @@ You can upload the appliance with the following steps:
     3.  Click **Create**.
 
 5.  Click **Upload Files** and browse to the location of the
-    {{ site.data.product.title }} Google Compute Engine appliance you downloaded.
+    {{ site.data.product.title_short }} Google Compute Engine appliance you downloaded.
     Select the `tar.gz` file on your local machine, and click **Open**
     to begin the upload.
 
@@ -98,5 +98,5 @@ You can upload the appliance with the following steps:
     6.  Configure any other fields as desired, and click **Create**.
 
 Your new virtual machine instance, as well as the external IP address
-for accessing the {{ site.data.product.title }} interface, appears under **VM
+for accessing the {{ site.data.product.title_short }} interface, appears under **VM
 instances**.

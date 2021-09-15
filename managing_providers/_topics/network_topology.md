@@ -2,7 +2,7 @@
 
 The **Topology** widget is an interactive topology graph, showing the
 status and relationships between the different entities of the network
-providers that {{ site.data.product.title }} has access to.
+providers that {{ site.data.product.title_short }} has access to.
 
 The topology graph includes cloud subnets, virtual machines, security
 groups, floating IP addresses, cloud networks, network routers, cloud
@@ -14,7 +14,7 @@ issue.
 
 ![network topology](../images/network_topology.png)
 
-1.  Navigate to menu:Networks\[Topology\].
+1.  Browse to menu: **Networks > Topology**.
 
 2.  Click the desired network provider for viewing the provider summary.
 
@@ -24,7 +24,7 @@ summary page by clicking **Topology** under **Overview**.
   - Hovering over any individual graph element will display a summary of
     details for the individual element.
 
-  - Double-click an entity in the graph to navigate to its summary page.
+  - Double-click an entity in the graph to browse to its summary page.
 
   - Drag elements to reposition the graph.
 

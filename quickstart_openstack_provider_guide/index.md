@@ -1,13 +1,13 @@
 ---
 ---
 
-# QuickStart Guide for {{ site.data.product.title }} with Red Hat OpenStack Platform
+# QuickStart Guide for {{ site.data.product.title_short }} with Red Hat OpenStack Platform
 
 {% include introduction.md %}
 
-## Key {{ site.data.product.title }} Features for OpenStack Cloud Providers
+## Key {{ site.data.product.title_short }} Features for OpenStack Cloud Providers
 
-{{ site.data.product.title }} provides several interface features specific to OpenStack cloud providers:
+{{ site.data.product.title_short }} provides several interface features specific to OpenStack cloud providers:
 
   - The {{ site.data.product.title_short }} **Topology** widget ([Using the Topology Widget](#using-the-topology-widget)) provides an interactive
     visualization of the OpenStack cloud.
@@ -24,11 +24,11 @@ When adding an OpenStack cloud provider, you can also:
 
 For information about tenant mapping and the Keystone V3 API, see [Adding an OpenStack Cloud Provider](#adding-an-openstack-cloud-provider).
 
-## Installing and Configuring {{ site.data.product.title }}
+## Installing and Configuring {{ site.data.product.title_short }}
 
 {% include_relative _topics/installing.md %}
 
-### Configuring {{ site.data.product.title }}
+### Configuring {{ site.data.product.title_short }}
 
 {% include_relative _topics/configuration-quick.md %}
 
@@ -50,21 +50,21 @@ For information about tenant mapping and the Keystone V3 API, see [Adding an Ope
 
 ## Performing a SmartState Analysis
 
-{{ site.data.product.title }} can analyze a cloud Instance or infrastructure host to collect metadata such as user accounts, applications, software patches, and other internal information. This key feature is called SmartState Analysis. SmartState analysis can be initiated
+{{ site.data.product.title_short }} can analyze a cloud Instance or infrastructure host to collect metadata such as user accounts, applications, software patches, and other internal information. This key feature is called SmartState Analysis. SmartState analysis can be initiated
 manually or automatically using Control Policies.
 
 {% include smartstate-analysis-instances.md %}
 
 ## Using the Topology Widget
 
-The **Topology** widget is an interactive topology graph, showing the status and relationships between the different resources and entities of the OpenStack providers that {{ site.data.product.title }} has access to.
+The **Topology** widget is an interactive topology graph, showing the status and relationships between the different resources and entities of the OpenStack providers that {{ site.data.product.title_short }} has access to.
 
   - The topology graph includes instances, nodes, and other cloud resources within the overall OpenStack cloud provider environment.
     {% include topology_widget.md %}
 
 To view an OpenStack provider through the **Topology** widget:
 
-1.  Navigate to <span class="menuchoice">Compute \> Cloud \> Providers</span>.
+1.  Browse to menu: **Compute > Cloud > Providers**.
 
 2.  Click the desired OpenStack cloud provider for viewing the provider summary.
 

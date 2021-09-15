@@ -1,7 +1,7 @@
 # Datastores
 
 A storage location is considered a device where digital information
-resides and is connected to a resource. {{ site.data.product.title }} detects,
+resides and is connected to a resource. {{ site.data.product.title_short }} detects,
 analyzes, and collects capacity and utilization data for both VMFS and
 NFS datastores. Datastores connected to a provider are automatically
 created on discovery. On creation of a repository, a datastore is

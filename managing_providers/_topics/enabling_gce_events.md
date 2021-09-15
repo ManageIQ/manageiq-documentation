@@ -1,8 +1,8 @@
 # Enabling Google Compute Engine Events
 
-After adding Google Compute Engine as a provider in {{ site.data.product.title }},
+After adding Google Compute Engine as a provider in {{ site.data.product.title_short }},
 enable events for the provider so that you can monitor the system from
-{{ site.data.product.title }}.
+{{ site.data.product.title_short }}.
 
 Events are set up on a per-project basis by using Google Stackdriver
 logging combined with Google Pub/Sub. Stackdriver logging is a service
@@ -10,7 +10,7 @@ that aggregates and exposes log events from Google services and
 applications. Stackdriver exports the log events to Google Pub/Sub, a
 messaging service. This section describes how to export activity log
 entries for a Google Compute Engine project so that events are captured
-in {{ site.data.product.title }}.
+in {{ site.data.product.title_short }}.
 
   - You must have owner permission on the project you are exporting.
 
@@ -40,7 +40,7 @@ in {{ site.data.product.title }}.
 
 <!-- end list -->
 
-1.  In Google Cloud Platform, select your project and navigate to ![gce
+1.  In Google Cloud Platform, select your project and browse to ![gce
     products services](../images/gce-products-services.png) menu:Products
     and Services\[IAM & Admin \> IAM\] to go to
     <https://console.cloud.google.com/iam-admin/iam/>.
@@ -67,7 +67,7 @@ in {{ site.data.product.title }}.
 
 After you have completed the steps from
 [itemizedlist\_title](#GCE_event_prerequisites), set up your Google
-Compute Engine project to export events to {{ site.data.product.title }} with the
+Compute Engine project to export events to {{ site.data.product.title_short }} with the
 following steps:
 
 1.  In Google Cloud Platform, click ![gce products
@@ -94,7 +94,7 @@ following steps:
 
 8.  Click **Save**.
 
-When changes occur to Google Compute Engine instances, {{ site.data.product.title }}
+When changes occur to Google Compute Engine instances, {{ site.data.product.title_short }}
 is now notified and reports these changes as events.
 
 **Note:**
@@ -109,13 +109,13 @@ Cloud Platform documentation:
   - For information on Google Cloud Pub/Sub API operations and costs,
     see <https://cloud.google.com/pubsub/>.
 
-## Viewing Google Compute Engine Events in {{ site.data.product.title }}
+## Viewing Google Compute Engine Events in {{ site.data.product.title_short }}
 
-In {{ site.data.product.title }}, view events for your Google Compute Engine project
+In {{ site.data.product.title_short }}, view events for your Google Compute Engine project
 by following these steps:
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\] and select your
+1.  Browse to menu: **Compute > Clouds > Providers** and select your
     Google Compute Engine project.
 
-2.  Click menu:Monitoring\[Timelines\] on the provider summary page to
+2.  Click menu: **Monitoring > Timelines** on the provider summary page to
     see an events timeline for the project.

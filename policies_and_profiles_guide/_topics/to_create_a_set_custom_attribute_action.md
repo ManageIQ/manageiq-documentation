@@ -1,6 +1,6 @@
 #### Creating a Set Custom Attribute Action
 
-The custom attribute must already exist in vCenter. See vCenter documentation for instructions. In this example, an attribute called {{ site.data.product.title }} policy already exists.
+The custom attribute must already exist in vCenter. See vCenter documentation for instructions. In this example, an attribute called {{ site.data.product.title_short }} policy already exists.
 
 1. Browse to menu: **Control > Explorer**.
 

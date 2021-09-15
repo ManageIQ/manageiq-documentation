@@ -1,15 +1,15 @@
 The options under the ![Configuration](../images/config-gear.png)
 **Configuration** menu allow you to configure global options for your
-{{ site.data.product.title }} environment, view diagnostic information, and view
+{{ site.data.product.title_short }} environment, view diagnostic information, and view
 analytics on the servers in the environment. The menu displays the
-{{ site.data.product.title }} environment at the enterprise, zone, and server levels.
+{{ site.data.product.title_short }} environment at the enterprise, zone, and server levels.
 
 There are four main areas:
 
   - **Settings**
 
     This menu allows you to configure global settings for your
-    {{ site.data.product.title }} infrastructure. You can also create analysis
+    {{ site.data.product.title_short }} infrastructure. You can also create analysis
     profiles and schedules for these profiles.
 
   - **Access Control**

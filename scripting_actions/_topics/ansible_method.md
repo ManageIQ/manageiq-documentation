@@ -1,6 +1,6 @@
 #### Creating a Playbook Automate Method
 
-{{ site.data.product.title }} can choose an Ansible playbook from a repository and
+{{ site.data.product.title_short }} can choose an Ansible playbook from a repository and
 execute it as a method. Each playbook method can take additional input
 parameters specified by the user.
 
@@ -68,7 +68,7 @@ See [Exporting All Datastore Classes](#exporting-all-datastore-classes) for info
 
 ##### Passing variables between successive playbook methods
 
-Automate designers can pass variables between successive Ansible playbook methods in a state machine using {{ site.data.product.title }}.
+Automate designers can pass variables between successive Ansible playbook methods in a state machine using {{ site.data.product.title_short }}.
 
 To pass variables between Ansible playbook methods, use the `set_stats` module in your playbooks.
 

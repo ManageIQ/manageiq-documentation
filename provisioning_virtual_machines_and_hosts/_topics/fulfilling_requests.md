@@ -2,7 +2,7 @@
 
 ### Fulfilling a Request
 
-After a request has been approved, {{ site.data.product.title }} then goes through the
+After a request has been approved, {{ site.data.product.title_short }} then goes through the
 steps required to complete the request. The steps followed for a regular
 provision from a virtual machine to a virtual machine (not to a
 template) are found by navigating to menu:Automate\[Explorer\], then
@@ -41,7 +41,7 @@ quota is set for the tenant or group as a whole.
 ##### Applying User or Group Quotas
 
 1.  Log in as a user with administrator or super administrator rights to
-    the {{ site.data.product.title }} console.
+    the {{ site.data.product.title_short }} console.
 
 2.  Navigate to menu:Automate\[Explorer\].
 
@@ -71,7 +71,7 @@ quota is set for the tenant or group as a whole.
 
 ##### Using Tags for Owner and Group Quotas
 
-{{ site.data.product.title }} provides tags for enforcing quotas for the owners of virtual machines or instances. Ownership of a virtual machine or instance can be set either during the provisioning process or by using
+{{ site.data.product.title_short }} provides tags for enforcing quotas for the owners of virtual machines or instances. Ownership of a virtual machine or instance can be set either during the provisioning process or by using
 the **Configuration Set Ownership** button. If a virtual machine or instance has an owner, the value is displayed in the **Lifecycle** section of the virtual machine or instance summary page.
 
 Quota tags can be assigned directly to **either** a group or owner **not** to a configuration item. The table below shows the tags for use in quotas.
@@ -105,7 +105,7 @@ When quotas are applied by both automate instance and tagging, the tagged values
 The automate state machine processes an ordered list of states. It can ensure the successful completion of a step before the next step is run, permit steps to be retried, allow setting a maximum time to retry the state before exiting, and number of retries before exiting the state.
 Before each state is executed, the `On_Entry` method is executed and after the state ends the `On_Exit` or `On_Error` method is executed based on how the state ends.
 
-The following components make up a {{ site.data.product.title }} automate state machine:
+The following components make up a {{ site.data.product.title_short }} automate state machine:
 
 | Component     | Description                                                                                                                                                                                                     |
 | ------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

@@ -389,7 +389,7 @@ Your environment is now configured for high availability.
 
 <div class="important">
 
-The following additional configuration in the {{ site.data.product.title }} user
+The following additional configuration in the {{ site.data.product.title_short }} user
 interface worker appliances and the load balancer are recommended for
 improved performance in worker appliances:
 

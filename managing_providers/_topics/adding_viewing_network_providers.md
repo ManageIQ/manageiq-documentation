@@ -8,7 +8,7 @@ removing the respective cloud provider.
 
 Viewing network providers:
 
-1.  Navigate to menu:Networks\[Providers\] to see a list of all network
+1.  Browse to menu: **Networks > Providers** to see a list of all network
     providers, along with information such as *Name*, *Type*, *EVM
     Zone*, *Number of Instances*, *Subnets*, and *Region*.
 

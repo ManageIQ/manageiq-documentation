@@ -7,7 +7,7 @@
 When a virtual machine or instance is no longer required, it can be
 retired. Once a virtual machine or instance reaches its retirement date,
 it is immediately shut down and not allowed to restart. If an attempt to
-restart is made, {{ site.data.product.title }} will shut down the virtual machine or
+restart is made, {{ site.data.product.title_short }} will shut down the virtual machine or
 instance.
 
 There are three built-in policies involved with retirement:
@@ -16,22 +16,22 @@ There are three built-in policies involved with retirement:
     will be stopped even if it is running.
 
   - If a retired virtual machine or instance is requested to start
-    through {{ site.data.product.title }}, the virtual machine or instance will not be
+    through {{ site.data.product.title_short }}, the virtual machine or instance will not be
     allowed to start.
 
   - If a provider starts a retired virtual machine or instance outside
-    of {{ site.data.product.title }}, the virtual machine or instance will be stopped.
+    of {{ site.data.product.title_short }}, the virtual machine or instance will be stopped.
 
-{{ site.data.product.title }} provides a number of ways to retire a virtual machine or
+{{ site.data.product.title_short }} provides a number of ways to retire a virtual machine or
 instance:
 
-  - By using the allocated buttons in the {{ site.data.product.title }} console.
+  - By using the allocated buttons in the {{ site.data.product.title_short }} console.
 
   - When creating a provision request, a retirement date can be set up.
 
 #### Using the Console to Retire a Virtual Machine
 
-Through the {{ site.data.product.title }} console, you can retire a virtual machine on
+Through the {{ site.data.product.title_short }} console, you can retire a virtual machine on
 a specific date or immediately.
 
 #### Retiring a Virtual Machine Immediately
@@ -100,7 +100,7 @@ summary screen.
 
 ### Setting Retirement in a Provision Request
 
-If you are using {{ site.data.product.title }} to provision, you can set when you want
+If you are using {{ site.data.product.title_short }} to provision, you can set when you want
 retirement in the provision request. To see how to create a request, see
 [???](#provisioning-requests). A warning email will be sent to the owner
 before the retirement.
@@ -124,7 +124,7 @@ screen appears where you can set up your provision requests.
 
 ### Extending Retirement Dates
 
-{{ site.data.product.title }} **Automate** includes a method to extend the retirement
+{{ site.data.product.title_short }} **Automate** includes a method to extend the retirement
 of a virtual machine or instance by 14 days. This section describes how
 to create a button that invokes this method and how to edit the method
 to change the number of days.

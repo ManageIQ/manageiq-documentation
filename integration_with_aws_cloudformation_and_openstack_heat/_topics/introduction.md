@@ -14,6 +14,6 @@ Heat templates.
 
 Instances deployed using templates through the orchestration service are
 known as stacks. A user can author the stack templates, or can upload
-them from other sources. {{ site.data.product.title }} has enabled CloudFormation and
+them from other sources. {{ site.data.product.title_short }} has enabled CloudFormation and
 Heat integration, and now allows you to launch, delete, and update
 stacks using the dashboard.

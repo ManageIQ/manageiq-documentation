@@ -4,7 +4,7 @@ This section outlines the basic procedure to create an alert.
 
 **Note:**
 
-To send emails or SNMP traps from the {{ site.data.product.title }} server, you must
+To send emails or SNMP traps from the {{ site.data.product.title_short }} server, you must
 enable the Notifier server role and set up SMTP email or SNMP traps. For
 more information, see *General Configuration*.
 
@@ -40,11 +40,11 @@ more information, see *General Configuration*.
 
     1.  Enter the email address from which to send the email in the **From** field.
 
-    2.  Select a user from the **Add a User** list to add a user registered in {{ site.data.product.title }}. The user must have a valid email address entered under accounts.
+    2.  Select a user from the **Add a User** list to add a user registered in {{ site.data.product.title_short }}. The user must have a valid email address entered under accounts.
 
     3.  Enter the email address of a user in the **Add (enter
         manually)** field and click ![2261](../images/2261.png) to add a
-        user not registered in {{ site.data.product.title }}.
+        user not registered in {{ site.data.product.title_short }}.
 
 6.  Optionally, select **Send an SNMP Trap** to configure options so
     that an SNMP trap is sent when the alert is triggered:

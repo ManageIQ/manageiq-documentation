@@ -1,6 +1,6 @@
 # Containers Providers
 
-A containers provider is a service that manages container resources, that can be added to the {{ site.data.product.title }} appliance.
+A containers provider is a service that manages container resources, that can be added to the {{ site.data.product.title_short }} appliance.
 
 {{ site.data.product.title_short }} can connect to OpenShift Container Platform containers providers and manage them similarly to infrastructure and cloud providers. This allows you to gain control over different aspects of your containers environment and answer questions such as:
 
@@ -53,7 +53,35 @@ Containers provider authentication status
 
 When deploying OpenShift using `openshift-ansible-3.0.20` (or later
 versions), the OpenShift Container Platform [service account](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html)
-and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title }} are installed by default.
+and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title_short }} are installed by default.
+
+For newer versions of OpenShift you have to create a service-account with the proper permissions for {{ site.data.product.title_short }}.
+
+1. Create a namespace for the service account
+   ```
+   project_name="management-manageiq" # Pick a name for your project
+   oc adm new-project $project_name --description="ManageIQ Project"
+   ```
+
+2. Create a service account in that project
+   ```
+   service_account_name="management-admin"
+   oc create serviceaccount $service_account_name -n $project_name
+   ```
+
+3. Create the cluster role
+   ```
+   echo '{"apiVersion": "v1", "kind": "ClusterRole", "metadata": {"name": "management-manageiq-admin"}, "rules": [{"resources": ["pods/proxy"], "verbs": ["*"]}]}' | oc create -f -
+   ```
+
+4. Apply roles and policies to the service account
+   ```
+   oc policy add-role-to-user -n $project_name admin -z $service_account_name
+   oc policy add-role-to-user -n $project_name management-manageiq-admin -z $service_account_name
+   oc adm policy add-cluster-role-to-user cluster-reader system:serviceaccount:$project_name:$service_account_name
+   oc adm policy add-scc-to-user privileged system:serviceaccount:$project_name:$service_account_name
+   oc adm policy add-cluster-role-to-user self-provisioner system:serviceaccount:$project_name:$service_account_name
+   ```
 
 **Note:**
 
@@ -62,18 +90,22 @@ for a list of the default roles.
 
 Run the following to obtain the token needed to add an OpenShift Container Platform provider:
 
-    # oc sa get-token -n management-infra management-admin
+    # oc sa get-token -n $project_name $service_account_name
     eyJhbGciOiJSUzI1NiI...
 
 ## Enabling OpenShift Cluster Metrics
 
 Use the OpenShift Cluster Metrics plug-in to collect node, pod, and container metrics into one location. This helps track usage and find common issues.
 
-  - Configure {{ site.data.product.title }} to allow for all three [Capacity & Utilization server roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles).
+  - Configure {{ site.data.product.title_short }} to allow for all three [Capacity & Utilization server roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles).
 
   - Enable cluster metrics using the [OpenShift Container Platform documentation](https://access.redhat.com/documentation/en-us/openshift_container_platform/3.5/html-single/installation_and_configuration/#install-config-cluster-metrics).
 
 {% include_relative _topics/adding_an_openshift_provider.md %}
+
+{% include_relative _topics/adding_an_azure_kubernetes_provider.md %}
+
+{% include_relative _topics/adding_an_oracle_kubernetes_engine_provider.md %}
 
 {% include_relative _topics/tagging_containers_providers.md %}
 

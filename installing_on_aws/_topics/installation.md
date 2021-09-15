@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1. Downloading the appliance for your environment as a virtual machine snapshot template.
 
@@ -14,7 +14,7 @@ After you have completed all the procedures in this guide, you will have a worki
 
 ### Requirements
 
-Below are the two sets of requirements for installing {{ site.data.product.title }} on Amazon EC2.
+Below are the two sets of requirements for installing {{ site.data.product.title_short }} on Amazon EC2.
 
 ### {{ site.data.product.title_short }} Requirements
 

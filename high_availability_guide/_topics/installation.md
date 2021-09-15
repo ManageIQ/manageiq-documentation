@@ -1,7 +1,7 @@
 ## Installing the Appliances
 
 This chapter outlines the steps for installing and configuring the
-{{ site.data.product.title }} components needed for high availability: a database
+{{ site.data.product.title_short }} components needed for high availability: a database
 cluster comprised of primary and standby database-only appliances, and
 two (at minimum) non-database {{ site.data.product.title_short }} appliances.
 
@@ -36,7 +36,14 @@ the non-database {{ site.data.product.title_short }} appliances.
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    2.  Select **Configure Database**.
+    For standard {{ site.data.product.title_short }} installations, a pre-sized database disk is already attached, initialized, encryption key generated, database configured with a region, and the application started.
+
+    2. Select **Stop evm server processes**, select `y`.
+    3. Quit from appliance console and `run systemctl disable evmserverd` to make this a standalone database server.
+
+    Alternatively, if you attached a new database disk and have not yet configured the application:
+
+    2.  Select **Configure Application**.
 
     3.  Select **Create key** to create the encryption key. You can
         create a new key, or use an existing key on your system by
@@ -122,7 +129,7 @@ and secondary database-only appliances can be configured.
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    2.  Select **Configure Database**.
+    2.  Select **Configure Application**.
 
     3.  Configure this appliance to use the encryption key from the
         primary database-only appliance:
@@ -340,7 +347,7 @@ and any additional appliances in the region using the following steps:
 
     1.  Configure the hostname by selecting **Set Hostname**.
 
-    2.  Select **Configure Database**.
+    2.  Select **Configure Application**.
 
     3.  Configure this appliance to use the encryption key from the
         primary database-only appliance:

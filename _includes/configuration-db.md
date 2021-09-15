@@ -5,26 +5,26 @@ hosting your appliance. See the documentation specific to your
 infrastructure for instructions for adding a disk. As a storage disk
 usually cannot be added while a virtual machine is running, Red Hat
 recommends adding the disk before starting the appliance.
-{{ site.data.product.title }} only supports installing of an internal VMDB on blank
+{{ site.data.product.title_short }} only supports installing of an internal VMDB on blank
 disks; installation will fail if the disks are not blank.
 
 </div>
 
 1.  Start the appliance and open a terminal console.
 
-2.  Enter the `appliance_console` command. The {{ site.data.product.title }} appliance
+2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance
     summary screen displays.
 
 3.  Press **Enter** to manually configure settings.
 
-4.  Select **Configure Database** from the menu.
+4.  Select **Configure Application** from the menu.
 
 5.  You are prompted to create or fetch an encryption key.
 
-      - If this is the first {{ site.data.product.title }} appliance, choose **Create
+      - If this is the first {{ site.data.product.title_short }} appliance, choose **Create
         key**.
 
-      - If this is not the first {{ site.data.product.title }} appliance, choose
+      - If this is not the first {{ site.data.product.title_short }} appliance, choose
         **Fetch key from remote machine** to fetch the key from the
         first appliance. For worker and multi-region setups, use this
         option to copy key from another appliance.
@@ -84,6 +84,6 @@ disks; installation will fail if the disks are not blank.
 
 10. Create and confirm a password for the database.
 
-{{ site.data.product.title }} then configures the internal database. This takes a few
+{{ site.data.product.title_short }} then configures the internal database. This takes a few
 minutes. After the database is created and initialized, you can log in
 to {{ site.data.product.title_short }}.

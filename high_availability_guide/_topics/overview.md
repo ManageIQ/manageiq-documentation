@@ -1,6 +1,6 @@
 ## Environment Overview
 
-Learn how to configure and manage database high availability in a {{ site.data.product.title }} environment. This configuration allows for disaster mitigation: a failure in the primary database does not result in downtime, as the standby database takes over the failed database’s processes. This is made possible by database replication between two or more database servers. In {{ site.data.product.title_short }}, these servers are *database-only {{ site.data.product.title_short }} appliances*, which do not have `evmserverd` processes that are enabled. This is configured from the `appliance_console` menu at the time of deployment.
+Learn how to configure and manage database high availability in a {{ site.data.product.title_short }} environment. This configuration allows for disaster mitigation: a failure in the primary database does not result in downtime, as the standby database takes over the failed database’s processes. This is made possible by database replication between two or more database servers. In {{ site.data.product.title_short }}, these servers are *database-only {{ site.data.product.title_short }} appliances*, which do not have `evmserverd` processes that are enabled. This is configured from the `appliance_console` menu at the time of deployment.
 
 Two types of appliances that are used in high availability:
 
@@ -19,7 +19,7 @@ Note, this procedure also does not provide scalability or a multi-master databas
 
 ### Requirements
 
-For a high availability {{ site.data.product.title }} environment, you need a virtualization host containing at minimum four virtual machines with {{ site.data.product.title_short }} installed, consisting of:
+For a high availability {{ site.data.product.title_short }} environment, you need a virtualization host containing at minimum four virtual machines with {{ site.data.product.title_short }} installed, consisting of:
 
   - One virtual machine for the primary external database containing a minimum of 4 GB dedicated disk space
 
@@ -31,6 +31,6 @@ The database-only appliances must reside on a highly reliable local network in t
 
 **Important:**
 
-It is essential to use the same {{ site.data.product.title }} appliance template version to install each virtual machine in this environment.
+It is essential to use the same {{ site.data.product.title_short }} appliance template version to install each virtual machine in this environment.
 
 Correct time synchronization is required before installing the cluster. After installing the appliances, configure time synchronization on all appliances by using `chronyd`.

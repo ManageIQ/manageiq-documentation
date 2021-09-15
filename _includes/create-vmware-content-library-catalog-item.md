@@ -5,9 +5,9 @@ Use the following procedure to create a VMware Content Library OVF Template cata
 Before you create the catalog item, make sure you have added a VMware vCenter Provider, and create a Service Dialog.
 See [Adding a VMware vCenter Provider](../managing_providers/index.html#adding-a-vmware-vcenter-provider) and [Creating a Service Dialog](../creating_a_service_for_vm_provisioning/index.html#creating-a-service-dialog) for more information.
 
-1. Navigate to menu: **Services > Catalogs** and select **Catalog Items** in the accordion menu.
+1. Browse to menu: **Services > Catalogs** and select **Catalog Items** in the accordion menu.
 
-2. Click ![Configuration](../images/1847.png) **Configuration**, then click ![Green_Plus_Sign](../images/1848.png) **Add a New Catalog Item**. The **Adding a new Service Catalog Item** window is displayed.
+2. Click **Configuration**, then click ![Green_Plus_Sign](../images/1848.png) **Add a New Catalog Item**. The **Adding a new Service Catalog Item** window is displayed.
 
 3. Select **VMware Content Library OVF Template** from the **Catalog Item Type** list.
 

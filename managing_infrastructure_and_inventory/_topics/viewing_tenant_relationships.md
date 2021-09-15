@@ -3,7 +3,7 @@
 Use the tenant accordion’s **Relationship** section to see items related
 to the tenant.
 
-1.  Navigate to menu:Compute\[Clouds \> Tenants\].
+1.  Browse to menu: **Compute > Clouds > Tenants**.
 
 2.  Click a tenant to view the configuration.
 

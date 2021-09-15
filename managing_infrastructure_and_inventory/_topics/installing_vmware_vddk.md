@@ -1,8 +1,8 @@
-# Installing VMware VDDK on {{ site.data.product.title }}
+# Installing VMware VDDK on {{ site.data.product.title_short }}
 
 Execution of SmartState Analysis on virtual machines within a VMware
 environment requires the Virtual Disk Development Kit (VDDK).
-{{ site.data.product.title }} supports VDDK 5.5.
+{{ site.data.product.title_short }} supports VDDK 5.5.
 
 1.  Download VDDK 5.5 (`VMware-vix-disklib-5.5.0-1284542.x86_64.tar.gz`
     at the time of this writing) from the VMware website.
@@ -46,7 +46,7 @@ environment requires the Virtual Disk Development Kit (VDDK).
         Enjoy,
         --the VMware team
 
-6.  Run `ldconfig` in order for {{ site.data.product.title }} to find the newly installed VDDK library.
+6.  Run `ldconfig` in order for {{ site.data.product.title_short }} to find the newly installed VDDK library.
 
     **Note:**
 
@@ -54,7 +54,7 @@ environment requires the Virtual Disk Development Kit (VDDK).
 
         # ldconfig -p | grep vix
 
-7.  Restart the {{ site.data.product.title }} appliance.
+7.  Restart the {{ site.data.product.title_short }} appliance.
 
-The VDDK is now installed on the {{ site.data.product.title }} appliance. This enables
+The VDDK is now installed on the {{ site.data.product.title_short }} appliance. This enables
 use of the SmartState Analysis Server Role on the appliance.

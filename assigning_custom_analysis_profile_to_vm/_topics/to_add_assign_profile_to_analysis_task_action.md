@@ -2,7 +2,7 @@
 
 Actions are performed after the condition is evaluated. You can
 associate actions with specific events when you create a policy.
-{{ site.data.product.title }} provides a set of default actions, but you can also
+{{ site.data.product.title_short }} provides a set of default actions, but you can also
 create custom actions using the {{ site.data.product.title_short }} user interface.
 
 Use this procedure to create a custom action by adding the **Assign
@@ -11,10 +11,10 @@ profile (created in [Creating a Virtual Machine Analysis Profile](#creating-a-vi
 
 ![image](../images/create-custom-action.png)
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Browse to menu: **Control > Explorer**.
 
 2.  Expand the **Actions** accordion and click
-    ![image](../images/1847.png) (**Configuration**), then
+    **Configuration**, then
     ![image](../images/1862.png) (**Add a new Action**).
 
 3.  Enter a **Description** for the new action. This will be the name

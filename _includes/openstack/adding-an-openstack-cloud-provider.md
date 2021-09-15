@@ -1,8 +1,8 @@
-{{ site.data.product.title }} supports operating with the OpenStack `admin` tenant.
-When creating an OpenStack provider in {{ site.data.product.title }}, select the
+{{ site.data.product.title_short }} supports operating with the OpenStack `admin` tenant.
+When creating an OpenStack provider in {{ site.data.product.title_short }}, select the
 OpenStack provider’s `admin` user because it is the default
 administrator of the OpenStack `admin` tenant. When using the `admin`
-credentials, a user in {{ site.data.product.title }} provisions into the `admin`
+credentials, a user in {{ site.data.product.title_short }} provisions into the `admin`
 tenant, and sees images, networks, and instances that are associated
 with the `admin` tenant.
 
@@ -16,7 +16,7 @@ See [Cloud Tenants](../managing_infrastructure_and_inventory/index.html#cloud-te
 
 **Note:**
 
-You can set whether {{ site.data.product.title }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the overcloud to store events. See [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events) for instructions.
+You can set whether {{ site.data.product.title_short }} should use the Telemetry service or Advanced Message Queueing Protocol (AMQP) for event monitoring. If you choose Telemetry, you should first configure the **ceilometer** service on the overcloud to store events. See [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events) for instructions.
 
 For more information, see <a href="https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-telemetry" target="_blank">OpenStack Telemetry
 (ceilometer)</a> in the Red Hat OpenStack Platform *Architecture Guide*.
@@ -25,9 +25,9 @@ For more information, see <a href="https://access.redhat.com/documentation/en-us
 
 To authenticate the provider using a self-signed Certificate Authority (CA), configure the {{ site.data.product.title_short }} appliance to trust the certificate using the steps in [Using a Self-Signed CA Certificate](#app-self_signed_CA) before adding the provider.
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\].
+1.  Browse to menu: **Compute > Clouds > Providers**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+2.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.
@@ -38,7 +38,7 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
     `Keystone v2`.
 
     If you select `Keystone v3`, enter the `Keystone V3 Domain ID` that
-    {{ site.data.product.title }} should use. This is the domain of the user account
+    {{ site.data.product.title_short }} should use. This is the domain of the user account
     you will be specifying later in the **Default** tab. If domains are
     not configured in the provider, enter **default**.
 
@@ -106,10 +106,10 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 
     5.  In the **Password** field, enter the password for the user.
 
-    6.  Click **Validate** to confirm {{ site.data.product.title }} can connect to the
+    6.  Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
         OpenStack provider.
 
-11. Next, configure how {{ site.data.product.title }} should receive events from the
+11. Next, configure how {{ site.data.product.title_short }} should receive events from the
     OpenStack provider. Click the **Events** tab in the **Endpoints**
     section to start.
 
@@ -140,7 +140,7 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 **Note:**
 
   - To collect inventory and metrics from an OpenStack environment, the
-    {{ site.data.product.title }} appliance requires that the adminURL endpoint for
+    {{ site.data.product.title_short }} appliance requires that the adminURL endpoint for
     the OpenStack environment be on a non-private network. Hence, the
     OpenStack adminURL endpoint should be assigned an IP address other
     than `192.168.x.x`. Additionally, all the Keystone endpoints must be

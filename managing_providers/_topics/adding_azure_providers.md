@@ -1,6 +1,6 @@
 # Adding Azure Providers
 
-{{ site.data.product.title }} supports Microsoft Azure providers. Before
+{{ site.data.product.title_short }} supports Microsoft Azure providers. Before
 {{ site.data.product.title_short }} can be authenticated to Microsoft Azure, you must
 complete a series of prerequisite steps using the Azure portal; see
 [Create Active Directory application and service principal account using
@@ -64,9 +64,9 @@ You can now use these values in the procedure below to add an Azure cloud instan
 
 **To Add an Azure Cloud Provider**:
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\].
+1.  Browse to menu: **Compute > Clouds > Providers**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**), then click
+2.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.

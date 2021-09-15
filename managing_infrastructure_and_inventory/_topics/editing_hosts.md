@@ -3,9 +3,9 @@
 If multiple hosts have the same settings or credentials, edit them at
 the same time.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
-2.  Click ![1847](../images/1847.png) (**Configuration**).
+2.  Click **Configuration**.
 
 3.  Check the Hosts to edit.
 

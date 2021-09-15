@@ -23,9 +23,9 @@ through `virsh`:
 
 {% include configuration-advanced.md %}
 
-### Configuring a Database for {{ site.data.product.title }}
+### Configuring a Database for {{ site.data.product.title_short }}
 
-{{ site.data.product.title }} supports the use of an internal or external database.
+{{ site.data.product.title_short }} supports the use of an internal or external database.
 The following instructions are suitable for configuring an *internal*
 database. For instructions on how to configure an external database
 instead, see [Configuring an External
@@ -33,17 +33,17 @@ Database](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/sing
 
 {% include configuration-db.md %}
 
-### Configuring General {{ site.data.product.title }} Settings
+### Configuring General {{ site.data.product.title_short }} Settings
 
 After configuring the general settings for the appliance and creating a
-database for it, you can now launch {{ site.data.product.title }}. To do this, use the
+database for it, you can now launch {{ site.data.product.title_short }}. To do this, use the
 **Start EVM Server Processes** option from the appliance console
 ([Configuring General Appliance
 Settings](#configuring_general_appliance_settings)). Once you launch
-{{ site.data.product.title }}, note the **Hostname** and **IP Address** displayed on
+{{ site.data.product.title_short }}, note the **Hostname** and **IP Address** displayed on
 the appliance console screen.
 
-Open the {{ site.data.product.title }} web-based user interface by accessing either
+Open the {{ site.data.product.title_short }} web-based user interface by accessing either
 **Hostname** and **IP Address** on a web browser. At the login screen,
 use the following credentials:
 
@@ -56,7 +56,7 @@ use the following credentials:
 You can also change the password of the **admin** account from the login
 screen. To do so, click the **Update Password** link.
 
-You can access and configure most {{ site.data.product.title }} settings through the
+You can access and configure most {{ site.data.product.title_short }} settings through the
 **Configuration** menu. You can access this menu through **Administrator | EVM** \> **Configuration**.
 
 {% include configuration-gui.md %}

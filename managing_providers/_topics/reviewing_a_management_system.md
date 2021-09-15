@@ -45,7 +45,7 @@ From the dashboard, you can view:
 
 To view the dashboard:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click the infrastructure provider to view.
 

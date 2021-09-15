@@ -1,6 +1,6 @@
 # Viewing a Swift Manager’s Timeline
 
-In {{ site.data.product.title }}, view events for a Swift storage manager by following
+In {{ site.data.product.title_short }}, view events for a Swift storage manager by following
 these steps:
 
 1.  Navigate to menu:Storage\[Storage Providers\].

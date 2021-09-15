@@ -21,7 +21,7 @@ following ways:
 
 Search for virtual machines or templates:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to search.
 

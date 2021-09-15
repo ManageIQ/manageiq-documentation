@@ -1,6 +1,6 @@
 #### Creating an SNMP Action
 
-To send SNMP traps from the {{ site.data.product.title }} server, you must have the `Notifier` server role and the SNMP daemons enabled.
+To send SNMP traps from the {{ site.data.product.title_short }} server, you must have the `Notifier` server role and the SNMP daemons enabled.
 
 1. Browse to menu: **Control > Explorer**.
 

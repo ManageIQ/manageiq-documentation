@@ -1,9 +1,9 @@
 ### Ruby method
 
 ``` ruby
-# {{ site.data.product.title }} Automate Method
+# {{ site.data.product.title_short }} Automate Method
 #
-$evm.log("info", "{{ site.data.product.title }} Automate Method  Building VM Provisioning Request Started")
+$evm.log("info", "{{ site.data.product.title_short }} Automate Method  Building VM Provisioning Request Started")
 #
  
 prov= $evm.root['miq_provision']

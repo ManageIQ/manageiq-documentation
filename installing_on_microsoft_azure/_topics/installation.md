@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1.  Downloading the appliance for your environment as a virtual machine
     image template.
@@ -13,9 +13,9 @@ After you have completed all the procedures in this guide, you will have
 a working environment on which additional customizations and
 configurations can be performed.
 
-### Obtaining the {{ site.data.product.title }} Virtual Appliance
+### Obtaining the {{ site.data.product.title_short }} Virtual Appliance
 
-### Uploading and Provisioning the {{ site.data.product.title }} Virtual Appliance in Microsoft Azure
+### Uploading and Provisioning the {{ site.data.product.title_short }} Virtual Appliance in Microsoft Azure
 
 You can upload and provision the appliance in an Azure environment using
 the following two methods:
@@ -24,11 +24,11 @@ the following two methods:
 
   - Using the Azure Command-Line Interface (Azure CLI)
 
-To upload the {{ site.data.product.title }} appliance file in Microsoft Azure, ensure
+To upload the {{ site.data.product.title_short }} appliance file in Microsoft Azure, ensure
 the following requirements are met:
 
   - Approximately 2 GB of space for each VHD image; 44+ GB of space, 12
-    GB RAM, and 4 VCPUs for the {{ site.data.product.title }} appliance.
+    GB RAM, and 4 VCPUs for the {{ site.data.product.title_short }} appliance.
 
   - [Microsoft Azure Account](https://azure.microsoft.com/en-us/free/).
 

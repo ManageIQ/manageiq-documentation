@@ -1,6 +1,6 @@
 Currently, the `appliance_console_cli` feature is a subset of the full functionality of the `appliance_console` itself, and covers functions most likely to be scripted by using the command-line interface (CLI).
 
-1.  After starting the {{ site.data.product.title }} appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the root user.
+1.  After starting the {{ site.data.product.title_short }} appliance, log in with a user name of `root` and the default password of `smartvm`. This displays the Bash prompt for the root user.
 
 2.  Enter the `appliance_console_cli` or `appliance_console_cli --help` command to see a list of options available with the command, or simply enter `appliance_console_cli --option <argument>` directly to use a specific option.
 

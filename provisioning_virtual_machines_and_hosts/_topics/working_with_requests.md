@@ -3,12 +3,12 @@
 ### Provisioning Request Approval Methods
 
 In this chapter, you will learn about the different approval methods.
-The request can be approved manually in the {{ site.data.product.title }} console, set
+The request can be approved manually in the {{ site.data.product.title_short }} console, set
 for automatic approval by setting options in the **Automate Explorer**,
 or by using an external method. ![2348](../images/2348.png) When using an
 external method, the approval actually takes place on the external
 system and is sent directly for execution. This chapter discusses how to
-view and edit requests in the {{ site.data.product.title }} Console, how to approve a
+view and edit requests in the {{ site.data.product.title_short }} Console, how to approve a
 request, and how to set automatic approval parameters.
 
 ### Working with Provisioning Requests
@@ -37,7 +37,7 @@ trillion database IDs, this number can be several digits long.
 #### Approving a Provisioning Request
 
 After a user creates provisioning request, administrators have the
-ability to approve the request and allow {{ site.data.product.title }} to complete
+ability to approve the request and allow {{ site.data.product.title_short }} to complete
 virtual machine or instance creation.
 
 1.  Navigate to menu:Services\[Requests\].
@@ -155,7 +155,7 @@ The thresholds for automatic approval are set. The next time a provision request
 
 ##### Template Specific Approval Defaults
 
-{{ site.data.product.title }} provides tags that can be used to set default automatic approval values on a per template or image basis. These values **supersede** those in the **Automate** model. Use these tags to eliminate the need for manual approval for all provisioning requests. To enable automatic approval, assign the tags directly to templates or images.
+{{ site.data.product.title_short }} provides tags that can be used to set default automatic approval values on a per template or image basis. These values **supersede** those in the **Automate** model. Use these tags to eliminate the need for manual approval for all provisioning requests. To enable automatic approval, assign the tags directly to templates or images.
 
 | Category Display Name (Name)                                   | Use (Sample values)                                                                                                                                            |
 | -------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -181,7 +181,7 @@ The thresholds for automatic approval for a specific template are set. The next 
 
 ##### Setting Provisioning Notification Email Addresses
 
-{{ site.data.product.title }} contains a set of Automate instances for provisioning. These Automate instances also include email fields to set the sender and recipient of provisioning notifications, such as requests. These fields
+{{ site.data.product.title_short }} contains a set of Automate instances for provisioning. These Automate instances also include email fields to set the sender and recipient of provisioning notifications, such as requests. These fields
 are set to **evmadmin@company.com** as a default.
 
 1.  Navigate to menu:Automate\[Explorer\].

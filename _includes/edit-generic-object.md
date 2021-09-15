@@ -1,10 +1,10 @@
 Edit existing generic objects classes using the following steps:
 
-1.  Navigate to menu:Automation\[Automate \> Generic Objects\].
+1.  Browse to menu: **Automation > Automate > Generic Objects**.
 
 2.  Click on a generic object class in the list view.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     click ![Edit this Generic Object Class](../images/1851.png) (**Edit
     this Generic Object Class**).
 

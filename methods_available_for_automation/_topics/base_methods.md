@@ -17,7 +17,7 @@ Model.
 | tag\_unassign(tag)                                                                              | Unassigns tag to the object, except for the miq\_provision object, which uses clear\_tag(category, tag\_name) |
 
 The **InspectMe** **Sample Method** uses many of the Methods shown in
-this document. The method returns attributes of the {{ site.data.product.title }}
+this document. The method returns attributes of the {{ site.data.product.title_short }}
 Server and then returns attributes for the host, cluster, and virtual
 machine from the provider of invocation. In many environments it is
 linked to a button.

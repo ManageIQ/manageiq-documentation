@@ -5,7 +5,7 @@ template, information on the disks associated with the item is
 collected. This includes free and used space information as well as the
 type of disk and file system.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click on the item to view its **Summary**.
 

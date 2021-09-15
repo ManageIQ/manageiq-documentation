@@ -1,6 +1,6 @@
 ### Setting the Root Password on the Appliance
 
-The {{ site.data.product.title }} appliance is a virtual machine image that runs on a
+The {{ site.data.product.title_short }} appliance is a virtual machine image that runs on a
 Red Hat Enterprise Linux-based operating system. This means users can
 access the base operating system through SSH. This is why it is
 advisable to change the default password. Continuing to use the default
@@ -29,5 +29,5 @@ as changing any user password on a Linux-based system.
 
 4.  Log out of the appliance.
 
-The {{ site.data.product.title }} appliance now has a non-default `root` password.
+The {{ site.data.product.title_short }} appliance now has a non-default `root` password.
 This prevents unauthorized access to your appliance through SSH.

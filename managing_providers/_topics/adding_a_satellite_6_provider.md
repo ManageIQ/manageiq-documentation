@@ -1,11 +1,11 @@
 # Adding a Satellite 6 Provider
 
 To start provisioning bare metal machines, you need at least one Red Hat
-Satelllite 6 provider added to {{ site.data.product.title }}.
+Satelllite 6 provider added to {{ site.data.product.title_short }}.
 
-1.  Navigate to menu:Configuration\[Management\].
+1.  Browse to menu: **Configuration > Management**.
 
-2.  Select menu:Configuration\[Add a new Provider\].
+2.  Select menu: **Configuration > Add a new Provider**.
 
 3.  Enter a **Name** for the provider.
 
@@ -28,5 +28,5 @@ Satelllite 6 provider added to {{ site.data.product.title }}.
 
 9.  Click **Add** to confirm your settings and save the provider.
 
-{{ site.data.product.title }} saves the Satellite 6 provider in its database and
+{{ site.data.product.title_short }} saves the Satellite 6 provider in its database and
 triggers a refresh of resources detected in the provider.

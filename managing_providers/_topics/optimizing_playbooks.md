@@ -1,4 +1,4 @@
-# Optimizing Ansible Playbooks for {{ site.data.product.title }}
+# Optimizing Ansible Playbooks for {{ site.data.product.title_short }}
 
 Ansible is a simple model-driven configuration management, multi-node
 deployment, and remote-task execution system. When designing playbooks

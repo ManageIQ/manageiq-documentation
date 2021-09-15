@@ -2,7 +2,7 @@
 
 Use tags to categorize vSphere distributed switches.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Networking\].
+1.  Browse to menu: **Compute > Infrastructure > Networking**.
 
 2.  Select the switches to tag.
 

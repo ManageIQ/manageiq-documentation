@@ -10,10 +10,10 @@ Use this procedure to add a new catalog using the dashboard UI.
 
 ![Adding\_a\_New\_Catalog](../images/7149.png)
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalogs** in the
+1.  Browse to menu: **Services > Catalogs** and select **Catalogs** in the
     accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+2.  Click **Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog**.
     The **Adding a new Catalog** window is displayed.
 
@@ -29,13 +29,13 @@ Use this procedure to add a new catalog using the dashboard UI.
 Use this procedure to add a new service dialog based on the input
 parameters defined in the orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and click **Orchestration
+1.  Browse to menu: **Services > Catalogs** and click **Orchestration
     Templates** in the accordion menu.
 
 2.  From **All Orchestration Templates**, select the orchestration
     template you want to create a service dialog from.
 
-3.  Click ![Configuration](../images/1847.png) **Configuration**, then
+3.  Click **Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png) **Create Service
     Dialog** from **Orchestration Template**. The **Adding a new Service
     Dialog from Orchestration Template** window is displayed.
@@ -50,10 +50,10 @@ parameters defined in the orchestration template.
 Use this procedure to add a new service catalog item using the dashboard
 UI.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
+1.  Browse to menu: **Services > Catalogs** and select **Catalog Items**
     in the accordion menu.
 
-2.  Click ![Configuration](../images/1847.png) **Configuration**, then
+2.  Click **Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png) **Add a New Catalog
     Item**. The **Adding a new Service Catalog Item** window is
     displayed.
@@ -78,7 +78,7 @@ UI.
 Use this procedure to order a service catalog item using the dashboard
 UI.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Service
+1.  Browse to menu: **Services > Catalogs** and select **Service
     Catalogs** in the accordion menu. From **All Services** catalogs,
     select the **catalog item** that you want to order. The **Service**
     window with the name and description of the service to be ordered is

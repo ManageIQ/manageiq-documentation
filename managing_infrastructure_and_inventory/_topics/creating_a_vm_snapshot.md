@@ -2,7 +2,7 @@
 
 To create a snapshot of a virtual machine:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the target virtual machine, and open it to view its details.
 

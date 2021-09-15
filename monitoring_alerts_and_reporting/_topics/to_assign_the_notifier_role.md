@@ -2,7 +2,7 @@
 
 1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
 
-2.  Click the **Settings** accordion, and select the {{ site.data.product.title }}
+2.  Click the **Settings** accordion, and select the {{ site.data.product.title_short }}
     server.
 
 3.  From the **Server Control** tab, select the **Notifier** role.

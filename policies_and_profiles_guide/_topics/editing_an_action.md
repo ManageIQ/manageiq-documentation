@@ -1,6 +1,6 @@
 ### Editing an Action
 
-Edit an action to modify its properties. You can't edit any of the default actions that are supplied with {{ site.data.product.title }}. Only actions that you create can be changed.
+Edit an action to modify its properties. You can't edit any of the default actions that are supplied with {{ site.data.product.title_short }}. Only actions that you create can be changed.
 
 **Note**: When you view an action, you can see what policies it is assigned to.
 

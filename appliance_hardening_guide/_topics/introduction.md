@@ -1,10 +1,10 @@
-# Introduction to Hardening {{ site.data.product.title }}
+# Introduction to Hardening {{ site.data.product.title_short }}
 
-The {{ site.data.product.title }} appliance is distributed as a virtual machine image,
+The {{ site.data.product.title_short }} appliance is distributed as a virtual machine image,
 which provides users with a simple installation process. The appliance
 also contains a set of factory default settings that can expose
 appliances to vulnerabilities if left unset. This guide provides a set
-of procedures to enhance security on your {{ site.data.product.title }} appliance.
+of procedures to enhance security on your {{ site.data.product.title_short }} appliance.
 This ensures your appliance has enhanced protection against any
 unwarranted intrusion.
 

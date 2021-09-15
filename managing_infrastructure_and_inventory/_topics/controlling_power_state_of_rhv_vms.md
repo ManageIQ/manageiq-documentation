@@ -1,7 +1,7 @@
 # Controlling the Power State of Red Hat Virtualization Virtual Machines
 
 Follow this procedure to control the power states of Red Hat
-Virtualization VMs through the {{ site.data.product.title }} console.
+Virtualization VMs through the {{ site.data.product.title_short }} console.
 
 1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
 

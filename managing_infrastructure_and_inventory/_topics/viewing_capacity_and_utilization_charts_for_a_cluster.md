@@ -2,7 +2,7 @@
 
 View capacity and utilization for a cluster.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Clusters\].
+1.  Browse to menu: **Compute > Infrastructure > Clusters**.
 
 2.  Click the cluster to view Capacity and Utilization data.
 

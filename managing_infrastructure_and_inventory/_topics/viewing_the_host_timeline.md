@@ -3,7 +3,7 @@
 View the timeline of events for the virtual machines registered to a
 host.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Click the host to view the timeline.
 

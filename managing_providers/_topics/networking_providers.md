@@ -1,6 +1,6 @@
 # Network Managers
 
-In {{ site.data.product.title }}, a network manager is an inventory of networking
+In {{ site.data.product.title_short }}, a network manager is an inventory of networking
 entities on existing cloud and infrastructure providers managed by your
 {{ site.data.product.title_short }} appliance.
 

@@ -1,6 +1,6 @@
 ## Creating and Administering Subnets
 
-{{ site.data.product.title }} enables creation and administration of subnets for your
+{{ site.data.product.title_short }} enables creation and administration of subnets for your
 cloud networks. Create subnets in pre-existing networks as means to
 grant network connectivity to instances. Subnets are the means by which
 instances are granted network connectivity. Each instance is assigned to

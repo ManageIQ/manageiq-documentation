@@ -12,7 +12,7 @@ to set the memory size or number of CPUs on a virtual machine.
 
 To see the sample provisioning dialog for Red Hat Virtualization:
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Browse to menu: **Automation > Automate > Customization**.
 
 2.  Expand the **Provisioning Dialogs** accordion and select **Sample
     RedHat VM Provisioning Dialog** under **VM Provision**.

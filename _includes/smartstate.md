@@ -8,7 +8,7 @@ To do so:
 
 2.  Select the server to configure from menu: **Settings**[Zone] in the left pane of the appliance.
 
-3.  Navigate to the **Server Roles** list in the menu: **Server > Server Control** section. From there, set the appropriate SmartState roles to **ON**. Namely:
+3.  Browse to the **Server Roles** list in the menu: **Server > Server Control** section. From there, set the appropriate SmartState roles to **ON**. Namely:
 
     1.  **SmartProxy**
 

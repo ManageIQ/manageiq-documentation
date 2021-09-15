@@ -1,6 +1,6 @@
 ### Creating a VMware Alarm Alert
 
-{{ site.data.product.title }} can use VMware alarms as a trigger for an alert. This
+{{ site.data.product.title_short }} can use VMware alarms as a trigger for an alert. This
 type of alert can be created for a cluster, host, or virtual machine.
 
 1.  Navigate to menu:Control\[Explorer\].

@@ -1,16 +1,16 @@
 # Data Optimization
 
-{{ site.data.product.title }} optimization functions allow you to view utilization trends in your environment. In addition, you can predict where you have capacity for more virtual machines, see [Planning Where to Put a New Virtual Machine](../deployment_planning_guide/index.html#planning-where-to-put-a-new-virtual-machine)
+{{ site.data.product.title_short }} optimization functions allow you to view utilization trends in your environment. In addition, you can predict where you have capacity for more virtual machines, see [Planning Where to Put a New Virtual Machine](../deployment_planning_guide/index.html#planning-where-to-put-a-new-virtual-machine)
 in the *Deployment Planning Guide*.
 
-**Note:** To access the utilization report features, you will first need to enable data collection in {{ site.data.product.title }}; see the following sections in the *Deployment Planning Guide*:
+**Note:** To access the utilization report features, you will first need to enable data collection in {{ site.data.product.title_short }}; see the following sections in the *Deployment Planning Guide*:
 
 - [Assigning the Capacity and Utilization Server Roles](../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles)
 - [Capacity and Utilization Data Collected](../deployment_planning_guide/index.html#capacity-and-utilization-data-collected)
 
 ## Utilization Trends
 
-{{ site.data.product.title }} allows you to view the resource utilization of your
+{{ site.data.product.title_short }} allows you to view the resource utilization of your
 clusters, providers, and datastores. You can choose from summary,
 details, or report view.
 
@@ -18,7 +18,7 @@ details, or report view.
 
 This procedure shows you how to view a utilization trend summary.
 
-1.  Navigate to menu:Overview\[Utilization\].
+1.  Browse to menu: **Overview > Utilization**.
 
 2.  Click **Summary** if it is not already selected.
 
@@ -48,7 +48,7 @@ This procedure shows you how to view a utilization trend summary.
 This procedure shows you how to view detail lines of a utilization
 trend.
 
-1.  Navigate to menu:Overview\[Utilization\].
+1.  Browse to menu: **Overview > Utilization**.
 
 2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 
@@ -64,7 +64,7 @@ trend.
 To find out more about resource utilization, view utilization trend
 reports.
 
-1.  Navigate to menu:Overview\[Utilization\].
+1.  Browse to menu: **Overview < Utilization**.
 
 2.  Expand the tree on the left side until you can see the wanted providers, clusters, or datastores.
 

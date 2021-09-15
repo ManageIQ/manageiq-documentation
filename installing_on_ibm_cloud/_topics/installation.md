@@ -1,6 +1,6 @@
-## Installing {{ site.data.product.title }}
+## Installing {{ site.data.product.title_short }}
 
-Installing {{ site.data.product.title }} consists of the following steps:
+Installing {{ site.data.product.title_short }} consists of the following steps:
 
 1.  Downloading the appliance for your environment as a virtual machine image template.
 
@@ -10,23 +10,23 @@ Installing {{ site.data.product.title }} consists of the following steps:
 
 After you have completed all the procedures in this guide, you will have a working environment on which additional customizations and configurations can be performed.
 
-### Obtaining the {{ site.data.product.title }} Virtual Appliance
+### Obtaining the {{ site.data.product.title_short }} Virtual Appliance
 
-### Uploading and Provisioning the {{ site.data.product.title }} Virtual Appliance in IBM Cloud
+### Uploading and Provisioning the {{ site.data.product.title_short }} Virtual Appliance in IBM Cloud
 
-To upload the {{ site.data.product.title }} appliance file in IBM Cloud, ensure the following requirements are met:
+To upload the {{ site.data.product.title_short }} appliance file in IBM Cloud, ensure the following requirements are met:
 
-  - Approximately 2 GB of space for each image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {{ site.data.product.title }} appliance.
+  - Approximately 2 GB of space for each image; 44+ GB of space, 12 GB RAM, and 4 VCPUs for the {{ site.data.product.title_short }} appliance.
 
   - You must have an IBM Cloud user account with the following roles: 
 ![Figure showing the required roles for an IBM Cloud user account.](../images/required_roles.png){: caption="Figure 1. Required roles for IBM Cloud user account" caption-side="bottom"}
 
   - Depending on your infrastructure, allow time for the upload.
 
-### Step A. Setting up the Custom image for {{ site.data.product.title }} in IBM Cloud
+### Step A. Setting up the Custom image for {{ site.data.product.title_short }} in IBM Cloud
 {: #config-image}
 
-Create a custom Linux-based image to deploy {{ site.data.product.title }} as a virtual server instance in IBM Cloud.
+Create a custom Linux-based image to deploy {{ site.data.product.title_short }} as a virtual server instance in IBM Cloud.
 
 1. If you don't already have an instance of IBM Cloud Object Storage, see [Getting started with IBM Cloud Object Storage](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started)
 
@@ -35,18 +35,20 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
     You must also create a bucket in IBM Cloud Object Storage to store your images.
     ![Figure showing example standard type bucket created.](../images/buckets.png){: caption="Figure 3. Example Standard type bucket created" caption-side="bottom"}
 
+2. Rename the {{ site.data.product.title_short }} installation image file and change the file extension from `.qc2` to `.qcow2`.
+For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (file name: `manageiq-openstack-kasparov-1.qcow2`).
 
-2. Upload the {{ site.data.product.title }} installation image (file name: `manageiq-openstack-jansa-1.qc2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). 
+3. Upload the {{ site.data.product.title_short }} installation image (file name: `manageiq-openstack-kasparov-1.qcow2`) to your IBM Cloud Object Storage. Select your bucket and click Add Objects to upload the images. For more information, see [Uploading data by using the console](https://cloud.ibm.com/docs/services/cloud-object-storage?topic=cloud-object-storage-upload#upload-console). 
    
    **Note:** You can use the Aspera high-speed transfer plug-in to upload images larger than 200 MB.  
-![Figure showing example that uses Aspera uploaded file to bucket.](../images/upload_images_to_bucket.png){: caption="Figure 4. Example using Aspera uploaded file to bucket" caption-side="bottom"}
+![Figure showing example that uses Aspera uploaded file to bucket.](../images/upload_images_to_bucket_2.png){: caption="Figure 4. Example using Aspera uploaded file to bucket" caption-side="bottom"}
 
-1. From IBM Cloud Identity and Access Management (IAM), create an authorization between the Virtual Private Cloud (VPC) Infrastructure (source service) > Image Service for VPC (resource type) and Cloud Object Storage (target service). For more information, see [Create an authorization](https://cloud.ibm.com/docs/iam?topic=iam-serviceauth#serviceauth).
+4. From IBM Cloud Identity and Access Management (IAM), create an authorization between the Virtual Private Cloud (VPC) Infrastructure (source service) > Image Service for VPC (resource type) and Cloud Object Storage (target service). For more information, see [Create an authorization](https://cloud.ibm.com/docs/iam?topic=iam-serviceauth#serviceauth).
     
     **Important**: The configuration must be set up as this example or permissions can fail. 
     ![Figure showing example IAM authorization.](../images/service_auth_vpc.png){: caption="Figure 5. Example IAM authorization" caption-side="bottom"}
 
-2. Create a generation 2 Virtual Private Cloud (**Must be generation 2**). For more information, see [Create a VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started#create-and-configure-vpc)
+5. Create a generation 2 Virtual Private Cloud (**Must be generation 2**). For more information, see [Create a VPC](https://cloud.ibm.com/docs/vpc?topic=vpc-getting-started#create-and-configure-vpc)
   
     a. Create a VPC - The VPC must be in the same resource group and region as your bucket.
 
@@ -56,11 +58,11 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
 
     ![Figure showing example VPC.](../images/service_auth_vpc.png){: caption="Figure 6. Example VPC" caption-side="bottom"}
 
-3. Configure an access control list (ACL) to limit the subnet's inbound and outbound traffic.
+6. Configure an access control list (ACL) to limit the subnet's inbound and outbound traffic.
 
     ![Figure showing example ACL.](../images/config_ACL.png){: caption="Figure 7. Example ACL" caption-side="bottom"}
 
-4. Import the {{ site.data.product.title }} installation images from the bucket into the VPC.
+7. Import the {{ site.data.product.title_short }} installation images from the bucket into the VPC.
   
     a. Browse to **VPC Infrastructure** > **Compute** > **Custom images** and select **import custom image**.
 
@@ -80,11 +82,11 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
 
     h. Click **Import custom image**.
 
-    ![Figure showing example of custom image imported.](../images/select_qcow2_image.png){: caption="Figure 9. Example of custom image imported" caption-side="bottom"}
+    ![Figure showing example of custom image imported.](../images/select_qcow2_image_2.png){: caption="Figure 9. Example of custom image imported" caption-side="bottom"}
 
     ![Figure showing example of custom image listing after successful image creation.](../images/results_vpc_images.png){: caption="Figure 10. Example of custom image listing after successful image creation" caption-side="bottom"}
 
-5. Create a virtual server from the custom image by clicking the "three dot menu" of that image, then selecting "New virtual server".
+8. Create a virtual server from the custom image by clicking the "three dot menu" of that image, then selecting "New virtual server".
 ![Figure showing select three dot menu for New virtual server.](../images/select_new_server.png){: caption="Figure 11. Select New virtual server from the three dot menu" caption-side="bottom"}
   
    a. Enter your name. Select the Virtual private cloud and Resource group.
@@ -100,7 +102,7 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
 
    ![Figure showing add ssh key.](../images/ssh_keys.png){: caption="Figure 13. Add an ssh key" caption-side="bottom"}
 
-   f. Add storage to your virtual service. For example, 100 gigabytes. This volume is needed to configure the {{ site.data.product.title }} appliance. 
+   f. Add storage to your virtual service. For example, 100 gigabytes. This volume is needed to configure the {{ site.data.product.title_short }} appliance. 
 
    **Note:** Make sure that the data volume name is unique and not named the same as another volume across your virtual server instances.
 
@@ -108,16 +110,16 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
 
     g. Select create virtual server instance. 
  
-8. Update the security group that allows inbound and outbound traffic. Open the server instance, go down to the Network interfaces section, and then modify the security group.
+9. Update the security group that allows inbound and outbound traffic. Open the server instance, go down to the Network interfaces section, and then modify the security group.
 
    ![Figure showing example security group that allows inbound and outbound traffic.](../images/security_inbound_outbound.png){: caption="Figure 15. Example security group that allows inbound and outbound traffic" caption-side="bottom"}
 
-9. Assign the floating IP address:
+10. Assign the floating IP address:
 
    ![Figure showing example Floating IP address.](../images/floating_ip_vpc.png){: caption="Figure 16. Example Floating IP address assigned" caption-side="bottom"}
 
 
-### Step B. Setting up the {{ site.data.product.title }} appliance
+### Step B. Setting up the {{ site.data.product.title_short }} appliance
 
 1. Use the `ssh` command to connect to your virtual server instance (appliance) by using the floating IP address. Log in with a username of `root` and the default password `smartvm`. The Bash prompt for the root user is displayed.
   
@@ -125,7 +127,7 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
    ```
    ssh root@<host_ip_address>
    ```
-2. Enter the `appliance_console` command. The {{ site.data.product.title }} appliance summary screen is displayed.
+2. Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance summary screen is displayed.
 
    ![Figure showing example appliance_console.](../images/setup_appliance.png){: caption="Figure 17. Welcome to the Appliance Console" caption-side="bottom"}
 
@@ -136,11 +138,11 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
 4. Select _5) Configure database_ from the menu.
 
     - You are prompted to create or fetch an encryption key.
-    If this instance is the first {{ site.data.product.title }} appliance, select _1) Create key_.
+    If this instance is the first {{ site.data.product.title_short }} appliance, select _1) Create key_.
     
-    - If this is not the first {{ site.data.product.title }} appliance, select _2) Fetch key_ from remote system to fetch the key from the first appliance. For worker and multi-region setups, use this option to copy key from another appliance.
+    - If this is not the first {{ site.data.product.title_short }} appliance, select _2) Fetch key_ from remote system to fetch the key from the first appliance. For worker and multi-region setups, use this option to copy key from another appliance.
 
-    **Note:** All {{ site.data.product.title }} appliances in a multi-region deployment must use the same key.
+    **Note:** All {{ site.data.product.title_short }} appliances in a multi-region deployment must use the same key.
 
 5. Select _1) Create Internal Database_ for the database location.
 
@@ -166,10 +168,10 @@ Create a custom Linux-based image to deploy {{ site.data.product.title }} as a v
 
 9.  Create and confirm a password for the database.
 
-    {{ site.data.product.title }} configures the internal database. This takes a few minutes. 
+    {{ site.data.product.title_short }} configures the internal database. This takes a few minutes. 
 
-10. Once {{ site.data.product.title }} is installed, you can log in and complete administrative tasks.
-    - Log in to Red Hat {{ site.data.product.title }} for the first time by:
+10. Once {{ site.data.product.title_short }} is installed, you can log in and complete administrative tasks.
+    - Log in to Red Hat {{ site.data.product.title_short }} for the first time by:
     - Select the URL for the login screen. For example,  `https://xx.xx.xx.xx` on the virtual server instance, where `xx.xx.xx.xx` is the floating IP.
     - Enter the default credentials (Username: admin | Password: smartvm) for the initial login.
     - Click Login.

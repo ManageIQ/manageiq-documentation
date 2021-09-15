@@ -47,7 +47,7 @@ The compliance check runs all compliance policies that are assigned to the host 
 
 **Note:**
 
-To schedule, you must have `EvmRole-administrator` access to the {{ site.data.product.title }} server.
+To schedule, you must have `EvmRole-administrator` access to the {{ site.data.product.title_short }} server.
 
 {% include_relative _topics/to_schedule_a_compliance_check.md %}
 

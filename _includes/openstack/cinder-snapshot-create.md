@@ -1,8 +1,8 @@
-1.  Navigate to menu:Storage\[Block Storage \> Volumes\].
+1.  Browse to menu: **Storage > Block Storage > Volumes**.
 
 2.  Click the volume to snapshot to open the volume’s summary page.
 
-3.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+3.  Click **Configuration**, then
     click ![Create a Snapshot of this Cloud
     Volume](../images/volume-icon.png) (**Create a Snapshot of this Cloud
     Volume**).

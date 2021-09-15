@@ -2,7 +2,7 @@ Procedure
 
 1.  ssh to the {{ site.data.product.title_short }} appliance as `root`.
 
-2.  Navigate to `/var/www/miq/vmdb`:
+2.  Browse to `/var/www/miq/vmdb`:
 
         # cd /var/www/miq/vmdb
 

@@ -42,14 +42,14 @@ _topics/performing_smartstate_analysis_on_hosts.md %}
 
 ## Comparing Hosts
 
-{{ site.data.product.title }} allows you to compare hosts and check operating systems,
+{{ site.data.product.title_short }} allows you to compare hosts and check operating systems,
 host software and version information, and hardware.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Check the hosts to compare.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then
+3.  Click **Configuration**, and then
     ![2148](../images/2148.png) (**Compare selected Hosts**). The
     comparison displays in a default expanded view, which lists a
     limited set of properties.
@@ -86,8 +86,6 @@ host software and version information, and hardware.
 {% include_relative _topics/to_create_a_comparison_report2.md %}
 
 {% include_relative _topics/refreshing_multiple_hosts.md %}
-
-{% include_relative _topics/discovering_multiple_hosts.md %}
 
 {% include_relative _topics/adding_a_single_host.md %}
 

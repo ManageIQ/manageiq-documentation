@@ -1,5 +1,5 @@
 The default set of provisioning dialogs shows all possible options.
-However, {{ site.data.product.title }} also provides the ability to customize which
+However, {{ site.data.product.title_short }} also provides the ability to customize which
 tabs and fields are shown. You can decide what fields are required to
 submit the provisioning request or set default values.
 

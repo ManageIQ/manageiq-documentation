@@ -41,9 +41,9 @@ respective ports.
 | CFME appliance                                               | CFME SmartProxy installed on VMware ESX Server                         | HTTPS                  | 1139      |          | Communication with SmartProxy                                           |
 | CFME appliance                                               | DNS Server                                                             | UDP                    |           | 53       | DNS Lookups                                                             |
 
-Ports Used by {{ site.data.product.title }}
+Ports Used by {{ site.data.product.title_short }}
 
-The following tables detail the ports used by {{ site.data.product.title }} to
+The following tables detail the ports used by {{ site.data.product.title_short }} to
 communicate with providers.
 
 | Initiator (CFME Role if applicable) | Receiver (CFME Role if applicable) | Application | TCP Port | UDP Port | Purpose                                                                                                                                                                                   |
@@ -53,7 +53,7 @@ communicate with providers.
 | CFME appliance                      | RHEV-H Hosts or RHEL Hypervisors   | SSH         | 22       |          | SSH connections.                                                                                                                                                                          |
 | CFME appliance                      | RHEV-H Hosts or RHEL Hypervisors   | DirectLUN   |          |          | Direct LUN hook must be installed and enabled for embedded VM scanning on FC or iSCSI storage devices. Not a tcp/udp connection.                                                          |
 
-Red Hat Enterprise Virtualization Ports Used by {{ site.data.product.title }}
+Red Hat Enterprise Virtualization Ports Used by {{ site.data.product.title_short }}
 
 | Initiator (CFME Role if applicable) | Receiver (CFME Role if applicable) | Application   | TCP Port | UDP Port | Purpose                                |
 | ----------------------------------- | ---------------------------------- | ------------- | -------- | -------- | -------------------------------------- |
@@ -65,14 +65,14 @@ Red Hat Enterprise Virtualization Ports Used by {{ site.data.product.title }}
 | CFME appliance                      | RHOS (Neutron)                     | HTTP REST API | 9696     |          | Networking                             |
 | CFME appliance                      | RHOS (Cinder)                      | HTTP REST API | 8776     |          | Block Storage                          |
 
-Red Hat OpenStack Platform Ports Used by {{ site.data.product.title }}
+Red Hat OpenStack Platform Ports Used by {{ site.data.product.title_short }}
 
 | Initiator (CFME Role if applicable) | Receiver (CFME Role if applicable)                  | Application | TCP Port    | UDP Port | Purpose                                                                                |
 | ----------------------------------- | --------------------------------------------------- | ----------- | ----------- | -------- | -------------------------------------------------------------------------------------- |
 | CFME Appliance                      | OpenShift Master Node(s) (or Load Balancer)         | HTTPS       | 8443 or 443 |          | Required for communication to the OpenShift API. Dependent on OpenShift configuration. |
 | CFME Appliance                      | OpenShift Infrastructure Node(s) (or Load Balancer) | HTTPS       | 443         |          | Metrics and logging                                                                    |
 
-OpenShift Container Platform Ports Used by {{ site.data.product.title }}
+OpenShift Container Platform Ports Used by {{ site.data.product.title_short }}
 
 | Initiator (CFME Role if applicable)                                                                          | Receiver (CFME Role if applicable)        | Application     | TCP Port | UDP Port | Purpose                                                                                         |
 | ------------------------------------------------------------------------------------------------------------ | ----------------------------------------- | --------------- | -------- | -------- | ----------------------------------------------------------------------------------------------- |
@@ -82,7 +82,7 @@ OpenShift Container Platform Ports Used by {{ site.data.product.title }}
 | CFME appliance (SmartProxy)                                                                                  | vCenter (if analyzing VMs through VC)     | SOAP over HTTPS | 902      |          | Communication from CFME appliance to vCenters                                                   |
 | CFME appliance(SmartProxy)                                                                                   | ESX Hosts (not needed for ESXi)           | SSH             | 22       |          | CFME appliance console access (ssh) to ESX hosts                                                |
 
-VMware vSphere Ports Used by {{ site.data.product.title }}
+VMware vSphere Ports Used by {{ site.data.product.title_short }}
 
 | Initiator (CFME Role if applicable) | Receiver (CFME Role if applicable)                                    | Application                      | TCP Port       | UDP Port | Purpose                                             |
 | ----------------------------------- | --------------------------------------------------------------------- | -------------------------------- | -------------- | -------- | --------------------------------------------------- |
@@ -98,7 +98,7 @@ VMware vSphere Ports Used by {{ site.data.product.title }}
 | CFME appliance                      | Hyper-V Host (file transfer)                                          | BITS                             | 443            |          | Communication from CFME appliance to Host           |
 | CFME appliance                      | VMware Web Services                                                   | WCF                              | 443            |          |                                                     |
 
-SCVMM Ports Used by {{ site.data.product.title }}
+SCVMM Ports Used by {{ site.data.product.title_short }}
 
 | Initiator (CFME Role if applicable) | Receiver (CFME Role if applicable)                       | Application  | TCP Port | UDP Port | Purpose                                     |
 | ----------------------------------- | -------------------------------------------------------- | ------------ | -------- | -------- | ------------------------------------------- |
@@ -108,11 +108,11 @@ SCVMM Ports Used by {{ site.data.product.title }}
 | CFME appliance                      | Service Bus Pubsub over REST (\*.servicebus.windows.net) | HTTPS        | 443      |          |                                             |
 | CFME appliance                      | Access Control (\*.accesscontrol.windows.net)            | HTTPS        | 443      |          |                                             |
 
-Azure Ports Used by {{ site.data.product.title }}
+Azure Ports Used by {{ site.data.product.title_short }}
 
 <div class="important">
 
-To provide your {{ site.data.product.title }} infrastructure with an extra layer of
+To provide your {{ site.data.product.title_short }} infrastructure with an extra layer of
 security, use a network layer firewall to restrict port access.
 
 </div>

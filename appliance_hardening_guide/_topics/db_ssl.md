@@ -1,6 +1,6 @@
 ### Configuring the Database to use SSL
 
-{{ site.data.product.title }} initially connects to the database through an unencrypted communication. If you are using multiple appliances that are connecting to a single database appliance, you can set up the database connection to use SSL. An SSL connection encrypts the communication between the {{ site.data.product.title_short }} and the database.
+{{ site.data.product.title_short }} initially connects to the database through an unencrypted communication. If you are using multiple appliances that are connecting to a single database appliance, you can set up the database connection to use SSL. An SSL connection encrypts the communication between the {{ site.data.product.title_short }} and the database.
 
 The procedures in this section use the SSL certificate and the following key files. These files can be found on your main {{ site.data.product.title_short }} database appliance.
 
@@ -87,7 +87,7 @@ The database appliance now accepts only connections from connecting appliances t
 
         [root@{{ site.data.product.title_short_l }}2 ~]# mkdir /root/.postgresql
 
-    The PostgreSQL client library, which {{ site.data.product.title }} also uses, looks to this directory for custom configuration files.
+    The PostgreSQL client library, which {{ site.data.product.title_short }} also uses, looks to this directory for custom configuration files.
 
 3.  Copy the root certificate file from the database appliance to the `/root/.postgresql` directory on the connecting appliance:
 
@@ -107,7 +107,7 @@ The database appliance now accepts only connections from connecting appliances t
 
     The `psql` displays information about the SSL connection, which indicates that the configuration succeeded. Enter `\q` to leave `psql`.
 
-Complete this procedure for each external appliance. This enhances the security of all database transactions in your {{ site.data.product.title }} infrastructure.
+Complete this procedure for each external appliance. This enhances the security of all database transactions in your {{ site.data.product.title_short }} infrastructure.
 
 #### Hardening TLS Protocol Version
 

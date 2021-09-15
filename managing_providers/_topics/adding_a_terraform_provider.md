@@ -1,6 +1,6 @@
 # Adding an IBM Terraform Provider
 
-To start discovering the Terraform templates and virtual machines, you need at least one IBM Terraform provider added to {{ site.data.product.title }}.
+To start discovering the Terraform templates and virtual machines, you need at least one IBM Terraform provider added to {{ site.data.product.title_short }}.
 
 1. Browse to menu: **Configuration > Providers**.
 
@@ -32,4 +32,4 @@ To start discovering the Terraform templates and virtual machines, you need at l
 
 12. Click **Add** to confirm your settings and save the provider.
 
-{{ site.data.product.title }} saves the IBM Terraform provider in its database and triggers a refresh of resources detected in the provider.
+{{ site.data.product.title_short }} saves the IBM Terraform provider in its database and triggers a refresh of resources detected in the provider.

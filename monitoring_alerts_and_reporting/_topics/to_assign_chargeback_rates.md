@@ -1,6 +1,6 @@
 ### Assigning Chargeback Rates
 
-{{ site.data.product.title }} allows you to assign chargeback rates by choosing from
+{{ site.data.product.title_short }} allows you to assign chargeback rates by choosing from
 **Compute** and **Storage**. You can assign either a custom chargeback
 rate, or a default rate for Compute, Storage, or Container Images.
 

@@ -11,10 +11,10 @@ information about it, such as patches, CPU, and memory.
 
   - `root` or administrator credentials are required to get patch information.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Hosts\].
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Check the hosts to analyze.
 
-3.  Click ![1847](../images/1847.png) (**Configuration**), and then ![1942](../images/1942.png)(**Perform SmartState Analysis**).
+3.  Click **Configuration**, and then ![1942](../images/1942.png)(**Perform SmartState Analysis**).
 
 4.  Click **OK**.

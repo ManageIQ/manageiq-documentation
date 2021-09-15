@@ -3,7 +3,7 @@
 Virtual machines and templates can be sorted by Name, Cluster, Host,
 Datastore, Compliance, Last Analysis Time, Total Snapshots, or Region.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to sort.
 

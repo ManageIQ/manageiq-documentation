@@ -1,6 +1,6 @@
 # Tagging Virtual Machines and Templates
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to tag.
 

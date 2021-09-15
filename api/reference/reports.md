@@ -19,6 +19,8 @@ collections:
 
   - [Running Reports](#running-reports)
 
+  - [Scheduling Reports](#scheduling-reports)
+
   - [Requesting Report Result Downloads](#requesting-result-downloads)
 
   - [Importing Reports](#importing-reports)
@@ -314,6 +316,65 @@ GET /api/reports/80/results?expand=resources&attributes=created_on
       "created_on": "2015-07-29T18:24:35Z"
     }
   ]
+}
+```
+
+### Scheduling Reports
+
+Scheduling a report is done via the **schedule** action on a report resource as follows
+
+``` data
+POST /api/reports/:id
+```
+
+``` data
+{
+  "action" : "schedule"
+  "resource": {
+    "send_email": true|false,
+    "start_date": DateTime,
+    "time_zone":  TZ,
+    "interval": {
+      "unit":  "minutely"|"hourly"|"daily"|"weekly"|"monthly"|"once",
+      "value": "once"
+    },
+    ...
+  }
+}
+```
+
+#### Example:  "One off" report
+
+##### Request
+
+``` data
+POST /api/reports/5
+```
+
+``` data
+{
+  "action": "schedule",
+  "resource": {
+    "name":        "Chargeback Report Schedule - 2000/01/01",
+    "description": "Chargeback Report 2000 New Year Report",
+    "resource_type": "MiqReport",
+    "start_date": "2000-01-01T00:00:00Z",
+    "time_zone": "UTC",
+    "interval": { "unit": "once" },
+    "enabled": true
+  }
+}
+```
+
+##### Response
+
+``` data
+{
+  "success":       true,
+  "message":       "scheduling of report 5",
+  "schedule_id":   "10",
+  "schedule_href": "http://localhost:3000/api/reports/5/schedules/10",
+  "href":          "http://localhost:3000/api/reports/5"
 }
 ```
 

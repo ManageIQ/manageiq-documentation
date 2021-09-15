@@ -1,8 +1,8 @@
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Browse to menu: **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
-3.  Click ![1847](../images/1847.png)(**Configuration**), and then
+3.  Click **Configuration**, and then
     ![1862](../images/1862.png)(**Add a New Catalog Item**).
 
 4.  Select the **Catalog Item Type** you are adding. This list only

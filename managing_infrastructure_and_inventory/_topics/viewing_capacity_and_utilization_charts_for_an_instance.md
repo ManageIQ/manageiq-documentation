@@ -9,7 +9,7 @@ You must have a server with network visibility to your provider assigned
 the server role of **Capacity & Utilization Collector** to use this
 feature.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion to view capacity data.
 
@@ -27,6 +27,6 @@ feature.
 
 **Note:**
 
-Daily charts only include full days of data. This means {{ site.data.product.title }} does not show daily data for a day without a complete 24 data point range for a day.
+Daily charts only include full days of data. This means {{ site.data.product.title_short }} does not show daily data for a day without a complete 24 data point range for a day.
 
 For information about data optimization including utilization trend reports, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization).

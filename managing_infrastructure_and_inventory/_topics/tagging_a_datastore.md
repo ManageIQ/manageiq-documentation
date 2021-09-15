@@ -2,7 +2,7 @@
 
 Use tags to categorize a datastore.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Datastores\].
+1.  Browse to menu: **Compute > Infrastructure > Datastores**.
 
 2.  Click the datastore to tag.
 

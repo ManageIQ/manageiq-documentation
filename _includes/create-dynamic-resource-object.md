@@ -1,14 +1,14 @@
 Model a new resource by creating a generic object class and adding it to
-your {{ site.data.product.title }} inventory. Each generic object class can have
+your {{ site.data.product.title_short }} inventory. Each generic object class can have
 attributes, associations, and methods. Once created, generic object
 classes are visible to users of the Self Service user interface at the
 resource level.
 
 Create a generic object class using the following steps:
 
-1.  Navigate to menu:Automation\[Automate \> Generic Objects\].
+1.  Browse to menu: **Automation > Automate > Generic Objects**.
 
-2.  Click ![Configuration](../images/1847.png) (**Configuration**), then
+2.  Click **Configuration**, then
     click ![Add a New Generic Object Class](../images/1862.png) (**Add a
     New Generic Object Class**).
 

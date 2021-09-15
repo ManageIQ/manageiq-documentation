@@ -1,9 +1,9 @@
 # Viewing Group Information for an Instance or Image
 
-{{ site.data.product.title }}'s **SmartState Analysis** feature returns group
+{{ site.data.product.title_short }}'s **SmartState Analysis** feature returns group
 information. Explore the group to get a list of its users.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Browse to menu: **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the item to view user information.
 

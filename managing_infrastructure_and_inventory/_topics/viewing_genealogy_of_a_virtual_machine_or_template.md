@@ -1,10 +1,10 @@
 # Viewing Genealogy of a Virtual Machine or Template
 
-{{ site.data.product.title }} detects the lineage of a virtual machine. View a virtual
+{{ site.data.product.title_short }} detects the lineage of a virtual machine. View a virtual
 machine’s lineage and compare the virtual machines that are part of its
 tree. This also allows tagging of virtual machines that share genealogy.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the item to view genealogy.
 

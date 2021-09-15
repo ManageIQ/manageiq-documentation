@@ -1,6 +1,6 @@
 # Authenticating to Microsoft SCVMM
 
-Before you can add a Microsoft SCVMM provider to your {{ site.data.product.title }}
+Before you can add a Microsoft SCVMM provider to your {{ site.data.product.title_short }}
 environment, you must enable WinRM to listen for HTTP traffic on
 Microsoft SCVMM servers. You must also set the appropriate execution
 policy on the Microsoft SCVMM server to allow PowerShell scripts from

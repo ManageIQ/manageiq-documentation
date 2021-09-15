@@ -1,6 +1,6 @@
 # Creating a Virtual Machine or Template Filter
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Browse to menu: **Compute > Infrastructure > Virtual Machines**.
 
 2.  Go to the **VMs** or **Templates** accordion.
 

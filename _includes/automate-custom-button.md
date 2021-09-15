@@ -1,4 +1,4 @@
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Browse to menu: **Automation > Automate > Customization**.
 
 2.  Click the **Buttons** accordion.
 
@@ -7,11 +7,11 @@
 
 4.  Click **Unassigned Buttons**.
 
-5.  Click ![image](../images/1847.png)(**Configuration**), then ![image](../images/1862.png) (**Add a new Button**).
+5.  Click **Configuration**, then ![image](../images/1862.png) **Add a new Button**.
 
     **Note:**
 
-    If ![image](../images/1862.png) (**Add a new Button**) is not available, that means you have not created a button group for that object. To continue, create a button group first. See [Creating a Custom Button](#create-custom-button-group).
+    If ![image](../images/1862.png) **Add a new Button** is not available, that means you have not created a button group for that object. To continue, create a button group first. See [Creating a Custom Button](#create-custom-button-group).
 
 6.  Under the **Options** tab:
 

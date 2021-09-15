@@ -1,6 +1,6 @@
 #### Creating an E-mail Action
 
-To send emails from the {{ site.data.product.title }} server, you must have the notifier server role enabled and have defined settings for SMTP email.
+To send emails from the {{ site.data.product.title_short }} server, you must have the notifier server role enabled and have defined settings for SMTP email.
 
 1. Browse to menu: **Control > Explorer**.
 

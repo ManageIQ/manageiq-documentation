@@ -31,7 +31,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Capacity & Utilization          | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ✅     |
 | Instance Event Timelines        | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ✅                   | ✅     |
 | Cloud Layer Timelines           | ❌  | ❌    | ❌  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
-| Reporting                       | ✅  | ✅    | ✅  | ✅        | ❌                   | ✅                   | ✅                   | ✅     |
+| Reporting                       | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ✅     |
 | Right Sizing                    | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Chargeback by Allocation        | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ❌     |
 | Chargeback by Usage             | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |

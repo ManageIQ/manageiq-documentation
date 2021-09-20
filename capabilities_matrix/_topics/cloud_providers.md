@@ -27,11 +27,11 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | ------------------------------- | --- | ----- | --- | --------- | -------------------- | -------------------- | -------------------- | ------ |
 | Relationship Discovery          | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ✅     |
 | Instance Drift Comparison       | ✅  | ✅    | ❌  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |
-| Instance Genealogy              | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ✅                   | ✅     |
+| Instance Genealogy              | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ✅     |
 | Capacity & Utilization          | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ✅     |
 | Instance Event Timelines        | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ✅                   | ✅     |
 | Cloud Layer Timelines           | ❌  | ❌    | ❌  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
-| Reporting                       | ✅  | ✅    | ✅  | ✅        | ❌                   | ✅                   | ✅                   | ✅     |
+| Reporting                       | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ✅     |
 | Right Sizing                    | ✅  | ✅    | ✅  | ✅        | ✅                   | ❌                   | ❌                   | ❌     |
 | Chargeback by Allocation        | ✅  | ✅    | ✅  | ✅        | ✅                   | ✅                   | ✅                   | ❌     |
 | Chargeback by Usage             | ✅  | ✅    | ✅  | ✅        | ❌                   | ❌                   | ❌                   | ❌     |

@@ -10,7 +10,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 |   - Cloud Networks             | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ✅     | ✅    |
 |   - Cloud Subnets              | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ✅     | ✅    |
 |   - Floating IP Addresses      | ✅  | ✅    | ✅  | ✅        | N/A     | N/A     | ✅     | ❌    |
-|   - Load Balancers             | ✅  | ✅    | ✅  | ❌        | N/A     | ❌      | ✅     | ❌    |
+|   - Load Balancers             | ✅  | ✅    | ✅  | ❌        | N/A     | N/A     | ✅     | ❌    |
 |   - Network Managers           | ❌  | ✅    | ✅  | ❌        | ❌      | ✅      | ✅     | ✅    |
 |   - Network Manager Relations  | ✅  | ✅    | ✅  | ✅        | ❌      | ✅      | ✅     | ✅    |
 |   - Network Ports              | ✅  | ✅    | ✅  | ✅        | ❌      | ✅      | ✅     | ✅    |

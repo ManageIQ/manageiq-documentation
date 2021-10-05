@@ -17,7 +17,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 |   - Network Routers            | ❌  | ❌    | ✅  | ✅        | ❌      | ❌      | ✅     | ❌    |
 |   - Security Groups            | ✅  | ✅    | ✅  | ✅        | N/A     | N/A     | N/A     | ❌    |
 | Storage Inventory              | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ✅     | ✅    |
-|   - Storage Manager            | ✅  | ❌    | ❌  | ✅        | ❌      | ✅      | ✅     | ❌    |
+|   - Storage Manager            | ✅  | ❌    | ❌  | ✅        | ✅      | ✅      | ✅     | ❌    |
 |   - Volumes                    | ❌  | ❌    | ✅  | ✅        | ✅      | ✅      | ✅     | ✅    |
 | Events                         | ✅  | ✅    | ✅  | ✅        | ✅      | ❌      | ✅     | ✅    |
 | Metrics                        | ✅  | ✅    | ✅  | ✅        | ❌      | ❌      | ❌     | ✅    |

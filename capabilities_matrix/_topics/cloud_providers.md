@@ -54,7 +54,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 |   - from Volume Snapshot to Instance   | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 |   - from Orchestration Template        | ✅  | ✅    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 |   - Cloud-init                         | ❌  | ❌    | ❌  | ✅        | ✅                               | ✅       | ❌      | ❌           |
-|   - Sysprep Windows Templates          | ❌  | ❌    | ❌  | ✅        | ❌                               | N/A      | N/A     | ❌           |
+|   - Sysprep Windows Templates          | ❌  | ❌    | ❌  | ✅        | N/A                              | N/A      | N/A     | ❌           |
 | Instance Retirement                    | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ❌      | ✅           |
 | Instance Reconfiguration               | ❌  | ❌    | ❌  | ✅        | ✅                               | ❌       | ❌      | ❌           |
 |   - Disk Addition                      | ✅  | ✅    | ❌  | ✅        | ❌                               | ✅       | ❌      | ❌           |

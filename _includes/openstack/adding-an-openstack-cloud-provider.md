@@ -30,11 +30,23 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 2.  Click **Configuration**, then click
     ![1862](../images/1862.png) (**Add a New Cloud Provider**).
 
-3.  Enter a **Name** for the provider.
+3.  From the **Type** list, select **OpenStack**.
 
-4.  From the **Type** list, select **OpenStack**.
+4.  Enter a **Name** for the provider.
 
-5.  Select the appropriate **API Version** from the list. The default is
+5.  Select the appropriate **Zone** for the provider. By default, the
+    zone is set to **default**.
+
+    **Note:**
+
+    For more information, see the definition of host aggregates and availability zones in [OpenStack Compute (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute) in the Red Hat OpenStack Platform *Architecture Guide*.
+
+
+6.  Enter the OpenStack region in **Provider Region**.
+
+7.  (Optional) Select an associated **Openstack Infra Provider**
+
+8.  Select the appropriate **API Version** from the list. The default is
     `Keystone v2`.
 
     If you select `Keystone v3`, enter the `Keystone V3 Domain ID` that
@@ -51,22 +63,10 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 
     {% include openstack/osp-keystone-api-v3.md %}
 
-6.  Enter a region number in **Region**.
-
-7.  Enter the appropriate **Zone** for the provider. If you do not
-    specify a zone, it is set to `default`.
-
-8.  (Optional) Enable tenant mapping by toggling the **Tenant Mapping
+9.  (Optional) Enable tenant mapping by toggling the **Tenant Mapping
     Enabled** option to **Yes**. This synchronizes resources and users
     between the OpenStack cloud provider and {{ site.data.product.title_short }}. By
     default, tenant mapping is disabled.
-
-9.  Select the appropriate **Zone** for the provider. By default, the
-    zone is set to **default**.
-
-    **Note:**
-
-    For more information, see the definition of host aggregates and availability zones in [OpenStack Compute (nova)](https://access.redhat.com/documentation/en-us/red_hat_openstack_platform/11/html/architecture_guide/components#comp-compute) in the Red Hat OpenStack Platform *Architecture Guide*.
 
 10. In the **Default** tab, under **Endpoints**, configure the host and authentication details of your OpenStack provider:
 
@@ -109,7 +109,7 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
     6.  Click **Validate** to confirm {{ site.data.product.title_short }} can connect to the
         OpenStack provider.
 
-11. Next, configure how {{ site.data.product.title_short }} should receive events from the
+12. Next, configure how {{ site.data.product.title_short }} should receive events from the
     OpenStack provider. Click the **Events** tab in the **Endpoints**
     section to start.
 
@@ -135,7 +135,7 @@ To authenticate the provider using a self-signed Certificate Authority (CA), con
 
         5.  Click **Validate** to confirm the credentials.
 
-12. Click **Add** after configuring the cloud provider.
+13. Click **Add** after configuring the cloud provider.
 
 **Note:**
 

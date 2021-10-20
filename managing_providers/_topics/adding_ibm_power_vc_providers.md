@@ -12,20 +12,20 @@ Complete the following procedure to add an IBM PowerVC cloud provider in
 
 4.  Enter a **Name** for the provider.
 
-6.  Select the appropriate **Zone**.
+5.  Select the appropriate **Zone**.
 
-7.  Select the appropriate **Provider Region**.
+6.  Enter the PowerVC region in **Provider Region**.
 
-8.  Select the appropriate **Domain ID**.
+7.  Select the appropriate **Domain ID**.
 
-9.  (Optional) Enable tenant mapping by toggling the **Tenant Mapping Enabled**
+8.  (Optional) Enable tenant mapping by toggling the **Tenant Mapping Enabled**
     option to **On**. This synchronizes resources and users between the IBM
     PowerVC provider and {{ site.data.product.title_short }}. By default,
     tenant mapping is disabled.
 
-10.  Under **Endpoints**, in the **Default** tab.
-    1.  Select a **Security Protocol** method to specify how to authenticate
-        the provider:
+9.  Under **Endpoints**, in the **Default** tab:
+
+    1.  Select a **Security Protocol** method to specify how to authenticate the provider:
 
           - **SSL without validation**: Authenticate the provider insecurely
             using SSL.

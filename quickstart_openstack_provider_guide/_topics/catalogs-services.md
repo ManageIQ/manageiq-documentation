@@ -1,4 +1,4 @@
-In [???](#provisioning-an-openstack-instance-from-an-image), you
+In [Provisioning an OpenStack Instance from an Image, Volume or Volume Snapshot](../provisioning_virtual_machines_and_hosts/#provisioning-an-openstack-instance-from-an-image-volume-or-volume-snapshot), you
 provisioned instance manually by entering values in provisioning dialogs
 such as name, size, image, CPUs, etc. *Catalogs* are used to create
 groups of instances for provisioning. {{ site.data.product.title_short }} enables

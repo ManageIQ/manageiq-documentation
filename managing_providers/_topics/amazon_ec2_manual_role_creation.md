@@ -18,5 +18,4 @@ Use the following parameters:
 
 3.  Enter `smartstate` for the **Role name**.
 
-Once the IAM role is created, assign the provider *Power User*
-privileges as described in [???](#amazon-provider-permissions).
+Once the IAM role is created, assign the provider *Power User* privileges as described in [Permissions for Amazon EC2 Providers](../managing_providers/cloud_providers#amazon-provider-permissions).

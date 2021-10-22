@@ -23,7 +23,7 @@ To use the Amazon Elastic Block Store service as a storage manager, you
 must first add an Amazon EC2 cloud provider to your {{ site.data.product.title_short }}
 appliance. The Amazon Elastic Block Store service is automatically
 discovered by {{ site.data.product.title_short }}, and added to the **Storage Managers**
-list. See [???](#adding-amazon-ec2-providers) for instructions on adding
+list. See [Adding Amazon EC2 Providers](../managing_providers/cloud_providers#adding-amazon-ec2-providers) for instructions on adding
 an Amazon EC2 cloud provider.
 
 ## OpenStack Block Storage Managers
@@ -36,7 +36,7 @@ To use OpenStack Block Storage as a storage manager, you must first add
 an OpenStack cloud provider to your {{ site.data.product.title_short }} appliance and enable
 events. The Block Storage service will be automatically discovered by
 {{ site.data.product.title_short }} and added to the **Storage Managers** list in
-{{ site.data.product.title_short }}. See [???](#adding_openstack_cloud_providers) for
+{{ site.data.product.title_short }}. See [Adding OpenStack Providers](../managing_providers/cloud_providers#adding_openstack_cloud_providers) for
 instructions on adding a cloud provider and enabling events.
 
 ## OpenStack Block Storage Manager Targeted Refresh
@@ -57,9 +57,7 @@ object storage.
 To use the OpenStack Object Storage service as a storage manager, you
 must first add an OpenStack cloud provider to your {{ site.data.product.title_short }}
 appliance and enable events. The Object Storage service will be
-automatically discovered by {{ site.data.product.title_short }} and added to the **Storage
-Managers** list in {{ site.data.product.title_short }}. See
-[???](#adding_openstack_cloud_providers) for instructions on adding a
-cloud provider and enabling events.
+automatically discovered by {{ site.data.product.title_short }} and added to the **Storage Managers** list in {{ site.data.product.title_short }}. See
+[Adding OpenStack Providers](../managing_providers/cloud_providers#adding_openstack_cloud_providers) for instructions on adding a cloud provider and enabling events.
 
 {% include_relative _topics/viewing_swift_object_stores.md %}

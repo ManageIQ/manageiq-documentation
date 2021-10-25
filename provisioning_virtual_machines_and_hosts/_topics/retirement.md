@@ -102,7 +102,7 @@ summary screen.
 
 If you are using {{ site.data.product.title_short }} to provision, you can set when you want
 retirement in the provision request. To see how to create a request, see
-[???](#provisioning-requests). A warning email will be sent to the owner
+[Provisioning Requests](../provisioning_virtual_machines_and_hosts/#provisioning-requests). A warning email will be sent to the owner
 before the retirement.
 
 #### Scheduling Retirement in a Provision Request

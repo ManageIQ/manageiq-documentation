@@ -13,7 +13,7 @@ view the report in a full screen.
 
 3.  Click on the row for the instance of the report you want to
     download. If the report needs to be generated, see
-    [???](#running_reports).
+    [Running Reports](../monitoring_alerts_and_reporting/sect_reports#running_reports).
 
 4.  Click on the report download buttons for the type of export you
     want.

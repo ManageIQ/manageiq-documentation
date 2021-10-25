@@ -10,7 +10,7 @@ categories. Each category has its own set of subfolders.
 {% include reports-categories.md %}
 
 For a complete list of reportable fields in {{ site.data.product.title_short }}, see
-[???](#_appe_reportable_fields).
+[Reportable Fields](../monitoring_alerts_and_reporting/index.html#reportable-fields-in-manageiq).
 
 {% include_relative _topics/running_reports.md %}
 

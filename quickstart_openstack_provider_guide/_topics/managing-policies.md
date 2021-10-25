@@ -126,7 +126,7 @@ At this point, you should now be able to add the policy profile to the cloud pro
 
 1.  Navigate to menu:Compute\[Cloud \> Providers\].
 
-2.  Select the overcloud you added in [???](#add-openstack-oc).
+2.  Select the overcloud you added in [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events).
 
 3.  Click ![image](../images/1941.png) (**Policy**), then
     ![image](../images/1851.png) (**Manage Policies**).

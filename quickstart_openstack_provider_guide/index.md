@@ -164,7 +164,7 @@ and features frequently used by specific tenants.
 **Note:**
 
 This capability is made possible through the *Automate* model. See
-[Understanding the Automate Model](../scripting_actions/index.html#understanding-the-automate-model) from the [Scripting Actions in {{ site.data.product.product.title_short }}](../scripting_actions/index.html) guide for more details.
+[Understanding the Automate Model](../scripting_actions/index.html#understanding-the-automate-model) from the [Scripting Actions in {{ site.data.product.title_short }}](../scripting_actions/index.html) guide for more details.
 
 The following subsections summarize the two main steps for creating a
 custom button for cloud tenants.

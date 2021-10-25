@@ -2,7 +2,7 @@
 
 Complete the following procedure to create a new catalog, and assign the
 catalog item you created in
-[???](#example-adding-orchestration-catalog-item).
+[Creating an Orchestration Template](../service_provisioning_using_an_orchestration_template/index.html#creating-an-orchestration-template).
 
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalogs** in the
     accordion menu.
@@ -14,7 +14,7 @@ catalog item you created in
     catalog.
 
 4.  Under **Assign Catalog Items**, select the catalog item you created
-    in [???](#example-adding-orchestration-catalog-item) from the
+    in [Creating an Orchestration Template](../service_provisioning_using_an_orchestration_template/index.html#creating-an-orchestration-template) from the
     **Unassigned** box, then move it to the **Selected** box.
 
 5.  Click **Add**.

@@ -2,7 +2,7 @@
 
 Complete the following procedure to create a new catalog item from the
 orchestration template you created in
-[???](#example-adding-orchestration-template).
+[Creating an Orchestration Template](../service_provisioning_using_an_orchestration_template/index#creating-an-orchestration-template).
 
 1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
     in the accordion menu.
@@ -25,7 +25,7 @@ orchestration template you created in
     4.  Select the appropriate dialog from the **Dialog** list.
 
     5.  Select the orchestration template you created in
-        [???](#example-adding-orchestration-template) from the
+        [Creating an Orchestration Template](../service_provisioning_using_an_orchestration_template/index#creating-an-orchestration-template) from the
         **Orchestration Template** list.
 
     6.  Select **Amazon** from the **Provider** list.

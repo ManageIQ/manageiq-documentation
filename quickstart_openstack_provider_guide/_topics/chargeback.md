@@ -2,7 +2,7 @@ The *chargeback* feature allows you to calculate monetary virtual
 machine charges based on owner or company tag. To use this feature you
 must be collecting capacity and utilization data. For information on
 server control settings and capacity & utilization collection settings,
-see [???](#cf-caputils).
+see [Capacity and Utilization Collection Settings](../general_configuration/index.html#capacity-and-utilization-collection).
 
 ### Creating Chargeback Rates
 

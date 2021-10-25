@@ -37,6 +37,6 @@ information.
 5.  After setting the parameters, you then select what you want the
     alert to do. You can send an email, create an SNMP Trap, or send a
     management event to start an automation process. See
-    [???](#_to_create_an_alert).
+    [Creating an Alert](../monitoring_alerts_and_reporting/index.html#creating-an-alert).
 
 6.  Click **Add**.

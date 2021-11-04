@@ -57,53 +57,33 @@
 
         $ oc edit secret app-secrets
 
-4. Find the orchestrator pod and start a debug session into it. Keep this running in the background...
+4. Temporarily hijack the orchestrator by adding the following to the deployment:
 
-        $ oc get pods -o name | grep orchestrator
-        $ oc debug pod/orchestrator-123456abcd-789ef
+        $ kubectl patch deployment orchestrator -p '{"spec":{"template":{"spec":{"containers":[{"name":"orchestrator","command":["sleep", "1d"]}]}}}}'
 
-5. Temporarily prevent the orchestrator from starting by adding the following to the deployment:
+5. Shell into the orchestrator container:
 
-        $ oc edit deployment/orchestrator
-
-        spec:
-          template:
-            spec:
-              nodeSelector:
-                kubernetes.io/hostname: nope
-
-6. Delete the old replica set, the new one will sit in "pending" state.
-
-        $ oc delete replicaset.apps/orchestrator-123456abcd
-
-7. Back in the debug pod from step 4:
+        $ oc rsh deploy/orchestrator
 
         $ cd /var/www/miq/vmdb
         $ source ./container_env
         $ DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:drop db:create
 
-8. `oc rsh` into the database pod and restore the database backup
+6. `oc rsh` into the database pod and restore the database backup
 
         $ cd /var/lib/pgsql
         # --- download your backup here ---
-        $ pg_restore -d vmdb_production <your_backup_file>
+        $ pg_restore -v -d vmdb_production <your_backup_file>
         $ rm -f <your_backup_file>
         $ exit
 
-9. Back in the debug pod from step 4:
+7. Back in orchestrator pod from step 5:
 
         $ rake db:migrate
         $ exit
 
-10. Delete the node selector that we added above `oc edit deployment/orchestrator` removing:
+8. Delete the orchestrator deployment to remove the command override that we added above:
 
-        spec:
-          template:
-            spec:
-              nodeSelector:
-
-11. Delete the pending orchestrator deployment
-
-        $ oc delete replicaset.apps/orchestrator-98765cba
+        $ kubectl delete deployment orchestrator
 
 Done! The orchestrator will start deploying the rest of the pods required to run the application.

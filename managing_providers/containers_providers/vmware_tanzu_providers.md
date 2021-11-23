@@ -1,4 +1,4 @@
-# Adding a VMware Tanzu Container Provider
+# VMware Tanzu Container Provider
 
 After initial installation and creation of a {{ site.data.product.title_short }}
 environment you can add a VMware Tanzu Container provider.
@@ -6,7 +6,7 @@ environment you can add a VMware Tanzu Container provider.
 1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click **Configuration**, then
-    click ![Add a New Containers Provider](../images/1862.png)
+    click ![Add a New Containers Provider](../../images/1862.png)
      (**Add a New Containers Provider**).
 
 3.  From the **Type** list, select **VMware Tanzu**.

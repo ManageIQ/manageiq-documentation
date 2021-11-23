@@ -1,4 +1,4 @@
-# Adding an Azure Kubernetes Service (AKS) Container Provider
+# Azure Kubernetes Service (AKS) Container Provider
 
 After initial installation and creation of a {{ site.data.product.title_short }}
 environment you can add an Azure Kubernetes Service Container provider.
@@ -26,7 +26,7 @@ If you already have multiple clusters configured search for your AKS cluster adm
 1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click **Configuration**, then
-    click ![Add a New Containers Provider](../images/1862.png) (**Add a New Containers Provider**).
+    click ![Add a New Containers Provider](../../images/1862.png) (**Add a New Containers Provider**).
 
 3.  Enter a **Name** for the provider.
 

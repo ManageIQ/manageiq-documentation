@@ -1,4 +1,4 @@
-# Defining the Workflow
+## Defining the Workflow
 
 This section uses the following workflow:
 

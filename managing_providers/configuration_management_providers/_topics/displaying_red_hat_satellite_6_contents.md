@@ -1,4 +1,4 @@
-# Displaying Red Hat Satellite 6 Contents
+## Displaying Red Hat Satellite 6 Contents
 
 {{ site.data.product.title_short }} provides two methods for viewing the contents of a Red
 Hat Satellite 6 provider:

@@ -1,4 +1,4 @@
-# Reprovisioning a Bare Metal Host
+## Reprovisioning a Bare Metal Host
 
 This procedure provides an example of reprovisioning an existing bare
 metal system into a new hostgroup. For this example, your Red Hat
@@ -96,4 +96,3 @@ the schedule.
 Previously provisioned hosts might require manual selection of PXE boot
 from the boot menu, otherwise they might boot to hard disk and not
 reprovision.
-

@@ -1,4 +1,4 @@
-# Defining the Hostgroup Hierarchy
+## Defining the Hostgroup Hierarchy
 
 {{ site.data.product.title_short }} displays the Red Hat Satellite 6 infrastructure in a
 host group and host relationship. A host group defines a set of default

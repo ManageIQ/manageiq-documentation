@@ -1,4 +1,4 @@
-# Triggering a Refresh of a Satellite 6 Provider
+## Triggering a Refresh of a Satellite 6 Provider
 
 Your Satellite 6 provider can still create new hosts independently of
 {{ site.data.product.title_short }}. Your {{ site.data.product.title_short }} appliance detects these changes

@@ -45,7 +45,7 @@ For information on working with the resources contained by a provider or manager
 
 {% include_relative _topics/containers_providers.md %}
 
-{% include_relative _topics/storage_managers.md %}
+{% include_relative _topics/storage_providers.md %}
 
 # Appendix
 

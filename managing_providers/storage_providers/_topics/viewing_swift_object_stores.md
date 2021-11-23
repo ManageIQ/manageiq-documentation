@@ -1,4 +1,4 @@
-# Viewing Object Stores
+## Viewing Object Stores
 
 The object store summary page shows details including the object store’s
 size, parent cloud, storage manager, cloud tenant, and the number of

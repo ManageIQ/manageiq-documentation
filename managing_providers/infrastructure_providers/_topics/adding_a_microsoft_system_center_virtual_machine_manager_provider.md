@@ -1,4 +1,4 @@
-# Adding a Microsoft SCVMM Provider
+## Adding a Microsoft SCVMM Provider
 
 After initial installation and creation of a {{ site.data.product.title_short }}
 environment, add a Microsoft System Center Virtual Machine Manager
@@ -13,7 +13,7 @@ the provider.
 1.  Browse to menu: **Compute > Infrastructure > Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../images/1862.png) (**Add a New Infrastructure Provider**).
+    ![1862](../../images/1862.png) (**Add a New Infrastructure Provider**).
 
 3.  Enter the **Name** of the provider to add. The **Name** is how the
     device is labeled in the console.

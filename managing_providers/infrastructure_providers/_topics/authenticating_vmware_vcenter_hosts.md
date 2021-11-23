@@ -1,4 +1,4 @@
-# Authenticating VMware vCenter Hosts
+## Authenticating VMware vCenter Hosts
 
 The procedure below describes how to authenticate the VMware vCenter
 hosts.
@@ -15,7 +15,7 @@ hosts.
 
 5.  Click **Configuration**
 
-6.  Click ![Edit Selected items](../images/1851.png) (**Edit Selected
+6.  Click ![Edit Selected items](../../images/1851.png) (**Edit Selected
     items**).
 
 7.  In the **Credentials** area, under **Default**, provide the VMware

@@ -1,4 +1,4 @@
-# Authenticating Red Hat Virtualization Hosts
+## Authenticating Red Hat Virtualization Hosts
 
 After adding a Red Hat Virtualization infrastructure provider, you must
 authenticate its hosts to enable full functionality.
@@ -15,7 +15,7 @@ authenticate its hosts to enable full functionality.
 
 5.  Click **Configuration**.
 
-6.  Click ![Edit this item](../images/1851.png) (**Edit this item**).
+6.  Click ![Edit this item](../../images/1851.png) (**Edit this item**).
 
 7.  In the **Credentials** area, enter credentials for the following, as
     required:

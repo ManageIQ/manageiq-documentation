@@ -1,4 +1,4 @@
-# Adding an OpenStack Infrastructure Provider
+## Adding an OpenStack Infrastructure Provider
 
 {% include openstack/adding-an-openstack-infrastructure-provider.md %}
 

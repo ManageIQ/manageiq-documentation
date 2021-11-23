@@ -28,73 +28,26 @@ display basic information about each provider:
 | ![2191](../images/2191.png) | Invalid: Authentication credentials are invalid.                               |
 | ![2192](../images/2192.png) | Unknown: Authentication status is unknown or no credentials have been entered. |
 
-Provider authentication status
+For information on managing specific infrastructure providers see the following.
 
-## Red Hat Virtualization Providers
+* [Red Hat Virtualization Providers](./infrastructure_providers/red_hat_virtualization_providers.md)
 
-To use a Red Hat Virtualization provider, add it to the appliance and
-authenticate its hosts. You can also configure capacity and utilization
-data collection to help track usage and find common issues.
+* [OpenStack Infrastructure Providers](./infrastructure_providers/openstack_infrastructure_providers.md)
 
-{% include_relative _topics/enabling_red_hat_virtualization_cu.md
-%}
+* [VMware vCenter Providers](./infrastructure_providers/vmware_vcenter_providers.md)
 
-{% include_relative
-_topics/adding_a_red_hat_virtualization_provider.md %}
+* [Microsoft SCVMM Providers](./infrastructure_providers/microsoft_scvmm_providers.md)
 
-{% include_relative
-_topics/authenticating_red_hat_virtualization_hosts.md %}
+{% include_relative _topics/refreshing_multiple_management_systems.md %}
 
-## OpenStack Infrastructure Providers
-
-Enable an OpenStack Infrastructure provider by adding it to the
-appliance.
-
-{% include_relative
-_topics/adding_an_openstack_infrastructure_provider.md %}
-
-## VMware vCenter Providers
-
-To use a VMware vCenter provider, add it to the appliance and
-authenticate its hosts.
-
-{% include_relative _topics/adding_a_vmware_vcenter_provider.md %}
-
-{% include_relative _topics/nonadmin_vmware_vcenter_auth.md %}
-
-{% include_relative _topics/authenticating_vmware_vcenter_hosts.md
-%}
-
-## Microsoft SCVMM Providers
-
-To use a Microsoft System Center Virtual Machine Manager (SCVMM)
-provider, add it to the appliance and set up the SCVMM server for
-authentication.
-
-**Note:**
-
-To use a SCVMM provider, you must have at least one network adapter available for communication between the host and the SCVMM management server. Make sure that **Used by Management** is checked for this network adapter in the SCVMM host properties.
-
-{% include_relative _topics/authenticating_to_microsoft_scvmm.md %}
-
-{% include_relative
-_topics/adding_a_microsoft_system_center_virtual_machine_manager_provider.md
-%}
-
-{% include_relative
-_topics/refreshing_multiple_management_systems.md %}
-
-{% include_relative _topics/tagging_multiple_management_systems.md
-%}
+{% include_relative _topics/tagging_multiple_management_systems.md %}
 
 {% include_relative _topics/reviewing_a_management_system.md %}
 
 {% include_relative _topics/to_remove_management_systems.md %}
 
-{% include_relative
-_topics/viewing_the_management_system_timeline.md %}
+{% include_relative _topics/viewing_the_management_system_timeline.md %}
 
 {% include_relative _topics/viewing_hosts_and_clusters.md %}
 
-{% include_relative
-_topics/viewing_virtual_machines_and_templates.md %}
+{% include_relative _topics/viewing_virtual_machines_and_templates.md %}

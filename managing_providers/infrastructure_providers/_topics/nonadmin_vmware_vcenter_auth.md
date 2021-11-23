@@ -1,4 +1,4 @@
-# Using a Non-Administrator Account for vCenter Hosts
+## Using a Non-Administrator Account for vCenter Hosts
 
 After adding a VMware vCenter infrastructure provider, you must
 authenticate its hosts to enable full functionality. You can use

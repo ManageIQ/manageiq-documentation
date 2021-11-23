@@ -1,4 +1,6 @@
-# Adding OpenStack Providers
+# OpenStack Providers
+
+## Adding OpenStack Providers
 
 {% include openstack/adding-an-openstack-cloud-provider.md %}
 

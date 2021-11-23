@@ -1,4 +1,4 @@
-# Enabling Amazon EC2 Events
+## Enabling Amazon EC2 Events
 
 After adding an Amazon EC2 provider and configuring an SNS topic in [Enabling AWS Config Notifications](#enabling-aws-config-notifications), create a CloudTrail,
 then configure CloudWatch rules on your EC2 provider to automatically get events in {{ site.data.product.title_short }} for monitoring the provider.

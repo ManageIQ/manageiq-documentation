@@ -31,34 +31,6 @@ information about each provider:
 
 Provider authentication status
 
-## OpenStack Providers
-
-{% include_relative _topics/adding_openstack_providers.md %}
-
-## Azure Providers
-
-{% include_relative _topics/adding_azure_providers.md %}
-
-{% include_relative _topics/adding_azure_cloud_regions.md %}
-
-{% include_relative _topics/disabling_azure_cloud_regions.md %}
-
-## Amazon EC2 Providers
-
-{% include_relative _topics/amazon_ec2_providers_permissions.md %}
-
-{% include_relative _topics/adding_amazon_ec2_providers.md %}
-
-{% include_relative _topics/enabling_public_amis.md %}
-
-{% include_relative _topics/enabling_aws_config_notifications.md %}
-
-{% include_relative _topics/enabling_amazon_events.md %}
-
-{% include_relative _topics/adding_amazon_cloud_regions.md %}
-
-{% include_relative _topics/disabling_amazon_cloud_regions.md %}
-
 {% include_relative _topics/refreshing_cloud_providers.md %}
 
 {% include_relative _topics/tagging_cloud_providers.md %}
@@ -67,23 +39,18 @@ Provider authentication status
 
 {% include_relative _topics/editing_a_cloud_provider.md %}
 
-{% include_relative _topics/viewing_a_cloud_providers_timeline.md
-%}
+{% include_relative _topics/viewing_a_cloud_providers_timeline.md %}
 
-## IBM Cloud VPC Provider
+* [Azure Providers](./cloud_providers/azure_providers.md)
 
-{% include_relative _topics/overview_ibm_cloud_vpc.md %}
+* [Amazon EC2 Providers](./cloud_providers/amazon_ec2_providers.md)
 
-{% include_relative _topics/adding_ibm_cloud_vpc_provider.md %}
+* [Google Compute Engine Providers](./cloud_providers/google_compute_engine_providers.md)
 
-## IBM Power Systems Virtual Servers Providers
+* [IBM Cloud VPC Provider](./cloud_providers/ibm_cloud_vpc_providers.md)
 
-{% include_relative _topics/overview_ibm_cloud_powervs.md %}
+* [IBM Power Systems Virtual Servers Providers](./cloud_providers/ibm_power_systems_virtual_servers_providers.md)
 
-{% include_relative _topics/adding_ibm_cloud_powervs_providers.md %}
+* [IBM PowerVC Providers](./cloud_providers/ibm_power_vc_providers.md)
 
-## IBM PowerVC Providers
-
-{% include_relative _topics/overview_ibm_power_vc.md %}
-
-{% include_relative _topics/adding_ibm_power_vc_providers.md %}
+* [OpenStack Providers](./cloud_providers/openstack_providers.md)

@@ -1,4 +1,4 @@
-# Adding IBM PowerVC Providers
+## Adding IBM PowerVC Providers
 
 Complete the following procedure to add an IBM PowerVC cloud provider in
 {{ site.data.product.title_short }}.
@@ -6,7 +6,7 @@ Complete the following procedure to add an IBM PowerVC cloud provider in
 1.  Browse to menu: **Compute > Clouds > Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../images/1862.png) (**Add a New Cloud Provider**).
+    ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  From the **Type** list, select **IBM PowerVC**.
 

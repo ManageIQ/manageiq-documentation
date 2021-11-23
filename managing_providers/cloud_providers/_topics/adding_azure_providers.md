@@ -1,4 +1,4 @@
-# Adding Azure Providers
+## Adding Azure Providers
 
 {{ site.data.product.title_short }} supports Microsoft Azure providers. Before
 {{ site.data.product.title_short }} can be authenticated to Microsoft Azure, you must
@@ -67,7 +67,7 @@ You can now use these values in the procedure below to add an Azure cloud instan
 1.  Browse to menu: **Compute > Clouds > Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../images/1862.png) (**Add a New Cloud Provider**).
+    ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.
 

@@ -1,11 +1,11 @@
-# Adding Azure Cloud Regions
+## Adding Azure Cloud Regions
 
 {{ site.data.product.title_short }} allows administrators to add additional Azure cloud regions on
 the appliance server. You can use this capability to add new regions that have been
 set up since {{ site.data.product.title_short }} was released.  Once added the region it will be available when
 creating a new Azure provider.
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **ManageIQ Region** at the top.
 

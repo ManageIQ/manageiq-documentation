@@ -1,4 +1,4 @@
-# Adding IBM Power Systems Virtual Servers Providers
+## Adding IBM Power Systems Virtual Servers Providers
 
 Complete the following procedure to add an IBM Power Systems Virtual Servers
 cloud provider in {{ site.data.product.title_short }}.
@@ -6,7 +6,7 @@ cloud provider in {{ site.data.product.title_short }}.
 1.  Browse to menu: **Compute > Clouds > Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../images/1862.png) (**Add a New Cloud Provider**).
+    ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  From the **Type** list, select **IBM Power Systems Virtual Servers**.
 
@@ -29,7 +29,7 @@ cloud provider in {{ site.data.product.title_short }}.
         [IBM Cloud Resources](https://cloud.ibm.com/resources) page, by selecting
         "Services" and clicking on the whitespace of a PowerVS instance row.
 
-        ![Power Systems Virtual Server GUID](../images/ibm_cloud_powervs_guid.png)
+        ![Power Systems Virtual Server GUID](../../images/ibm_cloud_powervs_guid.png)
 
     3.  Click **Validate** to validate the credentials.
 

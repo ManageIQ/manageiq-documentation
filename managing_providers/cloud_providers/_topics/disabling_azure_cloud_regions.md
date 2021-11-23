@@ -1,11 +1,11 @@
-# Disabling Azure Cloud Regions
+## Disabling Azure Cloud Regions
 
 {{ site.data.product.title_short }} allows administrators to disable Azure cloud regions on
 the appliance server. You can use this capability to disable certain
 classified regions. Once disabled, the region will not be available when
 adding a new Azure provider.
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../../images/config-gear.png) (**Configuration**).
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 

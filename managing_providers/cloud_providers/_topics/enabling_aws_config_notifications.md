@@ -1,4 +1,4 @@
-# Enabling AWS Config Notifications
+## Enabling AWS Config Notifications
 
 Amazon’s AWS Config notifies subscribers of changes in a region through
 its Simple Notification Service (SNS). {{ site.data.product.title_short }} subscribes to the

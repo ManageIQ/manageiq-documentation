@@ -1,4 +1,4 @@
-# Permissions for Amazon EC2 Providers
+## Permissions for Amazon EC2 Providers
 
 Further limiting API access limitations can limit Automate capabilities,
 as Automate scripts directly access the AWS SDK to create brand new

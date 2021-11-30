@@ -59,6 +59,9 @@ This documentation site is a [Jekyll](https://github.com/jekyll/jekyll) based si
 
 4. Open [this link](http://localhost:4000/docs/reference) in your browser to access the local documentation website contaning your changes.
 
+**Note:** (optional) the static documentation website you've built at this point is located under the `../manageiq.org/dest` directory.    
+You can deploy it to an HTTP-server of your choice on current or any other workstation.
+
 ## License
 
 <img src="https://camo.githubusercontent.com/5b90073c55c29f75739b4b8f8ec044c82722a41c/687474703a2f2f6d6972726f72732e6372656174697665636f6d6d6f6e732e6f72672f70726573736b69742f627574746f6e732f38387833312f7376672f62792d73612e737667" alt="Creative Commons License" data-canonical-src="http://mirrors.creativecommons.org/presskit/buttons/88x31/svg/by-sa.svg" height="31px" width="88px">

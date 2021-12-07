@@ -8,7 +8,7 @@
 In {{ site.data.product.title_short }}, a *provider* is an external virtualization, cloud, or containers environment that manages multiple virtual machines
 or instances residing on multiple hosts. One example is Red Hat Virtualization, a platform that manages multiple hosts and virtual machines.
 
-In {{ site.data.product.title_short }}, a *manager* is an external management environment that manages more than one type of resource. One example of a manager is OpenStack, which manages infrastucture, cloud, network, and storage resources.
+In {{ site.data.product.title_short }}, a *manager* is an external management environment that manages more than one type of resource. One example of a manager is OpenStack, which manages infrastructure, cloud, network, and storage resources.
 
 This guide covers working with providers and managers in
 {{ site.data.product.title_short }}, which include:
@@ -45,7 +45,7 @@ For information on working with the resources contained by a provider or manager
 
 {% include_relative _topics/containers_providers.md %}
 
-{% include_relative _topics/storage_managers.md %}
+{% include_relative _topics/storage_providers.md %}
 
 # Appendix
 

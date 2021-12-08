@@ -41,16 +41,16 @@ Provider authentication status
 
 {% include_relative _topics/viewing_a_cloud_providers_timeline.md %}
 
-* [Azure Providers](./cloud_providers/azure_providers.md)
+* [Azure Providers](./cloud_providers/azure_providers.html)
 
-* [Amazon EC2 Providers](./cloud_providers/amazon_ec2_providers.md)
+* [Amazon EC2 Providers](./cloud_providers/amazon_ec2_providers.html)
 
-* [Google Compute Engine Providers](./cloud_providers/google_compute_engine_providers.md)
+* [Google Compute Engine Providers](./cloud_providers/google_compute_engine_providers.html)
 
-* [IBM Cloud VPC Provider](./cloud_providers/ibm_cloud_vpc_providers.md)
+* [IBM Cloud VPC Provider](./cloud_providers/ibm_cloud_vpc_providers.html)
 
-* [IBM Power Systems Virtual Servers Providers](./cloud_providers/ibm_power_systems_virtual_servers_providers.md)
+* [IBM Power Systems Virtual Servers Providers](./cloud_providers/ibm_power_systems_virtual_servers_providers.html)
 
-* [IBM PowerVC Providers](./cloud_providers/ibm_power_vc_providers.md)
+* [IBM PowerVC Providers](./cloud_providers/ibm_power_vc_providers.html)
 
-* [OpenStack Providers](./cloud_providers/openstack_providers.md)
+* [OpenStack Providers](./cloud_providers/openstack_providers.html)

@@ -59,12 +59,12 @@ Containers provider authentication status
 
 {% include_relative _topics/viewing_a_containers_providers_timeline.md %}
 
-* [Azure Kubernetes Providers](./containers_providers/azure_kubernetes_providers.md)
+* [Azure Kubernetes Providers](./containers_providers/azure_kubernetes_providers.html)
 
-* [Red Hat OpenShift Providers](./containers_providers/red_hat_openshift_providers.md)
+* [Red Hat OpenShift Providers](./containers_providers/red_hat_openshift_providers.html)
 
-* [IBM Cloud Kubernetes Service Providers](./containers_providers/ibm_cloud_kubernetes_service_providers.md)
+* [IBM Cloud Kubernetes Service Providers](./containers_providers/ibm_cloud_kubernetes_service_providers.html)
 
-* [Oracle Kubernetes Engine Providers](./containers_providers/oracle_kubernetes_engine_providers.md)
+* [Oracle Kubernetes Engine Providers](./containers_providers/oracle_kubernetes_engine_providers.html)
 
-* [VMware Tanzu Providers](./containers_providers/vmware_tanzu_providers.md)
+* [VMware Tanzu Providers](./containers_providers/vmware_tanzu_providers.html)

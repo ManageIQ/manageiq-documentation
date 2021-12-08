@@ -1,3 +1,6 @@
+---
+---
+
 # VMware vCenter Providers
 
 To use a VMware vCenter provider, add it to the appliance and

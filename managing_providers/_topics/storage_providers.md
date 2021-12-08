@@ -8,10 +8,10 @@ chapter describes the different types of storage managers used by
 There are three types of storage managers currently available to
 {{ site.data.product.title_short }}:
 
-* [Amazon Elastic Block Store Managers](./storage_providers/amazon_ebs_managers.md)
+* [Amazon Elastic Block Store Managers](./storage_providers/amazon_ebs_managers.html)
 
-* [OpenStack Block Storage Managers](./storage_providers/openstack_block_storage_managers.md)
+* [OpenStack Block Storage Managers](./storage_providers/openstack_block_storage_managers.html)
 
-* [OpenStack Object Storage Managers](./storage_providers/openstack_object_storage_managers.md)
+* [OpenStack Object Storage Managers](./storage_providers/openstack_object_storage_managers.html)
 
-* [IBM Cloud Object Storage Managers](./storage_providers/ibm_cloud_object_storage_managers.md)
+* [IBM Cloud Object Storage Managers](./storage_providers/ibm_cloud_object_storage_managers.html)

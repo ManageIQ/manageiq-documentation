@@ -1,3 +1,6 @@
+---
+---
+
 # Azure Providers
 
 {% include_relative _topics/adding_azure_providers.md %}

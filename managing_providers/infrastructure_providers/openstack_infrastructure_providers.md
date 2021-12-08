@@ -1,3 +1,6 @@
+---
+---
+
 # OpenStack Infrastructure Providers
 
 Enable an OpenStack Infrastructure provider by adding it to the

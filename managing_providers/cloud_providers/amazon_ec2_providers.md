@@ -1,3 +1,6 @@
+---
+---
+
 # Amazon EC2 Providers
 
 {% include_relative _topics/amazon_ec2_providers_permissions.md %}

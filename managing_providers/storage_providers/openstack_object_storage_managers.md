@@ -1,3 +1,6 @@
+---
+---
+
 # OpenStack Object Storage Managers
 
 The OpenStack Object Storage (`openstack-swift`) service provides cloud

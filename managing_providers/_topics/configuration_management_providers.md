@@ -13,6 +13,6 @@ providers available to {{ site.data.product.title_short }}, and how to manage th
 Configuration management providers must be added individually to
 {{ site.data.product.title_short }}.
 
-* [IBM Terraform provider](./configuration_management_providers/ibm_terraform_provider.md)
+* [IBM Terraform provider](./configuration_management_providers/ibm_terraform_provider.html)
 
-* [Red Hat Satellite 6](./configuration_management_providers/red_hat_satellite_6.md)
+* [Red Hat Satellite 6](./configuration_management_providers/red_hat_satellite_6.html)

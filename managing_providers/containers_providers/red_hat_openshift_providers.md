@@ -1,3 +1,6 @@
+---
+---
+
 # Red Hat OpenShift
 
 ## Obtaining an OpenShift Container Platform Management Token

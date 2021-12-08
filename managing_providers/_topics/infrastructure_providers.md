@@ -30,13 +30,13 @@ display basic information about each provider:
 
 For information on managing specific infrastructure providers see the following.
 
-* [Red Hat Virtualization Providers](./infrastructure_providers/red_hat_virtualization_providers.md)
+* [Red Hat Virtualization Providers](./infrastructure_providers/red_hat_virtualization_providers.html)
 
-* [OpenStack Infrastructure Providers](./infrastructure_providers/openstack_infrastructure_providers.md)
+* [OpenStack Infrastructure Providers](./infrastructure_providers/openstack_infrastructure_providers.html)
 
-* [VMware vCenter Providers](./infrastructure_providers/vmware_vcenter_providers.md)
+* [VMware vCenter Providers](./infrastructure_providers/vmware_vcenter_providers.html)
 
-* [Microsoft SCVMM Providers](./infrastructure_providers/microsoft_scvmm_providers.md)
+* [Microsoft SCVMM Providers](./infrastructure_providers/microsoft_scvmm_providers.html)
 
 {% include_relative _topics/refreshing_multiple_management_systems.md %}
 

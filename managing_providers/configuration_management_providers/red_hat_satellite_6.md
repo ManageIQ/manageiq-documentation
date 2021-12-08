@@ -1,3 +1,6 @@
+---
+---
+
 # Red Hat Satellite 6
 
 Satellite 6 is a subscription and system management tool that provides a

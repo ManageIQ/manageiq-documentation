@@ -136,3 +136,113 @@ Delete backing is optional and defaults to true.
 
 You can retrieve the disk_name from the disk's `filename` property
 Decreasing a disk's size is not supported
+
+### Reconfigure a VM - Add a Network Adapter
+
+#### Request:
+
+    POST /api/requests
+
+``` json
+{
+  "action" : "create",
+  "options": {
+    "request_type": "vm_reconfigure",
+    "src_ids": ["2"],
+    "network_adapter_add": [
+      {
+        "network": "VM Network"
+      }
+    ]
+  }
+}
+```
+
+### Reconfigure a VM - Remove a Network Adapter
+
+#### Request:
+
+    POST /api/requests
+
+``` json
+{
+  "action" : "create",
+  "options": {
+    "request_type": "vm_reconfigure",
+    "src_ids": ["2"],
+    "network_adapter_remove": [
+      {
+        "network": {
+          "name": "Network Adapter 1"
+        }
+      }
+    ]
+  }
+}
+```
+
+### Reconfigure a VM - Modify a Network Adapter
+
+#### Request:
+
+    POST /api/requests
+
+``` json
+{
+  "action" : "create",
+  "options": {
+    "request_type": "vm_reconfigure",
+    "src_ids": ["2"],
+    "network_adapter_edit": [
+      {
+        "name": "Network Adapter 1",
+        "network": "VM Network 2"
+      }
+    ]
+  }
+}
+```
+
+### Reconfigure a VM - Connect a CD-ROM
+
+#### Request:
+
+    POST /api/requests
+
+``` json
+{
+  "action" : "create",
+  "options": {
+    "request_type": "vm_reconfigure",
+    "src_ids": ["2"],
+    "cdrom_connect": [
+      {
+        "device_name": "CD/DVD drive 1",
+        "storage_id": "1",
+        "filename": "file.iso"
+      }
+    ]
+  }
+}
+```
+
+### Reconfigure a VM - Disconnect a CD-ROM
+
+#### Request:
+
+    POST /api/requests
+
+``` json
+{
+  "action" : "create",
+  "options": {
+    "request_type": "vm_reconfigure",
+    "src_ids": ["2"],
+    "cdrom_disconnect": [
+      {
+        "device_name": "CD/DVD drive 1"
+      }
+    ]
+  }
+}
+```

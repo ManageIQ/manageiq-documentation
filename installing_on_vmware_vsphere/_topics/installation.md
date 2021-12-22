@@ -58,15 +58,12 @@ Use the following procedure to upload the {{ site.data.product.title_short }} ap
 5.  Select the host or cluster on which you want to deploy the OVF
     template and click **Next**.
 
-6.  Select the host on which you want to run the run the {{ site.data.product.title_short }}
-    appliance, and click **Next**.
+6.  Select the host on which you want to run the run the {{ site.data.product.title_short }} appliance, and click **Next**.
 
 7.  Navigate to, and select the resource pool where you want to run the
     {{ site.data.product.title_short }} appliance and click **Next**.
 
-8.  Select a datastore to store the deployed {{ site.data.product.title_short }} appliance,
-    and click Next. Ensure to select a datastore large enough to
-    accommodate the virtual machine and all of its virtual disk files.
+8.  Select a datastore to store the deployed {{ site.data.product.title_short }} appliance, and click Next. Ensure to select a datastore large enough to accommodate the virtual machine and all of its virtual disk files.
 
 9.  Select the disk format to store the virtual machine virtual disks,
     and click **Next**.

@@ -25,9 +25,3 @@ available when adding an Amazon EC2 provider.
           - ap-northeast-1
 
 6.  Click **Save**.
-
-**Note:**
-
-In AWS, Government regions are disabled by default. To enable a disabled
-region, be sure to do so in the `production.yml` configuration file
-manually.

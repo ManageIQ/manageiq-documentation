@@ -21,6 +21,8 @@ This guide covers working with providers and managers in
 
   - Cloud providers
 
+  - Physical infrastructure providers
+
   - Networking management providers
 
   - Middleware management providers
@@ -38,6 +40,8 @@ For information on working with the resources contained by a provider or manager
 {% include_relative _topics/automation_management_providers.md %}
 
 {% include_relative _topics/cloud_providers.md %}
+
+{% include_relative _topics/physical_infrastructure_providers.md %}
 
 {% include_relative _topics/image_import.md %}
 

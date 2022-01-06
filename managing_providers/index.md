@@ -23,8 +23,6 @@ This guide covers working with providers and managers in
 
   - Networking management providers
 
-  - Middleware management providers
-
   - Container providers
 
   - Storage managers

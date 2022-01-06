@@ -2,7 +2,7 @@
 
 Adding a self-signed Certificate Authority (CA) certificate for SSL authentication requires more configuration on OpenStack Platform and Microsoft System Center Virtual Machine Manager (SCVMM) providers.
 
-**Note**: This procedure is not required for OpenShift Container Platform, Red Hat Virtualization, or middleware manager providers, which have the option to select **SSL trusting custom CA** as a **Security Protocol** in the user interface. These steps are needed only for providers without this option in the user interface.
+**Note**: This procedure is not required for OpenShift Container Platform, or Red Hat Virtualization, which have the option to select **SSL trusting custom CA** as a **Security Protocol** in the user interface. These steps are needed only for providers without this option in the user interface.
 
 Before adding the provider, configure the following:
 

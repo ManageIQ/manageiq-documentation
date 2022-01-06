@@ -62,11 +62,6 @@ features.
 | container\_image\_registry       |
 | container\_image                 |
 | container\_topology              |
-| ems\_middleware                  |
-| middleware\_server               |
-| middleware\_deployment           |
-| middleware\_datasource           |
-| middleware\_topology             |
 | cloud\_topology                  |
 | infra\_topology                  |
 | host                             |
@@ -1169,7 +1164,6 @@ product features.
 | tasks                            |
 | about                            |
 | ems\_container                   |
-| middleware\_server\_group        |
 | container\_group                 |
 | container\_node                  |
 | container\_replicator            |
@@ -1303,7 +1297,6 @@ features.
 | ems\_container\_view                             |
 | ems\_infra\_view                                 |
 | ems\_physical\_infra\_view                       |
-| ems\_middleware\_view                            |
 | ems\_network\_view                               |
 | ems\_object\_storage\_view                       |
 | flavor\_view                                     |
@@ -1316,12 +1309,6 @@ features.
 | instance\_view                                   |
 | iso\_datastore\_view                             |
 | load\_balancer\_view                             |
-| middleware\_datasource\_view                     |
-| middleware\_deployment\_view                     |
-| middleware\_domain\_view                         |
-| middleware\_messaging\_view                      |
-| middleware\_server\_view                         |
-| middleware\_topology                             |
 | miq\_ae\_class\_log                              |
 | miq\_ae\_domain\_view                            |
 | miq\_report\_saved\_reports\_view                |

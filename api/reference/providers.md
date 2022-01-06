@@ -202,7 +202,6 @@ which include:
 | ------------------------------------------------- |
 | ManageIQ::Providers::Amazon::CloudManager         |
 | ManageIQ::Providers::Azure::CloudManager          |
-| ManageIQ::Providers::Hawkular::MiddlewareManager  |
 | ManageIQ::Providers::Kubernetes::ContainerManager |
 | ManageIQ::Providers::Microsoft::InfraManager      |
 | ManageIQ::Providers::Openshift::ContainerManager  |

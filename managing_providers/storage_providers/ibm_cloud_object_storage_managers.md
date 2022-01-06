@@ -22,19 +22,19 @@ For a list of supported regions please refer to this [page](https://cloud.ibm.co
 1. [Create](https://cloud.ibm.com/objectstorage/create) new Cloud Object Storage instance in IBM Cloud Console.
 
 2. Create access credentials by navigating to **Service Credentials -> New Credential** in your new instance.
-   ![Import Image Button Screenshot](../images/new_cos_creds.png)
+   ![Import Image Button Screenshot](../../images/new_cos_creds.png)
    Make sure to choose the **Manager** role and to enable **Include HMAC Credential** option.
 
 3. Next navigate to `Manage -> Access (IAM) -> Service IDs`, find your newly created credential and edit it.
-   ![pvc_reg](../images/cos_access_policies.png)
+   ![pvc_reg](../../images/cos_access_policies.png)
 
 4. Select `Viewer` checkbox under `Platform Access` group and press `Add`.
-   ![pvc_reg](../images/cos_viewer.png)
+   ![pvc_reg](../../images/cos_viewer.png)
 
 5. Browse to {{ site.data.product.title_short }} menu **Storage > Managers**.
 
 6. Click **Configuration**, then click
-    ![1862](../images/1862.png) (**Add a New Storage Provider**).
+    ![1862](../../images/1862.png) (**Add a New Storage Provider**).
 
 7. From the **Type** list, select **IBM Cloud Object Storage**.
 

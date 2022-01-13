@@ -11,6 +11,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [Google Cloud Platform (GCP)](#cloud-providers)                                      |
 | IBM AutoSDE                                                                          |
 | [IBM Cloud VPC](#cloud-providers)                                                    |
+| [IBM Power HMC](#infrastructure-providers)                                           |
 | [IBM Power Systems Virtual Servers (PowerVS)](#cloud-providers)                      |
 | [IBM PowerVC](#cloud-providers)                                                      |
 | IBM Terraform                                                                        |

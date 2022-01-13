@@ -17,9 +17,9 @@
 | Drift Comparison                                             | ✅      | ✅          | ✅    | ✅ (Nodes)           | ❌            |
 | VM Genealogy                                                 | ✅      | ✅          | ✅    | ✅                   | ❌            |
 | Capacity & Utilization                                       | ✅      | ✅          | ❌    | ✅                   | ❌            |
-| VM Event Timelines                                           | ✅      | ✅          | ✅    | ❌                   | ❌            |
+| VM Event Timelines                                           | ✅      | ✅          | ✅    | ❌                   | ✅            |
 | Infrastructure Event Timelines                               | ❌      | ❌          | ❌    | ✅                   | ❌            |
-| Reporting                                                    | ✅      | ✅          | ✅    | ✅                   | ❌            |
+| Reporting                                                    | ✅      | ✅          | ✅    | ✅                   | ✅            |
 | Right Sizing                                                 | ✅      | ✅          | ❌    | ❌                   | ❌            |
 | Chargeback by Allocation                                     | ✅      | ✅          | ✅    | ❌                   | ❌            |
 | Chargeback by Usage                                          | ✅      | ✅          | ❌    | ❌                   | ❌            |
@@ -45,7 +45,7 @@
 |   - Clone from VM to VM                                      | ✅      | ❌          | ❌    | ❌                      | ❌            |
 |   - Sysprep Windows Templates                                | ✅      | ✅          | ❌    | ❌                      | ❌            |
 |   - Cloud-init                                               | ❌      | ✅          | ❌    | ❌                      | ❌            |
-| VM Retirement                                                | ✅      | ✅          | ✅    | ❌                      | ❌            |
+| VM Retirement                                                | ✅      | ✅          | ✅    | ❌                      | ✅            |
 | VM Reconfiguration                                           | ✅      | ✅          | ❌    | ❌                      | ❌            |
 |   - Disk Addition                                            | ✅      | ✅          | ❌    | ❌                      | ❌            |
 |   - Network Interface Add/Remove                             | ✅      | ✅          | ❌    | ❌                      | ❌            |

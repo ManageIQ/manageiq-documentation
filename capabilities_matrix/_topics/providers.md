@@ -12,6 +12,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | IBM AutoSDE                                                                          |
 | [IBM Cloud VPC](#cloud-providers)                                                    |
 | [IBM Power Systems Virtual Servers (PowerVS)](#cloud-providers)                      |
+| [IBM Power HMC](#infrastructure-providers)                                           |
 | [IBM PowerVC](#cloud-providers)                                                      |
 | IBM Terraform                                                                        |
 | [Kubernetes](#container-providers)                                                   |

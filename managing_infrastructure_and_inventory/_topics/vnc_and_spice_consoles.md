@@ -146,24 +146,6 @@ Complete the following steps to enable WebMKS support in
     SDK](https://www.vmware.com/support/developer/html-console/) into
     the `webmks` folder.
 
-4.  Log in to the {{ site.data.product.title_short }} user interface as an
-    administrative user. If you are already logged in, refresh the
-    settings page in the {{ site.data.product.title_short }} user interface for the
-    changes to take effect.
-
-5.  Click ![config gear](../images/config-gear.png) (**Configuration**).
-
-6.  Click on the **Settings** accordion, then click **Zones**.
-
-7.  Click the zone where the {{ site.data.product.title_short }} server is located.
-
-8.  Click on the server.
-
-9.  Under **VMware Console Support**, select **VMware WebMKS** from the
-    **Use** list.
-
-10. Click **Save**.
-
 ## Opening a Console for a Virtual Machine
 
 Open a web-based VNC or SPICE console for a virtual machine.

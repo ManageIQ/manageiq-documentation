@@ -25,4 +25,6 @@
 
 {% include_relative _topics/network_providers.md %}
 
+{% include_relative _topics/physical_infrastructure_providers.md %}
+
 {% include_relative _topics/smartstate_analysis.md %}

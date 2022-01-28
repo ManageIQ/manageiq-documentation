@@ -38,6 +38,8 @@ For information on managing specific infrastructure providers see the following.
 
 * [Microsoft SCVMM Providers](./infrastructure_providers/microsoft_scvmm_providers.html)
 
+* [IBM Power HMC](./infrastructure_providers/ibm_power_hmc_providers.html)
+
 {% include_relative _topics/refreshing_multiple_management_systems.md %}
 
 {% include_relative _topics/tagging_multiple_management_systems.md %}

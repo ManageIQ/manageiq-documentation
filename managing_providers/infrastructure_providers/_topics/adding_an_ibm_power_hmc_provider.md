@@ -23,7 +23,7 @@ environment, add an IBM Power HMC provider to the appliance.
         to specify whether to authenticate securely to the provider using SSL.
 
       - Enter the **Hostname (or IPv4 or IPv6 address)** of the provider. The
-        **Host Name** must use a unique fully qualified domain name.
+        **Hostname** must use a unique fully qualified domain name.
 
       - Enter the **API port** if your provider uses a non-standard port for
         access.

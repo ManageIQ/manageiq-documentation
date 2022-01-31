@@ -155,7 +155,35 @@
     5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect
         to the metrics endpoint.
 
-9. Click the **Advanced** tab to add image inspector settings for
+9. In the **Virtualization** endpoint tab optionally configure the virtualization service details:
+
+    1. Select a service type (KubeVirt) or leave disabled
+
+    2.  Select a **Security Protocol** method to specify how to
+        authenticate the service:
+
+          - **SSL**: Authenticate the provider securely using a trusted
+            Certificate Authority. Select this option if the provider
+            has a valid SSL certificate and it is signed by a trusted
+            Certificate Authority. No further configuration is required
+            for this option.
+
+          - **SSL trusting custom CA**: Authenticate the provider with a
+            self-signed certificate. For this option, copy your
+            provider’s CA certificate to the **Trusted CA
+            Certificates** box in PEM format.
+
+          - **SSL without validation**: Authenticate the provider
+            insecurely using SSL. (Not recommended)
+
+    3.  Enter the **Hostname** (or IPv4 or IPv6 address) of the
+        virtualization service.
+
+    4.  Enter the **API Port** of your virtualization service. The default port is `443`.
+
+    5.  Enter a token for your provider in the **Token** box.
+
+10. Click the **Advanced** tab to add image inspector settings for
     scanning container images on your provider using OpenSCAP.
 
     **Note:**
@@ -186,7 +214,7 @@
     5.  Enter `https://www.redhat.com/security/data/metrics/ds/` in
         **CVE location**.
 
-10. Click **Add**.
+11. Click **Add**.
 
 **Note:**
 

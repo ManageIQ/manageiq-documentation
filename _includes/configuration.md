@@ -1,14 +1,14 @@
 ## Configuring {{ site.data.product.title_short }}
 
-After installing {{ site.data.product.title_short }} and running it for the first
+After installing {{ site.data.product.title_short }} and run it for the first
 time, you must perform some basic configuration. To configure
-{{ site.data.product.title_short }}, you must at a minimum:
+{{ site.data.product.title_short }}, you must complete these steps:
 
-1.  Add a disk to the infrastructure hosting your appliance.
+1.  Add a disk to the infrastructure that is hosting your appliance.
 
 2.  Configure the database.
 
-Configure the {{ site.data.product.title_short }} appliance using the internal
+Configure the {{ site.data.product.title_short }} appliance by using the internal
 appliance console.
 
 ### Accessing the Appliance Console
@@ -43,9 +43,6 @@ options for database configuration:
 
   - Configure the appliance to use an external PostgreSQL database
 
-#### Configuring an Internal Database
-
-{% include configuration-db.md %}
 
 #### Configuring an External Database
 
@@ -60,8 +57,7 @@ database.
 The `postgresql.conf` file used with {{ site.data.product.title_short }} databases requires
 specific settings for correct operation. For example, it must correctly
 reclaim table space, control session timeouts, and format the PostgreSQL
-server log for improved system support. Due to these requirements, Red
-Hat recommends that external {{ site.data.product.title_short }} databases use a
+server log for improved system support. It is recommended that external {{ site.data.product.title_short }} databases use a
 `postgresql.conf` file based on the standard file used by the
 {{ site.data.product.title_short }} appliance.
 
@@ -74,7 +70,7 @@ necessary to alter the `max_connections` setting.
 
 **Note:**
 
-  - {{ site.data.product.title_short }} requires PostgreSQL version 9.5.
+  - {{ site.data.product.title_short }} requires PostgreSQL version 10.
 
   - Because the `postgresql.conf` file controls the operation of all
     databases managed by a single instance of PostgreSQL, do not mix
@@ -90,32 +86,18 @@ necessary to alter the `max_connections` setting.
 
 4.  Select **Configure Application** from the menu.
 
-5.  You are prompted to create or fetch a security key.
+5.  Choose **Create Region in External Database** for the database location.
 
-      - If this is the first {{ site.data.product.title_short }} appliance, choose **Create
-        key**.
+6.  Enter the database hostname or IP address when prompted.
 
-      - If this is not the first {{ site.data.product.title_short }} appliance, choose
-        **Fetch key from remote machine** to fetch the key from the
-        first appliance.
-
-        **Note:**
-
-        All {{ site.data.product.title_short }} appliances in a multi-region
-        deployment must use the same key.
-
-6.  Choose **Create Region in External Database** for the database location.
-
-7.  Enter the database hostname or IP address when prompted.
-
-8.  Enter the database name or leave blank for the default
+7.  Enter the database name or leave blank for the default
     (`vmdb_production`).
 
-9.  Enter the database username or leave blank for the default (`root`).
+8.  Enter the database username or leave blank for the default (`root`).
 
-10. Enter the chosen database user’s password.
+9. Enter the chosen database user’s password.
 
-11. Confirm the configuration if prompted.
+10. Confirm the configuration if prompted.
 
 {{ site.data.product.title_short }} will then configure the external database.
 

@@ -16,8 +16,8 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [IBM PowerVC](#cloud-providers)                                                      |
 | IBM Terraform                                                                        |
 | [Kubernetes](#container-providers)                                                   |
-| KubeVirt                                                                             |
-| Lenovo xClarity                                                                      |
+| [KubeVirt](#infrastructure-providers)                                                |
+| [Lenovo xClarity](#physical-infrastructure-providers)                                |
 | [Microsoft Azure](#cloud-providers)                                                  |
 | [Microsoft Azure Stack](#cloud-providers)                                            |
 | [Microsoft System Center Virtual Machine Manager (SCVMM)](#infrastructure-providers) |
@@ -30,7 +30,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [Red Hat OpenStack Platform (OSP)](#cloud-providers)                                 |
 | Red Hat Satellite                                                                    |
 | [Red Hat Virtualization (RHV)](#infrastructure-providers)                            |
-| Redfish                                                                              |
+| [Redfish](#physical-infrastructure-providers)                                        |
 | [VMware vCloud](#cloud-providers)                                                    |
 | [VMware vSphere](#infrastructure-providers)                                          |
 | [VMware NSX-t](#network-providers)                                                   |

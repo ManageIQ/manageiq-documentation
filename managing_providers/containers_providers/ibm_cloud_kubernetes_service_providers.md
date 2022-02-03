@@ -50,3 +50,28 @@ create an IBM Cloud API key, see https://cloud.ibm.com/docs/account?topic=accoun
     to the IBM Cloud Kubernetes Service.
 
 10. Click **Add**.
+
+
+## Configuring Metrics Collection for IBM Cloud Kubernetes Service (IKS) Provider
+
+1. On IBM Cloud, create an `IBM Cloud Monitoring` service instance
+
+2. Log in to IBM Cloud CLI i.e. `ibmcloud login -sso`
+
+3. Use the following command to retrieve the monitoring instance ID: `ibmcloud resource service-instance <INSTANCE_NAME> --output json | jq -r '.[].guid'`
+
+Refer to the following table to determine the hostname for the `IBM Cloud Monitoring` service instance:
+
+| Region   | Hostname                            |
+| -------- | ----------------------------------- |
+| US South | `us-south.monitoring.cloud.ibm.com` |
+| EU DE    | `eu-de.monitoring.cloud.ibm.com`    |
+| EU GB    | `eu-gb.monitoring.cloud.ibm.com`    |
+| JP OSA   | `jp-osa.monitoring.cloud.ibm.com`   |
+| JP TOK   | `jp-tok.monitoring.cloud.ibm.com`   |
+| US East  | `us-east.monitoring.cloud.ibm.com`  |
+| AU SYD   | `au-syd.monitoring.cloud.ibm.com`   |
+| CA TOR   | `ca-tor.monitoring.cloud.ibm.com`   |
+| BR SAO   | `br-sao.monitoring.cloud.ibm.com`   |
+
+4. Enter the **Hostname** and **Monitoring Instance ID** under the **Metrics** tab when creating the IKS provider

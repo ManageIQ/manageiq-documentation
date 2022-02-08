@@ -90,14 +90,14 @@ necessary to alter the `max_connections` setting.
 
 7.  Enter the database hostname or IP address when prompted.
 
-8.  Enter the database name or leave blank for the default
+7.  Enter the database name or leave blank for the default
     (`vmdb_production`).
 
-9.  Enter the database username or leave blank for the default (`root`).
+8.  Enter the database username or leave blank for the default (`root`).
 
-10. Enter the chosen database user’s password.
+9. Enter the chosen database user’s password.
 
-11. Confirm the configuration if prompted.
+10. Confirm the configuration if prompted.
 
 {{ site.data.product.title_short }} will then configure the external database.
 

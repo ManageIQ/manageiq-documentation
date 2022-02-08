@@ -58,7 +58,7 @@ Use the following procedure to upload the {{ site.data.product.title_short }} ap
 5.  Select the host or cluster on which you want to deploy the OVF
     template and click **Next**.
 
-6.  Select the host on which you want to run the run the {{ site.data.product.title_short }}
+6.  Select the host on which you want to run the {{ site.data.product.title_short }}
     appliance, and click **Next**.
 
 7.  Navigate to, and select the resource pool where you want to run the

@@ -75,17 +75,21 @@ namespace :release do
     content = site_menu.read.lines
     content.delete_if { |line| line.match?(/^\s+prior:/) }
     site_menu.write(content.join)
+    site_menu_modified = !`git status --porcelain _data/site_menu.yml`.chomp.empty?
 
     # Commit
-    files_to_update = [site_menu]
-    exit $?.exitstatus unless system("git add #{files_to_update.join(" ")}")
-    exit $?.exitstatus unless system("git commit -m 'Changes after new branch #{branch}'")
+    files_to_update = []
+    files_to_update << site_menu if site_menu_modified
+    if files_to_update.any?
+      exit $?.exitstatus unless system("git add #{files_to_update.join(" ")}")
+      exit $?.exitstatus unless system("git commit -m 'Changes after new branch #{branch}'")
 
-    puts
-    puts "The commit on #{current_branch} has been created."
-    puts "Run the following to push to the upstream remote:"
-    puts
-    puts "\tgit push upstream #{current_branch}"
-    puts
+      puts
+      puts "The commit on #{current_branch} has been created."
+      puts "Run the following to push to the upstream remote:"
+      puts
+      puts "\tgit push upstream #{current_branch}"
+      puts
+    end
   end
 end

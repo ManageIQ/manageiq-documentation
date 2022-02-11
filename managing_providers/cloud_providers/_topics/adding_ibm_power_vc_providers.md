@@ -1,5 +1,7 @@
 ## Adding IBM PowerVC Providers
 
+The corresponding {{ site.data.product.title_short }} plugin supports IBM PowerVC **v1.4.4 or higher**.
+
 Complete the following procedure to add an IBM PowerVC cloud provider in
 {{ site.data.product.title_short }}.
 

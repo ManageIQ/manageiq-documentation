@@ -1,21 +1,21 @@
-## Configuring ManageIQ
+## Configuring {{ site.data.product.title_short }}
 
-After installing ManageIQ and run it for the first
+After installing {{ site.data.product.title_short }} and run it for the first
 time, you must perform some basic configuration. To configure
-ManageIQ, you must complete these steps:
+{{ site.data.product.title_short }}, you must complete these steps:
 
 1.  Add a disk to the infrastructure that is hosting your appliance.
 
 2.  Configure the database.
 
-Configure the ManageIQ appliance by using the internal
+Configure the {{ site.data.product.title_short }} appliance by using the internal
 appliance console.
 
 ### Accessing the Appliance Console
 
 1.  Start the appliance and open a terminal console.
 
-2.  Enter the `appliance_console` command. The ManageIQ appliance
+2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance
     summary screen displays.
 
 3.  Press `Enter` to manually configure settings.
@@ -29,14 +29,14 @@ appliance console.
 
 **Note:**
 
-The ManageIQ appliance console automatically logs out
+The {{ site.data.product.title_short }} appliance console automatically logs out
 after five minutes of inactivity.
 
 ### Configuring a Database
 
-ManageIQ uses a database to store information about the
-environment. Before using ManageIQ, configure the database
-options for it; ManageIQ provides the following two
+{{ site.data.product.title_short }} uses a database to store information about the
+environment. Before using {{ site.data.product.title_short }}, configure the database
+options for it; {{ site.data.product.title_short }} provides the following two
 options for database configuration:
 
   - Install an internal PostgreSQL database to the appliance
@@ -54,12 +54,12 @@ reporting zone, where each zone provides a specific function. The
 appliances in these zones must be configured to use an external
 database.
 
-The `postgresql.conf` file used with ManageIQ databases requires
+The `postgresql.conf` file used with {{ site.data.product.title_short }} databases requires
 specific settings for correct operation. For example, it must correctly
 reclaim table space, control session timeouts, and format the PostgreSQL
-server log for improved system support. It is recommended that external ManageIQ databases use a
+server log for improved system support. It is recommended that external databases use a
 `postgresql.conf` file based on the standard file used by the
-ManageIQ appliance.
+{{ site.data.product.title_short }} appliance.
 
 Ensure you configure the settings in the `postgresql.conf` to suit your
 system. For example, customize the `shared_buffers` setting according to
@@ -70,16 +70,16 @@ necessary to alter the `max_connections` setting.
 
 **Note:**
 
-  - ManageIQ requires PostgreSQL version 10.
+  - {{ site.data.product.title_short }} requires PostgreSQL version 10.
 
   - Because the `postgresql.conf` file controls the operation of all
     databases managed by a single instance of PostgreSQL, do not mix
-    ManageIQ databases with other types of databases in a single
+    {{ site.data.product.title_short }} databases with other types of databases in a single
     PostgreSQL instance.
 
 1.  Start the appliance and open a terminal console.
 
-2.  Enter the `appliance_console` command. The ManageIQ appliance
+2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance
     summary screen displays.
 
 3.  Press **Enter** to manually configure settings.
@@ -99,7 +99,7 @@ necessary to alter the `max_connections` setting.
 
 10. Confirm the configuration if prompted.
 
-ManageIQ will then configure the external database.
+{{ site.data.product.title_short }} will then configure the external database.
 
 ### Configuring a Worker Appliance
 
@@ -113,7 +113,7 @@ has a region configured with a database.
 
 1.  Start the appliance and open a terminal console.
 
-2.  Enter the `appliance_console` command. The ManageIQ appliance
+2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance
     summary screen displays.
 
 3.  Press **Enter** to manually configure settings.
@@ -121,13 +121,13 @@ has a region configured with a database.
 4.  Select **Configure Application** from the menu.
 
 5.  You are prompted to create or fetch a security key. Since this is
-    not the first ManageIQ appliance, choose **2) Fetch key from
+    not the first {{ site.data.product.title_short }} appliance, choose **2) Fetch key from
     remote machine**. For worker and multi-region setups, use this
     option to copy the security key from another appliance.
 
     **Note:**
 
-    All ManageIQ appliances in a multi-region deployment
+    All {{ site.data.product.title_short }} appliances in a multi-region deployment
     must use the same key.
 
 6.  Choose **Join Region in External Database** for the database location.

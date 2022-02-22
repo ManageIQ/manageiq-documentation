@@ -1,8 +1,7 @@
 ## Configuring {{ site.data.product.title_short }}
 
-After installing {{ site.data.product.title_short }} and run it for the first
-time, you must perform some basic configuration. To configure
-{{ site.data.product.title_short }}, you must complete these steps:
+After installing {{ site.data.product.title_short }} and running it for the first
+time, you must perform some basic configuration. You must complete these steps:
 
 1.  Add a disk to the infrastructure that is hosting your appliance.
 

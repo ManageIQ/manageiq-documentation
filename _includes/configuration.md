@@ -7,8 +7,7 @@ time, you must perform some basic configuration. You must complete these steps:
 
 2.  Configure the database.
 
-Configure the {{ site.data.product.title_short }} appliance by using the internal
-appliance console.
+Configure the appliance by using the internal appliance console.
 
 ### Accessing the Appliance Console
 

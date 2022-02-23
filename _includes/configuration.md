@@ -85,7 +85,7 @@ necessary to alter the `max_connections` setting.
 
 4.  Select **Configure Application** from the menu.
 
-6.  Choose **Create Region in External Database** for the database location.
+5.  Choose **Create Region in External Database** for the database location.
 
 7.  Enter the database hostname or IP address when prompted.
 

@@ -87,7 +87,7 @@ necessary to alter the `max_connections` setting.
 
 5.  Choose **Create Region in External Database** for the database location.
 
-7.  Enter the database hostname or IP address when prompted.
+6.  Enter the database hostname or IP address when prompted.
 
 7.  Enter the database name or leave blank for the default
     (`vmdb_production`).

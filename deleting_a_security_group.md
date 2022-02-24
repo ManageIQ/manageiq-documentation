@@ -1,4 +1,4 @@
-### Deleting a Security Group
+# Deleting a Security Group
 
 To delete a security group:
 

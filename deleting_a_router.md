@@ -1,4 +1,4 @@
-### Deleting a Network Router
+# Deleting a Network Router
 
 To delete a network router:
 

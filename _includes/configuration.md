@@ -43,7 +43,6 @@ options for database configuration:
 
   - Configure the appliance to use an external PostgreSQL database
 
-#### Configuring an Internal Database
 
 {% include configuration-db.md %}
 

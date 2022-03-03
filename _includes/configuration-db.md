@@ -1,5 +1,7 @@
 <div class="important">
 
+### Configuring an Internal Database
+
 Before installing an internal database, add a disk to the infrastructure
 hosting your appliance. See the documentation specific to your
 infrastructure for instructions for adding a disk. As a storage disk

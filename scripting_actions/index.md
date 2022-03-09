@@ -1,7 +1,7 @@
 ---
 ---
 
-# Scripting Actions in CloudForms
+# Scripting Actions in {{ site.data.product.title_short }}
 
 {% include_relative _topics/preface.md %}
 

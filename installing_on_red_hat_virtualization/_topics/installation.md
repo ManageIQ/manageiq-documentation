@@ -35,7 +35,7 @@ See [Creating a Virtual Machine](https://access.redhat.com/documentation/en-us/r
 ### Obtaining the Appliance
 
 After the image completes downloading, you are ready to upload the
-CloudForms appliance to your Red Hat Virtualization environment and
+{{ site.data.product.title_short }} appliance to your Red Hat Virtualization environment and
 create a virtual machine.
 
 ### Uploading the Appliance to Red Hat Virtualization

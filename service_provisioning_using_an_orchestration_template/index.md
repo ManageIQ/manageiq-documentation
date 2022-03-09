@@ -1,7 +1,7 @@
 ---
 ---
 
-# Service Provisioning in CloudForms Using an Orchestration Template
+# Service Provisioning Using an Orchestration Template
 
 {% include_relative _topics/overview.md %}
 

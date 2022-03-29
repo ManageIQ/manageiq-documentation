@@ -1,15 +1,13 @@
 ## Configuring {{ site.data.product.title_short }}
 
 After installing {{ site.data.product.title_short }} and running it for the first
-time, you must perform some basic configuration. To configure
-{{ site.data.product.title_short }}, you must at a minimum:
+time, you must perform some basic configuration. You must complete these steps:
 
-1.  Add a disk to the infrastructure hosting your appliance.
+1.  Add a disk to the infrastructure that is hosting your appliance.
 
 2.  Configure the database.
 
-Configure the {{ site.data.product.title_short }} appliance using the internal
-appliance console.
+Configure the appliance by using the internal appliance console.
 
 ### Accessing the Appliance Console
 

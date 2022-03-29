@@ -351,7 +351,7 @@ using the Azure Command-Line Interface (Azure CLI).
     minutes. Note: Enter `az storage container list` to get the list of
     storage containers.
 
-        $ az storage blob upload --account-name <storage-account-name> --container-name <container-name> --type page --file <path-to-vhd> --name <image-name>.vhd
+        $ az storage blob upload --account-name <storage-account-name> --container-name <storage-container-name> --type page --file <path-to-vhd> --name <image-name>.vhd
 
         Example:
 
@@ -374,7 +374,7 @@ using the Azure Command-Line Interface (Azure CLI).
 
         Example:
 
-        $ az image create -n <image-name> -g <{{ site.data.product.title_abbr }}-appliance-group> --os-type <linux> --source <https://{{ site.data.product.title_abbr }}storageaccount.blob.core.windows.net/{{ site.data.product.title_abbr }}storagecontainer/example.vhd>
+        $ az image create -n <image-name> -g <appliance-group-name> --os-type <linux> --source <https://storage-account-name.blob.core.windows.net/storage-container-name/example.vhd>
 
 4.  Create the virtual machine. Note that the following command uses
     `--generate-ssh-keys`. In this example, the private/public key pair
@@ -385,11 +385,11 @@ using the Azure Command-Line Interface (Azure CLI).
 
         Example:
 
-        az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name {{ site.data.product.title_abbr }}-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/example.vhd
+        az vm create --resource-group azrhelclirsgrp --location southcentralus --use-unmanaged-disk --name my-appliance-1 --storage-account azrhelclistact --os-type linux --admin-username clouduser --generate-ssh-keys --image https://azrhelclistact.blob.core.windows.net/azrhelclistcont/example.vhd
 
         {
           "fqdns": "",
-          "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/{{ site.data.product.title_abbr }}-appliance-1",
+          "id": "/subscriptions//resourceGroups/azrhelclirsgrp/providers/Microsoft.Compute/virtualMachines/my-appliance-1",
           "location": "southcentralus",
           "macAddress": "00-0X-XX-XX-XX-XX",
           "powerState": "VM running",

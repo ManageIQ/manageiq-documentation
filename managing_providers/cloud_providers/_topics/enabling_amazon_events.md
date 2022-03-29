@@ -75,6 +75,41 @@ To create a CloudWatch rule for EC2:
 
 7.  Click **Create rule** to save the CloudWatch rule.
 
+Repeat the same procedure to create a CloudWatch rule for EC2 Instance
+State-changes:
+
+1.  Browse to menu: **Events > Rules** and click **Create rule**.
+
+2.  Select the **Event Pattern** radio button to specify the event
+    source.
+
+3.  Edit the **Event Pattern Preview** box, and paste and save the
+    following code to create a rule based on a custom event pattern:
+
+        {
+          "source": [
+            "aws.ec2"
+          ],
+          "detail-type": [
+            "EC2 Instance State-change Notification"
+          ]
+        }
+
+4.  Click **Add target** and specify the following attributes:
+
+      - **Type**: `SNS Topic`
+
+      - **Topic**: `AWSConfig_topic`
+
+      - **Input**: `Matched event`
+
+5.  Click **Configure Details** to save these details.
+
+6.  Configure a name and description for the rule if desired. Ensure the
+    **Enabled** checkbox is selected for **State**.
+
+7.  Click **Create rule** to save the CloudWatch rule.
+
 Repeat the same procedure to create a CloudWatch rule for volumes,
 pasting the code snippet below to the **Event Pattern Preview** box:
 

@@ -5,6 +5,14 @@
 The image import functionality allows you to easily move an image from your on-prem PowerVC environment to an off-prem Power Systems Virtual Server environment using {{ site.data.product.title_short }} web interface.
 The enablement of the workflow in {{ site.data.product.title_short }} requires you to perform certain preparations that are described in detail below.
 
+### Preparing {{ site.data.product.title_short }} hosting server (required once):
+
+The following commands are to be run on a server (or in a corresponding docker container) that is dedicated to hosting your {{ site.data.product.title_short }} instance.
+
+1. Install `ansible-runner` application using the installation [instructions](https://ansible-runner.readthedocs.io/en/stable/install.html). The application must be available in the the command line
+of the user under which the {{ site.data.product.title_short }} web-server is running.
+
+
 ### Preparing IBM PowerVC Server (required once):
 The  following commands are to be run on a PowerVC server that is dedicated to supporting the image import workflow.
 

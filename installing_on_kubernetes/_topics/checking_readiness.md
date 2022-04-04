@@ -1,4 +1,4 @@
-## Check readiness of the MIQ pods
+## Check readiness of the pods
 
 _**Note:**_ Please allow a few minutes for the application to start.  Initial install and upgrades take extra time due do database initialization.  HTTPS traffic will not be served until pods are running and ready.  The READY column denotes the number of replicas and their readiness state.  The operator deploys the following pods:
 
@@ -6,7 +6,7 @@ _**Note:**_ Please allow a few minutes for the application to start.  Initial in
 $ oc get pods
 NAME                                     READY     STATUS    RESTARTS   AGE
 httpd-754985464b-4dzzx                   1/1       Running   0          37s
-manageiq-orchestrator-5997776478-vx4v9   1/1       Running   0          37s
+orchestrator-5997776478-vx4v9            1/1       Running   0          37s
 memcached-696479b955-67fs6               1/1       Running   0          37s
 postgresql-5f954fdbd5-tnlmf              1/1       Running   0          37s
 ```
@@ -21,7 +21,7 @@ event-handler-747574c54c-xpcvf           1/1       Running   0          32m
 generic-55cc84f79d-gwf5v                 1/1       Running   0          32m
 generic-55cc84f79d-w4vzs                 1/1       Running   0          32m
 httpd-754985464b-4dzzx                   1/1       Running   0          37m
-manageiq-orchestrator-5997776478-vx4v9   1/1       Running   0          37m
+orchestrator-5997776478-vx4v9            1/1       Running   0          37m
 memcached-696479b955-67fs6               1/1       Running   0          37m
 postgresql-5f954fdbd5-tnlmf              1/1       Running   0          37m
 priority-7b6666cdcd-5hkkm                1/1       Running   0          32m

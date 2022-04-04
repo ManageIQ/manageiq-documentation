@@ -1,7 +1,7 @@
 ## Using TLS to encrypt connections between pods inside the cluster:
 
 ### Create a secret containing all of the certificates
-The certificates should all be signed by a CA and that CA certificate should be in uploaded as `root_crt` so that it can be used to verify connection validity.  If the secret is named `internal-certificates-secret`, no changes are needed in the CR, if you choose a different name, that should be set in the `internalCertificatesSecret` field of the manageiq CR.
+The certificates should all be signed by a CA and that CA certificate should be in uploaded as `root_crt` so that it can be used to verify connection validity.  If the secret is named `internal-certificates-secret`, no changes are needed in the CR, if you choose a different name, that should be set in the `internalCertificatesSecret` field of the CR.
 
 ```sh
     oc create secret generic internal-certificates-secret \

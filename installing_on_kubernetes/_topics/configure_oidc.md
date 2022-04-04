@@ -1,6 +1,6 @@
 ## Configuring OpenID-Connect Authentication
 
-To run ManageIQ with OpenID-Connect Authentication, customize the following example as required to fit your environment.
+To run with OpenID-Connect Authentication, customize the following example as required to fit your environment.
 For this example we tested with Keycloak version 11.0
 
 Create a secret containing the OpenID-Connect's `Client ID` and `Client Secret`.

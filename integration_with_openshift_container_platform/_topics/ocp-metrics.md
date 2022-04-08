@@ -51,8 +51,9 @@ To create these accounts:
     **metrics-deployer** service account. Configure the
     **metrics-deployer** account to have **edit** permissions in the
     **openshift-infra** project:
-    ````
-       $ oc adm policy add-role-to-user \
+
+    ```
+    $ oc adm policy add-role-to-user \
     edit system:serviceaccount:openshift-infra:metrics-deployer
     ```
 6.  The **heapster** account will be automatically created in [Deploying the Metrics Components](#ocp-metrics-deploy). However, pre-emptively
@@ -60,7 +61,7 @@ To create these accounts:
     project:
 
     ```
-       oc adm policy add-cluster-role-to-user \
+    oc adm policy add-cluster-role-to-user \
     cluster-reader system:serviceaccount:openshift-infra:heapster
     ```
 

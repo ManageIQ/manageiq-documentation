@@ -71,7 +71,7 @@ necessary to alter the `max_connections` setting.
 
 **Note:**
 
-  - {{ site.data.product.title_short }} requires PostgreSQL version 9.5.
+  - {{ site.data.product.title_short }} requires PostgreSQL version 10.
 
   - Because the `postgresql.conf` file controls the operation of all
     databases managed by a single instance of PostgreSQL, do not mix

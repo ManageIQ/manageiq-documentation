@@ -33,7 +33,7 @@ has the following requirements:
 **Note:**
 
 These are the procedural steps as of the time of writing. For more
-information, consult the VMware documentation.
+information, consult the [VMware documentation](https://docs.vmware.com/).
 
 Use the following procedure to upload the {{ site.data.product.title_short }} appliance OVF template from your local file system using the vSphere Client.
 

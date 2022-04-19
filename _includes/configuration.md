@@ -37,10 +37,7 @@ environment. Before using {{ site.data.product.title_short }}, configure the dat
 options for it; {{ site.data.product.title_short }} provides the following two
 options for database configuration:
 
-  - Install an internal PostgreSQL database to the appliance
-
   - Configure the appliance to use an external PostgreSQL database
-
 
 #### Configuring an External Database
 

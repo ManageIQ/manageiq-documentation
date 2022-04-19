@@ -169,11 +169,11 @@ To import the appliance:
             }
         }
 
-    See the [AWS documentation](//docs.aws.amazon.com) on VM import and
+    See the [AWS documentation](https://docs.aws.amazon.com/) on VM import and
     export requirements, such as image formats, instances, volume and
     file system types, and using regions.
 
-2. Use the AWS-CLI tools to import a disk as a snapshot. See the [AWS documentation](//docs.aws.amazon.com) on using VM Import/Export to import a disk as a snapshot.
+2. Use the AWS-CLI tools to import a disk as a snapshot. See the [AWS documentation](https://docs.aws.amazon.com/) on using VM Import/Export to import a disk as a snapshot.
 
     **Note:**
 
@@ -188,7 +188,7 @@ To import the appliance:
      $ aws ec2 describe-import-snapshot-tasks --import-task-ids SNAPSHOT_ID_GOT_FROM_RESPONSE
     ```
 
-4.  Create an AMI from the snapshot. See the [AWS documentation](//docs.aws.amazon.com) on using options with the following command to create and register a Linux AMI from a snapshot.
+4.  Create an AMI from the snapshot. See the [AWS documentation](https://docs.aws.amazon.com/) on using options with the following command to create and register a Linux AMI from a snapshot.
 
     ```
      $ aws ec2 register-image

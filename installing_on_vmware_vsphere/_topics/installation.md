@@ -33,9 +33,9 @@ has the following requirements:
 **Note:**
 
 These are the procedural steps as of the time of writing. For more
-information, consult the [VMware documentation](https://docs.vmware.com/).
+information, consult the [VMware documentation](https://docs.vmware.com/en/VMware-vSphere/7.0/com.vmware.vsphere.vm_admin.doc/GUID-17BEDA21-43F6-41F4-8FB2-E01D275FE9B4.html).For more information, please refer to “Deploying an OVF or OVA Template” topic in the VMware documentation.
 
-Use the following procedure to upload the {{ site.data.product.title_short }} appliance OVF template from your local file system using the vSphere Client.
+Use the following procedure to upload the {{ site.data.product.title_short}} appliance OVF template from your local file system using the vSphere Client.
 
 1.  In the vSphere Client, select menu:File\[Deploy OVF Template\]. The
     Deploy OVF Template wizard appears.

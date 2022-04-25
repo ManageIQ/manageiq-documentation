@@ -62,8 +62,7 @@ database.
 The `postgresql.conf` file used with {{ site.data.product.title_short }} databases requires
 specific settings for correct operation. For example, it must correctly
 reclaim table space, control session timeouts, and format the PostgreSQL
-server log for improved system support. Due to these requirements, Red
-Hat recommends that external {{ site.data.product.title_short }} databases use a
+server log for improved system support. Due to these requirements, it is recommended that external {{ site.data.product.title_short }} databases use a
 `postgresql.conf` file based on the standard file used by the
 {{ site.data.product.title_short }} appliance.
 

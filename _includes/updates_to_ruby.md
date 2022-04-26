@@ -8,7 +8,7 @@ of Ruby and Rails, review the below resources.
 
 ### Updates and Changes in Rails
 
-See [Rails Releases](https://weblog.rubyonrails.org/releases/) for
+See [Rails Releases](https://rubyonrails.org/category/releases) for
 information on each release of Rails. To compare versions of Rails, see
 [Comparing changes in Rails](https://github.com/rails/rails/compare).
 

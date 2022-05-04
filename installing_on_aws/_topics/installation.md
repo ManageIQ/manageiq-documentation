@@ -23,6 +23,7 @@ Below are the two sets of requirements for installing {{ site.data.product.title
   - 12 GB RAM.
 
   - 4 vCPUs.
+  - Check that there are inbound rules to access ports 443, 22, and 80.
 
 #### Amazon EC2 Requirements
 

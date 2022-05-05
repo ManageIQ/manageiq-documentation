@@ -24,6 +24,7 @@ Below are the two sets of requirements for installing {{ site.data.product.title
 
   - 4 vCPUs.
 
+  - Check that there are inbound rules to access ports 443, 22, and 80.
 #### Amazon EC2 Requirements
 
   - An Amazon S3 bucket to store the disk image that will be imported to AWS as a snapshot.

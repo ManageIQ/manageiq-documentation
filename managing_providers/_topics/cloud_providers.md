@@ -54,3 +54,5 @@ Provider authentication status
 * [IBM PowerVC Providers](./cloud_providers/ibm_power_vc_providers.html)
 
 * [OpenStack Providers](./cloud_providers/openstack_providers.html)
+
+* [Oracle Cloud Providers](./cloud_providers/oracle_cloud_providers.html)

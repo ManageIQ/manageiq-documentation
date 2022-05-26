@@ -66,3 +66,4 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 |   - Create/Update/Delete Subnet        | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ✅      | ❌           |
 |   - Create/Update/Delete Routers       | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 | Volume Creation/Deletion               | ❌  | ❌    | ❌  | ✅        | ✅                               | ✅       | ✅      | ❌           |
+| Cloud Database - CRUD Actions          | ✅  | ✅    | ✅  | ❌        | ❌                               | ❌       | ✅      | ✅           |

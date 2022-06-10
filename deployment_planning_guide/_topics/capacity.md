@@ -58,7 +58,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
     <div class="important">
 
-    For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you need to enable the *rh-postgresql95* collection and load into the current shell prompt by using the source command:
+    For RHV 4.2 and 4.3, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you need to enable the *rh-postgresql95* collection and load into the current shell prompt by using the source command:
 
     $ source /opt/rh/rh-postgresql95/enable
 
@@ -104,7 +104,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
             host    all      all    0.0.0.0/0     md5
 
-    2. For RHV 4.2, update the following line in
+    2. For RHV 4.2 and 4.3, update the following line in
         `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
 
             host    all      all    0.0.0.0/0     md5
@@ -115,7 +115,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
             listen_addresses  =  '*'
 
-    2. For RHV 4.2, ensure the `listen_addresses` line in
+    2. For RHV 4.2 and 4.3, ensure the `listen_addresses` line in
         `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` matches the following example:
 
             listen_addresses  =  '*'
@@ -126,7 +126,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
             # systemctl reload postgresql
 
-    2. For RHV 4.2:
+    2. For RHV 4.2 and 4.3:
 
             # systemctl reload rh-postgresql95-postgresql
 

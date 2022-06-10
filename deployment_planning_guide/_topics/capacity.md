@@ -99,7 +99,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
 11. Enable external md5 authentication.
 
-    1. For RHV 4.0 and RHV 4.1, update the following line in
+    1. For RHV 4.0, 4.1, and 4.4 update the following line in
         `/var/lib/pgsql/data/pg_hba.conf`:
 
             host    all      all    0.0.0.0/0     md5
@@ -111,7 +111,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
 12. Enable PostgreSQL to listen for remote connections.
 
-    1. For RHV 4.0 and RHV 4.1, ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` matches the following example:
+    1. For RHV 4.0, 4.1, and 4.4 ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` matches the following example:
 
             listen_addresses  =  '*'
 
@@ -122,7 +122,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
 13. Reload the PostgreSQL configuration.
 
-    1. For RHV 4.0 and RHV 4.1:
+    1. For RHV 4.0, 4.1, and 4.4:
 
             # systemctl reload postgresql
 

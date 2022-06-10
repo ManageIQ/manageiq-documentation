@@ -58,7 +58,7 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
     <div class="important">
 
-    For RHV 4.2, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you need to enable the *rh-postgresql95* collection and load into the current shell prompt by using the source command:
+    For RHV 4.2 and 4.3, the PostgreSQL database is delivered as a software collection in version 9.5 and must be enabled first. Therefore, to run the following psql commands, you need to enable the *rh-postgresql95* collection and load into the current shell prompt by using the source command:
 
     $ source /opt/rh/rh-postgresql95/enable
 
@@ -66,20 +66,20 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
 3. Create the user for {{ site.data.product.title_short }} to be granted read-only access to the history database:
 
-        $ psql -U postgres -c "CREATE ROLE cfme WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
+        $ psql -U postgres -c "CREATE ROLE example_role_name WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
 
 4. Grant the newly created user permission to connect to the history
     database:
 
-        $ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO cfme;"
+        $ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO example_role_name;"
 
 5. Grant the newly created user usage of the public schema:
 
-        $ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO cfme;" ovirt_engine_history
+        $ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO example_role_name;" ovirt_engine_history
 
 6. Generate the rest of the permissions that will be granted to the newly created user and save them to a file:
 
-        $ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
+        $ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO example_role_name;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
 
 7. Use the file that you created in the previous step to grant permissions to the newly created user:
 
@@ -99,34 +99,34 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
 11. Enable external md5 authentication.
 
-    1. For RHV 4.0 and RHV 4.1, update the following line in
+    1. For RHV 4.0, 4.1, and 4.4 update the following line in
         `/var/lib/pgsql/data/pg_hba.conf`:
 
             host    all      all    0.0.0.0/0     md5
 
-    2. For RHV 4.2, update the following line in
+    2. For RHV 4.2 and 4.3, update the following line in
         `/var/opt/rh/rh-postgresql95/lib/pgsql/data/pg_hba.conf`:
 
             host    all      all    0.0.0.0/0     md5
 
 12. Enable PostgreSQL to listen for remote connections.
 
-    1. For RHV 4.0 and RHV 4.1, ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` matches the following example:
+    1. For RHV 4.0, 4.1, and 4.4 ensure the `listen_addresses` line in `/var/lib/pgsql/data/postgresql.conf` matches the following example:
 
             listen_addresses  =  '*'
 
-    2. For RHV 4.2, ensure the `listen_addresses` line in
+    2. For RHV 4.2 and 4.3, ensure the `listen_addresses` line in
         `/var/opt/rh/rh-postgresql95/lib/pgsql/data/postgresql.conf` matches the following example:
 
             listen_addresses  =  '*'
 
 13. Reload the PostgreSQL configuration.
 
-    1. For RHV 4.0 and RHV 4.1:
+    1. For RHV 4.0, 4.1, and 4.4:
 
             # systemctl reload postgresql
 
-    2. For RHV 4.2:
+    2. For RHV 4.2 and 4.3:
 
             # systemctl reload rh-postgresql95-postgresql
 

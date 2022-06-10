@@ -66,20 +66,20 @@ database (ovirt\_engine\_history) is located. Usually, this is the RHV-M server.
 
 3. Create the user for {{ site.data.product.title_short }} to be granted read-only access to the history database:
 
-        $ psql -U postgres -c "CREATE ROLE cfme WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
+        $ psql -U postgres -c "CREATE ROLE example_role_name WITH LOGIN ENCRYPTED PASSWORD '[password]';" -d ovirt_engine_history
 
 4. Grant the newly created user permission to connect to the history
     database:
 
-        $ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO cfme;"
+        $ psql -U postgres -c "GRANT CONNECT ON DATABASE ovirt_engine_history TO example_role_name;"
 
 5. Grant the newly created user usage of the public schema:
 
-        $ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO cfme;" ovirt_engine_history
+        $ psql -U postgres -c "GRANT USAGE ON SCHEMA public TO example_role_name;" ovirt_engine_history
 
 6. Generate the rest of the permissions that will be granted to the newly created user and save them to a file:
 
-        $ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO cfme;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
+        $ psql -U postgres -c "SELECT 'GRANT SELECT ON ' || relname || ' TO example_role_name;' FROM pg_class JOIN pg_namespace ON pg_namespace.oid = pg_class.relnamespace WHERE nspname = 'public' AND relkind IN ('r', 'v', 'S');" --pset=tuples_only=on  ovirt_engine_history > grant.sql
 
 7. Use the file that you created in the previous step to grant permissions to the newly created user:
 

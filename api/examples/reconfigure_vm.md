@@ -124,7 +124,7 @@ Delete backing is optional and defaults to true.
   "options": {
     "request_type": "vm_reconfigure",
     "src_ids": ["2"],
-    "disk_remove": [
+    "disk_resize": [
       {
         "disk_name": "[Datastore 0] vm/vm_1.vmdk",
         "disk_size_in_mb": 20480

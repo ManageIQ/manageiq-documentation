@@ -228,7 +228,7 @@ wait for the newly imported image to appear.
 
 ### Troubleshooting
 
-* If the {{site.data.product.title_short}} UI shows no detailed error description then make sure to check the latest logs in `<{{ site.data.product.title_short }}>/log/evm.log` on a server that hosts your {{site.data.product.title_short}} instance.
+* If the {{site.data.product.title_short}} UI shows no detailed error description then make sure to check the latest logs with `journalctl -t evm` or `oc logs` on a server or pod that hosts your {{site.data.product.title_short}} instance.
 
 * If  `{{ site.data.product.title_short }}` server is terminated during the workflow execution then certain residual objects will 
   have to be removed manually. These are potentially the session directory on the PowerVC server under `/home/sessions`, the already uploaded OVA 

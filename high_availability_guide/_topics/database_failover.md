@@ -60,8 +60,8 @@ following steps:
     **Note:**
 
     You can check the status of the simulated failure by viewing the
-    most recent `evm.log` log on the engine appliances.
-    
+    evm log on the engine appliances with `journalctl -t evm`.
+
 3.  Check the appliance console summary screen for the primary database.
     If configured correctly, the **{{ site.data.product.title_abbr_uc }} Database**
     value in the appliance console summary should have switched from the

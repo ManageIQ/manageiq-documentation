@@ -35,4 +35,4 @@ the appliance to run remotely.
     Cmdlet](http://technet.microsoft.com/en-us/library/ee176961.aspx).
 
 If PowerShell returns an error, search for `log_dos_error_results` in
-the `evm.log` and `scvmm.log` files for information.
+`journalctl -t evm -t scvmm` or `oc logs` for information.

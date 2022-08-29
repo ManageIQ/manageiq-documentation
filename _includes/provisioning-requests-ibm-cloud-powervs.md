@@ -143,4 +143,4 @@ long.
 
 **Request ID Format**
 
-Request 99 in region 123 results in Request ID 123000000000099.
+Request 99 in region123 results in Request ID 123000000000099.

@@ -95,8 +95,7 @@ summary screen.
 3.  Click ![2007](../images/2007.png)(**Lifecycle**), then click
     ![2010](../images/2010.png)(**Set Retirement Date**).
 
-4.  Click ![remove retirement date](../images/remove-retirement-date.png)
-    to remove the retirement date.
+4.  Save a blank date to remove the retirement dates.
 
 ### Setting Retirement in a Provision Request
 

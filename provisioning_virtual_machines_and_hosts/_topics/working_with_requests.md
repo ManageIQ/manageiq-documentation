@@ -25,14 +25,14 @@ trillion database IDs, this number can be several digits long.
 
 **Request ID Format**
 
-**Request 99** in **region 123** results in **Request ID
+**Request 99** results in **Request ID
 123000000000099**.
 
 #### Reloading the Status of Provisioning Requests
 
 1.  Navigate to menu:Services\[Requests\].
 
-2.  Click ![2106](../images/2106.png)(**Reload the current display**).
+2.  Click ![2106](../images/2106.png)(**Refreshes the current display**).
 
 #### Approving a Provisioning Request
 

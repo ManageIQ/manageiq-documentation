@@ -20,6 +20,9 @@ To create a new key pair:
 4.  If you want to use a public key, copy its contents into the **Public
     Key (optional)** field.
 
+    **Note**: You must have a public key value for the IBM POWER VS provider to create the key pair.
+    An error message is returned if you fail to add a public key value and can be viewed in **Settings > Tasks**.
+
 5.  Select which cloud provider on which to create the key pair. The key
     pair will then be available for use by instances in that provider.
 

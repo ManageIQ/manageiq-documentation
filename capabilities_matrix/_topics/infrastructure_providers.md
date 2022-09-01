@@ -16,7 +16,7 @@
 | Relationship Discovery                                       | ✅      | ✅          | ✅    | ✅                   | ✅            | ✅         |
 | Drift Comparison                                             | ✅      | ✅          | ✅    | ✅ (Nodes)           | ❌            | ❌          |
 | VM Genealogy                                                 | ✅      | ✅          | ✅    | ✅                   | ❌            | ✅         |
-| Capacity & Utilization                                       | ✅      | ✅          | ❌    | ✅                   | ❌            | ❌          |
+| Capacity & Utilization                                       | ✅      | ✅          | ❌    | ✅                   | ✅            | ❌          |
 | VM Event Timelines                                           | ✅      | ✅          | ✅    | ❌                   | ✅            | ❌          |
 | Infrastructure Event Timelines                               | ❌      | ❌          | ❌    | ✅                   | ❌            | ❌          |
 | Reporting                                                    | ✅      | ✅          | ✅    | ✅                   | ✅            | ✅         |
@@ -40,7 +40,7 @@
 | VM Provisioning                                              |         |             |       |                         |               |
 |   - using PXE                                                | ✅      | ✅          | ❌    | ❌                      | ❌            | ❌          |
 |   - using ISO                                                | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
-|   - from Template to VM                                      | ✅      | ✅          | ✅    | ❌                      | ❌            | ✅         |
+|   - from Template to VM                                      | ✅      | ✅          | ✅    | ❌                      | ✅            | ✅         |
 |   - from VM to Template                                      | ✅      | ✅          | ❌    | ❌                      | ✅            | ❌          |
 |   - Clone from VM to VM                                      | ✅      | ❌          | ❌    | ❌                      | ❌            | ❌          |
 |   - Sysprep Windows Templates                                | ✅      | ✅          | ❌    | ❌                      | ❌            | ❌          |
@@ -50,7 +50,7 @@
 |   - Disk Addition                                            | ✅      | ✅          | ❌    | ❌                      | ❌            | ❌          |
 |   - Network Interface Add/Remove                             | ✅      | ✅          | ❌    | ❌                      | ❌            | ❌          |
 | VM Snapshot Creation and Removal                             | ✅      | ✅          | ❌    | ❌                      | ❌            | ❌          |
-| Host Power Operations                                        | ✅      | ❌          | ❌    | ✅                      | ❌            | ❌          |
+| Host Power Operations                                        | ✅      | ❌          | ❌    | ✅                      | ✅            | ❌          |
 | Node Operations                                              |         |             |       |                         |               | ❌          |
 |   - Add/Remove Node                                          | ❌      | ❌          | ❌    | ✅                      | ❌            | ❌          |
 |   - Scale Down Node                                          | ❌      | ❌          | ❌    | ✅ (Compute nodes only) | ❌            | ❌          |

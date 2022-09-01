@@ -109,7 +109,7 @@ your playbooks.
 
 7.  Provide a branch name in the **SCM Branch** field.
 
-8. Click **Save**.
+8. Click **Save**.  
 
 Once you have synced a repository, its playbooks will become available
 to {{ site.data.product.title_short }}.

@@ -22,7 +22,7 @@ information on state machines, see [State Machines](#state-machines).
 | Register DNS        | Integrates with IPAM to register with DNS.                                          |
 | Register CMDB       | Integrates with CMDB (Configuration Management Database) to register with the CMDB. |
 | Register AD         | Integrates with IPAM to register with active directory.                             |
-| Placement           | Determine placement of virtual machine or instance.
+| Placement           | Determine placement of virtual machine or instance.                                 |
 | PreProvision        | Pre-provisioning steps.                                                             |
 | Provision           | Create the virtual machine or instance.                                             |
 | CheckProvisioned    | Check that the new virtual machine or instance is in the VMDB.                      |

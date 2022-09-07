@@ -21,7 +21,7 @@ when run.
 4.  Select the **Credential Type**. Additional fields will appear
     depending on the type chosen.
 
-5. **Vault Password**: Ansible Vault credentials have only the **Vault
+5.  **Vault Password**: Ansible Vault credentials have only the **Vault
     Password** attribute that may be configured.
 
 6.  Click **Add**.

@@ -159,7 +159,7 @@ to change the number of days.
 1.  Navigate to menu:Automate\[Explorer\].
 
 2.  Click menu:DOMAIN\[Cloud \> VM \> Retirement \> Email \>
-    vm\_retire\_extend\].
+    System \> Request \].
 
     **Note:**
 

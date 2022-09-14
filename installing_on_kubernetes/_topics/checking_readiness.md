@@ -34,8 +34,4 @@ ui-5b8c86f6f9-jhd9w                      1/1       Running   0          32m
 web-service-858f55f55d-5tmcr             1/1       Running   0          32m
 ```
 
-Under normal circumstances the entire first time deployment process should take around ~10 minutes, indication of issues can be seen
-by examination of the deployment events and pod logs.
-Time can vary significantly based on performance of the environment.
-Subsequent boots should be much faster.
-Version upgrades can also be time consuming depending on the size of the database and the number and difficulty of migrations that need to be applied.  Progress can be seen in the orchestrator logs.
+Under normal circumstances the entire first time deployment process should take around ~10 minutes.  Any issues can be seen by examining the deployment events and pod logs.  The time can vary significantly based on performance of the environment, however, subsequent boots should be much faster.  Version upgrades can also be time consuming depending on the size of the database and the number and difficulty of migrations that need to be applied.  Progress can be monitored in the orchestrator logs.

@@ -24,7 +24,7 @@ Configuration settings are located in
 | Parameter                  | Default Value | Description                                                                                                                                       |
 | -------------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `failover_attempts`        | 10            | The number of times the `failover_monitor` will attempt to failover after discovering the connection to the current database is no longer active. |
-| `db_check_frequency`       | 300s          | The sleep interval in the monitor loop, it defines how frequently the connection to the database is checked.                                      |
+| `db_check_frequency`       | 120s          | The sleep interval in the monitor loop, it defines how frequently the connection to the database is checked.                                      |
 | `failover_check_frequency` | 60s           | The sleep interval between attempting to failover additional times.                                                                               |
 
 **Note:**

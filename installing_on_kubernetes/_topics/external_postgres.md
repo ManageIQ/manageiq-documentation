@@ -4,10 +4,10 @@ Running with an external Postgres server is an option, if you want the default i
 ```bash
 $ oc create secret generic postgresql-secrets \
   --from-literal=dbname=vmdb_production \
-  --from-literal=hostname=YOUR_HOSTNAME \
+  --from-literal=hostname=<your hostname> \
   --from-literal=port=5432 \
-  --from-literal=password=YOUR_PASSWORD_HERE \
-  --from-literal=username=YOUR_USERNAME_HERE \
+  --from-literal=password=<your password> \
+  --from-literal=username=<your username> \
   --from-literal=sslmode=verify-full \ # optional
   --from-file=rootcertificate=path/to/optional/certificate.pem # optional
 ```

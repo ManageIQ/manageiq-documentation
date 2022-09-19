@@ -1,6 +1,6 @@
 ## Check readiness of the pods
 
-_**Note:**_ Please allow a few minutes for the application to start.  Initial install and upgrades take extra time due do database initialization.  HTTPS traffic will not be served until pods are running and ready.  The READY column denotes the number of replicas and their readiness state.  The operator deploys the following pods:
+**Note:** Please allow a few minutes for the application to start.  Initial install and upgrades take extra time due to database initialization.  HTTPS traffic will not be served until pods are running and ready.  The READY column denotes the number of replicas and their readiness state.  The operator deploys the following pods:
 
 ```bash
 $ oc get pods

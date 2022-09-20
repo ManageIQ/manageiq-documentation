@@ -7,7 +7,7 @@ Create a secret containing the OpenID-Connect's `Client ID` and `Client Secret`.
 The values for `CLIENT_ID` and `CLIENT_SECRET` come from your authentication provider's client definition.
 
 ```bash
-$ oc create secret generic <name of your kubernetes secret> --from-literal=CLIENT_ID=<your auth provider's client ID> --from-literal=CLIENT_SECRET=<your auth provider's client secret>
+$ oc create secret generic <name of your kubernetes secret> --from-literal=CLIENT_ID=<your auth provider client ID> --from-literal=CLIENT_SECRET=<your auth provider client secret>
 ````
 
 Modify the CR with the following values:

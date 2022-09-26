@@ -25,14 +25,14 @@ trillion database IDs, this number can be several digits long.
 
 **Request ID Format**
 
-**Request 99** in **region 123** results in **Request ID
+**Request 99** in region 123 results in **Request ID
 123000000000099**.
 
 #### Reloading the Status of Provisioning Requests
 
 1.  Navigate to menu:Services\[Requests\].
 
-2.  Click ![2106](../images/2106.png)(**Reload the current display**).
+2.  Click ![2106](../images/2106.png)(**Refreshes the current display**).
 
 #### Approving a Provisioning Request
 
@@ -44,9 +44,9 @@ virtual machine or instance creation.
 
 2.  Click on the request you want to approve.
 
-3.  Type in a **Reason** for the approval.
+3.  Click ![1852](../images/1852.png)(**Approve this request**).
 
-4.  Click ![1852](../images/1852.png)(**Approve this request**).
+4.  Type in a **Reason** for the approval.
 
 #### Denying a Provisioning Request
 
@@ -54,9 +54,9 @@ virtual machine or instance creation.
 
 2.  Click on the request you want to deny.
 
-3.  Type in a **Reason** for the denial.
+3.  Click ![2009](../images/2009.png)(**Deny this request**).
 
-4.  Click ![2009](../images/2009.png)(**Deny this request**).
+4.  Type in a **Reason** for the denial.
 
 #### Copying a Provisioning Request
 
@@ -186,23 +186,14 @@ are set to **evmadmin@company.com** as a default.
 
 1.  Navigate to menu:Automate\[Explorer\].
 
-2.  Choose the following Namespace: menu:DOMAIN\[Cloud \> VM \>
-    Provisioning \> Email\].
+2.  Select an instance within the chosen class.
 
-    **Note:**
-
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-
-    This example uses the **Cloud** Namespace, but can also use the **Infrastructure** namespace.
-
-3.  Select an instance within the chosen class.
-
-4.  Click ![1847](../images/1847.png)(**Configuration**), then
+3.  Click ![1847](../images/1847.png)(**Configuration**), then
     ![1851](../images/1851.png)(**Edit this instance**).
 
-5.  Type the desired email addresses in the **to\_email\_address** and
+4.  Type the desired email addresses in the **to\_email\_address** and
     **from\_email\_address** fields.
 
-6.  Click **Save**.
+5.  Click **Save**.
 
     ![6282](../images/6282.png)

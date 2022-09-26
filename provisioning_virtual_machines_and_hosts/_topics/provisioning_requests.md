@@ -836,7 +836,7 @@ Request 99 in region 123 results in Request ID 123000000000099.
 1.  Login to the {{ site.data.product.title_short }} console for the {{ site.data.product.title_short }} server
     where you want to change the dialog.
 
-2.  Navigate to menu:Automate\[Customization\].
+2.  Navigate to menu:Embedded Automate\[Customization\].
 
 3.  Click the **Provisioning Dialogs** accordion.
 
@@ -875,7 +875,7 @@ If you are using **Provisioning Profiles**, you can specify a specific file that
 
 ##### Creating a Custom Provision Dialog
 
-1.  Navigate to menu:Automate\[Customization\].
+1.  Navigate to menu:Embedded Automate\[Customization\].
 
 2.  Click on the **Provisioning Dialogs** accordion.
 
@@ -935,7 +935,7 @@ The diagram below shows where provisioning profiles are called during the entire
 
 ##### Creating a Provisioning Profile Instance
 
-1.  Navigate to menu:Automate\[Explorer\].
+1.  Navigate to menu:Embedded Automate\[Explorer\].
 
 2.  Using the tree located in the accordion, click menu:DOMAIN\[Cloud \> VM \> Provisioning \> Profile\].
 

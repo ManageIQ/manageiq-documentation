@@ -85,7 +85,7 @@ features.
 1.  Browse to the settings menu, then **Configuration** →
     **Diagnostics** and click on the desired server.
 
-2.  Click on the **Workers** tab.
+2.  Click on the **Roles by Servers** tab.
 
 A table of all workers and current status will appear from which you can
 confirm the state of your embedded Ansible worker.
@@ -103,17 +103,13 @@ your playbooks.
 
 4.  Add a description for the repository in the **Description** field.
 
-5.  Select an **SCM Type** from the drop-down menu.
+5.  Add a **URL** or IP Address for the repository.
 
-6.  Add a **URL** or IP Address for the repository.
+6.  Select the appropriate **SCM Credentials** from the drop-down menu.
 
-7.  Select the appropriate **SCM Credentials** from the drop-down menu.
+7.  Provide a branch name in the **SCM Branch** field.
 
-8.  Provide a branch name in the **SCM Branch** field.
-
-9.  Check the appropriate box for any **SCM Update Options**.
-
-10. Click **Add**.
+8.  Click **Save**.  
 
 Once you have synced a repository, its playbooks will become available
 to {{ site.data.product.title_short }}.

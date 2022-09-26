@@ -7,7 +7,7 @@ steps required to complete the request. The steps followed for a regular
 provision from a virtual machine to a virtual machine (not to a
 template) are found by navigating to menu:Automate\[Explorer\], then
 listed under menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \>
-VMProvision\_VM \> Provision VM from Template (template)\]. The value
+StateMachines \> VMProvision\_VM \> Provision VM from Template (template)\]. The value
 for each state shows where the instance resides in the **Datastore**
 accordion. The default set of execution steps is shown below. For more
 information on state machines, see [State Machines](#state-machines).
@@ -22,6 +22,7 @@ information on state machines, see [State Machines](#state-machines).
 | Register DNS        | Integrates with IPAM to register with DNS.                                          |
 | Register CMDB       | Integrates with CMDB (Configuration Management Database) to register with the CMDB. |
 | Register AD         | Integrates with IPAM to register with active directory.                             |
+| Placement           | Determine placement of virtual machine or instance.                                 |
 | PreProvision        | Pre-provisioning steps.                                                             |
 | Provision           | Create the virtual machine or instance.                                             |
 | CheckProvisioned    | Check that the new virtual machine or instance is in the VMDB.                      |
@@ -84,7 +85,7 @@ Quota tags can be assigned directly to **either** a group or owner **not** to a 
 
 ##### Applying a Tag to a User or User Group
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../images/config-gear.png) (**Configuration**) > click **Application Settings**.
 
 2.  Click the **Access Control** accordion, and select the user or group
     that you want to tag.

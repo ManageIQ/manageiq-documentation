@@ -3,9 +3,7 @@
 
 ## LDAP
 
-In this guide we will cover how to manually configure a 7.1 Appliance’s
-external authentication to work against LDAP. This provides LDAP users
-access to the Appliance UI as well as the REST API.
+This guide covers how to manually configure an appliance’s external authentication to work against LDAP. This provides LDAP users access to the Appliance UI as well as the REST API.
 
 1.  [Testing OpenLDAP](#testing-openldap)
 
@@ -290,7 +288,7 @@ Restart Services
 
 ## Configure Administrative UI
 
-Login as admin, then in *Configure→Configuration→Authentication*
+Log in as admin, navigate to *Settings > Application Settings > Settings*.  Select the server, then select the *Authentication tab*
 
   - Set mode to External (httpd)
 
@@ -301,10 +299,10 @@ Login as admin, then in *Configure→Configuration→Authentication*
 
   - Click Save.
 
-The above steps need to be done on each UI and WebService enabled
+The above steps need to be completed on each UI and WebService enabled
 appliance.
 
-in *Configure→Configuration→Access Control*
+Navigate to *Settings > Application Settings > Access Control*
 
   - Make sure the user’s LDAP group for the appliance are created and
     appropriate roles assigned to those groups.

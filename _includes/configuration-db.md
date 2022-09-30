@@ -36,7 +36,9 @@ disks; installation will fail if the disks are not blank.
         All {{ site.data.product.title_short }} appliances in a multi-region
         deployment must use the same key.
 
-6.  Choose **Create Internal Database** for the database location.
+6.  Choose **Create Internal Database** for the database location. 
+
+    In the **Configure Messaging** menu when you select **Make No messaging changes**, then the ```Configuration failed: Internal database require a volume mounted at /var/lib/pgsql. Please add an unpartitioned disk and try again.``` message is displayed.
 
 7.  Choose a disk for the database. This can be either a disk you
     attached previously, or a partition on the current disk.

@@ -11,14 +11,12 @@ permissions.
 
 2.  Select the checkboxes for the Ansible playbooks to tag.
 
-3.  Click ![Policy](../images/1941.png) (**Policy**), and then ![Edit
+3.  Click **Policy**, and then ![Edit
     Tags](../images/1851.png) (**Edit Tags**).
 
 4.  Select a customer tag to assign from the first list.
 
-    ![2219](../images/2219.png)
-
-5.  Select a value to assign from the second list.
+5.  Select a value to assign from the value list.
 
 6.  Click **Save**.
 
@@ -28,14 +26,12 @@ permissions.
 
 2.  Select the checkboxes for the Ansible repositories to tag.
 
-3.  Click ![Policy](../images/1941.png) (**Policy**), and then ![Edit
+3.  Click **Policy**, and then ![Edit
     Tags](../images/1851.png) (**Edit Tags**).
 
 4.  Select a customer tag to assign from the first list.
 
-    ![2219](../images/2219.png)
-
-5.  Select a value to assign from the second list.
+5.  Select a value to assign from the value list.
 
 6.  Click **Save**.
 
@@ -45,13 +41,11 @@ permissions.
 
 2.  Select the checkboxes for the Ansible credentials to tag.
 
-3.  Click ![Policy](../images/1941.png) (**Policy**), and then ![Edit
+3.  Click **Policy**, and then ![Edit
     Tags](../images/1851.png) (**Edit Tags**).
 
 4.  Select a customer tag to assign from the first list.
 
-    ![2219](../images/2219.png)
-
-5.  Select a value to assign from the second list.
+5.  Select a value to assign from the value list.
 
 6.  Click **Save**.

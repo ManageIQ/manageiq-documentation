@@ -97,7 +97,9 @@ your playbooks.
 
 1.  Browse to menu: **Automation > Ansible > Repositories**.
 
-2.  Click **Add**.
+2.  Click **Configuration**, then
+    ![Add New Repository](../images/1862.png) (**Add New
+    Repository**).
 
 3.  Provide a Repository Name in the **Name** field.
 

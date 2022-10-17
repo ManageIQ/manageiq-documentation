@@ -13,7 +13,7 @@ when run.
 1.  Browse to menu: **Automation > Ansible > Credentials**.
 
 2.  Click **Configuration**, then
-    ![Add a New Credential](../images/1862.png) (**Add a New
+    ![Add New Credential](../images/1862.png) (**Add New
     Credential**).
 
 3.  Provide a **Name** for the credential.
@@ -21,10 +21,10 @@ when run.
 4.  Select the **Credential Type**. Additional fields will appear
     depending on the type chosen.
 
-5.  **Vault Password**: Ansible Vault credentials have only the **Vault
-    Password** attribute that may be configured.
+    - **Vault Password**: Ansible Vault credentials have only the **Vault
+    Password** attribute that may be configured. For more information on Ansible Vault, see [Using Vault in playbooks](http://docs.ansible.com/ansible/latest/playbooks_vault.html).
 
-6.  Click **Add**.
+5.  Click **Add**.
 
 ## Credential Types
 
@@ -60,10 +60,6 @@ a remote host.
   - **Privilege Escalation Password**: Enter the actual password to be
     used to authenticate the user via the selected privilege escalation
     type on the remote system.
-
-**Note:**
-
-For more information on Ansible Vault, see [Using Vault in playbooks](http://docs.ansible.com/ansible/latest/playbooks_vault.html).
 
 ### Network
 

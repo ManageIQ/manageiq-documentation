@@ -1,5 +1,3 @@
-<div class="important">
-
 ### Configuring an Internal Database
 
 Before installing an internal database, add a disk to the infrastructure
@@ -38,7 +36,7 @@ disks; installation will fail if the disks are not blank.
 
 6.  Choose **Create Internal Database** for the database location. 
 
-    In the **Configure Messaging** menu when you select **Make No messaging changes**, then the ```Configuration failed: Internal database require a volume mounted at /var/lib/pgsql. Please add an unpartitioned disk and try again.``` message is displayed.
+    In the **Configure Messaging** menu when you select **Make No messaging changes**, then the ```Configuration failed: Internal database require a volume mounted at /var/lib/pgsql. Please add an unpartitioned disk and try again.``` message is displayed. As a resolution, ensure to add the database disk instructions as defined above.
 
 7.  Choose a disk for the database. This can be either a disk you
     attached previously, or a partition on the current disk.

@@ -85,7 +85,7 @@ Quota tags can be assigned directly to **either** a group or owner **not** to a 
 
 ##### Applying a Tag to a User or User Group
 
-1.  Click ![config gear](../images/config-gear.png) (**Configuration**) > click **Application Settings**.
+1.  Click ![config gear](../images/config-gear.png) (**Settings**) > **Application Settings**.
 
 2.  Click the **Access Control** accordion, and select the user or group
     that you want to tag.

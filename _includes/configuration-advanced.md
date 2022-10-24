@@ -27,7 +27,7 @@ configuration of the appliance:
 </tr>
 <tr class="even">
 <td><p><strong>Configure Application</strong></p></td>
-<td><p>Configure the VMDB. Use this option to configure the database for the appliance after installing and running it for the first time.</p></td>
+<td><p>Configure the VMDB and Kafka. Use this option to configure the database and messaging for the appliance after installing and running it for the first time.</p></td>
 </tr>
 <tr class="odd">
 <td><p><strong>Configure Database Replication</strong></p></td>

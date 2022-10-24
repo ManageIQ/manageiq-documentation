@@ -7,6 +7,8 @@ time, you must perform some basic configuration. You must complete these steps:
 
 2.  Configure the database.
 
+3.  Configure messaging
+
 Configure the appliance by using the internal appliance console.
 
 ### Accessing the Appliance Console
@@ -96,21 +98,11 @@ necessary to alter the `max_connections` setting.
 
 {{ site.data.product.title_short }} will then configure the external database.
 
-#### Configuring a Kafka broker
+### Configure Messaging
 
-Some features of ManageIQ can be enabled by enabling a message server.
+Configuring messaging is required for appliance setup. It is recommended to configure the broker on the same appliance where your database is configured
 
-1. Start the appliance and open a terminal console.
-
-2. Run the `appliance_console` command and the summary screen will be displayed.
-
-3. Press **Enter** to manually configure settings.
-
-4. Select **Configure Application** from the menu.
-
-5. Select **Make No Database Changes** from the menu.
-
-6. You can either configure the current appliance as a kafka broker, or point the
+1. You can either configure the current appliance as a kafka broker, or point the
    appliance to an existing external kafka broker.
 
    Select the appropriate option either
@@ -119,7 +111,7 @@ Some features of ManageIQ can be enabled by enabling a message server.
    to connect to an external kafka broker.  You will be asked to fill in the
    required **Message Client Parameters** like IP address and username/password.
 
-7. Select **Proceed** and appliance_console will apply the configuration that you have
+2. Select **Proceed** and appliance_console will apply the configuration that you have
    requested then restart evmserverd to pick up the changes.
 
 ### Configuring a Worker Appliance
@@ -130,7 +122,7 @@ appliance to handle work for one or many roles, with workers within the
 appliance carrying out the duties for which they are configured. You can
 configure a worker appliance through the terminal. The following steps
 demonstrate how to join a worker appliance to an appliance that already
-has a region configured with a database.
+has a region configured with a database and messaging.
 
 1.  Start the appliance and open a terminal console.
 
@@ -165,3 +157,9 @@ has a region configured with a database.
 11. Enter the chosen database user’s password.
 
 12. Confirm the configuration if prompted.
+
+13. Choose **Connect to an external messaging system** to connect to the external kafka broker located on the appliance with the external database
+
+14. Enter the necessary **Message Client Parameters** such as the hostname/IP and username/password
+
+14. Confirm the configuration if prompted.

@@ -17,7 +17,7 @@ database host.
 ### Failover Configuration Settings
 
 Configuration settings are located in
-`/var/www/miq/config/ha_admin.yml`.
+`/var/www/miq/vmdb/config/ha_admin.yml`.
 
 **Default settings**:
 

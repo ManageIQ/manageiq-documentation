@@ -129,7 +129,7 @@ The  following commands are to be run on a PowerVC server that is dedicated to s
 
 ### Add a Cloud Object Storage provider in {{ site.data.product.title_short }}: 
 
-1. See the corresponding instructions [here](storage_providers/ibm_cloud_object_storage_managers).
+1. See the corresponding instructions [here](storage_providers/ibm_cloud_object_storage_managers.html).
 
 2. Create a bucket in your Cloud Object Storage that will hold the transient OVA image files.    
    ![New Bucket](../images/new_bucket.png) 
@@ -143,11 +143,11 @@ The  following commands are to be run on a PowerVC server that is dedicated to s
 
 ### Add an IBM Power Systems Virtual Server provider in {{ site.data.product.title_short }}:
 
-1. See the corresponding instructions [here](cloud_providers/ibm_power_systems_virtual_servers_providers).
+1. See the corresponding instructions [here](cloud_providers/ibm_power_systems_virtual_servers_providers.html).
 
 ### Add an IBM PowerVC provider in {{ site.data.product.title_short }}:
 
-1. See the corresponding instructions [here](cloud_providers/ibm_power_vc_providers). 
+1. See the corresponding instructions [here](cloud_providers/ibm_power_vc_providers.html).
 
 2. Specify the image import related parameters on the PowerVC registration form.   
 

@@ -141,7 +141,7 @@ Querying all tags of the Location category:
 }
 ```
 
-For additional details on tags, the **cateogy** and **classification**
+For additional details on tags, the **category** and **classification**
 attributes can be queried on tags as follows:
 
     GET /api/tags/5?attributes=category,classification

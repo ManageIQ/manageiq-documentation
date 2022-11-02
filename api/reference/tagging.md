@@ -116,7 +116,7 @@ Expanding the resources, does provide us with the tag name as follows:
 }
 ```
 
-For additional details on tags, the **cateogy** and **classification**
+For additional details on tags, the **category** and **classification**
 attributes can be queried on tags as follows:
 
     GET /api/tags/5?attributes=category,classification

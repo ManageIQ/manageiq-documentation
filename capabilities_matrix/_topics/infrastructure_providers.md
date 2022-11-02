@@ -6,9 +6,9 @@
 | ------------------------------------------------------------ | ------- | ----------- | ----- | ----------------------- | ------------- | -------- |
 | Compute Inventory                                            | ✅      | ✅          | ✅    | ✅ (Nodes and Services) | ✅            | ✅         |
 | Network Inventory                                            | ✅      | ✅ (OVN)    | ❌    | ❌                      | ✅            | ❌          |
-| Storage Inventory                                            | ✅      | ❌          | ❌    | ❌                      | ❌            | ✅         |
+| Storage Inventory                                            | ✅      | ❌          | ❌    | ❌                      | ✅            | ✅         |
 | Events                                                       | ✅      | ✅          | ✅    | ✅                      | ✅            | ❌          |
-| Metrics                                                      | ✅      | ✅          | ✅    | ✅                      | ❌            | ❌          |
+| Metrics                                                      | ✅      | ✅          | ✅    | ✅                      | ✅            | ❌          |
 | Forensic Analysis (SmartState)                               | ✅      | ✅          | ❌    | ✅ (Nodes)              | ❌            | ❌          |
 
 | General Features                                             | vSphere | oVirt / RHV | SCVMM | OpenStack undercloud | IBM Power HMC | KubeVirt |
@@ -20,7 +20,7 @@
 | VM Event Timelines                                           | ✅      | ✅          | ✅    | ❌                   | ✅            | ❌          |
 | Infrastructure Event Timelines                               | ❌      | ❌          | ❌    | ✅                   | ❌            | ❌          |
 | Reporting                                                    | ✅      | ✅          | ✅    | ✅                   | ✅            | ✅         |
-| Right Sizing                                                 | ✅      | ✅          | ❌    | ❌                   | ❌            | ❌          |
+| Right Sizing                                                 | ✅      | ✅          | ❌    | ❌                   | ✅            | ❌          |
 | Chargeback by Allocation                                     | ✅      | ✅          | ✅    | ❌                   | ❌            | ❌          |
 | Chargeback by Usage                                          | ✅      | ✅          | ❌    | ❌                   | ❌            | ❌          |
 | Automation Work Flows                                        | ✅      | ✅          | ✅    | ❌                   | ❌            | ❌          |

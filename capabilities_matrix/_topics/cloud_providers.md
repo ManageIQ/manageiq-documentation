@@ -47,8 +47,8 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | -------------------------------------- | --- | ----- | --- | --------- | -------------------------------- | -------- | ------- | ------------ |
 | Instance Remote Console Access         | ❌  | ❌    | ❌  | ✅ (VNC)  | ✅ (NovaLink-managed hosts only) | ❌       | ❌      | ❌           |
 | Instance Power Operations              | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ✅           |
-| Instance Provisioning                  | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ❌           |
-|   - from Image to Instance             | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ❌           |
+| Instance Provisioning                  | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ✅           |
+|   - from Image to Instance             | ✅  | ✅    | ✅  | ✅        | ✅                               | ✅       | ✅      | ✅           |
 |   - from Image Snapshot to Instance    | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 |   - from Volume to Instance            | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |
 |   - from Volume Snapshot to Instance   | ❌  | ❌    | ❌  | ✅        | ❌                               | ❌       | ❌      | ❌           |

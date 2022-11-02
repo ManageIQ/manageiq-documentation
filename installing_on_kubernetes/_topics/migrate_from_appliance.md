@@ -16,74 +16,100 @@
   To publish the postgresql service on a node port, patch the service using `$ kubectl patch service/postgresql --patch '{"spec": {"type": "NodePort"}}'`.
   Now you will see the node port listed (31871 in this example) as well as the internal service port (5432).  This node port can be used along with the IP address of any node in the cluster to access the postgresql service.
 
-        $ oc get service/postgresql
-        NAME         TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
-        postgresql   NodePort   192.0.2.1    <none>        5432:31871/TCP   2m
+```bash
+$ oc get service/postgresql
+NAME         TYPE       CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
+postgresql   NodePort   192.0.2.1    <none>        5432:31871/TCP   2m
+```
 
 ### Collect data from the appliance
 1. Take a backup of the database
 
-        $ pg_dump -Fc -d vmdb_production > /root/pg_dump
+   ```bash
+   $ pg_dump -Fc -d vmdb_production > /root/pg_dump
+   ```
 
 2. Export the encryption key and Base64 encode it for the Kubernetes Secret.
 
-        $ vmdb && rails r "puts Base64.encode64(ManageIQ::Password.v2_key.to_s)"
+   ```bash
+   $ vmdb && rails r "puts Base64.encode64(ManageIQ::Password.v2_key.to_s)"
+   ```
 
 3. Get the region number
 
-        $ vmdb && rails r "puts MiqRegion.my_region.region"
+   ```bash
+   $ vmdb && rails r "puts MiqRegion.my_region.region"
+   ```
 
 4. Get the GUID of the server that you want to run as.
 
-        $ vmdb && cat GUID
+   ```bash
+   $ vmdb && cat GUID
+   ```
 
 ### Restore the backup into the kubernetes environment
 1. Create a YAML file defining the Custom Resource (CR). Minimally you'll need the following:
 
-        apiVersion: {{ site.data.product.operator_namespace }}/{{ site.data.product.operator_api_version }}
-        kind: {{ site.data.product.operator_custom_resource_kind }}
-        metadata:
-          name: <friendly name for you CR instance>
-        spec:
-          applicationDomain: <your application domain name>
-          databaseRegion: <region number from the appliance above>
-          serverGuid: <GUID value from appliance above>
+   ```yaml
+   apiVersion: {{ site.data.product.operator_namespace }}/{{ site.data.product.operator_api_version }}
+   kind: {{ site.data.product.operator_custom_resource_kind }}
+   metadata:
+     name: <friendly name for you CR instance>
+   spec:
+     applicationDomain: <your application domain name>
+     databaseRegion: <region number from the appliance above>
+     serverGuid: <GUID value from appliance above>
+   ```
 
 2. Create the CR in your namespace. Once created, the operator will create several additional resources and start deploying the app.
 
-        $ oc create -f <file name from above>
+   ```bash
+   $ oc create -f <file name from above>
+   ```
 
 3. Edit the app secret inserting the encryption key from the appliance. Replace the "encryption-key" value with the value we exported from the appliance above.
 
-        $ oc edit secret app-secrets
+   ```bash
+   $ oc edit secret app-secrets
+   ```
 
 4. Temporarily hijack the orchestrator by adding the following to the deployment:
 
-        $ kubectl patch deployment orchestrator -p '{"spec":{"template":{"spec":{"containers":[{"name":"orchestrator","command":["sleep", "1d"]}]}}}}'
+   ```bash
+   $ kubectl patch deployment orchestrator -p '{"spec":{"template":{"spec":{"containers":[{"name":"orchestrator","command":["sleep", "1d"]}]}}}}'
+   ```
 
 5. Shell into the orchestrator container:
 
-        $ oc rsh deploy/orchestrator
+   ```bash
+   $ oc rsh deploy/orchestrator
 
-        $ cd /var/www/miq/vmdb
-        $ source ./container_env
-        $ DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:drop db:create
+   $ cd /var/www/miq/vmdb
+   $ source ./container_env
+   $ DISABLE_DATABASE_ENVIRONMENT_CHECK=1 rake db:drop db:create
+   ```
 
 6. `oc rsh` into the database pod and restore the database backup
 
-        $ cd /var/lib/pgsql
-        # --- download your backup here ---
-        $ pg_restore -v -d vmdb_production <your_backup_file>
-        $ rm -f <your_backup_file>
-        $ exit
+   ```bash
+   $ cd /var/lib/pgsql
+   # --- download your backup here ---
+   $ pg_restore -v -d vmdb_production <your_backup_file>
+   $ rm -f <your_backup_file>
+   $ exit
+   ```
 
 7. Back in orchestrator pod from step 5:
 
-        $ rake db:migrate
-        $ exit
+   ```bash
+   $ rake db:migrate
+   $ exit
+   ```
 
 8. Delete the orchestrator deployment to remove the command override that we added above:
 
-        $ kubectl delete deployment orchestrator
+   ```bash
+   $ kubectl delete deployment orchestrator
+   ```
 
 Done! The orchestrator will start deploying the rest of the pods required to run the application.

@@ -2890,10 +2890,10 @@ To restore a database from a backup:
 
 2.  If you are restoring a database backup on a high availability
     environment, stop the replication manager service
-    (`repmgr10.service`). This is not required in other
+    (`repmgr13.service`). This is not required in other
     {{ site.data.product.title_short }} configurations.
 
-        # systemctl stop repmgr10.service
+        # systemctl stop repmgr13.service
 
 3.  Log in to the appliance as the **root** user.
 
@@ -2939,10 +2939,10 @@ To restore a database from a backup:
 
 16. If you are restoring a database backup on a high availability
     environment, start the replication manager service
-    (`repmgr10.service`). This is not required in other
+    (`repmgr13.service`). This is not required in other
     {{ site.data.product.title_short }} configurations.
 
-        # systemctl start repmgr10.service
+        # systemctl start repmgr13.service
 
 #### Performing a Binary Backup and Restoring the Database
 

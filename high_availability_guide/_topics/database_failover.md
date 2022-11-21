@@ -127,7 +127,7 @@ the standby database-only appliance, configure the following:
         If re-using the node’s identification number, select `y` to
         overwrite the existing node ID (this cannot be undone).
         Additionally, select `y` to overwrite and reconfigure the
-        replication settings in `/etc/repmgr.conf` when prompted.
+        replication settings in `/etc/repmgr/*/repmgr.conf` when prompted.
         
     8.  Confirm that the replication standby server configuration details are correct, and select `y` to apply the configuration.
 

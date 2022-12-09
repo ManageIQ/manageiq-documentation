@@ -57,6 +57,12 @@
 |   - Scale Up Nodes                                           | ❌      | ❌          | ❌    | ✅ (Compute nodes only) | ❌            | ❌          |
 |   - Nodes Policy Enforcement                                 | ❌      | ❌          | ❌    | ✅                      | ❌            | ❌          |
 |   - Nodes Evacuate                                           | ❌      | ❌          | ❌    | ✅                      | ❌            | ❌          |
+| Create Cloud Network                                         | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
+| Delete Cloud Network                                         | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
+| Create Cloud Subnet                                          | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
+| Delete Cloud Subnet                                          | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
+| Create Network Router                                        | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
+| Delete Network Router                                        | ❌      | ✅          | ❌    | ❌                      | ❌            | ❌          |
 
 #### Remote Consoles
 

@@ -117,7 +117,7 @@ returns the following structure:
   "product_info": {
     "name": "ManageIQ",
     "name_full": "ManageIQ",
-    "copyright": "Copyright (c) 2016 ManageIQ. Sponsored by Red Hat Inc.",
+    "copyright": "Copyright (c) 2014-present ManageIQ Authors.",
     "support_website": "http://www.manageiq.org",
     "support_website_text": "ManageIQ.org"
   },

@@ -5,11 +5,7 @@
 
 ## Obtaining an OpenShift Container Platform Management Token
 
-When deploying OpenShift using `openshift-ansible-3.0.20` (or later
-versions), the OpenShift Container Platform [service account](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html)
-and [roles](https://docs.openshift.com/container-platform/4.5/authentication/understanding-and-creating-service-accounts.html#service-accounts-granting-roles_understanding-service-accounts) required by {{ site.data.product.title_short }} are installed by default.
-
-For newer versions of OpenShift you have to create a service-account with the proper permissions for {{ site.data.product.title_short }}.
+First you have to create a service-account with the proper permissions for {{ site.data.product.title_short }}.
 
 1. Create a namespace for the service account
    ```
@@ -44,8 +40,7 @@ for a list of the default roles.
 
 Run the following to obtain the token needed to add an OpenShift Container Platform provider:
 
-    # oc sa get-token -n $project_name $service_account_name
-    eyJhbGciOiJSUzI1NiI...
+{% include provider-ocp-mgt-token.md %}
 
 ## Adding an OpenShift Container Platform Provider
 

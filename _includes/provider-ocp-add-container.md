@@ -45,7 +45,7 @@
         The **Hostname** must use a unique fully qualified domain name.
 
     3.  Enter the **API Port** of the provider. The default port is
-        `8443`.
+        `6443`.
 
     4.  Enter a token for your provider in the **Token** box.
 
@@ -61,36 +61,6 @@
 
     5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect
         to the OpenShift Container Platform provider.
-
-7.  In the **Alerts** endpoint tab optionally configure the alerts service:
-
-    1.  Select a service type, or leave disabled.  Prometheus alerts are only supported on OCP v3
-
-    2.  Select a **Security Protocol** method to specify how to
-        authenticate the service:
-
-          - **SSL**: Authenticate the provider securely using a trusted
-            Certificate Authority. Select this option if the provider
-            has a valid SSL certificate and it is signed by a trusted
-            Certificate Authority. No further configuration is required
-            for this option.
-
-          - **SSL trusting custom CA**: Authenticate the provider with a
-            self-signed certificate. For this option, copy your
-            provider’s CA certificate to the **Trusted CA
-            Certificates** box in PEM format.
-
-          - **SSL without validation**: Authenticate the provider
-            insecurely using SSL. (Not recommended)
-
-    3.  Enter the **Hostname** (or IPv4 or IPv6 address) or alert
-        **Route**.
-
-    4.  Enter the **API Port** if your Prometheus provider uses a
-        non-standard port for access. The default port is `443`.
-
-    5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can
-        connect to the alerts service.
 
 8. In the **Metrics** endpoint tab optionally configure the metrics service details:
 
@@ -128,7 +98,7 @@
 
         In order to find the hostname you can use the `oc get route` command.
 
-        On OCPv4 you can get the Prometheus route by running:
+        You can retrieve the Prometheus route by running:
 
         `oc get route prometheus-k8s -n openshift-monitoring`
 
@@ -140,14 +110,6 @@
         ```
 
         In this example you would use `prometheus-k8s-openshift-monitoring.ocp.example.com` as the metrics hostname.
-
-        On OCPv3 you can get the Hawkular route by running:
-
-        `oc get route hawkular-metrics -n openshift-infra`
-
-        Or the Prometheus route:
-
-        `oc get route prometheus -n openshift-metrics`
 
     4.  Enter the **API Port** if your Hawkular or Prometheus provider
         uses a non-standard port for access. The default port is `443`.

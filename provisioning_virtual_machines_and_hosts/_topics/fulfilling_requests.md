@@ -175,12 +175,31 @@ Grayed out items reflect values that are set in the class schema. These values c
 ##### Customizing Provisioning States
 
 The steps followed when provisioning a virtual machine or cloud instance are completed based on instances from the
-menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\] class. Depending on your environment you can remove, change, or add steps to the provisioning process. For example, if you are not integrating with IPAM or a CMDB, then you can remove
-those execution steps. ![6281](../images/6281.png)
+menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\] class. Depending on your environment you can leave the values blank in a provisioning process. For example, if you are not integrating with IPAM or a CMDB, then you can leave
+those values blank. ![6281](../images/6281.png)
 
 ##### Editing the Default State Instance
 
-1.  Navigate to menu:Automate\[Explorer\].
+1.  Navigate to menu:Automation \> Embedded Automate \> Explorer.
+
+2.  Click **Datastore** accordion. Select **Configuration** > Add a New Domain. You must fill the Name and Description values and click **Add** to create a custom 
+    domain.
+
+3. From the accordion menu, navigate to ManageIQ \> Cloud \> VM \>Provisioning \> StateMachines \> VMProvision_VM.
+
+   1.  Click on the drop-down menu, Configuration \> Copy this class. 
+   
+   2.  To add the class to the custom domain, specify the custom domain in the **To Domain** list and click Copy.
+
+4.  From the Datastore accordion, navigate to custom domain \> Cloud \> VM \> Provisioning \> StateMachines \> VMProvision_VM. 
+
+    1.  Click **Schema** tab. 
+    
+    2.  Select Configuration \> Edit selected Schema.
+
+5. You can remove, update, or insert a line in the Editing Class Schema panel.
+
+6.  
 
 2.  From the accordion menu, click menu:DOMAIN\[Cloud \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\].
 

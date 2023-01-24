@@ -175,8 +175,7 @@ Grayed out items reflect values that are set in the class schema. These values c
 ##### Customizing Provisioning States
 
 The steps followed when provisioning a virtual machine or cloud instance are completed based on instances from the
-menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\] class. Depending on your environment you can leave the values blank in a provisioning process. For example, if you are not integrating with IPAM or a CMDB, then you can leave
-those values blank. ![6281](../images/6281.png)
+menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\] class.
 
 ##### Editing the Default State Instance
 
@@ -185,7 +184,7 @@ those values blank. ![6281](../images/6281.png)
 2.  Click **Datastore** accordion. Select **Configuration** > Add a New Domain. You must fill the Name and Description values and click **Add** to create a custom 
     domain.
 
-3. From the accordion menu, navigate to ManageIQ \> Cloud \> VM \>Provisioning \> StateMachines \> VMProvision_VM.
+3.  From the accordion menu, navigate to ManageIQ \> Cloud \> VM \>Provisioning \> StateMachines \> VMProvision_VM.
 
    1.  Click on the drop-down menu, Configuration \> Copy this class. 
    
@@ -197,24 +196,14 @@ those values blank. ![6281](../images/6281.png)
     
     2.  Select Configuration \> Edit selected Schema.
 
-5. You can remove, update, or insert a line in the Editing Class Schema panel.
+5.  You can remove, update, or insert a line in the Editing Class Schema panel.
 
-6.  
+**Note**: Depending on your environment, you can leave the values blank in a provisioning process. For example, if you are not integrating with IPAM or a CMDB, then you can leave the values blank. ![6281](../images/6281.png)
 
-2.  From the accordion menu, click menu:DOMAIN\[Cloud \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\].
+6.  On the Datastore tree, navigate to custom domain \> Cloud \> VM \> Provisioning \> StateMachines \> VMProvision_VM. Click **Schema** tab and select 
+    Configuration \> Edit sequence.
 
-    **Note:**
-
-    **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-
-    This example uses the **Cloud** Namespace, but can also use the **Infrastructure** namespace.
-
-3.  Click ![1847](../images/1847.png)(**Configuration**), then ![1851](../images/1851.png)(**Edit this instance**).
-    ![6281](../images/6281.png)
-
-4.  For each step that you want to remove, clear the entries in the **Value**, **On Entry**, **On Exit**, and **On Error** columns.
-
-5.  Click **Save**.
+7.  Resequence the schema in the Edit of Class Schema Sequence panel.
 
 ##### Viewing the Status of a Provisioning Request
 

@@ -102,6 +102,8 @@ necessary to alter the `max_connections` setting.
 
 Configuring messaging is required for appliance setup. It is recommended to configure the broker on the same appliance where your database is configured
 
+**Note:** You can only have one kafka broker per region
+
 1. You can either configure the current appliance as a kafka broker, or point the
    appliance to an existing external kafka broker.
 
@@ -160,6 +162,8 @@ has a region configured with a database and messaging.
 
 13. Choose **Connect to an external messaging system** to connect to the external kafka broker located on the appliance with the external database
 
+    **Note:** You can only have one kafka broker per region
+
 14. Enter the necessary **Message Client Parameters** such as the hostname/IP and username/password
 
-14. Confirm the configuration if prompted.
+15. Confirm the configuration if prompted.

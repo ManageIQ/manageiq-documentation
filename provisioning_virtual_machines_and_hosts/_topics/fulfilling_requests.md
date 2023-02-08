@@ -184,7 +184,7 @@ menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMPr
 2.  Click **Datastore** accordion. Select **Configuration** > Add a New Domain. You must fill the Name and Description values and click **Add** to create a custom 
     domain.
 
-3.  From the accordion menu, navigate to ManageIQ \> Cloud \> VM \>Provisioning \> StateMachines \> VMProvision_VM.
+3.  From the accordion menu, navigate to Cloud \> VM \>Provisioning \> StateMachines \> VMProvision_VM.
 
    1.  Click on the drop-down menu, Configuration \> Copy this class. 
    

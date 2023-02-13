@@ -106,15 +106,26 @@ These are the procedural steps as of the time of writing. For the latest informa
                "s3:GetBucketLocation",
                "s3:GetObject",
                "s3:ListBucket",
-               "s3:PutObject"
+               "s3:PutObject",
+               "s3:GetBucketAcl"
              ],
-             "Resource": ["arn:aws:s3:::BUCKET_TO_UPLOAD_IMAGE","arn:aws:s3:::BUCKET_TO_UPLOAD_IMAGE/*"]
+             "Resource": ["arn:aws:s3:::wt-cp4mcm-bcdr","arn:aws:s3:::wt-cp4mcm-bcdr/*"]
            },
            {
              "Effect": "Allow",
              "Action": [
                "iam:CreateRole",
                "iam:PutRolePolicy"
+             ],
+             "Resource": "*"
+           },
+           {
+             "Effect": "Allow",
+             "Action": [
+               "ec2:ModifySnapshotAttribute",
+               "ec2:CopySnapshot",
+               "ec2:RegisterImage",
+               "ec2:Describe*"
              ],
              "Resource": "*"
            },
@@ -144,9 +155,11 @@ These are the procedural steps as of the time of writing. For the latest informa
                "ec2:ImportSnapshot",
                "ec2:DescribeImportImageTasks",
                "ec2:DescribeImportSnapshotTasks",
-               "ec2:CancelImportTask"
-             ],
-             "Resource": "*"
+               "ec2:CancelImportTask",
+               "ec2:DescribeImages",
+               "ec2:DescribeSnapshots"
+           ],
+           "Resource": "*"
            }
          ]
         }

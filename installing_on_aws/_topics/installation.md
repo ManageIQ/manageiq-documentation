@@ -109,7 +109,7 @@ These are the procedural steps as of the time of writing. For the latest informa
                "s3:PutObject",
                "s3:GetBucketAcl"
              ],
-             "Resource": ["arn:aws:s3:::wt-cp4mcm-bcdr","arn:aws:s3:::wt-cp4mcm-bcdr/*"]
+             "Resource": ["arn:aws:s3:::BUCKET_TO_UPLOAD_IMAGE","arn:aws:s3:::BUCKET_TO_UPLOAD_IMAGE/*"]
            },
            {
              "Effect": "Allow",

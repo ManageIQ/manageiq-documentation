@@ -10,26 +10,28 @@ If you want to tail the main `evm` logs then you can use `journalctl -f -t evm`.
 
 Here are some helpful examples:
 
-View all logs: `journalctl`
-View all logs, most recent first: `journalctl -r`
-View all logs since the last boot: `journalctl -b`
-View all logs from the previous boot: `journalctl -b -1`
-View all logs from a time range: `journalctl --since "1 hour ago"`
-View all logs with extra metadata: `journalctl --output verbose`
+Viewing:
+- View all logs: `journalctl`
+- View all logs, most recent first: `journalctl -r`
+- View all logs since the last boot: `journalctl -b`
+- View all logs from the previous boot: `journalctl -b -1`
+- View all logs from a time range: `journalctl --since "1 hour ago"`
+- View all logs with extra metadata: `journalctl --output verbose`
+- Tail all logs: `journalctl -f`
 
-Tail all logs: `journalctl -f`
-Tail all warnings: `journalctl -f -p warning`
-Tail all errors: `journalctl -f -p err`
-Tail all warnings and errors: `journalctl -f -p err -p warning`
+Filtering:
+- Filter warnings: `journalctl -f -p warning`
+- Filter errors: `journalctl -f -p err`
+- Filter warnings and errors: `journalctl -f -p err -p warning`
+- Logs for a specific unit: `journalctl -f -u manageiq-generic@51113329-8942-4a4c-98d6-1e532656c569.service`
+- Logs for a group of workers: `journalctl -f -u manageiq-generic.slice`
+- Logs matching a pattern: `journalctl -g '(Started|Stopping) EVM server''` (accepts perl compatible regular expressions)
+- Logs for a specific identifier: `journalctl -f -t evm`
 
-Logs for a specific unit: `journalctl -f -u manageiq-generic@51113329-8942-4a4c-98d6-1e532656c569.service`
-Logs for a group of workers: `journalctl -f -u manageiq-generic.slice`
-Logs matching a pattern: `journalctl -g '(Started|Stopping) EVM server''` (accepts perl compatible regular expressions)
-Logs for a specific identifier: `journalctl -f -t evm`
-
-Export to a file: `journalctl --output export > export.log`
-Rotate the current journal to an archive: `journalctl --rotate`
-Clear out all archived journals: `journalctl --vacuum-time=1s`
-Clear out journal archives over a day old: `journalctl --vacuum-time=1d`
+Other:
+- Export to a file: `journalctl --output export > export.log`
+- Rotate the current journal to an archive: `journalctl --rotate`
+- Clear out all archived journals: `journalctl --vacuum-time=1s`
+- Clear out journal archives over a day old: `journalctl --vacuum-time=1d`
 
 Almost all of these can be combined together where they don't conflict (e.g. `-f` can't be used with `-r`)

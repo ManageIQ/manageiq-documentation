@@ -64,7 +64,7 @@
 
 8. In the **Metrics** endpoint tab optionally configure the metrics service details:
 
-    1.  Select a service type (Prometheus or Hawkular) or leave disabled
+    1.  Select a service type (e.g.: Prometheus) or leave disabled
 
     2.  Select a **Security Protocol** method to specify how to
         authenticate the service:
@@ -79,16 +79,6 @@
             self-signed certificate. For this option, copy your
             provider’s CA certificate to the **Trusted CA
             Certificates** box in PEM format.
-
-            **Note:**
-
-            In OpenShift, the default deployment of the router generates
-            certificates during installation, which can be used with the
-            **SSL trusting custom CA** option. Connecting a Hawkular
-            endpoint with this option requires the CA certificate that
-            the cluster uses for service certificates, which is stored
-            in `/etc/origin/master/service-signer.crt` on the first
-            master in a cluster.
 
           - **SSL without validation**: Authenticate the provider
             insecurely using SSL. (Not recommended)
@@ -111,7 +101,7 @@
 
         In this example you would use `prometheus-k8s-openshift-monitoring.ocp.example.com` as the metrics hostname.
 
-    4.  Enter the **API Port** if your Hawkular or Prometheus provider
+    4.  Enter the **API Port** of your metrics endpoint
         uses a non-standard port for access. The default port is `443`.
 
     5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect

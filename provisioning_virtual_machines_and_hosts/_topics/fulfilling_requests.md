@@ -223,3 +223,8 @@ When a virtual machine or instance is created as a result of a provisioning requ
 
 From menu:Services\[Workloads\], click the virtual machine or instance
 that you want to view.
+
+You can now request log table in the **Services** > **Request** to display logs related to a particular request.
+
+**Note**: The table appears only if there are any logs to display. This table is sorted by the time, severity, and message.
+

@@ -19,6 +19,10 @@ The following options are available when making provisioning requests:
 
   - Schedule the provisioning ![2315](../images/2315.png)
 
+You can now request log table in the **Services** > **Request** to display logs related to a particular request.
+
+**Note**: The table appears only if there are any logs to display. This table is sorted by the time, severity, and message.
+
 ### Requirements for Provisioning Virtual Machines and Instances
 
 {{ site.data.product.title_short }} supports the provisioning of VMware ESX hypervisors. To

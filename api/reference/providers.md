@@ -264,10 +264,10 @@ Compound credentials set:
 
 When creating or updating providers, connection configurations can be
 set. Connection configurations can be used to specify resources such as
-an `amqp` event provider for OpenStack, adding Hawkular metrics, or an
+an `amqp` event provider for OpenStack, adding Prometheus metrics, or an
 authentication token.
 
-Hawkular metrics:
+Prometheus metrics:
 
 ``` json
 {
@@ -277,16 +277,16 @@ Hawkular metrics:
   "connection_configurations": [
     {
       "endpoint": {
-        "role"                  : "hawkular",
-        "hostname"              : "hawkular_host",
-        "port"                  : "1443",
+        "role"                  : "prometheus",
+        "hostname"              : "prometheus_host",
+        "port"                  : "443",
         "security_protocol"     : "ssl-without-validation",
         "certificate_authority" : "-----BEGIN CERTIFICATE-----",
         "verify_ssl": 0
       },
       "authentication": {
-        "role"     :  "hawkular",
-        "auth_key" :  "hawkular_auth_key"
+        "role"     :  "prometheus",
+        "auth_key" :  "prometheus_auth_key"
       }
     }
   ]

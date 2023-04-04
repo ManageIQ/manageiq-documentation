@@ -123,9 +123,6 @@ The complete updated settings is returned:
     “purge_window_size” : 500
   },
   ...
-  "hawkular_tenant_labels": {
-    "_hawkular_admin": "Hawkular Admin"
-  }
 }
 ```
 

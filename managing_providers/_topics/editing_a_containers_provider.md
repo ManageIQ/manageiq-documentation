@@ -51,7 +51,7 @@ Edit information about a provider such as the name, hostname, IP address or port
 
     5.  Click **Validate** to confirm that {{ site.data.product.title_short }} can connect to the OpenShift Container Platform provider.
 
-6.  Under **Endpoints** in the **Metrics** tab, configure the following for gathering capacity and utilization metrics for Hawkular or Prometheus based on the selection:
+6.  Under **Endpoints** in the **Metrics** tab, configure the following for gathering capacity and utilization metrics for Prometheus based on the selection:
 
     1.  Select a **Security Protocol** method to specify how to authenticate the provider:
 

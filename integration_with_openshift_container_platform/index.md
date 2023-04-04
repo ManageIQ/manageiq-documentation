@@ -11,10 +11,6 @@
 
 {% include_relative _topics/prerequisites.md %}
 
-## Enabling OpenShift Container Platform Metrics
-
-{% include_relative _topics/ocp-metrics.md %}
-
 ## Retrieving the OpenShift Container Platform Management Token
 
 {% include_relative _topics/ocp-retrieve-tokens.md %}

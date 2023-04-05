@@ -1,5 +1,7 @@
 ### Appliance Logging
 
+#### Viewing Logs
+
 On appliances logging is managed using the built-in systemd-journal system.  Journald uses database-like binary files to store log lines along with extensive metadata.
 
 There is a `journalctl` command-line utility which can be used to query the journal.  Documentation for journalctl can be found at https://man7.org/linux/man-pages/man1/journalctl.1.html
@@ -35,3 +37,15 @@ Other:
 - Clear out journal archives over a day old: `journalctl --vacuum-time=1d`
 
 Almost all of these can be combined together where they don't conflict (e.g. `-f` can't be used with `-r`)
+
+#### Collecting Logs
+
+If you have to collect logs from appliances for diagnostic purposes there are a couple utilities that are provided for this purpose.
+
+To collect logs from only a single appliance you can use `collect_current_logs.sh` or `collect_archive_logs.sh`.  To use these utilities you should ssh to the appliance and `cd /var/www/miq/vmdb/tools/collect_logs` directory.
+
+Now run `./collect_current_logs.sh` or `./collect_archive_logs.sh` depending on if you want the latest or all logs.
+
+The output will be in `/var/www/miq/vmdb/log/evm_current_HOSTNAME_TIMESTAMP.tar.xz` or `/var/www/miq/vmdb/log/evm_archive_HOSTNAME_TIMESTAMP.tar.xz`
+
+To collect logs from all appliances in the region over ssh we provide a `collect_all_logs` utility.  This iterates over all `MiqServer` records in the region and collects the output of `collect_current_logs.sh` rolled up into a single `.tar.xz` file.

@@ -1,6 +1,9 @@
 ## Enabling Capacity and Utilization data from IBM PowerVC Providers
 
-Complete the following procedure to enable Capacity and Utilization data for an
+
+In addition to enabling general
+[Capacity and Utilization Collection](../../general_configuration/index.html#capacity-and-utilization-collection),
+complete the following procedure to enable Capacity and Utilization data for an
 IBM PowerVC cloud provider in {{ site.data.product.title_short }}.
 
 Virtual Machines for which you want to monitor capacity and utilization data
@@ -23,5 +26,3 @@ your template.
 
 Any Virtual Machines created using that template will be able to transmit
 Capacity and Utilization data to {{ site.data.product.title_short }}.
-
-![PowerVC Compute Template](../../images/enable-perf-info-collection.png)

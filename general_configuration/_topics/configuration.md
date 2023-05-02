@@ -1874,10 +1874,11 @@ pre-defined account role can do, see [Roles](#roles).
 A user can exist in multiple groups. However, a group can only be
 assigned one account role.
 
-If a user belongs to multiple groups, you can change the user’s current
-group by navigating to the settings menu, clicking **Change Group**,
-then selecting the desired group. The **Current Group** affects quota
-and other settings for the user.
+If you belong to multiple groups, you can change the current group.
+The Current Group affects quota and other settings for the user,
+including permissions for controlling the tasks that you can complete and the data that you can view.
+To change the group, click the group name in the upper left of the screen,
+and select your preferred group from the listed groups.
 
 ![change group](../images/change_group.png)
 

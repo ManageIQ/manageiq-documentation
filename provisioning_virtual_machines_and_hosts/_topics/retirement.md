@@ -130,7 +130,7 @@ to change the number of days.
 
 #### Creating a Custom Button to Extend Retirement
 
-1.  Navigate to menu:Automate\[Customization\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Customization\].
 
 2.  Click the **Buttons** accordion.
 
@@ -156,7 +156,7 @@ to change the number of days.
 
 #### Changing the Number of Days to Extend Retirement
 
-1.  Navigate to menu:Automate\[Explorer\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 2.  Click menu:DOMAIN\[Cloud \> VM \> Retirement \> Email \>
     System \> Request\].

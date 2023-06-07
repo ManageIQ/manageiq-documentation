@@ -5,7 +5,7 @@
 After a request has been approved, {{ site.data.product.title_short }} then goes through the
 steps required to complete the request. The steps followed for a regular
 provision from a virtual machine to a virtual machine (not to a
-template) are found by navigating to menu:Automate\[Explorer\], then
+template) are found by navigating to menu:Automation\[Embedded Automate \> Explorer\], then
 listed under menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \>
 StateMachines \> VMProvision\_VM \> Provision VM from Template (template)\]. The value
 for each state shows where the instance resides in the **Datastore**
@@ -44,7 +44,7 @@ quota is set for the tenant or group as a whole.
 1.  Log in as a user with administrator or super administrator rights to
     the {{ site.data.product.title_short }} console.
 
-2.  Navigate to menu:Automate\[Explorer\].
+2.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 3.  Copy the menu:ManageIQ\[System \> CommonMethods \> QuotaStateMachine
     \> quota\] instance to a custom DOMAIN.
@@ -54,7 +54,7 @@ quota is set for the tenant or group as a whole.
 
     **Note:**
 
-    By default, quotas are applied to tenants and do not require any change in menu:Automate\[Explorer\].
+    By default, quotas are applied to tenants and do not require any change in menu:Automation\[Embedded Automate \> Explorer\].
 
 5.  Click ![1847](../images/1847.png)(**Configuration**),
     ![1851](../images/1851.png)(**Edit this instance**).

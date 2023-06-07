@@ -109,7 +109,7 @@ You can do this either as a global default or on a per template basis.
 ##### Enabling Global Defaults for Automatic Approval
 
 To enable a global set of default approval values, edit the defaults
-instance by navigating to menu:Automate\[Explorer\], then
+instance by navigating to menu:Automation\[Embedded Automate \> Explorer\], then
 menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines
 \> ProvisionRequestApproval\] in the accordion menu. The parameters in
 this instance are used by the methods in that same class. By default,
@@ -119,7 +119,7 @@ maximum number of virtual machines, set this field to 0. Set this field
 to -1 to force manual approval. At a minimum, you must change this
 parameter for all others to be validated.
 
-1.  Navigate to menu:Automate\[Explorer\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 2.  From the tree in the accordion menu, select menu:DOMAIN\[Cloud \> VM
     \> Provisioning \> StateMachines \> ProvisionRequestApproval
@@ -184,7 +184,7 @@ The thresholds for automatic approval for a specific template are set. The next 
 {{ site.data.product.title_short }} contains a set of Automate instances for provisioning. These Automate instances also include email fields to set the sender and recipient of provisioning notifications, such as requests. These fields
 are set to **evmadmin@company.com** as a default.
 
-1.  Navigate to menu:Automate\[Explorer\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 2.  Select an instance within the chosen class.
 

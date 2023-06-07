@@ -132,7 +132,7 @@ Catalog Item](#create-container-template-catalog-item).
 You can share service dialogs between appliances using the export and
 import features.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Customization\].
 
 2.  In the **Import/Export** accordion, click **Service Dialog
     Import/Export**.
@@ -146,7 +146,7 @@ import features.
 You can share service dialogs between appliances using the export and
 import features.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Customization\].
 
 2.  In the **Import/Export** accordion, click **Service Dialog
     Import/Export**.
@@ -289,7 +289,7 @@ A method is provided below that was created for the following scenario:
 
 Service methods have been split based on purpose.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 2.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
     StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
@@ -315,7 +315,7 @@ Service methods have been split based on purpose.
 
 ##### Creating an Instance in the Service Class
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 2.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
     StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
@@ -350,7 +350,7 @@ must be called before the provision job begins.
 
 Service methods have been split based on purpose.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
 
 2.  From the accordion menu, click the required service method.
 

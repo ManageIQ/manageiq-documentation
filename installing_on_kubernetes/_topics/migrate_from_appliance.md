@@ -32,7 +32,7 @@ postgresql   NodePort   192.0.2.1    <none>        5432:31871/TCP   2m
 2. Export the encryption key and Base64 encode it for the Kubernetes Secret.
 
    ```bash
-   $ vmdb && rails r "puts Base64.encode64(ManageIQ::Password.v2_key.to_s)"
+   $ vmdb && rails r "puts Base64.encode64(ManageIQ::Password.key.to_s)"
    ```
 
 3. Get the region number

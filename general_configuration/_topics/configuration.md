@@ -1469,7 +1469,7 @@ Table: workers
 
 #### Schedules
 
-##### Scheduling SmartState Analyses and Backups
+##### Scheduling SmartState Analyses
 
 From the **Schedules** area in **Settings**, you can schedule the
 analyses of virtual machines, hosts, clusters, and datastores to keep
@@ -1537,7 +1537,7 @@ To schedule a SmartState Analysis or Compliance Check:
         **All Hosts for Cluster**, **A single Host**, or **Global Filters**.
 
       - **Database Backup**: Under **Type**, displays **Network File System**, **Samba**, **Amazon AWS S3** and **OpenStack Swift**..
-        
+
 7.  By applying **Global Filters** within any of the above items, you
     can designate which virtual machines or hosts to analyze.
 
@@ -1565,6 +1565,64 @@ To schedule a SmartState Analysis or Compliance Check:
     Time Zone.
 
 12. Click **Add**.
+
+###### Modifying a Schedule
+
+To modify a schedule:
+
+1.  Browse to **Settings** > **Application Settings**.
+
+2.  Click on the **Settings** accordion, then click **Schedules**.
+
+3.  Click the schedule that you want to edit.
+
+4.  Click ![1847](../images/1847.png) (**Configuration**), and then click
+    ![1851](../images/1851.png) (**Edit this Schedule**).
+
+5.  Make the required changes.
+
+6.  Click **Save**.
+
+##### Importing and Exporting Schedules
+
+{{ site.data.product.title_short }} provides the ability to import and export
+schedules using the `import_export_schedules.rb` script:
+
+    ./var/www/miq/vmdb/tools/import_export_schedules.rb -h
+
+| Option                              | Description                        |
+| ----------------------------------- | ---------------------------------- |
+| \-u, --user=\<s\>                   | userid (default: admin)            |
+| \-d, --output-dir=\<s\>             | Output directory (default: ./)     |
+| \-s, --schedule=\<s\>               | Schedule name or id                |
+| \-o, --operation=\<s\>              | Export or import (default: export) |
+| \-y, --import-yaml=\<filename/uri\> | Imported yaml                      |
+| \-h, --help                         | Show this message                  |
+
+**Usage Example.**
+
+Import:
+
+    ./var/www/miq/vmdb/tools/import_export_schedules.rb -o import -y ./filename.yaml
+
+Export:
+
+    ./var/www/miq/vmdb/tools/import_export_schedules.rb -s 158
+
+Note that the `import_export_schedules.rb` script works for all types of
+schedules, including:
+
+  - Report
+
+  - Policy
+
+  - Alert
+
+  - SmartState Analysis
+
+  - Automation Task
+
+  - Service Template
 
 ### Access Control
 

@@ -1469,7 +1469,7 @@ Table: workers
 
 #### Schedules
 
-##### Scheduling SmartState Analyses and Backups
+##### Scheduling SmartState Analyses
 
 From the **Schedules** area in **Settings**, you can schedule the
 analyses of virtual machines, hosts, clusters, and datastores to keep
@@ -1537,8 +1537,6 @@ To schedule a SmartState Analysis or Compliance Check:
         **All Hosts for Cluster**, **A single Host**, or **Global Filters**.
 
       - **Database Backup**: Under **Type**, displays **Network File System**, **Samba**, **Amazon AWS S3** and **OpenStack Swift**..
-        See [Scheduling a Database Backup](#database_backup) for details
-        on scheduling a database backup.
 
 7.  By applying **Global Filters** within any of the above items, you
     can designate which virtual machines or hosts to analyze.
@@ -1565,93 +1563,6 @@ To schedule a SmartState Analysis or Compliance Check:
 
 11. Select a **Starting Time** based on a 24 hour clock in the selected
     Time Zone.
-
-12. Click **Add**.
-
-##### Scheduling a Database Backup
-
-**Note:**
-
-Set `wal_keep_segments` parameter to a value that ensures
-{{ site.data.product.title_short }} scheduled backups finish. Create a test backup
-using a value based on the calculation:
-
-**(\<pg-volume-free-space\>MB/4)/16MB**.
-
-Measure free space in MB and ensure the denominator matches in units.
-
-Setting `wal_keep_segments` to this value will cause the transaction log
-to occupy, at a minimum, one quarter of the current free space. Adjust
-your calculation accordingly upon successful testing.
-
-To set the `wal_keep_segments` value:
-
-1.  SSH to the database appliance
-
-2.  Access the database
-
-        # psql DBNAME USERNAME
-
-3.  Set the `wal_keep_segments` value
-
-        postgres=# ALTER SYSTEM SET wal_keep_segments = <value>;
-
-4.  Reload `wal_keep_segments`
-
-        postgres=# SELECT pg_reload_conf();
-
-On successful backup, revise the value for `wal_keep_segments` to save
-space based on transaction log size.
-
-To schedule a database backup:
-
-1.  Browse to **Settings** > **Application Settings**.
-
-2.  Click on the **Settings** accordion, then click **Schedules**.
-
-3.  Click ![1847](../images/1847.png) (**Configuration**), and ![plus
-    green](../images/plus_green.png)(**Add a new Schedule**).
-
-4.  In the **Basic Information** area, type in a **Name** and
-    **Description** for the schedule. ![2082](../images/2082.png)
-
-5.  Select **Active** to enable this backup schedule.
-
-6.  From the **Action** list, select **Database backup**.
-
-7.  In the **Database Backup Settings** area, select a type of server to
-    put the backups. You can either use **Network File System** or
-    **Samba**.
-
-      - If selecting **Samba**, enter the **Depot Name**, **URI**,
-        **User ID**, and a valid **Password**. Then, click **Validate**
-        to check the settings.
-
-      - If you choose **Network File System**, enter the **Depot Name**
-        and **URI**.
-
-8.  In **Run**, set the frequency of the analysis to run. There are
-    further options based on which **Run** option you choose.
-
-      - Click **Once** to have the backup run only one time.
-
-      - Click **Daily** to run the backup on a daily basis. You will be
-        prompted to select the number of days between each backup.
-
-      - Click **Hourly** to run the backup hourly. You will be prompted
-        to select the number of hours between each backup.
-
-9.  Select a **Time Zone**.
-
-    **Note:**
-
-    If you change the **Time Zone**, you will need to reset the stating
-    date and time.
-
-10. Type or select a date to begin the schedule in **Starting Date**.
-
-11. Select a **Starting Time** (UTC) based on a 24 hour clock in the
-    selected time zone.
 
 12. Click **Add**.
 
@@ -1708,8 +1619,6 @@ schedules, including:
   - Alert
 
   - SmartState Analysis
-
-  - Database Backup
 
   - Automation Task
 

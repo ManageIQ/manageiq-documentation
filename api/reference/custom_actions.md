@@ -254,11 +254,6 @@ returned are the common ones defined by the system:
       "href": "https://172.16.30.129/api/vms/173"
     },
     {
-      "name": "add_lifecycle_event",
-      "method": "post",
-      "href": "https://172.16.30.129/api/vms/173"
-    },
-    {
       "name": "add_event",
       "method": "post",
       "href": "https://172.16.30.129/api/vms/173"
@@ -307,11 +302,6 @@ and *ping* defined:
   "actions": [
     {
       "name": "edit",
-      "method": "post",
-      "href": "https://172.16.30.129/api/vms/173"
-    },
-    {
-      "name": "add_lifecycle_event",
       "method": "post",
       "href": "https://172.16.30.129/api/vms/173"
     },

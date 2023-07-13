@@ -27,7 +27,7 @@
 
 2. Export the encryption key and Base64 encode it for the Kubernetes Secret.
 
-        $ vmdb && rails r "puts Base64.encode64(ManageIQ::Password.v2_key.to_s)"
+        $ vmdb && rails r "puts Base64.encode64(ManageIQ::Password.key.to_s)"
 
 3. Get the region number
 

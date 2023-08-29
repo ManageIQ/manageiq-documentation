@@ -31,7 +31,8 @@ database. For instructions on how to configure an external database
 instead, see [Configuring an External
 Database](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/single/installing-red-hat-cloudforms-on-red-hat-enterprise-linux-openstack-platform#configuring_an_external_database).
 
-{% include configuration-db.md %}
+{% include internal-configuration-db.md %}
+{% include external-configuration-db.md %}
 
 ### Configuring General {{ site.data.product.title_short }} Settings
 

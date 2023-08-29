@@ -42,7 +42,8 @@ options for database configuration:
   - Configure the appliance to use an internal PostgreSQL database
   - Configure the appliance to use an external PostgreSQL database
 
-{% include configuration-db.md %}
+{% include internal-configuration-db.md %}
+{% include external-configuration-db.md %}
 
 ### Configure Messaging
 

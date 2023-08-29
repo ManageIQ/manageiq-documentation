@@ -8,7 +8,7 @@ reporting zone, where each zone provides a specific function. The
 appliances in these zones must be configured to use an external
 database.
 
-The `postgresql.conf` file used with {{ site.data.product.title_short }} databases requires
+The `postgresql.conf` file requires
 specific settings for correct operation. For example, it must correctly
 reclaim table space, control session timeouts, and format the PostgreSQL
 server log for improved system support. It is recommended that external databases use a
@@ -24,17 +24,15 @@ necessary to alter the `max_connections` setting.
 
 **Note:**
 
-  - {{ site.data.product.title_short }} requires PostgreSQL version 10.
+  - {{ site.data.product.title_short }} requires PostgreSQL version 13.
 
-  - Because the `postgresql.conf` file controls the operation of all
-    databases managed by a single instance of PostgreSQL, do not mix
-    {{ site.data.product.title_short }} databases with other types of databases in a single
-    PostgreSQL instance.
+  - `postgresql.conf` controls the operation of all databases managed by the
+   PostgreSQL instance, therefore it is not recommended to run other databases
+   on this PostgreSQL instance.
 
 1.  Start the appliance and open a terminal console.
 
-2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance
-    summary screen displays.
+2.  Enter the `appliance_console` command. The appliance console summary screen will be displayed.
 
 3.  Press **Enter** to manually configure settings.
 

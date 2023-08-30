@@ -23,16 +23,9 @@ through `virsh`:
 
 {% include configuration-advanced.md %}
 
-### Configuring a Database for {{ site.data.product.title_short }}
+### Configuring a Database
 
-{{ site.data.product.title_short }} supports the use of an internal or external database.
-The following instructions are suitable for configuring an *internal*
-database. For instructions on how to configure an external database
-instead, see [Configuring an External
-Database](https://access.redhat.com/documentation/en/red-hat-cloudforms/4.1/single/installing-red-hat-cloudforms-on-red-hat-enterprise-linux-openstack-platform#configuring_an_external_database).
-
-{% include internal-configuration-db.md %}
-{% include external-configuration-db.md %}
+{% include configuration-db.md %}
 
 ### Configuring General {{ site.data.product.title_short }} Settings
 

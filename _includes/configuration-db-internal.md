@@ -1,4 +1,4 @@
-### Configuring an Internal Database
+#### Configuring an Internal Database
 
 Before installing an internal database, add a disk to the infrastructure
 hosting your appliance. See the documentation specific to your

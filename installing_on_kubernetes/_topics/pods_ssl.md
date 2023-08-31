@@ -6,6 +6,7 @@ The certificates should all be signed by a CA and that CA certificate should be 
 ```sh
     oc create secret generic internal-certificates-secret \
       --from-file=root_crt=./certs/root.crt \
+      --from-file=root_key=./certs/root.key \
       --from-file=httpd_crt=./certs/httpd.crt \
       --from-file=httpd_key=./certs/httpd.key \
       --from-file=kafka_crt=./certs/kafka.crt \

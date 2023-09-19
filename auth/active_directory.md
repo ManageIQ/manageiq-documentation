@@ -110,7 +110,7 @@ include *domainname* for these attributes.
 
 =>  [ifp]
 =>  default_domain_suffix = example.com
-=>  allowed_uids = apache, root
+=>  allowed_uids = apache, root, manageiq
 =>  user_attributes = +mail, +givenname, +sn, +displayname, +domainname
 ```
 

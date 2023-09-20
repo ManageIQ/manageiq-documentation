@@ -70,6 +70,8 @@ Edit information about a provider such as the name, hostname, IP address or port
 
 7.  Under **Endpoints** in the **Alerts** tab, configure the following for Prometheus alerting from the cluster.
 
+    **Note:** Prometheus alerts are not supported on Red Hat OpenShift Container Platform version 4.
+
       - **SSL**: Authenticate the provider securely using a trusted Certificate Authority. Select this option if the provider has a valid SSL certificate and it is signed by a trusted Certificate Authority. No further configuration is required for this option.
 
       - **SSL trusting custom CA**: Authenticate the provider with a self-signed certificate. For this option, copy your provider’s CA certificate to the **Trusted CA Certificates** box in PEM format.

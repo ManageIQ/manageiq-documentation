@@ -17,8 +17,8 @@ The certificates should all be signed by a CA and that CA certificate should be 
       --from-file=postgresql_key=./certs/postgresql.key \
       --from-file=api_crt=./certs/api.crt \
       --from-file=api_key=./certs/api.key \
-      --from-file=remote-console_crt=./certs/remote-console.crt \
-      --from-file=remote-console_key=./certs/remote-console.key \
+      --from-file=remote_console_crt=./certs/remote-console.crt \
+      --from-file=remote_console_key=./certs/remote-console.key \
       --from-file=ui_crt=./certs/ui.crt \
       --from-file=ui_key=./certs/ui.key
 ```

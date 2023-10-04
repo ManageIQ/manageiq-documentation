@@ -15,6 +15,24 @@ Creating a backup of the appliance will be done using SSH or the console.
 
 3. Save and/or rename `/root/backup.tgz`
 
+# Scheduling Database Backups
+Scheduling a database backup using crontab and pg_dump.
+This example will create a backup file in `/tmp` named something like `db_dump20231009T145028.dump`.
+Before adding the cron job it would be best practice to mount an external storage and adjust the example accordingly.
+
+1. SSH into the appliance and edit the root user crontab `crontab -e`
+2. Press `i` to insert and add a line with the desired schedule to run the backup job. Examples:
+   ```bash
+     # Every hour on the hour
+     0 * * * * pg_dump -Fc vmdb_production > /tmp/db_dump$(date +\%Y\%m\%dT\%H\%M\%S).dump
+     # Every day at midnight
+     0 0 * * * pg_dump -Fc vmdb_production > /tmp/db_dump$(date +\%Y\%m\%dT\%H\%M\%S).dump
+     # Every week at midnight on Sunday
+     0 0 * * 0 pg_dump -Fc vmdb_production > /tmp/db_dump$(date +\%Y\%m\%dT\%H\%M\%S).dump
+   ```
+3. Press `Esc` to exit insert mode then `:wq` and hit `Enter` to write and quit.  If successful, it will output `crontab: installing new crontab`
+4. Done. If needed, logs can be found at `/var/log/cron`
+
 # Restore
 Restoring a backup of the appliance will be done using SSH or the console.
 

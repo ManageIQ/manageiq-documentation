@@ -3080,3 +3080,18 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
 #### Creating a Database Dump
 
 {% include database-dumps.md %}
+
+#### Enabling Events Syndication
+
+Events syndication can be enabled in the `Advanced` settings:
+
+1. Head over to `Settings -> Application Settings`
+2. Under the `Advanced` tab, find the following settings:
+```
+:event_streams:
+  :history:
+    :keep_events: 6.months
+    :purge_window_size: 1000
+  :syndicate_events: false
+```
+3. Set the `:syndicate_events:` value to `true`

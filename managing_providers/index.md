@@ -2,7 +2,6 @@
 ---
 
 # Managing Providers
-{: #managing_providers}
 
 {{ site.data.product.title_short }} can manage a variety of external environments, which are known as providers and managers. A provider or manager is any system that {{ site.data.product.title_short }} integrates with for the purpose of collecting data and performing operations.
 
@@ -49,6 +48,5 @@ For information on working with the resources that are contained by a provider o
 {% include_relative _topics/storage_providers.md %}
 
 ## Appendix
-{: #appendix}
 
 {% include app-self_signed_ca.md %}

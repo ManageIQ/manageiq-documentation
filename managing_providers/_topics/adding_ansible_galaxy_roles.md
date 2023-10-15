@@ -1,5 +1,4 @@
 ## Installing Roles on an Embedded Ansible Appliance
-{: #installing_roles_embedded_ansible_appliance}
 
 Roles are ways of automatically loading certain variable files, tasks, and handlers based on a known file structure. Grouping content by roles also allows for easy sharing of roles with other users. Install roles on a {{ site.data.product.title_short }} appliance with the Embedded Ansible server role activated to optimize playbooks.
 

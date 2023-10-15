@@ -1,13 +1,10 @@
 # Image Import Workflows
-{: #image_import_workflows}
 
 ## IBM PowerVC to IBM Power Systems Virtual Server
-{: #powervc_to_power_systems_virtual_server}
 
 The image import functionality allows you to easily move an image from your on-prem PowerVC environment to an off-prem Power Systems Virtual Server environment using {{ site.data.product.title_short }} web interface. The enablement of the workflow in {{ site.data.product.title_short }} requires you to perform certain preparations that are described in detail below.
 
 ### Preparing {{ site.data.product.title_short }} hosting server (required once):
-{: #preparing_hosting_server}
 
 The following commands are to be run on a server (or in a corresponding docker container) that is dedicated to hosting your {{ site.data.product.title_short }} instance.
 
@@ -15,7 +12,6 @@ The following commands are to be run on a server (or in a corresponding docker c
 
 
 ### Preparing IBM PowerVC Server (required once):
-{: #preparing_powervc_server}
 
 The following commands are to be run on a PowerVC server that is dedicated to supporting the image import workflow.
 
@@ -99,7 +95,6 @@ The following commands are to be run on a PowerVC server that is dedicated to su
         rm /home/sessions/image.ova
 
 ### Add a Cloud Object Storage provider in {{ site.data.product.title_short }}:
-{: #add_cloud_object_storage_provider}
 
 1. See the corresponding instructions [here](storage_providers/ibm_cloud_object_storage_managers.html).
 
@@ -111,12 +106,10 @@ The following commands are to be run on a PowerVC server that is dedicated to su
    **NOTE**: The "root" user as well as the workflow dedicated user of the PowerVC server from step [5](#preparing-ibm-powervc-server-required-once) would both be able to decrypt the Cloud Object Storage's credentials during the execution of the import workflow and therefore make sure to take this into consideration in your security setup.
 
 ### Add an IBM Power Systems Virtual Server provider in {{ site.data.product.title_short }}:
-{: #add_power_systems_virtual_server_provider}
 
 1. See the corresponding instructions [here](cloud_providers/ibm_power_systems_virtual_servers_providers.html).
 
 ### Add an IBM PowerVC provider in {{ site.data.product.title_short }}:
-{: #add_powervc_provider}
 
 1. See the corresponding instructions [here](cloud_providers/ibm_power_vc_providers.html).
 
@@ -129,20 +122,17 @@ The following commands are to be run on a PowerVC server that is dedicated to su
 
 
 ### Grant Image Import Permissions in {{ site.data.product.title_short }}:
-{: #grant_image_import_permissions}
 
 User performing image import needs a corresponding permission in {{ site.data.product.title_short }} in order to perform this operation. For granting permissions, log-in through an administrative account and navigate to `Settings -> Application Settings -> Access Control`. Make sure the user of your choice has permissions for `Import Cloud Template` action through the user's corresponding group and role.
 ![import_access_control](../images/import_access_control.png)
 
 ### Enable Embedded Ansible in {{ site.data.product.title_short }}:
-{: #enable_embedded_ansible}
 
 Currently the workflow event is queued as Embedded Ansible playbook upon request submission and as such the corresponding functionality has to be enabled in {{ site.data.product.title_short }} by navigating to: `Settings -> Application Settings -> Settings`
 
 ![Enable Embedded Ansible](../images/import_emb_ansible.png)
 
 ### Start the workflow
-{: #start_the_workflow}
 
 The workflow operates by exporting the image as an OVA file onto a PowerVC local storage, uploading it to the Cloud Object Storage bucket and then transferring it into Power Systems Virtual Server image registry. In order to initiate the workflow:
 
@@ -180,7 +170,6 @@ The workflow operates by exporting the image as an OVA file onto a PowerVC local
 14. Initiate the refreshing of the Power Systems Virtual Server provider upon workflow completion and wait for the newly imported image to appear.
 
 ### Troubleshooting
-{: #troubleshooting}
 
 * If the {{site.data.product.title_short}} UI shows no detailed error description then make sure to check the latest logs with `journalctl -t evm` or `oc logs` on a server or pod that hosts your {{site.data.product.title_short}} instance.
 

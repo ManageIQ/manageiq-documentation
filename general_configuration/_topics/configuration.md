@@ -3083,15 +3083,28 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
 
 #### Enabling Events Syndication
 
-Events syndication can be enabled in the `Advanced` settings:
+You can enable events syndication in the `Advanced` settings:
 
-1. Head over to `Settings -> Application Settings`
-2. Under the `Advanced` tab, find the following settings:
-```
-:event_streams:
-  :history:
-    :keep_events: 6.months
-    :purge_window_size: 1000
-  :syndicate_events: false
-```
-3. Set the `:syndicate_events:` value to `true`
+1. From the menu, go to **Settings** > **Application Settings**.
+
+2. Expand the **Settings** accordian. When you select the **Settings** accordion, you are automatically taken to the server list under **Zones**.
+
+3. Select the zone where the EVM server is located, and select the EVM server.
+
+4. Click the **Advanced** tab.
+
+   You can click the **Advanced** tab at the zone level to set advanced configuration settings for the entire zone. Or, you can click on the server, and then click the **Advanced** tab to set advanced configuration settings at the server (appliance) level, which overrides zone-level settings.
+
+4. Find the following configuration:
+
+   ```
+   :event_streams:
+     :history:
+       :keep_events: 6.months
+       :purge_window_size: 1000
+     :syndicate_events: false
+   ```
+
+5. Set the value for `:syndicate_events:` to `true`.
+
+6. Click **Save**.

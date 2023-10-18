@@ -60,6 +60,15 @@ To add a repository, complete the following steps:
 
 6. Select the appropriate SCM (Source Control Management) credentials from the **SCM Credentials** dropdown menu. These are the credentials for how you access your specified Git repository, and are used in different ways within embedded workflows.
 
+   If you are adding a repository that is not publicly available, add an SCM (source control) credential for accessing the repository. 
+
+   Source Control credentials have several attributes that can be configured:
+
+   - **Username**: The username to use in conjunction with the source control system.
+   - **Password**: The password to use in conjunction with the source control system.
+   - **Private key passphrase**: If the SSH private key used is protected by a passphrase, you can configure a key passphrase for the private key.
+   - **Private Key**: Copy or drag and drop the actual SSH Private Key to be used to authenticate the user to the source control system by using SSH.
+
 7. Provide a branch name in the **SCM Branch** field for the branch that you want to pull.
 
 8. Click **Save**. Upon saving, the repository is imported and scanned for any included workflows (any Amazon States Language `.asl` files).
@@ -67,13 +76,6 @@ To add a repository, complete the following steps:
    ![Repository details](../images/embedworkflow_addnewrepository_details.png)
 
 9. Confirm that the synchronization with your repository is successful by viewing the list of workflows that are detected for the repository.
-
-**Note:** If you are adding a repository that is not publicly available, add an SCM (source control) credential for accessing the repository. This credential is separate from the workflow credentials that you configure in the procedure for adding the repository. Source Control credentials have several attributes that can be configured:
-
-   - **Username**: The username to use in conjunction with the source control system.
-   - **Password**: The password to use in conjunction with the source control system.
-   - **Private key passphrase**: If the SSH private key used is protected by a passphrase, you can configure a key passphrase for the private key.
-   - **Private Key**: Copy or drag and drop the actual SSH Private Key to be used to authenticate the user to the source control system by using SSH.
 
 ### Viewing the List of Workflows in a Repository
 
@@ -154,6 +156,15 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
    Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what happens for that Task state. For example, a docker container can run to clone a template.
 
 2. Build the docker containers that are required for the workflow.
+
+<!--
+##### Add docker images to a podified deployment and appliances (workflow registries)
+Include:
+* Building docker containers (reference Docker documentation)
+* Push to a registry
+* Add the registry to the appliance/kubernetes system.
+
+-->
 
 #### Example: Provisioning Workflow
 

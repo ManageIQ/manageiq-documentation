@@ -128,7 +128,7 @@ Each credential type that is used by {{ site.data.product.title_short }} for emb
 
 ##### SCM
 
-SCM (source control) credentials are used with Projects to clone and update local source code repositories from a remote revision control system such as Git, Subversion, or Mercurial. Source Control credentials have several attributes that can be configured:
+SCM (source control Management) credentials are used with Projects to clone and update local source code Git repositories. Source Control credentials have several attributes that can be configured:
 
 - **Username**: The username to use in conjunction with the source control system.
 

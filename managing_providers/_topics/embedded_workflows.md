@@ -1,20 +1,8 @@
 ## Embedded Workflows
-{: #embedded_workflows}
 
 *Embedded Workflows* provide the capability to simplify service catalog creation and improve the overall service catalog experience through a step-based automation system. Each step within a workflow runs a container to complete processes. Workflows are imported from GitHub repository content into {{ site.data.product.title_short }} where they are made available for users to run.
 
 *Embedded Workflows* are an alternative to the *Embedded Automate* capability for authoring and running automation. With *Embedded Workflows*, you can continue to use the *Embedded Automate* feature for service catalog creation and management.
-
-### Enabling Embedded Workflows
-
-The Embedded Workflows functionality is not enabled and available by default. A user with administrator rights must enable the functionality by turning on a prototype flag. If you are an administrative user, you can complete the following steps to enable the functionality:
-
-1. From the {{site.data.product.title_short }} UI, click **Settings** > **Applications Settings**. Then, click the **Advanced** tab.
-2. On the *Advanced* tab, search for `ems_workflows` within the *Prototype* section. For the entry, set the `enabled` setting to `true`.
-3. Click **Save**.
-4. Restart the application.
-
-When the application is restarted, the *Embedded Workflows* functionality is enabled. <!-- This functionality reuses existing API. -->
 
 ### Embedded Workflows UI additions
 

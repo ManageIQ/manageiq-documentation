@@ -149,7 +149,7 @@ SCM (source control) credentials are used with Projects to clone and update loca
 
 ### Authoring a workflow
 
-When the *Embedded Workflows* feature is enabled, you can configure workflows for use in the following areas during service catalog creation:
+You can configure workflows for use in the following areas during service catalog creation:
 
 - **Dynamic dialog fields** - You (or your users) can attach workflows to a field so that the field becomes populated or refreshed with the results from the running of the workflow.
 - **Service Entry Points** - You (or your users) can set and use workflows for provisioning, reconfiguring, and retiring services.
@@ -162,7 +162,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
 
-   Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For each of the steps in the workflow, a docker container is called. The container defines what happens for that state. For example, a docker container can run to clone a template.
+   Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what happens for that Task state. For example, a docker container can run to clone a template.
 
 2. Build the docker containers that are required for the workflow.
 
@@ -175,7 +175,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
   "States": {
     "CloneTemplate": {
       "Type": "Task",
-      "Resource": "docker://docker.io/agrare/clone-template:latest",
+      "Resource": "docker://docker.io/manageiq/workflows-examples-clone-template:latest",
       "Next": "CheckTaskComplete",
       "Credentials": {
         "api_user.$": "$.api_user",
@@ -193,7 +193,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
     "CheckTaskComplete": {
       "Type": "Task",
-      "Resource": "docker://docker.io/agrare/check-task-complete:latest",
+      "Resource": "docker://docker.io/manageiq/workflows-examples-check-task-complete:latest",
       "Next": "PollTaskComplete",
       "Credentials": {
         "vcenter_user.$": "$.vcenter_user",
@@ -235,7 +235,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
     "PowerOnVM": {
       "Type": "Task",
-      "Resource": "docker://docker.io/agrare/power-on-vm:latest",
+      "Resource": "docker://docker.io/manageiq/workflows-examples-power-on-vm:latest",
       "Next": "SuccessState",
       "Credentials": {
         "vcenter_user.$": "$.vcenter_user",
@@ -279,7 +279,7 @@ When workflows are available, you can view the details for each workflow, such a
 
 ### Creating a Service Dialog using an Embedded Workflow
 
-With Embedded Workflows enabled, fields that are *Dynamic* offer the choice of *Embedded Workflows* in addition to the original *Embedded Automate*.
+Fields that are *Dynamic* offer the choice of *Embedded Workflows* in addition to the original *Embedded Automate*.
 
 Dialogs are the part of {{ site.data.product.title_short }} that you interface with when you order services.
 
@@ -297,14 +297,14 @@ Dialogs are the part of {{ site.data.product.title_short }} that you interface w
 
 ### Creating Service Catalog Items using an Embedded Workflow
 
-You can create a generic service catalog item that uses a created dynamic dialog and an embedded workflow. To use previously set up workflows and to view a service catalog item, you need to *order* the item. Complete the following steps to order a service catalog item that uses embedded workflows:
+You can create a generic service catalog item that uses an embedded workflow. To use previously set up workflows and to view a service catalog item, you need to *order* the item. Complete the following steps to order a service catalog item that uses embedded workflows:
 
 1. Click **Services** > **Catalogs**.
 2. The *Service Catalogs* section opens and you see the existing Service Catalogs. If you want to order one, click it and then **Order**.
 
    ![Service Dialog Dynamic](../images/embedworkflow_orderservicecatalog.png)
 
-   Ensure that the *VM Name*, *Provider* and *Template* fields are correct, and then click **Submit**.
+   Complete the fields for your specified dialog. Then, click **Submit**.
 
 3. If you want to know more about the item first or to edit it, click the **Catalogs** section, and then click that item that is created. Click **Configuration** > **Edit this item**. For instance, one area that you can edit is the three service entry point fields. One field is for *Provisioning*, one for *Reconfiguring* and one for *Retirement*. You can now set these fields to *Embedded Workflows* instead of *Embedded Automate*. You can set the point field to the workflow that you want to use for any, or all, of the three service entry points.
 

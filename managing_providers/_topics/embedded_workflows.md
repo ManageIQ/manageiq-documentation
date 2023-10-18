@@ -38,7 +38,7 @@ In addition to the *Embedded Workflows* UI, **Embedded Workflows** can also be u
 
 * Service Catalog Items
 
-   The provisioning, reconfigure, and retirement entry points include the option for using **Embedded Workflows** or **Embedded Automate**.
+   The provisioning, reconfigure, and retirement entry points include the option for using **Embedded Workflows** or **Embedded Automate**.  You can set the point field to the workflow that you want to use for any, or all, of the three service entry points.
 
    ![Entry Points options](../images/embedworkflow_entrypointsembedded.png)
 
@@ -60,7 +60,7 @@ To add a repository, complete the following steps:
 
 6. Select the appropriate SCM (Source Control Management) credentials from the **SCM Credentials** dropdown menu. These are the credentials for how you access your specified Git repository, and are used in different ways within embedded workflows.
 
-   If you are adding a repository that is not publicly available, add an SCM (source control) credential for accessing the repository. 
+   If you are adding a repository that is not publicly available, add an SCM (source control) credential for accessing the repository.
 
    Source Control credentials have several attributes that can be configured:
 
@@ -274,7 +274,11 @@ Once a workflow is imported, you can view the details, such as to verify the pay
 
    ![Graph view](../images/embedworkflow_graphView.png)
 
-3. If your workflow has credential fields, then create a workflow credential for each of the fields. Then, map the workflow credential to the workflow.
+3. If your workflow has credential fields, create a workflow credential for each of the fields. For more information about creating a credential, see [Adding Credentials](#adding-credentials).
+
+4. Map any workflow credentials to the workflow.
+
+   <!-- Substeps required. -->
 
 ### Creating a Service Dialog using an Embedded Workflow
 
@@ -305,7 +309,7 @@ You can create a generic service catalog item that uses an embedded workflow. To
 
    Complete the fields for your specified dialog. Then, click **Submit**.
 
-3. If you want to know more about the item first or to edit it, click the **Catalogs** section, and then click that item that is created. Click **Configuration** > **Edit this item**. For instance, one area that you can edit is the three service entry point fields. One field is for *Provisioning*, one for *Reconfiguring* and one for *Retirement*. You can now set these fields to *Embedded Workflows* instead of *Embedded Automate*. You can set the point field to the workflow that you want to use for any, or all, of the three service entry points.
+3. If you want to know more about the item first or to edit it, click the **Catalogs** section, and then click that item that is created. Click **Configuration** > **Edit this item**.
 
    ![Entry Points Dynamic](../images/embedworkflow_entrypointsembedded.png)
 

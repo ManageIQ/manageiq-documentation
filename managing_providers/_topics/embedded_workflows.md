@@ -61,15 +61,13 @@ To add a repository, complete the following steps:
 
    ![Add a repository](../images/embedworkflow_addnewrepository.png)
 
-2. Enter *Name*, *Description*, and a *GitHub URL*.
+2. Enter the repository name in the **Name** field.
 
-3. Provide a Repository Name in the **Name** field.
+3. Add a description for the repository in the **Description** field.
 
-4. Add a description for the repository in the **Description** field.
+4. Enter a Git repository URL for the repository in the **GitHub URL** field. The Git repository URL does not need to be a GitHub repository.
 
-5. Add a **GitHub URL** for the repository.
-
-6. Select the appropriate SCM (Source Control) credentials from the **SCM Credentials** dropdown menu. These are the credentials for how you access GitHub, and are used in different ways within embedded workflows.
+6. Select the appropriate SCM (Source Control Management) credentials from the **SCM Credentials** dropdown menu. These are the credentials for how you access your specified Git repository, and are used in different ways within embedded workflows.
 
 7. Provide a branch name in the **SCM Branch** field for the branch that you want to pull.
 

@@ -28,11 +28,9 @@ For the *Embedded Workflows* feature, the following pages are available in the U
 
 - **Credentials**
 
-   Credentials are used by {{ site.data.product.title_short }} for authentication when running embedded workflows against machines, synchronizing with inventory sources, and importing project content from a version control system.
+   Credentials are used by {{ site.data.product.title_short }} for any authentication that is required when running embedded workflows, and when importing workflows from a version control system.
 
    This page lists, and provides a summary of, the credentials for accessing and using embedded workflows. From this page, you can add, update, and delete credentials.
-
-   These credentials are tied to the provider instance, and are used by the workflow when it runs. The credential types are defined by the provider.
 
 #### UI Field Updates
 {: #field_updates}

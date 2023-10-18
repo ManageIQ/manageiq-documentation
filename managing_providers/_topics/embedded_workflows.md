@@ -4,11 +4,7 @@
 
 *Embedded Workflows* are an alternative to the *Embedded Automate* capability for authoring and running automation. With *Embedded Workflows*, you can continue to use the *Embedded Automate* feature for service catalog creation and management.
 
-### Embedded Workflows UI additions
-
-For the *Embedded Workflows* feature, **Automation** > **Embedded Workflows** pages are available for use in the UI. In addition to the *Embedded Workflows* UI, you can select **Embedded Workflows** as a dropdown option along with **Embedded Automate** for various fields on other UI pages.
-
-#### Embedded Workflow UI
+### Embedded Workflows UI
 
 For the *Embedded Workflows* feature, the following pages are available in the UI, which you can use to access and work with workflows. To view these pages, go to **Automation** > **Embedded Workflows** and select the page.
 
@@ -32,20 +28,17 @@ For the *Embedded Workflows* feature, the following pages are available in the U
 
    This page lists, and provides a summary of, the credentials for accessing and using embedded workflows. From this page, you can add, update, and delete credentials.
 
-#### UI Field Updates
-{: #field_updates}
-
-Existing integration points are updated for the service catalog creation and management process to support choosing to use **Embedded Workflows** or **Embedded Automate**. This choice can be set when working with service catalog items and service dialogs.
+In addition to the *Embedded Workflows* UI, **Embedded Workflows** can also be used in Service Dialogs for dynamic dialog fields and with Service Catalog Items for provisioning, reconfiguration, and retirement entrypoints.
 
 * Service Dialog
 
-   When creating a service dialog, fields that are dynamic now include the option for using **Embedded Workflows** or **Embedded Automate**.
+   When creating a service dialog, fields that are dynamic include the option for using **Embedded Workflows** or **Embedded Automate**.
 
    ![Service Dialog options](../images/embedworkflow_servicedialogdynamic.png)
 
 * Service Catalog Items
 
-   The provisioning, configuring, or retiring entry points now include the option for using **Embedded Workflows** or **Embedded Automate**.
+   The provisioning, reconfigure, and retirement entry points include the option for using **Embedded Workflows** or **Embedded Automate**.
 
    ![Entry Points options](../images/embedworkflow_entrypointsembedded.png)
 

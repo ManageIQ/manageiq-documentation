@@ -12,7 +12,7 @@ For the *Embedded Workflows* feature, **Automation** > **Embedded Workflows** pa
 
 For the *Embedded Workflows* feature, the following pages are available in the UI, which you can use to access and work with workflows. To view these pages, go to **Automation** > **Embedded Workflows** and select the page.
 
-![Embedded Workflow UI](../images/embedworkflow_ui.png){: caption="Embedded Workflow UI" caption-side="bottom"}
+![Embedded Workflow UI](../images/embedworkflow_ui.png)
 
 - **Workflows**
 
@@ -43,13 +43,13 @@ Existing integration points are updated for the service catalog creation and man
 
    When creating a service dialog, fields that are dynamic now include the option for using **Embedded Workflows** or **Embedded Automate**.
 
-   ![Service Dialog options](../images/embedworkflow_servicedialogdynamic.png){: caption="Service Dialog options" caption-side="bottom"}
+   ![Service Dialog options](../images/embedworkflow_servicedialogdynamic.png)
 
 * Service Catalog Items
 
    The provisioning, configuring, or retiring entry points now include the option for using **Embedded Workflows** or **Embedded Automate**.
 
-   ![Entry Points options](../images/embedworkflow_entrypointsembedded.png){: caption="Entry Points options" caption-side="bottom"}
+   ![Entry Points options](../images/embedworkflow_entrypointsembedded.png)
 
 ### Adding an Embedded Workflows Repository
 
@@ -59,7 +59,7 @@ To add a repository, complete the following steps:
 
 1. Click  **Automation** > **Embedded Workflows** > **Repositories** > **Configuration** > **Add New Repository**.
 
-   ![Add a repository](../images/embedworkflow_addnewrepository.png){: caption="Add a repository" caption-side="bottom"}
+   ![Add a repository](../images/embedworkflow_addnewrepository.png)
 
 2. Enter *Name*, *Description*, and a *GitHub URL*.
 
@@ -75,7 +75,7 @@ To add a repository, complete the following steps:
 
 8. Click **Save**. Upon saving, the repository is imported and scanned for any included workflows.
 
-   ![Repository details](../images/embedworkflow_addnewrepository_details.png){: caption="Repository details" caption-side="bottom"}
+   ![Repository details](../images/embedworkflow_addnewrepository_details.png)
 
 9. Confirm that the synchronization with your repository is successful by viewing the list of workflows that are detected for the repository.
 
@@ -91,7 +91,7 @@ To add a repository, complete the following steps:
 When your repository is added, the repository shows in the *Repositories* list. You can now click the entry for the repository to open it so that you can scan for existing workflows.
 If multiple workflows are found, click the corresponding number to view the list of workflows, **3** in this case.
 
-   ![Repository workflows](../images/embedworkflow_workflownumbers.png){: caption="Repository workflows" caption-side="bottom"}
+   ![Repository workflows](../images/embedworkflow_workflownumbers.png)
 
 Alternatively, click **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the workflows list.
 
@@ -370,11 +370,11 @@ When workflows are available, you can view the details for each workflow, such a
 
 2. Click a workflow. The default *Text* view of the workflow opens where you see the code content.
 
-   ![Text view](../images/embedworkflow_textview.png){: caption="Text view" caption-side="bottom"}
+   ![Text view](../images/embedworkflow_textview.png)
 
    Alternatively, click the **Graph** tab to see a graph of the same data.
 
-   ![Graph view](../images/embedworkflow_graphView.png){: caption="Graph view" caption-side="bottom"}
+   ![Graph view](../images/embedworkflow_graphView.png)
 
 3. If your workflow has credential fields, then create a workflow credential for each of the fields. Then, map the workflow credential to the workflow.
    <!-- Add substeps from development - A.G to provide.-->
@@ -393,7 +393,7 @@ Dialogs are the part of {{ site.data.product.title_short }} that you interface w
 
 4. Click the **Options** tab. You can now select between *Embedded Automate* and *Embedded Workflows* in the Automation field.
 
-   ![Dialog Dynamic](../images/embedworkflow_servicedialogdynamic.png){: caption="Dialog Dynamic" caption-side="bottom"}
+   ![Dialog Dynamic](../images/embedworkflow_servicedialogdynamic.png)
 
    If you choose **Embedded Workflows**, you can select the workflow to run. Complete the fields, such as *Template* (using drag and drop functionality) and click **Save** when you complete the form. The workflow now runs and refreshes the fields with data from the workflow. In this way fields are chained together. When you *order* a service catalog, the workflow runs in the background to refresh the template.
 
@@ -404,13 +404,13 @@ You can create a generic service catalog item that uses a created dynamic dialog
 1. Click **Services** > **Catalogs**.
 2. The *Service Catalogs* section opens and you see the existing Service Catalogs. If you want to order one, click it and then **Order**.
 
-   ![Service Dialog Dynamic](../images/embedworkflow_orderservicecatalog.png){: caption="Service Dialog Dynamic" caption-side="bottom"}
+   ![Service Dialog Dynamic](../images/embedworkflow_orderservicecatalog.png)
 
    Ensure that the *VM Name*, *Provider* and *Template* fields are correct, and then click **Submit**.
 
 3. If you want to know more about the item first or to edit it, click the **Catalogs** section, and then click that item that is created. Click **Configuration** > **Edit this item**. For instance, one area that you can edit is the three service entry point fields. One field is for *Provisioning*, one for *Reconfiguring* and one for *Retirement*. You can now set these fields to *Embedded Workflows* instead of *Embedded Automate*. You can set the point field to the workflow that you want to use for any, or all, of the three service entry points.
 
-   ![Entry Points Dynamic](../images/embedworkflow_entrypointsembedded.png){: caption="Entry Points Dynamic" caption-side="bottom"}
+   ![Entry Points Dynamic](../images/embedworkflow_entrypointsembedded.png)
 
 4. When you complete all your edits, click **Save**.
 5. Confirm that you can order the service catalog item and that it runs the workflows to drive the dynamic dialog dropdown.

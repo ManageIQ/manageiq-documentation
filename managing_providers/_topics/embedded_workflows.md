@@ -6,11 +6,11 @@
 
 ### Embedded Workflows UI additions
 
-When the *Embedded Workflows* functionality is enabled, new **Automation** > **Embedded Workflows** pages become available for use in the UI. In addition to the *Embedded Workflows* UI, you can now select **Embedded Workflows** as a dropdown option along with **Embedded Automate** for various fields on other UI pages.
+For the *Embedded Workflows* feature, **Automation** > **Embedded Workflows** pages are available for use in the UI. In addition to the *Embedded Workflows* UI, you can select **Embedded Workflows** as a dropdown option along with **Embedded Automate** for various fields on other UI pages.
 
 #### Embedded Workflow UI
 
-The new *Embedded Workflows* functionality adds the following pages to the UI, which you can use to access and work with workflows. To view these pages, go to **Automation** > **Embedded Workflows** and select the page.
+For the *Embedded Workflows* feature, the following pages are available in the UI, which you can use to access and work with workflows. To view these pages, go to **Automation** > **Embedded Workflows** and select the page.
 
 ![Embedded Workflow UI](../images/embedworkflow_ui.png){: caption="Embedded Workflow UI" caption-side="bottom"}
 

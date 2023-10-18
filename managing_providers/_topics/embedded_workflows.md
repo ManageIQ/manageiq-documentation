@@ -77,6 +77,12 @@ To add a repository, complete the following steps:
 
 9. Confirm that the synchronization with your repository is successful by viewing the list of workflows that are detected for the repository.
 
+To view the added repositories, return to the **Automation** > **Embedded Workflows** > **Repositories** page. The list of repositories is displayed. To view a summary of details for a repository, click the repository to open the *Summary* page for that repository.
+
+If you need to edit a repository, select the repository from the list of repositories. Then, click **Configuration** > **Edit this Repository**. After you complete your edits, click **Save**.
+
+If you need to delete a repository, select the repository from the list of repositories. Then, click **Configuration** > **Remove this Repository from Inventory**.
+
 ### Viewing the List of Workflows in a Repository
 
 When your repository is added, the repository shows in the *Repositories* list. You can now click the entry for the repository to open it so that you can view the imported workflows.
@@ -121,6 +127,12 @@ Credentials are used by {{ site.data.product.title_short }} for any authenticati
 4.  Select the **Credential Type**. More fields appear depending on the type chosen.
 
 5.  Click **Add**.
+
+To view the added credentials, return to the **Automation** > **Embedded Workflows** > **Credentials** page. The list of credentials is displayed. To view a summary of details for a credential, click the credential to open the *Summary* page for that credential.
+
+If you need to edit a credential, select the credential from the list of credentials. Then, click **Configuration** > **Edit this Credential**. After you complete your edits, click **Save**.
+
+If you need to delete a credential, select the credential from the list of credentials. Then, click **Configuration** > **Remove selected Credentials from Inventory**.
 
 #### Credential Types
 

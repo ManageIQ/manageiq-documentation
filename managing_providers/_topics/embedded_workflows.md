@@ -19,7 +19,7 @@ For the *Embedded Workflows* feature, the following pages are available in the U
    This UI page includes a summary of the available workflows. You can use different views to review the workflows:
 
    - Text view, which is the raw representation (JSON or YAML) of the Amazon State Languages (ASL) code.
-   - Graph view, which shows an SVG visual representation of the workflow structure.
+   - Graph view, which shows a visual representation of the workflow structure.
 
 - **Repositories**
 

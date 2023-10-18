@@ -62,7 +62,7 @@ To add a repository, complete the following steps:
 
 7. Provide a branch name in the **SCM Branch** field for the branch that you want to pull.
 
-8. Click **Save**. Upon saving, the repository is imported and scanned for any included workflows.
+8. Click **Save**. Upon saving, the repository is imported and scanned for any included workflows (any Amazon States Language `.asl` files).
 
    ![Repository details](../images/embedworkflow_addnewrepository_details.png)
 
@@ -77,12 +77,12 @@ To add a repository, complete the following steps:
 
 ### Viewing the List of Workflows in a Repository
 
-When your repository is added, the repository shows in the *Repositories* list. You can now click the entry for the repository to open it so that you can scan for existing workflows.
-If multiple workflows are found, click the corresponding number to view the list of workflows, **3** in this case.
+When your repository is added, the repository shows in the *Repositories* list. You can now click the entry for the repository to open it so that you can view the imported workflows.
+If a workflow is found, click the corresponding number to view the list of workflows.
 
    ![Repository workflows](../images/embedworkflow_workflownumbers.png)
 
-Alternatively, click **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the workflows list.
+Alternatively, click **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the list of workflows across all repositories.
 
 ### Refreshing Repositories
 
@@ -106,7 +106,7 @@ Alternately, you can refresh some or all repositories from the list view:
 
 ### Adding Credentials
 
-Credentials are used by {{ site.data.product.title_short }} for authentication when running embedded workflows against machines, synchronizing with inventory sources, and importing project content from a version control system.
+Credentials are used by {{ site.data.product.title_short }} for any authentication that is required when running embedded workflows, and when importing workflows from a version control system.
 
 {{ site.data.product.title_short }} can store credentials that are used by embedded workflows. Credentials saved in {{ site.data.product.title_short }} are matched and executed with a workflow when it runs.
 
@@ -251,7 +251,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
 ### Viewing workflow details
 
-When workflows are available, you can view the details for each workflow, such as to verify the payload. To view the details for a workflow:
+Once a workflow is imported, you can view the details, such as to verify the payload. To view the details for a workflow:
 
 1. Click **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the workflows list.
 
@@ -264,7 +264,6 @@ When workflows are available, you can view the details for each workflow, such a
    ![Graph view](../images/embedworkflow_graphView.png)
 
 3. If your workflow has credential fields, then create a workflow credential for each of the fields. Then, map the workflow credential to the workflow.
-   <!-- Add substeps from development - A.G to provide.-->
 
 ### Creating a Service Dialog using an Embedded Workflow
 
@@ -301,8 +300,3 @@ You can create a generic service catalog item that uses an embedded workflow. To
 
 4. When you complete all your edits, click **Save**.
 5. Confirm that you can order the service catalog item and that it runs the workflows to drive the dynamic dialog dropdown.
-
-<!--
-##### Add docker images to a podified deployment and appliances (workflow registries)
-
--->

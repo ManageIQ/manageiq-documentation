@@ -78,7 +78,7 @@ To add a repository, complete the following steps:
 ### Viewing the List of Workflows in a Repository
 
 When your repository is added, the repository shows in the *Repositories* list. You can now click the entry for the repository to open it so that you can view the imported workflows.
-If a workflow is found, click the corresponding number to view the list of workflows.
+If any workflows are found, click the corresponding number to view the list of workflows.
 
    ![Repository workflows](../images/embedworkflow_workflownumbers.png)
 

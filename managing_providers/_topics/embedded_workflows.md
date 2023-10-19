@@ -116,7 +116,7 @@ Alternately, you can refresh some or all repositories from the list view:
 
 Credentials are used by {{ site.data.product.title_short }} for any authentication that is required when running embedded workflows, and when importing workflows from a version control system.
 
-{{ site.data.product.title_short }} can store credentials that are used by embedded workflows. Credentials saved in {{ site.data.product.title_short }} are matched and executed with a workflow when it runs.
+{{ site.data.product.title_short }} can store credentials that are used by embedded workflows. Credentials that are saved in {{ site.data.product.title_short }} are matched and executed with a workflow when it runs.
 
 1.  Browse to the menu: **Automation** > **Embedded Workflows** > **Credentials**.
 
@@ -276,7 +276,7 @@ Include:
 
 Once a workflow is imported, you can view the details, such as to verify the payload. To view the details for a workflow:
 
-1. Click **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the workflows list.
+1. Go to the menu: **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the workflows list.
 
 2. Click a workflow. The default *Text* view of the workflow opens where you see the code content.
 
@@ -290,7 +290,17 @@ Once a workflow is imported, you can view the details, such as to verify the pay
 
 4. Map any workflow credentials to the workflow.
 
-   <!-- Substeps required. -->
+   1. Go to the menu: **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the workflows list.
+
+   2. Select the workflow that includes the credentials that you need to map.
+
+   3. Click **Configuration** > **Map Credentials to this Workflow**.
+
+      The table that displays on the *Map Credentials* page displays all the current mappings for the selected workflow. Verify that the list of credential identifiers includes all of the identifiers that are in the workflow payload.
+
+   4. Use the drop-down fields to map one or more credentials for the workflow. Verify that the table is updated with the correct information.
+
+   5. Click **Save**.
 
 ### Creating a Service Dialog using an Embedded Workflow
 

@@ -29,7 +29,7 @@
 
 {% include_relative _topics/custom_images.md %}
 
-{% include_relative _topics/installing_vddk.md %}
+{% include installing-vmware-vddk-containers.md %}
 
 # Uninstalling
 

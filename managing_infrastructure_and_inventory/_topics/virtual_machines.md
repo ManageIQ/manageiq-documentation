@@ -158,8 +158,6 @@ _topics/storage_support_notes_about_analyzing_from_rhevm_3.0.md
 
 ## VMware vSphere Prerequisites
 
-### Installing VMware VDDK on {{ site.data.product.title_short }}
-
 {% include installing-vmware-vddk.md %}
 
 ## Comparing Virtual Machines and Templates

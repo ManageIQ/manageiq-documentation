@@ -1,7 +1,5 @@
 ## Additional Configuration for Appliances on VMware vSphere
 
-### Installing VMware VDDK on {{ site.data.product.title_short }}
-
 {% include installing-vmware-vddk.md %}
 
 ### Tuning Appliance Performance

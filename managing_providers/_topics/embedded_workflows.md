@@ -1,6 +1,6 @@
 ## Embedded Workflows
 
-*Embedded Workflows* provide the capability to simplify service catalog creation and improve the overall service catalog experience through a step-based automation system. Each step within a workflow runs a container to complete processes. Workflows are imported from GitHub repository content into {{ site.data.product.title_short }} where they are made available for users to run.
+*Embedded Workflows* provide the capability to simplify service catalog creation and improve the overall service catalog experience through a step-based automation system. Workflows can run docker containers to accomplish a task that the user requires as part of the state machine. Workflows are imported from Git repository content into {{ site.data.product.title_short }} where they are made available for users to run.
 
 *Embedded Workflows* are an alternative to the *Embedded Automate* capability for authoring and running automation. With *Embedded Workflows*, you can continue to use the *Embedded Automate* feature for service catalog creation and management.
 
@@ -44,7 +44,7 @@ In addition to the *Embedded Workflows* UI, **Embedded Workflows** can also be u
 
 ### Adding an Embedded Workflows Repository
 
-As a starting point to begin authoring a workflow, you must first add the repository that includes your workflows.
+As a starting point to begin using workflows, you must first add a repository that includes your workflows.
 
 To add a repository, complete the following steps:
 
@@ -56,11 +56,11 @@ To add a repository, complete the following steps:
 
 3. Add a description for the repository in the **Description** field.
 
-4. Enter a Git repository URL for the repository in the **GitHub URL** field. The Git repository URL does not need to be a GitHub repository.
+4. Enter a Git repository URL for the repository in the **URL** field. The Git repository URL does not need to be a GitHub repository.
 
 6. Select the appropriate SCM (Source Control Management) credentials from the **SCM Credentials** dropdown menu. These are the credentials for how you access your specified Git repository, and are used in different ways within embedded workflows.
 
-   If you are adding a repository that is not publicly available, add an SCM (source control) credential for accessing the repository.
+   If you are adding a repository that requires authentication then add an SCM credential and select that credential for this repository.
 
    Source Control credentials have several attributes that can be configured:
 
@@ -114,9 +114,9 @@ Alternately, you can refresh some or all repositories from the list view:
 
 ### Adding Credentials
 
-Credentials are used by {{ site.data.product.title_short }} for any authentication that is required when running embedded workflows, and when importing workflows from a version control system.
+Credentials are used by {{ site.data.product.title_short }} for any authentication that is required when running embedded workflows, or when importing workflows from a version control system.
 
-{{ site.data.product.title_short }} can store credentials that are used by embedded workflows. Credentials that are saved in {{ site.data.product.title_short }} are matched and executed with a workflow when it runs.
+{{ site.data.product.title_short }} can store credentials that are used by embedded workflows. Credentials that are saved in {{ site.data.product.title_short }} are mapped to values in the `Credentials` field of your Workflow and are made available to the container with a workflow when the workflow runs.
 
 1.  Browse to the menu: **Automation** > **Embedded Workflows** > **Credentials**.
 

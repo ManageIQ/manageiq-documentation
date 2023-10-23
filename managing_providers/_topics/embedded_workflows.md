@@ -58,9 +58,7 @@ To add a repository, complete the following steps:
 
 4. Enter a Git repository URL for the repository in the **URL** field. The Git repository URL does not need to be a GitHub repository.
 
-6. Select the appropriate SCM (Source Control Management) credentials from the **SCM Credentials** dropdown menu. These are the credentials for how you access your specified Git repository, and are used in different ways within embedded workflows.
-
-   If you are adding a repository that requires authentication then add an SCM credential and select that credential for this repository.
+6. If you are adding a repository that requires authentication then add an SCM (Source Control Management) credential for accessing the repository. Select that credential for this repository from the **SCM Credentials** dropdown menu. These credentials are used in different ways within embedded workflows.
 
    Source Control credentials have several attributes that can be configured:
 
@@ -157,15 +155,15 @@ You can configure workflows for use in the following areas during service catalo
 - **Dynamic dialog fields** - You (or your users) can attach workflows to a field so that the field becomes populated or refreshed with the results from the running of the workflow.
 - **Service Entry Points** - You (or your users) can set and use workflows for provisioning, reconfiguring, and retiring services.
 
-The Automate model provides flexibility to not only change parts of the provisioning process, but also to allow you to automate other operational tasks. You can create and use your own embedded workflows as needed to automate your operational tasks.
+You can create and use embedded workflows as needed to not only change parts of the provisioning process, but also to automate other operational tasks.
 
-Workflows must be authored in Amazon State Languages (ASL) format. As part of authoring a workflow, you (or your users) must build and support the containers that are run during each step of an embedded workflow.
+Workflows must be authored in Amazon State Languages (ASL) format. As part of authoring a workflow, you (or your users) can build container images that are able to perform any tasks that are required in any language that you like. You can use these images during Task states in your workflows.
 
 1. Define the code for the workflow. If your workflow requires the use of any credentials or parameters to be specified, ensure that they are passed in the code.
 
-   The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
+   Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what happens for that Task state. For example, a docker container can run to clone a template. If your states require parameters or credentials, you can specify them in your state definitions.
 
-   Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what happens for that Task state. For example, a docker container can run to clone a template.
+   The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
 
 2. Build the docker containers that are required for the workflow.
 

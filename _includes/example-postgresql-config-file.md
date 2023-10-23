@@ -295,7 +295,7 @@
 
     # These are only used if logging_collector is on:
     log_directory = '/www/postgres/log' # Customer specific setting
-    #log_directory = 'pg_log'       # directory where log files are written,
+    #log_directory = 'log'       # directory where log files are written,
                         # can be absolute or relative to PGDATA
     log_filename = 'postgresql-%Y-%m-%d.log'        # log file name pattern,
                         # can include strftime() escapes

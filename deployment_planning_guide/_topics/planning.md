@@ -296,8 +296,8 @@ not be available to other tenants.
 
 **Tenancy Relationships and Properties.**
 
-The tenant summary page found in menu:Configuration\[Access Control \>
-Tenants \> *Tenant*\] provides detailed information about the tenant and
+The tenant summary page found in **Configuration > Access Control >
+Tenants > Tenant** provides detailed information about the tenant and
 its relationships including:
 
   - Catalog items and bundles

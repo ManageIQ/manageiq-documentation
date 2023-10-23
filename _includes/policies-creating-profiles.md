@@ -1,4 +1,4 @@
-1.  Browse  to menu: **Control > Explorer**.
+1.  Browse to menu: **Control > Explorer**.
 
 2.  Click on the **Policy Profiles** accordion, then click
     **Configuration**, then

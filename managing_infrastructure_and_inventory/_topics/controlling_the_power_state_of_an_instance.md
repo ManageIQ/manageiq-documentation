@@ -3,7 +3,7 @@
 Follow this procedure to control the power states of an instance through
 the {{ site.data.product.title_short }} console.
 
-1.  Navigate to menu:Compute\[Clouds \> Instances\].
+1.  Navigate to **Compute > Clouds > Instances**.
 
 2.  Click the instance to change the power state.
 

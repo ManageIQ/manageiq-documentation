@@ -1,6 +1,6 @@
 ### Copying a Widget
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Dashboard Widget** accordion, and select the widget you
     want to copy.

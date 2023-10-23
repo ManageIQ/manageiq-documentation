@@ -2,7 +2,7 @@
 
 Add a new cloud network following the steps in this procedure:
 
-1.  Browse to menu: **Network** > **Networks**.
+1.  Browse to menu: **Network > Networks**.
 
 2.  Click **Configuration** and then click **Add a new Cloud Network**.
 

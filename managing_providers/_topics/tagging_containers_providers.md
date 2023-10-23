@@ -3,7 +3,7 @@
 Apply tags to all containers providers to categorize them together at
 the same time.
 
-1.  Navigate to menu:Compute\[Containers \> Providers\].
+1.  Navigate to **Compute > Containers > Providers**.
 
 2.  Select the checkboxes for the containers providers to tag.
 

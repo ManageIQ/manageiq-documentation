@@ -1,4 +1,4 @@
-1.  Browse to menu: **Overview** > **Reports**.
+1.  Browse to menu: **Overview > Reports**.
 
 2.  Click the **Reports** accordion.
 

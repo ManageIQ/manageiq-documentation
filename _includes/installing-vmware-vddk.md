@@ -11,7 +11,7 @@ To install VMware VDDK:
 
     - If you do not already have a login ID to VMware, then you will
       need to create one. At the time of this writing, the file can be
-      found by navigating to **Downloads** > **vSphere**. Select the
+      found by navigating to **Downloads > vSphere**. Select the
       version from the drop-down list, then click the **Drivers &
       Tools** tab. Expand **Automation Tools and SDKs**, and click
       **Go to Downloads** next to the **VMware vSphere Virtual Disk

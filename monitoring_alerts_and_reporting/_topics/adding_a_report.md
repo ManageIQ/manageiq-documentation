@@ -4,9 +4,9 @@ Add reports if the default reports do not include what you need or you
 want to narrow the scope of a report. For example, you may want a report
 that shows only Windows virtual machines.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
-2.  Click the menu:Reports\[All Reports\] accordion.
+2.  Click the **Reports > All Reports** accordion.
 
 3.  Click ![1847](../images/1847.png) **(Configuration)**, then click
     ![1862](../images/1862.png) **(Add a New Report)**.
@@ -31,7 +31,7 @@ that shows only Windows virtual machines.
 
         If you change the report base or the interval, all selections
         below will be reset.
-      
+
       - Select fields that you want in the report from **Available Fields**, and then click ![2289](../images/2289.png) `(Move selected fields down)`. In addition to the fields, you can also select any tags that you have created and assigned.
 
       - Change the order of the fields in the report by clicking
@@ -196,4 +196,3 @@ that shows only Windows virtual machines.
 
 After the new report is created, to make the report accessible from the
 report menu, you must add it to a report menu.
-

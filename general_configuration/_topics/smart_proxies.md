@@ -32,7 +32,7 @@ for the installation of SmartProxy.
 
 To Enter Credentials and Operating System for the Target Host:
 
-1.  Browse to menu: **Compute** > **Infrastructure** > **Hosts**.
+1.  Browse to menu: **Compute > Infrastructure > Hosts**.
 
 2.  Select the host you want to edit.
 

@@ -11,7 +11,7 @@ providers would become a major problem for the other systems relying on
 it for accurate and consistent billing information. Review all the
 dependencies carefully before deleting a provider.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Providers\].
+1.  Navigate to **Compute > Infrastructure > Providers**.
 
 2.  Select the check box for the provider to delete.
 

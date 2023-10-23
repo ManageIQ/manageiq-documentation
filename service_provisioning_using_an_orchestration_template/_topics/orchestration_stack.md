@@ -1,8 +1,8 @@
 ## Orchestration Stacks
 
 1.  Once the status of the provisioning request in
-    menu:Services\[Requests\] is **Finished**, click
-    menu:Compute\[Clouds \> Stacks\] to see the deployed stack.
+    **Services > Requests** is **Finished**, click
+    **Compute > Clouds > Stacks** to see the deployed stack.
 
 2.  Click the stack to see a summary of its properties, resources, among
     other details, including the running instances that are part of the

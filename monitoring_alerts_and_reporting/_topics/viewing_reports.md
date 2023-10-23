@@ -3,7 +3,7 @@
 Once you have run a report, you can view it at any time after the first
 scheduled time has occurred.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Saved Reports** accordion or the **Reports** accordion.
 

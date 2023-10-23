@@ -1,4 +1,4 @@
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Navigate to **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 

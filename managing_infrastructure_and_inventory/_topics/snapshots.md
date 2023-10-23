@@ -7,7 +7,7 @@ may have unintended consequences. You can use a snapshot to return a
 virtual machine to a previous state.
 
 View virtual machines by infrastructure providers by navigating to
-menu:Compute\[Infrastructure \> Providers\].
+**Compute > Infrastructure > Providers**.
 
 {% include_relative _topics/creating_a_vm_snapshot.md %}
 

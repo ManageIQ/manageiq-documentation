@@ -7,7 +7,7 @@ This feature is currently available as a technology preview only. For more infor
 Prometheus is used as an external alerting component.
 {{ site.data.product.title_short }} integrates Prometheus alerts for use with OpenShift Container Platform. {{ site.data.product.title_short }} collects events from Prometheus, generates alerts based on these events, and then attaches alerts to inventory objects.
 
-It is possible to view ongoing alerts in {{ site.data.product.title_short }} by navigating to menu:Monitor\[Alerts\] and manage their life cycle,
+It is possible to view ongoing alerts in {{ site.data.product.title_short }} by navigating to **Monitor > Alerts** and manage their life cycle,
 including the ability to:
 
   - View active alerts per provider in the **Overview** screen.
@@ -89,7 +89,7 @@ the enterprise using the {{ site.data.product.title_short }} user interface.
 Both Node and Provider alert profiles are created automatically during
 the installation, so it is not required to create these profiles.
 
-1.  Navigate to menu:Control\[Explorer\], then click **Alert Profiles**
+1.  Navigate to **Control > Explorer**, then click **Alert Profiles**
     in the accordion menu.
 
 2.  Click to expand **Node Alert Profiles**, then click **Prometheus
@@ -126,5 +126,5 @@ interface.
 
 Once you have completed the procedure, you will have OpenShift
 Prometheus alerts enabled in {{ site.data.product.title_short }}, and can manage
-their life cyle from the menu:Monitor\[Alerts\] screen in the user
+their life cyle from the **Monitor > Alerts** screen in the user
 interface.

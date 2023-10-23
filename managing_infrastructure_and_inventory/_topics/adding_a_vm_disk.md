@@ -17,5 +17,5 @@ machine with the following steps:
 6.  Click **Submit**.
 
 After the disk has been added, you can view the new disk by navigating
-to menu:Compute\[Infrastructure \> Virtual Machines\]. . Open the target
+to **Compute > Infrastructure > Virtual Machines**. . Open the target
 virtual machine, then click **Devices** to view the new disk.

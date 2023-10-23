@@ -13,7 +13,7 @@ The following methods are included:
 
 The table name cannot be changed unless there is a specific requirement
 to manage records elsewhere. Entries in this table appear in the
-menu:Configuration\[Base Items \> Servers\] menu in the ServiceNow web
+**Configuration > Base Items > Servers** menu in the ServiceNow web
 user interface.
 
 |             |                                             |

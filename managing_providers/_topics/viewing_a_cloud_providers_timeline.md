@@ -3,7 +3,7 @@
 View the timeline of events for instances registered to a cloud
 provider.
 
-1.  Navigate to menu:Compute\[Clouds \> Providers\].
+1.  Navigate to **Compute > Clouds > Providers**.
 
 2.  Click the desired cloud provider for viewing the timeline.
 

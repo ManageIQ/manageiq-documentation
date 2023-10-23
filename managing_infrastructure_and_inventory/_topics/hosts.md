@@ -1,6 +1,6 @@
 # Hosts
 
-The **Hosts** page under menu:Compute\[Infrastructure\] displays the
+The **Hosts** page under **Compute > Infrastructure** displays the
 hosts discovered in your enterprise environment.
 
 **Note:**

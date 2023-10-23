@@ -13,7 +13,7 @@ an existing rate, or creating a new rate.
 
 #### Editing a Chargeback Rate
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Navigate to **Overview > Chargeback**.
 
 2.  Click the **Rates** accordion and select an existing rate from under
     **Compute** or **Storage**.
@@ -28,7 +28,7 @@ an existing rate, or creating a new rate.
 
 #### Copying a Chargeback Rate
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Navigate to **Overview > Chargeback**.
 
 2.  Click the **Rates** accordion and select an existing rate from under
     **Compute** or **Storage**.
@@ -55,7 +55,7 @@ tiers, calculating both fixed and variable costs:
 
 To configure this rate:
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Navigate to **Overview > Chargeback**.
 
 2.  Click the **Rates** accordion and select **Compute** to create a CPU
     chargeback rate.

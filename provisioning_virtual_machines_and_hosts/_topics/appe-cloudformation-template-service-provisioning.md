@@ -12,7 +12,7 @@ services easier in the cloud.
 
 Complete the following procedure to add new orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration
+1.  Navigate to **Services > Catalogs** and select **Orchestration
     Templates** in the accordion menu.
 
 2.  Click ![Configuration](../images/1847.png) **Configuration**, then
@@ -40,7 +40,7 @@ using a service dialog.
 Complete the following procedure to create a service dialog based on the
 input parameters defined in the orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and click **Orchestration
+1.  Navigate to **Services > Catalogs** and click **Orchestration
     Templates** in the accordion menu.
 
 2.  Expand **All Orchestration Templates**, then click the orchestration
@@ -59,7 +59,7 @@ input parameters defined in the orchestration template.
 
 Complete the following procedure to create a new catalog.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalogs** in the
+1.  Navigate to **Services > Catalogs** and select **Catalogs** in the
     accordion menu.
 
 2.  Click ![Configuration](../images/1847.png) **Configuration**, then
@@ -77,7 +77,7 @@ Complete the following procedure to create a new catalog.
 Complete the following procedure to create a new orchestration catalog
 item.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Catalog Items**
+1.  Navigate to **Services > Catalogs** and select **Catalog Items**
     in the accordion menu.
 
 2.  Click ![Configuration](../images/1847.png) **Configuration**, then
@@ -107,7 +107,7 @@ item.
 Complete the following procedure to order your catalog item from the
 service catalog.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Service
+1.  Navigate to **Services > Catalogs** and select **Service
     Catalogs** in the accordion menu.
 
 2.  Expand **All Services**, then click the catalog item you want to
@@ -131,13 +131,13 @@ service catalog.
 The provisioning service request is submitted. Once a request has been
 approved, the various stages of fulfillment will be processed. You can
 monitor the request status and other details in
-menu:Services\[Requests\].
+**Services > Requests**.
 
 # Orchestration Stacks
 
 1.  Once the status of the provisioning request in
-    menu:Services\[Requests\] is **Finished**, click
-    menu:Compute\[Clouds \> Stacks\] to see the newly deployed stack.
+    **Services > Requests** is **Finished**, click
+    **Compute > Clouds > Stacks** to see the newly deployed stack.
 
 2.  Click the stack to see a summary of its properties, resources, among
     other details including the running instances that are part of the

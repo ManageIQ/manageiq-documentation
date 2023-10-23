@@ -3,7 +3,7 @@
 1.  Log in to the console as a user who is assigned either the super
     administrator or administrator account role.
 
-2.  Navigate to menu:Overview\[Reports\].
+2.  Navigate to **Overview > Reports**.
 
 3.  Click the **Edit Report Menus** accordion.
 
@@ -39,4 +39,3 @@
 **Note:**
 
 Only reports that are not already in another folder can be assigned.
-

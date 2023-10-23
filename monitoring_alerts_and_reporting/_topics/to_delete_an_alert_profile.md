@@ -3,7 +3,7 @@
 Remove alert profiles that you no longer need. This does not remove the
 alerts associated with the alert profile.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click on the **Alert Profiles** accordion, then click the alert
     profile you want to remove.

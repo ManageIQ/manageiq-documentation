@@ -8,7 +8,7 @@ assigned to clusters, datastores, hosts, and virtual machines.
 
 Each profile type under the **Alert Profile** accordion menu will have its own **Alert Selections** and subsequent **Assignments** choices.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click on the **Alert Profiles** accordion, then click on the type of profile that you want to create.
 

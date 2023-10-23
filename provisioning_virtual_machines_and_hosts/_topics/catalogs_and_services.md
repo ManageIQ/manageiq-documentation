@@ -40,7 +40,7 @@ not supported by {{ site.data.product.title_short }}.
 View a list of generic objects and click through to see detailed summary
 information for each object.
 
-1.  Navigate to menu:Automate\[Generic Objects\].
+1.  Navigate to **Automate > Generic Objects**.
 
 2.  Click on a generic object class in the table to view its summary
     information.
@@ -112,7 +112,7 @@ service dialog, be sure to plan what items you need the user to input.
 Complete the following procedure to create a Service Dialog from a
 Container Template.
 
-1.  Navigate to menu:Compute\[Containers \> Container Templates\] and
+1.  Navigate to **Compute > Containers > Container Templates** and
     select the template for provisioning.
 
 2.  Click ![1847](../images/1847.png)(**Configuration**), then
@@ -132,7 +132,7 @@ Catalog Item](#create-container-template-catalog-item).
 You can share service dialogs between appliances using the export and
 import features.
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Customization\].
+1.  Navigate to **Automation > Embedded Automate > Customization**.
 
 2.  In the **Import/Export** accordion, click **Service Dialog
     Import/Export**.
@@ -146,7 +146,7 @@ import features.
 You can share service dialogs between appliances using the export and
 import features.
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Customization\].
+1.  Navigate to **Automation > Embedded Automate > Customization**.
 
 2.  In the **Import/Export** accordion, click **Service Dialog
     Import/Export**.
@@ -289,16 +289,16 @@ A method is provided below that was created for the following scenario:
 
 Service methods have been split based on purpose.
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
-2.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
-    StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
-    StateMachines \> Methods\].
+2.  Service Class is located at **DOMAIN > Service > Provisioning >
+    StateMachines > Methods** and **DOMAIN > Service > Retirement >
+    StateMachines > Methods**.
 
     **Note:**
 
     **DOMAIN** must be a user-defined Domain and not the locked ManageIQ Domain. If necessary, you can copy the class from the ManageIQ domain into a custom domain.
-    
+
 3.  Click the **Methods** tab.
 
 4.  Click ![1847](../images/1847.png)(**Configuration**), then
@@ -315,11 +315,11 @@ Service methods have been split based on purpose.
 
 ##### Creating an Instance in the Service Class
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
-2.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
-    StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
-    StateMachines \> Methods\].
+2.  Service Class is located at **DOMAIN > Service > Provisioning >
+    StateMachines > Methods** and **DOMAIN > Service > Retirement >
+    StateMachines > Methods**.
 
     **Note:**
 
@@ -350,13 +350,13 @@ must be called before the provision job begins.
 
 Service methods have been split based on purpose.
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
 2.  From the accordion menu, click the required service method.
 
-3.  Service Class is located at menu:DOMAIN\[Service \> Provisioning \>
-    StateMachines \> Methods\] and menu:Domain\[Service \> Retirement \>
-    StateMachines \> Methods\].
+3.  Service Class is located at **DOMAIN > Service > Provisioning >
+    StateMachines > Methods** and **DOMAIN > Service > Retirement >
+    StateMachines > Methods**.
 
     **Note:**
 
@@ -411,7 +411,7 @@ service catalog.
 
 #### Creating a Catalog Bundle
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Navigate to **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
@@ -449,7 +449,7 @@ Then, you will see the **Entry Point** field.
 
 #### Copying a Catalog Bundle
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Navigate to **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
@@ -477,7 +477,7 @@ Create a catalog item for each virtual machine or cloud instance that will be pa
 
 When copying a catalog item for reuse, you must click **Display in Catalog** in the copied catalog item for the item to appear in the catalog.
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Navigate to **Services > Catalogs**.
 
 2.  Click the **Catalog Items** accordion.
 
@@ -564,7 +564,7 @@ When importing a template into {{ site.data.product.title_short }}, the selected
 
 Complete the following procedure to add an orchestration template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Navigate to **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
 2.  Click ![Configuration](../images/1847.png)**Configuration**, then
     click ![Green\_Plus\_Sign](../images/1848.png)**Create a new Orchestration Template**.
@@ -583,7 +583,7 @@ Complete the following procedure to add an orchestration template.
 
 Complete the following procedure to edit orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Navigate to **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
 2.  Select the orchestration template you want to edit from the **All Orchestration Templates** list.
 
@@ -602,7 +602,7 @@ Complete the following procedure to edit orchestration templates.
 
 Complete the following procedure to copy an orchestration template to create a new template.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Navigate to **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
 2.  Click ![Configuration](../images/1847.png)**Configuration**, then
     click ![Copy](../images/1859.png) **Copy this Orchestration Template**.
@@ -619,7 +619,7 @@ Complete the following procedure to copy an orchestration template to create a n
 
 Complete the following procedure to delete orchestration templates.
 
-1.  Navigate to menu:Services\[Catalogs\] and select **Orchestration Templates** in the accordion menu.
+1.  Navigate to **Services > Catalogs** and select **Orchestration Templates** in the accordion menu.
 
 2.  Select the orchestration template you want to delete from the **All Orchestration Templates** list.
 
@@ -630,4 +630,3 @@ Complete the following procedure to delete orchestration templates.
 **Note:**
 
 Read-only templates cannot be deleted.
-

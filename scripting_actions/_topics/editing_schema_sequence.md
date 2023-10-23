@@ -2,7 +2,7 @@
 
 This procedure shows you how to change schema sequence.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Navigate to **Automation > Automate > Explorer**.
 
 2.  Click the class you want to change the schema sequence for.
 

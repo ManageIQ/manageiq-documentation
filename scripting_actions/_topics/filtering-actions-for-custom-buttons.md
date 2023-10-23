@@ -9,7 +9,7 @@ Filtering works on single objects and is not applicable to lists.
 
 To apply filtering actions to a custom button:
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Navigate to **Automation > Automate > Customization**.
 
 2.  Click the **Buttons** accordion. Select the custom button to use.
 

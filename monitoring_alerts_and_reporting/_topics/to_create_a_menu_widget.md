@@ -1,6 +1,6 @@
 ### Creating a Menu Widget
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Dashboard Widgets** accordion and click the **Menus**
     folder.

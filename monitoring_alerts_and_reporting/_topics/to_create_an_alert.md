@@ -8,7 +8,7 @@ To send emails or SNMP traps from the {{ site.data.product.title_short }} server
 enable the Notifier server role and set up SMTP email or SNMP traps. For
 more information, see *General Configuration*.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png) (**Configuration**), ![1862](../images/1862.png) (**Add a New Alert**).
 

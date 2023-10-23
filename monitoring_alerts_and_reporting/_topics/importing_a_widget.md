@@ -3,7 +3,7 @@
 You can share widgets between appliances using the export and import
 features.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  In the **Import/Export** accordion, click **Widgets**.
 

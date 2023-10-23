@@ -51,7 +51,7 @@ You can also change the password of the **admin** account from the login
 screen. To do so, click the **Update Password** link.
 
 You can access and configure most {{ site.data.product.title_short }} settings through the
-**Configuration** menu. You can access this menu through **Administrator | EVM** \> **Configuration**.
+**Configuration** menu. You can access this menu through **Administrator | EVM > Configuration**.
 
 {% include configuration-gui.md %}
 

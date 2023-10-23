@@ -2,7 +2,7 @@
 
 This procedure shows you how to create a custom Automate action.
 
-1.  Navigate to menu:Control\[Explorer\] accordion.
+1.  Navigate to **Control > Explorer** accordion.
 
 2.  Click the **Actions** accordion.
 

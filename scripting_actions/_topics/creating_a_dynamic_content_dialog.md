@@ -2,10 +2,10 @@
 
 The procedure describes the steps to create a dynamic content dialog.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Navigate to **Automation > Automate > Explorer**.
 
-2.  From the accordion menu, click menu:DOMAIN\[Cloud \> VM \>
-    Operations \> Methods\].
+2.  From the accordion menu, click **DOMAIN > Cloud > VM >
+    Operations > Methods**.
 
     **Note:**
 

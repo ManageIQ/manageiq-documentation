@@ -1211,7 +1211,7 @@ Table: collection
 <p>log/*.txt</p>
 <p>config/*</p>
 <p>/var/lib/pgsql/data/*.conf</p>
-<p>/var/lib/pgsql/data/pg_log/*</p>
+<p>/var/lib/pgsql/data/log/*</p>
 <p>/var/log/syslog*</p>
 <p>/var/log/daemon.log*</p>
 <p>/etc/default/ntp*</p>

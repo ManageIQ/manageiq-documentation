@@ -6,9 +6,13 @@ In {{ site.data.product.title_short }}, an automation management provider is a m
 
 **Automate** enables real-time, bidirectional process integration. This embedded automate feature provides you with a method to implement adaptive automation for management events and administrative or operational activities.
 
+**Embedded Workflows** provide the capability to simplify service catalog creation and improve the overall service catalog experience through a step-based automation system. Workflows can run docker containers to accomplish a task that the user requires as part of the state machine. Workflows are imported from Git repository content into {{ site.data.product.title_short }} where they are made available for users to run. *Embedded Workflows* are an alternative to the *Embedded Automate* capability for authoring and running automation. With *Embedded Workflows*, you can continue to use the *Embedded Automate* feature for service catalog creation and management.
+
 **Ansible** integration delivers out-of-the-box support for backing service, alert, and policy actions by using Ansible playbooks. Sync your existing playbook repositories with {{ site.data.product.title_short }}, add credentials to access providers, and create service catalog items for actions ranging from creating and retiring VMs, updating security software, or adding more disks when space runs low.
 
 **Ansible Tower** is a management tool that is integrated with {{ site.data.product.title_short }}, designed to help automate infrastructure operations utlizizing existing Ansible Tower providers in your inventory. {{ site.data.product.title_short }} allows you to execute Ansible Tower jobs by using service catalogs and Automate. Using Ansible Tower, you can schedule Ansible playbook runs and monitor current and historical results, allowing for troubleshooting or identification of issues before they occur.
+
+{% include_relative _topics/embedded_workflows.md %}
 
 ## Ansible
 

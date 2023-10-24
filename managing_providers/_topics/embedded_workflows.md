@@ -8,7 +8,7 @@
 
 For the *Embedded Workflows* feature, the following pages are available in the UI, which you can use to access and work with workflows. To view these pages, go to **Automation** > **Embedded Workflows** and select the page.
 
-![Embedded Workflow UI](../images/embedworkflow_ui.png)
+![Embedded Workflow UI](../../images/embedworkflow_ui.png)
 
 - **Workflows**
 
@@ -34,13 +34,13 @@ In addition to the *Embedded Workflows* UI, **Embedded Workflows** can also be u
 
    When creating a service dialog, fields that are dynamic include the option for using **Embedded Workflows** or **Embedded Automate**.
 
-   ![Service Dialog options](../images/embedworkflow_servicedialogdynamic.png)
+   ![Service Dialog options](../../images/embedworkflow_servicedialogdynamic.png)
 
 * Service Catalog Items
 
    The provisioning, reconfigure, and retirement entry points include the option for using **Embedded Workflows** or **Embedded Automate**.  You can set the point field to the workflow that you want to use for any, or all, of the three service entry points.
 
-   ![Entry Points options](../images/embedworkflow_entrypointsembedded.png)
+   ![Entry Points options](../../images/embedworkflow_entrypointsembedded.png)
 
 ### Adding an Embedded Workflows Repository
 
@@ -50,7 +50,7 @@ To add a repository, complete the following steps:
 
 1. Click  **Automation** > **Embedded Workflows** > **Repositories** > **Configuration** > **Add New Repository**.
 
-   ![Add a repository](../images/embedworkflow_addnewrepository.png)
+   ![Add a repository](../../images/embedworkflow_addnewrepository.png)
 
 2. Enter the repository name in the **Name** field.
 
@@ -71,7 +71,7 @@ To add a repository, complete the following steps:
 
 8. Click **Save**. Upon saving, the repository is imported and scanned for any included workflows (any Amazon States Language `.asl` files).
 
-   ![Repository details](../images/embedworkflow_addnewrepository_details.png)
+   ![Repository details](../../images/embedworkflow_addnewrepository_details.png)
 
 9. Confirm that the synchronization with your repository is successful by viewing the list of workflows that are detected for the repository.
 
@@ -86,7 +86,7 @@ If you need to delete a repository, select the repository from the list of repos
 When your repository is added, the repository shows in the *Repositories* list. You can now click the entry for the repository to open it so that you can view the imported workflows.
 If any workflows are found, click the corresponding number to view the list of workflows.
 
-   ![Repository workflows](../images/embedworkflow_workflownumbers.png)
+   ![Repository workflows](../../images/embedworkflow_workflownumbers.png)
 
 Alternatively, click **Automation** > **Embedded Workflows**. Then, click **Workflows** to see the list of workflows across all repositories.
 
@@ -100,7 +100,7 @@ Refresh a targeted repository:
 
 2.  Click a repository.
 
-3.  Click **Configuration**, then ![Refresh this Repository](../images/2003.png) (**Refresh this Repository**).
+3.  Click **Configuration**, then ![Refresh this Repository](../../images/2003.png) (**Refresh this Repository**).
 
 Alternately, you can refresh some or all repositories from the list view:
 
@@ -108,7 +108,7 @@ Alternately, you can refresh some or all repositories from the list view:
 
 2.  Check those repositories to refresh. Click **Check All** to select all repositories.
 
-3.  Click **Configuration**, then ![Refresh Selected Workflow Repositories](../images/2003.png)(**Refresh Selected Workflow Repositories**).
+3.  Click **Configuration**, then ![Refresh Selected Workflow Repositories](../../images/2003.png)(**Refresh Selected Workflow Repositories**).
 
 ### Adding Credentials
 
@@ -118,7 +118,7 @@ Credentials are used by {{ site.data.product.title_short }} for any authenticati
 
 1.  Browse to the menu: **Automation** > **Embedded Workflows** > **Credentials**.
 
-2.  Click **Configuration**, then ![Add New Credential](../images/1862.png) (**Add New Credential**).
+2.  Click **Configuration**, then ![Add New Credential](../../images/1862.png) (**Add New Credential**).
 
 3.  Provide a **Name** for the credential.
 
@@ -167,14 +167,19 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
 2. Build the docker containers that are required for the workflow.
 
-<!--
-##### Add docker images to a podified deployment and appliances (workflow registries)
-Include:
-* Building docker containers (reference Docker documentation)
-* Push to a registry
-* Add the registry to the appliance/kubernetes system.
+   When you have the code for your task resource written, you need to bundle it into a docker image. You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
 
--->
+   On appliances, `podman` is used to execute the container, so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user.
+
+     ```
+     # su manageiq
+     $ podman login docker.io
+     Username:
+     Password:
+     Login Succeeded!
+     ```
+
+   You are recommended to use a docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
 
 #### Example: Provisioning Workflow
 
@@ -278,11 +283,11 @@ Once a workflow is imported, you can view the details, such as to verify the pay
 
 2. Click a workflow. The default *Text* view of the workflow opens where you see the code content.
 
-   ![Text view](../images/embedworkflow_textview.png)
+   ![Text view](../../images/embedworkflow_textview.png)
 
    Alternatively, click the **Graph** tab to see a graph of the same data.
 
-   ![Graph view](../images/embedworkflow_graphView.png)
+   ![Graph view](../../images/embedworkflow_graphView.png)
 
 3. If your workflow has credential fields, create a workflow credential for each of the fields. For more information about creating a credential, see [Adding Credentials](#adding-credentials).
 
@@ -314,9 +319,9 @@ Dialogs are the part of {{ site.data.product.title_short }} that you interface w
 
 4. Click the **Options** tab. You can now select between *Embedded Automate* and *Embedded Workflows* in the Automation field.
 
-   ![Dialog Dynamic](../images/embedworkflow_servicedialogdynamic.png)
+   ![Dialog Dynamic](../../images/embedworkflow_servicedialogdynamic.png)
 
-   If you choose **Embedded Workflows**, you can select the workflow to run. Complete the fields, such as *Template* (using drag and drop functionality) and click **Save** when you complete the form. The workflow now runs and refreshes the fields with data from the workflow. In this way fields are chained together. When you *order* a service catalog, the workflow runs in the background to refresh the template.
+   If you choose **Embedded Workflows**, you can select the workflow to run. Complete the remaining fields and click **Save** when you complete the form. You can chain dialog fields together by using **Fields to refresh**, which lets one dialog field trigger the run of another when there are interdependencies. When you *order* a service catalog, any dynamic dialogs that are backed by embedded workflows run in the background to populate the dialogs.
 
 ### Creating Service Catalog Items using an Embedded Workflow
 
@@ -325,13 +330,17 @@ You can create a generic service catalog item that uses an embedded workflow. To
 1. Click **Services** > **Catalogs**.
 2. The *Service Catalogs* section opens and you see the existing Service Catalogs. If you want to order one, click it and then **Order**.
 
-   ![Service Dialog Dynamic](../images/embedworkflow_orderservicecatalog.png)
+   ![Service Dialog Dynamic](../../images/embedworkflow_orderservicecatalog.png)
 
    Complete the fields for your specified dialog. Then, click **Submit**.
 
 3. If you want to know more about the item first or to edit it, click the **Catalogs** section, and then click that item that is created. Click **Configuration** > **Edit this item**.
 
-   ![Entry Points Dynamic](../images/embedworkflow_entrypointsembedded.png)
+   ![Entry Points Dynamic](../../images/embedworkflow_entrypointsembedded.png)
 
 4. When you complete all your edits, click **Save**.
 5. Confirm that you can order the service catalog item and that it runs the workflows to drive the dynamic dialog dropdown.
+
+   The list of services and requests is shown when the catalog item is submitted. Clicking the request shows the execution status, including any embedded workflows.
+
+   ![Workflow Status](../../images/embedworkflow_runstatus.png)

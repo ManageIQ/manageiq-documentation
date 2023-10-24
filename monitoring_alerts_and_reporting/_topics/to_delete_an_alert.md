@@ -2,7 +2,7 @@
 
 When an alert is no longer needed, you can remove it from your VMDB.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click on the **Alerts** accordion, then click on the alert that you
     want to delete.

@@ -49,8 +49,8 @@ You can upload the appliance with the following steps:
     to begin the upload.
 
 6.  When the upload is complete, click ![gce products
-    services](../images/gce-products-services.png) menu:Products &
-    services\[Compute Engine\] on the left menu.
+    services](../images/gce-products-services.png) **Products &
+    services > Compute Engine** on the left menu.
 
 7.  Create an image by clicking **Images** from the left menu, then
     **Create Image**. Fill in the following details about the image:
@@ -75,8 +75,8 @@ You can upload the appliance with the following steps:
         When the image is created, the screen will refresh and the new
         image will appear in the **Images** list.
 
-8.  Create a virtual machine instance by navigating to menu:VM
-    instances\[Create Instance\], and configure the following fields:
+8.  Create a virtual machine instance by navigating to **VM
+    instances > Create Instance**, and configure the following fields:
 
     1.  Enter a unique **Name** for the virtual machine instance using
         lower case alphanumeric characters and/or hyphens.

@@ -2,7 +2,7 @@
 
 This procedure shows you how to create a policy for automate.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click the **Policies** accordion, and select **Control Policies**.
 
@@ -45,4 +45,3 @@ You can now assign this policy to a **Policy Profile**. Then, assign the policy 
 **Note:**
 
 If you want the policy to initiate an Automate Model from the `/System/Process/Request` class, then you can create your own custom action. Be sure to have an instance in the `/System/Process/Request` class for it to map to.
-

@@ -2,7 +2,7 @@
 
 This procedure shows you how to edit a custom button.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Navigate to **Automation > Automate > Customization**.
 
 2.  From the **Object Types** dropdown, select the type of object you
     want to edit the button for.

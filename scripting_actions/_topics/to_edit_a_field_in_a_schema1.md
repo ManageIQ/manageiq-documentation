@@ -2,7 +2,7 @@
 
 This procedure describes how to edit schema fields.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\].
+1.  Navigate to **Automation > Automate > Explorer**.
 
 2.  Click the class you want to define a schema for.
 

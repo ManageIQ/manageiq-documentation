@@ -1,6 +1,6 @@
 ### Generating Widget Content Immediately
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Dashboard Widgets** accordion and select the widget you
     want to generate.

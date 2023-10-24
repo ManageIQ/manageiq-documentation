@@ -11,7 +11,7 @@ containers provider with multiple images, where only some of the images
 have a chargeback rate assigned; the images without a custom rate will
 then use the default rate.
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Navigate to **Overview > Chargeback**.
 
 2.  Click the **Assignments** accordion, and click either **Compute** or
     **Storage**.
@@ -60,4 +60,3 @@ When viewing chargeback, there is a rate for a virtual machine for the
 number of the CPUs. The chargeback for this parameter is calculated
 based on when the virtual machine is running. If the virtual machine is
 not running, then it is not charged for CPU allocation.
-

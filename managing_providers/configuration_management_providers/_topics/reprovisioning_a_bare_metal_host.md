@@ -35,7 +35,7 @@ Satellite 6 environment requires the following:
 
 3.  Select one or more hosts to reprovision.
 
-4.  Select menu:Lifecycle\[Provision Configured Systems\].
+4.  Select **Lifecycle > Provision Configured Systems**.
 
 5.  Under the **Request** tab, enter the following details:
 

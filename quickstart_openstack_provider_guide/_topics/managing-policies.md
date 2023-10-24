@@ -17,7 +17,7 @@ The following subsections demonstrate how to create host compliance and instance
 The following procedure describes how to create a compliance policy that checks whether firewalls are enabled on infrastructure provider nodes.
 Nodes with disabled firewalls are marked *non-compliant*.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Expand the **Policies** accordion, and click **Compliance Policies**.
 
@@ -57,7 +57,7 @@ At this point, you can now add the new policy profile to the infrastructure prov
 
 The process of creating a *control policy* is similar to that of a compliance policy. A control policy is driven by events after certain conditions are met. The following control policy will start a SmartState analysis on an instance every 24 hours:
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Expand the **Policies** accordion, and click **Control Policies**.
 
@@ -83,7 +83,7 @@ The process of creating a *control policy* is similar to that of a compliance po
 
 You can now associate events, conditions, and actions to this control policy. To do so:
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click the **Policies** accordion, and select the control policy you just created.
 
@@ -108,7 +108,7 @@ You can now associate an action to the **VM Power On** event. To do so:
 
 Next, create a policy profile and assign this new control policy to it:
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click on the **Policy Profiles** accordion, then click
     ![image](../images/1847.png) (**Configuration**), then
@@ -124,7 +124,7 @@ Next, create a policy profile and assign this new control policy to it:
 
 At this point, you should now be able to add the policy profile to the cloud providers.
 
-1.  Navigate to menu:Compute\[Cloud \> Providers\].
+1.  Navigate to **Compute > Cloud > Providers**.
 
 2.  Select the overcloud you added in [Configuring the Overcloud to Store Events](../managing_providers/index.html#configuring-the-overcloud-to-store-events).
 

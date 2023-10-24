@@ -1,6 +1,6 @@
 ### Editing a Domain
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\]. The default
+1.  Navigate to **Automation > Automate > Explorer**. The default
     view is the Datastore.
 
 2.  Select the Domain you want to edit.

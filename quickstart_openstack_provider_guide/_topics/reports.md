@@ -20,7 +20,7 @@ Reporting](../monitoring_alerts_and_reporting/index.html).
 You can view historical data by creating reports on a scheduled basis.
 In addition, scheduled reports can be emailed directly to users:
 
-1.  Navigate to menu:Overview\[Reports\]
+1.  Navigate to **Overview > Reports**
 
 2.  Click the **Reports** accordion and select the report you want to
     view.
@@ -42,7 +42,7 @@ In addition, scheduled reports can be emailed directly to users:
 Once you have created a schedule for a report, you can view it at any
 time after the first scheduled time has occurred.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Saved Reports** accordion or the **Reports** accordion.
 

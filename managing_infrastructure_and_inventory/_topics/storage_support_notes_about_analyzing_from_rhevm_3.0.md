@@ -13,7 +13,7 @@ storage. NFS storage does not have these requirements.
         edit the desired Red Hat Enterprise Virtualization storage and
         get the `LUNID` value. Then, on the {{ site.data.product.title_short }} appliance
         virtual machine in the Red Hat Enterprise Virtualization user
-        interface, right-click and select menu:Edit\[Custom Properties\]
+        interface, right-click and select **Edit > Custom Properties**
         and enter the following in the **Custom Properties** edit box:
 
             directlun=<LUN ID>:readonly

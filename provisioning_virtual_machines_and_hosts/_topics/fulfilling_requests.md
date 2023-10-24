@@ -5,9 +5,9 @@
 After a request has been approved, {{ site.data.product.title_short }} then goes through the
 steps required to complete the request. The steps followed for a regular
 provision from a virtual machine to a virtual machine (not to a
-template) are found by navigating to menu:Automation\[Embedded Automate \> Explorer\], then
-listed under menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \>
-StateMachines \> VMProvision\_VM \> Provision VM from Template (template)\]. The value
+template) are found by navigating to **Automation > Embedded Automate > Explorer**, then
+listed under **DOMAIN > Cloud|Infrastructure > VM > Provisioning >
+StateMachines > VMProvision\_VM > Provision VM from Template (template)**. The value
 for each state shows where the instance resides in the **Datastore**
 accordion. The default set of execution steps is shown below. For more
 information on state machines, see [State Machines](#state-machines).
@@ -44,17 +44,17 @@ quota is set for the tenant or group as a whole.
 1.  Log in as a user with administrator or super administrator rights to
     the {{ site.data.product.title_short }} console.
 
-2.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+2.  Navigate to **Automation > Embedded Automate > Explorer**.
 
-3.  Copy the menu:ManageIQ\[System \> CommonMethods \> QuotaStateMachine
-    \> quota\] instance to a custom DOMAIN.
+3.  Copy the **ManageIQ > System > CommonMethods > QuotaStateMachine
+    > quota** instance to a custom DOMAIN.
 
-4.  From the accordion menu, click menu:DOMAIN\[System \> CommonMethods
-    \> QuotaStateMachine \> quota\].
+4.  From the accordion menu, click **DOMAIN > System > CommonMethods
+    > QuotaStateMachine > quota**.
 
     **Note:**
 
-    By default, quotas are applied to tenants and do not require any change in menu:Automation\[Embedded Automate \> Explorer\].
+    By default, quotas are applied to tenants and do not require any change in **Automation > Embedded Automate > Explorer**.
 
 5.  Click ![1847](../images/1847.png)(**Configuration**),
     ![1851](../images/1851.png)(**Edit this instance**).
@@ -152,8 +152,8 @@ The retry logic, `On_Entry` and `On_Error` are distinct cases in the program flo
 
 The following image shows a simple state machine pertaining to approving
 a provision request. This instance can be found in
-menu:Datastore\[ManageIQ \> Infrastructure \> VM \> Provisioning \>
-StateMachines \> ProvisioningRequestApproval \> Default\].
+**Datastore > ManageIQ > Infrastructure > VM > Provisioning >
+StateMachines > ProvisioningRequestApproval > Default**.
 ![2354](../images/2354.png)
 
 1.  The attribute **max\_vms** has a value of 1. State machine
@@ -175,33 +175,33 @@ Grayed out items reflect values that are set in the class schema. These values c
 ##### Customizing Provisioning States
 
 The steps followed when provisioning a virtual machine or cloud instance are completed based on instances from the
-menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMProvision\_VM\] class.
+**DOMAIN > Cloud|Infrastructure > VM > Provisioning > StateMachines > VMProvision\_VM** class.
 
 ##### Editing the Default State Instance
 
-1.  Navigate to menu:Automation \> Embedded Automate \> Explorer.
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
-2.  Click **Datastore** accordion. Select **Configuration** > Add a New Domain. You must fill the Name and Description values and click **Add** to create a custom 
+2.  Click **Datastore** accordion. Select **Configuration** > Add a New Domain**. You must fill the Name and Description values and click **Add** to create a custom
     domain.
 
-3.  From the accordion menu, navigate to Cloud \> VM \>Provisioning \> StateMachines \> VMProvision_VM.
+3.  From the accordion menu, navigate to **Cloud > VM > Provisioning > StateMachines > VMProvision_VM**.
 
-   1.  Click on the drop-down menu, Configuration \> Copy this class. 
-   
+   1.  Click on the drop-down menu, **Configuration > Copy this class**.
+
    2.  To add the class to the custom domain, specify the custom domain in the **To Domain** list and click Copy.
 
-4.  From the Datastore accordion, navigate to custom domain \> Cloud \> VM \> Provisioning \> StateMachines \> VMProvision_VM. 
+4.  From the Datastore accordion, navigate to **custom domain > Cloud > VM > Provisioning > StateMachines > VMProvision\_VM**.
 
-    1.  Click **Schema** tab. 
-    
-    2.  Select Configuration \> Edit selected Schema.
+    1.  Click **Schema** tab.
+
+    2.  Select **Configuration > Edit selected Schema**.
 
 5.  You can remove, update, or insert a line in the Editing Class Schema panel.
 
 **Note**: Depending on your environment, you can leave the values blank in a provisioning process. For example, if you are not integrating with IPAM or a CMDB, then you can leave the values blank. ![6281](../images/6281.png)
 
-6.  On the Datastore tree, navigate to custom domain \> Cloud \> VM \> Provisioning \> StateMachines \> VMProvision_VM. Click **Schema** tab and select 
-    Configuration \> Edit sequence.
+6.  On the Datastore tree, navigate to **custom domain > Cloud > VM > Provisioning > StateMachines > VMProvision\_VM**. Click **Schema** tab and select
+    Configuration > Edit sequence.
 
 7.  Resequence the schema in the Edit of Class Schema Sequence panel.
 
@@ -209,7 +209,7 @@ menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines \> VMPr
 
 After a request has been approved, the various stages of fulfillment are executed. You can see the progress of the provisioning process by viewing its status.
 
-1.  Navigate to menu:Services\[Requests\]. The list of requests is shown.
+1.  Navigate to **Services > Requests**. The list of requests is shown.
 
 2.  Click on a specific request for more information. Once the provisioning begins, if the request was supposed to create more than one virtual machine or instance, a field will appear called **Provisioned VMs**. Click on the number that appears next to it for information on each of the individual provisions.
 
@@ -217,14 +217,13 @@ After a request has been approved, the various stages of fulfillment are execute
 
 When a virtual machine or instance is created as a result of a provisioning request, its summary screen will show when it was provisioned in the **Lifecycle** area of the respective summary.
 
-1.  From menu:Services\[Workloads\], click the virtual machine or instance that you want to view. ![2356](../images/2356.png)
+1.  From **Services > Workloads**, click the virtual machine or instance that you want to view. ![2356](../images/2356.png)
 
 ##### Viewing a Virtual Machine or Instance Summary
 
-From menu:Services\[Workloads\], click the virtual machine or instance
+From **Services > Workloads**, click the virtual machine or instance
 that you want to view.
 
-You can now request the log table from **Services** > **Request** to display logs related to a particular request.
+You can now request the log table from **Services > Request** to display logs related to a particular request.
 
 **Note**: The table appears only if there are any logs to display. This table is sorted by the time, severity, and message.
-

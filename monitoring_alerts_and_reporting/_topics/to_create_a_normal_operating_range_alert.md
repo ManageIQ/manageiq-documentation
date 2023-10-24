@@ -6,7 +6,7 @@ minute to 2 hours. Capacity and utilization must be enabled for normal
 operating ranges to be calculated. See *General Configuration* for more
 information.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click the **Alerts** accordion, then click ![1847](../images/1847.png)
     (**Configuration**), ![1862](../images/1862.png) (**Add a new

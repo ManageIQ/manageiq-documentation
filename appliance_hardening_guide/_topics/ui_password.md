@@ -16,7 +16,7 @@ standard user in the appliance.
     select the **Administrator** under the **Users** section. This
     displays the details for the `admin` user.
 
-4.  On the details page, select menu:Configuration\[Edit this user\]
+4.  On the details page, select **Configuration > Edit this user**
     from the toolbar.
 
 5.  Enter a new password in the **Change Password / Confirm Password**

@@ -106,7 +106,7 @@ associated with the `admin` tenant.
 
     1.  From there, enter the **Username** of an account with privileged access.
 
-    2.  If you selected **SSL** in **Endpoints \> Default \> Security Protocol** earlier, use the **Browse** button to find and set a private key.
+    2.  If you selected **SSL** in **Endpoints > Default > Security Protocol** earlier, use the **Browse** button to find and set a private key.
 
 10. Click **Add** after configuring the infrastructure provider.
 

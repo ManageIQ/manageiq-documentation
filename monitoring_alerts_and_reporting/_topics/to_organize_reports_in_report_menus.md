@@ -3,7 +3,7 @@
 1.  Log in to the console as a user who is assigned either the Super
     Administrator or Administrator Account Role.
 
-2.  Navigate to menu:Overview\[Reports\].
+2.  Navigate to **Overview > Reports**.
 
 3.  Click the **Edit Report Menus** accordion.
 

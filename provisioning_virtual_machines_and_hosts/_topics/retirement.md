@@ -36,7 +36,7 @@ a specific date or immediately.
 
 #### Retiring a Virtual Machine Immediately
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the virtual machine or instance that you want to retire.
 
@@ -52,7 +52,7 @@ You can schedule virtual machine retirement by specifying a date and
 time, or by selecting a relative time a number of months, weeks, days or
 hours ahead of the present time.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the virtual machine or instance that you want to set a
     retirement date for.
@@ -87,7 +87,7 @@ summary screen.
 
 #### Removing a Retirement Date for a Virtual Machine or Instance
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Select the virtual machine or instance that you want to remove the
     retirement date from.
@@ -130,7 +130,7 @@ to change the number of days.
 
 #### Creating a Custom Button to Extend Retirement
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Customization\].
+1.  Navigate to **Automation > Embedded Automate > Customization**.
 
 2.  Click the **Buttons** accordion.
 
@@ -156,10 +156,10 @@ to change the number of days.
 
 #### Changing the Number of Days to Extend Retirement
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
-2.  Click menu:DOMAIN\[Cloud \> VM \> Retirement \> Email \>
-    System \> Request\].
+2.  Click **DOMAIN > Cloud > VM > Retirement > Email >
+    System > Request**.
 
     **Note:**
 

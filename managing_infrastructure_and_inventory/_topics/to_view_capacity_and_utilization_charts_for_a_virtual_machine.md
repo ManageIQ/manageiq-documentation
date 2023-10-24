@@ -15,7 +15,7 @@ You must have a server with network visibility to your provider assigned the ser
 
 The virtual machine must be powered on to collect the data.
 
-1.  From menu:Compute\[Infrastructure \> Virtual Machines\], click the
+1.  From **Compute > Infrastructure > Virtual Machines**, click the
     accordion that you want to view capacity data for.
 
 2.  Click the item you want to view.

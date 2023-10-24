@@ -17,8 +17,8 @@ To add a Google Compute Engine provider to {{ site.data.product.title_short }}, 
 
     **Note:**
 
-    You can generate a private JSON key for your project in menu:IAM &
-    Admin\[Service Accounts\] in Google Cloud Platform. This key is used
+    You can generate a private JSON key for your project in **IAM &
+    Admin > Service Accounts** in Google Cloud Platform. This key is used
     to authenticate against your provider.
 
     For additional information, see the [Google Cloud Platform](https://cloud.google.com/storage/docs/authentication) documentation.

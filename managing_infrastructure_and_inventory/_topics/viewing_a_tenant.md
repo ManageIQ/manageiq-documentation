@@ -1,6 +1,6 @@
 # Viewing Cloud Tenant Relationships
 
-From menu:Compute\[Clouds \> Tenants\], click on a specific cloud tenant
+From **Compute > Clouds > Tenants**, click on a specific cloud tenant
 to view its details.
 
 The screen provides you with a cloud tenant accordion and a cloud tenant

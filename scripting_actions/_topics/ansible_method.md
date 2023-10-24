@@ -14,7 +14,7 @@ parameters specified by the user.
 
 To create a playbook automate method:
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\], then click on a domain under **Datastore**.
+1.  Navigate to **Automation > Automate > Explorer**, then click on a domain under **Datastore**.
 
 2.  Under a namespace, select the class for which you want to create a new method.
 

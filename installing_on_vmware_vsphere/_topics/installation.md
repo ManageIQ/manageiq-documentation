@@ -37,7 +37,7 @@ information, consult the "Deploying an OVF or OVA Template" topic in the [VMware
 
 Use the following procedure to upload the {{ site.data.product.title_short }} appliance OVF template from your local file system using the vSphere Client.
 
-1.  In the vSphere Client, select menu:File\[Deploy OVF Template\]. The
+1.  In the vSphere Client, select **File > Deploy OVF Template**. The
     Deploy OVF Template wizard appears.
 
 2.  Specify the source location and click **Next**.

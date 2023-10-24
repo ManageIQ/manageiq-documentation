@@ -18,7 +18,7 @@ services.
 You can register the appliance with insights, and connect to
 cloud.redhat.com to manage your Red Hat insfrastructure in the cloud.
 
-1.  Navigate to menu:Red Hat Cloud\[Services\].
+1.  Navigate to **Red Hat Cloud > Services**.
 
 2.  Click **Take me there**.
 
@@ -27,13 +27,13 @@ cloud.redhat.com to manage your Red Hat insfrastructure in the cloud.
 To synchronize all of your {{ site.data.product.title_short }} data and providers to
 Red Hat Cloud Services:
 
-1.  Navigate to menu:Red Hat Cloud\[Providers\].
+1.  Navigate to **Red Hat Cloud > Providers**.
 
 2.  Click **Synchronize this Platform to Cloud**.
 
 To synchronize selected providers to Red Hat Cloud Services:
 
-1.  Navigate to menu:Red Hat Cloud\[Providers\].
+1.  Navigate to **Red Hat Cloud > Providers**.
 
 2.  Select the providers you want to synchronize, then click
     **Synchronize**. This will push data for selected providers to Red

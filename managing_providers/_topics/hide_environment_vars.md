@@ -28,8 +28,8 @@ To configure user access to container environment variables:
 
 5.  For **Access Restriction for Services, VMs, and Templates**, select if you want to limit users with this role to only see resources owned by the user or their group, owned by the user, or all resources (**None**).
 
-6.  Expand the **Product Features (Editing)** tree options to show menu:Everything\[Compute \> Containers \> Containers Explorer \> All
-    Containers \> View Containers\].
+6.  Expand the **Product Features (Editing)** tree options to show **Everything > Compute > Containers > Containers Explorer > All
+    Containers > View Containers**.
 
 7.  Clear the **Environment Variables** checkbox to restrict the user role from viewing container environment variables.
 

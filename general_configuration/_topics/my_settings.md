@@ -151,7 +151,7 @@ Use the following procedure to set general view options:
 
 #### Setting Default Views for Services
 
-Use the following procedure to set default views for services in the menu: **Compute** > **Services** tab.
+Use the following procedure to set default views for services in the menu: **Compute > Services** tab.
 
 1.  From the **Settings** menu, browse to **My Settings**, then click on the **Default Views** tab.
 
@@ -172,7 +172,7 @@ Use the following procedure to set default views for services in the menu: **Com
 
 #### Setting Default Views for Clouds
 
-Use the following procedure to set default views for clouds in the menu: **Compute** > **Clouds** tab.
+Use the following procedure to set default views for clouds in the menu: **Compute > Clouds** tab.
 
 1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.
@@ -195,7 +195,7 @@ Use the following procedure to set default views for clouds in the menu: **Compu
 #### Setting Default Views for Infrastructure Components
 
 Use the following procedure to set default views for infrastructure
-components in the menu: **Compute** > **Infrastructure** tab.
+components in the menu: **Compute > Infrastructure** tab.
 
 1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.
@@ -218,7 +218,7 @@ components in the menu: **Compute** > **Infrastructure** tab.
 #### Setting Default Views for Containers
 
 Use the following procedure to set default views for containers in the
-menu: **Compute** > **Containers** tab.
+menu: **Compute > Containers** tab.
 
 1.  From the **Settings** menu, browse to **My Settings**, then click on
     the **Default Views** tab.

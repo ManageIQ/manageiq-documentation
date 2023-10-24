@@ -2,7 +2,7 @@
 
 This procedure shows you how to create a schema.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\], and click the
+1.  Navigate to **Automation > Automate > Explorer**, and click the
     class you want to define a schema for.
 
 2.  Click on the **Schema** tab.
@@ -49,4 +49,3 @@ The class schema is created, and you can now add instances to it.
 **Note:**
 
 You may need to edit a class schema to reorder, add, edit, or remove a field. Classes define the order in which fields are processed and you may need to process some items before others.
-

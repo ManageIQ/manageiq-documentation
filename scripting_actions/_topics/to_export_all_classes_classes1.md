@@ -2,7 +2,7 @@
 
 This procedure shows you how export datastore classes as a YAML file.
 
-1.  Navigate to menu:Automation\[Automate \> Import/Export\].
+1.  Navigate to **Automation > Automate > Import/Export**.
 
 2.  Click ![image](../images/2371.png) (**Export all Datastore classes and
     instances to a file**).

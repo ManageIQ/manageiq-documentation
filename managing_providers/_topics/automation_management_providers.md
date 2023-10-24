@@ -38,7 +38,7 @@ In {{ site.data.product.title_short }}, the **Embedded Ansible** role is disable
 
 **Note:** Configure your {{ site.data.product.title_short }} appliance network identity (hostname/IP address) before enabling the Embedded Ansible server role. Restart the `evmserverd` service on the appliance with the enabled Embedded Ansible server role after making any changes to the hostname or IP address.
 
-1. Browse to the settings menu, then **Configuration** > **Settings**.
+1. Browse to the settings menu, then **Configuration > Settings**.
 
 2. Select the desired server under **Zones**.
 
@@ -48,7 +48,7 @@ In {{ site.data.product.title_short }}, the **Embedded Ansible** role is disable
 
 Verify that the Embedded Ansible worker has started to utilize its features.
 
-1. Browse to the settings menu, then **Configuration** > **Diagnostics** and click on the desired server.
+1. Browse to the settings menu, then **Configuration > Diagnostics** and click on the desired server.
 
 2. Click on the **Roles by Servers** tab.
 
@@ -300,7 +300,7 @@ To configure a custom button to execute an Ansible Tower job on a virtual machin
 
 2. Click the **Buttons** accordion menu.
 
-3. Click menu: **VM and Instance** > **Unassigned Buttons**. This configures the button to run on virtual machines or instances.
+3. Click menu: **VM and Instance > Unassigned Buttons**. This configures the button to run on virtual machines or instances.
 
 4. Click **Configuration**, then click ![1862](../images/1862.png) (**Add a new Button**).
 

@@ -97,7 +97,7 @@ web user interface.
 
 3.  Click the **Settings** sub tab.
 
-4.  Click menu:System\[Security Profile\] from the list on the left.
+4.  Click **System > Security Profile** from the list on the left.
 
 5.  Click **Edit**.
 
@@ -111,8 +111,8 @@ firewall ports must be enabled on each VMware ESXi host running virtual
 machines that will be accessed through the HTML5 or VNC console on the
 {{ site.data.product.title_short }}.
 
-1.  Log in to your vSphere Client and select menu:Home\[Inventory \>
-    Hosts and Clusters\].
+1.  Log in to your vSphere Client and select **Home > Inventory >
+    Hosts and Clusters**.
 
 2.  In the **Hosts/Clusters** tree view, select the VMware ESXi host you
     want to configure for HTML5 or VNC console access.

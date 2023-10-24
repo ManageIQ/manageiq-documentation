@@ -39,7 +39,7 @@ A catalog is a way to organize or categorize catalog items and bundles.
 Before you can associate a catalog item into a catalog, create an empty
 catalog first:
 
-1.  Navigate to menu:Services\[Catalogs\].
+1.  Navigate to **Services > Catalogs**.
 
 2.  Click the **Catalogs** accordion.
 

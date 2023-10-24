@@ -96,7 +96,7 @@ The **Virtual Machine Filter** accordion is provided so that you can
 easily navigate through groups of virtual machines. You can use the ones
 provided or create your own through **Advanced Filtering** capabilities.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Go to the **VMs** or **Templates** accordion.
 
@@ -135,7 +135,7 @@ information since a snapshot might be created.
 
 SmartState Analysis of a virtual machine requires access to its host. To perform a successful analysis, edit the virtual machine’s host and enter the host’s authentication credentials.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to analyze.
 
@@ -182,7 +182,7 @@ Use the comparison feature to:
 
 Compare virtual machines and templates:
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the accordion for the items to analyze.
 

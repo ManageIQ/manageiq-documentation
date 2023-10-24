@@ -6,7 +6,7 @@ dynamic dialogs.
 
 To create an expression method:
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\], then click on a
+1.  Navigate to **Automation > Automate > Explorer**, then click on a
     domain under **Datastore**.
 
 2.  Under a namespace, select the class for which you want to create a

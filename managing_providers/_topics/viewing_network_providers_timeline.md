@@ -3,7 +3,7 @@
 View the timeline of events for instances registered to a network
 provider.
 
-1.  Navigate to menu:Networks\[Providers\].
+1.  Navigate to **Networks > Providers**.
 
 2.  Click the network provider you want to monitor the timeline for.
 

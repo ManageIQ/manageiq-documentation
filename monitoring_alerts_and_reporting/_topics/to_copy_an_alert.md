@@ -3,7 +3,7 @@
 You can copy an existing alert to create a new alert that is similar to
 the existing one, then change the values associated with it.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click on the **Alert** accordion, then click on the alert that you
     want to copy.

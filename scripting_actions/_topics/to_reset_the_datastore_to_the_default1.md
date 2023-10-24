@@ -2,7 +2,7 @@
 
 This procedure shows you how reset the datastores to the default.
 
-1.  Navigate to menu:Automation\[Automate \> Import/Export\].
+1.  Navigate to **Automation > Automate > Import/Export**.
 
 2.  Export the datastore so that you have a backup.
 

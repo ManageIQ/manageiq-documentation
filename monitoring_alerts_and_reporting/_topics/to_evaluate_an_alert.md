@@ -1,6 +1,6 @@
 ### Evaluating an Alert
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click the **Actions** accordion, then click
     ![1847](../images/1847.png) (**Configuration**),

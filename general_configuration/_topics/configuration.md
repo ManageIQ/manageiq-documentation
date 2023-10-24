@@ -85,14 +85,14 @@ Use **C & U Collection Settings** to select specifically which clusters and data
 the Capacity & Utilization **Coordinator**, **Data Collector**, and **Data Processor** roles enabled as well. See Section **Server Control Settings**.
 
 After a provider has been discovered and its relationships refreshed, view the clusters, hosts, and datastores from the settings menu.
-Navigate to **Settings**, then click on **Application Settings**. Click the menu: **Settings** > **Region**, then select the **C & U Collection** tab.
+Navigate to **Settings**, then click on **Application Settings**. Click the menu: **Settings > Region**, then select the **C & U Collection** tab.
 
 ###### Enabling a Cluster, Host, or Datastore for Capacity and
 Utilization Collection
 
 To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 
-1.  Click **Settings**, then click on **Application Settings**. 
+1.  Click **Settings**, then click on **Application Settings**.
 
 2.  Click the **Settings** accordion, then select **Region**, then click on the **C & U Collection** tab.
 
@@ -122,7 +122,7 @@ To enable a cluster, host, or datastore for Capacity and Utilization Collection:
 {{ site.data.product.title_short }} allows you to create your own set of tags and tag
 categories. Use tags to create a customized, searchable index for your resources. Depending on your database type, your tags may be case sensitive. After creating these values, you can apply them to your resources. There are two kinds of tags.
 
-  - **Company tags** which you will see under **My Company Tags** for a resource. Create company tags from the settings menu. Browse to **Settings** > **Application Settings**. Click the **Settings** accordion, then select the **Region** and click on the **Tags** tab, then **My Company Tags**. A selection of company tags is provided to you by default as
+  - **Company tags** which you will see under **My Company Tags** for a resource. Create company tags from the settings menu. Browse to **Settings > Application Settings**. Click the **Settings** accordion, then select the **Region** and click on the **Tags** tab, then **My Company Tags**. A selection of company tags is provided to you by default as
     samples. These can be deleted if you do not need them, but are not
     recreated by {{ site.data.product.title_short }}.
 
@@ -186,7 +186,7 @@ If no values are created for a category, you are unable to assign a value from t
 
 To delete a tag category:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then **Region**.
 
@@ -207,7 +207,7 @@ tags from the category are unassigned from all resources.
 
 To create a company tag:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then **Region**.
 
@@ -224,7 +224,7 @@ To create a company tag:
       - For some databases such as **PostgreSQL**, tags are case
         sensitive. For example, filtering by 'Linux' in title case give
         you different results from filtering by 'linux' in lower case.
-    
+
 5.  Click **Add** under the **Actions** column, and type a **Name** and **Description** for your new value.
 
 6.  Click **Add** once again to add the new entry to the table.
@@ -233,7 +233,7 @@ To create a company tag:
 
 To delete a company tag:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then **Region**.
 
@@ -245,7 +245,7 @@ To delete a company tag:
     **Note:**
 
     When you delete a tag, the tag is also deleted from any resource to which it was assigned.
-    
+
 5.  Click **OK** to confirm.
 
 ###### Importing Tags for Virtual Machines
@@ -268,7 +268,7 @@ You can import a **CSV** file with tag assignments into the VMDB. For the import
 To import tags for a virtual machine from a CSV file:
 
 1.  Make sure the **CSV file** is in the required format.
-2.  Browse to **Settings** > **Application Settings**.
+2.  Browse to **Settings > Application Settings**.
 3.  Click on the **Settings** accordion, then **Region**.
 4.  Select the **Tags** tab, then click on
     the **Import Tags** tab.
@@ -323,7 +323,7 @@ page as the **Custom Identifier** in the **Properties** area. All of the custom 
 To import asset tags for a virtual machine from a CSV file
 
 1.  Make sure the **CSV file** is in the required format.
-2.  Browse to **Settings** > **Application Settings**.
+2.  Browse to **Settings > Application Settings**.
 3.  Click on the **Settings** accordion, then **Region**.
 4.  Select the **Tags** tab, then click on
     the **Import Variables** tab.
@@ -344,13 +344,13 @@ To import asset tags for a virtual machine from a CSV file
 
 You can map labels from external providers to tags within {{ site.data.product.title_short }}.
 
-1. Browse to **Settings** > **Application Settings**.
+1. Browse to **Settings > Application Settings**.
 2. Click on the **Settings** accordion, then select the **Region**.
 3. Select the **Tags** tab, then click on
     the **Map Tags** tab.
 4. Click **Add** to create a tag map.
 5. In the **Choose a resource entity and label**, select the **Entity** and enter a **Resource label**, then enter a **Tag Category**.
-6. Click **Add**.     
+6. Click **Add**.
 
 ##### Customizing the Help Menu
 
@@ -362,7 +362,7 @@ Any change to the help menu will take effect upon a full page reload.
 
 Customize the help menu using the following steps:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then **Region**.
 3.  Click on the **Help Menu** tab.
 4.  Provide custom **Menu item labels** and an associated **URL** for each. Define how each window should open by selecting from the options in the **Open in** menu.
@@ -380,7 +380,7 @@ one.
 
 To create a host analysis profile:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
 3.  Click **Configuration**, and ![plus
@@ -406,7 +406,7 @@ To create a host analysis profile:
 
 To create a virtual machine analysis profile:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
 3.  Click **Configuration**, and ![plus green](../images/plus_green.png) **Add VM Analysis Profile**.
@@ -435,7 +435,7 @@ To create a virtual machine analysis profile:
 
 To edit an analysis profile:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 3.  Check the analysis profile you want to edit.
 
@@ -452,7 +452,7 @@ hosts must be re-analyzed to collect the new or modified information.
 
 To copy an analysis profile:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
 3.  Check the analysis profile you want to copy.
@@ -471,7 +471,7 @@ If you want to set an analysis profile to be used for all virtual machines, you 
 
 To create a default analysis profile:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Analysis Profiles**.
 
 3.  Click on the analysis profile you want to set as the default.
@@ -503,7 +503,7 @@ Only users assigned the super administrator role can create zones. There must al
 
 To create a zone:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 
 3.  Click **Configuration**, and ![plus green](../images/plus_green.png) **Add a new Zone** to create a zone.
@@ -512,7 +512,7 @@ To create a zone:
 
 5.  Use **SmartProxy Server IP** to specify the IP address of the server that you want SmartProxies installed in this zone to report to. If this is not set, then the IP address of the server that deployed the SmartProxy is used. This does not apply to embedded SmartProxies.
 
-6.  Optionally, you can configure **NTP servers** for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the menu: **Operations** > **Server** page.
+6.  Optionally, you can configure **NTP servers** for the entire zone in the NTP Servers area. These settings will be used if the NTP servers have not been set for the appliance in the menu: **Operations > Server** page.
 
 7.  In the **Settings** area, set the number for **Max Active VM Scans**. The default is `Unlimited`.
 
@@ -522,7 +522,7 @@ To create a zone:
 
 To delete a zone:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 
 3.  Click the zone you want to remove.
@@ -531,7 +531,7 @@ To delete a zone:
 
     You cannot delete a zone if there are servers assigned to it.
 
-4.  Click ![1847](../images/1847.png) **Configuration**, then click 
+4.  Click ![1847](../images/1847.png) **Configuration**, then click
     ![gui delete](../images/gui_delete.png) **Delete this Zone**.
 
 5.  Click **OK** to confirm.
@@ -540,7 +540,7 @@ To delete a zone:
 
 To edit a zone:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 3.  Click the zone you want to edit.
 
@@ -557,7 +557,7 @@ Enable SmartProxy Affinity for zones containing servers with the SmartProxy role
 
 To add SmartProxy Affinity to a zone:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 3.  Click the zone in which you want to enable SmartProxy Affinity.
 4.  Click the **SmartProxy Affinity** tab and click the appropriate
@@ -578,7 +578,7 @@ The server selection options are only available if you have multiple servers sha
 
 To change server settings:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 2.  Click on the **Settings** accordion, then click **Zones**.
 3.  Click the zone where the {{ site.data.product.title_short }} server is located.
 
@@ -663,7 +663,7 @@ are enabled by default on all servers.
 | Database Operations                   | Use Database Operations to enable this {{ site.data.product.title_short }} server to run database backups or garbage collection.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  | Zone                 | Active/Active                      |
 | Embedded Ansible                      | This role is disabled by default. The Embedded Ansible role supports Ansible Automation Inside functionality. Enable this role to configure playbook repositories and run playbooks natively to back service catalog items. **NOTE**: Enable the Provider Inventory server role in the same zone as the Embedded Ansible server role to ensure proper functionality.                                                                                                                                                                                                                                                                                 | Region               | Primary/Secondary                  |
 | Event Monitor                         | This role is enabled by default and provides the information shown in timelines. The Event Monitor is responsible for the work between the {{ site.data.product.title_short }} server and your providers. It starts 2 workers for each provider. One worker, the monitor, is responsible for maintaining a connection to a provider, catching events, and putting them on the {{ site.data.product.title_short }} message queue for processing. The second worker, the handler, is a message queue worker responsible for delivering only those messages for a provider. You should have at least one of these in each zone.                                                   | Zone                 | Primary/Secondary                  |
-| Git Repository                        | The Git Repositories Owner server role supports importing domains into automate from a git repository. This feature is available from the Automate \> Import/Export screen in the {{ site.data.product.title_short }} user interface.                                                                                                                                                                                                                                                                                                                                                                                                                             | Region               | Primary/Secondary                  |
+| Git Repository                        | The Git Repositories Owner server role supports importing domains into automate from a git repository. This feature is available from the **Automate > Import/Export** screen in the {{ site.data.product.title_short }} user interface.                                                                                                                                                                                                                                                                                                                                                                                                                             | Region               | Primary/Secondary                  |
 | Notifier                              | Use this role if you will be using {{ site.data.product.title_short }} Control or Automate to forward SNMP traps to a monitoring system or send e-mails. See [Creating an Alert](#_to_create_an_alert) for details on creating SNMP alerts. If more than one {{ site.data.product.title_short }} server in a specific region has this role, only one will be active at a time.                                                                                                                                                                                                                                                                                                                | Region               | Primary/Secondary                  |
 | Provider Inventory                    | This role is enabled by default. This role is responsible for refreshing provider information including EMS, hosts, virtual machines, and clusters, and is also responsible for capturing datastore file lists. If more than one {{ site.data.product.title_short }} server in a specific zone has this role, only one will be active at a time. Required in the same zone as a {{ site.data.product.title_short }} appliance with the Embedded Ansible role enabled.                                                                                                                                                                                                          | Zone                 | Primary/Secondary                  |
 | Provider Operations                   | This role is enabled by default. This role sends stop, start, suspend, shutdown guest, clone, reconfigure, and unregister to the provider, directly from the console or through a policy action if you have {{ site.data.product.title_short }} Control. More than one {{ site.data.product.title_short }} server can have this role in a zone.                                                                                                                                                                                                                                                                                                                                | Zone                 | Active/Active                      |
@@ -751,8 +751,8 @@ To enable the notifier role:
 
 1. Access each SNMP processing appliance using their web interfaces.
 
-2. Browse to **Settings** > **Application Settings**.
-    
+2. Browse to **Settings > Application Settings**.
+
 3. Click on the **Settings** accordion, then click **Zones**. Select the zone where the EVM server is located, and select the EVM server.
 
 4.  In the **Server Control** area, set the **Notifier** server role
@@ -762,7 +762,7 @@ To enable the notifier role:
 
 To set the failover priority role:
 
-1.  Browse to **Settings** > **Application Settings** then click the **Diagnostics** accordion.
+1.  Browse to **Settings > Application Settings** then click the **Diagnostics** accordion.
 
 2.  Select the zone where the EVM server is located.
 
@@ -845,7 +845,7 @@ LDAP, LDAPS, Amazon, or an external IPA server.
 
 To change authentication settings:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Settings** accordion, then click **Zones**.
 
@@ -874,7 +874,7 @@ Only make these changes when directed to by Red Hat Support.
 
 To change the settings for a worker
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -904,7 +904,7 @@ to validate your new settings before restarting the server.
 
 To change a database setting:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -955,7 +955,7 @@ Make sure the desired logo is accessible from the computer where you are running
 
 To upload a custom logo to the user interface:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -989,7 +989,7 @@ Make sure the background image that you want to use is accessible from the compu
 
 To customize the login background:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1018,7 +1018,7 @@ To customize the login background:
 
 To customize the login panel text:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Zones**.
 
@@ -1041,7 +1041,7 @@ To customize the login panel text:
 To enable displaying your custom logo in the corner of the
 {{ site.data.product.title_short }} user interface and on the login screen:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Access Control** accordion.
 
@@ -1232,9 +1232,9 @@ Table: log\_depot
 
 | Parameters | Description                                                                                                                                                                         |
 | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| uri        | Specify the URI for the log depot. This is the same as the URI in menu:Configuration\[Diagnostics \> Collect Logs\] in the appliance console. Default: blank                        |
-| username   | Specify the user name for the log depot. This is the same as the user ID in menu:Configuration\[Diagnostics \> Collect Logs\] in the appliance console. Default: blank              |
-| password   | Specify the password for the user for the log depot. This is the same as the password in menu:Configuration\[Diagnostics \> Collect Logs\] in the appliance console. Default: blank |
+| uri        | Specify the URI for the log depot. This is the same as the URI in **Configuration > Diagnostics > Collect Logs** in the appliance console. Default: blank                        |
+| username   | Specify the user name for the log depot. This is the same as the user ID in **Configuration > Diagnostics > Collect Logs** in the appliance console. Default: blank              |
+| password   | Specify the password for the user for the log depot. This is the same as the password in **Configuration > Diagnostics > Collect Logs** in the appliance console. Default: blank |
 
 Table: performance
 
@@ -1482,7 +1482,7 @@ addition, you can schedule compliance checks, and database backups.
 
 To schedule a SmartState Analysis or Compliance Check:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
@@ -1570,7 +1570,7 @@ To schedule a SmartState Analysis or Compliance Check:
 
 To modify a schedule:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Settings** accordion, then click **Schedules**.
 
@@ -1626,7 +1626,7 @@ schedules, including:
 
 ### Access Control
 
-Browse to **Settings** > **Application Settings**. Click
+Browse to **Settings > Application Settings**. Click
 on the **Access Control** accordion to see a hierarchy of the
 configurable items for users, groups, roles, and tenants. You can add and modify users, groups, account roles, tenants, and projects.
 
@@ -1637,7 +1637,7 @@ objects.
 
 To create a tenant:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -1660,7 +1660,7 @@ organization.
 
 To create a project:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -1687,7 +1687,7 @@ belongs to multiple groups, you must change to the desired group before
 allocating or editing group quota. See [Groups](#groups) for more
 details.
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -1708,7 +1708,7 @@ details.
 
 To tag tenants and projects:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Tenants**.
 
@@ -1725,7 +1725,7 @@ To tag tenants and projects:
 
 To create a user:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Users**.
 
@@ -1763,7 +1763,7 @@ information or functions of the server.
 
 To delete a user:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Users**.
 
@@ -1795,7 +1795,7 @@ and select your preferred group from the listed groups.
 
 To create a user group:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Groups**.
 
@@ -1869,7 +1869,7 @@ directory service.
 
 To view details of a role and its level of access:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Roles**.
 
@@ -1905,7 +1905,7 @@ The table below shows a summary of the functions available to each role.
 
 To create a role:
 
-1.  Click **Settings** > **Application Settings**.
+1.  Click **Settings > Application Settings**.
 
 2.  Click on the **Access Control** accordion, then click **Roles**.
 
@@ -1926,7 +1926,7 @@ To create a role:
 
 ### Diagnostics
 
-Browse to **Settings** > **Application Settings**. Click on the **Diagnostics** tab to see the status of the different {{ site.data.product.title_short }} roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information. The Diagnostics area is designed in a hierarchy.
+Browse to **Settings > Application Settings**. Click on the **Diagnostics** tab to see the status of the different {{ site.data.product.title_short }} roles and workers for each server, view and collect logs, and gather data if there are any gaps in capacity and utilization information. The Diagnostics area is designed in a hierarchy.
 
   - At the **region** level, you can see replication status, backup the VMDB, and run garbage collection on the VMDB.
 
@@ -1988,7 +1988,7 @@ There are three role priorities.
 
 To set the priority of a failover role:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2019,7 +2019,7 @@ collect capacity and utilization data that may be missing.
 
 To view the status of server roles:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2051,7 +2051,7 @@ To view the status of server roles:
 
 To remove an inactive server:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2088,7 +2088,7 @@ location.
 
 To set the location of the log depot:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2113,7 +2113,7 @@ To set the location of the log depot:
 
 To collect and download logs from all servers in a zone:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2144,7 +2144,7 @@ To repair capacity and utilization data:
 
 1.  Log in to a {{ site.data.product.title_short }} appliance located in the zone for which you want to gather the data.
 
-2.  Browse to **Settings** > **Application Settings**.
+2.  Browse to **Settings > Application Settings**.
 
 3.  Click on the **Diagnostics** accordion, then click the **Zone** that you want to view.
 
@@ -2219,7 +2219,7 @@ You can see additional information on and restart the following items:
 
 To reload worker display:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2235,7 +2235,7 @@ To reload worker display:
 
 To restart a worker:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2279,7 +2279,7 @@ server level supersede the ones at the zone level.
 
 To set the location of the log depot for a specific server
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2307,7 +2307,7 @@ To set the location of the log depot for a specific server
 
 To Collect the Current Log Set of a Server
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2327,7 +2327,7 @@ To Collect the Current Log Set of a Server
 
 To Collect All Log Sets from a Server
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2358,7 +2358,7 @@ communication with the SmartProxy and tasks.
 
 To view the server log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2374,7 +2374,7 @@ of the log.
 
 To reload the server log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2389,7 +2389,7 @@ To reload the server log:
 
 To download the server log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2409,7 +2409,7 @@ Use the **Audit Log** to see changes to the user interface and authentication.
 
 To view the audit log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2424,7 +2424,7 @@ The server automatically retrieves the last 1000 lines of the log.
 
 To reload the audit log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2439,7 +2439,7 @@ To reload the audit log:
 
 To download the audit log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the Zone that you want to view.
 
@@ -2456,7 +2456,7 @@ Use the production log to see all actions performed using the console.
 
 To view the production log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that
     you want to view.
@@ -2472,7 +2472,7 @@ of the log.
 
 To reload the production log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the Zone that you want to view.
 
@@ -2487,7 +2487,7 @@ To reload the production log:
 
 To download the production log:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click on the **Diagnostics** accordion, then click the **Zone** that you want to view.
 
@@ -2508,7 +2508,7 @@ connection, and database utilization.
 
 To view information on the VMDB:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Database** accordion.
 
@@ -2600,7 +2600,7 @@ Centralized administration in {{ site.data.product.title_short }} supports life 
 
 Configure a {{ site.data.product.title_short }} instance to act as a remote copy from which data will be replicated to the global copy.
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Settings** accordion.
 
@@ -2679,7 +2679,7 @@ You can reset the replication relationship between the global copy and
 remote copies by temporarily removing and re-enabling the subscription
 from the global copy.
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Settings** accordion.
 
@@ -2719,7 +2719,7 @@ from the global copy.
 #### Backing Up and Restoring {{ site.data.product.title_short }} in a Kubernetes Based Environment (podified)
 
 **Prerequisites:**
-   - Velero and Restic must be installed and working in your cluster. For more information on Velero, see the [Velero documentation](https://velero.io/docs/v1.5/). For more information on Restic, see the [Restic documentation](https://restic.readthedocs.io/en/stable/) 
+   - Velero and Restic must be installed and working in your cluster. For more information on Velero, see the [Velero documentation](https://velero.io/docs/v1.5/). For more information on Restic, see the [Restic documentation](https://restic.readthedocs.io/en/stable/)
 
 **Note:** The operator adds labels and/or annotations to everything that needs to be backed up. You can easily and quickly backup only what is required. The operator will add annotations for restic volume backups for example, `backup.velero.io/backup-volumes: <volume-label>`.
 
@@ -2742,7 +2742,7 @@ from the global copy.
 
 #### Backing Up and Restoring a Database for an Appliance Based Environment
 
-##### Running a Single Database Backup 
+##### Running a Single Database Backup
 
 {{ site.data.product.title_short }} supports database backups to **Network File System
 (NFS)**, **Samba**, **Amazon Web Service(AWS) S3** and **OpenStack
@@ -2755,7 +2755,7 @@ this operation.
 
 To run a single database backup:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Diagnostics** accordion and click the **Region** name.
 
@@ -2942,7 +2942,7 @@ order to reclaim unused space in your VMDB.
 
 To run database garbage collection:
 
-1.  Browse to **Settings** > **Application Settings**.
+1.  Browse to **Settings > Application Settings**.
 
 2.  Click the **Diagnostics** accordion and click the **Region** name.
 
@@ -3085,7 +3085,7 @@ to access the server, and restart the {{ site.data.product.title_short }} applia
 
 You can enable events syndication in the `Advanced` settings:
 
-1. From the menu, go to **Settings** > **Application Settings**.
+1. From the menu, go to **Settings > Application Settings**.
 
 2. Expand the **Settings** accordian. When you select the **Settings** accordion, you are automatically taken to the server list under **Zones**.
 

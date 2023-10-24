@@ -1,6 +1,6 @@
 ### Exporting a Policy, Policy Profile, or an Alert
 
-1.  Navigate to menu:Control\[Import/Export\].
+1.  Navigate to **Control > Import/Export**.
 
 2.  From the **Export dropdown**, select policy profiles, policies, or
     alerts, depending on what you want to export.

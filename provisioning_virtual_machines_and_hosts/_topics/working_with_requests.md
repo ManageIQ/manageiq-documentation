@@ -30,7 +30,7 @@ trillion database IDs, this number can be several digits long.
 
 #### Reloading the Status of Provisioning Requests
 
-1.  Navigate to menu:Services\[Requests\].
+1.  Navigate to **Services > Requests**.
 
 2.  Click ![2106](../images/2106.png)(**Refreshes the current display**).
 
@@ -40,7 +40,7 @@ After a user creates provisioning request, administrators have the
 ability to approve the request and allow {{ site.data.product.title_short }} to complete
 virtual machine or instance creation.
 
-1.  Navigate to menu:Services\[Requests\].
+1.  Navigate to **Services > Requests**.
 
 2.  Click on the request you want to approve.
 
@@ -50,7 +50,7 @@ virtual machine or instance creation.
 
 #### Denying a Provisioning Request
 
-1.  Navigate to menu:Services\[Requests\].
+1.  Navigate to **Services > Requests**.
 
 2.  Click on the request you want to deny.
 
@@ -60,7 +60,7 @@ virtual machine or instance creation.
 
 #### Copying a Provisioning Request
 
-1.  Navigate to menu:Services\[Requests\].
+1.  Navigate to **Services > Requests**.
 
 2.  Click on the request you want to copy.
 
@@ -79,7 +79,7 @@ If the logged in user is not same as the requester or the request has been alrea
 
 #### Editing a Provisioning Request
 
-1.  Navigate to menu:Services\[Requests\].
+1.  Navigate to **Services > Requests**.
 
 2.  Click on the request you want to edit.
 
@@ -92,7 +92,7 @@ If the logged in user is not same as the requester or the request has been alrea
 
 #### Deleting a Provisioning Request
 
-1.  Navigate to menu:Services\[Requests\].
+1.  Navigate to **Services > Requests**.
 
 2.  Click on the request you want to delete.
 
@@ -109,9 +109,9 @@ You can do this either as a global default or on a per template basis.
 ##### Enabling Global Defaults for Automatic Approval
 
 To enable a global set of default approval values, edit the defaults
-instance by navigating to menu:Automation\[Embedded Automate \> Explorer\], then
-menu:DOMAIN\[Cloud|Infrastructure \> VM \> Provisioning \> StateMachines
-\> ProvisionRequestApproval\] in the accordion menu. The parameters in
+instance by navigating to **Automation > Embedded Automate > Explorer**, then
+**DOMAIN > Cloud|Infrastructure > VM > Provisioning > StateMachines
+\> ProvisionRequestApproval** in the accordion menu. The parameters in
 this instance are used by the methods in that same class. By default,
 the maximum number of virtual machines or instances that can be
 automatically approved for provisioning is 1. To skip the check for the
@@ -119,11 +119,11 @@ maximum number of virtual machines, set this field to 0. Set this field
 to -1 to force manual approval. At a minimum, you must change this
 parameter for all others to be validated.
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
-2.  From the tree in the accordion menu, select menu:DOMAIN\[Cloud \> VM
-    \> Provisioning \> StateMachines \> ProvisionRequestApproval
-    Class\].
+2.  From the tree in the accordion menu, select **DOMAIN > Cloud > VM
+    > Provisioning > StateMachines > ProvisionRequestApproval
+    Class**.
 
     **Note:**
 
@@ -166,7 +166,7 @@ The thresholds for automatic approval are set. The next time a provision request
 
 ##### Assigning Tags to a Template for Auto Approval
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click the **Templates** accordion, and select the templates that you
     want to tag.
@@ -184,7 +184,7 @@ The thresholds for automatic approval for a specific template are set. The next 
 {{ site.data.product.title_short }} contains a set of Automate instances for provisioning. These Automate instances also include email fields to set the sender and recipient of provisioning notifications, such as requests. These fields
 are set to **evmadmin@company.com** as a default.
 
-1.  Navigate to menu:Automation\[Embedded Automate \> Explorer\].
+1.  Navigate to **Automation > Embedded Automate > Explorer**.
 
 2.  Select an instance within the chosen class.
 

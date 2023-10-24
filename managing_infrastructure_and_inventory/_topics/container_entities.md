@@ -14,7 +14,7 @@ page also provides metrics for **Aggregated Node Utilization**,
 
 ![Containers Overview](../images/containers-overview.png)
 
-1.  Browse to menu: **Compute** > **Containers** > **Overview**.
+1.  Browse to menu: **Compute > Containers > Overview**.
 
 2.  Click the desired containers entity, or provider, if applicable, for viewing the summary with further information.
 
@@ -43,7 +43,7 @@ containers providers and projects to which {{ site.data.product.title_short }} h
 
 ### Viewing the Topology for Container Providers
 
-1.  Browse to menu: **Compute** > **Containers** > **Providers**.
+1.  Browse to menu: **Compute > Containers > Providers**.
 
 2.  Click the desired containers provider for viewing the provider summary.
 
@@ -55,7 +55,7 @@ containers providers and projects to which {{ site.data.product.title_short }} h
 The project topology page displays the project as the center node,
 surrounded by its related entities.
 
-1.  Browse to menu: **Compute** > **Containers** > **Projects**.
+1.  Browse to menu: **Compute > Containers > Projects**.
 
 2.  Click on a project.
 
@@ -78,7 +78,7 @@ surrounded by its related entities.
 Perform a SmartState Analysis of a container image to inspect the
 packages included in an image.
 
-1.  Browse to menu: **Compute** > **Containers** > **Container Images**.
+1.  Browse to menu: **Compute > Containers > Container Images**.
 
 2.  Check the container image to analyze. You can check multiple images.
 
@@ -128,7 +128,7 @@ To configure automatic tagging on container entities using labels:
 
 1.  Note the *key* of the OpenShift label you want to map to a {{ site.data.product.title_short }} tag. OpenShift labels consist of two parts: a *key* and a *value*.
 
-    1.  Browse to menu: **Compute** > **Containers** > **Container Nodes**.
+    1.  Browse to menu: **Compute > Containers > Container Nodes**.
 
     2.  Select a node to open its summary page.
 
@@ -169,7 +169,7 @@ To configure automatic tagging on container entities using labels:
 
 5.  Refresh the provider to complete the mapping:
 
-    1.  Browse to menu: **Compute** > **Containers** > **Providers**.
+    1.  Browse to menu: **Compute > Containers > Providers**.
 
     2.  Select the provider to refresh.
 

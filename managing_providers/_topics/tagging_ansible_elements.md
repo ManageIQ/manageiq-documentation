@@ -7,7 +7,7 @@ permissions.
 
 ## Adding Tags to Ansible Playbooks
 
-1.  Navigate to menu:Automate\[Ansible \> Playbooks\].
+1.  Navigate to **Automate > Ansible > Playbooks**.
 
 2.  Select the checkboxes for the Ansible playbooks to tag.
 
@@ -22,7 +22,7 @@ permissions.
 
 ## Adding Tags to Ansible Repositories
 
-1.  Navigate to menu:Automate\[Ansible \> Repositories\].
+1.  Navigate to **Automate > Ansible > Repositories**.
 
 2.  Select the checkboxes for the Ansible repositories to tag.
 
@@ -37,7 +37,7 @@ permissions.
 
 ## Adding Tags to Ansible Credentials
 
-1.  Navigate to menu:Automate\[Ansible \> credentials\].
+1.  Navigate to **Automate > Ansible > credentials**.
 
 2.  Select the checkboxes for the Ansible credentials to tag.
 

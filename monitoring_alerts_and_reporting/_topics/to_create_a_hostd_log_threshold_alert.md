@@ -6,7 +6,7 @@ with event log items is required for this feature. The following example
 shows steps to check the host’s log for a failure to validate a virtual
 machine’s IP address.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click the **Alert** accordion.
 

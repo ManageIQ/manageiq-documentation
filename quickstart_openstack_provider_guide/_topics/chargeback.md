@@ -14,7 +14,7 @@ one rate is assigned to one usage range, and another rate is assigned to
 a different usage range. You can also assign fixed and variable rates
 per tier if desired.
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Navigate to **Overview > Chargeback**.
 
 2.  Click the **Rates** accordion and select **Compute** to create a CPU
     chargeback rate.
@@ -34,7 +34,7 @@ per tier if desired.
 
 After assigning a chargeback rate, assign it to a cloud provider.
 
-1.  Navigate to menu:Overview\[Chargeback\].
+1.  Navigate to **Overview > Chargeback**.
 
 2.  Click the **Assignments** accordion, and click either **Compute** or
     **Storage**.

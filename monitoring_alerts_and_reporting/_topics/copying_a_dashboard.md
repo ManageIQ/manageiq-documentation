@@ -6,7 +6,7 @@ users who do not have permissions to manage resources.
 You can copy a dashboard to another user group by completing the
 following steps as an administrative user:
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Dashboards** accordion, then select the dashboard to
     copy.
@@ -25,5 +25,5 @@ The copied dashboard is now available to all users in the group you
 selected.
 
 To view the dashboards available to each group, click the **Dashboards**
-accordion, then **All Dashboards \> All Groups**, and click the group to
+accordion, then **All Dashboards > All Groups**, and click the group to
 see a list.

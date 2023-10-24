@@ -3,7 +3,7 @@
 Edit the properties of an instance or image to set parent and child
 instances. SmartState Analysis also can detect this.
 
-1.  From menu:Compute\[Clouds \> Instances\].
+1.  From **Compute > Clouds > Instances**.
 
 2.  Click the accordion for the items to edit.
 

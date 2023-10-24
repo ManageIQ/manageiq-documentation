@@ -21,7 +21,7 @@ administrative or operational activities.
 
 Provisioning requires the **Automation Engine** server role enabled.
 Check your server role settings in the settings menu,
-menu:Configuration\[Server \> Server Control\].
+**Configuration > Server > Server Control**.
 
 </div>
 

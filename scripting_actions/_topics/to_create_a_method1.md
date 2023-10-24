@@ -2,7 +2,7 @@
 
 This procedure shows you how to create a method.
 
-1.  Navigate to menu:Automation\[Automate \> Explorer\], navigate to the
+1.  Navigate to **Automation > Automate > Explorer**, navigate to the
     class where you want to create a method.
 
 2.  Click the **Methods** tab.

@@ -1,6 +1,6 @@
 ### Creating a Report Widget
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click on the **Dashboard Widgets** accordion, then choose the
     **Reports** folder.

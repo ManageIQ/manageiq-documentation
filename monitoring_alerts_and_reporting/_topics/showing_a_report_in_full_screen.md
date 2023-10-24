@@ -3,9 +3,9 @@
 View the report in full screen to examine report details. From full
 screen, you can also print the chart that accompanies a report.
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
-2.  Click the menu:Reports\[All Reports\] accordion and select the
+2.  Click the **Reports > All Reports** accordion and select the
     report that you want to view.
 
 3.  Click the **Saved Reports** tab and select a report.

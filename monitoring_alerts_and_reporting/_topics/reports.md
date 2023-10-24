@@ -1,6 +1,6 @@
 ## Reports
 
-Click the **Reports** accordion under menu:Overview\[Reports\] to see a
+Click the **Reports** accordion under **Overview > Reports** to see a
 list of reports available. These reports have been constructed to help
 you view the most commonly requested and significant data. From here,
 you can also create reports if you have appropriate access.

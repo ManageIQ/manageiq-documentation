@@ -9,7 +9,7 @@ can be defined for any object type available.
 
 An Ansible Playbook catalog item must exist in order to create an Ansible Playbook custom button. For more information, see [Creating an Ansible Playbook Service Catalog Item](../provisioning_virtual_machines_and_hosts/index.html#creating-an-ansible-playbook-service-catalog-item) in the Provisioning Virtual Machines and Hosts guide.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\].
+1.  Navigate to **Automation > Automate > Customization**.
 
 2.  Click the **Buttons** accordion.
 

@@ -112,12 +112,12 @@ UI.
 
 The order request is submitted. After a request has been approved, the
 various stages of fulfillment are executed. You can see the progress
-status of the provisioning process in menu:Services\[Requests\].
+status of the provisioning process in **Services > Requests**.
 
 ### Orchestration Stacks
 
 After ordering a service, you can see the progress state of the
-provisioning process in menu:Services\[Requests\].
+provisioning process in **Services > Requests**.
 
 1.  Initially, the **Request State** shows **Pending** with its
     **Approval State** as **Pending Approval**.
@@ -129,7 +129,7 @@ provisioning process in menu:Services\[Requests\].
     ![Request\_State](../images/7179.png)
 
 3.  After the **Request State** is **Finished**, you can see the stack
-    entry created in menu:Compute\[Clouds \> Stacks\]. In the screen
+    entry created in **Compute > Clouds > Stacks**. In the screen
     capture below, you can see the heat-stack we created from the
     catalog item ordered from the **Service Catalog** as shown in the
     previous section. ![Catalog\_Item\_State](../images/7180.png)

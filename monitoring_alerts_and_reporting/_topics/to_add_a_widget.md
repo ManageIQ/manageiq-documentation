@@ -3,7 +3,7 @@
 You can add widgets to the dashboard to accommodate the information you
 want to see upon login.
 
-1.  Navigate to menu:Overview\[Dashboard\].
+1.  Navigate to **Overview > Dashboard**.
 
 2.  Click ![2259](../images/2259.png) **(Add a Widget)**.
 
@@ -13,4 +13,3 @@ want to see upon login.
 
 Only widgets that are not currently showing on the dashboard will appear
 in this list.
-

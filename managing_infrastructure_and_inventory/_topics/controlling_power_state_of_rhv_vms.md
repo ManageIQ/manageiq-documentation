@@ -3,7 +3,7 @@
 Follow this procedure to control the power states of Red Hat
 Virtualization VMs through the {{ site.data.product.title_short }} console.
 
-1.  Navigate to menu:Compute\[Infrastructure \> Virtual Machines\].
+1.  Navigate to **Compute > Infrastructure > Virtual Machines**.
 
 2.  Click on a VM to change the power state.
 

@@ -3,7 +3,7 @@
 After creating an alert, you can edit the threshold, expression, or the
 notification type.
 
-1.  Navigate to menu:Control\[Explorer\].
+1.  Navigate to **Control > Explorer**.
 
 2.  Click on the **Alerts** accordion, then click on the alert that you
     need to edit.

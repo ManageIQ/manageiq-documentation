@@ -5,7 +5,7 @@ interface to view or modify the global configuration of your appliance.
 
 **Settings**
 
-To view or modify global settings for your appliance, click **Settings** > **My Settings** to modify. The availability of each menu item
+To view or modify global settings for your appliance, click **Settings > My Settings** to modify. The availability of each menu item
 depends on the role assigned to your user account. For more information on roles, see [Roles](#roles).
 
 The following menu items are available from the settings menu:
@@ -25,7 +25,7 @@ The following menu items are available from the settings menu:
 
 **Application Settings**
 
-The **Application Settings** menu is now accessible from **Settings** > **Application Settings** from the user
+The **Application Settings** menu is now accessible from **Settings > Application Settings** from the user
 interface.
 
 This menu allows you to specify enterprise, region, zone, and server settings for your {{ site.data.product.title_short }} infrastructure. Diagnostics such as logs and the status of processes are also shown here.

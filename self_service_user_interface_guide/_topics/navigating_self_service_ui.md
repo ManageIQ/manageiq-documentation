@@ -37,8 +37,8 @@ The resources linked to in the help icon will be, by default, the ones listed ab
 
   - Role-Based Access Control
     The Self Service user interface supports role-based access control of menus and features. If you are a member of multiple user groups, you can change the acting group by navigating to ***Administrator***
-    \> **Change Group**, then select the new group from the available options in the list.
+    > **Change Group**, then select the new group from the available options in the list.
 
   - Switch Language
     Although you can set your preferred language for the user interface from the login screen itself, you can switch to a different language than what is currently set also by navigating to ***Administrator***
-    \> **Switch Language** within the Self Service user interface.
+    > **Switch Language** within the Self Service user interface.

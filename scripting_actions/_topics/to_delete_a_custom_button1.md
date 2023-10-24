@@ -2,7 +2,7 @@
 
 This procedure shows you how to delete a custom button.
 
-1.  Navigate to menu:Automation\[Automate \> Customization\], then
+1.  Navigate to **Automation > Automate > Customization**, then
     select the **Buttons** accordion.
 
 2.  From the **Object Type** tree in the accordion menu, select the type

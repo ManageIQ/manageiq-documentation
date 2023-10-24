@@ -77,9 +77,9 @@ group can talk to each other on any port.
 
 4.  Configure the rule.
 
-    1.  Select menu:Rule\[Custom TCP Rule\].
+    1.  Select **Rule > Custom TCP Rule**.
 
-    2.  Select menu:Direction\[Ingress\].
+    2.  Select **Direction > Ingress**.
 
     3.  Select **Port** from the **Open Port** list.
 
@@ -196,9 +196,9 @@ of the instances involved.
 
         $ nova-manage floating create IP_BLOCK
 
-2.  In the **Project** tab, browse to menu: **Compute > Access & Security**.
+2.  In the **Project** tab, browse to **Compute > Access & Security**.
 
-3.  Click menu:Floating IPs\[Allocate IP To Project\]. The **Allocate
+3.  Click **Floating IPs > Allocate IP To Project**. The **Allocate
     Floating IP** window is displayed. ![7218](../images/7218.png)
 
 4.  Click **Allocate IP** to allocate a floating IP from the pool. The

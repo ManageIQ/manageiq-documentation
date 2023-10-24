@@ -1,6 +1,6 @@
 #### Modifying a Report Schedule
 
-1.  Navigate to menu:Overview\[Reports\]
+1.  Navigate to **Overview > Reports**
 
 2.  Click the **Schedules** accordion and select the schedule you want
     to edit.

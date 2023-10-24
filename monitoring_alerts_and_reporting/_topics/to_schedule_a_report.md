@@ -11,19 +11,19 @@ There are two ways to schedule a report:
 
 Add a new Schedule through the **Reports** accordion:
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Select a report from the **Reports** accordion and click
     ![1847](../images/1847.png) **Configuration**.
 
 3.  Click ![1862](../images/1862.png) **Add a New Schedule** or click the Schedules accordion and click ![1847](../images/1847.png)
-    **Configuration** \> ![1862](../images/1862.png) **Add a New Schedule**.
+    **Configuration** > ![1862](../images/1862.png) **Add a New Schedule**.
 
 or
 
 Add a new Schedule through the **Schedules** accordion:
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
 2.  Click the **Schedules** accordion.
 

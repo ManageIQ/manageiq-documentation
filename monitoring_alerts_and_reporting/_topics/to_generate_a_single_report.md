@@ -1,8 +1,8 @@
 #### Generating a Single Report
 
-1.  Navigate to menu:Overview\[Reports\].
+1.  Navigate to **Overview > Reports**.
 
-2.  Click the menu:Reports\[All Reports\] accordion. Navigate to the
+2.  Click the **Reports > All Reports** accordion. Navigate to the
     report you want to view by selecting the appropriate folder.
 
 3.  Click ![1847](../images/1847.png) (**Queue**).

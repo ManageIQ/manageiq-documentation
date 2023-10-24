@@ -70,9 +70,9 @@ To upload the appliance:
 
 1.  Log in to the Red Hat Virtualization Administration Portal.
 
-2.  Click menu:Storage\[Disks\].
+2.  Click **Storage > Disks**.
 
-3.  Select menu:Upload\[Start\].
+3.  Select **Upload > Start**.
 
 4.  Click **Choose File**, and select the appliance image to upload.
 
@@ -105,7 +105,7 @@ After uploading the appliance to the data domain, create a virtual
 machine containing the {{ site.data.product.title_short }} image and a second disk
 for the database:
 
-1.  In menu:Compute\[Virtual Machines\], click **New** to open the **New
+1.  In **Compute > Virtual Machines**, click **New** to open the **New
     Virtual Machine** dialog.
 
 2.  From the **General** tab, specify a name for the virtual machine and

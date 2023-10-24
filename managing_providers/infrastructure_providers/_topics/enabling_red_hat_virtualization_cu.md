@@ -2,7 +2,7 @@
 
 Configure the following to collect capacity and utilization data from a Red Hat Virtualization provider:
 
-  - In {{ site.data.product.title_short }}, enable the capacity and utilization server roles from the settings menu, in menu:Configuration\[Server\> Server Control\]. For more information on capacity and utilization collection, see [Assigning the Capacity and Utilization Server Roles](../../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles) in the *Deployment Planning Guide*.
+  - In {{ site.data.product.title_short }}, enable the capacity and utilization server roles from the settings menu, in **Configuration > Server > Server Control**. For more information on capacity and utilization collection, see [Assigning the Capacity and Utilization Server Roles](../../deployment_planning_guide/index.html#assigning-the-capacity-and-utilization-server-roles) in the *Deployment Planning Guide*.
 
   - For information on selecting clusters and datastores used to collect data, see [Capacity and Utilization Data Collected](../../deployment_planning_guide/index.html#capacity-and-utilization-data-collected) in the *General Configuration Guide*.
 

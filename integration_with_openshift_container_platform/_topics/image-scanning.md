@@ -33,11 +33,11 @@ images:
 
 1.  Click **Configuration**.
 
-2.  From menu: **Settings > Zones** in the left pane of the appliance,
+2.  From **Settings > Zones** in the left pane of the appliance,
     select **Schedules**.
 
-3.  From the drop-down menu, click menu:Configuration\[Add a new
-    Schedule\].
+3.  From the drop-down menu, click **Configuration > Add a new
+    Schedule**.
 
 4.  Type an arbitrary **Name**.
 
@@ -80,15 +80,15 @@ For compliance and scanning history information, locate the
 ### Manual Scanning
 
 SmartState analysis scanning may be initiated manually for images. From
-an image summary page, select menu:Configuration\[Perform SmartState
-Analysis\]. Refreshing the image page will reflect the latest scan
+an image summary page, select **Configuration > Perform SmartState
+Analysis**. Refreshing the image page will reflect the latest scan
 results and compliance history.
 
 ### Evaluating Compliance
 
 If the image scan policy has been updated since the last scan,
 compliance conditions may be re-evaluated. From an image summary page,
-select menu:Policy\[Check Compliance of Last Known Configuration\].
+select **Policy > Check Compliance of Last Known Configuration**.
 Refreshing the image page will reflect the latest compliance history.
 
 ### Generating a Report on Images

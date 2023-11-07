@@ -638,11 +638,6 @@ task generated for it and look for the state attribute as follows:
       "href": "http://localhost:3000/api/vms/171"
     },
     {
-      "name": "add_lifecycle_event",
-      "method": "post",
-      "href": "http://localhost:3000/api/vms/171"
-    },
-    {
       "name": "add_event",
       "method": "post",
       "href": "http://localhost:3000/api/vms/171"

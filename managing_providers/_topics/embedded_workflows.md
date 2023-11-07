@@ -181,7 +181,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    You are recommended to use a docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
 
-   To use a secret to pull an image from a private registry, and then add it to the relevant service account, see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/) followed by [Add Image Pull Secrets to a service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account/). The service account in question is 'manageiq-default'.
+   In order to pull an image from a private registry you have to provide an `ImagePullSecret` to your containers, see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).  {{ site.data.product.title_short }} uses a service account called `manageiq-default` to run containers for your workflows.  You can add an `ImagePullSecret` to this service account by following [Add Image Pull Secrets to a service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account/).
 
 #### Example: Provisioning Workflow
 

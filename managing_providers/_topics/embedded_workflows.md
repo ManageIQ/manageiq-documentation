@@ -161,13 +161,14 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
 1. Define the code for the workflow. If your workflow requires the use of any credentials or parameters to be specified, ensure that they are passed in the code.
 
-   Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what happens for that Task state. For example, a docker container can run to clone a template. If your states require parameters or credentials, you can specify them in your state definitions.
+   Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what   happens for that Task state. For example, a docker container can run to clone a template. If your states require parameters or credentials, you can specify them in your state definitions.
 
    The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
 
 2. Build the docker containers that are required for the workflow.
 
-   When you have the code for your task resource written, you need to bundle it into a docker image. You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
+   a) Bundle your task resource code, and add it to a docker image
+   You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
 
    On appliances, `podman` is used to execute the container, so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user.
 
@@ -181,7 +182,8 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    You are recommended to use a docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
 
-   In order to pull an image from a private registry you have to provide an `ImagePullSecret` to your containers, see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).  {{ site.data.product.title_short }} uses a service account called `manageiq-default` to run containers for your workflows.  You can add an `ImagePullSecret` to this service account by following [Add Image Pull Secrets to a service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account/).
+   b) Provide an image pull secret to a podified Kubernetes container, and then add it to a service account
+     In order to pull an image from a private registry you have to provide an `ImagePullSecret` to your containers, see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/).  {{ site.data.product.title_short }} uses a service account called `manageiq-default` to run containers for your workflows.  You can add an `ImagePullSecret` to this service account by following [Add Image Pull Secrets to a service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account/).
 
 #### Example: Provisioning Workflow
 

@@ -167,10 +167,9 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
 2. Build the docker containers that are required for the workflow.
 
-   a) Bundle your task resource code, and add it to a docker image
-   You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
+   When you have the code for your task resource written, you need to bundle it into a docker image. You can bundle the code by creating a standard  [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
 
-   On appliances, `podman` is used to execute the container, so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user.
+  a) On appliances, `podman` is used to execute the container, so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user.
 
      ```
      # su manageiq

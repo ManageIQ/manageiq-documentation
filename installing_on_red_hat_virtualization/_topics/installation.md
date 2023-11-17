@@ -109,7 +109,8 @@ for the database:
     Virtual Machine** dialog.
 
 2.  From the **General** tab, specify a name for the virtual machine and
-    any other details.
+    any other details.  Ensure that `Q35 Chipset with BIOS` is selected
+    for **Chipset/Firmware Type**.
 
 3.  Click **Attach**.
 

@@ -47,7 +47,8 @@
 |   - Cloud-init                                               | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | VM Retirement                                                | ✅      | ✅          | ❌                      | ✅            | ✅         |
 | VM Reconfiguration                                           | ✅      | ✅          | ❌                      | ❌            | ❌          |
-|   - Disk Addition                                            | ✅      | ✅           Network Interface Add/Remove                             | ✅      | ✅          | ❌                      | ❌            | ❌          |
+|   - Disk Addition                                            | ✅      | ✅          | ❌                      | ❌            | ❌          |
+|   - Network Interface Add/Remove                             | ✅      | ✅          | ❌                      | ❌            | ❌          |
 | VM Snapshot Creation and Removal                             | ✅      | ✅          | ❌                      | ❌            | ❌          |
 | Host Power Operations                                        | ✅      | ❌          | ✅                      | ✅            | ❌          |
 | Node Operations                                              |         |              |                         |               | ❌          |

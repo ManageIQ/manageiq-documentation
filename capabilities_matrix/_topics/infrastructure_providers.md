@@ -37,26 +37,26 @@
 | ------------------------------------------------------------ | ------- | ----------- | ----------------------- | --------------| -------- |
 | VM Remote Console Access (see section below)                 | ✅      | ✅          | ❌                      | ❌            | ✅         |
 | VM Power Operations                                          | ✅      | ✅          | ❌                      | ✅            | ✅         |
-| VM Provisioning                                              |         |              |                         |               |
-|   - using PXE                                                | ✅      | ✅          | ❌                      | ❌            | ❌          |
-|   - using ISO                                                | ❌      | ✅          | ❌                      | ❌            | ❌          |
-|   - from Template to VM                                      | ✅      | ✅          | ❌                      | ✅            | ✅         |
-|   - from VM to Template                                      | ✅      | ✅          | ❌                      | ✅            | ❌          |
-|   - Clone from VM to VM                                      | ✅      | ❌          | ❌                      | ❌            | ❌          |
-|   - Sysprep Windows Templates                                | ✅      | ✅          | ❌                      | ❌            | ❌          |
-|   - Cloud-init                                               | ❌      | ✅          | ❌                      | ❌            | ❌          |
+| VM Provisioning                                              |         |             |                         |               |
+|   &nbsp;&nbsp;&bull; using PXE                               | ✅      | ✅          | ❌                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; using ISO                               | ❌      | ✅          | ❌                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; from Template to VM                     | ✅      | ✅          | ❌                      | ✅            | ✅         |
+|   &nbsp;&nbsp;&bull; from VM to Template                     | ✅      | ✅          | ❌                      | ✅            | ❌          |
+|   &nbsp;&nbsp;&bull; Clone from VM to VM                     | ✅      | ❌          | ❌                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Sysprep Windows Templates               | ✅      | ✅          | ❌                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Cloud-init                              | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | VM Retirement                                                | ✅      | ✅          | ❌                      | ✅            | ✅         |
 | VM Reconfiguration                                           | ✅      | ✅          | ❌                      | ❌            | ❌          |
-|   - Disk Addition                                            | ✅      | ✅          | ❌                      | ❌            | ❌          |
-|   - Network Interface Add/Remove                             | ✅      | ✅          | ❌                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Disk Addition                           | ✅      | ✅          | ❌                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Network Interface Add/Remove            | ✅      | ✅          | ❌                      | ❌            | ❌          |
 | VM Snapshot Creation and Removal                             | ✅      | ✅          | ❌                      | ❌            | ❌          |
 | Host Power Operations                                        | ✅      | ❌          | ✅                      | ✅            | ❌          |
-| Node Operations                                              |         |              |                         |               | ❌          |
-|   - Add/Remove Node                                          | ❌      | ❌          | ✅                      | ❌            | ❌          |
-|   - Scale Down Node                                          | ❌      | ❌          | ✅ (Compute nodes only) | ❌            | ❌          |
-|   - Scale Up Nodes                                           | ❌      | ❌          | ✅ (Compute nodes only) | ❌            | ❌          |
-|   - Nodes Policy Enforcement                                 | ❌      | ❌          | ✅                      | ❌            | ❌          |
-|   - Nodes Evacuate                                           | ❌      | ❌          | ✅                      | ❌            | ❌          |
+| Node Operations                                              |         |             |                         |               | ❌          |
+|   &nbsp;&nbsp;&bull; Add/Remove Node                         | ❌      | ❌          | ✅                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Scale Down Node                         | ❌      | ❌          | ✅ (Compute nodes only) | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Scale Up Nodes                          | ❌      | ❌          | ✅ (Compute nodes only) | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Nodes Policy Enforcement                | ❌      | ❌          | ✅                      | ❌            | ❌          |
+|   &nbsp;&nbsp;&bull; Nodes Evacuate                          | ❌      | ❌          | ✅                      | ❌            | ❌          |
 | Create Cloud Network                                         | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | Delete Cloud Network                                         | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | Create Cloud Subnet                                          | ❌      | ✅          | ❌                      | ❌            | ❌          |

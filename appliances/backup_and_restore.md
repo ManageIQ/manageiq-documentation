@@ -5,9 +5,8 @@
 Creating a backup of the appliance will be done using SSH or the console.
 
 1. Launch `appliance_console`
-   1. Select `Stop EVM Server Processes` to stop the server processes
-   2. Select `Create Database Backup` and choose a backup location (/tmp/evm_db.backup is the default)
-   3. Select `Quit` to return to the shell
+   1. Select `Create Database Backup` and choose a backup location (/tmp/evm_db.backup is the default)
+   2. Select `Quit` to return to the shell
 2. For convenience, create a TGZ containing all files required to restore the database
    ```bash
      tar -czvf /root/backup.tgz /tmp/evm_db.backup /var/www/miq/vmdb/GUID /var/www/miq/vmdb/certs/v2_key

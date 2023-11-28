@@ -169,9 +169,11 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    When you have the code for your task resource written, you need to bundle it into a docker image. You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
 
-   * On appliances, `podman` is used to execute the container
+  Pull secrets for containers are used differently between appliances and the OpenShift Container Platform (OCP). These differences are outlined in the following sections.
 
-     On appliances, `podman` is used to execute the container so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user.
+  #### Running an Embedded Workflow on Appliances
+
+   * On appliances, `podman` is used to execute the container so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user. 
 
      ```text
      # su manageiq
@@ -181,11 +183,29 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
      Login Succeeded!
      ```
 
+      Images are pulled to a local directory /var/www/miq/vmdb/data/containers/storage as the default /home/manageiq partition has insufficient space to store large images.
+
       You are recommended to use a docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
 
    * Provide an image pull secret to a podified Kubernetes container, and then add it to a service account
 
      In order to pull an image from a private registry you have to provide an `ImagePullSecret` to your containers, see [Pull an Image from a Private Registry](https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/). {{ site.data.product.title_short }} uses a service account called {{ site.data.product.workflow_service_account }} to run containers for your workflows. You can add an `ImagePullSecret` to this service account by following [Add Image Pull Secrets to a service account](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#add-imagepullsecrets-to-a-service-account/).
+
+#### Running an Embedded Workflow on the OpenShift Container Platform (OCP)
+
+If the user is running an embedded workflow on OCP, and is using a docker repository requiring a custom pull secret for their container images, the following steps need to be carried out.
+
+1. Create a pull secret for the repository in question in the same namespace as {{ site.data.product.title_short }}, for example:
+
+    ```
+    oc create secret docker-registry <pull-secret-name> --docker-server=<docker-server> --docker-username=<docker-username> --docker-password=<docker-password>
+    ```
+
+2. Add this pull secret to the {{ site.data.product.workflow_service_account }}, for example:
+
+    ```
+    oc secret link {{ site.data.product.workflow_service_account }} <pull-secret-name> --for=pull
+    ```
 
 #### Example: Provisioning Workflow
 

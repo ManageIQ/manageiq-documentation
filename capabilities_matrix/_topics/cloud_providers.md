@@ -50,7 +50,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Instance Provisioning                                        | ✅  | ✅    | ✅  | ✅        | ✅       | ✅                               | ✅       | ✅      | ✅           |
 |   &nbsp;&nbsp;&bull; from Image to Instance                  | ✅  | ✅    | ✅  | ✅        | ✅       | ✅                               | ✅       | ✅      | ✅           |
 |   &nbsp;&nbsp;&bull; from Image Snapshot to Instance         | ❌  | ❌    | ❌  | ✅        | ✅       | ❌                               | ❌       | ❌      | ❌           |
-|   &nbsp;&nbsp;&bull; from Volume to Instance                 | ❌  | ❌    | ❌  | ✅        | ❌       | ❌                               | ❌       | ❌      | ❌           |
+|   &nbsp;&nbsp;&bull; from Volume to Instance                 | ❌  | ❌    | ❌  | ✅        | ✅       | ❌                               | ❌       | ❌      | ❌           |
 |   &nbsp;&nbsp;&bull; from Volume Snapshot to Instance        | ❌  | ❌    | ❌  | ✅        | ❌       | ❌                               | ❌       | ❌      | ❌           |
 |   &nbsp;&nbsp;&bull; from Orchestration Template             | ✅  | ✅    | ❌  | ✅        | ✅       | ❌                               | ❌       | ❌      | ❌           |
 |   &nbsp;&nbsp;&bull; Cloud-init                              | ❌  | ❌    | ❌  | ✅        | ✅       | ✅                               | ✅       | ❌      | ❌           |

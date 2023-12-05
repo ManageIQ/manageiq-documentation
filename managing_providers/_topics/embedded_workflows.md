@@ -183,9 +183,15 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
      Login Succeeded!
      ```
 
-      Images are pulled to a local directory /var/www/miq/vmdb/data/containers/storage as the default /home/manageiq partition has insufficient space to store large images.
+      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/www/miq/vmdb/data/containers/storage' as in the example 
+        
+        ```text
+        podman pull <repository>/<image>:<tag>  --root /var/www/miq/vmdb/data/containers/storage
+        ```
+        
+        It is worth noting that the default /home/manageiq partition has insufficient space to store large images.
 
-      You are recommended to use a docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
+      You can use any repository to store your images, for example you can use docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
 
    * Provide an image pull secret to a podified Kubernetes container, and then add it to a service account
 

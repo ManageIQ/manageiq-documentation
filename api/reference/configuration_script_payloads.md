@@ -185,8 +185,8 @@ For instance, configuration script payloads can be edited to map credentials:
     {
       "id": 1,
       "credentials": [
-        {"my-cred-user": {"credential_ref": "my-credential", "credential_field": "userid"},
-        {"my-cred-password": {"credential_ref": "my-credential", "credential_field": "password"}
+        {"my-cred-user": {"credential_ref": "my-credential", "credential_field": "userid"}},
+        {"my-cred-password": {"credential_ref": "my-credential", "credential_field": "password"}}
       ]
     }
   ]

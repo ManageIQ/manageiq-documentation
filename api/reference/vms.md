@@ -19,7 +19,6 @@ Management of virtual machines adds support of the following actions:
 | set\_miq\_server      | Sets the server of a virtual machine                  |
 | set\_owner            | Sets the owner of a virtual machine                   |
 | add\_event            | Adding an event to a virtual machine                  |
-| add\_lifecycle\_event | Add a life cycle event to a virtual machine           |
 | edit                  | Edits a virtual machine                               |
 | delete                | Deletes a virtual machine in the appliance            |
 
@@ -50,8 +49,6 @@ Management of virtual machines adds support of the following actions:
   - [Setting Owner of a VM](#set-owner-vm)
 
   - [Adding an Event to a VM](#add-event-vm)
-
-  - [Adding a Lifecycle Event to a VM](#add-lifecycle-event-vm)
 
   - [Editing a VM](#edit-vm)
 
@@ -249,20 +246,6 @@ reference as follows:
 **Note:**
 
 event\_time above is optional. If skipped, current time will be used.
-
-### Adding a Lifecycle Event to a Virtual Machine
-
-``` json
-{
-  "action" : "add_lifecycle_event",
-  "resource" : {
-    "event" : "...",
-    "status" : "...",
-    "message" : "...",
-    "created_by" : "..."
-  }
-}
-```
 
 ### Editing a Virtual Machine
 

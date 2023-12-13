@@ -31,6 +31,8 @@ In this example, we will update from jansa to kasparov.
         # reboot
 
 
+**Note:** If upgrading to Quinteros, messaging (Kafka) setup is required. See [Configure Messaging](../_includes/configuration.md#configure-messaging)
+
 # Appendix
 
 ## RPM URLs for manageiq-release

@@ -1,4 +1,8 @@
 ## Preparing the Kubernetes namespace
+Prerequisite:
+If you are using OpenShift, our operator will leverage the OpenShift catalog to install Strimzi for you automatically.
+If not running on OpenShift, manual installation of Strimzi Kafka is required. [Strimzi](https://strimzi.io/) installation steps can be found [here](https://strimzi.io/docs/operators/latest/deploying#deploy-tasks_str). Only the Strimzi cluster operator needs to be deployed, our operator will then make the necessary requests for the resources needed from Strimzi.
+
 The operator directory referenced below can be found [here]({{ site.data.product.operator_directory }})
 
 1. Search for the Custom Resource Definition (CRD) and create it if it doesn't already exist.

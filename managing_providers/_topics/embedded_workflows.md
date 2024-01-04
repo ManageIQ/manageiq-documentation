@@ -173,7 +173,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
 #### Running an Embedded Workflow on Appliances
 
-   * On appliances, `podman` is used to execute the container so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user. 
+   * On appliances, `podman` is used to execute the container so use [podman login](https://docs.podman.io/en/stable/markdown/podman-login.1.html) as the `manageiq` user.
 
      ```text
      # su manageiq
@@ -183,12 +183,12 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
      Login Succeeded!
      ```
 
-      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/www/miq/vmdb/data/containers/storage' as in the example 
-        
+      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/www/miq/vmdb/data/containers/storage' as in the example
+
         ```text
         podman pull <repository>/<image>:<tag>  --root /var/www/miq/vmdb/data/containers/storage
         ```
-        
+
         It is worth noting that the default /home/manageiq partition has insufficient space to store large images.
 
       You can use any repository to store your images, for example you can use docker.io [access token](https://docs.docker.com/security/for-developers/access-tokens/) so that the token does not expire.
@@ -306,6 +306,88 @@ If the user is running an embedded workflow on OCP, and is using a docker reposi
   }
 }
 ```
+
+#### Credentials
+
+{{ site.data.product.title_short }} provides a mechanism for securely passing credentials to your running workflows.  Credentials should never be set statically in your workflow definition.
+
+Long lived credentials like usernames and passwords should be defined as Mapped Credentials as described in `Adding Credentials`.
+
+Short lived credentials such as bearer tokens which are obtained while the workflow is running can be set as state output and stored securely in the Credentials field for further states.  This can be accomplished by using `ResultPath` with a path starting with `$.Credentials`.  This will set the output of the state in the `Credentials` payload.
+
+For an example lets say we have a State which takes a username and password and outputs a bearer token to be used later on:
+
+```asl
+"Login": {
+  "Type": "Task",
+  "Resource": "docker://login:latest",
+  "Credentials": {
+    "username.$": "$.username",
+    "password.$": "$.password"
+  },
+  "ResultPath": "$.Credentials",
+  "Next": "NextState"
+}
+```
+
+If the output of the docker image is `{"bearer_token":"abcd"}` then we will be able to use this in the next state like so:
+
+```asl
+"NextState": {
+  "Type": "Task",
+  "Resource": "docker://do-something:latest",
+  "Credentials": {
+    "token.$": "$.bearer_token"
+  }
+}
+```
+
+All of the normal Input/Output processing still applies so if you need to manipulate the output you can use `ResultSelector`.  Say for example our login docker image outputs the token as `{"result":"abcd"}` but we want to store it as `"bearer_token"`.  We can use `ResultSelector` to change this:
+
+```asl
+"Login": {
+  "Type": "Task",
+  "Resource": "docker://login:latest",
+  "Credentials": {
+    "username.$": "$.username",
+    "password.$": "$.password"
+  },
+  "ResultSelector": {
+    "bearer_token.$": "$.result"
+  },
+  "ResultPath": "$.Credentials",
+  "Next": "NextState"
+}
+```
+
+We can also store the result in a parent node for organization:
+
+```asl
+"Login": {
+  "Type": "Task",
+  "Resource": "docker://login:latest",
+  "Credentials": {
+    "username.$": "$.username",
+    "password.$": "$.password"
+  },
+  "ResultPath": "$.Credentials.VMware",
+  "Next": "NextState"
+}
+```
+
+And then access it like:
+
+```asl
+"NextState": {
+  "Type": "Task",
+  "Resource": "docker://do-something:latest",
+  "Credentials": {
+    "token.$": "$.VMware.bearer_token"
+  }
+}
+```
+
+If you have a mapped credential and your state overwrites its, a new non-mapped entry will be created and the original mapped credential will be left intact.
 
 ### Viewing workflow details
 

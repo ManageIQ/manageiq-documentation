@@ -140,6 +140,21 @@ templates in a service catalog as follows:
 }
 ```
 
+**Note:** If you need to include a password in the call to the Ordering Services, you can use the `password::dialog_password` field to supply the password as a parameter. This password is passed as a `string` datatype.
+
+
+``` json
+{
+  "action" : "order",
+  "resource" : {
+    "href" : "http://localhost:3000/api/service_templates/3",
+    "option_0_vm_target_name" : "test-vm-0001",
+    "option_0_vm_target_hostname" : "test-vm-0001",
+    "password::dialog_password" : "password"
+  }
+}
+```
+
 #### Refresh Service Dialog Fields
 
 Refreshing dialog fields is done via a *refresh\_dialog\_fields* action

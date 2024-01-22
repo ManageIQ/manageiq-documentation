@@ -21,7 +21,7 @@ First you have to create a service-account with the proper permissions for {{ si
 
 3. Create the cluster role
    ```
-   echo '{"apiVersion": "v1", "kind": "ClusterRole", "metadata": {"name": "management-manageiq-admin"}, "rules": [{"resources": ["pods/proxy"], "verbs": ["*"]}]}' | oc create -f -
+   echo '{"apiVersion": "authorization.openshift.io/v1", "kind": "ClusterRole", "metadata": {"name": "management-manageiq-admin"}, "rules": [{"resources": ["pods/proxy"], "verbs": ["*"]}]}' | oc create -f -
    ```
 
 4. Apply roles and policies to the service account

@@ -54,7 +54,7 @@ Configuring messaging is required for appliance setup. It is recommended to conf
 2. Select **Proceed** and appliance_console will apply the configuration that you have
    requested then restart evmserverd to pick up the changes.
 
-**Note:** It is recommended to use your Fully Qualified Domain Name (FQDN) as the messaging hostname rather than `localhost`
+**Note:** It is recommended to use your internal Fully Qualified Domain Name (FQDN) as the messaging hostname rather than `localhost`
 
 ### Configuring a Worker Appliance
 

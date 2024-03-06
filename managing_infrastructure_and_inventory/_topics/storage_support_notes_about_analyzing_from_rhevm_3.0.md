@@ -44,3 +44,21 @@ storage. NFS storage does not have these requirements.
 
     3.  Select the server that relates to this instance of the
         {{ site.data.product.title_short }} appliance.
+
+3.  If your storage domain is using Logical Volume Manager (LVM), you will need to manually activate your volume groups
+    and logical volumes before performing the SmartState Analysis.
+
+    1. Edit the `/etc/lvm/lvm.conf` file on the appliance and add volume groups to activate as read-only:
+        ```
+        activation {
+            read_only_volume_list = ["volume_group_0", "volume_group_1", etc...]
+        }
+        ```
+        Note: the volume group names are the storage domain UUIDs
+    
+    2. Activate volume groups:
+        ```
+        vgchange -ay
+        ```
+
+    For more information, please refer to the Red Hat Enterprise Linux documentation.

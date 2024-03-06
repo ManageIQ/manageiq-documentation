@@ -24,6 +24,22 @@ Red Hat Enterprise Virtualization Manager 3.1 and above.
       - A {{ site.data.product.title_short }} appliance **must** reside in each datacenter
         with the iSCSI / FCP storage type.
 
+      - If your storage domain is using Logical Volume Manager (LVM), you will need to manually activate your volume groups
+        and logical volumes before performing the SmartState Analysis.
+
+        1. Edit the `/etc/lvm/lvm.conf` file on the appliance and add volume groups to activate as read-only:
+            ```
+            activation {
+                read_only_volume_list = ["volume_group_0", "volume_group_1", etc...]
+            }
+            ```
+            Note: the volume group names are the storage domain UUIDs
+        
+        2. Activate volume groups:
+            ```
+            vgchange -ay
+            ```
+
   - Other Notes
 
       - The **Edit Management Engine Relationship** option enables the

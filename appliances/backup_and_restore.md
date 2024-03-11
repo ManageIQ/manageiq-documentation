@@ -45,7 +45,7 @@ Restoring a backup of the appliance will be done using SSH or the console.
 3. Launch `appliance_console`
    1. If this is a brand new appliance and the database has not yet been initialized, select `Configure Application`. If this is an existing database appliance, this step can be skipped.
       1. When prompted to configure the database, select `Create Internal Database`
-      2. When prompted to configure messaging, select `Make No messaging changes`
+      2. When prompted to configure messaging, either connect to an external messaging system or configure this appliance as a messaging server
       3. Choose a database disk
       4. Answer y or n to "Should this appliance run as a standalone database server?"
       5. Enter a region number (0), this is not important and will be overwritten on restore

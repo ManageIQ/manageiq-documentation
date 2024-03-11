@@ -39,8 +39,8 @@ Restoring a backup of the appliance will be done using SSH or the console.
 2. On the command line:
    ```bash
      cd /
-     tar -zxf /backup
-     rm -f /backup # if desired to save space
+     tar -zxf /backup.tgz
+     rm -f /backup.tgz # if desired to save space
    ```
 3. Launch `appliance_console`
    1. If this is a brand new appliance and the database has not yet been initialized, select `Configure Application`. If this is an existing database appliance, this step can be skipped.

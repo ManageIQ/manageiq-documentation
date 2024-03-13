@@ -18,14 +18,8 @@ the non-database {{ site.data.product.title_short }} appliances.
     `/etc/chrony.conf` with valid NTP server information.
 
 3.  From your host environment, open the appliance and configure the
-    network:
-
-    1.  Log in to the appliance and run the `appliance_console` command
-        to access the appliance console menu.
-
-    2.  Configure networking as desired by selecting the **Set DHCP
-        Network Configuration** or **Set Static Network Configuration**
-        option.
+    network and hostname using nmcli or nmtui from the console or from your
+    web browser using Cockpit on port 9090
 
 4.  Resynchronize time information across the appliances:
 
@@ -34,21 +28,19 @@ the non-database {{ site.data.product.title_short }} appliances.
 
 5.  In the appliance console, configure the following:
 
-    1.  Configure the hostname by selecting **Set Hostname**.
+    1.  Select **Configure Application**.
 
-    2.  Select **Configure Application**.
-
-    3.  Select **Create key** to create the encryption key. You can
+    2.  Select **Create key** to create the encryption key. You can
         create a new key, or use an existing key on your system by
         selecting **Fetch key from remote machine** and following the
         prompts.
 
-    4.  Select **Create Internal Database**.
+    3.  Select **Create Internal Database**.
 
-    5.  Select the database disk. {{ site.data.product.title_short }} then activates
+    4.  Select the database disk. {{ site.data.product.title_short }} then activates
         the configuration.
 
-    6.  For **Should this appliance run as a standalone database
+    5.  For **Should this appliance run as a standalone database
         server?**, select `y`. Selecting this option configures this
         appliance as a database-only appliance, and therefore the
         {{ site.data.product.title_abbr_uc }} application and `evmserverd` processes
@@ -59,7 +51,7 @@ the non-database {{ site.data.product.title_short }} appliances.
         
         This configuration is not reversible.
 
-    7.  Create the database password.
+    6.  Create the database password.
 
 **Note:**
 
@@ -104,14 +96,8 @@ and secondary database-only appliances can be configured.
     `/etc/chrony.conf` with valid NTP server information.
 
 3.  From your host environment, open the appliance and configure the
-    network:
-
-    1.  Log in to the appliance and run the `appliance_console` command
-        to access the appliance console menu.
-
-    2.  Configure networking as desired by selecting the **Set DHCP
-        Network Configuration** or **Set Static Network Configuration**
-        option.
+    network and hostname using nmcli or nmtui from the console or from your
+    web browser using Cockpit on port 9090
 
 4.  Re-synchronize time information across the appliances:
 
@@ -120,11 +106,9 @@ and secondary database-only appliances can be configured.
 
 5.  In the appliance console, configure the following:
 
-    1.  Configure the hostname by selecting **Set Hostname**.
+    1.  Select **Configure Application**.
 
-    2.  Select **Configure Application**.
-
-    3.  Configure this appliance to use the encryption key from the
+    2.  Configure this appliance to use the encryption key from the
         primary database-only appliance:
 
         1.  For **Encryption Key**, select **Fetch key from remote
@@ -146,7 +130,7 @@ and secondary database-only appliances can be configured.
 
             </div>
 
-    4.  Configure the database:
+    3.  Configure the database:
 
         1.  Select **Create Region in External Database**, since the
             database is external to the appliances.
@@ -164,7 +148,7 @@ and secondary database-only appliances can be configured.
 
         4.  For **Are you sure you want to continue?** Select `y`.
 
-    5.  Enter the primary database-only appliance’s name and access
+    4.  Enter the primary database-only appliance’s name and access
         details:
 
         1.  Enter the hostname for the primary database-only appliance.
@@ -236,22 +220,13 @@ standby appliance to the cluster.
     `/etc/chrony.conf` with valid NTP server information.
 
 3.  From your host environment, open the appliance and configure the
-    network:
-
-    1.  Log in to the appliance and run the `appliance_console` command
-        to access the appliance console menu.
-
-    2.  Configure networking as desired by selecting the **Set DHCP
-        Network Configuration** or **Set Static Network Configuration**
-        option.
+    network and hostname using nmcli or nmtui from the console or from your
+    web browser using Cockpit on port 9090
 
 4.  Re-synchronize time information across the appliances:
 
         # systemctl enable chronyd.service
         # systemctl start chronyd.service
-
-5.  In the appliance console, configure the hostname by selecting **Set
-    Hostname**.
 
 You can now configure this appliance as a standby database-only
 appliance in the cluster.
@@ -322,14 +297,8 @@ and any additional appliances in the region using the following steps:
     `/etc/chrony.conf` with valid NTP server information.
 
 3.  From your host environment, open the appliance and configure the
-    network:
-
-    1.  Log in to the appliance and run the `appliance_console` command
-        to access the appliance console menu.
-
-    2.  Configure networking as desired by selecting the **Set DHCP
-        Network Configuration** or **Set Static Network Configuration**
-        option.
+    network and hostname using nmcli or nmtui from the console or from your
+    web browser using Cockpit on port 9090
 
 4.  Re-synchronize time information across the appliances:
 
@@ -338,11 +307,9 @@ and any additional appliances in the region using the following steps:
 
 5.  In the appliance console, configure the following:
 
-    1.  Configure the hostname by selecting **Set Hostname**.
+    1.  Select **Configure Application**.
 
-    2.  Select **Configure Application**.
-
-    3.  Configure this appliance to use the encryption key from the
+    2.  Configure this appliance to use the encryption key from the
         primary database-only appliance:
 
         1.  For **Encryption Key**, select **Fetch key from remote
@@ -363,7 +330,7 @@ and any additional appliances in the region using the following steps:
         7.  Select **Join Region in External Database** from the
             appliance console menu.
 
-    4.  Enter the primary database-only appliance’s name and access
+    3.  Enter the primary database-only appliance’s name and access
         details:
 
         1.  Enter the hostname for the primary database-only appliance.

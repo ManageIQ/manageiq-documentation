@@ -35,17 +35,22 @@ Before adding the cron job it would be best practice to mount an external storag
 # Restore
 Restoring a backup of the appliance will be done using SSH or the console.
 
-1. Download a backup TGZ and place it in `/`
-2. On the command line:
+1. Set the hostname on the new appliance.  On the command line:
+   ```bash
+     hostnamectl hostname your-new-hostname.example.com
+     echo "your.ip.address your-new-hostname.example.com your-new-hostname" >> /etc/hosts
+   ```
+2. Download a backup TGZ and place it in `/`
+3. On the command line:
    ```bash
      cd /
-     tar -zxf /backup
-     rm -f /backup # if desired to save space
+     tar -zxf /backup.tgz
+     rm -f /backup.tgz # if desired to save space
    ```
-3. Launch `appliance_console`
-   1. If this is a brand new appliance and the database has not yet been initialized, select `Configure Application`. If this is an existing database appliance, this step can be skipped.
+4. Launch `appliance_console`
+   1. Since the database has not yet been initialized, select `Configure Application`.
       1. When prompted to configure the database, select `Create Internal Database`
-      2. When prompted to configure messaging, select `Make No messaging changes`
+      2. When prompted to configure messaging, either connect to an external messaging system or configure this appliance as a messaging server
       3. Choose a database disk
       4. Answer y or n to "Should this appliance run as a standalone database server?"
       5. Enter a region number (0), this is not important and will be overwritten on restore
@@ -55,4 +60,4 @@ Restoring a backup of the appliance will be done using SSH or the console.
    3. Select `Restore Database From Backup`
       - Decide whether you want to delete the backup file in /tmp after restore. (Yes)
    4. Select `Start EVM Server Processes`
-4. After a few minutes, you can log into the web UI and see all of the data contained in the backup.
+5. After a few minutes, you can log into the web UI and see all of the data contained in the backup.

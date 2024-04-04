@@ -10,3 +10,7 @@
 {% include_relative _topics/configuring_ibm_cloud_vpc_metrics_collection.md %}
 
 {% include_relative _topics/configuring_ibm_cloud_vpc_events.md %}
+
+{% include_relative _topics/adding_ibm_cloud_vpc_regions.md %}
+
+{% include_relative _topics/disabling_ibm_cloud_vpc_regions.md %}

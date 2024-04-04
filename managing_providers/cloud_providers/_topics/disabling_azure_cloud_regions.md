@@ -5,9 +5,11 @@ the appliance server. You can use this capability to disable certain
 classified regions. Once disabled, the region will not be available when
 adding a new Azure provider.
 
-1.  Click ![config gear](../../images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../../images/config-gear.png) **Settings** > **Application Settings**.
 
-2.  Click on the **Settings** accordion, then click **Zones**.
+2.  Click on the **Settings** accordion, then click **{{ site.data.product.title_short }}: Region** at the top.
+    Optionally, a server can be selected (within Zones) to limit the disabled
+    region to that server only.
 
 3.  Click the zone where the {{ site.data.product.title_short }} server is located,
     then click on the EVM server.

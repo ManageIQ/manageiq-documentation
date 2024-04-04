@@ -5,9 +5,11 @@ the appliance server. You can use this capability to add new regions that have b
 set up since {{ site.data.product.title_short }} was released.  Once adding the region it will be
 available when creating a new Amazon EC2 provider.
 
-1.  Click ![config gear](../../images/config-gear.png) (**Configuration**).
+1.  Click ![config gear](../../images/config-gear.png) **Settings** > **Application Settings**.
 
-2.  Click on the **Settings** accordion, then click **ManageIQ Region** at the top.
+2.  Click on the **Settings** accordion, then click **{{ site.data.product.title_short }}: Region** at the top.
+    Optionally, a server can be selected (within Zones) to limit the additional
+    region to that server only.
 
 3.  Click on the **Advanced** tab.
 

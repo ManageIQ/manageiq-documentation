@@ -3108,3 +3108,29 @@ You can enable events syndication in the `Advanced` settings:
 5. Set the value for `:syndicate_events:` to `true`.
 
 6. Click **Save**.
+
+#### Enabling Inventory Syndication
+
+You can enable inventory syndication in the `Advanced` settings:
+
+1. From the menu, go to **Settings** > **Application Settings**.
+
+2. Expand the **Settings** accordion. When you select the **Settings** accordion, you are automatically taken to the server list under **Zones**.
+
+3. Select the zone where the EVM server is located and select the EVM server.
+
+4. Click the **Advanced** tab.
+
+   You can click the **Advanced** tab at the zone level to set advanced configuration settings for the entire zone. Or, you can click on the server, and then click the **Advanced** tab to set advanced configuration settings at the server (appliance) level, which overrides zone-level settings.
+
+5. Find the following configuration:
+
+   ```yaml
+   :ems_refresh:
+    :full_refresh_threshold: 100
+    :syndicate_inventory: false
+    :raise_vm_snapshot_complete_if_created_within: 15.minutes
+    :refresh_interval: 24.hours
+   ```
+
+6. Set the value for `syndicate_inventory` to `true`.

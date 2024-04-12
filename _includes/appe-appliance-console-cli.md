@@ -6,7 +6,7 @@ Currently, the `appliance_console_cli` feature is a subset of the full functiona
 
 #### Database Configuration Options
 
-|                  |                                                                                            | 
+|                  |                                                                                            |
 | ---------------- | ------------------------------------------------------------------------------------------ |
 | Option           | Description                                                                                |
 | --region (-r)    | region number (create a new region in the database - requires database credentials passed) |
@@ -19,6 +19,26 @@ Currently, the `appliance_console_cli` feature is a subset of the full functiona
 | --dbname (-d)    | database name (defaults to `vmdb_production`)                                              |
 
 {: caption="Table 1. Database Configuration Options" caption-side="top"}
+
+#### Messaging Configuration Options
+|                               |                                                       |
+| ----------------------------- | ----------------------------------------------------- |
+| Option                        | Description                                           |
+| --message-server-config       | configure appliance as a messaging server (boolean)   |
+| --message-server-unconfig     | unconfigure appliance as a messaging server (boolean) |
+| --message-client-config       | configure appliance as a messaging server (boolean)   |
+| --message-client-unconfig     | unconfigure appliance as a messaging server (boolean) |
+| --message-keystore-username   | messaging keystore username (defaults to admin)       |
+| --message-keystore-password   | messaging keystore password                           |
+| --message-server-username     | messaging server username (defaults to admin)         |
+| --message-server-password     | messaging server password                             |
+| --message-server-port         | messaging server port (defaults to 9093)              |
+| --message-server-use-ipaddr   | use ipaddress not hostname for messaging server       |
+| --message-server-host         | messaging server hostname or ipaddress                |
+| --message-truststore-path-src | path for messaging server truststore                  |
+| --message-ca-cert-path-src    | path to a certificate authority for messaging SSL     |
+| --message-persistent-disk     | configure a new volume for storing messaging data     |
+
 
 #### v2_key Options
 
@@ -84,6 +104,14 @@ Currently, the `appliance_console_cli` feature is a subset of the full functiona
 
     $ ssh root@appliance.test.company.com
 
+Set up an all-in-one appliance as a local database and messaging appliance and start the MIQ Server:
+
+    # appliance_console_cli --internal --dbdisk /dev/sdb --region 0 --password smartvm --message-server-config --message-keystore-password smartvm --server=start
+
+Join a worker appliance to an existing region:
+
+    # appliance_console_cli --fetch-key db.example.com --sshlogin root --sshpassword smartvm --hostname db.example.com --password mydatabasepassword --message-client-config --message-server-host db.example.com --message-server-password smartvm --message-keystore-password smartvm --server start
+
 To create a new database locally on the server by using `/dev/sdb`:
 
     # appliance_console_cli --internal --dbdisk /dev/sdb --region 0 --password smartvm
@@ -95,6 +123,14 @@ To copy the v2_key from a host *some.example.com* to local machine:
 You could combine the two to join a region where *db.example.com* is the appliance hosting the database:
 
     # appliance_console_cli --fetch-key db.example.com --sshlogin root --sshpassword smartvm --hostname db.example.com --password mydatabasepassword
+
+To configure an appliance as a messaging server:
+
+    # appliance_console_cli --message-server-config --message-keystore-password="smartvm"
+
+To configure an appliance as a messaging client:
+
+    # appliance_console_cli --message-client-config --message-server-host db.example.com --message-server-password smartvm --message-keystore-password smartvm
 
 To configure external authentication:
 

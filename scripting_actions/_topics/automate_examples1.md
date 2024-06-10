@@ -16,3 +16,5 @@ initiated by:
 
 All invocations of an automate model must enter through the
 `/System/Process` namespace.
+
+You can use automation to create a Provisioning Dialog that modifies the provisioning parameters of a VM service. For more information, see [Example: Provisioning a VM service](../../provisioning_virtual_machines_and_hosts/_topics/catalogs_and_services.md#provisioning-dialog)

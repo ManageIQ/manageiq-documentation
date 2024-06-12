@@ -376,11 +376,11 @@ Service methods have been split based on purpose.
 
 The following example shows how to create a Provisioning Dialog that modifies the parameters for provisioning a small, medium, or large service.
 
-The `provision-vm-small-med-large.asl` workflow runs for every provisioned VM and is responsible for modifying the VM size. This workflow is the `<ManageIQ>` service Provisioning Entry Point.
+The `provision-vm-small-med-large.asl` workflow runs for every provisioned VM and is responsible for modifying the VM size. This workflow is the Provisioning service entry point.
 
-You need to set the ManageIQ Provisioning service entry point to workflow script. For example, this workflow is run for every provisioned Virtual Machine (VM), and modifies the VM size.
+You need to set the Provisioning service entry point to workflow script. For example, this workflow is run for every provisioned Virtual Machine (VM), and modifies the VM size.
 
-Use the following sections and follow them in order to provision a VM service, create Provisioning Dialog and modify the paramaters.
+Use the following sections and follow them in order to provision a VM service, create a Provisioning Dialog and modify the parameters.
 
 #### Create a workflow (optional)
 
@@ -411,7 +411,7 @@ Use the following steps to add a Workflow Repository.
 3. Provide the **Name** and **URL** for the repository:
    - **Name**: Local name to identify this repository. For example, `Example Workflows`.
    - **Url**: Git repository URL. For example, `https://github.com/ManageIQ/workflows-examples`.
-   - **SCM Branch**: Git repository branch name. For example, leave this field blank if you want to use the existing `provision-vm-small-med-large.asl` script blank or use a branch name like `sm-md-lg` if you have edited or created your own workflow script.
+   - **SCM Branch**: Git repository branch name. For example, leave this field blank if you want to use the existing `provision-vm-small-med-large.asl` script from the master branch, or use a branch name like `sm-md-lg` if you have edited or created your own workflow script.
 4. Click **Save**.
 
 #### Create a Provisioning Dialog
@@ -429,14 +429,14 @@ Use the following steps to create a Provisioning Dialog.
 7. Click the edit pencil icon for the **size** dropdown.
 8. Under **Options** > **Entries** enter the following values:
    - Enter the following for the first row:
-      - For **Name** field, choose **Large**.
-      - For **Value** field, choose **large**.
+      - For **Name** field, type `Large`.
+      - For **Value** field, type `large`.
    - Enter the following for the second row:
-      - For **Name** field, choose **Medium**.
-      - For **Value** field, choose **medium**.
+      - For **Name** field, type `Medium`.
+      - For **Value** field, type `medium`.
    - Enter the following for the third row:
-      - For **Name** field, choose **Small**.
-      - For **Value** field, choose **small**.
+      - For **Name** field, type `Small`.
+      - For **Value** field, type `small`.
 9. Click **Save**.
 
 #### Create a Service Catalog Item
@@ -453,7 +453,7 @@ Use the following steps to create a Service Catalog Item.
 6. Click **Catalog Items** > **All Catalog Items** > **Provisioning**.
 7. Click **Configuration** > **Add a New Catalog Item**.
 8. Provide a value for `Catalog Item Type`:
-   - **Catalog Item Type**: The functionality of this catalog item. Choose **VmWare**.
+   - **Catalog Item Type**: The functionality of this catalog item. Choose **VMware**.
 9. Under the **Basic Information** tab, provide the values for the following fields:
    - **Name**: Name displayed in the catalog. For example, `Provision VM with Size`.
    - **Description**: Description of the catalog. For example, `Provision a VM choosing size`.
@@ -463,22 +463,22 @@ Use the following steps to create a Service Catalog Item.
    - **Provisioning Entry Point**:
      - For **endpoint type**, choose **Embedded Workflow**.
      - For the **endpoint value** choose the workflow script. For example, `provision-vm-small-med-large.asl`.
-17. Under the **Request Info** > **Catalog** tab enter the following values:
+10. Under the **Request Info** > **Catalog** tab enter the following values:
      - **VM Name**: Name that is overwritten by the **VM name** in the dialog. Enter anything here.
-20. Under the **Environment** tab, choose an appropriate **Host** and **Datastore**:
+11. Under the **Environment** tab, choose an appropriate **Host** and **Datastore**:
     - **Host**: Host that runs the VM.
     - **Datastore**: Disk that stores the VM.
-22. Under the **Networking** tab, choose an appropriate **Network Adapter**.
-24. Click **Add**.
+12. Under the **Networking** tab, choose an appropriate **Network Adapter**.
+13. Click **Add**.
 
 #### Provisioning a Virtual Machine
 
 1. Click **Services** > **Catalogs** > **Service Catalogs**.
 2. Click **Order** under the newly created service, **Vm with Size**.
 3. Provide the following fields:
-   - **VM name**: Name for the newly created vm. For example `demo-1`.
-   - **size**: The desired VM size. You can choose `small`, `medium` or `large`. For example, choose **small**.
-1. Click **Submit**
+   - **VM name**: Name for the newly created VM. For example `demo-1`.
+   - **Size**: The desired VM size. You can choose `Small`, `Medium` or `Large`. For example, choose **Small**.
+4. Click **Submit**
 
 #### Iterate
 

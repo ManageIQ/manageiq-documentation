@@ -448,7 +448,7 @@ Use the following steps to create a Service Catalog Item.
 3. Click **Configuration** > **Add a New Catalog**.
 4. Provide a **Name** and **Description**:
    - **Name**: Name displayed in the catalog. For example, `Provision VM`.
-   - **Description**: Desription of the catalog. For example, `Provisioning VM by size`.
+   - **Description**: Description of the catalog. For example, `Provisioning VM by size`.
 5. Click **Save**.
 6. Click **Catalog Items** > **All Catalog Items** > **Provisioning**.
 7. Click **Configuration** > **Add a New Catalog Item**.

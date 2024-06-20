@@ -365,3 +365,148 @@ To use the button to run an Ansible Tower job on a virtual machine:
 If you selected a service dialog to run when creating the button, {{ site.data.product.title_short }} will then prompt you to enter variables to complete the task. After entering your desired parameters, {{ site.data.product.title_short }} takes you to the **Requests** page.
 
 The service item’s details can be viewed in menu: **Services > My Services** in {{ site.data.product.title_short }}.
+
+## OpenTofu
+
+OpenTofu is an open source infrastructure as code tool, which can be used to build, change, and version infrastructure. OpenTofu allows you to define infrastructure resources in human-readable configuration files that you can use to version, reuse, and share.
+
+OpenTofu is built into {{ site.data.product.title_short }} so you do not need to install any additional components. The basic workflow to use OpenTofu in {{ site.data.product.title_short }} is as follows:
+
+1. Enable the Embedded Terraform server role.
+2. Add a source control repository that contains your templates.
+3. Add credentials for your cloud providers.
+4. Create a Service Catalog item with the desired Terraform template.
+
+Use the following sections to learn more about OpenTofu and how to use these described workflows within {{ site.data.product.title_short }}.
+
+### Enabling the Embedded Terraform Server Role
+
+In {{ site.data.product.title_short }}, the Embedded Terraform Role is disabled by default. Enable this server role to utilize Terraform Automation Inside.
+
+To enable the Embedded Terraform Server Role, use the following steps:
+
+1. Browse to the settings menu, and click **Configuration** > **Settings**.
+2. Select the desired server under **Zones**.
+3. Set the **Server Role** for **Embedded Terraform** to `On`.
+
+### Verifying the Embedded Terraform worker state
+
+Verify that the Embedded Terraform worker is started to utilize its features:
+
+1. Browse to the settings menu, then click **Configuration** > **Diagnostics** and click on the desired server.
+2. Click **Roles by Servers** tab.
+
+A table of all workers and their current status appears from which you can confirm the state of your Embedded Terraform worker.
+
+### Adding a Template Repository
+
+To enable {{ site.data.product.title_short }} to discover and utilize your Terraform templates, add a repository to store and manage your templates.
+
+1. Browse to menu and click **Automation > Embedded Terraform > Repositories**.
+
+2. Click **Configuration**, then ![Add New Repository](../images/1862.png) (**Add New Repository**).
+
+3. Provide a Repository Name in the **Name** field.
+
+4. Add a description for the repository in the **Description** field.
+
+5. Add a **URL** or IP Address for the repository.
+
+6. Select the appropriate **SCM Credentials** from the drop down menu.
+
+7. Provide a branch name in the **SCM Branch** field.
+
+8. Click **Save**.
+
+Once you have synced a repository, the Terraform templates become available to {{ site.data.product.title_short }}.
+
+### Refreshing Repositories
+
+{{ site.data.product.title_short }} allows you to refresh a targeted Terraform templates or all repositories in your inventory to ensure that your templates are up to date.
+
+Use the following steps to refresh a targeted repository:
+
+1. Browse to menu and click **Automation > Embedded Terraform > Repositories**.
+
+2. Click on a repository.
+
+3. Click **Configuration**, then ![Refresh this Repository](../images/2003.png) (**Refresh this Repository**).
+
+Alternately, you can refresh some or all of the repositories from the list view:
+
+1. Browse to menu and click **Automation > Embedded Terraform > Repositories**.
+
+2. Select the repositories that you want to refresh. Click **Check All** to select all repositories.
+
+3. Click **Configuration**, then ![Refresh Selected Terraform Templates Repositories](../images/2003.png) (**Refresh Selected Ansible Repositories**).
+
+{% include_relative _topics/opentofu_credentials.md %}
+
+### Executing a Terraform Template from a Service Catalog
+
+You can execute a Terraform Template from {{ site.data.product.title_short }} by creating a Service Catalog item from a Terraform template.
+
+Use the following sections listed in order to execute a Terraform Template from a Service Catalog:
+
+1. Create a catalog
+2. Create a Terraform Service Catalog item
+3. Execute the Terraform template
+
+#### Create a catalog
+
+Use the following steps to create a catalog:
+
+1. In the navigation bar click **Services** > **Catalogs and click Catalog Items**.
+
+2. Click **Configuration**, then click **Add a New Catalog**.
+
+3. Enter a **Name** and **Description** for the catalog.
+
+4. Click **Add**.
+
+#### Create a Terraform Service Catalog item
+
+Use the following steps to create a Terraform Service Catalog item:
+
+1. In the navigation bar click **Automation** > **Embedded Automate** > **Customization**, then click **Service Dialog**.
+
+2. Click **Configuration** > **Create Service Dialog**.
+
+3. Enter a **Service Dialog Name** and add the required fields for the Terraform template.
+
+4. Click **Save**.
+
+5. In the navigation nar click **Services** > **Catalogs** > **Catalog Items**.
+
+6. Click **Configuration** > **Add a New Catalog Item*  to create a new catalog item with the following details at minimum:
+
+   - For **Catalog Item type**, select **Terraform Template**.
+
+   - Enter a **Name** for the service catalog item.
+
+   - Select **Display** in **Catalog**.
+
+   - In Catalog, select the catalog that you created previously.
+
+   - In Provisioning, select the repository that you previously added and select the Terraform template that you want to deploy.
+
+   - In Provisioning, select the **Cloud Type** and then select the **credential** to connect to the cloud.
+
+   - In Provisioning, select the **Service Dialog** that you created previously. If you want enter additional information when running the task, **Service Dialog** must be selected. A dialog is required if **Display in Catalog** is chosen.
+
+6. Click **Save**. The catalog item you created appears in the *All Service Catalog Items* list.
+
+#### Execute the Terraform Template:
+
+Use the following steps to execute the Terraform Template.
+
+1. In the navigation bar click **Service** > **Catalogs** > **Service Catalogs** > **created catalog**.
+
+2. Click **Order** for the catalog item.
+
+3. Enter any variables requested and click **Submit**.
+
+{{ site.data.product.title_short }} takes you to the *Requests queue* page and displays the status of the job.
+
+The service item details can be viewed by navigating to **Services** > **My Services in Infrastructure Automation**.
+

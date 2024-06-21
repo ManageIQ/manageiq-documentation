@@ -386,6 +386,16 @@ runuser --login manageiq --command 'podman --root=/var/www/miq/vmdb/data/contain
 
 Where `OpenTofu_image` is the name of your OpenTofu image.
 
+``` bash
+runuser --login manageiq --command 'podman --root=/var/www/miq/vmdb/data/containers/storage image load --input /tmp/infra-mgmt-opentofu-runner_PR-110-204033d-20240521-x86_64.tar'
+```
+
+You also need to set the docker image name in advanced settings page before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `container_image` field.
+
+An example value of this field is `container_image: docker.io/manageiq/opentofu-runner:latest`.
+
+## Usage of Embedded Terraform (OpenTofu)
+
 The following sections show the usage of Embedded Terraform in {{ site.data.product.title_short }}. The following sections apply to {{ site.data.product.title_short }} that is deployed as a containerized deployment (podified) and {{ site.data.product.title_short }} that is deployed as a virtual machine appliance:
 
 1. Enable the Embedded Terraform server role.

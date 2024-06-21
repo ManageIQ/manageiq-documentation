@@ -370,14 +370,28 @@ The service item’s details can be viewed in menu: **Services > My Services** i
 
 OpenTofu is an open source infrastructure as code tool, which can be used to build, change, and version the infrastructure. You can use OpenTofu to define infrastructure resources in human-readable configuration files that you can use to version, reuse, and share.
 
-OpenTofu is built into {{ site.data.product.title_short }} so you do not need to install any additional components. The basic workflow to use OpenTofu in {{ site.data.product.title_short }} is as follows:
+OpenTofu is built into {{ site.data.product.title_short }} so you do not need to install any additional components. 
+
+If you want to use the Embedded Terraform feature in {{ site.data.product.title_short }} that is deployed as a virtual machine appliance, then you need to manually import the Terraform image on an appliance:
+
+## Importing OpenTofu image on an appliance
+
+**Note**: Follow this section if you have {{ site.data.product.title_short }} that is deployed as a virtual machine appliance. These steps are not applicable to {{ site.data.product.title_short }} that is deployed as a containerized deployment (podified).
+
+Use the following command to import the OpenTofu image on your appliance server.
+
+``` bash
+runuser --login manageiq --command 'podman --root=/var/www/miq/vmdb/data/containers/storage image load --input /tmp/<OpenTofu_image>'
+```
+
+Where `OpenTofu_image` is the name of your OpenTofu image.
+
+The following sections show the usage of Embedded Terraform in {{ site.data.product.title_short }}. The following sections apply to {{ site.data.product.title_short }} that is deployed as a containerized deployment (podified) and {{ site.data.product.title_short }} that is deployed as a virtual machine appliance:
 
 1. Enable the Embedded Terraform server role.
 2. Add a source control repository that contains your templates.
 3. Add credentials for your cloud providers.
 4. Create a Service Catalog item with the wanted Terraform template.
-
-Use the following sections to learn more about OpenTofu and how to use these described workflows within {{ site.data.product.title_short }}.
 
 ### Enabling the Embedded Terraform Server Role
 

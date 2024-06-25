@@ -386,7 +386,6 @@ runuser --login manageiq --command 'podman --root=/var/www/miq/vmdb/data/contain
 
 Where `OpenTofu_image` is the name of your OpenTofu image.
 
-
 You also need to set the docker image name in advanced settings before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `workers/worker_base/opentofu_worker/container_image` field.
 
 An example value of this field is `container_image: docker.io/manageiq/opentofu-runner:latest`.

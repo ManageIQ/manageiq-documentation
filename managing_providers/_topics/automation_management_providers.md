@@ -366,7 +366,7 @@ If you selected a service dialog to run when creating the button, {{ site.data.p
 
 The service item’s details can be viewed in menu: **Services > My Services** in {{ site.data.product.title_short }}.
 
-## OpenTofu
+## Embedded Terraform (OpenTofu)
 
 OpenTofu is an open source infrastructure as code tool, which can be used to build, change, and version the infrastructure. You can use OpenTofu to define infrastructure resources in human-readable configuration files that you can use to version, reuse, and share.
 
@@ -376,7 +376,7 @@ If you want to use the Embedded Terraform feature in {{ site.data.product.title_
 
 ## Importing OpenTofu image on an appliance
 
-**Note**: Follow this section if you have {{ site.data.product.title_short }} that is deployed as a virtual machine appliance. These steps are not applicable to {{ site.data.product.title_short }} that is deployed as a containerized deployment (podified).
+**Note**: Follow this section if you have {{ site.data.product.title_short }} that is deployed as a virtual appliance. These steps are not applicable to a containerized deployment (podified) of {{ site.data.product.title_short }}.
 
 Use the following command to import the OpenTofu image on your appliance server.
 
@@ -387,7 +387,7 @@ runuser --login manageiq --command 'podman --root=/var/www/miq/vmdb/data/contain
 Where `OpenTofu_image` is the name of your OpenTofu image.
 
 
-You also need to set the docker image name in advanced settings page before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `container_image` field.
+You also need to set the docker image name in advanced settings before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `workers/worker_base/opentofu_worker/container_image` field.
 
 An example value of this field is `container_image: docker.io/manageiq/opentofu-runner:latest`.
 
@@ -397,17 +397,17 @@ The following sections show the usage of Embedded Terraform in {{ site.data.prod
 
 1. Enable the Embedded Terraform server role.
 2. Add a source control repository that contains your templates.
-3. Add credentials for your cloud providers.
-4. Create a Service Catalog item with the wanted Terraform template.
+3. Add credentials to access the repository.
+4. Create a Service Catalog item with the desired Terraform template.
 
 ### Enabling the Embedded Terraform Server Role
 
-In {{ site.data.product.title_short }}, the Embedded Terraform server role is disabled by default. Enable this server role to use Terraform Automation Inside.
+In {{ site.data.product.title_short }}, the Embedded Terraform server role is disabled by default. Enable this server role to use Embedded Terraform (OpenTofu).
 
 To enable the Embedded Terraform Server Role, use the following steps:
 
 1. Browse to the settings menu, and click **Configuration** > **Settings**.
-2. Select the wanted server under **Zones**.
+2. Select the desired server under **Zones**.
 3. Set the **Server Role** for **Embedded Terraform** to `On`.
 
 ### Verifying the Embedded Terraform worker state
@@ -421,7 +421,11 @@ A table of all workers and their status appears from which you can confirm the s
 
 ### Adding a Template Repository
 
-To enable {{ site.data.product.title_short }} to discover and use your Terraform templates, add a repository to store and manage your templates. Use the following steps to add a repository:
+To enable {{ site.data.product.title_short }} to discover and use your Terraform templates, add a repository to store and manage your templates.
+
+If your repository requires credentials for access, then you need to create SCM credentials. For more information about how to create SCM credentials, see [SCM credentials](../_topics/opentofu_credentials.md#scm).
+
+Use the following steps to add a repository:
 
 1. Browse to the menu and click **Automation > Embedded Terraform > Repositories**.
 
@@ -431,21 +435,21 @@ To enable {{ site.data.product.title_short }} to discover and use your Terraform
 
 4. Add a description for the repository in the **Description** field.
 
-5. Add a **URL** or IP address for the repository.
+5. Add a **URL** and an optional port for the repository.
 
 6. Select the appropriate **SCM Credentials** from the drop-down menu.
 
-7. Provide a branch name in the **SCM Branch** field.
+7. Provide a branch name in the **SCM Branch** field. This field is optional and default value is set to `master` branch.
 
 8. Click **Save**.
 
-When you sync a repository, the Terraform templates become available to {{ site.data.product.title_short }}.
+When you save the repository, the Terraform templates are synced, and are available to {{ site.data.product.title_short }}.
 
 ### Refreshing Repositories
 
-You can use {{ site.data.product.title_short }} to refresh targeted Terraform templates or all repositories in your inventory to make sure that your templates are up to date.
+You can use {{ site.data.product.title_short }} to refresh specific Terraform repositories or all repositories in your inventory to make sure that your templates are up to date.
 
-Use the following steps to refresh a targeted repository:
+Use the following steps to refresh a specific repository:
 
 1. Browse to the menu and click **Automation > Embedded Terraform > Repositories**.
 
@@ -531,5 +535,5 @@ Use the following steps to run the Terraform Template.
 
 {{ site.data.product.title_short }} takes you to the *Requests queue* page and displays the status of the job.
 
-The service item details can be viewed when you navigate to **Services** > **My Services in Infrastructure Automation**.
+The service item details can be viewed when you navigate to **Services** > **My Services in {{ site.data.product.title_short }}**.
 

@@ -370,7 +370,7 @@ The service item’s details can be viewed in menu: **Services > My Services** i
 
 OpenTofu is an open source infrastructure as code tool, which can be used to build, change, and version the infrastructure. You can use OpenTofu to define infrastructure resources in human-readable configuration files that you can use to version, reuse, and share.
 
-OpenTofu is built into {{ site.data.product.title_short }} so you do not need to install any additional components. 
+OpenTofu is built into {{ site.data.product.title_short }} so you do not need to install any additional components.
 
 If you want to use the Embedded Terraform feature in {{ site.data.product.title_short }} that is deployed as a virtual machine appliance, then you need to manually import the Terraform image on an appliance:
 

@@ -381,14 +381,14 @@ If you want to use the Embedded Terraform feature in {{ site.data.product.title_
 Use the following command to import the OpenTofu image on your appliance server.
 
 ``` bash
-runuser --login manageiq --command 'podman --root=/var/www/miq/vmdb/data/containers/storage image load --input /tmp/<OpenTofu_image>'
+{{ site.data.product.import_opentofu }}
 ```
 
 Where `OpenTofu_image` is the name of your OpenTofu image.
 
 You also need to set the docker image name in advanced settings before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `workers/worker_base/opentofu_worker/container_image` field.
 
-An example value of this field is `container_image: docker.io/manageiq/opentofu-runner:latest`.
+An example value of this field is `container_image:` `{{ site.data.product.container_image }}`.
 
 ## Usage of Embedded Terraform (OpenTofu)
 

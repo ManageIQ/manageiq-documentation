@@ -388,7 +388,7 @@ Where `OpenTofu_image` is the name of your OpenTofu image.
 
 You also need to set the docker image name in advanced settings before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `workers/worker_base/opentofu_worker/container_image` field.
 
-An example value of this field is `container_image:` `{{ site.data.product.container_image }}`.
+An example value of this field is `container_image: {{ site.data.product.container_image }}`.
 
 ## Usage of Embedded Terraform (OpenTofu)
 

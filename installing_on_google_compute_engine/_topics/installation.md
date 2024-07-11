@@ -57,7 +57,7 @@ You can upload the appliance with the following steps:
     1.  Enter a unique **Name** for the image that uses lowercase
         alphanumeric characters and hyphens.
 
-    2.  Add a **Description**.
+    2.  Optionally, add a **Description**.
 
     3.  Configure **Encryption** if needed. The default value is set to `Automatic
         (recommended)`.

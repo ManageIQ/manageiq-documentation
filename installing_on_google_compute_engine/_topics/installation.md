@@ -36,8 +36,7 @@ You can upload the appliance with the following steps:
 4.  Create a bucket by clicking **Create Bucket**, and configure the
     following details:
 
-    1.  Enter a unique **Name** for the bucket that uses lowercase
-        alphanumeric characters, hyphens, and underscores.
+    1.  Enter a unique **Name** for the bucket.  Valid characters include lowercase alphanumeric characters, hyphens, and underscores.
 
     2.  Configure your location from the dropdown list.
 

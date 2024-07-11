@@ -54,8 +54,7 @@ You can upload the appliance with the following steps:
 7.  Create an image by clicking **Images** from the left menu, then
     **Create Image**. Enter the following details about the image:
 
-    1.  Enter a unique **Name** for the image that uses lowercase
-        alphanumeric characters and hyphens.
+    1.  Enter a unique **Name** for the image. Valid characters include lowercase alphanumeric characters and hyphens.
 
     2.  Optionally, add a **Description**.
 
@@ -76,8 +75,7 @@ You can upload the appliance with the following steps:
 8.  Create a virtual machine instance by navigating to **VM
     instances > Create Instance**, and configure the following fields:
 
-    1.  Enter a unique **Name** for the virtual machine instance that uses
-        lowercase alphanumeric characters and hyphens.
+    1.  Enter a unique **Name** for the virtual machine instance. Valid characters include lowercase alphanumeric characters and hyphens.
 
     2.  Select the **Zone** closest to your location.
 

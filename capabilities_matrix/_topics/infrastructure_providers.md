@@ -2,7 +2,7 @@
 
  The following tables outline the capabilities of {{ site.data.product.title_short }} that are known to work for various virtual infrastructure providers.
 
-| Discovery                                                    | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | OpenShift Virtualization (KubeVirt) |
+| Discovery                                                    | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | ----------------------- | ------------- | -------- |
 | Compute Inventory                                            | ✅      | ✅          | ✅ (Nodes and Services) | ✅            | ✅         |
 | Network Inventory                                            | ✅      | ✅ (OVN)    | ❌                      | ✅            | ❌          |

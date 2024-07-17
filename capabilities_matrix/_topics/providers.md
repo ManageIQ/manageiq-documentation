@@ -17,7 +17,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [IBM PowerVC](#cloud-providers)                                                      |
 | IBM Terraform                                                                        |
 | [Kubernetes](#container-providers)                                                   |
-| [KubeVirt](#infrastructure-providers)                                                |
+| [OpenShift Virtualization (KubeVirt)](#infrastructure-providers)                     |
 | [Lenovo xClarity](#physical-infrastructure-providers)                                |
 | [Microsoft Azure](#cloud-providers)                                                  |
 | [Microsoft Azure Stack](#cloud-providers)                                            |

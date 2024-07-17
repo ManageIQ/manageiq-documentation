@@ -40,7 +40,7 @@ For information on managing specific infrastructure providers see the following.
 
 * [IBM Power HMC](./infrastructure_providers/ibm_power_hmc_providers.html)
 
-* [Kubevirt](./infrastructure_providers/kubevirt_providers.html)
+* [OpenShift Virtualization (KubeVirt)](./infrastructure_providers/kubevirt_providers.html)
 
 {% include_relative _topics/refreshing_multiple_management_systems.md %}
 

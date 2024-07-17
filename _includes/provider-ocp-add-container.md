@@ -109,7 +109,7 @@
 
 9. In the **Virtualization** endpoint tab optionally configure the virtualization service details:
 
-    1. Select a service type (KubeVirt) or leave disabled
+    1. Select a service type (OpenShift Virtualization / KubeVirt) or leave disabled
 
     2.  Select a **Security Protocol** method to specify how to
         authenticate the service:

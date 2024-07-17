@@ -11,7 +11,7 @@
 | Metrics                                                      | ✅      | ✅          | ✅                      | ✅            | ❌          |
 | Forensic Analysis (SmartState)                               | ✅      | ✅          | ✅ (Nodes)              | ❌            | ❌          |
 
-| General Features                                             | vSphere | oVirt / RHV | OpenStack undercloud | IBM Power HMC | OpenShift Virtualization (KubeVirt) |
+| General Features                                             | vSphere | oVirt / RHV | OpenStack undercloud | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | -------------------- | ------------- | -------- |
 | Relationship Discovery                                       | ✅      | ✅          | ✅                   | ✅            | ✅         |
 | Drift Comparison                                             | ✅      | ✅          | ✅ (Nodes)           | ❌            | ❌          |
@@ -33,7 +33,7 @@
 | Alerts - VM Reconfigured                                     | ✅      | ✅          | ❌                   | ❌            | ❌          |
 | Integrate with Service Catalogs                              | ✅      | ✅          | ❌                   | ❌            | ❌          |
 
-| Operations                                                   | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | OpenShift Virtualization (KubeVirt) |
+| Operations                                                   | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | ----------------------- | --------------| -------- |
 | VM Remote Console Access (see section below)                 | ✅      | ✅          | ❌                      | ❌            | ✅         |
 | VM Power Operations                                          | ✅      | ✅          | ❌                      | ✅            | ✅         |
@@ -75,4 +75,5 @@
 |              | WebMKS          |
 | RHV          | SPICE           |
 | SCVMM        | N/A             |
-| OpenShift Virtualization (KubeVirt)     | SPICE           |
+| KubeVirt     | SPICE           |
+| OSV          | SPICE           |

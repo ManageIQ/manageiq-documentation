@@ -10,7 +10,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | Foreman                                                                              |
 | [Google Cloud Platform (GCP)](#cloud-providers)                                      |
 | IBM AutoSDE                                                                          |
-| [IBM Cloud Infrastructure Center (CIC)](#cloud-providers)
+| [IBM Cloud Infrastructure Center (CIC)](#cloud-providers)                            |
 | [IBM Cloud VPC](#cloud-providers)                                                    |
 | [IBM Power HMC](#infrastructure-providers)                                           |
 | [IBM Power Systems Virtual Servers (PowerVS)](#cloud-providers)                      |
@@ -18,7 +18,6 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | IBM Terraform                                                                        |
 | [Kubernetes](#container-providers)                                                   |
 | [KubeVirt](#infrastructure-providers)                                                |
-| [OpenShift Virtualization (OSV)](#infrastructure-providers)                          |
 | [Lenovo xClarity](#physical-infrastructure-providers)                                |
 | [Microsoft Azure](#cloud-providers)                                                  |
 | [Microsoft Azure Stack](#cloud-providers)                                            |
@@ -29,6 +28,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [oVirt](#infrastructure-providers)                                                   |
 | [Red Hat Ansible Tower](#automation-providers)                                       |
 | [Red Hat OpenShift Container Platform (OCP)](#container-providers)                   |
+| [Red Hat OpenShift Virtualization (OSV)](#infrastructure-providers)                  |
 | [Red Hat OpenStack Platform (OSP)](#cloud-providers)                                 |
 | Red Hat Satellite                                                                    |
 | [Red Hat Virtualization (RHV)](#infrastructure-providers)                            |

@@ -2,7 +2,7 @@
 
  The following tables outline the capabilities of {{ site.data.product.title_short }} that are known to work for various virtual infrastructure providers.
 
-| Discovery                                                    | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt |
+| Discovery                                                    | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | ----------------------- | ------------- | -------- |
 | Compute Inventory                                            | ✅      | ✅          | ✅ (Nodes and Services) | ✅            | ✅         |
 | Network Inventory                                            | ✅      | ✅ (OVN)    | ❌                      | ✅            | ❌          |
@@ -11,7 +11,7 @@
 | Metrics                                                      | ✅      | ✅          | ✅                      | ✅            | ❌          |
 | Forensic Analysis (SmartState)                               | ✅      | ✅          | ✅ (Nodes)              | ❌            | ❌          |
 
-| General Features                                             | vSphere | oVirt / RHV | OpenStack undercloud | IBM Power HMC | KubeVirt |
+| General Features                                             | vSphere | oVirt / RHV | OpenStack undercloud | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | -------------------- | ------------- | -------- |
 | Relationship Discovery                                       | ✅      | ✅          | ✅                   | ✅            | ✅         |
 | Drift Comparison                                             | ✅      | ✅          | ✅ (Nodes)           | ❌            | ❌          |
@@ -33,7 +33,7 @@
 | Alerts - VM Reconfigured                                     | ✅      | ✅          | ❌                   | ❌            | ❌          |
 | Integrate with Service Catalogs                              | ✅      | ✅          | ❌                   | ❌            | ❌          |
 
-| Operations                                                   | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt |
+| Operations                                                   | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | ----------------------- | --------------| -------- |
 | VM Remote Console Access (see section below)                 | ✅      | ✅          | ❌                      | ❌            | ✅         |
 | VM Power Operations                                          | ✅      | ✅          | ❌                      | ✅            | ✅         |
@@ -76,3 +76,4 @@
 | RHV          | SPICE           |
 | SCVMM        | N/A             |
 | KubeVirt     | SPICE           |
+| OSV          | SPICE           |

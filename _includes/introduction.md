@@ -70,7 +70,7 @@ minimum:
 
   - 12 GB RAM
 
-  - 44 GB HDD + optional database disk
+  - 44 GB HDD + optional database disk + optional messaging disk
 
 #### Database Requirements
 

@@ -405,7 +405,7 @@ In {{ site.data.product.title_short }}, the Embedded Terraform server role is di
 
 To enable the Embedded Terraform Server Role, use the following steps:
 
-1. Browse to the settings menu, and click **Configuration** > **Settings**.
+1. Browse to the settings menu, and click **Configuration** > **Application Settings**.
 2. Select the desired server under **Zones**.
 3. Set the **Server Role** for **Embedded Terraform** to `On`.
 
@@ -413,7 +413,8 @@ To enable the Embedded Terraform Server Role, use the following steps:
 
 Verify that the Embedded Terraform worker is started to use its features:
 
-1. Browse to the settings menu, then click **Configuration** > **Diagnostics** and click the server that you want to choose.
+1. Browse to the settings menu, then click **Configuration** > **Application Settings**.
+2. Click **Diagnostics** and click the server that you want to choose.
 2. Click **Roles by Servers** tab.
 
 A table of all workers and their status appears from which you can confirm the state of your Embedded Terraform worker.
@@ -480,13 +481,15 @@ Use the following listed steps in each section to run the Terraform Template fro
 
 Use the following steps to create a catalog:
 
-1. In the navigation bar, click **Services** > **Catalogs and click Catalog Items**.
+1. In the navigation bar, click **Services** > **Catalogs**.
 
-2. Click **Configuration**, then click **Add a New Catalog**.
+2. Click **Catalogs**.
 
-3. Enter a **Name** and **Description** for the catalog.
+3. Click **Configuration**, then click **Add a New Catalog**.
 
-4. Click **Add**.
+4. Enter a **Name** and **Description** for the catalog.
+
+5. Click **Add**.
 
 #### Create a Terraform Service Catalog item
 

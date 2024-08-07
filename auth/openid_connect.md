@@ -107,9 +107,9 @@ is created:
 
 The following *Group Membership* mapper must be manually created:
 
-| Name   | Consent Required | Mapper Type      | Token Claim Name | Full group path | Add to ID token | Add to access token | Add to userinfo |
-| ------ | ---------------- | ---------------- | ---------------- | --------------- | --------------- | ------------------- | --------------- |
-| groups | OFF              | Group Membership | groups           | OFF             | ON              | ON                  | OFF             |
+| Name   | Consent Required | Mapper Type      | Token Claim Name | Full group path | Add to ID token | Add to access token | Add to userinfo | Add to token introspection |
+| ------ | ---------------- | ---------------- | ---------------- | --------------- | --------------- | ------------------- | --------------- | -------------------------- |
+| groups | OFF              | Group Membership | groups           | OFF             | ON              | OFF                 | OFF             | ON                         |
 
 The following *User Session Note* mappers must be manually created:
 

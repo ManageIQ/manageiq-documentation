@@ -37,7 +37,7 @@ Configure the appliance by using the internal appliance console.
 
 Configuring messaging is required for appliance setup. It is recommended to configure the broker on the same appliance where your database is configured
 
-**Note:** You can only have one kafka broker per region
+**Note:** You can only have one kafka broker per region.
 
 1. You can either configure the current appliance as a kafka broker, or point the
    appliance to an existing external kafka broker.
@@ -51,7 +51,7 @@ Configuring messaging is required for appliance setup. It is recommended to conf
 2. Select **Proceed** and appliance_console will apply the configuration that you have
    requested then restart evmserverd to pick up the changes.
 
-**Note:** It is recommended to use your Fully Qualified Domain Name (FQDN) as the messaging hostname rather than `localhost`, ensure that a resolvable and reachable non-localhost name entry is present in `/etc/hosts`
+**Note:** It is recommended to use your Fully Qualified Domain Name (FQDN) as the messaging hostname rather than `localhost`, ensure that a resolvable and reachable non-localhost name entry is present in `/etc/hosts`.
 
 ### Configuring a Worker Appliance
 

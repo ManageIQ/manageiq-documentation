@@ -27,10 +27,7 @@ Configure the appliance by using the internal appliance console.
 
 6.  Press `Enter` to accept a setting where applicable.
 
-**Note:**
-
-The {{ site.data.product.title_short }} appliance console automatically logs out
-after five minutes of inactivity.
+**Note**: The {{ site.data.product.title_short }} appliance console automatically logs out after five minutes of inactivity.
 
 ### Configuring a Database
 
@@ -80,10 +77,7 @@ has a region configured with a database and messaging.
     remote machine**. For worker and multi-region setups, use this
     option to copy the security key from another appliance.
 
-    **Note:**
-
-    All {{ site.data.product.title_short }} appliances in a multi-region deployment
-    must use the same key.
+    **Note**: All {{ site.data.product.title_short }} appliances in a multi-region deployment must use the same key.
 
 6.  Choose **Join Region in External Database** for the database location.
 

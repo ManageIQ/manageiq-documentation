@@ -1,8 +1,7 @@
 Change your password to ensure more private and secure access to
 {{ site.data.product.title_short }}.
 
-1.  Browse to the URL for the login screen. (<https://xx.xx.xx.xx> on
-    the virtual machine instance)
+1.  Browse to the URL for the login screen.
 
 2.  Click **Update Password** beneath the **Username** and **Password**
     text fields.

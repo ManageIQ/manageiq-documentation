@@ -3,8 +3,7 @@ administration tasks.
 
 Log in to {{ site.data.product.title_short }} for the first time after installing by:
 
-1.  Browse to the URL for the login screen. (<https://xx.xx.xx.xx> on
-    the virtual machine instance)
+1.  Browse to the URL for the login screen.
 
 2.  Enter the default credentials (Username: **admin** | Password:
     **smartvm**) for the initial login.

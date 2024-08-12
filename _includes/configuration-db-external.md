@@ -24,11 +24,11 @@ necessary to alter the `max_connections` setting.
 
 **Note:**
 
-  - {{ site.data.product.title_short }} requires PostgreSQL version 13.
+    - {{ site.data.product.title_short }} requires PostgreSQL version 13.
 
-  - `postgresql.conf` controls the operation of all databases managed by the
-   PostgreSQL instance, therefore it is not recommended to run other databases
-   on this PostgreSQL instance.
+    - `postgresql.conf` controls the operation of all databases managed by the PostgreSQL instance, therefore it is not recommended to run other databases on this PostgreSQL instance.
+
+Use the following steps to configure an external PostgreSQL database:
 
 1.  Start the appliance and open a terminal console.
 

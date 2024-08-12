@@ -20,7 +20,7 @@ Configure the appliance by using the internal appliance console.
 
 3.  Press `Enter` to manually configure settings.
 
-4.  Press the number for the item you want to change, and press `Enter`.
+4.  Press the number for the item that you want to change, and press `Enter`.
     The options for your selection are displayed.
 
 5.  Follow the prompts to make the changes.
@@ -35,23 +35,24 @@ Configure the appliance by using the internal appliance console.
 
 ### Configure Messaging
 
-Configuring messaging is required for appliance setup. It is recommended to configure the broker on the same appliance where your database is configured
+Configuring messaging is required for the appliance setup. It is recommended to configure the broker on the same appliance where your database is configured
 
-**Note:** You can only have one kafka broker per region.
+**Note:** You can only have one Kafka broker per region.
 
-1. You can either configure the current appliance as a kafka broker, or point the
-   appliance to an existing external kafka broker.
+1. You can either configure the current appliance as a Kafka broker, or point the
+   appliance to an existing external Kafka broker.
 
    Select the appropriate option either
    **Configure this appliance as a messaging server** or
    **Connect to an external messaging system**
-   to connect to an external kafka broker.  You will be asked to fill in the
-   required **Message Client Parameters** like IP address and username/password.
+   to connect to an external Kafka broker. Fill in the
+   required **Message Client Parameters**, such as IP address, username and password.
 
-2. Select **Proceed** and appliance_console will apply the configuration that you have
-   requested then restart evmserverd to pick up the changes.
+2. Select **Proceed**. `appliance_console` applies the configuration that you requested.
 
-**Note:** It is recommended to use your Fully Qualified Domain Name (FQDN) as the messaging hostname rather than `localhost`, ensure that a resolvable and reachable non-localhost name entry is present in `/etc/hosts`.
+3. Restart `evmserverd` to pick up the changes.
+
+**Note:** Use your Fully Qualified Domain Name (FQDN) as the messaging hostname rather than `localhost`, ensure that a resolvable and reachable non-localhost name entry is present in `/etc/hosts`.
 
 ### Configuring a Worker Appliance
 

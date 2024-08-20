@@ -8,8 +8,6 @@ recommends adding the disk before starting the appliance.
 {{ site.data.product.title_short }} only supports installing of an internal VMDB on blank
 disks; installation will fail if the disks are not blank.
 
-</div>
-
 1.  Start the appliance and open a terminal console.
 
 2.  Enter the `appliance_console` command. The {{ site.data.product.title_short }} appliance
@@ -29,10 +27,7 @@ disks; installation will fail if the disks are not blank.
         first appliance. For worker and multi-region setups, use this
         option to copy key from another appliance.
 
-        **Note:**
-
-        All {{ site.data.product.title_short }} appliances in a multi-region
-        deployment must use the same key.
+        **Note**: All {{ site.data.product.title_short }} appliances in a multi-region deployment must use the same key.
 
 6.  Choose **Create Internal Database** for the database location.
 

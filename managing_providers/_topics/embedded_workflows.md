@@ -165,6 +165,8 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
 
+   Amazon States Language does not support **Map** and **Parallel** states.
+
 2. Build the docker containers that are required for the workflow.
 
    When you have the code for your task resource written, you need to bundle it into a docker image. You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.

@@ -36,8 +36,6 @@ For information on managing specific infrastructure providers see the following.
 
 * [VMware vCenter Providers](./infrastructure_providers/vmware_vcenter_providers.html)
 
-* [Microsoft SCVMM Providers](./infrastructure_providers/microsoft_scvmm_providers.html)
-
 * [IBM Power HMC](./infrastructure_providers/ibm_power_hmc_providers.html)
 
 * [OpenShift Virtualization (KubeVirt)](./infrastructure_providers/kubevirt_providers.html)

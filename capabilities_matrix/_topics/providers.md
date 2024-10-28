@@ -23,6 +23,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [Microsoft Azure Stack](#cloud-providers)                                            |
 | [Microsoft System Center Virtual Machine Manager (SCVMM)](#infrastructure-providers) |
 | [Nuage Networks](#network-providers)                                                 |
+| [OpenShift Virtualization](#infrastructure-providers)                                |
 | [OpenStack](#cloud-providers)                                                        |
 | [Oracle Cloud](#cloud-providers)                                                     |
 | [oVirt](#infrastructure-providers)                                                   |

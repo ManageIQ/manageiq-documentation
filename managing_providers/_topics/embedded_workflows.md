@@ -165,7 +165,15 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
 
-   **Note**: The current implementation of the Amazon States Language does not support **Map** and **Parallel** states.
+   **Note**: The current implementation of the Amazon States Language does not support certain **Map** states. See [Unsupported States Language Features](#unsupported-states-language-features).
+
+   #### Unsupported States Language Features
+
+    The following are not yet supported for Floe:
+    - Map State Fields:
+      - ItemReader
+      - ItemSelector/ItemBatcher
+      - ResultWriter
 
 2. Build the docker containers that are required for the workflow.
 

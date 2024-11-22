@@ -3156,7 +3156,7 @@ You can enable metrics syndication in the `Advanced` settings:
      :host_overhead:
        :memory: 2.01.percent
        :cpu: 0.15.percent
-     :syndicate_metrics: true
+     :syndicate_metrics: false
    ```
 
 6. Set the value for **:syndicate_metrics:** to `true`.

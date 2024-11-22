@@ -3134,3 +3134,31 @@ You can enable inventory syndication in the `Advanced` settings:
    ```
 
 6. Set the value for `syndicate_inventory` to `true`.
+
+#### Enabling Metrics Syndication
+
+You can enable metrics syndication in the `Advanced` settings:
+
+1. From the menu, go to **Settings** > **Application Settings**.
+
+2. Expand the **Settings** accordion. When you select the **Settings** accordion, you are automatically taken to the server list under **Zones**.
+
+3. Select the zone where the EVM server is located and select the EVM server.
+
+4. Click the **Advanced** tab.
+
+   You can click the **Advanced** tab at the zone level to set advanced configuration settings for the entire zone. Or, you can click on the server, and then click the **Advanced** tab to set advanced configuration settings at the server (appliance) level, which overrides zone-level settings.
+
+5. Find the following configuration:
+
+   ```yaml
+   :performance:
+     :host_overhead:
+       :memory: 2.01.percent
+       :cpu: 0.15.percent
+     :syndicate_metrics: true
+   ```
+
+6. Set the value for **:syndicate_metrics:** to `true`.
+
+7. Use **C & U Collection Settings** to select the clusters and datastores that you want to collect usage data for.

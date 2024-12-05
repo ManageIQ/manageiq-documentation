@@ -17,7 +17,7 @@
 | Drift Comparison                                             | ✅      | ✅          | ✅ (Nodes)           | ❌            | ❌          |
 | VM Genealogy                                                 | ✅      | ✅          | ✅                   | ❌            | ✅         |
 | Capacity & Utilization                                       | ✅      | ✅          | ✅                   | ✅            | ❌          |
-| VM Event Timelines                                           | ✅      | ✅          | ❌                   | ✅            | ❌          |
+| VM Event Timelines                                           | ✅      | ✅          | ❌                   | ✅            | ✅          |
 | Infrastructure Event Timelines                               | ❌      | ❌          | ✅                   | ❌            | ❌          |
 | Reporting                                                    | ✅      | ✅          | ✅                   | ✅            | ✅         |
 | Right Sizing                                                 | ✅      | ✅          | ❌                   | ✅            | ❌          |

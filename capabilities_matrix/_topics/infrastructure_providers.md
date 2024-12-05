@@ -8,7 +8,7 @@
 | Network Inventory                                            | ✅      | ✅ (OVN)    | ❌                      | ✅            | ❌          |
 | Storage Inventory                                            | ✅      | ❌          | ❌                      | ✅            | ✅         |
 | Events                                                       | ✅      | ✅          | ✅                      | ✅            | ❌          |
-| Metrics                                                      | ✅      | ✅          | ✅                      | ✅            | ❌          |
+| Metrics                                                      | ✅      | ✅          | ✅                      | ✅            | ✅          |
 | Forensic Analysis (SmartState)                               | ✅      | ✅          | ✅ (Nodes)              | ❌            | ❌          |
 
 | General Features                                             | vSphere | oVirt / RHV | OpenStack undercloud | IBM Power HMC | KubeVirt / OSV |

@@ -41,7 +41,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Instance Policy Enforcement     | ✅  | ✅    | ✅  | ✅        | ✅      | ✅                   | ✅                   | ✅                   | ✅     |
 | Instance Compliance Enforcement | ✅  | ✅    | ✅  | ✅        | ❌      | ❌                   | ❌                   | ❌                   | ❌     |
 | Alerts - Real Time              | ❌  | ❌    | ❌  | ✅        | ❌      | ❌                   | ❌                   | ❌                   | ❌     |
-| Integrate with Service Catalogs | ✅  | ✅    | ✅  | ✅        | ✅      | ✅                   | ✅                   | ❌                   | ✅     |
+| Integrate with Service Catalogs | ✅  | ✅    | ✅  | ✅        | ✅      | ✅                   | ✅                   | ✅                   | ✅     |
 
 | Operations                                                   | AWS | Azure | GCP | OpenStack | IBM CIC | PowerVC                          | PowerVS  | IBM VPC | Oracle       |
 | ------------------------------------------------------------ | --- | ----- | --- | --------- | -------- | -------------------------------- | -------- | ------- | ------------ |

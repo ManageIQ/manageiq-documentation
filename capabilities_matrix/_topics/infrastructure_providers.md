@@ -8,7 +8,7 @@
 | Network Inventory                                            | ✅      | ✅ (OVN)    | ❌                      | ✅            | ❌          |
 | Storage Inventory                                            | ✅      | ❌          | ❌                      | ✅            | ✅         |
 | Events                                                       | ✅      | ✅          | ✅                      | ✅            | ❌          |
-| Metrics                                                      | ✅      | ✅          | ✅                      | ✅            | ❌          |
+| Metrics                                                      | ✅      | ✅          | ✅                      | ✅            | ✅          |
 | Forensic Analysis (SmartState)                               | ✅      | ✅          | ✅ (Nodes)              | ❌            | ❌          |
 
 | General Features                                             | vSphere | oVirt / RHV | OpenStack undercloud | IBM Power HMC | KubeVirt / OSV |
@@ -17,7 +17,7 @@
 | Drift Comparison                                             | ✅      | ✅          | ✅ (Nodes)           | ❌            | ❌          |
 | VM Genealogy                                                 | ✅      | ✅          | ✅                   | ❌            | ✅         |
 | Capacity & Utilization                                       | ✅      | ✅          | ✅                   | ✅            | ❌          |
-| VM Event Timelines                                           | ✅      | ✅          | ❌                   | ✅            | ❌          |
+| VM Event Timelines                                           | ✅      | ✅          | ❌                   | ✅            | ✅          |
 | Infrastructure Event Timelines                               | ❌      | ❌          | ✅                   | ❌            | ❌          |
 | Reporting                                                    | ✅      | ✅          | ✅                   | ✅            | ✅         |
 | Right Sizing                                                 | ✅      | ✅          | ❌                   | ✅            | ❌          |

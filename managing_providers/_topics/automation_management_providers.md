@@ -545,14 +545,14 @@ When Terraform provisioned service resources are no longer required, the resourc
 
 Use the following steps to retire the service instance immediately:
 
-1. In the navigation bar, click **Service catalog** > **Services**.
+1. In the navigation bar, click **Services**.
 2. Click **My Services**.
 3. Select the service instance that you want to retire.
 4. Click **Lifecycle** > **Retire the Service**.
 
 Use the following steps to set a retirement day and time for a service instance:
 
-1. In the navigation bar, click **Service catalog** > **Services**.
+1. In the navigation bar, click **Services**.
 2. Click **My Services**.
 3. Click **Lifecycle** > **Set Retirement Dates for this Service**.
 4. In **Enter Retirement Date as** field, select **Specific Date and Time** or **Time Delay from Now** to schedule the retirement.

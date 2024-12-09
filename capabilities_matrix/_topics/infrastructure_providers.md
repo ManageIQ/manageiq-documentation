@@ -31,7 +31,7 @@
 | Alerts - Real Time                                           | ✅      | ❌          | ❌                   | ❌            | ❌          |
 | Alerts - VM Value Changed                                    | ✅      | ✅          | ❌                   | ❌            | ❌          |
 | Alerts - VM Reconfigured                                     | ✅      | ✅          | ❌                   | ❌            | ❌          |
-| Integrate with Service Catalogs                              | ✅      | ✅          | ❌                   | ❌            | ❌          |
+| Integrate with Service Catalogs                              | ✅      | ✅          | ❌                   | ✅            | ✅          |
 
 | Operations                                                   | vSphere | oVirt / RHV | OpenStack undercloud    | IBM Power HMC | KubeVirt / OSV |
 | ------------------------------------------------------------ | ------- | ----------- | ----------------------- | --------------| -------- |

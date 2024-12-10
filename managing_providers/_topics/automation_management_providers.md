@@ -384,7 +384,7 @@ Use the following command to import the OpenTofu image on your appliance server.
 {{ site.data.product.import_opentofu }}
 ```
 
-Where {{ site.data.product.opentofu_image_name }} is the name of your OpenTofu image.
+Where `{{ site.data.product.opentofu_image_name }}` is the name of your OpenTofu image.
 
 You also need to set the docker image name in advanced settings before enabling the server role. Navigate to the **Settings** > **Application Settings** in {{ site.data.product.title_short }} UI and set the value for `workers/worker_base/opentofu_worker/container_image` field.
 
@@ -538,4 +538,3 @@ Use the following steps to run the Terraform Template.
 {{ site.data.product.title_short }} takes you to the *Requests queue* page and displays the status of the job.
 
 The service item details can be viewed when you navigate to **Services** > **My Services in {{ site.data.product.title_short }}**.
-

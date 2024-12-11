@@ -538,3 +538,31 @@ Use the following steps to run the Terraform Template.
 {{ site.data.product.title_short }} takes you to the *Requests queue* page and displays the status of the job.
 
 The service item details can be viewed when you navigate to **Services** > **My Services in {{ site.data.product.title_short }}**.
+
+#### Retire the Terraform services
+
+When Terraform provisioned service resources are no longer required, the resources can be retired. The retirement action initiates the Terraform backend to run the `destroy` command. This action destroys all the remote resources that are managed by the Terraform configuration.
+
+Use the following steps to retire the service instance immediately:
+
+1. In the navigation bar, click **Services**.
+2. Click **My Services**.
+3. Select the service instance that you want to retire.
+4. Click **Lifecycle** > **Retire the Service**.
+
+Use the following steps to set a retirement day and time for a service instance:
+
+1. In the navigation bar, click **Services**.
+2. Click **My Services**.
+3. Click **Lifecycle** > **Set Retirement Dates for this Service**.
+4. In **Enter Retirement Date as** field, select **Specific Date and Time** or **Time Delay from Now** to schedule the retirement.
+
+   - To choose a **Specific Date and Time** for Retirement, click the **Retirement Date** to open the calendar:
+      1. Select a **Retirement Date** by using the calendar control.
+      2. Select a **Retirement Time** (in UTC) by using the arrows.
+
+   - To retire by using a relative time, select **Time Delay from Now**:
+      1. From **Time Delay**, specify a retirement time in the form of the number of months, weeks, days, or hours in the using the arrows.
+
+5. Select a **Retirement Warning** if needed.
+6. Click **Save**.

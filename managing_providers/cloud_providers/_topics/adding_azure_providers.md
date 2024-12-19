@@ -62,6 +62,15 @@ So, after a service principal account (instance of an application in a directory
 
 You can now use these values in the procedure below to add an Azure cloud instance as a provider to {{ site.data.product.title_short }}.
 
+In order to be able to capture Events or Capacity & Utilization metrics from your Azure account
+you first have to register the Microsoft Insights resource provider.
+
+1. Select your subscription, and click on "Resource providers"
+2. Enter "microsoft.insights" in the search box
+3. If the Provider isn't registered, then hit the checkbox and select the Register option
+
+[Microsoft Insights Resource Provider](../../images/azure-microsoft-insights.png)
+
 **To Add an Azure Cloud Provider**:
 
 1.  Browse to menu: **Compute > Clouds > Providers**.

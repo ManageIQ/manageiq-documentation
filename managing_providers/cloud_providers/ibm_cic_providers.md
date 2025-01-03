@@ -9,8 +9,5 @@ IBM Cloud Infrastructure Center (CIC) is an advanced infrastructure management (
 
 ## Adding IBM CIC Providers
 
-{% include openstack/adding-a-cic-cloud-provider.md %}
+{% include_relative _topics/adding_ibm_cic_providers.md %}
 
-## Configuring the Overcloud to Store Events
-
-{% include openstack/configure-overcloud-to-store-events.md %}

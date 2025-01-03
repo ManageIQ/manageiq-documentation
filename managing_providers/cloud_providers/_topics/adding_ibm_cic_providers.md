@@ -9,7 +9,7 @@ Complete the following procedure to add an IBM CIC cloud provider in
 2.  Click **Configuration**, then click
     ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
 
-3.  From the **Type** list, select **IBM CIC**.
+3.  From the **Type** list, select **IBM Cloud Infrastructure Center**.
 
 4.  Enter a **Name** for the provider.
 
@@ -60,4 +60,4 @@ Complete the following procedure to add an IBM CIC cloud provider in
     6.  Click **Validate** to confirm {{ site.data.product.title_short }} can
         connect to the CIC provider.
 
-11.  Click **Add**.
+10.  Click **Add**.

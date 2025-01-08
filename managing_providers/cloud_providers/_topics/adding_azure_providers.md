@@ -2,10 +2,11 @@
 
 {{ site.data.product.title_short }} supports Microsoft Azure providers. Before
 {{ site.data.product.title_short }} can be authenticated to Microsoft Azure, you must
-complete a series of prerequisite steps using the Azure portal; see
+complete a series of prerequisite steps using the Azure portal. For more information, see
 [Create Active Directory application and service principal account using
 the Azure
 portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/).
+
 Follow the steps to set up an Azure Active Directory (Azure AD) and
 assign the required permissions to it, then create an Azure Active
 Directory application, and obtain the **Application ID** (Client ID),
@@ -19,15 +20,15 @@ Manager (Classic) mode.
 
 In the steps described in [Create Active Directory application and service principal account using the Azure portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/):
 
-  - The **Application ID** obtained during *Get Application ID and
+- The **Application ID** obtained during *Get Application ID and
     Authentication Key* is your **Client ID**. In the same section,
     after providing a description and a duration for the key, the
     **VALUE** displayed after clicking **Save** is your **Client Key**.
     If you choose an expiring key, make sure to note the expiration
-    date, as you will need to generate a new key before that day in
+    date, as you need to generate a new key before that day in
     order to avoid an interruption.
 
-  - The **Directory ID** obtained during *Get Tenant ID* is your
+- The **Directory ID** obtained during *Get Tenant ID* is your
     **Tenant ID**. In Azure Active Directory (Azure AD), a tenant is a
     dedicated instance of the Azure AD service and is representative of
     an organization. It houses the users in a company and the
@@ -37,14 +38,14 @@ In the steps described in [Create Active Directory application and service princ
     your application, you must register your application in a tenant of
     your own which is assigned a Tenant ID (Directory ID).
 
-  - During *Assign Application to Role*, select the **Contributor** role
+- During *Assign Application to Role*, select the **Contributor** role
     and not the **Reader** role.
 
-  - To obtain your **Subscription ID**, log in to the Azure portal and
-    click **Subscriptions** on the slide-out menu on the left. Find the
+- To obtain your **Subscription ID**, log in to the Azure portal and
+    click **Subscriptions** on the slide-out menu. Find the
     appropriate subscription and see your Azure **Subscription ID**
     associated with it. Note that if the **Subscriptions** tab is not
-    visible, then click on **More services \>** to find it. The Azure
+    visible, then click on **More services** to find it. The Azure
     **Subscription ID** is like a billing unit for all of the services
     consumed in your Azure account, including virtual machines and
     storage. The **Subscription ID** is in the form of a Globally Unique

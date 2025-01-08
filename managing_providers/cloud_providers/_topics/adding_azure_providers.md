@@ -50,33 +50,30 @@ In the steps described in [Create Active Directory application and service princ
     storage. The **Subscription ID** is in the form of a Globally Unique
     Identifier (GUID).
 
-So, after a service principal account (instance of an application in a directory) has been created using the Azure portal, the following four pieces of information will be available within the Azure AD module.
+When the service principal account (instance of an application in a directory) is created using the Azure portal, the following four pieces of information becomes available within the Azure AD module.
 
-  - Directory ID (Tenant ID)
-
-  - Subscription ID
-
-  - Application ID (Client ID)
-
-  - Client Key
+- Directory ID (Tenant ID)
+- Subscription ID
+- Application ID (Client ID)
+- Client Key
 
 You can now use these values in the procedure below to add an Azure cloud instance as a provider to {{ site.data.product.title_short }}.
 
-In order to be able to capture Events or Capacity & Utilization metrics from your Azure account
-you first have to register the Microsoft Insights resource provider.
+To capture Events or Capacity and Utilization metrics from your Azure account
+you need to register the Microsoft Insights resource provider.
 
-1. Select your subscription, and click on "Resource providers"
-2. Enter "microsoft.insights" in the search box
-3. If the Provider isn't registered, then hit the checkbox and select the Register option
+1. Select your subscription, and click **Resource providers**.
+2. Enter **microsoft.insights** in the search box.
+3. If the provider isn't registered, then select the checkbox, and click **Register**.
 
-[Microsoft Insights Resource Provider](../../images/azure-microsoft-insights.png)
+![Microsoft Insights Resource Provider](../../../images/azure-microsoft-insights.png)
 
-**To Add an Azure Cloud Provider**:
+**Add an Azure Cloud Provider**:
 
-1.  Browse to menu: **Compute > Clouds > Providers**.
+1.  Browse to the menu and click **Compute** > **Clouds** > **Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
+    ![1862](../../../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.
 

@@ -20,7 +20,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 |   &nbsp;&nbsp;&bull; Storage Manager                         | ✅  | ❌    | ❌  | ✅        | ✅      | ✅      | ✅      | ✅     | ❌    |
 |   &nbsp;&nbsp;&bull; Volumes                                 | ❌  | ❌    | ✅  | ✅        | ✅      | ✅      | ✅      | ✅     | ✅    |
 | Events                                                       | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ❌      | ✅     | ✅    |
-| Metrics                                                      | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ❌      | ❌     | ✅    |
+| Metrics                                                      | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ❌      | ✅     | ✅    |
 | Forensic Analysis (SmartState)                               | ✅  | ✅    | ❌  | ✅        | ❌      | ❌      | ❌      | ❌     | ❌    |
 
 | General Features                | AWS | Azure | GCP | OpenStack | IBM CIC | PowerVC              | PowerVS              | IBM VPC              | Oracle |

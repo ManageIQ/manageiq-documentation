@@ -47,6 +47,8 @@ Provider authentication status
 
 * [Google Compute Engine Providers](./cloud_providers/google_compute_engine_providers.html)
 
+* [IBM CIC Providers](./cloud_providers/ibm_cic_providers.html)
+
 * [IBM Cloud VPC Provider](./cloud_providers/ibm_cloud_vpc_providers.html)
 
 * [IBM Power Systems Virtual Servers Providers](./cloud_providers/ibm_power_systems_virtual_servers_providers.html)

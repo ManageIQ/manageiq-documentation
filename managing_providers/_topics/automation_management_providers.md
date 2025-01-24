@@ -519,7 +519,15 @@ Use the following steps to create a Terraform Service Catalog item:
 
    - In Provisioning, select the **Cloud Type** and then select the **credential** to connect to the cloud.
 
-   - In Provisioning, select the **Service Dialog** that you created previously. If you want to enter additional information when you run the task, **Service Dialog** must be selected. A dialog is required if **Display in Catalog** is chosen.
+   - In Provisioning, if you want to enter additional information when you run the task, **Service Catalog** must be selected. A dialog is required if **Display in Catalog** is chosen.
+
+   - In Provisioning, you have two options to create a Service Dialog:
+
+     * **Use Existing**: When you select **Use Existing** option, you can select the Service Dialog that you previously created.
+     * **Create new**: When you select **Create new** option, you can create a new Service Dialog by providing a name. When the catalog item is saved, the new Service Dialog is created with section for **Terraform Template Variables**. The **Terraform Template Variables** section contains the text box inputs for each of the input variables from the Terraform Template. To modify the dialog, navigate to **Automation** > **Automate** > **Customization** > **Service Dialogs**, select **Service Dialog**, and from the Configuration menu, select **Edit this dialog** to make the required changes.
+     * **Create new**: When you select **Create new** option, you can create a new Service Dialog by providing a name. When the catalog item is saved, the new Service Dialog is created with section for **Terraform Template Variables**. The **Terraform Template Variables** section contains input fields for each of the input variables from the Terraform Template. Under the **Terraform Template Variables** section, the boolean field displays as a checkbox. Number field displays as a textbox with regex validation for the number value. JSON fields display as multi-line text area field, with JSON value prettified. String fields display as single line textbox fields.
+
+     To modify the dialog, navigate to **Automation** > **Automate** > **Customization** > **Service Dialogs**, select **Service Dialog**, and from the Configuration menu, select **Edit this dialog** to make the required changes.
 
 6. Click **Save**.
 

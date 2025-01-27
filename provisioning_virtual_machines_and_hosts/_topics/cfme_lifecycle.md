@@ -37,4 +37,6 @@ pre-processing and post-processing. Pre-processing acquires IP addresses
 for the user, creates CMDB instances, and creates the virtual machine or
 instance based on information in the request. Post-processing activates
 the CMDB instance and emails the user. The steps for provisioning may be
-modified at any time using {{ site.data.product.title_short }}. ![2314](../images/2314.png)
+modified at any time using {{ site.data.product.title_short }}. 
+
+![2314](../images/2314.png)

@@ -28,7 +28,7 @@ To add a Google Compute Engine provider to {{ site.data.product.title_short }}, 
 1.  Browse to menu: **Compute > Clouds > Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../images/1862.png) (**Add a New Cloud Provider**).
+    ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.
 

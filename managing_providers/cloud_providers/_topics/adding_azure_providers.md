@@ -67,14 +67,14 @@ you need to register the Microsoft Insights resource provider.
 2. Enter **microsoft.insights** in the search box.
 3. If the provider isn't registered, then select the checkbox, and click **Register**.
 
-![Microsoft Insights Resource Provider](../../../images/azure-microsoft-insights.png)
+![Microsoft Insights Resource Provider](../../images/azure-microsoft-insights.png)
 
 **Add an Azure Cloud Provider**:
 
 1.  Browse to the menu and click **Compute** > **Clouds** > **Providers**.
 
 2.  Click **Configuration**, then click
-    ![1862](../../../images/1862.png) (**Add a New Cloud Provider**).
+    ![1862](../../images/1862.png) (**Add a New Cloud Provider**).
 
 3.  Enter a **Name** for the provider.
 

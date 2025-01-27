@@ -17,7 +17,9 @@ The following options are available when making provisioning requests:
 
   - Customize the guest operating system
 
-  - Schedule the provisioning ![2315](../images/2315.png)
+  - Schedule the provisioning 
+
+  ![2315](../images/2315.png)
 
 ### Requirements for Provisioning Virtual Machines and Instances
 

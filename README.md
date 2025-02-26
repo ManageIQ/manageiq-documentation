@@ -1,6 +1,6 @@
 # ManageIQ Documentation
 
-[![CI](https://github.com/ManageIQ/manageiq-documentation/actions/workflows/ci.yaml/badge.svg)](https://github.com/ManageIQ/manageiq-documentation/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-documentation/actions/workflows/ci.yaml/badge.svg?branch=spassky)](https://github.com/ManageIQ/manageiq-documentation/actions/workflows/ci.yaml)
 [![Join the chat at https://gitter.im/ManageIQ/manageiq_docs](https://badges.gitter.im/ManageIQ/manageiq_docs.svg)](https://gitter.im/ManageIQ/manageiq_docs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This documentation site is a [Jekyll](https://github.com/jekyll/jekyll) based site for the ManageIQ documentation.

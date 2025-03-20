@@ -24,6 +24,7 @@
 | XFS         | Linux     | ✅            |
 | ReiserFS    | Linux     | ✅            |
 | CDfs        | Linux     | ✅            |
+| RPM (RHEL 6, 7, 8, 9) | Linux | ✅      |
 
 
 #### File Formats

@@ -24,7 +24,6 @@
 | XFS         | Linux     | ✅            |
 | ReiserFS    | Linux     | ✅            |
 | CDfs        | Linux     | ✅            |
-| RPM (RHEL 6, 7, 8, 9) | Linux | ✅      |
 
 
 #### File Formats
@@ -40,7 +39,7 @@
 | SQLite            | Linux     | ✅            |
 | Berkeley DB (BDB) | Linux     | ✅            |
 | Conary            | Linux     | ✅            |
-| RPM               | Linux     | ✅            |
+| RPM (RHEL 6, 7, 8, 9)  | Linux  | ✅          |
 | /etc/passwd       | Linux     | ✅            |
 | /etc/group        | Linux     | ✅            |
 | /etc/init.d       | Linux     | ✅            |

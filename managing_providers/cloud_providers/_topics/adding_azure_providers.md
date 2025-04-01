@@ -3,9 +3,7 @@
 {{ site.data.product.title_short }} supports Microsoft Azure providers. Before
 {{ site.data.product.title_short }} can be authenticated to Microsoft Azure, you must
 complete a series of prerequisite steps using the Azure portal. For more information, see
-[Create Active Directory application and service principal account using
-the Azure
-portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/).
+[Register a Microsoft Entra app and create a service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal/).
 
 Follow the steps to set up an Azure Active Directory (Azure AD) and
 assign the required permissions to it, then create an Azure Active
@@ -18,7 +16,7 @@ Manager (Classic) mode.
 
 **Note:**
 
-In the steps described in [Create Active Directory application and service principal account using the Azure portal](https://azure.microsoft.com/en-us/documentation/articles/resource-group-create-service-principal-portal/):
+In the steps described in [Register a Microsoft Entra app and create a service principal](https://learn.microsoft.com/en-us/entra/identity-platform/howto-create-service-principal-portal/):
 
 - The **Application ID** obtained during *Get Application ID and
     Authentication Key* is your **Client ID**. In the same section,

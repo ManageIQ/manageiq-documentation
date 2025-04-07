@@ -26,7 +26,7 @@ and WebMKS consoles:
     virtual machine fails when the server security type is set to `2`
     for that virtual machine.
 
-  - Due to VMware licensing restrictions, Red Hat cannot ship the WebMKS
+  - Due to VMware licensing restrictions, {{ site.data.product.vendor }} cannot ship the WebMKS
     SDK in {{ site.data.product.title_short }}. For information on how to configure
     WebMKS support in {{ site.data.product.title_short }}, see [Configuring VMware WebMKS
     Support](#configuring-vmware-webmks-support).

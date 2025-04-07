@@ -28,8 +28,8 @@ and WebMKS consoles:
 
   - Due to VMware licensing restrictions, Red Hat cannot ship the WebMKS
     SDK in {{ site.data.product.title_short }}. For information on how to configure
-    WebMKS support in {{ site.data.product.title_short }}, see [Configuring WebMKS
-    Support in {{ site.data.product.title_short }}](#configuring-the-webmks-support).
+    WebMKS support in {{ site.data.product.title_short }}, see [Configuring VMware WebMKS
+    Support](#configuring-vmware-webmks-support).
 
 All of the above make use of the websocket protocol supported by all recent versions of browsers, and can use SSL to encrypt the websocket connection.
 
@@ -129,7 +129,7 @@ machines that will be accessed through the HTML5 or VNC console on the
 
 7.  Click **OK**.
 
-## Configuring WebMKS Support in {{ site.data.product.title_short }}
+## Configuring VMware WebMKS Support
 
 Complete the following steps to enable WebMKS support in
 {{ site.data.product.title_short }}.

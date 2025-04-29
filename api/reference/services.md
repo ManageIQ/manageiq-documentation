@@ -20,8 +20,7 @@ Full CRUD is available on service catalogs.
 
   - [Editing Service Catalogs](#editing-service-catalogs)
 
-  - [Assigning/Unassigning Service Templates from Service
-    Catalogs](#assigning-service-template)
+  - [Assigning Service Templates](#assigning-service-templates)
 
   - [Ordering Services](#ordering-services)
 
@@ -122,7 +121,7 @@ the *assign* and *unassign* actions as follows:
 }
 ```
 
-#### Ordering Services Service Templates
+#### Ordering Services
 
 Ordering services is done by triggering an *order* action on service
 templates in a service catalog as follows:
@@ -330,7 +329,7 @@ Multiple service templates can also be deleted in bulk as follows:
 }
 ```
 
-### Services ===
+### Services
 
 Accessing services is via the **services** collection as follows:
 
@@ -344,7 +343,7 @@ or addressing an individual Service via the **services** resource:
 /api/services/:id
 ```
 
-#### Creating Services ====
+#### Creating Services
 
 In general, services are created once ordered from service catalogs.
 
@@ -373,7 +372,7 @@ an existing service.
 Please refer to the [Resource Attributes](../appendices/resource_attributes.html#services) page for a
 list of available attributes when creating Services.
 
-#### Service Actions ====
+#### Service Actions
 
 Once services are ordered from a catalog, they can be:
 
@@ -385,23 +384,21 @@ Once services are ordered from a catalog, they can be:
 
   - [Reconfigured](#service-reconfiguring)
 
-  - [Started](#service-started)
+  - [Started](#starting-services)
 
-  - [Stopped](#service-stopped)
+  - [Stopped](#stopping-services)
 
-  - [Suspended](#service-suspended)
+  - [Suspended](#suspending-services)
 
-  - [Deleted](#service-deleting)
+  - [Deleted](#deleting-services)
 
 Additional Service actions include:
 
-  - [Adding and Removing Resources from
-    Services](#service-add-remove-resources)
+  - [Adding and Removing Resources from Services](#adding-and-removing-resources-from-services)
 
-  - [Adding Provider VMs to Services](#service-add-provider-vms)
+  - [Adding Provider VMs to Services](#adding-provider-vms-to-services)
 
-  - [Requesting a Chargeback Report for a
-    Service](#service-queue-chargeback-report)
+  - [Requesting a Chargeback Report for a Service](#requesting-a-chargeback-report-for-a-service)
 
 Other than service creates and edits, service actions return the action
 response as in the following example:
@@ -702,18 +699,15 @@ Or via the delete action for deleting multiple services:
 }
 ```
 
-### Service Requests ===
+### Service Requests
 
   - [Querying Service Requests](#querying-service-requests)
 
-  - [Approving or Denying Service
-    Requests](#approving-denying-service-requests)
+  - [Approving or Denying ServiceRequests](#approving-or-denying-service-requests)
 
-  - [Adding Approvers to Service
-    Requests](#adding-approvers-service-requests)
+  - [Adding Approvers to Service Requests](#adding-approvers-to-service-requests)
 
-  - [Removing Approvers to Service
-    Requests](#removing-approvers-service-requests)
+  - [Removing Approvers to Service Requests](#removing-approvers-to-service-requests)
 
   - [Editing Request Tasks](#editing-request-tasks)
 

@@ -129,22 +129,7 @@ machines that will be accessed through the HTML5 or VNC console on the
 
 7.  Click **OK**.
 
-## Configuring VMware WebMKS Support
-
-Complete the following steps to enable WebMKS support in
-{{ site.data.product.title_short }}.
-
-1.  Log in to the {{ site.data.product.title_short }} user interface appliance
-    console as the root user.
-
-2.  On the {{ site.data.product.title_short }} user interface appliances, create a
-    folder titled `webmks` in the `/var/www/miq/vmdb/public/` directory.
-
-        /var/www/miq/vmdb/public/webmks
-
-3.  Download and extract the contents of [VMware WebMKS
-    SDK](https://www.vmware.com/support/developer/html-console/) into
-    the `webmks` folder.
+{% include installing-vmware-webmks.md %}
 
 ## Opening a Console for a Virtual Machine
 

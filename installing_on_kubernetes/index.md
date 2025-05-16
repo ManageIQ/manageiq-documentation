@@ -31,6 +31,8 @@
 
 {% include installing-vmware-vddk-containers.md %}
 
+{% include installing-vmware-webmks-containers.md %}
+
 # Uninstalling
 
 {% include_relative _topics/uninstalling.md %}

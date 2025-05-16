@@ -1,6 +1,7 @@
 ## Additional Configuration for Appliances on VMware vSphere
 
 {% include installing-vmware-vddk.md %}
+{% include installing-vmware-webmks.md %}
 
 ### Tuning Appliance Performance
 

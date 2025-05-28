@@ -224,7 +224,7 @@ You can execute an Ansible Tower playbook from {{ site.data.product.title_short 
 
 First, create a catalog:
 
-1. Browse to menu: **Services > Catalogs** and click **Catalog Items**.
+1. Browse to menu: **Services > Catalogs** and click **Catalogs**.
 
 2. Click **Configuration**, then ![Add a New Catalog](../images/1862.png) (**Add a New Catalog**)
 
@@ -628,7 +628,7 @@ You can plan and apply a Terraform Enterprise Workspace from {{ site.data.produc
 
 First, create a catalog:
 
-1. Browse to menu: **Services > Catalogs** and click **Catalog Items**.
+1. Browse to menu: **Services > Catalogs** and click **Catalogs**.
 
 2. Click **Configuration**, then ![Add a New Catalog](../images/1862.png) (**Add a New Catalog**)
 

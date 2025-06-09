@@ -46,7 +46,7 @@
 |   &nbsp;&nbsp;&bull; Sysprep Windows Templates               | ✅      | ✅          | ❌                      | ❌            | ❌          |
 |   &nbsp;&nbsp;&bull; Cloud-init                              | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | VM Retirement                                                | ✅      | ✅          | ❌                      | ✅            | ✅         |
-| VM Reconfiguration                                           | ✅      | ✅          | ❌                      | ❌            | ✅          |
+| VM Reconfiguration                                           | ✅      | ✅          | ❌                      | ❌            | ✅ *        |
 |   &nbsp;&nbsp;&bull; Disk Addition                           | ✅      | ✅          | ❌                      | ❌            | ❌          |
 |   &nbsp;&nbsp;&bull; Network Interface Add/Remove            | ✅      | ✅          | ❌                      | ❌            | ❌          |
 | VM Snapshot Creation and Removal                             | ✅      | ✅          | ❌                      | ❌            | ❌          |
@@ -63,6 +63,8 @@
 | Delete Cloud Subnet                                          | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | Create Network Router                                        | ❌      | ✅          | ❌                      | ❌            | ❌          |
 | Delete Network Router                                        | ❌      | ✅          | ❌                      | ❌            | ❌          |
+
+\* KubeVirt/OSV VMs created with an instance type are not supported for reconfigure
 
 #### Remote Consoles
 

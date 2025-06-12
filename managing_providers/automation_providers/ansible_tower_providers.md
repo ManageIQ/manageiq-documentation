@@ -1,4 +1,0 @@
----
----
-
-# Ansible Automation Platform Providers

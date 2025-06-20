@@ -20,7 +20,7 @@
    # Copy the database backup to the appliance (usually under /tmp/ or somewhere that has enough space)
    ```
 
-1. Extraxt the database password, encryption key, server GUID and region number
+1. Extract the database password, encryption key, server GUID and region number
    ```bash
    $ oc rsh deploy/orchestrator
    sh-5.1$ cd /var/www/miq/vmdb/
@@ -70,7 +70,7 @@
 
 1. Run the `appliance_console` to configure the appliance
    a. Select "Configure Application"
-   b. Select "1) Create Internal Database" to create a new datbase.
+   b. Select "1) Create Internal Database" to create a new database.
    c. Select "3) Make No messaging changes" to skip messaging configuration for now.
    d. Choose the database disk
    e. Choose whether this will be a standalone database server

@@ -19,7 +19,7 @@ The following tables outline the capabilities of {{ site.data.product.title_shor
 | Storage Inventory                                            | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ✅      | ✅     | ✅    |
 |   &nbsp;&nbsp;&bull; Storage Manager                         | ✅  | ❌    | ❌  | ✅        | ✅      | ✅      | ✅      | ✅     | ❌    |
 |   &nbsp;&nbsp;&bull; Volumes                                 | ❌  | ❌    | ✅  | ✅        | ✅      | ✅      | ✅      | ✅     | ✅    |
-| Events                                                       | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ❌      | ✅     | ✅    |
+| Events                                                       | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ✅      | ✅     | ✅    |
 | Metrics                                                      | ✅  | ✅    | ✅  | ✅        | ✅      | ✅      | ❌      | ✅     | ✅    |
 | Forensic Analysis (SmartState)                               | ✅  | ✅    | ❌  | ✅        | ❌      | ❌      | ❌      | ❌     | ❌    |
 

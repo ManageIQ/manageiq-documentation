@@ -42,8 +42,8 @@ following:
 
 Run the following steps on your primary database-only appliance:
 
-1.  In the appliance console menu, configure the new hostname or IP
-    address from the **Configure Network** option.
+1.  Configure the network and hostname using nmcli or nmtui from the console or
+    from your web browser using Cockpit on port 9090
 
 2.  Restart the appliance.
 
@@ -54,8 +54,8 @@ Run the following steps on your primary database-only appliance:
 
 Run the following steps on your standby database-only appliances:
 
-1.  In the appliance console menu, configure the new hostname or IP
-    address from the **Configure Network** option.
+1.  Configure the network and hostname using nmcli or nmtui from the console or
+    from your web browser using Cockpit on port 9090
 
 2.  Restart the appliance.
 

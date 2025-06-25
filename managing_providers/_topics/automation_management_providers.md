@@ -382,7 +382,7 @@ If you want to use the Embedded Terraform feature in {{ site.data.product.title_
 
 Use the following command to import the OpenTofu image on your appliance server.
 
-``` bash
+```bash
 {{ site.data.product.import_opentofu }}
 ```
 

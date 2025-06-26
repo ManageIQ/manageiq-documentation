@@ -8,7 +8,7 @@ Credentials are utilized by {{ site.data.product.title_short }} for authenticati
 
 1.  Browse to menu: **Automation > Ansible > Credentials**.
 
-2.  Click **Configuration**, then ![Add New Credential](../images/1862.png) (**Add New Credential**).
+2.  Click **Configuration**, then ![Add New Credential](../../images/1862.png) (**Add New Credential**).
 
 3.  Provide a **Name** for the credential.
 

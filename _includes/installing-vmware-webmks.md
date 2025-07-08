@@ -12,5 +12,5 @@ Due to license restrictions this SDK cannot be built in to {{ site.data.product.
         /var/www/miq/vmdb/public/webmks
 
 3.  Download and extract the contents of [VMware WebMKS
-    SDK](https://www.vmware.com/support/developer/html-console/) into
+    SDK](https://developer.broadcom.com/sdks/vmware-html-console-sdk/latest/) into
     the `webmks` folder.

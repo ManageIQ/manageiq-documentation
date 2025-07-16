@@ -620,10 +620,9 @@ To change server settings:
 
 ###### Server Control Settings
 
-A server role defines what a server can do. Red Hat recommends that
-Database Operations, Event Monitor, Reporting, Scheduler, SmartState
+A server role defines what a server can do. Database Operations, Event Monitor, Reporting, Scheduler, SmartState
 Analysis, User Interface, Provider Inventory, Provider Operations, and
-Web Services be enabled on at least one server in each zone. These roles
+Web Services are recommended on at least one server in each zone. These roles
 are enabled by default on all servers.
 
   - Use **Default Repository SmartProxy** to set the SmartProxy from
@@ -868,7 +867,7 @@ memory allowed to be used for each type.
 
 **Note:**
 
-Only make these changes when directed to by Red Hat Support.
+Only make these changes when directed by Support.
 
 ###### Changing Settings for a Worker
 
@@ -1059,7 +1058,7 @@ To enable displaying your custom logo in the corner of the
 
 ##### Advanced Settings
 
-You may be instructed by Red Hat to edit some configuration settings
+You may be instructed by Support to edit some configuration settings
 manually. This feature is available for a limited number of options and
 can only be used by users assigned the super administrator role.
 Changing settings using this procedure may disable your
@@ -1068,7 +1067,7 @@ Changing settings using this procedure may disable your
 <div class="important">
 
   - Only make manual changes to your configuration files if directed to
-    do so by Red Hat.
+    do so by Support.
 
   - {{ site.data.product.title_short }} provides the ability to edit advanced
     configuration settings for all appliances through the **Advanced**
@@ -2075,8 +2074,6 @@ Log depot options include:
 
   - Network File System (NFS)
 
-  - Red Hat Dropbox
-
   - Samba
 
 See your network administrator if you need to set up one of these
@@ -2153,8 +2150,7 @@ To repair capacity and utilization data:
 
         **Note:**
 
-        Do not select more than one week unless instructed to do so by
-        Red Hat Support.
+        Do not select more than one week unless instructed to do so by Support.
 
     2.  Select a **Start Date**.
 
@@ -2265,8 +2261,6 @@ Log depot options include:
   - File Transfer Protocol (FTP)
 
   - Network File System (NFS)
-
-  - Red Hat Dropbox
 
   - Samba
 
@@ -2935,7 +2929,7 @@ restoring data.
 
 #### Running Database Garbage Collection
 
-The database server collects garbage automatically, but Red Hat may
+The database server collects garbage automatically, but Support may
 occasionally direct you to run database garbage collection manually in
 order to reclaim unused space in your VMDB.
 

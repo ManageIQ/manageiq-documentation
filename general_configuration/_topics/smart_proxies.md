@@ -10,7 +10,7 @@ also be installed on an ESX Server version 3.0.2, 3.5 or 4.
 
 <div class="important">
 
-Contact Red Hat before installing a new SmartProxy on an ESX Server.
+Contact Support before installing a new SmartProxy on an ESX Server.
 
 </div>
 

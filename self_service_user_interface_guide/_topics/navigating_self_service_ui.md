@@ -28,8 +28,7 @@ you can see the current logged in LDAP user, for example,
   - Administration User Interface Link Clicking the menu icon (![Administration UI icon](../images/ssui-administration-ui-icon.png)) shows the **Administration UI** link, which when clicked, takes you to the full administrative user interface login page in a new window or tab of your web browser.
 
   - Help
-    Click the help icon to access the options to open **Documentation**,
-    **Red Hat Customer Portal**, and **About**. Click **About** to see information about your Self Service environment, such as the logged in user name and role, the browser details, and importantly, the Self Service user interface version number, which can be useful for support purposes.
+    Click the help icon to access the options to open **Documentation** and **About**. Click **About** to see information about your Self Service environment, such as the logged in user name and role, the browser details, and importantly, the Self Service user interface version number, which can be useful for support purposes.
 
 **Note:**
 

@@ -92,7 +92,7 @@ allows you to see the results in tree and XML view.
 ### Importing, Exporting, and Resetting the Datastore
 
 The **Automate Model** can be exported and imported as a YAML file.
-{{ site.data.product.title_short }} allows you to back up your model by export. Red Hat may provide you with new or updated classes, and provides an import function
+{{ site.data.product.title_short }} allows you to back up your model by export. Support may provide you with new or updated classes, and provides an import function
 for either a class or the entire model. Finally, you can reset the datastore to its default. Always be sure to export the current datastore before importing or resetting.
 
 **Note:**

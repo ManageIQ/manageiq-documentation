@@ -46,3 +46,5 @@
 {% include_relative _topics/pod_shell.md %}
 
 {% include_relative _topics/cluster_image_policy.md %}
+
+{% include_relative _topics/migrate_to_appliance.md %}

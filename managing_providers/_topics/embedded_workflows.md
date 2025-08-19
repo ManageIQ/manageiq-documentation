@@ -322,7 +322,7 @@ If the user is running an embedded workflow on OCP, and is using a docker reposi
 
 Long lived credentials like usernames and passwords should be defined as Mapped Credentials as described in `Adding Credentials`.
 
-Short lived credentials such as bearer tokens which are obtained while the workflow is running can be set as state output and stored securely in the Credentials field for further states.  This can be accomplished by using `ResultPath` with a path starting with `$.Credentials`.  This will set the output of the state in the `Credentials` payload.
+Short lived credentials such as bearer tokens which are obtained while the workflow is running can be set as state output and stored securely in the Credentials field for further states.  This can be accomplished by using `ResultPath` with a path starting with `$$.Credentials`.  This will set the output of the state in the `Credentials` payload.
 
 For an example lets say we have a State which takes a username and password and outputs a bearer token to be used later on:
 
@@ -331,10 +331,10 @@ For an example lets say we have a State which takes a username and password and 
   "Type": "Task",
   "Resource": "docker://login:latest",
   "Credentials": {
-    "username.$": "$.username",
-    "password.$": "$.password"
+    "username.$": "$$.Credentials.username",
+    "password.$": "$$.Credentials.password"
   },
-  "ResultPath": "$.Credentials",
+  "ResultPath": "$$.Credentials",
   "Next": "NextState"
 }
 ```
@@ -346,7 +346,7 @@ If the output of the docker image is `{"bearer_token":"abcd"}` then we will be a
   "Type": "Task",
   "Resource": "docker://do-something:latest",
   "Credentials": {
-    "token.$": "$.bearer_token"
+    "token.$": "$$.Credentials.bearer_token"
   }
 }
 ```
@@ -358,13 +358,13 @@ All of the normal Input/Output processing still applies so if you need to manipu
   "Type": "Task",
   "Resource": "docker://login:latest",
   "Credentials": {
-    "username.$": "$.username",
-    "password.$": "$.password"
+    "username.$": "$$.Credentials.username",
+    "password.$": "$$.Credentials.password"
   },
   "ResultSelector": {
     "bearer_token.$": "$.result"
   },
-  "ResultPath": "$.Credentials",
+  "ResultPath": "$$.Credentials",
   "Next": "NextState"
 }
 ```
@@ -376,10 +376,10 @@ We can also store the result in a parent node for organization:
   "Type": "Task",
   "Resource": "docker://login:latest",
   "Credentials": {
-    "username.$": "$.username",
-    "password.$": "$.password"
+    "username.$": "$$.Credentials.username",
+    "password.$": "$$.Credentials.password"
   },
-  "ResultPath": "$.Credentials.VMware",
+  "ResultPath": "$$.Credentials.VMware",
   "Next": "NextState"
 }
 ```
@@ -391,7 +391,7 @@ And then access it like:
   "Type": "Task",
   "Resource": "docker://do-something:latest",
   "Credentials": {
-    "token.$": "$.VMware.bearer_token"
+    "token.$": "$$.VMware.bearer_token"
   }
 }
 ```

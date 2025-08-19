@@ -467,3 +467,49 @@ You can create a generic service catalog item that uses an embedded workflow. To
    The list of services and requests is shown when the catalog item is submitted. Clicking the request shows the execution status, including any embedded workflows.
 
    ![Workflow Status](../images/embedworkflow_runstatus.png)
+
+## Upgrading
+
+If you wrote a workflow on `spassky-1` or older you might have to update your workflow content.
+
+1. The Credentials Task property has changed to use `$$.Credentials` to access the credentials payload, `$.` will use state input which is consistent with the rest of Input/Output processing.  `ResultPath` also has to be updated to set credentials to `$$.Credentials`.
+
+Example:
+```json
+{
+  "Type": "Task",
+  "Credentials": {"password.$": "$.Password"},
+  "ResultPath": "$.Credentials"
+}
+```
+
+Becomes:
+```json
+{
+  "Type": "Task",
+  "Credentials": {"password.$": "$$.Credentials.password"},
+  "ResultPath": "$$.Credentials"
+}
+```
+
+2. Nested hashes no longer require the key to have a `.$` suffix to perform interpolation
+
+Example:
+```json
+{
+  "Type": "Pass",
+  "Result": {
+    "Body.$": {"foo.$": "$.bar"}
+  }
+}
+```
+
+Becomes:
+```json
+{
+  "Type": "Pass",
+  "Result": {
+    "Body": {"foo.$": "$.bar"}
+  }
+}
+```

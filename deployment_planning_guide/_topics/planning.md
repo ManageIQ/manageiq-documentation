@@ -149,7 +149,7 @@ remote region.
 
 The operations initiated from the global region are subject to the
 role-based access control (RBAC) rules on the remote region. The user in
-the remote region which matches the logged-in user’s **user ID** will be
+the remote region which matches the logged-in user's **user ID** will be
 used to enforce RBAC in the target region. The operation will fail on
 the remote system if the user does not have the required permissions.
 
@@ -173,8 +173,8 @@ organization.
 
 If you do not add any additional tenants, all resources and user
 accounts are contained in a single base tenant which is your
-{{ site.data.product.title_short }} appliance itself. In {{ site.data.product.title_short }}, is
-sometimes referred as 'tenant zero'.
+{{ site.data.product.title_short }} appliance itself. In {{ site.data.product.title_short }}, this is
+sometimes referred to as 'tenant zero'.
 
 **Tenancy Account Roles.**
 
@@ -200,7 +200,7 @@ inside a tenant.
 The following two approaches exist for tenancy planning:
 
   - **Tenantless** - You can create a single large tenant, sometimes
-    referred as 'tenant zero', and perform all your operations in there
+    referred to as 'tenant zero', and perform all your operations in there
     without any subdivision of resources or user accounts.
 
   - **Enterprise model** - A common scenario is to create a single
@@ -400,4 +400,4 @@ value set for `max_wal_senders`:
 
 **Example:**
 
-    `psql -d vmdb_production -c 'show max_wal_senders'
+    `psql -d vmdb_production -c 'show max_wal_senders'`

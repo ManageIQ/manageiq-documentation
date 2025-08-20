@@ -46,7 +46,7 @@ $ curl -i -X GET -H "Accept: application/json"
        http://localhost:3000/api/vms
 ```
 
-The validated users’s group will be in effect for the duration of the
+The validated user's group will be in effect for the duration of the
 REST API request. Multiple requests can be made as a particular user but
 with different authorization groups concurrently.
 

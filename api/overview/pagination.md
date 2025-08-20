@@ -59,7 +59,7 @@ following:
   - "pages" metadata which is the total number of pages for the *limit*
     specified (or the default 1000).
 
-  - "links" metadata section which includes the necessary URL’s for
+  - "links" metadata section which includes the necessary URLs for
     fetching the current page, next and previous pages, as well as the
     first and last pages.
 

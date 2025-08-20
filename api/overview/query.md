@@ -53,7 +53,7 @@ For more information on filter\[\] please reference the
 ### Expanding Collection
 
 While in the JSON serialization example the description says that the
-resource might be a list of references to these resource, using the
+resources might be a list of references to these resources, using the
 **expand** parameter they can be expanded to return a full JSON
 serialization of the resource instead:
 
@@ -183,8 +183,8 @@ As another example, one can query good details on hosts:
 
     GET /api/hosts/8?attributes=custom_attributes,ext_management_system,resource_pools,storages,vms,hardware
 
-of course, one needs to be careful with queries like these as list of
-vms for a host could be quite large.
+Of course, one needs to be careful with queries like these as the list of
+VMs for a host could be quite large.
 
 Virtual attributes can also be queried from one-to-one relationships via
 the dot notation as follows:

@@ -159,7 +159,7 @@ You can create and use embedded workflows as needed to not only change parts of 
 
 Workflows must be authored in Amazon State Languages (ASL) format. As part of authoring a workflow, you (or your users) can build container images that are able to perform any tasks that are required in any language that you like. You can use these images during Task states in your workflows.
 
-1. Define the code for the workflow. If your workflow requires the use of any credentials or parameters to be specified, ensure that they are passed in the code.
+* Define the code for the workflow. If your workflow requires the use of any credentials or parameters to be specified, ensure that they are passed in the code.
 
    Within the workflow code, you need to specify the states that your workflow requires, including any next steps. For `Task` type steps in the workflow, a docker container is called. The container defines what happens for that Task state. For example, a docker container can run to clone a template. If your states require parameters or credentials, you can specify them in your state definitions.
 
@@ -174,11 +174,89 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
       - ItemReader
       - ResultWriter
 
-2. Build the docker containers that are required for the workflow.
+* Build the docker containers that are required for the workflow.
 
    When you have the code for your task resource written, you need to bundle it into a docker image. You can bundle the code by creating a standard [Dockerfile](https://docs.docker.com/engine/reference/builder/) and building the image (https://docs.docker.com/engine/reference/commandline/build/). Then, you can push the image to a [registry](https://docs.docker.com/engine/reference/commandline/push/), which makes the image available to be used by {{ site.data.product.title_short }}. When you have pushed your images to an image registry, you can add the registry to {{ site.data.product.title_short }}.
 
   Pull secrets for containers are used differently between appliances and the OpenShift Container Platform (OCP). These differences are outlined in the following sections.
+
+* Use "builtin" runner methods from the ManageIQ Task Runner
+
+  In addition to the `docker://` runner which can run any container you want, there are also builtin runner methods for some common tasks like executing an http call or sending an email.
+
+  * `manageiq://http` - Execute any HTTP action
+
+    Parameters:
+    * `Method` (required) - HTTP method name. Permitted values: `GET`, `POST`, `PUT`, `DELETE`, `HEAD`, `PATCH`, `OPTIONS`, or `TRACE`
+    * `Url` (required) - URL to execute the HTTP call to
+    * `Headers` - Hash of unencoded HTTP request header key/value pairs.
+    * `QueryParameters` - URI query unencoded key/value pairs.
+    * `Body` - HTTP request body.  Depending on Encoding this can be a String or a Hash of key/value pairs.
+    * `Ssl` - SSL options
+      * `Verify` - Boolean - Verify SSL certificate.  Defaults to `true`
+      * `VerifyHostname` - Boolean - Verify SSL certificate hostname.  Defaults to `true`
+      * `Hostname` - String - Server hostname for SNI.
+      * `CaFile` - String - Path to a CA file in PEM format.
+      * `CaPath` - String - Path to a CA directory.
+      * `VerifyMode` - Integer - OpenSSL constant.  `VERIFY_NONE` => 0, `VERIFY_PEER` => 1, `VERIFY_FAIL_IF_NO_PEER_CERT` => 2, `VERIFY_CLIENT_ONCE` => 4,
+      * `VerifyDepth` - Integer - Maximum depth for the certificate chain validation.
+      * `Version` - Integer - SSL Version.
+      * `MinVersion` - Integer - Minimum SSL Version.
+      * `MaxVersion` - Integer - Maximum SSL Version.
+      * `Ciphers` - String - Ciphers supported.
+    * `Proxy`
+      * `Uri` - String - URI of the proxy.
+      * `User` - String - User for the proxy.
+      * `Password` - String - Password for the proxy
+    * `Options`
+      * `Timeout`
+      * `ReadTimeout`
+      * `OpenTimeout`
+      * `WriteTimeout`
+      * `Encoding` - String
+        * `JSON` - JSON encodes the request and decodes the response
+
+
+  * `manageiq://email` - Send an email using the configured SMTP server
+
+    Parameters:
+    * `To` - Array of recipient email addresses, defaults to service requester email
+    * `From` - Sender email address, defaults to smtp.from Setting
+    * `Subject` - Email Subject string
+    * `Cc` - Array of recipients to carbon-copy
+    * `Bcc` - Array of recipients to blind-carbon-copy
+    * `Body` - The body of the email
+    * `Attachment` - A hash with the filename as the key and the content as the value
+
+  * `manageiq://embedded_ansible` - Execute an ansible playbook with EmbeddedAnsible
+
+    Identifying a playbook: You must identity a playbook by either:
+
+    `PlaybookId` - This is the database identifier of the `ConfigurationScript`
+
+    or
+
+    `RepositoryUrl`, `RepositoryBranch`, and `PlaybookName`
+
+    Parameters:
+    * `RepositoryUrl` - URL of the configuration script source identifying the repository where the playbook resides
+    * `RepositoryBranch` - Branch of the configuration script source where the playbook resides
+    * `PlaybookName` - Name of the playbook
+    * `PlaybookId` - Integer - Database ID of the `ConfigurationScript`
+    * `Hosts` - Array - hostnames to target with the playbook
+    * `ExtraVars` - Hash - key/value pairs that will be passed as extra_vars
+    * `BecomeEnabled` - Boolean - If playbook should activate privilege escalation, defaults to false
+    * `Timeout` - Integer - Minutes for how long to allow the playbook to run for
+    * `Verbosity` - Integer - Ansible verbosity level 0-5
+    * `CredentialId` - Integer - Database ID of an ansible credential
+    * `CloudCredentialId` - Integer - Database ID of an ansible cloud credential
+    * `NetworkCredentialId` - Integer - Database ID of an ansible network credential
+    * `VaultCredentialId` - Integer - Database ID of an ansible vault credential
+
+  * `manageiq://provision_execute` - Execute an MiqProvision task
+
+    This can be used for a VM Provision Service Catalog item in place of automate.  No explicit parameters are required, as state input is used as the provision options.
+
 
 #### Running an Embedded Workflow on Appliances
 

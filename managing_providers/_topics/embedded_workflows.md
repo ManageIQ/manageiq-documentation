@@ -470,7 +470,7 @@ You can create a generic service catalog item that uses an embedded workflow. To
 
 ## Upgrading
 
-If you wrote a workflow on `spassky-1` or older you might have to update your workflow content.
+If you wrote a workflow with floe prior to `v0.17.0` you might have to update your workflow content.  You can check your floe version by using `bundle info floe`
 
 1. The Credentials Task property has changed to use `$$.Credentials` to access the credentials payload, `$.` will use state input which is consistent with the rest of Input/Output processing.  `ResultPath` also has to be updated to set credentials to `$$.Credentials`.
 

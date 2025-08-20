@@ -222,12 +222,12 @@ OPTIONS and DELETE.
 </tbody>
 </table>
 
-There :collection represent specific Appliance entities like services,
+There, :collection represents specific Appliance entities like services,
 hosts, vms, etc.
 
 ## Updating resources
 
-As shown in the above table, there are a couple of way to update
+As shown in the above table, there are a couple of ways to update
 attributes in a resource. These are:
 
   - Update a resource via the PUT HTTP Method
@@ -303,14 +303,14 @@ available with the other two methods.
   - **204 No Content** - The server has fulfilled the request but does
     not need to return an entity-body, and might want to return updated
     meta information. This HTTP response is commonly used for the DELETE
-    requests, as the resource that was deleted does not exists anymore.
+    requests, as the resource that was deleted does not exist anymore.
 
 ### Client Errors
 
   - **400 Bad Request** - The request could not be understood by the
     server due to malformed syntax. The client SHOULD NOT repeat the
     request without modifications. In REST API this status code should
-    be returned to client when the client use the wrong combination of
+    be returned to client when the client uses the wrong combination of
     attributes, like expanding the non-existing collection, or using the
     pagination parameter incorrectly. Another use-case could be creating
     or performing actions on the resource, when the wrong JSON
@@ -319,7 +319,7 @@ available with the other two methods.
   - **401 Unauthorized** - The request requires user authentication. The
     response MUST include a *Authenticate* header field containing a
     challenge applicable to the requested resource. If the request
-    include *Authenticate* header, then this HTTP status code might
+    includes an *Authenticate* header, then this HTTP status code might
     indicate that the current user is **not authorized** to perform
     given action or to access given resource.
 

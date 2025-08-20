@@ -9,7 +9,7 @@ Update, Delete) using the REST API.
 For Authentication, we are showing here basic authentication via the
 *--user admin:smartvm* credentials argument. For multiple API calls it
 is recommended to access the REST API via token based authentication,
-please refer the the [Authentication Page](auth.html) for details.
+please refer to the [Authentication Page](auth.html) for details.
 
 #### Show a collection of Resources
 

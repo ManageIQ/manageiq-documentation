@@ -67,7 +67,7 @@ Where op supports the following operators:
 </tbody>
 </table>
 
-When strings, value to be quoted in single or double quotes. When
+When using strings, values should be quoted in single or double quotes. When
 datetimes, only strict comparison operators are supported.
 
 Example Query of VMs named sample\*, created\_on \> 2019-09-01, and return
@@ -122,4 +122,4 @@ Metadata](../appendices/collection_metadata.html) page.
     GET /api/vms?attributes=name,vendor,hardware&filter[]=vendor='vmware'&filter[]=hardware.memory_mb>=8192
 
 Here filtering on the virtual attribute *hardware* including the one
-level association *memory\_mb* off hardware.
+level association *memory\_mb* of hardware.

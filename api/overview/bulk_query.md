@@ -5,7 +5,7 @@
 
 While the capability to fetch an individual resource via
 /api/:collection/:id is available, fetching multiple resources via a
-filtered search is possible but has limitation on GET url limits and is
+filtered search is possible but has limitations on GET url limits and is
 cumbersome on the filtering syntax.
 
 The Bulk Queries provides this capability by implementing a *query* POST

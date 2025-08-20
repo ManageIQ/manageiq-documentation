@@ -221,7 +221,7 @@ installation of RHEL-OSP and registration to a satellite that has access to both
         # . ~/keystonerc_admin
         # ceilometer sample-list -m cpu |wc -l
 
-12. Add the configured OpenStack provider to {{ site.data.product.title_short }}. See After adding the provider, capacity, and utilization data for your instances populate in a few minutes.
+12. Add the configured OpenStack provider to {{ site.data.product.title_short }}. After adding the provider, capacity and utilization data for your instances will populate in a few minutes.
 
 ### Capacity and Utilization Data Collected
 
@@ -287,7 +287,7 @@ Capacity and utilization charts for host, clusters, virtual machines, and datast
 
 You can use the data that is collected in the VMDB to plan where you can put more virtual machines. With {{ site.data.product.title_short }}, you can use a reference virtual machine as an example to plan on which hosts and clusters you can place a new virtual machine.
 
-** Note:** For more information about utilization trends and identifying bottlenecks in your environment, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization) in Managing Infrastructure and Inventory.
+**Note:** For more information about utilization trends and identifying bottlenecks in your environment, see [Data Optimization](../managing_infrastructure_and_inventory/index.html#data-optimization) in Managing Infrastructure and Inventory.
 
 1. Browse to **Optimize > Planning**.
 2. From **Reference VM Selection**, use the drop-down menu to select the virtual machine that is most like the one that you want to add.
@@ -301,11 +301,11 @@ You can use the data that is collected in the VMDB to plan where you can put mor
    From the **Source** list, select the type of data to use as the source for your projections. For example, select **Allocation** to calculate based on the current allocation values of each resource (CPU, memory, or disk space) for the reference virtual machine. Use **Reservation** to project based on the current guaranteed value of the specific resource (CPU Speed, CPU count, memory, or disk space) although that amount might not be allocated to the virtual machine at a specific moment in time. Select **Usage** if you want to calculate based on usage history of the reference virtual machine. Use **Manual Input** to enter your own set of parameters for each resource.
 
 4. From **Target Options / Limits**, select if you want to use clusters or hosts as your targets.
-      
+
    ![2256](../images/2256.png)
 
-   Also, select the limit of how high the projection can go for CPU, memory, and datastore space. If you are targeting hosts, you are able to select a filter for which hosts can be targets. 
+   Also, select the limit of how high the projection can go for CPU, memory, and datastore space. If you are targeting hosts, you are able to select a filter for which hosts can be targets.
 5. From Trend Options, select how far back you want to use the trend data for, a Time Profile and Time Zone if applicable. Note that Time Profile will only show if the logged on user has a Time Profile available.
 6. Click Submit.
 
-The **Summary** tab shows the best clusters or hosts on which to place the virtual machines. The **Report** tab shows the best fit and statistics on the reference virtual machine in a tabular format. From the **Report** tab, you can also create a PDF of the report or download the data in `txt` or `csv` format. 
+The **Summary** tab shows the best clusters or hosts on which to place the virtual machines. The **Report** tab shows the best fit and statistics on the reference virtual machine in a tabular format. From the **Report** tab, you can also create a PDF of the report or download the data in `txt` or `csv` format.

@@ -41,7 +41,7 @@ Authentication tokens:
 
   - Are associated with the user credentials
 
-  - Provide the necessary identify for RBAC in subsequent REST API calls
+  - Provide the necessary identity for RBAC in subsequent REST API calls
 
   - Expire after a certain amount of time with no REST API activity - 10
     minutes by default.
@@ -95,11 +95,11 @@ that time-out much later.
 
 For such environments, it is possible to request a REST API token to
 leverage the administrative UI session timeout. This is requested with
-the **requester\_type** parameter witih the value **ui** as follows:
+the **requester\_type** parameter with the value **ui** as follows:
 
 ``` sh
 $ curl --user username:password
-        -i X GET -H "Accept: application/json"
+        -i -X GET -H "Accept: application/json"
         http://localhost:3000/api/auth?requester_type=ui
 ```
 

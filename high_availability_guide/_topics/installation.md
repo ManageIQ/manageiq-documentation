@@ -56,7 +56,7 @@ the non-database {{ site.data.product.title_short }} appliances.
         deployments.
 
         **Warning:**
-        
+
         This configuration is not reversible.
 
     7.  Create the database password.
@@ -83,7 +83,7 @@ database server.
 
 After installing and configuring an empty database-only appliance in
 [Installing the Primary Database-Only
-Appliance](#installation_primary_db), the steps in this section create
+Appliance](#installing-the-primary-database-only-appliance), the steps in this section create
 the database schema used by {{ site.data.product.title_short }} on the primary
 database-only appliance, and populate the database with the initial
 data.
@@ -185,7 +185,7 @@ the hostname of the primary database-only appliance.
 ### Configuring the Primary Database-Only Appliance
 
 On the primary database-only appliance you created in [Installing the
-Primary Database-Only Appliance](#installation_primary_db), initialize
+Primary Database-Only Appliance](#installing-the-primary-database-only-appliance), initialize
 the nodes in the database cluster to configure the database replication.
 Run these steps from the appliance console:
 

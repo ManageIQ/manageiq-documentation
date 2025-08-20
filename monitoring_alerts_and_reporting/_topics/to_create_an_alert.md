@@ -56,13 +56,11 @@ more information, see *General Configuration*.
 
         1.  If you select **v1**, enter a trap number in the **Trap
             Number** field. Enter **1**, **2**, or **3**, based on the
-            appropriate suffix number in
-            [table\_title](#snmp-trap-identifiers).
+            appropriate suffix number in the table below.
 
         2.  If you select **v2**, enter a trap object ID in the **Trap
             Object ID** field. Enter **info**, **warning**, or
-            **critical** based on the values in
-            [table\_title](#snmp-trap-identifiers).
+            **critical** based on the values in the table below.
 
             | Object ID             | Suffix Number Added to PEN | PEN with the Suffix Added |
             | --------------------- | -------------------------- | ------------------------- |
@@ -70,8 +68,6 @@ more information, see *General Configuration*.
             | warn, warning         | 2                          | 1.3.6.1.4.1.33482.2       |
             | crit, critical, error | 3                          | 1.3.6.1.4.1.33482.3       |
 
-
-            SNMP Trap Identifiers
 
 7.  Optionally, select **Send a Management Event** to trigger an
     automation event:

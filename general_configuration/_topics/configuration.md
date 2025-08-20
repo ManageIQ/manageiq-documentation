@@ -709,8 +709,9 @@ the required software, you must specify its version in the
     provider must be registered to it. For vCenter version 4, the VMware
     vCenter Management Webservices must be running.
 
-###### NTP Servers Settings In the **NTP Servers** area, you can
-specify the NTP servers to use as source for clock synchronization here.
+###### NTP Servers Settings
+
+In the **NTP Servers** area, you can specify the NTP servers to use as source for clock synchronization here.
 The NTP settings specified here will override Zone NTP settings. Enter
 one NTP server hostname or IP address in each text box.
 
@@ -977,7 +978,7 @@ To upload a custom logo to the user interface:
 
 To enable displaying your custom logo, ensure the option to use
 configuration settings for the tenant under **Access Control** is set to
-`Yes`. See [simpara\_title](#display-custom-settings) for the procedure
+`Yes`. See [Displaying the Custom Configuration Settings](#displaying-the-custom-configuration-settings) for the procedure
 on how to set the configuration settings.
 
 ###### Customizing the Login Background

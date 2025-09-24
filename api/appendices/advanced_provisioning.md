@@ -12,6 +12,8 @@ provisioning via /api/provision\_requests.
 
   - [Defining new Disks](#defining-new-disks)
 
+  - [Increasing the template disk size](#increasing-the-template-disk-size)
+
   - [Cloning Type](#cloning-type)
 
   - [Limit Template Selection](#limit-template-selection)
@@ -84,6 +86,18 @@ Example:
 "diskscsi1" : "0:0:8"
 "diskscsi1.datastore" : "storage1"
 "diskscsi1.backing.diskmode" : "independent_persistent"
+```
+
+### Increasing the template disk size
+
+The `allocated_disk_storage` attribute allows for the first disk on a VM to be increased in size
+after the clone operation is complete.  This is only supported for templates with 1 disk.
+The attribute's unit is gigabytes.
+
+This is supported by the VMware vSphere provider.
+
+```json
+allocated_disk_storage: 10
 ```
 
 ### Cloning Type

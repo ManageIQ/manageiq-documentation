@@ -270,10 +270,10 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
      Login Succeeded!
      ```
 
-      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/www/miq/vmdb/data/containers/storage' as in the example
+      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/lib/manageiq/containers/storage' as in the example
 
         ```text
-        podman pull <repository>/<image>:<tag>  --root /var/www/miq/vmdb/data/containers/storage
+        podman pull <repository>/<image>:<tag>  --root /var/lib/manageiq/containers/storage
         ```
 
         It is worth noting that the default /home/manageiq partition has insufficient space to store large images.

@@ -216,6 +216,15 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
       * `Encoding` - String
         * `JSON` - JSON encodes the request and decodes the response
 
+  * `manageiq://api` - Execute HTTP actions against the ManageIQ API
+
+    This has the same parameters as `manageiq://http` with the following defaults:
+
+    * `Url` - Defaults to the ManageIQ Web Services URL
+    * `Headers`
+      * `ContentType` - Defaults to `application/json`
+    * `Options`
+      * `Encoding` - Defaults to `JSON`
 
   * `manageiq://email` - Send an email using the configured SMTP server
 

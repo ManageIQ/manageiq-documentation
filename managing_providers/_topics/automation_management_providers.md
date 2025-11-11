@@ -652,11 +652,13 @@ Next create a Terraform Enterprise Service Catalog Item:
 
    - In **Dialog**, select a service dialog you created previously.  To ask the user to enter extra information when running the task, **Service Dialog** must be selected. A dialog is required if **Display in Catalog** is chosen.
 
-   - In **Provider**, select your Terraform Enterprise provider. This brings up the **Terraform Template** option where you can select which Terraform Workspace you want to use.
+   - Add configuration information for **Provisioning Entry Point**, **Reconfigure Entry Point** and **Retirement Entry Point** as applicable.
+     You can select either an **Embedded Automate** method or an **Embedded Workflow**.
 
-   - Add configuration information for **Reconfigure Entry Point** and **Retirement Entry Point** as applicable.
+     If you select an Embedded Workflow, the workflow you use must call the builtin `manageiq://provision_execute` in order to run provision request.
 
-   - Select your desired **Terraform Template** from the list.
+   - In the **Request Info** subtab, enter the owner information in the **Requester** section and select a `Configuration Script` from the **Catalog** tab.
+     ![request info configuration script](../images/automation_management_request_info.png)
 
 3. Click **Add**. The catalog item you created will appear in the **All Service Catalog Items** list.
 

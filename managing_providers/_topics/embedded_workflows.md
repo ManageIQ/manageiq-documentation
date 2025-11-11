@@ -216,6 +216,15 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
       * `Encoding` - String
         * `JSON` - JSON encodes the request and decodes the response
 
+  * `manageiq://api` - Execute HTTP actions against the ManageIQ API
+
+    This has the same parameters as `manageiq://http` with the following defaults:
+
+    * `Url` - Defaults to the ManageIQ Web Services URL
+    * `Headers`
+      * `ContentType` - Defaults to `application/json`
+    * `Options`
+      * `Encoding` - Defaults to `JSON`
 
   * `manageiq://email` - Send an email using the configured SMTP server
 
@@ -270,10 +279,10 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
      Login Succeeded!
      ```
 
-      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/www/miq/vmdb/data/containers/storage' as in the example
+      If you use the --root flag in the podman pull, images are pulled to a local directory '/var/lib/manageiq/containers/storage' as in the example
 
         ```text
-        podman pull <repository>/<image>:<tag>  --root /var/www/miq/vmdb/data/containers/storage
+        podman pull <repository>/<image>:<tag>  --root /var/lib/manageiq/containers/storage
         ```
 
         It is worth noting that the default /home/manageiq partition has insufficient space to store large images.

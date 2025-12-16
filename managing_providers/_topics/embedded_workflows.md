@@ -184,6 +184,12 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
   In addition to the `docker://` runner which can run any container you want, there are also builtin runner methods for some common tasks like executing an http call or sending an email.
 
+  * `manageiq://log` - Write a message to the logger.
+
+    Parameters:
+    * `Level` (required) - Log level. Permitted values: `DEBUG`, `INFO`, `WARN`, `ERROR`, `FATAL`, or `UNKNOWN`.  Defaults to `INFO`.
+    * `Message` (required) - The message to log.
+
   * `manageiq://http` - Execute any HTTP action
 
     Parameters:

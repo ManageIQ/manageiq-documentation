@@ -272,6 +272,14 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
     This can be used for a VM Provision Service Catalog item in place of automate.  No explicit parameters are required, as state input is used as the provision options.
 
+  * `manageiq://retire_execute` - Execute a MiqRetireTask task
+
+    This can be used as the retirement entrypoint for a VM or Orchestration Stack Service Catalog item.
+
+    Parameters:
+    * `RemoveFromProvider` - Boolean - Indicates if the object being retired should be removed from the provider.  Defaults to `true`
+    * `RemoveFromProviderStorage` - Boolean - When removing from the provider should the object be deleted from storage.  Defaults to `true`.  Ignored if `RemoveFromProvider` is `false`
+    * `RemoveFromInventory` - Boolean - After retirement should the object being retired be removed from the {{ site.data.product.title_short }} inventory database.  Defaults to `false`.
 
 #### Running an Embedded Workflow on Appliances
 

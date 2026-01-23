@@ -627,10 +627,10 @@ Create a catalog item that uses an Ansible Playbook to back it.
 
 {% include create-playbook-service-catalog-item.md %}
 
-#### Creating an Ansible Tower Service Catalog Item
+#### Creating an Ansible Automation Platform Service Catalog Item
 
-Create a service catalog item from an Ansible Tower template you can use
-to execute an Ansible Tower playbook in {{ site.data.product.title_short }}.
+Create a service catalog item from an Ansible Automation Platform template you can use
+to execute an Ansible Automation Platform playbook in {{ site.data.product.title_short }}.
 
 {% include create-tower-catalog-item.md %}
 

@@ -1,8 +1,8 @@
 <div class="important">
 
-You must first create the job or workflow template in Ansible Tower. The
+You must first create the job or workflow template in Ansible Automation Platform. The
 job or workflow templates are automatically discovered by
-{{ site.data.product.title_short }} when refreshing your Ansible Tower provider’s inventory.
+{{ site.data.product.title_short }} when refreshing your Ansible Automation Platform provider’s inventory.
 
 </div>
 
@@ -17,12 +17,12 @@ First, create a catalog:
 
 4.  Click **Add**.
 
-Then, create an Ansible Tower service catalog item:
+Then, create an Ansible Automation Platform service catalog item:
 
-1.  Browse to menu: **Automation < Ansible Tower < Explorer**, then click
+1.  Browse to menu: **Automation < Ansible Automation Platform < Explorer**, then click
     on the **Templates** accordion menu.
 
-2.  Click **Ansible Tower Templates** and select an Ansible Tower job or
+2.  Click **Ansible Automation Platform Templates** and select an Ansible Automation Platform job or
     workflow template.
 
 3.  Click **Configuration**, then
@@ -39,7 +39,7 @@ Then, create an Ansible Tower service catalog item:
     Item**) to create a new catalog item with the following details, at
     minimum:
 
-      - For **Catalog Item type**, select **Ansible Tower**.
+      - For **Catalog Item type**, select **Ansible Automation Platform**.
 
       - Enter a **Name** for the service catalog item.
 
@@ -53,15 +53,15 @@ Then, create an Ansible Tower service catalog item:
         Dialog** must be selected. A dialog is required if **Display in
         Catalog** is chosen.
 
-      - In **Provider**, select your Ansible Tower provider. This brings
-        up the **Ansible Tower Template** option and configures the
+      - In **Provider**, select your Ansible Automation Platform provider. This brings
+        up the **Ansible Automation Platform Template** option and configures the
         **Provisioning Entry Point State Machine** automatically.
 
       - Add configuration information for **Reconfigure Entry Point**
         and **Retirement Entry Point** as applicable.
 
-      - Select your desired **Ansible Tower Template** from the list.
-        Generally, this is the Ansible Tower job or workflow template
+      - Select your desired **Ansible Automation Platform Template** from the list.
+        Generally, this is the Ansible Automation Platform job or workflow template
         previously used to create the service dialog.
 
 7.  Click **Add**. The catalog item you created will appear in the **All

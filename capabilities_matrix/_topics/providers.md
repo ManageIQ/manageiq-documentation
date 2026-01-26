@@ -27,7 +27,7 @@ The following table lists providers that {{ site.data.product.title_short }} can
 | [OpenStack](#cloud-providers)                                                        |
 | [Oracle Cloud](#cloud-providers)                                                     |
 | [oVirt](#infrastructure-providers)                                                   |
-| [Red Hat Ansible Tower](#automation-providers)                                       |
+| [Red Hat Ansible Automation Platformower](#automation-providers)                     |
 | [Red Hat OpenShift Container Platform (OCP)](#container-providers)                   |
 | [Red Hat OpenShift Virtualization (OSV)](#infrastructure-providers)                  |
 | [Red Hat OpenStack Platform (OSP)](#cloud-providers)                                 |

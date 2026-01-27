@@ -148,6 +148,8 @@ To access your Ansible Automation Platform inventory from {{ site.data.product.t
 
 - A trailing slash is **not** required at the end of the Ansible Automation Platform provider URL. Adding the trailing slash to the provider URL may result in a validation error.
 
+- Ansible Automation Platform 2.5 changed the API path.  If you are using 2.5 or newer you must add `/api/controller/v2` to the end of your **URL**
+
 1. Browse to menu: **Automation > Ansible Automation Platform > Explorer** and click on the **Providers** accordion tab.
 
 2. Under **Configuration**, click ![Add a new Provider](../images/1862.png) **Add a new Provider**.

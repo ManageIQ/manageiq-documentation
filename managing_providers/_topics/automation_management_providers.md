@@ -249,6 +249,8 @@ Then, create an Ansible Automation Platform service catalog item:
 6. Click **Configuration**, then ![Add a New Catalog Item](../images/1862.png) (**Add a New Catalog Item**) to create a new catalog item with the following details, at minimum:
 
    - For **Catalog Item type**, select **Ansible Automation Platform**.
+     **NOTE** If you have existing **Ansible Automation Platform** Catalog Item it might show up as **Ansible Automation Platform (deprecated)** type.
+     These Catalog Item types cannot be used with Embedded Workflows and are being phased out.  It is recommended that you create a new **Catalog Item** with the new type.
 
    - Enter a **Name** for the service catalog item.
 

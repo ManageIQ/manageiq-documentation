@@ -35,7 +35,12 @@ In this example, we will update from jansa to kasparov.
 
 ## RPM URLs for manageiq-release
 
-        http://rpm.manageiq.org/release/19-spassky/el9/noarch/manageiq-release-19.0-1.el9.noarch.rpm
+        https://rpm.manageiq.org/release/19-spassky/el9/noarch/manageiq-release-19.0-1.el9.noarch.rpm
+        https://rpm.manageiq.org/release/18-radjabov/el9/noarch/manageiq-release-18.0-1.el9.noarch.rpm
+        https://rpm.manageiq.org/release/17-quinteros/el8/noarch/manageiq-release-17.0-1.el8.noarch.rpm
+        https://rpm.manageiq.org/release/16-petrosian/el8/noarch/manageiq-release-16.0-1.el8.noarch.rpm
+        https://rpm.manageiq.org/release/15-oparin/el8/noarch/manageiq-release-15.0-1.el8.noarch.rpm
+        https://rpm.manageiq.org/release/14-najdorf/el8/noarch/manageiq-release-14.0-1.el8.noarch.rpm
         https://rpm.manageiq.org/release/13-morphy/el8/noarch/manageiq-release-13.0-1.el8.noarch.rpm
         https://rpm.manageiq.org/release/12-lasker/el8/noarch/manageiq-release-12.0-1.el8.noarch.rpm
         https://rpm.manageiq.org/release/11-kasparov/el8/noarch/manageiq-release-11.0-1.el8.noarch.rpm

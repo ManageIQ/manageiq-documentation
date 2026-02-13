@@ -42,6 +42,8 @@ For information on managing specific infrastructure providers see the following.
 
 * [Nutanix](./infrastructure_providers/nutanix_providers.html)
 
+* [Proxmox](./infrastructure_providers/proxmox_providers.html)
+
 {% include_relative _topics/refreshing_multiple_management_systems.md %}
 
 {% include_relative _topics/tagging_multiple_management_systems.md %}

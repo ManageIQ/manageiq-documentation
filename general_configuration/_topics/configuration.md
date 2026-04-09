@@ -2726,11 +2726,13 @@ from the global copy.
    ```
 2. Create a backup by running the command:
    ```
+   velero backup create <your backup name>-database --include-namespaces <your namespace> -l <your label name>=db
    velero backup create <your backup name> --include-namespaces <your namespace> -l <your label name>=t
    ```
 3. In order to restore a backup, first ensure the {{ site.data.product.title_short }} CRD exists. Then, restore the backup by running the commands:
    ```
    oc new-project <your namespace>
+   velero restore create --from-backup <your backup name>-database # Wait for restore to finish before continuing
    velero restore create --from-backup <your backup name>
    ```
 

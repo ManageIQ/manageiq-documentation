@@ -21,6 +21,7 @@ Management of virtual machines adds support of the following actions:
 | add\_event            | Adding an event to a virtual machine                  |
 | edit                  | Edits a virtual machine                               |
 | delete                | Deletes a virtual machine in the appliance            |
+| terminate             | Terminates a virtual machine                          |
 
   - [Targeting VMs](#targeting-vms)
 
@@ -53,6 +54,8 @@ Management of virtual machines adds support of the following actions:
   - [Editing a VM](#edit-vm)
 
   - [Deleting a VM](#delete-vm)
+
+  - [Terminating a VM](#terminate-vm)
 
 ### Targeting Virtual Machines
 
@@ -319,6 +322,31 @@ POST /api/vms
 Or simply doing the following:
 
     DELETE /api/vms/:id
+
+
+### Terminating a Virtual Machine
+
+    POST /api/vms/:id
+
+``` json
+{
+  "action" : "terminate"
+}
+```
+
+Multiple virtual machines can also be terminated with a single request:
+
+    POST /api/vms
+
+``` json
+{
+  "action" : "terminate",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/vms/69" },
+    { "href" : "http://localhost:3000/api/vms/70" }
+  ]
+}
+```
 
 See the main REST API examples section for additional virtual machine
 management examples.

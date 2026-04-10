@@ -5,13 +5,19 @@
 
 Management of Hosts adds support of the following actions:
 
-| Action | Description |
-| ------ | ----------- |
-| edit   | Edit a Host |
+| Action | Description     |
+| ------ | --------------- |
+| edit   | Edit a Host     |
+| start  | Start a Host    |
+| stop   | Stop a Host     |
 
   - [Querying Hosts](#querying-hosts)
 
   - [Editing a Host](#edit-hosts)
+
+  - [Starting a Host](#start-host)
+
+  - [Stopping a Host](#stop-host)
 
 ### Querying Hosts
 
@@ -72,6 +78,60 @@ follows:
     { "id" : "102", "credentials" : { "password" : "updated_password" } },
     { "id" : "103", "credentials" : { "password" : "updated_password" } },
     ...
+  ]
+}
+```
+
+### Starting a Host
+
+Hosts can be started by posting the following action:
+
+    POST /api/hosts/:id
+
+``` json
+{
+  "action" : "start"
+}
+```
+
+Multiple hosts can also be started with a single request:
+
+    POST /api/hosts
+
+``` json
+{
+  "action" : "start",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/hosts/101" },
+    { "href" : "http://localhost:3000/api/hosts/102" },
+    { "href" : "http://localhost:3000/api/hosts/103" }
+  ]
+}
+```
+
+### Stopping a Host
+
+Hosts can be stopped by posting the following action:
+
+    POST /api/hosts/:id
+
+``` json
+{
+  "action" : "stop"
+}
+```
+
+Multiple hosts can also be stopped with a single request:
+
+    POST /api/hosts
+
+``` json
+{
+  "action" : "stop",
+  "resources" : [
+    { "href" : "http://localhost:3000/api/hosts/101" },
+    { "href" : "http://localhost:3000/api/hosts/102" },
+    { "href" : "http://localhost:3000/api/hosts/103" }
   ]
 }
 ```

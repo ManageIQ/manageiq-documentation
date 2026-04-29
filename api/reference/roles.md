@@ -213,3 +213,8 @@ Deleting multiple roles can be done as follows:
   ]
 }
 ```
+
+**Note:**
+
+See [Disabling a Feature Across All User Interfaces](../troubleshooting/index.html#Disabling-a-Feature-Across-All-User-Interfaces)
+for details on disabling features across all user interfaces.

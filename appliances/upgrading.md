@@ -41,57 +41,81 @@ Always be sure to export the current datastore before importing or resetting.
 In this section we will upgrade an existing podified installation and upgrade the database server from PostgreSQL 13 to 16.
 1. Switch to the namespace where the application is installed.
 
-        # oc project <your_namespace>
+```bash
+# oc project <your_namespace>
+```
 
-2. Upgrade the operator (and image references other than postgresqlVersion)
+2. Upgrade the operator changing .spec.template.spec.containers[0].image to the new image
 
-        # oc edit deployment {{ title_short_l }}-operator
-          # Change .spec.template.spec.containers[0].image to the new image
-        # oc edit {{ site.data.product.operator_custom_resource_definition_name_plural }}
-          # Update all of the image tags except for postgresql
+```bash
+# oc edit deployment {{ title_short_l }}-operator
+```
 
-3. Stop all of the worker pods by putting the orchestrator to sleep
+3. Update httpd, memcached, base-worker, orchestrator, ui-worker and webserver-worker image references
 
-        # oc patch deployment orchestrator -p '{"spec":{"template":{"spec":{"containers":[{"name":"orchestrator","command":["sleep", "1d"]}]}}}}'
+```bash
+# oc edit {{ site.data.product.operator_custom_resource_definition_name_plural }}
+```
 
-4. Back up the postgresql 13 database to a file on the PV
+4. Stop all of the worker pods by putting the orchestrator to sleep
 
-        # oc rsh deploy/postgresql
-        #   sh-5.2$ pg_dumpall -c --if-exists | gzip > /var/lib/pgsql/data/vmdb.pg.gz
-        #   sh-5.2$ exit
+```bash
+# oc patch deployment orchestrator -p '{"spec":{"template":{"spec":{"containers":[{"name":"orchestrator","command":["sleep", "1d"]}]}}}}'
+```
 
-5. Copy the database backup locally
+5. Back up the postgresql 13 database to a file on the PV
 
-        # oc get pod -l name=postgresql
-        # oc cp <name of postgresql-xxx pod>:/var/lib/pgsql/data/vmdb.pg.gz vmdb.pg.gz
+```bash
+# oc rsh deploy/postgresql
+#   sh-5.2$ pg_dumpall -c --if-exists | gzip > /var/lib/pgsql/data/vmdb.pg.gz
+#   sh-5.2$ exit
+```
 
-6. Switch the postgresql deployment from 13 to 16 using the following:
+6. Copy the database backup locally
 
-        # oc edit {{ site.data.product.operator_custom_resource_definition_name_plural }}
-          # Change the .spec.postgresqlImage tag from "13-el9" to "16-el10"
+```bash
+# oc get pod -l name=postgresql
+# oc cp <name of postgresql-xxx pod>:/var/lib/pgsql/data/vmdb.pg.gz vmdb.pg.gz
+```
 
-7. The new postgresql pod will get deployed, but stuck in CrashLoopBackOff because of incompatible data directory
+7. Upgrade the postgresql deployment from 13 to 16 by switching the image tag from "13-el9" to "16-el10"
 
-        # oc delete pvc/postgresql deployment/postgresql
+```bash
+# oc edit {{ site.data.product.operator_custom_resource_definition_name_plural }}
+```
 
-8. Copy the database backup to the new pvc
+8. The new postgresql pod will get deployed, but stuck in CrashLoopBackOff because of incompatible data directory
 
-        # oc get pod -l name=postgresql
-        # oc cp vmdb.pg.gz <name of new postgresql-xxx pod>:/var/lib/pgsql/data/vmdb.pg.gz
+```bash
+# oc delete pvc/postgresql deployment/postgresql
+```
 
-9. Restore the database backup to the postgresql 16 formatted userdata directory
+9. Copy the database backup to the new pvc
 
-        # oc rsh deploy/postgresql
-          # gunzip < /var/lib/pgsql/data/vmdb.pg.gz | psql postgres
-          # rm -rf /var/lib/pgsql/data/vmdb.pg.gz
-          # exit
+```bash
+# oc get pod -l name=postgresql
+# oc cp vmdb.pg.gz <name of new postgresql-xxx pod>:/var/lib/pgsql/data/vmdb.pg.gz
+```
 
-10.  Restart the orchestrator
+10. Restore the database backup to the postgresql 16 formatted userdata directory
 
-        # oc delete deployment orchestrator
+```bash
+# oc rsh deploy/postgresql
+  # gunzip < /var/lib/pgsql/data/vmdb.pg.gz | psql postgres
+  # rm -rf /var/lib/pgsql/data/vmdb.pg.gz
+  # exit
+```
 
-11. Delete the old network policies
+11.  Restart the orchestrator
 
-        # oc delete networkpolicy -l app=ibm-infra-management-application
+```bash
+# oc delete deployment orchestrator
+```
+
+12. Delete the old network policies
+
+```bash
+# oc delete networkpolicy -l app=ibm-infra-management-application
+```
 
 The new orchestrator and network policies will get created and after a few minutes the worker pods will be deployed.  Once the UI pods are up, log into the web-UI and verify that the restore was successful.

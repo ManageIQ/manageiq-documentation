@@ -141,6 +141,7 @@ The defaults in the *manageiq-external-auth-oidc.conf* file are:
 | LogLevel                 | warn      |
 | OIDCCryptoPassphrase     | sp-cookie |
 | OIDCOAuthRemoteUserClaim | username  |
+| OIDCPassClaimsAs         | both none |
 
 Installation specific values must be specified in the
 *manageiq-external-auth-oidc.conf* file for the following parameters,

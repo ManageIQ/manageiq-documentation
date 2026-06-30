@@ -497,31 +497,87 @@ Use the following steps to create a Terraform Service Catalog item:
 
 5. In the navigation bar, click **Services** > **Catalogs** > **Catalog Items**.
 
-6. Click **Configuration** > **Add a New Catalog Item** to create a new catalog item with the following details at minimum:
+6. Click **Configuration** > **Add a New Catalog Item**, and select one of the two catalog item types available for Terraform Template:
 
-   - For **Catalog Item type**, select **Terraform Template**.
+   - **Terraform Template (deprecated)**: Supports the Automate engine.
 
-   - Enter a **Name** for the service catalog item.
+   - **Terraform Template**: Supports both the Workflow and Automate engines.
 
-   - Select **Display** in **Catalog**.
+7. Create a new catalog item with at least the following details:
 
-   - In Catalog, select the catalog that you created previously.
+   - **Terraform Template (deprecated)** selected for **Catalog Item Type**:
 
-   - In Provisioning, select the repository that you previously added and select the Terraform template that you want to deploy.
+     - Enter a **Name** for the service catalog item.
 
-   - In Provisioning, select the **Cloud Type** and then select the **credential** to connect to the cloud.
+     - Select **Display in Catalog**.
 
-   - In Provisioning, if you want to enter additional information when you run the task, **Service Catalog** must be selected. A dialog is required if **Display in Catalog** is chosen.
+     - In **Catalog**, select the catalog that you created previously.
 
-   - In Provisioning, you have two options to create a Service Dialog:
+     - In **Provisioning**, select the repository that you previously added, and then select the Terraform template that you want to deploy.
 
-     * **Use Existing**: When you select **Use Existing** option, you can select the Service Dialog that you previously created.
-     * **Create new**: When you select **Create new** option, you can create a new Service Dialog by providing a name. When the catalog item is saved, the new Service Dialog is created with section for **Terraform Template Variables**. The **Terraform Template Variables** section contains the text box inputs for each of the input variables from the Terraform Template. To modify the dialog, navigate to **Automation** > **Automate** > **Customization** > **Service Dialogs**, select **Service Dialog**, and from the Configuration menu, select **Edit this dialog** to make the required changes.
-     * **Create new**: When you select **Create new** option, you can create a new Service Dialog by providing a name. When the catalog item is saved, the new Service Dialog is created with section for **Terraform Template Variables**. The **Terraform Template Variables** section contains input fields for each of the input variables from the Terraform Template. Under the **Terraform Template Variables** section, the boolean field displays as a checkbox. Number field displays as a textbox with regex validation for the number value. JSON fields display as multi-line text area field, with JSON value prettified. String fields display as single line textbox fields.
+     - In **Provisioning**, select the **Cloud Type**, and then select the **Credential** to connect to the cloud.
 
-     To modify the dialog, navigate to **Automation** > **Automate** > **Customization** > **Service Dialogs**, select **Service Dialog**, and from the Configuration menu, select **Edit this dialog** to make the required changes.
+     - In **Provisioning**, if you want to enter additional information when you run the task, select **Service Catalog**. A dialog is required when **Display in Catalog** is selected.
 
-6. Click **Save**.
+     - In **Provisioning**, select one of the following options to create a service dialog:
+
+       * **Use Existing**: Select the service dialog that you created previously.
+       * **Create New**: Provide a name to create a new service dialog. When the catalog item is saved, the service dialog is created with a **Terraform Template Variables** section, which contains a text box input for each input variable in the Terraform template. To modify the dialog, navigate to **Automation** > **Automate** > **Customization** > **Service Dialogs**, select the service dialog, and then select **Edit this dialog** from the **Configuration** menu.
+
+     - Click **Save**.
+
+   - **Terraform Template** selected for **Catalog Item Type**:
+
+     - Enter a **Name** for the service catalog item.
+
+     - (Optional) Select **Display in Catalog**.
+
+     - For **Catalog**, select the catalog that you created previously.
+
+     - For **Dialog**, select the service dialog that you created previously.
+
+     - For **Provisioning Entry Point**:
+
+       * Click the entry point type field to reveal the **Embedded Automate** and **Embedded Workflow** options.
+
+       * Select **Embedded Workflow**.
+
+       * Click the browse icon to view the available workflow entry points.
+
+       * Select **provision.asl** or a custom ASL workflow.
+
+         > **Note:** Your custom ASL workflow must call `manageiq://provision_execute` at some point in the state machine.
+
+       * Click **Apply** to confirm the selection.
+
+     - For **Retirement Entry Point**:
+       * Click the entry point type field to reveal the **Embedded Automate** and **Embedded Workflow** options.
+
+       * Select **Embedded Workflow**.
+
+       * Click the browse icon to view the available workflow entry points.
+
+       * Select **retire.asl** or a custom ASL workflow.
+
+         > **Note:** Your custom ASL workflow must call `manageiq://retire_execute` at some point in the state machine.
+
+       * Click **Apply** to confirm the selection.
+
+     > **Note:** A built-in Embedded Workflow entry point for **Reconfigure Entry Point** is not yet available. This option will be available in a future release.
+
+     - In **Request Info**:
+
+       * In **Requester**, enter the requester email address.
+
+       * In **Catalog**, select a configuration script.
+
+       * In **Customize**, select the credentials to connect to the cloud:
+
+         - Select the **Credential Type**.
+
+         - Select the **Cloud Credential**.
+
+     - Click **Add**.
 
 The catalog item that you created appears in the *All Service Catalog Items* list.
 

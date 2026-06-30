@@ -232,6 +232,10 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
     * `Options`
       * `Encoding` - Defaults to `JSON`
 
+    Credentials:
+    * `username`/`password` - If these are both present then a Basic Authorization header will be added
+    * `bearer_token` - If this is present then a Bearer Authorization header will be added.  The `bearer_token` Credential takes priority over `username`/`password`.
+
   * `manageiq://email` - Send an email using the configured SMTP server
 
     Parameters:

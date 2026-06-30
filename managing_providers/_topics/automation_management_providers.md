@@ -544,13 +544,24 @@ Use the following steps to create a Terraform Service Catalog item:
 
        * Click the browse icon to view the available workflow entry points.
 
-       * Select **provision.asl**.
+       * Select **provision.asl** or a custom ASL workflow.
 
-         > **Note:** You can also select a custom ASL workflow. It must call the `manageiq://provision_execute` step at some point in the state machine.
+         > **Note:** Your custom ASL workflow must call `manageiq://provision_execute` at some point in the state machine.
 
        * Click **Apply** to confirm the selection.
 
-     - For **Retirement Entry Point**, select **retire.asl** or your custom ASL workflow by following the same steps.
+     - For **Retirement Entry Point**:
+       * Click the entry point type field to reveal the **Embedded Automate** and **Embedded Workflow** options.
+
+       * Select **Embedded Workflow**.
+
+       * Click the browse icon to view the available workflow entry points.
+
+       * Select **retire.asl** or a custom ASL workflow.
+
+         > **Note:** Your custom ASL workflow must call `manageiq://retire_execute` at some point in the state machine.
+
+       * Click **Apply** to confirm the selection.
 
      > **Note:** A built-in Embedded Workflow entry point for **Reconfigure Entry Point** is not yet available. This option will be available in a future release.
 

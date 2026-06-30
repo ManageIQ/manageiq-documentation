@@ -530,7 +530,7 @@ Use the following steps to create a Terraform Service Catalog item:
 
      - Enter a **Name** for the service catalog item.
 
-     - Select **Display in Catalog**.
+     - (Optional) Select **Display in Catalog**.
 
      - For **Catalog**, select the catalog that you created previously.
 
@@ -546,9 +546,11 @@ Use the following steps to create a Terraform Service Catalog item:
 
        * Select **provision.asl**.
 
+         > **Note:** You can also select a custom ASL workflow. It must call the `manageiq://provision_execute` step at some point in the state machine.
+
        * Click **Apply** to confirm the selection.
 
-     - For **Retirement Entry Point**, select **retire.asl** by following the same steps.
+     - For **Retirement Entry Point**, select **retire.asl** or your custom ASL workflow by following the same steps.
 
      > **Note:** A built-in Embedded Workflow entry point for **Reconfigure Entry Point** is not yet available. This option will be available in a future release.
 

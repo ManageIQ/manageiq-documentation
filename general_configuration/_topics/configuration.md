@@ -1862,6 +1862,11 @@ create your own, or copy and edit the default groups.
 
 **Note:**
 
+See [Disabling a Feature Across All User Interfaces](../troubleshooting/index.html#Disabling-a-Feature-Across-All-User-Interfaces)
+for details on disabling features across all user interfaces.
+
+**Note:**
+
 If you have enabled **Get Role from LDAP** under **LDAP Settings**, then
 the role is determined by the LDAP user’s group membership in the
 directory service.

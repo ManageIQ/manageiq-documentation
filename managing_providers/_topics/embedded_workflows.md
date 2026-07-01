@@ -173,6 +173,7 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
     - Map State Fields:
       - ItemReader
       - ResultWriter
+    - JSONata expressions
 
 * Build the docker containers that are required for the workflow.
 

@@ -1862,7 +1862,7 @@ create your own, or copy and edit the default groups.
 
 **Note:**
 
-See [Disabling a Feature Across All User Interfaces](../../troubleshooting/index.html#disabling-a-feature-across-all-user-interfaces)
+See [Disabling a Feature Across All User Interfaces](../troubleshooting/index.html#disabling-a-feature-across-all-user-interfaces)
 for details on disabling features across all user interfaces.
 
 **Note:**

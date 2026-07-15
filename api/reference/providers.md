@@ -484,7 +484,7 @@ tags, policies and policy\_profiles subcollections will be rejected.
 
 Below you will find example requests for creating various providers.
 
-Ansible Automation Provider Automation Manager:
+Ansible Automation Provider:
 
 ``` json
 {

@@ -3,33 +3,31 @@
 
 # Upgrading Appliances
 
-In this example, we will update from jansa to kasparov.
+In the tal release, we moved to CentOS Stream 10 bootc appliances.  Upgrading to tal requires a replacement of the appliances.  Once you have a tal appliance, the new upgrade mechanism uses bootc to pull and boot container images rather than dnf/rpm.
 
-1. Ensure that the appliance is up to date on the current branch
+1. If your container registry requires authentication, create a container registry auth file in /etc/ostree/auth.json
 
-        # dnf update
+2. Pull and prepare to run the newer release.  i.e. docker.io/manageiq/manageiq-appliance-libvirt:latest
 
-2. Install the new manageiq-release RPM for the version that you want to upgrade to. Refer to the [release directory](https://rpm.manageiq.org/?prefix=release) in our RPM repository to find the latest manageiq-release rpm. Navigate to the non-nightly directory, el, then noarch directory for the version that you want to upgrade to, and get the URL for the manageiq-release rpm.
+```bash
+bootc switch <new image>
+```
 
-        # dnf install https://rpm.manageiq.org/release/11-kasparov/el8/noarch/manageiq-release-11.0-1.el8.noarch.rpm
+3. Reboot into the new image
 
-3. Stop evmserverd if running
+```bash
+reboot
+```
 
-        # systemctl stop evmserverd
-        # systemctl status evmserverd
+4. Stop evmserverd, migrate the database, and re-start the application
 
-4. Update the RPMs from the new repo
-
-        # dnf update
-
-5. Migrate the database
-
-        # cd /var/www/miq/vmdb/
-        # bundle exec rake db:migrate
-
-6. Reboot the appliance
-
-        # reboot
+```bash
+systemctl stop evmserverd
+systemctl status evmserverd
+cd /var/www/miq/vmdb/
+bundle exec rake db:migrate
+systemctl start evmserverd
+```
 
 ## Update automation engine
 

@@ -37,10 +37,10 @@ Configure the appliance by using the internal appliance console.
 
 Configuring messaging is required for the appliance setup. It is recommended to configure the broker on the same appliance where your database is configured
 
-**Note:** You can only have one Kafka broker per region.
+**Note:** You can only have one Kafka cluster per region. You can configure a Kafka high-availability cluster with multiple brokers for improved reliability and fault tolerance.
 
 1. You can either configure the current appliance as a Kafka broker, or point the
-   appliance to an existing external Kafka broker.
+   appliance to an existing external Kafka cluster.
 
    Select the appropriate option either
    **Configure this appliance as a messaging server** or
@@ -95,9 +95,9 @@ has a region configured with a database and messaging.
 
 12. Confirm the configuration if prompted.
 
-13. Choose **Connect to an external messaging system** to connect to the external kafka broker located on the appliance with the external database
+13. Choose **Connect to an external messaging system** to connect to the external kafka cluster located on the appliance with the external database
 
-    **Note:** You can only have one kafka broker per region
+    **Note:** All worker appliances in a region must use the same kafka cluster.
 
 14. Enter the necessary **Message Client Parameters** such as the hostname/IP and username/password
 

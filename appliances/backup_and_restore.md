@@ -9,7 +9,7 @@ Creating a backup of the appliance will be done using SSH or the console.
    2. Select `Quit` to return to the shell
 2. For convenience, create a TGZ containing all files required to restore the database
    ```bash
-     tar -czvf /root/backup.tgz /tmp/evm_db.backup /var/www/miq/vmdb/GUID /var/www/miq/vmdb/certs/v2_key
+     tar -czvPf /root/backup.tgz /tmp/evm_db.backup /var/www/miq/vmdb/GUID /var/www/miq/vmdb/certs/v2_key
    ```
 
 3. Save and/or rename `/root/backup.tgz`
@@ -40,12 +40,13 @@ Restoring a backup of the appliance will be done using SSH or the console.
      hostnamectl hostname your-new-hostname.example.com
      echo "your.ip.address your-new-hostname.example.com your-new-hostname" >> /etc/hosts
    ```
-2. Download a backup TGZ and place it in `/`
+2. Download a backup TGZ and place it in `/root/`.
 3. On the command line:
    ```bash
-     cd /
-     tar -zxf /backup.tgz
-     rm -f /backup.tgz # if desired to save space
+     cd /root/
+     tar -zxvPf backup.tgz
+     chown manageiq /var/www/miq/vmdb/certs/v2_key
+     rm -f backup.tgz # if desired to save space
    ```
 4. Launch `appliance_console`
    1. Since the database has not yet been initialized, select `Configure Application`.

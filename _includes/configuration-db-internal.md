@@ -3,8 +3,8 @@
 Before installing an internal database, add a disk to the infrastructure
 hosting your appliance. See the documentation specific to your
 infrastructure for instructions for adding a disk. As a storage disk
-usually cannot be added while a virtual machine is running, Red Hat
-recommends adding the disk before starting the appliance.
+usually cannot be added while a virtual machine is running, it is
+recommended to add the disk before starting the appliance.
 {{ site.data.product.title_short }} only supports installing of an internal VMDB on blank
 disks; installation will fail if the disks are not blank.
 
@@ -38,7 +38,7 @@ disks; installation will fail if the disks are not blank.
 
     <div class="important">
 
-    Red Hat recommends using a separate disk for the database.
+    It is recommended to use a separate disk for the database.
 
     </div>
 

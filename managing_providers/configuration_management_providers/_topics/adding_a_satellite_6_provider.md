@@ -1,7 +1,7 @@
 ## Adding a Satellite 6 Provider
 
 To start provisioning bare metal machines, you need at least one Red Hat
-Satelllite 6 provider added to {{ site.data.product.title_short }}.
+Satellite 6 provider added to {{ site.data.product.title_short }}.
 
 1.  Browse to menu: **Configuration > Management**.
 

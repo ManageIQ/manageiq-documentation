@@ -74,7 +74,7 @@ minimum:
 
 #### Database Requirements
 
-Red Hat recommends allocating the virtual machine disk fully at the time
+It is recommended to allocate the virtual machine disk fully at the time
 of creation. Three main factors affect the size of your database over
 time:
 

@@ -24,6 +24,8 @@ management events and administrative or operational activities.
 {% include_relative _topics/to_create_a_schema_for_a_class1.md
 %}
 
+{% include_relative _topics/automate_assertions.md %}
+
 {% include_relative _topics/to_edit_a_field_in_a_schema1.md %}
 
 {% include_relative _topics/editing_schema_sequence.md %}

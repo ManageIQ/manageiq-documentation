@@ -165,15 +165,15 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
 
    The workflow code must be in the Amazon States Language (ASL) format and follow its supported specifications. For more information about Amazon States Language and its specification, see [Amazon States Language Guide](https://states-language.net/).
 
-   **Note**: The current implementation of the Amazon States Language does not support certain **Map** states. For more information, see [Unsupported Amazon States Language features](#unsupported-states-language-features).
+   * Unsupported Amazon States Language features
 
-   #### Unsupported Amazon States Language features
+     The current implementation of the Amazon States Language does not support certain features.
+      - Map State Fields:
+        - ItemReader
+        - ResultWriter
+       - JSONata expressions
 
-    The following features of Amazon States Language are not supported by Floe:
-    - Map State Fields:
-      - ItemReader
-      - ResultWriter
-    - JSONata expressions
+      For more information, see [Unsupported Amazon States Language features](#unsupported-states-language-features).
 
 * Build the docker containers that are required for the workflow.
 
@@ -233,6 +233,10 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
     * `Options`
       * `Encoding` - Defaults to `JSON`
 
+    Credentials:
+    * `username`/`password` - If these are both present then a Basic Authorization header will be added
+    * `bearer_token` - If this is present then a Bearer Authorization header will be added.  The `bearer_token` Credential takes priority over `username`/`password`.
+
   * `manageiq://email` - Send an email using the configured SMTP server
 
     Parameters:
@@ -281,6 +285,9 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
     * `RemoveFromProvider` - Boolean - Indicates if the object being retired should be removed from the provider.  Defaults to `true`
     * `RemoveFromProviderStorage` - Boolean - When removing from the provider should the object be deleted from storage.  Defaults to `true`.  Ignored if `RemoveFromProvider` is `false`
     * `RemoveFromInventory` - Boolean - After retirement should the object being retired be removed from the {{ site.data.product.title_short }} inventory database.  Defaults to `false`.
+
+{% include_relative _topics/servicenow_builtin_methods.md %}
+
 
 #### Running an Embedded Workflow on Appliances
 

@@ -39,7 +39,7 @@ To add a Google Compute Engine provider to {{ site.data.product.title_short }}, 
 6.  Enter your Google Compute Engine Project ID for **Project**.
 
 7.  Select the appropriate **Zone** if you have more than one available.
-    Red Hat recommends creating a new zone for your Google Compute Engine provider.
+    It is recommended to create a new zone for your Google Compute Engine provider.
 
 8.  Copy your project’s **Service Account** JSON key contents to the **Service Account JSON** field.
 

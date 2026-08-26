@@ -171,7 +171,7 @@ For example, change from (file name: `manageiq-openstack-kasparov-1.qc2`) to (fi
     {{ site.data.product.title_short }} configures the internal database. This takes a few minutes.
 
 10. Once {{ site.data.product.title_short }} is installed, you can log in and complete administrative tasks.
-    - Log in to Red Hat {{ site.data.product.title_short }} for the first time by:
+    - Log in to {{ site.data.product.title_short }} for the first time by:
     - Select the URL for the login screen. For example,  `https://xx.xx.xx.xx` on the virtual server instance, where `xx.xx.xx.xx` is the floating IP.
     - Enter the default credentials (Username: admin | Password: smartvm) for the initial login.
     - Click Login.

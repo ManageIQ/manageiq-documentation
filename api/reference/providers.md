@@ -11,25 +11,20 @@ through:
 /api/providers
 ```
 
+- [Provider Support](#provider-support)
   - [Querying Providers](#querying-providers)
-
+    - [Cloud Networks](#cloud-networks)
+    - [Cloud Subnets](#cloud-subnets)
+    - [Load Balancers](#load-balancers)
+    - [Virtual Machines](#virtual-machines)
   - [Creating Providers](#creating-providers)
-
   - [Specifying Credentials](#specifying-credentials)
-
-  - [Specifying Connection
-    Configurations](#specifying-connection-configurations)
-
+  - [Specifying Connection Configurations](#specifying-connection-configurations)
   - [Editing Providers](#editing-providers)
-
   - [Deleting Providers](#deleting-providers)
-
   - [Refresh Providers](#refresh-providers)
-
-  - [Import Vm to Provider](#import-vm-providers)
-
+  - [Import Vm to Provider](#import-vm-to-provider)
   - [Foreman Support](#foreman-support)
-
   - [Provider Examples](#provider-examples)
 
 ### Querying Providers

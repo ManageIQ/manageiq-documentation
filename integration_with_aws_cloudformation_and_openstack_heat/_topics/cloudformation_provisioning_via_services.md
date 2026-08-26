@@ -97,8 +97,8 @@ UI.
     **Note:**
 
     The number of seconds get converted (rounded) to minutes when
-    ordering the provision through Red Hat Enterprise Linus OpenStack
-    Platform. For example, 100 seconds rounds to two minutes.
+    ordering the provision through Red Hat OpenStack Platform.
+    For example, 100 seconds rounds to two minutes.
 
 6.  You can use the default parameter values from the template, or enter new values as appropriate.
 

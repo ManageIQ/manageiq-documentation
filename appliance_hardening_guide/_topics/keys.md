@@ -8,7 +8,7 @@ only.
 
 <div class="important">
 
-Red Hat does not recommend changing the encryption key for an existing
+It is not recommended to change the encryption key for an existing
 appliance as the ability to decrypt the password will be lost, affecting
 all stored passwords in {{ site.data.product.title_short }}.
 

@@ -69,8 +69,8 @@ while some steps apply to all appliances.
         # yum update
 
 7.  On one of the non-database {{ site.data.product.title_short }} appliances, apply
-    any database schema updates included in the errata, and reset the
-    Red Hat and ManageIQ automation domains:
+    any database schema updates included in the errata, and reset the default automation
+    domains:
 
         # vmdb
         # rake db:migrate

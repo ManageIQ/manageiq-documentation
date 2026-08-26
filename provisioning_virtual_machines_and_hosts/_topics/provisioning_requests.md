@@ -17,7 +17,7 @@ The following options are available when making provisioning requests:
 
   - Customize the guest operating system
 
-  - Schedule the provisioning 
+  - Schedule the provisioning
 
   ![2315](../images/2315.png)
 
@@ -79,7 +79,7 @@ requirements.
 <p>DirectLUN Hook installed on each host and registered to Red Hat Virtualization Managers.</p>
 <p>Must have {{ site.data.product.title_short }} appliance in each Cluster with this storage type.</p>
 <p>{{ site.data.product.title_short }} appliance virtual machine container must have DirectLUN attribute set.</p>
-<p>Local storage - Not yet supported (Red Hat does not recommend due to single point of failure).</p></td>
+<p>Local storage - Not yet supported (This is not recommended due to being a single point of failure).</p></td>
 </tr>
 </tbody>
 </table>
@@ -954,7 +954,7 @@ The diagram below shows where provisioning profiles are called during the entire
     **{{ site.data.product.title_short }}-test group** to **{{ site.data.product.title_short }}-test\_group**.
     ![6278](../images/6278.png)
 
-5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the {{ site.data.product.title_short }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. Red Hat recommends naming
+5.  In the dialog name field, enter the name of the customized dialog file. This file must reside on the {{ site.data.product.title_short }} appliance in the `/var/www/miq/vmdb/db/fixtures` directory. It is recommended to name
     the file in the format `miq_provision_dialogs-groupname.rb` and copying this file to all {{ site.data.product.title_short }} appliances. For instructions on creating a custom dialog file, see [Customizing Provisioning Dialogs](#provisioning-dialogs-customizing).
 
     **Note:**

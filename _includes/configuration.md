@@ -5,9 +5,15 @@ time, you must perform some basic configuration. You must complete these steps:
 
 1.  Add a disk to the infrastructure that is hosting your appliance.
 
-2.  Configure the database.
+2.  Configure networking
 
-3.  Configure messaging
+3.  Configure the database.
+
+4.  Configure messaging
+
+### Configure Networking
+
+{% include configuration-network.md %}
 
 Configure the appliance by using the internal appliance console.
 

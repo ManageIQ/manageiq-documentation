@@ -77,5 +77,5 @@
 |              | WebMKS          |
 | RHV          | SPICE           |
 | SCVMM        | N/A             |
-| KubeVirt     | SPICE           |
-| OSV          | SPICE           |
+| KubeVirt     | VNC             |
+| OSV          | VNC             |

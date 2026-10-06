@@ -369,10 +369,11 @@ call.
 Bulk assignment of tags is available via the *assign\_tags* action to
 the following collections:
 
-| Collection    |
-| ------------- |
-| /api/vms      |
-| /api/services |
+| Collection         |
+| ------------------ |
+| /api/vms           |
+| /api/services      |
+| /api/cloud_volumes |
 
 The *assign\_tags* action allows adding one or more tags to one or more
 resources.
@@ -429,10 +430,11 @@ resources.
 Tags can also be unassigned in bulk from multiple resources for the
 following collections via the *unassign\_tags* action:
 
-| Collection    |
-| ------------- |
-| /api/vms      |
-| /api/services |
+| Collection         |
+| ------------------ |
+| /api/vms           |
+| /api/services      |
+| /api/cloud_volumes |
 
     POST /api/services
 

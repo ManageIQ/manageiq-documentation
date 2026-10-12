@@ -12,15 +12,15 @@ cloud provider in {{ site.data.product.title_short }}.
 
 4.  Enter a **Name** for the provider.
 
-6.  Select the appropriate **Zone**.
+5.  Select the appropriate **Zone**.
 
-7.  Under **Endpoints**, in the **Default** tab.
+6.  Under **Endpoints**, in the **Default** tab:
 
     1.  Enter your **IBM Cloud API Key**.
 
         For more information on managing IBM Cloud API keys, including how to
         create one, refer to IBM Cloud Docs:
-        [Managing user API keys](https://cloud.ibm.com/docs/account?topic=account-userapikey)
+        [Managing user API keys](https://cloud.ibm.com/docs/account?topic=account-userapikey).
 
     2.  Enter the **PowerVS Service GUID** of the IBM Power Systems Virtual
         Servers service instance you want to add.
@@ -33,4 +33,16 @@ cloud provider in {{ site.data.product.title_short }}.
 
     3.  Click **Validate** to validate the credentials.
 
-9.  Click **Add**.
+7.  Under **Endpoints**, in the **Metrics** tab (Optional):
+
+    1.  From the **Type** list, select **Enabled** to enable metrics collection.
+
+    2.  Enter the **IBM Cloud Monitoring Instance GUID** for the IBM Cloud Monitoring instance in the same region configured to receive IBM Power Virtual Server metrics.
+
+        You can find the instance GUID under **Observability > Monitoring** in the IBM Cloud console or by using the IBM Cloud CLI:
+
+        ```terminal
+        ibmcloud resource service-instance <INSTANCE_NAME> --output json | jq -r '.[].guid'
+        ```
+
+8.  Click **Add**.

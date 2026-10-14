@@ -27,3 +27,4 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Tag Mapping from Provider               | ✅         | ✅         | ✅                   |✅          |✅         |✅          |✅             |✅             |
 | Tag Mapping to Provider                 | ❌         | ❌         | ❌                   |❌          |❌         |❌          |❌             |❌             |
 | Container Group Remote Console Access   | ✅         | ✅         | ❌                   |❌          |❌         |❌          |❌             |❌             |
+| Pod Container Logs                      | ✅         | ✅         | ❌                   |❌          |❌         |❌          |❌             |❌             |

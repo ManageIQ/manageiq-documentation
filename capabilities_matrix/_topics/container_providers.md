@@ -26,3 +26,4 @@ The following table outlines the capabilities of {{ site.data.product.title_shor
 | Cross Linking Underlying Infrastructure | ✅         | ✅         | ✅                   |✅          |✅         |✅          |✅             |✅             |
 | Tag Mapping from Provider               | ✅         | ✅         | ✅                   |✅          |✅         |✅          |✅             |✅             |
 | Tag Mapping to Provider                 | ❌         | ❌         | ❌                   |❌          |❌         |❌          |❌             |❌             |
+| Container Group Remote Console Access   | ✅         | ✅         | ❌                   |❌          |❌         |❌          |❌             |❌             |

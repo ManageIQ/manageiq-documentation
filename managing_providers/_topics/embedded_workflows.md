@@ -286,6 +286,90 @@ Workflows must be authored in Amazon State Languages (ASL) format. As part of au
     * `RemoveFromProviderStorage` - Boolean - When removing from the provider should the object be deleted from storage.  Defaults to `true`.  Ignored if `RemoveFromProvider` is `false`
     * `RemoveFromInventory` - Boolean - After retirement should the object being retired be removed from the {{ site.data.product.title_short }} inventory database.  Defaults to `false`.
 
+ * `manageiq://provision_task` - Create a MiqProvisionTask
+
+    All parameters are passed to the initialize method for the provision task.
+    Certain parameters are set automatically and cannot be overridden.  These are:
+    * `miq_request_id` - The ID of the `ServiceTemplateProvisionRequest`.
+    * `miq_request_task_id` - The ID of the `ServiceTemplateProvisionTask`.
+    * `userid` - The User who ordered the service.
+    * `tenant_id` - the ID of the tenant that the `ServiceTemplateProvisionTask` belongs to.
+
+    Parameters:
+    * `request_type` - String - *Required* This indicates what type of provision request class to create.
+
+      Valid values are: `"vm_provision"`, `"configured_system_provision"`, `"configuration_script_provision"`, `"clone_to_vm"`, `"clone_to_template"`, `"provision_physical_server"`.
+
+      An invalid `request_type` will result in a `"Unable to find MiqReqeust class from request_type"` error.
+
+    * `options` - Object - These are provider specific and will depend on the request_type and the source record.
+
+    Example:
+    ```json
+    "Provision": {
+      "Type": "Task",
+      "Resource": "manageiq://provision_task",
+      "Parameters": {
+        "request_type": "vm_provision",
+        "options": {
+          "src_vm_id.$": "$.dialog.dialog_src_vm_id",
+          "vm_target_name.$": "$.dialog.dialog_vm_name"
+          ...
+        }
+      },
+      "Next": "PostProvision"
+    }
+    ```
+
+    Output:
+
+    The state completes when the provision task finishes.  On success, the output is an object describing the provision task:
+    * `id` - Integer - The ID of the provision task.
+    * `state` - String - The state of the provision task, for example `"finished"`.
+    * `status` - String - The status of the provision task, for example `"Ok"`.
+    * `href` - String - The API URL of the provision task.  Only present when the {{ site.data.product.title_short }} API URL is available to the workflow.
+    * `source` - Object - Details of the source record that was provisioned from, for example the template.  Only present if the task has a source.
+    * `destination` - Object - Details of the record that was created by the provision, for example the new VM.  Only present if the task has a destination.
+
+    The `source` and `destination` objects contain:
+    * `id` - Integer - The ID of the record.
+    * `name` - String - The name of the record.
+    * `description` - String - The description of the record.
+    * `ems_ref` - String - The identifier of the record on the provider.
+    * `href` - String - The API URL of the record.  Only present when the {{ site.data.product.title_short }} API URL is available to the workflow.
+    * `uid_ems` - String - The provider unique identifier.  Only present when the record is a VM or template.
+    * `outputs` - Object - The stack outputs as key/value pairs.  Only present when the record is an orchestration stack.
+
+    Example output:
+    ```json
+    {
+      "id": 123,
+      "state": "finished",
+      "status": "Ok",
+      "href": "https://manageiq.example.com/api/miq_request_tasks/123",
+      "source": {
+        "id": 10,
+        "name": "rhel9-template",
+        "description": "RHEL 9 template",
+        "ems_ref": "vm-10",
+        "href": "https://manageiq.example.com/api/vms/10",
+        "uid_ems": "42000000-0000-0000-0000-000000000010"
+      },
+      "destination": {
+        "id": 456,
+        "name": "my-new-vm",
+        "description": "Provisioned by workflow",
+        "ems_ref": "vm-456",
+        "href": "https://manageiq.example.com/api/vms/456",
+        "uid_ems": "42000000-0000-0000-0000-000000000456"
+      }
+    }
+    ```
+
+    If the provision task fails, the state fails with the task's error message as the `Cause`.
+
+    By default the output replaces the state input.  Use `ResultPath` to keep it alongside the existing input for later states, for example `"ResultPath": "$.provision"`.
+
 {% include_relative _topics/servicenow_builtin_methods.md %}
 
 
